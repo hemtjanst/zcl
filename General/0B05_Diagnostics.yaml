@@ -1,9 +1,167 @@
 id: "0x0B05"
 name: Diagnostics
-description: Attributes and commands that provide an interface to diagnostics of the ZigBee stack
+description: The diagnostics cluster provides access to information regarding the
+    operation of the ZigBee stack over time.
 server:
-  attr:
-  cmd:
-client:
-  attr:
-  cmd:
+    attr:
+    - id: "0x0000"
+        name: Number of Resets
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0001"
+        name: Persistens Memory Writes
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0100"
+        name: Mac Rx Bcast
+        type: u32
+        access: r
+        default: "0x00000000"
+    - id: "0x0101"
+        name: Mac Tx Bcast
+        type: u32
+        access: r
+        default: "0x00000000"
+    - id: "0x0102"
+        name: Mac Rx Ucast
+        type: u32
+        access: r
+        default: "0x00000000"
+    - id: "0x0103"
+        name: Mac Tx Ucast
+        type: u32
+        access: r
+        default: "0x00000000"
+    - id: "0x0104"
+        name: Mac Tx Ucast Retry
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0105"
+        name: Mac Tx Ucast Fail
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0106"
+        name: APS Rx Bcast
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0107"
+        name: APS Tx Bcast
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0108"
+        name: APS Rx Ucast
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0109"
+        name: APS Tx Ucast Success
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x010A"
+        name: APS Tx Ucast Retry
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x010B"
+        name: APS Tx Ucast Fail
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x010C"
+        name: Route Disc Initiated
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x010D"
+        name: Neighbor Added
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x010E"
+        name: Neighbor Removed
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x010F"
+        name: Neighbor Stale
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0110"
+        name: Join Indication
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0111"
+        name: Child Moved
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0112"
+        name: NWK FC Failure
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0113"
+        name: APS FC Failure
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0114"
+        name: APS Unauthorized Key
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0115"
+        name: NWK Decrypt Failures
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0116"
+        name: APS Decrypt Failures
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0117"
+        name: Packet Buffer Alloc Failures
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0118"
+        name: Relayed Ucast
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x0119"
+        name: Phy to MAC queue limit reached
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x011A"
+        name: Packet Validate Dropcount
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x011B"
+        name: Avg MAC Retry per APS Msg Sent
+        type: u16
+        access: r
+        default: "0x0000"
+    - id: "0x011C"
+        name: Last Message LQI
+        type: u8
+        access: r
+        default: "0x00"
+    - id: "0x011D"
+        name: Last Message RSSI
+        type: s8
+        access: r
+        default: "0x00"
+client: {}
