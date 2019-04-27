@@ -1,0 +1,6 @@
+id: "0x0703"
+name: Message
+description: This cluster provides an interface for passing text messages between
+    ZigBee devices.
+server: {}
+client: {}

@@ -1,0 +1,32 @@
+id: "0x000F"
+name: Binary Input (Basic)
+description: 'The Binary Input (Basic) cluster provides an interface for reading the
+    value of a binary measurement and accessing various characteristics of that measurement.
+    The cluster is typically used to implement a sensor that measures a two-state
+    physical quantity. '
+server:
+    attr:
+    - id: "0x0051"
+        name: Out of Service
+        type: bool
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x0055"
+        name: Present Value
+        type: bool
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x006F"
+        name: Status Flags
+        type: bmp8
+        access: r
+        default: "0"
+        required: m
+        bits:
+            "1": In Alarm
+            "2": Fault
+            "4": Overidden
+            "8": Out of Service
+client: {}

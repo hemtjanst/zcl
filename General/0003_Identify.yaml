@@ -1,0 +1,79 @@
+id: "0x0003"
+name: Identify
+description: Attributes and commands for putting a device into Identification mode
+    (e.g. flashing a light)
+server:
+    attr:
+    - id: "0x0000"
+        name: Identify Time
+        type: u16
+        access: rw
+        default: "0x0000"
+        required: m
+        range: 0x0000,0xfff
+    cmd:
+    - id: "0x00"
+        name: Identify
+        description: Start or stop the device identifying itself.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Identify Time
+            description: The time in seconds for which a device will stay in identify
+                mode.
+            type: u16
+            default: "5"
+            required: m
+    - id: "0x01"
+        name: Identify Query
+        description: Allows the sending device to request the target or targets to
+            respond if they are currently identifying themselves.
+        dir: recv
+        required: m
+        response: "0x00"
+    - id: "0x40"
+        name: Trigger Effect
+        description: 'The trigger effect command allows the support of feedback to
+            the user, such as a certain light effect. '
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Effect identifier
+            description: The effect identifier field specifies the identify effect
+                to use.
+            type: enum8
+            default: "0x00"
+            required: m
+            values:
+                "0x0B": Channel change
+                "0x00": Blink
+                "0x01": Breathe
+                "0x02": Okay
+                "0xFE": Finish
+                "0xFF": Stop
+        - id: "0x0001"
+            name: Effect variant
+            description: The effect identifier field specifies the identify effect
+                to use.
+            type: enum8
+            default: "0"
+            required: m
+            values:
+                "0x00": Default
+client:
+    cmd:
+    - id: "0x00"
+        name: Identify Query Response
+        description: Response of a identify query command.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Timeout
+            description: The time in seconds for which a device will stay in identify
+                mode.
+            type: u16
+            default: "0"
+            required: m

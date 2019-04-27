@@ -1,0 +1,42 @@
+id: "0xFC01"
+mnfcode: "0x10F2"
+name: Dimmer Setup
+description: Attributes and commands.
+server:
+    attr:
+    - id: "0x0000"
+        name: Capabilities
+        type: bmp8
+        access: r
+        default: "00000000"
+        required: m
+        bits:
+            "0": Forward Phase Control
+            "1": Reverse Phase Control
+            "5": Reactance Discriminator
+            "6": Configurable Curve
+            "7": Overload detection
+    - id: "0x0001"
+        name: Status
+        type: bmp8
+        access: r
+        default: "00000000"
+        required: m
+        bits:
+            "0": Forward Phase Control
+            "1": Reverse Phase Control
+            "2": Operational
+            "3": Overload
+            "6": Capacitive Load
+            "7": Inductive Load
+    - id: "0x0002"
+        name: Mode
+        type: bmp8
+        access: r
+        default: "00000000"
+        required: m
+        bits:
+            "0": Automatic Phase Control
+            "1": Forward Phase Control
+            "2": Reverse Phase Control
+client: {}

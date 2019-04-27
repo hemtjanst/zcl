@@ -1,0 +1,209 @@
+id: "0x0102"
+name: Window Covering
+description: The window covering cluster provides an interface for controlling and
+    adjusting automatic window coverings such as drapery motors, automatic shades,
+    and blinds.
+server:
+    attr:
+    - id: "0x0000"
+        name: Window Covering Type
+        type: enum8
+        access: r
+        default: "0x00"
+        required: m
+        values:
+            "0x00": Rollershade
+            "0x01": Rollershade - 2 Motor
+            "0x02": Rollershade - Exterior
+            "0x03": Rollershade - Exterior - 2 Motor
+            "0x04": Drapery
+            "0x05": Awning
+            "0x06": Shutter
+            "0x07": Tilt Blind - Tilt Only
+            "0x08": Tilt Blind - Lift and Tilt
+            "0x09": Projector Screen
+    - id: "0x0001"
+        name: Physical Closed Limit - Lift
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0002"
+        name: Physical Closed Limit - Tilt
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0003"
+        name: Current Position - Lift
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0004"
+        name: Current Position - Tilt
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0005"
+        name: Number of Actuations - Lift
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0006"
+        name: Number of Actuations - Tilt
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0007"
+        name: Config / Status
+        type: bmp8
+        access: r
+        default: "0x03"
+        required: o
+        bits:
+            "0": Operational
+            "1": Online
+            "2": Commands Reversed
+            "3": Lift control is Closed Loop
+            "4": Tilt control is Closed Loop
+            "5": 'Lift: Encoder Controlled'
+            "6": 'Tilt: Encoder Controlled'
+    - id: "0x0008"
+        name: Current Position Lift Percentage
+        type: u8
+        access: r
+        default: "0x00"
+        required: o
+        range: 0,0x64
+    - id: "0x0009"
+        name: Current Position Tilt Percentage
+        type: u8
+        access: r
+        default: "0x00"
+        required: o
+        range: 0,0x64
+    - id: "0x0010"
+        name: Installed Open Limit - Lift
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0011"
+        name: Installed Closed Limit - Lift
+        type: u16
+        access: r
+        default: "0xffff"
+        required: o
+    - id: "0x0012"
+        name: Installed Open Limit - Tilt A
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+    - id: "0x0013"
+        name: Installed Open Limit - Tilt B
+        type: u16
+        access: r
+        default: "0xffff"
+        required: o
+    - id: "0x0014"
+        name: Velocity - Lift
+        type: u16
+        access: rw
+        default: "0x0000"
+        required: o
+    - id: "0x0015"
+        name: Acceleration Time - Lift
+        type: u16
+        access: rw
+        default: "0x0000"
+        required: o
+    - id: "0x0016"
+        name: Deceleration Time - Lift
+        type: u16
+        access: rw
+        default: "0x0000"
+        required: o
+    - id: "0x0017"
+        name: Mode
+        type: bmp8
+        access: rw
+        default: "0x0000"
+        required: o
+        bits:
+            "0": Reversed
+            "1": Calibration Mode
+            "2": Maintenance Mode
+            "3": LED feedback
+    - id: "0x0018"
+        name: Intermediate Setpoints - Lift
+        type: ostring
+        access: rw
+        default: 1,0x0000
+        required: o
+    - id: "0x0019"
+        name: Intermediate Setpoints - Tilt
+        type: ostring
+        access: rw
+        default: 1,0x0000
+        required: o
+    cmd:
+    - id: "0x00"
+        name: Up / Open
+        dir: recv
+        required: m
+    - id: "0x01"
+        name: Down / Close
+        dir: recv
+        required: m
+    - id: "0x02"
+        name: Stop
+        dir: recv
+        required: m
+    - id: "0x04"
+        name: Go To Lift Value
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Lift Value
+            type: u16
+            default: "0x0000"
+            required: m
+    - id: "0x05"
+        name: Go to Lift Percentage
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Lift Percentage
+            type: u8
+            default: "0x00"
+            required: m
+            range: 0,0x64
+    - id: "0x07"
+        name: Go to Tilt Value
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Tilt Value
+            type: u16
+            default: "0x0000"
+            required: m
+    - id: "0x08"
+        name: Go to Tilt Percentage
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Tilt Percentage
+            type: u8
+            default: "0x00"
+            required: m
+            range: 0,0x64
+client: {}

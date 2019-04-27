@@ -1,0 +1,6 @@
+id: "0x000E"
+name: Analog Value (Basic)
+description: An interface for setting an analog value, typically used as a control
+    system parameter, and accessing various characteristics of that value.
+server: {}
+client: {}

@@ -1,0 +1,201 @@
+id: "0x0008"
+name: Level Control
+description: This cluster provides an interface for controlling a characteristic of
+    a device that can be set to a level, for example the brightness of a light, the
+    degree of closure of a door, or the power output of a heater.
+server:
+    attr:
+    - id: "0x0000"
+        name: Current Level
+        description: The CurrentLevel attribute represents the current level of this
+            device. meaning of 'level' is device dependent.
+        type: u8
+        access: r
+        default: "0x00"
+        required: m
+        range: 0x00,0xff
+    - id: "0x0001"
+        name: Remaining Time
+        description: The RemainingTime attribute represents the time remaining until
+            the current command is complete - it is specified in 1/10ths of a second.
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+        range: 0x0000,0xffff
+    - id: "0x000F"
+        name: Unknown
+        description: IKEA specific.
+        type: bmp8
+        access: rw
+        required: o
+    - id: "0x0010"
+        name: OnOff Transistion Time
+        description: The OnOffTransitionTime attribute represents the time taken to
+            move to or from the target level when On of Off commands are received
+            by an On/Off cluster on the same endpoint. It is specified in 1/10ths
+            of a second. The actual time taken should be as close to OnOffTransitionTime
+            as the device is able.
+        type: u16
+        access: rw
+        default: "0x0000"
+        required: o
+        range: 0x0000,0xffff
+    - id: "0x0011"
+        name: On Level
+        description: The OnLevel attribute determines the value that the CurrentLevel
+            attribute is set to when the OnOff attribute of an On/Off cluster on the
+            same endpoint is set to On. If the OnLevel attribute is not implemented,
+            or is set to 0xff, it has no effect.
+        type: u8
+        access: rw
+        default: "0xfe"
+        required: o
+        range: 0x00,0xfe
+    - id: "0x0012"
+        name: On Transition Time
+        type: u16
+        access: rw
+        required: o
+        range: 0x0000,0xfffe
+    - id: "0x0013"
+        name: Off Transition Time
+        type: u16
+        access: rw
+        required: o
+        range: 0x0000,0xfffe
+    - id: "0x0014"
+        name: Default Move Rate
+        type: u8
+        access: rw
+        required: o
+        range: 0x00,0xfe
+    - id: "0x4000"
+        name: PowerOn Level
+        type: u8
+        access: rw
+        required: o
+    cmd:
+    - id: "0x00"
+        name: Move to Level
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Level
+            type: u8
+            default: "0x00"
+            required: m
+            range: 0x00,0xff
+        - id: "0x0001"
+            name: Transistion time
+            type: u16
+            default: "0x0000"
+            required: m
+    - id: "0x01"
+        name: Move
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Move mode
+            type: enum8
+            default: "0x00"
+            required: m
+            values:
+                "0x00": Up
+                "0x01": Down
+        - id: "0x0001"
+            name: Rate
+            type: u8
+            default: "0x00"
+            required: m
+    - id: "0x02"
+        name: Step
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Step mode
+            type: enum8
+            default: "0x00"
+            required: m
+            values:
+                "0x00": Up
+                "0x01": Down
+        - id: "0x0001"
+            name: Step size
+            type: u8
+            default: "0x00"
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            type: u16
+            default: "0x0000"
+            required: m
+    - id: "0x03"
+        name: Stop
+        dir: recv
+        required: m
+    - id: "0x04"
+        name: Move to Level (with On/Off)
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Level
+            type: u8
+            default: "0x00"
+            required: m
+            range: 0x00,0xff
+        - id: "0x0001"
+            name: Transistion time
+            type: u16
+            default: "0x0000"
+            required: m
+    - id: "0x05"
+        name: Move (with On/Off)
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Move mode
+            type: enum8
+            default: "0x00"
+            required: m
+            values:
+                "0x00": Up
+                "0x01": Down
+        - id: "0x0001"
+            name: Rate
+            type: u8
+            default: "0x00"
+            required: m
+    - id: "0x06"
+        name: Step (with On/Off)
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Step mode
+            type: enum8
+            default: "0x00"
+            required: m
+            values:
+                "0x00": Up
+                "0x01": Down
+        - id: "0x0001"
+            name: Step size
+            type: u8
+            default: "0x00"
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            type: u16
+            default: "0x0000"
+            required: m
+    - id: "0x07"
+        name: Stop (with On/Off)
+        dir: recv
+        required: m
+client: {}

@@ -1,0 +1,5 @@
+id: "0x0200"
+name: Pump Configuration and Control
+description: An interface for configuring and controlling pumps.
+server: {}
+client: {}

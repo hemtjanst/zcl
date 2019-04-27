@@ -1,0 +1,6 @@
+name: Green Power
+description: The green power domain contains clusters and information that provides
+    ZGP specific functions and attributes.
+lowbound: "0x0000"
+highbound: "0x0000"
+usezcl: true

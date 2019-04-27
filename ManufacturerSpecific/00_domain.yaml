@@ -1,0 +1,5 @@
+name: Manufacturer Specific
+description: Manufacturer specific clusters.
+lowbound: "0x0000"
+highbound: "0x0000"
+usezcl: true

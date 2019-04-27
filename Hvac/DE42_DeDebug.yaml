@@ -1,0 +1,19 @@
+id: "0xDE42"
+name: DE Debug
+description: Attributes and commands for debugging purposes.
+server:
+    attr:
+    - id: "0x0000"
+        name: Debug enabled
+        type: bool
+        access: rw
+        default: "0x00"
+        required: m
+    - id: "0x0001"
+        name: Debug destination
+        type: u16
+        access: rw
+        default: "0x0000"
+        required: m
+        showas: hex
+client: {}

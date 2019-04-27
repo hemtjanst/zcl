@@ -1,0 +1,37 @@
+id: "0x000C"
+name: Analog Input (Basic)
+description: An interface for reading the value of an analog measurement and accessing
+    various characteristics of that measurement.
+server:
+    attr:
+    - id: "0x0051"
+        name: Out of service
+        type: bool
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x0055"
+        name: Present value
+        type: float
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x006F"
+        name: Status flags
+        type: bmp8
+        access: r
+        default: "0"
+        required: m
+        bits:
+            "1": In Alarm
+            "2": Fault
+            "4": Overidden
+            "8": Out of Service
+    - id: "0xFF05"
+        name: Unknown
+        type: u16
+        access: r
+        default: "0"
+        required: o
+        showas: hex
+client: {}

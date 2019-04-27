@@ -1,0 +1,120 @@
+id: "0x0B04"
+name: Electrical Measurement
+description: Provides a mechanism for querying data about the electrical properties
+    as measured by the device.
+server:
+    attr:
+    - id: "0x0000"
+        name: Measurement Type
+        type: bmp32
+        access: r
+        default: "0x00000000"
+        required: m
+        bits:
+            "0": Active measurement (AC)
+            "1": Reactive measurement (AC)
+            "2": Apparent measurement (AC)
+            "3": Phase A measurement
+            "4": Phase B measurement
+            "5": Phase C measurement
+            "6": DC measurement
+            "7": Harmonics measurement
+            "8": Power quality measurement
+    - id: "0x0300"
+        name: AC Frequency
+        type: u16
+        access: r
+        default: "0xFFFF"
+        required: o
+    - id: "0x0304"
+        name: Total Active Power
+        type: u32
+        access: r
+        required: o
+    - id: "0x0305"
+        name: Total Reactive Power
+        type: u32
+        access: r
+        required: o
+    - id: "0x0306"
+        name: Total Apparent Power
+        type: s32
+        access: r
+        required: o
+    - id: "0x0505"
+        name: RMS Voltage
+        type: u16
+        access: r
+        default: "0xFFFF"
+        required: o
+    - id: "0x0508"
+        name: RMS Current
+        type: u16
+        access: r
+        default: "0xFFFF"
+        required: o
+    - id: "0x050B"
+        name: Active Power
+        description: Represents the single phase or Phase A, current demand of active
+            power delivered or received at the premises, in Watts (W). Positive values
+            indicate power delivered to the premises where negative values indicate
+            power received from the premises.
+        type: s16
+        access: r
+        default: "0x8000"
+        required: o
+    - id: "0x050E"
+        name: Reactive Power
+        type: s16
+        access: r
+        default: "0x8000"
+        required: o
+    - id: "0x050F"
+        name: Apparent Power
+        type: u16
+        access: r
+        default: "0xFFFF"
+        required: o
+    - id: "0x0510"
+        name: Power Factor
+        type: s8
+        access: r
+        default: "0x00"
+        required: o
+    - id: "0x0600"
+        name: AC Voltage Multiplier
+        type: u16
+        access: r
+        default: "0x0001"
+        required: o
+    - id: "0x0601"
+        name: AC Voltage Divisor
+        type: u16
+        access: r
+        default: "0x0001"
+        required: o
+    - id: "0x0602"
+        name: AC Current Multiplier
+        type: u16
+        access: r
+        default: "0x0001"
+        required: o
+    - id: "0x0603"
+        name: AC Current Divisor
+        type: u16
+        access: r
+        default: "0x0001"
+        required: o
+    - id: "0x0604"
+        name: AC Power Multiplier
+        type: u16
+        access: r
+        default: "0x0001"
+        required: o
+    - id: "0x0605"
+        name: AC Power Divisor
+        type: u16
+        access: r
+        default: "0x0001"
+        required: o
+client: {}

@@ -1,0 +1,74 @@
+id: "0x0021"
+name: Green Power
+description: Attributes and commands.
+server:
+    attr:
+    - id: "0x0000"
+        name: Max Sink Table Entries
+        description: Maximum number of Sink Table entries supported by this device.
+        type: u8
+        access: r
+        default: "0x00"
+        required: m
+        showas: hex
+    - id: "0x0001"
+        name: Sink Table
+        description: Sink Table, holding information about local bindings between
+            a particular GPD and target‘s local endpoints.
+        type: lostring
+        access: r
+        default: "0x0000"
+        required: m
+        showas: hex
+    - id: "0x0002"
+        name: Communication Mode
+        description: Default communication mode requested by this sink.
+        type: bmp8
+        access: rw
+        default: "0x01"
+        required: m
+        showas: hex
+    - id: "0x0003"
+        name: Commissioning Exit Mode
+        description: Conditions for the sink to exit the commissioning mode.
+        type: bmp8
+        access: rw
+        default: "0x02"
+        required: m
+        showas: hex
+    - id: "0x0004"
+        name: Commissioning Window
+        description: Default duration of the Commissioning window duration, in seconds,
+            as requested by this sink.
+        type: u16
+        access: rw
+        default: "0x00B4"
+        required: o
+        showas: hex
+    - id: "0x0005"
+        name: Security Level
+        description: The minimum required security level to be supported by the paired
+            GPDs.
+        type: bmp8
+        access: rw
+        default: "0x06"
+        required: m
+        showas: hex
+    - id: "0x0006"
+        name: Functionality
+        description: The optional GP functionality supported by this sink.
+        type: bmp24
+        access: r
+        default: "0x0"
+        required: m
+        showas: hex
+    - id: "0x0007"
+        name: Active Functionality
+        description: The optional GP functionality supported by this sink that is
+            active.
+        type: bmp24
+        access: r
+        default: "0xffffff"
+        required: m
+        showas: hex
+client: {}

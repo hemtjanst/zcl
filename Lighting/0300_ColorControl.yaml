@@ -1,0 +1,608 @@
+id: "0x0300"
+name: Color control
+description: Attributes and commands for controlling the color properties of a color-capable
+    light.
+server:
+    attr:
+    - id: "0x0000"
+        name: Current hue
+        type: u8
+        access: r
+        default: "0x00"
+        required: o
+        range: 0x00,0xfe
+    - id: "0x0001"
+        name: Current saturation
+        type: u8
+        access: r
+        default: "0x00"
+        required: o
+        range: 0x00,0xfe
+    - id: "0x0002"
+        name: Remaining time
+        type: u16
+        access: r
+        default: "0x0000"
+        required: o
+        range: 0x0000,0xfffe
+    - id: "0x0003"
+        name: Current x
+        type: u16
+        access: r
+        default: "0x61eb"
+        required: m
+        range: 0x0000,0xfeff
+    - id: "0x0004"
+        name: Current y
+        type: u16
+        access: r
+        default: "0x607b"
+        required: m
+        range: 0x0000,0xfeff
+    - id: "0x0007"
+        name: Color temperature
+        type: u16
+        access: r
+        default: "0"
+        required: m
+        range: 0x0000,0xffff
+    - id: "0x0008"
+        name: Color Mode
+        type: enum8
+        access: r
+        default: "0x01"
+        required: o
+        range: 0x00,0x02
+        values:
+            "0x00": Current hue and current saturation
+            "0x01": Current x and current y
+            "0x02": Color temperature
+    - id: "0x0010"
+        name: Number of primaries
+        type: u8
+        access: r
+        required: o
+        range: 0x00,0x06
+    - id: "0x0011"
+        name: Primary1 x
+        type: u16
+        access: r
+        required: o
+        range: 0x0000,0xfeff
+    - id: "0x0012"
+        name: Primary1 y
+        type: u16
+        access: r
+        required: o
+        range: 0x0000,0xfeff
+    - id: "0x0013"
+        name: Primary1 intensity
+        type: u8
+        access: r
+        required: o
+        range: 0x00,0xff
+    - id: "0x0015"
+        name: Primary2 x
+        type: u16
+        access: r
+        required: o
+        range: 0x0000,0xfeff
+    - id: "0x0016"
+        name: Primary2 y
+        type: u16
+        access: r
+        required: o
+        range: 0x0000,0xfeff
+    - id: "0x0017"
+        name: Primary2 intensity
+        type: u8
+        access: r
+        required: o
+        range: 0x00,0xff
+    - id: "0x0019"
+        name: Primary3 x
+        type: u16
+        access: r
+        required: o
+        range: 0x0000,0xfeff
+    - id: "0x001A"
+        name: Primary3 y
+        type: u16
+        access: r
+        required: o
+        range: 0x0000,0xfeff
+    - id: "0x001B"
+        name: Primary3 intensity
+        type: u8
+        access: r
+        required: o
+        range: 0x00,0xff
+    - id: "0x4000"
+        name: Enhanced current hue
+        type: u16
+        access: r
+        default: "0x0000"
+        required: m
+        range: 0x0000,0xffff
+    - id: "0x4001"
+        name: Enhanced color mode
+        type: enum8
+        access: r
+        default: "0x00"
+        required: m
+        range: 0x00,0xff
+        values:
+            "0x00": Current hue and current saturation
+            "0x01": Current x and current y
+            "0x02": Color temperature
+            "0x03": Enhanced current hue and current saturation
+    - id: "0x4002"
+        name: Color loop active
+        type: u8
+        access: r
+        default: "0x00"
+        required: m
+        range: 0x00,0xff
+    - id: "0x4003"
+        name: Color loop direction
+        type: u8
+        access: r
+        default: "0x00"
+        required: m
+        range: 0x00,0xff
+    - id: "0x4004"
+        name: Color loop time
+        type: u16
+        access: r
+        default: "0x0019"
+        required: m
+        range: 0x00,0xff
+    - id: "0x4005"
+        name: Color loop start - enhanced hue
+        type: u16
+        access: r
+        default: "0x2300"
+        required: m
+        range: 0x00,0xff
+    - id: "0x4006"
+        name: Color loop stored - enhanced hue
+        type: u16
+        access: r
+        default: "0x0000"
+        required: m
+        range: 0x00,0xff
+    - id: "0x400A"
+        name: Color capabilities
+        type: bmp16
+        access: r
+        default: "0x0000"
+        required: m
+        bits:
+            "0": Hue saturation
+            "1": Enhanced Hue saturation
+            "2": Color loop
+            "3": CIE 1931 XY
+            "4": Color temperature
+    - id: "0x400B"
+        name: Color temperature min
+        type: u16
+        access: r
+        default: "0"
+        required: m
+        range: 0x0000,0xffff
+    - id: "0x400C"
+        name: Color temperature max
+        type: u16
+        access: r
+        default: "0xffff"
+        required: m
+        range: 0x0000,0xffff
+    - id: "0x4010"
+        name: PowerOn Color Temperature
+        type: u16
+        access: rw
+        default: "0xffff"
+        required: o
+        range: 0x0000,0xffff
+    - id: "0xDE01"
+        name: Active channels
+        type: u8
+        access: r
+        default: "0x00"
+        required: m
+        range: 0x00,0xff
+    cmd:
+    - id: "0x00"
+        name: Move to hue
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Hue
+            type: u8
+            required: m
+        - id: "0x0001"
+            name: Direction
+            type: enum8
+            required: m
+            values:
+                "0x00": Shortest distance
+                "0x01": Longest Distance
+                "0x02": Up
+                "0x03": Down
+        - id: "0x0002"
+            name: Transition time
+            description: The transition time in 1/10ths of a second.
+            type: u16
+            required: m
+    - id: "0x01"
+        name: Move hue
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0001"
+            name: Move mode
+            type: enum8
+            required: m
+            values:
+                "0x00": Stop
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0002"
+            name: Steps/second
+            type: u8
+            required: m
+    - id: "0x02"
+        name: Step hue
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Step mode
+            type: enum8
+            required: m
+            values:
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0001"
+            name: Step size
+            type: u8
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u8
+            required: m
+    - id: "0x03"
+        name: Move to saturation
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Saturation
+            type: u8
+            required: m
+        - id: "0x0001"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x04"
+        name: Move saturation
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Move mode
+            type: enum8
+            required: m
+            values:
+                "0x00": Stop
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0001"
+            name: Rate
+            description: The steps per second.
+            type: u8
+            required: m
+    - id: "0x05"
+        name: Step saturation
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Step mode
+            type: enum8
+            required: m
+            values:
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0001"
+            name: Step size
+            type: u8
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u8
+            required: m
+    - id: "0x06"
+        name: Move to hue and saturation
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Hue
+            type: u8
+            required: m
+        - id: "0x0001"
+            name: Saturation
+            type: u8
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x07"
+        name: Move to color
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: ColorX
+            type: u16
+            required: m
+        - id: "0x0001"
+            name: ColorY
+            type: u16
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x08"
+        name: Move color
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Rate X
+            description: The steps per second.
+            type: s16
+            required: m
+        - id: "0x0001"
+            name: Rate Y
+            description: The steps per second.
+            type: s16
+            required: m
+    - id: "0x09"
+        name: Step color
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Step X
+            type: s16
+            required: m
+        - id: "0x0001"
+            name: Step Y
+            type: s16
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x0A"
+        name: Move to color temperature
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Color temperature
+            type: u16
+            required: m
+        - id: "0x0001"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x40"
+        name: Enhanced move to hue
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Enhanced hue
+            type: u16
+            required: m
+        - id: "0x0001"
+            name: Direction
+            type: enum8
+            required: m
+            values:
+                "0x00": Shortest distance
+                "0x01": Longest Distance
+                "0x02": Up
+                "0x03": Down
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x41"
+        name: Enhanced move hue
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Move mode
+            type: enum8
+            required: m
+            values:
+                "0x00": Stop
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0001"
+            name: Rate
+            description: Steps per second.
+            type: u16
+            required: m
+    - id: "0x42"
+        name: Enhanced step hue
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Step mode
+            type: enum8
+            required: m
+            values:
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0001"
+            name: Step size
+            type: u16
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x43"
+        name: Enhanced move to hue and saturation
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Enhanced hue
+            type: u16
+            required: m
+        - id: "0x0001"
+            name: Saturation
+            type: u8
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+    - id: "0x44"
+        name: Color loop set
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Update flags
+            type: bmp8
+            required: m
+            bits:
+                "0": Update action
+                "1": Update direction
+                "2": Update time
+                "3": Update start hue
+        - id: "0x0001"
+            name: Action
+            type: enum8
+            required: m
+            values:
+                "0x00": De-activate color loop
+                "0x01": Activate from ColorLoopStartEnhancedHue
+                "0x02": Activate from EnhancedCurrentHue
+        - id: "0x0002"
+            name: Direction
+            type: enum8
+            required: m
+            values:
+                "0x00": Decrement hue
+                "0x01": Increment hue
+        - id: "0x0003"
+            name: Time
+            description: Time in seconds used for a whole color loop.
+            type: u16
+            required: m
+        - id: "0x0004"
+            name: Start enhanced hue
+            type: u16
+            required: m
+    - id: "0x47"
+        name: Stop move step
+        description: Stops move to and step commands. It has no effect on a active
+            color loop.
+        dir: recv
+        required: m
+    - id: "0x4B"
+        name: Move color temperature
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Move mode
+            type: enum8
+            required: m
+            values:
+                "0x00": Stop
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0001"
+            name: Rate
+            description: Steps per second.
+            type: u16
+            required: m
+        - id: "0x0002"
+            name: Color temperature min
+            description: Specifies a lower bound on the color temperature for the
+                current move operation.
+            type: u16
+            required: m
+        - id: "0x0003"
+            name: Color temperature max
+            description: Specifies a upper bound on the color temperature for the
+                current move operation.
+            type: u16
+            required: m
+    - id: "0x4C"
+        name: Step color temperature
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Step mode
+            type: enum8
+            required: m
+            values:
+                "0x01": Up
+                "0x03": Down
+        - id: "0x0001"
+            name: Step size
+            type: u16
+            required: m
+        - id: "0x0002"
+            name: Transition time
+            description: The transitiontime in 1/10 seconds.
+            type: u16
+            required: m
+        - id: "0x0003"
+            name: Color temperature min
+            description: Specifies a lower bound on the color temperature for the
+                current step operation.
+            type: u16
+            required: m
+        - id: "0x0004"
+            name: Color temperature max
+            description: Specifies a upper bound on the color temperature for the
+                current step operation.
+            type: u16
+            required: m
+    - id: "0xD0"
+        name: Set active channels
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Channels
+            type: u8
+            required: m
+client: {}

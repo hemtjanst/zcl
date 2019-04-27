@@ -1,0 +1,381 @@
+id: "0x0005"
+name: Scenes
+description: Attributes and commands for scene configuration and manipulation.
+server:
+    attr:
+    - id: "0x0000"
+        name: Scene Count
+        type: u8
+        access: r
+        default: "0x00"
+        required: m
+        range: 0x00-0xff
+        showas: hex
+    - id: "0x0001"
+        name: Current Scene
+        type: u8
+        access: r
+        default: "0x00"
+        required: m
+        range: 0x00-0xff
+        showas: hex
+    - id: "0x0002"
+        name: Current Group
+        type: u16
+        access: r
+        default: "0x0000"
+        required: m
+        range: 0x0000-0xfff7
+        showas: hex
+    - id: "0x0003"
+        name: Scene Valid
+        type: bool
+        access: r
+        default: "0"
+        required: m
+    - id: "0x0004"
+        name: Name Support
+        type: bmp8
+        access: r
+        default: "0"
+        required: m
+        showas: hex
+    - id: "0x0005"
+        name: Last ConfiguredBy
+        type: uid
+        access: r
+        required: o
+        showas: hex
+    cmd:
+    - id: "0x00"
+        name: Add scene
+        description: Add a scenes to the group (empty).
+        dir: recv
+        required: m
+        response: "0x00"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+        - id: "0x0002"
+            name: Transition time
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+    - id: "0x01"
+        name: View scene
+        description: Views the scenes of a group.
+        dir: recv
+        required: m
+        response: "0x01"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+    - id: "0x02"
+        name: Remove scene
+        description: Removes a scenes of a group.
+        dir: recv
+        required: m
+        response: "0x02"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+    - id: "0x03"
+        name: Remove all scenes
+        description: Removes all scenes of a group.
+        dir: recv
+        required: m
+        response: "0x03"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+    - id: "0x04"
+        name: Store scene
+        description: Stores a scene of a group for a device.
+        dir: recv
+        required: m
+        response: "0x04"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+    - id: "0x05"
+        name: Recall scene
+        description: Recalls a scene of a group for a device.
+        dir: recv
+        required: m
+        response: "0x05"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+    - id: "0x06"
+        name: Get scene membership
+        description: Get the scenes of a group for a device.
+        dir: recv
+        required: m
+        response: "0x06"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+    - id: "0x41"
+        name: Enhanced view scene
+        description: Views the scenes of a group.
+        dir: recv
+        required: m
+        response: "0x41"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+client:
+    cmd:
+    - id: "0x00"
+        name: Add scene response
+        description: Response to the add scene command.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: m
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0002"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+    - id: "0x01"
+        name: View scene response
+        description: Response to the view scene command.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: m
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0002"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+        - id: "0x0003"
+            name: Transition time
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+    - id: "0x02"
+        name: Remove scene response
+        description: Response to the remove scene command.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: m
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0002"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+    - id: "0x03"
+        name: Remove all scenes response
+        description: Response to the remove all scenes command.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: m
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+    - id: "0x04"
+        name: Store scene response
+        description: Response to the store scene command.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: m
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0002"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+    - id: "0x06"
+        name: Get scene membershio response
+        description: Shows details about scene membership.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: m
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Capacity
+            type: u8
+            default: "0x00"
+            required: m
+            showas: dec
+        - id: "0x0002"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0003"
+            name: Scene count
+            type: u8
+            default: "0x00"
+            required: m
+            showas: dec
+    - id: "0x41"
+        name: Enhanced view scene response
+        description: A scene description.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: m
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0002"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+        - id: "0x0003"
+            name: Transition time
+            type: u16
+            default: "0x00"
+            required: m
+            showas: dec
+        - id: "0x0004"
+            name: Name
+            type: cstring
+            required: m

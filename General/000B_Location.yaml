@@ -1,0 +1,50 @@
+id: "0x000B"
+name: Location
+description: Measure distance between devices.
+server:
+    cmd:
+    - id: "0x40"
+        name: Distance measure
+        dir: recv
+        required: m
+        response: "0x40"
+        showas: hex
+        payloadattr:
+        - id: "0x0000"
+            name: Target address
+            type: u16
+            default: "0x0000"
+            required: m
+        - id: "0x0001"
+            name: Resolution
+            type: enum8
+            default: "0x00"
+            required: m
+            values:
+                "0x00": High
+                "0x01": Mid
+                "0x02": Low
+client:
+    cmd:
+    - id: "0x40"
+        name: Distance measure response
+        description: Returns the result of a distance measure.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Target address
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Distance (Meter)
+            type: u16
+            default: "0"
+            required: m
+        - id: "0x0002"
+            name: Quality index
+            type: u16
+            default: "0"
+            required: m

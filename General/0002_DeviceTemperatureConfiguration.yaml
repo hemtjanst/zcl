@@ -1,0 +1,6 @@
+id: "0x0002"
+name: Device Temperature Configuration
+description: Attributes for determining information about a device’s internal temperature,
+    and for configuring under/over temperature alarms.
+server: {}
+client: {}

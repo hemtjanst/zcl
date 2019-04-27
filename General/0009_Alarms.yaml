@@ -1,0 +1,30 @@
+id: "0x0009"
+name: Alarms
+description: Sending alarm notifications and configuring alarm functionality.
+server:
+    attr:
+    - id: "0x0000"
+        name: Alarm Count
+        type: u16
+        access: rw
+        default: "0x00"
+        required: m
+    cmd:
+    - id: "0x00"
+        name: Alarm
+        dir: send
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Alarm code
+            type: u8
+            default: "0x00"
+            required: m
+            showas: hex
+        - id: "0x0001"
+            name: Cluster Id
+            type: u16
+            default: "0x0000"
+            required: m
+            showas: hex
+client: {}

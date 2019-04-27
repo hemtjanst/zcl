@@ -1,0 +1,117 @@
+id: "0x0301"
+name: Ballast Configuration
+description: Attributes and commands to configure a ballast.
+server:
+    attr:
+    - id: "0x0000"
+        name: Physical Min Level
+        type: u8
+        access: r
+        default: "0x01"
+        required: o
+        range: 0x01,0xfe
+    - id: "0x0001"
+        name: Physical Max Level
+        type: u8
+        access: r
+        default: "0xfe"
+        required: o
+        range: 0x01,0xfe
+    - id: "0x0002"
+        name: Ballast Status
+        type: bmp8
+        access: r
+        default: "0x00"
+        required: m
+        bits:
+            "0": Non-operational
+            "1": Lamp not in socket
+    - id: "0x0010"
+        name: Min Level
+        type: u8
+        access: rw
+        default: "0x01"
+        required: o
+        range: 0x01,0xfe
+    - id: "0x0011"
+        name: Max Level
+        type: u8
+        access: rw
+        default: "0xfe"
+        required: o
+        range: 0x01,0xfe
+    - id: "0x0012"
+        name: Power On Level
+        type: u8
+        access: rw
+        default: "0xfe"
+        required: o
+        range: 0x01,0xfe
+    - id: "0x0013"
+        name: Power On Fade Time
+        type: u16
+        access: rw
+        default: "0x0000"
+        required: o
+        range: 0x0000,0xfffe
+    - id: "0x0014"
+        name: Intrinsic Ballast Factor
+        type: u8
+        access: rw
+        default: "0x00"
+        required: o
+        range: 0x00,0xfe
+    - id: "0x0015"
+        name: Ballast Factor Adjustment
+        type: u8
+        access: rw
+        default: "0xff"
+        required: o
+        range: 0x64,0xff
+    - id: "0x0020"
+        name: Lamp Quantity
+        type: u8
+        access: r
+        default: "0x00"
+        required: o
+        range: 0x00,0xfe
+    - id: "0x0030"
+        name: Lamp Type
+        type: cstring
+        access: rw
+        required: o
+    - id: "0x0031"
+        name: Lamp Manufacturer
+        type: cstring
+        access: rw
+        required: o
+    - id: "0x0032"
+        name: Lamp Rated Hours
+        type: u24
+        access: rw
+        default: "0xffffff"
+        required: o
+        range: 0x000000,0xfffffe
+    - id: "0x0033"
+        name: Lamp Burn Hours
+        type: u24
+        access: rw
+        default: "0x000000"
+        required: o
+        range: 0x000000,0xfffffe
+    - id: "0x0034"
+        name: Lamp Alarm Mode
+        type: bmp8
+        access: rw
+        default: "0x00"
+        required: m
+        bits:
+            "0": Lamp Burn Hours
+    - id: "0x0035"
+        name: Lamp Burn Hours Trip Point
+        type: u24
+        access: rw
+        default: "0x000000"
+        required: o
+        range: 0x000000,0xfffffe
+client: {}

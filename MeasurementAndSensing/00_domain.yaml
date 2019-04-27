@@ -1,0 +1,6 @@
+name: Measurement and sensing
+description: The measurement and sensing functional domain contains clusters and information
+    to build devices in the measurement and sensing domain, e.g. a temperature sensor
+    or an occupancy sensor.
+lowbound: "0x0400"
+highbound: "0x04FF"

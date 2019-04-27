@@ -1,0 +1,36 @@
+id: "0x0701"
+name: Demand Response and Load Control
+description: ' This cluster provides an interface to the functionality of Smart Energy
+    Demand Response and Load Control. Devices targeted by this cluster include thermostats
+    and devices that support load control. '
+server: {}
+client:
+    attr:
+    - id: "0x0000"
+        name: Utility Enrolment Group
+        type: u8
+        access: rw
+        default: "0"
+        required: m
+        range: 0x00,0xff
+    - id: "0x0001"
+        name: Start Randomize Minutes
+        type: u8
+        access: rw
+        default: "0x1e"
+        required: m
+        range: 0x00,0x3c
+    - id: "0x0002"
+        name: Stop Randomize Minutes
+        type: u8
+        access: rw
+        default: "0x1e"
+        required: m
+        range: 0x00,0x3c
+    - id: "0x0003"
+        name: Device Class Value
+        type: u16
+        access: r
+        default: "0x1e"
+        required: m
+        range: 0x00,0xff

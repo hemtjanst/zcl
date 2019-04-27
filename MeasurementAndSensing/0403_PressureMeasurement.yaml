@@ -1,0 +1,25 @@
+id: "0x0403"
+name: Pressure measurement
+description: The server cluster provides an interface to air pressure measurement
+    functionality, including configuration and provision of notifications of air pressure
+    measurements.
+server:
+    attr:
+    - id: "0x0000"
+        name: Measured Value
+        type: s16
+        access: r
+        default: "0"
+        required: m
+    - id: "0x0010"
+        name: Scaled Value
+        type: s16
+        access: r
+        default: "0"
+        required: o
+    - id: "0x0014"
+        name: Scale
+        type: s8
+        access: r
+        required: o
+client: {}

@@ -1,0 +1,31 @@
+id: "0x0402"
+name: Temperature measurement
+description: The server cluster provides an interface to temperature measurement functionality,
+    including configuration and provision  of notifications of temperature measurements.
+server:
+    attr:
+    - id: "0x0000"
+        name: Measured Value
+        type: s16
+        access: r
+        default: "0"
+        required: m
+    - id: "0x0001"
+        name: Min Measured Value
+        type: s16
+        access: r
+        required: m
+        range: 0x954d,0x7ffe
+    - id: "0x0002"
+        name: Max Measured Value
+        type: s16
+        access: r
+        required: m
+        range: 0x954e,0x7ffe
+    - id: "0x0003"
+        name: Tolerance
+        type: u16
+        access: r
+        required: o
+        range: 0x0000,0x0800
+client: {}

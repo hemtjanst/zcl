@@ -1,0 +1,319 @@
+id: "0x0015"
+name: Commissioning
+description: Attributes and commands for commissioning and managing a ZigBee device.
+server:
+    attr:
+    - id: "0x0000"
+        name: Short Address
+        type: u16
+        access: rw
+        required: m
+        range: 0x0000,0xfff7
+        showas: hex
+    - id: "0x0001"
+        name: Extended PAN ID
+        type: uid
+        access: rw
+        required: m
+        range: 0x0000000000000000,0xfffffffffffffff7
+    - id: "0x0002"
+        name: PAN ID
+        type: u16
+        access: rw
+        required: m
+        range: 0x0000,0xffff
+        showas: hex
+    - id: "0x0003"
+        name: Channel Mask
+        type: bmp32
+        access: rw
+        required: m
+        bits:
+            "11": CH 11
+            "12": CH 12
+            "13": CH 13
+            "14": CH 14
+            "15": CH 15
+            "16": CH 16
+            "17": CH 17
+            "18": CH 18
+            "19": CH 19
+            "20": CH 20
+            "21": CH 21
+            "22": CH 22
+            "23": CH 23
+            "24": CH 24
+            "25": CH 25
+            "26": CH 26
+    - id: "0x0004"
+        name: Protocol Version
+        type: u8
+        access: rw
+        default: "0x02"
+        required: m
+    - id: "0x0005"
+        name: Stack Profile
+        type: u8
+        access: rw
+        required: m
+        range: 0x01,0x02
+    - id: "0x0006"
+        name: Startup Control
+        type: enum8
+        access: rw
+        required: m
+        values:
+            "0x00": Part of the network
+            "0x01": Form a network
+            "0x02": Rejoin the network
+            "0x03": Start from scratch
+    - id: "0x0010"
+        name: Trust Center Address
+        type: uid
+        access: rw
+        required: m
+    - id: "0x0011"
+        name: Trust Center Master Key
+        type: seckey
+        access: rw
+        required: m
+    - id: "0x0012"
+        name: Network Key
+        type: seckey
+        access: rw
+        required: m
+    - id: "0x0013"
+        name: Use Insecure Join
+        type: bool
+        access: rw
+        required: m
+    - id: "0x0014"
+        name: Preconfigured Link Key
+        type: seckey
+        access: rw
+        required: m
+    - id: "0x0015"
+        name: Network Key Seq Num
+        type: u8
+        access: rw
+        required: m
+        range: 0x00,0xff
+    - id: "0x0016"
+        name: Network Key Type
+        type: enum8
+        access: rw
+        required: m
+        values:
+            "0x01": Standard
+            "0x05": High Security
+    - id: "0x0017"
+        name: Network Manager Address
+        type: u16
+        access: rw
+        required: m
+    - id: "0x0020"
+        name: Scan Attempts
+        type: u8
+        access: rw
+        required: m
+        range: 0x01,0xff
+    - id: "0x0021"
+        name: Time Between Scans
+        type: u16
+        access: rw
+        required: m
+        range: 0x0001,0xffff
+    - id: "0x0022"
+        name: Rejoin Interval
+        type: u16
+        access: rw
+        required: m
+        range: 0x0001,0xffff
+    - id: "0x0023"
+        name: Max Rejoin Interval
+        type: u16
+        access: rw
+        required: m
+        range: 0x0001,0xffff
+    - id: "0x0030"
+        name: Indirect Poll Rate
+        type: u16
+        access: rw
+        required: m
+        range: 0x0000,0xffff
+    - id: "0x0030"
+        name: Parent Retry Threshold
+        type: u8
+        access: rw
+        required: m
+        range: 0x00,0xff
+    - id: "0x0040"
+        name: Concentrator Flag
+        type: bool
+        access: rw
+        required: m
+    - id: "0x0041"
+        name: Concentrator Radius
+        type: u8
+        access: rw
+        required: m
+        range: 0x00,0xff
+    - id: "0x0042"
+        name: Concentrator Discovery Time
+        type: u8
+        access: rw
+        required: m
+        range: 0x00,0xff
+    - id: "0xDE01"
+        name: MAC Address
+        type: uid
+        access: rw
+        required: m
+    cmd:
+    - id: "0x00"
+        name: Restart Device
+        description: The Restart Device command is used to optionally install a set
+            of startup parameters in a device and run the startup procedure so as
+            to put the new values into effect. The new values may take effect immediately
+            or after an optional delay with optional jitter. The server will send
+            a Restart Device Response command back to the client device before executing
+            the procedure or starting the countdown timer required to time the delay.
+        dir: recv
+        required: m
+        response: "0x00"
+        payloadattr:
+        - id: "0x0000"
+            name: Options
+            type: bmp8
+            access: rw
+            default: "00000000"
+            required: m
+            bits:
+                "0": Don't replace attributes on restart
+                "1": Immediate
+        - id: "0x0001"
+            name: Delay
+            type: u8
+            required: m
+        - id: "0x0002"
+            name: Jitter
+            type: u8
+            required: m
+    - id: "0x01"
+        name: Save Startup Parameters
+        description: The Save Startup Parameters Request command allows for the current
+            attribute set to be stored under a given index.
+        dir: recv
+        required: o
+        response: "0x01"
+        payloadattr:
+        - id: "0x0000"
+            name: Options
+            type: bmp8
+            access: rw
+            default: "00000000"
+            required: m
+        - id: "0x0001"
+            name: Index
+            type: u8
+            required: m
+    - id: "0x02"
+        name: Restore Startup Parameters
+        description: This command allows a saved startup parameters attribute set
+            to be restored to current status overwriting whatever was there previously.
+        dir: recv
+        required: o
+        response: "0x02"
+        payloadattr:
+        - id: "0x0000"
+            name: Options
+            type: bmp8
+            access: rw
+            default: "00000000"
+            required: m
+        - id: "0x0001"
+            name: Index
+            type: u8
+            required: m
+    - id: "0x03"
+        name: Reset Startup Parameters
+        description: This command allows current startup parameters attribute set
+            and one or all of the saved attribute sets to be set to default values.
+            There is also an option for erasing the index under which an attribute
+            set is saved thereby freeing up storage capacity.
+        dir: recv
+        required: m
+        response: "0x03"
+        payloadattr:
+        - id: "0x0000"
+            name: Options
+            type: bmp8
+            access: rw
+            default: "00000000"
+            required: m
+            bits:
+                "0": Reset Current
+                "1": Reset All
+                "2": Erase Index
+        - id: "0x0001"
+            name: Index
+            type: u8
+            required: m
+client:
+    cmd:
+    - id: "0x00"
+        name: Restart Device Response
+        description: On receipt of this command the client is made aware that the
+            server has received the corresponding request and is informed of the status
+            of the request.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            access: rw
+            required: m
+            enumeration: ZCL_Status
+    - id: "0x01"
+        name: Save Startup Parameters Response
+        description: On receipt of this command the client is made aware that the
+            server has received the corresponding request and is informed of the status
+            of the request.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            access: rw
+            required: m
+            enumeration: ZCL_Status
+    - id: "0x02"
+        name: Restore Startup Parameters Response
+        description: On receipt of this command the client is made aware that the
+            server has received the corresponding request and is informed of the status
+            of the request.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            access: rw
+            required: m
+            enumeration: ZCL_Status
+    - id: "0x03"
+        name: Reset Startup Parameters Response
+        description: On receipt of this command the client is made aware that the
+            server has received the corresponding request and is informed of the status
+            of the request.
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            access: rw
+            required: m
+            enumeration: ZCL_Status

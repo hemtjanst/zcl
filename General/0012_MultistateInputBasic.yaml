@@ -1,0 +1,38 @@
+id: "0x0012"
+name: Multistate Input (Basic)
+description: Provides an interface for reading the value of a multistate measurement
+    and accessing various characteristics of that measurement. The cluster is typically
+    used to implement a sensor that measures a physical quantity that can take on
+    one of a number of discrete states.
+server:
+    attr:
+    - id: "0x004A"
+        name: Number of states
+        type: u16
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x0051"
+        name: Out of service
+        type: bool
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x0055"
+        name: Present value
+        type: u16
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x006F"
+        name: Status flags
+        type: bmp8
+        access: r
+        default: "0"
+        required: m
+        bits:
+            "1": In Alarm
+            "2": Fault
+            "4": Overidden
+            "8": Out of Service
+client: {}

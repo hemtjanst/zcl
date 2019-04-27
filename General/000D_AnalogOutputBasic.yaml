@@ -1,0 +1,51 @@
+id: "0x000D"
+name: Analog Output (Basic)
+description: The Analog Output (Basic) cluster provides an interface for setting the
+    value of an analog output (typically to the environment) and accessing various
+    characteristics of that value.
+server:
+    attr:
+    - id: "0x001C"
+        name: Description
+        type: cstring
+        access: rw
+        required: o
+    - id: "0x0041"
+        name: Max Present Value
+        type: float
+        access: rw
+        required: o
+    - id: "0x0045"
+        name: Min Present Value
+        type: float
+        access: rw
+        required: o
+    - id: "0x0051"
+        name: Out of service
+        type: bool
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x0055"
+        name: Present value
+        type: float
+        access: rw
+        default: "0"
+        required: m
+    - id: "0x006F"
+        name: Status flags
+        type: bmp8
+        access: r
+        default: "0"
+        required: m
+        bits:
+            "1": In Alarm
+            "2": Fault
+            "4": Overidden
+            "8": Out of Service
+    - id: "0xF000"
+        name: Xiaomi 0xf000
+        type: u32
+        access: r
+        required: o
+client: {}

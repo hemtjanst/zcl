@@ -1,0 +1,192 @@
+id: "0x0000"
+name: Basic
+description: ' Attributes for determining basic information about a device, setting
+    user device information such as description of location, and enabling a device. '
+server:
+    attr:
+    - id: "0xFFFD"
+        name: Cluster Revision
+        type: u16
+        access: rw
+        default: "0"
+        required: o
+    - id: "0x0000"
+        name: ZCL Version
+        type: u8
+        access: r
+        default: "0"
+        required: m
+    - id: "0x0001"
+        name: Application Version
+        type: u8
+        access: r
+        default: "0"
+        required: o
+    - id: "0x0002"
+        name: Stack Version
+        type: u8
+        access: r
+        default: "0"
+        required: o
+    - id: "0x0003"
+        name: HW Version
+        type: u8
+        access: r
+        default: "0"
+        required: o
+    - id: "0x0004"
+        name: Manufacturer Name
+        type: cstring
+        access: r
+        required: o
+        range: 0,32
+    - id: "0x0005"
+        name: Model Identifier
+        type: cstring
+        access: r
+        required: o
+        range: 0,32
+    - id: "0x0006"
+        name: Date Code
+        type: cstring
+        access: r
+        required: o
+        range: 0,16
+    - id: "0x0007"
+        name: Power Source
+        type: enum8
+        access: r
+        default: "0"
+        required: m
+        values:
+            "0x00": Unknown
+            "0x01": Mains (single phase)
+            "0x02": Mains (3 phase)
+            "0x03": Battery
+            "0x04": DC Source
+            "0x05": Emergency mains constantly powered
+            "0x06": Emergency mains and transfer switch
+            "0x81": Mains (single phase) with battery backup
+    - id: "0x0008"
+        name: Unknown 1
+        description: IKEA control outlet specific.
+        type: enum8
+        access: r
+        required: o
+    - id: "0x0009"
+        name: Unknown 2
+        description: IKEA control outlet specific.
+        type: enum8
+        access: r
+        required: o
+    - id: "0x000A"
+        name: Product code
+        description: As printed on the product.
+        type: ostring
+        access: r
+        required: o
+    - id: "0x4000"
+        name: SW Build ID
+        type: cstring
+        access: r
+        required: o
+        range: 0,16
+    - id: "0xFF0D"
+        mnfcode: "0x115F"
+        name: Xiaomi Sensitivity
+        type: u8
+        access: rw
+        required: o
+    - id: "0xFF22"
+        mnfcode: "0x115F"
+        name: Xiaomi Disconnect 1
+        description: Set to 0x12 (0xFE) to connect (disconnect) the left button to
+            (from) the relay.
+        type: u8
+        access: rw
+        required: o
+        showas: hex
+    - id: "0xFF23"
+        mnfcode: "0x115F"
+        name: Xiaomi Disconnect 2
+        description: Set to 0x22 (0xFE) to connect (disconnect) the left button to
+            (from) the relay.
+        type: u8
+        access: rw
+        required: o
+        showas: hex
+    - id: "0x0010"
+        name: Location Description
+        type: cstring
+        access: rw
+        required: o
+        range: 0,16
+    - id: "0x0011"
+        name: Physical Environment
+        type: enum8
+        access: rw
+        default: "0"
+        required: o
+        values:
+            "0x00": Unspecified Environment
+            "0xFF": Unknown Environment
+    - id: "0x0012"
+        name: Device Enabled
+        type: bool
+        access: rw
+        default: "1"
+        required: o
+        values:
+            "0x00": Disabled
+            "0x01": Enabled
+    - id: "0x0013"
+        name: Alarm Mask
+        type: bmp8
+        access: rw
+        default: "00000000"
+        required: o
+        bits:
+            "0": General Hardware Fault
+            "1": General Software Fault
+    - id: "0x0030"
+        mnfcode: "0x100B"
+        name: Sensitivity
+        type: enum8
+        access: rw
+        default: "0"
+        required: o
+        values:
+            "0x00": default
+            "0x01": high
+            "0x02": max
+    - id: "0x0031"
+        mnfcode: "0x100B"
+        name: Configuration
+        type: bmp16
+        access: rw
+        default: "0"
+        required: o
+        bits:
+            "0": Touchlink enabled 0
+            "1": Touchlink enabled 1
+            "3": Touchlink enabled 2
+    - id: "0x0032"
+        mnfcode: "0x100B"
+        name: Usertest
+        type: bool
+        access: rw
+        default: "0"
+        required: o
+    - id: "0x0033"
+        mnfcode: "0x100B"
+        name: LED Indication
+        type: bool
+        access: rw
+        default: "0"
+        required: o
+    cmd:
+    - id: "0x00"
+        name: Reset to Factory Defaults
+        dir: recv
+        required: o
+client: {}

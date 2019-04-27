@@ -1,0 +1,5 @@
+name: Protocol interfaces
+description: The protocol interfaces functional domain contains clusters and information
+    to build devices to interface to other protocols, e.g. BACnet.
+lowbound: "0x0600"
+highbound: "0x06FF"

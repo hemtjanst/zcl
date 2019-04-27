@@ -1,0 +1,4 @@
+name: Smart energy
+description: TODO Smart Energy Description
+lowbound: "0x0700"
+highbound: "0x07FF"
