@@ -10,18 +10,20 @@ server:
         access: r
         default: "0"
         required: true
+        range: 0x0000,0xffff
     - id: "0x0001"
         name: Min Measured Value
         type: u16
         access: r
         required: true
-        range: 0x0002,0xfffd
+        report: true
+        range: 0x0001,0xfffd
     - id: "0x0002"
         name: Max Measured Value
         type: u16
         access: r
         required: true
-        range: 0x0001,0x7ffe
+        range: 0x0002,0xfffe
     - id: "0x0003"
         name: Tolerance
         type: u16

@@ -8,21 +8,24 @@ server:
         access: r
         default: "0"
         required: true
+        report: true
+        range: 0x0000,0x2710
     - id: "0x0001"
         name: Min Measured Value
         type: u16
         access: r
         required: true
-        range: 0x954d,0x7ffe
+        range: 0x0000,0x270f
     - id: "0x0002"
         name: Max Measured Value
         type: u16
         access: r
         required: true
-        range: 0x954e,0x7ffe
+        range: 0x0001,0x2710
     - id: "0x0003"
         name: Tolerance
         type: u16
         access: r
+        report: true
         range: 0x0000,0x0800
 client: {}
