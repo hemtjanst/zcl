@@ -10,42 +10,36 @@ server:
         type: ostring
         access: rw
         default: Tier1
-        required: o
         range: 0,12
     - id: "0x0001"
         name: Tier2 Price Label
         type: ostring
         access: rw
         default: Tier2
-        required: o
         range: 0,12
     - id: "0x0002"
         name: Tier3 Price Label
         type: ostring
         access: rw
         default: Tier3
-        required: o
         range: 0,12
     - id: "0x0003"
         name: Tier4 Price Label
         type: ostring
         access: rw
         default: Tier4
-        required: o
         range: 0,12
     - id: "0x0004"
         name: Tier5 Price Label
         type: ostring
         access: rw
         default: Tier5
-        required: o
         range: 0,12
     - id: "0x0005"
         name: Tier6 Price Label
         type: ostring
         access: rw
         default: Tier6
-        required: o
         range: 0,12
     cmd:
     - id: "0x00"
@@ -56,7 +50,7 @@ server:
         - id: "0x0000"
             name: Command Options
             type: bmp8
-            required: m
+            required: true
             bits:
                 "0": Requestor Rx On When Idle
     - id: "0x01"
@@ -67,9 +61,9 @@ server:
         - id: "0x0000"
             name: Start Time
             type: utc
-            required: m
+            required: true
         - id: "0x0001"
             name: Number of Events
             type: u8
-            required: m
+            required: true
 client: {}

@@ -6,13 +6,13 @@ server:
         name: Occupancy
         type: bmp8
         access: r
-        required: m
+        required: true
         range: 0000000x
     - id: "0x0001"
         name: Occupancy Sensor Type
         type: enum8
         access: r
-        required: m
+        required: true
         range: 0x00,0xfe
         values:
             "0x00": PIR
@@ -28,7 +28,6 @@ server:
         type: u16
         access: rw
         default: "0x00"
-        required: o
         range: 0x00,0xfffe
     - id: "0x0011"
         name: PIR Unoccupied To Occupied Delay
@@ -38,7 +37,6 @@ server:
         type: u16
         access: rw
         default: "0x00"
-        required: o
         range: 0x00,0xfffe
     - id: "0x0020"
         name: Ultrasonic Occupied To Unoccupied Delay
@@ -50,7 +48,6 @@ server:
         type: u8
         access: rw
         default: "0x00"
-        required: o
         range: 0x00,0xfe
     - id: "0x0021"
         name: Ultrasonic Unoccupied To Occupied Delay
@@ -60,7 +57,6 @@ server:
         type: u8
         access: rw
         default: "0x00"
-        required: o
         range: 0x00,0xfe
     - id: "0x0030"
         mnfcode: "0x100B"
@@ -68,12 +64,10 @@ server:
         type: u8
         access: rw
         default: "0"
-        required: o
     - id: "0x0031"
         mnfcode: "0x100B"
         name: Sensitivity max.
         type: u8
         access: rw
         default: "0"
-        required: o
 client: {}

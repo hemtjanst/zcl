@@ -8,17 +8,15 @@ server:
         name: Physical Closed Limit
         type: u16
         access: r
-        required: o
     - id: "0x0001"
         name: MotorStepSize
         type: u8
         access: r
-        required: o
     - id: "0x0002"
         name: Status
         type: bmp8
         access: rw
-        required: m
+        required: true
         bits:
             "0": Shade operational
             "1": Shade adjusting
@@ -29,14 +27,14 @@ server:
         type: u16
         access: rw
         default: "0x0001"
-        required: m
+        required: true
         range: 0x0001,0xfffe
     - id: "0x0011"
         name: Mode
         type: enum8
         access: rw
         default: "0x00"
-        required: m
+        required: true
         values:
             "0x00": Normal
             "0x01": Configure

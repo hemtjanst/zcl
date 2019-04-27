@@ -8,7 +8,7 @@ server:
         type: u16
         access: rw
         default: "0x00"
-        required: m
+        required: true
     cmd:
     - id: "0x00"
         name: Alarm
@@ -19,12 +19,12 @@ server:
             name: Alarm code
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Cluster Id
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
 client: {}

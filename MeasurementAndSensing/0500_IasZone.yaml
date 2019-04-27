@@ -9,7 +9,7 @@ server:
         name: Zone State
         type: enum8
         access: r
-        required: m
+        required: true
         range: 0x00,0x01
         values:
             "0x00": Not enrolled
@@ -18,7 +18,7 @@ server:
         name: Zone Type
         type: enum16
         access: r
-        required: m
+        required: true
         range: 0x0000,0xffff
         values:
             "0x000D": Motion sensor
@@ -40,7 +40,7 @@ server:
         name: Zone Status
         type: bmp16
         access: r
-        required: m
+        required: true
         bits:
             "0": Alarm 1
             "1": Alarm 2
@@ -57,12 +57,11 @@ server:
         type: uid
         access: rw
         default: "0"
-        required: o
     - id: "0x0011"
         name: Zone ID
         type: u8
         access: r
-        required: m
+        required: true
         range: 0x00,0xff
     cmd:
     - id: "0x00"
@@ -73,7 +72,7 @@ server:
         - id: "0x0000"
             name: Enroll response code
             type: enum16
-            required: m
+            required: true
             values:
                 "0x0000": Success
                 "0x0001": Not supported
@@ -82,7 +81,7 @@ server:
         - id: "0x0001"
             name: Zone ID
             type: u8
-            required: m
+            required: true
     - id: "0x01"
         name: Initiate Normal Operation Mode
         dir: recv
@@ -95,7 +94,7 @@ server:
         - id: "0x0000"
             name: Zone Status
             type: bmp16
-            required: m
+            required: true
             bits:
                 "0": Alarm 1
                 "1": Alarm 2
@@ -111,15 +110,15 @@ server:
             name: Extended Status
             type: u8
             default: "0x00"
-            required: m
+            required: true
         - id: "0x0002"
             name: Zone ID
             type: u8
-            required: m
+            required: true
         - id: "0x0003"
             name: Delay
             type: u16
-            required: m
+            required: true
     - id: "0x01"
         name: Zone Enroll request
         dir: send
@@ -128,7 +127,7 @@ server:
         - id: "0x0000"
             name: Zone Status
             type: enum16
-            required: m
+            required: true
             values:
                 "0x000D": Motion sensor
                 "0x0000": Standard CIE
@@ -146,5 +145,5 @@ server:
         - id: "0x0001"
             name: Manufacturer Code
             type: u16
-            required: m
+            required: true
 client: {}

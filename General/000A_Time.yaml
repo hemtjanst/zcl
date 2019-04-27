@@ -7,13 +7,13 @@ server:
         name: Time
         type: utc
         access: rw
-        required: m
+        required: true
     - id: "0x0001"
         name: Time Status
         type: bmp8
         access: rw
         default: "0b00000000"
-        required: m
+        required: true
         bits:
             "0": Master Clock
             "1": Synchronized
@@ -24,51 +24,43 @@ server:
         type: s32
         access: rw
         default: "0"
-        required: o
         range: -86400,86400
     - id: "0x0003"
         name: Dst Start
         type: u32
         access: rw
-        required: o
         range: 0x00000000,0xfffffffe
     - id: "0x0004"
         name: Dst End
         type: u32
         access: rw
-        required: o
         range: 0x00000000,0xfffffffe
     - id: "0x0005"
         name: Dst Shift
         type: s32
         access: rw
         default: "0"
-        required: o
         range: -86400,86400
     - id: "0x0006"
         name: Standard Time
         type: u32
         access: r
-        required: o
         range: 0x00000000,0xfffffffe
     - id: "0x0007"
         name: Local Time
         type: u32
         access: r
-        required: o
         range: 0x00000000,0xfffffffe
     - id: "0x0008"
         name: Last Set Time
         type: utc
         access: r
         default: "0xffffffff"
-        required: o
         range: 0x00000000,0xfffffffe
     - id: "0x0009"
         name: Valid Until Time
         type: utc
         access: rw
         default: "0xffffffff"
-        required: o
         range: 0x00000000,0xfffffffe
 client: {}

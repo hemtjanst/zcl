@@ -9,14 +9,14 @@ server:
         type: u32
         access: r
         default: "0"
-        required: m
+        required: true
         showas: hex
     - id: "0x0001"
         name: ColorSetCount
         type: u8
         access: r
         default: "0"
-        required: m
+        required: true
     cmd:
     - id: "0x00"
         name: Set Color
@@ -29,33 +29,33 @@ server:
             name: Red
             type: u8
             default: "0x00"
-            required: m
+            required: true
             range: 0x00,0xFF
             showas: slider
         - id: "0x0001"
             name: Green
             type: u8
             default: "0x00"
-            required: m
+            required: true
             range: 0x00,0xFF
             showas: slider
         - id: "0x0002"
             name: Blue
             type: u8
             default: "0x00"
-            required: m
+            required: true
             range: 0x00,0xFF
             showas: slider
         - id: "0x0003"
             name: Set Index
             type: u8
             default: "0x00"
-            required: m
+            required: true
         - id: "0x0004"
             name: Options
             type: bmp8
             default: "0x00"
-            required: m
+            required: true
             bits:
                 "0": Change colors
                 "1": Use current preset

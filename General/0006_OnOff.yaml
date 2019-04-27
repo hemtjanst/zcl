@@ -9,7 +9,7 @@ server:
         type: bool
         access: r
         default: "0"
-        required: m
+        required: true
         values:
             "0x00": Off
             "0x01": On
@@ -18,25 +18,21 @@ server:
         type: bool
         access: r
         default: "0"
-        required: o
     - id: "0x4001"
         name: OnTime
         type: u16
         access: r
         default: "0"
-        required: o
     - id: "0x4002"
         name: OffWaitTime
         type: u16
         access: r
         default: "0"
-        required: o
     - id: "0x4003"
         name: PowerOn OnOff
         type: enum8
         access: rw
         default: "0x01"
-        required: o
         values:
             "0x00": Off
             "0x01": On
@@ -74,7 +70,7 @@ server:
                 use.
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x00": Delayed all off
                 "0x01": Dying light
@@ -84,7 +80,7 @@ server:
                 to use.
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x00": 20% dim up in 0.5s then off in 1s (Dying light)
                 "0x01": ""
@@ -110,7 +106,7 @@ server:
                 use.
             type: bmp8
             default: "0x00"
-            required: m
+            required: true
             bits:
                 "0": Accept only when on
         - id: "0x0001"
@@ -119,12 +115,12 @@ server:
                 on.
             type: u16
             default: "0x0000"
-            required: m
+            required: true
         - id: "0x0002"
             name: Off wait time
             description: Length of time (in 1/10ths second) that the lamp shall remain
                 off.
             type: u16
             default: "0x0000"
-            required: m
+            required: true
 client: {}

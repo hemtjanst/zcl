@@ -9,30 +9,28 @@ server:
         type: u16
         access: r
         default: "0"
-        required: m
+        required: true
     - id: "0x0001"
         name: Min Measured Value
         type: u16
         access: r
-        required: m
+        required: true
         range: 0x0002,0xfffd
     - id: "0x0002"
         name: Max Measured Value
         type: u16
         access: r
-        required: m
+        required: true
         range: 0x0001,0x7ffe
     - id: "0x0003"
         name: Tolerance
         type: u16
         access: r
-        required: o
         range: 0x0000,0x0800
     - id: "0x0004"
         name: Light Sensor Type
         type: enum8
         access: r
-        required: o
         range: 0x00,0xff
         values:
             "0x00": Photodiode
@@ -44,31 +42,26 @@ client:
         name: Hysteresis
         type: u16
         access: rw
-        required: o
     - id: "0xF001"
         name: Max Up Speed
         description: Maximum up adjustment speed in 1/10 seconds.
         type: u16
         access: rw
-        required: o
     - id: "0xF002"
         name: Max Down Speed
         description: Maximum down adjustment speed in 1/10 seconds.
         type: u16
         access: rw
-        required: o
     - id: "0xF003"
         name: Target Value
         description: Target value in Lux which should be kept.
         type: u16
         access: rw
-        required: o
     - id: "0xF004"
         name: Startup Type
         description: Brightness control startup type.
         type: enum8
         access: rw
-        required: o
         values:
             "0x00": Default Level
             "0x01": Zero Level

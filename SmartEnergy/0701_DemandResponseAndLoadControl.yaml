@@ -11,26 +11,26 @@ client:
         type: u8
         access: rw
         default: "0"
-        required: m
+        required: true
         range: 0x00,0xff
     - id: "0x0001"
         name: Start Randomize Minutes
         type: u8
         access: rw
         default: "0x1e"
-        required: m
+        required: true
         range: 0x00,0x3c
     - id: "0x0002"
         name: Stop Randomize Minutes
         type: u8
         access: rw
         default: "0x1e"
-        required: m
+        required: true
         range: 0x00,0x3c
     - id: "0x0003"
         name: Device Class Value
         type: u16
         access: r
         default: "0x1e"
-        required: m
+        required: true
         range: 0x00,0xff

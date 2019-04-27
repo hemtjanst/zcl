@@ -9,7 +9,7 @@ server:
         type: enum8
         access: rw
         default: "0x05"
-        required: m
+        required: true
         values:
             "0x00": Off
             "0x01": Low
@@ -23,7 +23,7 @@ server:
         type: enum8
         access: rw
         default: "0x02"
-        required: m
+        required: true
         values:
             "0x00": Low/Med/High
             "0x01": Low/High

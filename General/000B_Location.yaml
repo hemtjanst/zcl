@@ -14,12 +14,12 @@ server:
             name: Target address
             type: u16
             default: "0x0000"
-            required: m
+            required: true
         - id: "0x0001"
             name: Resolution
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x00": High
                 "0x01": Mid
@@ -36,15 +36,15 @@ client:
             name: Target address
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Distance (Meter)
             type: u16
             default: "0"
-            required: m
+            required: true
         - id: "0x0002"
             name: Quality index
             type: u16
             default: "0"
-            required: m
+            required: true

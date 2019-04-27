@@ -9,35 +9,32 @@ server:
         name: Description
         type: cstring
         access: rw
-        required: o
     - id: "0x0041"
         name: Max Present Value
         type: float
         access: rw
-        required: o
     - id: "0x0045"
         name: Min Present Value
         type: float
         access: rw
-        required: o
     - id: "0x0051"
         name: Out of service
         type: bool
         access: rw
         default: "0"
-        required: m
+        required: true
     - id: "0x0055"
         name: Present value
         type: float
         access: rw
         default: "0"
-        required: m
+        required: true
     - id: "0x006F"
         name: Status flags
         type: bmp8
         access: r
         default: "0"
-        required: m
+        required: true
         bits:
             "1": In Alarm
             "2": Fault
@@ -47,5 +44,4 @@ server:
         name: Xiaomi 0xf000
         type: u32
         access: r
-        required: o
 client: {}

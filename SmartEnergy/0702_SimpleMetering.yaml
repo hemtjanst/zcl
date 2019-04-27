@@ -10,13 +10,13 @@ server:
         name: Current Summation Delivered
         type: u48
         access: r
-        required: m
+        required: true
     - id: "0x0200"
         name: Status
         type: bmp8
         access: r
         default: "00000000"
-        required: m
+        required: true
         bits:
             "0": Check Meter
             "1": Low Battery
@@ -30,7 +30,7 @@ server:
         type: enum8
         access: r
         default: "0"
-        required: m
+        required: true
         values:
             "0x00": kW & kWh binary
             "0x01": m³ & m³/h binary
@@ -56,17 +56,15 @@ server:
         name: Multiplier
         type: u24
         access: r
-        required: o
     - id: "0x0302"
         name: Divisor
         type: u24
         access: r
-        required: o
     - id: "0x0303"
         name: Summation Formatting
         type: bmp8
         access: r
-        required: m
+        required: true
         bits:
             "0": Number Digits Left
             "7": Surpress Leading Zeros
@@ -74,7 +72,7 @@ server:
         name: Metering Device Type
         type: enum8
         access: r
-        required: m
+        required: true
         values:
             "0x00": Electric Metering
             "0x01": Gas Metering
@@ -93,7 +91,6 @@ server:
         name: Instantaneous Demand
         type: s24
         access: r
-        required: o
     cmd:
     - id: "0x00"
         name: Get Profile
@@ -103,18 +100,18 @@ server:
         - id: "0x0000"
             name: Interval Channel
             type: u8
-            required: m
+            required: true
             values:
                 "0x00": Consumption Delivered
                 "0x01": Consumption Received
         - id: "0x0001"
             name: End Time
             type: utc
-            required: m
+            required: true
         - id: "0x0002"
             name: Number Of Periods
             type: u8
-            required: m
+            required: true
     - id: "0x01"
         name: Request Mirror Response
         dir: recv
@@ -123,7 +120,7 @@ server:
         - id: "0x0000"
             name: EndPoint ID
             type: u16
-            required: m
+            required: true
             range: 0x0001,0x00f0
     - id: "0x02"
         name: Mirror Removed
@@ -133,6 +130,6 @@ server:
         - id: "0x0000"
             name: Removed EndPoint ID
             type: u16
-            required: m
+            required: true
             range: 0x0001,0x00f0
 client: {}

@@ -7,140 +7,122 @@ server:
         name: Local Temperature
         type: s16
         access: r
-        required: m
+        required: true
         range: 0x954d,0x7fff
     - id: "0x0001"
         name: Outdoor Temperature
         type: s16
         access: r
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0002"
         name: Occupancy
         type: bmp8
         access: r
         default: "0"
-        required: o
     - id: "0x0003"
         name: Abs Min Heat Setpoint Limit
         type: s16
         access: r
         default: "0x02bc"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0004"
         name: Abs Max Heat Setpoint Limit
         type: s16
         access: r
         default: "0x0bb8"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0005"
         name: Abs Min Cool Setpoint Limit
         type: s16
         access: r
         default: "0x0640"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0006"
         name: Abs Max Cool Setpoint Limit
         type: s16
         access: r
         default: "0x0c80"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0007"
         name: PI Cooling Demand
         type: u8
         access: r
-        required: o
         range: 0x00,0x64
     - id: "0x0008"
         name: PI Heating Demand
         type: u8
         access: r
-        required: o
         range: 0x00,0x64
     - id: "0x0009"
         name: HVAC System Type Configuration
         type: bmp8
         access: rw
         default: "0"
-        required: o
     - id: "0x0010"
         name: Local Temperature Calibration
         type: s8
         access: rw
         default: "0x00"
-        required: o
         range: 0xe7,0x19
     - id: "0x0011"
         name: Occupied Cooling Setpoint
         type: s16
         access: rw
         default: "0x0a28"
-        required: m
+        required: true
         range: 0x954d,0x7fff
     - id: "0x0012"
         name: Occupied Heating Setpoint
         type: s16
         access: rw
         default: "0x07d0"
-        required: m
+        required: true
         range: 0x954d,0x7fff
     - id: "0x0013"
         name: Unoccupied Cooling Setpoint
         type: s16
         access: rw
         default: "0x0a28"
-        required: o
     - id: "0x0014"
         name: Unoccupied Heating Setpoint
         type: s16
         access: rw
         default: "0x07d0"
-        required: o
     - id: "0x0015"
         name: Min Heat Setpoint Limit
         type: s16
         access: rw
         default: "0x02bc"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0016"
         name: Max Heat Setpoint Limit
         type: s16
         access: rw
         default: "0x0bb8"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0017"
         name: Min Cool Setpoint Limit
         type: s16
         access: rw
         default: "0x0640"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0018"
         name: Max Cool Setpoint Limit
         type: s16
         access: rw
         default: "0x0c80"
-        required: o
         range: 0x954d,0x7fff
     - id: "0x0019"
         name: Min Setpoint Dead Band
         type: s8
         access: rw
         default: "0x19"
-        required: o
         range: 0x0a,0x19
     - id: "0x001A"
         name: Remote Sensing
         type: bmp8
         access: rw
         default: "0"
-        required: o
         bits:
             "0": Local temperature sensed remotely
             "1": Outdoor temperature sensed remotely
@@ -150,7 +132,7 @@ server:
         type: enum8
         access: rw
         default: "0x04"
-        required: m
+        required: true
         values:
             "0x00": Cooling Only
             "0x01": Cooling With Reheat
@@ -163,7 +145,7 @@ server:
         type: enum8
         access: rw
         default: "0x01"
-        required: m
+        required: true
         values:
             "0x00": Off
             "0x01": Auto
@@ -179,7 +161,6 @@ server:
         type: bmp8
         access: r
         default: "0"
-        required: o
         bits:
             "0": Initialization failure
             "1": Hardware failure
@@ -189,7 +170,6 @@ server:
         type: enum8
         access: r
         default: "0x00"
-        required: o
         values:
             "0x00": Off
             "0x03": Cool
@@ -199,7 +179,6 @@ server:
         type: enum8
         access: r
         default: "0x00"
-        required: o
         values:
             "0x00": Sunday
             "0x01": Monday
@@ -212,20 +191,17 @@ server:
         name: Number of Weekly Transitions
         type: u8
         access: r
-        required: o
         range: 0x00,0xff
     - id: "0x0022"
         name: Number of Dail Transitions
         type: u8
         access: r
-        required: o
         range: 0x00,0xff
     - id: "0x0023"
         name: Temperature Setpoint Hold
         type: enum8
         access: r
         default: "0x00"
-        required: o
         values:
             "0x00": Setpoint Hold Off
             "0x01": Setpoint Hold On
@@ -234,14 +210,12 @@ server:
         type: u8
         access: rw
         default: "0xffff"
-        required: o
         range: 0x05a0,0xffff
     - id: "0x0025"
         name: Thermostat Programming Operation Mode
         type: bmp8
         access: rw
         default: "0"
-        required: o
         bits:
             "0": Simple/setpoint mode
             "1": Auto/recovery mode
@@ -250,7 +224,6 @@ server:
         name: Thermostat Running State
         type: bmp16
         access: r
-        required: o
         bits:
             "0": Heat State On
             "1": Cool State On
@@ -265,7 +238,7 @@ server:
         type: enum8
         access: rw
         default: "0x02"
-        required: m
+        required: true
         values:
             "0x00": Unknown 1
             "0x01": Unknown 2
@@ -276,14 +249,14 @@ server:
         type: u8
         access: rw
         default: "0x00"
-        required: m
+        required: true
     - id: "0x4002"
         mnfcode: "0x1037"
         name: Errors
         type: u8
         access: r
         default: "0x00"
-        required: m
+        required: true
         values:
             "0x00": Reserved
             "0x01": Reserved
@@ -299,14 +272,14 @@ server:
         type: s16
         access: rw
         default: "0x07d0"
-        required: m
+        required: true
     - id: "0x4008"
         mnfcode: "0x1037"
         name: Host Flags
         type: u24
         access: rw
         default: "0x000000"
-        required: m
+        required: true
         showas: hex
     cmd:
     - id: "0x00"
@@ -320,7 +293,7 @@ server:
             name: Mode
             type: enum8
             default: "0x02"
-            required: m
+            required: true
             values:
                 "0x00": Heat (adjust Heat Setpoint)
                 "0x01": Cool (adjust Cool Setpoint)
@@ -331,5 +304,5 @@ server:
                 the amount the setpoint(s) are to be a increased (or decreased) by,
                 in steps of 0.1°C.
             type: s8
-            required: m
+            required: true
 client: {}

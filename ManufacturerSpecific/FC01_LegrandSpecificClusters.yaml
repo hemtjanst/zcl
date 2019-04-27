@@ -10,7 +10,7 @@ server:
         type: dat16
         access: rw
         default: "0x0101"
-        required: m
+        required: true
         showas: hex
     - id: "0x0001"
         name: LED
@@ -18,5 +18,5 @@ server:
         type: bool
         access: rw
         default: "0"
-        required: m
+        required: true
 client: {}

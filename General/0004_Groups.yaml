@@ -7,7 +7,7 @@ server:
         name: Name Support
         type: bmp8
         access: r
-        required: m
+        required: true
         range: x0000000
         bits:
             "7": Name Support
@@ -23,12 +23,12 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Group Name
             type: cstring
-            required: m
+            required: true
     - id: "0x01"
         name: View group
         description: Get the name of a group.
@@ -40,7 +40,7 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x02"
         name: Get group membership
@@ -53,12 +53,12 @@ server:
             name: Group count
             type: u8
             default: "0x00"
-            required: m
+            required: true
         - id: "0x0001"
             name: Group list
             type: set
             arraytype: u16
-            required: m
+            required: true
             showas: hex
             listsize: '@0x0000'
     - id: "0x03"
@@ -72,7 +72,7 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x04"
         name: Remove all groups
@@ -91,13 +91,13 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x01"
         name: View group response
@@ -109,18 +109,18 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Group Name
             type: cstring
-            required: m
+            required: true
         payloadcond:
         - id: "0x0"
             op: '!='
@@ -140,17 +140,16 @@ client:
             name: Capacity
             type: u8
             default: "0x00"
-            required: m
+            required: true
         - id: "0x0001"
             name: Group count
             type: u8
             default: "0x00"
-            required: m
+            required: true
         - id: "0x0002"
             name: Group list
             type: set
             arraytype: u16
-            required: o
             showas: hex
             listsize: "0x0001"
     - id: "0x03"
@@ -163,11 +162,11 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex

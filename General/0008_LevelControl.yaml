@@ -12,7 +12,7 @@ server:
         type: u8
         access: r
         default: "0x00"
-        required: m
+        required: true
         range: 0x00,0xff
     - id: "0x0001"
         name: Remaining Time
@@ -21,14 +21,12 @@ server:
         type: u16
         access: r
         default: "0x0000"
-        required: o
         range: 0x0000,0xffff
     - id: "0x000F"
         name: Unknown
         description: IKEA specific.
         type: bmp8
         access: rw
-        required: o
     - id: "0x0010"
         name: OnOff Transistion Time
         description: The OnOffTransitionTime attribute represents the time taken to
@@ -39,7 +37,6 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        required: o
         range: 0x0000,0xffff
     - id: "0x0011"
         name: On Level
@@ -50,31 +47,26 @@ server:
         type: u8
         access: rw
         default: "0xfe"
-        required: o
         range: 0x00,0xfe
     - id: "0x0012"
         name: On Transition Time
         type: u16
         access: rw
-        required: o
         range: 0x0000,0xfffe
     - id: "0x0013"
         name: Off Transition Time
         type: u16
         access: rw
-        required: o
         range: 0x0000,0xfffe
     - id: "0x0014"
         name: Default Move Rate
         type: u8
         access: rw
-        required: o
         range: 0x00,0xfe
     - id: "0x4000"
         name: PowerOn Level
         type: u8
         access: rw
-        required: o
     cmd:
     - id: "0x00"
         name: Move to Level
@@ -85,13 +77,13 @@ server:
             name: Level
             type: u8
             default: "0x00"
-            required: m
+            required: true
             range: 0x00,0xff
         - id: "0x0001"
             name: Transistion time
             type: u16
             default: "0x0000"
-            required: m
+            required: true
     - id: "0x01"
         name: Move
         dir: recv
@@ -101,7 +93,7 @@ server:
             name: Move mode
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x00": Up
                 "0x01": Down
@@ -109,7 +101,7 @@ server:
             name: Rate
             type: u8
             default: "0x00"
-            required: m
+            required: true
     - id: "0x02"
         name: Step
         dir: recv
@@ -119,7 +111,7 @@ server:
             name: Step mode
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x00": Up
                 "0x01": Down
@@ -127,12 +119,12 @@ server:
             name: Step size
             type: u8
             default: "0x00"
-            required: m
+            required: true
         - id: "0x0002"
             name: Transition time
             type: u16
             default: "0x0000"
-            required: m
+            required: true
     - id: "0x03"
         name: Stop
         dir: recv
@@ -146,13 +138,13 @@ server:
             name: Level
             type: u8
             default: "0x00"
-            required: m
+            required: true
             range: 0x00,0xff
         - id: "0x0001"
             name: Transistion time
             type: u16
             default: "0x0000"
-            required: m
+            required: true
     - id: "0x05"
         name: Move (with On/Off)
         dir: recv
@@ -162,7 +154,7 @@ server:
             name: Move mode
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x00": Up
                 "0x01": Down
@@ -170,7 +162,7 @@ server:
             name: Rate
             type: u8
             default: "0x00"
-            required: m
+            required: true
     - id: "0x06"
         name: Step (with On/Off)
         dir: recv
@@ -180,7 +172,7 @@ server:
             name: Step mode
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x00": Up
                 "0x01": Down
@@ -188,12 +180,12 @@ server:
             name: Step size
             type: u8
             default: "0x00"
-            required: m
+            required: true
         - id: "0x0002"
             name: Transition time
             type: u16
             default: "0x0000"
-            required: m
+            required: true
     - id: "0x07"
         name: Stop (with On/Off)
         dir: recv

@@ -9,13 +9,13 @@ server:
         name: Unknown 1
         type: u8
         access: rw
-        required: m
+        required: true
         showas: hex
     - id: "0xFFFD"
         mnfcode: "0x117C"
         name: Unknown 2
         type: u16
         access: rw
-        required: m
+        required: true
         showas: hex
 client: {}

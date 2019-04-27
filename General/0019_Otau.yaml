@@ -9,48 +9,43 @@ client:
         type: uid
         access: rw
         default: "0"
-        required: m
+        required: true
     - id: "0x0001"
         name: File Offset
         type: u32
         access: r
         default: "0xffffffff"
-        required: o
         showas: hex
     - id: "0x0002"
         name: Current File Version
         type: u32
         access: r
         default: "0xffffffff"
-        required: o
         showas: hex
     - id: "0x0003"
         name: Current ZigBee Stack Version
         type: u16
         access: r
         default: "0xffff"
-        required: o
         showas: hex
     - id: "0x0004"
         name: Downloaded File Version
         type: u32
         access: r
         default: "0xffffffff"
-        required: o
         showas: hex
     - id: "0x0005"
         name: Downloaded ZigBee Stack Version
         type: u16
         access: r
         default: "0xffff"
-        required: o
         showas: hex
     - id: "0x0006"
         name: Image upgrade status
         type: enum8
         access: rw
         default: "0x04"
-        required: m
+        required: true
         values:
             "0x00": Normal
             "0x01": Download in progress
@@ -63,7 +58,7 @@ client:
         type: u16
         access: r
         default: "0"
-        required: m
+        required: true
     cmd:
     - id: "0x01"
         name: Query next image
@@ -74,19 +69,19 @@ client:
             name: Control field
             type: bmp8
             default: "0x00"
-            required: m
+            required: true
             bits:
                 "1": Hardware version present
         - id: "0x0001"
             name: Manufacturer ID
             type: u16
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Image type
             type: enum16
             default: "0x0000"
-            required: m
+            required: true
             values:
                 "0x0000": Specific image
                 "0xFFC0": Security credential
@@ -96,22 +91,22 @@ client:
         - id: "0x0003"
             name: Application Release
             type: u8
-            required: m
+            required: true
             showas: hex
         - id: "0x0004"
             name: Application Build
             type: u8
-            required: m
+            required: true
             showas: hex
         - id: "0x0005"
             name: Stack Release
             type: u8
-            required: m
+            required: true
             showas: hex
         - id: "0x0006"
             name: Stack Build
             type: u8
-            required: m
+            required: true
             showas: hex
     - id: "0x07"
         name: Upgrade end response
@@ -121,25 +116,25 @@ client:
         - id: "0x0000"
             name: Manufacturer ID
             type: u16
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Image type
             type: u16
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: File version
             type: u32
-            required: m
+            required: true
             showas: hex
         - id: "0x0003"
             name: Current time
             type: u32
-            required: m
+            required: true
             showas: hex
         - id: "0x0004"
             name: Upgrade time
             type: u32
-            required: m
+            required: true
             showas: hex

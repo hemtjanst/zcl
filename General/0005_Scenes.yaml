@@ -8,7 +8,7 @@ server:
         type: u8
         access: r
         default: "0x00"
-        required: m
+        required: true
         range: 0x00-0xff
         showas: hex
     - id: "0x0001"
@@ -16,7 +16,7 @@ server:
         type: u8
         access: r
         default: "0x00"
-        required: m
+        required: true
         range: 0x00-0xff
         showas: hex
     - id: "0x0002"
@@ -24,7 +24,7 @@ server:
         type: u16
         access: r
         default: "0x0000"
-        required: m
+        required: true
         range: 0x0000-0xfff7
         showas: hex
     - id: "0x0003"
@@ -32,19 +32,18 @@ server:
         type: bool
         access: r
         default: "0"
-        required: m
+        required: true
     - id: "0x0004"
         name: Name Support
         type: bmp8
         access: r
         default: "0"
-        required: m
+        required: true
         showas: hex
     - id: "0x0005"
         name: Last ConfiguredBy
         type: uid
         access: r
-        required: o
         showas: hex
     cmd:
     - id: "0x00"
@@ -58,19 +57,19 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Transition time
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x01"
         name: View scene
@@ -83,13 +82,13 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
     - id: "0x02"
         name: Remove scene
@@ -102,13 +101,13 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
     - id: "0x03"
         name: Remove all scenes
@@ -121,7 +120,7 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x04"
         name: Store scene
@@ -134,13 +133,13 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
     - id: "0x05"
         name: Recall scene
@@ -153,13 +152,13 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
     - id: "0x06"
         name: Get scene membership
@@ -172,7 +171,7 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x41"
         name: Enhanced view scene
@@ -185,13 +184,13 @@ server:
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0001"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
 client:
     cmd:
@@ -205,19 +204,19 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
     - id: "0x01"
         name: View scene response
@@ -229,25 +228,25 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
         - id: "0x0003"
             name: Transition time
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x02"
         name: Remove scene response
@@ -259,19 +258,19 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
     - id: "0x03"
         name: Remove all scenes response
@@ -283,13 +282,13 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
     - id: "0x04"
         name: Store scene response
@@ -301,19 +300,19 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
     - id: "0x06"
         name: Get scene membershio response
@@ -325,25 +324,25 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Capacity
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: dec
         - id: "0x0002"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0003"
             name: Scene count
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: dec
     - id: "0x41"
         name: Enhanced view scene response
@@ -355,27 +354,27 @@ client:
             name: Status
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             enumeration: ZCL_Status
         - id: "0x0001"
             name: Group ID
             type: u16
             default: "0x0000"
-            required: m
+            required: true
             showas: hex
         - id: "0x0002"
             name: Scene ID
             type: u8
             default: "0x00"
-            required: m
+            required: true
             showas: hex
         - id: "0x0003"
             name: Transition time
             type: u16
             default: "0x00"
-            required: m
+            required: true
             showas: dec
         - id: "0x0004"
             name: Name
             type: cstring
-            required: m
+            required: true

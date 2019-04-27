@@ -9,55 +9,48 @@ server:
         type: u16
         access: rw
         default: "0"
-        required: o
     - id: "0x0000"
         name: ZCL Version
         type: u8
         access: r
         default: "0"
-        required: m
+        required: true
     - id: "0x0001"
         name: Application Version
         type: u8
         access: r
         default: "0"
-        required: o
     - id: "0x0002"
         name: Stack Version
         type: u8
         access: r
         default: "0"
-        required: o
     - id: "0x0003"
         name: HW Version
         type: u8
         access: r
         default: "0"
-        required: o
     - id: "0x0004"
         name: Manufacturer Name
         type: cstring
         access: r
-        required: o
         range: 0,32
     - id: "0x0005"
         name: Model Identifier
         type: cstring
         access: r
-        required: o
         range: 0,32
     - id: "0x0006"
         name: Date Code
         type: cstring
         access: r
-        required: o
         range: 0,16
     - id: "0x0007"
         name: Power Source
         type: enum8
         access: r
         default: "0"
-        required: m
+        required: true
         values:
             "0x00": Unknown
             "0x01": Mains (single phase)
@@ -72,31 +65,26 @@ server:
         description: IKEA control outlet specific.
         type: enum8
         access: r
-        required: o
     - id: "0x0009"
         name: Unknown 2
         description: IKEA control outlet specific.
         type: enum8
         access: r
-        required: o
     - id: "0x000A"
         name: Product code
         description: As printed on the product.
         type: ostring
         access: r
-        required: o
     - id: "0x4000"
         name: SW Build ID
         type: cstring
         access: r
-        required: o
         range: 0,16
     - id: "0xFF0D"
         mnfcode: "0x115F"
         name: Xiaomi Sensitivity
         type: u8
         access: rw
-        required: o
     - id: "0xFF22"
         mnfcode: "0x115F"
         name: Xiaomi Disconnect 1
@@ -104,7 +92,6 @@ server:
             (from) the relay.
         type: u8
         access: rw
-        required: o
         showas: hex
     - id: "0xFF23"
         mnfcode: "0x115F"
@@ -113,20 +100,17 @@ server:
             (from) the relay.
         type: u8
         access: rw
-        required: o
         showas: hex
     - id: "0x0010"
         name: Location Description
         type: cstring
         access: rw
-        required: o
         range: 0,16
     - id: "0x0011"
         name: Physical Environment
         type: enum8
         access: rw
         default: "0"
-        required: o
         values:
             "0x00": Unspecified Environment
             "0xFF": Unknown Environment
@@ -135,7 +119,6 @@ server:
         type: bool
         access: rw
         default: "1"
-        required: o
         values:
             "0x00": Disabled
             "0x01": Enabled
@@ -144,7 +127,6 @@ server:
         type: bmp8
         access: rw
         default: "00000000"
-        required: o
         bits:
             "0": General Hardware Fault
             "1": General Software Fault
@@ -154,7 +136,6 @@ server:
         type: enum8
         access: rw
         default: "0"
-        required: o
         values:
             "0x00": default
             "0x01": high
@@ -165,7 +146,6 @@ server:
         type: bmp16
         access: rw
         default: "0"
-        required: o
         bits:
             "0": Touchlink enabled 0
             "1": Touchlink enabled 1
@@ -176,14 +156,12 @@ server:
         type: bool
         access: rw
         default: "0"
-        required: o
     - id: "0x0033"
         mnfcode: "0x100B"
         name: LED Indication
         type: bool
         access: rw
         default: "0"
-        required: o
     cmd:
     - id: "0x00"
         name: Reset to Factory Defaults

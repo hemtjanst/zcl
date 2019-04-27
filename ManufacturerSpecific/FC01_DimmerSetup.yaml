@@ -9,7 +9,7 @@ server:
         type: bmp8
         access: r
         default: "00000000"
-        required: m
+        required: true
         bits:
             "0": Forward Phase Control
             "1": Reverse Phase Control
@@ -21,7 +21,7 @@ server:
         type: bmp8
         access: r
         default: "00000000"
-        required: m
+        required: true
         bits:
             "0": Forward Phase Control
             "1": Reverse Phase Control
@@ -34,7 +34,7 @@ server:
         type: bmp8
         access: r
         default: "00000000"
-        required: m
+        required: true
         bits:
             "0": Automatic Phase Control
             "1": Forward Phase Control

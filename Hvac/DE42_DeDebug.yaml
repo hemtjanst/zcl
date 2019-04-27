@@ -8,12 +8,12 @@ server:
         type: bool
         access: rw
         default: "0x00"
-        required: m
+        required: true
     - id: "0x0001"
         name: Debug destination
         type: u16
         access: rw
         default: "0x0000"
-        required: m
+        required: true
         showas: hex
 client: {}

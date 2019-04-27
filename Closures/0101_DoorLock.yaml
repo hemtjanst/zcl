@@ -8,7 +8,7 @@ server:
         name: Lock State
         type: enum8
         access: r
-        required: m
+        required: true
         values:
             "0x00": Not fully locked
             "0x01": Locked
@@ -18,7 +18,7 @@ server:
         name: Lock Type
         type: enum8
         access: r
-        required: m
+        required: true
         values:
             "0x0A": Door Furniture
             "0x00": Dead bolt
@@ -35,61 +35,52 @@ server:
         name: Actuator enabled
         type: bool
         access: r
-        required: m
+        required: true
     - id: "0x0010"
         name: Number Of Log Records Supported
         type: u16
         access: r
         default: "0"
-        required: o
     - id: "0x0011"
         name: Number Of Total Users Supported
         type: u16
         access: r
         default: "0"
-        required: o
     - id: "0x0012"
         name: Number Of PIN Users Supported
         type: u16
         access: r
         default: "0"
-        required: o
     - id: "0x0013"
         name: Number Of RFID Users Supported
         type: u16
         access: r
         default: "0"
-        required: o
     - id: "0x0014"
         name: Number Of WeekDay Schedules Supported Per User
         type: u8
         access: r
         default: "0"
-        required: o
     - id: "0x0015"
         name: Number Of Year Day Schedules Supported Per User
         type: u8
         access: r
         default: "0"
-        required: o
     - id: "0x0016"
         name: Number Of Holiday Schedules Supported
         type: u8
         access: r
         default: "0"
-        required: o
     - id: "0x0020"
         name: Enable Logging
         type: bool
         access: rw
         default: "0"
-        required: o
     - id: "0x0034"
         name: Zigbee Security Level
         type: enum8
         access: r
         default: "0"
-        required: o
         values:
             "0x00": Network Security
             "0x01": APS Security
@@ -98,7 +89,6 @@ server:
         type: bmp16
         access: rw
         default: "0x0000"
-        required: o
         bits:
             "0": Deadbolt Jammed
             "1": Lock Reset to Factory Defaults
@@ -112,7 +102,6 @@ server:
         type: bmp16
         access: rw
         default: "0x0000"
-        required: o
         bits:
             "0": Unknown or manufacturer-specific RF operation event
             "1": 'Lock, source: RF'
@@ -126,7 +115,6 @@ server:
         type: bmp16
         access: rw
         default: "0x0000"
-        required: o
         bits:
             "0": Unknown or manufacturer-specific manual operation event
             "1": Thumbturn Lock
@@ -143,23 +131,19 @@ server:
         name: Event Type
         type: u16
         access: r
-        required: o
     - id: "0x0503"
         name: Tilt Angle
         type: u16
         access: r
-        required: o
     - id: "0x0505"
         name: Vibration Strength
         type: u32
         access: r
-        required: o
         showas: hex
     - id: "0x0508"
         name: Orientation
         type: u48
         access: r
-        required: o
         showas: hex
     cmd:
     - id: "0x00"
@@ -182,7 +166,7 @@ server:
             name: Log Index
             type: u16
             default: "0x0000"
-            required: m
+            required: true
     - id: "0x04"
         name: Get Log Record Response
         description: Returns the specified log record.
@@ -192,15 +176,15 @@ server:
         - id: "0x0000"
             name: Log Entry ID
             type: u16
-            required: m
+            required: true
         - id: "0x0001"
             name: Timestamp
             type: u32
-            required: m
+            required: true
         - id: "0x0002"
             name: Event Type
             type: enum8
-            required: m
+            required: true
             values:
                 "0x00": Operation
                 "0x01": Programming
@@ -208,19 +192,19 @@ server:
         - id: "0x0003"
             name: Source
             type: u8
-            required: m
+            required: true
         - id: "0x0004"
             name: Event ID/Alarm Code
             type: u8
-            required: m
+            required: true
         - id: "0x0005"
             name: User ID
             type: u16
-            required: m
+            required: true
         - id: "0x0006"
             name: PIN
             type: cstring
-            required: m
+            required: true
     - id: "0x20"
         name: Operationg Event Notification
         description: The door lock server sends out operation event notification when
@@ -231,26 +215,26 @@ server:
         - id: "0x0000"
             name: Operation Event Source
             type: u8
-            required: m
+            required: true
         - id: "0x0001"
             name: Operation Event Code
             type: u8
-            required: m
+            required: true
         - id: "0x0002"
             name: User ID
             type: u16
-            required: m
+            required: true
         - id: "0x0003"
             name: PIN
             type: u8
             default: "0x0000"
-            required: m
+            required: true
         - id: "0x0004"
             name: ZigBee Local Time
             type: u32
-            required: m
+            required: true
         - id: "0x0005"
             name: Data
             type: cstring
-            required: m
+            required: true
 client: {}

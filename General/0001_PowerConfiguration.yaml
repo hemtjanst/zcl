@@ -8,18 +8,15 @@ server:
         name: Mains Voltage
         type: u16
         access: r
-        required: o
     - id: "0x0001"
         name: Mains Frequency
         type: u8
         access: r
-        required: o
     - id: "0x0010"
         name: Mains Alarm Mask
         type: bmp8
         access: rw
         default: "00000000"
-        required: o
         bits:
             "0": Mains Voltage too low (7.2.2.2.2)
             "1": Mains Voltage too high (7.2.2.2.3)
@@ -28,41 +25,34 @@ server:
         type: u16
         access: rw
         default: "0"
-        required: o
     - id: "0x0012"
         name: Mains Voltage Max Threshold
         type: u16
         access: rw
         default: ffff
-        required: o
     - id: "0x0013"
         name: Mains Voltage Dwell Trip Point
         type: u16
         access: rw
         default: "0"
-        required: o
     - id: "0x0020"
         name: Battery Voltage
         type: u8
         access: r
-        required: o
     - id: "0x0021"
         name: Battery Percentage Remaining
         type: u8
         access: r
-        required: o
     - id: "0x0030"
         name: Battery Manufacturer
         type: cstring
         access: rw
-        required: o
         range: 0,16
     - id: "0x0031"
         name: Battery Size
         type: enum8
         access: rw
         default: ff
-        required: o
         values:
             "0x00": No Battery
             "0x01": Built in
@@ -75,23 +65,19 @@ server:
         name: Battery AHr Rating
         type: u16
         access: rw
-        required: o
     - id: "0x0033"
         name: Battery Quantity
         type: u8
         access: rw
-        required: o
     - id: "0x0034"
         name: Battery Rated Voltage
         type: u8
         access: rw
-        required: o
     - id: "0x0035"
         name: Battery Alarm Mask
         type: bmp8
         access: rw
         default: "00000000"
-        required: o
         bits:
             "0": Battery Voltage too low
             "1": Battery Alarm 1
@@ -102,11 +88,9 @@ server:
         type: u8
         access: rw
         default: "00"
-        required: o
     - id: "0x003E"
         name: Battery Alarm State
         type: bmp32
         access: rw
         default: "0"
-        required: o
 client: {}

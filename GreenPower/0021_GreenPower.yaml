@@ -9,7 +9,7 @@ server:
         type: u8
         access: r
         default: "0x00"
-        required: m
+        required: true
         showas: hex
     - id: "0x0001"
         name: Sink Table
@@ -18,7 +18,7 @@ server:
         type: lostring
         access: r
         default: "0x0000"
-        required: m
+        required: true
         showas: hex
     - id: "0x0002"
         name: Communication Mode
@@ -26,7 +26,7 @@ server:
         type: bmp8
         access: rw
         default: "0x01"
-        required: m
+        required: true
         showas: hex
     - id: "0x0003"
         name: Commissioning Exit Mode
@@ -34,7 +34,7 @@ server:
         type: bmp8
         access: rw
         default: "0x02"
-        required: m
+        required: true
         showas: hex
     - id: "0x0004"
         name: Commissioning Window
@@ -43,7 +43,6 @@ server:
         type: u16
         access: rw
         default: "0x00B4"
-        required: o
         showas: hex
     - id: "0x0005"
         name: Security Level
@@ -52,7 +51,7 @@ server:
         type: bmp8
         access: rw
         default: "0x06"
-        required: m
+        required: true
         showas: hex
     - id: "0x0006"
         name: Functionality
@@ -60,7 +59,7 @@ server:
         type: bmp24
         access: r
         default: "0x0"
-        required: m
+        required: true
         showas: hex
     - id: "0x0007"
         name: Active Functionality
@@ -69,6 +68,6 @@ server:
         type: bmp24
         access: r
         default: "0xffffff"
-        required: m
+        required: true
         showas: hex
 client: {}

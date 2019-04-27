@@ -9,7 +9,7 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        required: m
+        required: true
         range: 0x0000,0xfff
     cmd:
     - id: "0x00"
@@ -24,7 +24,7 @@ server:
                 mode.
             type: u16
             default: "5"
-            required: m
+            required: true
     - id: "0x01"
         name: Identify Query
         description: Allows the sending device to request the target or targets to
@@ -45,7 +45,7 @@ server:
                 to use.
             type: enum8
             default: "0x00"
-            required: m
+            required: true
             values:
                 "0x0B": Channel change
                 "0x00": Blink
@@ -59,7 +59,7 @@ server:
                 to use.
             type: enum8
             default: "0"
-            required: m
+            required: true
             values:
                 "0x00": Default
 client:
@@ -76,4 +76,4 @@ client:
                 mode.
             type: u16
             default: "0"
-            required: m
+            required: true

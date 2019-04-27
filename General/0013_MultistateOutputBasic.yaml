@@ -7,25 +7,25 @@ server:
         type: u16
         access: rw
         default: "0"
-        required: m
+        required: true
     - id: "0x0051"
         name: Out of service
         type: bool
         access: rw
         default: "0"
-        required: m
+        required: true
     - id: "0x0055"
         name: Present value
         type: u16
         access: rw
         default: "0"
-        required: m
+        required: true
     - id: "0x006F"
         name: Status flags
         type: bmp8
         access: r
         default: "0"
-        required: m
+        required: true
         bits:
             "1": In Alarm
             "2": Fault
