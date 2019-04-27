@@ -121,6 +121,15 @@ client:
             name: Group Name
             type: cstring
             required: m
+        payloadcond:
+        - id: "0x0"
+            op: '!='
+            value: "0x0"
+            action:
+            - action: ignore
+                id: "0x1"
+            - action: ignore
+                id: "0x2"
     - id: "0x02"
         name: Get group membership response
         description: The Response to the get group membership request.
