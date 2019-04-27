@@ -1,0 +1,9 @@
+id: "0x001A"
+name: Power Profile
+description: Attributes and commands that provide an interface to the power profile of a device
+server:
+  attr:
+  cmd:
+client:
+  attr:
+  cmd:

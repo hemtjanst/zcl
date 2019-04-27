@@ -1,6 +1,6 @@
 id: "0x1000"
-name: ZLL commissioning
-description: Attributes and commands for ZLL commissioning.
+name: Touchlink
+description: Attributes and commands for Touchlink commissioning.
 server:
     cmd:
     - id: "0x41"

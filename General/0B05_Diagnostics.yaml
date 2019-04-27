@@ -1,0 +1,9 @@
+id: "0x0B05"
+name: Diagnostics
+description: Attributes and commands that provide an interface to diagnostics of the ZigBee stack
+server:
+  attr:
+  cmd:
+client:
+  attr:
+  cmd:

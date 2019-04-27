@@ -1,0 +1,9 @@
+id: "0x0B01"
+name: Meter Identification
+description: Attributes and commands that provide an interface tometer identification
+server:
+  attr:
+  cmd:
+client:
+  attr:
+  cmd:
