@@ -1,3 +1,4 @@
+# Status: Done
 id: "0x0003"
 name: Identify
 description: Attributes and commands for putting a device into Identification mode
@@ -7,10 +8,11 @@ server:
     - id: "0x0000"
         name: Identify Time
         type: u16
+        unit: s
         access: rw
         default: "0x0000"
         required: true
-        range: 0x0000,0xfff
+        range: 0x0000,0xffff
     cmd:
     - id: "0x00"
         name: Identify
@@ -23,6 +25,7 @@ server:
             description: The time in seconds for which a device will stay in identify
                 mode.
             type: u16
+            unit: s
             default: "5"
             required: true
     - id: "0x01"
@@ -75,5 +78,7 @@ client:
             description: The time in seconds for which a device will stay in identify
                 mode.
             type: u16
+            unit: s
             default: "0"
             required: true
+
