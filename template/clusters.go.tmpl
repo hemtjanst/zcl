@@ -1,0 +1,146 @@
+{{.Desc.Comment}}package {{package}}
+
+import (
+    "{{path "zcl"}}"
+)
+{{$clid:=.ID.Uint}}
+{{$mfc:=.MfCode}}
+
+// {{ $sn := .MfCode.Stn .Name}}{{$sn}}{{if .MfCode.Valid}}
+// Manufacturer code 0x{{fmt "%04X" $mfc.Uint}}{{end}}
+{{.Desc.Comment}}
+func New{{$sn}}Server(profile zcl.ProfileID) *{{$sn}}Server { return &{{$sn}}Server{p: profile} }
+func New{{$sn}}Client(profile zcl.ProfileID) *{{$sn}}Client { return &{{$sn}}Client{p: profile} }
+
+const {{$sn}}Cluster zcl.ClusterID = {{$clid}}
+
+type {{$sn}}Server struct {
+	p zcl.ProfileID
+    {{range .Server.Attr}}
+    {{.Name.Fmt}} *{{.Name.Fmt}}{{end}}
+}
+{{range .Server.Command}}
+func (s *{{$sn}}Server) {{.Name.Fmt}}() *{{.Name.Fmt}} { return new({{.Name.Fmt}}) }{{end}}
+
+type {{$sn}}Client struct {
+	p zcl.ProfileID
+    {{range .Client.Attr}}
+    {{.Name.Fmt}} *{{.Name.Fmt}}{{end}}
+}
+
+{{range .Client.Command}}
+func (s *{{$sn}}Client) {{.Name.Fmt}}() *{{.Name.Fmt}} { return new({{.Name.Fmt}}) }{{end}}
+
+/*
+var {{$sn}}Server = map[zcl.CommandID]func() zcl.Command{ {{range .Server.Command}}
+    {{.Name.Fmt}}ID: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
+}
+
+var {{$sn}}Client = map[zcl.CommandID]func() zcl.Command{ {{range .Client.Command}}
+    {{.Name.Fmt}}ID: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
+}
+*/
+
+{{range .Command}}{{$cmd := .}}
+{{.Desc.Comment}}type {{.Name.Fmt}} struct { {{range .PayloadAttr}}
+{{.Desc.Comment}}{{.Name.Fmt}} zcl.{{.Type.Type}}{{end}}
+}
+const {{.Name.Fmt}}Command zcl.CommandID = {{.ID.Uint}}
+
+func (v *{{.Name.Fmt}}) Values() []zcl.Val {
+    return []zcl.Val{ {{range .PayloadAttr}}
+        &v.{{.Name.Fmt}},{{end}}
+    }
+}
+
+func (v {{.Name.Fmt}}) ID() zcl.CommandID {
+    return {{.Name.Fmt}}Command
+}
+
+func (v {{.Name.Fmt}}) Cluster() zcl.ClusterID {
+	return {{$sn}}Cluster
+}
+
+func (v {{.Name.Fmt}}) MnfCode() []byte {
+	return []byte{ {{$mfc.ByteStr}} }
+}
+
+func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}
+	var data []byte
+	var tmp []byte
+	var err error
+    {{range .PayloadAttr}}
+    {{if .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{end}}
+    if tmp, err = v.{{.Name.Fmt}}.MarshalZcl(); err != nil {
+        return nil, err
+    }
+    data = append(data, tmp...)
+    {{if .Cond}} } {{end}}
+    {{end}}
+
+    return data, nil {{ else }}
+    return nil, nil {{ end }}
+}
+
+func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAttr}}
+    var err error
+    {{range .PayloadAttr}}
+    {{if .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{end}}
+    if b, err = (&v.{{.Name.Fmt}}).UnmarshalZcl(b); err != nil {
+        return b, err
+    }
+    {{if .Cond}} } {{end}}
+    {{end}}
+    {{ end }}return b, nil
+}
+
+{{end}}
+{{range .Attr}}{{$an:=.Name.Fmt}}
+type {{.Name.Fmt}} zcl.{{.Type.Type}}
+func (a {{.Name.Fmt}}) ID() zcl.AttrID { return {{.ID.Uint}} }
+func (a {{.Name.Fmt}}) Cluster() zcl.ClusterID { return {{$sn}}Cluster }
+func (a *{{.Name.Fmt}}) Value() *{{.Name.Fmt}} { return a }
+func (a {{.Name.Fmt}}) MarshalZcl() ([]byte, error) {
+    return zcl.{{.Type.Type}}(a).MarshalZcl()
+}
+func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
+    nt := new(zcl.{{.Type.Type}})
+    br, err := nt.UnmarshalZcl(b)
+    *a = {{.Name.Fmt}}(*nt)
+    return br, err
+}
+
+func (a {{$an}}) Readable() bool { return {{if .CanRead}}true{{else}}false{{end}} }
+func (a {{$an}}) Writable() bool { return {{if .CanWrite}}true{{else}}false{{end}} }
+func (a {{$an}}) Reportable() bool { return {{if .Report}}true{{else}}false{{end}} }
+func (a {{$an}}) SceneIndex() int { return {{if .Scene}}{{.Scene}}{{else}}-1{{end}} }
+
+func (a {{$an}}) String() string {
+    {{if .Values}}switch a { {{range $vk,$vv := .Values}}
+        case {{$vk}}: return "{{$vv}}"{{end}}
+    }{{end}}
+    {{if .Bits}}
+    var bstr []string
+    {{range $vk,$vv := .Bits}}if a.Is{{$vv.Fmt}}() { bstr = append(bstr, "{{$vv}}") }
+    {{end}}return zcl.StrJoin(bstr, ", ")
+    {{else}}
+    return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%s{{end}}", zcl.{{.Type.Type}}(a)){{end}}
+}
+
+{{range $vk,$vv := .Bits}}
+func (a {{$an}}) Is{{$vv.Fmt}}() bool {
+	return zcl.BitmapTest([]byte(a), {{$vk}})
+}
+func (a *{{$an}}) Set{{$vv.Fmt}}(b bool) {
+	*a = {{$an}}(zcl.BitmapSet([]byte(*a), {{$vk}}, b))
+}
+{{end}}
+
+{{range $vk,$vv := .Values}}
+// Is{{$vv.Fmt}} checks if {{$an}} equals the value for {{$vv}} ({{$vk}})
+func (a {{$an}}) Is{{$vv.Fmt}}() bool { return a == {{$vk}} }
+// Set{{$vv.Fmt}} sets {{$an}} to {{$vv}} ({{$vk}})
+func (a *{{$an}}) Set{{$vv.Fmt}}() { *a = {{$vk}} }
+
+{{end}}
+{{end}}
