@@ -2,7 +2,7 @@
 package other
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // RgbColor

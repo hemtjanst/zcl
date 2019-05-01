@@ -2,7 +2,7 @@
 package ota_upgrade
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // Otau

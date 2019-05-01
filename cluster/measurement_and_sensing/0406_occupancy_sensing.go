@@ -1,7 +1,7 @@
 package measurement_and_sensing
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // OccupancySensing

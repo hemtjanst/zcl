@@ -2,7 +2,7 @@
 package closures
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // DoorLock

@@ -2,7 +2,7 @@
 package green_power
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // GreenPower

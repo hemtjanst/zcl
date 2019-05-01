@@ -1,7 +1,7 @@
 package general
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // BinaryOutputBasic

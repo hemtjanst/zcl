@@ -2,7 +2,7 @@
 package smart_energy
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // DemandResponseAndLoadControl

@@ -2,7 +2,7 @@
 package manufacturer_specific
 
 import (
-	"neotor.se/zcl/cluster/zcl"
+	"neotor.se/zcl"
 )
 
 // UbisysDeviceSetup

@@ -14,7 +14,7 @@ func check(err error) {
 func main() {
 
 	check(codegen.GenerateCluster(
-		"neotor.se/zcl/cluster",
+		"neotor.se/zcl",
 		"./definition",
 		"./template",
 		"./cluster",
