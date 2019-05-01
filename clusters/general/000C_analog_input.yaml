@@ -6,40 +6,40 @@ description: An interface for reading the value of an analog measurement and acc
 server:
     attr:
       - id: "0x001C"
-        name: Description
+        name: Analog Input Description
         type: cstring
         access: rw
       - id: "0x0041"
-        name: Max Present Value
+        name: Analog Input Max Present Value
         type: float
         access: rw
       - id: "0x0042"
-        name: Min Present Value
+        name: Analog Input Min Present Value
         type: float
         access: rw
       - id: "0x0051"
-        name: Out of service
+        name: Analog Input Out of service
         type: bool
         access: rw
         default: "0"
         required: true
       - id: "0x0055"
-        name: Present value
+        name: Analog Input Present value
         type: float
         access: rw
         default: "0"
         required: true
         report: true
       - id: "0x0067"
-        name: Reliability
+        name: Analog Input Reliability
         type: enum8
         access: rw
       - id: "0x006A"
-        name: Resolution
+        name: Analog Input Resolution
         type: float
         access: rw
       - id: "0x006F"
-        name: Status flags
+        name: Analog Input Status flags
         type: bmp8
         access: r
         default: "0"
@@ -51,7 +51,7 @@ server:
             "4": Overidden
             "8": Out of Service
       - id: "0x0075"
-        name: Engineering Units
+        name: Analog Input Engineering Units
         type: enum16
         access: rw
         values:
@@ -246,13 +246,7 @@ server:
             "0x00BC": Watts-per-meter-per-degree-Kelvin  # Other
             "0x00FF": "Other"
       - id: "0x0100"
-        name: Application Type
+        name: Analog Input Application Type
         access: r
         type: u32
-      - id: "0xFF05"
-        name: Unknown
-        type: u16
-        access: r
-        default: "0"
-        showas: hex
 client: {}

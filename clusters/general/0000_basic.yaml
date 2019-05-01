@@ -115,7 +115,7 @@ server:
             "0x21": Mud Room (small room for coats and boots)
             "0x22": Nursery
             "0x23": Pantry
-            "0x24": Office
+            "0x24": Office 2
             "0x25": Outside
             "0x26": Pool
             "0x27": Porch
@@ -136,7 +136,7 @@ server:
             "0x36": Patio
             "0x37": Driveway
             "0x38": Sun Room
-            "0x39": Living Room
+            "0x39": Living Room 2
             "0x3a": Spa
             "0x3b": Whirlpool
             "0x3c": Shed

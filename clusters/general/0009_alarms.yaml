@@ -81,7 +81,7 @@ client:
           - id: "0x0002"
             name: Cluster ID
             required: false
-            type: uint16
+            type: u16
             cond:
               - attr: 0x0000
                 value: 0x00

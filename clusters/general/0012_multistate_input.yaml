@@ -7,25 +7,25 @@ description: Provides an interface for reading the value of a multistate measure
 server:
     attr:
       - id: "0x004A"
-        name: Number of states
+        name: Multi Input Number of states
         type: u16
         access: rw
         default: "0"
         required: true
       - id: "0x0051"
-        name: Out of service
+        name: Multi Input Out of service
         type: bool
         access: rw
         default: "0"
         required: true
       - id: "0x0055"
-        name: Present value
+        name: Multi Input Present value
         type: u16
         access: rw
         default: "0"
         required: true
       - id: "0x006F"
-        name: Status flags
+        name: Multi Input Status flags
         type: bmp8
         access: r
         default: "0"

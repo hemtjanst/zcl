@@ -6,7 +6,7 @@ server:
     attr:
     - id: "0x0000"
       name: Location Type
-      type: enum8
+      type: bmp8
       access: rw
       required: true
       bits:
@@ -235,8 +235,8 @@ server:
             type: s8
             unit: dBm
           - id: "0x0005"
-            name: NumberRSSIMeasurements
-            type: uint8
+            name: Number RSSI Measurements
+            type: u8
       - id: "0x05"
         name: Send Pings
         required: o

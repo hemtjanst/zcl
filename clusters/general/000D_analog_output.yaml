@@ -7,31 +7,31 @@ description: The Analog Output (Basic) cluster provides an interface for setting
 server:
     attr:
       - id: "0x001C"
-        name: Description
+        name: Analog Output Description
         type: cstring
         access: rw
       - id: "0x0041"
-        name: Max Present Value
+        name: Analog Output Max Present Value
         type: float
         access: rw
       - id: "0x0045"
-        name: Min Present Value
+        name: Analog Output Min Present Value
         type: float
         access: rw
       - id: "0x0051"
-        name: Out of service
+        name: Analog Output Out of service
         type: bool
         access: rw
         default: "0"
         required: true
       - id: "0x0055"
-        name: Present value
+        name: Analog Output Present value
         type: float
         access: rw
         default: "0"
         required: true
       - id: "0x0057"
-        name: Priority Array
+        name: Analog Output Priority Array
         access: rw
         type: array
         arraytype: struct
@@ -41,19 +41,19 @@ server:
         - id: "0x0001"
           type: float
       - id: "0x0067"
-        name: Reliability
+        name: Analog Output Reliability
         type: enum8
         access: rw
       - id: "0x0067"
-        name: Relinquish Default
+        name: Analog Output Relinquish Default
         type: float
         access: rw
       - id: "0x006A"
-        name: Resolution
+        name: Analog Output Resolution
         type: float
         access: rw
       - id: "0x006F"
-        name: Status flags
+        name: Analog Output Status flags
         type: bmp8
         access: r
         default: "0"
@@ -65,7 +65,7 @@ server:
             "4": Overidden
             "8": Out of Service
       - id: "0x0075"
-        name: Engineering Units
+        name: Analog Output Engineering Units
         type: enum16
         access: rw
         values:
@@ -260,11 +260,11 @@ server:
             "0x00BC": Watts-per-meter-per-degree-Kelvin  # Other
             "0x00FF": "Other"
       - id: "0x0100"
-        name: Application Type
+        name: Analog Output Application Type
         access: r
         type: u32
       - id: "0xF000"
-        name: Xiaomi 0xf000
+        name: Analog Output Xiaomi 0xf000
         type: u32
         access: r
 client: {}

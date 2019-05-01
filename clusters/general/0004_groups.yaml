@@ -5,7 +5,7 @@ description: Attributes and commands for group configuration and manipulation.
 server:
     attr:
       - id: "0x0000"
-        name: Name Support
+        name: Group Name Support
         type: bmp8
         access: r
         required: true

@@ -34,7 +34,7 @@ server:
         default: "0"
         required: true
       - id: "0x0004"
-        name: Name Support
+        name: Scene Name Support
         type: bmp8
         access: r
         default: "0"
@@ -77,7 +77,7 @@ server:
             type: cstring
             required: true
           - id: "0x0004"
-          - name: Extension Field Sets
+            name: Extension Field Sets
             description: |
                 The format of each extension field set is a 16 bit field carrying the cluster ID,
                 followed by an 8 bit length field and the set of scene extension fields specified
@@ -221,7 +221,7 @@ server:
             type: cstring
             required: true
           - id: "0x0004"
-          - name: Extension Field Sets
+            name: Extension Field Sets
             type: SceneExtensionSet # Special type
 
       - id: "0x41"

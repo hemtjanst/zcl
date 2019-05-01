@@ -12,7 +12,7 @@ server:
         default: "0"
         required: true
         report: true
-        scene: true
+        scene: 1
         values:
             "0x00": Off
             "0x01": On

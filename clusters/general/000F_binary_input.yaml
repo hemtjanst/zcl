@@ -7,19 +7,19 @@ description: 'The Binary Input (Basic) cluster provides an interface for reading
 server:
     attr:
       - id: "0x0051"
-        name: Out of Service
+        name: Binary Input Out of Service
         type: bool
         access: rw
         default: "0"
         required: true
       - id: "0x0055"
-        name: Present Value
+        name: Binary Input Present Value
         type: bool
         access: rw
         default: "0"
         required: true
       - id: "0x006F"
-        name: Status Flags
+        name: Binary Input Status Flags
         type: bmp8
         access: r
         default: "0"

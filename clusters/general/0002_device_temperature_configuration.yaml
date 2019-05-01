@@ -27,7 +27,7 @@ server:
       - id: "0x0003"
         name: Over Temp Total Dwell
         description: Total time the device has spent above the tmperature specified by High Temp Threshold
-        type: uint16
+        type: u16
         units: Hr
         invalid: 0xffff
       - id: "0x0010"
