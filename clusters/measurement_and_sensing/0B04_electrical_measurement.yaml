@@ -818,4 +818,88 @@ server:
       access: rw
       default: "0x0000"
       unit: s
-client: {}
+    cmd:
+    - id: "0x00"
+      name: Get Profile Info Response Command
+      dir: send
+      payloadattr:
+      - id: "0x0000"
+        name: Profile Count
+        type: u8
+      - id: "0x0001"
+        name: Profile Interval Period
+        type: enum8
+        values:
+          0x00: Daily
+          0x01: 60 minutes
+          0x02: 30 minutes
+          0x03: 15 minutes
+          0x04: 10 minutes
+          0x05: 7.5 minutes
+          0x06: 5 minutes
+          0x07: 2.5 minutes
+      - id: "0x0002"
+        name: Max Number of Intervals
+        type: u8
+      - id: "0x0003"
+        name: List of Attributes
+        type: array
+        arraytype: u16
+    - id: "0x01"
+      name: Get Measurement Profile Response Command
+      dir: send
+      payloadattr:
+      - id: "0x0000"
+        name: Start Time
+        type: utc
+      - id: "0x0001"
+        name: Status
+        type: enum8
+        values:
+          0x00: Success
+          0x01: Attribute Profile not supported
+          0x02: Invalid Start Time
+          0x03: More intervals requested than can be returned
+          0x04: No intervals available for the requested time
+      - id: "0x0002"
+        name: Profile Interval Period
+        type: enum8
+        values:
+          0x00: Daily
+          0x01: 60 minutes
+          0x02: 30 minutes
+          0x03: 15 minutes
+          0x04: 10 minutes
+          0x05: 7.5 minutes
+          0x06: 5 minutes
+          0x07: 2.5 minutes
+      - id: "0x0003"
+        name: Number of intervals delivered
+        type: u8
+      - id: "0x0004"
+        name: Attribute ID
+        type: u16
+      - id: "0x0005"
+        name: Intervals
+        type: array
+        arraytype: u16
+client:
+    cmd:
+    - id: "0x00"
+      name: Get Profile Info Command
+      dir: send
+      response: "0x00"
+    - id: "0x01"
+      name: Get Measurement Profile Command
+      dir: send
+      response: "0x01"
+      payloadattr:
+      - id: "0x00"
+        name: Attribute ID
+        type: u16
+      - id: "0x01"
+        name: Start Time
+        type: utc
+      - id: "0x02"
+        name: Number of intervals
+        type: u8
