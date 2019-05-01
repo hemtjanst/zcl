@@ -21,9 +21,10 @@ server:
         access: r
         default: "0x00"
         required: true
+        range: 0x00,0x03
         bits:
-            "0": Non-operational
-            "1": Lamp not in socket
+            0: Non-operational
+            1: Lamp not in socket
     - id: "0x0010"
         name: Min Level
         type: u8
@@ -52,7 +53,6 @@ server:
         name: Intrinsic Ballast Factor
         type: u8
         access: rw
-        default: "0x00"
         range: 0x00,0xfe
     - id: "0x0015"
         name: Ballast Factor Adjustment
@@ -64,7 +64,6 @@ server:
         name: Lamp Quantity
         type: u8
         access: r
-        default: "0x00"
         range: 0x00,0xfe
     - id: "0x0030"
         name: Lamp Type
@@ -91,9 +90,9 @@ server:
         type: bmp8
         access: rw
         default: "0x00"
-        required: true
+        range: 0x00,0x03
         bits:
-            "0": Lamp Burn Hours
+            0: Lamp Burn Hours
     - id: "0x0035"
         name: Lamp Burn Hours Trip Point
         type: u24
