@@ -261,9 +261,8 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             access: rw
-            enumeration: ZCL_Status
       - id: "0x01"
         name: Save Startup Parameters Response
         description: On receipt of this command the client is made aware that the
@@ -274,9 +273,8 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             access: rw
-            enumeration: ZCL_Status
       - id: "0x02"
         name: Restore Startup Parameters Response
         description: On receipt of this command the client is made aware that the
@@ -287,9 +285,8 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             access: rw
-            enumeration: ZCL_Status
       - id: "0x03"
         name: Reset Startup Parameters Response
         description: On receipt of this command the client is made aware that the
@@ -300,6 +297,5 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             access: rw
-            enumeration: ZCL_Status

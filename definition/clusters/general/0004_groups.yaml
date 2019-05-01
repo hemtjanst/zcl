@@ -101,10 +101,9 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             default: "0x00"
             required: true
-            enumeration: ZCL_Status
           - id: "0x0001"
             name: Group ID
             type: u16
@@ -119,10 +118,9 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             default: "0x00"
             required: true
-            enumeration: ZCL_Status
           - id: "0x0001"
             name: Group ID
             type: u16
@@ -161,10 +159,9 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             default: "0x00"
             required: true
-            enumeration: ZCL_Status
           - id: "0x0001"
             name: Group ID
             type: u16

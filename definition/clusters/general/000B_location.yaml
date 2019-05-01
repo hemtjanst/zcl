@@ -309,8 +309,7 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
-            enumeration: ZCL_Status
+            type: Status
           - id: "0x0001"
             name: Power
             type: s16
@@ -360,8 +359,7 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
-            enumeration: ZCL_Status
+            type: Status
           - id: "0x0001"
             name: Location Type
             type: enum8

@@ -68,9 +68,8 @@ client:
         payloadattr:
           - id: "0x0000"
             name: Status
-            type: enum8
+            type: Status
             required: true
-            enumeration: ZCL_Status
           - id: "0x0001"
             name: Alarm Code
             required: false
