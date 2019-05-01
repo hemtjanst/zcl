@@ -1,3 +1,4 @@
+# Status: done
 id: "0x0004"
 name: Groups
 description: Attributes and commands for group configuration and manipulation.
@@ -8,9 +9,8 @@ server:
         type: bmp8
         access: r
         required: true
-        range: x0000000
         bits:
-            "7": Name Support
+            "7": Names Supported
     cmd:
     - id: "0x00"
         name: Add group
@@ -44,23 +44,17 @@ server:
             showas: hex
     - id: "0x02"
         name: Get group membership
-        description: Get the group membership of the device.
+        description: Get the group membership of the device. Send an empty group list to request all group memberships
         dir: recv
         required: m
         response: "0x02"
         payloadattr:
-        - id: "0x0000"
-            name: Group count
-            type: u8
-            default: "0x00"
-            required: true
-        - id: "0x0001"
+        - id: "0x000"
             name: Group list
             type: set
             arraytype: u16
             required: true
             showas: hex
-            listsize: '@0x0000'
     - id: "0x03"
         name: Remove group
         description: Remove a group from the device.
@@ -79,6 +73,24 @@ server:
         description: Remove all group from the device.
         dir: recv
         required: m
+        response: "0x03"
+    - id: "0x05"
+        name: Add group if identifying
+        description: Add a group to the device if the device is currently identifying itself (using the identify cluster)
+        dir: recv
+        required: m
+        response: ""
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: true
+            showas: hex
+        - id: "0x0001"
+            name: Group Name
+            type: cstring
+            required: true
 client:
     cmd:
     - id: "0x00"
@@ -121,15 +133,6 @@ client:
             name: Group Name
             type: cstring
             required: true
-        payloadcond:
-        - id: "0x0"
-            op: '!='
-            value: "0x0"
-            action:
-            - action: ignore
-                id: "0x1"
-            - action: ignore
-                id: "0x2"
     - id: "0x02"
         name: Get group membership response
         description: The Response to the get group membership request.
@@ -138,20 +141,18 @@ client:
         payloadattr:
         - id: "0x0000"
             name: Capacity
+            description: |
+                The remaining number of groups that can be added.
+                If set to 0xFE, at least one more group can be added (exact number unknown)
+                If set to 0xFF, it's unknown if any more groups can be added
             type: u8
             default: "0x00"
             required: true
         - id: "0x0001"
-            name: Group count
-            type: u8
-            default: "0x00"
-            required: true
-        - id: "0x0002"
             name: Group list
             type: set
             arraytype: u16
             showas: hex
-            listsize: "0x0001"
     - id: "0x03"
         name: Remove group response
         description: The Response to the remove group request.

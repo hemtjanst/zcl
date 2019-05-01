@@ -1,3 +1,4 @@
+#status: done
 id: "0x0008"
 name: Level Control
 description: This cluster provides an interface for controlling a characteristic of
@@ -13,7 +14,11 @@ server:
         access: r
         default: "0x00"
         required: true
-        range: 0x00,0xff
+        report: true
+        scene: true
+        unit: %
+        multiplier: 2.54
+        range: 0x00,0xfe
     - id: "0x0001"
         name: Remaining Time
         description: The RemainingTime attribute represents the time remaining until
@@ -21,6 +26,8 @@ server:
         type: u16
         access: r
         default: "0x0000"
+        multiplier: 10
+        unit: s
         range: 0x0000,0xffff
     - id: "0x000F"
         name: Unknown
@@ -36,6 +43,8 @@ server:
             as the device is able.
         type: u16
         access: rw
+        multiplier: 10
+        unit: s
         default: "0x0000"
         range: 0x0000,0xffff
     - id: "0x0011"
@@ -46,27 +55,37 @@ server:
             or is set to 0xff, it has no effect.
         type: u8
         access: rw
+        unit: %
+        multiplier: 2.54
         default: "0xfe"
         range: 0x00,0xfe
     - id: "0x0012"
         name: On Transition Time
         type: u16
         access: rw
+        multiplier: 10
+        unit: s
         range: 0x0000,0xfffe
     - id: "0x0013"
         name: Off Transition Time
         type: u16
         access: rw
+        multiplier: 10
+        unit: s
         range: 0x0000,0xfffe
     - id: "0x0014"
         name: Default Move Rate
         type: u8
         access: rw
         range: 0x00,0xfe
+        unit: %/s
+        multiplier: 2.54
     - id: "0x4000"
         name: PowerOn Level
         type: u8
         access: rw
+        unit: %
+        multiplier: 2.54
     cmd:
     - id: "0x00"
         name: Move to Level
@@ -78,12 +97,16 @@ server:
             type: u8
             default: "0x00"
             required: true
-            range: 0x00,0xff
+            range: 0x00,0xfe
+            unit: %
+            multiplier: 2.54
         - id: "0x0001"
             name: Transistion time
             type: u16
             default: "0x0000"
             required: true
+            multiplier: 10
+            unit: s
     - id: "0x01"
         name: Move
         dir: recv
@@ -102,6 +125,9 @@ server:
             type: u8
             default: "0x00"
             required: true
+            unit: %/s
+            multiplier: 2.54
+
     - id: "0x02"
         name: Step
         dir: recv
@@ -120,11 +146,15 @@ server:
             type: u8
             default: "0x00"
             required: true
+            unit: %
+            multiplier: 2.54
         - id: "0x0002"
             name: Transition time
             type: u16
             default: "0x0000"
             required: true
+            units: s
+            multiplier: 10
     - id: "0x03"
         name: Stop
         dir: recv
@@ -140,11 +170,15 @@ server:
             default: "0x00"
             required: true
             range: 0x00,0xff
+            unit: %
+            multiplier: 2.54
         - id: "0x0001"
             name: Transistion time
             type: u16
             default: "0x0000"
             required: true
+            units: s
+            multiplier: 10
     - id: "0x05"
         name: Move (with On/Off)
         dir: recv
@@ -163,6 +197,8 @@ server:
             type: u8
             default: "0x00"
             required: true
+            unit: %/s
+            multiplier: 2.54
     - id: "0x06"
         name: Step (with On/Off)
         dir: recv
@@ -181,11 +217,15 @@ server:
             type: u8
             default: "0x00"
             required: true
+            unit: %
+            multiplier: 2.54
         - id: "0x0002"
             name: Transition time
             type: u16
             default: "0x0000"
             required: true
+            units: s
+            multiplier: 10
     - id: "0x07"
         name: Stop (with On/Off)
         dir: recv

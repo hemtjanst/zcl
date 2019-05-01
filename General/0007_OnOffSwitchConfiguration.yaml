@@ -1,3 +1,4 @@
+#status: done
 id: "0x0007"
 name: On/Off Switch Configuration
 description: Attributes and commands for configuring On/Off switching devices
@@ -14,6 +15,7 @@ server:
         values:
             "0x00": Toggle
             "0x01": Momentary
+            "0x02": Multifunction
     - id: "0x0010"
         name: SwitchActions
         description: The SwitchActions attribute is 8-bits in length and specifies

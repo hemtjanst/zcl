@@ -1,3 +1,5 @@
+#status: done
+#Special field: SceneExtensionSet
 id: "0x0005"
 name: Scenes
 description: Attributes and commands for scene configuration and manipulation.
@@ -9,7 +11,6 @@ server:
         access: r
         default: "0x00"
         required: true
-        range: 0x00-0xff
         showas: hex
     - id: "0x0001"
         name: Current Scene
@@ -17,7 +18,6 @@ server:
         access: r
         default: "0x00"
         required: true
-        range: 0x00-0xff
         showas: hex
     - id: "0x0002"
         name: Current Group
@@ -25,7 +25,7 @@ server:
         access: r
         default: "0x0000"
         required: true
-        range: 0x0000-0xfff7
+        range: 0x0000,0xfff7
         showas: hex
     - id: "0x0003"
         name: Scene Valid
@@ -39,16 +39,16 @@ server:
         access: r
         default: "0"
         required: true
-        showas: hex
+        bits:
+            "7": "Names Supported"
     - id: "0x0005"
         name: Last ConfiguredBy
         type: uid
         access: r
-        showas: hex
     cmd:
     - id: "0x00"
         name: Add scene
-        description: Add a scenes to the group (empty).
+        description: Add a scenes to the group.
         dir: recv
         required: m
         response: "0x00"
@@ -71,6 +71,22 @@ server:
             default: "0x0000"
             required: true
             showas: hex
+            unit: s
+        - id: "0x0003"
+            name: Scene Name
+            type: cstring
+            required: true
+        - id: "0x0004"
+          - name: Extension Field Sets
+            description: |
+                The format of each extension field set is a 16 bit field carrying the cluster ID,
+                followed by an 8 bit length field and the set of scene extension fields specified
+                in  the  relevant  cluster. The length field holds the length in octets of that
+                extension field set. Extension field set format:
+                {{clusterId1, length 1, {extension field set 1}}, {clusterId2, length 2, {extension field set 2}} ...}
+                I.e. the field would be a repeating struct with [ClusterID uint16] [OctetLength uint8] [AttrID ...uint16]
+            type: SceneExtensionSet # Special type
+
     - id: "0x01"
         name: View scene
         description: Views the scenes of a group.
@@ -173,11 +189,46 @@ server:
             default: "0x0000"
             required: true
             showas: hex
-    - id: "0x41"
-        name: Enhanced view scene
-        description: Views the scenes of a group.
+    - id: "0x40"
+        name: Enhanced Add Scene
+        description: Same as Add Scene, except that transition time is specified in 1/10 s
         dir: recv
         required: m
+        response: "0x40"
+        payloadattr:
+        - id: "0x0000"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: true
+            showas: hex
+        - id: "0x0001"
+            name: Scene ID
+            type: u8
+            default: "0x00"
+            required: true
+            showas: hex
+        - id: "0x0002"
+            name: Transition time
+            type: u16
+            default: "0x0000"
+            required: true
+            showas: hex
+            unit: s
+            multiplier: 0.1
+        - id: "0x0003"
+            name: Scene Name
+            type: cstring
+            required: true
+        - id: "0x0004"
+          - name: Extension Field Sets
+            type: SceneExtensionSet # Special type
+
+    - id: "0x41"
+        name: Enhanced View Scene
+        description: Views the scenes of a group (returning transition time with 1/10s precision).
+        dir: recv
+        required: o
         response: "0x41"
         payloadattr:
         - id: "0x0000"
@@ -192,6 +243,39 @@ server:
             default: "0x00"
             required: true
             showas: hex
+    - id: "0x42"
+        name: Copy Scene
+        required: o
+        dir: recv
+        response: "0x42"
+        payloadattr:
+        - id: "0x0000"
+            name: Mode
+            type: bmp8
+            required: true
+            bits:
+              "0": "Copy All Scenes"
+        - id: "0x0001"
+            name: From Group ID
+            type: u16
+            required: true
+            showas: hex
+        - id: "0x0001"
+            name: From Scene ID
+            type: u8
+            required: true
+            showas: hex
+        - id: "0x0001"
+            name: To Group ID
+            type: u16
+            required: true
+            showas: hex
+        - id: "0x0001"
+            name: To Scene ID
+            type: u8
+            required: true
+            showas: hex
+
 client:
     cmd:
     - id: "0x00"
@@ -247,7 +331,16 @@ client:
             type: u16
             default: "0x0000"
             required: true
-            showas: hex
+            showas: dec
+            unit: s
+        - id: "0x0004"
+            name: Scene Name
+            type: cstring
+            required: true
+        - id: "0x0005"
+            name: Extension Field Sets
+            type: SceneExtensionSet
+            required: true
     - id: "0x02"
         name: Remove scene response
         description: Response to the remove scene command.
@@ -315,7 +408,7 @@ client:
             required: true
             showas: hex
     - id: "0x06"
-        name: Get scene membershio response
+        name: Get scene membership response
         description: Shows details about scene membership.
         dir: recv
         required: m
@@ -339,16 +432,40 @@ client:
             required: true
             showas: hex
         - id: "0x0003"
-            name: Scene count
+            name: Scene list
+            type: set
+            arraytype: u8
+            default: "0x00"
+            required: true
+            showas: hex
+    - id: "0x40"
+        name: Enhanced Add Scene response
+        required: o
+        dir: recv
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: true
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Group ID
+            type: u16
+            default: "0x0000"
+            required: true
+            showas: hex
+        - id: "0x0002"
+            name: Scene ID
             type: u8
             default: "0x00"
             required: true
-            showas: dec
+            showas: hex
     - id: "0x41"
-        name: Enhanced view scene response
+        name: Enhanced View Scene response
         description: A scene description.
         dir: recv
-        required: m
+        required: o
         payloadattr:
         - id: "0x0000"
             name: Status
@@ -373,8 +490,36 @@ client:
             type: u16
             default: "0x00"
             required: true
+            unit: s
+            multiplier: 0.1
             showas: dec
         - id: "0x0004"
             name: Name
             type: cstring
             required: true
+        - id: "0x0005"
+            name: Extension Field Sets
+            type: SceneExtensionSet
+            required: true
+    - id: "0x42"
+        name: Copy Scene Response
+        required: o
+        dir: recv
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            default: "0x00"
+            required: true
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: From Group ID
+            type: u16
+            default: "0x0000"
+            required: true
+            showas: hex
+        - id: "0x0002"
+            name: From Scene ID
+            type: u8
+            default: "0x00"
+            required: true
+            showas: hex

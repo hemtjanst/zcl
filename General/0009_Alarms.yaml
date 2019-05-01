@@ -1,18 +1,19 @@
+# status: done
 id: "0x0009"
 name: Alarms
 description: Sending alarm notifications and configuring alarm functionality.
 server:
     attr:
     - id: "0x0000"
+        description: Number of alarms currently defined
         name: Alarm Count
         type: u16
         access: rw
         default: "0x00"
-        required: true
     cmd:
     - id: "0x00"
-        name: Alarm
-        dir: send
+        name: Reset alarm
+        dir: recv
         required: m
         payloadattr:
         - id: "0x0000"
@@ -27,4 +28,68 @@ server:
             default: "0x0000"
             required: true
             showas: hex
-client: {}
+    - id: "0x01"
+        name: Reset all alarms
+        dir: recv
+        required: m
+        description: Resets all alarms, causing triggered alarms to generate new notification
+    - id: "0x02"
+        name: Get Alarm
+        response: "0x01"
+        required: o
+        description: Retrieves the earliest alarm and removes it from the table
+    - id: "0x03"
+        name: Reset alarm log
+        required: o
+        description: Clears the alarm log
+client:
+    cmd:
+    - id: "0x00"
+        name: Alarm
+        dir: recv
+        required: m
+        payloadattr:
+        - id: "0x0000"
+            name: Alarm code
+            type: u8
+            default: "0x00"
+            required: true
+            showas: hex
+        - id: "0x0001"
+            name: Cluster Id
+            type: u16
+            default: "0x0000"
+            required: true
+            showas: hex
+    - id: "0x01"
+        name: Get alarm response
+        dir: recv
+        required: o
+        payloadattr:
+        - id: "0x0000"
+            name: Status
+            type: enum8
+            required: true
+            enumeration: ZCL_Status
+        - id: "0x0001"
+            name: Alarm Code
+            required: false
+            type: enum8
+            cond:
+              - attr: 0x0000
+                value: 0x00
+        - id: "0x0002"
+            name: Cluster ID
+            required: false
+            type: uint16
+            cond:
+              - attr: 0x0000
+                value: 0x00
+        - id: "0x0003"
+            name: Timestamp
+            required: false
+            invalid: 0xffffffff
+            type: utc # verify if this is actually correct
+            cond:
+              - attr: 0x0000
+                value: 0x00

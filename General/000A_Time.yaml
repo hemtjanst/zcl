@@ -1,3 +1,4 @@
+# status: done
 id: "0x000A"
 name: Time
 description: This cluster provides a basic interface to a real-time clock.
@@ -8,6 +9,7 @@ server:
         type: utc
         access: rw
         required: true
+        range: 0x00000000,0xfffffffe
     - id: "0x0001"
         name: Time Status
         type: bmp8
@@ -21,33 +23,40 @@ server:
             "3": Superseding
     - id: "0x0002"
         name: Time Zone
+        description: Offset during normal time from UTC in seconds
         type: s32
         access: rw
         default: "0"
+        unit: s
         range: -86400,86400
     - id: "0x0003"
         name: Dst Start
-        type: u32
+        type: utc
         access: rw
         range: 0x00000000,0xfffffffe
+        description: Start of DST
     - id: "0x0004"
         name: Dst End
-        type: u32
+        type: utc
         access: rw
         range: 0x00000000,0xfffffffe
+        description: End of DST
     - id: "0x0005"
         name: Dst Shift
         type: s32
         access: rw
         default: "0"
         range: -86400,86400
+        unit: s
     - id: "0x0006"
         name: Standard Time
+        description: Local time (without DST offset)
         type: u32
         access: r
         range: 0x00000000,0xfffffffe
     - id: "0x0007"
         name: Local Time
+        description: Local time
         type: u32
         access: r
         range: 0x00000000,0xfffffffe

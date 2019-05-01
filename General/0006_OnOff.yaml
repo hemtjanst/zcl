@@ -1,3 +1,4 @@
+#status: done
 id: "0x0006"
 name: On/Off
 description: Attributes and commands for switching devices between 'On' and 'Off'
@@ -10,6 +11,8 @@ server:
         access: r
         default: "0"
         required: true
+        report: true
+        scene: true
         values:
             "0x00": Off
             "0x01": On
@@ -23,11 +26,15 @@ server:
         type: u16
         access: r
         default: "0"
+        unit: s
+        multiplier: 10
     - id: "0x4002"
         name: OffWaitTime
         type: u16
         access: r
         default: "0"
+        unit: s
+        multiplier: 10
     - id: "0x4003"
         name: PowerOn OnOff
         type: enum8
@@ -82,9 +89,9 @@ server:
             default: "0x00"
             required: true
             values:
-                "0x00": 20% dim up in 0.5s then off in 1s (Dying light)
-                "0x01": ""
-                "0x02": 50% dim down in 0.8s then fade off in 12s (Delayed all off)
+                "0x00": Fade to off in 0.8 seconds / 20% dim up in 0.5 then fade to off in 1 second
+                "0x01": No Fade
+                "0x02": 50% dim down in 0.8s then fade off in 12s
     - id: "0x41"
         name: On with recall global scene
         description: The on with recall global scene command allows the recall of
@@ -116,6 +123,8 @@ server:
             type: u16
             default: "0x0000"
             required: true
+            unit: s
+            multiplier: 10
         - id: "0x0002"
             name: Off wait time
             description: Length of time (in 1/10ths second) that the lamp shall remain
@@ -123,4 +132,6 @@ server:
             type: u16
             default: "0x0000"
             required: true
+            unit: s
+            multiplier: 10
 client: {}

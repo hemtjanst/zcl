@@ -1,3 +1,4 @@
+# status: done
 id: "0x000D"
 name: Analog Output (Basic)
 description: The Analog Output (Basic) cluster provides an interface for setting the
@@ -29,17 +30,239 @@ server:
         access: rw
         default: "0"
         required: true
+    - id: "0x0057"
+        name: Priority Array
+        access: rw
+        type: array
+        arraytype: struct
+        structattr:
+        - id: "0x0000"
+          type: bool
+        - id: "0x0001"
+          type: float
+    - id: "0x0067"
+        name: Reliability
+        type: enum8
+        access: rw
+    - id: "0x0067"
+        name: Relinquish Default
+        type: float
+        access: rw
+    - id: "0x006A"
+        name: Resolution
+        type: float
+        access: rw
     - id: "0x006F"
         name: Status flags
         type: bmp8
         access: r
         default: "0"
         required: true
+        report: true
         bits:
             "1": In Alarm
             "2": Fault
             "4": Overidden
             "8": Out of Service
+    - id: "0x0075"
+        name: Engineering Units
+        type: enum16
+        access: rw
+        values:
+            "0x0000": Square-meters  # Area
+            "0x0001": Square-feet  # Area
+            "0x0002": Milliamperes  # Electrical
+            "0x0003": Amperes  # Electrical
+            "0x0004": Ohms  # Electrical
+            "0x0005": Volts  # Electrical
+            "0x0006": Kilo-volts  # Electrical
+            "0x0007": Mega-volts  # Electrical
+            "0x0008": Volt-amperes  # Electrical
+            "0x0009": Kilo-volt-amperes  # Electrical
+            "0x000A": Mega-volt-amperes  # Electrical
+            "0x000B": Volt-amperes-reactive  # Electrical
+            "0x000C": Kilo-volt-amperes-reactive  # Electrical
+            "0x000D": Mega-volt-amperes-reactive  # Electrical
+            "0x000E": Degrees-phase  # Electrical
+            "0x000F": Power-factor  # Electrical
+            "0x0010": Joules  # Energy
+            "0x0011": Kilojoules  # Energy
+            "0x0012": Watt-hours  # Energy
+            "0x0013": Kilowatt-hours  # Energy
+            "0x0014": BTUs  # Energy
+            "0x0015": Therms  # Energy
+            "0x0016": Ton-hours  # Energy
+            "0x0017": Joules-per-kilogram-dry-air  # Enthalpy
+            "0x0018": BTUs-per-pound-dry-air  # Enthalpy
+            "0x0019": Cycles-per-hour  # Frequency
+            "0x001A": Cycles-per-minute  # Frequency
+            "0x001B": Hertz  # Frequency
+            "0x001C": Grams-of-water-per-kilogram-dry-air  # Humidity
+            "0x001D": Percent-relative-humidity  # Humidity
+            "0x001E": Millimeters  # Length
+            "0x001F": Meters  # Length
+            "0x0020": Inches  # Length
+            "0x0021": Feet  # Length
+            "0x0022": Watts-per-square-foot  # Light
+            "0x0023": Watts-per-square-meter  # Light
+            "0x0024": Lumens  # Light
+            "0x0025": Luxes  # Light
+            "0x0026": Foot-candles  # Light
+            "0x0027": Kilograms  # Mass
+            "0x0028": Pounds-mass  # Mass
+            "0x0029": Tons  # Mass
+            "0x002A": Kilograms-per-second  # Mass Flow
+            "0x002B": Kilograms-per-minute  # Mass Flow
+            "0x002C": Kilograms-per-hour  # Mass Flow
+            "0x002D": Pounds-mass-per-minute  # Mass Flow
+            "0x002E": Pounds-mass-per-hour  # Mass Flow
+            "0x002F": Watts  # Power
+            "0x0030": Kilowatts  # Power
+            "0x0031": Megawatts  # Power
+            "0x0032": BTUs-per-hour  # Power
+            "0x0033": Horsepower  # Power
+            "0x0034": Tons-refrigeration  # Power
+            "0x0035": Pascals  # Pressure
+            "0x0036": Kilopascals  # Pressure
+            "0x0037": Bars  # Pressure
+            "0x0038": Pounds-force-per-square-inch  # Pressure
+            "0x0039": Centimeters-of-water  # Pressure
+            "0x003A": Inches-of-water  # Pressure
+            "0x003B": Millimeters-of-mercury  # Pressure
+            "0x003C": Centimeters-of-mercury  # Pressure
+            "0x003D": Inches-of-mercury  # Pressure
+            "0x003E": Degrees-Celsius  # Temperature
+            "0x003F": Degrees-Kelvin  # Temperature
+            "0x0040": Degrees-Fahrenheit  # Temperature
+            "0x0041": Degree-days-Celsius  # Temperature
+            "0x0042": Degree-days-Fahrenheit  # Temperature
+            "0x0043": Years  # Time
+            "0x0044": Months  # Time
+            "0x0045": Weeks  # Time
+            "0x0046": Days  # Time
+            "0x0047": Hours  # Time
+            "0x0048": Minutes  # Time
+            "0x0049": Seconds  # Time
+            "0x004A": Meters-per-second  # Velocity
+            "0x004B": Kilometers-per-hour  # Velocity
+            "0x004C": Feet-per-second  # Velocity
+            "0x004D": Feet-per-minute  # Velocity
+            "0x004E": Miles-per-hour  # Velocity
+            "0x004F": Cubic-feet  # Volume
+            "0x0050": Cubic-meters  # Volume
+            "0x0051": Imperial-gallons  # Volume
+            "0x0052": Liters  # Volume
+            "0x0053": Us-gallons  # Volume
+            "0x0054": Cubic-feet-per-minute  # Volumetric Flow
+            "0x0055": Cubic-meters-per-second  # Volumetric Flow
+            "0x0056": Imperial-gallons-per-minute  # Volumetric Flow
+            "0x0057": Liters-per-second  # Volumetric Flow
+            "0x0058": Liters-per-minute  # Volumetric Flow
+            "0x0059": Us-gallons-per-minute  # Volumetric Flow
+            "0x005A": Degrees-angular  # Other
+            "0x005B": Degrees-Celsius-per-hour  # Other
+            "0x005C": Degrees-Celsius-per-minute  # Other
+            "0x005D": Degrees-Fahrenheit-per-hour  # Other
+            "0x005E": Degrees-Fahrenheit-per-minute  # Other
+            "0x005F": No-units  # Other
+            "0x0060": Parts-per-million  # Other
+            "0x0061": Parts-per-billion  # Other
+            "0x0062": Percent  # Other
+            "0x0063": Percent-per-second  # Other
+            "0x0064": Per-minute  # Other
+            "0x0065": Per-second  # Other
+            "0x0066": Psi-per-Degree-Fahrenheit  # Other
+            "0x0067": Radians  # Other
+            "0x0068": Revolutions-per-minute  # Other
+            "0x0069": Currency1  # Currency
+            "0x006A": Currency2  # Currency
+            "0x006B": Currency3  # Currency
+            "0x006C": Currency4  # Currency
+            "0x006D": Currency5  # Currency
+            "0x006E": Currency6  # Currency
+            "0x006F": Currency7  # Currency
+            "0x0070": Currency8  # Currency
+            "0x0071": Currency9  # Currency
+            "0x0072": Currency10  # Currency
+            "0x0073": Square-inches  # Area
+            "0x0074": Square-centimeters  # Area
+            "0x0075": BTUs-per-pound  # Enthalpy
+            "0x0076": Centimeters  # Length
+            "0x0077": Pounds-mass-per-second  # Mass Flow
+            "0x0078": Delta-Degrees-Fahrenheit  # Temperature
+            "0x0079": Delta-Degrees-Kelvin  # Temperature
+            "0x007A": Kilohms  # Electrical
+            "0x007B": Megohms  # Electrical
+            "0x007C": Millivolts  # Electrical
+            "0x007D": Kilojoules-per-kilogram  # Energy
+            "0x007E": Megajoules  # Energy
+            "0x007F": Joules-per-degree-Kelvin  # Entrophy
+            "0x0080": Joules-per-kilogram-degree-Kelvin  # Entrophy
+            "0x0081": Kilohertz  # Frequency
+            "0x0082": Megahertz  # Frequency
+            "0x0083": Per-hour  # Frequency
+            "0x0084": Milliwatts  # Power
+            "0x0085": Hectopascals  # Pressure
+            "0x0086": Millibars  # Pressure
+            "0x0087": Cubic-meters-per-hour  # Volumetric Flow
+            "0x0088": Liters-per-hour  # Volumetric Flow
+            "0x0089": Kilowatt-hours-per-square-meter  # Other
+            "0x008A": Kilowatt-hours-per-square-foot  # Other
+            "0x008B": Megajoules-per-square-meter  # Other
+            "0x008C": Megajoules-per-square-foot  # Other
+            "0x008D": Watts-per-square-meter-Degree-Kelvin  # Other
+            "0x008E": Cubic-feet-per-second  # Volumetric Flow
+            "0x008F": Percent-obscuration-per-foot  # Other
+            "0x0090": Percent-obscuration-per-meter  # Other
+            "0x0091": Milliohms  # Electrical
+            "0x0092": Megawatt-hours  # Energy
+            "0x0093": Kilo-BTUs  # Energy
+            "0x0094": Mega-BTUs  # Energy
+            "0x0095": Kilojoules-per-kilogram-dry-air  # Enthalpy
+            "0x0096": Megajoules-per-kilogram-dry-air  # Enthalpy
+            "0x0097": Kilojoules-per-degree-Kelvin  # Entrophy
+            "0x0098": Megajoules-per-degree-Kelvin  # Entrophy
+            "0x0099": Newton  # Force
+            "0x009A": Grams-per-second  # Mass Flow
+            "0x009B": Grams-per-minute  # Mass Flow
+            "0x009C": Tons-per-hour  # Mass Flow
+            "0x009D": Kilo-BTUs-per-hour  # Power
+            "0x009E": Hundredths-seconds  # Time
+            "0x009F": Milliseconds  # Time
+            "0x00A0": Newton-meters  # Torque
+            "0x00A1": Millimeters-per-second  # Velocity
+            "0x00A2": Millimeters-per-minute  # Velocity
+            "0x00A3": Meters-per-minute  # Velocity
+            "0x00A4": Meters-per-hour  # Velocity
+            "0x00A5": Cubic-meters-per-minute  # Volumetric Flow
+            "0x00A6": Meters-per-second-per-second  # Acceleration
+            "0x00A7": Amperes-per-meter  # Electrical
+            "0x00A8": Amperes-per-square-meter  # Electrical
+            "0x00A9": Ampere-square-meters  # Electrical
+            "0x00AA": Farads  # Electrical
+            "0x00AB": Henrys  # Electrical
+            "0x00AC": Ohm-meters  # Electrical
+            "0x00AD": Siemens  # Electrical
+            "0x00AE": Siemens-per-meter  # Electrical
+            "0x00AF": Teslas  # Electrical
+            "0x00B0": Volts-per-degree-Kelvin  # Electrical
+            "0x00B1": Volts-per-meter  # Electrical
+            "0x00B2": Webers  # Electrical
+            "0x00B3": Candelas  # Light
+            "0x00B4": Candelas-per-square-meter  # Light
+            "0x00B5": Kelvins-per-hour  # Temperature
+            "0x00B6": Kelvins-per-minute  # Temperature
+            "0x00B7": Joule-seconds  # Other
+            "0x00B8": Square-meters-per-Newton  # Other
+            "0x00B9": Kilogram-per-cubic-meter  # Other
+            "0x00BA": Newton-seconds  # Other
+            "0x00BB": Newtons-per-meter  # Other
+            "0x00BC": Watts-per-meter-per-degree-Kelvin  # Other
+            "0x00FF": "Other"
+    - id: "0x0100"
+        name: Application Type
+        access: r
+        type: u32
     - id: "0xF000"
         name: Xiaomi 0xf000
         type: u32
