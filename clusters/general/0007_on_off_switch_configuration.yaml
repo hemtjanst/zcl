@@ -4,7 +4,7 @@ name: On/Off Switch Configuration
 description: Attributes and commands for configuring On/Off switching devices
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: SwitchType
         description: The SwitchType attribute specifies the basic functionality of
             the On/Off switching device.
@@ -16,7 +16,7 @@ server:
             "0x00": Toggle
             "0x01": Momentary
             "0x02": Multifunction
-    - id: "0x0010"
+      - id: "0x0010"
         name: SwitchActions
         description: The SwitchActions attribute is 8-bits in length and specifies
             the commands of the On/Off cluster to be generated when the switch moves

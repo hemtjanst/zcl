@@ -5,40 +5,40 @@ description: An interface for reading the value of an analog measurement and acc
     various characteristics of that measurement.
 server:
     attr:
-    - id: "0x001C"
+      - id: "0x001C"
         name: Description
         type: cstring
         access: rw
-    - id: "0x0041"
+      - id: "0x0041"
         name: Max Present Value
         type: float
         access: rw
-    - id: "0x0042"
+      - id: "0x0042"
         name: Min Present Value
         type: float
         access: rw
-    - id: "0x0051"
+      - id: "0x0051"
         name: Out of service
         type: bool
         access: rw
         default: "0"
         required: true
-    - id: "0x0055"
+      - id: "0x0055"
         name: Present value
         type: float
         access: rw
         default: "0"
         required: true
         report: true
-    - id: "0x0067"
+      - id: "0x0067"
         name: Reliability
         type: enum8
         access: rw
-    - id: "0x006A"
+      - id: "0x006A"
         name: Resolution
         type: float
         access: rw
-    - id: "0x006F"
+      - id: "0x006F"
         name: Status flags
         type: bmp8
         access: r
@@ -50,7 +50,7 @@ server:
             "2": Fault
             "4": Overidden
             "8": Out of Service
-    - id: "0x0075"
+      - id: "0x0075"
         name: Engineering Units
         type: enum16
         access: rw
@@ -245,11 +245,11 @@ server:
             "0x00BB": Newtons-per-meter  # Other
             "0x00BC": Watts-per-meter-per-degree-Kelvin  # Other
             "0x00FF": "Other"
-    - id: "0x0100"
+      - id: "0x0100"
         name: Application Type
         access: r
         type: u32
-    - id: "0xFF05"
+      - id: "0xFF05"
         name: Unknown
         type: u16
         access: r

@@ -2,7 +2,7 @@ id: "0x0404"
 name: Flow measurement
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Measured Value
         type: u16
         access: r
@@ -10,19 +10,19 @@ server:
         required: true
         report: true
         range: 0x0000,0xfffe
-    - id: "0x0001"
+      - id: "0x0001"
         name: Min Measured Value
         type: u16
         access: r
         required: true
         range: 0x0000,0xfffd
-    - id: "0x0002"
+      - id: "0x0002"
         name: Max Measured Value
         type: u16
         access: r
         required: true
         range: 0x0001,0xfffe
-    - id: "0x0003"
+      - id: "0x0003"
         name: Tolerance
         type: u16
         access: r

@@ -4,54 +4,54 @@ description: Attributes and commands for setting devices light color. The color 
     specified in the RGB range from 0 - 255.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: CurrentColorSet
         type: u32
         access: r
         default: "0"
         required: true
         showas: hex
-    - id: "0x0001"
+      - id: "0x0001"
         name: ColorSetCount
         type: u8
         access: r
         default: "0"
         required: true
     cmd:
-    - id: "0x00"
+      - id: "0x00"
         name: Set Color
         description: On receipt of this command, the color of the light shall be changed
             and the current index updatet.
         dir: recv
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Red
             type: u8
             default: "0x00"
             required: true
             range: 0x00,0xFF
             showas: slider
-        - id: "0x0001"
+          - id: "0x0001"
             name: Green
             type: u8
             default: "0x00"
             required: true
             range: 0x00,0xFF
             showas: slider
-        - id: "0x0002"
+          - id: "0x0002"
             name: Blue
             type: u8
             default: "0x00"
             required: true
             range: 0x00,0xFF
             showas: slider
-        - id: "0x0003"
+          - id: "0x0003"
             name: Set Index
             type: u8
             default: "0x00"
             required: true
-        - id: "0x0004"
+          - id: "0x0004"
             name: Options
             type: bmp8
             default: "0x00"

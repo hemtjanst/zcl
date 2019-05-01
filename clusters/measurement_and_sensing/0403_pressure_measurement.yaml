@@ -5,7 +5,7 @@ description: The server cluster provides an interface to air pressure measuremen
     measurements.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Measured Value
         type: s16
         access: r
@@ -13,48 +13,48 @@ server:
         required: true
         report: true
         range: 0x8001,0x7fff
-    - id: "0x0001"
+      - id: "0x0001"
         name: Min Measured Value
         type: s16
         access: r
         required: true
         range: 0x8001,0x7ffe
-    - id: "0x0002"
+      - id: "0x0002"
         name: Max Measured Value
         type: s16
         access: r
         required: true
         range: 0x8002,0x7fff
-    - id: "0x0003"
+      - id: "0x0003"
         name: Tolerance
         type: u16
         access: r
         report: true
         range: 0x0000,0x0800
-    - id: "0x0010"
+      - id: "0x0010"
         name: Scaled Value
         type: s16
         access: r
         default: "0"
         range: 0x8001,0x7fff
-    - id: "0x0011"
+      - id: "0x0011"
         name: Min Scaled Value
         type: s16
         access: r
         required: true
         range: 0x8001,0x7ffe
-    - id: "0x0012"
+      - id: "0x0012"
         name: Max Scaled Value
         type: s16
         access: r
         required: true
         range: 0x8002,0x7fff
-    - id: "0x0013"
+      - id: "0x0013"
         name: Scaled Tolerance
         type: u16
         access: r
         range: 0x0000,0x0800
-    - id: "0x0014"
+      - id: "0x0014"
         name: Scale
         type: s8
         access: r

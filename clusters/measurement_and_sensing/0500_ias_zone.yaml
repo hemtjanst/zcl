@@ -5,7 +5,7 @@ description: The IAS Zone cluster defines an interface to the functionality of a
     battery reports and supervision of the IAS network.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Zone State
         type: enum8
         access: r
@@ -14,7 +14,7 @@ server:
         values:
             "0x00": Not enrolled
             "0x01": Enrolled
-    - id: "0x0001"
+      - id: "0x0001"
         name: Zone Type
         type: enum16
         access: r
@@ -36,7 +36,7 @@ server:
             "0x0226": Glass break sensor
             "0x0229": Security repeater
             "0xFFFF": Invalid Zone Type
-    - id: "0x0002"
+      - id: "0x0002"
         name: Zone Status
         type: bmp16
         access: r
@@ -52,24 +52,24 @@ server:
             "7": AC (mains)
             "8": Test
             "9": Battery defect
-    - id: "0x0010"
+      - id: "0x0010"
         name: IAS_CIE_Address
         type: uid
         access: rw
         default: "0"
-    - id: "0x0011"
+      - id: "0x0011"
         name: Zone ID
         type: u8
         access: r
         required: true
         range: 0x00,0xff
     cmd:
-    - id: "0x00"
+      - id: "0x00"
         name: Zone Enroll Response
         dir: recv
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Enroll response code
             type: enum16
             required: true
@@ -78,20 +78,20 @@ server:
                 "0x0001": Not supported
                 "0x0002": No enroll permit
                 "0x0003": Too many zones
-        - id: "0x0001"
+          - id: "0x0001"
             name: Zone ID
             type: u8
             required: true
-    - id: "0x01"
+      - id: "0x01"
         name: Initiate Normal Operation Mode
         dir: recv
         required: o
-    - id: "0x00"
+      - id: "0x00"
         name: Zone Status Change Notification
         dir: send
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Zone Status
             type: bmp16
             required: true
@@ -106,25 +106,25 @@ server:
                 "7": AC (mains)
                 "8": Test
                 "9": Battery defect
-        - id: "0x0001"
+          - id: "0x0001"
             name: Extended Status
             type: u8
             default: "0x00"
             required: true
-        - id: "0x0002"
+          - id: "0x0002"
             name: Zone ID
             type: u8
             required: true
-        - id: "0x0003"
+          - id: "0x0003"
             name: Delay
             type: u16
             required: true
-    - id: "0x01"
+      - id: "0x01"
         name: Zone Enroll request
         dir: send
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Zone Status
             type: enum16
             required: true
@@ -142,7 +142,7 @@ server:
                 "0x0115": Key fob
                 "0x0225": Standard Warning Device
                 "0xFFFF": Invalid Zone Type
-        - id: "0x0001"
+          - id: "0x0001"
             name: Manufacturer Code
             type: u16
             required: true

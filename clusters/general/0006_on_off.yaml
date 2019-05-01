@@ -5,7 +5,7 @@ description: Attributes and commands for switching devices between 'On' and 'Off
     states.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: OnOff
         type: bool
         access: r
@@ -16,26 +16,26 @@ server:
         values:
             "0x00": Off
             "0x01": On
-    - id: "0x4000"
+      - id: "0x4000"
         name: GlobalSceneControl
         type: bool
         access: r
         default: "0"
-    - id: "0x4001"
+      - id: "0x4001"
         name: OnTime
         type: u16
         access: r
         default: "0"
         unit: s
         multiplier: 10
-    - id: "0x4002"
+      - id: "0x4002"
         name: OffWaitTime
         type: u16
         access: r
         default: "0"
         unit: s
         multiplier: 10
-    - id: "0x4003"
+      - id: "0x4003"
         name: PowerOn OnOff
         type: enum8
         access: rw
@@ -45,33 +45,33 @@ server:
             "0x01": On
             "0xFF": Previous
     cmd:
-    - id: "0x00"
+      - id: "0x00"
         name: Off
         description: On receipt of this command, a device shall enter its 'Off' state.
             This state is device dependent, but it is recommended that it is used
             for power off or similar functions.
         dir: recv
         required: m
-    - id: "0x01"
+      - id: "0x01"
         name: On
         description: On receipt of this command, a device shall enter its 'On' state.
             This state is device dependent, but it is recommended that it is used
             for power on or similar functions.
         dir: recv
         required: m
-    - id: "0x02"
+      - id: "0x02"
         name: Toggle
         description: On receipt of this command, if a device is in its ‘Off’ state
             it shall enter its 'On' state. Otherwise, if it is in its ‘On’ state it
             shall enter its 'Off' state.
         dir: recv
         required: m
-    - id: "0x40"
+      - id: "0x40"
         name: Off with effect
         dir: recv
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Effect identifier
             description: The effect identifier field specifies the fading effect to
                 use.
@@ -81,7 +81,7 @@ server:
             values:
                 "0x00": Delayed all off
                 "0x01": Dying light
-        - id: "0x0001"
+          - id: "0x0001"
             name: Effect variant
             description: The effect identifier field specifies the effect variant
                 to use.
@@ -92,13 +92,13 @@ server:
                 "0x00": Fade to off in 0.8 seconds / 20% dim up in 0.5 then fade to off in 1 second
                 "0x01": No Fade
                 "0x02": 50% dim down in 0.8s then fade off in 12s
-    - id: "0x41"
+      - id: "0x41"
         name: On with recall global scene
         description: The on with recall global scene command allows the recall of
             the light settings when the light was turned off.
         dir: recv
         required: m
-    - id: "0x42"
+      - id: "0x42"
         name: On with timed off
         description: Allows lamps to be turned on for a specific duration with a guarded
             off duration so that should the lamp be subsequently switched off, further
@@ -107,7 +107,7 @@ server:
         dir: recv
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: On/off control
             description: The effect identifier field specifies the fading effect to
                 use.
@@ -116,7 +116,7 @@ server:
             required: true
             bits:
                 "0": Accept only when on
-        - id: "0x0001"
+          - id: "0x0001"
             name: On time
             description: Length of time (in 1/10ths second) that the lamp is to remain
                 on.
@@ -125,7 +125,7 @@ server:
             required: true
             unit: s
             multiplier: 10
-        - id: "0x0002"
+          - id: "0x0002"
             name: Off wait time
             description: Length of time (in 1/10ths second) that the lamp shall remain
                 off.

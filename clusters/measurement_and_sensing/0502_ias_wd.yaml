@@ -6,7 +6,7 @@ description: ' The IAS WD cluster provides an interface to the functionality of 
     (siren, strobe lighting, etc.) when a system alarm condition is detected. '
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Max Duration
         type: u16
         access: rw
@@ -14,12 +14,12 @@ server:
         required: true
         range: 0x0000,0xfffe
     cmd:
-    - id: "0x00"
+      - id: "0x00"
         name: Start warning
         dir: recv
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Options
             type: bmp8
             required: true
@@ -31,16 +31,16 @@ server:
                 "5": Warning mode 1
                 "6": Warning mode 2
                 "7": Warning mode 3
-        - id: "0x0001"
+          - id: "0x0001"
             name: Warning duration
             type: u16
             required: true
-        - id: "0x0002"
+          - id: "0x0002"
             name: Strobe duty cycle
             type: u8
             default: "0x00"
             required: true
-        - id: "0x0000"
+          - id: "0x0000"
             name: Strobe level
             type: enum8
             required: true
@@ -49,12 +49,12 @@ server:
                 "0x01": Medium
                 "0x02": High
                 "0x03": Very high
-    - id: "0x01"
+      - id: "0x01"
         name: Squawk
         dir: recv
         required: m
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Options
             type: bmp8
             required: true

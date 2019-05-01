@@ -4,7 +4,7 @@ description: This cluster specifies an interface to control the speed of a fan a
     part of a heating / cooling system.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Fan Mode
         type: enum8
         access: rw
@@ -18,7 +18,7 @@ server:
             "0x04": On
             "0x05": Auto
             "0x06": Smart
-    - id: "0x0001"
+      - id: "0x0001"
         name: Fan Mode Sequence
         type: enum8
         access: rw

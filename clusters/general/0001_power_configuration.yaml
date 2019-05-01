@@ -5,13 +5,13 @@ description: Attributes for determining more detailed information about a device
     power source(s), and for configuring under/over voltage alarms.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Mains Voltage
         type: u16
         unit: V
         multiplier: 10
         access: r
-    - id: "0x0001"
+      - id: "0x0001"
         name: Mains Frequency
         description: |
             Resolution of 2Hz
@@ -24,7 +24,7 @@ server:
         multiplier: 2
         range: "0x01,0xfd"
         access: r
-    - id: "0x0010"
+      - id: "0x0010"
         name: Mains Alarm Mask
         type: bmp8
         access: rw
@@ -33,21 +33,21 @@ server:
             "0": Mains Voltage too low
             "1": Mains Voltage too high
             "2": Mains power supply lost/unavailable
-    - id: "0x0011"
+      - id: "0x0011"
         name: Mains Voltage Min Threshold
         type: u16
         access: rw
         unit: V
         multiplier: 10
         default: "0"
-    - id: "0x0012"
+      - id: "0x0012"
         name: Mains Voltage Max Threshold
         type: u16
         access: rw
         unit: V
         multiplier: 10
         default: "0xffff"
-    - id: "0x0013"
+      - id: "0x0013"
         name: Mains Voltage Dwell Trip Point
         description: |
           Length of time that the value of MainsVoltage MAY exist beyond either
@@ -56,13 +56,13 @@ server:
         access: rw
         unit: s
         default: "0x0000"
-    - id: "0x0020"
+      - id: "0x0020"
         name: Battery Voltage
         type: u8
         unit: V
         multiplier: 10
         access: r
-    - id: "0x0021"
+      - id: "0x0021"
         name: Battery Percentage Remaining
         type: u8
         report: true
@@ -70,12 +70,12 @@ server:
         multiplier: 0.5
         range: "0x00,0xC8"
         access: r
-    - id: "0x0030"
+      - id: "0x0030"
         name: Battery Manufacturer
         type: cstring
         access: rw
         range: 0,16
-    - id: "0x0031"
+      - id: "0x0031"
         name: Battery Size
         type: enum8
         access: rw
@@ -91,23 +91,23 @@ server:
             "0x07": CR2
             "0x08": CR123A
             "0xFF": Unknown
-    - id: "0x0032"
+      - id: "0x0032"
         name: Battery AHr Rating
         type: u16
         unit: mAh
         multiplier: 0.1
         access: rw
-    - id: "0x0033"
+      - id: "0x0033"
         name: Battery Quantity
         type: u8
         access: rw
-    - id: "0x0034"
+      - id: "0x0034"
         name: Battery Rated Voltage
         type: u8
         unit: V
         multiplier: 10
         access: rw
-    - id: "0x0035"
+      - id: "0x0035"
         name: Battery Alarm Mask
         type: bmp8
         access: rw
@@ -117,63 +117,63 @@ server:
             "1": Battery Alarm 1
             "2": Battery Alarm 2
             "3": Battery Alarm 3
-    - id: "0x0036"
+      - id: "0x0036"
         name: Battery Voltage Min Threshold
         type: u8
         access: rw
         unit: V
         multiplier: 10
         default: "0x00"
-    - id: "0x0037"
+      - id: "0x0037"
         name: Battery Voltage Threshold 1
         type: u8
         access: rw
         unit: V
         multiplier: 10
         default: "0x00"
-    - id: "0x0038"
+      - id: "0x0038"
         name: Battery Voltage Threshold 2
         type: u8
         access: rw
         unit: V
         multiplier: 10
         default: "0x00"
-    - id: "0x0039"
+      - id: "0x0039"
         name: Battery Voltage Threshold 3
         type: u8
         access: rw
         unit: V
         multiplier: 10
         default: "0x00"
-    - id: "0x003a"
+      - id: "0x003a"
         name: Battery Percentage Min Threshold
         type: u8
         access: rw
         unit: "%"
         multiplier: 0.5
         range: "0x00,0xC8"
-    - id: "0x003b"
+      - id: "0x003b"
         name: Battery Percentage Threshold 1
         type: u8
         access: rw
         unit: "%"
         multiplier: 0.5
         range: "0x00,0xC8"
-    - id: "0x003c"
+      - id: "0x003c"
         name: Battery Percentage Threshold 2
         type: u8
         access: rw
         unit: "%"
         multiplier: 0.5
         range: "0x00,0xC8"
-    - id: "0x003d"
+      - id: "0x003d"
         name: Battery Percentage Threshold 3
         type: u8
         access: rw
         unit: "%"
         multiplier: 0.5
         range: "0x00,0xC8"
-    - id: "0x003E"
+      - id: "0x003E"
         name: Battery Alarm State
         type: bmp32
         access: rw

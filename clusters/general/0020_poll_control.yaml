@@ -4,51 +4,51 @@ description: Provides a mechanism for the management of an end device’s MAC Da
     rate.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Check-in Interval
         type: u32
         access: rw
         default: "0x3840"
         required: true
         range: 0x0,0x6e0000
-    - id: "0x0001"
+      - id: "0x0001"
         name: Long Poll Interval
         type: u32
         access: r
         default: "0x14"
         required: true
         range: 0x04,0x6e0000
-    - id: "0x0002"
+      - id: "0x0002"
         name: Short Poll Interval
         type: u16
         access: r
         default: "0x02"
         required: true
         range: 0x01,0xffff
-    - id: "0x0003"
+      - id: "0x0003"
         name: Fast Poll Timeout
         type: u16
         access: rw
         default: "0x028"
         required: true
         range: 0x01,0xffff
-    - id: "0x0004"
+      - id: "0x0004"
         name: Check-in Interval Min
         type: u32
         access: r
         default: "0"
-    - id: "0x0005"
+      - id: "0x0005"
         name: Long Poll Interval Min
         type: u32
         access: r
         default: "0"
-    - id: "0x0006"
+      - id: "0x0006"
         name: Fast Poll Timeout Max
         type: u16
         access: r
         default: "0"
     cmd:
-    - id: "0x00"
+      - id: "0x00"
         name: Check-in
         dir: send
         required: m

@@ -2,14 +2,14 @@ id: "0x0406"
 name: Occupancy sensing
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Occupancy
         type: bmp8
         access: r
         required: true
         report: true
         range: 0b0000,000x
-    - id: "0x0001"
+      - id: "0x0001"
         name: Occupancy Sensor Type
         type: enum8
         access: r
@@ -19,7 +19,7 @@ server:
             "0x00": PIR
             "0x01": Ultrasonic
             "0x02": PIR and ultrasonic
-    - id: "0x0010"
+      - id: "0x0010"
         name: PIR Occupied To Unoccupied Delay
         description: The PIROccupiedToUnoccupiedDelay attribute is 16-bits in length
             and specifies the time delay, in seconds, before the PIR sensor changes
@@ -30,7 +30,7 @@ server:
         access: rw
         default: "0x00"
         range: 0x00,0xfffe
-    - id: "0x0011"
+      - id: "0x0011"
         name: PIR Unoccupied To Occupied Delay
         description: The PIRUnoccupiedToOccupiedDelay attribute is 16-bits in length
             and specifies the time delay, in seconds, before the PIR sensor changes
@@ -39,7 +39,7 @@ server:
         access: rw
         default: "0x00"
         range: 0x00,0xfffe
-    - id: "0x0012"
+      - id: "0x0012"
         name: PIR Unoccupied To Occupied Threshold
         description: The PIRUnoccupiedToOccupiedThreshold attribute is 8 bits in length
             and specifies the number of movement detection events that must occur in
@@ -49,7 +49,7 @@ server:
         access: rw
         default: "0x01"
         range: 0x01,0xfe
-    - id: "0x0020"
+      - id: "0x0020"
         name: Ultrasonic Occupied To Unoccupied Delay
         description: The UltraSonicOccupiedToUnoccupiedTime attribute specifies the
             time delay, in seconds, before the ultrasonic sensor changes to its occupied
@@ -60,7 +60,7 @@ server:
         access: rw
         default: "0x00"
         range: 0x0000,0xfffe
-    - id: "0x0021"
+      - id: "0x0021"
         name: Ultrasonic Unoccupied To Occupied Delay
         description: The UltraSonicUnoccupiedToOccupiedTime attribute specifies the
             time delay, in seconds, before the ultrasonic sensor changes to its unoccupied
@@ -69,7 +69,7 @@ server:
         access: rw
         default: "0x00"
         range: 0x0000,0xfffe
-    - id: "0x0022"
+      - id: "0x0022"
         name: Ultrasonic Unoccupied To Occupied Threshold
         description: The UltrasonicUnoccupiedToOccupiedThreshold attribute is 8 bits
             in length and specifies the number of movement detection events that must
@@ -79,13 +79,13 @@ server:
         access: rw
         default: "0x01"
         range: 0x01,0xfe
-    - id: "0x0030"
+      - id: "0x0030"
         mnfcode: "0x100B"
         name: Sensitivity
         type: u8
         access: rw
         default: "0"
-    - id: "0x0031"
+      - id: "0x0031"
         mnfcode: "0x100B"
         name: Sensitivity max.
         type: u8

@@ -4,15 +4,15 @@ description: The shade configuration cluster provides an interface for reading i
     about a shade, and configuring its open and closed limits.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Physical Closed Limit
         type: u16
         access: r
-    - id: "0x0001"
+      - id: "0x0001"
         name: MotorStepSize
         type: u8
         access: r
-    - id: "0x0002"
+      - id: "0x0002"
         name: Status
         type: bmp8
         access: rw
@@ -22,14 +22,14 @@ server:
             "1": Shade adjusting
             "2": Shade direction
             "3": Direction Reversed
-    - id: "0x0010"
+      - id: "0x0010"
         name: Closed Limit
         type: u16
         access: rw
         default: "0x0001"
         required: true
         range: 0x0001,0xfffe
-    - id: "0x0011"
+      - id: "0x0011"
         name: Mode
         type: enum8
         access: rw

@@ -6,19 +6,19 @@ description: 'The Binary Input (Basic) cluster provides an interface for reading
     physical quantity. '
 server:
     attr:
-    - id: "0x0051"
+      - id: "0x0051"
         name: Out of Service
         type: bool
         access: rw
         default: "0"
         required: true
-    - id: "0x0055"
+      - id: "0x0055"
         name: Present Value
         type: bool
         access: rw
         default: "0"
         required: true
-    - id: "0x006F"
+      - id: "0x006F"
         name: Status Flags
         type: bmp8
         access: r

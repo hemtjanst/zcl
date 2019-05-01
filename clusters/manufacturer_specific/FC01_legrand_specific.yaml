@@ -4,7 +4,7 @@ name: Legrand - Specific clusters
 description: Legrand Specific clusters.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Dimmer
         description: 0100 = Dimmer Off, 0101 = Dimmer On
         type: dat16
@@ -12,7 +12,7 @@ server:
         default: "0x0101"
         required: true
         showas: hex
-    - id: "0x0001"
+      - id: "0x0001"
         name: LED
         description: Enable LED in dark
         type: bool

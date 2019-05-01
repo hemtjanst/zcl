@@ -3,13 +3,13 @@ name: DE Debug
 description: Attributes and commands for debugging purposes.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Debug enabled
         type: bool
         access: rw
         default: "0x00"
         required: true
-    - id: "0x0001"
+      - id: "0x0001"
         name: Debug destination
         type: u16
         access: rw

@@ -4,14 +4,14 @@ description: Attributes and commands for controlling the color properties of a c
     light.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Current hue
         type: u8
         access: r
         report: true
         default: "0x00"
         range: 0x00,0xfe
-    - id: "0x0001"
+      - id: "0x0001"
         name: Current saturation
         type: u8
         access: r
@@ -19,13 +19,13 @@ server:
         scene: 4
         default: "0x00"
         range: 0x00,0xfe
-    - id: "0x0002"
+      - id: "0x0002"
         name: Remaining time
         type: u16
         access: r
         default: "0x0000"
         range: 0x0000,0xfffe
-    - id: "0x0003"
+      - id: "0x0003"
         name: Current x in CIE xyY
         type: u16
         access: r
@@ -33,7 +33,7 @@ server:
         scene: 1
         default: "0x616b"
         range: 0x0000,0xfeff
-    - id: "0x0004"
+      - id: "0x0004"
         name: Current y in CIE xyY
         type: u16
         access: r
@@ -41,7 +41,7 @@ server:
         scene: 2
         default: "0x607d"
         range: 0x0000,0xfeff
-    - id: "0x0005"
+      - id: "0x0005"
         name: Drift Compensation
         type: enum8
         range: "0x00,0x40"
@@ -52,19 +52,19 @@ server:
             0x02: Temperature monitoring
             0x03: Optical luminance monitoring and feedback
             0x04: Optical color monitoring and feedback
-    - id: "0x0006"
+      - id: "0x0006"
         name: Compensation Text
         type: cstring
         range: 0,254
         access: r
-    - id: "0x0007"
+      - id: "0x0007"
         name: Color temperature Mireds
         type: u16
         access: r
         report: true
         default: "0x00fa" # 4000 Kelvin
         range: 0x0000,0xfeff
-    - id: "0x0008"
+      - id: "0x0008"
         name: Color Mode
         type: enum8
         access: r
@@ -75,14 +75,14 @@ server:
             "0x00": Current hue and current saturation
             "0x01": Current x and current y in CIE xyY
             "0x02": Color temperature
-    - id: "0x4000"
+      - id: "0x4000"
         name: Enhanced current hue
         type: u16
         access: r
         default: "0x0000"
         scene: 3
         range: 0x0000,0xffff
-    - id: "0x4001"
+      - id: "0x4001"
         name: Enhanced color mode
         type: enum8
         access: r
@@ -94,40 +94,40 @@ server:
             "0x01": Current x and current y in CIE xyY
             "0x02": Color temperature
             "0x03": Enhanced current hue and current saturation
-    - id: "0x4002"
+      - id: "0x4002"
         name: Color loop active
         type: u8
         access: r
         scene: 5
         default: "0x00"
         range: 0x00,0xff
-    - id: "0x4003"
+      - id: "0x4003"
         name: Color loop direction
         type: u8
         access: r
         scene: 6
         default: "0x00"
         range: 0x00,0xff
-    - id: "0x4004"
+      - id: "0x4004"
         name: Color loop time
         type: u16
         access: r
         scene: 7
         default: "0x0019"
         range: 0x0000,0xffff
-    - id: "0x4005"
+      - id: "0x4005"
         name: Color loop start enhanced hue
         type: u16
         access: r
         default: "0x2300"
         range: 0x00,0xff
-    - id: "0x4006"
+      - id: "0x4006"
         name: Color loop stored enhanced hue
         type: u16
         access: r
         default: "0x0000"
         range: 0x00,0xff
-    - id: "0x400A"
+      - id: "0x400A"
         name: Color capabilities
         type: bmp16
         access: r
@@ -140,183 +140,183 @@ server:
             "2": Color loop
             "3": CIE 1931 XY
             "4": Color temperature
-    - id: "0x400B"
+      - id: "0x400B"
         name: Color temperature physical min Mireds
         type: u16
         access: r
         default: "0x0000"
         range: 0x0000,0xfeff
-    - id: "0x400C"
+      - id: "0x400C"
         name: Color temperature physical max Mireds
         type: u16
         access: r
         default: "0xfeff"
         range: 0x0000,0xfeff
-    - id: "0x4010"
+      - id: "0x4010"
         name: Power-on color temperature
         type: u16
         access: rw
         default: "0xffff"
         range: 0x0000,0xffff
-   - id: "0x0010"
+      - id: "0x0010"
         name: Number of primaries
         type: u8
         access: r
         range: 0x00,0x06
-    - id: "0x0011"
+      - id: "0x0011"
         name: Primary1 x in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0012"
+      - id: "0x0012"
         name: Primary1 y in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0013"
+      - id: "0x0013"
         name: Primary1 intensity
         type: u8
         access: r
         range: 0x00,0xff
-    - id: "0x0015"
+      - id: "0x0015"
         name: Primary2 x in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0016"
+      - id: "0x0016"
         name: Primary2 y in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0017"
+      - id: "0x0017"
         name: Primary2 intensity
         type: u8
         access: r
         range: 0x00,0xff
-    - id: "0x0019"
+      - id: "0x0019"
         name: Primary3 x in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x001A"
+      - id: "0x001A"
         name: Primary3 y in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x001B"
+      - id: "0x001B"
         name: Primary3 intensity
         type: u8
         access: r
         range: 0x00,0xff
-    - id: "0x0020"
+      - id: "0x0020"
         name: Primary4 x in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0021"
+      - id: "0x0021"
         name: Primary4 y in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0022"
+      - id: "0x0022"
         name: Primary4 intensity
         type: u8
         access: r
         range: 0x00,0xff
-    - id: "0x0024"
+      - id: "0x0024"
         name: Primary5 x in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0025"
+      - id: "0x0025"
         name: Primary5 y in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0026"
+      - id: "0x0026"
         name: Primary5 intensity
         type: u8
         access: r
         range: 0x00,0xff
-    - id: "0x0028"
+      - id: "0x0028"
         name: Primary6 x in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x0029"
+      - id: "0x0029"
         name: Primary6 y in CIE xyY
         type: u16
         access: r
         range: 0x0000,0xfeff
-    - id: "0x002a"
+      - id: "0x002a"
         name: Primary6 intensity
         type: u8
         access: r
         range: 0x00,0xff
-    - id: "0x0030"
+      - id: "0x0030"
         name: White Point x in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x0031"
+      - id: "0x0031"
         name: White Point y in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x0032"
+      - id: "0x0032"
         name: Color Point Red x in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x0033"
+      - id: "0x0033"
         name: Color Point Red y in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x0034"
+      - id: "0x0034"
         name: Color Point Red intensity
         type: u8
         access: rw
         range: 0x00,0xff
-    - id: "0x0036"
+      - id: "0x0036"
         name: Color Point Green x in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x0037"
+      - id: "0x0037"
         name: Color Point Green y in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x0038"
+      - id: "0x0038"
         name: Color Point Green intensity
         type: u8
         access: rw
         range: 0x00,0xff
-    - id: "0x003a"
+      - id: "0x003a"
         name: Color Point Blue x in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x003b"
+      - id: "0x003b"
         name: Color Point Blue y in CIE xyY
         type: u16
         access: rw
         range: 0x0000,0xffff
-    - id: "0x003c"
+      - id: "0x003c"
         name: Color Point Blue intensity
         type: u8
         access: rw
         range: 0x00,0xff
     cmd:
-    - id: "0x00"
+      - id: "0x00"
         name: Move to hue
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Hue
             type: u8
-        - id: "0x0001"
+          - id: "0x0001"
             name: Direction
             type: enum8
             values:
@@ -324,159 +324,159 @@ server:
                 "0x01": Longest Distance
                 "0x02": Up
                 "0x03": Down
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transition time in 1/10ths of a second.
             type: u16
-    - id: "0x01"
+      - id: "0x01"
         name: Move hue
         dir: recv
         payloadattr:
-        - id: "0x0001"
+          - id: "0x0001"
             name: Move mode
             type: enum8
             values:
                 "0x00": Stop
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0002"
+          - id: "0x0002"
             name: Rate
             type: u8
-    - id: "0x02"
+      - id: "0x02"
         name: Step hue
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Step mode
             type: enum8
             values:
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0001"
+          - id: "0x0001"
             name: Step size
             type: u8
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u8
-    - id: "0x03"
+      - id: "0x03"
         name: Move to saturation
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Saturation
             type: u8
-        - id: "0x0001"
+          - id: "0x0001"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x04"
+      - id: "0x04"
         name: Move saturation
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Move mode
             type: enum8
             values:
                 "0x00": Stop
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0001"
+          - id: "0x0001"
             name: Rate
             description: The steps per second.
             type: u8
-    - id: "0x05"
+      - id: "0x05"
         name: Step saturation
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Step mode
             type: enum8
             values:
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0001"
+          - id: "0x0001"
             name: Step size
             type: u8
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u8
-    - id: "0x06"
+      - id: "0x06"
         name: Move to hue and saturation
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Hue
             type: u8
-        - id: "0x0001"
+          - id: "0x0001"
             name: Saturation
             type: u8
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x07"
+      - id: "0x07"
         name: Move to color
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Color x
             type: u16
-        - id: "0x0001"
+          - id: "0x0001"
             name: Color y
             type: u16
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x08"
+      - id: "0x08"
         name: Move color
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Rate x
             description: The steps per second.
             type: s16
-        - id: "0x0001"
+          - id: "0x0001"
             name: Rate y
             description: The steps per second.
             type: s16
-    - id: "0x09"
+      - id: "0x09"
         name: Step color
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Step x
             type: s16
-        - id: "0x0001"
+          - id: "0x0001"
             name: Step y
             type: s16
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x0A"
+      - id: "0x0A"
         name: Move to color temperature
         dir: recv
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Color temperature
             type: u16
-        - id: "0x0001"
+          - id: "0x0001"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x40"
+      - id: "0x40"
         name: Enhanced move to hue
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Enhanced hue
             type: u16
-        - id: "0x0001"
+          - id: "0x0001"
             name: Direction
             type: enum8
             values:
@@ -484,65 +484,65 @@ server:
                 "0x01": Longest Distance
                 "0x02": Up
                 "0x03": Down
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x41"
+      - id: "0x41"
         name: Enhanced move hue
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Move mode
             type: enum8
             values:
                 "0x00": Stop
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0001"
+          - id: "0x0001"
             name: Rate
             description: Steps per second.
             type: u16
-    - id: "0x42"
+      - id: "0x42"
         name: Enhanced step hue
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Step mode
             type: enum8
             values:
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0001"
+          - id: "0x0001"
             name: Step size
             type: u16
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x43"
+      - id: "0x43"
         name: Enhanced move to hue and saturation
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Enhanced hue
             type: u16
-        - id: "0x0001"
+          - id: "0x0001"
             name: Saturation
             type: u8
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-    - id: "0x44"
+      - id: "0x44"
         name: Color loop set
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Update flags
             type: bmp8
             bits:
@@ -550,82 +550,82 @@ server:
                 1: Update direction
                 2: Update time
                 3: Update start hue
-        - id: "0x0001"
+          - id: "0x0001"
             name: Action
             type: enum8
             values:
                 "0x00": De-activate color loop
                 "0x01": Activate from ColorLoopStartEnhancedHue
                 "0x02": Activate from EnhancedCurrentHue
-        - id: "0x0002"
+          - id: "0x0002"
             name: Direction
             type: enum8
             values:
                 "0x00": Decrement hue
                 "0x01": Increment hue
-        - id: "0x0003"
+          - id: "0x0003"
             name: Time
             description: Time in seconds used for a whole color loop.
             type: u16
-        - id: "0x0004"
+          - id: "0x0004"
             name: Start hue
             type: u16
-    - id: "0x47"
+      - id: "0x47"
         name: Stop move step
         description: Stops move to and step commands. It has no effect on a active
             color loop.
         dir: recv
         required: true
-    - id: "0x4B"
+      - id: "0x4B"
         name: Move color temperature
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Move mode
             type: enum8
             values:
                 "0x00": Stop
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0001"
+          - id: "0x0001"
             name: Rate
             description: Steps per second.
             type: u16
-        - id: "0x0002"
+          - id: "0x0002"
             name: Color temperature min
             description: Specifies a lower bound on the color temperature for the
                 current move operation.
             type: u16
-        - id: "0x0003"
+          - id: "0x0003"
             name: Color temperature max
             description: Specifies a upper bound on the color temperature for the
                 current move operation.
             type: u16
-    - id: "0x4C"
+      - id: "0x4C"
         name: Step color temperature
         dir: recv
         required: true
         payloadattr:
-        - id: "0x0000"
+          - id: "0x0000"
             name: Step mode
             type: enum8
             values:
                 "0x01": Up
                 "0x03": Down
-        - id: "0x0001"
+          - id: "0x0001"
             name: Step size
             type: u16
-        - id: "0x0002"
+          - id: "0x0002"
             name: Transition time
             description: The transitiontime in 1/10 seconds.
             type: u16
-        - id: "0x0003"
+          - id: "0x0003"
             name: Color temperature minimum Mireds
             description: Specifies a lower bound on the color temperature for the
                 current step operation.
             type: u16
-        - id: "0x0004"
+          - id: "0x0004"
             name: Color temperature maximum Mireds
             description: Specifies a upper bound on the color temperature for the
                 current step operation.

@@ -6,28 +6,28 @@ description: ' This cluster provides an interface to the functionality of Smart 
 server: {}
 client:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Utility Enrolment Group
         type: u8
         access: rw
         default: "0"
         required: true
         range: 0x00,0xff
-    - id: "0x0001"
+      - id: "0x0001"
         name: Start Randomize Minutes
         type: u8
         access: rw
         default: "0x1e"
         required: true
         range: 0x00,0x3c
-    - id: "0x0002"
+      - id: "0x0002"
         name: Stop Randomize Minutes
         type: u8
         access: rw
         default: "0x1e"
         required: true
         range: 0x00,0x3c
-    - id: "0x0003"
+      - id: "0x0003"
         name: Device Class Value
         type: u16
         access: r

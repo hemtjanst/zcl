@@ -4,7 +4,7 @@ name: Dimmer Setup
 description: Attributes and commands.
 server:
     attr:
-    - id: "0x0000"
+      - id: "0x0000"
         name: Capabilities
         type: bmp8
         access: r
@@ -16,7 +16,7 @@ server:
             "5": Reactance Discriminator
             "6": Configurable Curve
             "7": Overload detection
-    - id: "0x0001"
+      - id: "0x0001"
         name: Status
         type: bmp8
         access: r
@@ -29,7 +29,7 @@ server:
             "3": Overload
             "6": Capacitive Load
             "7": Inductive Load
-    - id: "0x0002"
+      - id: "0x0002"
         name: Mode
         type: bmp8
         access: r
