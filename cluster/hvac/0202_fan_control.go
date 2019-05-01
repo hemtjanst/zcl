@@ -6,40 +6,25 @@ import (
 )
 
 // FanControl
-// This cluster specifies an interface to control the speed of a fan as part of a heating / cooling system.
+const FanControlID zcl.ClusterID = 514
 
-func NewFanControlServer(profile zcl.ProfileID) *FanControlServer {
-	return &FanControlServer{p: profile}
-}
-func NewFanControlClient(profile zcl.ProfileID) *FanControlClient {
-	return &FanControlClient{p: profile}
-}
-
-const FanControlCluster zcl.ClusterID = 514
-
-type FanControlServer struct {
-	p zcl.ProfileID
-
-	FanMode         *FanMode
-	FanModeSequence *FanModeSequence
+var FanControlCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		FanModeAttr:         func() zcl.Attr { return new(FanMode) },
+		FanModeSequenceAttr: func() zcl.Attr { return new(FanModeSequence) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type FanControlClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var FanControlServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var FanControlClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const FanModeAttr zcl.AttrID = 0
 
 type FanMode zcl.Zenum8
 
-func (a FanMode) ID() zcl.AttrID         { return 0 }
-func (a FanMode) Cluster() zcl.ClusterID { return FanControlCluster }
+func (a FanMode) ID() zcl.AttrID         { return FanModeAttr }
+func (a FanMode) Cluster() zcl.ClusterID { return FanControlID }
 func (a *FanMode) Value() *FanMode       { return a }
 func (a FanMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -119,10 +104,12 @@ func (a FanMode) IsSmart() bool { return a == 0x06 }
 // SetSmart sets FanMode to Smart (0x06)
 func (a *FanMode) SetSmart() { *a = 0x06 }
 
+const FanModeSequenceAttr zcl.AttrID = 1
+
 type FanModeSequence zcl.Zenum8
 
-func (a FanModeSequence) ID() zcl.AttrID           { return 1 }
-func (a FanModeSequence) Cluster() zcl.ClusterID   { return FanControlCluster }
+func (a FanModeSequence) ID() zcl.AttrID           { return FanModeSequenceAttr }
+func (a FanModeSequence) Cluster() zcl.ClusterID   { return FanControlID }
 func (a *FanModeSequence) Value() *FanModeSequence { return a }
 func (a FanModeSequence) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()

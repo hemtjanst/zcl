@@ -6,42 +6,27 @@ import (
 )
 
 // DemandResponseAndLoadControl
-// This cluster provides an interface to the functionality of Smart Energy Demand Response and Load Control. Devices targeted by this cluster include thermostats and devices that support load control.
+const DemandResponseAndLoadControlID zcl.ClusterID = 1793
 
-func NewDemandResponseAndLoadControlServer(profile zcl.ProfileID) *DemandResponseAndLoadControlServer {
-	return &DemandResponseAndLoadControlServer{p: profile}
-}
-func NewDemandResponseAndLoadControlClient(profile zcl.ProfileID) *DemandResponseAndLoadControlClient {
-	return &DemandResponseAndLoadControlClient{p: profile}
-}
-
-const DemandResponseAndLoadControlCluster zcl.ClusterID = 1793
-
-type DemandResponseAndLoadControlServer struct {
-	p zcl.ProfileID
-}
-
-type DemandResponseAndLoadControlClient struct {
-	p zcl.ProfileID
-
-	UtilityEnrolmentGroup *UtilityEnrolmentGroup
-	StartRandomizeMinutes *StartRandomizeMinutes
-	StopRandomizeMinutes  *StopRandomizeMinutes
-	DeviceClassValue      *DeviceClassValue
+var DemandResponseAndLoadControlCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{
+		UtilityEnrolmentGroupAttr: func() zcl.Attr { return new(UtilityEnrolmentGroup) },
+		StartRandomizeMinutesAttr: func() zcl.Attr { return new(StartRandomizeMinutes) },
+		StopRandomizeMinutesAttr:  func() zcl.Attr { return new(StopRandomizeMinutes) },
+		DeviceClassValueAttr:      func() zcl.Attr { return new(DeviceClassValue) },
+	},
+	SceneAttr: []zcl.AttrID{},
 }
 
-/*
-var DemandResponseAndLoadControlServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var DemandResponseAndLoadControlClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const UtilityEnrolmentGroupAttr zcl.AttrID = 0
 
 type UtilityEnrolmentGroup zcl.Zu8
 
-func (a UtilityEnrolmentGroup) ID() zcl.AttrID                 { return 0 }
-func (a UtilityEnrolmentGroup) Cluster() zcl.ClusterID         { return DemandResponseAndLoadControlCluster }
+func (a UtilityEnrolmentGroup) ID() zcl.AttrID                 { return UtilityEnrolmentGroupAttr }
+func (a UtilityEnrolmentGroup) Cluster() zcl.ClusterID         { return DemandResponseAndLoadControlID }
 func (a *UtilityEnrolmentGroup) Value() *UtilityEnrolmentGroup { return a }
 func (a UtilityEnrolmentGroup) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -63,10 +48,12 @@ func (a UtilityEnrolmentGroup) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const StartRandomizeMinutesAttr zcl.AttrID = 1
+
 type StartRandomizeMinutes zcl.Zu8
 
-func (a StartRandomizeMinutes) ID() zcl.AttrID                 { return 1 }
-func (a StartRandomizeMinutes) Cluster() zcl.ClusterID         { return DemandResponseAndLoadControlCluster }
+func (a StartRandomizeMinutes) ID() zcl.AttrID                 { return StartRandomizeMinutesAttr }
+func (a StartRandomizeMinutes) Cluster() zcl.ClusterID         { return DemandResponseAndLoadControlID }
 func (a *StartRandomizeMinutes) Value() *StartRandomizeMinutes { return a }
 func (a StartRandomizeMinutes) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -88,10 +75,12 @@ func (a StartRandomizeMinutes) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const StopRandomizeMinutesAttr zcl.AttrID = 2
+
 type StopRandomizeMinutes zcl.Zu8
 
-func (a StopRandomizeMinutes) ID() zcl.AttrID                { return 2 }
-func (a StopRandomizeMinutes) Cluster() zcl.ClusterID        { return DemandResponseAndLoadControlCluster }
+func (a StopRandomizeMinutes) ID() zcl.AttrID                { return StopRandomizeMinutesAttr }
+func (a StopRandomizeMinutes) Cluster() zcl.ClusterID        { return DemandResponseAndLoadControlID }
 func (a *StopRandomizeMinutes) Value() *StopRandomizeMinutes { return a }
 func (a StopRandomizeMinutes) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -113,10 +102,12 @@ func (a StopRandomizeMinutes) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const DeviceClassValueAttr zcl.AttrID = 3
+
 type DeviceClassValue zcl.Zu16
 
-func (a DeviceClassValue) ID() zcl.AttrID            { return 3 }
-func (a DeviceClassValue) Cluster() zcl.ClusterID    { return DemandResponseAndLoadControlCluster }
+func (a DeviceClassValue) ID() zcl.AttrID            { return DeviceClassValueAttr }
+func (a DeviceClassValue) Cluster() zcl.ClusterID    { return DemandResponseAndLoadControlID }
 func (a *DeviceClassValue) Value() *DeviceClassValue { return a }
 func (a DeviceClassValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

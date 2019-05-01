@@ -8,61 +8,43 @@ import (
 )
 
 // Basic
-// Attributes for determining basic information about a device, setting user device information
-// such as description of location, and enabling a device.
-//
+const BasicID zcl.ClusterID = 0
 
-func NewBasicServer(profile zcl.ProfileID) *BasicServer { return &BasicServer{p: profile} }
-func NewBasicClient(profile zcl.ProfileID) *BasicClient { return &BasicClient{p: profile} }
-
-const BasicCluster zcl.ClusterID = 0
-
-type BasicServer struct {
-	p zcl.ProfileID
-
-	ClusterRevision     *ClusterRevision
-	ZclVersion          *ZclVersion
-	ApplicationVersion  *ApplicationVersion
-	StackVersion        *StackVersion
-	HwVersion           *HwVersion
-	ManufacturerName    *ManufacturerName
-	ModelIdentifier     *ModelIdentifier
-	DateCode            *DateCode
-	PowerSource         *PowerSource
-	LocationDescription *LocationDescription
-	PhysicalEnvironment *PhysicalEnvironment
-	DeviceEnabled       *DeviceEnabled
-	AlarmMask           *AlarmMask
-	DisableLocalConfig  *DisableLocalConfig
-	SwBuildId           *SwBuildId
-	Unknown1            *Unknown1
-	Unknown2            *Unknown2
-	ProductCode         *ProductCode
-	XiaomiSensitivity   *XiaomiSensitivity
-	XiaomiDisconnect1   *XiaomiDisconnect1
-	XiaomiDisconnect2   *XiaomiDisconnect2
-	Sensitivity         *Sensitivity
-	Configuration       *Configuration
-	Usertest            *Usertest
-	LedIndication       *LedIndication
+var BasicCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		ResetToFactoryDefaultsCommand: func() zcl.Command { return new(ResetToFactoryDefaults) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		ClusterRevisionAttr:     func() zcl.Attr { return new(ClusterRevision) },
+		ZclVersionAttr:          func() zcl.Attr { return new(ZclVersion) },
+		ApplicationVersionAttr:  func() zcl.Attr { return new(ApplicationVersion) },
+		StackVersionAttr:        func() zcl.Attr { return new(StackVersion) },
+		HwVersionAttr:           func() zcl.Attr { return new(HwVersion) },
+		ManufacturerNameAttr:    func() zcl.Attr { return new(ManufacturerName) },
+		ModelIdentifierAttr:     func() zcl.Attr { return new(ModelIdentifier) },
+		DateCodeAttr:            func() zcl.Attr { return new(DateCode) },
+		PowerSourceAttr:         func() zcl.Attr { return new(PowerSource) },
+		LocationDescriptionAttr: func() zcl.Attr { return new(LocationDescription) },
+		PhysicalEnvironmentAttr: func() zcl.Attr { return new(PhysicalEnvironment) },
+		DeviceEnabledAttr:       func() zcl.Attr { return new(DeviceEnabled) },
+		AlarmMaskAttr:           func() zcl.Attr { return new(AlarmMask) },
+		DisableLocalConfigAttr:  func() zcl.Attr { return new(DisableLocalConfig) },
+		SwBuildIdAttr:           func() zcl.Attr { return new(SwBuildId) },
+		Unknown1Attr:            func() zcl.Attr { return new(Unknown1) },
+		Unknown2Attr:            func() zcl.Attr { return new(Unknown2) },
+		ProductCodeAttr:         func() zcl.Attr { return new(ProductCode) },
+		XiaomiSensitivityAttr:   func() zcl.Attr { return new(XiaomiSensitivity) },
+		XiaomiDisconnect1Attr:   func() zcl.Attr { return new(XiaomiDisconnect1) },
+		XiaomiDisconnect2Attr:   func() zcl.Attr { return new(XiaomiDisconnect2) },
+		SensitivityAttr:         func() zcl.Attr { return new(Sensitivity) },
+		ConfigurationAttr:       func() zcl.Attr { return new(Configuration) },
+		UsertestAttr:            func() zcl.Attr { return new(Usertest) },
+		LedIndicationAttr:       func() zcl.Attr { return new(LedIndication) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *BasicServer) ResetToFactoryDefaults() *ResetToFactoryDefaults {
-	return new(ResetToFactoryDefaults)
-}
-
-type BasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var BasicServer = map[zcl.CommandID]func() zcl.Command{
-    ResetToFactoryDefaultsID: func() zcl.Command { return new(ResetToFactoryDefaults) },
-}
-
-var BasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type ResetToFactoryDefaults struct {
 }
@@ -78,7 +60,7 @@ func (v ResetToFactoryDefaults) ID() zcl.CommandID {
 }
 
 func (v ResetToFactoryDefaults) Cluster() zcl.ClusterID {
-	return BasicCluster
+	return BasicID
 }
 
 func (v ResetToFactoryDefaults) MnfCode() []byte {
@@ -93,10 +75,12 @@ func (v *ResetToFactoryDefaults) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const ClusterRevisionAttr zcl.AttrID = 65533
+
 type ClusterRevision zcl.Zu16
 
-func (a ClusterRevision) ID() zcl.AttrID           { return 65533 }
-func (a ClusterRevision) Cluster() zcl.ClusterID   { return BasicCluster }
+func (a ClusterRevision) ID() zcl.AttrID           { return ClusterRevisionAttr }
+func (a ClusterRevision) Cluster() zcl.ClusterID   { return BasicID }
 func (a *ClusterRevision) Value() *ClusterRevision { return a }
 func (a ClusterRevision) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -118,10 +102,12 @@ func (a ClusterRevision) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ZclVersionAttr zcl.AttrID = 0
+
 type ZclVersion zcl.Zu8
 
-func (a ZclVersion) ID() zcl.AttrID         { return 0 }
-func (a ZclVersion) Cluster() zcl.ClusterID { return BasicCluster }
+func (a ZclVersion) ID() zcl.AttrID         { return ZclVersionAttr }
+func (a ZclVersion) Cluster() zcl.ClusterID { return BasicID }
 func (a *ZclVersion) Value() *ZclVersion    { return a }
 func (a ZclVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -143,10 +129,12 @@ func (a ZclVersion) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const ApplicationVersionAttr zcl.AttrID = 1
+
 type ApplicationVersion zcl.Zu8
 
-func (a ApplicationVersion) ID() zcl.AttrID              { return 1 }
-func (a ApplicationVersion) Cluster() zcl.ClusterID      { return BasicCluster }
+func (a ApplicationVersion) ID() zcl.AttrID              { return ApplicationVersionAttr }
+func (a ApplicationVersion) Cluster() zcl.ClusterID      { return BasicID }
 func (a *ApplicationVersion) Value() *ApplicationVersion { return a }
 func (a ApplicationVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -168,10 +156,12 @@ func (a ApplicationVersion) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const StackVersionAttr zcl.AttrID = 2
+
 type StackVersion zcl.Zu8
 
-func (a StackVersion) ID() zcl.AttrID         { return 2 }
-func (a StackVersion) Cluster() zcl.ClusterID { return BasicCluster }
+func (a StackVersion) ID() zcl.AttrID         { return StackVersionAttr }
+func (a StackVersion) Cluster() zcl.ClusterID { return BasicID }
 func (a *StackVersion) Value() *StackVersion  { return a }
 func (a StackVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -193,10 +183,12 @@ func (a StackVersion) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const HwVersionAttr zcl.AttrID = 3
+
 type HwVersion zcl.Zu8
 
-func (a HwVersion) ID() zcl.AttrID         { return 3 }
-func (a HwVersion) Cluster() zcl.ClusterID { return BasicCluster }
+func (a HwVersion) ID() zcl.AttrID         { return HwVersionAttr }
+func (a HwVersion) Cluster() zcl.ClusterID { return BasicID }
 func (a *HwVersion) Value() *HwVersion     { return a }
 func (a HwVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -218,10 +210,12 @@ func (a HwVersion) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const ManufacturerNameAttr zcl.AttrID = 4
+
 type ManufacturerName zcl.Zcstring
 
-func (a ManufacturerName) ID() zcl.AttrID            { return 4 }
-func (a ManufacturerName) Cluster() zcl.ClusterID    { return BasicCluster }
+func (a ManufacturerName) ID() zcl.AttrID            { return ManufacturerNameAttr }
+func (a ManufacturerName) Cluster() zcl.ClusterID    { return BasicID }
 func (a *ManufacturerName) Value() *ManufacturerName { return a }
 func (a ManufacturerName) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -243,10 +237,12 @@ func (a ManufacturerName) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const ModelIdentifierAttr zcl.AttrID = 5
+
 type ModelIdentifier zcl.Zcstring
 
-func (a ModelIdentifier) ID() zcl.AttrID           { return 5 }
-func (a ModelIdentifier) Cluster() zcl.ClusterID   { return BasicCluster }
+func (a ModelIdentifier) ID() zcl.AttrID           { return ModelIdentifierAttr }
+func (a ModelIdentifier) Cluster() zcl.ClusterID   { return BasicID }
 func (a *ModelIdentifier) Value() *ModelIdentifier { return a }
 func (a ModelIdentifier) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -268,10 +264,12 @@ func (a ModelIdentifier) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const DateCodeAttr zcl.AttrID = 6
+
 type DateCode zcl.Zcstring
 
-func (a DateCode) ID() zcl.AttrID         { return 6 }
-func (a DateCode) Cluster() zcl.ClusterID { return BasicCluster }
+func (a DateCode) ID() zcl.AttrID         { return DateCodeAttr }
+func (a DateCode) Cluster() zcl.ClusterID { return BasicID }
 func (a *DateCode) Value() *DateCode      { return a }
 func (a DateCode) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -293,10 +291,12 @@ func (a DateCode) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const PowerSourceAttr zcl.AttrID = 7
+
 type PowerSource zcl.Zenum8
 
-func (a PowerSource) ID() zcl.AttrID         { return 7 }
-func (a PowerSource) Cluster() zcl.ClusterID { return BasicCluster }
+func (a PowerSource) ID() zcl.AttrID         { return PowerSourceAttr }
+func (a PowerSource) Cluster() zcl.ClusterID { return BasicID }
 func (a *PowerSource) Value() *PowerSource   { return a }
 func (a PowerSource) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -432,10 +432,12 @@ func (a PowerSource) IsEmergencyMainsAndTransferSwitchWithBatteryBackup() bool {
 // SetEmergencyMainsAndTransferSwitchWithBatteryBackup sets PowerSource to Emergency mains and transfer switch with battery backup (0x86)
 func (a *PowerSource) SetEmergencyMainsAndTransferSwitchWithBatteryBackup() { *a = 0x86 }
 
+const LocationDescriptionAttr zcl.AttrID = 16
+
 type LocationDescription zcl.Zcstring
 
-func (a LocationDescription) ID() zcl.AttrID               { return 16 }
-func (a LocationDescription) Cluster() zcl.ClusterID       { return BasicCluster }
+func (a LocationDescription) ID() zcl.AttrID               { return LocationDescriptionAttr }
+func (a LocationDescription) Cluster() zcl.ClusterID       { return BasicID }
 func (a *LocationDescription) Value() *LocationDescription { return a }
 func (a LocationDescription) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -457,10 +459,12 @@ func (a LocationDescription) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const PhysicalEnvironmentAttr zcl.AttrID = 17
+
 type PhysicalEnvironment zcl.Zenum8
 
-func (a PhysicalEnvironment) ID() zcl.AttrID               { return 17 }
-func (a PhysicalEnvironment) Cluster() zcl.ClusterID       { return BasicCluster }
+func (a PhysicalEnvironment) ID() zcl.AttrID               { return PhysicalEnvironmentAttr }
+func (a PhysicalEnvironment) Cluster() zcl.ClusterID       { return BasicID }
 func (a *PhysicalEnvironment) Value() *PhysicalEnvironment { return a }
 func (a PhysicalEnvironment) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1340,10 +1344,12 @@ func (a PhysicalEnvironment) IsUnknownEnvironment() bool { return a == 0xFF }
 // SetUnknownEnvironment sets PhysicalEnvironment to Unknown Environment (0xFF)
 func (a *PhysicalEnvironment) SetUnknownEnvironment() { *a = 0xFF }
 
+const DeviceEnabledAttr zcl.AttrID = 18
+
 type DeviceEnabled zcl.Zbool
 
-func (a DeviceEnabled) ID() zcl.AttrID         { return 18 }
-func (a DeviceEnabled) Cluster() zcl.ClusterID { return BasicCluster }
+func (a DeviceEnabled) ID() zcl.AttrID         { return DeviceEnabledAttr }
+func (a DeviceEnabled) Cluster() zcl.ClusterID { return BasicID }
 func (a *DeviceEnabled) Value() *DeviceEnabled { return a }
 func (a DeviceEnabled) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -1365,10 +1371,12 @@ func (a DeviceEnabled) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const AlarmMaskAttr zcl.AttrID = 19
+
 type AlarmMask zcl.Zbmp8
 
-func (a AlarmMask) ID() zcl.AttrID         { return 19 }
-func (a AlarmMask) Cluster() zcl.ClusterID { return BasicCluster }
+func (a AlarmMask) ID() zcl.AttrID         { return AlarmMaskAttr }
+func (a AlarmMask) Cluster() zcl.ClusterID { return BasicID }
 func (a *AlarmMask) Value() *AlarmMask     { return a }
 func (a AlarmMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -1412,10 +1420,12 @@ func (a *AlarmMask) SetGeneralSoftwareFault(b bool) {
 	*a = AlarmMask(zcl.BitmapSet([]byte(*a), 1, b))
 }
 
+const DisableLocalConfigAttr zcl.AttrID = 20
+
 type DisableLocalConfig zcl.Zbmp8
 
-func (a DisableLocalConfig) ID() zcl.AttrID              { return 20 }
-func (a DisableLocalConfig) Cluster() zcl.ClusterID      { return BasicCluster }
+func (a DisableLocalConfig) ID() zcl.AttrID              { return DisableLocalConfigAttr }
+func (a DisableLocalConfig) Cluster() zcl.ClusterID      { return BasicID }
 func (a *DisableLocalConfig) Value() *DisableLocalConfig { return a }
 func (a DisableLocalConfig) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -1459,10 +1469,12 @@ func (a *DisableLocalConfig) SetDisableDeviceConfiguration(b bool) {
 	*a = DisableLocalConfig(zcl.BitmapSet([]byte(*a), 1, b))
 }
 
+const SwBuildIdAttr zcl.AttrID = 16384
+
 type SwBuildId zcl.Zcstring
 
-func (a SwBuildId) ID() zcl.AttrID         { return 16384 }
-func (a SwBuildId) Cluster() zcl.ClusterID { return BasicCluster }
+func (a SwBuildId) ID() zcl.AttrID         { return SwBuildIdAttr }
+func (a SwBuildId) Cluster() zcl.ClusterID { return BasicID }
 func (a *SwBuildId) Value() *SwBuildId     { return a }
 func (a SwBuildId) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -1484,10 +1496,12 @@ func (a SwBuildId) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const Unknown1Attr zcl.AttrID = 8
+
 type Unknown1 zcl.Zenum8
 
-func (a Unknown1) ID() zcl.AttrID         { return 8 }
-func (a Unknown1) Cluster() zcl.ClusterID { return BasicCluster }
+func (a Unknown1) ID() zcl.AttrID         { return Unknown1Attr }
+func (a Unknown1) Cluster() zcl.ClusterID { return BasicID }
 func (a *Unknown1) Value() *Unknown1      { return a }
 func (a Unknown1) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1509,10 +1523,12 @@ func (a Unknown1) String() string {
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
+const Unknown2Attr zcl.AttrID = 9
+
 type Unknown2 zcl.Zenum8
 
-func (a Unknown2) ID() zcl.AttrID         { return 9 }
-func (a Unknown2) Cluster() zcl.ClusterID { return BasicCluster }
+func (a Unknown2) ID() zcl.AttrID         { return Unknown2Attr }
+func (a Unknown2) Cluster() zcl.ClusterID { return BasicID }
 func (a *Unknown2) Value() *Unknown2      { return a }
 func (a Unknown2) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1534,10 +1550,12 @@ func (a Unknown2) String() string {
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
+const ProductCodeAttr zcl.AttrID = 10
+
 type ProductCode zcl.Zostring
 
-func (a ProductCode) ID() zcl.AttrID         { return 10 }
-func (a ProductCode) Cluster() zcl.ClusterID { return BasicCluster }
+func (a ProductCode) ID() zcl.AttrID         { return ProductCodeAttr }
+func (a ProductCode) Cluster() zcl.ClusterID { return BasicID }
 func (a *ProductCode) Value() *ProductCode   { return a }
 func (a ProductCode) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()
@@ -1559,10 +1577,12 @@ func (a ProductCode) String() string {
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
+const XiaomiSensitivityAttr zcl.AttrID = 65293
+
 type XiaomiSensitivity zcl.Zu8
 
-func (a XiaomiSensitivity) ID() zcl.AttrID             { return 65293 }
-func (a XiaomiSensitivity) Cluster() zcl.ClusterID     { return BasicCluster }
+func (a XiaomiSensitivity) ID() zcl.AttrID             { return XiaomiSensitivityAttr }
+func (a XiaomiSensitivity) Cluster() zcl.ClusterID     { return BasicID }
 func (a *XiaomiSensitivity) Value() *XiaomiSensitivity { return a }
 func (a XiaomiSensitivity) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1584,10 +1604,12 @@ func (a XiaomiSensitivity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const XiaomiDisconnect1Attr zcl.AttrID = 65314
+
 type XiaomiDisconnect1 zcl.Zu8
 
-func (a XiaomiDisconnect1) ID() zcl.AttrID             { return 65314 }
-func (a XiaomiDisconnect1) Cluster() zcl.ClusterID     { return BasicCluster }
+func (a XiaomiDisconnect1) ID() zcl.AttrID             { return XiaomiDisconnect1Attr }
+func (a XiaomiDisconnect1) Cluster() zcl.ClusterID     { return BasicID }
 func (a *XiaomiDisconnect1) Value() *XiaomiDisconnect1 { return a }
 func (a XiaomiDisconnect1) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1609,10 +1631,12 @@ func (a XiaomiDisconnect1) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
+const XiaomiDisconnect2Attr zcl.AttrID = 65315
+
 type XiaomiDisconnect2 zcl.Zu8
 
-func (a XiaomiDisconnect2) ID() zcl.AttrID             { return 65315 }
-func (a XiaomiDisconnect2) Cluster() zcl.ClusterID     { return BasicCluster }
+func (a XiaomiDisconnect2) ID() zcl.AttrID             { return XiaomiDisconnect2Attr }
+func (a XiaomiDisconnect2) Cluster() zcl.ClusterID     { return BasicID }
 func (a *XiaomiDisconnect2) Value() *XiaomiDisconnect2 { return a }
 func (a XiaomiDisconnect2) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1634,10 +1658,12 @@ func (a XiaomiDisconnect2) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
+const SensitivityAttr zcl.AttrID = 48
+
 type Sensitivity zcl.Zenum8
 
-func (a Sensitivity) ID() zcl.AttrID         { return 48 }
-func (a Sensitivity) Cluster() zcl.ClusterID { return BasicCluster }
+func (a Sensitivity) ID() zcl.AttrID         { return SensitivityAttr }
+func (a Sensitivity) Cluster() zcl.ClusterID { return BasicID }
 func (a *Sensitivity) Value() *Sensitivity   { return a }
 func (a Sensitivity) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1685,10 +1711,12 @@ func (a Sensitivity) IsMax() bool { return a == 0x02 }
 // SetMax sets Sensitivity to max (0x02)
 func (a *Sensitivity) SetMax() { *a = 0x02 }
 
+const ConfigurationAttr zcl.AttrID = 49
+
 type Configuration zcl.Zbmp16
 
-func (a Configuration) ID() zcl.AttrID         { return 49 }
-func (a Configuration) Cluster() zcl.ClusterID { return BasicCluster }
+func (a Configuration) ID() zcl.AttrID         { return ConfigurationAttr }
+func (a Configuration) Cluster() zcl.ClusterID { return BasicID }
 func (a *Configuration) Value() *Configuration { return a }
 func (a Configuration) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp16(a).MarshalZcl()
@@ -1742,10 +1770,12 @@ func (a *Configuration) SetTouchlinkEnabled2(b bool) {
 	*a = Configuration(zcl.BitmapSet([]byte(*a), 3, b))
 }
 
+const UsertestAttr zcl.AttrID = 50
+
 type Usertest zcl.Zbool
 
-func (a Usertest) ID() zcl.AttrID         { return 50 }
-func (a Usertest) Cluster() zcl.ClusterID { return BasicCluster }
+func (a Usertest) ID() zcl.AttrID         { return UsertestAttr }
+func (a Usertest) Cluster() zcl.ClusterID { return BasicID }
 func (a *Usertest) Value() *Usertest      { return a }
 func (a Usertest) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -1767,10 +1797,12 @@ func (a Usertest) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const LedIndicationAttr zcl.AttrID = 51
+
 type LedIndication zcl.Zbool
 
-func (a LedIndication) ID() zcl.AttrID         { return 51 }
-func (a LedIndication) Cluster() zcl.ClusterID { return BasicCluster }
+func (a LedIndication) ID() zcl.AttrID         { return LedIndicationAttr }
+func (a LedIndication) Cluster() zcl.ClusterID { return BasicID }
 func (a *LedIndication) Value() *LedIndication { return a }
 func (a LedIndication) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()

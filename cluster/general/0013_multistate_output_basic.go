@@ -5,41 +5,27 @@ import (
 )
 
 // MultistateOutputBasic
+const MultistateOutputBasicID zcl.ClusterID = 19
 
-func NewMultistateOutputBasicServer(profile zcl.ProfileID) *MultistateOutputBasicServer {
-	return &MultistateOutputBasicServer{p: profile}
-}
-func NewMultistateOutputBasicClient(profile zcl.ProfileID) *MultistateOutputBasicClient {
-	return &MultistateOutputBasicClient{p: profile}
-}
-
-const MultistateOutputBasicCluster zcl.ClusterID = 19
-
-type MultistateOutputBasicServer struct {
-	p zcl.ProfileID
-
-	MultiOutputNumberOfStates *MultiOutputNumberOfStates
-	MultiOutputOutOfService   *MultiOutputOutOfService
-	MultiOutputPresentValue   *MultiOutputPresentValue
-	MultiOutputStatusFlags    *MultiOutputStatusFlags
+var MultistateOutputBasicCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MultiOutputNumberOfStatesAttr: func() zcl.Attr { return new(MultiOutputNumberOfStates) },
+		MultiOutputOutOfServiceAttr:   func() zcl.Attr { return new(MultiOutputOutOfService) },
+		MultiOutputPresentValueAttr:   func() zcl.Attr { return new(MultiOutputPresentValue) },
+		MultiOutputStatusFlagsAttr:    func() zcl.Attr { return new(MultiOutputStatusFlags) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type MultistateOutputBasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var MultistateOutputBasicServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var MultistateOutputBasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MultiOutputNumberOfStatesAttr zcl.AttrID = 74
 
 type MultiOutputNumberOfStates zcl.Zu16
 
-func (a MultiOutputNumberOfStates) ID() zcl.AttrID                     { return 74 }
-func (a MultiOutputNumberOfStates) Cluster() zcl.ClusterID             { return MultistateOutputBasicCluster }
+func (a MultiOutputNumberOfStates) ID() zcl.AttrID                     { return MultiOutputNumberOfStatesAttr }
+func (a MultiOutputNumberOfStates) Cluster() zcl.ClusterID             { return MultistateOutputBasicID }
 func (a *MultiOutputNumberOfStates) Value() *MultiOutputNumberOfStates { return a }
 func (a MultiOutputNumberOfStates) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -61,10 +47,12 @@ func (a MultiOutputNumberOfStates) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MultiOutputOutOfServiceAttr zcl.AttrID = 81
+
 type MultiOutputOutOfService zcl.Zbool
 
-func (a MultiOutputOutOfService) ID() zcl.AttrID                   { return 81 }
-func (a MultiOutputOutOfService) Cluster() zcl.ClusterID           { return MultistateOutputBasicCluster }
+func (a MultiOutputOutOfService) ID() zcl.AttrID                   { return MultiOutputOutOfServiceAttr }
+func (a MultiOutputOutOfService) Cluster() zcl.ClusterID           { return MultistateOutputBasicID }
 func (a *MultiOutputOutOfService) Value() *MultiOutputOutOfService { return a }
 func (a MultiOutputOutOfService) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -86,10 +74,12 @@ func (a MultiOutputOutOfService) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const MultiOutputPresentValueAttr zcl.AttrID = 85
+
 type MultiOutputPresentValue zcl.Zu16
 
-func (a MultiOutputPresentValue) ID() zcl.AttrID                   { return 85 }
-func (a MultiOutputPresentValue) Cluster() zcl.ClusterID           { return MultistateOutputBasicCluster }
+func (a MultiOutputPresentValue) ID() zcl.AttrID                   { return MultiOutputPresentValueAttr }
+func (a MultiOutputPresentValue) Cluster() zcl.ClusterID           { return MultistateOutputBasicID }
 func (a *MultiOutputPresentValue) Value() *MultiOutputPresentValue { return a }
 func (a MultiOutputPresentValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -111,10 +101,12 @@ func (a MultiOutputPresentValue) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MultiOutputStatusFlagsAttr zcl.AttrID = 111
+
 type MultiOutputStatusFlags zcl.Zbmp8
 
-func (a MultiOutputStatusFlags) ID() zcl.AttrID                  { return 111 }
-func (a MultiOutputStatusFlags) Cluster() zcl.ClusterID          { return MultistateOutputBasicCluster }
+func (a MultiOutputStatusFlags) ID() zcl.AttrID                  { return MultiOutputStatusFlagsAttr }
+func (a MultiOutputStatusFlags) Cluster() zcl.ClusterID          { return MultistateOutputBasicID }
 func (a *MultiOutputStatusFlags) Value() *MultiOutputStatusFlags { return a }
 func (a MultiOutputStatusFlags) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()

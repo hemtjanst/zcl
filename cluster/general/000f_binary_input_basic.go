@@ -6,41 +6,26 @@ import (
 )
 
 // BinaryInputBasic
-// The Binary Input (Basic) cluster provides an interface for reading the value of a binary measurement and accessing various characteristics of that measurement. The cluster is typically used to implement a sensor that measures a two-state physical quantity.
+const BinaryInputBasicID zcl.ClusterID = 15
 
-func NewBinaryInputBasicServer(profile zcl.ProfileID) *BinaryInputBasicServer {
-	return &BinaryInputBasicServer{p: profile}
-}
-func NewBinaryInputBasicClient(profile zcl.ProfileID) *BinaryInputBasicClient {
-	return &BinaryInputBasicClient{p: profile}
-}
-
-const BinaryInputBasicCluster zcl.ClusterID = 15
-
-type BinaryInputBasicServer struct {
-	p zcl.ProfileID
-
-	BinaryInputOutOfService *BinaryInputOutOfService
-	BinaryInputPresentValue *BinaryInputPresentValue
-	BinaryInputStatusFlags  *BinaryInputStatusFlags
+var BinaryInputBasicCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		BinaryInputOutOfServiceAttr: func() zcl.Attr { return new(BinaryInputOutOfService) },
+		BinaryInputPresentValueAttr: func() zcl.Attr { return new(BinaryInputPresentValue) },
+		BinaryInputStatusFlagsAttr:  func() zcl.Attr { return new(BinaryInputStatusFlags) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type BinaryInputBasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var BinaryInputBasicServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var BinaryInputBasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const BinaryInputOutOfServiceAttr zcl.AttrID = 81
 
 type BinaryInputOutOfService zcl.Zbool
 
-func (a BinaryInputOutOfService) ID() zcl.AttrID                   { return 81 }
-func (a BinaryInputOutOfService) Cluster() zcl.ClusterID           { return BinaryInputBasicCluster }
+func (a BinaryInputOutOfService) ID() zcl.AttrID                   { return BinaryInputOutOfServiceAttr }
+func (a BinaryInputOutOfService) Cluster() zcl.ClusterID           { return BinaryInputBasicID }
 func (a *BinaryInputOutOfService) Value() *BinaryInputOutOfService { return a }
 func (a BinaryInputOutOfService) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -62,10 +47,12 @@ func (a BinaryInputOutOfService) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const BinaryInputPresentValueAttr zcl.AttrID = 85
+
 type BinaryInputPresentValue zcl.Zbool
 
-func (a BinaryInputPresentValue) ID() zcl.AttrID                   { return 85 }
-func (a BinaryInputPresentValue) Cluster() zcl.ClusterID           { return BinaryInputBasicCluster }
+func (a BinaryInputPresentValue) ID() zcl.AttrID                   { return BinaryInputPresentValueAttr }
+func (a BinaryInputPresentValue) Cluster() zcl.ClusterID           { return BinaryInputBasicID }
 func (a *BinaryInputPresentValue) Value() *BinaryInputPresentValue { return a }
 func (a BinaryInputPresentValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -87,10 +74,12 @@ func (a BinaryInputPresentValue) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const BinaryInputStatusFlagsAttr zcl.AttrID = 111
+
 type BinaryInputStatusFlags zcl.Zbmp8
 
-func (a BinaryInputStatusFlags) ID() zcl.AttrID                  { return 111 }
-func (a BinaryInputStatusFlags) Cluster() zcl.ClusterID          { return BinaryInputBasicCluster }
+func (a BinaryInputStatusFlags) ID() zcl.AttrID                  { return BinaryInputStatusFlagsAttr }
+func (a BinaryInputStatusFlags) Cluster() zcl.ClusterID          { return BinaryInputBasicID }
 func (a *BinaryInputStatusFlags) Value() *BinaryInputStatusFlags { return a }
 func (a BinaryInputStatusFlags) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()

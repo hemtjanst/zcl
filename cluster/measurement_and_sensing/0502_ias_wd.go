@@ -6,35 +6,20 @@ import (
 )
 
 // IasWd
-// The IAS WD cluster provides an interface to the functionality of any Warning Device equipment of the IAS system. Using this cluster, a ZigBee enabled CIE device can access a ZigBee enabled IAS WD device and issue alarm warning indications (siren, strobe lighting, etc.) when a system alarm condition is detected.
+const IasWdID zcl.ClusterID = 1282
 
-func NewIasWdServer(profile zcl.ProfileID) *IasWdServer { return &IasWdServer{p: profile} }
-func NewIasWdClient(profile zcl.ProfileID) *IasWdClient { return &IasWdClient{p: profile} }
-
-const IasWdCluster zcl.ClusterID = 1282
-
-type IasWdServer struct {
-	p zcl.ProfileID
-
-	MaxDuration *MaxDuration
+var IasWdCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		StartWarningCommand: func() zcl.Command { return new(StartWarning) },
+		SquawkCommand:       func() zcl.Command { return new(Squawk) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MaxDurationAttr: func() zcl.Attr { return new(MaxDuration) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *IasWdServer) StartWarning() *StartWarning { return new(StartWarning) }
-func (s *IasWdServer) Squawk() *Squawk             { return new(Squawk) }
-
-type IasWdClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var IasWdServer = map[zcl.CommandID]func() zcl.Command{
-    StartWarningID: func() zcl.Command { return new(StartWarning) },
-    SquawkID: func() zcl.Command { return new(Squawk) },
-}
-
-var IasWdClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type StartWarning struct {
 	Options         zcl.Zbmp8
@@ -59,7 +44,7 @@ func (v StartWarning) ID() zcl.CommandID {
 }
 
 func (v StartWarning) Cluster() zcl.ClusterID {
-	return IasWdCluster
+	return IasWdID
 }
 
 func (v StartWarning) MnfCode() []byte {
@@ -133,7 +118,7 @@ func (v Squawk) ID() zcl.CommandID {
 }
 
 func (v Squawk) Cluster() zcl.ClusterID {
-	return IasWdCluster
+	return IasWdID
 }
 
 func (v Squawk) MnfCode() []byte {
@@ -163,10 +148,12 @@ func (v *Squawk) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const MaxDurationAttr zcl.AttrID = 0
+
 type MaxDuration zcl.Zu16
 
-func (a MaxDuration) ID() zcl.AttrID         { return 0 }
-func (a MaxDuration) Cluster() zcl.ClusterID { return IasWdCluster }
+func (a MaxDuration) ID() zcl.AttrID         { return MaxDurationAttr }
+func (a MaxDuration) Cluster() zcl.ClusterID { return IasWdID }
 func (a *MaxDuration) Value() *MaxDuration   { return a }
 func (a MaxDuration) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

@@ -3,6 +3,7 @@ package codegen
 import (
 	"encoding/hex"
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -139,7 +140,7 @@ type Attr struct {
 	Default     Hex             `xml:"default,attr" toml:"default,omitempty" yaml:"default,omitempty" json:"default,omitempty"`
 	Required    string          `xml:"required,attr" toml:"required,omitempty" yaml:"required,omitempty" json:"required,omitempty"`
 	Report      bool            `xml:"-" toml:"report,omitempty" yaml:"report,omitempty" json:"report,omitempty"`
-	Scene       string          `xml:"-" toml:"scene,omitempty" yaml:"scene,omitempty" json:"scene,omitempty"`
+	Scene       Int             `xml:"-" toml:"scene,omitempty" yaml:"scene,omitempty" json:"scene,omitempty"`
 	Range       string          `xml:"range,attr" toml:"range,omitempty" yaml:"range,omitempty" json:"range,omitempty"`
 	MfCode      MfCode          `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
 	ShowAs      string          `xml:"showas,attr" toml:"showas,omitempty" yaml:"showas,omitempty" json:"showas,omitempty"`
@@ -169,6 +170,21 @@ type CmdAttr struct {
 	AttrSet []AttrSet `xml:"attribute-set"`
 	Attr    []Attr    `xml:"attribute" toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
 	Command []Command `xml:"command" toml:"cmd,omitempty" yaml:"cmd,omitempty" json:"cmd,omitempty"`
+}
+
+func (c CmdAttr) SceneAttr() []Attr {
+	var a []Attr
+
+	for _, attr := range c.Attr {
+		if attr.Scene.Valid() {
+			a = append(a, attr)
+		}
+	}
+	sort.Slice(a, func(i, j int) bool {
+		return a[i].Scene.Int() < a[j].Scene.Int()
+	})
+
+	return a
 }
 
 type Profile struct {
@@ -356,6 +372,20 @@ type Name string
 type Hex string
 type MfCode string
 type Length string
+type Int string
+
+func (i Int) Valid() bool {
+	if i == "" {
+		return false
+	}
+	_, err := strconv.Atoi(string(i))
+	return err == nil
+}
+
+func (i Int) Int() int {
+	v, _ := strconv.Atoi(string(i))
+	return v
+}
 
 func (l Length) Uint() uint {
 	v, _ := strconv.Atoi(string(l))

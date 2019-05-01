@@ -6,48 +6,33 @@ import (
 )
 
 // AnalogInputBasic
-// An interface for reading the value of an analog measurement and accessing various characteristics of that measurement.
+const AnalogInputBasicID zcl.ClusterID = 12
 
-func NewAnalogInputBasicServer(profile zcl.ProfileID) *AnalogInputBasicServer {
-	return &AnalogInputBasicServer{p: profile}
-}
-func NewAnalogInputBasicClient(profile zcl.ProfileID) *AnalogInputBasicClient {
-	return &AnalogInputBasicClient{p: profile}
-}
-
-const AnalogInputBasicCluster zcl.ClusterID = 12
-
-type AnalogInputBasicServer struct {
-	p zcl.ProfileID
-
-	AnalogInputDescription      *AnalogInputDescription
-	AnalogInputMaxPresentValue  *AnalogInputMaxPresentValue
-	AnalogInputMinPresentValue  *AnalogInputMinPresentValue
-	AnalogInputOutOfService     *AnalogInputOutOfService
-	AnalogInputPresentValue     *AnalogInputPresentValue
-	AnalogInputReliability      *AnalogInputReliability
-	AnalogInputResolution       *AnalogInputResolution
-	AnalogInputStatusFlags      *AnalogInputStatusFlags
-	AnalogInputEngineeringUnits *AnalogInputEngineeringUnits
-	AnalogInputApplicationType  *AnalogInputApplicationType
+var AnalogInputBasicCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		AnalogInputDescriptionAttr:      func() zcl.Attr { return new(AnalogInputDescription) },
+		AnalogInputMaxPresentValueAttr:  func() zcl.Attr { return new(AnalogInputMaxPresentValue) },
+		AnalogInputMinPresentValueAttr:  func() zcl.Attr { return new(AnalogInputMinPresentValue) },
+		AnalogInputOutOfServiceAttr:     func() zcl.Attr { return new(AnalogInputOutOfService) },
+		AnalogInputPresentValueAttr:     func() zcl.Attr { return new(AnalogInputPresentValue) },
+		AnalogInputReliabilityAttr:      func() zcl.Attr { return new(AnalogInputReliability) },
+		AnalogInputResolutionAttr:       func() zcl.Attr { return new(AnalogInputResolution) },
+		AnalogInputStatusFlagsAttr:      func() zcl.Attr { return new(AnalogInputStatusFlags) },
+		AnalogInputEngineeringUnitsAttr: func() zcl.Attr { return new(AnalogInputEngineeringUnits) },
+		AnalogInputApplicationTypeAttr:  func() zcl.Attr { return new(AnalogInputApplicationType) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type AnalogInputBasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var AnalogInputBasicServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var AnalogInputBasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const AnalogInputDescriptionAttr zcl.AttrID = 28
 
 type AnalogInputDescription zcl.Zcstring
 
-func (a AnalogInputDescription) ID() zcl.AttrID                  { return 28 }
-func (a AnalogInputDescription) Cluster() zcl.ClusterID          { return AnalogInputBasicCluster }
+func (a AnalogInputDescription) ID() zcl.AttrID                  { return AnalogInputDescriptionAttr }
+func (a AnalogInputDescription) Cluster() zcl.ClusterID          { return AnalogInputBasicID }
 func (a *AnalogInputDescription) Value() *AnalogInputDescription { return a }
 func (a AnalogInputDescription) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -69,10 +54,12 @@ func (a AnalogInputDescription) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const AnalogInputMaxPresentValueAttr zcl.AttrID = 65
+
 type AnalogInputMaxPresentValue zcl.Zfloat
 
-func (a AnalogInputMaxPresentValue) ID() zcl.AttrID                      { return 65 }
-func (a AnalogInputMaxPresentValue) Cluster() zcl.ClusterID              { return AnalogInputBasicCluster }
+func (a AnalogInputMaxPresentValue) ID() zcl.AttrID                      { return AnalogInputMaxPresentValueAttr }
+func (a AnalogInputMaxPresentValue) Cluster() zcl.ClusterID              { return AnalogInputBasicID }
 func (a *AnalogInputMaxPresentValue) Value() *AnalogInputMaxPresentValue { return a }
 func (a AnalogInputMaxPresentValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zfloat(a).MarshalZcl()
@@ -94,10 +81,12 @@ func (a AnalogInputMaxPresentValue) String() string {
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
+const AnalogInputMinPresentValueAttr zcl.AttrID = 66
+
 type AnalogInputMinPresentValue zcl.Zfloat
 
-func (a AnalogInputMinPresentValue) ID() zcl.AttrID                      { return 66 }
-func (a AnalogInputMinPresentValue) Cluster() zcl.ClusterID              { return AnalogInputBasicCluster }
+func (a AnalogInputMinPresentValue) ID() zcl.AttrID                      { return AnalogInputMinPresentValueAttr }
+func (a AnalogInputMinPresentValue) Cluster() zcl.ClusterID              { return AnalogInputBasicID }
 func (a *AnalogInputMinPresentValue) Value() *AnalogInputMinPresentValue { return a }
 func (a AnalogInputMinPresentValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zfloat(a).MarshalZcl()
@@ -119,10 +108,12 @@ func (a AnalogInputMinPresentValue) String() string {
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
+const AnalogInputOutOfServiceAttr zcl.AttrID = 81
+
 type AnalogInputOutOfService zcl.Zbool
 
-func (a AnalogInputOutOfService) ID() zcl.AttrID                   { return 81 }
-func (a AnalogInputOutOfService) Cluster() zcl.ClusterID           { return AnalogInputBasicCluster }
+func (a AnalogInputOutOfService) ID() zcl.AttrID                   { return AnalogInputOutOfServiceAttr }
+func (a AnalogInputOutOfService) Cluster() zcl.ClusterID           { return AnalogInputBasicID }
 func (a *AnalogInputOutOfService) Value() *AnalogInputOutOfService { return a }
 func (a AnalogInputOutOfService) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -144,10 +135,12 @@ func (a AnalogInputOutOfService) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const AnalogInputPresentValueAttr zcl.AttrID = 85
+
 type AnalogInputPresentValue zcl.Zfloat
 
-func (a AnalogInputPresentValue) ID() zcl.AttrID                   { return 85 }
-func (a AnalogInputPresentValue) Cluster() zcl.ClusterID           { return AnalogInputBasicCluster }
+func (a AnalogInputPresentValue) ID() zcl.AttrID                   { return AnalogInputPresentValueAttr }
+func (a AnalogInputPresentValue) Cluster() zcl.ClusterID           { return AnalogInputBasicID }
 func (a *AnalogInputPresentValue) Value() *AnalogInputPresentValue { return a }
 func (a AnalogInputPresentValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zfloat(a).MarshalZcl()
@@ -169,10 +162,12 @@ func (a AnalogInputPresentValue) String() string {
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
+const AnalogInputReliabilityAttr zcl.AttrID = 103
+
 type AnalogInputReliability zcl.Zenum8
 
-func (a AnalogInputReliability) ID() zcl.AttrID                  { return 103 }
-func (a AnalogInputReliability) Cluster() zcl.ClusterID          { return AnalogInputBasicCluster }
+func (a AnalogInputReliability) ID() zcl.AttrID                  { return AnalogInputReliabilityAttr }
+func (a AnalogInputReliability) Cluster() zcl.ClusterID          { return AnalogInputBasicID }
 func (a *AnalogInputReliability) Value() *AnalogInputReliability { return a }
 func (a AnalogInputReliability) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -194,10 +189,12 @@ func (a AnalogInputReliability) String() string {
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
+const AnalogInputResolutionAttr zcl.AttrID = 106
+
 type AnalogInputResolution zcl.Zfloat
 
-func (a AnalogInputResolution) ID() zcl.AttrID                 { return 106 }
-func (a AnalogInputResolution) Cluster() zcl.ClusterID         { return AnalogInputBasicCluster }
+func (a AnalogInputResolution) ID() zcl.AttrID                 { return AnalogInputResolutionAttr }
+func (a AnalogInputResolution) Cluster() zcl.ClusterID         { return AnalogInputBasicID }
 func (a *AnalogInputResolution) Value() *AnalogInputResolution { return a }
 func (a AnalogInputResolution) MarshalZcl() ([]byte, error) {
 	return zcl.Zfloat(a).MarshalZcl()
@@ -219,10 +216,12 @@ func (a AnalogInputResolution) String() string {
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
+const AnalogInputStatusFlagsAttr zcl.AttrID = 111
+
 type AnalogInputStatusFlags zcl.Zbmp8
 
-func (a AnalogInputStatusFlags) ID() zcl.AttrID                  { return 111 }
-func (a AnalogInputStatusFlags) Cluster() zcl.ClusterID          { return AnalogInputBasicCluster }
+func (a AnalogInputStatusFlags) ID() zcl.AttrID                  { return AnalogInputStatusFlagsAttr }
+func (a AnalogInputStatusFlags) Cluster() zcl.ClusterID          { return AnalogInputBasicID }
 func (a *AnalogInputStatusFlags) Value() *AnalogInputStatusFlags { return a }
 func (a AnalogInputStatusFlags) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -286,10 +285,12 @@ func (a *AnalogInputStatusFlags) SetOutOfService(b bool) {
 	*a = AnalogInputStatusFlags(zcl.BitmapSet([]byte(*a), 8, b))
 }
 
+const AnalogInputEngineeringUnitsAttr zcl.AttrID = 117
+
 type AnalogInputEngineeringUnits zcl.Zenum16
 
-func (a AnalogInputEngineeringUnits) ID() zcl.AttrID                       { return 117 }
-func (a AnalogInputEngineeringUnits) Cluster() zcl.ClusterID               { return AnalogInputBasicCluster }
+func (a AnalogInputEngineeringUnits) ID() zcl.AttrID                       { return AnalogInputEngineeringUnitsAttr }
+func (a AnalogInputEngineeringUnits) Cluster() zcl.ClusterID               { return AnalogInputBasicID }
 func (a *AnalogInputEngineeringUnits) Value() *AnalogInputEngineeringUnits { return a }
 func (a AnalogInputEngineeringUnits) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum16(a).MarshalZcl()
@@ -1833,10 +1834,12 @@ func (a AnalogInputEngineeringUnits) IsOther() bool { return a == 0x00FF }
 // SetOther sets AnalogInputEngineeringUnits to Other (0x00FF)
 func (a *AnalogInputEngineeringUnits) SetOther() { *a = 0x00FF }
 
+const AnalogInputApplicationTypeAttr zcl.AttrID = 256
+
 type AnalogInputApplicationType zcl.Zu32
 
-func (a AnalogInputApplicationType) ID() zcl.AttrID                      { return 256 }
-func (a AnalogInputApplicationType) Cluster() zcl.ClusterID              { return AnalogInputBasicCluster }
+func (a AnalogInputApplicationType) ID() zcl.AttrID                      { return AnalogInputApplicationTypeAttr }
+func (a AnalogInputApplicationType) Cluster() zcl.ClusterID              { return AnalogInputBasicID }
 func (a *AnalogInputApplicationType) Value() *AnalogInputApplicationType { return a }
 func (a AnalogInputApplicationType) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()

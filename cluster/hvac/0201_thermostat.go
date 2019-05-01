@@ -6,73 +6,55 @@ import (
 )
 
 // Thermostat
-// Thermostat control cluster attributes and commands.
+const ThermostatID zcl.ClusterID = 513
 
-func NewThermostatServer(profile zcl.ProfileID) *ThermostatServer {
-	return &ThermostatServer{p: profile}
+var ThermostatCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		SetpointRaiseLowerCommand: func() zcl.Command { return new(SetpointRaiseLower) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		LocalTemperatureAttr:                   func() zcl.Attr { return new(LocalTemperature) },
+		OutdoorTemperatureAttr:                 func() zcl.Attr { return new(OutdoorTemperature) },
+		OccupancyAttr:                          func() zcl.Attr { return new(Occupancy) },
+		AbsMinHeatSetpointLimitAttr:            func() zcl.Attr { return new(AbsMinHeatSetpointLimit) },
+		AbsMaxHeatSetpointLimitAttr:            func() zcl.Attr { return new(AbsMaxHeatSetpointLimit) },
+		AbsMinCoolSetpointLimitAttr:            func() zcl.Attr { return new(AbsMinCoolSetpointLimit) },
+		AbsMaxCoolSetpointLimitAttr:            func() zcl.Attr { return new(AbsMaxCoolSetpointLimit) },
+		PiCoolingDemandAttr:                    func() zcl.Attr { return new(PiCoolingDemand) },
+		PiHeatingDemandAttr:                    func() zcl.Attr { return new(PiHeatingDemand) },
+		HvacSystemTypeConfigurationAttr:        func() zcl.Attr { return new(HvacSystemTypeConfiguration) },
+		LocalTemperatureCalibrationAttr:        func() zcl.Attr { return new(LocalTemperatureCalibration) },
+		OccupiedCoolingSetpointAttr:            func() zcl.Attr { return new(OccupiedCoolingSetpoint) },
+		OccupiedHeatingSetpointAttr:            func() zcl.Attr { return new(OccupiedHeatingSetpoint) },
+		UnoccupiedCoolingSetpointAttr:          func() zcl.Attr { return new(UnoccupiedCoolingSetpoint) },
+		UnoccupiedHeatingSetpointAttr:          func() zcl.Attr { return new(UnoccupiedHeatingSetpoint) },
+		MinHeatSetpointLimitAttr:               func() zcl.Attr { return new(MinHeatSetpointLimit) },
+		MaxHeatSetpointLimitAttr:               func() zcl.Attr { return new(MaxHeatSetpointLimit) },
+		MinCoolSetpointLimitAttr:               func() zcl.Attr { return new(MinCoolSetpointLimit) },
+		MaxCoolSetpointLimitAttr:               func() zcl.Attr { return new(MaxCoolSetpointLimit) },
+		MinSetpointDeadBandAttr:                func() zcl.Attr { return new(MinSetpointDeadBand) },
+		RemoteSensingAttr:                      func() zcl.Attr { return new(RemoteSensing) },
+		ControlSequenceOfOperationAttr:         func() zcl.Attr { return new(ControlSequenceOfOperation) },
+		SystemModeAttr:                         func() zcl.Attr { return new(SystemMode) },
+		AlarmMaskAttr:                          func() zcl.Attr { return new(AlarmMask) },
+		ThermostatRunningModeAttr:              func() zcl.Attr { return new(ThermostatRunningMode) },
+		StartOfWeekAttr:                        func() zcl.Attr { return new(StartOfWeek) },
+		NumberOfWeeklyTransitionsAttr:          func() zcl.Attr { return new(NumberOfWeeklyTransitions) },
+		NumberOfDailTransitionsAttr:            func() zcl.Attr { return new(NumberOfDailTransitions) },
+		TemperatureSetpointHoldAttr:            func() zcl.Attr { return new(TemperatureSetpointHold) },
+		TemperatureSetpointHoldDurationAttr:    func() zcl.Attr { return new(TemperatureSetpointHoldDuration) },
+		ThermostatProgrammingOperationModeAttr: func() zcl.Attr { return new(ThermostatProgrammingOperationMode) },
+		ThermostatRunningStateAttr:             func() zcl.Attr { return new(ThermostatRunningState) },
+		TrvModeAttr:                            func() zcl.Attr { return new(TrvMode) },
+		SetValvePositionAttr:                   func() zcl.Attr { return new(SetValvePosition) },
+		ErrorsAttr:                             func() zcl.Attr { return new(Errors) },
+		CurrentTemperatureSetpointAttr:         func() zcl.Attr { return new(CurrentTemperatureSetpoint) },
+		HostFlagsAttr:                          func() zcl.Attr { return new(HostFlags) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewThermostatClient(profile zcl.ProfileID) *ThermostatClient {
-	return &ThermostatClient{p: profile}
-}
-
-const ThermostatCluster zcl.ClusterID = 513
-
-type ThermostatServer struct {
-	p zcl.ProfileID
-
-	LocalTemperature                   *LocalTemperature
-	OutdoorTemperature                 *OutdoorTemperature
-	Occupancy                          *Occupancy
-	AbsMinHeatSetpointLimit            *AbsMinHeatSetpointLimit
-	AbsMaxHeatSetpointLimit            *AbsMaxHeatSetpointLimit
-	AbsMinCoolSetpointLimit            *AbsMinCoolSetpointLimit
-	AbsMaxCoolSetpointLimit            *AbsMaxCoolSetpointLimit
-	PiCoolingDemand                    *PiCoolingDemand
-	PiHeatingDemand                    *PiHeatingDemand
-	HvacSystemTypeConfiguration        *HvacSystemTypeConfiguration
-	LocalTemperatureCalibration        *LocalTemperatureCalibration
-	OccupiedCoolingSetpoint            *OccupiedCoolingSetpoint
-	OccupiedHeatingSetpoint            *OccupiedHeatingSetpoint
-	UnoccupiedCoolingSetpoint          *UnoccupiedCoolingSetpoint
-	UnoccupiedHeatingSetpoint          *UnoccupiedHeatingSetpoint
-	MinHeatSetpointLimit               *MinHeatSetpointLimit
-	MaxHeatSetpointLimit               *MaxHeatSetpointLimit
-	MinCoolSetpointLimit               *MinCoolSetpointLimit
-	MaxCoolSetpointLimit               *MaxCoolSetpointLimit
-	MinSetpointDeadBand                *MinSetpointDeadBand
-	RemoteSensing                      *RemoteSensing
-	ControlSequenceOfOperation         *ControlSequenceOfOperation
-	SystemMode                         *SystemMode
-	AlarmMask                          *AlarmMask
-	ThermostatRunningMode              *ThermostatRunningMode
-	StartOfWeek                        *StartOfWeek
-	NumberOfWeeklyTransitions          *NumberOfWeeklyTransitions
-	NumberOfDailTransitions            *NumberOfDailTransitions
-	TemperatureSetpointHold            *TemperatureSetpointHold
-	TemperatureSetpointHoldDuration    *TemperatureSetpointHoldDuration
-	ThermostatProgrammingOperationMode *ThermostatProgrammingOperationMode
-	ThermostatRunningState             *ThermostatRunningState
-	TrvMode                            *TrvMode
-	SetValvePosition                   *SetValvePosition
-	Errors                             *Errors
-	CurrentTemperatureSetpoint         *CurrentTemperatureSetpoint
-	HostFlags                          *HostFlags
-}
-
-func (s *ThermostatServer) SetpointRaiseLower() *SetpointRaiseLower { return new(SetpointRaiseLower) }
-
-type ThermostatClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var ThermostatServer = map[zcl.CommandID]func() zcl.Command{
-    SetpointRaiseLowerID: func() zcl.Command { return new(SetpointRaiseLower) },
-}
-
-var ThermostatClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 // This command increases (or decreases) the setpoint(s) by amount, in steps of 0.1°C.
 type SetpointRaiseLower struct {
@@ -95,7 +77,7 @@ func (v SetpointRaiseLower) ID() zcl.CommandID {
 }
 
 func (v SetpointRaiseLower) Cluster() zcl.ClusterID {
-	return ThermostatCluster
+	return ThermostatID
 }
 
 func (v SetpointRaiseLower) MnfCode() []byte {
@@ -134,10 +116,12 @@ func (v *SetpointRaiseLower) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const LocalTemperatureAttr zcl.AttrID = 0
+
 type LocalTemperature zcl.Zs16
 
-func (a LocalTemperature) ID() zcl.AttrID            { return 0 }
-func (a LocalTemperature) Cluster() zcl.ClusterID    { return ThermostatCluster }
+func (a LocalTemperature) ID() zcl.AttrID            { return LocalTemperatureAttr }
+func (a LocalTemperature) Cluster() zcl.ClusterID    { return ThermostatID }
 func (a *LocalTemperature) Value() *LocalTemperature { return a }
 func (a LocalTemperature) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -159,10 +143,12 @@ func (a LocalTemperature) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const OutdoorTemperatureAttr zcl.AttrID = 1
+
 type OutdoorTemperature zcl.Zs16
 
-func (a OutdoorTemperature) ID() zcl.AttrID              { return 1 }
-func (a OutdoorTemperature) Cluster() zcl.ClusterID      { return ThermostatCluster }
+func (a OutdoorTemperature) ID() zcl.AttrID              { return OutdoorTemperatureAttr }
+func (a OutdoorTemperature) Cluster() zcl.ClusterID      { return ThermostatID }
 func (a *OutdoorTemperature) Value() *OutdoorTemperature { return a }
 func (a OutdoorTemperature) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -184,10 +170,12 @@ func (a OutdoorTemperature) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const OccupancyAttr zcl.AttrID = 2
+
 type Occupancy zcl.Zbmp8
 
-func (a Occupancy) ID() zcl.AttrID         { return 2 }
-func (a Occupancy) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a Occupancy) ID() zcl.AttrID         { return OccupancyAttr }
+func (a Occupancy) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *Occupancy) Value() *Occupancy     { return a }
 func (a Occupancy) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -209,10 +197,12 @@ func (a Occupancy) String() string {
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
+const AbsMinHeatSetpointLimitAttr zcl.AttrID = 3
+
 type AbsMinHeatSetpointLimit zcl.Zs16
 
-func (a AbsMinHeatSetpointLimit) ID() zcl.AttrID                   { return 3 }
-func (a AbsMinHeatSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a AbsMinHeatSetpointLimit) ID() zcl.AttrID                   { return AbsMinHeatSetpointLimitAttr }
+func (a AbsMinHeatSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *AbsMinHeatSetpointLimit) Value() *AbsMinHeatSetpointLimit { return a }
 func (a AbsMinHeatSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -234,10 +224,12 @@ func (a AbsMinHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AbsMaxHeatSetpointLimitAttr zcl.AttrID = 4
+
 type AbsMaxHeatSetpointLimit zcl.Zs16
 
-func (a AbsMaxHeatSetpointLimit) ID() zcl.AttrID                   { return 4 }
-func (a AbsMaxHeatSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a AbsMaxHeatSetpointLimit) ID() zcl.AttrID                   { return AbsMaxHeatSetpointLimitAttr }
+func (a AbsMaxHeatSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *AbsMaxHeatSetpointLimit) Value() *AbsMaxHeatSetpointLimit { return a }
 func (a AbsMaxHeatSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -259,10 +251,12 @@ func (a AbsMaxHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AbsMinCoolSetpointLimitAttr zcl.AttrID = 5
+
 type AbsMinCoolSetpointLimit zcl.Zs16
 
-func (a AbsMinCoolSetpointLimit) ID() zcl.AttrID                   { return 5 }
-func (a AbsMinCoolSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a AbsMinCoolSetpointLimit) ID() zcl.AttrID                   { return AbsMinCoolSetpointLimitAttr }
+func (a AbsMinCoolSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *AbsMinCoolSetpointLimit) Value() *AbsMinCoolSetpointLimit { return a }
 func (a AbsMinCoolSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -284,10 +278,12 @@ func (a AbsMinCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AbsMaxCoolSetpointLimitAttr zcl.AttrID = 6
+
 type AbsMaxCoolSetpointLimit zcl.Zs16
 
-func (a AbsMaxCoolSetpointLimit) ID() zcl.AttrID                   { return 6 }
-func (a AbsMaxCoolSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a AbsMaxCoolSetpointLimit) ID() zcl.AttrID                   { return AbsMaxCoolSetpointLimitAttr }
+func (a AbsMaxCoolSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *AbsMaxCoolSetpointLimit) Value() *AbsMaxCoolSetpointLimit { return a }
 func (a AbsMaxCoolSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -309,10 +305,12 @@ func (a AbsMaxCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const PiCoolingDemandAttr zcl.AttrID = 7
+
 type PiCoolingDemand zcl.Zu8
 
-func (a PiCoolingDemand) ID() zcl.AttrID           { return 7 }
-func (a PiCoolingDemand) Cluster() zcl.ClusterID   { return ThermostatCluster }
+func (a PiCoolingDemand) ID() zcl.AttrID           { return PiCoolingDemandAttr }
+func (a PiCoolingDemand) Cluster() zcl.ClusterID   { return ThermostatID }
 func (a *PiCoolingDemand) Value() *PiCoolingDemand { return a }
 func (a PiCoolingDemand) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -334,10 +332,12 @@ func (a PiCoolingDemand) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const PiHeatingDemandAttr zcl.AttrID = 8
+
 type PiHeatingDemand zcl.Zu8
 
-func (a PiHeatingDemand) ID() zcl.AttrID           { return 8 }
-func (a PiHeatingDemand) Cluster() zcl.ClusterID   { return ThermostatCluster }
+func (a PiHeatingDemand) ID() zcl.AttrID           { return PiHeatingDemandAttr }
+func (a PiHeatingDemand) Cluster() zcl.ClusterID   { return ThermostatID }
 func (a *PiHeatingDemand) Value() *PiHeatingDemand { return a }
 func (a PiHeatingDemand) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -359,10 +359,12 @@ func (a PiHeatingDemand) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const HvacSystemTypeConfigurationAttr zcl.AttrID = 9
+
 type HvacSystemTypeConfiguration zcl.Zbmp8
 
-func (a HvacSystemTypeConfiguration) ID() zcl.AttrID                       { return 9 }
-func (a HvacSystemTypeConfiguration) Cluster() zcl.ClusterID               { return ThermostatCluster }
+func (a HvacSystemTypeConfiguration) ID() zcl.AttrID                       { return HvacSystemTypeConfigurationAttr }
+func (a HvacSystemTypeConfiguration) Cluster() zcl.ClusterID               { return ThermostatID }
 func (a *HvacSystemTypeConfiguration) Value() *HvacSystemTypeConfiguration { return a }
 func (a HvacSystemTypeConfiguration) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -384,10 +386,12 @@ func (a HvacSystemTypeConfiguration) String() string {
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
+const LocalTemperatureCalibrationAttr zcl.AttrID = 16
+
 type LocalTemperatureCalibration zcl.Zs8
 
-func (a LocalTemperatureCalibration) ID() zcl.AttrID                       { return 16 }
-func (a LocalTemperatureCalibration) Cluster() zcl.ClusterID               { return ThermostatCluster }
+func (a LocalTemperatureCalibration) ID() zcl.AttrID                       { return LocalTemperatureCalibrationAttr }
+func (a LocalTemperatureCalibration) Cluster() zcl.ClusterID               { return ThermostatID }
 func (a *LocalTemperatureCalibration) Value() *LocalTemperatureCalibration { return a }
 func (a LocalTemperatureCalibration) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()
@@ -409,10 +413,12 @@ func (a LocalTemperatureCalibration) String() string {
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
+const OccupiedCoolingSetpointAttr zcl.AttrID = 17
+
 type OccupiedCoolingSetpoint zcl.Zs16
 
-func (a OccupiedCoolingSetpoint) ID() zcl.AttrID                   { return 17 }
-func (a OccupiedCoolingSetpoint) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a OccupiedCoolingSetpoint) ID() zcl.AttrID                   { return OccupiedCoolingSetpointAttr }
+func (a OccupiedCoolingSetpoint) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *OccupiedCoolingSetpoint) Value() *OccupiedCoolingSetpoint { return a }
 func (a OccupiedCoolingSetpoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -434,10 +440,12 @@ func (a OccupiedCoolingSetpoint) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const OccupiedHeatingSetpointAttr zcl.AttrID = 18
+
 type OccupiedHeatingSetpoint zcl.Zs16
 
-func (a OccupiedHeatingSetpoint) ID() zcl.AttrID                   { return 18 }
-func (a OccupiedHeatingSetpoint) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a OccupiedHeatingSetpoint) ID() zcl.AttrID                   { return OccupiedHeatingSetpointAttr }
+func (a OccupiedHeatingSetpoint) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *OccupiedHeatingSetpoint) Value() *OccupiedHeatingSetpoint { return a }
 func (a OccupiedHeatingSetpoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -459,10 +467,12 @@ func (a OccupiedHeatingSetpoint) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const UnoccupiedCoolingSetpointAttr zcl.AttrID = 19
+
 type UnoccupiedCoolingSetpoint zcl.Zs16
 
-func (a UnoccupiedCoolingSetpoint) ID() zcl.AttrID                     { return 19 }
-func (a UnoccupiedCoolingSetpoint) Cluster() zcl.ClusterID             { return ThermostatCluster }
+func (a UnoccupiedCoolingSetpoint) ID() zcl.AttrID                     { return UnoccupiedCoolingSetpointAttr }
+func (a UnoccupiedCoolingSetpoint) Cluster() zcl.ClusterID             { return ThermostatID }
 func (a *UnoccupiedCoolingSetpoint) Value() *UnoccupiedCoolingSetpoint { return a }
 func (a UnoccupiedCoolingSetpoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -484,10 +494,12 @@ func (a UnoccupiedCoolingSetpoint) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const UnoccupiedHeatingSetpointAttr zcl.AttrID = 20
+
 type UnoccupiedHeatingSetpoint zcl.Zs16
 
-func (a UnoccupiedHeatingSetpoint) ID() zcl.AttrID                     { return 20 }
-func (a UnoccupiedHeatingSetpoint) Cluster() zcl.ClusterID             { return ThermostatCluster }
+func (a UnoccupiedHeatingSetpoint) ID() zcl.AttrID                     { return UnoccupiedHeatingSetpointAttr }
+func (a UnoccupiedHeatingSetpoint) Cluster() zcl.ClusterID             { return ThermostatID }
 func (a *UnoccupiedHeatingSetpoint) Value() *UnoccupiedHeatingSetpoint { return a }
 func (a UnoccupiedHeatingSetpoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -509,10 +521,12 @@ func (a UnoccupiedHeatingSetpoint) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MinHeatSetpointLimitAttr zcl.AttrID = 21
+
 type MinHeatSetpointLimit zcl.Zs16
 
-func (a MinHeatSetpointLimit) ID() zcl.AttrID                { return 21 }
-func (a MinHeatSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatCluster }
+func (a MinHeatSetpointLimit) ID() zcl.AttrID                { return MinHeatSetpointLimitAttr }
+func (a MinHeatSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
 func (a *MinHeatSetpointLimit) Value() *MinHeatSetpointLimit { return a }
 func (a MinHeatSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -534,10 +548,12 @@ func (a MinHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MaxHeatSetpointLimitAttr zcl.AttrID = 22
+
 type MaxHeatSetpointLimit zcl.Zs16
 
-func (a MaxHeatSetpointLimit) ID() zcl.AttrID                { return 22 }
-func (a MaxHeatSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatCluster }
+func (a MaxHeatSetpointLimit) ID() zcl.AttrID                { return MaxHeatSetpointLimitAttr }
+func (a MaxHeatSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
 func (a *MaxHeatSetpointLimit) Value() *MaxHeatSetpointLimit { return a }
 func (a MaxHeatSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -559,10 +575,12 @@ func (a MaxHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MinCoolSetpointLimitAttr zcl.AttrID = 23
+
 type MinCoolSetpointLimit zcl.Zs16
 
-func (a MinCoolSetpointLimit) ID() zcl.AttrID                { return 23 }
-func (a MinCoolSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatCluster }
+func (a MinCoolSetpointLimit) ID() zcl.AttrID                { return MinCoolSetpointLimitAttr }
+func (a MinCoolSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
 func (a *MinCoolSetpointLimit) Value() *MinCoolSetpointLimit { return a }
 func (a MinCoolSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -584,10 +602,12 @@ func (a MinCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MaxCoolSetpointLimitAttr zcl.AttrID = 24
+
 type MaxCoolSetpointLimit zcl.Zs16
 
-func (a MaxCoolSetpointLimit) ID() zcl.AttrID                { return 24 }
-func (a MaxCoolSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatCluster }
+func (a MaxCoolSetpointLimit) ID() zcl.AttrID                { return MaxCoolSetpointLimitAttr }
+func (a MaxCoolSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
 func (a *MaxCoolSetpointLimit) Value() *MaxCoolSetpointLimit { return a }
 func (a MaxCoolSetpointLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -609,10 +629,12 @@ func (a MaxCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MinSetpointDeadBandAttr zcl.AttrID = 25
+
 type MinSetpointDeadBand zcl.Zs8
 
-func (a MinSetpointDeadBand) ID() zcl.AttrID               { return 25 }
-func (a MinSetpointDeadBand) Cluster() zcl.ClusterID       { return ThermostatCluster }
+func (a MinSetpointDeadBand) ID() zcl.AttrID               { return MinSetpointDeadBandAttr }
+func (a MinSetpointDeadBand) Cluster() zcl.ClusterID       { return ThermostatID }
 func (a *MinSetpointDeadBand) Value() *MinSetpointDeadBand { return a }
 func (a MinSetpointDeadBand) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()
@@ -634,10 +656,12 @@ func (a MinSetpointDeadBand) String() string {
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
+const RemoteSensingAttr zcl.AttrID = 26
+
 type RemoteSensing zcl.Zbmp8
 
-func (a RemoteSensing) ID() zcl.AttrID         { return 26 }
-func (a RemoteSensing) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a RemoteSensing) ID() zcl.AttrID         { return RemoteSensingAttr }
+func (a RemoteSensing) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *RemoteSensing) Value() *RemoteSensing { return a }
 func (a RemoteSensing) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -691,10 +715,12 @@ func (a *RemoteSensing) SetOccupancySensedRemotely(b bool) {
 	*a = RemoteSensing(zcl.BitmapSet([]byte(*a), 2, b))
 }
 
+const ControlSequenceOfOperationAttr zcl.AttrID = 27
+
 type ControlSequenceOfOperation zcl.Zenum8
 
-func (a ControlSequenceOfOperation) ID() zcl.AttrID                      { return 27 }
-func (a ControlSequenceOfOperation) Cluster() zcl.ClusterID              { return ThermostatCluster }
+func (a ControlSequenceOfOperation) ID() zcl.AttrID                      { return ControlSequenceOfOperationAttr }
+func (a ControlSequenceOfOperation) Cluster() zcl.ClusterID              { return ThermostatID }
 func (a *ControlSequenceOfOperation) Value() *ControlSequenceOfOperation { return a }
 func (a ControlSequenceOfOperation) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -766,10 +792,12 @@ func (a ControlSequenceOfOperation) IsCoolingAndHeating4PipesWithReheat() bool {
 // SetCoolingAndHeating4PipesWithReheat sets ControlSequenceOfOperation to Cooling and Heating 4-pipes with Reheat (0x05)
 func (a *ControlSequenceOfOperation) SetCoolingAndHeating4PipesWithReheat() { *a = 0x05 }
 
+const SystemModeAttr zcl.AttrID = 28
+
 type SystemMode zcl.Zenum8
 
-func (a SystemMode) ID() zcl.AttrID         { return 28 }
-func (a SystemMode) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a SystemMode) ID() zcl.AttrID         { return SystemModeAttr }
+func (a SystemMode) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *SystemMode) Value() *SystemMode    { return a }
 func (a SystemMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -865,10 +893,12 @@ func (a SystemMode) IsSleep() bool { return a == 0x09 }
 // SetSleep sets SystemMode to Sleep (0x09)
 func (a *SystemMode) SetSleep() { *a = 0x09 }
 
+const AlarmMaskAttr zcl.AttrID = 29
+
 type AlarmMask zcl.Zbmp8
 
-func (a AlarmMask) ID() zcl.AttrID         { return 29 }
-func (a AlarmMask) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a AlarmMask) ID() zcl.AttrID         { return AlarmMaskAttr }
+func (a AlarmMask) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *AlarmMask) Value() *AlarmMask     { return a }
 func (a AlarmMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -922,10 +952,12 @@ func (a *AlarmMask) SetSelfCalibrationFailure(b bool) {
 	*a = AlarmMask(zcl.BitmapSet([]byte(*a), 2, b))
 }
 
+const ThermostatRunningModeAttr zcl.AttrID = 30
+
 type ThermostatRunningMode zcl.Zenum8
 
-func (a ThermostatRunningMode) ID() zcl.AttrID                 { return 30 }
-func (a ThermostatRunningMode) Cluster() zcl.ClusterID         { return ThermostatCluster }
+func (a ThermostatRunningMode) ID() zcl.AttrID                 { return ThermostatRunningModeAttr }
+func (a ThermostatRunningMode) Cluster() zcl.ClusterID         { return ThermostatID }
 func (a *ThermostatRunningMode) Value() *ThermostatRunningMode { return a }
 func (a ThermostatRunningMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -973,10 +1005,12 @@ func (a ThermostatRunningMode) IsHeat() bool { return a == 0x04 }
 // SetHeat sets ThermostatRunningMode to Heat (0x04)
 func (a *ThermostatRunningMode) SetHeat() { *a = 0x04 }
 
+const StartOfWeekAttr zcl.AttrID = 32
+
 type StartOfWeek zcl.Zenum8
 
-func (a StartOfWeek) ID() zcl.AttrID         { return 32 }
-func (a StartOfWeek) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a StartOfWeek) ID() zcl.AttrID         { return StartOfWeekAttr }
+func (a StartOfWeek) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *StartOfWeek) Value() *StartOfWeek   { return a }
 func (a StartOfWeek) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1056,10 +1090,12 @@ func (a StartOfWeek) IsSaturday() bool { return a == 0x06 }
 // SetSaturday sets StartOfWeek to Saturday (0x06)
 func (a *StartOfWeek) SetSaturday() { *a = 0x06 }
 
+const NumberOfWeeklyTransitionsAttr zcl.AttrID = 33
+
 type NumberOfWeeklyTransitions zcl.Zu8
 
-func (a NumberOfWeeklyTransitions) ID() zcl.AttrID                     { return 33 }
-func (a NumberOfWeeklyTransitions) Cluster() zcl.ClusterID             { return ThermostatCluster }
+func (a NumberOfWeeklyTransitions) ID() zcl.AttrID                     { return NumberOfWeeklyTransitionsAttr }
+func (a NumberOfWeeklyTransitions) Cluster() zcl.ClusterID             { return ThermostatID }
 func (a *NumberOfWeeklyTransitions) Value() *NumberOfWeeklyTransitions { return a }
 func (a NumberOfWeeklyTransitions) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1081,10 +1117,12 @@ func (a NumberOfWeeklyTransitions) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const NumberOfDailTransitionsAttr zcl.AttrID = 34
+
 type NumberOfDailTransitions zcl.Zu8
 
-func (a NumberOfDailTransitions) ID() zcl.AttrID                   { return 34 }
-func (a NumberOfDailTransitions) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a NumberOfDailTransitions) ID() zcl.AttrID                   { return NumberOfDailTransitionsAttr }
+func (a NumberOfDailTransitions) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *NumberOfDailTransitions) Value() *NumberOfDailTransitions { return a }
 func (a NumberOfDailTransitions) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1106,10 +1144,12 @@ func (a NumberOfDailTransitions) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const TemperatureSetpointHoldAttr zcl.AttrID = 35
+
 type TemperatureSetpointHold zcl.Zenum8
 
-func (a TemperatureSetpointHold) ID() zcl.AttrID                   { return 35 }
-func (a TemperatureSetpointHold) Cluster() zcl.ClusterID           { return ThermostatCluster }
+func (a TemperatureSetpointHold) ID() zcl.AttrID                   { return TemperatureSetpointHoldAttr }
+func (a TemperatureSetpointHold) Cluster() zcl.ClusterID           { return ThermostatID }
 func (a *TemperatureSetpointHold) Value() *TemperatureSetpointHold { return a }
 func (a TemperatureSetpointHold) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1149,10 +1189,12 @@ func (a TemperatureSetpointHold) IsSetpointHoldOn() bool { return a == 0x01 }
 // SetSetpointHoldOn sets TemperatureSetpointHold to Setpoint Hold On (0x01)
 func (a *TemperatureSetpointHold) SetSetpointHoldOn() { *a = 0x01 }
 
+const TemperatureSetpointHoldDurationAttr zcl.AttrID = 36
+
 type TemperatureSetpointHoldDuration zcl.Zu8
 
-func (a TemperatureSetpointHoldDuration) ID() zcl.AttrID                           { return 36 }
-func (a TemperatureSetpointHoldDuration) Cluster() zcl.ClusterID                   { return ThermostatCluster }
+func (a TemperatureSetpointHoldDuration) ID() zcl.AttrID                           { return TemperatureSetpointHoldDurationAttr }
+func (a TemperatureSetpointHoldDuration) Cluster() zcl.ClusterID                   { return ThermostatID }
 func (a *TemperatureSetpointHoldDuration) Value() *TemperatureSetpointHoldDuration { return a }
 func (a TemperatureSetpointHoldDuration) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1174,10 +1216,14 @@ func (a TemperatureSetpointHoldDuration) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const ThermostatProgrammingOperationModeAttr zcl.AttrID = 37
+
 type ThermostatProgrammingOperationMode zcl.Zbmp8
 
-func (a ThermostatProgrammingOperationMode) ID() zcl.AttrID                              { return 37 }
-func (a ThermostatProgrammingOperationMode) Cluster() zcl.ClusterID                      { return ThermostatCluster }
+func (a ThermostatProgrammingOperationMode) ID() zcl.AttrID {
+	return ThermostatProgrammingOperationModeAttr
+}
+func (a ThermostatProgrammingOperationMode) Cluster() zcl.ClusterID                      { return ThermostatID }
 func (a *ThermostatProgrammingOperationMode) Value() *ThermostatProgrammingOperationMode { return a }
 func (a ThermostatProgrammingOperationMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -1231,10 +1277,12 @@ func (a *ThermostatProgrammingOperationMode) SetEconomyEnergystarMode(b bool) {
 	*a = ThermostatProgrammingOperationMode(zcl.BitmapSet([]byte(*a), 2, b))
 }
 
+const ThermostatRunningStateAttr zcl.AttrID = 41
+
 type ThermostatRunningState zcl.Zbmp16
 
-func (a ThermostatRunningState) ID() zcl.AttrID                  { return 41 }
-func (a ThermostatRunningState) Cluster() zcl.ClusterID          { return ThermostatCluster }
+func (a ThermostatRunningState) ID() zcl.AttrID                  { return ThermostatRunningStateAttr }
+func (a ThermostatRunningState) Cluster() zcl.ClusterID          { return ThermostatID }
 func (a *ThermostatRunningState) Value() *ThermostatRunningState { return a }
 func (a ThermostatRunningState) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp16(a).MarshalZcl()
@@ -1328,10 +1376,12 @@ func (a *ThermostatRunningState) SetFan3RdStageStateOn(b bool) {
 	*a = ThermostatRunningState(zcl.BitmapSet([]byte(*a), 6, b))
 }
 
+const TrvModeAttr zcl.AttrID = 16384
+
 type TrvMode zcl.Zenum8
 
-func (a TrvMode) ID() zcl.AttrID         { return 16384 }
-func (a TrvMode) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a TrvMode) ID() zcl.AttrID         { return TrvModeAttr }
+func (a TrvMode) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *TrvMode) Value() *TrvMode       { return a }
 func (a TrvMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1379,10 +1429,12 @@ func (a TrvMode) IsManual() bool { return a == 0x02 }
 // SetManual sets TrvMode to manual (0x02)
 func (a *TrvMode) SetManual() { *a = 0x02 }
 
+const SetValvePositionAttr zcl.AttrID = 16385
+
 type SetValvePosition zcl.Zu8
 
-func (a SetValvePosition) ID() zcl.AttrID            { return 16385 }
-func (a SetValvePosition) Cluster() zcl.ClusterID    { return ThermostatCluster }
+func (a SetValvePosition) ID() zcl.AttrID            { return SetValvePositionAttr }
+func (a SetValvePosition) Cluster() zcl.ClusterID    { return ThermostatID }
 func (a *SetValvePosition) Value() *SetValvePosition { return a }
 func (a SetValvePosition) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1404,10 +1456,12 @@ func (a SetValvePosition) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const ErrorsAttr zcl.AttrID = 16386
+
 type Errors zcl.Zu8
 
-func (a Errors) ID() zcl.AttrID         { return 16386 }
-func (a Errors) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a Errors) ID() zcl.AttrID         { return ErrorsAttr }
+func (a Errors) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *Errors) Value() *Errors        { return a }
 func (a Errors) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1455,10 +1509,12 @@ func (a Errors) IsValveNotMovingE3() bool { return a == 0x05 }
 // SetValveNotMovingE3 sets Errors to Valve not Moving (E3) (0x05)
 func (a *Errors) SetValveNotMovingE3() { *a = 0x05 }
 
+const CurrentTemperatureSetpointAttr zcl.AttrID = 16387
+
 type CurrentTemperatureSetpoint zcl.Zs16
 
-func (a CurrentTemperatureSetpoint) ID() zcl.AttrID                      { return 16387 }
-func (a CurrentTemperatureSetpoint) Cluster() zcl.ClusterID              { return ThermostatCluster }
+func (a CurrentTemperatureSetpoint) ID() zcl.AttrID                      { return CurrentTemperatureSetpointAttr }
+func (a CurrentTemperatureSetpoint) Cluster() zcl.ClusterID              { return ThermostatID }
 func (a *CurrentTemperatureSetpoint) Value() *CurrentTemperatureSetpoint { return a }
 func (a CurrentTemperatureSetpoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1480,10 +1536,12 @@ func (a CurrentTemperatureSetpoint) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const HostFlagsAttr zcl.AttrID = 16392
+
 type HostFlags zcl.Zu24
 
-func (a HostFlags) ID() zcl.AttrID         { return 16392 }
-func (a HostFlags) Cluster() zcl.ClusterID { return ThermostatCluster }
+func (a HostFlags) ID() zcl.AttrID         { return HostFlagsAttr }
+func (a HostFlags) Cluster() zcl.ClusterID { return ThermostatID }
 func (a *HostFlags) Value() *HostFlags     { return a }
 func (a HostFlags) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()

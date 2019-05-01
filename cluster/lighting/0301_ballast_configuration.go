@@ -6,54 +6,39 @@ import (
 )
 
 // BallastConfiguration
-// Attributes and commands to configure a ballast.
+const BallastConfigurationID zcl.ClusterID = 769
 
-func NewBallastConfigurationServer(profile zcl.ProfileID) *BallastConfigurationServer {
-	return &BallastConfigurationServer{p: profile}
-}
-func NewBallastConfigurationClient(profile zcl.ProfileID) *BallastConfigurationClient {
-	return &BallastConfigurationClient{p: profile}
-}
-
-const BallastConfigurationCluster zcl.ClusterID = 769
-
-type BallastConfigurationServer struct {
-	p zcl.ProfileID
-
-	PhysicalMinLevel        *PhysicalMinLevel
-	PhysicalMaxLevel        *PhysicalMaxLevel
-	BallastStatus           *BallastStatus
-	MinLevel                *MinLevel
-	MaxLevel                *MaxLevel
-	PowerOnLevel            *PowerOnLevel
-	PowerOnFadeTime         *PowerOnFadeTime
-	IntrinsicBallastFactor  *IntrinsicBallastFactor
-	BallastFactorAdjustment *BallastFactorAdjustment
-	LampQuantity            *LampQuantity
-	LampType                *LampType
-	LampManufacturer        *LampManufacturer
-	LampRatedHours          *LampRatedHours
-	LampBurnHours           *LampBurnHours
-	LampAlarmMode           *LampAlarmMode
-	LampBurnHoursTripPoint  *LampBurnHoursTripPoint
+var BallastConfigurationCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		PhysicalMinLevelAttr:        func() zcl.Attr { return new(PhysicalMinLevel) },
+		PhysicalMaxLevelAttr:        func() zcl.Attr { return new(PhysicalMaxLevel) },
+		BallastStatusAttr:           func() zcl.Attr { return new(BallastStatus) },
+		MinLevelAttr:                func() zcl.Attr { return new(MinLevel) },
+		MaxLevelAttr:                func() zcl.Attr { return new(MaxLevel) },
+		PowerOnLevelAttr:            func() zcl.Attr { return new(PowerOnLevel) },
+		PowerOnFadeTimeAttr:         func() zcl.Attr { return new(PowerOnFadeTime) },
+		IntrinsicBallastFactorAttr:  func() zcl.Attr { return new(IntrinsicBallastFactor) },
+		BallastFactorAdjustmentAttr: func() zcl.Attr { return new(BallastFactorAdjustment) },
+		LampQuantityAttr:            func() zcl.Attr { return new(LampQuantity) },
+		LampTypeAttr:                func() zcl.Attr { return new(LampType) },
+		LampManufacturerAttr:        func() zcl.Attr { return new(LampManufacturer) },
+		LampRatedHoursAttr:          func() zcl.Attr { return new(LampRatedHours) },
+		LampBurnHoursAttr:           func() zcl.Attr { return new(LampBurnHours) },
+		LampAlarmModeAttr:           func() zcl.Attr { return new(LampAlarmMode) },
+		LampBurnHoursTripPointAttr:  func() zcl.Attr { return new(LampBurnHoursTripPoint) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type BallastConfigurationClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var BallastConfigurationServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var BallastConfigurationClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const PhysicalMinLevelAttr zcl.AttrID = 0
 
 type PhysicalMinLevel zcl.Zu8
 
-func (a PhysicalMinLevel) ID() zcl.AttrID            { return 0 }
-func (a PhysicalMinLevel) Cluster() zcl.ClusterID    { return BallastConfigurationCluster }
+func (a PhysicalMinLevel) ID() zcl.AttrID            { return PhysicalMinLevelAttr }
+func (a PhysicalMinLevel) Cluster() zcl.ClusterID    { return BallastConfigurationID }
 func (a *PhysicalMinLevel) Value() *PhysicalMinLevel { return a }
 func (a PhysicalMinLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -75,10 +60,12 @@ func (a PhysicalMinLevel) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const PhysicalMaxLevelAttr zcl.AttrID = 1
+
 type PhysicalMaxLevel zcl.Zu8
 
-func (a PhysicalMaxLevel) ID() zcl.AttrID            { return 1 }
-func (a PhysicalMaxLevel) Cluster() zcl.ClusterID    { return BallastConfigurationCluster }
+func (a PhysicalMaxLevel) ID() zcl.AttrID            { return PhysicalMaxLevelAttr }
+func (a PhysicalMaxLevel) Cluster() zcl.ClusterID    { return BallastConfigurationID }
 func (a *PhysicalMaxLevel) Value() *PhysicalMaxLevel { return a }
 func (a PhysicalMaxLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -100,10 +87,12 @@ func (a PhysicalMaxLevel) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const BallastStatusAttr zcl.AttrID = 2
+
 type BallastStatus zcl.Zbmp8
 
-func (a BallastStatus) ID() zcl.AttrID         { return 2 }
-func (a BallastStatus) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a BallastStatus) ID() zcl.AttrID         { return BallastStatusAttr }
+func (a BallastStatus) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *BallastStatus) Value() *BallastStatus { return a }
 func (a BallastStatus) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -147,10 +136,12 @@ func (a *BallastStatus) SetLampNotInSocket(b bool) {
 	*a = BallastStatus(zcl.BitmapSet([]byte(*a), 1, b))
 }
 
+const MinLevelAttr zcl.AttrID = 16
+
 type MinLevel zcl.Zu8
 
-func (a MinLevel) ID() zcl.AttrID         { return 16 }
-func (a MinLevel) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a MinLevel) ID() zcl.AttrID         { return MinLevelAttr }
+func (a MinLevel) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *MinLevel) Value() *MinLevel      { return a }
 func (a MinLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -172,10 +163,12 @@ func (a MinLevel) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const MaxLevelAttr zcl.AttrID = 17
+
 type MaxLevel zcl.Zu8
 
-func (a MaxLevel) ID() zcl.AttrID         { return 17 }
-func (a MaxLevel) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a MaxLevel) ID() zcl.AttrID         { return MaxLevelAttr }
+func (a MaxLevel) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *MaxLevel) Value() *MaxLevel      { return a }
 func (a MaxLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -197,10 +190,12 @@ func (a MaxLevel) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const PowerOnLevelAttr zcl.AttrID = 18
+
 type PowerOnLevel zcl.Zu8
 
-func (a PowerOnLevel) ID() zcl.AttrID         { return 18 }
-func (a PowerOnLevel) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a PowerOnLevel) ID() zcl.AttrID         { return PowerOnLevelAttr }
+func (a PowerOnLevel) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *PowerOnLevel) Value() *PowerOnLevel  { return a }
 func (a PowerOnLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -222,10 +217,12 @@ func (a PowerOnLevel) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const PowerOnFadeTimeAttr zcl.AttrID = 19
+
 type PowerOnFadeTime zcl.Zu16
 
-func (a PowerOnFadeTime) ID() zcl.AttrID           { return 19 }
-func (a PowerOnFadeTime) Cluster() zcl.ClusterID   { return BallastConfigurationCluster }
+func (a PowerOnFadeTime) ID() zcl.AttrID           { return PowerOnFadeTimeAttr }
+func (a PowerOnFadeTime) Cluster() zcl.ClusterID   { return BallastConfigurationID }
 func (a *PowerOnFadeTime) Value() *PowerOnFadeTime { return a }
 func (a PowerOnFadeTime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -247,10 +244,12 @@ func (a PowerOnFadeTime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const IntrinsicBallastFactorAttr zcl.AttrID = 20
+
 type IntrinsicBallastFactor zcl.Zu8
 
-func (a IntrinsicBallastFactor) ID() zcl.AttrID                  { return 20 }
-func (a IntrinsicBallastFactor) Cluster() zcl.ClusterID          { return BallastConfigurationCluster }
+func (a IntrinsicBallastFactor) ID() zcl.AttrID                  { return IntrinsicBallastFactorAttr }
+func (a IntrinsicBallastFactor) Cluster() zcl.ClusterID          { return BallastConfigurationID }
 func (a *IntrinsicBallastFactor) Value() *IntrinsicBallastFactor { return a }
 func (a IntrinsicBallastFactor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -272,10 +271,12 @@ func (a IntrinsicBallastFactor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const BallastFactorAdjustmentAttr zcl.AttrID = 21
+
 type BallastFactorAdjustment zcl.Zu8
 
-func (a BallastFactorAdjustment) ID() zcl.AttrID                   { return 21 }
-func (a BallastFactorAdjustment) Cluster() zcl.ClusterID           { return BallastConfigurationCluster }
+func (a BallastFactorAdjustment) ID() zcl.AttrID                   { return BallastFactorAdjustmentAttr }
+func (a BallastFactorAdjustment) Cluster() zcl.ClusterID           { return BallastConfigurationID }
 func (a *BallastFactorAdjustment) Value() *BallastFactorAdjustment { return a }
 func (a BallastFactorAdjustment) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -297,10 +298,12 @@ func (a BallastFactorAdjustment) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const LampQuantityAttr zcl.AttrID = 32
+
 type LampQuantity zcl.Zu8
 
-func (a LampQuantity) ID() zcl.AttrID         { return 32 }
-func (a LampQuantity) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a LampQuantity) ID() zcl.AttrID         { return LampQuantityAttr }
+func (a LampQuantity) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *LampQuantity) Value() *LampQuantity  { return a }
 func (a LampQuantity) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -322,10 +325,12 @@ func (a LampQuantity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const LampTypeAttr zcl.AttrID = 48
+
 type LampType zcl.Zcstring
 
-func (a LampType) ID() zcl.AttrID         { return 48 }
-func (a LampType) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a LampType) ID() zcl.AttrID         { return LampTypeAttr }
+func (a LampType) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *LampType) Value() *LampType      { return a }
 func (a LampType) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -347,10 +352,12 @@ func (a LampType) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const LampManufacturerAttr zcl.AttrID = 49
+
 type LampManufacturer zcl.Zcstring
 
-func (a LampManufacturer) ID() zcl.AttrID            { return 49 }
-func (a LampManufacturer) Cluster() zcl.ClusterID    { return BallastConfigurationCluster }
+func (a LampManufacturer) ID() zcl.AttrID            { return LampManufacturerAttr }
+func (a LampManufacturer) Cluster() zcl.ClusterID    { return BallastConfigurationID }
 func (a *LampManufacturer) Value() *LampManufacturer { return a }
 func (a LampManufacturer) MarshalZcl() ([]byte, error) {
 	return zcl.Zcstring(a).MarshalZcl()
@@ -372,10 +379,12 @@ func (a LampManufacturer) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
+const LampRatedHoursAttr zcl.AttrID = 50
+
 type LampRatedHours zcl.Zu24
 
-func (a LampRatedHours) ID() zcl.AttrID          { return 50 }
-func (a LampRatedHours) Cluster() zcl.ClusterID  { return BallastConfigurationCluster }
+func (a LampRatedHours) ID() zcl.AttrID          { return LampRatedHoursAttr }
+func (a LampRatedHours) Cluster() zcl.ClusterID  { return BallastConfigurationID }
 func (a *LampRatedHours) Value() *LampRatedHours { return a }
 func (a LampRatedHours) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()
@@ -397,10 +406,12 @@ func (a LampRatedHours) String() string {
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
+const LampBurnHoursAttr zcl.AttrID = 51
+
 type LampBurnHours zcl.Zu24
 
-func (a LampBurnHours) ID() zcl.AttrID         { return 51 }
-func (a LampBurnHours) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a LampBurnHours) ID() zcl.AttrID         { return LampBurnHoursAttr }
+func (a LampBurnHours) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *LampBurnHours) Value() *LampBurnHours { return a }
 func (a LampBurnHours) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()
@@ -422,10 +433,12 @@ func (a LampBurnHours) String() string {
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
+const LampAlarmModeAttr zcl.AttrID = 52
+
 type LampAlarmMode zcl.Zbmp8
 
-func (a LampAlarmMode) ID() zcl.AttrID         { return 52 }
-func (a LampAlarmMode) Cluster() zcl.ClusterID { return BallastConfigurationCluster }
+func (a LampAlarmMode) ID() zcl.AttrID         { return LampAlarmModeAttr }
+func (a LampAlarmMode) Cluster() zcl.ClusterID { return BallastConfigurationID }
 func (a *LampAlarmMode) Value() *LampAlarmMode { return a }
 func (a LampAlarmMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -459,10 +472,12 @@ func (a *LampAlarmMode) SetLampBurnHours(b bool) {
 	*a = LampAlarmMode(zcl.BitmapSet([]byte(*a), 0, b))
 }
 
+const LampBurnHoursTripPointAttr zcl.AttrID = 53
+
 type LampBurnHoursTripPoint zcl.Zu24
 
-func (a LampBurnHoursTripPoint) ID() zcl.AttrID                  { return 53 }
-func (a LampBurnHoursTripPoint) Cluster() zcl.ClusterID          { return BallastConfigurationCluster }
+func (a LampBurnHoursTripPoint) ID() zcl.AttrID                  { return LampBurnHoursTripPointAttr }
+func (a LampBurnHoursTripPoint) Cluster() zcl.ClusterID          { return BallastConfigurationID }
 func (a *LampBurnHoursTripPoint) Value() *LampBurnHoursTripPoint { return a }
 func (a LampBurnHoursTripPoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()

@@ -5,41 +5,27 @@ import (
 )
 
 // RelativeHumidityMeasurement
+const RelativeHumidityMeasurementID zcl.ClusterID = 1029
 
-func NewRelativeHumidityMeasurementServer(profile zcl.ProfileID) *RelativeHumidityMeasurementServer {
-	return &RelativeHumidityMeasurementServer{p: profile}
-}
-func NewRelativeHumidityMeasurementClient(profile zcl.ProfileID) *RelativeHumidityMeasurementClient {
-	return &RelativeHumidityMeasurementClient{p: profile}
-}
-
-const RelativeHumidityMeasurementCluster zcl.ClusterID = 1029
-
-type RelativeHumidityMeasurementServer struct {
-	p zcl.ProfileID
-
-	MeasuredRelativeHumidity    *MeasuredRelativeHumidity
-	MinMeasuredRelativeHumidity *MinMeasuredRelativeHumidity
-	MaxMeasuredRelativeHumidity *MaxMeasuredRelativeHumidity
-	RelativeHumidityTolerance   *RelativeHumidityTolerance
+var RelativeHumidityMeasurementCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MeasuredRelativeHumidityAttr:    func() zcl.Attr { return new(MeasuredRelativeHumidity) },
+		MinMeasuredRelativeHumidityAttr: func() zcl.Attr { return new(MinMeasuredRelativeHumidity) },
+		MaxMeasuredRelativeHumidityAttr: func() zcl.Attr { return new(MaxMeasuredRelativeHumidity) },
+		RelativeHumidityToleranceAttr:   func() zcl.Attr { return new(RelativeHumidityTolerance) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type RelativeHumidityMeasurementClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var RelativeHumidityMeasurementServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var RelativeHumidityMeasurementClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MeasuredRelativeHumidityAttr zcl.AttrID = 0
 
 type MeasuredRelativeHumidity zcl.Zu16
 
-func (a MeasuredRelativeHumidity) ID() zcl.AttrID                    { return 0 }
-func (a MeasuredRelativeHumidity) Cluster() zcl.ClusterID            { return RelativeHumidityMeasurementCluster }
+func (a MeasuredRelativeHumidity) ID() zcl.AttrID                    { return MeasuredRelativeHumidityAttr }
+func (a MeasuredRelativeHumidity) Cluster() zcl.ClusterID            { return RelativeHumidityMeasurementID }
 func (a *MeasuredRelativeHumidity) Value() *MeasuredRelativeHumidity { return a }
 func (a MeasuredRelativeHumidity) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -61,12 +47,12 @@ func (a MeasuredRelativeHumidity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MinMeasuredRelativeHumidityAttr zcl.AttrID = 1
+
 type MinMeasuredRelativeHumidity zcl.Zu16
 
-func (a MinMeasuredRelativeHumidity) ID() zcl.AttrID { return 1 }
-func (a MinMeasuredRelativeHumidity) Cluster() zcl.ClusterID {
-	return RelativeHumidityMeasurementCluster
-}
+func (a MinMeasuredRelativeHumidity) ID() zcl.AttrID                       { return MinMeasuredRelativeHumidityAttr }
+func (a MinMeasuredRelativeHumidity) Cluster() zcl.ClusterID               { return RelativeHumidityMeasurementID }
 func (a *MinMeasuredRelativeHumidity) Value() *MinMeasuredRelativeHumidity { return a }
 func (a MinMeasuredRelativeHumidity) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -88,12 +74,12 @@ func (a MinMeasuredRelativeHumidity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MaxMeasuredRelativeHumidityAttr zcl.AttrID = 2
+
 type MaxMeasuredRelativeHumidity zcl.Zu16
 
-func (a MaxMeasuredRelativeHumidity) ID() zcl.AttrID { return 2 }
-func (a MaxMeasuredRelativeHumidity) Cluster() zcl.ClusterID {
-	return RelativeHumidityMeasurementCluster
-}
+func (a MaxMeasuredRelativeHumidity) ID() zcl.AttrID                       { return MaxMeasuredRelativeHumidityAttr }
+func (a MaxMeasuredRelativeHumidity) Cluster() zcl.ClusterID               { return RelativeHumidityMeasurementID }
 func (a *MaxMeasuredRelativeHumidity) Value() *MaxMeasuredRelativeHumidity { return a }
 func (a MaxMeasuredRelativeHumidity) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -115,10 +101,12 @@ func (a MaxMeasuredRelativeHumidity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RelativeHumidityToleranceAttr zcl.AttrID = 3
+
 type RelativeHumidityTolerance zcl.Zu16
 
-func (a RelativeHumidityTolerance) ID() zcl.AttrID                     { return 3 }
-func (a RelativeHumidityTolerance) Cluster() zcl.ClusterID             { return RelativeHumidityMeasurementCluster }
+func (a RelativeHumidityTolerance) ID() zcl.AttrID                     { return RelativeHumidityToleranceAttr }
+func (a RelativeHumidityTolerance) Cluster() zcl.ClusterID             { return RelativeHumidityMeasurementID }
 func (a *RelativeHumidityTolerance) Value() *RelativeHumidityTolerance { return a }
 func (a RelativeHumidityTolerance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

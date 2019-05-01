@@ -5,28 +5,12 @@ import (
 )
 
 // Prepayment
+const PrepaymentID zcl.ClusterID = 1797
 
-func NewPrepaymentServer(profile zcl.ProfileID) *PrepaymentServer {
-	return &PrepaymentServer{p: profile}
+var PrepaymentCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewPrepaymentClient(profile zcl.ProfileID) *PrepaymentClient {
-	return &PrepaymentClient{p: profile}
-}
-
-const PrepaymentCluster zcl.ClusterID = 1797
-
-type PrepaymentServer struct {
-	p zcl.ProfileID
-}
-
-type PrepaymentClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var PrepaymentServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var PrepaymentClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

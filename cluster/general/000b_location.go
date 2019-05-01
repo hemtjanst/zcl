@@ -6,94 +6,48 @@ import (
 )
 
 // Location
-// Measure distance between devices.
+const LocationID zcl.ClusterID = 11
 
-func NewLocationServer(profile zcl.ProfileID) *LocationServer { return &LocationServer{p: profile} }
-func NewLocationClient(profile zcl.ProfileID) *LocationClient { return &LocationClient{p: profile} }
-
-const LocationCluster zcl.ClusterID = 11
-
-type LocationServer struct {
-	p zcl.ProfileID
-
-	LocationType           *LocationType
-	LocationMethod         *LocationMethod
-	LocationAge            *LocationAge
-	QualityMeasure         *QualityMeasure
-	NumberOfDevices        *NumberOfDevices
-	XCoordinate            *XCoordinate
-	YCoordinate            *YCoordinate
-	ZCoordinate            *ZCoordinate
-	Power                  *Power
-	PathLossExponent       *PathLossExponent
-	ReportingPeriod        *ReportingPeriod
-	CalculationPeriod      *CalculationPeriod
-	NumberRssiMeasurements *NumberRssiMeasurements
+var LocationCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		SetAbsoluteLocationCommand:    func() zcl.Command { return new(SetAbsoluteLocation) },
+		SetDeviceConfigurationCommand: func() zcl.Command { return new(SetDeviceConfiguration) },
+		GetDeviceConfigurationCommand: func() zcl.Command { return new(GetDeviceConfiguration) },
+		GetLocationDataCommand:        func() zcl.Command { return new(GetLocationData) },
+		RssiResponseCommand:           func() zcl.Command { return new(RssiResponse) },
+		SendPingsCommand:              func() zcl.Command { return new(SendPings) },
+		AnchorNodeAnnounceCommand:     func() zcl.Command { return new(AnchorNodeAnnounce) },
+		DistanceMeasureCommand:        func() zcl.Command { return new(DistanceMeasure) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		DeviceConfigurationResponseCommand:     func() zcl.Command { return new(DeviceConfigurationResponse) },
+		LocationDataResponseCommand:            func() zcl.Command { return new(LocationDataResponse) },
+		LocationDataNotificationCommand:        func() zcl.Command { return new(LocationDataNotification) },
+		CompactLocationDataNotificationCommand: func() zcl.Command { return new(CompactLocationDataNotification) },
+		RssiPingCommand:                        func() zcl.Command { return new(RssiPing) },
+		RssiRequestCommand:                     func() zcl.Command { return new(RssiRequest) },
+		ReportRssiMeasurementsCommand:          func() zcl.Command { return new(ReportRssiMeasurements) },
+		RequestOwnLocationCommand:              func() zcl.Command { return new(RequestOwnLocation) },
+		DistanceMeasureResponseCommand:         func() zcl.Command { return new(DistanceMeasureResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		LocationTypeAttr:           func() zcl.Attr { return new(LocationType) },
+		LocationMethodAttr:         func() zcl.Attr { return new(LocationMethod) },
+		LocationAgeAttr:            func() zcl.Attr { return new(LocationAge) },
+		QualityMeasureAttr:         func() zcl.Attr { return new(QualityMeasure) },
+		NumberOfDevicesAttr:        func() zcl.Attr { return new(NumberOfDevices) },
+		XCoordinateAttr:            func() zcl.Attr { return new(XCoordinate) },
+		YCoordinateAttr:            func() zcl.Attr { return new(YCoordinate) },
+		ZCoordinateAttr:            func() zcl.Attr { return new(ZCoordinate) },
+		PowerAttr:                  func() zcl.Attr { return new(Power) },
+		PathLossExponentAttr:       func() zcl.Attr { return new(PathLossExponent) },
+		ReportingPeriodAttr:        func() zcl.Attr { return new(ReportingPeriod) },
+		CalculationPeriodAttr:      func() zcl.Attr { return new(CalculationPeriod) },
+		NumberRssiMeasurementsAttr: func() zcl.Attr { return new(NumberRssiMeasurements) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *LocationServer) SetAbsoluteLocation() *SetAbsoluteLocation { return new(SetAbsoluteLocation) }
-func (s *LocationServer) SetDeviceConfiguration() *SetDeviceConfiguration {
-	return new(SetDeviceConfiguration)
-}
-func (s *LocationServer) GetDeviceConfiguration() *GetDeviceConfiguration {
-	return new(GetDeviceConfiguration)
-}
-func (s *LocationServer) GetLocationData() *GetLocationData       { return new(GetLocationData) }
-func (s *LocationServer) RssiResponse() *RssiResponse             { return new(RssiResponse) }
-func (s *LocationServer) SendPings() *SendPings                   { return new(SendPings) }
-func (s *LocationServer) AnchorNodeAnnounce() *AnchorNodeAnnounce { return new(AnchorNodeAnnounce) }
-func (s *LocationServer) DistanceMeasure() *DistanceMeasure       { return new(DistanceMeasure) }
-
-type LocationClient struct {
-	p zcl.ProfileID
-}
-
-func (s *LocationClient) DeviceConfigurationResponse() *DeviceConfigurationResponse {
-	return new(DeviceConfigurationResponse)
-}
-func (s *LocationClient) LocationDataResponse() *LocationDataResponse {
-	return new(LocationDataResponse)
-}
-func (s *LocationClient) LocationDataNotification() *LocationDataNotification {
-	return new(LocationDataNotification)
-}
-func (s *LocationClient) CompactLocationDataNotification() *CompactLocationDataNotification {
-	return new(CompactLocationDataNotification)
-}
-func (s *LocationClient) RssiPing() *RssiPing       { return new(RssiPing) }
-func (s *LocationClient) RssiRequest() *RssiRequest { return new(RssiRequest) }
-func (s *LocationClient) ReportRssiMeasurements() *ReportRssiMeasurements {
-	return new(ReportRssiMeasurements)
-}
-func (s *LocationClient) RequestOwnLocation() *RequestOwnLocation { return new(RequestOwnLocation) }
-func (s *LocationClient) DistanceMeasureResponse() *DistanceMeasureResponse {
-	return new(DistanceMeasureResponse)
-}
-
-/*
-var LocationServer = map[zcl.CommandID]func() zcl.Command{
-    SetAbsoluteLocationID: func() zcl.Command { return new(SetAbsoluteLocation) },
-    SetDeviceConfigurationID: func() zcl.Command { return new(SetDeviceConfiguration) },
-    GetDeviceConfigurationID: func() zcl.Command { return new(GetDeviceConfiguration) },
-    GetLocationDataID: func() zcl.Command { return new(GetLocationData) },
-    RssiResponseID: func() zcl.Command { return new(RssiResponse) },
-    SendPingsID: func() zcl.Command { return new(SendPings) },
-    AnchorNodeAnnounceID: func() zcl.Command { return new(AnchorNodeAnnounce) },
-    DistanceMeasureID: func() zcl.Command { return new(DistanceMeasure) },
-}
-
-var LocationClient = map[zcl.CommandID]func() zcl.Command{
-    DeviceConfigurationResponseID: func() zcl.Command { return new(DeviceConfigurationResponse) },
-    LocationDataResponseID: func() zcl.Command { return new(LocationDataResponse) },
-    LocationDataNotificationID: func() zcl.Command { return new(LocationDataNotification) },
-    CompactLocationDataNotificationID: func() zcl.Command { return new(CompactLocationDataNotification) },
-    RssiPingID: func() zcl.Command { return new(RssiPing) },
-    RssiRequestID: func() zcl.Command { return new(RssiRequest) },
-    ReportRssiMeasurementsID: func() zcl.Command { return new(ReportRssiMeasurements) },
-    RequestOwnLocationID: func() zcl.Command { return new(RequestOwnLocation) },
-    DistanceMeasureResponseID: func() zcl.Command { return new(DistanceMeasureResponse) },
-}
-*/
 
 type SetAbsoluteLocation struct {
 	XCoordinate zcl.Zs16
@@ -121,7 +75,7 @@ func (v SetAbsoluteLocation) ID() zcl.CommandID {
 }
 
 func (v SetAbsoluteLocation) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v SetAbsoluteLocation) MnfCode() []byte {
@@ -214,7 +168,7 @@ func (v SetDeviceConfiguration) ID() zcl.CommandID {
 }
 
 func (v SetDeviceConfiguration) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v SetDeviceConfiguration) MnfCode() []byte {
@@ -297,7 +251,7 @@ func (v GetDeviceConfiguration) ID() zcl.CommandID {
 }
 
 func (v GetDeviceConfiguration) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v GetDeviceConfiguration) MnfCode() []byte {
@@ -348,7 +302,7 @@ func (v GetLocationData) ID() zcl.CommandID {
 }
 
 func (v GetLocationData) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v GetLocationData) MnfCode() []byte {
@@ -423,7 +377,7 @@ func (v RssiResponse) ID() zcl.CommandID {
 }
 
 func (v RssiResponse) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v RssiResponse) MnfCode() []byte {
@@ -520,7 +474,7 @@ func (v SendPings) ID() zcl.CommandID {
 }
 
 func (v SendPings) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v SendPings) MnfCode() []byte {
@@ -591,7 +545,7 @@ func (v AnchorNodeAnnounce) ID() zcl.CommandID {
 }
 
 func (v AnchorNodeAnnounce) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v AnchorNodeAnnounce) MnfCode() []byte {
@@ -667,7 +621,7 @@ func (v DistanceMeasure) ID() zcl.CommandID {
 }
 
 func (v DistanceMeasure) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v DistanceMeasure) MnfCode() []byte {
@@ -735,7 +689,7 @@ func (v DeviceConfigurationResponse) ID() zcl.CommandID {
 }
 
 func (v DeviceConfigurationResponse) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v DeviceConfigurationResponse) MnfCode() []byte {
@@ -866,7 +820,7 @@ func (v LocationDataResponse) ID() zcl.CommandID {
 }
 
 func (v LocationDataResponse) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v LocationDataResponse) MnfCode() []byte {
@@ -1047,7 +1001,7 @@ func (v LocationDataNotification) ID() zcl.CommandID {
 }
 
 func (v LocationDataNotification) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v LocationDataNotification) MnfCode() []byte {
@@ -1192,7 +1146,7 @@ func (v CompactLocationDataNotification) ID() zcl.CommandID {
 }
 
 func (v CompactLocationDataNotification) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v CompactLocationDataNotification) MnfCode() []byte {
@@ -1296,7 +1250,7 @@ func (v RssiPing) ID() zcl.CommandID {
 }
 
 func (v RssiPing) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v RssiPing) MnfCode() []byte {
@@ -1340,7 +1294,7 @@ func (v RssiRequest) ID() zcl.CommandID {
 }
 
 func (v RssiRequest) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v RssiRequest) MnfCode() []byte {
@@ -1374,7 +1328,7 @@ func (v ReportRssiMeasurements) ID() zcl.CommandID {
 }
 
 func (v ReportRssiMeasurements) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v ReportRssiMeasurements) MnfCode() []byte {
@@ -1430,7 +1384,7 @@ func (v RequestOwnLocation) ID() zcl.CommandID {
 }
 
 func (v RequestOwnLocation) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v RequestOwnLocation) MnfCode() []byte {
@@ -1482,7 +1436,7 @@ func (v DistanceMeasureResponse) ID() zcl.CommandID {
 }
 
 func (v DistanceMeasureResponse) Cluster() zcl.ClusterID {
-	return LocationCluster
+	return LocationID
 }
 
 func (v DistanceMeasureResponse) MnfCode() []byte {
@@ -1530,10 +1484,12 @@ func (v *DistanceMeasureResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const LocationTypeAttr zcl.AttrID = 0
+
 type LocationType zcl.Zbmp8
 
-func (a LocationType) ID() zcl.AttrID         { return 0 }
-func (a LocationType) Cluster() zcl.ClusterID { return LocationCluster }
+func (a LocationType) ID() zcl.AttrID         { return LocationTypeAttr }
+func (a LocationType) Cluster() zcl.ClusterID { return LocationID }
 func (a *LocationType) Value() *LocationType  { return a }
 func (a LocationType) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -1577,10 +1533,12 @@ func (a *LocationType) SetTwoDimensional(b bool) {
 	*a = LocationType(zcl.BitmapSet([]byte(*a), 1, b))
 }
 
+const LocationMethodAttr zcl.AttrID = 1
+
 type LocationMethod zcl.Zenum8
 
-func (a LocationMethod) ID() zcl.AttrID          { return 1 }
-func (a LocationMethod) Cluster() zcl.ClusterID  { return LocationCluster }
+func (a LocationMethod) ID() zcl.AttrID          { return LocationMethodAttr }
+func (a LocationMethod) Cluster() zcl.ClusterID  { return LocationID }
 func (a *LocationMethod) Value() *LocationMethod { return a }
 func (a LocationMethod) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1644,10 +1602,12 @@ func (a LocationMethod) IsCentralized() bool { return a == 0x04 }
 // SetCentralized sets LocationMethod to Centralized (0x04)
 func (a *LocationMethod) SetCentralized() { *a = 0x04 }
 
+const LocationAgeAttr zcl.AttrID = 2
+
 type LocationAge zcl.Zu16
 
-func (a LocationAge) ID() zcl.AttrID         { return 2 }
-func (a LocationAge) Cluster() zcl.ClusterID { return LocationCluster }
+func (a LocationAge) ID() zcl.AttrID         { return LocationAgeAttr }
+func (a LocationAge) Cluster() zcl.ClusterID { return LocationID }
 func (a *LocationAge) Value() *LocationAge   { return a }
 func (a LocationAge) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1669,10 +1629,12 @@ func (a LocationAge) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const QualityMeasureAttr zcl.AttrID = 3
+
 type QualityMeasure zcl.Zu8
 
-func (a QualityMeasure) ID() zcl.AttrID          { return 3 }
-func (a QualityMeasure) Cluster() zcl.ClusterID  { return LocationCluster }
+func (a QualityMeasure) ID() zcl.AttrID          { return QualityMeasureAttr }
+func (a QualityMeasure) Cluster() zcl.ClusterID  { return LocationID }
 func (a *QualityMeasure) Value() *QualityMeasure { return a }
 func (a QualityMeasure) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1694,10 +1656,12 @@ func (a QualityMeasure) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const NumberOfDevicesAttr zcl.AttrID = 4
+
 type NumberOfDevices zcl.Zu8
 
-func (a NumberOfDevices) ID() zcl.AttrID           { return 4 }
-func (a NumberOfDevices) Cluster() zcl.ClusterID   { return LocationCluster }
+func (a NumberOfDevices) ID() zcl.AttrID           { return NumberOfDevicesAttr }
+func (a NumberOfDevices) Cluster() zcl.ClusterID   { return LocationID }
 func (a *NumberOfDevices) Value() *NumberOfDevices { return a }
 func (a NumberOfDevices) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1719,10 +1683,12 @@ func (a NumberOfDevices) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const XCoordinateAttr zcl.AttrID = 16
+
 type XCoordinate zcl.Zs16
 
-func (a XCoordinate) ID() zcl.AttrID         { return 16 }
-func (a XCoordinate) Cluster() zcl.ClusterID { return LocationCluster }
+func (a XCoordinate) ID() zcl.AttrID         { return XCoordinateAttr }
+func (a XCoordinate) Cluster() zcl.ClusterID { return LocationID }
 func (a *XCoordinate) Value() *XCoordinate   { return a }
 func (a XCoordinate) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1744,10 +1710,12 @@ func (a XCoordinate) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const YCoordinateAttr zcl.AttrID = 17
+
 type YCoordinate zcl.Zs16
 
-func (a YCoordinate) ID() zcl.AttrID         { return 17 }
-func (a YCoordinate) Cluster() zcl.ClusterID { return LocationCluster }
+func (a YCoordinate) ID() zcl.AttrID         { return YCoordinateAttr }
+func (a YCoordinate) Cluster() zcl.ClusterID { return LocationID }
 func (a *YCoordinate) Value() *YCoordinate   { return a }
 func (a YCoordinate) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1769,10 +1737,12 @@ func (a YCoordinate) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ZCoordinateAttr zcl.AttrID = 18
+
 type ZCoordinate zcl.Zs16
 
-func (a ZCoordinate) ID() zcl.AttrID         { return 18 }
-func (a ZCoordinate) Cluster() zcl.ClusterID { return LocationCluster }
+func (a ZCoordinate) ID() zcl.AttrID         { return ZCoordinateAttr }
+func (a ZCoordinate) Cluster() zcl.ClusterID { return LocationID }
 func (a *ZCoordinate) Value() *ZCoordinate   { return a }
 func (a ZCoordinate) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1794,10 +1764,12 @@ func (a ZCoordinate) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const PowerAttr zcl.AttrID = 19
+
 type Power zcl.Zs16
 
-func (a Power) ID() zcl.AttrID         { return 19 }
-func (a Power) Cluster() zcl.ClusterID { return LocationCluster }
+func (a Power) ID() zcl.AttrID         { return PowerAttr }
+func (a Power) Cluster() zcl.ClusterID { return LocationID }
 func (a *Power) Value() *Power         { return a }
 func (a Power) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1819,10 +1791,12 @@ func (a Power) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const PathLossExponentAttr zcl.AttrID = 20
+
 type PathLossExponent zcl.Zu16
 
-func (a PathLossExponent) ID() zcl.AttrID            { return 20 }
-func (a PathLossExponent) Cluster() zcl.ClusterID    { return LocationCluster }
+func (a PathLossExponent) ID() zcl.AttrID            { return PathLossExponentAttr }
+func (a PathLossExponent) Cluster() zcl.ClusterID    { return LocationID }
 func (a *PathLossExponent) Value() *PathLossExponent { return a }
 func (a PathLossExponent) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1844,10 +1818,12 @@ func (a PathLossExponent) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ReportingPeriodAttr zcl.AttrID = 21
+
 type ReportingPeriod zcl.Zu16
 
-func (a ReportingPeriod) ID() zcl.AttrID           { return 21 }
-func (a ReportingPeriod) Cluster() zcl.ClusterID   { return LocationCluster }
+func (a ReportingPeriod) ID() zcl.AttrID           { return ReportingPeriodAttr }
+func (a ReportingPeriod) Cluster() zcl.ClusterID   { return LocationID }
 func (a *ReportingPeriod) Value() *ReportingPeriod { return a }
 func (a ReportingPeriod) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1869,10 +1845,12 @@ func (a ReportingPeriod) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const CalculationPeriodAttr zcl.AttrID = 22
+
 type CalculationPeriod zcl.Zu16
 
-func (a CalculationPeriod) ID() zcl.AttrID             { return 22 }
-func (a CalculationPeriod) Cluster() zcl.ClusterID     { return LocationCluster }
+func (a CalculationPeriod) ID() zcl.AttrID             { return CalculationPeriodAttr }
+func (a CalculationPeriod) Cluster() zcl.ClusterID     { return LocationID }
 func (a *CalculationPeriod) Value() *CalculationPeriod { return a }
 func (a CalculationPeriod) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1894,10 +1872,12 @@ func (a CalculationPeriod) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NumberRssiMeasurementsAttr zcl.AttrID = 23
+
 type NumberRssiMeasurements zcl.Zu8
 
-func (a NumberRssiMeasurements) ID() zcl.AttrID                  { return 23 }
-func (a NumberRssiMeasurements) Cluster() zcl.ClusterID          { return LocationCluster }
+func (a NumberRssiMeasurements) ID() zcl.AttrID                  { return NumberRssiMeasurementsAttr }
+func (a NumberRssiMeasurements) Cluster() zcl.ClusterID          { return LocationID }
 func (a *NumberRssiMeasurements) Value() *NumberRssiMeasurements { return a }
 func (a NumberRssiMeasurements) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()

@@ -8,38 +8,25 @@ import (
 
 // {{ $sn := .MfCode.Stn .Name}}{{$sn}}{{if .MfCode.Valid}}
 // Manufacturer code 0x{{fmt "%04X" $mfc.Uint}}{{end}}
-{{.Desc.Comment}}
-func New{{$sn}}Server(profile zcl.ProfileID) *{{$sn}}Server { return &{{$sn}}Server{p: profile} }
-func New{{$sn}}Client(profile zcl.ProfileID) *{{$sn}}Client { return &{{$sn}}Client{p: profile} }
+const {{$sn}}ID zcl.ClusterID = {{$clid}}
 
-const {{$sn}}Cluster zcl.ClusterID = {{$clid}}
-
-type {{$sn}}Server struct {
-	p zcl.ProfileID
-    {{range .Server.Attr}}
-    {{.Name.Fmt}} *{{.Name.Fmt}}{{end}}
+var {{$sn}}Cluster = zcl.Cluster{
+    ServerCmd: map[zcl.CommandID]func() zcl.Command{ {{range .Server.Command}}
+        {{.Name.Fmt}}Command: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
+    },
+    ClientCmd: map[zcl.CommandID]func() zcl.Command{ {{range .Client.Command}}
+        {{.Name.Fmt}}Command: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
+    },
+    ServerAttr: map[zcl.AttrID]func() zcl.Attr{ {{range .Server.Attr}}
+        {{.Name.Fmt}}Attr: func() zcl.Attr { return new({{.Name.Fmt}}) },{{end}}
+    },
+    ClientAttr: map[zcl.AttrID]func() zcl.Attr{ {{range .Client.Attr}}
+        {{.Name.Fmt}}Attr: func() zcl.Attr { return new({{.Name.Fmt}}) },{{end}}
+    },
+    SceneAttr: []zcl.AttrID{ {{range .Server.SceneAttr}}
+        {{.Name.Fmt}}Attr, {{end}}
+    },
 }
-{{range .Server.Command}}
-func (s *{{$sn}}Server) {{.Name.Fmt}}() *{{.Name.Fmt}} { return new({{.Name.Fmt}}) }{{end}}
-
-type {{$sn}}Client struct {
-	p zcl.ProfileID
-    {{range .Client.Attr}}
-    {{.Name.Fmt}} *{{.Name.Fmt}}{{end}}
-}
-
-{{range .Client.Command}}
-func (s *{{$sn}}Client) {{.Name.Fmt}}() *{{.Name.Fmt}} { return new({{.Name.Fmt}}) }{{end}}
-
-/*
-var {{$sn}}Server = map[zcl.CommandID]func() zcl.Command{ {{range .Server.Command}}
-    {{.Name.Fmt}}ID: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
-}
-
-var {{$sn}}Client = map[zcl.CommandID]func() zcl.Command{ {{range .Client.Command}}
-    {{.Name.Fmt}}ID: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
-}
-*/
 
 {{range .Command}}{{$cmd := .}}
 {{.Desc.Comment}}type {{.Name.Fmt}} struct { {{range .PayloadAttr}}
@@ -58,7 +45,7 @@ func (v {{.Name.Fmt}}) ID() zcl.CommandID {
 }
 
 func (v {{.Name.Fmt}}) Cluster() zcl.ClusterID {
-	return {{$sn}}Cluster
+	return {{$sn}}ID
 }
 
 func (v {{.Name.Fmt}}) MnfCode() []byte {
@@ -96,9 +83,10 @@ func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAt
 
 {{end}}
 {{range .Attr}}{{$an:=.Name.Fmt}}
+const {{.Name.Fmt}}Attr zcl.AttrID = {{.ID.Uint}}
 type {{.Name.Fmt}} zcl.{{.Type.Type}}
-func (a {{.Name.Fmt}}) ID() zcl.AttrID { return {{.ID.Uint}} }
-func (a {{.Name.Fmt}}) Cluster() zcl.ClusterID { return {{$sn}}Cluster }
+func (a {{.Name.Fmt}}) ID() zcl.AttrID { return {{$an}}Attr }
+func (a {{.Name.Fmt}}) Cluster() zcl.ClusterID { return {{$sn}}ID }
 func (a *{{.Name.Fmt}}) Value() *{{.Name.Fmt}} { return a }
 func (a {{.Name.Fmt}}) MarshalZcl() ([]byte, error) {
     return zcl.{{.Type.Type}}(a).MarshalZcl()

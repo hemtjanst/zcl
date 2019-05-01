@@ -7,41 +7,26 @@ import (
 
 // UbisysDimmerSetup
 // Manufacturer code 0x10F2
-// Attributes and commands.
+const UbisysDimmerSetupID zcl.ClusterID = 64513
 
-func NewUbisysDimmerSetupServer(profile zcl.ProfileID) *UbisysDimmerSetupServer {
-	return &UbisysDimmerSetupServer{p: profile}
-}
-func NewUbisysDimmerSetupClient(profile zcl.ProfileID) *UbisysDimmerSetupClient {
-	return &UbisysDimmerSetupClient{p: profile}
-}
-
-const UbisysDimmerSetupCluster zcl.ClusterID = 64513
-
-type UbisysDimmerSetupServer struct {
-	p zcl.ProfileID
-
-	Capabilities *Capabilities
-	Status       *Status
-	Mode         *Mode
+var UbisysDimmerSetupCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		CapabilitiesAttr: func() zcl.Attr { return new(Capabilities) },
+		StatusAttr:       func() zcl.Attr { return new(Status) },
+		ModeAttr:         func() zcl.Attr { return new(Mode) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type UbisysDimmerSetupClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var UbisysDimmerSetupServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var UbisysDimmerSetupClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const CapabilitiesAttr zcl.AttrID = 0
 
 type Capabilities zcl.Zbmp8
 
-func (a Capabilities) ID() zcl.AttrID         { return 0 }
-func (a Capabilities) Cluster() zcl.ClusterID { return UbisysDimmerSetupCluster }
+func (a Capabilities) ID() zcl.AttrID         { return CapabilitiesAttr }
+func (a Capabilities) Cluster() zcl.ClusterID { return UbisysDimmerSetupID }
 func (a *Capabilities) Value() *Capabilities  { return a }
 func (a Capabilities) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -115,10 +100,12 @@ func (a *Capabilities) SetOverloadDetection(b bool) {
 	*a = Capabilities(zcl.BitmapSet([]byte(*a), 7, b))
 }
 
+const StatusAttr zcl.AttrID = 1
+
 type Status zcl.Zbmp8
 
-func (a Status) ID() zcl.AttrID         { return 1 }
-func (a Status) Cluster() zcl.ClusterID { return UbisysDimmerSetupCluster }
+func (a Status) ID() zcl.AttrID         { return StatusAttr }
+func (a Status) Cluster() zcl.ClusterID { return UbisysDimmerSetupID }
 func (a *Status) Value() *Status        { return a }
 func (a Status) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -202,10 +189,12 @@ func (a *Status) SetInductiveLoad(b bool) {
 	*a = Status(zcl.BitmapSet([]byte(*a), 7, b))
 }
 
+const ModeAttr zcl.AttrID = 2
+
 type Mode zcl.Zbmp8
 
-func (a Mode) ID() zcl.AttrID         { return 2 }
-func (a Mode) Cluster() zcl.ClusterID { return UbisysDimmerSetupCluster }
+func (a Mode) ID() zcl.AttrID         { return ModeAttr }
+func (a Mode) Cluster() zcl.ClusterID { return UbisysDimmerSetupID }
 func (a *Mode) Value() *Mode          { return a }
 func (a Mode) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()

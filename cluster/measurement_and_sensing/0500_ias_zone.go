@@ -6,47 +6,26 @@ import (
 )
 
 // IasZone
-// The IAS Zone cluster defines an interface to the functionality of an IAS security zone device. IAS Zone supports up totwo alarm types per zone, low battery reports and supervision of the IAS network.
+const IasZoneID zcl.ClusterID = 1280
 
-func NewIasZoneServer(profile zcl.ProfileID) *IasZoneServer { return &IasZoneServer{p: profile} }
-func NewIasZoneClient(profile zcl.ProfileID) *IasZoneClient { return &IasZoneClient{p: profile} }
-
-const IasZoneCluster zcl.ClusterID = 1280
-
-type IasZoneServer struct {
-	p zcl.ProfileID
-
-	ZoneState     *ZoneState
-	ZoneType      *ZoneType
-	ZoneStatus    *ZoneStatus
-	IasCieAddress *IasCieAddress
-	ZoneId        *ZoneId
+var IasZoneCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		ZoneEnrollResponseCommand:           func() zcl.Command { return new(ZoneEnrollResponse) },
+		InitiateNormalOperationModeCommand:  func() zcl.Command { return new(InitiateNormalOperationMode) },
+		ZoneStatusChangeNotificationCommand: func() zcl.Command { return new(ZoneStatusChangeNotification) },
+		ZoneEnrollRequestCommand:            func() zcl.Command { return new(ZoneEnrollRequest) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		ZoneStateAttr:     func() zcl.Attr { return new(ZoneState) },
+		ZoneTypeAttr:      func() zcl.Attr { return new(ZoneType) },
+		ZoneStatusAttr:    func() zcl.Attr { return new(ZoneStatus) },
+		IasCieAddressAttr: func() zcl.Attr { return new(IasCieAddress) },
+		ZoneIdAttr:        func() zcl.Attr { return new(ZoneId) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *IasZoneServer) ZoneEnrollResponse() *ZoneEnrollResponse { return new(ZoneEnrollResponse) }
-func (s *IasZoneServer) InitiateNormalOperationMode() *InitiateNormalOperationMode {
-	return new(InitiateNormalOperationMode)
-}
-func (s *IasZoneServer) ZoneStatusChangeNotification() *ZoneStatusChangeNotification {
-	return new(ZoneStatusChangeNotification)
-}
-func (s *IasZoneServer) ZoneEnrollRequest() *ZoneEnrollRequest { return new(ZoneEnrollRequest) }
-
-type IasZoneClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var IasZoneServer = map[zcl.CommandID]func() zcl.Command{
-    ZoneEnrollResponseID: func() zcl.Command { return new(ZoneEnrollResponse) },
-    InitiateNormalOperationModeID: func() zcl.Command { return new(InitiateNormalOperationMode) },
-    ZoneStatusChangeNotificationID: func() zcl.Command { return new(ZoneStatusChangeNotification) },
-    ZoneEnrollRequestID: func() zcl.Command { return new(ZoneEnrollRequest) },
-}
-
-var IasZoneClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type ZoneEnrollResponse struct {
 	EnrollResponseCode zcl.Zenum16
@@ -67,7 +46,7 @@ func (v ZoneEnrollResponse) ID() zcl.CommandID {
 }
 
 func (v ZoneEnrollResponse) Cluster() zcl.ClusterID {
-	return IasZoneCluster
+	return IasZoneID
 }
 
 func (v ZoneEnrollResponse) MnfCode() []byte {
@@ -120,7 +99,7 @@ func (v InitiateNormalOperationMode) ID() zcl.CommandID {
 }
 
 func (v InitiateNormalOperationMode) Cluster() zcl.ClusterID {
-	return IasZoneCluster
+	return IasZoneID
 }
 
 func (v InitiateNormalOperationMode) MnfCode() []byte {
@@ -158,7 +137,7 @@ func (v ZoneStatusChangeNotification) ID() zcl.CommandID {
 }
 
 func (v ZoneStatusChangeNotification) Cluster() zcl.ClusterID {
-	return IasZoneCluster
+	return IasZoneID
 }
 
 func (v ZoneStatusChangeNotification) MnfCode() []byte {
@@ -234,7 +213,7 @@ func (v ZoneEnrollRequest) ID() zcl.CommandID {
 }
 
 func (v ZoneEnrollRequest) Cluster() zcl.ClusterID {
-	return IasZoneCluster
+	return IasZoneID
 }
 
 func (v ZoneEnrollRequest) MnfCode() []byte {
@@ -273,10 +252,12 @@ func (v *ZoneEnrollRequest) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const ZoneStateAttr zcl.AttrID = 0
+
 type ZoneState zcl.Zenum8
 
-func (a ZoneState) ID() zcl.AttrID         { return 0 }
-func (a ZoneState) Cluster() zcl.ClusterID { return IasZoneCluster }
+func (a ZoneState) ID() zcl.AttrID         { return ZoneStateAttr }
+func (a ZoneState) Cluster() zcl.ClusterID { return IasZoneID }
 func (a *ZoneState) Value() *ZoneState     { return a }
 func (a ZoneState) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -316,10 +297,12 @@ func (a ZoneState) IsEnrolled() bool { return a == 0x01 }
 // SetEnrolled sets ZoneState to Enrolled (0x01)
 func (a *ZoneState) SetEnrolled() { *a = 0x01 }
 
+const ZoneTypeAttr zcl.AttrID = 1
+
 type ZoneType zcl.Zenum16
 
-func (a ZoneType) ID() zcl.AttrID         { return 1 }
-func (a ZoneType) Cluster() zcl.ClusterID { return IasZoneCluster }
+func (a ZoneType) ID() zcl.AttrID         { return ZoneTypeAttr }
+func (a ZoneType) Cluster() zcl.ClusterID { return IasZoneID }
 func (a *ZoneType) Value() *ZoneType      { return a }
 func (a ZoneType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum16(a).MarshalZcl()
@@ -463,10 +446,12 @@ func (a ZoneType) IsInvalidZoneType() bool { return a == 0xFFFF }
 // SetInvalidZoneType sets ZoneType to Invalid Zone Type (0xFFFF)
 func (a *ZoneType) SetInvalidZoneType() { *a = 0xFFFF }
 
+const ZoneStatusAttr zcl.AttrID = 2
+
 type ZoneStatus zcl.Zbmp16
 
-func (a ZoneStatus) ID() zcl.AttrID         { return 2 }
-func (a ZoneStatus) Cluster() zcl.ClusterID { return IasZoneCluster }
+func (a ZoneStatus) ID() zcl.AttrID         { return ZoneStatusAttr }
+func (a ZoneStatus) Cluster() zcl.ClusterID { return IasZoneID }
 func (a *ZoneStatus) Value() *ZoneStatus    { return a }
 func (a ZoneStatus) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp16(a).MarshalZcl()
@@ -590,10 +575,12 @@ func (a *ZoneStatus) SetBatteryDefect(b bool) {
 	*a = ZoneStatus(zcl.BitmapSet([]byte(*a), 9, b))
 }
 
+const IasCieAddressAttr zcl.AttrID = 16
+
 type IasCieAddress zcl.Zuid
 
-func (a IasCieAddress) ID() zcl.AttrID         { return 16 }
-func (a IasCieAddress) Cluster() zcl.ClusterID { return IasZoneCluster }
+func (a IasCieAddress) ID() zcl.AttrID         { return IasCieAddressAttr }
+func (a IasCieAddress) Cluster() zcl.ClusterID { return IasZoneID }
 func (a *IasCieAddress) Value() *IasCieAddress { return a }
 func (a IasCieAddress) MarshalZcl() ([]byte, error) {
 	return zcl.Zuid(a).MarshalZcl()
@@ -615,10 +602,12 @@ func (a IasCieAddress) String() string {
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
+const ZoneIdAttr zcl.AttrID = 17
+
 type ZoneId zcl.Zu8
 
-func (a ZoneId) ID() zcl.AttrID         { return 17 }
-func (a ZoneId) Cluster() zcl.ClusterID { return IasZoneCluster }
+func (a ZoneId) ID() zcl.AttrID         { return ZoneIdAttr }
+func (a ZoneId) Cluster() zcl.ClusterID { return IasZoneID }
 func (a *ZoneId) Value() *ZoneId        { return a }
 func (a ZoneId) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()

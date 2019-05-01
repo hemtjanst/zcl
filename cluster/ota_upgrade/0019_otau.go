@@ -6,42 +6,27 @@ import (
 )
 
 // Otau
-// Over the air upgrade.
+const OtauID zcl.ClusterID = 25
 
-func NewOtauServer(profile zcl.ProfileID) *OtauServer { return &OtauServer{p: profile} }
-func NewOtauClient(profile zcl.ProfileID) *OtauClient { return &OtauClient{p: profile} }
-
-const OtauCluster zcl.ClusterID = 25
-
-type OtauServer struct {
-	p zcl.ProfileID
+var OtauCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		QueryNextImageCommand:     func() zcl.Command { return new(QueryNextImage) },
+		UpgradeEndResponseCommand: func() zcl.Command { return new(UpgradeEndResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{
+		UpgradeServerAttr:                func() zcl.Attr { return new(UpgradeServer) },
+		FileOffsetAttr:                   func() zcl.Attr { return new(FileOffset) },
+		CurrentFileVersionAttr:           func() zcl.Attr { return new(CurrentFileVersion) },
+		CurrentZigbeeStackVersionAttr:    func() zcl.Attr { return new(CurrentZigbeeStackVersion) },
+		DownloadedFileVersionAttr:        func() zcl.Attr { return new(DownloadedFileVersion) },
+		DownloadedZigbeeStackVersionAttr: func() zcl.Attr { return new(DownloadedZigbeeStackVersion) },
+		ImageUpgradeStatusAttr:           func() zcl.Attr { return new(ImageUpgradeStatus) },
+		MinBlockRequestDelayAttr:         func() zcl.Attr { return new(MinBlockRequestDelay) },
+	},
+	SceneAttr: []zcl.AttrID{},
 }
-
-type OtauClient struct {
-	p zcl.ProfileID
-
-	UpgradeServer                *UpgradeServer
-	FileOffset                   *FileOffset
-	CurrentFileVersion           *CurrentFileVersion
-	CurrentZigbeeStackVersion    *CurrentZigbeeStackVersion
-	DownloadedFileVersion        *DownloadedFileVersion
-	DownloadedZigbeeStackVersion *DownloadedZigbeeStackVersion
-	ImageUpgradeStatus           *ImageUpgradeStatus
-	MinBlockRequestDelay         *MinBlockRequestDelay
-}
-
-func (s *OtauClient) QueryNextImage() *QueryNextImage         { return new(QueryNextImage) }
-func (s *OtauClient) UpgradeEndResponse() *UpgradeEndResponse { return new(UpgradeEndResponse) }
-
-/*
-var OtauServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var OtauClient = map[zcl.CommandID]func() zcl.Command{
-    QueryNextImageID: func() zcl.Command { return new(QueryNextImage) },
-    UpgradeEndResponseID: func() zcl.Command { return new(UpgradeEndResponse) },
-}
-*/
 
 type QueryNextImage struct {
 	ControlField       zcl.Zbmp8
@@ -72,7 +57,7 @@ func (v QueryNextImage) ID() zcl.CommandID {
 }
 
 func (v QueryNextImage) Cluster() zcl.ClusterID {
-	return OtauCluster
+	return OtauID
 }
 
 func (v QueryNextImage) MnfCode() []byte {
@@ -181,7 +166,7 @@ func (v UpgradeEndResponse) ID() zcl.CommandID {
 }
 
 func (v UpgradeEndResponse) Cluster() zcl.ClusterID {
-	return OtauCluster
+	return OtauID
 }
 
 func (v UpgradeEndResponse) MnfCode() []byte {
@@ -247,10 +232,12 @@ func (v *UpgradeEndResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const UpgradeServerAttr zcl.AttrID = 0
+
 type UpgradeServer zcl.Zuid
 
-func (a UpgradeServer) ID() zcl.AttrID         { return 0 }
-func (a UpgradeServer) Cluster() zcl.ClusterID { return OtauCluster }
+func (a UpgradeServer) ID() zcl.AttrID         { return UpgradeServerAttr }
+func (a UpgradeServer) Cluster() zcl.ClusterID { return OtauID }
 func (a *UpgradeServer) Value() *UpgradeServer { return a }
 func (a UpgradeServer) MarshalZcl() ([]byte, error) {
 	return zcl.Zuid(a).MarshalZcl()
@@ -272,10 +259,12 @@ func (a UpgradeServer) String() string {
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
+const FileOffsetAttr zcl.AttrID = 1
+
 type FileOffset zcl.Zu32
 
-func (a FileOffset) ID() zcl.AttrID         { return 1 }
-func (a FileOffset) Cluster() zcl.ClusterID { return OtauCluster }
+func (a FileOffset) ID() zcl.AttrID         { return FileOffsetAttr }
+func (a FileOffset) Cluster() zcl.ClusterID { return OtauID }
 func (a *FileOffset) Value() *FileOffset    { return a }
 func (a FileOffset) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -297,10 +286,12 @@ func (a FileOffset) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
+const CurrentFileVersionAttr zcl.AttrID = 2
+
 type CurrentFileVersion zcl.Zu32
 
-func (a CurrentFileVersion) ID() zcl.AttrID              { return 2 }
-func (a CurrentFileVersion) Cluster() zcl.ClusterID      { return OtauCluster }
+func (a CurrentFileVersion) ID() zcl.AttrID              { return CurrentFileVersionAttr }
+func (a CurrentFileVersion) Cluster() zcl.ClusterID      { return OtauID }
 func (a *CurrentFileVersion) Value() *CurrentFileVersion { return a }
 func (a CurrentFileVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -322,10 +313,12 @@ func (a CurrentFileVersion) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
+const CurrentZigbeeStackVersionAttr zcl.AttrID = 3
+
 type CurrentZigbeeStackVersion zcl.Zu16
 
-func (a CurrentZigbeeStackVersion) ID() zcl.AttrID                     { return 3 }
-func (a CurrentZigbeeStackVersion) Cluster() zcl.ClusterID             { return OtauCluster }
+func (a CurrentZigbeeStackVersion) ID() zcl.AttrID                     { return CurrentZigbeeStackVersionAttr }
+func (a CurrentZigbeeStackVersion) Cluster() zcl.ClusterID             { return OtauID }
 func (a *CurrentZigbeeStackVersion) Value() *CurrentZigbeeStackVersion { return a }
 func (a CurrentZigbeeStackVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -347,10 +340,12 @@ func (a CurrentZigbeeStackVersion) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
+const DownloadedFileVersionAttr zcl.AttrID = 4
+
 type DownloadedFileVersion zcl.Zu32
 
-func (a DownloadedFileVersion) ID() zcl.AttrID                 { return 4 }
-func (a DownloadedFileVersion) Cluster() zcl.ClusterID         { return OtauCluster }
+func (a DownloadedFileVersion) ID() zcl.AttrID                 { return DownloadedFileVersionAttr }
+func (a DownloadedFileVersion) Cluster() zcl.ClusterID         { return OtauID }
 func (a *DownloadedFileVersion) Value() *DownloadedFileVersion { return a }
 func (a DownloadedFileVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -372,10 +367,12 @@ func (a DownloadedFileVersion) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
+const DownloadedZigbeeStackVersionAttr zcl.AttrID = 5
+
 type DownloadedZigbeeStackVersion zcl.Zu16
 
-func (a DownloadedZigbeeStackVersion) ID() zcl.AttrID                        { return 5 }
-func (a DownloadedZigbeeStackVersion) Cluster() zcl.ClusterID                { return OtauCluster }
+func (a DownloadedZigbeeStackVersion) ID() zcl.AttrID                        { return DownloadedZigbeeStackVersionAttr }
+func (a DownloadedZigbeeStackVersion) Cluster() zcl.ClusterID                { return OtauID }
 func (a *DownloadedZigbeeStackVersion) Value() *DownloadedZigbeeStackVersion { return a }
 func (a DownloadedZigbeeStackVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -397,10 +394,12 @@ func (a DownloadedZigbeeStackVersion) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
+const ImageUpgradeStatusAttr zcl.AttrID = 6
+
 type ImageUpgradeStatus zcl.Zenum8
 
-func (a ImageUpgradeStatus) ID() zcl.AttrID              { return 6 }
-func (a ImageUpgradeStatus) Cluster() zcl.ClusterID      { return OtauCluster }
+func (a ImageUpgradeStatus) ID() zcl.AttrID              { return ImageUpgradeStatusAttr }
+func (a ImageUpgradeStatus) Cluster() zcl.ClusterID      { return OtauID }
 func (a *ImageUpgradeStatus) Value() *ImageUpgradeStatus { return a }
 func (a ImageUpgradeStatus) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -472,10 +471,12 @@ func (a ImageUpgradeStatus) IsWaitForMore() bool { return a == 0x05 }
 // SetWaitForMore sets ImageUpgradeStatus to Wait for more (0x05)
 func (a *ImageUpgradeStatus) SetWaitForMore() { *a = 0x05 }
 
+const MinBlockRequestDelayAttr zcl.AttrID = 9
+
 type MinBlockRequestDelay zcl.Zu16
 
-func (a MinBlockRequestDelay) ID() zcl.AttrID                { return 9 }
-func (a MinBlockRequestDelay) Cluster() zcl.ClusterID        { return OtauCluster }
+func (a MinBlockRequestDelay) ID() zcl.AttrID                { return MinBlockRequestDelayAttr }
+func (a MinBlockRequestDelay) Cluster() zcl.ClusterID        { return OtauID }
 func (a *MinBlockRequestDelay) Value() *MinBlockRequestDelay { return a }
 func (a MinBlockRequestDelay) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

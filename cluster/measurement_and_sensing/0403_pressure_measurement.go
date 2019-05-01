@@ -6,47 +6,32 @@ import (
 )
 
 // PressureMeasurement
-// The server cluster provides an interface to air pressure measurement functionality, including configuration and provision of notifications of air pressure measurements.
+const PressureMeasurementID zcl.ClusterID = 1027
 
-func NewPressureMeasurementServer(profile zcl.ProfileID) *PressureMeasurementServer {
-	return &PressureMeasurementServer{p: profile}
-}
-func NewPressureMeasurementClient(profile zcl.ProfileID) *PressureMeasurementClient {
-	return &PressureMeasurementClient{p: profile}
-}
-
-const PressureMeasurementCluster zcl.ClusterID = 1027
-
-type PressureMeasurementServer struct {
-	p zcl.ProfileID
-
-	MeasuredPressure        *MeasuredPressure
-	MinMeasuredPressure     *MinMeasuredPressure
-	MaxMeasuredPressure     *MaxMeasuredPressure
-	PressureTolerance       *PressureTolerance
-	ScaledPressure          *ScaledPressure
-	MinScaledPressure       *MinScaledPressure
-	MaxScaledPressure       *MaxScaledPressure
-	ScaledPressureTolerance *ScaledPressureTolerance
-	Scale                   *Scale
+var PressureMeasurementCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MeasuredPressureAttr:        func() zcl.Attr { return new(MeasuredPressure) },
+		MinMeasuredPressureAttr:     func() zcl.Attr { return new(MinMeasuredPressure) },
+		MaxMeasuredPressureAttr:     func() zcl.Attr { return new(MaxMeasuredPressure) },
+		PressureToleranceAttr:       func() zcl.Attr { return new(PressureTolerance) },
+		ScaledPressureAttr:          func() zcl.Attr { return new(ScaledPressure) },
+		MinScaledPressureAttr:       func() zcl.Attr { return new(MinScaledPressure) },
+		MaxScaledPressureAttr:       func() zcl.Attr { return new(MaxScaledPressure) },
+		ScaledPressureToleranceAttr: func() zcl.Attr { return new(ScaledPressureTolerance) },
+		ScaleAttr:                   func() zcl.Attr { return new(Scale) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type PressureMeasurementClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var PressureMeasurementServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var PressureMeasurementClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MeasuredPressureAttr zcl.AttrID = 0
 
 type MeasuredPressure zcl.Zs16
 
-func (a MeasuredPressure) ID() zcl.AttrID            { return 0 }
-func (a MeasuredPressure) Cluster() zcl.ClusterID    { return PressureMeasurementCluster }
+func (a MeasuredPressure) ID() zcl.AttrID            { return MeasuredPressureAttr }
+func (a MeasuredPressure) Cluster() zcl.ClusterID    { return PressureMeasurementID }
 func (a *MeasuredPressure) Value() *MeasuredPressure { return a }
 func (a MeasuredPressure) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -68,10 +53,12 @@ func (a MeasuredPressure) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MinMeasuredPressureAttr zcl.AttrID = 1
+
 type MinMeasuredPressure zcl.Zs16
 
-func (a MinMeasuredPressure) ID() zcl.AttrID               { return 1 }
-func (a MinMeasuredPressure) Cluster() zcl.ClusterID       { return PressureMeasurementCluster }
+func (a MinMeasuredPressure) ID() zcl.AttrID               { return MinMeasuredPressureAttr }
+func (a MinMeasuredPressure) Cluster() zcl.ClusterID       { return PressureMeasurementID }
 func (a *MinMeasuredPressure) Value() *MinMeasuredPressure { return a }
 func (a MinMeasuredPressure) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -93,10 +80,12 @@ func (a MinMeasuredPressure) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MaxMeasuredPressureAttr zcl.AttrID = 2
+
 type MaxMeasuredPressure zcl.Zs16
 
-func (a MaxMeasuredPressure) ID() zcl.AttrID               { return 2 }
-func (a MaxMeasuredPressure) Cluster() zcl.ClusterID       { return PressureMeasurementCluster }
+func (a MaxMeasuredPressure) ID() zcl.AttrID               { return MaxMeasuredPressureAttr }
+func (a MaxMeasuredPressure) Cluster() zcl.ClusterID       { return PressureMeasurementID }
 func (a *MaxMeasuredPressure) Value() *MaxMeasuredPressure { return a }
 func (a MaxMeasuredPressure) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -118,10 +107,12 @@ func (a MaxMeasuredPressure) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const PressureToleranceAttr zcl.AttrID = 3
+
 type PressureTolerance zcl.Zu16
 
-func (a PressureTolerance) ID() zcl.AttrID             { return 3 }
-func (a PressureTolerance) Cluster() zcl.ClusterID     { return PressureMeasurementCluster }
+func (a PressureTolerance) ID() zcl.AttrID             { return PressureToleranceAttr }
+func (a PressureTolerance) Cluster() zcl.ClusterID     { return PressureMeasurementID }
 func (a *PressureTolerance) Value() *PressureTolerance { return a }
 func (a PressureTolerance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -143,10 +134,12 @@ func (a PressureTolerance) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ScaledPressureAttr zcl.AttrID = 16
+
 type ScaledPressure zcl.Zs16
 
-func (a ScaledPressure) ID() zcl.AttrID          { return 16 }
-func (a ScaledPressure) Cluster() zcl.ClusterID  { return PressureMeasurementCluster }
+func (a ScaledPressure) ID() zcl.AttrID          { return ScaledPressureAttr }
+func (a ScaledPressure) Cluster() zcl.ClusterID  { return PressureMeasurementID }
 func (a *ScaledPressure) Value() *ScaledPressure { return a }
 func (a ScaledPressure) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -168,10 +161,12 @@ func (a ScaledPressure) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MinScaledPressureAttr zcl.AttrID = 17
+
 type MinScaledPressure zcl.Zs16
 
-func (a MinScaledPressure) ID() zcl.AttrID             { return 17 }
-func (a MinScaledPressure) Cluster() zcl.ClusterID     { return PressureMeasurementCluster }
+func (a MinScaledPressure) ID() zcl.AttrID             { return MinScaledPressureAttr }
+func (a MinScaledPressure) Cluster() zcl.ClusterID     { return PressureMeasurementID }
 func (a *MinScaledPressure) Value() *MinScaledPressure { return a }
 func (a MinScaledPressure) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -193,10 +188,12 @@ func (a MinScaledPressure) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MaxScaledPressureAttr zcl.AttrID = 18
+
 type MaxScaledPressure zcl.Zs16
 
-func (a MaxScaledPressure) ID() zcl.AttrID             { return 18 }
-func (a MaxScaledPressure) Cluster() zcl.ClusterID     { return PressureMeasurementCluster }
+func (a MaxScaledPressure) ID() zcl.AttrID             { return MaxScaledPressureAttr }
+func (a MaxScaledPressure) Cluster() zcl.ClusterID     { return PressureMeasurementID }
 func (a *MaxScaledPressure) Value() *MaxScaledPressure { return a }
 func (a MaxScaledPressure) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -218,10 +215,12 @@ func (a MaxScaledPressure) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ScaledPressureToleranceAttr zcl.AttrID = 19
+
 type ScaledPressureTolerance zcl.Zu16
 
-func (a ScaledPressureTolerance) ID() zcl.AttrID                   { return 19 }
-func (a ScaledPressureTolerance) Cluster() zcl.ClusterID           { return PressureMeasurementCluster }
+func (a ScaledPressureTolerance) ID() zcl.AttrID                   { return ScaledPressureToleranceAttr }
+func (a ScaledPressureTolerance) Cluster() zcl.ClusterID           { return PressureMeasurementID }
 func (a *ScaledPressureTolerance) Value() *ScaledPressureTolerance { return a }
 func (a ScaledPressureTolerance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -243,10 +242,12 @@ func (a ScaledPressureTolerance) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ScaleAttr zcl.AttrID = 20
+
 type Scale zcl.Zs8
 
-func (a Scale) ID() zcl.AttrID         { return 20 }
-func (a Scale) Cluster() zcl.ClusterID { return PressureMeasurementCluster }
+func (a Scale) ID() zcl.AttrID         { return ScaleAttr }
+func (a Scale) Cluster() zcl.ClusterID { return PressureMeasurementID }
 func (a *Scale) Value() *Scale         { return a }
 func (a Scale) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()

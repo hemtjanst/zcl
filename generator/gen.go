@@ -8,6 +8,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"sort"
 	"strings"
 	"text/template"
 )
@@ -46,6 +47,9 @@ func GenerateCluster(base, defPath, tplPath, outPath string) error {
 			Funcs(funcs).
 			Parse(string(b))
 	}
+
+	clusterIndex := map[string][]string{}
+	mfClusterIndex := map[uint16]map[string][]string{}
 
 	for _, v := range d.Files() {
 		p := v.SubPath()
@@ -97,6 +101,23 @@ func GenerateCluster(base, defPath, tplPath, outPath string) error {
 			return fmt.Errorf("while reading %s: %v", v.name, err)
 		}
 
+		if cl.MfCode.Valid() {
+			mf := uint16(cl.MfCode.Uint())
+			if _, ok := mfClusterIndex[mf]; !ok {
+				mfClusterIndex[mf] = map[string][]string{}
+			}
+			if _, ok := mfClusterIndex[mf][filepath.Base(dp)]; !ok {
+				mfClusterIndex[mf][filepath.Base(dp)] = []string{}
+			}
+			mfClusterIndex[mf][filepath.Base(dp)] = append(mfClusterIndex[mf][filepath.Base(dp)], cl.MfCode.Stn(cl.Name))
+
+		} else {
+			if _, ok := clusterIndex[filepath.Base(dp)]; !ok {
+				clusterIndex[filepath.Base(dp)] = []string{}
+			}
+			clusterIndex[filepath.Base(dp)] = append(clusterIndex[filepath.Base(dp)], cl.MfCode.Stn(cl.Name))
+		}
+
 		wr := &BufWriter{}
 		err = clusterTpl.Execute(wr, cl)
 		if err != nil {
@@ -109,6 +130,45 @@ func GenerateCluster(base, defPath, tplPath, outPath string) error {
 		}
 
 	}
+
+	wr := &BufWriter{}
+	_, _ = wr.Write([]byte(`
+package cluster
+
+import (
+`))
+
+	_, _ = wr.Write([]byte(fmt.Sprintf("    \"%s\"\n", base)))
+
+	var domains []string
+
+	for n := range clusterIndex {
+		domains = append(domains, n)
+	}
+	sort.Strings(domains)
+	for _, n := range domains {
+		_, _ = wr.Write([]byte(fmt.Sprintf("    \"%s/cluster/%s\"\n", base, n)))
+	}
+
+	_, _ = wr.Write([]byte(`
+)
+
+var Clusters = map[zcl.ClusterID]zcl.Cluster{
+`))
+
+	for _, n := range domains {
+		clusters := clusterIndex[n]
+		sort.Strings(clusters)
+
+		for _, v := range clusters {
+			_, _ = wr.Write([]byte(fmt.Sprintf("    %s.%sID: %s.%sCluster,\n", n, v, n, v)))
+		}
+	}
+
+	_, _ = wr.Write([]byte("}\n"))
+
+	_ = writeFile(filepath.Join(outPath, "all.go"), []byte(*wr))
+
 	return nil
 
 }

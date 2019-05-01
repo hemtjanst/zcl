@@ -6,44 +6,22 @@ import (
 )
 
 // Touchlink
-// Attributes and commands for Touchlink commissioning.
+const TouchlinkID zcl.ClusterID = 4096
 
-func NewTouchlinkServer(profile zcl.ProfileID) *TouchlinkServer { return &TouchlinkServer{p: profile} }
-func NewTouchlinkClient(profile zcl.ProfileID) *TouchlinkClient { return &TouchlinkClient{p: profile} }
-
-const TouchlinkCluster zcl.ClusterID = 4096
-
-type TouchlinkServer struct {
-	p zcl.ProfileID
+var TouchlinkCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		GetGroupIdentifiersCommand: func() zcl.Command { return new(GetGroupIdentifiers) },
+		GetEndpointListCommand:     func() zcl.Command { return new(GetEndpointList) },
+		WriteMacAddressCommand:     func() zcl.Command { return new(WriteMacAddress) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		GetGroupIdentifiersResponseCommand: func() zcl.Command { return new(GetGroupIdentifiersResponse) },
+		GetEndpointListResponseCommand:     func() zcl.Command { return new(GetEndpointListResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *TouchlinkServer) GetGroupIdentifiers() *GetGroupIdentifiers { return new(GetGroupIdentifiers) }
-func (s *TouchlinkServer) GetEndpointList() *GetEndpointList         { return new(GetEndpointList) }
-func (s *TouchlinkServer) WriteMacAddress() *WriteMacAddress         { return new(WriteMacAddress) }
-
-type TouchlinkClient struct {
-	p zcl.ProfileID
-}
-
-func (s *TouchlinkClient) GetGroupIdentifiersResponse() *GetGroupIdentifiersResponse {
-	return new(GetGroupIdentifiersResponse)
-}
-func (s *TouchlinkClient) GetEndpointListResponse() *GetEndpointListResponse {
-	return new(GetEndpointListResponse)
-}
-
-/*
-var TouchlinkServer = map[zcl.CommandID]func() zcl.Command{
-    GetGroupIdentifiersID: func() zcl.Command { return new(GetGroupIdentifiers) },
-    GetEndpointListID: func() zcl.Command { return new(GetEndpointList) },
-    WriteMacAddressID: func() zcl.Command { return new(WriteMacAddress) },
-}
-
-var TouchlinkClient = map[zcl.CommandID]func() zcl.Command{
-    GetGroupIdentifiersResponseID: func() zcl.Command { return new(GetGroupIdentifiersResponse) },
-    GetEndpointListResponseID: func() zcl.Command { return new(GetEndpointListResponse) },
-}
-*/
 
 // The get group identifiers request command is used to retrieve the actual group identifiers that the endpoint is using in its multicast communication in controlling different (remote) devices.
 type GetGroupIdentifiers struct {
@@ -63,7 +41,7 @@ func (v GetGroupIdentifiers) ID() zcl.CommandID {
 }
 
 func (v GetGroupIdentifiers) Cluster() zcl.ClusterID {
-	return TouchlinkCluster
+	return TouchlinkID
 }
 
 func (v GetGroupIdentifiers) MnfCode() []byte {
@@ -111,7 +89,7 @@ func (v GetEndpointList) ID() zcl.CommandID {
 }
 
 func (v GetEndpointList) Cluster() zcl.ClusterID {
-	return TouchlinkCluster
+	return TouchlinkID
 }
 
 func (v GetEndpointList) MnfCode() []byte {
@@ -159,7 +137,7 @@ func (v WriteMacAddress) ID() zcl.CommandID {
 }
 
 func (v WriteMacAddress) Cluster() zcl.ClusterID {
-	return TouchlinkCluster
+	return TouchlinkID
 }
 
 func (v WriteMacAddress) MnfCode() []byte {
@@ -215,7 +193,7 @@ func (v GetGroupIdentifiersResponse) ID() zcl.CommandID {
 }
 
 func (v GetGroupIdentifiersResponse) Cluster() zcl.ClusterID {
-	return TouchlinkCluster
+	return TouchlinkID
 }
 
 func (v GetGroupIdentifiersResponse) MnfCode() []byte {
@@ -313,7 +291,7 @@ func (v GetEndpointListResponse) ID() zcl.CommandID {
 }
 
 func (v GetEndpointListResponse) Cluster() zcl.ClusterID {
-	return TouchlinkCluster
+	return TouchlinkID
 }
 
 func (v GetEndpointListResponse) MnfCode() []byte {

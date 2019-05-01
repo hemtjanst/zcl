@@ -6,61 +6,36 @@ import (
 )
 
 // LevelControl
-// This cluster provides an interface for controlling a characteristic of a device that can be set to a level, for example the brightness of a light, the degree of closure of a door, or the power output of a heater.
+const LevelControlID zcl.ClusterID = 8
 
-func NewLevelControlServer(profile zcl.ProfileID) *LevelControlServer {
-	return &LevelControlServer{p: profile}
+var LevelControlCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		MoveToLevelCommand:          func() zcl.Command { return new(MoveToLevel) },
+		MoveCommand:                 func() zcl.Command { return new(Move) },
+		StepCommand:                 func() zcl.Command { return new(Step) },
+		StopCommand:                 func() zcl.Command { return new(Stop) },
+		MoveToLevelWithOnOffCommand: func() zcl.Command { return new(MoveToLevelWithOnOff) },
+		MoveWithOnOffCommand:        func() zcl.Command { return new(MoveWithOnOff) },
+		StepWithOnOffCommand:        func() zcl.Command { return new(StepWithOnOff) },
+		StopWithOnOffCommand:        func() zcl.Command { return new(StopWithOnOff) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		CurrentLevelAttr:         func() zcl.Attr { return new(CurrentLevel) },
+		RemainingTimeAttr:        func() zcl.Attr { return new(RemainingTime) },
+		UnknownAttr:              func() zcl.Attr { return new(Unknown) },
+		OnoffTransistionTimeAttr: func() zcl.Attr { return new(OnoffTransistionTime) },
+		OnLevelAttr:              func() zcl.Attr { return new(OnLevel) },
+		OnTransitionTimeAttr:     func() zcl.Attr { return new(OnTransitionTime) },
+		OffTransitionTimeAttr:    func() zcl.Attr { return new(OffTransitionTime) },
+		DefaultMoveRateAttr:      func() zcl.Attr { return new(DefaultMoveRate) },
+		PoweronLevelAttr:         func() zcl.Attr { return new(PoweronLevel) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr: []zcl.AttrID{
+		CurrentLevelAttr,
+	},
 }
-func NewLevelControlClient(profile zcl.ProfileID) *LevelControlClient {
-	return &LevelControlClient{p: profile}
-}
-
-const LevelControlCluster zcl.ClusterID = 8
-
-type LevelControlServer struct {
-	p zcl.ProfileID
-
-	CurrentLevel         *CurrentLevel
-	RemainingTime        *RemainingTime
-	Unknown              *Unknown
-	OnoffTransistionTime *OnoffTransistionTime
-	OnLevel              *OnLevel
-	OnTransitionTime     *OnTransitionTime
-	OffTransitionTime    *OffTransitionTime
-	DefaultMoveRate      *DefaultMoveRate
-	PoweronLevel         *PoweronLevel
-}
-
-func (s *LevelControlServer) MoveToLevel() *MoveToLevel { return new(MoveToLevel) }
-func (s *LevelControlServer) Move() *Move               { return new(Move) }
-func (s *LevelControlServer) Step() *Step               { return new(Step) }
-func (s *LevelControlServer) Stop() *Stop               { return new(Stop) }
-func (s *LevelControlServer) MoveToLevelWithOnOff() *MoveToLevelWithOnOff {
-	return new(MoveToLevelWithOnOff)
-}
-func (s *LevelControlServer) MoveWithOnOff() *MoveWithOnOff { return new(MoveWithOnOff) }
-func (s *LevelControlServer) StepWithOnOff() *StepWithOnOff { return new(StepWithOnOff) }
-func (s *LevelControlServer) StopWithOnOff() *StopWithOnOff { return new(StopWithOnOff) }
-
-type LevelControlClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var LevelControlServer = map[zcl.CommandID]func() zcl.Command{
-    MoveToLevelID: func() zcl.Command { return new(MoveToLevel) },
-    MoveID: func() zcl.Command { return new(Move) },
-    StepID: func() zcl.Command { return new(Step) },
-    StopID: func() zcl.Command { return new(Stop) },
-    MoveToLevelWithOnOffID: func() zcl.Command { return new(MoveToLevelWithOnOff) },
-    MoveWithOnOffID: func() zcl.Command { return new(MoveWithOnOff) },
-    StepWithOnOffID: func() zcl.Command { return new(StepWithOnOff) },
-    StopWithOnOffID: func() zcl.Command { return new(StopWithOnOff) },
-}
-
-var LevelControlClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type MoveToLevel struct {
 	Level           zcl.Zu8
@@ -81,7 +56,7 @@ func (v MoveToLevel) ID() zcl.CommandID {
 }
 
 func (v MoveToLevel) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v MoveToLevel) MnfCode() []byte {
@@ -139,7 +114,7 @@ func (v Move) ID() zcl.CommandID {
 }
 
 func (v Move) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v Move) MnfCode() []byte {
@@ -199,7 +174,7 @@ func (v Step) ID() zcl.CommandID {
 }
 
 func (v Step) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v Step) MnfCode() []byte {
@@ -261,7 +236,7 @@ func (v Stop) ID() zcl.CommandID {
 }
 
 func (v Stop) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v Stop) MnfCode() []byte {
@@ -295,7 +270,7 @@ func (v MoveToLevelWithOnOff) ID() zcl.CommandID {
 }
 
 func (v MoveToLevelWithOnOff) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v MoveToLevelWithOnOff) MnfCode() []byte {
@@ -353,7 +328,7 @@ func (v MoveWithOnOff) ID() zcl.CommandID {
 }
 
 func (v MoveWithOnOff) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v MoveWithOnOff) MnfCode() []byte {
@@ -413,7 +388,7 @@ func (v StepWithOnOff) ID() zcl.CommandID {
 }
 
 func (v StepWithOnOff) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v StepWithOnOff) MnfCode() []byte {
@@ -475,7 +450,7 @@ func (v StopWithOnOff) ID() zcl.CommandID {
 }
 
 func (v StopWithOnOff) Cluster() zcl.ClusterID {
-	return LevelControlCluster
+	return LevelControlID
 }
 
 func (v StopWithOnOff) MnfCode() []byte {
@@ -490,10 +465,12 @@ func (v *StopWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const CurrentLevelAttr zcl.AttrID = 0
+
 type CurrentLevel zcl.Zu8
 
-func (a CurrentLevel) ID() zcl.AttrID         { return 0 }
-func (a CurrentLevel) Cluster() zcl.ClusterID { return LevelControlCluster }
+func (a CurrentLevel) ID() zcl.AttrID         { return CurrentLevelAttr }
+func (a CurrentLevel) Cluster() zcl.ClusterID { return LevelControlID }
 func (a *CurrentLevel) Value() *CurrentLevel  { return a }
 func (a CurrentLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -515,10 +492,12 @@ func (a CurrentLevel) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const RemainingTimeAttr zcl.AttrID = 1
+
 type RemainingTime zcl.Zu16
 
-func (a RemainingTime) ID() zcl.AttrID         { return 1 }
-func (a RemainingTime) Cluster() zcl.ClusterID { return LevelControlCluster }
+func (a RemainingTime) ID() zcl.AttrID         { return RemainingTimeAttr }
+func (a RemainingTime) Cluster() zcl.ClusterID { return LevelControlID }
 func (a *RemainingTime) Value() *RemainingTime { return a }
 func (a RemainingTime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -540,10 +519,12 @@ func (a RemainingTime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const UnknownAttr zcl.AttrID = 15
+
 type Unknown zcl.Zbmp8
 
-func (a Unknown) ID() zcl.AttrID         { return 15 }
-func (a Unknown) Cluster() zcl.ClusterID { return LevelControlCluster }
+func (a Unknown) ID() zcl.AttrID         { return UnknownAttr }
+func (a Unknown) Cluster() zcl.ClusterID { return LevelControlID }
 func (a *Unknown) Value() *Unknown       { return a }
 func (a Unknown) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -565,10 +546,12 @@ func (a Unknown) String() string {
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
+const OnoffTransistionTimeAttr zcl.AttrID = 16
+
 type OnoffTransistionTime zcl.Zu16
 
-func (a OnoffTransistionTime) ID() zcl.AttrID                { return 16 }
-func (a OnoffTransistionTime) Cluster() zcl.ClusterID        { return LevelControlCluster }
+func (a OnoffTransistionTime) ID() zcl.AttrID                { return OnoffTransistionTimeAttr }
+func (a OnoffTransistionTime) Cluster() zcl.ClusterID        { return LevelControlID }
 func (a *OnoffTransistionTime) Value() *OnoffTransistionTime { return a }
 func (a OnoffTransistionTime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -590,10 +573,12 @@ func (a OnoffTransistionTime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const OnLevelAttr zcl.AttrID = 17
+
 type OnLevel zcl.Zu8
 
-func (a OnLevel) ID() zcl.AttrID         { return 17 }
-func (a OnLevel) Cluster() zcl.ClusterID { return LevelControlCluster }
+func (a OnLevel) ID() zcl.AttrID         { return OnLevelAttr }
+func (a OnLevel) Cluster() zcl.ClusterID { return LevelControlID }
 func (a *OnLevel) Value() *OnLevel       { return a }
 func (a OnLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -615,10 +600,12 @@ func (a OnLevel) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const OnTransitionTimeAttr zcl.AttrID = 18
+
 type OnTransitionTime zcl.Zu16
 
-func (a OnTransitionTime) ID() zcl.AttrID            { return 18 }
-func (a OnTransitionTime) Cluster() zcl.ClusterID    { return LevelControlCluster }
+func (a OnTransitionTime) ID() zcl.AttrID            { return OnTransitionTimeAttr }
+func (a OnTransitionTime) Cluster() zcl.ClusterID    { return LevelControlID }
 func (a *OnTransitionTime) Value() *OnTransitionTime { return a }
 func (a OnTransitionTime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -640,10 +627,12 @@ func (a OnTransitionTime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const OffTransitionTimeAttr zcl.AttrID = 19
+
 type OffTransitionTime zcl.Zu16
 
-func (a OffTransitionTime) ID() zcl.AttrID             { return 19 }
-func (a OffTransitionTime) Cluster() zcl.ClusterID     { return LevelControlCluster }
+func (a OffTransitionTime) ID() zcl.AttrID             { return OffTransitionTimeAttr }
+func (a OffTransitionTime) Cluster() zcl.ClusterID     { return LevelControlID }
 func (a *OffTransitionTime) Value() *OffTransitionTime { return a }
 func (a OffTransitionTime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -665,10 +654,12 @@ func (a OffTransitionTime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DefaultMoveRateAttr zcl.AttrID = 20
+
 type DefaultMoveRate zcl.Zu8
 
-func (a DefaultMoveRate) ID() zcl.AttrID           { return 20 }
-func (a DefaultMoveRate) Cluster() zcl.ClusterID   { return LevelControlCluster }
+func (a DefaultMoveRate) ID() zcl.AttrID           { return DefaultMoveRateAttr }
+func (a DefaultMoveRate) Cluster() zcl.ClusterID   { return LevelControlID }
 func (a *DefaultMoveRate) Value() *DefaultMoveRate { return a }
 func (a DefaultMoveRate) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -690,10 +681,12 @@ func (a DefaultMoveRate) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const PoweronLevelAttr zcl.AttrID = 16384
+
 type PoweronLevel zcl.Zu8
 
-func (a PoweronLevel) ID() zcl.AttrID         { return 16384 }
-func (a PoweronLevel) Cluster() zcl.ClusterID { return LevelControlCluster }
+func (a PoweronLevel) ID() zcl.AttrID         { return PoweronLevelAttr }
+func (a PoweronLevel) Cluster() zcl.ClusterID { return LevelControlID }
 func (a *PoweronLevel) Value() *PoweronLevel  { return a }
 func (a PoweronLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()

@@ -6,42 +6,27 @@ import (
 )
 
 // TemperatureMeasurement
-// The server cluster provides an interface to temperature measurement functionality, including configuration and provision of notifications of temperature measurements.
+const TemperatureMeasurementID zcl.ClusterID = 1026
 
-func NewTemperatureMeasurementServer(profile zcl.ProfileID) *TemperatureMeasurementServer {
-	return &TemperatureMeasurementServer{p: profile}
-}
-func NewTemperatureMeasurementClient(profile zcl.ProfileID) *TemperatureMeasurementClient {
-	return &TemperatureMeasurementClient{p: profile}
-}
-
-const TemperatureMeasurementCluster zcl.ClusterID = 1026
-
-type TemperatureMeasurementServer struct {
-	p zcl.ProfileID
-
-	MeasuredTemperature    *MeasuredTemperature
-	MinMeasuredTemperature *MinMeasuredTemperature
-	MaxMeasuredTemperature *MaxMeasuredTemperature
-	TemperatureTolerance   *TemperatureTolerance
+var TemperatureMeasurementCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MeasuredTemperatureAttr:    func() zcl.Attr { return new(MeasuredTemperature) },
+		MinMeasuredTemperatureAttr: func() zcl.Attr { return new(MinMeasuredTemperature) },
+		MaxMeasuredTemperatureAttr: func() zcl.Attr { return new(MaxMeasuredTemperature) },
+		TemperatureToleranceAttr:   func() zcl.Attr { return new(TemperatureTolerance) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type TemperatureMeasurementClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var TemperatureMeasurementServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var TemperatureMeasurementClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MeasuredTemperatureAttr zcl.AttrID = 0
 
 type MeasuredTemperature zcl.Zs16
 
-func (a MeasuredTemperature) ID() zcl.AttrID               { return 0 }
-func (a MeasuredTemperature) Cluster() zcl.ClusterID       { return TemperatureMeasurementCluster }
+func (a MeasuredTemperature) ID() zcl.AttrID               { return MeasuredTemperatureAttr }
+func (a MeasuredTemperature) Cluster() zcl.ClusterID       { return TemperatureMeasurementID }
 func (a *MeasuredTemperature) Value() *MeasuredTemperature { return a }
 func (a MeasuredTemperature) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -63,10 +48,12 @@ func (a MeasuredTemperature) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MinMeasuredTemperatureAttr zcl.AttrID = 1
+
 type MinMeasuredTemperature zcl.Zs16
 
-func (a MinMeasuredTemperature) ID() zcl.AttrID                  { return 1 }
-func (a MinMeasuredTemperature) Cluster() zcl.ClusterID          { return TemperatureMeasurementCluster }
+func (a MinMeasuredTemperature) ID() zcl.AttrID                  { return MinMeasuredTemperatureAttr }
+func (a MinMeasuredTemperature) Cluster() zcl.ClusterID          { return TemperatureMeasurementID }
 func (a *MinMeasuredTemperature) Value() *MinMeasuredTemperature { return a }
 func (a MinMeasuredTemperature) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -88,10 +75,12 @@ func (a MinMeasuredTemperature) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MaxMeasuredTemperatureAttr zcl.AttrID = 2
+
 type MaxMeasuredTemperature zcl.Zs16
 
-func (a MaxMeasuredTemperature) ID() zcl.AttrID                  { return 2 }
-func (a MaxMeasuredTemperature) Cluster() zcl.ClusterID          { return TemperatureMeasurementCluster }
+func (a MaxMeasuredTemperature) ID() zcl.AttrID                  { return MaxMeasuredTemperatureAttr }
+func (a MaxMeasuredTemperature) Cluster() zcl.ClusterID          { return TemperatureMeasurementID }
 func (a *MaxMeasuredTemperature) Value() *MaxMeasuredTemperature { return a }
 func (a MaxMeasuredTemperature) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -113,10 +102,12 @@ func (a MaxMeasuredTemperature) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const TemperatureToleranceAttr zcl.AttrID = 3
+
 type TemperatureTolerance zcl.Zu16
 
-func (a TemperatureTolerance) ID() zcl.AttrID                { return 3 }
-func (a TemperatureTolerance) Cluster() zcl.ClusterID        { return TemperatureMeasurementCluster }
+func (a TemperatureTolerance) ID() zcl.AttrID                { return TemperatureToleranceAttr }
+func (a TemperatureTolerance) Cluster() zcl.ClusterID        { return TemperatureMeasurementID }
 func (a *TemperatureTolerance) Value() *TemperatureTolerance { return a }
 func (a TemperatureTolerance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

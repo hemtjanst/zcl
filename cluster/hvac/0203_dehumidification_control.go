@@ -6,29 +6,12 @@ import (
 )
 
 // DehumidificationControl
-// dfdf
+const DehumidificationControlID zcl.ClusterID = 515
 
-func NewDehumidificationControlServer(profile zcl.ProfileID) *DehumidificationControlServer {
-	return &DehumidificationControlServer{p: profile}
+var DehumidificationControlCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewDehumidificationControlClient(profile zcl.ProfileID) *DehumidificationControlClient {
-	return &DehumidificationControlClient{p: profile}
-}
-
-const DehumidificationControlCluster zcl.ClusterID = 515
-
-type DehumidificationControlServer struct {
-	p zcl.ProfileID
-}
-
-type DehumidificationControlClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var DehumidificationControlServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var DehumidificationControlClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

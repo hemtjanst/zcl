@@ -6,29 +6,12 @@ import (
 )
 
 // MeterIdentification
-// Attributes and commands that provide an interface tometer identification
+const MeterIdentificationID zcl.ClusterID = 2817
 
-func NewMeterIdentificationServer(profile zcl.ProfileID) *MeterIdentificationServer {
-	return &MeterIdentificationServer{p: profile}
+var MeterIdentificationCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewMeterIdentificationClient(profile zcl.ProfileID) *MeterIdentificationClient {
-	return &MeterIdentificationClient{p: profile}
-}
-
-const MeterIdentificationCluster zcl.ClusterID = 2817
-
-type MeterIdentificationServer struct {
-	p zcl.ProfileID
-}
-
-type MeterIdentificationClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var MeterIdentificationServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var MeterIdentificationClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

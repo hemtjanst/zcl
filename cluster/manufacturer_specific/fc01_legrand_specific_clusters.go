@@ -7,40 +7,25 @@ import (
 
 // LegrandSpecificClusters
 // Manufacturer code 0x1021
-// Legrand Specific clusters.
+const LegrandSpecificClustersID zcl.ClusterID = 64513
 
-func NewLegrandSpecificClustersServer(profile zcl.ProfileID) *LegrandSpecificClustersServer {
-	return &LegrandSpecificClustersServer{p: profile}
-}
-func NewLegrandSpecificClustersClient(profile zcl.ProfileID) *LegrandSpecificClustersClient {
-	return &LegrandSpecificClustersClient{p: profile}
-}
-
-const LegrandSpecificClustersCluster zcl.ClusterID = 64513
-
-type LegrandSpecificClustersServer struct {
-	p zcl.ProfileID
-
-	Dimmer *Dimmer
-	Led    *Led
+var LegrandSpecificClustersCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		DimmerAttr: func() zcl.Attr { return new(Dimmer) },
+		LedAttr:    func() zcl.Attr { return new(Led) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type LegrandSpecificClustersClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var LegrandSpecificClustersServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var LegrandSpecificClustersClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const DimmerAttr zcl.AttrID = 0
 
 type Dimmer zcl.Zdat16
 
-func (a Dimmer) ID() zcl.AttrID         { return 0 }
-func (a Dimmer) Cluster() zcl.ClusterID { return LegrandSpecificClustersCluster }
+func (a Dimmer) ID() zcl.AttrID         { return DimmerAttr }
+func (a Dimmer) Cluster() zcl.ClusterID { return LegrandSpecificClustersID }
 func (a *Dimmer) Value() *Dimmer        { return a }
 func (a Dimmer) MarshalZcl() ([]byte, error) {
 	return zcl.Zdat16(a).MarshalZcl()
@@ -62,10 +47,12 @@ func (a Dimmer) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zdat16(a))
 }
 
+const LedAttr zcl.AttrID = 1
+
 type Led zcl.Zbool
 
-func (a Led) ID() zcl.AttrID         { return 1 }
-func (a Led) Cluster() zcl.ClusterID { return LegrandSpecificClustersCluster }
+func (a Led) ID() zcl.AttrID         { return LedAttr }
+func (a Led) Cluster() zcl.ClusterID { return LegrandSpecificClustersID }
 func (a *Led) Value() *Led           { return a }
 func (a Led) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()

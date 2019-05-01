@@ -6,46 +6,31 @@ import (
 )
 
 // GreenPower
-// Attributes and commands.
+const GreenPowerID zcl.ClusterID = 33
 
-func NewGreenPowerServer(profile zcl.ProfileID) *GreenPowerServer {
-	return &GreenPowerServer{p: profile}
-}
-func NewGreenPowerClient(profile zcl.ProfileID) *GreenPowerClient {
-	return &GreenPowerClient{p: profile}
-}
-
-const GreenPowerCluster zcl.ClusterID = 33
-
-type GreenPowerServer struct {
-	p zcl.ProfileID
-
-	MaxSinkTableEntries   *MaxSinkTableEntries
-	SinkTable             *SinkTable
-	CommunicationMode     *CommunicationMode
-	CommissioningExitMode *CommissioningExitMode
-	CommissioningWindow   *CommissioningWindow
-	SecurityLevel         *SecurityLevel
-	Functionality         *Functionality
-	ActiveFunctionality   *ActiveFunctionality
+var GreenPowerCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MaxSinkTableEntriesAttr:   func() zcl.Attr { return new(MaxSinkTableEntries) },
+		SinkTableAttr:             func() zcl.Attr { return new(SinkTable) },
+		CommunicationModeAttr:     func() zcl.Attr { return new(CommunicationMode) },
+		CommissioningExitModeAttr: func() zcl.Attr { return new(CommissioningExitMode) },
+		CommissioningWindowAttr:   func() zcl.Attr { return new(CommissioningWindow) },
+		SecurityLevelAttr:         func() zcl.Attr { return new(SecurityLevel) },
+		FunctionalityAttr:         func() zcl.Attr { return new(Functionality) },
+		ActiveFunctionalityAttr:   func() zcl.Attr { return new(ActiveFunctionality) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type GreenPowerClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var GreenPowerServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var GreenPowerClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MaxSinkTableEntriesAttr zcl.AttrID = 0
 
 type MaxSinkTableEntries zcl.Zu8
 
-func (a MaxSinkTableEntries) ID() zcl.AttrID               { return 0 }
-func (a MaxSinkTableEntries) Cluster() zcl.ClusterID       { return GreenPowerCluster }
+func (a MaxSinkTableEntries) ID() zcl.AttrID               { return MaxSinkTableEntriesAttr }
+func (a MaxSinkTableEntries) Cluster() zcl.ClusterID       { return GreenPowerID }
 func (a *MaxSinkTableEntries) Value() *MaxSinkTableEntries { return a }
 func (a MaxSinkTableEntries) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -67,10 +52,12 @@ func (a MaxSinkTableEntries) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
+const SinkTableAttr zcl.AttrID = 1
+
 type SinkTable zcl.Zlostring
 
-func (a SinkTable) ID() zcl.AttrID         { return 1 }
-func (a SinkTable) Cluster() zcl.ClusterID { return GreenPowerCluster }
+func (a SinkTable) ID() zcl.AttrID         { return SinkTableAttr }
+func (a SinkTable) Cluster() zcl.ClusterID { return GreenPowerID }
 func (a *SinkTable) Value() *SinkTable     { return a }
 func (a SinkTable) MarshalZcl() ([]byte, error) {
 	return zcl.Zlostring(a).MarshalZcl()
@@ -92,10 +79,12 @@ func (a SinkTable) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zlostring(a))
 }
 
+const CommunicationModeAttr zcl.AttrID = 2
+
 type CommunicationMode zcl.Zbmp8
 
-func (a CommunicationMode) ID() zcl.AttrID             { return 2 }
-func (a CommunicationMode) Cluster() zcl.ClusterID     { return GreenPowerCluster }
+func (a CommunicationMode) ID() zcl.AttrID             { return CommunicationModeAttr }
+func (a CommunicationMode) Cluster() zcl.ClusterID     { return GreenPowerID }
 func (a *CommunicationMode) Value() *CommunicationMode { return a }
 func (a CommunicationMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -117,10 +106,12 @@ func (a CommunicationMode) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
 }
 
+const CommissioningExitModeAttr zcl.AttrID = 3
+
 type CommissioningExitMode zcl.Zbmp8
 
-func (a CommissioningExitMode) ID() zcl.AttrID                 { return 3 }
-func (a CommissioningExitMode) Cluster() zcl.ClusterID         { return GreenPowerCluster }
+func (a CommissioningExitMode) ID() zcl.AttrID                 { return CommissioningExitModeAttr }
+func (a CommissioningExitMode) Cluster() zcl.ClusterID         { return GreenPowerID }
 func (a *CommissioningExitMode) Value() *CommissioningExitMode { return a }
 func (a CommissioningExitMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -142,10 +133,12 @@ func (a CommissioningExitMode) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
 }
 
+const CommissioningWindowAttr zcl.AttrID = 4
+
 type CommissioningWindow zcl.Zu16
 
-func (a CommissioningWindow) ID() zcl.AttrID               { return 4 }
-func (a CommissioningWindow) Cluster() zcl.ClusterID       { return GreenPowerCluster }
+func (a CommissioningWindow) ID() zcl.AttrID               { return CommissioningWindowAttr }
+func (a CommissioningWindow) Cluster() zcl.ClusterID       { return GreenPowerID }
 func (a *CommissioningWindow) Value() *CommissioningWindow { return a }
 func (a CommissioningWindow) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -167,10 +160,12 @@ func (a CommissioningWindow) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
+const SecurityLevelAttr zcl.AttrID = 5
+
 type SecurityLevel zcl.Zbmp8
 
-func (a SecurityLevel) ID() zcl.AttrID         { return 5 }
-func (a SecurityLevel) Cluster() zcl.ClusterID { return GreenPowerCluster }
+func (a SecurityLevel) ID() zcl.AttrID         { return SecurityLevelAttr }
+func (a SecurityLevel) Cluster() zcl.ClusterID { return GreenPowerID }
 func (a *SecurityLevel) Value() *SecurityLevel { return a }
 func (a SecurityLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -192,10 +187,12 @@ func (a SecurityLevel) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
 }
 
+const FunctionalityAttr zcl.AttrID = 6
+
 type Functionality zcl.Zbmp24
 
-func (a Functionality) ID() zcl.AttrID         { return 6 }
-func (a Functionality) Cluster() zcl.ClusterID { return GreenPowerCluster }
+func (a Functionality) ID() zcl.AttrID         { return FunctionalityAttr }
+func (a Functionality) Cluster() zcl.ClusterID { return GreenPowerID }
 func (a *Functionality) Value() *Functionality { return a }
 func (a Functionality) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp24(a).MarshalZcl()
@@ -217,10 +214,12 @@ func (a Functionality) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp24(a))
 }
 
+const ActiveFunctionalityAttr zcl.AttrID = 7
+
 type ActiveFunctionality zcl.Zbmp24
 
-func (a ActiveFunctionality) ID() zcl.AttrID               { return 7 }
-func (a ActiveFunctionality) Cluster() zcl.ClusterID       { return GreenPowerCluster }
+func (a ActiveFunctionality) ID() zcl.AttrID               { return ActiveFunctionalityAttr }
+func (a ActiveFunctionality) Cluster() zcl.ClusterID       { return GreenPowerID }
 func (a *ActiveFunctionality) Value() *ActiveFunctionality { return a }
 func (a ActiveFunctionality) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp24(a).MarshalZcl()

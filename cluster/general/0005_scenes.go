@@ -6,83 +6,43 @@ import (
 )
 
 // Scenes
-// Attributes and commands for scene configuration and manipulation.
+const ScenesID zcl.ClusterID = 5
 
-func NewScenesServer(profile zcl.ProfileID) *ScenesServer { return &ScenesServer{p: profile} }
-func NewScenesClient(profile zcl.ProfileID) *ScenesClient { return &ScenesClient{p: profile} }
-
-const ScenesCluster zcl.ClusterID = 5
-
-type ScenesServer struct {
-	p zcl.ProfileID
-
-	SceneCount       *SceneCount
-	CurrentScene     *CurrentScene
-	CurrentGroup     *CurrentGroup
-	SceneValid       *SceneValid
-	SceneNameSupport *SceneNameSupport
-	LastConfiguredby *LastConfiguredby
+var ScenesCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		AddSceneCommand:           func() zcl.Command { return new(AddScene) },
+		ViewSceneCommand:          func() zcl.Command { return new(ViewScene) },
+		RemoveSceneCommand:        func() zcl.Command { return new(RemoveScene) },
+		RemoveAllScenesCommand:    func() zcl.Command { return new(RemoveAllScenes) },
+		StoreSceneCommand:         func() zcl.Command { return new(StoreScene) },
+		RecallSceneCommand:        func() zcl.Command { return new(RecallScene) },
+		GetSceneMembershipCommand: func() zcl.Command { return new(GetSceneMembership) },
+		EnhancedAddSceneCommand:   func() zcl.Command { return new(EnhancedAddScene) },
+		EnhancedViewSceneCommand:  func() zcl.Command { return new(EnhancedViewScene) },
+		CopySceneCommand:          func() zcl.Command { return new(CopyScene) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		AddSceneResponseCommand:           func() zcl.Command { return new(AddSceneResponse) },
+		ViewSceneResponseCommand:          func() zcl.Command { return new(ViewSceneResponse) },
+		RemoveSceneResponseCommand:        func() zcl.Command { return new(RemoveSceneResponse) },
+		RemoveAllScenesResponseCommand:    func() zcl.Command { return new(RemoveAllScenesResponse) },
+		StoreSceneResponseCommand:         func() zcl.Command { return new(StoreSceneResponse) },
+		GetSceneMembershipResponseCommand: func() zcl.Command { return new(GetSceneMembershipResponse) },
+		EnhancedAddSceneResponseCommand:   func() zcl.Command { return new(EnhancedAddSceneResponse) },
+		EnhancedViewSceneResponseCommand:  func() zcl.Command { return new(EnhancedViewSceneResponse) },
+		CopySceneResponseCommand:          func() zcl.Command { return new(CopySceneResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		SceneCountAttr:       func() zcl.Attr { return new(SceneCount) },
+		CurrentSceneAttr:     func() zcl.Attr { return new(CurrentScene) },
+		CurrentGroupAttr:     func() zcl.Attr { return new(CurrentGroup) },
+		SceneValidAttr:       func() zcl.Attr { return new(SceneValid) },
+		SceneNameSupportAttr: func() zcl.Attr { return new(SceneNameSupport) },
+		LastConfiguredbyAttr: func() zcl.Attr { return new(LastConfiguredby) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *ScenesServer) AddScene() *AddScene                     { return new(AddScene) }
-func (s *ScenesServer) ViewScene() *ViewScene                   { return new(ViewScene) }
-func (s *ScenesServer) RemoveScene() *RemoveScene               { return new(RemoveScene) }
-func (s *ScenesServer) RemoveAllScenes() *RemoveAllScenes       { return new(RemoveAllScenes) }
-func (s *ScenesServer) StoreScene() *StoreScene                 { return new(StoreScene) }
-func (s *ScenesServer) RecallScene() *RecallScene               { return new(RecallScene) }
-func (s *ScenesServer) GetSceneMembership() *GetSceneMembership { return new(GetSceneMembership) }
-func (s *ScenesServer) EnhancedAddScene() *EnhancedAddScene     { return new(EnhancedAddScene) }
-func (s *ScenesServer) EnhancedViewScene() *EnhancedViewScene   { return new(EnhancedViewScene) }
-func (s *ScenesServer) CopyScene() *CopyScene                   { return new(CopyScene) }
-
-type ScenesClient struct {
-	p zcl.ProfileID
-}
-
-func (s *ScenesClient) AddSceneResponse() *AddSceneResponse       { return new(AddSceneResponse) }
-func (s *ScenesClient) ViewSceneResponse() *ViewSceneResponse     { return new(ViewSceneResponse) }
-func (s *ScenesClient) RemoveSceneResponse() *RemoveSceneResponse { return new(RemoveSceneResponse) }
-func (s *ScenesClient) RemoveAllScenesResponse() *RemoveAllScenesResponse {
-	return new(RemoveAllScenesResponse)
-}
-func (s *ScenesClient) StoreSceneResponse() *StoreSceneResponse { return new(StoreSceneResponse) }
-func (s *ScenesClient) GetSceneMembershipResponse() *GetSceneMembershipResponse {
-	return new(GetSceneMembershipResponse)
-}
-func (s *ScenesClient) EnhancedAddSceneResponse() *EnhancedAddSceneResponse {
-	return new(EnhancedAddSceneResponse)
-}
-func (s *ScenesClient) EnhancedViewSceneResponse() *EnhancedViewSceneResponse {
-	return new(EnhancedViewSceneResponse)
-}
-func (s *ScenesClient) CopySceneResponse() *CopySceneResponse { return new(CopySceneResponse) }
-
-/*
-var ScenesServer = map[zcl.CommandID]func() zcl.Command{
-    AddSceneID: func() zcl.Command { return new(AddScene) },
-    ViewSceneID: func() zcl.Command { return new(ViewScene) },
-    RemoveSceneID: func() zcl.Command { return new(RemoveScene) },
-    RemoveAllScenesID: func() zcl.Command { return new(RemoveAllScenes) },
-    StoreSceneID: func() zcl.Command { return new(StoreScene) },
-    RecallSceneID: func() zcl.Command { return new(RecallScene) },
-    GetSceneMembershipID: func() zcl.Command { return new(GetSceneMembership) },
-    EnhancedAddSceneID: func() zcl.Command { return new(EnhancedAddScene) },
-    EnhancedViewSceneID: func() zcl.Command { return new(EnhancedViewScene) },
-    CopySceneID: func() zcl.Command { return new(CopyScene) },
-}
-
-var ScenesClient = map[zcl.CommandID]func() zcl.Command{
-    AddSceneResponseID: func() zcl.Command { return new(AddSceneResponse) },
-    ViewSceneResponseID: func() zcl.Command { return new(ViewSceneResponse) },
-    RemoveSceneResponseID: func() zcl.Command { return new(RemoveSceneResponse) },
-    RemoveAllScenesResponseID: func() zcl.Command { return new(RemoveAllScenesResponse) },
-    StoreSceneResponseID: func() zcl.Command { return new(StoreSceneResponse) },
-    GetSceneMembershipResponseID: func() zcl.Command { return new(GetSceneMembershipResponse) },
-    EnhancedAddSceneResponseID: func() zcl.Command { return new(EnhancedAddSceneResponse) },
-    EnhancedViewSceneResponseID: func() zcl.Command { return new(EnhancedViewSceneResponse) },
-    CopySceneResponseID: func() zcl.Command { return new(CopySceneResponse) },
-}
-*/
 
 // Add a scenes to the group.
 type AddScene struct {
@@ -117,7 +77,7 @@ func (v AddScene) ID() zcl.CommandID {
 }
 
 func (v AddScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v AddScene) MnfCode() []byte {
@@ -203,7 +163,7 @@ func (v ViewScene) ID() zcl.CommandID {
 }
 
 func (v ViewScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v ViewScene) MnfCode() []byte {
@@ -262,7 +222,7 @@ func (v RemoveScene) ID() zcl.CommandID {
 }
 
 func (v RemoveScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v RemoveScene) MnfCode() []byte {
@@ -319,7 +279,7 @@ func (v RemoveAllScenes) ID() zcl.CommandID {
 }
 
 func (v RemoveAllScenes) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v RemoveAllScenes) MnfCode() []byte {
@@ -369,7 +329,7 @@ func (v StoreScene) ID() zcl.CommandID {
 }
 
 func (v StoreScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v StoreScene) MnfCode() []byte {
@@ -428,7 +388,7 @@ func (v RecallScene) ID() zcl.CommandID {
 }
 
 func (v RecallScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v RecallScene) MnfCode() []byte {
@@ -485,7 +445,7 @@ func (v GetSceneMembership) ID() zcl.CommandID {
 }
 
 func (v GetSceneMembership) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v GetSceneMembership) MnfCode() []byte {
@@ -541,7 +501,7 @@ func (v EnhancedAddScene) ID() zcl.CommandID {
 }
 
 func (v EnhancedAddScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v EnhancedAddScene) MnfCode() []byte {
@@ -627,7 +587,7 @@ func (v EnhancedViewScene) ID() zcl.CommandID {
 }
 
 func (v EnhancedViewScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v EnhancedViewScene) MnfCode() []byte {
@@ -691,7 +651,7 @@ func (v CopyScene) ID() zcl.CommandID {
 }
 
 func (v CopyScene) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v CopyScene) MnfCode() []byte {
@@ -779,7 +739,7 @@ func (v AddSceneResponse) ID() zcl.CommandID {
 }
 
 func (v AddSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v AddSceneResponse) MnfCode() []byte {
@@ -855,7 +815,7 @@ func (v ViewSceneResponse) ID() zcl.CommandID {
 }
 
 func (v ViewSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v ViewSceneResponse) MnfCode() []byte {
@@ -952,7 +912,7 @@ func (v RemoveSceneResponse) ID() zcl.CommandID {
 }
 
 func (v RemoveSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v RemoveSceneResponse) MnfCode() []byte {
@@ -1020,7 +980,7 @@ func (v RemoveAllScenesResponse) ID() zcl.CommandID {
 }
 
 func (v RemoveAllScenesResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v RemoveAllScenesResponse) MnfCode() []byte {
@@ -1081,7 +1041,7 @@ func (v StoreSceneResponse) ID() zcl.CommandID {
 }
 
 func (v StoreSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v StoreSceneResponse) MnfCode() []byte {
@@ -1153,7 +1113,7 @@ func (v GetSceneMembershipResponse) ID() zcl.CommandID {
 }
 
 func (v GetSceneMembershipResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v GetSceneMembershipResponse) MnfCode() []byte {
@@ -1231,7 +1191,7 @@ func (v EnhancedAddSceneResponse) ID() zcl.CommandID {
 }
 
 func (v EnhancedAddSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v EnhancedAddSceneResponse) MnfCode() []byte {
@@ -1307,7 +1267,7 @@ func (v EnhancedViewSceneResponse) ID() zcl.CommandID {
 }
 
 func (v EnhancedViewSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v EnhancedViewSceneResponse) MnfCode() []byte {
@@ -1403,7 +1363,7 @@ func (v CopySceneResponse) ID() zcl.CommandID {
 }
 
 func (v CopySceneResponse) Cluster() zcl.ClusterID {
-	return ScenesCluster
+	return ScenesID
 }
 
 func (v CopySceneResponse) MnfCode() []byte {
@@ -1451,10 +1411,12 @@ func (v *CopySceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const SceneCountAttr zcl.AttrID = 0
+
 type SceneCount zcl.Zu8
 
-func (a SceneCount) ID() zcl.AttrID         { return 0 }
-func (a SceneCount) Cluster() zcl.ClusterID { return ScenesCluster }
+func (a SceneCount) ID() zcl.AttrID         { return SceneCountAttr }
+func (a SceneCount) Cluster() zcl.ClusterID { return ScenesID }
 func (a *SceneCount) Value() *SceneCount    { return a }
 func (a SceneCount) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1476,10 +1438,12 @@ func (a SceneCount) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
+const CurrentSceneAttr zcl.AttrID = 1
+
 type CurrentScene zcl.Zu8
 
-func (a CurrentScene) ID() zcl.AttrID         { return 1 }
-func (a CurrentScene) Cluster() zcl.ClusterID { return ScenesCluster }
+func (a CurrentScene) ID() zcl.AttrID         { return CurrentSceneAttr }
+func (a CurrentScene) Cluster() zcl.ClusterID { return ScenesID }
 func (a *CurrentScene) Value() *CurrentScene  { return a }
 func (a CurrentScene) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1501,10 +1465,12 @@ func (a CurrentScene) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
+const CurrentGroupAttr zcl.AttrID = 2
+
 type CurrentGroup zcl.Zu16
 
-func (a CurrentGroup) ID() zcl.AttrID         { return 2 }
-func (a CurrentGroup) Cluster() zcl.ClusterID { return ScenesCluster }
+func (a CurrentGroup) ID() zcl.AttrID         { return CurrentGroupAttr }
+func (a CurrentGroup) Cluster() zcl.ClusterID { return ScenesID }
 func (a *CurrentGroup) Value() *CurrentGroup  { return a }
 func (a CurrentGroup) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1526,10 +1492,12 @@ func (a CurrentGroup) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
+const SceneValidAttr zcl.AttrID = 3
+
 type SceneValid zcl.Zbool
 
-func (a SceneValid) ID() zcl.AttrID         { return 3 }
-func (a SceneValid) Cluster() zcl.ClusterID { return ScenesCluster }
+func (a SceneValid) ID() zcl.AttrID         { return SceneValidAttr }
+func (a SceneValid) Cluster() zcl.ClusterID { return ScenesID }
 func (a *SceneValid) Value() *SceneValid    { return a }
 func (a SceneValid) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -1551,10 +1519,12 @@ func (a SceneValid) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const SceneNameSupportAttr zcl.AttrID = 4
+
 type SceneNameSupport zcl.Zbmp8
 
-func (a SceneNameSupport) ID() zcl.AttrID            { return 4 }
-func (a SceneNameSupport) Cluster() zcl.ClusterID    { return ScenesCluster }
+func (a SceneNameSupport) ID() zcl.AttrID            { return SceneNameSupportAttr }
+func (a SceneNameSupport) Cluster() zcl.ClusterID    { return ScenesID }
 func (a *SceneNameSupport) Value() *SceneNameSupport { return a }
 func (a SceneNameSupport) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -1588,10 +1558,12 @@ func (a *SceneNameSupport) SetNamesSupported(b bool) {
 	*a = SceneNameSupport(zcl.BitmapSet([]byte(*a), 7, b))
 }
 
+const LastConfiguredbyAttr zcl.AttrID = 5
+
 type LastConfiguredby zcl.Zuid
 
-func (a LastConfiguredby) ID() zcl.AttrID            { return 5 }
-func (a LastConfiguredby) Cluster() zcl.ClusterID    { return ScenesCluster }
+func (a LastConfiguredby) ID() zcl.AttrID            { return LastConfiguredbyAttr }
+func (a LastConfiguredby) Cluster() zcl.ClusterID    { return ScenesID }
 func (a *LastConfiguredby) Value() *LastConfiguredby { return a }
 func (a LastConfiguredby) MarshalZcl() ([]byte, error) {
 	return zcl.Zuid(a).MarshalZcl()

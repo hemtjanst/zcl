@@ -6,34 +6,20 @@ import (
 )
 
 // RgbColor
-// Attributes and commands for setting devices light color. The color is specified in the RGB range from 0 - 255.
+const RgbColorID zcl.ClusterID = 56838
 
-func NewRgbColorServer(profile zcl.ProfileID) *RgbColorServer { return &RgbColorServer{p: profile} }
-func NewRgbColorClient(profile zcl.ProfileID) *RgbColorClient { return &RgbColorClient{p: profile} }
-
-const RgbColorCluster zcl.ClusterID = 56838
-
-type RgbColorServer struct {
-	p zcl.ProfileID
-
-	Currentcolorset *Currentcolorset
-	Colorsetcount   *Colorsetcount
+var RgbColorCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		SetColorCommand: func() zcl.Command { return new(SetColor) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		CurrentcolorsetAttr: func() zcl.Attr { return new(Currentcolorset) },
+		ColorsetcountAttr:   func() zcl.Attr { return new(Colorsetcount) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *RgbColorServer) SetColor() *SetColor { return new(SetColor) }
-
-type RgbColorClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var RgbColorServer = map[zcl.CommandID]func() zcl.Command{
-    SetColorID: func() zcl.Command { return new(SetColor) },
-}
-
-var RgbColorClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 // On receipt of this command, the color of the light shall be changed and the current index updatet.
 type SetColor struct {
@@ -61,7 +47,7 @@ func (v SetColor) ID() zcl.CommandID {
 }
 
 func (v SetColor) Cluster() zcl.ClusterID {
-	return RgbColorCluster
+	return RgbColorID
 }
 
 func (v SetColor) MnfCode() []byte {
@@ -127,10 +113,12 @@ func (v *SetColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const CurrentcolorsetAttr zcl.AttrID = 0
+
 type Currentcolorset zcl.Zu32
 
-func (a Currentcolorset) ID() zcl.AttrID           { return 0 }
-func (a Currentcolorset) Cluster() zcl.ClusterID   { return RgbColorCluster }
+func (a Currentcolorset) ID() zcl.AttrID           { return CurrentcolorsetAttr }
+func (a Currentcolorset) Cluster() zcl.ClusterID   { return RgbColorID }
 func (a *Currentcolorset) Value() *Currentcolorset { return a }
 func (a Currentcolorset) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -152,10 +140,12 @@ func (a Currentcolorset) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
+const ColorsetcountAttr zcl.AttrID = 1
+
 type Colorsetcount zcl.Zu8
 
-func (a Colorsetcount) ID() zcl.AttrID         { return 1 }
-func (a Colorsetcount) Cluster() zcl.ClusterID { return RgbColorCluster }
+func (a Colorsetcount) ID() zcl.AttrID         { return ColorsetcountAttr }
+func (a Colorsetcount) Cluster() zcl.ClusterID { return RgbColorID }
 func (a *Colorsetcount) Value() *Colorsetcount { return a }
 func (a Colorsetcount) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()

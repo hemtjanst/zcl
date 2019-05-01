@@ -6,40 +6,25 @@ import (
 )
 
 // OnOffSwitchConfiguration
-// Attributes and commands for configuring On/Off switching devices
+const OnOffSwitchConfigurationID zcl.ClusterID = 7
 
-func NewOnOffSwitchConfigurationServer(profile zcl.ProfileID) *OnOffSwitchConfigurationServer {
-	return &OnOffSwitchConfigurationServer{p: profile}
-}
-func NewOnOffSwitchConfigurationClient(profile zcl.ProfileID) *OnOffSwitchConfigurationClient {
-	return &OnOffSwitchConfigurationClient{p: profile}
-}
-
-const OnOffSwitchConfigurationCluster zcl.ClusterID = 7
-
-type OnOffSwitchConfigurationServer struct {
-	p zcl.ProfileID
-
-	Switchtype    *Switchtype
-	Switchactions *Switchactions
+var OnOffSwitchConfigurationCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		SwitchtypeAttr:    func() zcl.Attr { return new(Switchtype) },
+		SwitchactionsAttr: func() zcl.Attr { return new(Switchactions) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type OnOffSwitchConfigurationClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var OnOffSwitchConfigurationServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var OnOffSwitchConfigurationClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const SwitchtypeAttr zcl.AttrID = 0
 
 type Switchtype zcl.Zenum8
 
-func (a Switchtype) ID() zcl.AttrID         { return 0 }
-func (a Switchtype) Cluster() zcl.ClusterID { return OnOffSwitchConfigurationCluster }
+func (a Switchtype) ID() zcl.AttrID         { return SwitchtypeAttr }
+func (a Switchtype) Cluster() zcl.ClusterID { return OnOffSwitchConfigurationID }
 func (a *Switchtype) Value() *Switchtype    { return a }
 func (a Switchtype) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -87,10 +72,12 @@ func (a Switchtype) IsMultifunction() bool { return a == 0x02 }
 // SetMultifunction sets Switchtype to Multifunction (0x02)
 func (a *Switchtype) SetMultifunction() { *a = 0x02 }
 
+const SwitchactionsAttr zcl.AttrID = 16
+
 type Switchactions zcl.Zenum8
 
-func (a Switchactions) ID() zcl.AttrID         { return 16 }
-func (a Switchactions) Cluster() zcl.ClusterID { return OnOffSwitchConfigurationCluster }
+func (a Switchactions) ID() zcl.AttrID         { return SwitchactionsAttr }
+func (a Switchactions) Cluster() zcl.ClusterID { return OnOffSwitchConfigurationID }
 func (a *Switchactions) Value() *Switchactions { return a }
 func (a Switchactions) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()

@@ -5,28 +5,12 @@ import (
 )
 
 // MultistateValueBasic
+const MultistateValueBasicID zcl.ClusterID = 20
 
-func NewMultistateValueBasicServer(profile zcl.ProfileID) *MultistateValueBasicServer {
-	return &MultistateValueBasicServer{p: profile}
+var MultistateValueBasicCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewMultistateValueBasicClient(profile zcl.ProfileID) *MultistateValueBasicClient {
-	return &MultistateValueBasicClient{p: profile}
-}
-
-const MultistateValueBasicCluster zcl.ClusterID = 20
-
-type MultistateValueBasicServer struct {
-	p zcl.ProfileID
-}
-
-type MultistateValueBasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var MultistateValueBasicServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var MultistateValueBasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

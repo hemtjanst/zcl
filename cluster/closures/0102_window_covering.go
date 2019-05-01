@@ -6,72 +6,44 @@ import (
 )
 
 // WindowCovering
-// The window covering cluster provides an interface for controlling and adjusting automatic window coverings such as drapery motors, automatic shades, and blinds.
+const WindowCoveringID zcl.ClusterID = 258
 
-func NewWindowCoveringServer(profile zcl.ProfileID) *WindowCoveringServer {
-	return &WindowCoveringServer{p: profile}
+var WindowCoveringCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		UpOpenCommand:             func() zcl.Command { return new(UpOpen) },
+		DownCloseCommand:          func() zcl.Command { return new(DownClose) },
+		StopCommand:               func() zcl.Command { return new(Stop) },
+		GoToLiftValueCommand:      func() zcl.Command { return new(GoToLiftValue) },
+		GoToLiftPercentageCommand: func() zcl.Command { return new(GoToLiftPercentage) },
+		GoToTiltValueCommand:      func() zcl.Command { return new(GoToTiltValue) },
+		GoToTiltPercentageCommand: func() zcl.Command { return new(GoToTiltPercentage) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		WindowCoveringTypeAttr:            func() zcl.Attr { return new(WindowCoveringType) },
+		PhysicalClosedLimitLiftAttr:       func() zcl.Attr { return new(PhysicalClosedLimitLift) },
+		PhysicalClosedLimitTiltAttr:       func() zcl.Attr { return new(PhysicalClosedLimitTilt) },
+		CurrentPositionLiftAttr:           func() zcl.Attr { return new(CurrentPositionLift) },
+		CurrentPositionTiltAttr:           func() zcl.Attr { return new(CurrentPositionTilt) },
+		NumberOfActuationsLiftAttr:        func() zcl.Attr { return new(NumberOfActuationsLift) },
+		NumberOfActuationsTiltAttr:        func() zcl.Attr { return new(NumberOfActuationsTilt) },
+		ConfigStatusAttr:                  func() zcl.Attr { return new(ConfigStatus) },
+		CurrentPositionLiftPercentageAttr: func() zcl.Attr { return new(CurrentPositionLiftPercentage) },
+		CurrentPositionTiltPercentageAttr: func() zcl.Attr { return new(CurrentPositionTiltPercentage) },
+		InstalledOpenLimitLiftAttr:        func() zcl.Attr { return new(InstalledOpenLimitLift) },
+		InstalledClosedLimitLiftAttr:      func() zcl.Attr { return new(InstalledClosedLimitLift) },
+		InstalledOpenLimitTiltAAttr:       func() zcl.Attr { return new(InstalledOpenLimitTiltA) },
+		InstalledOpenLimitTiltBAttr:       func() zcl.Attr { return new(InstalledOpenLimitTiltB) },
+		VelocityLiftAttr:                  func() zcl.Attr { return new(VelocityLift) },
+		AccelerationTimeLiftAttr:          func() zcl.Attr { return new(AccelerationTimeLift) },
+		DecelerationTimeLiftAttr:          func() zcl.Attr { return new(DecelerationTimeLift) },
+		WindowCoveringModeAttr:            func() zcl.Attr { return new(WindowCoveringMode) },
+		IntermediateSetpointsLiftAttr:     func() zcl.Attr { return new(IntermediateSetpointsLift) },
+		IntermediateSetpointsTiltAttr:     func() zcl.Attr { return new(IntermediateSetpointsTilt) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewWindowCoveringClient(profile zcl.ProfileID) *WindowCoveringClient {
-	return &WindowCoveringClient{p: profile}
-}
-
-const WindowCoveringCluster zcl.ClusterID = 258
-
-type WindowCoveringServer struct {
-	p zcl.ProfileID
-
-	WindowCoveringType            *WindowCoveringType
-	PhysicalClosedLimitLift       *PhysicalClosedLimitLift
-	PhysicalClosedLimitTilt       *PhysicalClosedLimitTilt
-	CurrentPositionLift           *CurrentPositionLift
-	CurrentPositionTilt           *CurrentPositionTilt
-	NumberOfActuationsLift        *NumberOfActuationsLift
-	NumberOfActuationsTilt        *NumberOfActuationsTilt
-	ConfigStatus                  *ConfigStatus
-	CurrentPositionLiftPercentage *CurrentPositionLiftPercentage
-	CurrentPositionTiltPercentage *CurrentPositionTiltPercentage
-	InstalledOpenLimitLift        *InstalledOpenLimitLift
-	InstalledClosedLimitLift      *InstalledClosedLimitLift
-	InstalledOpenLimitTiltA       *InstalledOpenLimitTiltA
-	InstalledOpenLimitTiltB       *InstalledOpenLimitTiltB
-	VelocityLift                  *VelocityLift
-	AccelerationTimeLift          *AccelerationTimeLift
-	DecelerationTimeLift          *DecelerationTimeLift
-	WindowCoveringMode            *WindowCoveringMode
-	IntermediateSetpointsLift     *IntermediateSetpointsLift
-	IntermediateSetpointsTilt     *IntermediateSetpointsTilt
-}
-
-func (s *WindowCoveringServer) UpOpen() *UpOpen               { return new(UpOpen) }
-func (s *WindowCoveringServer) DownClose() *DownClose         { return new(DownClose) }
-func (s *WindowCoveringServer) Stop() *Stop                   { return new(Stop) }
-func (s *WindowCoveringServer) GoToLiftValue() *GoToLiftValue { return new(GoToLiftValue) }
-func (s *WindowCoveringServer) GoToLiftPercentage() *GoToLiftPercentage {
-	return new(GoToLiftPercentage)
-}
-func (s *WindowCoveringServer) GoToTiltValue() *GoToTiltValue { return new(GoToTiltValue) }
-func (s *WindowCoveringServer) GoToTiltPercentage() *GoToTiltPercentage {
-	return new(GoToTiltPercentage)
-}
-
-type WindowCoveringClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var WindowCoveringServer = map[zcl.CommandID]func() zcl.Command{
-    UpOpenID: func() zcl.Command { return new(UpOpen) },
-    DownCloseID: func() zcl.Command { return new(DownClose) },
-    StopID: func() zcl.Command { return new(Stop) },
-    GoToLiftValueID: func() zcl.Command { return new(GoToLiftValue) },
-    GoToLiftPercentageID: func() zcl.Command { return new(GoToLiftPercentage) },
-    GoToTiltValueID: func() zcl.Command { return new(GoToTiltValue) },
-    GoToTiltPercentageID: func() zcl.Command { return new(GoToTiltPercentage) },
-}
-
-var WindowCoveringClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type UpOpen struct {
 }
@@ -87,7 +59,7 @@ func (v UpOpen) ID() zcl.CommandID {
 }
 
 func (v UpOpen) Cluster() zcl.ClusterID {
-	return WindowCoveringCluster
+	return WindowCoveringID
 }
 
 func (v UpOpen) MnfCode() []byte {
@@ -116,7 +88,7 @@ func (v DownClose) ID() zcl.CommandID {
 }
 
 func (v DownClose) Cluster() zcl.ClusterID {
-	return WindowCoveringCluster
+	return WindowCoveringID
 }
 
 func (v DownClose) MnfCode() []byte {
@@ -145,7 +117,7 @@ func (v Stop) ID() zcl.CommandID {
 }
 
 func (v Stop) Cluster() zcl.ClusterID {
-	return WindowCoveringCluster
+	return WindowCoveringID
 }
 
 func (v Stop) MnfCode() []byte {
@@ -177,7 +149,7 @@ func (v GoToLiftValue) ID() zcl.CommandID {
 }
 
 func (v GoToLiftValue) Cluster() zcl.ClusterID {
-	return WindowCoveringCluster
+	return WindowCoveringID
 }
 
 func (v GoToLiftValue) MnfCode() []byte {
@@ -224,7 +196,7 @@ func (v GoToLiftPercentage) ID() zcl.CommandID {
 }
 
 func (v GoToLiftPercentage) Cluster() zcl.ClusterID {
-	return WindowCoveringCluster
+	return WindowCoveringID
 }
 
 func (v GoToLiftPercentage) MnfCode() []byte {
@@ -271,7 +243,7 @@ func (v GoToTiltValue) ID() zcl.CommandID {
 }
 
 func (v GoToTiltValue) Cluster() zcl.ClusterID {
-	return WindowCoveringCluster
+	return WindowCoveringID
 }
 
 func (v GoToTiltValue) MnfCode() []byte {
@@ -318,7 +290,7 @@ func (v GoToTiltPercentage) ID() zcl.CommandID {
 }
 
 func (v GoToTiltPercentage) Cluster() zcl.ClusterID {
-	return WindowCoveringCluster
+	return WindowCoveringID
 }
 
 func (v GoToTiltPercentage) MnfCode() []byte {
@@ -348,10 +320,12 @@ func (v *GoToTiltPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const WindowCoveringTypeAttr zcl.AttrID = 0
+
 type WindowCoveringType zcl.Zenum8
 
-func (a WindowCoveringType) ID() zcl.AttrID              { return 0 }
-func (a WindowCoveringType) Cluster() zcl.ClusterID      { return WindowCoveringCluster }
+func (a WindowCoveringType) ID() zcl.AttrID              { return WindowCoveringTypeAttr }
+func (a WindowCoveringType) Cluster() zcl.ClusterID      { return WindowCoveringID }
 func (a *WindowCoveringType) Value() *WindowCoveringType { return a }
 func (a WindowCoveringType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -455,10 +429,12 @@ func (a WindowCoveringType) IsProjectorScreen() bool { return a == 0x09 }
 // SetProjectorScreen sets WindowCoveringType to Projector Screen (0x09)
 func (a *WindowCoveringType) SetProjectorScreen() { *a = 0x09 }
 
+const PhysicalClosedLimitLiftAttr zcl.AttrID = 1
+
 type PhysicalClosedLimitLift zcl.Zu16
 
-func (a PhysicalClosedLimitLift) ID() zcl.AttrID                   { return 1 }
-func (a PhysicalClosedLimitLift) Cluster() zcl.ClusterID           { return WindowCoveringCluster }
+func (a PhysicalClosedLimitLift) ID() zcl.AttrID                   { return PhysicalClosedLimitLiftAttr }
+func (a PhysicalClosedLimitLift) Cluster() zcl.ClusterID           { return WindowCoveringID }
 func (a *PhysicalClosedLimitLift) Value() *PhysicalClosedLimitLift { return a }
 func (a PhysicalClosedLimitLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -480,10 +456,12 @@ func (a PhysicalClosedLimitLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PhysicalClosedLimitTiltAttr zcl.AttrID = 2
+
 type PhysicalClosedLimitTilt zcl.Zu16
 
-func (a PhysicalClosedLimitTilt) ID() zcl.AttrID                   { return 2 }
-func (a PhysicalClosedLimitTilt) Cluster() zcl.ClusterID           { return WindowCoveringCluster }
+func (a PhysicalClosedLimitTilt) ID() zcl.AttrID                   { return PhysicalClosedLimitTiltAttr }
+func (a PhysicalClosedLimitTilt) Cluster() zcl.ClusterID           { return WindowCoveringID }
 func (a *PhysicalClosedLimitTilt) Value() *PhysicalClosedLimitTilt { return a }
 func (a PhysicalClosedLimitTilt) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -505,10 +483,12 @@ func (a PhysicalClosedLimitTilt) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const CurrentPositionLiftAttr zcl.AttrID = 3
+
 type CurrentPositionLift zcl.Zu16
 
-func (a CurrentPositionLift) ID() zcl.AttrID               { return 3 }
-func (a CurrentPositionLift) Cluster() zcl.ClusterID       { return WindowCoveringCluster }
+func (a CurrentPositionLift) ID() zcl.AttrID               { return CurrentPositionLiftAttr }
+func (a CurrentPositionLift) Cluster() zcl.ClusterID       { return WindowCoveringID }
 func (a *CurrentPositionLift) Value() *CurrentPositionLift { return a }
 func (a CurrentPositionLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -530,10 +510,12 @@ func (a CurrentPositionLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const CurrentPositionTiltAttr zcl.AttrID = 4
+
 type CurrentPositionTilt zcl.Zu16
 
-func (a CurrentPositionTilt) ID() zcl.AttrID               { return 4 }
-func (a CurrentPositionTilt) Cluster() zcl.ClusterID       { return WindowCoveringCluster }
+func (a CurrentPositionTilt) ID() zcl.AttrID               { return CurrentPositionTiltAttr }
+func (a CurrentPositionTilt) Cluster() zcl.ClusterID       { return WindowCoveringID }
 func (a *CurrentPositionTilt) Value() *CurrentPositionTilt { return a }
 func (a CurrentPositionTilt) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -555,10 +537,12 @@ func (a CurrentPositionTilt) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NumberOfActuationsLiftAttr zcl.AttrID = 5
+
 type NumberOfActuationsLift zcl.Zu16
 
-func (a NumberOfActuationsLift) ID() zcl.AttrID                  { return 5 }
-func (a NumberOfActuationsLift) Cluster() zcl.ClusterID          { return WindowCoveringCluster }
+func (a NumberOfActuationsLift) ID() zcl.AttrID                  { return NumberOfActuationsLiftAttr }
+func (a NumberOfActuationsLift) Cluster() zcl.ClusterID          { return WindowCoveringID }
 func (a *NumberOfActuationsLift) Value() *NumberOfActuationsLift { return a }
 func (a NumberOfActuationsLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -580,10 +564,12 @@ func (a NumberOfActuationsLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NumberOfActuationsTiltAttr zcl.AttrID = 6
+
 type NumberOfActuationsTilt zcl.Zu16
 
-func (a NumberOfActuationsTilt) ID() zcl.AttrID                  { return 6 }
-func (a NumberOfActuationsTilt) Cluster() zcl.ClusterID          { return WindowCoveringCluster }
+func (a NumberOfActuationsTilt) ID() zcl.AttrID                  { return NumberOfActuationsTiltAttr }
+func (a NumberOfActuationsTilt) Cluster() zcl.ClusterID          { return WindowCoveringID }
 func (a *NumberOfActuationsTilt) Value() *NumberOfActuationsTilt { return a }
 func (a NumberOfActuationsTilt) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -605,10 +591,12 @@ func (a NumberOfActuationsTilt) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ConfigStatusAttr zcl.AttrID = 7
+
 type ConfigStatus zcl.Zbmp8
 
-func (a ConfigStatus) ID() zcl.AttrID         { return 7 }
-func (a ConfigStatus) Cluster() zcl.ClusterID { return WindowCoveringCluster }
+func (a ConfigStatus) ID() zcl.AttrID         { return ConfigStatusAttr }
+func (a ConfigStatus) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (a *ConfigStatus) Value() *ConfigStatus  { return a }
 func (a ConfigStatus) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -702,10 +690,12 @@ func (a *ConfigStatus) SetTiltEncoderControlled(b bool) {
 	*a = ConfigStatus(zcl.BitmapSet([]byte(*a), 6, b))
 }
 
+const CurrentPositionLiftPercentageAttr zcl.AttrID = 8
+
 type CurrentPositionLiftPercentage zcl.Zu8
 
-func (a CurrentPositionLiftPercentage) ID() zcl.AttrID                         { return 8 }
-func (a CurrentPositionLiftPercentage) Cluster() zcl.ClusterID                 { return WindowCoveringCluster }
+func (a CurrentPositionLiftPercentage) ID() zcl.AttrID                         { return CurrentPositionLiftPercentageAttr }
+func (a CurrentPositionLiftPercentage) Cluster() zcl.ClusterID                 { return WindowCoveringID }
 func (a *CurrentPositionLiftPercentage) Value() *CurrentPositionLiftPercentage { return a }
 func (a CurrentPositionLiftPercentage) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -727,10 +717,12 @@ func (a CurrentPositionLiftPercentage) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const CurrentPositionTiltPercentageAttr zcl.AttrID = 9
+
 type CurrentPositionTiltPercentage zcl.Zu8
 
-func (a CurrentPositionTiltPercentage) ID() zcl.AttrID                         { return 9 }
-func (a CurrentPositionTiltPercentage) Cluster() zcl.ClusterID                 { return WindowCoveringCluster }
+func (a CurrentPositionTiltPercentage) ID() zcl.AttrID                         { return CurrentPositionTiltPercentageAttr }
+func (a CurrentPositionTiltPercentage) Cluster() zcl.ClusterID                 { return WindowCoveringID }
 func (a *CurrentPositionTiltPercentage) Value() *CurrentPositionTiltPercentage { return a }
 func (a CurrentPositionTiltPercentage) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -752,10 +744,12 @@ func (a CurrentPositionTiltPercentage) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const InstalledOpenLimitLiftAttr zcl.AttrID = 16
+
 type InstalledOpenLimitLift zcl.Zu16
 
-func (a InstalledOpenLimitLift) ID() zcl.AttrID                  { return 16 }
-func (a InstalledOpenLimitLift) Cluster() zcl.ClusterID          { return WindowCoveringCluster }
+func (a InstalledOpenLimitLift) ID() zcl.AttrID                  { return InstalledOpenLimitLiftAttr }
+func (a InstalledOpenLimitLift) Cluster() zcl.ClusterID          { return WindowCoveringID }
 func (a *InstalledOpenLimitLift) Value() *InstalledOpenLimitLift { return a }
 func (a InstalledOpenLimitLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -777,10 +771,12 @@ func (a InstalledOpenLimitLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const InstalledClosedLimitLiftAttr zcl.AttrID = 17
+
 type InstalledClosedLimitLift zcl.Zu16
 
-func (a InstalledClosedLimitLift) ID() zcl.AttrID                    { return 17 }
-func (a InstalledClosedLimitLift) Cluster() zcl.ClusterID            { return WindowCoveringCluster }
+func (a InstalledClosedLimitLift) ID() zcl.AttrID                    { return InstalledClosedLimitLiftAttr }
+func (a InstalledClosedLimitLift) Cluster() zcl.ClusterID            { return WindowCoveringID }
 func (a *InstalledClosedLimitLift) Value() *InstalledClosedLimitLift { return a }
 func (a InstalledClosedLimitLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -802,10 +798,12 @@ func (a InstalledClosedLimitLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const InstalledOpenLimitTiltAAttr zcl.AttrID = 18
+
 type InstalledOpenLimitTiltA zcl.Zu16
 
-func (a InstalledOpenLimitTiltA) ID() zcl.AttrID                   { return 18 }
-func (a InstalledOpenLimitTiltA) Cluster() zcl.ClusterID           { return WindowCoveringCluster }
+func (a InstalledOpenLimitTiltA) ID() zcl.AttrID                   { return InstalledOpenLimitTiltAAttr }
+func (a InstalledOpenLimitTiltA) Cluster() zcl.ClusterID           { return WindowCoveringID }
 func (a *InstalledOpenLimitTiltA) Value() *InstalledOpenLimitTiltA { return a }
 func (a InstalledOpenLimitTiltA) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -827,10 +825,12 @@ func (a InstalledOpenLimitTiltA) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const InstalledOpenLimitTiltBAttr zcl.AttrID = 19
+
 type InstalledOpenLimitTiltB zcl.Zu16
 
-func (a InstalledOpenLimitTiltB) ID() zcl.AttrID                   { return 19 }
-func (a InstalledOpenLimitTiltB) Cluster() zcl.ClusterID           { return WindowCoveringCluster }
+func (a InstalledOpenLimitTiltB) ID() zcl.AttrID                   { return InstalledOpenLimitTiltBAttr }
+func (a InstalledOpenLimitTiltB) Cluster() zcl.ClusterID           { return WindowCoveringID }
 func (a *InstalledOpenLimitTiltB) Value() *InstalledOpenLimitTiltB { return a }
 func (a InstalledOpenLimitTiltB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -852,10 +852,12 @@ func (a InstalledOpenLimitTiltB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const VelocityLiftAttr zcl.AttrID = 20
+
 type VelocityLift zcl.Zu16
 
-func (a VelocityLift) ID() zcl.AttrID         { return 20 }
-func (a VelocityLift) Cluster() zcl.ClusterID { return WindowCoveringCluster }
+func (a VelocityLift) ID() zcl.AttrID         { return VelocityLiftAttr }
+func (a VelocityLift) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (a *VelocityLift) Value() *VelocityLift  { return a }
 func (a VelocityLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -877,10 +879,12 @@ func (a VelocityLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AccelerationTimeLiftAttr zcl.AttrID = 21
+
 type AccelerationTimeLift zcl.Zu16
 
-func (a AccelerationTimeLift) ID() zcl.AttrID                { return 21 }
-func (a AccelerationTimeLift) Cluster() zcl.ClusterID        { return WindowCoveringCluster }
+func (a AccelerationTimeLift) ID() zcl.AttrID                { return AccelerationTimeLiftAttr }
+func (a AccelerationTimeLift) Cluster() zcl.ClusterID        { return WindowCoveringID }
 func (a *AccelerationTimeLift) Value() *AccelerationTimeLift { return a }
 func (a AccelerationTimeLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -902,10 +906,12 @@ func (a AccelerationTimeLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DecelerationTimeLiftAttr zcl.AttrID = 22
+
 type DecelerationTimeLift zcl.Zu16
 
-func (a DecelerationTimeLift) ID() zcl.AttrID                { return 22 }
-func (a DecelerationTimeLift) Cluster() zcl.ClusterID        { return WindowCoveringCluster }
+func (a DecelerationTimeLift) ID() zcl.AttrID                { return DecelerationTimeLiftAttr }
+func (a DecelerationTimeLift) Cluster() zcl.ClusterID        { return WindowCoveringID }
 func (a *DecelerationTimeLift) Value() *DecelerationTimeLift { return a }
 func (a DecelerationTimeLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -927,10 +933,12 @@ func (a DecelerationTimeLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const WindowCoveringModeAttr zcl.AttrID = 23
+
 type WindowCoveringMode zcl.Zbmp8
 
-func (a WindowCoveringMode) ID() zcl.AttrID              { return 23 }
-func (a WindowCoveringMode) Cluster() zcl.ClusterID      { return WindowCoveringCluster }
+func (a WindowCoveringMode) ID() zcl.AttrID              { return WindowCoveringModeAttr }
+func (a WindowCoveringMode) Cluster() zcl.ClusterID      { return WindowCoveringID }
 func (a *WindowCoveringMode) Value() *WindowCoveringMode { return a }
 func (a WindowCoveringMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -994,10 +1002,12 @@ func (a *WindowCoveringMode) SetLedFeedback(b bool) {
 	*a = WindowCoveringMode(zcl.BitmapSet([]byte(*a), 3, b))
 }
 
+const IntermediateSetpointsLiftAttr zcl.AttrID = 24
+
 type IntermediateSetpointsLift zcl.Zostring
 
-func (a IntermediateSetpointsLift) ID() zcl.AttrID                     { return 24 }
-func (a IntermediateSetpointsLift) Cluster() zcl.ClusterID             { return WindowCoveringCluster }
+func (a IntermediateSetpointsLift) ID() zcl.AttrID                     { return IntermediateSetpointsLiftAttr }
+func (a IntermediateSetpointsLift) Cluster() zcl.ClusterID             { return WindowCoveringID }
 func (a *IntermediateSetpointsLift) Value() *IntermediateSetpointsLift { return a }
 func (a IntermediateSetpointsLift) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()
@@ -1019,10 +1029,12 @@ func (a IntermediateSetpointsLift) String() string {
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
+const IntermediateSetpointsTiltAttr zcl.AttrID = 25
+
 type IntermediateSetpointsTilt zcl.Zostring
 
-func (a IntermediateSetpointsTilt) ID() zcl.AttrID                     { return 25 }
-func (a IntermediateSetpointsTilt) Cluster() zcl.ClusterID             { return WindowCoveringCluster }
+func (a IntermediateSetpointsTilt) ID() zcl.AttrID                     { return IntermediateSetpointsTiltAttr }
+func (a IntermediateSetpointsTilt) Cluster() zcl.ClusterID             { return WindowCoveringID }
 func (a *IntermediateSetpointsTilt) Value() *IntermediateSetpointsTilt { return a }
 func (a IntermediateSetpointsTilt) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()

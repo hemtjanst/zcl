@@ -6,40 +6,25 @@ import (
 )
 
 // Price
-// The Price Cluster provides the mechanism for communicating Gas, Energy, or Water pricing information within the premise. This pricing information is distributed to the ESP from either the utilities or from regional energy providers.
+const PriceID zcl.ClusterID = 1792
 
-func NewPriceServer(profile zcl.ProfileID) *PriceServer { return &PriceServer{p: profile} }
-func NewPriceClient(profile zcl.ProfileID) *PriceClient { return &PriceClient{p: profile} }
-
-const PriceCluster zcl.ClusterID = 1792
-
-type PriceServer struct {
-	p zcl.ProfileID
-
-	Tier1PriceLabel *Tier1PriceLabel
-	Tier2PriceLabel *Tier2PriceLabel
-	Tier3PriceLabel *Tier3PriceLabel
-	Tier4PriceLabel *Tier4PriceLabel
-	Tier5PriceLabel *Tier5PriceLabel
-	Tier6PriceLabel *Tier6PriceLabel
+var PriceCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		GetCurrentPriceCommand:    func() zcl.Command { return new(GetCurrentPrice) },
+		GetScheduledPricesCommand: func() zcl.Command { return new(GetScheduledPrices) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		Tier1PriceLabelAttr: func() zcl.Attr { return new(Tier1PriceLabel) },
+		Tier2PriceLabelAttr: func() zcl.Attr { return new(Tier2PriceLabel) },
+		Tier3PriceLabelAttr: func() zcl.Attr { return new(Tier3PriceLabel) },
+		Tier4PriceLabelAttr: func() zcl.Attr { return new(Tier4PriceLabel) },
+		Tier5PriceLabelAttr: func() zcl.Attr { return new(Tier5PriceLabel) },
+		Tier6PriceLabelAttr: func() zcl.Attr { return new(Tier6PriceLabel) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *PriceServer) GetCurrentPrice() *GetCurrentPrice       { return new(GetCurrentPrice) }
-func (s *PriceServer) GetScheduledPrices() *GetScheduledPrices { return new(GetScheduledPrices) }
-
-type PriceClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var PriceServer = map[zcl.CommandID]func() zcl.Command{
-    GetCurrentPriceID: func() zcl.Command { return new(GetCurrentPrice) },
-    GetScheduledPricesID: func() zcl.Command { return new(GetScheduledPrices) },
-}
-
-var PriceClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type GetCurrentPrice struct {
 	CommandOptions zcl.Zbmp8
@@ -58,7 +43,7 @@ func (v GetCurrentPrice) ID() zcl.CommandID {
 }
 
 func (v GetCurrentPrice) Cluster() zcl.ClusterID {
-	return PriceCluster
+	return PriceID
 }
 
 func (v GetCurrentPrice) MnfCode() []byte {
@@ -107,7 +92,7 @@ func (v GetScheduledPrices) ID() zcl.CommandID {
 }
 
 func (v GetScheduledPrices) Cluster() zcl.ClusterID {
-	return PriceCluster
+	return PriceID
 }
 
 func (v GetScheduledPrices) MnfCode() []byte {
@@ -146,10 +131,12 @@ func (v *GetScheduledPrices) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const Tier1PriceLabelAttr zcl.AttrID = 0
+
 type Tier1PriceLabel zcl.Zostring
 
-func (a Tier1PriceLabel) ID() zcl.AttrID           { return 0 }
-func (a Tier1PriceLabel) Cluster() zcl.ClusterID   { return PriceCluster }
+func (a Tier1PriceLabel) ID() zcl.AttrID           { return Tier1PriceLabelAttr }
+func (a Tier1PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
 func (a *Tier1PriceLabel) Value() *Tier1PriceLabel { return a }
 func (a Tier1PriceLabel) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()
@@ -171,10 +158,12 @@ func (a Tier1PriceLabel) String() string {
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
+const Tier2PriceLabelAttr zcl.AttrID = 1
+
 type Tier2PriceLabel zcl.Zostring
 
-func (a Tier2PriceLabel) ID() zcl.AttrID           { return 1 }
-func (a Tier2PriceLabel) Cluster() zcl.ClusterID   { return PriceCluster }
+func (a Tier2PriceLabel) ID() zcl.AttrID           { return Tier2PriceLabelAttr }
+func (a Tier2PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
 func (a *Tier2PriceLabel) Value() *Tier2PriceLabel { return a }
 func (a Tier2PriceLabel) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()
@@ -196,10 +185,12 @@ func (a Tier2PriceLabel) String() string {
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
+const Tier3PriceLabelAttr zcl.AttrID = 2
+
 type Tier3PriceLabel zcl.Zostring
 
-func (a Tier3PriceLabel) ID() zcl.AttrID           { return 2 }
-func (a Tier3PriceLabel) Cluster() zcl.ClusterID   { return PriceCluster }
+func (a Tier3PriceLabel) ID() zcl.AttrID           { return Tier3PriceLabelAttr }
+func (a Tier3PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
 func (a *Tier3PriceLabel) Value() *Tier3PriceLabel { return a }
 func (a Tier3PriceLabel) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()
@@ -221,10 +212,12 @@ func (a Tier3PriceLabel) String() string {
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
+const Tier4PriceLabelAttr zcl.AttrID = 3
+
 type Tier4PriceLabel zcl.Zostring
 
-func (a Tier4PriceLabel) ID() zcl.AttrID           { return 3 }
-func (a Tier4PriceLabel) Cluster() zcl.ClusterID   { return PriceCluster }
+func (a Tier4PriceLabel) ID() zcl.AttrID           { return Tier4PriceLabelAttr }
+func (a Tier4PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
 func (a *Tier4PriceLabel) Value() *Tier4PriceLabel { return a }
 func (a Tier4PriceLabel) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()
@@ -246,10 +239,12 @@ func (a Tier4PriceLabel) String() string {
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
+const Tier5PriceLabelAttr zcl.AttrID = 4
+
 type Tier5PriceLabel zcl.Zostring
 
-func (a Tier5PriceLabel) ID() zcl.AttrID           { return 4 }
-func (a Tier5PriceLabel) Cluster() zcl.ClusterID   { return PriceCluster }
+func (a Tier5PriceLabel) ID() zcl.AttrID           { return Tier5PriceLabelAttr }
+func (a Tier5PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
 func (a *Tier5PriceLabel) Value() *Tier5PriceLabel { return a }
 func (a Tier5PriceLabel) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()
@@ -271,10 +266,12 @@ func (a Tier5PriceLabel) String() string {
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
+const Tier6PriceLabelAttr zcl.AttrID = 5
+
 type Tier6PriceLabel zcl.Zostring
 
-func (a Tier6PriceLabel) ID() zcl.AttrID           { return 5 }
-func (a Tier6PriceLabel) Cluster() zcl.ClusterID   { return PriceCluster }
+func (a Tier6PriceLabel) ID() zcl.AttrID           { return Tier6PriceLabelAttr }
+func (a Tier6PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
 func (a *Tier6PriceLabel) Value() *Tier6PriceLabel { return a }
 func (a Tier6PriceLabel) MarshalZcl() ([]byte, error) {
 	return zcl.Zostring(a).MarshalZcl()

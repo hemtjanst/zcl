@@ -5,47 +5,33 @@ import (
 )
 
 // OccupancySensing
+const OccupancySensingID zcl.ClusterID = 1030
 
-func NewOccupancySensingServer(profile zcl.ProfileID) *OccupancySensingServer {
-	return &OccupancySensingServer{p: profile}
-}
-func NewOccupancySensingClient(profile zcl.ProfileID) *OccupancySensingClient {
-	return &OccupancySensingClient{p: profile}
-}
-
-const OccupancySensingCluster zcl.ClusterID = 1030
-
-type OccupancySensingServer struct {
-	p zcl.ProfileID
-
-	Occupancy                               *Occupancy
-	OccupancySensorType                     *OccupancySensorType
-	PirOccupiedToUnoccupiedDelay            *PirOccupiedToUnoccupiedDelay
-	PirUnoccupiedToOccupiedDelay            *PirUnoccupiedToOccupiedDelay
-	PirUnoccupiedToOccupiedThreshold        *PirUnoccupiedToOccupiedThreshold
-	UltrasonicOccupiedToUnoccupiedDelay     *UltrasonicOccupiedToUnoccupiedDelay
-	UltrasonicUnoccupiedToOccupiedDelay     *UltrasonicUnoccupiedToOccupiedDelay
-	UltrasonicUnoccupiedToOccupiedThreshold *UltrasonicUnoccupiedToOccupiedThreshold
-	Sensitivity                             *Sensitivity
-	SensitivityMax                          *SensitivityMax
+var OccupancySensingCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		OccupancyAttr:                               func() zcl.Attr { return new(Occupancy) },
+		OccupancySensorTypeAttr:                     func() zcl.Attr { return new(OccupancySensorType) },
+		PirOccupiedToUnoccupiedDelayAttr:            func() zcl.Attr { return new(PirOccupiedToUnoccupiedDelay) },
+		PirUnoccupiedToOccupiedDelayAttr:            func() zcl.Attr { return new(PirUnoccupiedToOccupiedDelay) },
+		PirUnoccupiedToOccupiedThresholdAttr:        func() zcl.Attr { return new(PirUnoccupiedToOccupiedThreshold) },
+		UltrasonicOccupiedToUnoccupiedDelayAttr:     func() zcl.Attr { return new(UltrasonicOccupiedToUnoccupiedDelay) },
+		UltrasonicUnoccupiedToOccupiedDelayAttr:     func() zcl.Attr { return new(UltrasonicUnoccupiedToOccupiedDelay) },
+		UltrasonicUnoccupiedToOccupiedThresholdAttr: func() zcl.Attr { return new(UltrasonicUnoccupiedToOccupiedThreshold) },
+		SensitivityAttr:                             func() zcl.Attr { return new(Sensitivity) },
+		SensitivityMaxAttr:                          func() zcl.Attr { return new(SensitivityMax) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type OccupancySensingClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var OccupancySensingServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var OccupancySensingClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const OccupancyAttr zcl.AttrID = 0
 
 type Occupancy zcl.Zbmp8
 
-func (a Occupancy) ID() zcl.AttrID         { return 0 }
-func (a Occupancy) Cluster() zcl.ClusterID { return OccupancySensingCluster }
+func (a Occupancy) ID() zcl.AttrID         { return OccupancyAttr }
+func (a Occupancy) Cluster() zcl.ClusterID { return OccupancySensingID }
 func (a *Occupancy) Value() *Occupancy     { return a }
 func (a Occupancy) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -67,10 +53,12 @@ func (a Occupancy) String() string {
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
+const OccupancySensorTypeAttr zcl.AttrID = 1
+
 type OccupancySensorType zcl.Zenum8
 
-func (a OccupancySensorType) ID() zcl.AttrID               { return 1 }
-func (a OccupancySensorType) Cluster() zcl.ClusterID       { return OccupancySensingCluster }
+func (a OccupancySensorType) ID() zcl.AttrID               { return OccupancySensorTypeAttr }
+func (a OccupancySensorType) Cluster() zcl.ClusterID       { return OccupancySensingID }
 func (a *OccupancySensorType) Value() *OccupancySensorType { return a }
 func (a OccupancySensorType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -118,10 +106,12 @@ func (a OccupancySensorType) IsPirAndUltrasonic() bool { return a == 0x02 }
 // SetPirAndUltrasonic sets OccupancySensorType to PIR and ultrasonic (0x02)
 func (a *OccupancySensorType) SetPirAndUltrasonic() { *a = 0x02 }
 
+const PirOccupiedToUnoccupiedDelayAttr zcl.AttrID = 16
+
 type PirOccupiedToUnoccupiedDelay zcl.Zu16
 
-func (a PirOccupiedToUnoccupiedDelay) ID() zcl.AttrID                        { return 16 }
-func (a PirOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID                { return OccupancySensingCluster }
+func (a PirOccupiedToUnoccupiedDelay) ID() zcl.AttrID                        { return PirOccupiedToUnoccupiedDelayAttr }
+func (a PirOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID                { return OccupancySensingID }
 func (a *PirOccupiedToUnoccupiedDelay) Value() *PirOccupiedToUnoccupiedDelay { return a }
 func (a PirOccupiedToUnoccupiedDelay) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -143,10 +133,12 @@ func (a PirOccupiedToUnoccupiedDelay) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PirUnoccupiedToOccupiedDelayAttr zcl.AttrID = 17
+
 type PirUnoccupiedToOccupiedDelay zcl.Zu16
 
-func (a PirUnoccupiedToOccupiedDelay) ID() zcl.AttrID                        { return 17 }
-func (a PirUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID                { return OccupancySensingCluster }
+func (a PirUnoccupiedToOccupiedDelay) ID() zcl.AttrID                        { return PirUnoccupiedToOccupiedDelayAttr }
+func (a PirUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID                { return OccupancySensingID }
 func (a *PirUnoccupiedToOccupiedDelay) Value() *PirUnoccupiedToOccupiedDelay { return a }
 func (a PirUnoccupiedToOccupiedDelay) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -168,10 +160,12 @@ func (a PirUnoccupiedToOccupiedDelay) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PirUnoccupiedToOccupiedThresholdAttr zcl.AttrID = 18
+
 type PirUnoccupiedToOccupiedThreshold zcl.Zu8
 
-func (a PirUnoccupiedToOccupiedThreshold) ID() zcl.AttrID                            { return 18 }
-func (a PirUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID                    { return OccupancySensingCluster }
+func (a PirUnoccupiedToOccupiedThreshold) ID() zcl.AttrID                            { return PirUnoccupiedToOccupiedThresholdAttr }
+func (a PirUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID                    { return OccupancySensingID }
 func (a *PirUnoccupiedToOccupiedThreshold) Value() *PirUnoccupiedToOccupiedThreshold { return a }
 func (a PirUnoccupiedToOccupiedThreshold) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -193,10 +187,14 @@ func (a PirUnoccupiedToOccupiedThreshold) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const UltrasonicOccupiedToUnoccupiedDelayAttr zcl.AttrID = 32
+
 type UltrasonicOccupiedToUnoccupiedDelay zcl.Zu16
 
-func (a UltrasonicOccupiedToUnoccupiedDelay) ID() zcl.AttrID                               { return 32 }
-func (a UltrasonicOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID                       { return OccupancySensingCluster }
+func (a UltrasonicOccupiedToUnoccupiedDelay) ID() zcl.AttrID {
+	return UltrasonicOccupiedToUnoccupiedDelayAttr
+}
+func (a UltrasonicOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID                       { return OccupancySensingID }
 func (a *UltrasonicOccupiedToUnoccupiedDelay) Value() *UltrasonicOccupiedToUnoccupiedDelay { return a }
 func (a UltrasonicOccupiedToUnoccupiedDelay) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -218,10 +216,14 @@ func (a UltrasonicOccupiedToUnoccupiedDelay) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const UltrasonicUnoccupiedToOccupiedDelayAttr zcl.AttrID = 33
+
 type UltrasonicUnoccupiedToOccupiedDelay zcl.Zu16
 
-func (a UltrasonicUnoccupiedToOccupiedDelay) ID() zcl.AttrID                               { return 33 }
-func (a UltrasonicUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID                       { return OccupancySensingCluster }
+func (a UltrasonicUnoccupiedToOccupiedDelay) ID() zcl.AttrID {
+	return UltrasonicUnoccupiedToOccupiedDelayAttr
+}
+func (a UltrasonicUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID                       { return OccupancySensingID }
 func (a *UltrasonicUnoccupiedToOccupiedDelay) Value() *UltrasonicUnoccupiedToOccupiedDelay { return a }
 func (a UltrasonicUnoccupiedToOccupiedDelay) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -243,12 +245,14 @@ func (a UltrasonicUnoccupiedToOccupiedDelay) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const UltrasonicUnoccupiedToOccupiedThresholdAttr zcl.AttrID = 34
+
 type UltrasonicUnoccupiedToOccupiedThreshold zcl.Zu8
 
-func (a UltrasonicUnoccupiedToOccupiedThreshold) ID() zcl.AttrID { return 34 }
-func (a UltrasonicUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID {
-	return OccupancySensingCluster
+func (a UltrasonicUnoccupiedToOccupiedThreshold) ID() zcl.AttrID {
+	return UltrasonicUnoccupiedToOccupiedThresholdAttr
 }
+func (a UltrasonicUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID { return OccupancySensingID }
 func (a *UltrasonicUnoccupiedToOccupiedThreshold) Value() *UltrasonicUnoccupiedToOccupiedThreshold {
 	return a
 }
@@ -272,10 +276,12 @@ func (a UltrasonicUnoccupiedToOccupiedThreshold) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const SensitivityAttr zcl.AttrID = 48
+
 type Sensitivity zcl.Zu8
 
-func (a Sensitivity) ID() zcl.AttrID         { return 48 }
-func (a Sensitivity) Cluster() zcl.ClusterID { return OccupancySensingCluster }
+func (a Sensitivity) ID() zcl.AttrID         { return SensitivityAttr }
+func (a Sensitivity) Cluster() zcl.ClusterID { return OccupancySensingID }
 func (a *Sensitivity) Value() *Sensitivity   { return a }
 func (a Sensitivity) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -297,10 +303,12 @@ func (a Sensitivity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const SensitivityMaxAttr zcl.AttrID = 49
+
 type SensitivityMax zcl.Zu8
 
-func (a SensitivityMax) ID() zcl.AttrID          { return 49 }
-func (a SensitivityMax) Cluster() zcl.ClusterID  { return OccupancySensingCluster }
+func (a SensitivityMax) ID() zcl.AttrID          { return SensitivityMaxAttr }
+func (a SensitivityMax) Cluster() zcl.ClusterID  { return OccupancySensingID }
 func (a *SensitivityMax) Value() *SensitivityMax { return a }
 func (a SensitivityMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()

@@ -6,90 +6,51 @@ import (
 )
 
 // Commissioning
-// Attributes and commands for commissioning and managing a ZigBee device.
+const CommissioningID zcl.ClusterID = 21
 
-func NewCommissioningServer(profile zcl.ProfileID) *CommissioningServer {
-	return &CommissioningServer{p: profile}
+var CommissioningCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		RestartDeviceCommand:            func() zcl.Command { return new(RestartDevice) },
+		SaveStartupParametersCommand:    func() zcl.Command { return new(SaveStartupParameters) },
+		RestoreStartupParametersCommand: func() zcl.Command { return new(RestoreStartupParameters) },
+		ResetStartupParametersCommand:   func() zcl.Command { return new(ResetStartupParameters) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		RestartDeviceResponseCommand:            func() zcl.Command { return new(RestartDeviceResponse) },
+		SaveStartupParametersResponseCommand:    func() zcl.Command { return new(SaveStartupParametersResponse) },
+		RestoreStartupParametersResponseCommand: func() zcl.Command { return new(RestoreStartupParametersResponse) },
+		ResetStartupParametersResponseCommand:   func() zcl.Command { return new(ResetStartupParametersResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		ShortAddressAttr:              func() zcl.Attr { return new(ShortAddress) },
+		ExtendedPanIdAttr:             func() zcl.Attr { return new(ExtendedPanId) },
+		PanIdAttr:                     func() zcl.Attr { return new(PanId) },
+		ChannelMaskAttr:               func() zcl.Attr { return new(ChannelMask) },
+		ProtocolVersionAttr:           func() zcl.Attr { return new(ProtocolVersion) },
+		StackProfileAttr:              func() zcl.Attr { return new(StackProfile) },
+		StartupControlAttr:            func() zcl.Attr { return new(StartupControl) },
+		TrustCenterAddressAttr:        func() zcl.Attr { return new(TrustCenterAddress) },
+		TrustCenterMasterKeyAttr:      func() zcl.Attr { return new(TrustCenterMasterKey) },
+		NetworkKeyAttr:                func() zcl.Attr { return new(NetworkKey) },
+		UseInsecureJoinAttr:           func() zcl.Attr { return new(UseInsecureJoin) },
+		PreconfiguredLinkKeyAttr:      func() zcl.Attr { return new(PreconfiguredLinkKey) },
+		NetworkKeySeqNumAttr:          func() zcl.Attr { return new(NetworkKeySeqNum) },
+		NetworkKeyTypeAttr:            func() zcl.Attr { return new(NetworkKeyType) },
+		NetworkManagerAddressAttr:     func() zcl.Attr { return new(NetworkManagerAddress) },
+		ScanAttemptsAttr:              func() zcl.Attr { return new(ScanAttempts) },
+		TimeBetweenScansAttr:          func() zcl.Attr { return new(TimeBetweenScans) },
+		RejoinIntervalAttr:            func() zcl.Attr { return new(RejoinInterval) },
+		MaxRejoinIntervalAttr:         func() zcl.Attr { return new(MaxRejoinInterval) },
+		IndirectPollRateAttr:          func() zcl.Attr { return new(IndirectPollRate) },
+		ParentRetryThresholdAttr:      func() zcl.Attr { return new(ParentRetryThreshold) },
+		ConcentratorFlagAttr:          func() zcl.Attr { return new(ConcentratorFlag) },
+		ConcentratorRadiusAttr:        func() zcl.Attr { return new(ConcentratorRadius) },
+		ConcentratorDiscoveryTimeAttr: func() zcl.Attr { return new(ConcentratorDiscoveryTime) },
+		MacAddressAttr:                func() zcl.Attr { return new(MacAddress) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewCommissioningClient(profile zcl.ProfileID) *CommissioningClient {
-	return &CommissioningClient{p: profile}
-}
-
-const CommissioningCluster zcl.ClusterID = 21
-
-type CommissioningServer struct {
-	p zcl.ProfileID
-
-	ShortAddress              *ShortAddress
-	ExtendedPanId             *ExtendedPanId
-	PanId                     *PanId
-	ChannelMask               *ChannelMask
-	ProtocolVersion           *ProtocolVersion
-	StackProfile              *StackProfile
-	StartupControl            *StartupControl
-	TrustCenterAddress        *TrustCenterAddress
-	TrustCenterMasterKey      *TrustCenterMasterKey
-	NetworkKey                *NetworkKey
-	UseInsecureJoin           *UseInsecureJoin
-	PreconfiguredLinkKey      *PreconfiguredLinkKey
-	NetworkKeySeqNum          *NetworkKeySeqNum
-	NetworkKeyType            *NetworkKeyType
-	NetworkManagerAddress     *NetworkManagerAddress
-	ScanAttempts              *ScanAttempts
-	TimeBetweenScans          *TimeBetweenScans
-	RejoinInterval            *RejoinInterval
-	MaxRejoinInterval         *MaxRejoinInterval
-	IndirectPollRate          *IndirectPollRate
-	ParentRetryThreshold      *ParentRetryThreshold
-	ConcentratorFlag          *ConcentratorFlag
-	ConcentratorRadius        *ConcentratorRadius
-	ConcentratorDiscoveryTime *ConcentratorDiscoveryTime
-	MacAddress                *MacAddress
-}
-
-func (s *CommissioningServer) RestartDevice() *RestartDevice { return new(RestartDevice) }
-func (s *CommissioningServer) SaveStartupParameters() *SaveStartupParameters {
-	return new(SaveStartupParameters)
-}
-func (s *CommissioningServer) RestoreStartupParameters() *RestoreStartupParameters {
-	return new(RestoreStartupParameters)
-}
-func (s *CommissioningServer) ResetStartupParameters() *ResetStartupParameters {
-	return new(ResetStartupParameters)
-}
-
-type CommissioningClient struct {
-	p zcl.ProfileID
-}
-
-func (s *CommissioningClient) RestartDeviceResponse() *RestartDeviceResponse {
-	return new(RestartDeviceResponse)
-}
-func (s *CommissioningClient) SaveStartupParametersResponse() *SaveStartupParametersResponse {
-	return new(SaveStartupParametersResponse)
-}
-func (s *CommissioningClient) RestoreStartupParametersResponse() *RestoreStartupParametersResponse {
-	return new(RestoreStartupParametersResponse)
-}
-func (s *CommissioningClient) ResetStartupParametersResponse() *ResetStartupParametersResponse {
-	return new(ResetStartupParametersResponse)
-}
-
-/*
-var CommissioningServer = map[zcl.CommandID]func() zcl.Command{
-    RestartDeviceID: func() zcl.Command { return new(RestartDevice) },
-    SaveStartupParametersID: func() zcl.Command { return new(SaveStartupParameters) },
-    RestoreStartupParametersID: func() zcl.Command { return new(RestoreStartupParameters) },
-    ResetStartupParametersID: func() zcl.Command { return new(ResetStartupParameters) },
-}
-
-var CommissioningClient = map[zcl.CommandID]func() zcl.Command{
-    RestartDeviceResponseID: func() zcl.Command { return new(RestartDeviceResponse) },
-    SaveStartupParametersResponseID: func() zcl.Command { return new(SaveStartupParametersResponse) },
-    RestoreStartupParametersResponseID: func() zcl.Command { return new(RestoreStartupParametersResponse) },
-    ResetStartupParametersResponseID: func() zcl.Command { return new(ResetStartupParametersResponse) },
-}
-*/
 
 // The Restart Device command is used to optionally install a set of startup parameters in a device and run the startup procedure so as to put the new values into effect. The new values may take effect immediately or after an optional delay with optional jitter. The server will send a Restart Device Response command back to the client device before executing the procedure or starting the countdown timer required to time the delay.
 type RestartDevice struct {
@@ -113,7 +74,7 @@ func (v RestartDevice) ID() zcl.CommandID {
 }
 
 func (v RestartDevice) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v RestartDevice) MnfCode() []byte {
@@ -181,7 +142,7 @@ func (v SaveStartupParameters) ID() zcl.CommandID {
 }
 
 func (v SaveStartupParameters) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v SaveStartupParameters) MnfCode() []byte {
@@ -240,7 +201,7 @@ func (v RestoreStartupParameters) ID() zcl.CommandID {
 }
 
 func (v RestoreStartupParameters) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v RestoreStartupParameters) MnfCode() []byte {
@@ -299,7 +260,7 @@ func (v ResetStartupParameters) ID() zcl.CommandID {
 }
 
 func (v ResetStartupParameters) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v ResetStartupParameters) MnfCode() []byte {
@@ -356,7 +317,7 @@ func (v RestartDeviceResponse) ID() zcl.CommandID {
 }
 
 func (v RestartDeviceResponse) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v RestartDeviceResponse) MnfCode() []byte {
@@ -404,7 +365,7 @@ func (v SaveStartupParametersResponse) ID() zcl.CommandID {
 }
 
 func (v SaveStartupParametersResponse) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v SaveStartupParametersResponse) MnfCode() []byte {
@@ -452,7 +413,7 @@ func (v RestoreStartupParametersResponse) ID() zcl.CommandID {
 }
 
 func (v RestoreStartupParametersResponse) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v RestoreStartupParametersResponse) MnfCode() []byte {
@@ -500,7 +461,7 @@ func (v ResetStartupParametersResponse) ID() zcl.CommandID {
 }
 
 func (v ResetStartupParametersResponse) Cluster() zcl.ClusterID {
-	return CommissioningCluster
+	return CommissioningID
 }
 
 func (v ResetStartupParametersResponse) MnfCode() []byte {
@@ -530,10 +491,12 @@ func (v *ResetStartupParametersResponse) UnmarshalZcl(b []byte) ([]byte, error) 
 	return b, nil
 }
 
+const ShortAddressAttr zcl.AttrID = 0
+
 type ShortAddress zcl.Zu16
 
-func (a ShortAddress) ID() zcl.AttrID         { return 0 }
-func (a ShortAddress) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a ShortAddress) ID() zcl.AttrID         { return ShortAddressAttr }
+func (a ShortAddress) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *ShortAddress) Value() *ShortAddress  { return a }
 func (a ShortAddress) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -555,10 +518,12 @@ func (a ShortAddress) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
+const ExtendedPanIdAttr zcl.AttrID = 1
+
 type ExtendedPanId zcl.Zuid
 
-func (a ExtendedPanId) ID() zcl.AttrID         { return 1 }
-func (a ExtendedPanId) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a ExtendedPanId) ID() zcl.AttrID         { return ExtendedPanIdAttr }
+func (a ExtendedPanId) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *ExtendedPanId) Value() *ExtendedPanId { return a }
 func (a ExtendedPanId) MarshalZcl() ([]byte, error) {
 	return zcl.Zuid(a).MarshalZcl()
@@ -580,10 +545,12 @@ func (a ExtendedPanId) String() string {
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
+const PanIdAttr zcl.AttrID = 2
+
 type PanId zcl.Zu16
 
-func (a PanId) ID() zcl.AttrID         { return 2 }
-func (a PanId) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a PanId) ID() zcl.AttrID         { return PanIdAttr }
+func (a PanId) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *PanId) Value() *PanId         { return a }
 func (a PanId) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -605,10 +572,12 @@ func (a PanId) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
+const ChannelMaskAttr zcl.AttrID = 3
+
 type ChannelMask zcl.Zbmp32
 
-func (a ChannelMask) ID() zcl.AttrID         { return 3 }
-func (a ChannelMask) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a ChannelMask) ID() zcl.AttrID         { return ChannelMaskAttr }
+func (a ChannelMask) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *ChannelMask) Value() *ChannelMask   { return a }
 func (a ChannelMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp32(a).MarshalZcl()
@@ -792,10 +761,12 @@ func (a *ChannelMask) SetCh26(b bool) {
 	*a = ChannelMask(zcl.BitmapSet([]byte(*a), 26, b))
 }
 
+const ProtocolVersionAttr zcl.AttrID = 4
+
 type ProtocolVersion zcl.Zu8
 
-func (a ProtocolVersion) ID() zcl.AttrID           { return 4 }
-func (a ProtocolVersion) Cluster() zcl.ClusterID   { return CommissioningCluster }
+func (a ProtocolVersion) ID() zcl.AttrID           { return ProtocolVersionAttr }
+func (a ProtocolVersion) Cluster() zcl.ClusterID   { return CommissioningID }
 func (a *ProtocolVersion) Value() *ProtocolVersion { return a }
 func (a ProtocolVersion) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -817,10 +788,12 @@ func (a ProtocolVersion) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const StackProfileAttr zcl.AttrID = 5
+
 type StackProfile zcl.Zu8
 
-func (a StackProfile) ID() zcl.AttrID         { return 5 }
-func (a StackProfile) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a StackProfile) ID() zcl.AttrID         { return StackProfileAttr }
+func (a StackProfile) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *StackProfile) Value() *StackProfile  { return a }
 func (a StackProfile) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -842,10 +815,12 @@ func (a StackProfile) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const StartupControlAttr zcl.AttrID = 6
+
 type StartupControl zcl.Zenum8
 
-func (a StartupControl) ID() zcl.AttrID          { return 6 }
-func (a StartupControl) Cluster() zcl.ClusterID  { return CommissioningCluster }
+func (a StartupControl) ID() zcl.AttrID          { return StartupControlAttr }
+func (a StartupControl) Cluster() zcl.ClusterID  { return CommissioningID }
 func (a *StartupControl) Value() *StartupControl { return a }
 func (a StartupControl) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -901,10 +876,12 @@ func (a StartupControl) IsStartFromScratch() bool { return a == 0x03 }
 // SetStartFromScratch sets StartupControl to Start from scratch (0x03)
 func (a *StartupControl) SetStartFromScratch() { *a = 0x03 }
 
+const TrustCenterAddressAttr zcl.AttrID = 16
+
 type TrustCenterAddress zcl.Zuid
 
-func (a TrustCenterAddress) ID() zcl.AttrID              { return 16 }
-func (a TrustCenterAddress) Cluster() zcl.ClusterID      { return CommissioningCluster }
+func (a TrustCenterAddress) ID() zcl.AttrID              { return TrustCenterAddressAttr }
+func (a TrustCenterAddress) Cluster() zcl.ClusterID      { return CommissioningID }
 func (a *TrustCenterAddress) Value() *TrustCenterAddress { return a }
 func (a TrustCenterAddress) MarshalZcl() ([]byte, error) {
 	return zcl.Zuid(a).MarshalZcl()
@@ -926,10 +903,12 @@ func (a TrustCenterAddress) String() string {
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
+const TrustCenterMasterKeyAttr zcl.AttrID = 17
+
 type TrustCenterMasterKey zcl.Zseckey
 
-func (a TrustCenterMasterKey) ID() zcl.AttrID                { return 17 }
-func (a TrustCenterMasterKey) Cluster() zcl.ClusterID        { return CommissioningCluster }
+func (a TrustCenterMasterKey) ID() zcl.AttrID                { return TrustCenterMasterKeyAttr }
+func (a TrustCenterMasterKey) Cluster() zcl.ClusterID        { return CommissioningID }
 func (a *TrustCenterMasterKey) Value() *TrustCenterMasterKey { return a }
 func (a TrustCenterMasterKey) MarshalZcl() ([]byte, error) {
 	return zcl.Zseckey(a).MarshalZcl()
@@ -951,10 +930,12 @@ func (a TrustCenterMasterKey) String() string {
 	return zcl.Sprintf("%s", zcl.Zseckey(a))
 }
 
+const NetworkKeyAttr zcl.AttrID = 18
+
 type NetworkKey zcl.Zseckey
 
-func (a NetworkKey) ID() zcl.AttrID         { return 18 }
-func (a NetworkKey) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a NetworkKey) ID() zcl.AttrID         { return NetworkKeyAttr }
+func (a NetworkKey) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *NetworkKey) Value() *NetworkKey    { return a }
 func (a NetworkKey) MarshalZcl() ([]byte, error) {
 	return zcl.Zseckey(a).MarshalZcl()
@@ -976,10 +957,12 @@ func (a NetworkKey) String() string {
 	return zcl.Sprintf("%s", zcl.Zseckey(a))
 }
 
+const UseInsecureJoinAttr zcl.AttrID = 19
+
 type UseInsecureJoin zcl.Zbool
 
-func (a UseInsecureJoin) ID() zcl.AttrID           { return 19 }
-func (a UseInsecureJoin) Cluster() zcl.ClusterID   { return CommissioningCluster }
+func (a UseInsecureJoin) ID() zcl.AttrID           { return UseInsecureJoinAttr }
+func (a UseInsecureJoin) Cluster() zcl.ClusterID   { return CommissioningID }
 func (a *UseInsecureJoin) Value() *UseInsecureJoin { return a }
 func (a UseInsecureJoin) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -1001,10 +984,12 @@ func (a UseInsecureJoin) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const PreconfiguredLinkKeyAttr zcl.AttrID = 20
+
 type PreconfiguredLinkKey zcl.Zseckey
 
-func (a PreconfiguredLinkKey) ID() zcl.AttrID                { return 20 }
-func (a PreconfiguredLinkKey) Cluster() zcl.ClusterID        { return CommissioningCluster }
+func (a PreconfiguredLinkKey) ID() zcl.AttrID                { return PreconfiguredLinkKeyAttr }
+func (a PreconfiguredLinkKey) Cluster() zcl.ClusterID        { return CommissioningID }
 func (a *PreconfiguredLinkKey) Value() *PreconfiguredLinkKey { return a }
 func (a PreconfiguredLinkKey) MarshalZcl() ([]byte, error) {
 	return zcl.Zseckey(a).MarshalZcl()
@@ -1026,10 +1011,12 @@ func (a PreconfiguredLinkKey) String() string {
 	return zcl.Sprintf("%s", zcl.Zseckey(a))
 }
 
+const NetworkKeySeqNumAttr zcl.AttrID = 21
+
 type NetworkKeySeqNum zcl.Zu8
 
-func (a NetworkKeySeqNum) ID() zcl.AttrID            { return 21 }
-func (a NetworkKeySeqNum) Cluster() zcl.ClusterID    { return CommissioningCluster }
+func (a NetworkKeySeqNum) ID() zcl.AttrID            { return NetworkKeySeqNumAttr }
+func (a NetworkKeySeqNum) Cluster() zcl.ClusterID    { return CommissioningID }
 func (a *NetworkKeySeqNum) Value() *NetworkKeySeqNum { return a }
 func (a NetworkKeySeqNum) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1051,10 +1038,12 @@ func (a NetworkKeySeqNum) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const NetworkKeyTypeAttr zcl.AttrID = 22
+
 type NetworkKeyType zcl.Zenum8
 
-func (a NetworkKeyType) ID() zcl.AttrID          { return 22 }
-func (a NetworkKeyType) Cluster() zcl.ClusterID  { return CommissioningCluster }
+func (a NetworkKeyType) ID() zcl.AttrID          { return NetworkKeyTypeAttr }
+func (a NetworkKeyType) Cluster() zcl.ClusterID  { return CommissioningID }
 func (a *NetworkKeyType) Value() *NetworkKeyType { return a }
 func (a NetworkKeyType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -1094,10 +1083,12 @@ func (a NetworkKeyType) IsHighSecurity() bool { return a == 0x05 }
 // SetHighSecurity sets NetworkKeyType to High Security (0x05)
 func (a *NetworkKeyType) SetHighSecurity() { *a = 0x05 }
 
+const NetworkManagerAddressAttr zcl.AttrID = 23
+
 type NetworkManagerAddress zcl.Zu16
 
-func (a NetworkManagerAddress) ID() zcl.AttrID                 { return 23 }
-func (a NetworkManagerAddress) Cluster() zcl.ClusterID         { return CommissioningCluster }
+func (a NetworkManagerAddress) ID() zcl.AttrID                 { return NetworkManagerAddressAttr }
+func (a NetworkManagerAddress) Cluster() zcl.ClusterID         { return CommissioningID }
 func (a *NetworkManagerAddress) Value() *NetworkManagerAddress { return a }
 func (a NetworkManagerAddress) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1119,10 +1110,12 @@ func (a NetworkManagerAddress) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ScanAttemptsAttr zcl.AttrID = 32
+
 type ScanAttempts zcl.Zu8
 
-func (a ScanAttempts) ID() zcl.AttrID         { return 32 }
-func (a ScanAttempts) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a ScanAttempts) ID() zcl.AttrID         { return ScanAttemptsAttr }
+func (a ScanAttempts) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *ScanAttempts) Value() *ScanAttempts  { return a }
 func (a ScanAttempts) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1144,10 +1137,12 @@ func (a ScanAttempts) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const TimeBetweenScansAttr zcl.AttrID = 33
+
 type TimeBetweenScans zcl.Zu16
 
-func (a TimeBetweenScans) ID() zcl.AttrID            { return 33 }
-func (a TimeBetweenScans) Cluster() zcl.ClusterID    { return CommissioningCluster }
+func (a TimeBetweenScans) ID() zcl.AttrID            { return TimeBetweenScansAttr }
+func (a TimeBetweenScans) Cluster() zcl.ClusterID    { return CommissioningID }
 func (a *TimeBetweenScans) Value() *TimeBetweenScans { return a }
 func (a TimeBetweenScans) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1169,10 +1164,12 @@ func (a TimeBetweenScans) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RejoinIntervalAttr zcl.AttrID = 34
+
 type RejoinInterval zcl.Zu16
 
-func (a RejoinInterval) ID() zcl.AttrID          { return 34 }
-func (a RejoinInterval) Cluster() zcl.ClusterID  { return CommissioningCluster }
+func (a RejoinInterval) ID() zcl.AttrID          { return RejoinIntervalAttr }
+func (a RejoinInterval) Cluster() zcl.ClusterID  { return CommissioningID }
 func (a *RejoinInterval) Value() *RejoinInterval { return a }
 func (a RejoinInterval) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1194,10 +1191,12 @@ func (a RejoinInterval) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MaxRejoinIntervalAttr zcl.AttrID = 35
+
 type MaxRejoinInterval zcl.Zu16
 
-func (a MaxRejoinInterval) ID() zcl.AttrID             { return 35 }
-func (a MaxRejoinInterval) Cluster() zcl.ClusterID     { return CommissioningCluster }
+func (a MaxRejoinInterval) ID() zcl.AttrID             { return MaxRejoinIntervalAttr }
+func (a MaxRejoinInterval) Cluster() zcl.ClusterID     { return CommissioningID }
 func (a *MaxRejoinInterval) Value() *MaxRejoinInterval { return a }
 func (a MaxRejoinInterval) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1219,10 +1218,12 @@ func (a MaxRejoinInterval) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const IndirectPollRateAttr zcl.AttrID = 48
+
 type IndirectPollRate zcl.Zu16
 
-func (a IndirectPollRate) ID() zcl.AttrID            { return 48 }
-func (a IndirectPollRate) Cluster() zcl.ClusterID    { return CommissioningCluster }
+func (a IndirectPollRate) ID() zcl.AttrID            { return IndirectPollRateAttr }
+func (a IndirectPollRate) Cluster() zcl.ClusterID    { return CommissioningID }
 func (a *IndirectPollRate) Value() *IndirectPollRate { return a }
 func (a IndirectPollRate) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1244,10 +1245,12 @@ func (a IndirectPollRate) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ParentRetryThresholdAttr zcl.AttrID = 48
+
 type ParentRetryThreshold zcl.Zu8
 
-func (a ParentRetryThreshold) ID() zcl.AttrID                { return 48 }
-func (a ParentRetryThreshold) Cluster() zcl.ClusterID        { return CommissioningCluster }
+func (a ParentRetryThreshold) ID() zcl.AttrID                { return ParentRetryThresholdAttr }
+func (a ParentRetryThreshold) Cluster() zcl.ClusterID        { return CommissioningID }
 func (a *ParentRetryThreshold) Value() *ParentRetryThreshold { return a }
 func (a ParentRetryThreshold) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1269,10 +1272,12 @@ func (a ParentRetryThreshold) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const ConcentratorFlagAttr zcl.AttrID = 64
+
 type ConcentratorFlag zcl.Zbool
 
-func (a ConcentratorFlag) ID() zcl.AttrID            { return 64 }
-func (a ConcentratorFlag) Cluster() zcl.ClusterID    { return CommissioningCluster }
+func (a ConcentratorFlag) ID() zcl.AttrID            { return ConcentratorFlagAttr }
+func (a ConcentratorFlag) Cluster() zcl.ClusterID    { return CommissioningID }
 func (a *ConcentratorFlag) Value() *ConcentratorFlag { return a }
 func (a ConcentratorFlag) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -1294,10 +1299,12 @@ func (a ConcentratorFlag) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const ConcentratorRadiusAttr zcl.AttrID = 65
+
 type ConcentratorRadius zcl.Zu8
 
-func (a ConcentratorRadius) ID() zcl.AttrID              { return 65 }
-func (a ConcentratorRadius) Cluster() zcl.ClusterID      { return CommissioningCluster }
+func (a ConcentratorRadius) ID() zcl.AttrID              { return ConcentratorRadiusAttr }
+func (a ConcentratorRadius) Cluster() zcl.ClusterID      { return CommissioningID }
 func (a *ConcentratorRadius) Value() *ConcentratorRadius { return a }
 func (a ConcentratorRadius) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1319,10 +1326,12 @@ func (a ConcentratorRadius) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const ConcentratorDiscoveryTimeAttr zcl.AttrID = 66
+
 type ConcentratorDiscoveryTime zcl.Zu8
 
-func (a ConcentratorDiscoveryTime) ID() zcl.AttrID                     { return 66 }
-func (a ConcentratorDiscoveryTime) Cluster() zcl.ClusterID             { return CommissioningCluster }
+func (a ConcentratorDiscoveryTime) ID() zcl.AttrID                     { return ConcentratorDiscoveryTimeAttr }
+func (a ConcentratorDiscoveryTime) Cluster() zcl.ClusterID             { return CommissioningID }
 func (a *ConcentratorDiscoveryTime) Value() *ConcentratorDiscoveryTime { return a }
 func (a ConcentratorDiscoveryTime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -1344,10 +1353,12 @@ func (a ConcentratorDiscoveryTime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const MacAddressAttr zcl.AttrID = 56833
+
 type MacAddress zcl.Zuid
 
-func (a MacAddress) ID() zcl.AttrID         { return 56833 }
-func (a MacAddress) Cluster() zcl.ClusterID { return CommissioningCluster }
+func (a MacAddress) ID() zcl.AttrID         { return MacAddressAttr }
+func (a MacAddress) Cluster() zcl.ClusterID { return CommissioningID }
 func (a *MacAddress) Value() *MacAddress    { return a }
 func (a MacAddress) MarshalZcl() ([]byte, error) {
 	return zcl.Zuid(a).MarshalZcl()

@@ -6,56 +6,29 @@ import (
 )
 
 // Groups
-// Attributes and commands for group configuration and manipulation.
+const GroupsID zcl.ClusterID = 4
 
-func NewGroupsServer(profile zcl.ProfileID) *GroupsServer { return &GroupsServer{p: profile} }
-func NewGroupsClient(profile zcl.ProfileID) *GroupsClient { return &GroupsClient{p: profile} }
-
-const GroupsCluster zcl.ClusterID = 4
-
-type GroupsServer struct {
-	p zcl.ProfileID
-
-	GroupNameSupport *GroupNameSupport
+var GroupsCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		AddGroupCommand:              func() zcl.Command { return new(AddGroup) },
+		ViewGroupCommand:             func() zcl.Command { return new(ViewGroup) },
+		GetGroupMembershipCommand:    func() zcl.Command { return new(GetGroupMembership) },
+		RemoveGroupCommand:           func() zcl.Command { return new(RemoveGroup) },
+		RemoveAllGroupsCommand:       func() zcl.Command { return new(RemoveAllGroups) },
+		AddGroupIfIdentifyingCommand: func() zcl.Command { return new(AddGroupIfIdentifying) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		AddGroupResponseCommand:           func() zcl.Command { return new(AddGroupResponse) },
+		ViewGroupResponseCommand:          func() zcl.Command { return new(ViewGroupResponse) },
+		GetGroupMembershipResponseCommand: func() zcl.Command { return new(GetGroupMembershipResponse) },
+		RemoveGroupResponseCommand:        func() zcl.Command { return new(RemoveGroupResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		GroupNameSupportAttr: func() zcl.Attr { return new(GroupNameSupport) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *GroupsServer) AddGroup() *AddGroup                     { return new(AddGroup) }
-func (s *GroupsServer) ViewGroup() *ViewGroup                   { return new(ViewGroup) }
-func (s *GroupsServer) GetGroupMembership() *GetGroupMembership { return new(GetGroupMembership) }
-func (s *GroupsServer) RemoveGroup() *RemoveGroup               { return new(RemoveGroup) }
-func (s *GroupsServer) RemoveAllGroups() *RemoveAllGroups       { return new(RemoveAllGroups) }
-func (s *GroupsServer) AddGroupIfIdentifying() *AddGroupIfIdentifying {
-	return new(AddGroupIfIdentifying)
-}
-
-type GroupsClient struct {
-	p zcl.ProfileID
-}
-
-func (s *GroupsClient) AddGroupResponse() *AddGroupResponse   { return new(AddGroupResponse) }
-func (s *GroupsClient) ViewGroupResponse() *ViewGroupResponse { return new(ViewGroupResponse) }
-func (s *GroupsClient) GetGroupMembershipResponse() *GetGroupMembershipResponse {
-	return new(GetGroupMembershipResponse)
-}
-func (s *GroupsClient) RemoveGroupResponse() *RemoveGroupResponse { return new(RemoveGroupResponse) }
-
-/*
-var GroupsServer = map[zcl.CommandID]func() zcl.Command{
-    AddGroupID: func() zcl.Command { return new(AddGroup) },
-    ViewGroupID: func() zcl.Command { return new(ViewGroup) },
-    GetGroupMembershipID: func() zcl.Command { return new(GetGroupMembership) },
-    RemoveGroupID: func() zcl.Command { return new(RemoveGroup) },
-    RemoveAllGroupsID: func() zcl.Command { return new(RemoveAllGroups) },
-    AddGroupIfIdentifyingID: func() zcl.Command { return new(AddGroupIfIdentifying) },
-}
-
-var GroupsClient = map[zcl.CommandID]func() zcl.Command{
-    AddGroupResponseID: func() zcl.Command { return new(AddGroupResponse) },
-    ViewGroupResponseID: func() zcl.Command { return new(ViewGroupResponse) },
-    GetGroupMembershipResponseID: func() zcl.Command { return new(GetGroupMembershipResponse) },
-    RemoveGroupResponseID: func() zcl.Command { return new(RemoveGroupResponse) },
-}
-*/
 
 // Add a group to the device.
 type AddGroup struct {
@@ -77,7 +50,7 @@ func (v AddGroup) ID() zcl.CommandID {
 }
 
 func (v AddGroup) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v AddGroup) MnfCode() []byte {
@@ -134,7 +107,7 @@ func (v ViewGroup) ID() zcl.CommandID {
 }
 
 func (v ViewGroup) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v ViewGroup) MnfCode() []byte {
@@ -182,7 +155,7 @@ func (v GetGroupMembership) ID() zcl.CommandID {
 }
 
 func (v GetGroupMembership) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v GetGroupMembership) MnfCode() []byte {
@@ -230,7 +203,7 @@ func (v RemoveGroup) ID() zcl.CommandID {
 }
 
 func (v RemoveGroup) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v RemoveGroup) MnfCode() []byte {
@@ -275,7 +248,7 @@ func (v RemoveAllGroups) ID() zcl.CommandID {
 }
 
 func (v RemoveAllGroups) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v RemoveAllGroups) MnfCode() []byte {
@@ -310,7 +283,7 @@ func (v AddGroupIfIdentifying) ID() zcl.CommandID {
 }
 
 func (v AddGroupIfIdentifying) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v AddGroupIfIdentifying) MnfCode() []byte {
@@ -369,7 +342,7 @@ func (v AddGroupResponse) ID() zcl.CommandID {
 }
 
 func (v AddGroupResponse) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v AddGroupResponse) MnfCode() []byte {
@@ -430,7 +403,7 @@ func (v ViewGroupResponse) ID() zcl.CommandID {
 }
 
 func (v ViewGroupResponse) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v ViewGroupResponse) MnfCode() []byte {
@@ -502,7 +475,7 @@ func (v GetGroupMembershipResponse) ID() zcl.CommandID {
 }
 
 func (v GetGroupMembershipResponse) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v GetGroupMembershipResponse) MnfCode() []byte {
@@ -561,7 +534,7 @@ func (v RemoveGroupResponse) ID() zcl.CommandID {
 }
 
 func (v RemoveGroupResponse) Cluster() zcl.ClusterID {
-	return GroupsCluster
+	return GroupsID
 }
 
 func (v RemoveGroupResponse) MnfCode() []byte {
@@ -600,10 +573,12 @@ func (v *RemoveGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const GroupNameSupportAttr zcl.AttrID = 0
+
 type GroupNameSupport zcl.Zbmp8
 
-func (a GroupNameSupport) ID() zcl.AttrID            { return 0 }
-func (a GroupNameSupport) Cluster() zcl.ClusterID    { return GroupsCluster }
+func (a GroupNameSupport) ID() zcl.AttrID            { return GroupNameSupportAttr }
+func (a GroupNameSupport) Cluster() zcl.ClusterID    { return GroupsID }
 func (a *GroupNameSupport) Value() *GroupNameSupport { return a }
 func (a GroupNameSupport) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()

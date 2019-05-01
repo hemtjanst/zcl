@@ -6,47 +6,32 @@ import (
 )
 
 // DeviceTemperatureConfiguration
-// Attributes for determining information about a device’s internal temperature, and for configuring under/over temperature alarms.
+const DeviceTemperatureConfigurationID zcl.ClusterID = 2
 
-func NewDeviceTemperatureConfigurationServer(profile zcl.ProfileID) *DeviceTemperatureConfigurationServer {
-	return &DeviceTemperatureConfigurationServer{p: profile}
-}
-func NewDeviceTemperatureConfigurationClient(profile zcl.ProfileID) *DeviceTemperatureConfigurationClient {
-	return &DeviceTemperatureConfigurationClient{p: profile}
-}
-
-const DeviceTemperatureConfigurationCluster zcl.ClusterID = 2
-
-type DeviceTemperatureConfigurationServer struct {
-	p zcl.ProfileID
-
-	CurrentTemperature     *CurrentTemperature
-	MinTempExperienced     *MinTempExperienced
-	MaxTempExperienced     *MaxTempExperienced
-	OverTempTotalDwell     *OverTempTotalDwell
-	DeviceTempAlarmMask    *DeviceTempAlarmMask
-	LowTempThreshold       *LowTempThreshold
-	HighTempThreshold      *HighTempThreshold
-	LowTempDwellTripPoint  *LowTempDwellTripPoint
-	HighTempDwellTripPoint *HighTempDwellTripPoint
+var DeviceTemperatureConfigurationCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		CurrentTemperatureAttr:     func() zcl.Attr { return new(CurrentTemperature) },
+		MinTempExperiencedAttr:     func() zcl.Attr { return new(MinTempExperienced) },
+		MaxTempExperiencedAttr:     func() zcl.Attr { return new(MaxTempExperienced) },
+		OverTempTotalDwellAttr:     func() zcl.Attr { return new(OverTempTotalDwell) },
+		DeviceTempAlarmMaskAttr:    func() zcl.Attr { return new(DeviceTempAlarmMask) },
+		LowTempThresholdAttr:       func() zcl.Attr { return new(LowTempThreshold) },
+		HighTempThresholdAttr:      func() zcl.Attr { return new(HighTempThreshold) },
+		LowTempDwellTripPointAttr:  func() zcl.Attr { return new(LowTempDwellTripPoint) },
+		HighTempDwellTripPointAttr: func() zcl.Attr { return new(HighTempDwellTripPoint) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type DeviceTemperatureConfigurationClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var DeviceTemperatureConfigurationServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var DeviceTemperatureConfigurationClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const CurrentTemperatureAttr zcl.AttrID = 0
 
 type CurrentTemperature zcl.Zs16
 
-func (a CurrentTemperature) ID() zcl.AttrID              { return 0 }
-func (a CurrentTemperature) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationCluster }
+func (a CurrentTemperature) ID() zcl.AttrID              { return CurrentTemperatureAttr }
+func (a CurrentTemperature) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
 func (a *CurrentTemperature) Value() *CurrentTemperature { return a }
 func (a CurrentTemperature) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -68,10 +53,12 @@ func (a CurrentTemperature) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MinTempExperiencedAttr zcl.AttrID = 1
+
 type MinTempExperienced zcl.Zs16
 
-func (a MinTempExperienced) ID() zcl.AttrID              { return 1 }
-func (a MinTempExperienced) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationCluster }
+func (a MinTempExperienced) ID() zcl.AttrID              { return MinTempExperiencedAttr }
+func (a MinTempExperienced) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
 func (a *MinTempExperienced) Value() *MinTempExperienced { return a }
 func (a MinTempExperienced) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -93,10 +80,12 @@ func (a MinTempExperienced) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MaxTempExperiencedAttr zcl.AttrID = 2
+
 type MaxTempExperienced zcl.Zs16
 
-func (a MaxTempExperienced) ID() zcl.AttrID              { return 2 }
-func (a MaxTempExperienced) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationCluster }
+func (a MaxTempExperienced) ID() zcl.AttrID              { return MaxTempExperiencedAttr }
+func (a MaxTempExperienced) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
 func (a *MaxTempExperienced) Value() *MaxTempExperienced { return a }
 func (a MaxTempExperienced) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -118,10 +107,12 @@ func (a MaxTempExperienced) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const OverTempTotalDwellAttr zcl.AttrID = 3
+
 type OverTempTotalDwell zcl.Zu16
 
-func (a OverTempTotalDwell) ID() zcl.AttrID              { return 3 }
-func (a OverTempTotalDwell) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationCluster }
+func (a OverTempTotalDwell) ID() zcl.AttrID              { return OverTempTotalDwellAttr }
+func (a OverTempTotalDwell) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
 func (a *OverTempTotalDwell) Value() *OverTempTotalDwell { return a }
 func (a OverTempTotalDwell) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -143,10 +134,12 @@ func (a OverTempTotalDwell) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DeviceTempAlarmMaskAttr zcl.AttrID = 16
+
 type DeviceTempAlarmMask zcl.Zbmp8
 
-func (a DeviceTempAlarmMask) ID() zcl.AttrID               { return 16 }
-func (a DeviceTempAlarmMask) Cluster() zcl.ClusterID       { return DeviceTemperatureConfigurationCluster }
+func (a DeviceTempAlarmMask) ID() zcl.AttrID               { return DeviceTempAlarmMaskAttr }
+func (a DeviceTempAlarmMask) Cluster() zcl.ClusterID       { return DeviceTemperatureConfigurationID }
 func (a *DeviceTempAlarmMask) Value() *DeviceTempAlarmMask { return a }
 func (a DeviceTempAlarmMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -190,10 +183,12 @@ func (a *DeviceTempAlarmMask) SetTemperatureTooHigh(b bool) {
 	*a = DeviceTempAlarmMask(zcl.BitmapSet([]byte(*a), 1, b))
 }
 
+const LowTempThresholdAttr zcl.AttrID = 17
+
 type LowTempThreshold zcl.Zs16
 
-func (a LowTempThreshold) ID() zcl.AttrID            { return 17 }
-func (a LowTempThreshold) Cluster() zcl.ClusterID    { return DeviceTemperatureConfigurationCluster }
+func (a LowTempThreshold) ID() zcl.AttrID            { return LowTempThresholdAttr }
+func (a LowTempThreshold) Cluster() zcl.ClusterID    { return DeviceTemperatureConfigurationID }
 func (a *LowTempThreshold) Value() *LowTempThreshold { return a }
 func (a LowTempThreshold) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -215,10 +210,12 @@ func (a LowTempThreshold) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const HighTempThresholdAttr zcl.AttrID = 18
+
 type HighTempThreshold zcl.Zs16
 
-func (a HighTempThreshold) ID() zcl.AttrID             { return 18 }
-func (a HighTempThreshold) Cluster() zcl.ClusterID     { return DeviceTemperatureConfigurationCluster }
+func (a HighTempThreshold) ID() zcl.AttrID             { return HighTempThresholdAttr }
+func (a HighTempThreshold) Cluster() zcl.ClusterID     { return DeviceTemperatureConfigurationID }
 func (a *HighTempThreshold) Value() *HighTempThreshold { return a }
 func (a HighTempThreshold) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -240,10 +237,12 @@ func (a HighTempThreshold) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const LowTempDwellTripPointAttr zcl.AttrID = 19
+
 type LowTempDwellTripPoint zcl.Zu24
 
-func (a LowTempDwellTripPoint) ID() zcl.AttrID                 { return 19 }
-func (a LowTempDwellTripPoint) Cluster() zcl.ClusterID         { return DeviceTemperatureConfigurationCluster }
+func (a LowTempDwellTripPoint) ID() zcl.AttrID                 { return LowTempDwellTripPointAttr }
+func (a LowTempDwellTripPoint) Cluster() zcl.ClusterID         { return DeviceTemperatureConfigurationID }
 func (a *LowTempDwellTripPoint) Value() *LowTempDwellTripPoint { return a }
 func (a LowTempDwellTripPoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()
@@ -265,10 +264,12 @@ func (a LowTempDwellTripPoint) String() string {
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
+const HighTempDwellTripPointAttr zcl.AttrID = 20
+
 type HighTempDwellTripPoint zcl.Zu24
 
-func (a HighTempDwellTripPoint) ID() zcl.AttrID                  { return 20 }
-func (a HighTempDwellTripPoint) Cluster() zcl.ClusterID          { return DeviceTemperatureConfigurationCluster }
+func (a HighTempDwellTripPoint) ID() zcl.AttrID                  { return HighTempDwellTripPointAttr }
+func (a HighTempDwellTripPoint) Cluster() zcl.ClusterID          { return DeviceTemperatureConfigurationID }
 func (a *HighTempDwellTripPoint) Value() *HighTempDwellTripPoint { return a }
 func (a HighTempDwellTripPoint) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()

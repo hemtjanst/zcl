@@ -5,41 +5,27 @@ import (
 )
 
 // FlowMeasurement
+const FlowMeasurementID zcl.ClusterID = 1028
 
-func NewFlowMeasurementServer(profile zcl.ProfileID) *FlowMeasurementServer {
-	return &FlowMeasurementServer{p: profile}
-}
-func NewFlowMeasurementClient(profile zcl.ProfileID) *FlowMeasurementClient {
-	return &FlowMeasurementClient{p: profile}
-}
-
-const FlowMeasurementCluster zcl.ClusterID = 1028
-
-type FlowMeasurementServer struct {
-	p zcl.ProfileID
-
-	MeasuredFlow    *MeasuredFlow
-	MinMeasuredFlow *MinMeasuredFlow
-	MaxMeasuredFlow *MaxMeasuredFlow
-	FlowTolerance   *FlowTolerance
+var FlowMeasurementCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MeasuredFlowAttr:    func() zcl.Attr { return new(MeasuredFlow) },
+		MinMeasuredFlowAttr: func() zcl.Attr { return new(MinMeasuredFlow) },
+		MaxMeasuredFlowAttr: func() zcl.Attr { return new(MaxMeasuredFlow) },
+		FlowToleranceAttr:   func() zcl.Attr { return new(FlowTolerance) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type FlowMeasurementClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var FlowMeasurementServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var FlowMeasurementClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MeasuredFlowAttr zcl.AttrID = 0
 
 type MeasuredFlow zcl.Zu16
 
-func (a MeasuredFlow) ID() zcl.AttrID         { return 0 }
-func (a MeasuredFlow) Cluster() zcl.ClusterID { return FlowMeasurementCluster }
+func (a MeasuredFlow) ID() zcl.AttrID         { return MeasuredFlowAttr }
+func (a MeasuredFlow) Cluster() zcl.ClusterID { return FlowMeasurementID }
 func (a *MeasuredFlow) Value() *MeasuredFlow  { return a }
 func (a MeasuredFlow) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -61,10 +47,12 @@ func (a MeasuredFlow) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MinMeasuredFlowAttr zcl.AttrID = 1
+
 type MinMeasuredFlow zcl.Zu16
 
-func (a MinMeasuredFlow) ID() zcl.AttrID           { return 1 }
-func (a MinMeasuredFlow) Cluster() zcl.ClusterID   { return FlowMeasurementCluster }
+func (a MinMeasuredFlow) ID() zcl.AttrID           { return MinMeasuredFlowAttr }
+func (a MinMeasuredFlow) Cluster() zcl.ClusterID   { return FlowMeasurementID }
 func (a *MinMeasuredFlow) Value() *MinMeasuredFlow { return a }
 func (a MinMeasuredFlow) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -86,10 +74,12 @@ func (a MinMeasuredFlow) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MaxMeasuredFlowAttr zcl.AttrID = 2
+
 type MaxMeasuredFlow zcl.Zu16
 
-func (a MaxMeasuredFlow) ID() zcl.AttrID           { return 2 }
-func (a MaxMeasuredFlow) Cluster() zcl.ClusterID   { return FlowMeasurementCluster }
+func (a MaxMeasuredFlow) ID() zcl.AttrID           { return MaxMeasuredFlowAttr }
+func (a MaxMeasuredFlow) Cluster() zcl.ClusterID   { return FlowMeasurementID }
 func (a *MaxMeasuredFlow) Value() *MaxMeasuredFlow { return a }
 func (a MaxMeasuredFlow) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -111,10 +101,12 @@ func (a MaxMeasuredFlow) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const FlowToleranceAttr zcl.AttrID = 3
+
 type FlowTolerance zcl.Zu16
 
-func (a FlowTolerance) ID() zcl.AttrID         { return 3 }
-func (a FlowTolerance) Cluster() zcl.ClusterID { return FlowMeasurementCluster }
+func (a FlowTolerance) ID() zcl.AttrID         { return FlowToleranceAttr }
+func (a FlowTolerance) Cluster() zcl.ClusterID { return FlowMeasurementID }
 func (a *FlowTolerance) Value() *FlowTolerance { return a }
 func (a FlowTolerance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

@@ -7,40 +7,25 @@ import (
 
 // UbisysDeviceSetup
 // Manufacturer code 0x10F2
-// Attributes and commands.
+const UbisysDeviceSetupID zcl.ClusterID = 64512
 
-func NewUbisysDeviceSetupServer(profile zcl.ProfileID) *UbisysDeviceSetupServer {
-	return &UbisysDeviceSetupServer{p: profile}
-}
-func NewUbisysDeviceSetupClient(profile zcl.ProfileID) *UbisysDeviceSetupClient {
-	return &UbisysDeviceSetupClient{p: profile}
-}
-
-const UbisysDeviceSetupCluster zcl.ClusterID = 64512
-
-type UbisysDeviceSetupServer struct {
-	p zcl.ProfileID
-
-	InputConfigurations *InputConfigurations
-	InputActions        *InputActions
+var UbisysDeviceSetupCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		InputConfigurationsAttr: func() zcl.Attr { return new(InputConfigurations) },
+		InputActionsAttr:        func() zcl.Attr { return new(InputActions) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type UbisysDeviceSetupClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var UbisysDeviceSetupServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var UbisysDeviceSetupClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const InputConfigurationsAttr zcl.AttrID = 0
 
 type InputConfigurations zcl.Zarray
 
-func (a InputConfigurations) ID() zcl.AttrID               { return 0 }
-func (a InputConfigurations) Cluster() zcl.ClusterID       { return UbisysDeviceSetupCluster }
+func (a InputConfigurations) ID() zcl.AttrID               { return InputConfigurationsAttr }
+func (a InputConfigurations) Cluster() zcl.ClusterID       { return UbisysDeviceSetupID }
 func (a *InputConfigurations) Value() *InputConfigurations { return a }
 func (a InputConfigurations) MarshalZcl() ([]byte, error) {
 	return zcl.Zarray(a).MarshalZcl()
@@ -62,10 +47,12 @@ func (a InputConfigurations) String() string {
 	return zcl.Sprintf("%s", zcl.Zarray(a))
 }
 
+const InputActionsAttr zcl.AttrID = 1
+
 type InputActions zcl.Zarray
 
-func (a InputActions) ID() zcl.AttrID         { return 1 }
-func (a InputActions) Cluster() zcl.ClusterID { return UbisysDeviceSetupCluster }
+func (a InputActions) ID() zcl.AttrID         { return InputActionsAttr }
+func (a InputActions) Cluster() zcl.ClusterID { return UbisysDeviceSetupID }
 func (a *InputActions) Value() *InputActions  { return a }
 func (a InputActions) MarshalZcl() ([]byte, error) {
 	return zcl.Zarray(a).MarshalZcl()

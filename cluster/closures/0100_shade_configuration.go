@@ -6,43 +6,28 @@ import (
 )
 
 // ShadeConfiguration
-// The shade configuration cluster provides an interface for reading information about a shade, and configuring its open and closed limits.
+const ShadeConfigurationID zcl.ClusterID = 256
 
-func NewShadeConfigurationServer(profile zcl.ProfileID) *ShadeConfigurationServer {
-	return &ShadeConfigurationServer{p: profile}
-}
-func NewShadeConfigurationClient(profile zcl.ProfileID) *ShadeConfigurationClient {
-	return &ShadeConfigurationClient{p: profile}
-}
-
-const ShadeConfigurationCluster zcl.ClusterID = 256
-
-type ShadeConfigurationServer struct {
-	p zcl.ProfileID
-
-	PhysicalClosedLimit *PhysicalClosedLimit
-	Motorstepsize       *Motorstepsize
-	Status              *Status
-	ClosedLimit         *ClosedLimit
-	Mode                *Mode
+var ShadeConfigurationCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		PhysicalClosedLimitAttr: func() zcl.Attr { return new(PhysicalClosedLimit) },
+		MotorstepsizeAttr:       func() zcl.Attr { return new(Motorstepsize) },
+		StatusAttr:              func() zcl.Attr { return new(Status) },
+		ClosedLimitAttr:         func() zcl.Attr { return new(ClosedLimit) },
+		ModeAttr:                func() zcl.Attr { return new(Mode) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type ShadeConfigurationClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var ShadeConfigurationServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var ShadeConfigurationClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const PhysicalClosedLimitAttr zcl.AttrID = 0
 
 type PhysicalClosedLimit zcl.Zu16
 
-func (a PhysicalClosedLimit) ID() zcl.AttrID               { return 0 }
-func (a PhysicalClosedLimit) Cluster() zcl.ClusterID       { return ShadeConfigurationCluster }
+func (a PhysicalClosedLimit) ID() zcl.AttrID               { return PhysicalClosedLimitAttr }
+func (a PhysicalClosedLimit) Cluster() zcl.ClusterID       { return ShadeConfigurationID }
 func (a *PhysicalClosedLimit) Value() *PhysicalClosedLimit { return a }
 func (a PhysicalClosedLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -64,10 +49,12 @@ func (a PhysicalClosedLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MotorstepsizeAttr zcl.AttrID = 1
+
 type Motorstepsize zcl.Zu8
 
-func (a Motorstepsize) ID() zcl.AttrID         { return 1 }
-func (a Motorstepsize) Cluster() zcl.ClusterID { return ShadeConfigurationCluster }
+func (a Motorstepsize) ID() zcl.AttrID         { return MotorstepsizeAttr }
+func (a Motorstepsize) Cluster() zcl.ClusterID { return ShadeConfigurationID }
 func (a *Motorstepsize) Value() *Motorstepsize { return a }
 func (a Motorstepsize) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -89,10 +76,12 @@ func (a Motorstepsize) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const StatusAttr zcl.AttrID = 2
+
 type Status zcl.Zbmp8
 
-func (a Status) ID() zcl.AttrID         { return 2 }
-func (a Status) Cluster() zcl.ClusterID { return ShadeConfigurationCluster }
+func (a Status) ID() zcl.AttrID         { return StatusAttr }
+func (a Status) Cluster() zcl.ClusterID { return ShadeConfigurationID }
 func (a *Status) Value() *Status        { return a }
 func (a Status) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -156,10 +145,12 @@ func (a *Status) SetDirectionReversed(b bool) {
 	*a = Status(zcl.BitmapSet([]byte(*a), 3, b))
 }
 
+const ClosedLimitAttr zcl.AttrID = 16
+
 type ClosedLimit zcl.Zu16
 
-func (a ClosedLimit) ID() zcl.AttrID         { return 16 }
-func (a ClosedLimit) Cluster() zcl.ClusterID { return ShadeConfigurationCluster }
+func (a ClosedLimit) ID() zcl.AttrID         { return ClosedLimitAttr }
+func (a ClosedLimit) Cluster() zcl.ClusterID { return ShadeConfigurationID }
 func (a *ClosedLimit) Value() *ClosedLimit   { return a }
 func (a ClosedLimit) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -181,10 +172,12 @@ func (a ClosedLimit) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ModeAttr zcl.AttrID = 17
+
 type Mode zcl.Zenum8
 
-func (a Mode) ID() zcl.AttrID         { return 17 }
-func (a Mode) Cluster() zcl.ClusterID { return ShadeConfigurationCluster }
+func (a Mode) ID() zcl.AttrID         { return ModeAttr }
+func (a Mode) Cluster() zcl.ClusterID { return ShadeConfigurationID }
 func (a *Mode) Value() *Mode          { return a }
 func (a Mode) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()

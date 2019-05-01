@@ -6,50 +6,28 @@ import (
 )
 
 // SimpleMetering
-// The Simple Metering Cluster provides a mechanism to retrieve usage information from Electric, Gas, Water, and potentially Thermal metering devices. These devices can operate on either battery or mains power, and can have a wide variety of sophistication.
+const SimpleMeteringID zcl.ClusterID = 1794
 
-func NewSimpleMeteringServer(profile zcl.ProfileID) *SimpleMeteringServer {
-	return &SimpleMeteringServer{p: profile}
+var SimpleMeteringCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		GetProfileCommand:            func() zcl.Command { return new(GetProfile) },
+		RequestMirrorResponseCommand: func() zcl.Command { return new(RequestMirrorResponse) },
+		MirrorRemovedCommand:         func() zcl.Command { return new(MirrorRemoved) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		CurrentSummationDeliveredAttr: func() zcl.Attr { return new(CurrentSummationDelivered) },
+		StatusAttr:                    func() zcl.Attr { return new(Status) },
+		UnitOfMeasureAttr:             func() zcl.Attr { return new(UnitOfMeasure) },
+		MultiplierAttr:                func() zcl.Attr { return new(Multiplier) },
+		DivisorAttr:                   func() zcl.Attr { return new(Divisor) },
+		SummationFormattingAttr:       func() zcl.Attr { return new(SummationFormatting) },
+		MeteringDeviceTypeAttr:        func() zcl.Attr { return new(MeteringDeviceType) },
+		InstantaneousDemandAttr:       func() zcl.Attr { return new(InstantaneousDemand) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewSimpleMeteringClient(profile zcl.ProfileID) *SimpleMeteringClient {
-	return &SimpleMeteringClient{p: profile}
-}
-
-const SimpleMeteringCluster zcl.ClusterID = 1794
-
-type SimpleMeteringServer struct {
-	p zcl.ProfileID
-
-	CurrentSummationDelivered *CurrentSummationDelivered
-	Status                    *Status
-	UnitOfMeasure             *UnitOfMeasure
-	Multiplier                *Multiplier
-	Divisor                   *Divisor
-	SummationFormatting       *SummationFormatting
-	MeteringDeviceType        *MeteringDeviceType
-	InstantaneousDemand       *InstantaneousDemand
-}
-
-func (s *SimpleMeteringServer) GetProfile() *GetProfile { return new(GetProfile) }
-func (s *SimpleMeteringServer) RequestMirrorResponse() *RequestMirrorResponse {
-	return new(RequestMirrorResponse)
-}
-func (s *SimpleMeteringServer) MirrorRemoved() *MirrorRemoved { return new(MirrorRemoved) }
-
-type SimpleMeteringClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var SimpleMeteringServer = map[zcl.CommandID]func() zcl.Command{
-    GetProfileID: func() zcl.Command { return new(GetProfile) },
-    RequestMirrorResponseID: func() zcl.Command { return new(RequestMirrorResponse) },
-    MirrorRemovedID: func() zcl.Command { return new(MirrorRemoved) },
-}
-
-var SimpleMeteringClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type GetProfile struct {
 	IntervalChannel zcl.Zu8
@@ -72,7 +50,7 @@ func (v GetProfile) ID() zcl.CommandID {
 }
 
 func (v GetProfile) Cluster() zcl.ClusterID {
-	return SimpleMeteringCluster
+	return SimpleMeteringID
 }
 
 func (v GetProfile) MnfCode() []byte {
@@ -137,7 +115,7 @@ func (v RequestMirrorResponse) ID() zcl.CommandID {
 }
 
 func (v RequestMirrorResponse) Cluster() zcl.ClusterID {
-	return SimpleMeteringCluster
+	return SimpleMeteringID
 }
 
 func (v RequestMirrorResponse) MnfCode() []byte {
@@ -184,7 +162,7 @@ func (v MirrorRemoved) ID() zcl.CommandID {
 }
 
 func (v MirrorRemoved) Cluster() zcl.ClusterID {
-	return SimpleMeteringCluster
+	return SimpleMeteringID
 }
 
 func (v MirrorRemoved) MnfCode() []byte {
@@ -214,10 +192,12 @@ func (v *MirrorRemoved) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const CurrentSummationDeliveredAttr zcl.AttrID = 0
+
 type CurrentSummationDelivered zcl.Zu48
 
-func (a CurrentSummationDelivered) ID() zcl.AttrID                     { return 0 }
-func (a CurrentSummationDelivered) Cluster() zcl.ClusterID             { return SimpleMeteringCluster }
+func (a CurrentSummationDelivered) ID() zcl.AttrID                     { return CurrentSummationDeliveredAttr }
+func (a CurrentSummationDelivered) Cluster() zcl.ClusterID             { return SimpleMeteringID }
 func (a *CurrentSummationDelivered) Value() *CurrentSummationDelivered { return a }
 func (a CurrentSummationDelivered) MarshalZcl() ([]byte, error) {
 	return zcl.Zu48(a).MarshalZcl()
@@ -239,10 +219,12 @@ func (a CurrentSummationDelivered) String() string {
 	return zcl.Sprintf("%s", zcl.Zu48(a))
 }
 
+const StatusAttr zcl.AttrID = 512
+
 type Status zcl.Zbmp8
 
-func (a Status) ID() zcl.AttrID         { return 512 }
-func (a Status) Cluster() zcl.ClusterID { return SimpleMeteringCluster }
+func (a Status) ID() zcl.AttrID         { return StatusAttr }
+func (a Status) Cluster() zcl.ClusterID { return SimpleMeteringID }
 func (a *Status) Value() *Status        { return a }
 func (a Status) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -336,10 +318,12 @@ func (a *Status) SetServiceDisconnectOpen(b bool) {
 	*a = Status(zcl.BitmapSet([]byte(*a), 6, b))
 }
 
+const UnitOfMeasureAttr zcl.AttrID = 768
+
 type UnitOfMeasure zcl.Zenum8
 
-func (a UnitOfMeasure) ID() zcl.AttrID         { return 768 }
-func (a UnitOfMeasure) Cluster() zcl.ClusterID { return SimpleMeteringCluster }
+func (a UnitOfMeasure) ID() zcl.AttrID         { return UnitOfMeasureAttr }
+func (a UnitOfMeasure) Cluster() zcl.ClusterID { return SimpleMeteringID }
 func (a *UnitOfMeasure) Value() *UnitOfMeasure { return a }
 func (a UnitOfMeasure) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -523,10 +507,12 @@ func (a UnitOfMeasure) IsKpaAbsoluteBcd() bool { return a == 0x89 }
 // SetKpaAbsoluteBcd sets UnitOfMeasure to kPA(absolute) BCD (0x89)
 func (a *UnitOfMeasure) SetKpaAbsoluteBcd() { *a = 0x89 }
 
+const MultiplierAttr zcl.AttrID = 769
+
 type Multiplier zcl.Zu24
 
-func (a Multiplier) ID() zcl.AttrID         { return 769 }
-func (a Multiplier) Cluster() zcl.ClusterID { return SimpleMeteringCluster }
+func (a Multiplier) ID() zcl.AttrID         { return MultiplierAttr }
+func (a Multiplier) Cluster() zcl.ClusterID { return SimpleMeteringID }
 func (a *Multiplier) Value() *Multiplier    { return a }
 func (a Multiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()
@@ -548,10 +534,12 @@ func (a Multiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
+const DivisorAttr zcl.AttrID = 770
+
 type Divisor zcl.Zu24
 
-func (a Divisor) ID() zcl.AttrID         { return 770 }
-func (a Divisor) Cluster() zcl.ClusterID { return SimpleMeteringCluster }
+func (a Divisor) ID() zcl.AttrID         { return DivisorAttr }
+func (a Divisor) Cluster() zcl.ClusterID { return SimpleMeteringID }
 func (a *Divisor) Value() *Divisor       { return a }
 func (a Divisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu24(a).MarshalZcl()
@@ -573,10 +561,12 @@ func (a Divisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
+const SummationFormattingAttr zcl.AttrID = 771
+
 type SummationFormatting zcl.Zbmp8
 
-func (a SummationFormatting) ID() zcl.AttrID               { return 771 }
-func (a SummationFormatting) Cluster() zcl.ClusterID       { return SimpleMeteringCluster }
+func (a SummationFormatting) ID() zcl.AttrID               { return SummationFormattingAttr }
+func (a SummationFormatting) Cluster() zcl.ClusterID       { return SimpleMeteringID }
 func (a *SummationFormatting) Value() *SummationFormatting { return a }
 func (a SummationFormatting) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -620,10 +610,12 @@ func (a *SummationFormatting) SetSurpressLeadingZeros(b bool) {
 	*a = SummationFormatting(zcl.BitmapSet([]byte(*a), 7, b))
 }
 
+const MeteringDeviceTypeAttr zcl.AttrID = 774
+
 type MeteringDeviceType zcl.Zenum8
 
-func (a MeteringDeviceType) ID() zcl.AttrID              { return 774 }
-func (a MeteringDeviceType) Cluster() zcl.ClusterID      { return SimpleMeteringCluster }
+func (a MeteringDeviceType) ID() zcl.AttrID              { return MeteringDeviceTypeAttr }
+func (a MeteringDeviceType) Cluster() zcl.ClusterID      { return SimpleMeteringID }
 func (a *MeteringDeviceType) Value() *MeteringDeviceType { return a }
 func (a MeteringDeviceType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -751,10 +743,12 @@ func (a MeteringDeviceType) IsMirroredCoolingMetering() bool { return a == 0x85 
 // SetMirroredCoolingMetering sets MeteringDeviceType to Mirrored Cooling Metering (0x85)
 func (a *MeteringDeviceType) SetMirroredCoolingMetering() { *a = 0x85 }
 
+const InstantaneousDemandAttr zcl.AttrID = 1024
+
 type InstantaneousDemand zcl.Zs24
 
-func (a InstantaneousDemand) ID() zcl.AttrID               { return 1024 }
-func (a InstantaneousDemand) Cluster() zcl.ClusterID       { return SimpleMeteringCluster }
+func (a InstantaneousDemand) ID() zcl.AttrID               { return InstantaneousDemandAttr }
+func (a InstantaneousDemand) Cluster() zcl.ClusterID       { return SimpleMeteringID }
 func (a *InstantaneousDemand) Value() *InstantaneousDemand { return a }
 func (a InstantaneousDemand) MarshalZcl() ([]byte, error) {
 	return zcl.Zs24(a).MarshalZcl()

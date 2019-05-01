@@ -5,28 +5,12 @@ import (
 )
 
 // BinaryValueBasic
+const BinaryValueBasicID zcl.ClusterID = 17
 
-func NewBinaryValueBasicServer(profile zcl.ProfileID) *BinaryValueBasicServer {
-	return &BinaryValueBasicServer{p: profile}
+var BinaryValueBasicCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewBinaryValueBasicClient(profile zcl.ProfileID) *BinaryValueBasicClient {
-	return &BinaryValueBasicClient{p: profile}
-}
-
-const BinaryValueBasicCluster zcl.ClusterID = 17
-
-type BinaryValueBasicServer struct {
-	p zcl.ProfileID
-}
-
-type BinaryValueBasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var BinaryValueBasicServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var BinaryValueBasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

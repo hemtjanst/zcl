@@ -6,49 +6,30 @@ import (
 )
 
 // OnOff
-// Attributes and commands for switching devices between 'On' and 'Off' states.
+const OnOffID zcl.ClusterID = 6
 
-func NewOnOffServer(profile zcl.ProfileID) *OnOffServer { return &OnOffServer{p: profile} }
-func NewOnOffClient(profile zcl.ProfileID) *OnOffClient { return &OnOffClient{p: profile} }
-
-const OnOffCluster zcl.ClusterID = 6
-
-type OnOffServer struct {
-	p zcl.ProfileID
-
-	Onoff              *Onoff
-	Globalscenecontrol *Globalscenecontrol
-	Ontime             *Ontime
-	Offwaittime        *Offwaittime
-	PoweronOnoff       *PoweronOnoff
+var OnOffCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		OffCommand:                     func() zcl.Command { return new(Off) },
+		OnCommand:                      func() zcl.Command { return new(On) },
+		ToggleCommand:                  func() zcl.Command { return new(Toggle) },
+		OffWithEffectCommand:           func() zcl.Command { return new(OffWithEffect) },
+		OnWithRecallGlobalSceneCommand: func() zcl.Command { return new(OnWithRecallGlobalScene) },
+		OnWithTimedOffCommand:          func() zcl.Command { return new(OnWithTimedOff) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		OnoffAttr:              func() zcl.Attr { return new(Onoff) },
+		GlobalscenecontrolAttr: func() zcl.Attr { return new(Globalscenecontrol) },
+		OntimeAttr:             func() zcl.Attr { return new(Ontime) },
+		OffwaittimeAttr:        func() zcl.Attr { return new(Offwaittime) },
+		PoweronOnoffAttr:       func() zcl.Attr { return new(PoweronOnoff) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr: []zcl.AttrID{
+		OnoffAttr,
+	},
 }
-
-func (s *OnOffServer) Off() *Off                     { return new(Off) }
-func (s *OnOffServer) On() *On                       { return new(On) }
-func (s *OnOffServer) Toggle() *Toggle               { return new(Toggle) }
-func (s *OnOffServer) OffWithEffect() *OffWithEffect { return new(OffWithEffect) }
-func (s *OnOffServer) OnWithRecallGlobalScene() *OnWithRecallGlobalScene {
-	return new(OnWithRecallGlobalScene)
-}
-func (s *OnOffServer) OnWithTimedOff() *OnWithTimedOff { return new(OnWithTimedOff) }
-
-type OnOffClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var OnOffServer = map[zcl.CommandID]func() zcl.Command{
-    OffID: func() zcl.Command { return new(Off) },
-    OnID: func() zcl.Command { return new(On) },
-    ToggleID: func() zcl.Command { return new(Toggle) },
-    OffWithEffectID: func() zcl.Command { return new(OffWithEffect) },
-    OnWithRecallGlobalSceneID: func() zcl.Command { return new(OnWithRecallGlobalScene) },
-    OnWithTimedOffID: func() zcl.Command { return new(OnWithTimedOff) },
-}
-
-var OnOffClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 // On receipt of this command, a device shall enter its 'Off' state. This state is device dependent, but it is recommended that it is used for power off or similar functions.
 type Off struct {
@@ -65,7 +46,7 @@ func (v Off) ID() zcl.CommandID {
 }
 
 func (v Off) Cluster() zcl.ClusterID {
-	return OnOffCluster
+	return OnOffID
 }
 
 func (v Off) MnfCode() []byte {
@@ -95,7 +76,7 @@ func (v On) ID() zcl.CommandID {
 }
 
 func (v On) Cluster() zcl.ClusterID {
-	return OnOffCluster
+	return OnOffID
 }
 
 func (v On) MnfCode() []byte {
@@ -125,7 +106,7 @@ func (v Toggle) ID() zcl.CommandID {
 }
 
 func (v Toggle) Cluster() zcl.ClusterID {
-	return OnOffCluster
+	return OnOffID
 }
 
 func (v Toggle) MnfCode() []byte {
@@ -161,7 +142,7 @@ func (v OffWithEffect) ID() zcl.CommandID {
 }
 
 func (v OffWithEffect) Cluster() zcl.ClusterID {
-	return OnOffCluster
+	return OnOffID
 }
 
 func (v OffWithEffect) MnfCode() []byte {
@@ -215,7 +196,7 @@ func (v OnWithRecallGlobalScene) ID() zcl.CommandID {
 }
 
 func (v OnWithRecallGlobalScene) Cluster() zcl.ClusterID {
-	return OnOffCluster
+	return OnOffID
 }
 
 func (v OnWithRecallGlobalScene) MnfCode() []byte {
@@ -255,7 +236,7 @@ func (v OnWithTimedOff) ID() zcl.CommandID {
 }
 
 func (v OnWithTimedOff) Cluster() zcl.ClusterID {
-	return OnOffCluster
+	return OnOffID
 }
 
 func (v OnWithTimedOff) MnfCode() []byte {
@@ -303,10 +284,12 @@ func (v *OnWithTimedOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const OnoffAttr zcl.AttrID = 0
+
 type Onoff zcl.Zbool
 
-func (a Onoff) ID() zcl.AttrID         { return 0 }
-func (a Onoff) Cluster() zcl.ClusterID { return OnOffCluster }
+func (a Onoff) ID() zcl.AttrID         { return OnoffAttr }
+func (a Onoff) Cluster() zcl.ClusterID { return OnOffID }
 func (a *Onoff) Value() *Onoff         { return a }
 func (a Onoff) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -346,10 +329,12 @@ func (a Onoff) IsOn() bool { return a == 0x01 }
 // SetOn sets Onoff to On (0x01)
 func (a *Onoff) SetOn() { *a = 0x01 }
 
+const GlobalscenecontrolAttr zcl.AttrID = 16384
+
 type Globalscenecontrol zcl.Zbool
 
-func (a Globalscenecontrol) ID() zcl.AttrID              { return 16384 }
-func (a Globalscenecontrol) Cluster() zcl.ClusterID      { return OnOffCluster }
+func (a Globalscenecontrol) ID() zcl.AttrID              { return GlobalscenecontrolAttr }
+func (a Globalscenecontrol) Cluster() zcl.ClusterID      { return OnOffID }
 func (a *Globalscenecontrol) Value() *Globalscenecontrol { return a }
 func (a Globalscenecontrol) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -371,10 +356,12 @@ func (a Globalscenecontrol) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const OntimeAttr zcl.AttrID = 16385
+
 type Ontime zcl.Zu16
 
-func (a Ontime) ID() zcl.AttrID         { return 16385 }
-func (a Ontime) Cluster() zcl.ClusterID { return OnOffCluster }
+func (a Ontime) ID() zcl.AttrID         { return OntimeAttr }
+func (a Ontime) Cluster() zcl.ClusterID { return OnOffID }
 func (a *Ontime) Value() *Ontime        { return a }
 func (a Ontime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -396,10 +383,12 @@ func (a Ontime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const OffwaittimeAttr zcl.AttrID = 16386
+
 type Offwaittime zcl.Zu16
 
-func (a Offwaittime) ID() zcl.AttrID         { return 16386 }
-func (a Offwaittime) Cluster() zcl.ClusterID { return OnOffCluster }
+func (a Offwaittime) ID() zcl.AttrID         { return OffwaittimeAttr }
+func (a Offwaittime) Cluster() zcl.ClusterID { return OnOffID }
 func (a *Offwaittime) Value() *Offwaittime   { return a }
 func (a Offwaittime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -421,10 +410,12 @@ func (a Offwaittime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PoweronOnoffAttr zcl.AttrID = 16387
+
 type PoweronOnoff zcl.Zenum8
 
-func (a PoweronOnoff) ID() zcl.AttrID         { return 16387 }
-func (a PoweronOnoff) Cluster() zcl.ClusterID { return OnOffCluster }
+func (a PoweronOnoff) ID() zcl.AttrID         { return PoweronOnoffAttr }
+func (a PoweronOnoff) Cluster() zcl.ClusterID { return OnOffID }
 func (a *PoweronOnoff) Value() *PoweronOnoff  { return a }
 func (a PoweronOnoff) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()

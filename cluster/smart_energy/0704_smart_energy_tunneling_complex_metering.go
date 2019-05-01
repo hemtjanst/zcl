@@ -5,28 +5,12 @@ import (
 )
 
 // SmartEnergyTunnelingComplexMetering
+const SmartEnergyTunnelingComplexMeteringID zcl.ClusterID = 1796
 
-func NewSmartEnergyTunnelingComplexMeteringServer(profile zcl.ProfileID) *SmartEnergyTunnelingComplexMeteringServer {
-	return &SmartEnergyTunnelingComplexMeteringServer{p: profile}
+var SmartEnergyTunnelingComplexMeteringCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewSmartEnergyTunnelingComplexMeteringClient(profile zcl.ProfileID) *SmartEnergyTunnelingComplexMeteringClient {
-	return &SmartEnergyTunnelingComplexMeteringClient{p: profile}
-}
-
-const SmartEnergyTunnelingComplexMeteringCluster zcl.ClusterID = 1796
-
-type SmartEnergyTunnelingComplexMeteringServer struct {
-	p zcl.ProfileID
-}
-
-type SmartEnergyTunnelingComplexMeteringClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var SmartEnergyTunnelingComplexMeteringServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var SmartEnergyTunnelingComplexMeteringClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

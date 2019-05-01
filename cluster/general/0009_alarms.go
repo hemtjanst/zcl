@@ -6,44 +6,25 @@ import (
 )
 
 // Alarms
-// Sending alarm notifications and configuring alarm functionality.
+const AlarmsID zcl.ClusterID = 9
 
-func NewAlarmsServer(profile zcl.ProfileID) *AlarmsServer { return &AlarmsServer{p: profile} }
-func NewAlarmsClient(profile zcl.ProfileID) *AlarmsClient { return &AlarmsClient{p: profile} }
-
-const AlarmsCluster zcl.ClusterID = 9
-
-type AlarmsServer struct {
-	p zcl.ProfileID
-
-	AlarmCount *AlarmCount
+var AlarmsCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		ResetAlarmCommand:     func() zcl.Command { return new(ResetAlarm) },
+		ResetAllAlarmsCommand: func() zcl.Command { return new(ResetAllAlarms) },
+		GetAlarmCommand:       func() zcl.Command { return new(GetAlarm) },
+		ResetAlarmLogCommand:  func() zcl.Command { return new(ResetAlarmLog) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		AlarmCommand:            func() zcl.Command { return new(Alarm) },
+		GetAlarmResponseCommand: func() zcl.Command { return new(GetAlarmResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		AlarmCountAttr: func() zcl.Attr { return new(AlarmCount) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *AlarmsServer) ResetAlarm() *ResetAlarm         { return new(ResetAlarm) }
-func (s *AlarmsServer) ResetAllAlarms() *ResetAllAlarms { return new(ResetAllAlarms) }
-func (s *AlarmsServer) GetAlarm() *GetAlarm             { return new(GetAlarm) }
-func (s *AlarmsServer) ResetAlarmLog() *ResetAlarmLog   { return new(ResetAlarmLog) }
-
-type AlarmsClient struct {
-	p zcl.ProfileID
-}
-
-func (s *AlarmsClient) Alarm() *Alarm                       { return new(Alarm) }
-func (s *AlarmsClient) GetAlarmResponse() *GetAlarmResponse { return new(GetAlarmResponse) }
-
-/*
-var AlarmsServer = map[zcl.CommandID]func() zcl.Command{
-    ResetAlarmID: func() zcl.Command { return new(ResetAlarm) },
-    ResetAllAlarmsID: func() zcl.Command { return new(ResetAllAlarms) },
-    GetAlarmID: func() zcl.Command { return new(GetAlarm) },
-    ResetAlarmLogID: func() zcl.Command { return new(ResetAlarmLog) },
-}
-
-var AlarmsClient = map[zcl.CommandID]func() zcl.Command{
-    AlarmID: func() zcl.Command { return new(Alarm) },
-    GetAlarmResponseID: func() zcl.Command { return new(GetAlarmResponse) },
-}
-*/
 
 type ResetAlarm struct {
 	AlarmCode zcl.Zu8
@@ -64,7 +45,7 @@ func (v ResetAlarm) ID() zcl.CommandID {
 }
 
 func (v ResetAlarm) Cluster() zcl.ClusterID {
-	return AlarmsCluster
+	return AlarmsID
 }
 
 func (v ResetAlarm) MnfCode() []byte {
@@ -118,7 +99,7 @@ func (v ResetAllAlarms) ID() zcl.CommandID {
 }
 
 func (v ResetAllAlarms) Cluster() zcl.ClusterID {
-	return AlarmsCluster
+	return AlarmsID
 }
 
 func (v ResetAllAlarms) MnfCode() []byte {
@@ -148,7 +129,7 @@ func (v GetAlarm) ID() zcl.CommandID {
 }
 
 func (v GetAlarm) Cluster() zcl.ClusterID {
-	return AlarmsCluster
+	return AlarmsID
 }
 
 func (v GetAlarm) MnfCode() []byte {
@@ -178,7 +159,7 @@ func (v ResetAlarmLog) ID() zcl.CommandID {
 }
 
 func (v ResetAlarmLog) Cluster() zcl.ClusterID {
-	return AlarmsCluster
+	return AlarmsID
 }
 
 func (v ResetAlarmLog) MnfCode() []byte {
@@ -212,7 +193,7 @@ func (v Alarm) ID() zcl.CommandID {
 }
 
 func (v Alarm) Cluster() zcl.ClusterID {
-	return AlarmsCluster
+	return AlarmsID
 }
 
 func (v Alarm) MnfCode() []byte {
@@ -274,7 +255,7 @@ func (v GetAlarmResponse) ID() zcl.CommandID {
 }
 
 func (v GetAlarmResponse) Cluster() zcl.ClusterID {
-	return AlarmsCluster
+	return AlarmsID
 }
 
 func (v GetAlarmResponse) MnfCode() []byte {
@@ -343,10 +324,12 @@ func (v *GetAlarmResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const AlarmCountAttr zcl.AttrID = 0
+
 type AlarmCount zcl.Zu16
 
-func (a AlarmCount) ID() zcl.AttrID         { return 0 }
-func (a AlarmCount) Cluster() zcl.ClusterID { return AlarmsCluster }
+func (a AlarmCount) ID() zcl.AttrID         { return AlarmCountAttr }
+func (a AlarmCount) Cluster() zcl.ClusterID { return AlarmsID }
 func (a *AlarmCount) Value() *AlarmCount    { return a }
 func (a AlarmCount) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

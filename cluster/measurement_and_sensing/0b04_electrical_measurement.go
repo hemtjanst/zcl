@@ -6,178 +6,149 @@ import (
 )
 
 // ElectricalMeasurement
-// Provides a mechanism for querying data about the electrical properties as measured by the device.
+const ElectricalMeasurementID zcl.ClusterID = 2820
 
-func NewElectricalMeasurementServer(profile zcl.ProfileID) *ElectricalMeasurementServer {
-	return &ElectricalMeasurementServer{p: profile}
+var ElectricalMeasurementCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		GetProfileInfoResponseCommandCommand:        func() zcl.Command { return new(GetProfileInfoResponseCommand) },
+		GetMeasurementProfileResponseCommandCommand: func() zcl.Command { return new(GetMeasurementProfileResponseCommand) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		GetProfileInfoCommandCommand:        func() zcl.Command { return new(GetProfileInfoCommand) },
+		GetMeasurementProfileCommandCommand: func() zcl.Command { return new(GetMeasurementProfileCommand) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MeasurementTypeAttr:                          func() zcl.Attr { return new(MeasurementType) },
+		DcVoltageAttr:                                func() zcl.Attr { return new(DcVoltage) },
+		DcVoltageMinAttr:                             func() zcl.Attr { return new(DcVoltageMin) },
+		DcVoltageMaxAttr:                             func() zcl.Attr { return new(DcVoltageMax) },
+		DcCurrentAttr:                                func() zcl.Attr { return new(DcCurrent) },
+		DcCurrentMinAttr:                             func() zcl.Attr { return new(DcCurrentMin) },
+		DcCurrentMaxAttr:                             func() zcl.Attr { return new(DcCurrentMax) },
+		DcPowerAttr:                                  func() zcl.Attr { return new(DcPower) },
+		DcPowerMinAttr:                               func() zcl.Attr { return new(DcPowerMin) },
+		DcPowerMaxAttr:                               func() zcl.Attr { return new(DcPowerMax) },
+		DcVoltageMultiplierAttr:                      func() zcl.Attr { return new(DcVoltageMultiplier) },
+		DcVoltageDivisorAttr:                         func() zcl.Attr { return new(DcVoltageDivisor) },
+		DcCurrentMultiplierAttr:                      func() zcl.Attr { return new(DcCurrentMultiplier) },
+		DcCurrentDivisorAttr:                         func() zcl.Attr { return new(DcCurrentDivisor) },
+		DcPowerMultiplierAttr:                        func() zcl.Attr { return new(DcPowerMultiplier) },
+		DcPowerDivisorAttr:                           func() zcl.Attr { return new(DcPowerDivisor) },
+		AcFrequencyAttr:                              func() zcl.Attr { return new(AcFrequency) },
+		AcFrequencyMinAttr:                           func() zcl.Attr { return new(AcFrequencyMin) },
+		AcFrequencyMaxAttr:                           func() zcl.Attr { return new(AcFrequencyMax) },
+		NeutralCurrentAttr:                           func() zcl.Attr { return new(NeutralCurrent) },
+		TotalActivePowerAttr:                         func() zcl.Attr { return new(TotalActivePower) },
+		TotalReactivePowerAttr:                       func() zcl.Attr { return new(TotalReactivePower) },
+		TotalApparentPowerAttr:                       func() zcl.Attr { return new(TotalApparentPower) },
+		Measured1StHarmonicCurrentAttr:               func() zcl.Attr { return new(Measured1StHarmonicCurrent) },
+		Measured3RdHarmonicCurrentAttr:               func() zcl.Attr { return new(Measured3RdHarmonicCurrent) },
+		Measured5ThHarmonicCurrentAttr:               func() zcl.Attr { return new(Measured5ThHarmonicCurrent) },
+		Measured7ThHarmonicCurrentAttr:               func() zcl.Attr { return new(Measured7ThHarmonicCurrent) },
+		Measured9ThHarmonicCurrentAttr:               func() zcl.Attr { return new(Measured9ThHarmonicCurrent) },
+		Measured11ThHarmonicCurrentAttr:              func() zcl.Attr { return new(Measured11ThHarmonicCurrent) },
+		MeasuredPhase1StHarmonicCurrentAttr:          func() zcl.Attr { return new(MeasuredPhase1StHarmonicCurrent) },
+		MeasuredPhase3RdHarmonicCurrentAttr:          func() zcl.Attr { return new(MeasuredPhase3RdHarmonicCurrent) },
+		MeasuredPhase5ThHarmonicCurrentAttr:          func() zcl.Attr { return new(MeasuredPhase5ThHarmonicCurrent) },
+		MeasuredPhase7ThHarmonicCurrentAttr:          func() zcl.Attr { return new(MeasuredPhase7ThHarmonicCurrent) },
+		MeasuredPhase9ThHarmonicCurrentAttr:          func() zcl.Attr { return new(MeasuredPhase9ThHarmonicCurrent) },
+		MeasuredPhase11ThHarmonicCurrentAttr:         func() zcl.Attr { return new(MeasuredPhase11ThHarmonicCurrent) },
+		AcFrequencyMultiplierAttr:                    func() zcl.Attr { return new(AcFrequencyMultiplier) },
+		AcFrequencyDivisorAttr:                       func() zcl.Attr { return new(AcFrequencyDivisor) },
+		PowerMultiplierAttr:                          func() zcl.Attr { return new(PowerMultiplier) },
+		PowerDivisorAttr:                             func() zcl.Attr { return new(PowerDivisor) },
+		HarmonicCurrentMultiplierAttr:                func() zcl.Attr { return new(HarmonicCurrentMultiplier) },
+		PhaseHarmonicCurrentMultiplierAttr:           func() zcl.Attr { return new(PhaseHarmonicCurrentMultiplier) },
+		LineCurrentAttr:                              func() zcl.Attr { return new(LineCurrent) },
+		ActiveCurrentAttr:                            func() zcl.Attr { return new(ActiveCurrent) },
+		ReactiveCurrentAttr:                          func() zcl.Attr { return new(ReactiveCurrent) },
+		RmsVoltageAttr:                               func() zcl.Attr { return new(RmsVoltage) },
+		RmsVoltageMinAttr:                            func() zcl.Attr { return new(RmsVoltageMin) },
+		RmsVoltageMaxAttr:                            func() zcl.Attr { return new(RmsVoltageMax) },
+		RmsCurrentAttr:                               func() zcl.Attr { return new(RmsCurrent) },
+		RmsCurrentMinAttr:                            func() zcl.Attr { return new(RmsCurrentMin) },
+		RmsCurrentMaxAttr:                            func() zcl.Attr { return new(RmsCurrentMax) },
+		ActivePowerAttr:                              func() zcl.Attr { return new(ActivePower) },
+		ActivePowerMinAttr:                           func() zcl.Attr { return new(ActivePowerMin) },
+		ActivePowerMaxAttr:                           func() zcl.Attr { return new(ActivePowerMax) },
+		ReactivePowerAttr:                            func() zcl.Attr { return new(ReactivePower) },
+		ApparentPowerAttr:                            func() zcl.Attr { return new(ApparentPower) },
+		PowerFactorAttr:                              func() zcl.Attr { return new(PowerFactor) },
+		AverageRmsVoltageMeasurementPeriodAttr:       func() zcl.Attr { return new(AverageRmsVoltageMeasurementPeriod) },
+		AverageRmsOvervoltageCounterAttr:             func() zcl.Attr { return new(AverageRmsOvervoltageCounter) },
+		AverageRmsUndervoltageCounterAttr:            func() zcl.Attr { return new(AverageRmsUndervoltageCounter) },
+		RmsExtremeOvervoltagePeriodAttr:              func() zcl.Attr { return new(RmsExtremeOvervoltagePeriod) },
+		RmsExtremeUndervoltagePeriodAttr:             func() zcl.Attr { return new(RmsExtremeUndervoltagePeriod) },
+		RmsVoltageSagPeriodAttr:                      func() zcl.Attr { return new(RmsVoltageSagPeriod) },
+		RmsVoltageSwellPeriodAttr:                    func() zcl.Attr { return new(RmsVoltageSwellPeriod) },
+		AcVoltageMultiplierAttr:                      func() zcl.Attr { return new(AcVoltageMultiplier) },
+		AcVoltageDivisorAttr:                         func() zcl.Attr { return new(AcVoltageDivisor) },
+		AcCurrentMultiplierAttr:                      func() zcl.Attr { return new(AcCurrentMultiplier) },
+		AcCurrentDivisorAttr:                         func() zcl.Attr { return new(AcCurrentDivisor) },
+		AcPowerMultiplierAttr:                        func() zcl.Attr { return new(AcPowerMultiplier) },
+		AcPowerDivisorAttr:                           func() zcl.Attr { return new(AcPowerDivisor) },
+		DcOverloadAlarmsMaskAttr:                     func() zcl.Attr { return new(DcOverloadAlarmsMask) },
+		DcVoltageOverloadAttr:                        func() zcl.Attr { return new(DcVoltageOverload) },
+		DcCurrentOverloadAttr:                        func() zcl.Attr { return new(DcCurrentOverload) },
+		AcOverloadAlarmsMaskAttr:                     func() zcl.Attr { return new(AcOverloadAlarmsMask) },
+		AcVoltageOverloadAttr:                        func() zcl.Attr { return new(AcVoltageOverload) },
+		AcCurrentOverloadAttr:                        func() zcl.Attr { return new(AcCurrentOverload) },
+		AcActivePowerOverloadAttr:                    func() zcl.Attr { return new(AcActivePowerOverload) },
+		AcReactivePowerOverloadAttr:                  func() zcl.Attr { return new(AcReactivePowerOverload) },
+		AverageRmsOvervoltageAttr:                    func() zcl.Attr { return new(AverageRmsOvervoltage) },
+		AverageRmsUndervoltageAttr:                   func() zcl.Attr { return new(AverageRmsUndervoltage) },
+		RmsExtremeOvervoltageAttr:                    func() zcl.Attr { return new(RmsExtremeOvervoltage) },
+		RmsExtremeUndervoltageAttr:                   func() zcl.Attr { return new(RmsExtremeUndervoltage) },
+		RmsVoltageSagAttr:                            func() zcl.Attr { return new(RmsVoltageSag) },
+		RmsVoltageSwellAttr:                          func() zcl.Attr { return new(RmsVoltageSwell) },
+		LineCurrentPhaseBAttr:                        func() zcl.Attr { return new(LineCurrentPhaseB) },
+		ActiveCurrentPhaseBAttr:                      func() zcl.Attr { return new(ActiveCurrentPhaseB) },
+		ReactiveCurrentPhaseBAttr:                    func() zcl.Attr { return new(ReactiveCurrentPhaseB) },
+		RmsVoltagePhaseBAttr:                         func() zcl.Attr { return new(RmsVoltagePhaseB) },
+		RmsVoltageMinPhaseBAttr:                      func() zcl.Attr { return new(RmsVoltageMinPhaseB) },
+		RmsVoltageMaxPhaseBAttr:                      func() zcl.Attr { return new(RmsVoltageMaxPhaseB) },
+		RmsCurrentPhaseBAttr:                         func() zcl.Attr { return new(RmsCurrentPhaseB) },
+		RmsCurrentMinPhaseBAttr:                      func() zcl.Attr { return new(RmsCurrentMinPhaseB) },
+		RmsCurrentMaxPhaseBAttr:                      func() zcl.Attr { return new(RmsCurrentMaxPhaseB) },
+		ActivePowerPhaseBAttr:                        func() zcl.Attr { return new(ActivePowerPhaseB) },
+		ActivePowerMinPhaseBAttr:                     func() zcl.Attr { return new(ActivePowerMinPhaseB) },
+		ActivePowerMaxPhaseBAttr:                     func() zcl.Attr { return new(ActivePowerMaxPhaseB) },
+		ReactivePowerPhaseBAttr:                      func() zcl.Attr { return new(ReactivePowerPhaseB) },
+		ApparentPowerPhaseBAttr:                      func() zcl.Attr { return new(ApparentPowerPhaseB) },
+		PowerFactorPhaseBAttr:                        func() zcl.Attr { return new(PowerFactorPhaseB) },
+		AverageRmsVoltageMeasurementPeriodPhaseBAttr: func() zcl.Attr { return new(AverageRmsVoltageMeasurementPeriodPhaseB) },
+		AverageRmsOvervoltageCounterPhaseBAttr:       func() zcl.Attr { return new(AverageRmsOvervoltageCounterPhaseB) },
+		AverageRmsUndervoltageCounterPhaseBAttr:      func() zcl.Attr { return new(AverageRmsUndervoltageCounterPhaseB) },
+		RmsExtremeOvervoltagePeriodPhaseBAttr:        func() zcl.Attr { return new(RmsExtremeOvervoltagePeriodPhaseB) },
+		RmsExtremeUndervoltagePeriodPhaseBAttr:       func() zcl.Attr { return new(RmsExtremeUndervoltagePeriodPhaseB) },
+		RmsVoltageSagPeriodPhaseBAttr:                func() zcl.Attr { return new(RmsVoltageSagPeriodPhaseB) },
+		RmsVoltageSwellPeriodPhaseBAttr:              func() zcl.Attr { return new(RmsVoltageSwellPeriodPhaseB) },
+		LineCurrentPhaseCAttr:                        func() zcl.Attr { return new(LineCurrentPhaseC) },
+		ActiveCurrentPhaseCAttr:                      func() zcl.Attr { return new(ActiveCurrentPhaseC) },
+		ReactiveCurrentPhaseCAttr:                    func() zcl.Attr { return new(ReactiveCurrentPhaseC) },
+		RmsVoltagePhaseCAttr:                         func() zcl.Attr { return new(RmsVoltagePhaseC) },
+		RmsVoltageMinPhaseCAttr:                      func() zcl.Attr { return new(RmsVoltageMinPhaseC) },
+		RmsVoltageMaxPhaseCAttr:                      func() zcl.Attr { return new(RmsVoltageMaxPhaseC) },
+		RmsCurrentPhaseCAttr:                         func() zcl.Attr { return new(RmsCurrentPhaseC) },
+		RmsCurrentMinPhaseCAttr:                      func() zcl.Attr { return new(RmsCurrentMinPhaseC) },
+		RmsCurrentMaxPhaseCAttr:                      func() zcl.Attr { return new(RmsCurrentMaxPhaseC) },
+		ActivePowerPhaseCAttr:                        func() zcl.Attr { return new(ActivePowerPhaseC) },
+		ActivePowerMinPhaseCAttr:                     func() zcl.Attr { return new(ActivePowerMinPhaseC) },
+		ActivePowerMaxPhaseCAttr:                     func() zcl.Attr { return new(ActivePowerMaxPhaseC) },
+		ReactivePowerPhaseCAttr:                      func() zcl.Attr { return new(ReactivePowerPhaseC) },
+		ApparentPowerPhaseCAttr:                      func() zcl.Attr { return new(ApparentPowerPhaseC) },
+		PowerFactorPhaseCAttr:                        func() zcl.Attr { return new(PowerFactorPhaseC) },
+		AverageRmsVoltageMeasurementPeriodPhaseCAttr: func() zcl.Attr { return new(AverageRmsVoltageMeasurementPeriodPhaseC) },
+		AverageRmsOvervoltageCounterPhaseCAttr:       func() zcl.Attr { return new(AverageRmsOvervoltageCounterPhaseC) },
+		AverageRmsUndervoltageCounterPhaseCAttr:      func() zcl.Attr { return new(AverageRmsUndervoltageCounterPhaseC) },
+		RmsExtremeOvervoltagePeriodPhaseCAttr:        func() zcl.Attr { return new(RmsExtremeOvervoltagePeriodPhaseC) },
+		RmsExtremeUndervoltagePeriodPhaseCAttr:       func() zcl.Attr { return new(RmsExtremeUndervoltagePeriodPhaseC) },
+		RmsVoltageSagPeriodPhaseCAttr:                func() zcl.Attr { return new(RmsVoltageSagPeriodPhaseC) },
+		RmsVoltageSwellPeriodPhaseCAttr:              func() zcl.Attr { return new(RmsVoltageSwellPeriodPhaseC) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewElectricalMeasurementClient(profile zcl.ProfileID) *ElectricalMeasurementClient {
-	return &ElectricalMeasurementClient{p: profile}
-}
-
-const ElectricalMeasurementCluster zcl.ClusterID = 2820
-
-type ElectricalMeasurementServer struct {
-	p zcl.ProfileID
-
-	MeasurementType                          *MeasurementType
-	DcVoltage                                *DcVoltage
-	DcVoltageMin                             *DcVoltageMin
-	DcVoltageMax                             *DcVoltageMax
-	DcCurrent                                *DcCurrent
-	DcCurrentMin                             *DcCurrentMin
-	DcCurrentMax                             *DcCurrentMax
-	DcPower                                  *DcPower
-	DcPowerMin                               *DcPowerMin
-	DcPowerMax                               *DcPowerMax
-	DcVoltageMultiplier                      *DcVoltageMultiplier
-	DcVoltageDivisor                         *DcVoltageDivisor
-	DcCurrentMultiplier                      *DcCurrentMultiplier
-	DcCurrentDivisor                         *DcCurrentDivisor
-	DcPowerMultiplier                        *DcPowerMultiplier
-	DcPowerDivisor                           *DcPowerDivisor
-	AcFrequency                              *AcFrequency
-	AcFrequencyMin                           *AcFrequencyMin
-	AcFrequencyMax                           *AcFrequencyMax
-	NeutralCurrent                           *NeutralCurrent
-	TotalActivePower                         *TotalActivePower
-	TotalReactivePower                       *TotalReactivePower
-	TotalApparentPower                       *TotalApparentPower
-	Measured1StHarmonicCurrent               *Measured1StHarmonicCurrent
-	Measured3RdHarmonicCurrent               *Measured3RdHarmonicCurrent
-	Measured5ThHarmonicCurrent               *Measured5ThHarmonicCurrent
-	Measured7ThHarmonicCurrent               *Measured7ThHarmonicCurrent
-	Measured9ThHarmonicCurrent               *Measured9ThHarmonicCurrent
-	Measured11ThHarmonicCurrent              *Measured11ThHarmonicCurrent
-	MeasuredPhase1StHarmonicCurrent          *MeasuredPhase1StHarmonicCurrent
-	MeasuredPhase3RdHarmonicCurrent          *MeasuredPhase3RdHarmonicCurrent
-	MeasuredPhase5ThHarmonicCurrent          *MeasuredPhase5ThHarmonicCurrent
-	MeasuredPhase7ThHarmonicCurrent          *MeasuredPhase7ThHarmonicCurrent
-	MeasuredPhase9ThHarmonicCurrent          *MeasuredPhase9ThHarmonicCurrent
-	MeasuredPhase11ThHarmonicCurrent         *MeasuredPhase11ThHarmonicCurrent
-	AcFrequencyMultiplier                    *AcFrequencyMultiplier
-	AcFrequencyDivisor                       *AcFrequencyDivisor
-	PowerMultiplier                          *PowerMultiplier
-	PowerDivisor                             *PowerDivisor
-	HarmonicCurrentMultiplier                *HarmonicCurrentMultiplier
-	PhaseHarmonicCurrentMultiplier           *PhaseHarmonicCurrentMultiplier
-	LineCurrent                              *LineCurrent
-	ActiveCurrent                            *ActiveCurrent
-	ReactiveCurrent                          *ReactiveCurrent
-	RmsVoltage                               *RmsVoltage
-	RmsVoltageMin                            *RmsVoltageMin
-	RmsVoltageMax                            *RmsVoltageMax
-	RmsCurrent                               *RmsCurrent
-	RmsCurrentMin                            *RmsCurrentMin
-	RmsCurrentMax                            *RmsCurrentMax
-	ActivePower                              *ActivePower
-	ActivePowerMin                           *ActivePowerMin
-	ActivePowerMax                           *ActivePowerMax
-	ReactivePower                            *ReactivePower
-	ApparentPower                            *ApparentPower
-	PowerFactor                              *PowerFactor
-	AverageRmsVoltageMeasurementPeriod       *AverageRmsVoltageMeasurementPeriod
-	AverageRmsOvervoltageCounter             *AverageRmsOvervoltageCounter
-	AverageRmsUndervoltageCounter            *AverageRmsUndervoltageCounter
-	RmsExtremeOvervoltagePeriod              *RmsExtremeOvervoltagePeriod
-	RmsExtremeUndervoltagePeriod             *RmsExtremeUndervoltagePeriod
-	RmsVoltageSagPeriod                      *RmsVoltageSagPeriod
-	RmsVoltageSwellPeriod                    *RmsVoltageSwellPeriod
-	AcVoltageMultiplier                      *AcVoltageMultiplier
-	AcVoltageDivisor                         *AcVoltageDivisor
-	AcCurrentMultiplier                      *AcCurrentMultiplier
-	AcCurrentDivisor                         *AcCurrentDivisor
-	AcPowerMultiplier                        *AcPowerMultiplier
-	AcPowerDivisor                           *AcPowerDivisor
-	DcOverloadAlarmsMask                     *DcOverloadAlarmsMask
-	DcVoltageOverload                        *DcVoltageOverload
-	DcCurrentOverload                        *DcCurrentOverload
-	AcOverloadAlarmsMask                     *AcOverloadAlarmsMask
-	AcVoltageOverload                        *AcVoltageOverload
-	AcCurrentOverload                        *AcCurrentOverload
-	AcActivePowerOverload                    *AcActivePowerOverload
-	AcReactivePowerOverload                  *AcReactivePowerOverload
-	AverageRmsOvervoltage                    *AverageRmsOvervoltage
-	AverageRmsUndervoltage                   *AverageRmsUndervoltage
-	RmsExtremeOvervoltage                    *RmsExtremeOvervoltage
-	RmsExtremeUndervoltage                   *RmsExtremeUndervoltage
-	RmsVoltageSag                            *RmsVoltageSag
-	RmsVoltageSwell                          *RmsVoltageSwell
-	LineCurrentPhaseB                        *LineCurrentPhaseB
-	ActiveCurrentPhaseB                      *ActiveCurrentPhaseB
-	ReactiveCurrentPhaseB                    *ReactiveCurrentPhaseB
-	RmsVoltagePhaseB                         *RmsVoltagePhaseB
-	RmsVoltageMinPhaseB                      *RmsVoltageMinPhaseB
-	RmsVoltageMaxPhaseB                      *RmsVoltageMaxPhaseB
-	RmsCurrentPhaseB                         *RmsCurrentPhaseB
-	RmsCurrentMinPhaseB                      *RmsCurrentMinPhaseB
-	RmsCurrentMaxPhaseB                      *RmsCurrentMaxPhaseB
-	ActivePowerPhaseB                        *ActivePowerPhaseB
-	ActivePowerMinPhaseB                     *ActivePowerMinPhaseB
-	ActivePowerMaxPhaseB                     *ActivePowerMaxPhaseB
-	ReactivePowerPhaseB                      *ReactivePowerPhaseB
-	ApparentPowerPhaseB                      *ApparentPowerPhaseB
-	PowerFactorPhaseB                        *PowerFactorPhaseB
-	AverageRmsVoltageMeasurementPeriodPhaseB *AverageRmsVoltageMeasurementPeriodPhaseB
-	AverageRmsOvervoltageCounterPhaseB       *AverageRmsOvervoltageCounterPhaseB
-	AverageRmsUndervoltageCounterPhaseB      *AverageRmsUndervoltageCounterPhaseB
-	RmsExtremeOvervoltagePeriodPhaseB        *RmsExtremeOvervoltagePeriodPhaseB
-	RmsExtremeUndervoltagePeriodPhaseB       *RmsExtremeUndervoltagePeriodPhaseB
-	RmsVoltageSagPeriodPhaseB                *RmsVoltageSagPeriodPhaseB
-	RmsVoltageSwellPeriodPhaseB              *RmsVoltageSwellPeriodPhaseB
-	LineCurrentPhaseC                        *LineCurrentPhaseC
-	ActiveCurrentPhaseC                      *ActiveCurrentPhaseC
-	ReactiveCurrentPhaseC                    *ReactiveCurrentPhaseC
-	RmsVoltagePhaseC                         *RmsVoltagePhaseC
-	RmsVoltageMinPhaseC                      *RmsVoltageMinPhaseC
-	RmsVoltageMaxPhaseC                      *RmsVoltageMaxPhaseC
-	RmsCurrentPhaseC                         *RmsCurrentPhaseC
-	RmsCurrentMinPhaseC                      *RmsCurrentMinPhaseC
-	RmsCurrentMaxPhaseC                      *RmsCurrentMaxPhaseC
-	ActivePowerPhaseC                        *ActivePowerPhaseC
-	ActivePowerMinPhaseC                     *ActivePowerMinPhaseC
-	ActivePowerMaxPhaseC                     *ActivePowerMaxPhaseC
-	ReactivePowerPhaseC                      *ReactivePowerPhaseC
-	ApparentPowerPhaseC                      *ApparentPowerPhaseC
-	PowerFactorPhaseC                        *PowerFactorPhaseC
-	AverageRmsVoltageMeasurementPeriodPhaseC *AverageRmsVoltageMeasurementPeriodPhaseC
-	AverageRmsOvervoltageCounterPhaseC       *AverageRmsOvervoltageCounterPhaseC
-	AverageRmsUndervoltageCounterPhaseC      *AverageRmsUndervoltageCounterPhaseC
-	RmsExtremeOvervoltagePeriodPhaseC        *RmsExtremeOvervoltagePeriodPhaseC
-	RmsExtremeUndervoltagePeriodPhaseC       *RmsExtremeUndervoltagePeriodPhaseC
-	RmsVoltageSagPeriodPhaseC                *RmsVoltageSagPeriodPhaseC
-	RmsVoltageSwellPeriodPhaseC              *RmsVoltageSwellPeriodPhaseC
-}
-
-func (s *ElectricalMeasurementServer) GetProfileInfoResponseCommand() *GetProfileInfoResponseCommand {
-	return new(GetProfileInfoResponseCommand)
-}
-func (s *ElectricalMeasurementServer) GetMeasurementProfileResponseCommand() *GetMeasurementProfileResponseCommand {
-	return new(GetMeasurementProfileResponseCommand)
-}
-
-type ElectricalMeasurementClient struct {
-	p zcl.ProfileID
-}
-
-func (s *ElectricalMeasurementClient) GetProfileInfoCommand() *GetProfileInfoCommand {
-	return new(GetProfileInfoCommand)
-}
-func (s *ElectricalMeasurementClient) GetMeasurementProfileCommand() *GetMeasurementProfileCommand {
-	return new(GetMeasurementProfileCommand)
-}
-
-/*
-var ElectricalMeasurementServer = map[zcl.CommandID]func() zcl.Command{
-    GetProfileInfoResponseCommandID: func() zcl.Command { return new(GetProfileInfoResponseCommand) },
-    GetMeasurementProfileResponseCommandID: func() zcl.Command { return new(GetMeasurementProfileResponseCommand) },
-}
-
-var ElectricalMeasurementClient = map[zcl.CommandID]func() zcl.Command{
-    GetProfileInfoCommandID: func() zcl.Command { return new(GetProfileInfoCommand) },
-    GetMeasurementProfileCommandID: func() zcl.Command { return new(GetMeasurementProfileCommand) },
-}
-*/
 
 type GetProfileInfoResponseCommand struct {
 	ProfileCount          zcl.Zu8
@@ -202,7 +173,7 @@ func (v GetProfileInfoResponseCommand) ID() zcl.CommandID {
 }
 
 func (v GetProfileInfoResponseCommand) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+	return ElectricalMeasurementID
 }
 
 func (v GetProfileInfoResponseCommand) MnfCode() []byte {
@@ -286,7 +257,7 @@ func (v GetMeasurementProfileResponseCommand) ID() zcl.CommandID {
 }
 
 func (v GetMeasurementProfileResponseCommand) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+	return ElectricalMeasurementID
 }
 
 func (v GetMeasurementProfileResponseCommand) MnfCode() []byte {
@@ -375,7 +346,7 @@ func (v GetProfileInfoCommand) ID() zcl.CommandID {
 }
 
 func (v GetProfileInfoCommand) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+	return ElectricalMeasurementID
 }
 
 func (v GetProfileInfoCommand) MnfCode() []byte {
@@ -411,7 +382,7 @@ func (v GetMeasurementProfileCommand) ID() zcl.CommandID {
 }
 
 func (v GetMeasurementProfileCommand) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+	return ElectricalMeasurementID
 }
 
 func (v GetMeasurementProfileCommand) MnfCode() []byte {
@@ -459,10 +430,12 @@ func (v *GetMeasurementProfileCommand) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const MeasurementTypeAttr zcl.AttrID = 0
+
 type MeasurementType zcl.Zbmp32
 
-func (a MeasurementType) ID() zcl.AttrID           { return 0 }
-func (a MeasurementType) Cluster() zcl.ClusterID   { return ElectricalMeasurementCluster }
+func (a MeasurementType) ID() zcl.AttrID           { return MeasurementTypeAttr }
+func (a MeasurementType) Cluster() zcl.ClusterID   { return ElectricalMeasurementID }
 func (a *MeasurementType) Value() *MeasurementType { return a }
 func (a MeasurementType) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp32(a).MarshalZcl()
@@ -576,10 +549,12 @@ func (a *MeasurementType) SetPowerQualityMeasurement(b bool) {
 	*a = MeasurementType(zcl.BitmapSet([]byte(*a), 8, b))
 }
 
+const DcVoltageAttr zcl.AttrID = 256
+
 type DcVoltage zcl.Zs16
 
-func (a DcVoltage) ID() zcl.AttrID         { return 256 }
-func (a DcVoltage) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcVoltage) ID() zcl.AttrID         { return DcVoltageAttr }
+func (a DcVoltage) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcVoltage) Value() *DcVoltage     { return a }
 func (a DcVoltage) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -601,10 +576,12 @@ func (a DcVoltage) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcVoltageMinAttr zcl.AttrID = 257
+
 type DcVoltageMin zcl.Zs16
 
-func (a DcVoltageMin) ID() zcl.AttrID         { return 257 }
-func (a DcVoltageMin) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcVoltageMin) ID() zcl.AttrID         { return DcVoltageMinAttr }
+func (a DcVoltageMin) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcVoltageMin) Value() *DcVoltageMin  { return a }
 func (a DcVoltageMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -626,10 +603,12 @@ func (a DcVoltageMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcVoltageMaxAttr zcl.AttrID = 258
+
 type DcVoltageMax zcl.Zs16
 
-func (a DcVoltageMax) ID() zcl.AttrID         { return 258 }
-func (a DcVoltageMax) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcVoltageMax) ID() zcl.AttrID         { return DcVoltageMaxAttr }
+func (a DcVoltageMax) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcVoltageMax) Value() *DcVoltageMax  { return a }
 func (a DcVoltageMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -651,10 +630,12 @@ func (a DcVoltageMax) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcCurrentAttr zcl.AttrID = 259
+
 type DcCurrent zcl.Zs16
 
-func (a DcCurrent) ID() zcl.AttrID         { return 259 }
-func (a DcCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcCurrent) ID() zcl.AttrID         { return DcCurrentAttr }
+func (a DcCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcCurrent) Value() *DcCurrent     { return a }
 func (a DcCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -676,10 +657,12 @@ func (a DcCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcCurrentMinAttr zcl.AttrID = 260
+
 type DcCurrentMin zcl.Zs16
 
-func (a DcCurrentMin) ID() zcl.AttrID         { return 260 }
-func (a DcCurrentMin) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcCurrentMin) ID() zcl.AttrID         { return DcCurrentMinAttr }
+func (a DcCurrentMin) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcCurrentMin) Value() *DcCurrentMin  { return a }
 func (a DcCurrentMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -701,10 +684,12 @@ func (a DcCurrentMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcCurrentMaxAttr zcl.AttrID = 261
+
 type DcCurrentMax zcl.Zs16
 
-func (a DcCurrentMax) ID() zcl.AttrID         { return 261 }
-func (a DcCurrentMax) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcCurrentMax) ID() zcl.AttrID         { return DcCurrentMaxAttr }
+func (a DcCurrentMax) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcCurrentMax) Value() *DcCurrentMax  { return a }
 func (a DcCurrentMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -726,10 +711,12 @@ func (a DcCurrentMax) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcPowerAttr zcl.AttrID = 262
+
 type DcPower zcl.Zs16
 
-func (a DcPower) ID() zcl.AttrID         { return 262 }
-func (a DcPower) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcPower) ID() zcl.AttrID         { return DcPowerAttr }
+func (a DcPower) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcPower) Value() *DcPower       { return a }
 func (a DcPower) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -751,10 +738,12 @@ func (a DcPower) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcPowerMinAttr zcl.AttrID = 263
+
 type DcPowerMin zcl.Zs16
 
-func (a DcPowerMin) ID() zcl.AttrID         { return 263 }
-func (a DcPowerMin) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcPowerMin) ID() zcl.AttrID         { return DcPowerMinAttr }
+func (a DcPowerMin) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcPowerMin) Value() *DcPowerMin    { return a }
 func (a DcPowerMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -776,10 +765,12 @@ func (a DcPowerMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcPowerMaxAttr zcl.AttrID = 264
+
 type DcPowerMax zcl.Zs16
 
-func (a DcPowerMax) ID() zcl.AttrID         { return 264 }
-func (a DcPowerMax) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a DcPowerMax) ID() zcl.AttrID         { return DcPowerMaxAttr }
+func (a DcPowerMax) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *DcPowerMax) Value() *DcPowerMax    { return a }
 func (a DcPowerMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -801,10 +792,12 @@ func (a DcPowerMax) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcVoltageMultiplierAttr zcl.AttrID = 512
+
 type DcVoltageMultiplier zcl.Zu16
 
-func (a DcVoltageMultiplier) ID() zcl.AttrID               { return 512 }
-func (a DcVoltageMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a DcVoltageMultiplier) ID() zcl.AttrID               { return DcVoltageMultiplierAttr }
+func (a DcVoltageMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *DcVoltageMultiplier) Value() *DcVoltageMultiplier { return a }
 func (a DcVoltageMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -826,10 +819,12 @@ func (a DcVoltageMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DcVoltageDivisorAttr zcl.AttrID = 513
+
 type DcVoltageDivisor zcl.Zu16
 
-func (a DcVoltageDivisor) ID() zcl.AttrID            { return 513 }
-func (a DcVoltageDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a DcVoltageDivisor) ID() zcl.AttrID            { return DcVoltageDivisorAttr }
+func (a DcVoltageDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *DcVoltageDivisor) Value() *DcVoltageDivisor { return a }
 func (a DcVoltageDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -851,10 +846,12 @@ func (a DcVoltageDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DcCurrentMultiplierAttr zcl.AttrID = 514
+
 type DcCurrentMultiplier zcl.Zu16
 
-func (a DcCurrentMultiplier) ID() zcl.AttrID               { return 514 }
-func (a DcCurrentMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a DcCurrentMultiplier) ID() zcl.AttrID               { return DcCurrentMultiplierAttr }
+func (a DcCurrentMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *DcCurrentMultiplier) Value() *DcCurrentMultiplier { return a }
 func (a DcCurrentMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -876,10 +873,12 @@ func (a DcCurrentMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DcCurrentDivisorAttr zcl.AttrID = 515
+
 type DcCurrentDivisor zcl.Zu16
 
-func (a DcCurrentDivisor) ID() zcl.AttrID            { return 515 }
-func (a DcCurrentDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a DcCurrentDivisor) ID() zcl.AttrID            { return DcCurrentDivisorAttr }
+func (a DcCurrentDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *DcCurrentDivisor) Value() *DcCurrentDivisor { return a }
 func (a DcCurrentDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -901,10 +900,12 @@ func (a DcCurrentDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DcPowerMultiplierAttr zcl.AttrID = 516
+
 type DcPowerMultiplier zcl.Zu16
 
-func (a DcPowerMultiplier) ID() zcl.AttrID             { return 516 }
-func (a DcPowerMultiplier) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a DcPowerMultiplier) ID() zcl.AttrID             { return DcPowerMultiplierAttr }
+func (a DcPowerMultiplier) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *DcPowerMultiplier) Value() *DcPowerMultiplier { return a }
 func (a DcPowerMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -926,10 +927,12 @@ func (a DcPowerMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DcPowerDivisorAttr zcl.AttrID = 517
+
 type DcPowerDivisor zcl.Zu16
 
-func (a DcPowerDivisor) ID() zcl.AttrID          { return 517 }
-func (a DcPowerDivisor) Cluster() zcl.ClusterID  { return ElectricalMeasurementCluster }
+func (a DcPowerDivisor) ID() zcl.AttrID          { return DcPowerDivisorAttr }
+func (a DcPowerDivisor) Cluster() zcl.ClusterID  { return ElectricalMeasurementID }
 func (a *DcPowerDivisor) Value() *DcPowerDivisor { return a }
 func (a DcPowerDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -951,10 +954,12 @@ func (a DcPowerDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcFrequencyAttr zcl.AttrID = 768
+
 type AcFrequency zcl.Zu16
 
-func (a AcFrequency) ID() zcl.AttrID         { return 768 }
-func (a AcFrequency) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a AcFrequency) ID() zcl.AttrID         { return AcFrequencyAttr }
+func (a AcFrequency) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *AcFrequency) Value() *AcFrequency   { return a }
 func (a AcFrequency) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -976,10 +981,12 @@ func (a AcFrequency) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcFrequencyMinAttr zcl.AttrID = 769
+
 type AcFrequencyMin zcl.Zu16
 
-func (a AcFrequencyMin) ID() zcl.AttrID          { return 769 }
-func (a AcFrequencyMin) Cluster() zcl.ClusterID  { return ElectricalMeasurementCluster }
+func (a AcFrequencyMin) ID() zcl.AttrID          { return AcFrequencyMinAttr }
+func (a AcFrequencyMin) Cluster() zcl.ClusterID  { return ElectricalMeasurementID }
 func (a *AcFrequencyMin) Value() *AcFrequencyMin { return a }
 func (a AcFrequencyMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1001,10 +1008,12 @@ func (a AcFrequencyMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcFrequencyMaxAttr zcl.AttrID = 770
+
 type AcFrequencyMax zcl.Zu16
 
-func (a AcFrequencyMax) ID() zcl.AttrID          { return 770 }
-func (a AcFrequencyMax) Cluster() zcl.ClusterID  { return ElectricalMeasurementCluster }
+func (a AcFrequencyMax) ID() zcl.AttrID          { return AcFrequencyMaxAttr }
+func (a AcFrequencyMax) Cluster() zcl.ClusterID  { return ElectricalMeasurementID }
 func (a *AcFrequencyMax) Value() *AcFrequencyMax { return a }
 func (a AcFrequencyMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1026,10 +1035,12 @@ func (a AcFrequencyMax) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NeutralCurrentAttr zcl.AttrID = 771
+
 type NeutralCurrent zcl.Zu16
 
-func (a NeutralCurrent) ID() zcl.AttrID          { return 771 }
-func (a NeutralCurrent) Cluster() zcl.ClusterID  { return ElectricalMeasurementCluster }
+func (a NeutralCurrent) ID() zcl.AttrID          { return NeutralCurrentAttr }
+func (a NeutralCurrent) Cluster() zcl.ClusterID  { return ElectricalMeasurementID }
 func (a *NeutralCurrent) Value() *NeutralCurrent { return a }
 func (a NeutralCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1051,10 +1062,12 @@ func (a NeutralCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const TotalActivePowerAttr zcl.AttrID = 772
+
 type TotalActivePower zcl.Zs32
 
-func (a TotalActivePower) ID() zcl.AttrID            { return 772 }
-func (a TotalActivePower) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a TotalActivePower) ID() zcl.AttrID            { return TotalActivePowerAttr }
+func (a TotalActivePower) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *TotalActivePower) Value() *TotalActivePower { return a }
 func (a TotalActivePower) MarshalZcl() ([]byte, error) {
 	return zcl.Zs32(a).MarshalZcl()
@@ -1076,10 +1089,12 @@ func (a TotalActivePower) String() string {
 	return zcl.Sprintf("%s", zcl.Zs32(a))
 }
 
+const TotalReactivePowerAttr zcl.AttrID = 773
+
 type TotalReactivePower zcl.Zs32
 
-func (a TotalReactivePower) ID() zcl.AttrID              { return 773 }
-func (a TotalReactivePower) Cluster() zcl.ClusterID      { return ElectricalMeasurementCluster }
+func (a TotalReactivePower) ID() zcl.AttrID              { return TotalReactivePowerAttr }
+func (a TotalReactivePower) Cluster() zcl.ClusterID      { return ElectricalMeasurementID }
 func (a *TotalReactivePower) Value() *TotalReactivePower { return a }
 func (a TotalReactivePower) MarshalZcl() ([]byte, error) {
 	return zcl.Zs32(a).MarshalZcl()
@@ -1101,10 +1116,12 @@ func (a TotalReactivePower) String() string {
 	return zcl.Sprintf("%s", zcl.Zs32(a))
 }
 
+const TotalApparentPowerAttr zcl.AttrID = 774
+
 type TotalApparentPower zcl.Zu32
 
-func (a TotalApparentPower) ID() zcl.AttrID              { return 774 }
-func (a TotalApparentPower) Cluster() zcl.ClusterID      { return ElectricalMeasurementCluster }
+func (a TotalApparentPower) ID() zcl.AttrID              { return TotalApparentPowerAttr }
+func (a TotalApparentPower) Cluster() zcl.ClusterID      { return ElectricalMeasurementID }
 func (a *TotalApparentPower) Value() *TotalApparentPower { return a }
 func (a TotalApparentPower) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -1126,10 +1143,12 @@ func (a TotalApparentPower) String() string {
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
+const Measured1StHarmonicCurrentAttr zcl.AttrID = 775
+
 type Measured1StHarmonicCurrent zcl.Zs16
 
-func (a Measured1StHarmonicCurrent) ID() zcl.AttrID                      { return 775 }
-func (a Measured1StHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementCluster }
+func (a Measured1StHarmonicCurrent) ID() zcl.AttrID                      { return Measured1StHarmonicCurrentAttr }
+func (a Measured1StHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementID }
 func (a *Measured1StHarmonicCurrent) Value() *Measured1StHarmonicCurrent { return a }
 func (a Measured1StHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1151,10 +1170,12 @@ func (a Measured1StHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const Measured3RdHarmonicCurrentAttr zcl.AttrID = 776
+
 type Measured3RdHarmonicCurrent zcl.Zs16
 
-func (a Measured3RdHarmonicCurrent) ID() zcl.AttrID                      { return 776 }
-func (a Measured3RdHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementCluster }
+func (a Measured3RdHarmonicCurrent) ID() zcl.AttrID                      { return Measured3RdHarmonicCurrentAttr }
+func (a Measured3RdHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementID }
 func (a *Measured3RdHarmonicCurrent) Value() *Measured3RdHarmonicCurrent { return a }
 func (a Measured3RdHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1176,10 +1197,12 @@ func (a Measured3RdHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const Measured5ThHarmonicCurrentAttr zcl.AttrID = 777
+
 type Measured5ThHarmonicCurrent zcl.Zs16
 
-func (a Measured5ThHarmonicCurrent) ID() zcl.AttrID                      { return 777 }
-func (a Measured5ThHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementCluster }
+func (a Measured5ThHarmonicCurrent) ID() zcl.AttrID                      { return Measured5ThHarmonicCurrentAttr }
+func (a Measured5ThHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementID }
 func (a *Measured5ThHarmonicCurrent) Value() *Measured5ThHarmonicCurrent { return a }
 func (a Measured5ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1201,10 +1224,12 @@ func (a Measured5ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const Measured7ThHarmonicCurrentAttr zcl.AttrID = 778
+
 type Measured7ThHarmonicCurrent zcl.Zs16
 
-func (a Measured7ThHarmonicCurrent) ID() zcl.AttrID                      { return 778 }
-func (a Measured7ThHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementCluster }
+func (a Measured7ThHarmonicCurrent) ID() zcl.AttrID                      { return Measured7ThHarmonicCurrentAttr }
+func (a Measured7ThHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementID }
 func (a *Measured7ThHarmonicCurrent) Value() *Measured7ThHarmonicCurrent { return a }
 func (a Measured7ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1226,10 +1251,12 @@ func (a Measured7ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const Measured9ThHarmonicCurrentAttr zcl.AttrID = 779
+
 type Measured9ThHarmonicCurrent zcl.Zs16
 
-func (a Measured9ThHarmonicCurrent) ID() zcl.AttrID                      { return 779 }
-func (a Measured9ThHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementCluster }
+func (a Measured9ThHarmonicCurrent) ID() zcl.AttrID                      { return Measured9ThHarmonicCurrentAttr }
+func (a Measured9ThHarmonicCurrent) Cluster() zcl.ClusterID              { return ElectricalMeasurementID }
 func (a *Measured9ThHarmonicCurrent) Value() *Measured9ThHarmonicCurrent { return a }
 func (a Measured9ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1251,10 +1278,12 @@ func (a Measured9ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const Measured11ThHarmonicCurrentAttr zcl.AttrID = 780
+
 type Measured11ThHarmonicCurrent zcl.Zs16
 
-func (a Measured11ThHarmonicCurrent) ID() zcl.AttrID                       { return 780 }
-func (a Measured11ThHarmonicCurrent) Cluster() zcl.ClusterID               { return ElectricalMeasurementCluster }
+func (a Measured11ThHarmonicCurrent) ID() zcl.AttrID                       { return Measured11ThHarmonicCurrentAttr }
+func (a Measured11ThHarmonicCurrent) Cluster() zcl.ClusterID               { return ElectricalMeasurementID }
 func (a *Measured11ThHarmonicCurrent) Value() *Measured11ThHarmonicCurrent { return a }
 func (a Measured11ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1276,10 +1305,12 @@ func (a Measured11ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MeasuredPhase1StHarmonicCurrentAttr zcl.AttrID = 781
+
 type MeasuredPhase1StHarmonicCurrent zcl.Zs16
 
-func (a MeasuredPhase1StHarmonicCurrent) ID() zcl.AttrID                           { return 781 }
-func (a MeasuredPhase1StHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementCluster }
+func (a MeasuredPhase1StHarmonicCurrent) ID() zcl.AttrID                           { return MeasuredPhase1StHarmonicCurrentAttr }
+func (a MeasuredPhase1StHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementID }
 func (a *MeasuredPhase1StHarmonicCurrent) Value() *MeasuredPhase1StHarmonicCurrent { return a }
 func (a MeasuredPhase1StHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1301,10 +1332,12 @@ func (a MeasuredPhase1StHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MeasuredPhase3RdHarmonicCurrentAttr zcl.AttrID = 782
+
 type MeasuredPhase3RdHarmonicCurrent zcl.Zs16
 
-func (a MeasuredPhase3RdHarmonicCurrent) ID() zcl.AttrID                           { return 782 }
-func (a MeasuredPhase3RdHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementCluster }
+func (a MeasuredPhase3RdHarmonicCurrent) ID() zcl.AttrID                           { return MeasuredPhase3RdHarmonicCurrentAttr }
+func (a MeasuredPhase3RdHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementID }
 func (a *MeasuredPhase3RdHarmonicCurrent) Value() *MeasuredPhase3RdHarmonicCurrent { return a }
 func (a MeasuredPhase3RdHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1326,10 +1359,12 @@ func (a MeasuredPhase3RdHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MeasuredPhase5ThHarmonicCurrentAttr zcl.AttrID = 783
+
 type MeasuredPhase5ThHarmonicCurrent zcl.Zs16
 
-func (a MeasuredPhase5ThHarmonicCurrent) ID() zcl.AttrID                           { return 783 }
-func (a MeasuredPhase5ThHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementCluster }
+func (a MeasuredPhase5ThHarmonicCurrent) ID() zcl.AttrID                           { return MeasuredPhase5ThHarmonicCurrentAttr }
+func (a MeasuredPhase5ThHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementID }
 func (a *MeasuredPhase5ThHarmonicCurrent) Value() *MeasuredPhase5ThHarmonicCurrent { return a }
 func (a MeasuredPhase5ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1351,10 +1386,12 @@ func (a MeasuredPhase5ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MeasuredPhase7ThHarmonicCurrentAttr zcl.AttrID = 784
+
 type MeasuredPhase7ThHarmonicCurrent zcl.Zs16
 
-func (a MeasuredPhase7ThHarmonicCurrent) ID() zcl.AttrID                           { return 784 }
-func (a MeasuredPhase7ThHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementCluster }
+func (a MeasuredPhase7ThHarmonicCurrent) ID() zcl.AttrID                           { return MeasuredPhase7ThHarmonicCurrentAttr }
+func (a MeasuredPhase7ThHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementID }
 func (a *MeasuredPhase7ThHarmonicCurrent) Value() *MeasuredPhase7ThHarmonicCurrent { return a }
 func (a MeasuredPhase7ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1376,10 +1413,12 @@ func (a MeasuredPhase7ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MeasuredPhase9ThHarmonicCurrentAttr zcl.AttrID = 785
+
 type MeasuredPhase9ThHarmonicCurrent zcl.Zs16
 
-func (a MeasuredPhase9ThHarmonicCurrent) ID() zcl.AttrID                           { return 785 }
-func (a MeasuredPhase9ThHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementCluster }
+func (a MeasuredPhase9ThHarmonicCurrent) ID() zcl.AttrID                           { return MeasuredPhase9ThHarmonicCurrentAttr }
+func (a MeasuredPhase9ThHarmonicCurrent) Cluster() zcl.ClusterID                   { return ElectricalMeasurementID }
 func (a *MeasuredPhase9ThHarmonicCurrent) Value() *MeasuredPhase9ThHarmonicCurrent { return a }
 func (a MeasuredPhase9ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1401,10 +1440,12 @@ func (a MeasuredPhase9ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const MeasuredPhase11ThHarmonicCurrentAttr zcl.AttrID = 786
+
 type MeasuredPhase11ThHarmonicCurrent zcl.Zs16
 
-func (a MeasuredPhase11ThHarmonicCurrent) ID() zcl.AttrID                            { return 786 }
-func (a MeasuredPhase11ThHarmonicCurrent) Cluster() zcl.ClusterID                    { return ElectricalMeasurementCluster }
+func (a MeasuredPhase11ThHarmonicCurrent) ID() zcl.AttrID                            { return MeasuredPhase11ThHarmonicCurrentAttr }
+func (a MeasuredPhase11ThHarmonicCurrent) Cluster() zcl.ClusterID                    { return ElectricalMeasurementID }
 func (a *MeasuredPhase11ThHarmonicCurrent) Value() *MeasuredPhase11ThHarmonicCurrent { return a }
 func (a MeasuredPhase11ThHarmonicCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1426,10 +1467,12 @@ func (a MeasuredPhase11ThHarmonicCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AcFrequencyMultiplierAttr zcl.AttrID = 1024
+
 type AcFrequencyMultiplier zcl.Zu16
 
-func (a AcFrequencyMultiplier) ID() zcl.AttrID                 { return 1024 }
-func (a AcFrequencyMultiplier) Cluster() zcl.ClusterID         { return ElectricalMeasurementCluster }
+func (a AcFrequencyMultiplier) ID() zcl.AttrID                 { return AcFrequencyMultiplierAttr }
+func (a AcFrequencyMultiplier) Cluster() zcl.ClusterID         { return ElectricalMeasurementID }
 func (a *AcFrequencyMultiplier) Value() *AcFrequencyMultiplier { return a }
 func (a AcFrequencyMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1451,10 +1494,12 @@ func (a AcFrequencyMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcFrequencyDivisorAttr zcl.AttrID = 1025
+
 type AcFrequencyDivisor zcl.Zu16
 
-func (a AcFrequencyDivisor) ID() zcl.AttrID              { return 1025 }
-func (a AcFrequencyDivisor) Cluster() zcl.ClusterID      { return ElectricalMeasurementCluster }
+func (a AcFrequencyDivisor) ID() zcl.AttrID              { return AcFrequencyDivisorAttr }
+func (a AcFrequencyDivisor) Cluster() zcl.ClusterID      { return ElectricalMeasurementID }
 func (a *AcFrequencyDivisor) Value() *AcFrequencyDivisor { return a }
 func (a AcFrequencyDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1476,10 +1521,12 @@ func (a AcFrequencyDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PowerMultiplierAttr zcl.AttrID = 1026
+
 type PowerMultiplier zcl.Zu32
 
-func (a PowerMultiplier) ID() zcl.AttrID           { return 1026 }
-func (a PowerMultiplier) Cluster() zcl.ClusterID   { return ElectricalMeasurementCluster }
+func (a PowerMultiplier) ID() zcl.AttrID           { return PowerMultiplierAttr }
+func (a PowerMultiplier) Cluster() zcl.ClusterID   { return ElectricalMeasurementID }
 func (a *PowerMultiplier) Value() *PowerMultiplier { return a }
 func (a PowerMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -1501,10 +1548,12 @@ func (a PowerMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
+const PowerDivisorAttr zcl.AttrID = 1027
+
 type PowerDivisor zcl.Zu32
 
-func (a PowerDivisor) ID() zcl.AttrID         { return 1027 }
-func (a PowerDivisor) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a PowerDivisor) ID() zcl.AttrID         { return PowerDivisorAttr }
+func (a PowerDivisor) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *PowerDivisor) Value() *PowerDivisor  { return a }
 func (a PowerDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -1526,10 +1575,12 @@ func (a PowerDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
+const HarmonicCurrentMultiplierAttr zcl.AttrID = 1028
+
 type HarmonicCurrentMultiplier zcl.Zs8
 
-func (a HarmonicCurrentMultiplier) ID() zcl.AttrID                     { return 1028 }
-func (a HarmonicCurrentMultiplier) Cluster() zcl.ClusterID             { return ElectricalMeasurementCluster }
+func (a HarmonicCurrentMultiplier) ID() zcl.AttrID                     { return HarmonicCurrentMultiplierAttr }
+func (a HarmonicCurrentMultiplier) Cluster() zcl.ClusterID             { return ElectricalMeasurementID }
 func (a *HarmonicCurrentMultiplier) Value() *HarmonicCurrentMultiplier { return a }
 func (a HarmonicCurrentMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()
@@ -1551,10 +1602,12 @@ func (a HarmonicCurrentMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
+const PhaseHarmonicCurrentMultiplierAttr zcl.AttrID = 1029
+
 type PhaseHarmonicCurrentMultiplier zcl.Zs8
 
-func (a PhaseHarmonicCurrentMultiplier) ID() zcl.AttrID                          { return 1029 }
-func (a PhaseHarmonicCurrentMultiplier) Cluster() zcl.ClusterID                  { return ElectricalMeasurementCluster }
+func (a PhaseHarmonicCurrentMultiplier) ID() zcl.AttrID                          { return PhaseHarmonicCurrentMultiplierAttr }
+func (a PhaseHarmonicCurrentMultiplier) Cluster() zcl.ClusterID                  { return ElectricalMeasurementID }
 func (a *PhaseHarmonicCurrentMultiplier) Value() *PhaseHarmonicCurrentMultiplier { return a }
 func (a PhaseHarmonicCurrentMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()
@@ -1576,10 +1629,12 @@ func (a PhaseHarmonicCurrentMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
+const LineCurrentAttr zcl.AttrID = 1281
+
 type LineCurrent zcl.Zu16
 
-func (a LineCurrent) ID() zcl.AttrID         { return 1281 }
-func (a LineCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a LineCurrent) ID() zcl.AttrID         { return LineCurrentAttr }
+func (a LineCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *LineCurrent) Value() *LineCurrent   { return a }
 func (a LineCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1601,10 +1656,12 @@ func (a LineCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ActiveCurrentAttr zcl.AttrID = 1282
+
 type ActiveCurrent zcl.Zs16
 
-func (a ActiveCurrent) ID() zcl.AttrID         { return 1282 }
-func (a ActiveCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a ActiveCurrent) ID() zcl.AttrID         { return ActiveCurrentAttr }
+func (a ActiveCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *ActiveCurrent) Value() *ActiveCurrent { return a }
 func (a ActiveCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1626,10 +1683,12 @@ func (a ActiveCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ReactiveCurrentAttr zcl.AttrID = 1283
+
 type ReactiveCurrent zcl.Zs16
 
-func (a ReactiveCurrent) ID() zcl.AttrID           { return 1283 }
-func (a ReactiveCurrent) Cluster() zcl.ClusterID   { return ElectricalMeasurementCluster }
+func (a ReactiveCurrent) ID() zcl.AttrID           { return ReactiveCurrentAttr }
+func (a ReactiveCurrent) Cluster() zcl.ClusterID   { return ElectricalMeasurementID }
 func (a *ReactiveCurrent) Value() *ReactiveCurrent { return a }
 func (a ReactiveCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1651,10 +1710,12 @@ func (a ReactiveCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const RmsVoltageAttr zcl.AttrID = 1285
+
 type RmsVoltage zcl.Zu16
 
-func (a RmsVoltage) ID() zcl.AttrID         { return 1285 }
-func (a RmsVoltage) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a RmsVoltage) ID() zcl.AttrID         { return RmsVoltageAttr }
+func (a RmsVoltage) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *RmsVoltage) Value() *RmsVoltage    { return a }
 func (a RmsVoltage) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1676,10 +1737,12 @@ func (a RmsVoltage) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageMinAttr zcl.AttrID = 1286
+
 type RmsVoltageMin zcl.Zu16
 
-func (a RmsVoltageMin) ID() zcl.AttrID         { return 1286 }
-func (a RmsVoltageMin) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a RmsVoltageMin) ID() zcl.AttrID         { return RmsVoltageMinAttr }
+func (a RmsVoltageMin) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *RmsVoltageMin) Value() *RmsVoltageMin { return a }
 func (a RmsVoltageMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1701,10 +1764,12 @@ func (a RmsVoltageMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageMaxAttr zcl.AttrID = 1287
+
 type RmsVoltageMax zcl.Zu16
 
-func (a RmsVoltageMax) ID() zcl.AttrID         { return 1287 }
-func (a RmsVoltageMax) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a RmsVoltageMax) ID() zcl.AttrID         { return RmsVoltageMaxAttr }
+func (a RmsVoltageMax) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *RmsVoltageMax) Value() *RmsVoltageMax { return a }
 func (a RmsVoltageMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1726,10 +1791,12 @@ func (a RmsVoltageMax) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentAttr zcl.AttrID = 1288
+
 type RmsCurrent zcl.Zu16
 
-func (a RmsCurrent) ID() zcl.AttrID         { return 1288 }
-func (a RmsCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a RmsCurrent) ID() zcl.AttrID         { return RmsCurrentAttr }
+func (a RmsCurrent) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *RmsCurrent) Value() *RmsCurrent    { return a }
 func (a RmsCurrent) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1751,10 +1818,12 @@ func (a RmsCurrent) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentMinAttr zcl.AttrID = 1289
+
 type RmsCurrentMin zcl.Zu16
 
-func (a RmsCurrentMin) ID() zcl.AttrID         { return 1289 }
-func (a RmsCurrentMin) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a RmsCurrentMin) ID() zcl.AttrID         { return RmsCurrentMinAttr }
+func (a RmsCurrentMin) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *RmsCurrentMin) Value() *RmsCurrentMin { return a }
 func (a RmsCurrentMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1776,10 +1845,12 @@ func (a RmsCurrentMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentMaxAttr zcl.AttrID = 1290
+
 type RmsCurrentMax zcl.Zu16
 
-func (a RmsCurrentMax) ID() zcl.AttrID         { return 1290 }
-func (a RmsCurrentMax) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a RmsCurrentMax) ID() zcl.AttrID         { return RmsCurrentMaxAttr }
+func (a RmsCurrentMax) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *RmsCurrentMax) Value() *RmsCurrentMax { return a }
 func (a RmsCurrentMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1801,10 +1872,12 @@ func (a RmsCurrentMax) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ActivePowerAttr zcl.AttrID = 1291
+
 type ActivePower zcl.Zs16
 
-func (a ActivePower) ID() zcl.AttrID         { return 1291 }
-func (a ActivePower) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a ActivePower) ID() zcl.AttrID         { return ActivePowerAttr }
+func (a ActivePower) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *ActivePower) Value() *ActivePower   { return a }
 func (a ActivePower) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1826,10 +1899,12 @@ func (a ActivePower) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ActivePowerMinAttr zcl.AttrID = 1292
+
 type ActivePowerMin zcl.Zs16
 
-func (a ActivePowerMin) ID() zcl.AttrID          { return 1292 }
-func (a ActivePowerMin) Cluster() zcl.ClusterID  { return ElectricalMeasurementCluster }
+func (a ActivePowerMin) ID() zcl.AttrID          { return ActivePowerMinAttr }
+func (a ActivePowerMin) Cluster() zcl.ClusterID  { return ElectricalMeasurementID }
 func (a *ActivePowerMin) Value() *ActivePowerMin { return a }
 func (a ActivePowerMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1851,10 +1926,12 @@ func (a ActivePowerMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ActivePowerMaxAttr zcl.AttrID = 1293
+
 type ActivePowerMax zcl.Zs16
 
-func (a ActivePowerMax) ID() zcl.AttrID          { return 1293 }
-func (a ActivePowerMax) Cluster() zcl.ClusterID  { return ElectricalMeasurementCluster }
+func (a ActivePowerMax) ID() zcl.AttrID          { return ActivePowerMaxAttr }
+func (a ActivePowerMax) Cluster() zcl.ClusterID  { return ElectricalMeasurementID }
 func (a *ActivePowerMax) Value() *ActivePowerMax { return a }
 func (a ActivePowerMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1876,10 +1953,12 @@ func (a ActivePowerMax) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ReactivePowerAttr zcl.AttrID = 1294
+
 type ReactivePower zcl.Zs16
 
-func (a ReactivePower) ID() zcl.AttrID         { return 1294 }
-func (a ReactivePower) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a ReactivePower) ID() zcl.AttrID         { return ReactivePowerAttr }
+func (a ReactivePower) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *ReactivePower) Value() *ReactivePower { return a }
 func (a ReactivePower) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -1901,10 +1980,12 @@ func (a ReactivePower) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ApparentPowerAttr zcl.AttrID = 1295
+
 type ApparentPower zcl.Zu16
 
-func (a ApparentPower) ID() zcl.AttrID         { return 1295 }
-func (a ApparentPower) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a ApparentPower) ID() zcl.AttrID         { return ApparentPowerAttr }
+func (a ApparentPower) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *ApparentPower) Value() *ApparentPower { return a }
 func (a ApparentPower) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1926,10 +2007,12 @@ func (a ApparentPower) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PowerFactorAttr zcl.AttrID = 1296
+
 type PowerFactor zcl.Zs8
 
-func (a PowerFactor) ID() zcl.AttrID         { return 1296 }
-func (a PowerFactor) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a PowerFactor) ID() zcl.AttrID         { return PowerFactorAttr }
+func (a PowerFactor) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *PowerFactor) Value() *PowerFactor   { return a }
 func (a PowerFactor) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()
@@ -1951,12 +2034,14 @@ func (a PowerFactor) String() string {
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
+const AverageRmsVoltageMeasurementPeriodAttr zcl.AttrID = 1297
+
 type AverageRmsVoltageMeasurementPeriod zcl.Zu16
 
-func (a AverageRmsVoltageMeasurementPeriod) ID() zcl.AttrID { return 1297 }
-func (a AverageRmsVoltageMeasurementPeriod) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a AverageRmsVoltageMeasurementPeriod) ID() zcl.AttrID {
+	return AverageRmsVoltageMeasurementPeriodAttr
 }
+func (a AverageRmsVoltageMeasurementPeriod) Cluster() zcl.ClusterID                      { return ElectricalMeasurementID }
 func (a *AverageRmsVoltageMeasurementPeriod) Value() *AverageRmsVoltageMeasurementPeriod { return a }
 func (a AverageRmsVoltageMeasurementPeriod) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1978,10 +2063,12 @@ func (a AverageRmsVoltageMeasurementPeriod) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AverageRmsOvervoltageCounterAttr zcl.AttrID = 1298
+
 type AverageRmsOvervoltageCounter zcl.Zu16
 
-func (a AverageRmsOvervoltageCounter) ID() zcl.AttrID                        { return 1298 }
-func (a AverageRmsOvervoltageCounter) Cluster() zcl.ClusterID                { return ElectricalMeasurementCluster }
+func (a AverageRmsOvervoltageCounter) ID() zcl.AttrID                        { return AverageRmsOvervoltageCounterAttr }
+func (a AverageRmsOvervoltageCounter) Cluster() zcl.ClusterID                { return ElectricalMeasurementID }
 func (a *AverageRmsOvervoltageCounter) Value() *AverageRmsOvervoltageCounter { return a }
 func (a AverageRmsOvervoltageCounter) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2003,10 +2090,12 @@ func (a AverageRmsOvervoltageCounter) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AverageRmsUndervoltageCounterAttr zcl.AttrID = 1299
+
 type AverageRmsUndervoltageCounter zcl.Zu16
 
-func (a AverageRmsUndervoltageCounter) ID() zcl.AttrID                         { return 1299 }
-func (a AverageRmsUndervoltageCounter) Cluster() zcl.ClusterID                 { return ElectricalMeasurementCluster }
+func (a AverageRmsUndervoltageCounter) ID() zcl.AttrID                         { return AverageRmsUndervoltageCounterAttr }
+func (a AverageRmsUndervoltageCounter) Cluster() zcl.ClusterID                 { return ElectricalMeasurementID }
 func (a *AverageRmsUndervoltageCounter) Value() *AverageRmsUndervoltageCounter { return a }
 func (a AverageRmsUndervoltageCounter) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2028,10 +2117,12 @@ func (a AverageRmsUndervoltageCounter) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsExtremeOvervoltagePeriodAttr zcl.AttrID = 1300
+
 type RmsExtremeOvervoltagePeriod zcl.Zu16
 
-func (a RmsExtremeOvervoltagePeriod) ID() zcl.AttrID                       { return 1300 }
-func (a RmsExtremeOvervoltagePeriod) Cluster() zcl.ClusterID               { return ElectricalMeasurementCluster }
+func (a RmsExtremeOvervoltagePeriod) ID() zcl.AttrID                       { return RmsExtremeOvervoltagePeriodAttr }
+func (a RmsExtremeOvervoltagePeriod) Cluster() zcl.ClusterID               { return ElectricalMeasurementID }
 func (a *RmsExtremeOvervoltagePeriod) Value() *RmsExtremeOvervoltagePeriod { return a }
 func (a RmsExtremeOvervoltagePeriod) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2053,10 +2144,12 @@ func (a RmsExtremeOvervoltagePeriod) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsExtremeUndervoltagePeriodAttr zcl.AttrID = 1301
+
 type RmsExtremeUndervoltagePeriod zcl.Zu16
 
-func (a RmsExtremeUndervoltagePeriod) ID() zcl.AttrID                        { return 1301 }
-func (a RmsExtremeUndervoltagePeriod) Cluster() zcl.ClusterID                { return ElectricalMeasurementCluster }
+func (a RmsExtremeUndervoltagePeriod) ID() zcl.AttrID                        { return RmsExtremeUndervoltagePeriodAttr }
+func (a RmsExtremeUndervoltagePeriod) Cluster() zcl.ClusterID                { return ElectricalMeasurementID }
 func (a *RmsExtremeUndervoltagePeriod) Value() *RmsExtremeUndervoltagePeriod { return a }
 func (a RmsExtremeUndervoltagePeriod) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2078,10 +2171,12 @@ func (a RmsExtremeUndervoltagePeriod) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageSagPeriodAttr zcl.AttrID = 1302
+
 type RmsVoltageSagPeriod zcl.Zu16
 
-func (a RmsVoltageSagPeriod) ID() zcl.AttrID               { return 1302 }
-func (a RmsVoltageSagPeriod) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsVoltageSagPeriod) ID() zcl.AttrID               { return RmsVoltageSagPeriodAttr }
+func (a RmsVoltageSagPeriod) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsVoltageSagPeriod) Value() *RmsVoltageSagPeriod { return a }
 func (a RmsVoltageSagPeriod) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2103,10 +2198,12 @@ func (a RmsVoltageSagPeriod) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageSwellPeriodAttr zcl.AttrID = 1303
+
 type RmsVoltageSwellPeriod zcl.Zu16
 
-func (a RmsVoltageSwellPeriod) ID() zcl.AttrID                 { return 1303 }
-func (a RmsVoltageSwellPeriod) Cluster() zcl.ClusterID         { return ElectricalMeasurementCluster }
+func (a RmsVoltageSwellPeriod) ID() zcl.AttrID                 { return RmsVoltageSwellPeriodAttr }
+func (a RmsVoltageSwellPeriod) Cluster() zcl.ClusterID         { return ElectricalMeasurementID }
 func (a *RmsVoltageSwellPeriod) Value() *RmsVoltageSwellPeriod { return a }
 func (a RmsVoltageSwellPeriod) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2128,10 +2225,12 @@ func (a RmsVoltageSwellPeriod) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcVoltageMultiplierAttr zcl.AttrID = 1536
+
 type AcVoltageMultiplier zcl.Zu16
 
-func (a AcVoltageMultiplier) ID() zcl.AttrID               { return 1536 }
-func (a AcVoltageMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a AcVoltageMultiplier) ID() zcl.AttrID               { return AcVoltageMultiplierAttr }
+func (a AcVoltageMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *AcVoltageMultiplier) Value() *AcVoltageMultiplier { return a }
 func (a AcVoltageMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2153,10 +2252,12 @@ func (a AcVoltageMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcVoltageDivisorAttr zcl.AttrID = 1537
+
 type AcVoltageDivisor zcl.Zu16
 
-func (a AcVoltageDivisor) ID() zcl.AttrID            { return 1537 }
-func (a AcVoltageDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a AcVoltageDivisor) ID() zcl.AttrID            { return AcVoltageDivisorAttr }
+func (a AcVoltageDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *AcVoltageDivisor) Value() *AcVoltageDivisor { return a }
 func (a AcVoltageDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2178,10 +2279,12 @@ func (a AcVoltageDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcCurrentMultiplierAttr zcl.AttrID = 1538
+
 type AcCurrentMultiplier zcl.Zu16
 
-func (a AcCurrentMultiplier) ID() zcl.AttrID               { return 1538 }
-func (a AcCurrentMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a AcCurrentMultiplier) ID() zcl.AttrID               { return AcCurrentMultiplierAttr }
+func (a AcCurrentMultiplier) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *AcCurrentMultiplier) Value() *AcCurrentMultiplier { return a }
 func (a AcCurrentMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2203,10 +2306,12 @@ func (a AcCurrentMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcCurrentDivisorAttr zcl.AttrID = 1539
+
 type AcCurrentDivisor zcl.Zu16
 
-func (a AcCurrentDivisor) ID() zcl.AttrID            { return 1539 }
-func (a AcCurrentDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a AcCurrentDivisor) ID() zcl.AttrID            { return AcCurrentDivisorAttr }
+func (a AcCurrentDivisor) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *AcCurrentDivisor) Value() *AcCurrentDivisor { return a }
 func (a AcCurrentDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2228,10 +2333,12 @@ func (a AcCurrentDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcPowerMultiplierAttr zcl.AttrID = 1540
+
 type AcPowerMultiplier zcl.Zu16
 
-func (a AcPowerMultiplier) ID() zcl.AttrID             { return 1540 }
-func (a AcPowerMultiplier) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a AcPowerMultiplier) ID() zcl.AttrID             { return AcPowerMultiplierAttr }
+func (a AcPowerMultiplier) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *AcPowerMultiplier) Value() *AcPowerMultiplier { return a }
 func (a AcPowerMultiplier) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2253,10 +2360,12 @@ func (a AcPowerMultiplier) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AcPowerDivisorAttr zcl.AttrID = 1541
+
 type AcPowerDivisor zcl.Zu16
 
-func (a AcPowerDivisor) ID() zcl.AttrID          { return 1541 }
-func (a AcPowerDivisor) Cluster() zcl.ClusterID  { return ElectricalMeasurementCluster }
+func (a AcPowerDivisor) ID() zcl.AttrID          { return AcPowerDivisorAttr }
+func (a AcPowerDivisor) Cluster() zcl.ClusterID  { return ElectricalMeasurementID }
 func (a *AcPowerDivisor) Value() *AcPowerDivisor { return a }
 func (a AcPowerDivisor) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2278,10 +2387,12 @@ func (a AcPowerDivisor) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const DcOverloadAlarmsMaskAttr zcl.AttrID = 1792
+
 type DcOverloadAlarmsMask zcl.Zbmp8
 
-func (a DcOverloadAlarmsMask) ID() zcl.AttrID                { return 1792 }
-func (a DcOverloadAlarmsMask) Cluster() zcl.ClusterID        { return ElectricalMeasurementCluster }
+func (a DcOverloadAlarmsMask) ID() zcl.AttrID                { return DcOverloadAlarmsMaskAttr }
+func (a DcOverloadAlarmsMask) Cluster() zcl.ClusterID        { return ElectricalMeasurementID }
 func (a *DcOverloadAlarmsMask) Value() *DcOverloadAlarmsMask { return a }
 func (a DcOverloadAlarmsMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
@@ -2325,10 +2436,12 @@ func (a *DcOverloadAlarmsMask) SetCurrentOverload(b bool) {
 	*a = DcOverloadAlarmsMask(zcl.BitmapSet([]byte(*a), 1, b))
 }
 
+const DcVoltageOverloadAttr zcl.AttrID = 1793
+
 type DcVoltageOverload zcl.Zs16
 
-func (a DcVoltageOverload) ID() zcl.AttrID             { return 1793 }
-func (a DcVoltageOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a DcVoltageOverload) ID() zcl.AttrID             { return DcVoltageOverloadAttr }
+func (a DcVoltageOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *DcVoltageOverload) Value() *DcVoltageOverload { return a }
 func (a DcVoltageOverload) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2350,10 +2463,12 @@ func (a DcVoltageOverload) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const DcCurrentOverloadAttr zcl.AttrID = 1794
+
 type DcCurrentOverload zcl.Zs16
 
-func (a DcCurrentOverload) ID() zcl.AttrID             { return 1794 }
-func (a DcCurrentOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a DcCurrentOverload) ID() zcl.AttrID             { return DcCurrentOverloadAttr }
+func (a DcCurrentOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *DcCurrentOverload) Value() *DcCurrentOverload { return a }
 func (a DcCurrentOverload) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2375,10 +2490,12 @@ func (a DcCurrentOverload) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AcOverloadAlarmsMaskAttr zcl.AttrID = 2048
+
 type AcOverloadAlarmsMask zcl.Zbmp16
 
-func (a AcOverloadAlarmsMask) ID() zcl.AttrID                { return 2048 }
-func (a AcOverloadAlarmsMask) Cluster() zcl.ClusterID        { return ElectricalMeasurementCluster }
+func (a AcOverloadAlarmsMask) ID() zcl.AttrID                { return AcOverloadAlarmsMaskAttr }
+func (a AcOverloadAlarmsMask) Cluster() zcl.ClusterID        { return ElectricalMeasurementID }
 func (a *AcOverloadAlarmsMask) Value() *AcOverloadAlarmsMask { return a }
 func (a AcOverloadAlarmsMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp16(a).MarshalZcl()
@@ -2502,10 +2619,12 @@ func (a *AcOverloadAlarmsMask) SetRmsVoltageSwell(b bool) {
 	*a = AcOverloadAlarmsMask(zcl.BitmapSet([]byte(*a), 9, b))
 }
 
+const AcVoltageOverloadAttr zcl.AttrID = 2049
+
 type AcVoltageOverload zcl.Zs16
 
-func (a AcVoltageOverload) ID() zcl.AttrID             { return 2049 }
-func (a AcVoltageOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a AcVoltageOverload) ID() zcl.AttrID             { return AcVoltageOverloadAttr }
+func (a AcVoltageOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *AcVoltageOverload) Value() *AcVoltageOverload { return a }
 func (a AcVoltageOverload) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2527,10 +2646,12 @@ func (a AcVoltageOverload) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AcCurrentOverloadAttr zcl.AttrID = 2050
+
 type AcCurrentOverload zcl.Zs16
 
-func (a AcCurrentOverload) ID() zcl.AttrID             { return 2050 }
-func (a AcCurrentOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a AcCurrentOverload) ID() zcl.AttrID             { return AcCurrentOverloadAttr }
+func (a AcCurrentOverload) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *AcCurrentOverload) Value() *AcCurrentOverload { return a }
 func (a AcCurrentOverload) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2552,10 +2673,12 @@ func (a AcCurrentOverload) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AcActivePowerOverloadAttr zcl.AttrID = 2051
+
 type AcActivePowerOverload zcl.Zs16
 
-func (a AcActivePowerOverload) ID() zcl.AttrID                 { return 2051 }
-func (a AcActivePowerOverload) Cluster() zcl.ClusterID         { return ElectricalMeasurementCluster }
+func (a AcActivePowerOverload) ID() zcl.AttrID                 { return AcActivePowerOverloadAttr }
+func (a AcActivePowerOverload) Cluster() zcl.ClusterID         { return ElectricalMeasurementID }
 func (a *AcActivePowerOverload) Value() *AcActivePowerOverload { return a }
 func (a AcActivePowerOverload) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2577,10 +2700,12 @@ func (a AcActivePowerOverload) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AcReactivePowerOverloadAttr zcl.AttrID = 2052
+
 type AcReactivePowerOverload zcl.Zs16
 
-func (a AcReactivePowerOverload) ID() zcl.AttrID                   { return 2052 }
-func (a AcReactivePowerOverload) Cluster() zcl.ClusterID           { return ElectricalMeasurementCluster }
+func (a AcReactivePowerOverload) ID() zcl.AttrID                   { return AcReactivePowerOverloadAttr }
+func (a AcReactivePowerOverload) Cluster() zcl.ClusterID           { return ElectricalMeasurementID }
 func (a *AcReactivePowerOverload) Value() *AcReactivePowerOverload { return a }
 func (a AcReactivePowerOverload) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2602,10 +2727,12 @@ func (a AcReactivePowerOverload) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AverageRmsOvervoltageAttr zcl.AttrID = 2053
+
 type AverageRmsOvervoltage zcl.Zs16
 
-func (a AverageRmsOvervoltage) ID() zcl.AttrID                 { return 2053 }
-func (a AverageRmsOvervoltage) Cluster() zcl.ClusterID         { return ElectricalMeasurementCluster }
+func (a AverageRmsOvervoltage) ID() zcl.AttrID                 { return AverageRmsOvervoltageAttr }
+func (a AverageRmsOvervoltage) Cluster() zcl.ClusterID         { return ElectricalMeasurementID }
 func (a *AverageRmsOvervoltage) Value() *AverageRmsOvervoltage { return a }
 func (a AverageRmsOvervoltage) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2627,10 +2754,12 @@ func (a AverageRmsOvervoltage) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const AverageRmsUndervoltageAttr zcl.AttrID = 2054
+
 type AverageRmsUndervoltage zcl.Zs16
 
-func (a AverageRmsUndervoltage) ID() zcl.AttrID                  { return 2054 }
-func (a AverageRmsUndervoltage) Cluster() zcl.ClusterID          { return ElectricalMeasurementCluster }
+func (a AverageRmsUndervoltage) ID() zcl.AttrID                  { return AverageRmsUndervoltageAttr }
+func (a AverageRmsUndervoltage) Cluster() zcl.ClusterID          { return ElectricalMeasurementID }
 func (a *AverageRmsUndervoltage) Value() *AverageRmsUndervoltage { return a }
 func (a AverageRmsUndervoltage) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2652,10 +2781,12 @@ func (a AverageRmsUndervoltage) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const RmsExtremeOvervoltageAttr zcl.AttrID = 2055
+
 type RmsExtremeOvervoltage zcl.Zs16
 
-func (a RmsExtremeOvervoltage) ID() zcl.AttrID                 { return 2055 }
-func (a RmsExtremeOvervoltage) Cluster() zcl.ClusterID         { return ElectricalMeasurementCluster }
+func (a RmsExtremeOvervoltage) ID() zcl.AttrID                 { return RmsExtremeOvervoltageAttr }
+func (a RmsExtremeOvervoltage) Cluster() zcl.ClusterID         { return ElectricalMeasurementID }
 func (a *RmsExtremeOvervoltage) Value() *RmsExtremeOvervoltage { return a }
 func (a RmsExtremeOvervoltage) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2677,10 +2808,12 @@ func (a RmsExtremeOvervoltage) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const RmsExtremeUndervoltageAttr zcl.AttrID = 2056
+
 type RmsExtremeUndervoltage zcl.Zs16
 
-func (a RmsExtremeUndervoltage) ID() zcl.AttrID                  { return 2056 }
-func (a RmsExtremeUndervoltage) Cluster() zcl.ClusterID          { return ElectricalMeasurementCluster }
+func (a RmsExtremeUndervoltage) ID() zcl.AttrID                  { return RmsExtremeUndervoltageAttr }
+func (a RmsExtremeUndervoltage) Cluster() zcl.ClusterID          { return ElectricalMeasurementID }
 func (a *RmsExtremeUndervoltage) Value() *RmsExtremeUndervoltage { return a }
 func (a RmsExtremeUndervoltage) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2702,10 +2835,12 @@ func (a RmsExtremeUndervoltage) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const RmsVoltageSagAttr zcl.AttrID = 2057
+
 type RmsVoltageSag zcl.Zs16
 
-func (a RmsVoltageSag) ID() zcl.AttrID         { return 2057 }
-func (a RmsVoltageSag) Cluster() zcl.ClusterID { return ElectricalMeasurementCluster }
+func (a RmsVoltageSag) ID() zcl.AttrID         { return RmsVoltageSagAttr }
+func (a RmsVoltageSag) Cluster() zcl.ClusterID { return ElectricalMeasurementID }
 func (a *RmsVoltageSag) Value() *RmsVoltageSag { return a }
 func (a RmsVoltageSag) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2727,10 +2862,12 @@ func (a RmsVoltageSag) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const RmsVoltageSwellAttr zcl.AttrID = 2058
+
 type RmsVoltageSwell zcl.Zs16
 
-func (a RmsVoltageSwell) ID() zcl.AttrID           { return 2058 }
-func (a RmsVoltageSwell) Cluster() zcl.ClusterID   { return ElectricalMeasurementCluster }
+func (a RmsVoltageSwell) ID() zcl.AttrID           { return RmsVoltageSwellAttr }
+func (a RmsVoltageSwell) Cluster() zcl.ClusterID   { return ElectricalMeasurementID }
 func (a *RmsVoltageSwell) Value() *RmsVoltageSwell { return a }
 func (a RmsVoltageSwell) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2752,10 +2889,12 @@ func (a RmsVoltageSwell) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const LineCurrentPhaseBAttr zcl.AttrID = 2305
+
 type LineCurrentPhaseB zcl.Zu16
 
-func (a LineCurrentPhaseB) ID() zcl.AttrID             { return 2305 }
-func (a LineCurrentPhaseB) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a LineCurrentPhaseB) ID() zcl.AttrID             { return LineCurrentPhaseBAttr }
+func (a LineCurrentPhaseB) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *LineCurrentPhaseB) Value() *LineCurrentPhaseB { return a }
 func (a LineCurrentPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2777,10 +2916,12 @@ func (a LineCurrentPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ActiveCurrentPhaseBAttr zcl.AttrID = 2306
+
 type ActiveCurrentPhaseB zcl.Zs16
 
-func (a ActiveCurrentPhaseB) ID() zcl.AttrID               { return 2306 }
-func (a ActiveCurrentPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a ActiveCurrentPhaseB) ID() zcl.AttrID               { return ActiveCurrentPhaseBAttr }
+func (a ActiveCurrentPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *ActiveCurrentPhaseB) Value() *ActiveCurrentPhaseB { return a }
 func (a ActiveCurrentPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2802,10 +2943,12 @@ func (a ActiveCurrentPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ReactiveCurrentPhaseBAttr zcl.AttrID = 2307
+
 type ReactiveCurrentPhaseB zcl.Zs16
 
-func (a ReactiveCurrentPhaseB) ID() zcl.AttrID                 { return 2307 }
-func (a ReactiveCurrentPhaseB) Cluster() zcl.ClusterID         { return ElectricalMeasurementCluster }
+func (a ReactiveCurrentPhaseB) ID() zcl.AttrID                 { return ReactiveCurrentPhaseBAttr }
+func (a ReactiveCurrentPhaseB) Cluster() zcl.ClusterID         { return ElectricalMeasurementID }
 func (a *ReactiveCurrentPhaseB) Value() *ReactiveCurrentPhaseB { return a }
 func (a ReactiveCurrentPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -2827,10 +2970,12 @@ func (a ReactiveCurrentPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const RmsVoltagePhaseBAttr zcl.AttrID = 2309
+
 type RmsVoltagePhaseB zcl.Zu16
 
-func (a RmsVoltagePhaseB) ID() zcl.AttrID            { return 2309 }
-func (a RmsVoltagePhaseB) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a RmsVoltagePhaseB) ID() zcl.AttrID            { return RmsVoltagePhaseBAttr }
+func (a RmsVoltagePhaseB) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *RmsVoltagePhaseB) Value() *RmsVoltagePhaseB { return a }
 func (a RmsVoltagePhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2852,10 +2997,12 @@ func (a RmsVoltagePhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageMinPhaseBAttr zcl.AttrID = 2310
+
 type RmsVoltageMinPhaseB zcl.Zu16
 
-func (a RmsVoltageMinPhaseB) ID() zcl.AttrID               { return 2310 }
-func (a RmsVoltageMinPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsVoltageMinPhaseB) ID() zcl.AttrID               { return RmsVoltageMinPhaseBAttr }
+func (a RmsVoltageMinPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsVoltageMinPhaseB) Value() *RmsVoltageMinPhaseB { return a }
 func (a RmsVoltageMinPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2877,10 +3024,12 @@ func (a RmsVoltageMinPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageMaxPhaseBAttr zcl.AttrID = 2311
+
 type RmsVoltageMaxPhaseB zcl.Zu16
 
-func (a RmsVoltageMaxPhaseB) ID() zcl.AttrID               { return 2311 }
-func (a RmsVoltageMaxPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsVoltageMaxPhaseB) ID() zcl.AttrID               { return RmsVoltageMaxPhaseBAttr }
+func (a RmsVoltageMaxPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsVoltageMaxPhaseB) Value() *RmsVoltageMaxPhaseB { return a }
 func (a RmsVoltageMaxPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2902,10 +3051,12 @@ func (a RmsVoltageMaxPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentPhaseBAttr zcl.AttrID = 2312
+
 type RmsCurrentPhaseB zcl.Zu16
 
-func (a RmsCurrentPhaseB) ID() zcl.AttrID            { return 2312 }
-func (a RmsCurrentPhaseB) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a RmsCurrentPhaseB) ID() zcl.AttrID            { return RmsCurrentPhaseBAttr }
+func (a RmsCurrentPhaseB) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *RmsCurrentPhaseB) Value() *RmsCurrentPhaseB { return a }
 func (a RmsCurrentPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2927,10 +3078,12 @@ func (a RmsCurrentPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentMinPhaseBAttr zcl.AttrID = 2313
+
 type RmsCurrentMinPhaseB zcl.Zu16
 
-func (a RmsCurrentMinPhaseB) ID() zcl.AttrID               { return 2313 }
-func (a RmsCurrentMinPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsCurrentMinPhaseB) ID() zcl.AttrID               { return RmsCurrentMinPhaseBAttr }
+func (a RmsCurrentMinPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsCurrentMinPhaseB) Value() *RmsCurrentMinPhaseB { return a }
 func (a RmsCurrentMinPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2952,10 +3105,12 @@ func (a RmsCurrentMinPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentMaxPhaseBAttr zcl.AttrID = 2314
+
 type RmsCurrentMaxPhaseB zcl.Zu16
 
-func (a RmsCurrentMaxPhaseB) ID() zcl.AttrID               { return 2314 }
-func (a RmsCurrentMaxPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsCurrentMaxPhaseB) ID() zcl.AttrID               { return RmsCurrentMaxPhaseBAttr }
+func (a RmsCurrentMaxPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsCurrentMaxPhaseB) Value() *RmsCurrentMaxPhaseB { return a }
 func (a RmsCurrentMaxPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -2977,10 +3132,12 @@ func (a RmsCurrentMaxPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ActivePowerPhaseBAttr zcl.AttrID = 2315
+
 type ActivePowerPhaseB zcl.Zs16
 
-func (a ActivePowerPhaseB) ID() zcl.AttrID             { return 2315 }
-func (a ActivePowerPhaseB) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a ActivePowerPhaseB) ID() zcl.AttrID             { return ActivePowerPhaseBAttr }
+func (a ActivePowerPhaseB) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *ActivePowerPhaseB) Value() *ActivePowerPhaseB { return a }
 func (a ActivePowerPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3002,10 +3159,12 @@ func (a ActivePowerPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ActivePowerMinPhaseBAttr zcl.AttrID = 2316
+
 type ActivePowerMinPhaseB zcl.Zs16
 
-func (a ActivePowerMinPhaseB) ID() zcl.AttrID                { return 2316 }
-func (a ActivePowerMinPhaseB) Cluster() zcl.ClusterID        { return ElectricalMeasurementCluster }
+func (a ActivePowerMinPhaseB) ID() zcl.AttrID                { return ActivePowerMinPhaseBAttr }
+func (a ActivePowerMinPhaseB) Cluster() zcl.ClusterID        { return ElectricalMeasurementID }
 func (a *ActivePowerMinPhaseB) Value() *ActivePowerMinPhaseB { return a }
 func (a ActivePowerMinPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3027,10 +3186,12 @@ func (a ActivePowerMinPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ActivePowerMaxPhaseBAttr zcl.AttrID = 2317
+
 type ActivePowerMaxPhaseB zcl.Zs16
 
-func (a ActivePowerMaxPhaseB) ID() zcl.AttrID                { return 2317 }
-func (a ActivePowerMaxPhaseB) Cluster() zcl.ClusterID        { return ElectricalMeasurementCluster }
+func (a ActivePowerMaxPhaseB) ID() zcl.AttrID                { return ActivePowerMaxPhaseBAttr }
+func (a ActivePowerMaxPhaseB) Cluster() zcl.ClusterID        { return ElectricalMeasurementID }
 func (a *ActivePowerMaxPhaseB) Value() *ActivePowerMaxPhaseB { return a }
 func (a ActivePowerMaxPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3052,10 +3213,12 @@ func (a ActivePowerMaxPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ReactivePowerPhaseBAttr zcl.AttrID = 2318
+
 type ReactivePowerPhaseB zcl.Zs16
 
-func (a ReactivePowerPhaseB) ID() zcl.AttrID               { return 2318 }
-func (a ReactivePowerPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a ReactivePowerPhaseB) ID() zcl.AttrID               { return ReactivePowerPhaseBAttr }
+func (a ReactivePowerPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *ReactivePowerPhaseB) Value() *ReactivePowerPhaseB { return a }
 func (a ReactivePowerPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3077,10 +3240,12 @@ func (a ReactivePowerPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ApparentPowerPhaseBAttr zcl.AttrID = 2319
+
 type ApparentPowerPhaseB zcl.Zu16
 
-func (a ApparentPowerPhaseB) ID() zcl.AttrID               { return 2319 }
-func (a ApparentPowerPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a ApparentPowerPhaseB) ID() zcl.AttrID               { return ApparentPowerPhaseBAttr }
+func (a ApparentPowerPhaseB) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *ApparentPowerPhaseB) Value() *ApparentPowerPhaseB { return a }
 func (a ApparentPowerPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3102,10 +3267,12 @@ func (a ApparentPowerPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PowerFactorPhaseBAttr zcl.AttrID = 2320
+
 type PowerFactorPhaseB zcl.Zs8
 
-func (a PowerFactorPhaseB) ID() zcl.AttrID             { return 2320 }
-func (a PowerFactorPhaseB) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a PowerFactorPhaseB) ID() zcl.AttrID             { return PowerFactorPhaseBAttr }
+func (a PowerFactorPhaseB) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *PowerFactorPhaseB) Value() *PowerFactorPhaseB { return a }
 func (a PowerFactorPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()
@@ -3127,11 +3294,15 @@ func (a PowerFactorPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
+const AverageRmsVoltageMeasurementPeriodPhaseBAttr zcl.AttrID = 2321
+
 type AverageRmsVoltageMeasurementPeriodPhaseB zcl.Zu16
 
-func (a AverageRmsVoltageMeasurementPeriodPhaseB) ID() zcl.AttrID { return 2321 }
+func (a AverageRmsVoltageMeasurementPeriodPhaseB) ID() zcl.AttrID {
+	return AverageRmsVoltageMeasurementPeriodPhaseBAttr
+}
 func (a AverageRmsVoltageMeasurementPeriodPhaseB) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+	return ElectricalMeasurementID
 }
 func (a *AverageRmsVoltageMeasurementPeriodPhaseB) Value() *AverageRmsVoltageMeasurementPeriodPhaseB {
 	return a
@@ -3156,12 +3327,14 @@ func (a AverageRmsVoltageMeasurementPeriodPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AverageRmsOvervoltageCounterPhaseBAttr zcl.AttrID = 2322
+
 type AverageRmsOvervoltageCounterPhaseB zcl.Zu16
 
-func (a AverageRmsOvervoltageCounterPhaseB) ID() zcl.AttrID { return 2322 }
-func (a AverageRmsOvervoltageCounterPhaseB) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a AverageRmsOvervoltageCounterPhaseB) ID() zcl.AttrID {
+	return AverageRmsOvervoltageCounterPhaseBAttr
 }
+func (a AverageRmsOvervoltageCounterPhaseB) Cluster() zcl.ClusterID                      { return ElectricalMeasurementID }
 func (a *AverageRmsOvervoltageCounterPhaseB) Value() *AverageRmsOvervoltageCounterPhaseB { return a }
 func (a AverageRmsOvervoltageCounterPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3183,12 +3356,14 @@ func (a AverageRmsOvervoltageCounterPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AverageRmsUndervoltageCounterPhaseBAttr zcl.AttrID = 2323
+
 type AverageRmsUndervoltageCounterPhaseB zcl.Zu16
 
-func (a AverageRmsUndervoltageCounterPhaseB) ID() zcl.AttrID { return 2323 }
-func (a AverageRmsUndervoltageCounterPhaseB) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a AverageRmsUndervoltageCounterPhaseB) ID() zcl.AttrID {
+	return AverageRmsUndervoltageCounterPhaseBAttr
 }
+func (a AverageRmsUndervoltageCounterPhaseB) Cluster() zcl.ClusterID                       { return ElectricalMeasurementID }
 func (a *AverageRmsUndervoltageCounterPhaseB) Value() *AverageRmsUndervoltageCounterPhaseB { return a }
 func (a AverageRmsUndervoltageCounterPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3210,12 +3385,14 @@ func (a AverageRmsUndervoltageCounterPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsExtremeOvervoltagePeriodPhaseBAttr zcl.AttrID = 2324
+
 type RmsExtremeOvervoltagePeriodPhaseB zcl.Zu16
 
-func (a RmsExtremeOvervoltagePeriodPhaseB) ID() zcl.AttrID { return 2324 }
-func (a RmsExtremeOvervoltagePeriodPhaseB) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a RmsExtremeOvervoltagePeriodPhaseB) ID() zcl.AttrID {
+	return RmsExtremeOvervoltagePeriodPhaseBAttr
 }
+func (a RmsExtremeOvervoltagePeriodPhaseB) Cluster() zcl.ClusterID                     { return ElectricalMeasurementID }
 func (a *RmsExtremeOvervoltagePeriodPhaseB) Value() *RmsExtremeOvervoltagePeriodPhaseB { return a }
 func (a RmsExtremeOvervoltagePeriodPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3237,12 +3414,14 @@ func (a RmsExtremeOvervoltagePeriodPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsExtremeUndervoltagePeriodPhaseBAttr zcl.AttrID = 2325
+
 type RmsExtremeUndervoltagePeriodPhaseB zcl.Zu16
 
-func (a RmsExtremeUndervoltagePeriodPhaseB) ID() zcl.AttrID { return 2325 }
-func (a RmsExtremeUndervoltagePeriodPhaseB) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a RmsExtremeUndervoltagePeriodPhaseB) ID() zcl.AttrID {
+	return RmsExtremeUndervoltagePeriodPhaseBAttr
 }
+func (a RmsExtremeUndervoltagePeriodPhaseB) Cluster() zcl.ClusterID                      { return ElectricalMeasurementID }
 func (a *RmsExtremeUndervoltagePeriodPhaseB) Value() *RmsExtremeUndervoltagePeriodPhaseB { return a }
 func (a RmsExtremeUndervoltagePeriodPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3264,10 +3443,12 @@ func (a RmsExtremeUndervoltagePeriodPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageSagPeriodPhaseBAttr zcl.AttrID = 2326
+
 type RmsVoltageSagPeriodPhaseB zcl.Zu16
 
-func (a RmsVoltageSagPeriodPhaseB) ID() zcl.AttrID                     { return 2326 }
-func (a RmsVoltageSagPeriodPhaseB) Cluster() zcl.ClusterID             { return ElectricalMeasurementCluster }
+func (a RmsVoltageSagPeriodPhaseB) ID() zcl.AttrID                     { return RmsVoltageSagPeriodPhaseBAttr }
+func (a RmsVoltageSagPeriodPhaseB) Cluster() zcl.ClusterID             { return ElectricalMeasurementID }
 func (a *RmsVoltageSagPeriodPhaseB) Value() *RmsVoltageSagPeriodPhaseB { return a }
 func (a RmsVoltageSagPeriodPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3289,10 +3470,12 @@ func (a RmsVoltageSagPeriodPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageSwellPeriodPhaseBAttr zcl.AttrID = 2327
+
 type RmsVoltageSwellPeriodPhaseB zcl.Zu16
 
-func (a RmsVoltageSwellPeriodPhaseB) ID() zcl.AttrID                       { return 2327 }
-func (a RmsVoltageSwellPeriodPhaseB) Cluster() zcl.ClusterID               { return ElectricalMeasurementCluster }
+func (a RmsVoltageSwellPeriodPhaseB) ID() zcl.AttrID                       { return RmsVoltageSwellPeriodPhaseBAttr }
+func (a RmsVoltageSwellPeriodPhaseB) Cluster() zcl.ClusterID               { return ElectricalMeasurementID }
 func (a *RmsVoltageSwellPeriodPhaseB) Value() *RmsVoltageSwellPeriodPhaseB { return a }
 func (a RmsVoltageSwellPeriodPhaseB) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3314,10 +3497,12 @@ func (a RmsVoltageSwellPeriodPhaseB) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const LineCurrentPhaseCAttr zcl.AttrID = 2561
+
 type LineCurrentPhaseC zcl.Zu16
 
-func (a LineCurrentPhaseC) ID() zcl.AttrID             { return 2561 }
-func (a LineCurrentPhaseC) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a LineCurrentPhaseC) ID() zcl.AttrID             { return LineCurrentPhaseCAttr }
+func (a LineCurrentPhaseC) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *LineCurrentPhaseC) Value() *LineCurrentPhaseC { return a }
 func (a LineCurrentPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3339,10 +3524,12 @@ func (a LineCurrentPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ActiveCurrentPhaseCAttr zcl.AttrID = 2562
+
 type ActiveCurrentPhaseC zcl.Zs16
 
-func (a ActiveCurrentPhaseC) ID() zcl.AttrID               { return 2562 }
-func (a ActiveCurrentPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a ActiveCurrentPhaseC) ID() zcl.AttrID               { return ActiveCurrentPhaseCAttr }
+func (a ActiveCurrentPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *ActiveCurrentPhaseC) Value() *ActiveCurrentPhaseC { return a }
 func (a ActiveCurrentPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3364,10 +3551,12 @@ func (a ActiveCurrentPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ReactiveCurrentPhaseCAttr zcl.AttrID = 2563
+
 type ReactiveCurrentPhaseC zcl.Zs16
 
-func (a ReactiveCurrentPhaseC) ID() zcl.AttrID                 { return 2563 }
-func (a ReactiveCurrentPhaseC) Cluster() zcl.ClusterID         { return ElectricalMeasurementCluster }
+func (a ReactiveCurrentPhaseC) ID() zcl.AttrID                 { return ReactiveCurrentPhaseCAttr }
+func (a ReactiveCurrentPhaseC) Cluster() zcl.ClusterID         { return ElectricalMeasurementID }
 func (a *ReactiveCurrentPhaseC) Value() *ReactiveCurrentPhaseC { return a }
 func (a ReactiveCurrentPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3389,10 +3578,12 @@ func (a ReactiveCurrentPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const RmsVoltagePhaseCAttr zcl.AttrID = 2565
+
 type RmsVoltagePhaseC zcl.Zu16
 
-func (a RmsVoltagePhaseC) ID() zcl.AttrID            { return 2565 }
-func (a RmsVoltagePhaseC) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a RmsVoltagePhaseC) ID() zcl.AttrID            { return RmsVoltagePhaseCAttr }
+func (a RmsVoltagePhaseC) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *RmsVoltagePhaseC) Value() *RmsVoltagePhaseC { return a }
 func (a RmsVoltagePhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3414,10 +3605,12 @@ func (a RmsVoltagePhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageMinPhaseCAttr zcl.AttrID = 2566
+
 type RmsVoltageMinPhaseC zcl.Zu16
 
-func (a RmsVoltageMinPhaseC) ID() zcl.AttrID               { return 2566 }
-func (a RmsVoltageMinPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsVoltageMinPhaseC) ID() zcl.AttrID               { return RmsVoltageMinPhaseCAttr }
+func (a RmsVoltageMinPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsVoltageMinPhaseC) Value() *RmsVoltageMinPhaseC { return a }
 func (a RmsVoltageMinPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3439,10 +3632,12 @@ func (a RmsVoltageMinPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageMaxPhaseCAttr zcl.AttrID = 2567
+
 type RmsVoltageMaxPhaseC zcl.Zu16
 
-func (a RmsVoltageMaxPhaseC) ID() zcl.AttrID               { return 2567 }
-func (a RmsVoltageMaxPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsVoltageMaxPhaseC) ID() zcl.AttrID               { return RmsVoltageMaxPhaseCAttr }
+func (a RmsVoltageMaxPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsVoltageMaxPhaseC) Value() *RmsVoltageMaxPhaseC { return a }
 func (a RmsVoltageMaxPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3464,10 +3659,12 @@ func (a RmsVoltageMaxPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentPhaseCAttr zcl.AttrID = 2568
+
 type RmsCurrentPhaseC zcl.Zu16
 
-func (a RmsCurrentPhaseC) ID() zcl.AttrID            { return 2568 }
-func (a RmsCurrentPhaseC) Cluster() zcl.ClusterID    { return ElectricalMeasurementCluster }
+func (a RmsCurrentPhaseC) ID() zcl.AttrID            { return RmsCurrentPhaseCAttr }
+func (a RmsCurrentPhaseC) Cluster() zcl.ClusterID    { return ElectricalMeasurementID }
 func (a *RmsCurrentPhaseC) Value() *RmsCurrentPhaseC { return a }
 func (a RmsCurrentPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3489,10 +3686,12 @@ func (a RmsCurrentPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentMinPhaseCAttr zcl.AttrID = 2569
+
 type RmsCurrentMinPhaseC zcl.Zu16
 
-func (a RmsCurrentMinPhaseC) ID() zcl.AttrID               { return 2569 }
-func (a RmsCurrentMinPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsCurrentMinPhaseC) ID() zcl.AttrID               { return RmsCurrentMinPhaseCAttr }
+func (a RmsCurrentMinPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsCurrentMinPhaseC) Value() *RmsCurrentMinPhaseC { return a }
 func (a RmsCurrentMinPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3514,10 +3713,12 @@ func (a RmsCurrentMinPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsCurrentMaxPhaseCAttr zcl.AttrID = 2570
+
 type RmsCurrentMaxPhaseC zcl.Zu16
 
-func (a RmsCurrentMaxPhaseC) ID() zcl.AttrID               { return 2570 }
-func (a RmsCurrentMaxPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a RmsCurrentMaxPhaseC) ID() zcl.AttrID               { return RmsCurrentMaxPhaseCAttr }
+func (a RmsCurrentMaxPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *RmsCurrentMaxPhaseC) Value() *RmsCurrentMaxPhaseC { return a }
 func (a RmsCurrentMaxPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3539,10 +3740,12 @@ func (a RmsCurrentMaxPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const ActivePowerPhaseCAttr zcl.AttrID = 2571
+
 type ActivePowerPhaseC zcl.Zs16
 
-func (a ActivePowerPhaseC) ID() zcl.AttrID             { return 2571 }
-func (a ActivePowerPhaseC) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a ActivePowerPhaseC) ID() zcl.AttrID             { return ActivePowerPhaseCAttr }
+func (a ActivePowerPhaseC) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *ActivePowerPhaseC) Value() *ActivePowerPhaseC { return a }
 func (a ActivePowerPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3564,10 +3767,12 @@ func (a ActivePowerPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ActivePowerMinPhaseCAttr zcl.AttrID = 2572
+
 type ActivePowerMinPhaseC zcl.Zs16
 
-func (a ActivePowerMinPhaseC) ID() zcl.AttrID                { return 2572 }
-func (a ActivePowerMinPhaseC) Cluster() zcl.ClusterID        { return ElectricalMeasurementCluster }
+func (a ActivePowerMinPhaseC) ID() zcl.AttrID                { return ActivePowerMinPhaseCAttr }
+func (a ActivePowerMinPhaseC) Cluster() zcl.ClusterID        { return ElectricalMeasurementID }
 func (a *ActivePowerMinPhaseC) Value() *ActivePowerMinPhaseC { return a }
 func (a ActivePowerMinPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3589,10 +3794,12 @@ func (a ActivePowerMinPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ActivePowerMaxPhaseCAttr zcl.AttrID = 2573
+
 type ActivePowerMaxPhaseC zcl.Zs16
 
-func (a ActivePowerMaxPhaseC) ID() zcl.AttrID                { return 2573 }
-func (a ActivePowerMaxPhaseC) Cluster() zcl.ClusterID        { return ElectricalMeasurementCluster }
+func (a ActivePowerMaxPhaseC) ID() zcl.AttrID                { return ActivePowerMaxPhaseCAttr }
+func (a ActivePowerMaxPhaseC) Cluster() zcl.ClusterID        { return ElectricalMeasurementID }
 func (a *ActivePowerMaxPhaseC) Value() *ActivePowerMaxPhaseC { return a }
 func (a ActivePowerMaxPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3614,10 +3821,12 @@ func (a ActivePowerMaxPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ReactivePowerPhaseCAttr zcl.AttrID = 2574
+
 type ReactivePowerPhaseC zcl.Zs16
 
-func (a ReactivePowerPhaseC) ID() zcl.AttrID               { return 2574 }
-func (a ReactivePowerPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a ReactivePowerPhaseC) ID() zcl.AttrID               { return ReactivePowerPhaseCAttr }
+func (a ReactivePowerPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *ReactivePowerPhaseC) Value() *ReactivePowerPhaseC { return a }
 func (a ReactivePowerPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zs16(a).MarshalZcl()
@@ -3639,10 +3848,12 @@ func (a ReactivePowerPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
+const ApparentPowerPhaseCAttr zcl.AttrID = 2575
+
 type ApparentPowerPhaseC zcl.Zu16
 
-func (a ApparentPowerPhaseC) ID() zcl.AttrID               { return 2575 }
-func (a ApparentPowerPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementCluster }
+func (a ApparentPowerPhaseC) ID() zcl.AttrID               { return ApparentPowerPhaseCAttr }
+func (a ApparentPowerPhaseC) Cluster() zcl.ClusterID       { return ElectricalMeasurementID }
 func (a *ApparentPowerPhaseC) Value() *ApparentPowerPhaseC { return a }
 func (a ApparentPowerPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3664,10 +3875,12 @@ func (a ApparentPowerPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const PowerFactorPhaseCAttr zcl.AttrID = 2576
+
 type PowerFactorPhaseC zcl.Zs8
 
-func (a PowerFactorPhaseC) ID() zcl.AttrID             { return 2576 }
-func (a PowerFactorPhaseC) Cluster() zcl.ClusterID     { return ElectricalMeasurementCluster }
+func (a PowerFactorPhaseC) ID() zcl.AttrID             { return PowerFactorPhaseCAttr }
+func (a PowerFactorPhaseC) Cluster() zcl.ClusterID     { return ElectricalMeasurementID }
 func (a *PowerFactorPhaseC) Value() *PowerFactorPhaseC { return a }
 func (a PowerFactorPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zs8(a).MarshalZcl()
@@ -3689,11 +3902,15 @@ func (a PowerFactorPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
+const AverageRmsVoltageMeasurementPeriodPhaseCAttr zcl.AttrID = 2577
+
 type AverageRmsVoltageMeasurementPeriodPhaseC zcl.Zu16
 
-func (a AverageRmsVoltageMeasurementPeriodPhaseC) ID() zcl.AttrID { return 2577 }
+func (a AverageRmsVoltageMeasurementPeriodPhaseC) ID() zcl.AttrID {
+	return AverageRmsVoltageMeasurementPeriodPhaseCAttr
+}
 func (a AverageRmsVoltageMeasurementPeriodPhaseC) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+	return ElectricalMeasurementID
 }
 func (a *AverageRmsVoltageMeasurementPeriodPhaseC) Value() *AverageRmsVoltageMeasurementPeriodPhaseC {
 	return a
@@ -3718,12 +3935,14 @@ func (a AverageRmsVoltageMeasurementPeriodPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AverageRmsOvervoltageCounterPhaseCAttr zcl.AttrID = 2578
+
 type AverageRmsOvervoltageCounterPhaseC zcl.Zu16
 
-func (a AverageRmsOvervoltageCounterPhaseC) ID() zcl.AttrID { return 2578 }
-func (a AverageRmsOvervoltageCounterPhaseC) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a AverageRmsOvervoltageCounterPhaseC) ID() zcl.AttrID {
+	return AverageRmsOvervoltageCounterPhaseCAttr
 }
+func (a AverageRmsOvervoltageCounterPhaseC) Cluster() zcl.ClusterID                      { return ElectricalMeasurementID }
 func (a *AverageRmsOvervoltageCounterPhaseC) Value() *AverageRmsOvervoltageCounterPhaseC { return a }
 func (a AverageRmsOvervoltageCounterPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3745,12 +3964,14 @@ func (a AverageRmsOvervoltageCounterPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const AverageRmsUndervoltageCounterPhaseCAttr zcl.AttrID = 2579
+
 type AverageRmsUndervoltageCounterPhaseC zcl.Zu16
 
-func (a AverageRmsUndervoltageCounterPhaseC) ID() zcl.AttrID { return 2579 }
-func (a AverageRmsUndervoltageCounterPhaseC) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a AverageRmsUndervoltageCounterPhaseC) ID() zcl.AttrID {
+	return AverageRmsUndervoltageCounterPhaseCAttr
 }
+func (a AverageRmsUndervoltageCounterPhaseC) Cluster() zcl.ClusterID                       { return ElectricalMeasurementID }
 func (a *AverageRmsUndervoltageCounterPhaseC) Value() *AverageRmsUndervoltageCounterPhaseC { return a }
 func (a AverageRmsUndervoltageCounterPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3772,12 +3993,14 @@ func (a AverageRmsUndervoltageCounterPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsExtremeOvervoltagePeriodPhaseCAttr zcl.AttrID = 2580
+
 type RmsExtremeOvervoltagePeriodPhaseC zcl.Zu16
 
-func (a RmsExtremeOvervoltagePeriodPhaseC) ID() zcl.AttrID { return 2580 }
-func (a RmsExtremeOvervoltagePeriodPhaseC) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a RmsExtremeOvervoltagePeriodPhaseC) ID() zcl.AttrID {
+	return RmsExtremeOvervoltagePeriodPhaseCAttr
 }
+func (a RmsExtremeOvervoltagePeriodPhaseC) Cluster() zcl.ClusterID                     { return ElectricalMeasurementID }
 func (a *RmsExtremeOvervoltagePeriodPhaseC) Value() *RmsExtremeOvervoltagePeriodPhaseC { return a }
 func (a RmsExtremeOvervoltagePeriodPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3799,12 +4022,14 @@ func (a RmsExtremeOvervoltagePeriodPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsExtremeUndervoltagePeriodPhaseCAttr zcl.AttrID = 2581
+
 type RmsExtremeUndervoltagePeriodPhaseC zcl.Zu16
 
-func (a RmsExtremeUndervoltagePeriodPhaseC) ID() zcl.AttrID { return 2581 }
-func (a RmsExtremeUndervoltagePeriodPhaseC) Cluster() zcl.ClusterID {
-	return ElectricalMeasurementCluster
+func (a RmsExtremeUndervoltagePeriodPhaseC) ID() zcl.AttrID {
+	return RmsExtremeUndervoltagePeriodPhaseCAttr
 }
+func (a RmsExtremeUndervoltagePeriodPhaseC) Cluster() zcl.ClusterID                      { return ElectricalMeasurementID }
 func (a *RmsExtremeUndervoltagePeriodPhaseC) Value() *RmsExtremeUndervoltagePeriodPhaseC { return a }
 func (a RmsExtremeUndervoltagePeriodPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3826,10 +4051,12 @@ func (a RmsExtremeUndervoltagePeriodPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageSagPeriodPhaseCAttr zcl.AttrID = 2582
+
 type RmsVoltageSagPeriodPhaseC zcl.Zu16
 
-func (a RmsVoltageSagPeriodPhaseC) ID() zcl.AttrID                     { return 2582 }
-func (a RmsVoltageSagPeriodPhaseC) Cluster() zcl.ClusterID             { return ElectricalMeasurementCluster }
+func (a RmsVoltageSagPeriodPhaseC) ID() zcl.AttrID                     { return RmsVoltageSagPeriodPhaseCAttr }
+func (a RmsVoltageSagPeriodPhaseC) Cluster() zcl.ClusterID             { return ElectricalMeasurementID }
 func (a *RmsVoltageSagPeriodPhaseC) Value() *RmsVoltageSagPeriodPhaseC { return a }
 func (a RmsVoltageSagPeriodPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -3851,10 +4078,12 @@ func (a RmsVoltageSagPeriodPhaseC) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const RmsVoltageSwellPeriodPhaseCAttr zcl.AttrID = 2583
+
 type RmsVoltageSwellPeriodPhaseC zcl.Zu16
 
-func (a RmsVoltageSwellPeriodPhaseC) ID() zcl.AttrID                       { return 2583 }
-func (a RmsVoltageSwellPeriodPhaseC) Cluster() zcl.ClusterID               { return ElectricalMeasurementCluster }
+func (a RmsVoltageSwellPeriodPhaseC) ID() zcl.AttrID                       { return RmsVoltageSwellPeriodPhaseCAttr }
+func (a RmsVoltageSwellPeriodPhaseC) Cluster() zcl.ClusterID               { return ElectricalMeasurementID }
 func (a *RmsVoltageSwellPeriodPhaseC) Value() *RmsVoltageSwellPeriodPhaseC { return a }
 func (a RmsVoltageSwellPeriodPhaseC) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

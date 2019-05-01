@@ -6,36 +6,25 @@ import (
 )
 
 // DeDebug
-// Attributes and commands for debugging purposes.
+const DeDebugID zcl.ClusterID = 56898
 
-func NewDeDebugServer(profile zcl.ProfileID) *DeDebugServer { return &DeDebugServer{p: profile} }
-func NewDeDebugClient(profile zcl.ProfileID) *DeDebugClient { return &DeDebugClient{p: profile} }
-
-const DeDebugCluster zcl.ClusterID = 56898
-
-type DeDebugServer struct {
-	p zcl.ProfileID
-
-	DebugEnabled     *DebugEnabled
-	DebugDestination *DebugDestination
+var DeDebugCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		DebugEnabledAttr:     func() zcl.Attr { return new(DebugEnabled) },
+		DebugDestinationAttr: func() zcl.Attr { return new(DebugDestination) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type DeDebugClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var DeDebugServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var DeDebugClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const DebugEnabledAttr zcl.AttrID = 0
 
 type DebugEnabled zcl.Zbool
 
-func (a DebugEnabled) ID() zcl.AttrID         { return 0 }
-func (a DebugEnabled) Cluster() zcl.ClusterID { return DeDebugCluster }
+func (a DebugEnabled) ID() zcl.AttrID         { return DebugEnabledAttr }
+func (a DebugEnabled) Cluster() zcl.ClusterID { return DeDebugID }
 func (a *DebugEnabled) Value() *DebugEnabled  { return a }
 func (a DebugEnabled) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -57,10 +46,12 @@ func (a DebugEnabled) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const DebugDestinationAttr zcl.AttrID = 1
+
 type DebugDestination zcl.Zu16
 
-func (a DebugDestination) ID() zcl.AttrID            { return 1 }
-func (a DebugDestination) Cluster() zcl.ClusterID    { return DeDebugCluster }
+func (a DebugDestination) ID() zcl.AttrID            { return DebugDestinationAttr }
+func (a DebugDestination) Cluster() zcl.ClusterID    { return DeDebugID }
 func (a *DebugDestination) Value() *DebugDestination { return a }
 func (a DebugDestination) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

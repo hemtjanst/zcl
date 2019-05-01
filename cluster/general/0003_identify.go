@@ -6,42 +6,23 @@ import (
 )
 
 // Identify
-// Attributes and commands for putting a device into Identification mode (e.g. flashing a light)
+const IdentifyID zcl.ClusterID = 3
 
-func NewIdentifyServer(profile zcl.ProfileID) *IdentifyServer { return &IdentifyServer{p: profile} }
-func NewIdentifyClient(profile zcl.ProfileID) *IdentifyClient { return &IdentifyClient{p: profile} }
-
-const IdentifyCluster zcl.ClusterID = 3
-
-type IdentifyServer struct {
-	p zcl.ProfileID
-
-	IdentifyTime *IdentifyTime
+var IdentifyCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		IdentifyCommand:      func() zcl.Command { return new(Identify) },
+		IdentifyQueryCommand: func() zcl.Command { return new(IdentifyQuery) },
+		TriggerEffectCommand: func() zcl.Command { return new(TriggerEffect) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		IdentifyQueryResponseCommand: func() zcl.Command { return new(IdentifyQueryResponse) },
+	},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		IdentifyTimeAttr: func() zcl.Attr { return new(IdentifyTime) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *IdentifyServer) Identify() *Identify           { return new(Identify) }
-func (s *IdentifyServer) IdentifyQuery() *IdentifyQuery { return new(IdentifyQuery) }
-func (s *IdentifyServer) TriggerEffect() *TriggerEffect { return new(TriggerEffect) }
-
-type IdentifyClient struct {
-	p zcl.ProfileID
-}
-
-func (s *IdentifyClient) IdentifyQueryResponse() *IdentifyQueryResponse {
-	return new(IdentifyQueryResponse)
-}
-
-/*
-var IdentifyServer = map[zcl.CommandID]func() zcl.Command{
-    IdentifyID: func() zcl.Command { return new(Identify) },
-    IdentifyQueryID: func() zcl.Command { return new(IdentifyQuery) },
-    TriggerEffectID: func() zcl.Command { return new(TriggerEffect) },
-}
-
-var IdentifyClient = map[zcl.CommandID]func() zcl.Command{
-    IdentifyQueryResponseID: func() zcl.Command { return new(IdentifyQueryResponse) },
-}
-*/
 
 // Start or stop the device identifying itself.
 type Identify struct {
@@ -62,7 +43,7 @@ func (v Identify) ID() zcl.CommandID {
 }
 
 func (v Identify) Cluster() zcl.ClusterID {
-	return IdentifyCluster
+	return IdentifyID
 }
 
 func (v Identify) MnfCode() []byte {
@@ -107,7 +88,7 @@ func (v IdentifyQuery) ID() zcl.CommandID {
 }
 
 func (v IdentifyQuery) Cluster() zcl.ClusterID {
-	return IdentifyCluster
+	return IdentifyID
 }
 
 func (v IdentifyQuery) MnfCode() []byte {
@@ -144,7 +125,7 @@ func (v TriggerEffect) ID() zcl.CommandID {
 }
 
 func (v TriggerEffect) Cluster() zcl.ClusterID {
-	return IdentifyCluster
+	return IdentifyID
 }
 
 func (v TriggerEffect) MnfCode() []byte {
@@ -202,7 +183,7 @@ func (v IdentifyQueryResponse) ID() zcl.CommandID {
 }
 
 func (v IdentifyQueryResponse) Cluster() zcl.ClusterID {
-	return IdentifyCluster
+	return IdentifyID
 }
 
 func (v IdentifyQueryResponse) MnfCode() []byte {
@@ -232,10 +213,12 @@ func (v *IdentifyQueryResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const IdentifyTimeAttr zcl.AttrID = 0
+
 type IdentifyTime zcl.Zu16
 
-func (a IdentifyTime) ID() zcl.AttrID         { return 0 }
-func (a IdentifyTime) Cluster() zcl.ClusterID { return IdentifyCluster }
+func (a IdentifyTime) ID() zcl.AttrID         { return IdentifyTimeAttr }
+func (a IdentifyTime) Cluster() zcl.ClusterID { return IdentifyID }
 func (a *IdentifyTime) Value() *IdentifyTime  { return a }
 func (a IdentifyTime) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

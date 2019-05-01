@@ -5,40 +5,26 @@ import (
 )
 
 // IlluminanceLevelSensing
+const IlluminanceLevelSensingID zcl.ClusterID = 1025
 
-func NewIlluminanceLevelSensingServer(profile zcl.ProfileID) *IlluminanceLevelSensingServer {
-	return &IlluminanceLevelSensingServer{p: profile}
-}
-func NewIlluminanceLevelSensingClient(profile zcl.ProfileID) *IlluminanceLevelSensingClient {
-	return &IlluminanceLevelSensingClient{p: profile}
-}
-
-const IlluminanceLevelSensingCluster zcl.ClusterID = 1025
-
-type IlluminanceLevelSensingServer struct {
-	p zcl.ProfileID
-
-	LevelStatus            *LevelStatus
-	IlluminanceSensorType  *IlluminanceSensorType
-	IlluminanceTargetLevel *IlluminanceTargetLevel
+var IlluminanceLevelSensingCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		LevelStatusAttr:            func() zcl.Attr { return new(LevelStatus) },
+		IlluminanceSensorTypeAttr:  func() zcl.Attr { return new(IlluminanceSensorType) },
+		IlluminanceTargetLevelAttr: func() zcl.Attr { return new(IlluminanceTargetLevel) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type IlluminanceLevelSensingClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var IlluminanceLevelSensingServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var IlluminanceLevelSensingClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const LevelStatusAttr zcl.AttrID = 0
 
 type LevelStatus zcl.Zenum8
 
-func (a LevelStatus) ID() zcl.AttrID         { return 0 }
-func (a LevelStatus) Cluster() zcl.ClusterID { return IlluminanceLevelSensingCluster }
+func (a LevelStatus) ID() zcl.AttrID         { return LevelStatusAttr }
+func (a LevelStatus) Cluster() zcl.ClusterID { return IlluminanceLevelSensingID }
 func (a *LevelStatus) Value() *LevelStatus   { return a }
 func (a LevelStatus) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -86,10 +72,12 @@ func (a LevelStatus) IsIlluminanceAboveTarget() bool { return a == 0x02 }
 // SetIlluminanceAboveTarget sets LevelStatus to Illuminance above target (0x02)
 func (a *LevelStatus) SetIlluminanceAboveTarget() { *a = 0x02 }
 
+const IlluminanceSensorTypeAttr zcl.AttrID = 1
+
 type IlluminanceSensorType zcl.Zenum8
 
-func (a IlluminanceSensorType) ID() zcl.AttrID                 { return 1 }
-func (a IlluminanceSensorType) Cluster() zcl.ClusterID         { return IlluminanceLevelSensingCluster }
+func (a IlluminanceSensorType) ID() zcl.AttrID                 { return IlluminanceSensorTypeAttr }
+func (a IlluminanceSensorType) Cluster() zcl.ClusterID         { return IlluminanceLevelSensingID }
 func (a *IlluminanceSensorType) Value() *IlluminanceSensorType { return a }
 func (a IlluminanceSensorType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -137,10 +125,12 @@ func (a IlluminanceSensorType) IsUnknown() bool { return a == 0xFF }
 // SetUnknown sets IlluminanceSensorType to Unknown (0xFF)
 func (a *IlluminanceSensorType) SetUnknown() { *a = 0xFF }
 
+const IlluminanceTargetLevelAttr zcl.AttrID = 16
+
 type IlluminanceTargetLevel zcl.Zu16
 
-func (a IlluminanceTargetLevel) ID() zcl.AttrID                  { return 16 }
-func (a IlluminanceTargetLevel) Cluster() zcl.ClusterID          { return IlluminanceLevelSensingCluster }
+func (a IlluminanceTargetLevel) ID() zcl.AttrID                  { return IlluminanceTargetLevelAttr }
+func (a IlluminanceTargetLevel) Cluster() zcl.ClusterID          { return IlluminanceLevelSensingID }
 func (a *IlluminanceTargetLevel) Value() *IlluminanceTargetLevel { return a }
 func (a IlluminanceTargetLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

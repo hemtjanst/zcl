@@ -35,6 +35,13 @@ const (
 	ErrNotImpl       errType = "not implemented"
 )
 
+type Cluster struct {
+	ServerCmd  map[CommandID]func() Command
+	ServerAttr map[AttrID]func() Attr
+	ClientCmd  map[CommandID]func() Command
+	ClientAttr map[AttrID]func() Attr
+	SceneAttr  []AttrID
+}
 type Frame struct {
 	ExpectReply bool
 	Profile     ProfileID
@@ -57,14 +64,21 @@ type Val interface {
 	UnmarshalZcl([]byte) ([]byte, error)
 }
 
+type Attr interface {
+	Val
+	ID() AttrID
+	Cluster() ClusterID
+	Readable() bool
+	Writable() bool
+	Reportable() bool
+	SceneIndex() int
+}
+
 type Command interface {
 	Val
 	ID() CommandID
 	Cluster() ClusterID
 	MnfCode() []byte
-}
-
-type Cluster interface {
 }
 
 type errType string

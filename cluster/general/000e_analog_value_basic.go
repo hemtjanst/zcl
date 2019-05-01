@@ -6,29 +6,12 @@ import (
 )
 
 // AnalogValueBasic
-// An interface for setting an analog value, typically used as a control system parameter, and accessing various characteristics of that value.
+const AnalogValueBasicID zcl.ClusterID = 14
 
-func NewAnalogValueBasicServer(profile zcl.ProfileID) *AnalogValueBasicServer {
-	return &AnalogValueBasicServer{p: profile}
+var AnalogValueBasicCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewAnalogValueBasicClient(profile zcl.ProfileID) *AnalogValueBasicClient {
-	return &AnalogValueBasicClient{p: profile}
-}
-
-const AnalogValueBasicCluster zcl.ClusterID = 14
-
-type AnalogValueBasicServer struct {
-	p zcl.ProfileID
-}
-
-type AnalogValueBasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var AnalogValueBasicServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var AnalogValueBasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

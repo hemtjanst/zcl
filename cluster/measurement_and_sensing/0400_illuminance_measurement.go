@@ -6,49 +6,34 @@ import (
 )
 
 // IlluminanceMeasurement
-// The server cluster provides an interface to illuminance measurement functionality, including configuration and provision of notifications of illuminance measurements.
+const IlluminanceMeasurementID zcl.ClusterID = 1024
 
-func NewIlluminanceMeasurementServer(profile zcl.ProfileID) *IlluminanceMeasurementServer {
-	return &IlluminanceMeasurementServer{p: profile}
-}
-func NewIlluminanceMeasurementClient(profile zcl.ProfileID) *IlluminanceMeasurementClient {
-	return &IlluminanceMeasurementClient{p: profile}
-}
-
-const IlluminanceMeasurementCluster zcl.ClusterID = 1024
-
-type IlluminanceMeasurementServer struct {
-	p zcl.ProfileID
-
-	MeasuredIlluminance    *MeasuredIlluminance
-	MinMeasuredIlluminance *MinMeasuredIlluminance
-	MaxMeasuredIlluminance *MaxMeasuredIlluminance
-	IlluminanceTolerance   *IlluminanceTolerance
-	LightSensorType        *LightSensorType
-}
-
-type IlluminanceMeasurementClient struct {
-	p zcl.ProfileID
-
-	Hysteresis   *Hysteresis
-	MaxUpSpeed   *MaxUpSpeed
-	MaxDownSpeed *MaxDownSpeed
-	TargetValue  *TargetValue
-	StartupType  *StartupType
+var IlluminanceMeasurementCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MeasuredIlluminanceAttr:    func() zcl.Attr { return new(MeasuredIlluminance) },
+		MinMeasuredIlluminanceAttr: func() zcl.Attr { return new(MinMeasuredIlluminance) },
+		MaxMeasuredIlluminanceAttr: func() zcl.Attr { return new(MaxMeasuredIlluminance) },
+		IlluminanceToleranceAttr:   func() zcl.Attr { return new(IlluminanceTolerance) },
+		LightSensorTypeAttr:        func() zcl.Attr { return new(LightSensorType) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{
+		HysteresisAttr:   func() zcl.Attr { return new(Hysteresis) },
+		MaxUpSpeedAttr:   func() zcl.Attr { return new(MaxUpSpeed) },
+		MaxDownSpeedAttr: func() zcl.Attr { return new(MaxDownSpeed) },
+		TargetValueAttr:  func() zcl.Attr { return new(TargetValue) },
+		StartupTypeAttr:  func() zcl.Attr { return new(StartupType) },
+	},
+	SceneAttr: []zcl.AttrID{},
 }
 
-/*
-var IlluminanceMeasurementServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var IlluminanceMeasurementClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MeasuredIlluminanceAttr zcl.AttrID = 0
 
 type MeasuredIlluminance zcl.Zu16
 
-func (a MeasuredIlluminance) ID() zcl.AttrID               { return 0 }
-func (a MeasuredIlluminance) Cluster() zcl.ClusterID       { return IlluminanceMeasurementCluster }
+func (a MeasuredIlluminance) ID() zcl.AttrID               { return MeasuredIlluminanceAttr }
+func (a MeasuredIlluminance) Cluster() zcl.ClusterID       { return IlluminanceMeasurementID }
 func (a *MeasuredIlluminance) Value() *MeasuredIlluminance { return a }
 func (a MeasuredIlluminance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -70,10 +55,12 @@ func (a MeasuredIlluminance) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MinMeasuredIlluminanceAttr zcl.AttrID = 1
+
 type MinMeasuredIlluminance zcl.Zu16
 
-func (a MinMeasuredIlluminance) ID() zcl.AttrID                  { return 1 }
-func (a MinMeasuredIlluminance) Cluster() zcl.ClusterID          { return IlluminanceMeasurementCluster }
+func (a MinMeasuredIlluminance) ID() zcl.AttrID                  { return MinMeasuredIlluminanceAttr }
+func (a MinMeasuredIlluminance) Cluster() zcl.ClusterID          { return IlluminanceMeasurementID }
 func (a *MinMeasuredIlluminance) Value() *MinMeasuredIlluminance { return a }
 func (a MinMeasuredIlluminance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -95,10 +82,12 @@ func (a MinMeasuredIlluminance) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MaxMeasuredIlluminanceAttr zcl.AttrID = 2
+
 type MaxMeasuredIlluminance zcl.Zu16
 
-func (a MaxMeasuredIlluminance) ID() zcl.AttrID                  { return 2 }
-func (a MaxMeasuredIlluminance) Cluster() zcl.ClusterID          { return IlluminanceMeasurementCluster }
+func (a MaxMeasuredIlluminance) ID() zcl.AttrID                  { return MaxMeasuredIlluminanceAttr }
+func (a MaxMeasuredIlluminance) Cluster() zcl.ClusterID          { return IlluminanceMeasurementID }
 func (a *MaxMeasuredIlluminance) Value() *MaxMeasuredIlluminance { return a }
 func (a MaxMeasuredIlluminance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -120,10 +109,12 @@ func (a MaxMeasuredIlluminance) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const IlluminanceToleranceAttr zcl.AttrID = 3
+
 type IlluminanceTolerance zcl.Zu16
 
-func (a IlluminanceTolerance) ID() zcl.AttrID                { return 3 }
-func (a IlluminanceTolerance) Cluster() zcl.ClusterID        { return IlluminanceMeasurementCluster }
+func (a IlluminanceTolerance) ID() zcl.AttrID                { return IlluminanceToleranceAttr }
+func (a IlluminanceTolerance) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
 func (a *IlluminanceTolerance) Value() *IlluminanceTolerance { return a }
 func (a IlluminanceTolerance) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -145,10 +136,12 @@ func (a IlluminanceTolerance) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const LightSensorTypeAttr zcl.AttrID = 4
+
 type LightSensorType zcl.Zenum8
 
-func (a LightSensorType) ID() zcl.AttrID           { return 4 }
-func (a LightSensorType) Cluster() zcl.ClusterID   { return IlluminanceMeasurementCluster }
+func (a LightSensorType) ID() zcl.AttrID           { return LightSensorTypeAttr }
+func (a LightSensorType) Cluster() zcl.ClusterID   { return IlluminanceMeasurementID }
 func (a *LightSensorType) Value() *LightSensorType { return a }
 func (a LightSensorType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -196,10 +189,12 @@ func (a LightSensorType) IsUnknown() bool { return a == 0xFF }
 // SetUnknown sets LightSensorType to Unknown (0xFF)
 func (a *LightSensorType) SetUnknown() { *a = 0xFF }
 
+const HysteresisAttr zcl.AttrID = 61440
+
 type Hysteresis zcl.Zu16
 
-func (a Hysteresis) ID() zcl.AttrID         { return 61440 }
-func (a Hysteresis) Cluster() zcl.ClusterID { return IlluminanceMeasurementCluster }
+func (a Hysteresis) ID() zcl.AttrID         { return HysteresisAttr }
+func (a Hysteresis) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
 func (a *Hysteresis) Value() *Hysteresis    { return a }
 func (a Hysteresis) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -221,10 +216,12 @@ func (a Hysteresis) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MaxUpSpeedAttr zcl.AttrID = 61441
+
 type MaxUpSpeed zcl.Zu16
 
-func (a MaxUpSpeed) ID() zcl.AttrID         { return 61441 }
-func (a MaxUpSpeed) Cluster() zcl.ClusterID { return IlluminanceMeasurementCluster }
+func (a MaxUpSpeed) ID() zcl.AttrID         { return MaxUpSpeedAttr }
+func (a MaxUpSpeed) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
 func (a *MaxUpSpeed) Value() *MaxUpSpeed    { return a }
 func (a MaxUpSpeed) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -246,10 +243,12 @@ func (a MaxUpSpeed) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MaxDownSpeedAttr zcl.AttrID = 61442
+
 type MaxDownSpeed zcl.Zu16
 
-func (a MaxDownSpeed) ID() zcl.AttrID         { return 61442 }
-func (a MaxDownSpeed) Cluster() zcl.ClusterID { return IlluminanceMeasurementCluster }
+func (a MaxDownSpeed) ID() zcl.AttrID         { return MaxDownSpeedAttr }
+func (a MaxDownSpeed) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
 func (a *MaxDownSpeed) Value() *MaxDownSpeed  { return a }
 func (a MaxDownSpeed) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -271,10 +270,12 @@ func (a MaxDownSpeed) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const TargetValueAttr zcl.AttrID = 61443
+
 type TargetValue zcl.Zu16
 
-func (a TargetValue) ID() zcl.AttrID         { return 61443 }
-func (a TargetValue) Cluster() zcl.ClusterID { return IlluminanceMeasurementCluster }
+func (a TargetValue) ID() zcl.AttrID         { return TargetValueAttr }
+func (a TargetValue) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
 func (a *TargetValue) Value() *TargetValue   { return a }
 func (a TargetValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -296,10 +297,12 @@ func (a TargetValue) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const StartupTypeAttr zcl.AttrID = 61444
+
 type StartupType zcl.Zenum8
 
-func (a StartupType) ID() zcl.AttrID         { return 61444 }
-func (a StartupType) Cluster() zcl.ClusterID { return IlluminanceMeasurementCluster }
+func (a StartupType) ID() zcl.AttrID         { return StartupTypeAttr }
+func (a StartupType) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
 func (a *StartupType) Value() *StartupType   { return a }
 func (a StartupType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()

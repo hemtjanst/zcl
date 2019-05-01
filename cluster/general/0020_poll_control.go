@@ -6,43 +6,25 @@ import (
 )
 
 // PollControl
-// Provides a mechanism for the management of an end device’s MAC Data Request rate.
+const PollControlID zcl.ClusterID = 32
 
-func NewPollControlServer(profile zcl.ProfileID) *PollControlServer {
-	return &PollControlServer{p: profile}
+var PollControlCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		CheckInCommand: func() zcl.Command { return new(CheckIn) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		CheckInIntervalAttr:     func() zcl.Attr { return new(CheckInInterval) },
+		LongPollIntervalAttr:    func() zcl.Attr { return new(LongPollInterval) },
+		ShortPollIntervalAttr:   func() zcl.Attr { return new(ShortPollInterval) },
+		FastPollTimeoutAttr:     func() zcl.Attr { return new(FastPollTimeout) },
+		CheckInIntervalMinAttr:  func() zcl.Attr { return new(CheckInIntervalMin) },
+		LongPollIntervalMinAttr: func() zcl.Attr { return new(LongPollIntervalMin) },
+		FastPollTimeoutMaxAttr:  func() zcl.Attr { return new(FastPollTimeoutMax) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-func NewPollControlClient(profile zcl.ProfileID) *PollControlClient {
-	return &PollControlClient{p: profile}
-}
-
-const PollControlCluster zcl.ClusterID = 32
-
-type PollControlServer struct {
-	p zcl.ProfileID
-
-	CheckInInterval     *CheckInInterval
-	LongPollInterval    *LongPollInterval
-	ShortPollInterval   *ShortPollInterval
-	FastPollTimeout     *FastPollTimeout
-	CheckInIntervalMin  *CheckInIntervalMin
-	LongPollIntervalMin *LongPollIntervalMin
-	FastPollTimeoutMax  *FastPollTimeoutMax
-}
-
-func (s *PollControlServer) CheckIn() *CheckIn { return new(CheckIn) }
-
-type PollControlClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var PollControlServer = map[zcl.CommandID]func() zcl.Command{
-    CheckInID: func() zcl.Command { return new(CheckIn) },
-}
-
-var PollControlClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 type CheckIn struct {
 }
@@ -58,7 +40,7 @@ func (v CheckIn) ID() zcl.CommandID {
 }
 
 func (v CheckIn) Cluster() zcl.ClusterID {
-	return PollControlCluster
+	return PollControlID
 }
 
 func (v CheckIn) MnfCode() []byte {
@@ -73,10 +55,12 @@ func (v *CheckIn) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const CheckInIntervalAttr zcl.AttrID = 0
+
 type CheckInInterval zcl.Zu32
 
-func (a CheckInInterval) ID() zcl.AttrID           { return 0 }
-func (a CheckInInterval) Cluster() zcl.ClusterID   { return PollControlCluster }
+func (a CheckInInterval) ID() zcl.AttrID           { return CheckInIntervalAttr }
+func (a CheckInInterval) Cluster() zcl.ClusterID   { return PollControlID }
 func (a *CheckInInterval) Value() *CheckInInterval { return a }
 func (a CheckInInterval) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -98,10 +82,12 @@ func (a CheckInInterval) String() string {
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
+const LongPollIntervalAttr zcl.AttrID = 1
+
 type LongPollInterval zcl.Zu32
 
-func (a LongPollInterval) ID() zcl.AttrID            { return 1 }
-func (a LongPollInterval) Cluster() zcl.ClusterID    { return PollControlCluster }
+func (a LongPollInterval) ID() zcl.AttrID            { return LongPollIntervalAttr }
+func (a LongPollInterval) Cluster() zcl.ClusterID    { return PollControlID }
 func (a *LongPollInterval) Value() *LongPollInterval { return a }
 func (a LongPollInterval) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -123,10 +109,12 @@ func (a LongPollInterval) String() string {
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
+const ShortPollIntervalAttr zcl.AttrID = 2
+
 type ShortPollInterval zcl.Zu16
 
-func (a ShortPollInterval) ID() zcl.AttrID             { return 2 }
-func (a ShortPollInterval) Cluster() zcl.ClusterID     { return PollControlCluster }
+func (a ShortPollInterval) ID() zcl.AttrID             { return ShortPollIntervalAttr }
+func (a ShortPollInterval) Cluster() zcl.ClusterID     { return PollControlID }
 func (a *ShortPollInterval) Value() *ShortPollInterval { return a }
 func (a ShortPollInterval) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -148,10 +136,12 @@ func (a ShortPollInterval) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const FastPollTimeoutAttr zcl.AttrID = 3
+
 type FastPollTimeout zcl.Zu16
 
-func (a FastPollTimeout) ID() zcl.AttrID           { return 3 }
-func (a FastPollTimeout) Cluster() zcl.ClusterID   { return PollControlCluster }
+func (a FastPollTimeout) ID() zcl.AttrID           { return FastPollTimeoutAttr }
+func (a FastPollTimeout) Cluster() zcl.ClusterID   { return PollControlID }
 func (a *FastPollTimeout) Value() *FastPollTimeout { return a }
 func (a FastPollTimeout) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -173,10 +163,12 @@ func (a FastPollTimeout) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const CheckInIntervalMinAttr zcl.AttrID = 4
+
 type CheckInIntervalMin zcl.Zu32
 
-func (a CheckInIntervalMin) ID() zcl.AttrID              { return 4 }
-func (a CheckInIntervalMin) Cluster() zcl.ClusterID      { return PollControlCluster }
+func (a CheckInIntervalMin) ID() zcl.AttrID              { return CheckInIntervalMinAttr }
+func (a CheckInIntervalMin) Cluster() zcl.ClusterID      { return PollControlID }
 func (a *CheckInIntervalMin) Value() *CheckInIntervalMin { return a }
 func (a CheckInIntervalMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -198,10 +190,12 @@ func (a CheckInIntervalMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
+const LongPollIntervalMinAttr zcl.AttrID = 5
+
 type LongPollIntervalMin zcl.Zu32
 
-func (a LongPollIntervalMin) ID() zcl.AttrID               { return 5 }
-func (a LongPollIntervalMin) Cluster() zcl.ClusterID       { return PollControlCluster }
+func (a LongPollIntervalMin) ID() zcl.AttrID               { return LongPollIntervalMinAttr }
+func (a LongPollIntervalMin) Cluster() zcl.ClusterID       { return PollControlID }
 func (a *LongPollIntervalMin) Value() *LongPollIntervalMin { return a }
 func (a LongPollIntervalMin) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -223,10 +217,12 @@ func (a LongPollIntervalMin) String() string {
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
+const FastPollTimeoutMaxAttr zcl.AttrID = 6
+
 type FastPollTimeoutMax zcl.Zu16
 
-func (a FastPollTimeoutMax) ID() zcl.AttrID              { return 6 }
-func (a FastPollTimeoutMax) Cluster() zcl.ClusterID      { return PollControlCluster }
+func (a FastPollTimeoutMax) ID() zcl.AttrID              { return FastPollTimeoutMaxAttr }
+func (a FastPollTimeoutMax) Cluster() zcl.ClusterID      { return PollControlID }
 func (a *FastPollTimeoutMax) Value() *FastPollTimeoutMax { return a }
 func (a FastPollTimeoutMax) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()

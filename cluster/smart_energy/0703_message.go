@@ -6,25 +6,12 @@ import (
 )
 
 // Message
-// This cluster provides an interface for passing text messages between ZigBee devices.
+const MessageID zcl.ClusterID = 1795
 
-func NewMessageServer(profile zcl.ProfileID) *MessageServer { return &MessageServer{p: profile} }
-func NewMessageClient(profile zcl.ProfileID) *MessageClient { return &MessageClient{p: profile} }
-
-const MessageCluster zcl.ClusterID = 1795
-
-type MessageServer struct {
-	p zcl.ProfileID
+var MessageCluster = zcl.Cluster{
+	ServerCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd:  map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-type MessageClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var MessageServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var MessageClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/

@@ -6,63 +6,41 @@ import (
 )
 
 // DoorLock
-// The door lock cluster provides an interface to a generic way to secure a door.
+const DoorLockID zcl.ClusterID = 257
 
-func NewDoorLockServer(profile zcl.ProfileID) *DoorLockServer { return &DoorLockServer{p: profile} }
-func NewDoorLockClient(profile zcl.ProfileID) *DoorLockClient { return &DoorLockClient{p: profile} }
-
-const DoorLockCluster zcl.ClusterID = 257
-
-type DoorLockServer struct {
-	p zcl.ProfileID
-
-	LockState                                *LockState
-	LockType                                 *LockType
-	ActuatorEnabled                          *ActuatorEnabled
-	NumberOfLogRecordsSupported              *NumberOfLogRecordsSupported
-	NumberOfTotalUsersSupported              *NumberOfTotalUsersSupported
-	NumberOfPinUsersSupported                *NumberOfPinUsersSupported
-	NumberOfRfidUsersSupported               *NumberOfRfidUsersSupported
-	NumberOfWeekdaySchedulesSupportedPerUser *NumberOfWeekdaySchedulesSupportedPerUser
-	NumberOfYearDaySchedulesSupportedPerUser *NumberOfYearDaySchedulesSupportedPerUser
-	NumberOfHolidaySchedulesSupported        *NumberOfHolidaySchedulesSupported
-	EnableLogging                            *EnableLogging
-	ZigbeeSecurityLevel                      *ZigbeeSecurityLevel
-	AlarmMask                                *AlarmMask
-	RfOperationEventMask                     *RfOperationEventMask
-	ManualOperationEventMask                 *ManualOperationEventMask
-	EventType                                *EventType
-	TiltAngle                                *TiltAngle
-	VibrationStrength                        *VibrationStrength
-	Orientation                              *Orientation
+var DoorLockCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{
+		LockDoorCommand:                    func() zcl.Command { return new(LockDoor) },
+		UnlockDoorCommand:                  func() zcl.Command { return new(UnlockDoor) },
+		GetLogRecordCommand:                func() zcl.Command { return new(GetLogRecord) },
+		GetLogRecordResponseCommand:        func() zcl.Command { return new(GetLogRecordResponse) },
+		OperationgEventNotificationCommand: func() zcl.Command { return new(OperationgEventNotification) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		LockStateAttr:                                func() zcl.Attr { return new(LockState) },
+		LockTypeAttr:                                 func() zcl.Attr { return new(LockType) },
+		ActuatorEnabledAttr:                          func() zcl.Attr { return new(ActuatorEnabled) },
+		NumberOfLogRecordsSupportedAttr:              func() zcl.Attr { return new(NumberOfLogRecordsSupported) },
+		NumberOfTotalUsersSupportedAttr:              func() zcl.Attr { return new(NumberOfTotalUsersSupported) },
+		NumberOfPinUsersSupportedAttr:                func() zcl.Attr { return new(NumberOfPinUsersSupported) },
+		NumberOfRfidUsersSupportedAttr:               func() zcl.Attr { return new(NumberOfRfidUsersSupported) },
+		NumberOfWeekdaySchedulesSupportedPerUserAttr: func() zcl.Attr { return new(NumberOfWeekdaySchedulesSupportedPerUser) },
+		NumberOfYearDaySchedulesSupportedPerUserAttr: func() zcl.Attr { return new(NumberOfYearDaySchedulesSupportedPerUser) },
+		NumberOfHolidaySchedulesSupportedAttr:        func() zcl.Attr { return new(NumberOfHolidaySchedulesSupported) },
+		EnableLoggingAttr:                            func() zcl.Attr { return new(EnableLogging) },
+		ZigbeeSecurityLevelAttr:                      func() zcl.Attr { return new(ZigbeeSecurityLevel) },
+		AlarmMaskAttr:                                func() zcl.Attr { return new(AlarmMask) },
+		RfOperationEventMaskAttr:                     func() zcl.Attr { return new(RfOperationEventMask) },
+		ManualOperationEventMaskAttr:                 func() zcl.Attr { return new(ManualOperationEventMask) },
+		EventTypeAttr:                                func() zcl.Attr { return new(EventType) },
+		TiltAngleAttr:                                func() zcl.Attr { return new(TiltAngle) },
+		VibrationStrengthAttr:                        func() zcl.Attr { return new(VibrationStrength) },
+		OrientationAttr:                              func() zcl.Attr { return new(Orientation) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
-
-func (s *DoorLockServer) LockDoor() *LockDoor         { return new(LockDoor) }
-func (s *DoorLockServer) UnlockDoor() *UnlockDoor     { return new(UnlockDoor) }
-func (s *DoorLockServer) GetLogRecord() *GetLogRecord { return new(GetLogRecord) }
-func (s *DoorLockServer) GetLogRecordResponse() *GetLogRecordResponse {
-	return new(GetLogRecordResponse)
-}
-func (s *DoorLockServer) OperationgEventNotification() *OperationgEventNotification {
-	return new(OperationgEventNotification)
-}
-
-type DoorLockClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var DoorLockServer = map[zcl.CommandID]func() zcl.Command{
-    LockDoorID: func() zcl.Command { return new(LockDoor) },
-    UnlockDoorID: func() zcl.Command { return new(UnlockDoor) },
-    GetLogRecordID: func() zcl.Command { return new(GetLogRecord) },
-    GetLogRecordResponseID: func() zcl.Command { return new(GetLogRecordResponse) },
-    OperationgEventNotificationID: func() zcl.Command { return new(OperationgEventNotification) },
-}
-
-var DoorLockClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
 
 // This command causes the lock device to lock the door.
 type LockDoor struct {
@@ -79,7 +57,7 @@ func (v LockDoor) ID() zcl.CommandID {
 }
 
 func (v LockDoor) Cluster() zcl.ClusterID {
-	return DoorLockCluster
+	return DoorLockID
 }
 
 func (v LockDoor) MnfCode() []byte {
@@ -109,7 +87,7 @@ func (v UnlockDoor) ID() zcl.CommandID {
 }
 
 func (v UnlockDoor) Cluster() zcl.ClusterID {
-	return DoorLockCluster
+	return DoorLockID
 }
 
 func (v UnlockDoor) MnfCode() []byte {
@@ -142,7 +120,7 @@ func (v GetLogRecord) ID() zcl.CommandID {
 }
 
 func (v GetLogRecord) Cluster() zcl.ClusterID {
-	return DoorLockCluster
+	return DoorLockID
 }
 
 func (v GetLogRecord) MnfCode() []byte {
@@ -202,7 +180,7 @@ func (v GetLogRecordResponse) ID() zcl.CommandID {
 }
 
 func (v GetLogRecordResponse) Cluster() zcl.ClusterID {
-	return DoorLockCluster
+	return DoorLockID
 }
 
 func (v GetLogRecordResponse) MnfCode() []byte {
@@ -314,7 +292,7 @@ func (v OperationgEventNotification) ID() zcl.CommandID {
 }
 
 func (v OperationgEventNotification) Cluster() zcl.ClusterID {
-	return DoorLockCluster
+	return DoorLockID
 }
 
 func (v OperationgEventNotification) MnfCode() []byte {
@@ -389,10 +367,12 @@ func (v *OperationgEventNotification) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+const LockStateAttr zcl.AttrID = 0
+
 type LockState zcl.Zenum8
 
-func (a LockState) ID() zcl.AttrID         { return 0 }
-func (a LockState) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a LockState) ID() zcl.AttrID         { return LockStateAttr }
+func (a LockState) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *LockState) Value() *LockState     { return a }
 func (a LockState) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -448,10 +428,12 @@ func (a LockState) IsUndefined() bool { return a == 0xFF }
 // SetUndefined sets LockState to Undefined (0xFF)
 func (a *LockState) SetUndefined() { *a = 0xFF }
 
+const LockTypeAttr zcl.AttrID = 1
+
 type LockType zcl.Zenum8
 
-func (a LockType) ID() zcl.AttrID         { return 1 }
-func (a LockType) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a LockType) ID() zcl.AttrID         { return LockTypeAttr }
+func (a LockType) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *LockType) Value() *LockType      { return a }
 func (a LockType) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -563,10 +545,12 @@ func (a LockType) IsDoorFurniture() bool { return a == 0x0A }
 // SetDoorFurniture sets LockType to Door Furniture (0x0A)
 func (a *LockType) SetDoorFurniture() { *a = 0x0A }
 
+const ActuatorEnabledAttr zcl.AttrID = 2
+
 type ActuatorEnabled zcl.Zbool
 
-func (a ActuatorEnabled) ID() zcl.AttrID           { return 2 }
-func (a ActuatorEnabled) Cluster() zcl.ClusterID   { return DoorLockCluster }
+func (a ActuatorEnabled) ID() zcl.AttrID           { return ActuatorEnabledAttr }
+func (a ActuatorEnabled) Cluster() zcl.ClusterID   { return DoorLockID }
 func (a *ActuatorEnabled) Value() *ActuatorEnabled { return a }
 func (a ActuatorEnabled) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -588,10 +572,12 @@ func (a ActuatorEnabled) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const NumberOfLogRecordsSupportedAttr zcl.AttrID = 16
+
 type NumberOfLogRecordsSupported zcl.Zu16
 
-func (a NumberOfLogRecordsSupported) ID() zcl.AttrID                       { return 16 }
-func (a NumberOfLogRecordsSupported) Cluster() zcl.ClusterID               { return DoorLockCluster }
+func (a NumberOfLogRecordsSupported) ID() zcl.AttrID                       { return NumberOfLogRecordsSupportedAttr }
+func (a NumberOfLogRecordsSupported) Cluster() zcl.ClusterID               { return DoorLockID }
 func (a *NumberOfLogRecordsSupported) Value() *NumberOfLogRecordsSupported { return a }
 func (a NumberOfLogRecordsSupported) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -613,10 +599,12 @@ func (a NumberOfLogRecordsSupported) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NumberOfTotalUsersSupportedAttr zcl.AttrID = 17
+
 type NumberOfTotalUsersSupported zcl.Zu16
 
-func (a NumberOfTotalUsersSupported) ID() zcl.AttrID                       { return 17 }
-func (a NumberOfTotalUsersSupported) Cluster() zcl.ClusterID               { return DoorLockCluster }
+func (a NumberOfTotalUsersSupported) ID() zcl.AttrID                       { return NumberOfTotalUsersSupportedAttr }
+func (a NumberOfTotalUsersSupported) Cluster() zcl.ClusterID               { return DoorLockID }
 func (a *NumberOfTotalUsersSupported) Value() *NumberOfTotalUsersSupported { return a }
 func (a NumberOfTotalUsersSupported) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -638,10 +626,12 @@ func (a NumberOfTotalUsersSupported) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NumberOfPinUsersSupportedAttr zcl.AttrID = 18
+
 type NumberOfPinUsersSupported zcl.Zu16
 
-func (a NumberOfPinUsersSupported) ID() zcl.AttrID                     { return 18 }
-func (a NumberOfPinUsersSupported) Cluster() zcl.ClusterID             { return DoorLockCluster }
+func (a NumberOfPinUsersSupported) ID() zcl.AttrID                     { return NumberOfPinUsersSupportedAttr }
+func (a NumberOfPinUsersSupported) Cluster() zcl.ClusterID             { return DoorLockID }
 func (a *NumberOfPinUsersSupported) Value() *NumberOfPinUsersSupported { return a }
 func (a NumberOfPinUsersSupported) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -663,10 +653,12 @@ func (a NumberOfPinUsersSupported) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NumberOfRfidUsersSupportedAttr zcl.AttrID = 19
+
 type NumberOfRfidUsersSupported zcl.Zu16
 
-func (a NumberOfRfidUsersSupported) ID() zcl.AttrID                      { return 19 }
-func (a NumberOfRfidUsersSupported) Cluster() zcl.ClusterID              { return DoorLockCluster }
+func (a NumberOfRfidUsersSupported) ID() zcl.AttrID                      { return NumberOfRfidUsersSupportedAttr }
+func (a NumberOfRfidUsersSupported) Cluster() zcl.ClusterID              { return DoorLockID }
 func (a *NumberOfRfidUsersSupported) Value() *NumberOfRfidUsersSupported { return a }
 func (a NumberOfRfidUsersSupported) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -688,10 +680,14 @@ func (a NumberOfRfidUsersSupported) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const NumberOfWeekdaySchedulesSupportedPerUserAttr zcl.AttrID = 20
+
 type NumberOfWeekdaySchedulesSupportedPerUser zcl.Zu8
 
-func (a NumberOfWeekdaySchedulesSupportedPerUser) ID() zcl.AttrID         { return 20 }
-func (a NumberOfWeekdaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a NumberOfWeekdaySchedulesSupportedPerUser) ID() zcl.AttrID {
+	return NumberOfWeekdaySchedulesSupportedPerUserAttr
+}
+func (a NumberOfWeekdaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *NumberOfWeekdaySchedulesSupportedPerUser) Value() *NumberOfWeekdaySchedulesSupportedPerUser {
 	return a
 }
@@ -715,10 +711,14 @@ func (a NumberOfWeekdaySchedulesSupportedPerUser) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const NumberOfYearDaySchedulesSupportedPerUserAttr zcl.AttrID = 21
+
 type NumberOfYearDaySchedulesSupportedPerUser zcl.Zu8
 
-func (a NumberOfYearDaySchedulesSupportedPerUser) ID() zcl.AttrID         { return 21 }
-func (a NumberOfYearDaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a NumberOfYearDaySchedulesSupportedPerUser) ID() zcl.AttrID {
+	return NumberOfYearDaySchedulesSupportedPerUserAttr
+}
+func (a NumberOfYearDaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *NumberOfYearDaySchedulesSupportedPerUser) Value() *NumberOfYearDaySchedulesSupportedPerUser {
 	return a
 }
@@ -742,10 +742,14 @@ func (a NumberOfYearDaySchedulesSupportedPerUser) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const NumberOfHolidaySchedulesSupportedAttr zcl.AttrID = 22
+
 type NumberOfHolidaySchedulesSupported zcl.Zu8
 
-func (a NumberOfHolidaySchedulesSupported) ID() zcl.AttrID                             { return 22 }
-func (a NumberOfHolidaySchedulesSupported) Cluster() zcl.ClusterID                     { return DoorLockCluster }
+func (a NumberOfHolidaySchedulesSupported) ID() zcl.AttrID {
+	return NumberOfHolidaySchedulesSupportedAttr
+}
+func (a NumberOfHolidaySchedulesSupported) Cluster() zcl.ClusterID                     { return DoorLockID }
 func (a *NumberOfHolidaySchedulesSupported) Value() *NumberOfHolidaySchedulesSupported { return a }
 func (a NumberOfHolidaySchedulesSupported) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
@@ -767,10 +771,12 @@ func (a NumberOfHolidaySchedulesSupported) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
+const EnableLoggingAttr zcl.AttrID = 32
+
 type EnableLogging zcl.Zbool
 
-func (a EnableLogging) ID() zcl.AttrID         { return 32 }
-func (a EnableLogging) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a EnableLogging) ID() zcl.AttrID         { return EnableLoggingAttr }
+func (a EnableLogging) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *EnableLogging) Value() *EnableLogging { return a }
 func (a EnableLogging) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -792,10 +798,12 @@ func (a EnableLogging) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const ZigbeeSecurityLevelAttr zcl.AttrID = 52
+
 type ZigbeeSecurityLevel zcl.Zenum8
 
-func (a ZigbeeSecurityLevel) ID() zcl.AttrID               { return 52 }
-func (a ZigbeeSecurityLevel) Cluster() zcl.ClusterID       { return DoorLockCluster }
+func (a ZigbeeSecurityLevel) ID() zcl.AttrID               { return ZigbeeSecurityLevelAttr }
+func (a ZigbeeSecurityLevel) Cluster() zcl.ClusterID       { return DoorLockID }
 func (a *ZigbeeSecurityLevel) Value() *ZigbeeSecurityLevel { return a }
 func (a ZigbeeSecurityLevel) MarshalZcl() ([]byte, error) {
 	return zcl.Zenum8(a).MarshalZcl()
@@ -835,10 +843,12 @@ func (a ZigbeeSecurityLevel) IsApsSecurity() bool { return a == 0x01 }
 // SetApsSecurity sets ZigbeeSecurityLevel to APS Security (0x01)
 func (a *ZigbeeSecurityLevel) SetApsSecurity() { *a = 0x01 }
 
+const AlarmMaskAttr zcl.AttrID = 64
+
 type AlarmMask zcl.Zbmp16
 
-func (a AlarmMask) ID() zcl.AttrID         { return 64 }
-func (a AlarmMask) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a AlarmMask) ID() zcl.AttrID         { return AlarmMaskAttr }
+func (a AlarmMask) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *AlarmMask) Value() *AlarmMask     { return a }
 func (a AlarmMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp16(a).MarshalZcl()
@@ -932,10 +942,12 @@ func (a *AlarmMask) SetForcedDoorOpenUnderDoorLockedCondition(b bool) {
 	*a = AlarmMask(zcl.BitmapSet([]byte(*a), 6, b))
 }
 
+const RfOperationEventMaskAttr zcl.AttrID = 66
+
 type RfOperationEventMask zcl.Zbmp16
 
-func (a RfOperationEventMask) ID() zcl.AttrID                { return 66 }
-func (a RfOperationEventMask) Cluster() zcl.ClusterID        { return DoorLockCluster }
+func (a RfOperationEventMask) ID() zcl.AttrID                { return RfOperationEventMaskAttr }
+func (a RfOperationEventMask) Cluster() zcl.ClusterID        { return DoorLockID }
 func (a *RfOperationEventMask) Value() *RfOperationEventMask { return a }
 func (a RfOperationEventMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp16(a).MarshalZcl()
@@ -1029,10 +1041,12 @@ func (a *RfOperationEventMask) SetUnlockSourceRfErrorInvalidSchedule(b bool) {
 	*a = RfOperationEventMask(zcl.BitmapSet([]byte(*a), 6, b))
 }
 
+const ManualOperationEventMaskAttr zcl.AttrID = 67
+
 type ManualOperationEventMask zcl.Zbmp16
 
-func (a ManualOperationEventMask) ID() zcl.AttrID                    { return 67 }
-func (a ManualOperationEventMask) Cluster() zcl.ClusterID            { return DoorLockCluster }
+func (a ManualOperationEventMask) ID() zcl.AttrID                    { return ManualOperationEventMaskAttr }
+func (a ManualOperationEventMask) Cluster() zcl.ClusterID            { return DoorLockID }
 func (a *ManualOperationEventMask) Value() *ManualOperationEventMask { return a }
 func (a ManualOperationEventMask) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp16(a).MarshalZcl()
@@ -1166,10 +1180,12 @@ func (a *ManualOperationEventMask) SetManualLockKeyOrThumbturn(b bool) {
 	*a = ManualOperationEventMask(zcl.BitmapSet([]byte(*a), 9, b))
 }
 
+const EventTypeAttr zcl.AttrID = 85
+
 type EventType zcl.Zu16
 
-func (a EventType) ID() zcl.AttrID         { return 85 }
-func (a EventType) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a EventType) ID() zcl.AttrID         { return EventTypeAttr }
+func (a EventType) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *EventType) Value() *EventType     { return a }
 func (a EventType) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1191,10 +1207,12 @@ func (a EventType) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const TiltAngleAttr zcl.AttrID = 1283
+
 type TiltAngle zcl.Zu16
 
-func (a TiltAngle) ID() zcl.AttrID         { return 1283 }
-func (a TiltAngle) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a TiltAngle) ID() zcl.AttrID         { return TiltAngleAttr }
+func (a TiltAngle) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *TiltAngle) Value() *TiltAngle     { return a }
 func (a TiltAngle) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -1216,10 +1234,12 @@ func (a TiltAngle) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const VibrationStrengthAttr zcl.AttrID = 1285
+
 type VibrationStrength zcl.Zu32
 
-func (a VibrationStrength) ID() zcl.AttrID             { return 1285 }
-func (a VibrationStrength) Cluster() zcl.ClusterID     { return DoorLockCluster }
+func (a VibrationStrength) ID() zcl.AttrID             { return VibrationStrengthAttr }
+func (a VibrationStrength) Cluster() zcl.ClusterID     { return DoorLockID }
 func (a *VibrationStrength) Value() *VibrationStrength { return a }
 func (a VibrationStrength) MarshalZcl() ([]byte, error) {
 	return zcl.Zu32(a).MarshalZcl()
@@ -1241,10 +1261,12 @@ func (a VibrationStrength) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
+const OrientationAttr zcl.AttrID = 1288
+
 type Orientation zcl.Zu48
 
-func (a Orientation) ID() zcl.AttrID         { return 1288 }
-func (a Orientation) Cluster() zcl.ClusterID { return DoorLockCluster }
+func (a Orientation) ID() zcl.AttrID         { return OrientationAttr }
+func (a Orientation) Cluster() zcl.ClusterID { return DoorLockID }
 func (a *Orientation) Value() *Orientation   { return a }
 func (a Orientation) MarshalZcl() ([]byte, error) {
 	return zcl.Zu48(a).MarshalZcl()

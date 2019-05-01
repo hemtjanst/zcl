@@ -6,42 +6,27 @@ import (
 )
 
 // MultistateInputBasic
-// Provides an interface for reading the value of a multistate measurement and accessing various characteristics of that measurement. The cluster is typically used to implement a sensor that measures a physical quantity that can take on one of a number of discrete states.
+const MultistateInputBasicID zcl.ClusterID = 18
 
-func NewMultistateInputBasicServer(profile zcl.ProfileID) *MultistateInputBasicServer {
-	return &MultistateInputBasicServer{p: profile}
-}
-func NewMultistateInputBasicClient(profile zcl.ProfileID) *MultistateInputBasicClient {
-	return &MultistateInputBasicClient{p: profile}
-}
-
-const MultistateInputBasicCluster zcl.ClusterID = 18
-
-type MultistateInputBasicServer struct {
-	p zcl.ProfileID
-
-	MultiInputNumberOfStates *MultiInputNumberOfStates
-	MultiInputOutOfService   *MultiInputOutOfService
-	MultiInputPresentValue   *MultiInputPresentValue
-	MultiInputStatusFlags    *MultiInputStatusFlags
+var MultistateInputBasicCluster = zcl.Cluster{
+	ServerCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
+		MultiInputNumberOfStatesAttr: func() zcl.Attr { return new(MultiInputNumberOfStates) },
+		MultiInputOutOfServiceAttr:   func() zcl.Attr { return new(MultiInputOutOfService) },
+		MultiInputPresentValueAttr:   func() zcl.Attr { return new(MultiInputPresentValue) },
+		MultiInputStatusFlagsAttr:    func() zcl.Attr { return new(MultiInputStatusFlags) },
+	},
+	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
+	SceneAttr:  []zcl.AttrID{},
 }
 
-type MultistateInputBasicClient struct {
-	p zcl.ProfileID
-}
-
-/*
-var MultistateInputBasicServer = map[zcl.CommandID]func() zcl.Command{
-}
-
-var MultistateInputBasicClient = map[zcl.CommandID]func() zcl.Command{
-}
-*/
+const MultiInputNumberOfStatesAttr zcl.AttrID = 74
 
 type MultiInputNumberOfStates zcl.Zu16
 
-func (a MultiInputNumberOfStates) ID() zcl.AttrID                    { return 74 }
-func (a MultiInputNumberOfStates) Cluster() zcl.ClusterID            { return MultistateInputBasicCluster }
+func (a MultiInputNumberOfStates) ID() zcl.AttrID                    { return MultiInputNumberOfStatesAttr }
+func (a MultiInputNumberOfStates) Cluster() zcl.ClusterID            { return MultistateInputBasicID }
 func (a *MultiInputNumberOfStates) Value() *MultiInputNumberOfStates { return a }
 func (a MultiInputNumberOfStates) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -63,10 +48,12 @@ func (a MultiInputNumberOfStates) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MultiInputOutOfServiceAttr zcl.AttrID = 81
+
 type MultiInputOutOfService zcl.Zbool
 
-func (a MultiInputOutOfService) ID() zcl.AttrID                  { return 81 }
-func (a MultiInputOutOfService) Cluster() zcl.ClusterID          { return MultistateInputBasicCluster }
+func (a MultiInputOutOfService) ID() zcl.AttrID                  { return MultiInputOutOfServiceAttr }
+func (a MultiInputOutOfService) Cluster() zcl.ClusterID          { return MultistateInputBasicID }
 func (a *MultiInputOutOfService) Value() *MultiInputOutOfService { return a }
 func (a MultiInputOutOfService) MarshalZcl() ([]byte, error) {
 	return zcl.Zbool(a).MarshalZcl()
@@ -88,10 +75,12 @@ func (a MultiInputOutOfService) String() string {
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
+const MultiInputPresentValueAttr zcl.AttrID = 85
+
 type MultiInputPresentValue zcl.Zu16
 
-func (a MultiInputPresentValue) ID() zcl.AttrID                  { return 85 }
-func (a MultiInputPresentValue) Cluster() zcl.ClusterID          { return MultistateInputBasicCluster }
+func (a MultiInputPresentValue) ID() zcl.AttrID                  { return MultiInputPresentValueAttr }
+func (a MultiInputPresentValue) Cluster() zcl.ClusterID          { return MultistateInputBasicID }
 func (a *MultiInputPresentValue) Value() *MultiInputPresentValue { return a }
 func (a MultiInputPresentValue) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
@@ -113,10 +102,12 @@ func (a MultiInputPresentValue) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
+const MultiInputStatusFlagsAttr zcl.AttrID = 111
+
 type MultiInputStatusFlags zcl.Zbmp8
 
-func (a MultiInputStatusFlags) ID() zcl.AttrID                 { return 111 }
-func (a MultiInputStatusFlags) Cluster() zcl.ClusterID         { return MultistateInputBasicCluster }
+func (a MultiInputStatusFlags) ID() zcl.AttrID                 { return MultiInputStatusFlagsAttr }
+func (a MultiInputStatusFlags) Cluster() zcl.ClusterID         { return MultistateInputBasicID }
 func (a *MultiInputStatusFlags) Value() *MultiInputStatusFlags { return a }
 func (a MultiInputStatusFlags) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
