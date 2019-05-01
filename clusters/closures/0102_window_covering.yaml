@@ -113,7 +113,7 @@ server:
         access: rw
         default: "0x0000"
       - id: "0x0017"
-        name: Mode
+        name: Window Covering Mode
         type: bmp8
         access: rw
         default: "0x0000"

@@ -14,7 +14,7 @@ server:
           "0x01": Illuminance below target
           "0x02": Illuminance above target
     - id: "0x0001"
-      name: Light Sensor Type
+      name: Illuminance Sensor Type
       type: enum8
       access: r
       range: 0x00,0xfe

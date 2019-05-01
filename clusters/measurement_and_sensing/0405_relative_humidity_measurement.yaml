@@ -3,7 +3,7 @@ name: Relative humidity measurement
 server:
     attr:
       - id: "0x0000"
-        name: Measured Value
+        name: Measured Relative humidity
         type: u16
         access: r
         default: "0"
@@ -11,19 +11,19 @@ server:
         report: true
         range: 0x0000,0x2710
       - id: "0x0001"
-        name: Min Measured Value
+        name: Min Measured Relative humidity
         type: u16
         access: r
         required: true
         range: 0x0000,0x270f
       - id: "0x0002"
-        name: Max Measured Value
+        name: Max Measured Relative humidity
         type: u16
         access: r
         required: true
         range: 0x0001,0x2710
       - id: "0x0003"
-        name: Tolerance
+        name: Relative humidity Tolerance
         type: u16
         access: r
         report: true

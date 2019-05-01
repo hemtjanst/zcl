@@ -109,13 +109,13 @@ server:
         range: 0x0001,0xffff
         default: "0x0001"
       - id: "0x0204"
-        name: DC Current Multiplier
+        name: DC Power Multiplier
         type: u16
         access: r
         range: 0x0001,0xffff
         default: "0x0001"
       - id: "0x0205"
-        name: DC Current Divisor
+        name: DC Power Divisor
         type: u16
         access: r
         range: 0x0001,0xffff

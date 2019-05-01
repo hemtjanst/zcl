@@ -5,27 +5,27 @@ description: The server cluster provides an interface to illuminance measurement
 server:
     attr:
       - id: "0x0000"
-        name: Measured Value
+        name: Measured Illuminance
         type: u16
         access: r
         default: "0"
         required: true
         range: 0x0000,0xffff
       - id: "0x0001"
-        name: Min Measured Value
+        name: Min Measured Illuminance
         type: u16
         access: r
         required: true
         report: true
         range: 0x0001,0xfffd
       - id: "0x0002"
-        name: Max Measured Value
+        name: Max Measured Illuminance
         type: u16
         access: r
         required: true
         range: 0x0002,0xfffe
       - id: "0x0003"
-        name: Tolerance
+        name: Illuminance Tolerance
         type: u16
         access: r
         range: 0x0000,0x0800

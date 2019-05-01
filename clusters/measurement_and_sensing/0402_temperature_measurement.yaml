@@ -5,7 +5,7 @@ description: The server cluster provides an interface to temperature measurement
 server:
     attr:
       - id: "0x0000"
-        name: Measured Value
+        name: Measured Temperature
         type: s16
         access: r
         default: "0"
@@ -13,19 +13,19 @@ server:
         report: true
         range: 0x954d,0x7fff
       - id: "0x0001"
-        name: Min Measured Value
+        name: Min Measured Temperature
         type: s16
         access: r
         required: true
         range: 0x954d,0x7ffe
       - id: "0x0002"
-        name: Max Measured Value
+        name: Max Measured Temperature
         type: s16
         access: r
         required: true
         range: 0x954e,0x7fff
       - id: "0x0003"
-        name: Tolerance
+        name: Temperature Tolerance
         type: u16
         access: r
         report: true

@@ -81,12 +81,12 @@ server:
             "0x04": Pressure Metering
             "0x05": Heat Metering
             "0x06": Cooling Metering
-            "0x128": Mirrored Gas Metering
-            "0x129": Mirrored Water Metering
-            "0x130": Mirrored Thermal Metering
-            "0x131": Mirrored Pressure Metering
-            "0x132": Mirrored Heat Metering
-            "0x133": Mirrored Cooling Metering
+            "0x80": Mirrored Gas Metering
+            "0x81": Mirrored Water Metering
+            "0x82": Mirrored Thermal Metering
+            "0x83": Mirrored Pressure Metering
+            "0x84": Mirrored Heat Metering
+            "0x85": Mirrored Cooling Metering
       - id: "0x0400"
         name: Instantaneous Demand
         type: s24
