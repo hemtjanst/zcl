@@ -456,6 +456,86 @@ server:
         type: u16
         access: r
         default: "0x0001"
+    - id: "0x0700"
+      name: DC Overload Alarms Mask
+      type: bmp8
+      access: rw
+      default: "0x00"
+      range: 0x00,0x03
+      bits:
+        0: Voltage Overload
+        1: Current Overload
+    - id: "0x0701"
+      name: DC Voltage Overload
+      type: s16
+      access: r
+      default: "0xFFFF"
+    - id: "0x0702"
+      name: DC Current Overload
+      type: s16
+      access: r
+      default: "0xFFFF"
+    - id: "0x0800"
+      name: AC Overload Alarms Mask
+      type: bmp16
+      access: rw
+      default: "0x0000"
+      range: 0x0000,0x0300
+      bits:
+        0: Voltage Overload
+        1: Current Overload
+        2: Active Power Overload
+        3: Reactive Power Overload
+        4: Average RMS Overvoltage
+        5: Average RMS Undervoltage
+        6: RMS Extreme Overvoltage
+        7: RMS Extreme Undervoltage
+        8: RMS Voltage Sag
+        9: RMS Voltage Swell
+    - id: "0x0801"
+      name: AC Voltage Overload
+      type: s16
+      access: r
+      default: "0xFFFF"
+    - id: "0x0802"
+      name: AC Current Overload
+      type: s16
+      access: r
+      default: "0xFFFF"
+    - id: "0x0803"
+      name: AC Active Power Overload
+      type: s16
+      access: r
+      default: "0xFFFF"
+    - id: "0x0804"
+      name: AC Reactive Power Overload
+      type: s16
+      access: r
+      default: "0xFFFF"
+    - id: "0x0805"
+      name: Average RMS Overvoltage
+      type: s16
+      access: r
+    - id: "0x0806"
+      name: Average RMS Undervoltage
+      type: s16
+      access: r
+    - id: "0x0807"
+      name: RMS Extreme Overvoltage
+      type: s16
+      access: r
+    - id: "0x0808"
+      name: RMS Extreme Undervoltage
+      type: s16
+      access: r
+    - id: "0x0809"
+      name: RMS Voltage Sag
+      type: s16
+      access: r
+    - id: "0x080A"
+      name: RMS Voltage Swell
+      type: s16
+      access: r
     - id: "0x0901"
       name: Line Current Phase B
       type: u16
