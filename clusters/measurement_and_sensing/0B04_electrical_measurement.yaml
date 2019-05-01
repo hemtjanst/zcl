@@ -456,4 +456,286 @@ server:
         type: u16
         access: r
         default: "0x0001"
+    - id: "0x0901"
+      name: Line Current Phase B
+      type: u16
+      access: r
+      default: "0xffff"
+      range: 0x0000,0xFFFF
+      unit: A
+    - id: "0x0902"
+      name: Active Current Phase B
+      type: s16
+      access: r
+      default: "0x8000"
+      unit: A
+    - id: "0x0903"
+      name: Reactive Current Phase B
+      type: s16
+      access: r
+      default: "0x8000"
+      unit: A
+    - id: "0x0905"
+        name: RMS Voltage Phase B
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: V
+    - id: "0x0906"
+        name: RMS Voltage Min Phase B
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: V
+    - id: "0x0907"
+        name: RMS Voltage Max Phase B
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: V
+    - id: "0x0908"
+        name: RMS Current Phase B
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: A
+    - id: "0x0909"
+        name: RMS Current Min Phase B
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: A
+    - id: "0x090a"
+        name: RMS Current Max Phase B
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: A
+    - id: "0x090B"
+        name: Active Power Phase B
+        description: Represents the Phase B, current demand of active power delivered
+          or received at the premises, in Watts (W). Positive values indicate power
+          delivered to the premises where negative values indicate power received
+          from the premises.
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: W
+    - id: "0x090c"
+        name: Active Power Min Phase B
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: W
+    - id: "0x090d"
+        name: Active Power Max Phase B
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: W
+    - id: "0x090E"
+        name: Reactive Power Phase B
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: VAr
+    - id: "0x090F"
+        name: Apparent Power Phase B
+        type: u16
+        access: r
+        default: "0xFFFF"
+        unit: VA
+    - id: "0x0910"
+        name: Power Factor Phase B
+        type: s8
+        access: r
+        default: "0x00"
+        range: -100,100
+    - id: "0x0911"
+      name: Average RMS Voltage Measurement Period Phase B
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0912"
+      name: Average RMS Overvoltage Counter Phase B
+      type: u16
+      access: rw
+      default: "0x0000"
+    - id: "0x0913"
+      name: Average RMS Undervoltage Counter Phase B
+      type: u16
+      access: rw
+      default: "0x0000"
+    - id: "0x0914"
+      name: RMS Extreme Overvoltage Period Phase B
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0915"
+      name: RMS Extreme Undervoltage Period Phase B
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0916"
+      name: RMS Voltage Sag Period Phase B
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0917"
+      name: RMS Voltage Swell Period Phase B
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0A01"
+      name: Line Current Phase C
+      type: u16
+      access: r
+      default: "0xffff"
+      range: 0x0000,0xFFFF
+      unit: A
+    - id: "0x0A02"
+      name: Active Current Phase C
+      type: s16
+      access: r
+      default: "0x8000"
+      unit: A
+    - id: "0x0A03"
+      name: Reactive Current Phase C
+      type: s16
+      access: r
+      default: "0x8000"
+      unit: A
+    - id: "0x0A05"
+        name: RMS Voltage Phase C
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: V
+    - id: "0x0A06"
+        name: RMS Voltage Min Phase C
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: V
+    - id: "0x0A07"
+        name: RMS Voltage Max Phase C
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: V
+    - id: "0x0A08"
+        name: RMS Current Phase C
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: A
+    - id: "0x0A09"
+        name: RMS Current Min Phase C
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: A
+    - id: "0x0A0a"
+        name: RMS Current Max Phase C
+        type: u16
+        access: r
+        default: "0xFFFF"
+        range: 0x0000,0xFFFF
+        unit: A
+    - id: "0x0A0B"
+        name: Active Power Phase C
+        description: Represents the Phase C, current demand of active power delivered
+          or received at the premises, in Watts (W). Positive values indicate power
+          delivered to the premises where negative values indicate power received
+          from the premises.
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: W
+    - id: "0x0A0c"
+        name: Active Power Min Phase C
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: W
+    - id: "0x0A0d"
+        name: Active Power Max Phase C
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: W
+    - id: "0x0A0E"
+        name: Reactive Power Phase C
+        type: s16
+        access: r
+        default: "0x8000"
+        unit: VAr
+    - id: "0x0A0F"
+        name: Apparent Power Phase C
+        type: u16
+        access: r
+        default: "0xFFFF"
+        unit: VA
+    - id: "0x0A10"
+        name: Power Factor Phase C
+        type: s8
+        access: r
+        default: "0x00"
+        range: -100,100
+    - id: "0x0A11"
+      name: Average RMS Voltage Measurement Period Phase C
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0A12"
+      name: Average RMS Overvoltage Counter Phase C
+      type: u16
+      access: rw
+      default: "0x0000"
+    - id: "0x0A13"
+      name: Average RMS Undervoltage Counter Phase C
+      type: u16
+      access: rw
+      default: "0x0000"
+    - id: "0x0A14"
+      name: RMS Extreme Overvoltage Period Phase C
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0A15"
+      name: RMS Extreme Undervoltage Period Phase C
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0A16"
+      name: RMS Voltage Sag Period Phase C
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
+    - id: "0x0A17"
+      name: RMS Voltage Swell Period Phase C
+      type: u16
+      access: rw
+      default: "0x0000"
+      unit: s
 client: {}
