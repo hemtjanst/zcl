@@ -10,12 +10,13 @@ const IasZoneID zcl.ClusterID = 1280
 
 var IasZoneCluster = zcl.Cluster{
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
-		ZoneEnrollResponseCommand:           func() zcl.Command { return new(ZoneEnrollResponse) },
-		InitiateNormalOperationModeCommand:  func() zcl.Command { return new(InitiateNormalOperationMode) },
+		ZoneEnrollResponseCommand:          func() zcl.Command { return new(ZoneEnrollResponse) },
+		InitiateNormalOperationModeCommand: func() zcl.Command { return new(InitiateNormalOperationMode) },
+	},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
 		ZoneStatusChangeNotificationCommand: func() zcl.Command { return new(ZoneStatusChangeNotification) },
 		ZoneEnrollRequestCommand:            func() zcl.Command { return new(ZoneEnrollRequest) },
 	},
-	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
 	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
 		ZoneStateAttr:     func() zcl.Attr { return new(ZoneState) },
 		ZoneTypeAttr:      func() zcl.Attr { return new(ZoneType) },

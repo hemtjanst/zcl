@@ -12,11 +12,13 @@ var DoorLockCluster = zcl.Cluster{
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
 		LockDoorCommand:                    func() zcl.Command { return new(LockDoor) },
 		UnlockDoorCommand:                  func() zcl.Command { return new(UnlockDoor) },
+		ToggleLockCommand:                  func() zcl.Command { return new(ToggleLock) },
 		GetLogRecordCommand:                func() zcl.Command { return new(GetLogRecord) },
-		GetLogRecordResponseCommand:        func() zcl.Command { return new(GetLogRecordResponse) },
 		OperationgEventNotificationCommand: func() zcl.Command { return new(OperationgEventNotification) },
 	},
-	ClientCmd: map[zcl.CommandID]func() zcl.Command{},
+	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		GetLogRecordResponseCommand: func() zcl.Command { return new(GetLogRecordResponse) },
+	},
 	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
 		LockStateAttr:                                func() zcl.Attr { return new(LockState) },
 		LockTypeAttr:                                 func() zcl.Attr { return new(LockType) },
@@ -102,6 +104,36 @@ func (v *UnlockDoor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+// This command causes the lock device to toggle.
+type ToggleLock struct {
+}
+
+const ToggleLockCommand zcl.CommandID = 2
+
+func (v *ToggleLock) Values() []zcl.Val {
+	return []zcl.Val{}
+}
+
+func (v ToggleLock) ID() zcl.CommandID {
+	return ToggleLockCommand
+}
+
+func (v ToggleLock) Cluster() zcl.ClusterID {
+	return DoorLockID
+}
+
+func (v ToggleLock) MnfCode() []byte {
+	return []byte{}
+}
+
+func (v ToggleLock) MarshalZcl() ([]byte, error) {
+	return nil, nil
+}
+
+func (v *ToggleLock) UnmarshalZcl(b []byte) ([]byte, error) {
+	return b, nil
+}
+
 // Request a log record.
 type GetLogRecord struct {
 	LogIndex zcl.Zu16
@@ -144,6 +176,109 @@ func (v *GetLogRecord) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
 	if b, err = (&v.LogIndex).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// The door lock server sends out operation event notification when the event is triggered by the various event sources.
+type OperationgEventNotification struct {
+	OperationEventSource zcl.Zu8
+	OperationEventCode   zcl.Zu8
+	UserId               zcl.Zu16
+	Pin                  zcl.Zu8
+	ZigbeeLocalTime      zcl.Zu32
+	Data                 zcl.Zcstring
+}
+
+const OperationgEventNotificationCommand zcl.CommandID = 32
+
+func (v *OperationgEventNotification) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.OperationEventSource,
+		&v.OperationEventCode,
+		&v.UserId,
+		&v.Pin,
+		&v.ZigbeeLocalTime,
+		&v.Data,
+	}
+}
+
+func (v OperationgEventNotification) ID() zcl.CommandID {
+	return OperationgEventNotificationCommand
+}
+
+func (v OperationgEventNotification) Cluster() zcl.ClusterID {
+	return DoorLockID
+}
+
+func (v OperationgEventNotification) MnfCode() []byte {
+	return []byte{}
+}
+
+func (v OperationgEventNotification) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	var err error
+
+	if tmp, err = v.OperationEventSource.MarshalZcl(); err != nil {
+		return nil, err
+	}
+	data = append(data, tmp...)
+
+	if tmp, err = v.OperationEventCode.MarshalZcl(); err != nil {
+		return nil, err
+	}
+	data = append(data, tmp...)
+
+	if tmp, err = v.UserId.MarshalZcl(); err != nil {
+		return nil, err
+	}
+	data = append(data, tmp...)
+
+	if tmp, err = v.Pin.MarshalZcl(); err != nil {
+		return nil, err
+	}
+	data = append(data, tmp...)
+
+	if tmp, err = v.ZigbeeLocalTime.MarshalZcl(); err != nil {
+		return nil, err
+	}
+	data = append(data, tmp...)
+
+	if tmp, err = v.Data.MarshalZcl(); err != nil {
+		return nil, err
+	}
+	data = append(data, tmp...)
+
+	return data, nil
+}
+
+func (v *OperationgEventNotification) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+
+	if b, err = (&v.OperationEventSource).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.OperationEventCode).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.UserId).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.Pin).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.ZigbeeLocalTime).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.Data).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -258,109 +393,6 @@ func (v *GetLogRecordResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	if b, err = (&v.Pin).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	return b, nil
-}
-
-// The door lock server sends out operation event notification when the event is triggered by the various event sources.
-type OperationgEventNotification struct {
-	OperationEventSource zcl.Zu8
-	OperationEventCode   zcl.Zu8
-	UserId               zcl.Zu16
-	Pin                  zcl.Zu8
-	ZigbeeLocalTime      zcl.Zu32
-	Data                 zcl.Zcstring
-}
-
-const OperationgEventNotificationCommand zcl.CommandID = 32
-
-func (v *OperationgEventNotification) Values() []zcl.Val {
-	return []zcl.Val{
-		&v.OperationEventSource,
-		&v.OperationEventCode,
-		&v.UserId,
-		&v.Pin,
-		&v.ZigbeeLocalTime,
-		&v.Data,
-	}
-}
-
-func (v OperationgEventNotification) ID() zcl.CommandID {
-	return OperationgEventNotificationCommand
-}
-
-func (v OperationgEventNotification) Cluster() zcl.ClusterID {
-	return DoorLockID
-}
-
-func (v OperationgEventNotification) MnfCode() []byte {
-	return []byte{}
-}
-
-func (v OperationgEventNotification) MarshalZcl() ([]byte, error) {
-	var data []byte
-	var tmp []byte
-	var err error
-
-	if tmp, err = v.OperationEventSource.MarshalZcl(); err != nil {
-		return nil, err
-	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.OperationEventCode.MarshalZcl(); err != nil {
-		return nil, err
-	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.UserId.MarshalZcl(); err != nil {
-		return nil, err
-	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Pin.MarshalZcl(); err != nil {
-		return nil, err
-	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ZigbeeLocalTime.MarshalZcl(); err != nil {
-		return nil, err
-	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Data.MarshalZcl(); err != nil {
-		return nil, err
-	}
-	data = append(data, tmp...)
-
-	return data, nil
-}
-
-func (v *OperationgEventNotification) UnmarshalZcl(b []byte) ([]byte, error) {
-	var err error
-
-	if b, err = (&v.OperationEventSource).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.OperationEventCode).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.UserId).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.Pin).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.ZigbeeLocalTime).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.Data).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
