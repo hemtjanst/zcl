@@ -16,7 +16,7 @@ server:
         required: true
         report: true
         scene: 1
-        unit: "%"
+        unit: Percent
         multiplier: 2.54
         range: 0x00,0xfe
       - id: "0x0001"
@@ -27,7 +27,7 @@ server:
         access: r
         default: "0x0000"
         multiplier: 10
-        unit: s
+        unit: Seconds
         range: 0x0000,0xffff
       - id: "0x000F"
         name: Unknown
@@ -44,7 +44,7 @@ server:
         type: u16
         access: rw
         multiplier: 10
-        unit: s
+        unit: Seconds
         default: "0x0000"
         range: 0x0000,0xffff
       - id: "0x0011"
@@ -55,7 +55,7 @@ server:
             or is set to 0xff, it has no effect.
         type: u8
         access: rw
-        unit: "%"
+        unit: Percent
         multiplier: 2.54
         default: "0xfe"
         range: 0x00,0xfe
@@ -64,27 +64,27 @@ server:
         type: u16
         access: rw
         multiplier: 10
-        unit: s
+        unit: Seconds
         range: 0x0000,0xfffe
       - id: "0x0013"
         name: Off Transition Time
         type: u16
         access: rw
         multiplier: 10
-        unit: s
+        unit: Seconds
         range: 0x0000,0xfffe
       - id: "0x0014"
         name: Default Move Rate
         type: u8
         access: rw
         range: 0x00,0xfe
-        unit: "%/s"
+        unit: PercentPerSecond
         multiplier: 2.54
       - id: "0x4000"
         name: PowerOn Level
         type: u8
         access: rw
-        unit: "%"
+        unit: Percent
         multiplier: 2.54
     cmd:
       - id: "0x00"
@@ -98,7 +98,7 @@ server:
             default: "0x00"
             required: true
             range: 0x00,0xfe
-            unit: "%"
+            unit: Percent
             multiplier: 2.54
           - id: "0x0001"
             name: Transistion time
@@ -106,7 +106,7 @@ server:
             default: "0x0000"
             required: true
             multiplier: 10
-            unit: s
+            unit: Seconds
       - id: "0x01"
         name: Move
         dir: recv
@@ -125,7 +125,7 @@ server:
             type: u8
             default: "0x00"
             required: true
-            unit: "%/s"
+            unit: PercentPerSecond
             multiplier: 2.54
 
       - id: "0x02"
@@ -146,7 +146,7 @@ server:
             type: u8
             default: "0x00"
             required: true
-            unit: "%"
+            unit: Percent
             multiplier: 2.54
           - id: "0x0002"
             name: Transition time
@@ -170,7 +170,7 @@ server:
             default: "0x00"
             required: true
             range: 0x00,0xff
-            unit: "%"
+            unit: Percent
             multiplier: 2.54
           - id: "0x0001"
             name: Transistion time
@@ -197,7 +197,7 @@ server:
             type: u8
             default: "0x00"
             required: true
-            unit: "%/s"
+            unit: PercentPerSecond
             multiplier: 2.54
       - id: "0x06"
         name: Step (with On/Off)
@@ -217,7 +217,7 @@ server:
             type: u8
             default: "0x00"
             required: true
-            unit: "%"
+            unit: Percent
             multiplier: 2.54
           - id: "0x0002"
             name: Transition time

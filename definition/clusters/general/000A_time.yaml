@@ -27,7 +27,7 @@ server:
         type: s32
         access: rw
         default: "0"
-        unit: s
+        unit: Seconds
         range: -86400,86400
       - id: "0x0003"
         name: Dst Start
@@ -47,7 +47,7 @@ server:
         access: rw
         default: "0"
         range: -86400,86400
-        unit: s
+        unit: Seconds
       - id: "0x0006"
         name: Standard Time
         description: Local time (without DST offset)

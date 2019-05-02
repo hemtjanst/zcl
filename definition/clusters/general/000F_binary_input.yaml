@@ -1,11 +1,15 @@
 id: "0x000F"
 name: Binary Input (Basic)
-description: 'The Binary Input (Basic) cluster provides an interface for reading the
+description: The Binary Input (Basic) cluster provides an interface for reading the
     value of a binary measurement and accessing various characteristics of that measurement.
     The cluster is typically used to implement a sensor that measures a two-state
-    physical quantity. '
+    physical quantity.
 server:
     attr:
+      - id: "0x0004"
+        name: Binary Input Active Text
+        type: cstring
+        access: rw
       - id: "0x0051"
         name: Binary Input Out of Service
         type: bool

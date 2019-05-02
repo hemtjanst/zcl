@@ -71,7 +71,7 @@ server:
             default: "0x0000"
             required: true
             showas: hex
-            unit: s
+            unit: Seconds
           - id: "0x0003"
             name: Scene Name
             type: cstring
@@ -214,7 +214,7 @@ server:
             default: "0x0000"
             required: true
             showas: hex
-            unit: s
+            unit: Seconds
             multiplier: 0.1
           - id: "0x0003"
             name: Scene Name
@@ -330,7 +330,7 @@ client:
             default: "0x0000"
             required: true
             showas: dec
-            unit: s
+            unit: Seconds
           - id: "0x0004"
             name: Scene Name
             type: cstring
@@ -482,7 +482,7 @@ client:
             type: u16
             default: "0x00"
             required: true
-            unit: s
+            unit: Seconds
             multiplier: 0.1
             showas: dec
           - id: "0x0004"

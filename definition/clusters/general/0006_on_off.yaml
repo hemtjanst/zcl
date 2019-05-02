@@ -26,14 +26,14 @@ server:
         type: u16
         access: r
         default: "0"
-        unit: s
+        unit: Seconds
         multiplier: 10
       - id: "0x4002"
         name: OffWaitTime
         type: u16
         access: r
         default: "0"
-        unit: s
+        unit: Seconds
         multiplier: 10
       - id: "0x4003"
         name: PowerOn OnOff
@@ -123,7 +123,7 @@ server:
             type: u16
             default: "0x0000"
             required: true
-            unit: s
+            unit: Seconds
             multiplier: 10
           - id: "0x0002"
             name: Off wait time
@@ -132,6 +132,6 @@ server:
             type: u16
             default: "0x0000"
             required: true
-            unit: s
+            unit: Seconds
             multiplier: 10
 client: {}

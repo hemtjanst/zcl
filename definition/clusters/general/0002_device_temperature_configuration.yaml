@@ -9,20 +9,20 @@ server:
         name: Current Temperature
         type: s16
         range: -200,200
-        unit: °C
+        unit: DegreesCelsius
         access: r
         require: true
       - id: "0x0001"
         name: Min Temp Experienced
         type: s16
         range: -200,200
-        unit: °C
+        unit: DegreesCelsius
         access: r
       - id: "0x0002"
         name: Max Temp Experienced
         type: s16
         range: -200,200
-        unit: °C
+        unit: DegreesCelsius
         access: r
       - id: "0x0003"
         name: Over Temp Total Dwell
@@ -44,7 +44,7 @@ server:
             than the time specified by low temp dwell, an alarm will be triggered
         type: s16
         range: -200,200
-        unit: °C
+        unit: DegreesCelsius
         access: rw
       - id: "0x0012"
         name: High Temp Threshold
@@ -53,14 +53,14 @@ server:
             than the time specified by high temp dwell, an alarm will be triggered
         type: s16
         range: -200,200
-        unit: °C
+        unit: DegreesCelsius
         access: rw
       - id: "0x0013"
         name: Low Temp Dwell Trip Point
-        unit: s
+        unit: Seconds
         type: u24
       - id: "0x0014"
         name: High Temp Dwell Trip Point
-        unit: s
+        unit: Seconds
         type: u24
 client: {}

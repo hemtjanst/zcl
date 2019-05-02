@@ -26,14 +26,14 @@ server:
     - id: "0x0002"
       name: Location Age
       type: u16
-      unit: s
+      unit: Seconds
       access: r
     - id: "0x0003"
       name: Quality Measure
       type: u8
       range: 0x00,0x64
       access: r
-      unit: "%"
+      unit: Percents
     - id: "0x0004"
       name: Number of Devices
       type: u8
@@ -43,7 +43,7 @@ server:
       type: s16
       range: -32768,32767
       access: rw
-      unit: m
+      unit: Meters
       multiplier: 10
       required: true
     - id: "0x0011"
@@ -51,7 +51,7 @@ server:
       type: s16
       range: -32768,32767
       access: rw
-      unit: m
+      unit: Meters
       multiplier: 10
       required: true
     - id: "0x0012"
@@ -59,7 +59,7 @@ server:
       type: s16
       range: -32768,32767
       access: rw
-      unit: m
+      unit: Meters
       multiplier: 10
       required: false
     - id: "0x0013"
@@ -67,7 +67,7 @@ server:
       type: s16
       range: -32768,32767
       access: rw
-      unit: dBm
+      unit: DecibelMilliWatts
       multiplier: 100
       invalid: 0x8000
       required: true
@@ -83,12 +83,12 @@ server:
       name: Reporting Period
       type: u16
       access: rw
-      unit: s
+      unit: Seconds
     - id: "0x0016"
       name: Calculation Period
       type: u16
       access: rw
-      unit: s
+      unit: Seconds
     - id: "0x0017"
       name: Number RSSI Measurements
       description: Number of measurements to use to generate one location estimate
@@ -106,7 +106,7 @@ server:
             type: s16
             range: -32768,32767
             access: rw
-            unit: m
+            unit: Meters
             multiplier: 10
             required: true
           - id: "0x0001"
@@ -114,7 +114,7 @@ server:
             type: s16
             range: -32768,32767
             access: rw
-            unit: m
+            unit: Meters
             multiplier: 10
             required: true
           - id: "0x0002"
@@ -122,7 +122,7 @@ server:
             type: s16
             range: -32768,32767
             access: rw
-            unit: m
+            unit: Meters
             multiplier: 10
             required: false
           - id: "0x0003"
@@ -130,7 +130,7 @@ server:
             type: s16
             range: -32768,32767
             access: rw
-            unit: dBm
+            unit: DecibelMilliWatts
             multiplier: 100
             invalid: 0x8000
             required: true
@@ -151,7 +151,7 @@ server:
             name: Power
             type: s16
             range: -32768,32767
-            unit: dBm
+            unit: DecibelMilliWatts
             multiplier: 100
             invalid: 0x8000
             required: true
@@ -165,7 +165,7 @@ server:
           - id: "0x0002"
             name: Calculation Period
             type: u16
-            unit: s
+            unit: Seconds
           - id: "0x0003"
             name: Number RSSI Measurements
             description: Number of measurements to use to generate one location estimate
@@ -174,7 +174,7 @@ server:
           - id: "0x0004"
             name: Reporting Period
             type: u16
-            unit: s
+            unit: Seconds
       - id: "0x02"
         name: Get Device Configuration
         required: m
@@ -216,24 +216,24 @@ server:
             name: X Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0002"
             name: Y Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0003"
             name: Z Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0004"
             name: RSSI
             type: s8
-            unit: dBm
+            unit: DecibelMilliWatts
           - id: "0x0005"
             name: Number RSSI Measurements
             type: u8
@@ -253,7 +253,7 @@ server:
           - id: "0x0002"
             name: Calculation Period
             type: u16
-            unit: s
+            unit: Seconds
       - id: "0x06"
         name: Anchor Node Announce
         required: o
@@ -265,19 +265,19 @@ server:
             name: X Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0002"
             name: Y Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0003"
             name: Z Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
       - id: "0x40"
         name: Distance measure
@@ -314,7 +314,7 @@ client:
             name: Power
             type: s16
             range: -32768,32767
-            unit: dBm
+            unit: DecibelMilliWatts
             multiplier: 100
             invalid: 0x8000
             cond:
@@ -332,7 +332,7 @@ client:
           - id: "0x0003"
             name: Calculation Period
             type: u16
-            unit: s
+            unit: Seconds
             cond:
               - attr: 0x0000
                 value: 0x00
@@ -347,7 +347,7 @@ client:
           - id: "0x0005"
             name: Reporting Period
             type: u16
-            unit: s
+            unit: Seconds
             cond:
               - attr: 0x0000
                 value: 0x00
@@ -373,7 +373,7 @@ client:
             name: X Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
             cond:
               - attr: 0x0000
@@ -382,7 +382,7 @@ client:
             name: Y Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
             cond:
               - attr: 0x0000
@@ -391,7 +391,7 @@ client:
             name: Z Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
             cond:
               - attr: 0x0000
@@ -404,7 +404,7 @@ client:
             type: s16
             range: -32768,32767
             access: rw
-            unit: dBm
+            unit: DecibelMilliWatts
             multiplier: 100
             invalid: 0x8000
             cond:
@@ -439,7 +439,7 @@ client:
             name: Quality Measure
             type: u8
             range: 0x00,0x64
-            unit: "%"
+            unit: Percent
             cond:
               - attr: 0x0000
                 value: 0x00
@@ -449,7 +449,7 @@ client:
           - id: "0x0009"
             name: Location Age
             type: u16
-            unit: s
+            unit: Seconds
             cond:
               - attr: 0x0000
                 value: 0x00
@@ -471,19 +471,19 @@ client:
             name: X Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0002"
             name: Y Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0003"
             name: Z Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
             cond:
               - attr: 0x0000
@@ -494,7 +494,7 @@ client:
             type: s16
             range: -32768,32767
             access: rw
-            unit: dBm
+            unit: DecibelMilliWatts
             multiplier: 100
             invalid: 0x8000
           - id: "0x0005"
@@ -521,7 +521,7 @@ client:
             name: Quality Measure
             type: u8
             range: 0x00,0x64
-            unit: "%"
+            unit: Percent
             cond:
               - attr: 0x0000
                 mask: 0x01
@@ -529,7 +529,7 @@ client:
           - id: "0x0008"
             name: Location Age
             type: u16
-            unit: s
+            unit: Seconds
             cond:
               - attr: 0x0000
                 mask: 0x01
@@ -549,19 +549,19 @@ client:
             name: X Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0002"
             name: Y Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
           - id: "0x0003"
             name: Z Coordinate
             type: s16
             range: -32768,32767
-            unit: m
+            unit: Meters
             multiplier: 10
             cond:
               - attr: 0x0000
@@ -571,7 +571,7 @@ client:
             name: Quality Measure
             type: u8
             range: 0x00,0x64
-            unit: "%"
+            unit: Percent
             cond:
               - attr: 0x0000
                 mask: 0x01
@@ -579,7 +579,7 @@ client:
           - id: "0x0005"
             name: Location Age
             type: u16
-            unit: s
+            unit: Seconds
             cond:
               - attr: 0x0000
                 mask: 0x01
@@ -620,24 +620,24 @@ client:
                   name: X Coordinate
                   type: s16
                   range: -32768,32767
-                  unit: m
+                  unit: Meters
                   multiplier: 10
                 - id: "0x0002"
                   name: Y Coordinate
                   type: s16
                   range: -32768,32767
-                  unit: m
+                  unit: Meters
                   multiplier: 10
                 - id: "0x0003"
                   name: Z Coordinate
                   type: s16
                   range: -32768,32767
-                  unit: m
+                  unit: Meters
                   multiplier: 10
                 - id: "0x0004"
                   name: RSSI
                   type: s8
-                  unit: dBm
+                  unit: DecibelMilliWatts
                 - id: "0x0005"
                   name: Number of RSSI Measurements
                   type: u8

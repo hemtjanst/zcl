@@ -27,63 +27,63 @@ server:
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: V
+        unit: Volts
       - id: "0x0101"
         name: DC Voltage Min
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: V
+        unit: Volts
       - id: "0x0102"
         name: DC Voltage Max
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: V
+        unit: Volts
       - id: "0x0103"
         name: DC Current
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: A
+        unit: Amperes
       - id: "0x0104"
         name: DC Current Min
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: A
+        unit: Amperes
       - id: "0x0105"
         name: DC Current Max
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: A
+        unit: Amperes
       - id: "0x0106"
         name: DC Power
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: W
+        unit: Watts
       - id: "0x0107"
         name: DC Power Min
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: W
+        unit: Watts
       - id: "0x0108"
         name: DC Power Max
         type: s16
         access: r
         default: "0x8000"
         range: -32767,32767
-        unit: W
+        unit: Watts
       - id: "0x0200"
         name: DC Voltage Multiplier
         type: u16
@@ -126,21 +126,21 @@ server:
         access: r
         default: "0xFFFF"
         range: 0x0000,0xffff
-        unit: Hz
+        unit: Hertz
       - id: "0x0301"
         name: AC Frequency Min
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xffff
-        unit: Hz
+        unit: Hertz
       - id: "0x0302"
         name: AC Frequency Max
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xffff
-        unit: Hz
+        unit: Hertz
       - id: "0x0303"
         name: Neutral Current
         type: u16
@@ -152,103 +152,103 @@ server:
         type: s32
         access: r
         range: -8388607,8388607
-        unit: kW
+        unit: Kilowatts
       - id: "0x0305"
         name: Total Reactive Power
         type: s32
         access: r
         range: -8388607,8388607
-        unit: kVA
+        unit: KiloVoltAmperes
       - id: "0x0306"
         name: Total Apparent Power
         type: u32
         access: r
         range: 0x000000,0xffffff
-        unit: kVA
+        unit: KiloVoltAmperes
       - id: "0x0307"
         name: Measured 1st Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: A
+        unit: Amperes
       - id: "0x0308"
         name: Measured 3rd Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: A
+        unit: Amperes
       - id: "0x0309"
         name: Measured 5th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: A
+        unit: Amperes
       - id: "0x030a"
         name: Measured 7th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: A
+        unit: Amperes
       - id: "0x030b"
         name: Measured 9th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: A
+        unit: Amperes
       - id: "0x030c"
         name: Measured 11th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: A
+        unit: Amperes
       - id: "0x030d"
         name: Measured Phase 1st Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: °
+        unit: DegreesPhase
       - id: "0x030e"
         name: Measured Phase 3rd Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: °
+        unit: DegreesPhase
       - id: "0x030f"
         name: Measured Phase 5th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: °
+        unit: DegreesPhase
       - id: "0x0310"
         name: Measured Phase 7th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: °
+        unit: DegreesPhase
       - id: "0x0311"
         name: Measured Phase 9th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: °
+        unit: DegreesPhase
       - id: "0x0312"
         name: Measured Phase 11th Harmonic Current
         type: s16
         access: r
         default: "0x8000"
         range: -32768,32767
-        unit: °
+        unit: DegreesPhase
       - id: "0x0400"
         name: AC Frequency Multiplier
         type: u16
@@ -278,74 +278,74 @@ server:
         type: s8
         access: r
         default: "0x00"
-        unit: A
+        unit: Amperes
       - id: "0x0405"
         name: Phase Harmonic Current Multiplier
         type: s8
         access: r
         default: "0x00"
-        unit: °
+        unit: DegreesPhase
       - id: "0x0501"
         name: Line Current
         type: u16
         access: r
         default: "0xffff"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0502"
         name: Active Current
         type: s16
         access: r
         default: "0x8000"
-        unit: A
+        unit: Amperes
       - id: "0x0503"
         name: Reactive Current
         type: s16
         access: r
         default: "0x8000"
-        unit: A
+        unit: Amperes
       - id: "0x0505"
         name: RMS Voltage
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0506"
         name: RMS Voltage Min
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0507"
         name: RMS Voltage Max
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0508"
         name: RMS Current
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0509"
         name: RMS Current Min
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x050a"
         name: RMS Current Max
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x050B"
         name: Active Power
         description: Represents the single phase or Phase A, current demand of active
@@ -355,31 +355,31 @@ server:
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x050c"
         name: Active Power Min
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x050d"
         name: Active Power Max
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x050E"
         name: Reactive Power
         type: s16
         access: r
         default: "0x8000"
-        unit: VAr
+        unit: VoltAmpereReactive
       - id: "0x050F"
         name: Apparent Power
         type: u16
         access: r
         default: "0xFFFF"
-        unit: VA
+        unit: VoltAmpere
       - id: "0x0510"
         name: Power Factor
         type: s8
@@ -391,7 +391,7 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0512"
         name: Average RMS Overvoltage Counter
         type: u16
@@ -407,25 +407,25 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0515"
         name: RMS Extreme Undervoltage Period
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0516"
         name: RMS Voltage Sag Period
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0517"
         name: RMS Voltage Swell Period
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0600"
         name: AC Voltage Multiplier
         type: u16
@@ -542,61 +542,61 @@ server:
         access: r
         default: "0xffff"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0902"
         name: Active Current Phase B
         type: s16
         access: r
         default: "0x8000"
-        unit: A
+        unit: Amperes
       - id: "0x0903"
         name: Reactive Current Phase B
         type: s16
         access: r
         default: "0x8000"
-        unit: A
+        unit: Amperes
       - id: "0x0905"
         name: RMS Voltage Phase B
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0906"
         name: RMS Voltage Min Phase B
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0907"
         name: RMS Voltage Max Phase B
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0908"
         name: RMS Current Phase B
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0909"
         name: RMS Current Min Phase B
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x090a"
         name: RMS Current Max Phase B
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x090B"
         name: Active Power Phase B
         description: Represents the Phase B, current demand of active power delivered
@@ -606,31 +606,31 @@ server:
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x090c"
         name: Active Power Min Phase B
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x090d"
         name: Active Power Max Phase B
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x090E"
         name: Reactive Power Phase B
         type: s16
         access: r
         default: "0x8000"
-        unit: VAr
+        unit: VoltAmpereReactive
       - id: "0x090F"
         name: Apparent Power Phase B
         type: u16
         access: r
         default: "0xFFFF"
-        unit: VA
+        unit: VoltAmpere
       - id: "0x0910"
         name: Power Factor Phase B
         type: s8
@@ -642,7 +642,7 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0912"
         name: Average RMS Overvoltage Counter Phase B
         type: u16
@@ -658,86 +658,86 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0915"
         name: RMS Extreme Undervoltage Period Phase B
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0916"
         name: RMS Voltage Sag Period Phase B
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0917"
         name: RMS Voltage Swell Period Phase B
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0A01"
         name: Line Current Phase C
         type: u16
         access: r
         default: "0xffff"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0A02"
         name: Active Current Phase C
         type: s16
         access: r
         default: "0x8000"
-        unit: A
+        unit: Amperes
       - id: "0x0A03"
         name: Reactive Current Phase C
         type: s16
         access: r
         default: "0x8000"
-        unit: A
+        unit: Amperes
       - id: "0x0A05"
         name: RMS Voltage Phase C
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0A06"
         name: RMS Voltage Min Phase C
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0A07"
         name: RMS Voltage Max Phase C
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: V
+        unit: Volts
       - id: "0x0A08"
         name: RMS Current Phase C
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0A09"
         name: RMS Current Min Phase C
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0A0a"
         name: RMS Current Max Phase C
         type: u16
         access: r
         default: "0xFFFF"
         range: 0x0000,0xFFFF
-        unit: A
+        unit: Amperes
       - id: "0x0A0B"
         name: Active Power Phase C
         description: Represents the Phase C, current demand of active power delivered
@@ -747,31 +747,31 @@ server:
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x0A0c"
         name: Active Power Min Phase C
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x0A0d"
         name: Active Power Max Phase C
         type: s16
         access: r
         default: "0x8000"
-        unit: W
+        unit: Watts
       - id: "0x0A0E"
         name: Reactive Power Phase C
         type: s16
         access: r
         default: "0x8000"
-        unit: VAr
+        unit: VoltAmpereReactive
       - id: "0x0A0F"
         name: Apparent Power Phase C
         type: u16
         access: r
         default: "0xFFFF"
-        unit: VA
+        unit: VoltAmpere
       - id: "0x0A10"
         name: Power Factor Phase C
         type: s8
@@ -783,7 +783,7 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0A12"
         name: Average RMS Overvoltage Counter Phase C
         type: u16
@@ -799,25 +799,25 @@ server:
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0A15"
         name: RMS Extreme Undervoltage Period Phase C
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0A16"
         name: RMS Voltage Sag Period Phase C
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
       - id: "0x0A17"
         name: RMS Voltage Swell Period Phase C
         type: u16
         access: rw
         default: "0x0000"
-        unit: s
+        unit: Seconds
     cmd:
     - id: "0x00"
       name: Get Profile Info Response
