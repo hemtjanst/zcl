@@ -2,5 +2,67 @@ id: "0x000E"
 name: Analog Value (Basic)
 description: An interface for setting an analog value, typically used as a control
     system parameter, and accessing various characteristics of that value.
-server: {}
+server:
+    attr:
+      - id: "0x001C"
+        name: Analog Value Description
+        type: cstring
+        access: rw
+      - id: "0x0051"
+        name: Analog Value Out of service
+        type: bool
+        access: rw
+        default: "0"
+        required: true
+      - id: "0x0055"
+        name: Analog Value Present value
+        type: float
+        access: rw
+        default: "0"
+        required: true
+        report: true
+      - id: "0x0057"
+        name: Analog Value Priority Array
+        access: rw
+        listSize: 16
+        type: array
+        arraytype: struct
+        structattr:
+        - id: "0x0000"
+          type: bool
+        - id: "0x0001"
+          type: float
+      - id: "0x0067"
+        name: Analog Value Reliability
+        type: enum8
+        access: rw
+      - id: "0x0067"
+        name: Analog Value Relinquish Default
+        type: float
+        access: rw
+      - id: "0x006A"
+        name: Analog Value Resolution
+        type: float
+        access: rw
+      - id: "0x006F"
+        name: Analog Value Status flags
+        type: bmp8
+        access: r
+        default: "0"
+        required: true
+        report: true
+        bits:
+            "1": In Alarm
+            "2": Fault
+            "4": Overidden
+            "8": Out of Service
+      - id: "0x0075"
+        name: Analog Value Engineering Units
+        type: EngineeringUnit
+        access: rw
+      - id: "0x0100"
+        name: Analog Value Application Type
+        access: r
+        type: u32
+
 client: {}
