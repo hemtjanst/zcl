@@ -3,8 +3,21 @@ package zcl
 import "fmt"
 
 type Unit uint8
-
+type CustomUnit uint8
 type EngineeringUnit uint16
+
+const (
+	DecibelMilliWatts CustomUnit = iota
+)
+
+func (u CustomUnit) Format(v float64) string {
+	// TODO
+	return fmt.Sprintf("%f", v)
+}
+func (u CustomUnit) String() string {
+	// TODO
+	return fmt.Sprintf("%d", u)
+}
 
 func (u *EngineeringUnit) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := uintLEUnmarshalZcl(2, buf)
@@ -271,15 +284,15 @@ func (u Unit) String() string {
 	case GramsOfWaterPerKilogramDryAir:
 		return "g water/kg dry air"
 	case PercentRelativeHumidity:
-		return "%% RH"
+		return "% RH"
 	case Millimeters:
 		return "mm"
 	case Meters:
 		return "m"
 	case Inches:
-		return "\""
+		return "in"
 	case Feet:
-		return "'"
+		return "ft"
 	case WattsPerSquareFoot:
 		return "W/ft²"
 	case WattsPerSquareMeter:
@@ -347,19 +360,19 @@ func (u Unit) String() string {
 	case DegreeDaysFahrenheit:
 		return "°F DD"
 	case Years:
-		return "year%s"
+		return "years"
 	case Months:
-		return "month%s"
+		return "months"
 	case Weeks:
-		return "week%s"
+		return "weeks"
 	case Days:
-		return "day%s"
+		return "days"
 	case Hours:
-		return "hour%s"
+		return "hours"
 	case Minutes:
-		return "minute%s"
+		return "minutes"
 	case Seconds:
-		return "second%s"
+		return "seconds"
 	case MetersPerSecond:
 		return "m/s"
 	case KilometersPerHour:
@@ -393,7 +406,7 @@ func (u Unit) String() string {
 	case UsGallonsPerMinute:
 		return "gal/min (US)"
 	case DegreesAngular:
-		return "° angle"
+		return "°"
 	case DegreesCelsiusPerHour:
 		return "°C/h"
 	case DegreesCelsiusPerMinute:
@@ -409,9 +422,9 @@ func (u Unit) String() string {
 	case PartsPerBillion:
 		return "ppb"
 	case Percent:
-		return "%%"
+		return "%"
 	case PercentPerSecond:
-		return "%%/s"
+		return "%/s"
 	case PerMinute:
 		return "/min"
 	case PerSecond:
@@ -499,9 +512,9 @@ func (u Unit) String() string {
 	case CubicFeetPerSecond:
 		return "ft³/s"
 	case PercentObscurationPerFoot:
-		return "%% obscuration/ft"
+		return "% obscuration/ft"
 	case PercentObscurationPerMeter:
-		return "%% obscuration/m"
+		return "% obscuration/m"
 	case Milliohms:
 		return "mΩ"
 	case MegawattHours:
@@ -553,9 +566,9 @@ func (u Unit) String() string {
 	case AmpereSquareMeters:
 		return "Am²"
 	case Farads:
-		return "Farad%s"
+		return "Farads"
 	case Henrys:
-		return "Henry%s"
+		return "Henrys"
 	case OhmMeters:
 		return "Ωm"
 	case Siemens:
@@ -563,17 +576,17 @@ func (u Unit) String() string {
 	case SiemensPerMeter:
 		return "Siemens/m"
 	case Teslas:
-		return "Tesla%s"
+		return "Teslas"
 	case VoltsPerDegreeKelvin:
 		return "V/deg-K"
 	case VoltsPerMeter:
 		return "V/m"
 	case Webers:
-		return "Weber%s"
+		return "Webers"
 	case Candelas:
-		return "Candela%s"
+		return "Candelas"
 	case CandelasPerSquareMeter:
-		return "Candela/m²"
+		return "Candelas/m²"
 	case KelvinsPerHour:
 		return "K/h"
 	case KelvinsPerMinute:
@@ -784,7 +797,7 @@ func (u Unit) Format(v float64) string {
 	case UsGallonsPerMinute:
 		return fmt.Sprintf("%f gal/min (US)", v)
 	case DegreesAngular:
-		return fmt.Sprintf("%f° angle", v)
+		return fmt.Sprintf("%f°", v)
 	case DegreesCelsiusPerHour:
 		return fmt.Sprintf("%f°C/h", v)
 	case DegreesCelsiusPerMinute:

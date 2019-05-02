@@ -109,8 +109,8 @@ func (a {{$an}}) String() string { {{if .Values}}switch a { {{range $vk,$vv := .
     var bstr []string
     {{range $vk,$vv := .Bits}}if a.Is{{$vv.Fmt}}() { bstr = append(bstr, "{{$vv}}") }
     {{end}}return zcl.StrJoin(bstr, ", "){{else if eq .Unit "s"}}
-    return zcl.Duration(int(a), {{.Multiplier}}).String(){{else if .Unit}}
-    return zcl.Sprintf("%f%s", float64(a){{if .Multiplier}}/{{.Multiplier}}{{end}}, "{{.Unit}}"){{else}}
+    {{else if .Unit}}
+    return zcl.{{.Unit}}.Format(float64(a){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else}}
     return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%s{{end}}", zcl.{{.Type.Type}}(a)){{end}}
 }
 
