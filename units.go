@@ -9,15 +9,30 @@ type EngineeringUnit uint16
 const (
 	DecibelMilliWatts CustomUnit = iota
 	MilliAmpereHours
+	Mired
 )
 
 func (u CustomUnit) Format(v float64) string {
-	// TODO
+	switch u {
+	case DecibelMilliWatts:
+		return fmt.Sprintf("%fdBm", v)
+	case MilliAmpereHours:
+		return fmt.Sprintf("%fmAh", v)
+	case Mired:
+		return fmt.Sprintf("%f mired", v)
+	}
 	return fmt.Sprintf("%f", v)
 }
 func (u CustomUnit) String() string {
-	// TODO
-	return fmt.Sprintf("%d", u)
+	switch u {
+	case DecibelMilliWatts:
+		return "dBm"
+	case MilliAmpereHours:
+		return "mAh"
+	case Mired:
+		return "mired"
+	}
+	return fmt.Sprintf("CustomUnit(0x%02x)", u)
 }
 
 func (u *EngineeringUnit) UnmarshalZcl(buf []byte) ([]byte, error) {

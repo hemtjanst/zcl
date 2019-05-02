@@ -104,7 +104,7 @@ server:
         invalid: "0xffff"
         default: "0x00fa" # 4000 Kelvin
         range: 0x0000,0xfeff
-        unit: mired
+        unit: Mired
       - id: "0x0008"
         name: Color Mode
         description: |
@@ -228,7 +228,7 @@ server:
         access: r
         default: "0x0000"
         range: 0x0000,0xfeff
-        unit: mired
+        unit: Mired
       - id: "0x400C"
         name: Color temperature physical max Mireds
         description: |
@@ -240,7 +240,7 @@ server:
         access: r
         default: "0xfeff"
         range: 0x0000,0xfeff
-        unit: mired
+        unit: Mired
       - id: "0x4010"
         name: Power-on color temperature
         type: u16
