@@ -10,12 +10,12 @@ const ElectricalMeasurementID zcl.ClusterID = 2820
 
 var ElectricalMeasurementCluster = zcl.Cluster{
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
-		GetProfileInfoResponseCommandCommand:        func() zcl.Command { return new(GetProfileInfoResponseCommand) },
-		GetMeasurementProfileResponseCommandCommand: func() zcl.Command { return new(GetMeasurementProfileResponseCommand) },
+		GetProfileInfoResponseCommand:        func() zcl.Command { return new(GetProfileInfoResponse) },
+		GetMeasurementProfileResponseCommand: func() zcl.Command { return new(GetMeasurementProfileResponse) },
 	},
 	ClientCmd: map[zcl.CommandID]func() zcl.Command{
-		GetProfileInfoCommandCommand:        func() zcl.Command { return new(GetProfileInfoCommand) },
-		GetMeasurementProfileCommandCommand: func() zcl.Command { return new(GetMeasurementProfileCommand) },
+		GetProfileInfoCommand:        func() zcl.Command { return new(GetProfileInfo) },
+		GetMeasurementProfileCommand: func() zcl.Command { return new(GetMeasurementProfile) },
 	},
 	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
 		MeasurementTypeAttr:                          func() zcl.Attr { return new(MeasurementType) },
@@ -150,16 +150,16 @@ var ElectricalMeasurementCluster = zcl.Cluster{
 	SceneAttr:  []zcl.AttrID{},
 }
 
-type GetProfileInfoResponseCommand struct {
+type GetProfileInfoResponse struct {
 	ProfileCount          zcl.Zu8
 	ProfileIntervalPeriod zcl.Zenum8
 	MaxNumberOfIntervals  zcl.Zu8
 	ListOfAttributes      zcl.Zarray
 }
 
-const GetProfileInfoResponseCommandCommand zcl.CommandID = 0
+const GetProfileInfoResponseCommand zcl.CommandID = 0
 
-func (v *GetProfileInfoResponseCommand) Values() []zcl.Val {
+func (v *GetProfileInfoResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.ProfileCount,
 		&v.ProfileIntervalPeriod,
@@ -168,19 +168,19 @@ func (v *GetProfileInfoResponseCommand) Values() []zcl.Val {
 	}
 }
 
-func (v GetProfileInfoResponseCommand) ID() zcl.CommandID {
-	return GetProfileInfoResponseCommandCommand
+func (v GetProfileInfoResponse) ID() zcl.CommandID {
+	return GetProfileInfoResponseCommand
 }
 
-func (v GetProfileInfoResponseCommand) Cluster() zcl.ClusterID {
+func (v GetProfileInfoResponse) Cluster() zcl.ClusterID {
 	return ElectricalMeasurementID
 }
 
-func (v GetProfileInfoResponseCommand) MnfCode() []byte {
+func (v GetProfileInfoResponse) MnfCode() []byte {
 	return []byte{}
 }
 
-func (v GetProfileInfoResponseCommand) MarshalZcl() ([]byte, error) {
+func (v GetProfileInfoResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
@@ -208,7 +208,7 @@ func (v GetProfileInfoResponseCommand) MarshalZcl() ([]byte, error) {
 	return data, nil
 }
 
-func (v *GetProfileInfoResponseCommand) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *GetProfileInfoResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
 	if b, err = (&v.ProfileCount).UnmarshalZcl(b); err != nil {
@@ -230,7 +230,7 @@ func (v *GetProfileInfoResponseCommand) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-type GetMeasurementProfileResponseCommand struct {
+type GetMeasurementProfileResponse struct {
 	StartTime                  zcl.Zutc
 	Status                     zcl.Zenum8
 	ProfileIntervalPeriod      zcl.Zenum8
@@ -239,9 +239,9 @@ type GetMeasurementProfileResponseCommand struct {
 	Intervals                  zcl.Zarray
 }
 
-const GetMeasurementProfileResponseCommandCommand zcl.CommandID = 1
+const GetMeasurementProfileResponseCommand zcl.CommandID = 1
 
-func (v *GetMeasurementProfileResponseCommand) Values() []zcl.Val {
+func (v *GetMeasurementProfileResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.StartTime,
 		&v.Status,
@@ -252,19 +252,19 @@ func (v *GetMeasurementProfileResponseCommand) Values() []zcl.Val {
 	}
 }
 
-func (v GetMeasurementProfileResponseCommand) ID() zcl.CommandID {
-	return GetMeasurementProfileResponseCommandCommand
+func (v GetMeasurementProfileResponse) ID() zcl.CommandID {
+	return GetMeasurementProfileResponseCommand
 }
 
-func (v GetMeasurementProfileResponseCommand) Cluster() zcl.ClusterID {
+func (v GetMeasurementProfileResponse) Cluster() zcl.ClusterID {
 	return ElectricalMeasurementID
 }
 
-func (v GetMeasurementProfileResponseCommand) MnfCode() []byte {
+func (v GetMeasurementProfileResponse) MnfCode() []byte {
 	return []byte{}
 }
 
-func (v GetMeasurementProfileResponseCommand) MarshalZcl() ([]byte, error) {
+func (v GetMeasurementProfileResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
@@ -302,7 +302,7 @@ func (v GetMeasurementProfileResponseCommand) MarshalZcl() ([]byte, error) {
 	return data, nil
 }
 
-func (v *GetMeasurementProfileResponseCommand) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *GetMeasurementProfileResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
 	if b, err = (&v.StartTime).UnmarshalZcl(b); err != nil {
@@ -332,44 +332,44 @@ func (v *GetMeasurementProfileResponseCommand) UnmarshalZcl(b []byte) ([]byte, e
 	return b, nil
 }
 
-type GetProfileInfoCommand struct {
+type GetProfileInfo struct {
 }
 
-const GetProfileInfoCommandCommand zcl.CommandID = 0
+const GetProfileInfoCommand zcl.CommandID = 0
 
-func (v *GetProfileInfoCommand) Values() []zcl.Val {
+func (v *GetProfileInfo) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-func (v GetProfileInfoCommand) ID() zcl.CommandID {
-	return GetProfileInfoCommandCommand
+func (v GetProfileInfo) ID() zcl.CommandID {
+	return GetProfileInfoCommand
 }
 
-func (v GetProfileInfoCommand) Cluster() zcl.ClusterID {
+func (v GetProfileInfo) Cluster() zcl.ClusterID {
 	return ElectricalMeasurementID
 }
 
-func (v GetProfileInfoCommand) MnfCode() []byte {
+func (v GetProfileInfo) MnfCode() []byte {
 	return []byte{}
 }
 
-func (v GetProfileInfoCommand) MarshalZcl() ([]byte, error) {
+func (v GetProfileInfo) MarshalZcl() ([]byte, error) {
 	return nil, nil
 }
 
-func (v *GetProfileInfoCommand) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *GetProfileInfo) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-type GetMeasurementProfileCommand struct {
+type GetMeasurementProfile struct {
 	AttributeId       zcl.Zu16
 	StartTime         zcl.Zutc
 	NumberOfIntervals zcl.Zu8
 }
 
-const GetMeasurementProfileCommandCommand zcl.CommandID = 1
+const GetMeasurementProfileCommand zcl.CommandID = 1
 
-func (v *GetMeasurementProfileCommand) Values() []zcl.Val {
+func (v *GetMeasurementProfile) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.AttributeId,
 		&v.StartTime,
@@ -377,19 +377,19 @@ func (v *GetMeasurementProfileCommand) Values() []zcl.Val {
 	}
 }
 
-func (v GetMeasurementProfileCommand) ID() zcl.CommandID {
-	return GetMeasurementProfileCommandCommand
+func (v GetMeasurementProfile) ID() zcl.CommandID {
+	return GetMeasurementProfileCommand
 }
 
-func (v GetMeasurementProfileCommand) Cluster() zcl.ClusterID {
+func (v GetMeasurementProfile) Cluster() zcl.ClusterID {
 	return ElectricalMeasurementID
 }
 
-func (v GetMeasurementProfileCommand) MnfCode() []byte {
+func (v GetMeasurementProfile) MnfCode() []byte {
 	return []byte{}
 }
 
-func (v GetMeasurementProfileCommand) MarshalZcl() ([]byte, error) {
+func (v GetMeasurementProfile) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
@@ -412,7 +412,7 @@ func (v GetMeasurementProfileCommand) MarshalZcl() ([]byte, error) {
 	return data, nil
 }
 
-func (v *GetMeasurementProfileCommand) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *GetMeasurementProfile) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
 	if b, err = (&v.AttributeId).UnmarshalZcl(b); err != nil {

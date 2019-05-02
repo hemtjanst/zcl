@@ -820,7 +820,7 @@ server:
         unit: s
     cmd:
     - id: "0x00"
-      name: Get Profile Info Response Command
+      name: Get Profile Info Response
       dir: send
       payloadattr:
       - id: "0x0000"
@@ -846,7 +846,7 @@ server:
         type: array
         arraytype: u16
     - id: "0x01"
-      name: Get Measurement Profile Response Command
+      name: Get Measurement Profile Response
       dir: send
       payloadattr:
       - id: "0x0000"
@@ -886,11 +886,11 @@ server:
 client:
     cmd:
     - id: "0x00"
-      name: Get Profile Info Command
+      name: Get Profile Info
       dir: send
       response: "0x00"
     - id: "0x01"
-      name: Get Measurement Profile Command
+      name: Get Measurement Profile
       dir: send
       response: "0x01"
       payloadattr:
