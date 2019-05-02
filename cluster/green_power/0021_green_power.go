@@ -48,7 +48,6 @@ func (a MaxSinkTableEntries) Reportable() bool { return false }
 func (a MaxSinkTableEntries) SceneIndex() int  { return -1 }
 
 func (a MaxSinkTableEntries) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
@@ -75,7 +74,6 @@ func (a SinkTable) Reportable() bool { return false }
 func (a SinkTable) SceneIndex() int  { return -1 }
 
 func (a SinkTable) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zlostring(a))
 }
 
@@ -102,7 +100,6 @@ func (a CommunicationMode) Reportable() bool { return false }
 func (a CommunicationMode) SceneIndex() int  { return -1 }
 
 func (a CommunicationMode) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
 }
 
@@ -129,7 +126,6 @@ func (a CommissioningExitMode) Reportable() bool { return false }
 func (a CommissioningExitMode) SceneIndex() int  { return -1 }
 
 func (a CommissioningExitMode) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
 }
 
@@ -156,7 +152,6 @@ func (a CommissioningWindow) Reportable() bool { return false }
 func (a CommissioningWindow) SceneIndex() int  { return -1 }
 
 func (a CommissioningWindow) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
@@ -183,7 +178,6 @@ func (a SecurityLevel) Reportable() bool { return false }
 func (a SecurityLevel) SceneIndex() int  { return -1 }
 
 func (a SecurityLevel) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
 }
 
@@ -210,7 +204,6 @@ func (a Functionality) Reportable() bool { return false }
 func (a Functionality) SceneIndex() int  { return -1 }
 
 func (a Functionality) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zbmp24(a))
 }
 
@@ -237,6 +230,5 @@ func (a ActiveFunctionality) Reportable() bool { return false }
 func (a ActiveFunctionality) SceneIndex() int  { return -1 }
 
 func (a ActiveFunctionality) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zbmp24(a))
 }

@@ -313,7 +313,6 @@ func (a Onoff) String() string {
 	case 0x01:
 		return "On"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -352,7 +351,6 @@ func (a Globalscenecontrol) Reportable() bool { return false }
 func (a Globalscenecontrol) SceneIndex() int  { return -1 }
 
 func (a Globalscenecontrol) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -379,8 +377,7 @@ func (a Ontime) Reportable() bool { return false }
 func (a Ontime) SceneIndex() int  { return -1 }
 
 func (a Ontime) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 10).String()
 }
 
 const OffwaittimeAttr zcl.AttrID = 16386
@@ -406,8 +403,7 @@ func (a Offwaittime) Reportable() bool { return false }
 func (a Offwaittime) SceneIndex() int  { return -1 }
 
 func (a Offwaittime) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 10).String()
 }
 
 const PoweronOnoffAttr zcl.AttrID = 16387
@@ -441,7 +437,6 @@ func (a PoweronOnoff) String() string {
 	case 0xFF:
 		return "Previous"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 

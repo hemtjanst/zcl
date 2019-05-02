@@ -44,7 +44,6 @@ func (a Capabilities) Reportable() bool { return false }
 func (a Capabilities) SceneIndex() int  { return -1 }
 
 func (a Capabilities) String() string {
-
 	var bstr []string
 	if a.IsForwardPhaseControl() {
 		bstr = append(bstr, "Forward Phase Control")
@@ -62,7 +61,6 @@ func (a Capabilities) String() string {
 		bstr = append(bstr, "Overload detection")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a Capabilities) IsForwardPhaseControl() bool {
@@ -123,7 +121,6 @@ func (a Status) Reportable() bool { return false }
 func (a Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
-
 	var bstr []string
 	if a.IsForwardPhaseControl() {
 		bstr = append(bstr, "Forward Phase Control")
@@ -144,7 +141,6 @@ func (a Status) String() string {
 		bstr = append(bstr, "Inductive Load")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a Status) IsForwardPhaseControl() bool {
@@ -212,7 +208,6 @@ func (a Mode) Reportable() bool { return false }
 func (a Mode) SceneIndex() int  { return -1 }
 
 func (a Mode) String() string {
-
 	var bstr []string
 	if a.IsAutomaticPhaseControl() {
 		bstr = append(bstr, "Automatic Phase Control")
@@ -224,7 +219,6 @@ func (a Mode) String() string {
 		bstr = append(bstr, "Reverse Phase Control")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a Mode) IsAutomaticPhaseControl() bool {

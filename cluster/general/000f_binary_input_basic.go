@@ -43,7 +43,6 @@ func (a BinaryInputOutOfService) Reportable() bool { return false }
 func (a BinaryInputOutOfService) SceneIndex() int  { return -1 }
 
 func (a BinaryInputOutOfService) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -70,7 +69,6 @@ func (a BinaryInputPresentValue) Reportable() bool { return false }
 func (a BinaryInputPresentValue) SceneIndex() int  { return -1 }
 
 func (a BinaryInputPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -97,7 +95,6 @@ func (a BinaryInputStatusFlags) Reportable() bool { return false }
 func (a BinaryInputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a BinaryInputStatusFlags) String() string {
-
 	var bstr []string
 	if a.IsInAlarm() {
 		bstr = append(bstr, "In Alarm")
@@ -112,7 +109,6 @@ func (a BinaryInputStatusFlags) String() string {
 		bstr = append(bstr, "Out of Service")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a BinaryInputStatusFlags) IsInAlarm() bool {

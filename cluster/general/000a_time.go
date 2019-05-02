@@ -50,7 +50,6 @@ func (a Time) Reportable() bool { return false }
 func (a Time) SceneIndex() int  { return -1 }
 
 func (a Time) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zutc(a))
 }
 
@@ -77,7 +76,6 @@ func (a TimeStatus) Reportable() bool { return false }
 func (a TimeStatus) SceneIndex() int  { return -1 }
 
 func (a TimeStatus) String() string {
-
 	var bstr []string
 	if a.IsMasterClock() {
 		bstr = append(bstr, "Master Clock")
@@ -92,7 +90,6 @@ func (a TimeStatus) String() string {
 		bstr = append(bstr, "Superseding")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a TimeStatus) IsMasterClock() bool {
@@ -146,8 +143,7 @@ func (a TimeZone) Reportable() bool { return false }
 func (a TimeZone) SceneIndex() int  { return -1 }
 
 func (a TimeZone) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs32(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const DstStartAttr zcl.AttrID = 3
@@ -173,7 +169,6 @@ func (a DstStart) Reportable() bool { return false }
 func (a DstStart) SceneIndex() int  { return -1 }
 
 func (a DstStart) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zutc(a))
 }
 
@@ -200,7 +195,6 @@ func (a DstEnd) Reportable() bool { return false }
 func (a DstEnd) SceneIndex() int  { return -1 }
 
 func (a DstEnd) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zutc(a))
 }
 
@@ -227,8 +221,7 @@ func (a DstShift) Reportable() bool { return false }
 func (a DstShift) SceneIndex() int  { return -1 }
 
 func (a DstShift) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs32(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const StandardTimeAttr zcl.AttrID = 6
@@ -254,7 +247,6 @@ func (a StandardTime) Reportable() bool { return false }
 func (a StandardTime) SceneIndex() int  { return -1 }
 
 func (a StandardTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -281,7 +273,6 @@ func (a LocalTime) Reportable() bool { return false }
 func (a LocalTime) SceneIndex() int  { return -1 }
 
 func (a LocalTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -308,7 +299,6 @@ func (a LastSetTime) Reportable() bool { return false }
 func (a LastSetTime) SceneIndex() int  { return -1 }
 
 func (a LastSetTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zutc(a))
 }
 
@@ -335,6 +325,5 @@ func (a ValidUntilTime) Reportable() bool { return false }
 func (a ValidUntilTime) SceneIndex() int  { return -1 }
 
 func (a ValidUntilTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zutc(a))
 }

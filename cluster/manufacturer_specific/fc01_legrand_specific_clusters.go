@@ -43,7 +43,6 @@ func (a Dimmer) Reportable() bool { return false }
 func (a Dimmer) SceneIndex() int  { return -1 }
 
 func (a Dimmer) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zdat16(a))
 }
 
@@ -70,6 +69,5 @@ func (a Led) Reportable() bool { return false }
 func (a Led) SceneIndex() int  { return -1 }
 
 func (a Led) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }

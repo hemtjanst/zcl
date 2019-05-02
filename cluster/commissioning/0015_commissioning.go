@@ -514,7 +514,6 @@ func (a ShortAddress) Reportable() bool { return false }
 func (a ShortAddress) SceneIndex() int  { return -1 }
 
 func (a ShortAddress) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
@@ -541,7 +540,6 @@ func (a ExtendedPanId) Reportable() bool { return false }
 func (a ExtendedPanId) SceneIndex() int  { return -1 }
 
 func (a ExtendedPanId) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
@@ -568,7 +566,6 @@ func (a PanId) Reportable() bool { return false }
 func (a PanId) SceneIndex() int  { return -1 }
 
 func (a PanId) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
@@ -595,7 +592,6 @@ func (a ChannelMask) Reportable() bool { return false }
 func (a ChannelMask) SceneIndex() int  { return -1 }
 
 func (a ChannelMask) String() string {
-
 	var bstr []string
 	if a.IsCh11() {
 		bstr = append(bstr, "CH 11")
@@ -646,7 +642,6 @@ func (a ChannelMask) String() string {
 		bstr = append(bstr, "CH 26")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a ChannelMask) IsCh11() bool {
@@ -784,7 +779,6 @@ func (a ProtocolVersion) Reportable() bool { return false }
 func (a ProtocolVersion) SceneIndex() int  { return -1 }
 
 func (a ProtocolVersion) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -811,7 +805,6 @@ func (a StackProfile) Reportable() bool { return false }
 func (a StackProfile) SceneIndex() int  { return -1 }
 
 func (a StackProfile) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -848,7 +841,6 @@ func (a StartupControl) String() string {
 	case 0x03:
 		return "Start from scratch"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -899,7 +891,6 @@ func (a TrustCenterAddress) Reportable() bool { return false }
 func (a TrustCenterAddress) SceneIndex() int  { return -1 }
 
 func (a TrustCenterAddress) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
@@ -926,7 +917,6 @@ func (a TrustCenterMasterKey) Reportable() bool { return false }
 func (a TrustCenterMasterKey) SceneIndex() int  { return -1 }
 
 func (a TrustCenterMasterKey) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zseckey(a))
 }
 
@@ -953,7 +943,6 @@ func (a NetworkKey) Reportable() bool { return false }
 func (a NetworkKey) SceneIndex() int  { return -1 }
 
 func (a NetworkKey) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zseckey(a))
 }
 
@@ -980,7 +969,6 @@ func (a UseInsecureJoin) Reportable() bool { return false }
 func (a UseInsecureJoin) SceneIndex() int  { return -1 }
 
 func (a UseInsecureJoin) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -1007,7 +995,6 @@ func (a PreconfiguredLinkKey) Reportable() bool { return false }
 func (a PreconfiguredLinkKey) SceneIndex() int  { return -1 }
 
 func (a PreconfiguredLinkKey) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zseckey(a))
 }
 
@@ -1034,7 +1021,6 @@ func (a NetworkKeySeqNum) Reportable() bool { return false }
 func (a NetworkKeySeqNum) SceneIndex() int  { return -1 }
 
 func (a NetworkKeySeqNum) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1067,7 +1053,6 @@ func (a NetworkKeyType) String() string {
 	case 0x05:
 		return "High Security"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1106,7 +1091,6 @@ func (a NetworkManagerAddress) Reportable() bool { return false }
 func (a NetworkManagerAddress) SceneIndex() int  { return -1 }
 
 func (a NetworkManagerAddress) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1133,7 +1117,6 @@ func (a ScanAttempts) Reportable() bool { return false }
 func (a ScanAttempts) SceneIndex() int  { return -1 }
 
 func (a ScanAttempts) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1160,7 +1143,6 @@ func (a TimeBetweenScans) Reportable() bool { return false }
 func (a TimeBetweenScans) SceneIndex() int  { return -1 }
 
 func (a TimeBetweenScans) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1187,7 +1169,6 @@ func (a RejoinInterval) Reportable() bool { return false }
 func (a RejoinInterval) SceneIndex() int  { return -1 }
 
 func (a RejoinInterval) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1214,7 +1195,6 @@ func (a MaxRejoinInterval) Reportable() bool { return false }
 func (a MaxRejoinInterval) SceneIndex() int  { return -1 }
 
 func (a MaxRejoinInterval) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1241,7 +1221,6 @@ func (a IndirectPollRate) Reportable() bool { return false }
 func (a IndirectPollRate) SceneIndex() int  { return -1 }
 
 func (a IndirectPollRate) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1268,7 +1247,6 @@ func (a ParentRetryThreshold) Reportable() bool { return false }
 func (a ParentRetryThreshold) SceneIndex() int  { return -1 }
 
 func (a ParentRetryThreshold) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1295,7 +1273,6 @@ func (a ConcentratorFlag) Reportable() bool { return false }
 func (a ConcentratorFlag) SceneIndex() int  { return -1 }
 
 func (a ConcentratorFlag) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -1322,7 +1299,6 @@ func (a ConcentratorRadius) Reportable() bool { return false }
 func (a ConcentratorRadius) SceneIndex() int  { return -1 }
 
 func (a ConcentratorRadius) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1349,7 +1325,6 @@ func (a ConcentratorDiscoveryTime) Reportable() bool { return false }
 func (a ConcentratorDiscoveryTime) SceneIndex() int  { return -1 }
 
 func (a ConcentratorDiscoveryTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1376,6 +1351,5 @@ func (a MacAddress) Reportable() bool { return false }
 func (a MacAddress) SceneIndex() int  { return -1 }
 
 func (a MacAddress) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }

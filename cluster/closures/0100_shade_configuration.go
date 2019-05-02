@@ -45,7 +45,6 @@ func (a PhysicalClosedLimit) Reportable() bool { return false }
 func (a PhysicalClosedLimit) SceneIndex() int  { return -1 }
 
 func (a PhysicalClosedLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -72,7 +71,6 @@ func (a Motorstepsize) Reportable() bool { return false }
 func (a Motorstepsize) SceneIndex() int  { return -1 }
 
 func (a Motorstepsize) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -99,7 +97,6 @@ func (a Status) Reportable() bool { return false }
 func (a Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
-
 	var bstr []string
 	if a.IsShadeOperational() {
 		bstr = append(bstr, "Shade operational")
@@ -114,7 +111,6 @@ func (a Status) String() string {
 		bstr = append(bstr, "Direction Reversed")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a Status) IsShadeOperational() bool {
@@ -168,7 +164,6 @@ func (a ClosedLimit) Reportable() bool { return false }
 func (a ClosedLimit) SceneIndex() int  { return -1 }
 
 func (a ClosedLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -203,7 +198,6 @@ func (a Mode) String() string {
 	case 0xFF:
 		return "Invalid"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 

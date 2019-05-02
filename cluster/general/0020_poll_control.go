@@ -78,7 +78,6 @@ func (a CheckInInterval) Reportable() bool { return false }
 func (a CheckInInterval) SceneIndex() int  { return -1 }
 
 func (a CheckInInterval) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -105,7 +104,6 @@ func (a LongPollInterval) Reportable() bool { return false }
 func (a LongPollInterval) SceneIndex() int  { return -1 }
 
 func (a LongPollInterval) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -132,7 +130,6 @@ func (a ShortPollInterval) Reportable() bool { return false }
 func (a ShortPollInterval) SceneIndex() int  { return -1 }
 
 func (a ShortPollInterval) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -159,7 +156,6 @@ func (a FastPollTimeout) Reportable() bool { return false }
 func (a FastPollTimeout) SceneIndex() int  { return -1 }
 
 func (a FastPollTimeout) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -186,7 +182,6 @@ func (a CheckInIntervalMin) Reportable() bool { return false }
 func (a CheckInIntervalMin) SceneIndex() int  { return -1 }
 
 func (a CheckInIntervalMin) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -213,7 +208,6 @@ func (a LongPollIntervalMin) Reportable() bool { return false }
 func (a LongPollIntervalMin) SceneIndex() int  { return -1 }
 
 func (a LongPollIntervalMin) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -240,6 +234,5 @@ func (a FastPollTimeoutMax) Reportable() bool { return false }
 func (a FastPollTimeoutMax) SceneIndex() int  { return -1 }
 
 func (a FastPollTimeoutMax) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

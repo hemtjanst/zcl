@@ -43,7 +43,6 @@ func (a Unknown1) Reportable() bool { return false }
 func (a Unknown1) SceneIndex() int  { return -1 }
 
 func (a Unknown1) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
@@ -70,6 +69,5 @@ func (a Unknown2) Reportable() bool { return false }
 func (a Unknown2) SceneIndex() int  { return -1 }
 
 func (a Unknown2) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }

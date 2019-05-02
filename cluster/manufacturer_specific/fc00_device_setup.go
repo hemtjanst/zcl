@@ -43,7 +43,6 @@ func (a InputConfigurations) Reportable() bool { return false }
 func (a InputConfigurations) SceneIndex() int  { return -1 }
 
 func (a InputConfigurations) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zarray(a))
 }
 
@@ -70,6 +69,5 @@ func (a InputActions) Reportable() bool { return false }
 func (a InputActions) SceneIndex() int  { return -1 }
 
 func (a InputActions) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zarray(a))
 }

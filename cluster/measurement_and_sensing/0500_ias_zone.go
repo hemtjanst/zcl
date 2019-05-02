@@ -281,7 +281,6 @@ func (a ZoneState) String() string {
 	case 0x01:
 		return "Enrolled"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -352,7 +351,6 @@ func (a ZoneType) String() string {
 	case 0xFFFF:
 		return "Invalid Zone Type"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum16(a))
 }
 
@@ -469,7 +467,6 @@ func (a ZoneStatus) Reportable() bool { return false }
 func (a ZoneStatus) SceneIndex() int  { return -1 }
 
 func (a ZoneStatus) String() string {
-
 	var bstr []string
 	if a.IsAlarm1() {
 		bstr = append(bstr, "Alarm 1")
@@ -502,7 +499,6 @@ func (a ZoneStatus) String() string {
 		bstr = append(bstr, "Battery defect")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a ZoneStatus) IsAlarm1() bool {
@@ -598,7 +594,6 @@ func (a IasCieAddress) Reportable() bool { return false }
 func (a IasCieAddress) SceneIndex() int  { return -1 }
 
 func (a IasCieAddress) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
@@ -625,6 +620,5 @@ func (a ZoneId) Reportable() bool { return false }
 func (a ZoneId) SceneIndex() int  { return -1 }
 
 func (a ZoneId) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }

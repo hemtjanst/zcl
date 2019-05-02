@@ -139,7 +139,6 @@ func (a LocalTemperature) Reportable() bool { return false }
 func (a LocalTemperature) SceneIndex() int  { return -1 }
 
 func (a LocalTemperature) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -166,7 +165,6 @@ func (a OutdoorTemperature) Reportable() bool { return false }
 func (a OutdoorTemperature) SceneIndex() int  { return -1 }
 
 func (a OutdoorTemperature) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -193,7 +191,6 @@ func (a Occupancy) Reportable() bool { return false }
 func (a Occupancy) SceneIndex() int  { return -1 }
 
 func (a Occupancy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
@@ -220,7 +217,6 @@ func (a AbsMinHeatSetpointLimit) Reportable() bool { return false }
 func (a AbsMinHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMinHeatSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -247,7 +243,6 @@ func (a AbsMaxHeatSetpointLimit) Reportable() bool { return false }
 func (a AbsMaxHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMaxHeatSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -274,7 +269,6 @@ func (a AbsMinCoolSetpointLimit) Reportable() bool { return false }
 func (a AbsMinCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMinCoolSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -301,7 +295,6 @@ func (a AbsMaxCoolSetpointLimit) Reportable() bool { return false }
 func (a AbsMaxCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMaxCoolSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -328,7 +321,6 @@ func (a PiCoolingDemand) Reportable() bool { return false }
 func (a PiCoolingDemand) SceneIndex() int  { return -1 }
 
 func (a PiCoolingDemand) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -355,7 +347,6 @@ func (a PiHeatingDemand) Reportable() bool { return false }
 func (a PiHeatingDemand) SceneIndex() int  { return -1 }
 
 func (a PiHeatingDemand) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -382,7 +373,6 @@ func (a HvacSystemTypeConfiguration) Reportable() bool { return false }
 func (a HvacSystemTypeConfiguration) SceneIndex() int  { return -1 }
 
 func (a HvacSystemTypeConfiguration) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
@@ -409,7 +399,6 @@ func (a LocalTemperatureCalibration) Reportable() bool { return false }
 func (a LocalTemperatureCalibration) SceneIndex() int  { return -1 }
 
 func (a LocalTemperatureCalibration) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
@@ -436,7 +425,6 @@ func (a OccupiedCoolingSetpoint) Reportable() bool { return false }
 func (a OccupiedCoolingSetpoint) SceneIndex() int  { return -1 }
 
 func (a OccupiedCoolingSetpoint) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -463,7 +451,6 @@ func (a OccupiedHeatingSetpoint) Reportable() bool { return false }
 func (a OccupiedHeatingSetpoint) SceneIndex() int  { return -1 }
 
 func (a OccupiedHeatingSetpoint) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -490,7 +477,6 @@ func (a UnoccupiedCoolingSetpoint) Reportable() bool { return false }
 func (a UnoccupiedCoolingSetpoint) SceneIndex() int  { return -1 }
 
 func (a UnoccupiedCoolingSetpoint) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -517,7 +503,6 @@ func (a UnoccupiedHeatingSetpoint) Reportable() bool { return false }
 func (a UnoccupiedHeatingSetpoint) SceneIndex() int  { return -1 }
 
 func (a UnoccupiedHeatingSetpoint) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -544,7 +529,6 @@ func (a MinHeatSetpointLimit) Reportable() bool { return false }
 func (a MinHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MinHeatSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -571,7 +555,6 @@ func (a MaxHeatSetpointLimit) Reportable() bool { return false }
 func (a MaxHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MaxHeatSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -598,7 +581,6 @@ func (a MinCoolSetpointLimit) Reportable() bool { return false }
 func (a MinCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MinCoolSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -625,7 +607,6 @@ func (a MaxCoolSetpointLimit) Reportable() bool { return false }
 func (a MaxCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MaxCoolSetpointLimit) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -652,7 +633,6 @@ func (a MinSetpointDeadBand) Reportable() bool { return false }
 func (a MinSetpointDeadBand) SceneIndex() int  { return -1 }
 
 func (a MinSetpointDeadBand) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
@@ -679,7 +659,6 @@ func (a RemoteSensing) Reportable() bool { return false }
 func (a RemoteSensing) SceneIndex() int  { return -1 }
 
 func (a RemoteSensing) String() string {
-
 	var bstr []string
 	if a.IsLocalTemperatureSensedRemotely() {
 		bstr = append(bstr, "Local temperature sensed remotely")
@@ -691,7 +670,6 @@ func (a RemoteSensing) String() string {
 		bstr = append(bstr, "Occupancy sensed remotely")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a RemoteSensing) IsLocalTemperatureSensedRemotely() bool {
@@ -752,7 +730,6 @@ func (a ControlSequenceOfOperation) String() string {
 	case 0x05:
 		return "Cooling and Heating 4-pipes with Reheat"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -835,7 +812,6 @@ func (a SystemMode) String() string {
 	case 0x09:
 		return "Sleep"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -916,7 +892,6 @@ func (a AlarmMask) Reportable() bool { return false }
 func (a AlarmMask) SceneIndex() int  { return -1 }
 
 func (a AlarmMask) String() string {
-
 	var bstr []string
 	if a.IsInitializationFailure() {
 		bstr = append(bstr, "Initialization failure")
@@ -928,7 +903,6 @@ func (a AlarmMask) String() string {
 		bstr = append(bstr, "Self-calibration failure")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a AlarmMask) IsInitializationFailure() bool {
@@ -983,7 +957,6 @@ func (a ThermostatRunningMode) String() string {
 	case 0x04:
 		return "Heat"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1044,7 +1017,6 @@ func (a StartOfWeek) String() string {
 	case 0x06:
 		return "Saturday"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1113,7 +1085,6 @@ func (a NumberOfWeeklyTransitions) Reportable() bool { return false }
 func (a NumberOfWeeklyTransitions) SceneIndex() int  { return -1 }
 
 func (a NumberOfWeeklyTransitions) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1140,7 +1111,6 @@ func (a NumberOfDailTransitions) Reportable() bool { return false }
 func (a NumberOfDailTransitions) SceneIndex() int  { return -1 }
 
 func (a NumberOfDailTransitions) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1173,7 +1143,6 @@ func (a TemperatureSetpointHold) String() string {
 	case 0x01:
 		return "Setpoint Hold On"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1212,7 +1181,6 @@ func (a TemperatureSetpointHoldDuration) Reportable() bool { return false }
 func (a TemperatureSetpointHoldDuration) SceneIndex() int  { return -1 }
 
 func (a TemperatureSetpointHoldDuration) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1241,7 +1209,6 @@ func (a ThermostatProgrammingOperationMode) Reportable() bool { return false }
 func (a ThermostatProgrammingOperationMode) SceneIndex() int  { return -1 }
 
 func (a ThermostatProgrammingOperationMode) String() string {
-
 	var bstr []string
 	if a.IsSimpleSetpointMode() {
 		bstr = append(bstr, "Simple/setpoint mode")
@@ -1253,7 +1220,6 @@ func (a ThermostatProgrammingOperationMode) String() string {
 		bstr = append(bstr, "Economy/EnergyStar mode")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a ThermostatProgrammingOperationMode) IsSimpleSetpointMode() bool {
@@ -1300,7 +1266,6 @@ func (a ThermostatRunningState) Reportable() bool { return false }
 func (a ThermostatRunningState) SceneIndex() int  { return -1 }
 
 func (a ThermostatRunningState) String() string {
-
 	var bstr []string
 	if a.IsHeatStateOn() {
 		bstr = append(bstr, "Heat State On")
@@ -1324,7 +1289,6 @@ func (a ThermostatRunningState) String() string {
 		bstr = append(bstr, "Fan 3rd Stage State On")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a ThermostatRunningState) IsHeatStateOn() bool {
@@ -1407,7 +1371,6 @@ func (a TrvMode) String() string {
 	case 0x02:
 		return "manual"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1452,7 +1415,6 @@ func (a SetValvePosition) Reportable() bool { return false }
 func (a SetValvePosition) SceneIndex() int  { return -1 }
 
 func (a SetValvePosition) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1487,7 +1449,6 @@ func (a Errors) String() string {
 	case 0x05:
 		return "Valve not Moving (E3)"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1532,7 +1493,6 @@ func (a CurrentTemperatureSetpoint) Reportable() bool { return false }
 func (a CurrentTemperatureSetpoint) SceneIndex() int  { return -1 }
 
 func (a CurrentTemperatureSetpoint) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -1559,6 +1519,5 @@ func (a HostFlags) Reportable() bool { return false }
 func (a HostFlags) SceneIndex() int  { return -1 }
 
 func (a HostFlags) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu24(a))
 }

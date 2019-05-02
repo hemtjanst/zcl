@@ -400,7 +400,6 @@ func (a LockState) String() string {
 	case 0xFF:
 		return "Undefined"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -475,7 +474,6 @@ func (a LockType) String() string {
 	case 0x0A:
 		return "Door Furniture"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -568,7 +566,6 @@ func (a ActuatorEnabled) Reportable() bool { return false }
 func (a ActuatorEnabled) SceneIndex() int  { return -1 }
 
 func (a ActuatorEnabled) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -595,7 +592,6 @@ func (a NumberOfLogRecordsSupported) Reportable() bool { return false }
 func (a NumberOfLogRecordsSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfLogRecordsSupported) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -622,7 +618,6 @@ func (a NumberOfTotalUsersSupported) Reportable() bool { return false }
 func (a NumberOfTotalUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfTotalUsersSupported) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -649,7 +644,6 @@ func (a NumberOfPinUsersSupported) Reportable() bool { return false }
 func (a NumberOfPinUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfPinUsersSupported) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -676,7 +670,6 @@ func (a NumberOfRfidUsersSupported) Reportable() bool { return false }
 func (a NumberOfRfidUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfRfidUsersSupported) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -707,7 +700,6 @@ func (a NumberOfWeekdaySchedulesSupportedPerUser) Reportable() bool { return fal
 func (a NumberOfWeekdaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
 
 func (a NumberOfWeekdaySchedulesSupportedPerUser) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -738,7 +730,6 @@ func (a NumberOfYearDaySchedulesSupportedPerUser) Reportable() bool { return fal
 func (a NumberOfYearDaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
 
 func (a NumberOfYearDaySchedulesSupportedPerUser) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -767,7 +758,6 @@ func (a NumberOfHolidaySchedulesSupported) Reportable() bool { return false }
 func (a NumberOfHolidaySchedulesSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfHolidaySchedulesSupported) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -794,7 +784,6 @@ func (a EnableLogging) Reportable() bool { return false }
 func (a EnableLogging) SceneIndex() int  { return -1 }
 
 func (a EnableLogging) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -827,7 +816,6 @@ func (a ZigbeeSecurityLevel) String() string {
 	case 0x01:
 		return "APS Security"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -866,7 +854,6 @@ func (a AlarmMask) Reportable() bool { return false }
 func (a AlarmMask) SceneIndex() int  { return -1 }
 
 func (a AlarmMask) String() string {
-
 	var bstr []string
 	if a.IsDeadboltJammed() {
 		bstr = append(bstr, "Deadbolt Jammed")
@@ -890,7 +877,6 @@ func (a AlarmMask) String() string {
 		bstr = append(bstr, "Forced Door Open under Door Locked Condition")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a AlarmMask) IsDeadboltJammed() bool {
@@ -965,7 +951,6 @@ func (a RfOperationEventMask) Reportable() bool { return false }
 func (a RfOperationEventMask) SceneIndex() int  { return -1 }
 
 func (a RfOperationEventMask) String() string {
-
 	var bstr []string
 	if a.IsUnknownOrManufacturerSpecificRfOperationEvent() {
 		bstr = append(bstr, "Unknown or manufacturer-specific RF operation event")
@@ -989,7 +974,6 @@ func (a RfOperationEventMask) String() string {
 		bstr = append(bstr, "Unlock, source: RF, error: invalid schedule")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a RfOperationEventMask) IsUnknownOrManufacturerSpecificRfOperationEvent() bool {
@@ -1064,7 +1048,6 @@ func (a ManualOperationEventMask) Reportable() bool { return false }
 func (a ManualOperationEventMask) SceneIndex() int  { return -1 }
 
 func (a ManualOperationEventMask) String() string {
-
 	var bstr []string
 	if a.IsUnknownOrManufacturerSpecificManualOperationEvent() {
 		bstr = append(bstr, "Unknown or manufacturer-specific manual operation event")
@@ -1100,7 +1083,6 @@ func (a ManualOperationEventMask) String() string {
 		bstr = append(bstr, "Manual Lock (Key or Thumbturn)")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a ManualOperationEventMask) IsUnknownOrManufacturerSpecificManualOperationEvent() bool {
@@ -1203,7 +1185,6 @@ func (a EventType) Reportable() bool { return false }
 func (a EventType) SceneIndex() int  { return -1 }
 
 func (a EventType) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1230,7 +1211,6 @@ func (a TiltAngle) Reportable() bool { return false }
 func (a TiltAngle) SceneIndex() int  { return -1 }
 
 func (a TiltAngle) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1257,7 +1237,6 @@ func (a VibrationStrength) Reportable() bool { return false }
 func (a VibrationStrength) SceneIndex() int  { return -1 }
 
 func (a VibrationStrength) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
@@ -1284,6 +1263,5 @@ func (a Orientation) Reportable() bool { return false }
 func (a Orientation) SceneIndex() int  { return -1 }
 
 func (a Orientation) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu48(a))
 }

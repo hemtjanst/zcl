@@ -215,7 +215,6 @@ func (a CurrentSummationDelivered) Reportable() bool { return false }
 func (a CurrentSummationDelivered) SceneIndex() int  { return -1 }
 
 func (a CurrentSummationDelivered) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu48(a))
 }
 
@@ -242,7 +241,6 @@ func (a Status) Reportable() bool { return false }
 func (a Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
-
 	var bstr []string
 	if a.IsCheckMeter() {
 		bstr = append(bstr, "Check Meter")
@@ -266,7 +264,6 @@ func (a Status) String() string {
 		bstr = append(bstr, "Service Disconnect Open")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a Status) IsCheckMeter() bool {
@@ -383,7 +380,6 @@ func (a UnitOfMeasure) String() string {
 	case 0x89:
 		return "kPA(absolute) BCD"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -530,7 +526,6 @@ func (a Multiplier) Reportable() bool { return false }
 func (a Multiplier) SceneIndex() int  { return -1 }
 
 func (a Multiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
@@ -557,7 +552,6 @@ func (a Divisor) Reportable() bool { return false }
 func (a Divisor) SceneIndex() int  { return -1 }
 
 func (a Divisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
@@ -584,7 +578,6 @@ func (a SummationFormatting) Reportable() bool { return false }
 func (a SummationFormatting) SceneIndex() int  { return -1 }
 
 func (a SummationFormatting) String() string {
-
 	var bstr []string
 	if a.IsNumberDigitsLeft() {
 		bstr = append(bstr, "Number Digits Left")
@@ -593,7 +586,6 @@ func (a SummationFormatting) String() string {
 		bstr = append(bstr, "Surpress Leading Zeros")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a SummationFormatting) IsNumberDigitsLeft() bool {
@@ -661,7 +653,6 @@ func (a MeteringDeviceType) String() string {
 	case 0x85:
 		return "Mirrored Cooling Metering"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -766,6 +757,5 @@ func (a InstantaneousDemand) Reportable() bool { return false }
 func (a InstantaneousDemand) SceneIndex() int  { return -1 }
 
 func (a InstantaneousDemand) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs24(a))
 }

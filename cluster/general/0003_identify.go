@@ -236,6 +236,5 @@ func (a IdentifyTime) Reportable() bool { return false }
 func (a IdentifyTime) SceneIndex() int  { return -1 }
 
 func (a IdentifyTime) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }

@@ -49,7 +49,6 @@ func (a Occupancy) Reportable() bool { return true }
 func (a Occupancy) SceneIndex() int  { return -1 }
 
 func (a Occupancy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
@@ -84,7 +83,6 @@ func (a OccupancySensorType) String() string {
 	case 0x02:
 		return "PIR and ultrasonic"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -129,7 +127,6 @@ func (a PirOccupiedToUnoccupiedDelay) Reportable() bool { return false }
 func (a PirOccupiedToUnoccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a PirOccupiedToUnoccupiedDelay) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -156,7 +153,6 @@ func (a PirUnoccupiedToOccupiedDelay) Reportable() bool { return false }
 func (a PirUnoccupiedToOccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a PirUnoccupiedToOccupiedDelay) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -183,7 +179,6 @@ func (a PirUnoccupiedToOccupiedThreshold) Reportable() bool { return false }
 func (a PirUnoccupiedToOccupiedThreshold) SceneIndex() int  { return -1 }
 
 func (a PirUnoccupiedToOccupiedThreshold) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -212,7 +207,6 @@ func (a UltrasonicOccupiedToUnoccupiedDelay) Reportable() bool { return false }
 func (a UltrasonicOccupiedToUnoccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a UltrasonicOccupiedToUnoccupiedDelay) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -241,7 +235,6 @@ func (a UltrasonicUnoccupiedToOccupiedDelay) Reportable() bool { return false }
 func (a UltrasonicUnoccupiedToOccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a UltrasonicUnoccupiedToOccupiedDelay) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -272,7 +265,6 @@ func (a UltrasonicUnoccupiedToOccupiedThreshold) Reportable() bool { return fals
 func (a UltrasonicUnoccupiedToOccupiedThreshold) SceneIndex() int  { return -1 }
 
 func (a UltrasonicUnoccupiedToOccupiedThreshold) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -299,7 +291,6 @@ func (a Sensitivity) Reportable() bool { return false }
 func (a Sensitivity) SceneIndex() int  { return -1 }
 
 func (a Sensitivity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -326,6 +317,5 @@ func (a SensitivityMax) Reportable() bool { return false }
 func (a SensitivityMax) SceneIndex() int  { return -1 }
 
 func (a SensitivityMax) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }

@@ -43,7 +43,6 @@ func (a MeasuredFlow) Reportable() bool { return true }
 func (a MeasuredFlow) SceneIndex() int  { return -1 }
 
 func (a MeasuredFlow) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -70,7 +69,6 @@ func (a MinMeasuredFlow) Reportable() bool { return false }
 func (a MinMeasuredFlow) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredFlow) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -97,7 +95,6 @@ func (a MaxMeasuredFlow) Reportable() bool { return false }
 func (a MaxMeasuredFlow) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredFlow) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -124,6 +121,5 @@ func (a FlowTolerance) Reportable() bool { return true }
 func (a FlowTolerance) SceneIndex() int  { return -1 }
 
 func (a FlowTolerance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

@@ -44,7 +44,6 @@ func (a UtilityEnrolmentGroup) Reportable() bool { return false }
 func (a UtilityEnrolmentGroup) SceneIndex() int  { return -1 }
 
 func (a UtilityEnrolmentGroup) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -71,7 +70,6 @@ func (a StartRandomizeMinutes) Reportable() bool { return false }
 func (a StartRandomizeMinutes) SceneIndex() int  { return -1 }
 
 func (a StartRandomizeMinutes) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -98,7 +96,6 @@ func (a StopRandomizeMinutes) Reportable() bool { return false }
 func (a StopRandomizeMinutes) SceneIndex() int  { return -1 }
 
 func (a StopRandomizeMinutes) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -125,6 +122,5 @@ func (a DeviceClassValue) Reportable() bool { return false }
 func (a DeviceClassValue) SceneIndex() int  { return -1 }
 
 func (a DeviceClassValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

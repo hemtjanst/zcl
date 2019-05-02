@@ -365,7 +365,6 @@ func (a WindowCoveringType) String() string {
 	case 0x09:
 		return "Projector Screen"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -452,7 +451,6 @@ func (a PhysicalClosedLimitLift) Reportable() bool { return false }
 func (a PhysicalClosedLimitLift) SceneIndex() int  { return -1 }
 
 func (a PhysicalClosedLimitLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -479,7 +477,6 @@ func (a PhysicalClosedLimitTilt) Reportable() bool { return false }
 func (a PhysicalClosedLimitTilt) SceneIndex() int  { return -1 }
 
 func (a PhysicalClosedLimitTilt) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -506,7 +503,6 @@ func (a CurrentPositionLift) Reportable() bool { return false }
 func (a CurrentPositionLift) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -533,7 +529,6 @@ func (a CurrentPositionTilt) Reportable() bool { return false }
 func (a CurrentPositionTilt) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionTilt) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -560,7 +555,6 @@ func (a NumberOfActuationsLift) Reportable() bool { return false }
 func (a NumberOfActuationsLift) SceneIndex() int  { return -1 }
 
 func (a NumberOfActuationsLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -587,7 +581,6 @@ func (a NumberOfActuationsTilt) Reportable() bool { return false }
 func (a NumberOfActuationsTilt) SceneIndex() int  { return -1 }
 
 func (a NumberOfActuationsTilt) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -614,7 +607,6 @@ func (a ConfigStatus) Reportable() bool { return false }
 func (a ConfigStatus) SceneIndex() int  { return -1 }
 
 func (a ConfigStatus) String() string {
-
 	var bstr []string
 	if a.IsOperational() {
 		bstr = append(bstr, "Operational")
@@ -638,7 +630,6 @@ func (a ConfigStatus) String() string {
 		bstr = append(bstr, "Tilt: Encoder Controlled")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a ConfigStatus) IsOperational() bool {
@@ -713,7 +704,6 @@ func (a CurrentPositionLiftPercentage) Reportable() bool { return false }
 func (a CurrentPositionLiftPercentage) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionLiftPercentage) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -740,7 +730,6 @@ func (a CurrentPositionTiltPercentage) Reportable() bool { return false }
 func (a CurrentPositionTiltPercentage) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionTiltPercentage) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -767,7 +756,6 @@ func (a InstalledOpenLimitLift) Reportable() bool { return false }
 func (a InstalledOpenLimitLift) SceneIndex() int  { return -1 }
 
 func (a InstalledOpenLimitLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -794,7 +782,6 @@ func (a InstalledClosedLimitLift) Reportable() bool { return false }
 func (a InstalledClosedLimitLift) SceneIndex() int  { return -1 }
 
 func (a InstalledClosedLimitLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -821,7 +808,6 @@ func (a InstalledOpenLimitTiltA) Reportable() bool { return false }
 func (a InstalledOpenLimitTiltA) SceneIndex() int  { return -1 }
 
 func (a InstalledOpenLimitTiltA) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -848,7 +834,6 @@ func (a InstalledOpenLimitTiltB) Reportable() bool { return false }
 func (a InstalledOpenLimitTiltB) SceneIndex() int  { return -1 }
 
 func (a InstalledOpenLimitTiltB) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -875,7 +860,6 @@ func (a VelocityLift) Reportable() bool { return false }
 func (a VelocityLift) SceneIndex() int  { return -1 }
 
 func (a VelocityLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -902,7 +886,6 @@ func (a AccelerationTimeLift) Reportable() bool { return false }
 func (a AccelerationTimeLift) SceneIndex() int  { return -1 }
 
 func (a AccelerationTimeLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -929,7 +912,6 @@ func (a DecelerationTimeLift) Reportable() bool { return false }
 func (a DecelerationTimeLift) SceneIndex() int  { return -1 }
 
 func (a DecelerationTimeLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -956,7 +938,6 @@ func (a WindowCoveringMode) Reportable() bool { return false }
 func (a WindowCoveringMode) SceneIndex() int  { return -1 }
 
 func (a WindowCoveringMode) String() string {
-
 	var bstr []string
 	if a.IsReversed() {
 		bstr = append(bstr, "Reversed")
@@ -971,7 +952,6 @@ func (a WindowCoveringMode) String() string {
 		bstr = append(bstr, "LED feedback")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a WindowCoveringMode) IsReversed() bool {
@@ -1025,7 +1005,6 @@ func (a IntermediateSetpointsLift) Reportable() bool { return false }
 func (a IntermediateSetpointsLift) SceneIndex() int  { return -1 }
 
 func (a IntermediateSetpointsLift) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
@@ -1052,6 +1031,5 @@ func (a IntermediateSetpointsTilt) Reportable() bool { return false }
 func (a IntermediateSetpointsTilt) SceneIndex() int  { return -1 }
 
 func (a IntermediateSetpointsTilt) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }

@@ -49,7 +49,6 @@ func (a MeasuredPressure) Reportable() bool { return true }
 func (a MeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MeasuredPressure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -76,7 +75,6 @@ func (a MinMeasuredPressure) Reportable() bool { return false }
 func (a MinMeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredPressure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -103,7 +101,6 @@ func (a MaxMeasuredPressure) Reportable() bool { return false }
 func (a MaxMeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredPressure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -130,7 +127,6 @@ func (a PressureTolerance) Reportable() bool { return true }
 func (a PressureTolerance) SceneIndex() int  { return -1 }
 
 func (a PressureTolerance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -157,7 +153,6 @@ func (a ScaledPressure) Reportable() bool { return false }
 func (a ScaledPressure) SceneIndex() int  { return -1 }
 
 func (a ScaledPressure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -184,7 +179,6 @@ func (a MinScaledPressure) Reportable() bool { return false }
 func (a MinScaledPressure) SceneIndex() int  { return -1 }
 
 func (a MinScaledPressure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -211,7 +205,6 @@ func (a MaxScaledPressure) Reportable() bool { return false }
 func (a MaxScaledPressure) SceneIndex() int  { return -1 }
 
 func (a MaxScaledPressure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -238,7 +231,6 @@ func (a ScaledPressureTolerance) Reportable() bool { return false }
 func (a ScaledPressureTolerance) SceneIndex() int  { return -1 }
 
 func (a ScaledPressureTolerance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -265,6 +257,5 @@ func (a Scale) Reportable() bool { return false }
 func (a Scale) SceneIndex() int  { return -1 }
 
 func (a Scale) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }

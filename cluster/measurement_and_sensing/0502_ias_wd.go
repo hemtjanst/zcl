@@ -171,6 +171,5 @@ func (a MaxDuration) Reportable() bool { return false }
 func (a MaxDuration) SceneIndex() int  { return -1 }
 
 func (a MaxDuration) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

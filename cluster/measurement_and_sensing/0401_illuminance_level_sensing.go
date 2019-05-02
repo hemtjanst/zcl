@@ -50,7 +50,6 @@ func (a LevelStatus) String() string {
 	case 0x02:
 		return "Illuminance above target"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -103,7 +102,6 @@ func (a IlluminanceSensorType) String() string {
 	case 0xFF:
 		return "Unknown"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -148,6 +146,5 @@ func (a IlluminanceTargetLevel) Reportable() bool { return false }
 func (a IlluminanceTargetLevel) SceneIndex() int  { return -1 }
 
 func (a IlluminanceTargetLevel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

@@ -136,7 +136,6 @@ func (a Currentcolorset) Reportable() bool { return false }
 func (a Currentcolorset) SceneIndex() int  { return -1 }
 
 func (a Currentcolorset) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
@@ -163,6 +162,5 @@ func (a Colorsetcount) Reportable() bool { return false }
 func (a Colorsetcount) SceneIndex() int  { return -1 }
 
 func (a Colorsetcount) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }

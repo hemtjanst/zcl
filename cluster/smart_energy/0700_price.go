@@ -154,7 +154,6 @@ func (a Tier1PriceLabel) Reportable() bool { return false }
 func (a Tier1PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier1PriceLabel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
@@ -181,7 +180,6 @@ func (a Tier2PriceLabel) Reportable() bool { return false }
 func (a Tier2PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier2PriceLabel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
@@ -208,7 +206,6 @@ func (a Tier3PriceLabel) Reportable() bool { return false }
 func (a Tier3PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier3PriceLabel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
@@ -235,7 +232,6 @@ func (a Tier4PriceLabel) Reportable() bool { return false }
 func (a Tier4PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier4PriceLabel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
@@ -262,7 +258,6 @@ func (a Tier5PriceLabel) Reportable() bool { return false }
 func (a Tier5PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier5PriceLabel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
@@ -289,6 +284,5 @@ func (a Tier6PriceLabel) Reportable() bool { return false }
 func (a Tier6PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier6PriceLabel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }

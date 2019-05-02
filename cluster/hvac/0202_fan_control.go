@@ -58,7 +58,6 @@ func (a FanMode) String() string {
 	case 0x06:
 		return "Smart"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -139,7 +138,6 @@ func (a FanModeSequence) String() string {
 	case 0x04:
 		return "On/Auto"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 

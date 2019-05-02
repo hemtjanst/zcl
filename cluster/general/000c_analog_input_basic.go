@@ -50,7 +50,6 @@ func (a AnalogInputDescription) Reportable() bool { return false }
 func (a AnalogInputDescription) SceneIndex() int  { return -1 }
 
 func (a AnalogInputDescription) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -77,7 +76,6 @@ func (a AnalogInputMaxPresentValue) Reportable() bool { return false }
 func (a AnalogInputMaxPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogInputMaxPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -104,7 +102,6 @@ func (a AnalogInputMinPresentValue) Reportable() bool { return false }
 func (a AnalogInputMinPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogInputMinPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -131,7 +128,6 @@ func (a AnalogInputOutOfService) Reportable() bool { return false }
 func (a AnalogInputOutOfService) SceneIndex() int  { return -1 }
 
 func (a AnalogInputOutOfService) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -158,7 +154,6 @@ func (a AnalogInputPresentValue) Reportable() bool { return true }
 func (a AnalogInputPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogInputPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -185,7 +180,6 @@ func (a AnalogInputReliability) Reportable() bool { return false }
 func (a AnalogInputReliability) SceneIndex() int  { return -1 }
 
 func (a AnalogInputReliability) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -212,7 +206,6 @@ func (a AnalogInputResolution) Reportable() bool { return false }
 func (a AnalogInputResolution) SceneIndex() int  { return -1 }
 
 func (a AnalogInputResolution) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -239,7 +232,6 @@ func (a AnalogInputStatusFlags) Reportable() bool { return true }
 func (a AnalogInputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a AnalogInputStatusFlags) String() string {
-
 	var bstr []string
 	if a.IsInAlarm() {
 		bstr = append(bstr, "In Alarm")
@@ -254,7 +246,6 @@ func (a AnalogInputStatusFlags) String() string {
 		bstr = append(bstr, "Out of Service")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a AnalogInputStatusFlags) IsInAlarm() bool {
@@ -690,7 +681,6 @@ func (a AnalogInputEngineeringUnits) String() string {
 	case 0x00FF:
 		return "Other"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum16(a))
 }
 
@@ -1857,6 +1847,5 @@ func (a AnalogInputApplicationType) Reportable() bool { return false }
 func (a AnalogInputApplicationType) SceneIndex() int  { return -1 }
 
 func (a AnalogInputApplicationType) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }

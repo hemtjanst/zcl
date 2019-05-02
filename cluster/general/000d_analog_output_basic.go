@@ -53,7 +53,6 @@ func (a AnalogOutputDescription) Reportable() bool { return false }
 func (a AnalogOutputDescription) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputDescription) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -80,7 +79,6 @@ func (a AnalogOutputMaxPresentValue) Reportable() bool { return false }
 func (a AnalogOutputMaxPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputMaxPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -107,7 +105,6 @@ func (a AnalogOutputMinPresentValue) Reportable() bool { return false }
 func (a AnalogOutputMinPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputMinPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -134,7 +131,6 @@ func (a AnalogOutputOutOfService) Reportable() bool { return false }
 func (a AnalogOutputOutOfService) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputOutOfService) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -161,7 +157,6 @@ func (a AnalogOutputPresentValue) Reportable() bool { return false }
 func (a AnalogOutputPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -188,7 +183,6 @@ func (a AnalogOutputPriorityArray) Reportable() bool { return false }
 func (a AnalogOutputPriorityArray) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputPriorityArray) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zarray(a))
 }
 
@@ -215,7 +209,6 @@ func (a AnalogOutputReliability) Reportable() bool { return false }
 func (a AnalogOutputReliability) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputReliability) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -242,7 +235,6 @@ func (a AnalogOutputRelinquishDefault) Reportable() bool { return false }
 func (a AnalogOutputRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputRelinquishDefault) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -269,7 +261,6 @@ func (a AnalogOutputResolution) Reportable() bool { return false }
 func (a AnalogOutputResolution) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputResolution) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zfloat(a))
 }
 
@@ -296,7 +287,6 @@ func (a AnalogOutputStatusFlags) Reportable() bool { return true }
 func (a AnalogOutputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputStatusFlags) String() string {
-
 	var bstr []string
 	if a.IsInAlarm() {
 		bstr = append(bstr, "In Alarm")
@@ -311,7 +301,6 @@ func (a AnalogOutputStatusFlags) String() string {
 		bstr = append(bstr, "Out of Service")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a AnalogOutputStatusFlags) IsInAlarm() bool {
@@ -747,7 +736,6 @@ func (a AnalogOutputEngineeringUnits) String() string {
 	case 0x00FF:
 		return "Other"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum16(a))
 }
 
@@ -1914,7 +1902,6 @@ func (a AnalogOutputApplicationType) Reportable() bool { return false }
 func (a AnalogOutputApplicationType) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputApplicationType) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -1941,6 +1928,5 @@ func (a AnalogOutputXiaomi0Xf000) Reportable() bool { return false }
 func (a AnalogOutputXiaomi0Xf000) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputXiaomi0Xf000) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }

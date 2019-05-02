@@ -43,7 +43,6 @@ func (a MeasuredRelativeHumidity) Reportable() bool { return true }
 func (a MeasuredRelativeHumidity) SceneIndex() int  { return -1 }
 
 func (a MeasuredRelativeHumidity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -70,7 +69,6 @@ func (a MinMeasuredRelativeHumidity) Reportable() bool { return false }
 func (a MinMeasuredRelativeHumidity) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredRelativeHumidity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -97,7 +95,6 @@ func (a MaxMeasuredRelativeHumidity) Reportable() bool { return false }
 func (a MaxMeasuredRelativeHumidity) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredRelativeHumidity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -124,6 +121,5 @@ func (a RelativeHumidityTolerance) Reportable() bool { return true }
 func (a RelativeHumidityTolerance) SceneIndex() int  { return -1 }
 
 func (a RelativeHumidityTolerance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

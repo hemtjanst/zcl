@@ -1507,7 +1507,6 @@ func (a LocationType) Reportable() bool { return false }
 func (a LocationType) SceneIndex() int  { return -1 }
 
 func (a LocationType) String() string {
-
 	var bstr []string
 	if a.IsAbsoluteLocation() {
 		bstr = append(bstr, "Absolute location")
@@ -1516,7 +1515,6 @@ func (a LocationType) String() string {
 		bstr = append(bstr, "Two dimensional")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a LocationType) IsAbsoluteLocation() bool {
@@ -1568,7 +1566,6 @@ func (a LocationMethod) String() string {
 	case 0x04:
 		return "Centralized"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1625,8 +1622,7 @@ func (a LocationAge) Reportable() bool { return false }
 func (a LocationAge) SceneIndex() int  { return -1 }
 
 func (a LocationAge) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const QualityMeasureAttr zcl.AttrID = 3
@@ -1652,8 +1648,7 @@ func (a QualityMeasure) Reportable() bool { return false }
 func (a QualityMeasure) SceneIndex() int  { return -1 }
 
 func (a QualityMeasure) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a), "%")
 }
 
 const NumberOfDevicesAttr zcl.AttrID = 4
@@ -1679,7 +1674,6 @@ func (a NumberOfDevices) Reportable() bool { return false }
 func (a NumberOfDevices) SceneIndex() int  { return -1 }
 
 func (a NumberOfDevices) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1706,8 +1700,7 @@ func (a XCoordinate) Reportable() bool { return false }
 func (a XCoordinate) SceneIndex() int  { return -1 }
 
 func (a XCoordinate) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "m")
 }
 
 const YCoordinateAttr zcl.AttrID = 17
@@ -1733,8 +1726,7 @@ func (a YCoordinate) Reportable() bool { return false }
 func (a YCoordinate) SceneIndex() int  { return -1 }
 
 func (a YCoordinate) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "m")
 }
 
 const ZCoordinateAttr zcl.AttrID = 18
@@ -1760,8 +1752,7 @@ func (a ZCoordinate) Reportable() bool { return false }
 func (a ZCoordinate) SceneIndex() int  { return -1 }
 
 func (a ZCoordinate) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "m")
 }
 
 const PowerAttr zcl.AttrID = 19
@@ -1787,8 +1778,7 @@ func (a Power) Reportable() bool { return false }
 func (a Power) SceneIndex() int  { return -1 }
 
 func (a Power) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a)/100, "dBm")
 }
 
 const PathLossExponentAttr zcl.AttrID = 20
@@ -1814,7 +1804,6 @@ func (a PathLossExponent) Reportable() bool { return false }
 func (a PathLossExponent) SceneIndex() int  { return -1 }
 
 func (a PathLossExponent) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1841,8 +1830,7 @@ func (a ReportingPeriod) Reportable() bool { return false }
 func (a ReportingPeriod) SceneIndex() int  { return -1 }
 
 func (a ReportingPeriod) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const CalculationPeriodAttr zcl.AttrID = 22
@@ -1868,8 +1856,7 @@ func (a CalculationPeriod) Reportable() bool { return false }
 func (a CalculationPeriod) SceneIndex() int  { return -1 }
 
 func (a CalculationPeriod) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const NumberRssiMeasurementsAttr zcl.AttrID = 23
@@ -1895,6 +1882,5 @@ func (a NumberRssiMeasurements) Reportable() bool { return false }
 func (a NumberRssiMeasurements) SceneIndex() int  { return -1 }
 
 func (a NumberRssiMeasurements) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }

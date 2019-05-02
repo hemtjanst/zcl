@@ -596,13 +596,11 @@ func (a GroupNameSupport) Reportable() bool { return false }
 func (a GroupNameSupport) SceneIndex() int  { return -1 }
 
 func (a GroupNameSupport) String() string {
-
 	var bstr []string
 	if a.IsNamesSupported() {
 		bstr = append(bstr, "Names Supported")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a GroupNameSupport) IsNamesSupported() bool {

@@ -63,8 +63,7 @@ func (a MainsVoltage) Reportable() bool { return false }
 func (a MainsVoltage) SceneIndex() int  { return -1 }
 
 func (a MainsVoltage) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const MainsFrequencyAttr zcl.AttrID = 1
@@ -90,8 +89,7 @@ func (a MainsFrequency) Reportable() bool { return false }
 func (a MainsFrequency) SceneIndex() int  { return -1 }
 
 func (a MainsFrequency) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/2, "Hz")
 }
 
 const MainsAlarmMaskAttr zcl.AttrID = 16
@@ -117,7 +115,6 @@ func (a MainsAlarmMask) Reportable() bool { return false }
 func (a MainsAlarmMask) SceneIndex() int  { return -1 }
 
 func (a MainsAlarmMask) String() string {
-
 	var bstr []string
 	if a.IsMainsVoltageTooLow() {
 		bstr = append(bstr, "Mains Voltage too low")
@@ -129,7 +126,6 @@ func (a MainsAlarmMask) String() string {
 		bstr = append(bstr, "Mains power supply lost/unavailable")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a MainsAlarmMask) IsMainsVoltageTooLow() bool {
@@ -176,8 +172,7 @@ func (a MainsVoltageMinThreshold) Reportable() bool { return false }
 func (a MainsVoltageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageMinThreshold) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const MainsVoltageMaxThresholdAttr zcl.AttrID = 18
@@ -203,8 +198,7 @@ func (a MainsVoltageMaxThreshold) Reportable() bool { return false }
 func (a MainsVoltageMaxThreshold) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageMaxThreshold) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const MainsVoltageDwellTripPointAttr zcl.AttrID = 19
@@ -230,8 +224,7 @@ func (a MainsVoltageDwellTripPoint) Reportable() bool { return false }
 func (a MainsVoltageDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageDwellTripPoint) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const BatteryVoltageAttr zcl.AttrID = 32
@@ -257,8 +250,7 @@ func (a BatteryVoltage) Reportable() bool { return false }
 func (a BatteryVoltage) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltage) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const BatteryPercentageRemainingAttr zcl.AttrID = 33
@@ -284,8 +276,7 @@ func (a BatteryPercentageRemaining) Reportable() bool { return true }
 func (a BatteryPercentageRemaining) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageRemaining) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a), "%")
 }
 
 const BatteryManufacturerAttr zcl.AttrID = 48
@@ -311,7 +302,6 @@ func (a BatteryManufacturer) Reportable() bool { return false }
 func (a BatteryManufacturer) SceneIndex() int  { return -1 }
 
 func (a BatteryManufacturer) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -360,7 +350,6 @@ func (a BatterySize) String() string {
 	case 0xFF:
 		return "Unknown"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -447,8 +436,7 @@ func (a BatteryAhrRating) Reportable() bool { return false }
 func (a BatteryAhrRating) SceneIndex() int  { return -1 }
 
 func (a BatteryAhrRating) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "mAh")
 }
 
 const BatteryQuantityAttr zcl.AttrID = 51
@@ -474,7 +462,6 @@ func (a BatteryQuantity) Reportable() bool { return false }
 func (a BatteryQuantity) SceneIndex() int  { return -1 }
 
 func (a BatteryQuantity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -501,8 +488,7 @@ func (a BatteryRatedVoltage) Reportable() bool { return false }
 func (a BatteryRatedVoltage) SceneIndex() int  { return -1 }
 
 func (a BatteryRatedVoltage) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const BatteryAlarmMaskAttr zcl.AttrID = 53
@@ -528,7 +514,6 @@ func (a BatteryAlarmMask) Reportable() bool { return false }
 func (a BatteryAlarmMask) SceneIndex() int  { return -1 }
 
 func (a BatteryAlarmMask) String() string {
-
 	var bstr []string
 	if a.IsBatteryVoltageTooLow() {
 		bstr = append(bstr, "Battery Voltage too low")
@@ -543,7 +528,6 @@ func (a BatteryAlarmMask) String() string {
 		bstr = append(bstr, "Battery Alarm 3")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a BatteryAlarmMask) IsBatteryVoltageTooLow() bool {
@@ -597,8 +581,7 @@ func (a BatteryVoltageMinThreshold) Reportable() bool { return false }
 func (a BatteryVoltageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageMinThreshold) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const BatteryVoltageThreshold1Attr zcl.AttrID = 55
@@ -624,8 +607,7 @@ func (a BatteryVoltageThreshold1) Reportable() bool { return false }
 func (a BatteryVoltageThreshold1) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold1) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const BatteryVoltageThreshold2Attr zcl.AttrID = 56
@@ -651,8 +633,7 @@ func (a BatteryVoltageThreshold2) Reportable() bool { return false }
 func (a BatteryVoltageThreshold2) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold2) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const BatteryVoltageThreshold3Attr zcl.AttrID = 57
@@ -678,8 +659,7 @@ func (a BatteryVoltageThreshold3) Reportable() bool { return false }
 func (a BatteryVoltageThreshold3) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold3) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/10, "V")
 }
 
 const BatteryPercentageMinThresholdAttr zcl.AttrID = 58
@@ -705,8 +685,7 @@ func (a BatteryPercentageMinThreshold) Reportable() bool { return false }
 func (a BatteryPercentageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageMinThreshold) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a), "%")
 }
 
 const BatteryPercentageThreshold1Attr zcl.AttrID = 59
@@ -732,8 +711,7 @@ func (a BatteryPercentageThreshold1) Reportable() bool { return false }
 func (a BatteryPercentageThreshold1) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold1) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a), "%")
 }
 
 const BatteryPercentageThreshold2Attr zcl.AttrID = 60
@@ -759,8 +737,7 @@ func (a BatteryPercentageThreshold2) Reportable() bool { return false }
 func (a BatteryPercentageThreshold2) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold2) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a), "%")
 }
 
 const BatteryPercentageThreshold3Attr zcl.AttrID = 61
@@ -786,8 +763,7 @@ func (a BatteryPercentageThreshold3) Reportable() bool { return false }
 func (a BatteryPercentageThreshold3) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold3) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a), "%")
 }
 
 const BatteryAlarmStateAttr zcl.AttrID = 62
@@ -813,7 +789,6 @@ func (a BatteryAlarmState) Reportable() bool { return false }
 func (a BatteryAlarmState) SceneIndex() int  { return -1 }
 
 func (a BatteryAlarmState) String() string {
-
 	var bstr []string
 	if a.IsMinimumThreshold1ForVoltageOrPercentageReachedForBatterySource1() {
 		bstr = append(bstr, "Minimum Threshold 1 for Voltage or Percentage reached for Battery Source 1")
@@ -855,7 +830,6 @@ func (a BatteryAlarmState) String() string {
 		bstr = append(bstr, "Mains power lost/unavailable")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a BatteryAlarmState) IsMinimumThreshold1ForVoltageOrPercentageReachedForBatterySource1() bool {

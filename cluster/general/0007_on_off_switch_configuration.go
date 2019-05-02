@@ -50,7 +50,6 @@ func (a Switchtype) String() string {
 	case 0x02:
 		return "Multifunction"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -103,7 +102,6 @@ func (a Switchactions) String() string {
 	case 0x02:
 		return "Toggle"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 

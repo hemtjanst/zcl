@@ -1434,7 +1434,6 @@ func (a SceneCount) Reportable() bool { return false }
 func (a SceneCount) SceneIndex() int  { return -1 }
 
 func (a SceneCount) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
@@ -1461,7 +1460,6 @@ func (a CurrentScene) Reportable() bool { return false }
 func (a CurrentScene) SceneIndex() int  { return -1 }
 
 func (a CurrentScene) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
@@ -1488,7 +1486,6 @@ func (a CurrentGroup) Reportable() bool { return false }
 func (a CurrentGroup) SceneIndex() int  { return -1 }
 
 func (a CurrentGroup) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
@@ -1515,7 +1512,6 @@ func (a SceneValid) Reportable() bool { return false }
 func (a SceneValid) SceneIndex() int  { return -1 }
 
 func (a SceneValid) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -1542,13 +1538,11 @@ func (a SceneNameSupport) Reportable() bool { return false }
 func (a SceneNameSupport) SceneIndex() int  { return -1 }
 
 func (a SceneNameSupport) String() string {
-
 	var bstr []string
 	if a.IsNamesSupported() {
 		bstr = append(bstr, "Names Supported")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a SceneNameSupport) IsNamesSupported() bool {
@@ -1581,6 +1575,5 @@ func (a LastConfiguredby) Reportable() bool { return false }
 func (a LastConfiguredby) SceneIndex() int  { return -1 }
 
 func (a LastConfiguredby) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }

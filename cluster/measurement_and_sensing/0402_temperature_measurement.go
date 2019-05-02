@@ -44,7 +44,6 @@ func (a MeasuredTemperature) Reportable() bool { return true }
 func (a MeasuredTemperature) SceneIndex() int  { return -1 }
 
 func (a MeasuredTemperature) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -71,7 +70,6 @@ func (a MinMeasuredTemperature) Reportable() bool { return false }
 func (a MinMeasuredTemperature) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredTemperature) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -98,7 +96,6 @@ func (a MaxMeasuredTemperature) Reportable() bool { return false }
 func (a MaxMeasuredTemperature) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredTemperature) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -125,6 +122,5 @@ func (a TemperatureTolerance) Reportable() bool { return true }
 func (a TemperatureTolerance) SceneIndex() int  { return -1 }
 
 func (a TemperatureTolerance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

@@ -49,8 +49,7 @@ func (a CurrentTemperature) Reportable() bool { return false }
 func (a CurrentTemperature) SceneIndex() int  { return -1 }
 
 func (a CurrentTemperature) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°C")
 }
 
 const MinTempExperiencedAttr zcl.AttrID = 1
@@ -76,8 +75,7 @@ func (a MinTempExperienced) Reportable() bool { return false }
 func (a MinTempExperienced) SceneIndex() int  { return -1 }
 
 func (a MinTempExperienced) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°C")
 }
 
 const MaxTempExperiencedAttr zcl.AttrID = 2
@@ -103,8 +101,7 @@ func (a MaxTempExperienced) Reportable() bool { return false }
 func (a MaxTempExperienced) SceneIndex() int  { return -1 }
 
 func (a MaxTempExperienced) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°C")
 }
 
 const OverTempTotalDwellAttr zcl.AttrID = 3
@@ -130,7 +127,6 @@ func (a OverTempTotalDwell) Reportable() bool { return false }
 func (a OverTempTotalDwell) SceneIndex() int  { return -1 }
 
 func (a OverTempTotalDwell) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -157,7 +153,6 @@ func (a DeviceTempAlarmMask) Reportable() bool { return false }
 func (a DeviceTempAlarmMask) SceneIndex() int  { return -1 }
 
 func (a DeviceTempAlarmMask) String() string {
-
 	var bstr []string
 	if a.IsTemperatureTooLow() {
 		bstr = append(bstr, "Temperature too low")
@@ -166,7 +161,6 @@ func (a DeviceTempAlarmMask) String() string {
 		bstr = append(bstr, "Temperature too high")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a DeviceTempAlarmMask) IsTemperatureTooLow() bool {
@@ -206,8 +200,7 @@ func (a LowTempThreshold) Reportable() bool { return false }
 func (a LowTempThreshold) SceneIndex() int  { return -1 }
 
 func (a LowTempThreshold) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°C")
 }
 
 const HighTempThresholdAttr zcl.AttrID = 18
@@ -233,8 +226,7 @@ func (a HighTempThreshold) Reportable() bool { return false }
 func (a HighTempThreshold) SceneIndex() int  { return -1 }
 
 func (a HighTempThreshold) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°C")
 }
 
 const LowTempDwellTripPointAttr zcl.AttrID = 19
@@ -260,8 +252,7 @@ func (a LowTempDwellTripPoint) Reportable() bool { return false }
 func (a LowTempDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a LowTempDwellTripPoint) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu24(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const HighTempDwellTripPointAttr zcl.AttrID = 20
@@ -287,6 +278,5 @@ func (a HighTempDwellTripPoint) Reportable() bool { return false }
 func (a HighTempDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a HighTempDwellTripPoint) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu24(a))
+	return zcl.Duration(int(a), 0).String()
 }

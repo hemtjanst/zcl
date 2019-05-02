@@ -453,7 +453,6 @@ func (a MeasurementType) Reportable() bool { return false }
 func (a MeasurementType) SceneIndex() int  { return -1 }
 
 func (a MeasurementType) String() string {
-
 	var bstr []string
 	if a.IsActiveMeasurementAc() {
 		bstr = append(bstr, "Active measurement (AC)")
@@ -483,7 +482,6 @@ func (a MeasurementType) String() string {
 		bstr = append(bstr, "Power quality measurement")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a MeasurementType) IsActiveMeasurementAc() bool {
@@ -572,8 +570,7 @@ func (a DcVoltage) Reportable() bool { return false }
 func (a DcVoltage) SceneIndex() int  { return -1 }
 
 func (a DcVoltage) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const DcVoltageMinAttr zcl.AttrID = 257
@@ -599,8 +596,7 @@ func (a DcVoltageMin) Reportable() bool { return false }
 func (a DcVoltageMin) SceneIndex() int  { return -1 }
 
 func (a DcVoltageMin) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const DcVoltageMaxAttr zcl.AttrID = 258
@@ -626,8 +622,7 @@ func (a DcVoltageMax) Reportable() bool { return false }
 func (a DcVoltageMax) SceneIndex() int  { return -1 }
 
 func (a DcVoltageMax) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const DcCurrentAttr zcl.AttrID = 259
@@ -653,8 +648,7 @@ func (a DcCurrent) Reportable() bool { return false }
 func (a DcCurrent) SceneIndex() int  { return -1 }
 
 func (a DcCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const DcCurrentMinAttr zcl.AttrID = 260
@@ -680,8 +674,7 @@ func (a DcCurrentMin) Reportable() bool { return false }
 func (a DcCurrentMin) SceneIndex() int  { return -1 }
 
 func (a DcCurrentMin) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const DcCurrentMaxAttr zcl.AttrID = 261
@@ -707,8 +700,7 @@ func (a DcCurrentMax) Reportable() bool { return false }
 func (a DcCurrentMax) SceneIndex() int  { return -1 }
 
 func (a DcCurrentMax) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const DcPowerAttr zcl.AttrID = 262
@@ -734,8 +726,7 @@ func (a DcPower) Reportable() bool { return false }
 func (a DcPower) SceneIndex() int  { return -1 }
 
 func (a DcPower) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const DcPowerMinAttr zcl.AttrID = 263
@@ -761,8 +752,7 @@ func (a DcPowerMin) Reportable() bool { return false }
 func (a DcPowerMin) SceneIndex() int  { return -1 }
 
 func (a DcPowerMin) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const DcPowerMaxAttr zcl.AttrID = 264
@@ -788,8 +778,7 @@ func (a DcPowerMax) Reportable() bool { return false }
 func (a DcPowerMax) SceneIndex() int  { return -1 }
 
 func (a DcPowerMax) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const DcVoltageMultiplierAttr zcl.AttrID = 512
@@ -815,7 +804,6 @@ func (a DcVoltageMultiplier) Reportable() bool { return false }
 func (a DcVoltageMultiplier) SceneIndex() int  { return -1 }
 
 func (a DcVoltageMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -842,7 +830,6 @@ func (a DcVoltageDivisor) Reportable() bool { return false }
 func (a DcVoltageDivisor) SceneIndex() int  { return -1 }
 
 func (a DcVoltageDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -869,7 +856,6 @@ func (a DcCurrentMultiplier) Reportable() bool { return false }
 func (a DcCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a DcCurrentMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -896,7 +882,6 @@ func (a DcCurrentDivisor) Reportable() bool { return false }
 func (a DcCurrentDivisor) SceneIndex() int  { return -1 }
 
 func (a DcCurrentDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -923,7 +908,6 @@ func (a DcPowerMultiplier) Reportable() bool { return false }
 func (a DcPowerMultiplier) SceneIndex() int  { return -1 }
 
 func (a DcPowerMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -950,7 +934,6 @@ func (a DcPowerDivisor) Reportable() bool { return false }
 func (a DcPowerDivisor) SceneIndex() int  { return -1 }
 
 func (a DcPowerDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -977,8 +960,7 @@ func (a AcFrequency) Reportable() bool { return false }
 func (a AcFrequency) SceneIndex() int  { return -1 }
 
 func (a AcFrequency) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "Hz")
 }
 
 const AcFrequencyMinAttr zcl.AttrID = 769
@@ -1004,8 +986,7 @@ func (a AcFrequencyMin) Reportable() bool { return false }
 func (a AcFrequencyMin) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyMin) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "Hz")
 }
 
 const AcFrequencyMaxAttr zcl.AttrID = 770
@@ -1031,8 +1012,7 @@ func (a AcFrequencyMax) Reportable() bool { return false }
 func (a AcFrequencyMax) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyMax) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "Hz")
 }
 
 const NeutralCurrentAttr zcl.AttrID = 771
@@ -1058,7 +1038,6 @@ func (a NeutralCurrent) Reportable() bool { return false }
 func (a NeutralCurrent) SceneIndex() int  { return -1 }
 
 func (a NeutralCurrent) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1085,8 +1064,7 @@ func (a TotalActivePower) Reportable() bool { return false }
 func (a TotalActivePower) SceneIndex() int  { return -1 }
 
 func (a TotalActivePower) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs32(a))
+	return zcl.Sprintf("%f%s", float64(a), "kW")
 }
 
 const TotalReactivePowerAttr zcl.AttrID = 773
@@ -1112,8 +1090,7 @@ func (a TotalReactivePower) Reportable() bool { return false }
 func (a TotalReactivePower) SceneIndex() int  { return -1 }
 
 func (a TotalReactivePower) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs32(a))
+	return zcl.Sprintf("%f%s", float64(a), "kVA")
 }
 
 const TotalApparentPowerAttr zcl.AttrID = 774
@@ -1139,8 +1116,7 @@ func (a TotalApparentPower) Reportable() bool { return false }
 func (a TotalApparentPower) SceneIndex() int  { return -1 }
 
 func (a TotalApparentPower) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu32(a))
+	return zcl.Sprintf("%f%s", float64(a), "kVA")
 }
 
 const Measured1StHarmonicCurrentAttr zcl.AttrID = 775
@@ -1166,8 +1142,7 @@ func (a Measured1StHarmonicCurrent) Reportable() bool { return false }
 func (a Measured1StHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured1StHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const Measured3RdHarmonicCurrentAttr zcl.AttrID = 776
@@ -1193,8 +1168,7 @@ func (a Measured3RdHarmonicCurrent) Reportable() bool { return false }
 func (a Measured3RdHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured3RdHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const Measured5ThHarmonicCurrentAttr zcl.AttrID = 777
@@ -1220,8 +1194,7 @@ func (a Measured5ThHarmonicCurrent) Reportable() bool { return false }
 func (a Measured5ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured5ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const Measured7ThHarmonicCurrentAttr zcl.AttrID = 778
@@ -1247,8 +1220,7 @@ func (a Measured7ThHarmonicCurrent) Reportable() bool { return false }
 func (a Measured7ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured7ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const Measured9ThHarmonicCurrentAttr zcl.AttrID = 779
@@ -1274,8 +1246,7 @@ func (a Measured9ThHarmonicCurrent) Reportable() bool { return false }
 func (a Measured9ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured9ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const Measured11ThHarmonicCurrentAttr zcl.AttrID = 780
@@ -1301,8 +1272,7 @@ func (a Measured11ThHarmonicCurrent) Reportable() bool { return false }
 func (a Measured11ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured11ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const MeasuredPhase1StHarmonicCurrentAttr zcl.AttrID = 781
@@ -1328,8 +1298,7 @@ func (a MeasuredPhase1StHarmonicCurrent) Reportable() bool { return false }
 func (a MeasuredPhase1StHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase1StHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°")
 }
 
 const MeasuredPhase3RdHarmonicCurrentAttr zcl.AttrID = 782
@@ -1355,8 +1324,7 @@ func (a MeasuredPhase3RdHarmonicCurrent) Reportable() bool { return false }
 func (a MeasuredPhase3RdHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase3RdHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°")
 }
 
 const MeasuredPhase5ThHarmonicCurrentAttr zcl.AttrID = 783
@@ -1382,8 +1350,7 @@ func (a MeasuredPhase5ThHarmonicCurrent) Reportable() bool { return false }
 func (a MeasuredPhase5ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase5ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°")
 }
 
 const MeasuredPhase7ThHarmonicCurrentAttr zcl.AttrID = 784
@@ -1409,8 +1376,7 @@ func (a MeasuredPhase7ThHarmonicCurrent) Reportable() bool { return false }
 func (a MeasuredPhase7ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase7ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°")
 }
 
 const MeasuredPhase9ThHarmonicCurrentAttr zcl.AttrID = 785
@@ -1436,8 +1402,7 @@ func (a MeasuredPhase9ThHarmonicCurrent) Reportable() bool { return false }
 func (a MeasuredPhase9ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase9ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°")
 }
 
 const MeasuredPhase11ThHarmonicCurrentAttr zcl.AttrID = 786
@@ -1463,8 +1428,7 @@ func (a MeasuredPhase11ThHarmonicCurrent) Reportable() bool { return false }
 func (a MeasuredPhase11ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase11ThHarmonicCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "°")
 }
 
 const AcFrequencyMultiplierAttr zcl.AttrID = 1024
@@ -1490,7 +1454,6 @@ func (a AcFrequencyMultiplier) Reportable() bool { return false }
 func (a AcFrequencyMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1517,7 +1480,6 @@ func (a AcFrequencyDivisor) Reportable() bool { return false }
 func (a AcFrequencyDivisor) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1544,7 +1506,6 @@ func (a PowerMultiplier) Reportable() bool { return false }
 func (a PowerMultiplier) SceneIndex() int  { return -1 }
 
 func (a PowerMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -1571,7 +1532,6 @@ func (a PowerDivisor) Reportable() bool { return false }
 func (a PowerDivisor) SceneIndex() int  { return -1 }
 
 func (a PowerDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -1598,8 +1558,7 @@ func (a HarmonicCurrentMultiplier) Reportable() bool { return false }
 func (a HarmonicCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a HarmonicCurrentMultiplier) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs8(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const PhaseHarmonicCurrentMultiplierAttr zcl.AttrID = 1029
@@ -1625,8 +1584,7 @@ func (a PhaseHarmonicCurrentMultiplier) Reportable() bool { return false }
 func (a PhaseHarmonicCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a PhaseHarmonicCurrentMultiplier) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs8(a))
+	return zcl.Sprintf("%f%s", float64(a), "°")
 }
 
 const LineCurrentAttr zcl.AttrID = 1281
@@ -1652,8 +1610,7 @@ func (a LineCurrent) Reportable() bool { return false }
 func (a LineCurrent) SceneIndex() int  { return -1 }
 
 func (a LineCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ActiveCurrentAttr zcl.AttrID = 1282
@@ -1679,8 +1636,7 @@ func (a ActiveCurrent) Reportable() bool { return false }
 func (a ActiveCurrent) SceneIndex() int  { return -1 }
 
 func (a ActiveCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ReactiveCurrentAttr zcl.AttrID = 1283
@@ -1706,8 +1662,7 @@ func (a ReactiveCurrent) Reportable() bool { return false }
 func (a ReactiveCurrent) SceneIndex() int  { return -1 }
 
 func (a ReactiveCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsVoltageAttr zcl.AttrID = 1285
@@ -1733,8 +1688,7 @@ func (a RmsVoltage) Reportable() bool { return false }
 func (a RmsVoltage) SceneIndex() int  { return -1 }
 
 func (a RmsVoltage) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsVoltageMinAttr zcl.AttrID = 1286
@@ -1760,8 +1714,7 @@ func (a RmsVoltageMin) Reportable() bool { return false }
 func (a RmsVoltageMin) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMin) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsVoltageMaxAttr zcl.AttrID = 1287
@@ -1787,8 +1740,7 @@ func (a RmsVoltageMax) Reportable() bool { return false }
 func (a RmsVoltageMax) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMax) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsCurrentAttr zcl.AttrID = 1288
@@ -1814,8 +1766,7 @@ func (a RmsCurrent) Reportable() bool { return false }
 func (a RmsCurrent) SceneIndex() int  { return -1 }
 
 func (a RmsCurrent) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsCurrentMinAttr zcl.AttrID = 1289
@@ -1841,8 +1792,7 @@ func (a RmsCurrentMin) Reportable() bool { return false }
 func (a RmsCurrentMin) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMin) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsCurrentMaxAttr zcl.AttrID = 1290
@@ -1868,8 +1818,7 @@ func (a RmsCurrentMax) Reportable() bool { return false }
 func (a RmsCurrentMax) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMax) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ActivePowerAttr zcl.AttrID = 1291
@@ -1895,8 +1844,7 @@ func (a ActivePower) Reportable() bool { return false }
 func (a ActivePower) SceneIndex() int  { return -1 }
 
 func (a ActivePower) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ActivePowerMinAttr zcl.AttrID = 1292
@@ -1922,8 +1870,7 @@ func (a ActivePowerMin) Reportable() bool { return false }
 func (a ActivePowerMin) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMin) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ActivePowerMaxAttr zcl.AttrID = 1293
@@ -1949,8 +1896,7 @@ func (a ActivePowerMax) Reportable() bool { return false }
 func (a ActivePowerMax) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMax) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ReactivePowerAttr zcl.AttrID = 1294
@@ -1976,8 +1922,7 @@ func (a ReactivePower) Reportable() bool { return false }
 func (a ReactivePower) SceneIndex() int  { return -1 }
 
 func (a ReactivePower) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "VAr")
 }
 
 const ApparentPowerAttr zcl.AttrID = 1295
@@ -2003,8 +1948,7 @@ func (a ApparentPower) Reportable() bool { return false }
 func (a ApparentPower) SceneIndex() int  { return -1 }
 
 func (a ApparentPower) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "VA")
 }
 
 const PowerFactorAttr zcl.AttrID = 1296
@@ -2030,7 +1974,6 @@ func (a PowerFactor) Reportable() bool { return false }
 func (a PowerFactor) SceneIndex() int  { return -1 }
 
 func (a PowerFactor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
@@ -2059,8 +2002,7 @@ func (a AverageRmsVoltageMeasurementPeriod) Reportable() bool { return false }
 func (a AverageRmsVoltageMeasurementPeriod) SceneIndex() int  { return -1 }
 
 func (a AverageRmsVoltageMeasurementPeriod) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const AverageRmsOvervoltageCounterAttr zcl.AttrID = 1298
@@ -2086,7 +2028,6 @@ func (a AverageRmsOvervoltageCounter) Reportable() bool { return false }
 func (a AverageRmsOvervoltageCounter) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltageCounter) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2113,7 +2054,6 @@ func (a AverageRmsUndervoltageCounter) Reportable() bool { return false }
 func (a AverageRmsUndervoltageCounter) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltageCounter) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2140,8 +2080,7 @@ func (a RmsExtremeOvervoltagePeriod) Reportable() bool { return false }
 func (a RmsExtremeOvervoltagePeriod) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltagePeriod) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsExtremeUndervoltagePeriodAttr zcl.AttrID = 1301
@@ -2167,8 +2106,7 @@ func (a RmsExtremeUndervoltagePeriod) Reportable() bool { return false }
 func (a RmsExtremeUndervoltagePeriod) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltagePeriod) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsVoltageSagPeriodAttr zcl.AttrID = 1302
@@ -2194,8 +2132,7 @@ func (a RmsVoltageSagPeriod) Reportable() bool { return false }
 func (a RmsVoltageSagPeriod) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSagPeriod) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsVoltageSwellPeriodAttr zcl.AttrID = 1303
@@ -2221,8 +2158,7 @@ func (a RmsVoltageSwellPeriod) Reportable() bool { return false }
 func (a RmsVoltageSwellPeriod) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwellPeriod) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const AcVoltageMultiplierAttr zcl.AttrID = 1536
@@ -2248,7 +2184,6 @@ func (a AcVoltageMultiplier) Reportable() bool { return false }
 func (a AcVoltageMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcVoltageMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2275,7 +2210,6 @@ func (a AcVoltageDivisor) Reportable() bool { return false }
 func (a AcVoltageDivisor) SceneIndex() int  { return -1 }
 
 func (a AcVoltageDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2302,7 +2236,6 @@ func (a AcCurrentMultiplier) Reportable() bool { return false }
 func (a AcCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcCurrentMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2329,7 +2262,6 @@ func (a AcCurrentDivisor) Reportable() bool { return false }
 func (a AcCurrentDivisor) SceneIndex() int  { return -1 }
 
 func (a AcCurrentDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2356,7 +2288,6 @@ func (a AcPowerMultiplier) Reportable() bool { return false }
 func (a AcPowerMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcPowerMultiplier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2383,7 +2314,6 @@ func (a AcPowerDivisor) Reportable() bool { return false }
 func (a AcPowerDivisor) SceneIndex() int  { return -1 }
 
 func (a AcPowerDivisor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2410,7 +2340,6 @@ func (a DcOverloadAlarmsMask) Reportable() bool { return false }
 func (a DcOverloadAlarmsMask) SceneIndex() int  { return -1 }
 
 func (a DcOverloadAlarmsMask) String() string {
-
 	var bstr []string
 	if a.IsVoltageOverload() {
 		bstr = append(bstr, "Voltage Overload")
@@ -2419,7 +2348,6 @@ func (a DcOverloadAlarmsMask) String() string {
 		bstr = append(bstr, "Current Overload")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a DcOverloadAlarmsMask) IsVoltageOverload() bool {
@@ -2459,7 +2387,6 @@ func (a DcVoltageOverload) Reportable() bool { return false }
 func (a DcVoltageOverload) SceneIndex() int  { return -1 }
 
 func (a DcVoltageOverload) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2486,7 +2413,6 @@ func (a DcCurrentOverload) Reportable() bool { return false }
 func (a DcCurrentOverload) SceneIndex() int  { return -1 }
 
 func (a DcCurrentOverload) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2513,7 +2439,6 @@ func (a AcOverloadAlarmsMask) Reportable() bool { return false }
 func (a AcOverloadAlarmsMask) SceneIndex() int  { return -1 }
 
 func (a AcOverloadAlarmsMask) String() string {
-
 	var bstr []string
 	if a.IsVoltageOverload() {
 		bstr = append(bstr, "Voltage Overload")
@@ -2546,7 +2471,6 @@ func (a AcOverloadAlarmsMask) String() string {
 		bstr = append(bstr, "RMS Voltage Swell")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a AcOverloadAlarmsMask) IsVoltageOverload() bool {
@@ -2642,7 +2566,6 @@ func (a AcVoltageOverload) Reportable() bool { return false }
 func (a AcVoltageOverload) SceneIndex() int  { return -1 }
 
 func (a AcVoltageOverload) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2669,7 +2592,6 @@ func (a AcCurrentOverload) Reportable() bool { return false }
 func (a AcCurrentOverload) SceneIndex() int  { return -1 }
 
 func (a AcCurrentOverload) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2696,7 +2618,6 @@ func (a AcActivePowerOverload) Reportable() bool { return false }
 func (a AcActivePowerOverload) SceneIndex() int  { return -1 }
 
 func (a AcActivePowerOverload) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2723,7 +2644,6 @@ func (a AcReactivePowerOverload) Reportable() bool { return false }
 func (a AcReactivePowerOverload) SceneIndex() int  { return -1 }
 
 func (a AcReactivePowerOverload) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2750,7 +2670,6 @@ func (a AverageRmsOvervoltage) Reportable() bool { return false }
 func (a AverageRmsOvervoltage) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltage) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2777,7 +2696,6 @@ func (a AverageRmsUndervoltage) Reportable() bool { return false }
 func (a AverageRmsUndervoltage) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltage) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2804,7 +2722,6 @@ func (a RmsExtremeOvervoltage) Reportable() bool { return false }
 func (a RmsExtremeOvervoltage) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltage) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2831,7 +2748,6 @@ func (a RmsExtremeUndervoltage) Reportable() bool { return false }
 func (a RmsExtremeUndervoltage) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltage) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2858,7 +2774,6 @@ func (a RmsVoltageSag) Reportable() bool { return false }
 func (a RmsVoltageSag) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSag) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2885,7 +2800,6 @@ func (a RmsVoltageSwell) Reportable() bool { return false }
 func (a RmsVoltageSwell) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwell) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs16(a))
 }
 
@@ -2912,8 +2826,7 @@ func (a LineCurrentPhaseB) Reportable() bool { return false }
 func (a LineCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a LineCurrentPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ActiveCurrentPhaseBAttr zcl.AttrID = 2306
@@ -2939,8 +2852,7 @@ func (a ActiveCurrentPhaseB) Reportable() bool { return false }
 func (a ActiveCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActiveCurrentPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ReactiveCurrentPhaseBAttr zcl.AttrID = 2307
@@ -2966,8 +2878,7 @@ func (a ReactiveCurrentPhaseB) Reportable() bool { return false }
 func (a ReactiveCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a ReactiveCurrentPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsVoltagePhaseBAttr zcl.AttrID = 2309
@@ -2993,8 +2904,7 @@ func (a RmsVoltagePhaseB) Reportable() bool { return false }
 func (a RmsVoltagePhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltagePhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsVoltageMinPhaseBAttr zcl.AttrID = 2310
@@ -3020,8 +2930,7 @@ func (a RmsVoltageMinPhaseB) Reportable() bool { return false }
 func (a RmsVoltageMinPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMinPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsVoltageMaxPhaseBAttr zcl.AttrID = 2311
@@ -3047,8 +2956,7 @@ func (a RmsVoltageMaxPhaseB) Reportable() bool { return false }
 func (a RmsVoltageMaxPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMaxPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsCurrentPhaseBAttr zcl.AttrID = 2312
@@ -3074,8 +2982,7 @@ func (a RmsCurrentPhaseB) Reportable() bool { return false }
 func (a RmsCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsCurrentMinPhaseBAttr zcl.AttrID = 2313
@@ -3101,8 +3008,7 @@ func (a RmsCurrentMinPhaseB) Reportable() bool { return false }
 func (a RmsCurrentMinPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMinPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsCurrentMaxPhaseBAttr zcl.AttrID = 2314
@@ -3128,8 +3034,7 @@ func (a RmsCurrentMaxPhaseB) Reportable() bool { return false }
 func (a RmsCurrentMaxPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMaxPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ActivePowerPhaseBAttr zcl.AttrID = 2315
@@ -3155,8 +3060,7 @@ func (a ActivePowerPhaseB) Reportable() bool { return false }
 func (a ActivePowerPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActivePowerPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ActivePowerMinPhaseBAttr zcl.AttrID = 2316
@@ -3182,8 +3086,7 @@ func (a ActivePowerMinPhaseB) Reportable() bool { return false }
 func (a ActivePowerMinPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMinPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ActivePowerMaxPhaseBAttr zcl.AttrID = 2317
@@ -3209,8 +3112,7 @@ func (a ActivePowerMaxPhaseB) Reportable() bool { return false }
 func (a ActivePowerMaxPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMaxPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ReactivePowerPhaseBAttr zcl.AttrID = 2318
@@ -3236,8 +3138,7 @@ func (a ReactivePowerPhaseB) Reportable() bool { return false }
 func (a ReactivePowerPhaseB) SceneIndex() int  { return -1 }
 
 func (a ReactivePowerPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "VAr")
 }
 
 const ApparentPowerPhaseBAttr zcl.AttrID = 2319
@@ -3263,8 +3164,7 @@ func (a ApparentPowerPhaseB) Reportable() bool { return false }
 func (a ApparentPowerPhaseB) SceneIndex() int  { return -1 }
 
 func (a ApparentPowerPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "VA")
 }
 
 const PowerFactorPhaseBAttr zcl.AttrID = 2320
@@ -3290,7 +3190,6 @@ func (a PowerFactorPhaseB) Reportable() bool { return false }
 func (a PowerFactorPhaseB) SceneIndex() int  { return -1 }
 
 func (a PowerFactorPhaseB) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
@@ -3323,8 +3222,7 @@ func (a AverageRmsVoltageMeasurementPeriodPhaseB) Reportable() bool { return fal
 func (a AverageRmsVoltageMeasurementPeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a AverageRmsVoltageMeasurementPeriodPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const AverageRmsOvervoltageCounterPhaseBAttr zcl.AttrID = 2322
@@ -3352,7 +3250,6 @@ func (a AverageRmsOvervoltageCounterPhaseB) Reportable() bool { return false }
 func (a AverageRmsOvervoltageCounterPhaseB) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltageCounterPhaseB) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -3381,7 +3278,6 @@ func (a AverageRmsUndervoltageCounterPhaseB) Reportable() bool { return false }
 func (a AverageRmsUndervoltageCounterPhaseB) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltageCounterPhaseB) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -3410,8 +3306,7 @@ func (a RmsExtremeOvervoltagePeriodPhaseB) Reportable() bool { return false }
 func (a RmsExtremeOvervoltagePeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltagePeriodPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsExtremeUndervoltagePeriodPhaseBAttr zcl.AttrID = 2325
@@ -3439,8 +3334,7 @@ func (a RmsExtremeUndervoltagePeriodPhaseB) Reportable() bool { return false }
 func (a RmsExtremeUndervoltagePeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltagePeriodPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsVoltageSagPeriodPhaseBAttr zcl.AttrID = 2326
@@ -3466,8 +3360,7 @@ func (a RmsVoltageSagPeriodPhaseB) Reportable() bool { return false }
 func (a RmsVoltageSagPeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSagPeriodPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsVoltageSwellPeriodPhaseBAttr zcl.AttrID = 2327
@@ -3493,8 +3386,7 @@ func (a RmsVoltageSwellPeriodPhaseB) Reportable() bool { return false }
 func (a RmsVoltageSwellPeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwellPeriodPhaseB) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const LineCurrentPhaseCAttr zcl.AttrID = 2561
@@ -3520,8 +3412,7 @@ func (a LineCurrentPhaseC) Reportable() bool { return false }
 func (a LineCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a LineCurrentPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ActiveCurrentPhaseCAttr zcl.AttrID = 2562
@@ -3547,8 +3438,7 @@ func (a ActiveCurrentPhaseC) Reportable() bool { return false }
 func (a ActiveCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActiveCurrentPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ReactiveCurrentPhaseCAttr zcl.AttrID = 2563
@@ -3574,8 +3464,7 @@ func (a ReactiveCurrentPhaseC) Reportable() bool { return false }
 func (a ReactiveCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a ReactiveCurrentPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsVoltagePhaseCAttr zcl.AttrID = 2565
@@ -3601,8 +3490,7 @@ func (a RmsVoltagePhaseC) Reportable() bool { return false }
 func (a RmsVoltagePhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltagePhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsVoltageMinPhaseCAttr zcl.AttrID = 2566
@@ -3628,8 +3516,7 @@ func (a RmsVoltageMinPhaseC) Reportable() bool { return false }
 func (a RmsVoltageMinPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMinPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsVoltageMaxPhaseCAttr zcl.AttrID = 2567
@@ -3655,8 +3542,7 @@ func (a RmsVoltageMaxPhaseC) Reportable() bool { return false }
 func (a RmsVoltageMaxPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMaxPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "V")
 }
 
 const RmsCurrentPhaseCAttr zcl.AttrID = 2568
@@ -3682,8 +3568,7 @@ func (a RmsCurrentPhaseC) Reportable() bool { return false }
 func (a RmsCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsCurrentMinPhaseCAttr zcl.AttrID = 2569
@@ -3709,8 +3594,7 @@ func (a RmsCurrentMinPhaseC) Reportable() bool { return false }
 func (a RmsCurrentMinPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMinPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const RmsCurrentMaxPhaseCAttr zcl.AttrID = 2570
@@ -3736,8 +3620,7 @@ func (a RmsCurrentMaxPhaseC) Reportable() bool { return false }
 func (a RmsCurrentMaxPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMaxPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "A")
 }
 
 const ActivePowerPhaseCAttr zcl.AttrID = 2571
@@ -3763,8 +3646,7 @@ func (a ActivePowerPhaseC) Reportable() bool { return false }
 func (a ActivePowerPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActivePowerPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ActivePowerMinPhaseCAttr zcl.AttrID = 2572
@@ -3790,8 +3672,7 @@ func (a ActivePowerMinPhaseC) Reportable() bool { return false }
 func (a ActivePowerMinPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMinPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ActivePowerMaxPhaseCAttr zcl.AttrID = 2573
@@ -3817,8 +3698,7 @@ func (a ActivePowerMaxPhaseC) Reportable() bool { return false }
 func (a ActivePowerMaxPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMaxPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "W")
 }
 
 const ReactivePowerPhaseCAttr zcl.AttrID = 2574
@@ -3844,8 +3724,7 @@ func (a ReactivePowerPhaseC) Reportable() bool { return false }
 func (a ReactivePowerPhaseC) SceneIndex() int  { return -1 }
 
 func (a ReactivePowerPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zs16(a))
+	return zcl.Sprintf("%f%s", float64(a), "VAr")
 }
 
 const ApparentPowerPhaseCAttr zcl.AttrID = 2575
@@ -3871,8 +3750,7 @@ func (a ApparentPowerPhaseC) Reportable() bool { return false }
 func (a ApparentPowerPhaseC) SceneIndex() int  { return -1 }
 
 func (a ApparentPowerPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%f%s", float64(a), "VA")
 }
 
 const PowerFactorPhaseCAttr zcl.AttrID = 2576
@@ -3898,7 +3776,6 @@ func (a PowerFactorPhaseC) Reportable() bool { return false }
 func (a PowerFactorPhaseC) SceneIndex() int  { return -1 }
 
 func (a PowerFactorPhaseC) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }
 
@@ -3931,8 +3808,7 @@ func (a AverageRmsVoltageMeasurementPeriodPhaseC) Reportable() bool { return fal
 func (a AverageRmsVoltageMeasurementPeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a AverageRmsVoltageMeasurementPeriodPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const AverageRmsOvervoltageCounterPhaseCAttr zcl.AttrID = 2578
@@ -3960,7 +3836,6 @@ func (a AverageRmsOvervoltageCounterPhaseC) Reportable() bool { return false }
 func (a AverageRmsOvervoltageCounterPhaseC) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltageCounterPhaseC) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -3989,7 +3864,6 @@ func (a AverageRmsUndervoltageCounterPhaseC) Reportable() bool { return false }
 func (a AverageRmsUndervoltageCounterPhaseC) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltageCounterPhaseC) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -4018,8 +3892,7 @@ func (a RmsExtremeOvervoltagePeriodPhaseC) Reportable() bool { return false }
 func (a RmsExtremeOvervoltagePeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltagePeriodPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsExtremeUndervoltagePeriodPhaseCAttr zcl.AttrID = 2581
@@ -4047,8 +3920,7 @@ func (a RmsExtremeUndervoltagePeriodPhaseC) Reportable() bool { return false }
 func (a RmsExtremeUndervoltagePeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltagePeriodPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsVoltageSagPeriodPhaseCAttr zcl.AttrID = 2582
@@ -4074,8 +3946,7 @@ func (a RmsVoltageSagPeriodPhaseC) Reportable() bool { return false }
 func (a RmsVoltageSagPeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSagPeriodPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }
 
 const RmsVoltageSwellPeriodPhaseCAttr zcl.AttrID = 2583
@@ -4101,6 +3972,5 @@ func (a RmsVoltageSwellPeriodPhaseC) Reportable() bool { return false }
 func (a RmsVoltageSwellPeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwellPeriodPhaseC) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 0).String()
 }

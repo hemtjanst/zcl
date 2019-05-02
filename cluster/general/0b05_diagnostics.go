@@ -72,7 +72,6 @@ func (a NumberOfResets) Reportable() bool { return false }
 func (a NumberOfResets) SceneIndex() int  { return -1 }
 
 func (a NumberOfResets) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -99,7 +98,6 @@ func (a PersistensMemoryWrites) Reportable() bool { return false }
 func (a PersistensMemoryWrites) SceneIndex() int  { return -1 }
 
 func (a PersistensMemoryWrites) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -126,7 +124,6 @@ func (a MacRxBcast) Reportable() bool { return false }
 func (a MacRxBcast) SceneIndex() int  { return -1 }
 
 func (a MacRxBcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -153,7 +150,6 @@ func (a MacTxBcast) Reportable() bool { return false }
 func (a MacTxBcast) SceneIndex() int  { return -1 }
 
 func (a MacTxBcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -180,7 +176,6 @@ func (a MacRxUcast) Reportable() bool { return false }
 func (a MacRxUcast) SceneIndex() int  { return -1 }
 
 func (a MacRxUcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -207,7 +202,6 @@ func (a MacTxUcast) Reportable() bool { return false }
 func (a MacTxUcast) SceneIndex() int  { return -1 }
 
 func (a MacTxUcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu32(a))
 }
 
@@ -234,7 +228,6 @@ func (a MacTxUcastRetry) Reportable() bool { return false }
 func (a MacTxUcastRetry) SceneIndex() int  { return -1 }
 
 func (a MacTxUcastRetry) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -261,7 +254,6 @@ func (a MacTxUcastFail) Reportable() bool { return false }
 func (a MacTxUcastFail) SceneIndex() int  { return -1 }
 
 func (a MacTxUcastFail) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -288,7 +280,6 @@ func (a ApsRxBcast) Reportable() bool { return false }
 func (a ApsRxBcast) SceneIndex() int  { return -1 }
 
 func (a ApsRxBcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -315,7 +306,6 @@ func (a ApsTxBcast) Reportable() bool { return false }
 func (a ApsTxBcast) SceneIndex() int  { return -1 }
 
 func (a ApsTxBcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -342,7 +332,6 @@ func (a ApsRxUcast) Reportable() bool { return false }
 func (a ApsRxUcast) SceneIndex() int  { return -1 }
 
 func (a ApsRxUcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -369,7 +358,6 @@ func (a ApsTxUcastSuccess) Reportable() bool { return false }
 func (a ApsTxUcastSuccess) SceneIndex() int  { return -1 }
 
 func (a ApsTxUcastSuccess) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -396,7 +384,6 @@ func (a ApsTxUcastRetry) Reportable() bool { return false }
 func (a ApsTxUcastRetry) SceneIndex() int  { return -1 }
 
 func (a ApsTxUcastRetry) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -423,7 +410,6 @@ func (a ApsTxUcastFail) Reportable() bool { return false }
 func (a ApsTxUcastFail) SceneIndex() int  { return -1 }
 
 func (a ApsTxUcastFail) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -450,7 +436,6 @@ func (a RouteDiscInitiated) Reportable() bool { return false }
 func (a RouteDiscInitiated) SceneIndex() int  { return -1 }
 
 func (a RouteDiscInitiated) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -477,7 +462,6 @@ func (a NeighborAdded) Reportable() bool { return false }
 func (a NeighborAdded) SceneIndex() int  { return -1 }
 
 func (a NeighborAdded) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -504,7 +488,6 @@ func (a NeighborRemoved) Reportable() bool { return false }
 func (a NeighborRemoved) SceneIndex() int  { return -1 }
 
 func (a NeighborRemoved) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -531,7 +514,6 @@ func (a NeighborStale) Reportable() bool { return false }
 func (a NeighborStale) SceneIndex() int  { return -1 }
 
 func (a NeighborStale) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -558,7 +540,6 @@ func (a JoinIndication) Reportable() bool { return false }
 func (a JoinIndication) SceneIndex() int  { return -1 }
 
 func (a JoinIndication) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -585,7 +566,6 @@ func (a ChildMoved) Reportable() bool { return false }
 func (a ChildMoved) SceneIndex() int  { return -1 }
 
 func (a ChildMoved) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -612,7 +592,6 @@ func (a NwkFcFailure) Reportable() bool { return false }
 func (a NwkFcFailure) SceneIndex() int  { return -1 }
 
 func (a NwkFcFailure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -639,7 +618,6 @@ func (a ApsFcFailure) Reportable() bool { return false }
 func (a ApsFcFailure) SceneIndex() int  { return -1 }
 
 func (a ApsFcFailure) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -666,7 +644,6 @@ func (a ApsUnauthorizedKey) Reportable() bool { return false }
 func (a ApsUnauthorizedKey) SceneIndex() int  { return -1 }
 
 func (a ApsUnauthorizedKey) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -693,7 +670,6 @@ func (a NwkDecryptFailures) Reportable() bool { return false }
 func (a NwkDecryptFailures) SceneIndex() int  { return -1 }
 
 func (a NwkDecryptFailures) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -720,7 +696,6 @@ func (a ApsDecryptFailures) Reportable() bool { return false }
 func (a ApsDecryptFailures) SceneIndex() int  { return -1 }
 
 func (a ApsDecryptFailures) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -747,7 +722,6 @@ func (a PacketBufferAllocFailures) Reportable() bool { return false }
 func (a PacketBufferAllocFailures) SceneIndex() int  { return -1 }
 
 func (a PacketBufferAllocFailures) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -774,7 +748,6 @@ func (a RelayedUcast) Reportable() bool { return false }
 func (a RelayedUcast) SceneIndex() int  { return -1 }
 
 func (a RelayedUcast) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -801,7 +774,6 @@ func (a PhyToMacQueueLimitReached) Reportable() bool { return false }
 func (a PhyToMacQueueLimitReached) SceneIndex() int  { return -1 }
 
 func (a PhyToMacQueueLimitReached) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -828,7 +800,6 @@ func (a PacketValidateDropcount) Reportable() bool { return false }
 func (a PacketValidateDropcount) SceneIndex() int  { return -1 }
 
 func (a PacketValidateDropcount) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -855,7 +826,6 @@ func (a AvgMacRetryPerApsMsgSent) Reportable() bool { return false }
 func (a AvgMacRetryPerApsMsgSent) SceneIndex() int  { return -1 }
 
 func (a AvgMacRetryPerApsMsgSent) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -882,7 +852,6 @@ func (a LastMessageLqi) Reportable() bool { return false }
 func (a LastMessageLqi) SceneIndex() int  { return -1 }
 
 func (a LastMessageLqi) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -909,6 +878,5 @@ func (a LastMessageRssi) Reportable() bool { return false }
 func (a LastMessageRssi) SceneIndex() int  { return -1 }
 
 func (a LastMessageRssi) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zs8(a))
 }

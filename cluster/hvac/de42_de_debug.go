@@ -42,7 +42,6 @@ func (a DebugEnabled) Reportable() bool { return false }
 func (a DebugEnabled) SceneIndex() int  { return -1 }
 
 func (a DebugEnabled) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -69,6 +68,5 @@ func (a DebugDestination) Reportable() bool { return false }
 func (a DebugDestination) SceneIndex() int  { return -1 }
 
 func (a DebugDestination) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }

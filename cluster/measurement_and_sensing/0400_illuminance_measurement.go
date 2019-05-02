@@ -51,7 +51,6 @@ func (a MeasuredIlluminance) Reportable() bool { return false }
 func (a MeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MeasuredIlluminance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -78,7 +77,6 @@ func (a MinMeasuredIlluminance) Reportable() bool { return true }
 func (a MinMeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredIlluminance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -105,7 +103,6 @@ func (a MaxMeasuredIlluminance) Reportable() bool { return false }
 func (a MaxMeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredIlluminance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -132,7 +129,6 @@ func (a IlluminanceTolerance) Reportable() bool { return false }
 func (a IlluminanceTolerance) SceneIndex() int  { return -1 }
 
 func (a IlluminanceTolerance) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -167,7 +163,6 @@ func (a LightSensorType) String() string {
 	case 0xFF:
 		return "Unknown"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -212,7 +207,6 @@ func (a Hysteresis) Reportable() bool { return false }
 func (a Hysteresis) SceneIndex() int  { return -1 }
 
 func (a Hysteresis) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -239,7 +233,6 @@ func (a MaxUpSpeed) Reportable() bool { return false }
 func (a MaxUpSpeed) SceneIndex() int  { return -1 }
 
 func (a MaxUpSpeed) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -266,7 +259,6 @@ func (a MaxDownSpeed) Reportable() bool { return false }
 func (a MaxDownSpeed) SceneIndex() int  { return -1 }
 
 func (a MaxDownSpeed) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -293,7 +285,6 @@ func (a TargetValue) Reportable() bool { return false }
 func (a TargetValue) SceneIndex() int  { return -1 }
 
 func (a TargetValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -326,7 +317,6 @@ func (a StartupType) String() string {
 	case 0x01:
 		return "Zero Level"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 

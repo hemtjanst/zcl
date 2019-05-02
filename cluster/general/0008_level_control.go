@@ -488,8 +488,7 @@ func (a CurrentLevel) Reportable() bool { return true }
 func (a CurrentLevel) SceneIndex() int  { return 1 }
 
 func (a CurrentLevel) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/2, "%")
 }
 
 const RemainingTimeAttr zcl.AttrID = 1
@@ -515,8 +514,7 @@ func (a RemainingTime) Reportable() bool { return false }
 func (a RemainingTime) SceneIndex() int  { return -1 }
 
 func (a RemainingTime) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 10).String()
 }
 
 const UnknownAttr zcl.AttrID = 15
@@ -542,7 +540,6 @@ func (a Unknown) Reportable() bool { return false }
 func (a Unknown) SceneIndex() int  { return -1 }
 
 func (a Unknown) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbmp8(a))
 }
 
@@ -569,8 +566,7 @@ func (a OnoffTransistionTime) Reportable() bool { return false }
 func (a OnoffTransistionTime) SceneIndex() int  { return -1 }
 
 func (a OnoffTransistionTime) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 10).String()
 }
 
 const OnLevelAttr zcl.AttrID = 17
@@ -596,8 +592,7 @@ func (a OnLevel) Reportable() bool { return false }
 func (a OnLevel) SceneIndex() int  { return -1 }
 
 func (a OnLevel) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/2, "%")
 }
 
 const OnTransitionTimeAttr zcl.AttrID = 18
@@ -623,8 +618,7 @@ func (a OnTransitionTime) Reportable() bool { return false }
 func (a OnTransitionTime) SceneIndex() int  { return -1 }
 
 func (a OnTransitionTime) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 10).String()
 }
 
 const OffTransitionTimeAttr zcl.AttrID = 19
@@ -650,8 +644,7 @@ func (a OffTransitionTime) Reportable() bool { return false }
 func (a OffTransitionTime) SceneIndex() int  { return -1 }
 
 func (a OffTransitionTime) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Duration(int(a), 10).String()
 }
 
 const DefaultMoveRateAttr zcl.AttrID = 20
@@ -677,8 +670,7 @@ func (a DefaultMoveRate) Reportable() bool { return false }
 func (a DefaultMoveRate) SceneIndex() int  { return -1 }
 
 func (a DefaultMoveRate) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/2, "%/s")
 }
 
 const PoweronLevelAttr zcl.AttrID = 16384
@@ -704,6 +696,5 @@ func (a PoweronLevel) Reportable() bool { return false }
 func (a PoweronLevel) SceneIndex() int  { return -1 }
 
 func (a PoweronLevel) String() string {
-
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%f%s", float64(a)/2, "%")
 }

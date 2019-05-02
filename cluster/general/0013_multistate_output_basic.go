@@ -43,7 +43,6 @@ func (a MultiOutputNumberOfStates) Reportable() bool { return false }
 func (a MultiOutputNumberOfStates) SceneIndex() int  { return -1 }
 
 func (a MultiOutputNumberOfStates) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -70,7 +69,6 @@ func (a MultiOutputOutOfService) Reportable() bool { return false }
 func (a MultiOutputOutOfService) SceneIndex() int  { return -1 }
 
 func (a MultiOutputOutOfService) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -97,7 +95,6 @@ func (a MultiOutputPresentValue) Reportable() bool { return false }
 func (a MultiOutputPresentValue) SceneIndex() int  { return -1 }
 
 func (a MultiOutputPresentValue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -124,7 +121,6 @@ func (a MultiOutputStatusFlags) Reportable() bool { return false }
 func (a MultiOutputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a MultiOutputStatusFlags) String() string {
-
 	var bstr []string
 	if a.IsInAlarm() {
 		bstr = append(bstr, "In Alarm")
@@ -139,7 +135,6 @@ func (a MultiOutputStatusFlags) String() string {
 		bstr = append(bstr, "Out of Service")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a MultiOutputStatusFlags) IsInAlarm() bool {

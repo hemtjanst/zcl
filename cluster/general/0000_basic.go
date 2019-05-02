@@ -98,7 +98,6 @@ func (a ClusterRevision) Reportable() bool { return false }
 func (a ClusterRevision) SceneIndex() int  { return -1 }
 
 func (a ClusterRevision) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -125,7 +124,6 @@ func (a ZclVersion) Reportable() bool { return false }
 func (a ZclVersion) SceneIndex() int  { return -1 }
 
 func (a ZclVersion) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -152,7 +150,6 @@ func (a ApplicationVersion) Reportable() bool { return false }
 func (a ApplicationVersion) SceneIndex() int  { return -1 }
 
 func (a ApplicationVersion) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -179,7 +176,6 @@ func (a StackVersion) Reportable() bool { return false }
 func (a StackVersion) SceneIndex() int  { return -1 }
 
 func (a StackVersion) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -206,7 +202,6 @@ func (a HwVersion) Reportable() bool { return false }
 func (a HwVersion) SceneIndex() int  { return -1 }
 
 func (a HwVersion) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -233,7 +228,6 @@ func (a ManufacturerName) Reportable() bool { return false }
 func (a ManufacturerName) SceneIndex() int  { return -1 }
 
 func (a ManufacturerName) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -260,7 +254,6 @@ func (a ModelIdentifier) Reportable() bool { return false }
 func (a ModelIdentifier) SceneIndex() int  { return -1 }
 
 func (a ModelIdentifier) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -287,7 +280,6 @@ func (a DateCode) Reportable() bool { return false }
 func (a DateCode) SceneIndex() int  { return -1 }
 
 func (a DateCode) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -344,7 +336,6 @@ func (a PowerSource) String() string {
 	case 0x86:
 		return "Emergency mains and transfer switch with battery backup"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -455,7 +446,6 @@ func (a LocationDescription) Reportable() bool { return false }
 func (a LocationDescription) SceneIndex() int  { return -1 }
 
 func (a LocationDescription) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -698,7 +688,6 @@ func (a PhysicalEnvironment) String() string {
 	case 0xFF:
 		return "Unknown Environment"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1367,7 +1356,6 @@ func (a DeviceEnabled) Reportable() bool { return false }
 func (a DeviceEnabled) SceneIndex() int  { return -1 }
 
 func (a DeviceEnabled) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -1394,7 +1382,6 @@ func (a AlarmMask) Reportable() bool { return false }
 func (a AlarmMask) SceneIndex() int  { return -1 }
 
 func (a AlarmMask) String() string {
-
 	var bstr []string
 	if a.IsGeneralHardwareFault() {
 		bstr = append(bstr, "General Hardware Fault")
@@ -1403,7 +1390,6 @@ func (a AlarmMask) String() string {
 		bstr = append(bstr, "General Software Fault")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a AlarmMask) IsGeneralHardwareFault() bool {
@@ -1443,7 +1429,6 @@ func (a DisableLocalConfig) Reportable() bool { return false }
 func (a DisableLocalConfig) SceneIndex() int  { return -1 }
 
 func (a DisableLocalConfig) String() string {
-
 	var bstr []string
 	if a.IsDisableFactoryReset() {
 		bstr = append(bstr, "Disable Factory Reset")
@@ -1452,7 +1437,6 @@ func (a DisableLocalConfig) String() string {
 		bstr = append(bstr, "Disable Device Configuration")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a DisableLocalConfig) IsDisableFactoryReset() bool {
@@ -1492,7 +1476,6 @@ func (a SwBuildId) Reportable() bool { return false }
 func (a SwBuildId) SceneIndex() int  { return -1 }
 
 func (a SwBuildId) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -1519,7 +1502,6 @@ func (a Unknown1) Reportable() bool { return false }
 func (a Unknown1) SceneIndex() int  { return -1 }
 
 func (a Unknown1) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1546,7 +1528,6 @@ func (a Unknown2) Reportable() bool { return false }
 func (a Unknown2) SceneIndex() int  { return -1 }
 
 func (a Unknown2) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1573,7 +1554,6 @@ func (a ProductCode) Reportable() bool { return false }
 func (a ProductCode) SceneIndex() int  { return -1 }
 
 func (a ProductCode) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zostring(a))
 }
 
@@ -1600,7 +1580,6 @@ func (a XiaomiSensitivity) Reportable() bool { return false }
 func (a XiaomiSensitivity) SceneIndex() int  { return -1 }
 
 func (a XiaomiSensitivity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1627,7 +1606,6 @@ func (a XiaomiDisconnect1) Reportable() bool { return false }
 func (a XiaomiDisconnect1) SceneIndex() int  { return -1 }
 
 func (a XiaomiDisconnect1) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
@@ -1654,7 +1632,6 @@ func (a XiaomiDisconnect2) Reportable() bool { return false }
 func (a XiaomiDisconnect2) SceneIndex() int  { return -1 }
 
 func (a XiaomiDisconnect2) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
 }
 
@@ -1689,7 +1666,6 @@ func (a Sensitivity) String() string {
 	case 0x02:
 		return "max"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1734,7 +1710,6 @@ func (a Configuration) Reportable() bool { return false }
 func (a Configuration) SceneIndex() int  { return -1 }
 
 func (a Configuration) String() string {
-
 	var bstr []string
 	if a.IsTouchlinkEnabled0() {
 		bstr = append(bstr, "Touchlink enabled 0")
@@ -1746,7 +1721,6 @@ func (a Configuration) String() string {
 		bstr = append(bstr, "Touchlink enabled 2")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a Configuration) IsTouchlinkEnabled0() bool {
@@ -1793,7 +1767,6 @@ func (a Usertest) Reportable() bool { return false }
 func (a Usertest) SceneIndex() int  { return -1 }
 
 func (a Usertest) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }
 
@@ -1820,6 +1793,5 @@ func (a LedIndication) Reportable() bool { return false }
 func (a LedIndication) SceneIndex() int  { return -1 }
 
 func (a LedIndication) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zbool(a))
 }

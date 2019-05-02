@@ -255,7 +255,6 @@ func (a UpgradeServer) Reportable() bool { return false }
 func (a UpgradeServer) SceneIndex() int  { return -1 }
 
 func (a UpgradeServer) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zuid(a))
 }
 
@@ -282,7 +281,6 @@ func (a FileOffset) Reportable() bool { return false }
 func (a FileOffset) SceneIndex() int  { return -1 }
 
 func (a FileOffset) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
@@ -309,7 +307,6 @@ func (a CurrentFileVersion) Reportable() bool { return false }
 func (a CurrentFileVersion) SceneIndex() int  { return -1 }
 
 func (a CurrentFileVersion) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
@@ -336,7 +333,6 @@ func (a CurrentZigbeeStackVersion) Reportable() bool { return false }
 func (a CurrentZigbeeStackVersion) SceneIndex() int  { return -1 }
 
 func (a CurrentZigbeeStackVersion) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
@@ -363,7 +359,6 @@ func (a DownloadedFileVersion) Reportable() bool { return false }
 func (a DownloadedFileVersion) SceneIndex() int  { return -1 }
 
 func (a DownloadedFileVersion) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
 }
 
@@ -390,7 +385,6 @@ func (a DownloadedZigbeeStackVersion) Reportable() bool { return false }
 func (a DownloadedZigbeeStackVersion) SceneIndex() int  { return -1 }
 
 func (a DownloadedZigbeeStackVersion) String() string {
-
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
 }
 
@@ -431,7 +425,6 @@ func (a ImageUpgradeStatus) String() string {
 	case 0x05:
 		return "Wait for more"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -494,6 +487,5 @@ func (a MinBlockRequestDelay) Reportable() bool { return false }
 func (a MinBlockRequestDelay) SceneIndex() int  { return -1 }
 
 func (a MinBlockRequestDelay) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

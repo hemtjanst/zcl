@@ -56,7 +56,6 @@ func (a PhysicalMinLevel) Reportable() bool { return false }
 func (a PhysicalMinLevel) SceneIndex() int  { return -1 }
 
 func (a PhysicalMinLevel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -83,7 +82,6 @@ func (a PhysicalMaxLevel) Reportable() bool { return false }
 func (a PhysicalMaxLevel) SceneIndex() int  { return -1 }
 
 func (a PhysicalMaxLevel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -110,7 +108,6 @@ func (a BallastStatus) Reportable() bool { return false }
 func (a BallastStatus) SceneIndex() int  { return -1 }
 
 func (a BallastStatus) String() string {
-
 	var bstr []string
 	if a.IsNonOperational() {
 		bstr = append(bstr, "Non-operational")
@@ -119,7 +116,6 @@ func (a BallastStatus) String() string {
 		bstr = append(bstr, "Lamp not in socket")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a BallastStatus) IsNonOperational() bool {
@@ -159,7 +155,6 @@ func (a MinLevel) Reportable() bool { return false }
 func (a MinLevel) SceneIndex() int  { return -1 }
 
 func (a MinLevel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -186,7 +181,6 @@ func (a MaxLevel) Reportable() bool { return false }
 func (a MaxLevel) SceneIndex() int  { return -1 }
 
 func (a MaxLevel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -213,7 +207,6 @@ func (a PowerOnLevel) Reportable() bool { return false }
 func (a PowerOnLevel) SceneIndex() int  { return -1 }
 
 func (a PowerOnLevel) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -240,7 +233,6 @@ func (a PowerOnFadeTime) Reportable() bool { return false }
 func (a PowerOnFadeTime) SceneIndex() int  { return -1 }
 
 func (a PowerOnFadeTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -267,7 +259,6 @@ func (a IntrinsicBallastFactor) Reportable() bool { return false }
 func (a IntrinsicBallastFactor) SceneIndex() int  { return -1 }
 
 func (a IntrinsicBallastFactor) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -294,7 +285,6 @@ func (a BallastFactorAdjustment) Reportable() bool { return false }
 func (a BallastFactorAdjustment) SceneIndex() int  { return -1 }
 
 func (a BallastFactorAdjustment) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -321,7 +311,6 @@ func (a LampQuantity) Reportable() bool { return false }
 func (a LampQuantity) SceneIndex() int  { return -1 }
 
 func (a LampQuantity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -348,7 +337,6 @@ func (a LampType) Reportable() bool { return false }
 func (a LampType) SceneIndex() int  { return -1 }
 
 func (a LampType) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -375,7 +363,6 @@ func (a LampManufacturer) Reportable() bool { return false }
 func (a LampManufacturer) SceneIndex() int  { return -1 }
 
 func (a LampManufacturer) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -402,7 +389,6 @@ func (a LampRatedHours) Reportable() bool { return false }
 func (a LampRatedHours) SceneIndex() int  { return -1 }
 
 func (a LampRatedHours) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
@@ -429,7 +415,6 @@ func (a LampBurnHours) Reportable() bool { return false }
 func (a LampBurnHours) SceneIndex() int  { return -1 }
 
 func (a LampBurnHours) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }
 
@@ -456,13 +441,11 @@ func (a LampAlarmMode) Reportable() bool { return false }
 func (a LampAlarmMode) SceneIndex() int  { return -1 }
 
 func (a LampAlarmMode) String() string {
-
 	var bstr []string
 	if a.IsLampBurnHours() {
 		bstr = append(bstr, "Lamp Burn Hours")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a LampAlarmMode) IsLampBurnHours() bool {
@@ -495,6 +478,5 @@ func (a LampBurnHoursTripPoint) Reportable() bool { return false }
 func (a LampBurnHoursTripPoint) SceneIndex() int  { return -1 }
 
 func (a LampBurnHoursTripPoint) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu24(a))
 }

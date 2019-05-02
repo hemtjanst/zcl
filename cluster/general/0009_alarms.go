@@ -347,6 +347,5 @@ func (a AlarmCount) Reportable() bool { return false }
 func (a AlarmCount) SceneIndex() int  { return -1 }
 
 func (a AlarmCount) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }

@@ -1401,7 +1401,6 @@ func (a CurrentHue) Reportable() bool { return true }
 func (a CurrentHue) SceneIndex() int  { return -1 }
 
 func (a CurrentHue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1428,7 +1427,6 @@ func (a CurrentSaturation) Reportable() bool { return true }
 func (a CurrentSaturation) SceneIndex() int  { return 4 }
 
 func (a CurrentSaturation) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1455,7 +1453,6 @@ func (a RemainingTime) Reportable() bool { return false }
 func (a RemainingTime) SceneIndex() int  { return -1 }
 
 func (a RemainingTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1482,7 +1479,6 @@ func (a CurrentXInCieXyy) Reportable() bool { return true }
 func (a CurrentXInCieXyy) SceneIndex() int  { return 1 }
 
 func (a CurrentXInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1509,7 +1505,6 @@ func (a CurrentYInCieXyy) Reportable() bool { return true }
 func (a CurrentYInCieXyy) SceneIndex() int  { return 2 }
 
 func (a CurrentYInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1548,7 +1543,6 @@ func (a DriftCompensation) String() string {
 	case 0x04:
 		return "Optical color monitoring and feedback"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1605,7 +1599,6 @@ func (a CompensationText) Reportable() bool { return false }
 func (a CompensationText) SceneIndex() int  { return -1 }
 
 func (a CompensationText) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
@@ -1632,7 +1625,6 @@ func (a ColorTemperatureMireds) Reportable() bool { return true }
 func (a ColorTemperatureMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperatureMireds) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1667,7 +1659,6 @@ func (a ColorMode) String() string {
 	case 0x02:
 		return "Color temperature"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1712,7 +1703,6 @@ func (a EnhancedCurrentHue) Reportable() bool { return false }
 func (a EnhancedCurrentHue) SceneIndex() int  { return 3 }
 
 func (a EnhancedCurrentHue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1749,7 +1739,6 @@ func (a EnhancedColorMode) String() string {
 	case 0x03:
 		return "Enhanced current hue and current saturation"
 	}
-
 	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
@@ -1800,7 +1789,6 @@ func (a ColorLoopActive) Reportable() bool { return false }
 func (a ColorLoopActive) SceneIndex() int  { return 5 }
 
 func (a ColorLoopActive) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1827,7 +1815,6 @@ func (a ColorLoopDirection) Reportable() bool { return false }
 func (a ColorLoopDirection) SceneIndex() int  { return 6 }
 
 func (a ColorLoopDirection) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -1854,7 +1841,6 @@ func (a ColorLoopTime) Reportable() bool { return false }
 func (a ColorLoopTime) SceneIndex() int  { return 7 }
 
 func (a ColorLoopTime) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1881,7 +1867,6 @@ func (a ColorLoopStartEnhancedHue) Reportable() bool { return false }
 func (a ColorLoopStartEnhancedHue) SceneIndex() int  { return -1 }
 
 func (a ColorLoopStartEnhancedHue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1908,7 +1893,6 @@ func (a ColorLoopStoredEnhancedHue) Reportable() bool { return false }
 func (a ColorLoopStoredEnhancedHue) SceneIndex() int  { return -1 }
 
 func (a ColorLoopStoredEnhancedHue) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -1935,7 +1919,6 @@ func (a ColorCapabilities) Reportable() bool { return false }
 func (a ColorCapabilities) SceneIndex() int  { return -1 }
 
 func (a ColorCapabilities) String() string {
-
 	var bstr []string
 	if a.IsHueSaturation() {
 		bstr = append(bstr, "Hue saturation")
@@ -1953,7 +1936,6 @@ func (a ColorCapabilities) String() string {
 		bstr = append(bstr, "Color temperature")
 	}
 	return zcl.StrJoin(bstr, ", ")
-
 }
 
 func (a ColorCapabilities) IsHueSaturation() bool {
@@ -2016,7 +1998,6 @@ func (a ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
 func (a ColorTemperaturePhysicalMinMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperaturePhysicalMinMireds) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2045,7 +2026,6 @@ func (a ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
 func (a ColorTemperaturePhysicalMaxMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperaturePhysicalMaxMireds) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2072,7 +2052,6 @@ func (a PowerOnColorTemperature) Reportable() bool { return false }
 func (a PowerOnColorTemperature) SceneIndex() int  { return -1 }
 
 func (a PowerOnColorTemperature) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2099,7 +2078,6 @@ func (a NumberOfPrimaries) Reportable() bool { return false }
 func (a NumberOfPrimaries) SceneIndex() int  { return -1 }
 
 func (a NumberOfPrimaries) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2126,7 +2104,6 @@ func (a Primary1XInCieXyy) Reportable() bool { return false }
 func (a Primary1XInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary1XInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2153,7 +2130,6 @@ func (a Primary1YInCieXyy) Reportable() bool { return false }
 func (a Primary1YInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary1YInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2180,7 +2156,6 @@ func (a Primary1Intensity) Reportable() bool { return false }
 func (a Primary1Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary1Intensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2207,7 +2182,6 @@ func (a Primary2XInCieXyy) Reportable() bool { return false }
 func (a Primary2XInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary2XInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2234,7 +2208,6 @@ func (a Primary2YInCieXyy) Reportable() bool { return false }
 func (a Primary2YInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary2YInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2261,7 +2234,6 @@ func (a Primary2Intensity) Reportable() bool { return false }
 func (a Primary2Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary2Intensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2288,7 +2260,6 @@ func (a Primary3XInCieXyy) Reportable() bool { return false }
 func (a Primary3XInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary3XInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2315,7 +2286,6 @@ func (a Primary3YInCieXyy) Reportable() bool { return false }
 func (a Primary3YInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary3YInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2342,7 +2312,6 @@ func (a Primary3Intensity) Reportable() bool { return false }
 func (a Primary3Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary3Intensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2369,7 +2338,6 @@ func (a Primary4XInCieXyy) Reportable() bool { return false }
 func (a Primary4XInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary4XInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2396,7 +2364,6 @@ func (a Primary4YInCieXyy) Reportable() bool { return false }
 func (a Primary4YInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary4YInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2423,7 +2390,6 @@ func (a Primary4Intensity) Reportable() bool { return false }
 func (a Primary4Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary4Intensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2450,7 +2416,6 @@ func (a Primary5XInCieXyy) Reportable() bool { return false }
 func (a Primary5XInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary5XInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2477,7 +2442,6 @@ func (a Primary5YInCieXyy) Reportable() bool { return false }
 func (a Primary5YInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary5YInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2504,7 +2468,6 @@ func (a Primary5Intensity) Reportable() bool { return false }
 func (a Primary5Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary5Intensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2531,7 +2494,6 @@ func (a Primary6XInCieXyy) Reportable() bool { return false }
 func (a Primary6XInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary6XInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2558,7 +2520,6 @@ func (a Primary6YInCieXyy) Reportable() bool { return false }
 func (a Primary6YInCieXyy) SceneIndex() int  { return -1 }
 
 func (a Primary6YInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2585,7 +2546,6 @@ func (a Primary6Intensity) Reportable() bool { return false }
 func (a Primary6Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary6Intensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2612,7 +2572,6 @@ func (a WhitePointXInCieXyy) Reportable() bool { return false }
 func (a WhitePointXInCieXyy) SceneIndex() int  { return -1 }
 
 func (a WhitePointXInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2639,7 +2598,6 @@ func (a WhitePointYInCieXyy) Reportable() bool { return false }
 func (a WhitePointYInCieXyy) SceneIndex() int  { return -1 }
 
 func (a WhitePointYInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2666,7 +2624,6 @@ func (a ColorPointRedXInCieXyy) Reportable() bool { return false }
 func (a ColorPointRedXInCieXyy) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedXInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2693,7 +2650,6 @@ func (a ColorPointRedYInCieXyy) Reportable() bool { return false }
 func (a ColorPointRedYInCieXyy) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedYInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2720,7 +2676,6 @@ func (a ColorPointRedIntensity) Reportable() bool { return false }
 func (a ColorPointRedIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedIntensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2747,7 +2702,6 @@ func (a ColorPointGreenXInCieXyy) Reportable() bool { return false }
 func (a ColorPointGreenXInCieXyy) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenXInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2774,7 +2728,6 @@ func (a ColorPointGreenYInCieXyy) Reportable() bool { return false }
 func (a ColorPointGreenYInCieXyy) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenYInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2801,7 +2754,6 @@ func (a ColorPointGreenIntensity) Reportable() bool { return false }
 func (a ColorPointGreenIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenIntensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
@@ -2828,7 +2780,6 @@ func (a ColorPointBlueXInCieXyy) Reportable() bool { return false }
 func (a ColorPointBlueXInCieXyy) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueXInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2855,7 +2806,6 @@ func (a ColorPointBlueYInCieXyy) Reportable() bool { return false }
 func (a ColorPointBlueYInCieXyy) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueYInCieXyy) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
@@ -2882,6 +2832,5 @@ func (a ColorPointBlueIntensity) Reportable() bool { return false }
 func (a ColorPointBlueIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueIntensity) String() string {
-
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
