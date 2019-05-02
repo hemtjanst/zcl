@@ -1,48 +1,77 @@
 id: "0x0300"
 name: Color control
-description: Attributes and commands for controlling the color properties of a color-capable
-    light.
+description: |
+  Attributes and commands for controlling the color properties of a color-capable
+  light.
 server:
     attr:
       - id: "0x0000"
         name: Current hue
+        description: |
+          It contains the current hue value of the light. Hue = CurrentHue x 360 / 254
+          (CurrentHue in the range 0 - 254 inclusive)
         type: u8
         access: r
         report: true
         default: "0x00"
         range: 0x00,0xfe
+        unit: DegreesAngular
+        multiplier: 0.70556
       - id: "0x0001"
         name: Current saturation
+        description: |
+          It holds the current saturation value of the light.
+          Saturation = CurrentSaturation/254 (CurrentSaturation in the range
+          0 - 254 inclusive)
         type: u8
         access: r
         report: true
         scene: 4
         default: "0x00"
         range: 0x00,0xfe
+        multiplier: 254
       - id: "0x0002"
         name: Remaining time
+        description: |
+          It holds the time remaining, in 1/10ths of a second, until the currently
+          active command will be complete
         type: u16
         access: r
         default: "0x0000"
         range: 0x0000,0xfffe
+        unit: Seconds
+        multiplier: 10
       - id: "0x0003"
-        name: Current x in CIE xyY
+        name: Current X
+        description: |
+          It contains the current value of the normalized chromaticity value x,
+          as defined in the CIE xyY Color Space. x = CurrentX / 65536 (CurrentX
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         report: true
         scene: 1
         default: "0x616b"
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0004"
-        name: Current y in CIE xyY
+        name: Current Y
+        description: |
+          It contains the current value of the normalized chromaticity value y,
+          as defined in the CIE xyY Color Space. y = CurrentY / 65536 (CurrentY
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         report: true
         scene: 2
         default: "0x607d"
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0005"
         name: Drift Compensation
+        description: |
+          It indicates what mechanism, if any, is in use for compensation for
+          color/intensity drift over time
         type: enum8
         range: "0x00,0x40"
         access: r
@@ -54,18 +83,34 @@ server:
             0x04: Optical color monitoring and feedback
       - id: "0x0006"
         name: Compensation Text
+        description: |
+          It holds a textual indication of what mechanism, if any, is in use to
+          compensate for color/intensity drift over time
         type: cstring
         range: 0,254
         access: r
       - id: "0x0007"
         name: Color temperature Mireds
+        description: |
+          It contains a scaled inverse of the current value of the color
+          temperature. The unit of ColorTemperatureMireds is the mired
+          (micro reciprocal degree), a.k.a mirek (micro reciprocal
+          kelvin). Color temperature in kelvins = 1,000,000 / ColorTemperatureMireds,
+          where ColorTemperatureMireds is in the range 1 to 65279 mireds inclusive,
+          giving a color temperature range from 1,000,000 kelvins to 15.32 kelvins
         type: u16
         access: r
         report: true
+        invalid: "0xffff"
         default: "0x00fa" # 4000 Kelvin
         range: 0x0000,0xfeff
+        unit: mired
       - id: "0x0008"
         name: Color Mode
+        description: |
+          It indicates which attributes are currently determining the color of
+          the device. This attribute is optional if the device does not implement
+          CurrentHue and CurrentSaturation
         type: enum8
         access: r
         required: true
@@ -73,10 +118,19 @@ server:
         range: 0x00,0x02
         values:
             "0x00": Current hue and current saturation
-            "0x01": Current x and current y in CIE xyY
+            "0x01": Current X and Current Y
             "0x02": Color temperature
       - id: "0x4000"
         name: Enhanced current hue
+        description: |
+          It represents non-equidistant steps along the CIE 1931 color triangle,
+          and it provides 16-bits precision. The upper 8 bits of this attribute
+          are used as an index in the implementation specific XY lookup table to
+          provide the non-equidistance steps. The lower 8 bits are used to
+          interpolate between these steps in a linear way in order to provide color
+          zoom for the user. To provide compatibility with standard ZCL, the
+          CurrentHue attribute contains a hue value in the range 0 to 254,
+          calculated from the EnhancedCurrentHue attribute
         type: u16
         access: r
         default: "0x0000"
@@ -84,6 +138,9 @@ server:
         range: 0x0000,0xffff
       - id: "0x4001"
         name: Enhanced color mode
+        description: |
+          It specifies which attributes are currently determining the color of
+          the device
         type: enum8
         access: r
         default: "0x00"
@@ -91,11 +148,14 @@ server:
         range: 0x00,0xff
         values:
             "0x00": Current hue and current saturation
-            "0x01": Current x and current y in CIE xyY
+            "0x01": Current X and Current Y
             "0x02": Color temperature
             "0x03": Enhanced current hue and current saturation
       - id: "0x4002"
         name: Color loop active
+        description: |
+          It specifies the current active status of the color loop. 0x00 means
+          inactive, 0x01 means active
         type: u8
         access: r
         scene: 5
@@ -103,6 +163,10 @@ server:
         range: 0x00,0xff
       - id: "0x4003"
         name: Color loop direction
+        description: |
+          It specifies the current direction of the color loop. If this attribute
+          has the value 0x00, the EnhancedCurrentHue is be decremented. If this
+          attribute has the value 0x01, the EnhancedCurrentHue is incremented
         type: u8
         access: r
         scene: 6
@@ -110,6 +174,9 @@ server:
         range: 0x00,0xff
       - id: "0x4004"
         name: Color loop time
+        description: |
+          It specifies the number of seconds it takes to perform a full color
+          loop, i.e., to cycle all values of EnhancedCurrentHue
         type: u16
         access: r
         scene: 7
@@ -117,18 +184,28 @@ server:
         range: 0x0000,0xffff
       - id: "0x4005"
         name: Color loop start enhanced hue
+        description: |
+          It specifies the value of the EnhancedCurrentHue attribute from which
+          the color loop starts
         type: u16
         access: r
         default: "0x2300"
         range: 0x00,0xff
       - id: "0x4006"
         name: Color loop stored enhanced hue
+        description: |
+          It specifies the value of the EnhancedCurrentHue attribute before the
+          color loop was started. Once the color loop is complete, It is restored
+          to this value
         type: u16
         access: r
         default: "0x0000"
         range: 0x00,0xff
       - id: "0x400A"
         name: Color capabilities
+        description: |
+          It specifies the color capabilities of the device supporting the color
+          control cluster
         type: bmp16
         access: r
         default: "0x0000"
@@ -142,16 +219,28 @@ server:
             "4": Color temperature
       - id: "0x400B"
         name: Color temperature physical min Mireds
+        description: |
+          It indicates the minimum mired value supported by the hardware.
+          ColorTempPhysicalMinMireds corresponds to the maximum color
+          temperature in Kelvins supported by the hardware.
+          ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds
         type: u16
         access: r
         default: "0x0000"
         range: 0x0000,0xfeff
+        unit: mired
       - id: "0x400C"
         name: Color temperature physical max Mireds
+        description: |
+          It indicates the maximum mired value supported by the hardware.
+          ColorTempPhysicalMaxMireds corresponds to the minimum color
+          temperature in Kelvins supported by the hardware.
+          ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds
         type: u16
         access: r
         default: "0xfeff"
         range: 0x0000,0xfeff
+        unit: mired
       - id: "0x4010"
         name: Power-on color temperature
         type: u16
@@ -160,154 +249,311 @@ server:
         range: 0x0000,0xffff
       - id: "0x0010"
         name: Number of primaries
+        description: |
+          It contains the number of color primaries implemented on this device.
+          A value of 0xff indicates that the number of primaries is unknown
         type: u8
         access: r
         range: 0x00,0x06
       - id: "0x0011"
-        name: Primary1 x in CIE xyY
+        name: Primary1 X
+        description: |
+          It contains the normalized chromaticity value x for this primary, as
+          defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0012"
-        name: Primary1 y in CIE xyY
+        name: Primary1 Y
+        description: |
+          It contains the normalized chromaticity value y for this primary, as
+          defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0013"
         name: Primary1 intensity
+        description: |
+          It contains a representation of the maximum intensity of this primary as
+          defined in the Dimming Light Curve in the Ballast Configuration cluster,
+          normalized such that the primary with the highest maximum intensity
+          contains the value 0xfe. A value of 0xff indicates that this primary is
+          not available
         type: u8
         access: r
         range: 0x00,0xff
       - id: "0x0015"
-        name: Primary2 x in CIE xyY
+        name: Primary2 X
+        description: |
+          It contains the normalized chromaticity value x for this primary, as
+          defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0016"
-        name: Primary2 y in CIE xyY
+        name: Primary2 Y
+        description: |
+          It contains the normalized chromaticity value y for this primary, as
+          defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0017"
         name: Primary2 intensity
+        description: |
+          It contains a representation of the maximum intensity of this primary as
+          defined in the Dimming Light Curve in the Ballast Configuration cluster,
+          normalized such that the primary with the highest maximum intensity
+          contains the value 0xfe. A value of 0xff indicates that this primary is
+          not available
         type: u8
         access: r
         range: 0x00,0xff
       - id: "0x0019"
-        name: Primary3 x in CIE xyY
+        name: Primary3 X
+        description: |
+          It contains the normalized chromaticity value x for this primary, as
+          defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x001A"
-        name: Primary3 y in CIE xyY
+        name: Primary3 Y
+        description: |
+          It contains the normalized chromaticity value y for this primary, as
+          defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x001B"
         name: Primary3 intensity
+        description: |
+          It contains a representation of the maximum intensity of this primary as
+          defined in the Dimming Light Curve in the Ballast Configuration cluster,
+          normalized such that the primary with the highest maximum intensity
+          contains the value 0xfe. A value of 0xff indicates that this primary is
+          not available
         type: u8
         access: r
         range: 0x00,0xff
       - id: "0x0020"
-        name: Primary4 x in CIE xyY
+        name: Primary4 X
+        description: |
+          It contains the normalized chromaticity value x for this primary, as
+          defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0021"
-        name: Primary4 y in CIE xyY
+        name: Primary4 Y
+        description: |
+          It contains the normalized chromaticity value y for this primary, as
+          defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0022"
         name: Primary4 intensity
+        description: |
+          It contains a representation of the maximum intensity of this primary as
+          defined in the Dimming Light Curve in the Ballast Configuration cluster,
+          normalized such that the primary with the highest maximum intensity
+          contains the value 0xfe. A value of 0xff indicates that this primary is
+          not available
         type: u8
         access: r
         range: 0x00,0xff
       - id: "0x0024"
-        name: Primary5 x in CIE xyY
+        name: Primary5 X
+        description: |
+          It contains the normalized chromaticity value x for this primary, as
+          defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0025"
-        name: Primary5 y in CIE xyY
+        name: Primary5 Y
+        description: |
+          It contains the normalized chromaticity value y for this primary, as
+          defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0026"
         name: Primary5 intensity
+        description: |
+          It contains a representation of the maximum intensity of this primary as
+          defined in the Dimming Light Curve in the Ballast Configuration cluster,
+          normalized such that the primary with the highest maximum intensity
+          contains the value 0xfe. A value of 0xff indicates that this primary is
+          not available
         type: u8
         access: r
         range: 0x00,0xff
       - id: "0x0028"
-        name: Primary6 x in CIE xyY
+        name: Primary6 X
+        description: |
+          It contains the normalized chromaticity value x for this primary, as
+          defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x0029"
-        name: Primary6 y in CIE xyY
+        name: Primary6 Y
+        description: |
+          It contains the normalized chromaticity value y for this primary, as
+          defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+          in the range 0 to 65279 inclusive)
         type: u16
         access: r
         range: 0x0000,0xfeff
+        multiplier: 65536
       - id: "0x002a"
         name: Primary6 intensity
+        description: |
+          It contains a representation of the maximum intensity of this primary as
+          defined in the Dimming Light Curve in the Ballast Configuration cluster,
+          normalized such that the primary with the highest maximum intensity
+          contains the value 0xfe. A value of 0xff indicates that this primary is
+          not available
         type: u8
         access: r
         range: 0x00,0xff
       - id: "0x0030"
-        name: White Point x in CIE xyY
+        name: White Point X
+        description: |
+          It contains the normalized chromaticity value x, as defined in the
+          CIE xyY Color Space, of the current white point of the device.
+          x = WhitePointX / 65536 (WhitePointX in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x0031"
-        name: White Point y in CIE xyY
+        name: White Point Y
+        description: |
+          It contains the normalized chromaticity value y, as defined in the
+          CIE xyY Color Space, of the current white point of the device.
+          y = WhitePointY / 65536 (WhitePointY in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x0032"
-        name: Color Point Red x in CIE xyY
+        name: Color Point Red X
+        description: |
+          It contains the normalized chromaticity value x, as defined in the
+          CIE xyY Color Space, of the red color point of the device.
+          x = ColorPointRX / 65536 (ColorPointRX in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x0033"
-        name: Color Point Red y in CIE xyY
+        name: Color Point Red Y
+        description: |
+          It contains the normalized chromaticity value y, as defined in the
+          CIE xyY Color Space, of the red color point of the device.
+          y = ColorPointRY / 65536 (ColorPointRY in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x0034"
         name: Color Point Red intensity
+        description: |
+          It contains a representation of the relative intensity of the red color
+          point as defined in the Dimming Light Curve in the Ballast Configuration
+          cluster, normalized such that the color point with the highest relative
+          intensity contains the value 0xfe
         type: u8
         access: rw
         range: 0x00,0xff
+        invalid: "0xff"
       - id: "0x0036"
-        name: Color Point Green x in CIE xyY
+        name: Color Point Green X
+        description: |
+          It contains the normalized chromaticity value x, as defined in the
+          CIE xyY Color Space, of the green color point of the device.
+          x = ColorPointGX / 65536 (ColorPointGX in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x0037"
-        name: Color Point Green y in CIE xyY
+        name: Color Point Green Y
+        description: |
+          It contains the normalized chromaticity value y, as defined in the
+          CIE xyY Color Space, of the green color point of the device.
+          y = ColorPointGY / 65536 (ColorPointGY in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x0038"
         name: Color Point Green intensity
+        description: |
+          It contains a representation of the relative intensity of the green
+          color point as defined in the Dimming Light Curve in the Ballast Configuration
+          cluster, normalized such that the color point with the highest relative
+          intensity contains the value 0xfe
         type: u8
         access: rw
         range: 0x00,0xff
+        invalid: "0xff"
       - id: "0x003a"
-        name: Color Point Blue x in CIE xyY
+        name: Color Point Blue X
+        description: |
+          It contains the normalized chromaticity value x, as defined in the
+          CIE xyY Color Space, of the blue color point of the device.
+          x = ColorPointBX / 65536 (ColorPointBX in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x003b"
-        name: Color Point Blue y in CIE xyY
+        name: Color Point Blue Y
+        description: |
+          It contains the normalized chromaticity value y, as defined in the
+          CIE xyY Color Space, of the blue color point of the device.
+          y = ColorPointBY / 65536 (ColorPointBY in the range 0 to 65279 inclusive)
         type: u16
         access: rw
         range: 0x0000,0xffff
+        multiplier: 65536
       - id: "0x003c"
         name: Color Point Blue intensity
+        description: |
+          It contains a representation of the relative intensity of the blue
+          color point as defined in the Dimming Light Curve in the Ballast Configuration
+          cluster, normalized such that the color point with the highest relative
+          intensity contains the value 0xfe
         type: u8
         access: rw
         range: 0x00,0xff
+        invalid: "0xff"
     cmd:
       - id: "0x00"
         name: Move to hue
@@ -572,8 +818,9 @@ server:
             type: u16
       - id: "0x47"
         name: Stop move step
-        description: Stops move to and step commands. It has no effect on a active
-            color loop.
+        description: |
+          Stops move to and step commands. It has no effect on a active
+          color loop.
         dir: recv
         required: true
       - id: "0x4B"
@@ -594,13 +841,15 @@ server:
             type: u16
           - id: "0x0002"
             name: Color temperature min
-            description: Specifies a lower bound on the color temperature for the
-                current move operation.
+            description: |
+              Specifies a lower bound on the color temperature for the
+              current move operation.
             type: u16
           - id: "0x0003"
             name: Color temperature max
-            description: Specifies a upper bound on the color temperature for the
-                current move operation.
+            description: |
+              Specifies a upper bound on the color temperature for the
+              current move operation.
             type: u16
       - id: "0x4C"
         name: Step color temperature
@@ -622,12 +871,14 @@ server:
             type: u16
           - id: "0x0003"
             name: Color temperature minimum Mireds
-            description: Specifies a lower bound on the color temperature for the
-                current step operation.
+            description: |
+              Specifies a lower bound on the color temperature for the
+              current step operation.
             type: u16
           - id: "0x0004"
             name: Color temperature maximum Mireds
-            description: Specifies a upper bound on the color temperature for the
-                current step operation.
+            description: |
+              Specifies a upper bound on the color temperature for the
+              current step operation.
             type: u16
 client: {}

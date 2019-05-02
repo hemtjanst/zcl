@@ -1,4 +1,6 @@
-// Attributes and commands for controlling the color properties of a color-capable light.
+// Attributes and commands for controlling the color properties of a color-capable
+// light.
+//
 package lighting
 
 import (
@@ -35,8 +37,8 @@ var ColorControlCluster = zcl.Cluster{
 		CurrentHueAttr:                        func() zcl.Attr { return new(CurrentHue) },
 		CurrentSaturationAttr:                 func() zcl.Attr { return new(CurrentSaturation) },
 		RemainingTimeAttr:                     func() zcl.Attr { return new(RemainingTime) },
-		CurrentXInCieXyyAttr:                  func() zcl.Attr { return new(CurrentXInCieXyy) },
-		CurrentYInCieXyyAttr:                  func() zcl.Attr { return new(CurrentYInCieXyy) },
+		CurrentXAttr:                          func() zcl.Attr { return new(CurrentX) },
+		CurrentYAttr:                          func() zcl.Attr { return new(CurrentY) },
 		DriftCompensationAttr:                 func() zcl.Attr { return new(DriftCompensation) },
 		CompensationTextAttr:                  func() zcl.Attr { return new(CompensationText) },
 		ColorTemperatureMiredsAttr:            func() zcl.Attr { return new(ColorTemperatureMireds) },
@@ -53,40 +55,40 @@ var ColorControlCluster = zcl.Cluster{
 		ColorTemperaturePhysicalMaxMiredsAttr: func() zcl.Attr { return new(ColorTemperaturePhysicalMaxMireds) },
 		PowerOnColorTemperatureAttr:           func() zcl.Attr { return new(PowerOnColorTemperature) },
 		NumberOfPrimariesAttr:                 func() zcl.Attr { return new(NumberOfPrimaries) },
-		Primary1XInCieXyyAttr:                 func() zcl.Attr { return new(Primary1XInCieXyy) },
-		Primary1YInCieXyyAttr:                 func() zcl.Attr { return new(Primary1YInCieXyy) },
+		Primary1XAttr:                         func() zcl.Attr { return new(Primary1X) },
+		Primary1YAttr:                         func() zcl.Attr { return new(Primary1Y) },
 		Primary1IntensityAttr:                 func() zcl.Attr { return new(Primary1Intensity) },
-		Primary2XInCieXyyAttr:                 func() zcl.Attr { return new(Primary2XInCieXyy) },
-		Primary2YInCieXyyAttr:                 func() zcl.Attr { return new(Primary2YInCieXyy) },
+		Primary2XAttr:                         func() zcl.Attr { return new(Primary2X) },
+		Primary2YAttr:                         func() zcl.Attr { return new(Primary2Y) },
 		Primary2IntensityAttr:                 func() zcl.Attr { return new(Primary2Intensity) },
-		Primary3XInCieXyyAttr:                 func() zcl.Attr { return new(Primary3XInCieXyy) },
-		Primary3YInCieXyyAttr:                 func() zcl.Attr { return new(Primary3YInCieXyy) },
+		Primary3XAttr:                         func() zcl.Attr { return new(Primary3X) },
+		Primary3YAttr:                         func() zcl.Attr { return new(Primary3Y) },
 		Primary3IntensityAttr:                 func() zcl.Attr { return new(Primary3Intensity) },
-		Primary4XInCieXyyAttr:                 func() zcl.Attr { return new(Primary4XInCieXyy) },
-		Primary4YInCieXyyAttr:                 func() zcl.Attr { return new(Primary4YInCieXyy) },
+		Primary4XAttr:                         func() zcl.Attr { return new(Primary4X) },
+		Primary4YAttr:                         func() zcl.Attr { return new(Primary4Y) },
 		Primary4IntensityAttr:                 func() zcl.Attr { return new(Primary4Intensity) },
-		Primary5XInCieXyyAttr:                 func() zcl.Attr { return new(Primary5XInCieXyy) },
-		Primary5YInCieXyyAttr:                 func() zcl.Attr { return new(Primary5YInCieXyy) },
+		Primary5XAttr:                         func() zcl.Attr { return new(Primary5X) },
+		Primary5YAttr:                         func() zcl.Attr { return new(Primary5Y) },
 		Primary5IntensityAttr:                 func() zcl.Attr { return new(Primary5Intensity) },
-		Primary6XInCieXyyAttr:                 func() zcl.Attr { return new(Primary6XInCieXyy) },
-		Primary6YInCieXyyAttr:                 func() zcl.Attr { return new(Primary6YInCieXyy) },
+		Primary6XAttr:                         func() zcl.Attr { return new(Primary6X) },
+		Primary6YAttr:                         func() zcl.Attr { return new(Primary6Y) },
 		Primary6IntensityAttr:                 func() zcl.Attr { return new(Primary6Intensity) },
-		WhitePointXInCieXyyAttr:               func() zcl.Attr { return new(WhitePointXInCieXyy) },
-		WhitePointYInCieXyyAttr:               func() zcl.Attr { return new(WhitePointYInCieXyy) },
-		ColorPointRedXInCieXyyAttr:            func() zcl.Attr { return new(ColorPointRedXInCieXyy) },
-		ColorPointRedYInCieXyyAttr:            func() zcl.Attr { return new(ColorPointRedYInCieXyy) },
+		WhitePointXAttr:                       func() zcl.Attr { return new(WhitePointX) },
+		WhitePointYAttr:                       func() zcl.Attr { return new(WhitePointY) },
+		ColorPointRedXAttr:                    func() zcl.Attr { return new(ColorPointRedX) },
+		ColorPointRedYAttr:                    func() zcl.Attr { return new(ColorPointRedY) },
 		ColorPointRedIntensityAttr:            func() zcl.Attr { return new(ColorPointRedIntensity) },
-		ColorPointGreenXInCieXyyAttr:          func() zcl.Attr { return new(ColorPointGreenXInCieXyy) },
-		ColorPointGreenYInCieXyyAttr:          func() zcl.Attr { return new(ColorPointGreenYInCieXyy) },
+		ColorPointGreenXAttr:                  func() zcl.Attr { return new(ColorPointGreenX) },
+		ColorPointGreenYAttr:                  func() zcl.Attr { return new(ColorPointGreenY) },
 		ColorPointGreenIntensityAttr:          func() zcl.Attr { return new(ColorPointGreenIntensity) },
-		ColorPointBlueXInCieXyyAttr:           func() zcl.Attr { return new(ColorPointBlueXInCieXyy) },
-		ColorPointBlueYInCieXyyAttr:           func() zcl.Attr { return new(ColorPointBlueYInCieXyy) },
+		ColorPointBlueXAttr:                   func() zcl.Attr { return new(ColorPointBlueX) },
+		ColorPointBlueYAttr:                   func() zcl.Attr { return new(ColorPointBlueY) },
 		ColorPointBlueIntensityAttr:           func() zcl.Attr { return new(ColorPointBlueIntensity) },
 	},
 	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
 	SceneAttr: []zcl.AttrID{
-		CurrentXInCieXyyAttr,
-		CurrentYInCieXyyAttr,
+		CurrentXAttr,
+		CurrentYAttr,
 		EnhancedCurrentHueAttr,
 		CurrentSaturationAttr,
 		ColorLoopActiveAttr,
@@ -1171,7 +1173,9 @@ func (v *ColorLoopSet) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-// Stops move to and step commands. It has no effect on a active color loop.
+// Stops move to and step commands. It has no effect on a active
+// color loop.
+//
 type StopMoveStep struct {
 }
 
@@ -1205,9 +1209,13 @@ type MoveColorTemperature struct {
 	MoveMode zcl.Zenum8
 	// Steps per second.
 	Rate zcl.Zu16
-	// Specifies a lower bound on the color temperature for the current move operation.
+	// Specifies a lower bound on the color temperature for the
+	// current move operation.
+	//
 	ColorTemperatureMin zcl.Zu16
-	// Specifies a upper bound on the color temperature for the current move operation.
+	// Specifies a upper bound on the color temperature for the
+	// current move operation.
+	//
 	ColorTemperatureMax zcl.Zu16
 }
 
@@ -1289,9 +1297,13 @@ type StepColorTemperature struct {
 	StepSize zcl.Zu16
 	// The transitiontime in 1/10 seconds.
 	TransitionTime zcl.Zu16
-	// Specifies a lower bound on the color temperature for the current step operation.
+	// Specifies a lower bound on the color temperature for the
+	// current step operation.
+	//
 	ColorTemperatureMinimumMireds zcl.Zu16
-	// Specifies a upper bound on the color temperature for the current step operation.
+	// Specifies a upper bound on the color temperature for the
+	// current step operation.
+	//
 	ColorTemperatureMaximumMireds zcl.Zu16
 }
 
@@ -1378,9 +1390,13 @@ func (v *StepColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-const CurrentHueAttr zcl.AttrID = 0
-
+// CurrentHue is an autogenerated attribute in the ColorControl cluster
+// It contains the current hue value of the light. Hue = CurrentHue x 360 / 254
+// (CurrentHue in the range 0 - 254 inclusive)
+//
 type CurrentHue zcl.Zu8
+
+const CurrentHueAttr zcl.AttrID = 0
 
 func (a CurrentHue) ID() zcl.AttrID         { return CurrentHueAttr }
 func (a CurrentHue) Cluster() zcl.ClusterID { return ColorControlID }
@@ -1401,12 +1417,17 @@ func (a CurrentHue) Reportable() bool { return true }
 func (a CurrentHue) SceneIndex() int  { return -1 }
 
 func (a CurrentHue) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.DegreesAngular.Format(float64(a))
 }
 
-const CurrentSaturationAttr zcl.AttrID = 1
-
+// CurrentSaturation is an autogenerated attribute in the ColorControl cluster
+// It holds the current saturation value of the light.
+// Saturation = CurrentSaturation/254 (CurrentSaturation in the range
+// 0 - 254 inclusive)
+//
 type CurrentSaturation zcl.Zu8
+
+const CurrentSaturationAttr zcl.AttrID = 1
 
 func (a CurrentSaturation) ID() zcl.AttrID             { return CurrentSaturationAttr }
 func (a CurrentSaturation) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -1430,9 +1451,13 @@ func (a CurrentSaturation) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const RemainingTimeAttr zcl.AttrID = 2
-
+// RemainingTime is an autogenerated attribute in the ColorControl cluster
+// It holds the time remaining, in 1/10ths of a second, until the currently
+// active command will be complete
+//
 type RemainingTime zcl.Zu16
+
+const RemainingTimeAttr zcl.AttrID = 2
 
 func (a RemainingTime) ID() zcl.AttrID         { return RemainingTimeAttr }
 func (a RemainingTime) Cluster() zcl.ClusterID { return ColorControlID }
@@ -1453,64 +1478,78 @@ func (a RemainingTime) Reportable() bool { return false }
 func (a RemainingTime) SceneIndex() int  { return -1 }
 
 func (a RemainingTime) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Seconds.Format(float64(a) / 10)
 }
 
-const CurrentXInCieXyyAttr zcl.AttrID = 3
+// CurrentX is an autogenerated attribute in the ColorControl cluster
+// It contains the current value of the normalized chromaticity value x,
+// as defined in the CIE xyY Color Space. x = CurrentX / 65536 (CurrentX
+// in the range 0 to 65279 inclusive)
+//
+type CurrentX zcl.Zu16
 
-type CurrentXInCieXyy zcl.Zu16
+const CurrentXAttr zcl.AttrID = 3
 
-func (a CurrentXInCieXyy) ID() zcl.AttrID            { return CurrentXInCieXyyAttr }
-func (a CurrentXInCieXyy) Cluster() zcl.ClusterID    { return ColorControlID }
-func (a *CurrentXInCieXyy) Value() *CurrentXInCieXyy { return a }
-func (a CurrentXInCieXyy) MarshalZcl() ([]byte, error) {
+func (a CurrentX) ID() zcl.AttrID         { return CurrentXAttr }
+func (a CurrentX) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *CurrentX) Value() *CurrentX      { return a }
+func (a CurrentX) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *CurrentXInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *CurrentX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentXInCieXyy(*nt)
+	*a = CurrentX(*nt)
 	return br, err
 }
 
-func (a CurrentXInCieXyy) Readable() bool   { return true }
-func (a CurrentXInCieXyy) Writable() bool   { return false }
-func (a CurrentXInCieXyy) Reportable() bool { return true }
-func (a CurrentXInCieXyy) SceneIndex() int  { return 1 }
+func (a CurrentX) Readable() bool   { return true }
+func (a CurrentX) Writable() bool   { return false }
+func (a CurrentX) Reportable() bool { return true }
+func (a CurrentX) SceneIndex() int  { return 1 }
 
-func (a CurrentXInCieXyy) String() string {
+func (a CurrentX) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const CurrentYInCieXyyAttr zcl.AttrID = 4
+// CurrentY is an autogenerated attribute in the ColorControl cluster
+// It contains the current value of the normalized chromaticity value y,
+// as defined in the CIE xyY Color Space. y = CurrentY / 65536 (CurrentY
+// in the range 0 to 65279 inclusive)
+//
+type CurrentY zcl.Zu16
 
-type CurrentYInCieXyy zcl.Zu16
+const CurrentYAttr zcl.AttrID = 4
 
-func (a CurrentYInCieXyy) ID() zcl.AttrID            { return CurrentYInCieXyyAttr }
-func (a CurrentYInCieXyy) Cluster() zcl.ClusterID    { return ColorControlID }
-func (a *CurrentYInCieXyy) Value() *CurrentYInCieXyy { return a }
-func (a CurrentYInCieXyy) MarshalZcl() ([]byte, error) {
+func (a CurrentY) ID() zcl.AttrID         { return CurrentYAttr }
+func (a CurrentY) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *CurrentY) Value() *CurrentY      { return a }
+func (a CurrentY) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *CurrentYInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *CurrentY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentYInCieXyy(*nt)
+	*a = CurrentY(*nt)
 	return br, err
 }
 
-func (a CurrentYInCieXyy) Readable() bool   { return true }
-func (a CurrentYInCieXyy) Writable() bool   { return false }
-func (a CurrentYInCieXyy) Reportable() bool { return true }
-func (a CurrentYInCieXyy) SceneIndex() int  { return 2 }
+func (a CurrentY) Readable() bool   { return true }
+func (a CurrentY) Writable() bool   { return false }
+func (a CurrentY) Reportable() bool { return true }
+func (a CurrentY) SceneIndex() int  { return 2 }
 
-func (a CurrentYInCieXyy) String() string {
+func (a CurrentY) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// DriftCompensation is an autogenerated attribute in the ColorControl cluster
+// It indicates what mechanism, if any, is in use for compensation for
+// color/intensity drift over time
+//
+type DriftCompensation zcl.Zenum8
 
 const DriftCompensationAttr zcl.AttrID = 5
-
-type DriftCompensation zcl.Zenum8
 
 func (a DriftCompensation) ID() zcl.AttrID             { return DriftCompensationAttr }
 func (a DriftCompensation) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -1576,9 +1615,13 @@ func (a DriftCompensation) IsOpticalColorMonitoringAndFeedback() bool { return a
 // SetOpticalColorMonitoringAndFeedback sets DriftCompensation to Optical color monitoring and feedback (0x04)
 func (a *DriftCompensation) SetOpticalColorMonitoringAndFeedback() { *a = 0x04 }
 
-const CompensationTextAttr zcl.AttrID = 6
-
+// CompensationText is an autogenerated attribute in the ColorControl cluster
+// It holds a textual indication of what mechanism, if any, is in use to
+// compensate for color/intensity drift over time
+//
 type CompensationText zcl.Zcstring
+
+const CompensationTextAttr zcl.AttrID = 6
 
 func (a CompensationText) ID() zcl.AttrID            { return CompensationTextAttr }
 func (a CompensationText) Cluster() zcl.ClusterID    { return ColorControlID }
@@ -1602,9 +1645,17 @@ func (a CompensationText) String() string {
 	return zcl.Sprintf("%s", zcl.Zcstring(a))
 }
 
-const ColorTemperatureMiredsAttr zcl.AttrID = 7
-
+// ColorTemperatureMireds is an autogenerated attribute in the ColorControl cluster
+// It contains a scaled inverse of the current value of the color
+// temperature. The unit of ColorTemperatureMireds is the mired
+// (micro reciprocal degree), a.k.a mirek (micro reciprocal
+// kelvin). Color temperature in kelvins = 1,000,000 / ColorTemperatureMireds,
+// where ColorTemperatureMireds is in the range 1 to 65279 mireds inclusive,
+// giving a color temperature range from 1,000,000 kelvins to 15.32 kelvins
+//
 type ColorTemperatureMireds zcl.Zu16
+
+const ColorTemperatureMiredsAttr zcl.AttrID = 7
 
 func (a ColorTemperatureMireds) ID() zcl.AttrID                  { return ColorTemperatureMiredsAttr }
 func (a ColorTemperatureMireds) Cluster() zcl.ClusterID          { return ColorControlID }
@@ -1625,12 +1676,17 @@ func (a ColorTemperatureMireds) Reportable() bool { return true }
 func (a ColorTemperatureMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperatureMireds) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.mired.Format(float64(a))
 }
 
-const ColorModeAttr zcl.AttrID = 8
-
+// ColorMode is an autogenerated attribute in the ColorControl cluster
+// It indicates which attributes are currently determining the color of
+// the device. This attribute is optional if the device does not implement
+// CurrentHue and CurrentSaturation
+//
 type ColorMode zcl.Zenum8
+
+const ColorModeAttr zcl.AttrID = 8
 
 func (a ColorMode) ID() zcl.AttrID         { return ColorModeAttr }
 func (a ColorMode) Cluster() zcl.ClusterID { return ColorControlID }
@@ -1655,7 +1711,7 @@ func (a ColorMode) String() string {
 	case 0x00:
 		return "Current hue and current saturation"
 	case 0x01:
-		return "Current x and current y in CIE xyY"
+		return "Current X and Current Y"
 	case 0x02:
 		return "Color temperature"
 	}
@@ -1668,11 +1724,11 @@ func (a ColorMode) IsCurrentHueAndCurrentSaturation() bool { return a == 0x00 }
 // SetCurrentHueAndCurrentSaturation sets ColorMode to Current hue and current saturation (0x00)
 func (a *ColorMode) SetCurrentHueAndCurrentSaturation() { *a = 0x00 }
 
-// IsCurrentXAndCurrentYInCieXyy checks if ColorMode equals the value for Current x and current y in CIE xyY (0x01)
-func (a ColorMode) IsCurrentXAndCurrentYInCieXyy() bool { return a == 0x01 }
+// IsCurrentXAndCurrentY checks if ColorMode equals the value for Current X and Current Y (0x01)
+func (a ColorMode) IsCurrentXAndCurrentY() bool { return a == 0x01 }
 
-// SetCurrentXAndCurrentYInCieXyy sets ColorMode to Current x and current y in CIE xyY (0x01)
-func (a *ColorMode) SetCurrentXAndCurrentYInCieXyy() { *a = 0x01 }
+// SetCurrentXAndCurrentY sets ColorMode to Current X and Current Y (0x01)
+func (a *ColorMode) SetCurrentXAndCurrentY() { *a = 0x01 }
 
 // IsColorTemperature checks if ColorMode equals the value for Color temperature (0x02)
 func (a ColorMode) IsColorTemperature() bool { return a == 0x02 }
@@ -1680,9 +1736,19 @@ func (a ColorMode) IsColorTemperature() bool { return a == 0x02 }
 // SetColorTemperature sets ColorMode to Color temperature (0x02)
 func (a *ColorMode) SetColorTemperature() { *a = 0x02 }
 
-const EnhancedCurrentHueAttr zcl.AttrID = 16384
-
+// EnhancedCurrentHue is an autogenerated attribute in the ColorControl cluster
+// It represents non-equidistant steps along the CIE 1931 color triangle,
+// and it provides 16-bits precision. The upper 8 bits of this attribute
+// are used as an index in the implementation specific XY lookup table to
+// provide the non-equidistance steps. The lower 8 bits are used to
+// interpolate between these steps in a linear way in order to provide color
+// zoom for the user. To provide compatibility with standard ZCL, the
+// CurrentHue attribute contains a hue value in the range 0 to 254,
+// calculated from the EnhancedCurrentHue attribute
+//
 type EnhancedCurrentHue zcl.Zu16
+
+const EnhancedCurrentHueAttr zcl.AttrID = 16384
 
 func (a EnhancedCurrentHue) ID() zcl.AttrID              { return EnhancedCurrentHueAttr }
 func (a EnhancedCurrentHue) Cluster() zcl.ClusterID      { return ColorControlID }
@@ -1706,9 +1772,13 @@ func (a EnhancedCurrentHue) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const EnhancedColorModeAttr zcl.AttrID = 16385
-
+// EnhancedColorMode is an autogenerated attribute in the ColorControl cluster
+// It specifies which attributes are currently determining the color of
+// the device
+//
 type EnhancedColorMode zcl.Zenum8
+
+const EnhancedColorModeAttr zcl.AttrID = 16385
 
 func (a EnhancedColorMode) ID() zcl.AttrID             { return EnhancedColorModeAttr }
 func (a EnhancedColorMode) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -1733,7 +1803,7 @@ func (a EnhancedColorMode) String() string {
 	case 0x00:
 		return "Current hue and current saturation"
 	case 0x01:
-		return "Current x and current y in CIE xyY"
+		return "Current X and Current Y"
 	case 0x02:
 		return "Color temperature"
 	case 0x03:
@@ -1748,11 +1818,11 @@ func (a EnhancedColorMode) IsCurrentHueAndCurrentSaturation() bool { return a ==
 // SetCurrentHueAndCurrentSaturation sets EnhancedColorMode to Current hue and current saturation (0x00)
 func (a *EnhancedColorMode) SetCurrentHueAndCurrentSaturation() { *a = 0x00 }
 
-// IsCurrentXAndCurrentYInCieXyy checks if EnhancedColorMode equals the value for Current x and current y in CIE xyY (0x01)
-func (a EnhancedColorMode) IsCurrentXAndCurrentYInCieXyy() bool { return a == 0x01 }
+// IsCurrentXAndCurrentY checks if EnhancedColorMode equals the value for Current X and Current Y (0x01)
+func (a EnhancedColorMode) IsCurrentXAndCurrentY() bool { return a == 0x01 }
 
-// SetCurrentXAndCurrentYInCieXyy sets EnhancedColorMode to Current x and current y in CIE xyY (0x01)
-func (a *EnhancedColorMode) SetCurrentXAndCurrentYInCieXyy() { *a = 0x01 }
+// SetCurrentXAndCurrentY sets EnhancedColorMode to Current X and Current Y (0x01)
+func (a *EnhancedColorMode) SetCurrentXAndCurrentY() { *a = 0x01 }
 
 // IsColorTemperature checks if EnhancedColorMode equals the value for Color temperature (0x02)
 func (a EnhancedColorMode) IsColorTemperature() bool { return a == 0x02 }
@@ -1766,9 +1836,13 @@ func (a EnhancedColorMode) IsEnhancedCurrentHueAndCurrentSaturation() bool { ret
 // SetEnhancedCurrentHueAndCurrentSaturation sets EnhancedColorMode to Enhanced current hue and current saturation (0x03)
 func (a *EnhancedColorMode) SetEnhancedCurrentHueAndCurrentSaturation() { *a = 0x03 }
 
-const ColorLoopActiveAttr zcl.AttrID = 16386
-
+// ColorLoopActive is an autogenerated attribute in the ColorControl cluster
+// It specifies the current active status of the color loop. 0x00 means
+// inactive, 0x01 means active
+//
 type ColorLoopActive zcl.Zu8
+
+const ColorLoopActiveAttr zcl.AttrID = 16386
 
 func (a ColorLoopActive) ID() zcl.AttrID           { return ColorLoopActiveAttr }
 func (a ColorLoopActive) Cluster() zcl.ClusterID   { return ColorControlID }
@@ -1792,9 +1866,14 @@ func (a ColorLoopActive) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const ColorLoopDirectionAttr zcl.AttrID = 16387
-
+// ColorLoopDirection is an autogenerated attribute in the ColorControl cluster
+// It specifies the current direction of the color loop. If this attribute
+// has the value 0x00, the EnhancedCurrentHue is be decremented. If this
+// attribute has the value 0x01, the EnhancedCurrentHue is incremented
+//
 type ColorLoopDirection zcl.Zu8
+
+const ColorLoopDirectionAttr zcl.AttrID = 16387
 
 func (a ColorLoopDirection) ID() zcl.AttrID              { return ColorLoopDirectionAttr }
 func (a ColorLoopDirection) Cluster() zcl.ClusterID      { return ColorControlID }
@@ -1818,9 +1897,13 @@ func (a ColorLoopDirection) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const ColorLoopTimeAttr zcl.AttrID = 16388
-
+// ColorLoopTime is an autogenerated attribute in the ColorControl cluster
+// It specifies the number of seconds it takes to perform a full color
+// loop, i.e., to cycle all values of EnhancedCurrentHue
+//
 type ColorLoopTime zcl.Zu16
+
+const ColorLoopTimeAttr zcl.AttrID = 16388
 
 func (a ColorLoopTime) ID() zcl.AttrID         { return ColorLoopTimeAttr }
 func (a ColorLoopTime) Cluster() zcl.ClusterID { return ColorControlID }
@@ -1844,9 +1927,13 @@ func (a ColorLoopTime) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const ColorLoopStartEnhancedHueAttr zcl.AttrID = 16389
-
+// ColorLoopStartEnhancedHue is an autogenerated attribute in the ColorControl cluster
+// It specifies the value of the EnhancedCurrentHue attribute from which
+// the color loop starts
+//
 type ColorLoopStartEnhancedHue zcl.Zu16
+
+const ColorLoopStartEnhancedHueAttr zcl.AttrID = 16389
 
 func (a ColorLoopStartEnhancedHue) ID() zcl.AttrID                     { return ColorLoopStartEnhancedHueAttr }
 func (a ColorLoopStartEnhancedHue) Cluster() zcl.ClusterID             { return ColorControlID }
@@ -1870,9 +1957,14 @@ func (a ColorLoopStartEnhancedHue) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const ColorLoopStoredEnhancedHueAttr zcl.AttrID = 16390
-
+// ColorLoopStoredEnhancedHue is an autogenerated attribute in the ColorControl cluster
+// It specifies the value of the EnhancedCurrentHue attribute before the
+// color loop was started. Once the color loop is complete, It is restored
+// to this value
+//
 type ColorLoopStoredEnhancedHue zcl.Zu16
+
+const ColorLoopStoredEnhancedHueAttr zcl.AttrID = 16390
 
 func (a ColorLoopStoredEnhancedHue) ID() zcl.AttrID                      { return ColorLoopStoredEnhancedHueAttr }
 func (a ColorLoopStoredEnhancedHue) Cluster() zcl.ClusterID              { return ColorControlID }
@@ -1896,9 +1988,13 @@ func (a ColorLoopStoredEnhancedHue) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const ColorCapabilitiesAttr zcl.AttrID = 16394
-
+// ColorCapabilities is an autogenerated attribute in the ColorControl cluster
+// It specifies the color capabilities of the device supporting the color
+// control cluster
+//
 type ColorCapabilities zcl.Zbmp16
+
+const ColorCapabilitiesAttr zcl.AttrID = 16394
 
 func (a ColorCapabilities) ID() zcl.AttrID             { return ColorCapabilitiesAttr }
 func (a ColorCapabilities) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -1973,9 +2069,15 @@ func (a *ColorCapabilities) SetColorTemperature(b bool) {
 	*a = ColorCapabilities(zcl.BitmapSet([]byte(*a), 4, b))
 }
 
-const ColorTemperaturePhysicalMinMiredsAttr zcl.AttrID = 16395
-
+// ColorTemperaturePhysicalMinMireds is an autogenerated attribute in the ColorControl cluster
+// It indicates the minimum mired value supported by the hardware.
+// ColorTempPhysicalMinMireds corresponds to the maximum color
+// temperature in Kelvins supported by the hardware.
+// ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds
+//
 type ColorTemperaturePhysicalMinMireds zcl.Zu16
+
+const ColorTemperaturePhysicalMinMiredsAttr zcl.AttrID = 16395
 
 func (a ColorTemperaturePhysicalMinMireds) ID() zcl.AttrID {
 	return ColorTemperaturePhysicalMinMiredsAttr
@@ -1998,12 +2100,18 @@ func (a ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
 func (a ColorTemperaturePhysicalMinMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperaturePhysicalMinMireds) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.mired.Format(float64(a))
 }
 
-const ColorTemperaturePhysicalMaxMiredsAttr zcl.AttrID = 16396
-
+// ColorTemperaturePhysicalMaxMireds is an autogenerated attribute in the ColorControl cluster
+// It indicates the maximum mired value supported by the hardware.
+// ColorTempPhysicalMaxMireds corresponds to the minimum color
+// temperature in Kelvins supported by the hardware.
+// ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds
+//
 type ColorTemperaturePhysicalMaxMireds zcl.Zu16
+
+const ColorTemperaturePhysicalMaxMiredsAttr zcl.AttrID = 16396
 
 func (a ColorTemperaturePhysicalMaxMireds) ID() zcl.AttrID {
 	return ColorTemperaturePhysicalMaxMiredsAttr
@@ -2026,12 +2134,13 @@ func (a ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
 func (a ColorTemperaturePhysicalMaxMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperaturePhysicalMaxMireds) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.mired.Format(float64(a))
 }
 
-const PowerOnColorTemperatureAttr zcl.AttrID = 16400
-
+// PowerOnColorTemperature is an autogenerated attribute in the ColorControl cluster
 type PowerOnColorTemperature zcl.Zu16
+
+const PowerOnColorTemperatureAttr zcl.AttrID = 16400
 
 func (a PowerOnColorTemperature) ID() zcl.AttrID                   { return PowerOnColorTemperatureAttr }
 func (a PowerOnColorTemperature) Cluster() zcl.ClusterID           { return ColorControlID }
@@ -2055,9 +2164,13 @@ func (a PowerOnColorTemperature) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const NumberOfPrimariesAttr zcl.AttrID = 16
-
+// NumberOfPrimaries is an autogenerated attribute in the ColorControl cluster
+// It contains the number of color primaries implemented on this device.
+// A value of 0xff indicates that the number of primaries is unknown
+//
 type NumberOfPrimaries zcl.Zu8
+
+const NumberOfPrimariesAttr zcl.AttrID = 16
 
 func (a NumberOfPrimaries) ID() zcl.AttrID             { return NumberOfPrimariesAttr }
 func (a NumberOfPrimaries) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -2081,61 +2194,78 @@ func (a NumberOfPrimaries) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const Primary1XInCieXyyAttr zcl.AttrID = 17
+// Primary1X is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x for this primary, as
+// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+// in the range 0 to 65279 inclusive)
+//
+type Primary1X zcl.Zu16
 
-type Primary1XInCieXyy zcl.Zu16
+const Primary1XAttr zcl.AttrID = 17
 
-func (a Primary1XInCieXyy) ID() zcl.AttrID             { return Primary1XInCieXyyAttr }
-func (a Primary1XInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary1XInCieXyy) Value() *Primary1XInCieXyy { return a }
-func (a Primary1XInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary1X) ID() zcl.AttrID         { return Primary1XAttr }
+func (a Primary1X) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary1X) Value() *Primary1X     { return a }
+func (a Primary1X) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary1XInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary1X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1XInCieXyy(*nt)
+	*a = Primary1X(*nt)
 	return br, err
 }
 
-func (a Primary1XInCieXyy) Readable() bool   { return true }
-func (a Primary1XInCieXyy) Writable() bool   { return false }
-func (a Primary1XInCieXyy) Reportable() bool { return false }
-func (a Primary1XInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary1X) Readable() bool   { return true }
+func (a Primary1X) Writable() bool   { return false }
+func (a Primary1X) Reportable() bool { return false }
+func (a Primary1X) SceneIndex() int  { return -1 }
 
-func (a Primary1XInCieXyy) String() string {
+func (a Primary1X) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const Primary1YInCieXyyAttr zcl.AttrID = 18
+// Primary1Y is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y for this primary, as
+// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+// in the range 0 to 65279 inclusive)
+//
+type Primary1Y zcl.Zu16
 
-type Primary1YInCieXyy zcl.Zu16
+const Primary1YAttr zcl.AttrID = 18
 
-func (a Primary1YInCieXyy) ID() zcl.AttrID             { return Primary1YInCieXyyAttr }
-func (a Primary1YInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary1YInCieXyy) Value() *Primary1YInCieXyy { return a }
-func (a Primary1YInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary1Y) ID() zcl.AttrID         { return Primary1YAttr }
+func (a Primary1Y) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary1Y) Value() *Primary1Y     { return a }
+func (a Primary1Y) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary1YInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary1Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1YInCieXyy(*nt)
+	*a = Primary1Y(*nt)
 	return br, err
 }
 
-func (a Primary1YInCieXyy) Readable() bool   { return true }
-func (a Primary1YInCieXyy) Writable() bool   { return false }
-func (a Primary1YInCieXyy) Reportable() bool { return false }
-func (a Primary1YInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary1Y) Readable() bool   { return true }
+func (a Primary1Y) Writable() bool   { return false }
+func (a Primary1Y) Reportable() bool { return false }
+func (a Primary1Y) SceneIndex() int  { return -1 }
 
-func (a Primary1YInCieXyy) String() string {
+func (a Primary1Y) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// Primary1Intensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the maximum intensity of this primary as
+// defined in the Dimming Light Curve in the Ballast Configuration cluster,
+// normalized such that the primary with the highest maximum intensity
+// contains the value 0xfe. A value of 0xff indicates that this primary is
+// not available
+//
+type Primary1Intensity zcl.Zu8
 
 const Primary1IntensityAttr zcl.AttrID = 19
-
-type Primary1Intensity zcl.Zu8
 
 func (a Primary1Intensity) ID() zcl.AttrID             { return Primary1IntensityAttr }
 func (a Primary1Intensity) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -2159,61 +2289,78 @@ func (a Primary1Intensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const Primary2XInCieXyyAttr zcl.AttrID = 21
+// Primary2X is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x for this primary, as
+// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+// in the range 0 to 65279 inclusive)
+//
+type Primary2X zcl.Zu16
 
-type Primary2XInCieXyy zcl.Zu16
+const Primary2XAttr zcl.AttrID = 21
 
-func (a Primary2XInCieXyy) ID() zcl.AttrID             { return Primary2XInCieXyyAttr }
-func (a Primary2XInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary2XInCieXyy) Value() *Primary2XInCieXyy { return a }
-func (a Primary2XInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary2X) ID() zcl.AttrID         { return Primary2XAttr }
+func (a Primary2X) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary2X) Value() *Primary2X     { return a }
+func (a Primary2X) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary2XInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary2X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2XInCieXyy(*nt)
+	*a = Primary2X(*nt)
 	return br, err
 }
 
-func (a Primary2XInCieXyy) Readable() bool   { return true }
-func (a Primary2XInCieXyy) Writable() bool   { return false }
-func (a Primary2XInCieXyy) Reportable() bool { return false }
-func (a Primary2XInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary2X) Readable() bool   { return true }
+func (a Primary2X) Writable() bool   { return false }
+func (a Primary2X) Reportable() bool { return false }
+func (a Primary2X) SceneIndex() int  { return -1 }
 
-func (a Primary2XInCieXyy) String() string {
+func (a Primary2X) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const Primary2YInCieXyyAttr zcl.AttrID = 22
+// Primary2Y is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y for this primary, as
+// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+// in the range 0 to 65279 inclusive)
+//
+type Primary2Y zcl.Zu16
 
-type Primary2YInCieXyy zcl.Zu16
+const Primary2YAttr zcl.AttrID = 22
 
-func (a Primary2YInCieXyy) ID() zcl.AttrID             { return Primary2YInCieXyyAttr }
-func (a Primary2YInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary2YInCieXyy) Value() *Primary2YInCieXyy { return a }
-func (a Primary2YInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary2Y) ID() zcl.AttrID         { return Primary2YAttr }
+func (a Primary2Y) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary2Y) Value() *Primary2Y     { return a }
+func (a Primary2Y) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary2YInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary2Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2YInCieXyy(*nt)
+	*a = Primary2Y(*nt)
 	return br, err
 }
 
-func (a Primary2YInCieXyy) Readable() bool   { return true }
-func (a Primary2YInCieXyy) Writable() bool   { return false }
-func (a Primary2YInCieXyy) Reportable() bool { return false }
-func (a Primary2YInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary2Y) Readable() bool   { return true }
+func (a Primary2Y) Writable() bool   { return false }
+func (a Primary2Y) Reportable() bool { return false }
+func (a Primary2Y) SceneIndex() int  { return -1 }
 
-func (a Primary2YInCieXyy) String() string {
+func (a Primary2Y) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// Primary2Intensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the maximum intensity of this primary as
+// defined in the Dimming Light Curve in the Ballast Configuration cluster,
+// normalized such that the primary with the highest maximum intensity
+// contains the value 0xfe. A value of 0xff indicates that this primary is
+// not available
+//
+type Primary2Intensity zcl.Zu8
 
 const Primary2IntensityAttr zcl.AttrID = 23
-
-type Primary2Intensity zcl.Zu8
 
 func (a Primary2Intensity) ID() zcl.AttrID             { return Primary2IntensityAttr }
 func (a Primary2Intensity) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -2237,61 +2384,78 @@ func (a Primary2Intensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const Primary3XInCieXyyAttr zcl.AttrID = 25
+// Primary3X is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x for this primary, as
+// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+// in the range 0 to 65279 inclusive)
+//
+type Primary3X zcl.Zu16
 
-type Primary3XInCieXyy zcl.Zu16
+const Primary3XAttr zcl.AttrID = 25
 
-func (a Primary3XInCieXyy) ID() zcl.AttrID             { return Primary3XInCieXyyAttr }
-func (a Primary3XInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary3XInCieXyy) Value() *Primary3XInCieXyy { return a }
-func (a Primary3XInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary3X) ID() zcl.AttrID         { return Primary3XAttr }
+func (a Primary3X) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary3X) Value() *Primary3X     { return a }
+func (a Primary3X) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary3XInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary3X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3XInCieXyy(*nt)
+	*a = Primary3X(*nt)
 	return br, err
 }
 
-func (a Primary3XInCieXyy) Readable() bool   { return true }
-func (a Primary3XInCieXyy) Writable() bool   { return false }
-func (a Primary3XInCieXyy) Reportable() bool { return false }
-func (a Primary3XInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary3X) Readable() bool   { return true }
+func (a Primary3X) Writable() bool   { return false }
+func (a Primary3X) Reportable() bool { return false }
+func (a Primary3X) SceneIndex() int  { return -1 }
 
-func (a Primary3XInCieXyy) String() string {
+func (a Primary3X) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const Primary3YInCieXyyAttr zcl.AttrID = 26
+// Primary3Y is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y for this primary, as
+// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+// in the range 0 to 65279 inclusive)
+//
+type Primary3Y zcl.Zu16
 
-type Primary3YInCieXyy zcl.Zu16
+const Primary3YAttr zcl.AttrID = 26
 
-func (a Primary3YInCieXyy) ID() zcl.AttrID             { return Primary3YInCieXyyAttr }
-func (a Primary3YInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary3YInCieXyy) Value() *Primary3YInCieXyy { return a }
-func (a Primary3YInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary3Y) ID() zcl.AttrID         { return Primary3YAttr }
+func (a Primary3Y) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary3Y) Value() *Primary3Y     { return a }
+func (a Primary3Y) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary3YInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary3Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3YInCieXyy(*nt)
+	*a = Primary3Y(*nt)
 	return br, err
 }
 
-func (a Primary3YInCieXyy) Readable() bool   { return true }
-func (a Primary3YInCieXyy) Writable() bool   { return false }
-func (a Primary3YInCieXyy) Reportable() bool { return false }
-func (a Primary3YInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary3Y) Readable() bool   { return true }
+func (a Primary3Y) Writable() bool   { return false }
+func (a Primary3Y) Reportable() bool { return false }
+func (a Primary3Y) SceneIndex() int  { return -1 }
 
-func (a Primary3YInCieXyy) String() string {
+func (a Primary3Y) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// Primary3Intensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the maximum intensity of this primary as
+// defined in the Dimming Light Curve in the Ballast Configuration cluster,
+// normalized such that the primary with the highest maximum intensity
+// contains the value 0xfe. A value of 0xff indicates that this primary is
+// not available
+//
+type Primary3Intensity zcl.Zu8
 
 const Primary3IntensityAttr zcl.AttrID = 27
-
-type Primary3Intensity zcl.Zu8
 
 func (a Primary3Intensity) ID() zcl.AttrID             { return Primary3IntensityAttr }
 func (a Primary3Intensity) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -2315,61 +2479,78 @@ func (a Primary3Intensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const Primary4XInCieXyyAttr zcl.AttrID = 32
+// Primary4X is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x for this primary, as
+// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+// in the range 0 to 65279 inclusive)
+//
+type Primary4X zcl.Zu16
 
-type Primary4XInCieXyy zcl.Zu16
+const Primary4XAttr zcl.AttrID = 32
 
-func (a Primary4XInCieXyy) ID() zcl.AttrID             { return Primary4XInCieXyyAttr }
-func (a Primary4XInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary4XInCieXyy) Value() *Primary4XInCieXyy { return a }
-func (a Primary4XInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary4X) ID() zcl.AttrID         { return Primary4XAttr }
+func (a Primary4X) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary4X) Value() *Primary4X     { return a }
+func (a Primary4X) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary4XInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary4X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4XInCieXyy(*nt)
+	*a = Primary4X(*nt)
 	return br, err
 }
 
-func (a Primary4XInCieXyy) Readable() bool   { return true }
-func (a Primary4XInCieXyy) Writable() bool   { return false }
-func (a Primary4XInCieXyy) Reportable() bool { return false }
-func (a Primary4XInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary4X) Readable() bool   { return true }
+func (a Primary4X) Writable() bool   { return false }
+func (a Primary4X) Reportable() bool { return false }
+func (a Primary4X) SceneIndex() int  { return -1 }
 
-func (a Primary4XInCieXyy) String() string {
+func (a Primary4X) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const Primary4YInCieXyyAttr zcl.AttrID = 33
+// Primary4Y is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y for this primary, as
+// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+// in the range 0 to 65279 inclusive)
+//
+type Primary4Y zcl.Zu16
 
-type Primary4YInCieXyy zcl.Zu16
+const Primary4YAttr zcl.AttrID = 33
 
-func (a Primary4YInCieXyy) ID() zcl.AttrID             { return Primary4YInCieXyyAttr }
-func (a Primary4YInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary4YInCieXyy) Value() *Primary4YInCieXyy { return a }
-func (a Primary4YInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary4Y) ID() zcl.AttrID         { return Primary4YAttr }
+func (a Primary4Y) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary4Y) Value() *Primary4Y     { return a }
+func (a Primary4Y) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary4YInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary4Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4YInCieXyy(*nt)
+	*a = Primary4Y(*nt)
 	return br, err
 }
 
-func (a Primary4YInCieXyy) Readable() bool   { return true }
-func (a Primary4YInCieXyy) Writable() bool   { return false }
-func (a Primary4YInCieXyy) Reportable() bool { return false }
-func (a Primary4YInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary4Y) Readable() bool   { return true }
+func (a Primary4Y) Writable() bool   { return false }
+func (a Primary4Y) Reportable() bool { return false }
+func (a Primary4Y) SceneIndex() int  { return -1 }
 
-func (a Primary4YInCieXyy) String() string {
+func (a Primary4Y) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// Primary4Intensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the maximum intensity of this primary as
+// defined in the Dimming Light Curve in the Ballast Configuration cluster,
+// normalized such that the primary with the highest maximum intensity
+// contains the value 0xfe. A value of 0xff indicates that this primary is
+// not available
+//
+type Primary4Intensity zcl.Zu8
 
 const Primary4IntensityAttr zcl.AttrID = 34
-
-type Primary4Intensity zcl.Zu8
 
 func (a Primary4Intensity) ID() zcl.AttrID             { return Primary4IntensityAttr }
 func (a Primary4Intensity) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -2393,61 +2574,78 @@ func (a Primary4Intensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const Primary5XInCieXyyAttr zcl.AttrID = 36
+// Primary5X is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x for this primary, as
+// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+// in the range 0 to 65279 inclusive)
+//
+type Primary5X zcl.Zu16
 
-type Primary5XInCieXyy zcl.Zu16
+const Primary5XAttr zcl.AttrID = 36
 
-func (a Primary5XInCieXyy) ID() zcl.AttrID             { return Primary5XInCieXyyAttr }
-func (a Primary5XInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary5XInCieXyy) Value() *Primary5XInCieXyy { return a }
-func (a Primary5XInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary5X) ID() zcl.AttrID         { return Primary5XAttr }
+func (a Primary5X) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary5X) Value() *Primary5X     { return a }
+func (a Primary5X) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary5XInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary5X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5XInCieXyy(*nt)
+	*a = Primary5X(*nt)
 	return br, err
 }
 
-func (a Primary5XInCieXyy) Readable() bool   { return true }
-func (a Primary5XInCieXyy) Writable() bool   { return false }
-func (a Primary5XInCieXyy) Reportable() bool { return false }
-func (a Primary5XInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary5X) Readable() bool   { return true }
+func (a Primary5X) Writable() bool   { return false }
+func (a Primary5X) Reportable() bool { return false }
+func (a Primary5X) SceneIndex() int  { return -1 }
 
-func (a Primary5XInCieXyy) String() string {
+func (a Primary5X) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const Primary5YInCieXyyAttr zcl.AttrID = 37
+// Primary5Y is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y for this primary, as
+// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+// in the range 0 to 65279 inclusive)
+//
+type Primary5Y zcl.Zu16
 
-type Primary5YInCieXyy zcl.Zu16
+const Primary5YAttr zcl.AttrID = 37
 
-func (a Primary5YInCieXyy) ID() zcl.AttrID             { return Primary5YInCieXyyAttr }
-func (a Primary5YInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary5YInCieXyy) Value() *Primary5YInCieXyy { return a }
-func (a Primary5YInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary5Y) ID() zcl.AttrID         { return Primary5YAttr }
+func (a Primary5Y) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary5Y) Value() *Primary5Y     { return a }
+func (a Primary5Y) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary5YInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary5Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5YInCieXyy(*nt)
+	*a = Primary5Y(*nt)
 	return br, err
 }
 
-func (a Primary5YInCieXyy) Readable() bool   { return true }
-func (a Primary5YInCieXyy) Writable() bool   { return false }
-func (a Primary5YInCieXyy) Reportable() bool { return false }
-func (a Primary5YInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary5Y) Readable() bool   { return true }
+func (a Primary5Y) Writable() bool   { return false }
+func (a Primary5Y) Reportable() bool { return false }
+func (a Primary5Y) SceneIndex() int  { return -1 }
 
-func (a Primary5YInCieXyy) String() string {
+func (a Primary5Y) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// Primary5Intensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the maximum intensity of this primary as
+// defined in the Dimming Light Curve in the Ballast Configuration cluster,
+// normalized such that the primary with the highest maximum intensity
+// contains the value 0xfe. A value of 0xff indicates that this primary is
+// not available
+//
+type Primary5Intensity zcl.Zu8
 
 const Primary5IntensityAttr zcl.AttrID = 38
-
-type Primary5Intensity zcl.Zu8
 
 func (a Primary5Intensity) ID() zcl.AttrID             { return Primary5IntensityAttr }
 func (a Primary5Intensity) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -2471,61 +2669,78 @@ func (a Primary5Intensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const Primary6XInCieXyyAttr zcl.AttrID = 40
+// Primary6X is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x for this primary, as
+// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
+// in the range 0 to 65279 inclusive)
+//
+type Primary6X zcl.Zu16
 
-type Primary6XInCieXyy zcl.Zu16
+const Primary6XAttr zcl.AttrID = 40
 
-func (a Primary6XInCieXyy) ID() zcl.AttrID             { return Primary6XInCieXyyAttr }
-func (a Primary6XInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary6XInCieXyy) Value() *Primary6XInCieXyy { return a }
-func (a Primary6XInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary6X) ID() zcl.AttrID         { return Primary6XAttr }
+func (a Primary6X) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary6X) Value() *Primary6X     { return a }
+func (a Primary6X) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary6XInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary6X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6XInCieXyy(*nt)
+	*a = Primary6X(*nt)
 	return br, err
 }
 
-func (a Primary6XInCieXyy) Readable() bool   { return true }
-func (a Primary6XInCieXyy) Writable() bool   { return false }
-func (a Primary6XInCieXyy) Reportable() bool { return false }
-func (a Primary6XInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary6X) Readable() bool   { return true }
+func (a Primary6X) Writable() bool   { return false }
+func (a Primary6X) Reportable() bool { return false }
+func (a Primary6X) SceneIndex() int  { return -1 }
 
-func (a Primary6XInCieXyy) String() string {
+func (a Primary6X) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const Primary6YInCieXyyAttr zcl.AttrID = 41
+// Primary6Y is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y for this primary, as
+// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
+// in the range 0 to 65279 inclusive)
+//
+type Primary6Y zcl.Zu16
 
-type Primary6YInCieXyy zcl.Zu16
+const Primary6YAttr zcl.AttrID = 41
 
-func (a Primary6YInCieXyy) ID() zcl.AttrID             { return Primary6YInCieXyyAttr }
-func (a Primary6YInCieXyy) Cluster() zcl.ClusterID     { return ColorControlID }
-func (a *Primary6YInCieXyy) Value() *Primary6YInCieXyy { return a }
-func (a Primary6YInCieXyy) MarshalZcl() ([]byte, error) {
+func (a Primary6Y) ID() zcl.AttrID         { return Primary6YAttr }
+func (a Primary6Y) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *Primary6Y) Value() *Primary6Y     { return a }
+func (a Primary6Y) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *Primary6YInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *Primary6Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6YInCieXyy(*nt)
+	*a = Primary6Y(*nt)
 	return br, err
 }
 
-func (a Primary6YInCieXyy) Readable() bool   { return true }
-func (a Primary6YInCieXyy) Writable() bool   { return false }
-func (a Primary6YInCieXyy) Reportable() bool { return false }
-func (a Primary6YInCieXyy) SceneIndex() int  { return -1 }
+func (a Primary6Y) Readable() bool   { return true }
+func (a Primary6Y) Writable() bool   { return false }
+func (a Primary6Y) Reportable() bool { return false }
+func (a Primary6Y) SceneIndex() int  { return -1 }
 
-func (a Primary6YInCieXyy) String() string {
+func (a Primary6Y) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// Primary6Intensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the maximum intensity of this primary as
+// defined in the Dimming Light Curve in the Ballast Configuration cluster,
+// normalized such that the primary with the highest maximum intensity
+// contains the value 0xfe. A value of 0xff indicates that this primary is
+// not available
+//
+type Primary6Intensity zcl.Zu8
 
 const Primary6IntensityAttr zcl.AttrID = 42
-
-type Primary6Intensity zcl.Zu8
 
 func (a Primary6Intensity) ID() zcl.AttrID             { return Primary6IntensityAttr }
 func (a Primary6Intensity) Cluster() zcl.ClusterID     { return ColorControlID }
@@ -2549,113 +2764,139 @@ func (a Primary6Intensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const WhitePointXInCieXyyAttr zcl.AttrID = 48
+// WhitePointX is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x, as defined in the
+// CIE xyY Color Space, of the current white point of the device.
+// x = WhitePointX / 65536 (WhitePointX in the range 0 to 65279 inclusive)
+//
+type WhitePointX zcl.Zu16
 
-type WhitePointXInCieXyy zcl.Zu16
+const WhitePointXAttr zcl.AttrID = 48
 
-func (a WhitePointXInCieXyy) ID() zcl.AttrID               { return WhitePointXInCieXyyAttr }
-func (a WhitePointXInCieXyy) Cluster() zcl.ClusterID       { return ColorControlID }
-func (a *WhitePointXInCieXyy) Value() *WhitePointXInCieXyy { return a }
-func (a WhitePointXInCieXyy) MarshalZcl() ([]byte, error) {
+func (a WhitePointX) ID() zcl.AttrID         { return WhitePointXAttr }
+func (a WhitePointX) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *WhitePointX) Value() *WhitePointX   { return a }
+func (a WhitePointX) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *WhitePointXInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *WhitePointX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = WhitePointXInCieXyy(*nt)
+	*a = WhitePointX(*nt)
 	return br, err
 }
 
-func (a WhitePointXInCieXyy) Readable() bool   { return true }
-func (a WhitePointXInCieXyy) Writable() bool   { return true }
-func (a WhitePointXInCieXyy) Reportable() bool { return false }
-func (a WhitePointXInCieXyy) SceneIndex() int  { return -1 }
+func (a WhitePointX) Readable() bool   { return true }
+func (a WhitePointX) Writable() bool   { return true }
+func (a WhitePointX) Reportable() bool { return false }
+func (a WhitePointX) SceneIndex() int  { return -1 }
 
-func (a WhitePointXInCieXyy) String() string {
+func (a WhitePointX) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const WhitePointYInCieXyyAttr zcl.AttrID = 49
+// WhitePointY is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y, as defined in the
+// CIE xyY Color Space, of the current white point of the device.
+// y = WhitePointY / 65536 (WhitePointY in the range 0 to 65279 inclusive)
+//
+type WhitePointY zcl.Zu16
 
-type WhitePointYInCieXyy zcl.Zu16
+const WhitePointYAttr zcl.AttrID = 49
 
-func (a WhitePointYInCieXyy) ID() zcl.AttrID               { return WhitePointYInCieXyyAttr }
-func (a WhitePointYInCieXyy) Cluster() zcl.ClusterID       { return ColorControlID }
-func (a *WhitePointYInCieXyy) Value() *WhitePointYInCieXyy { return a }
-func (a WhitePointYInCieXyy) MarshalZcl() ([]byte, error) {
+func (a WhitePointY) ID() zcl.AttrID         { return WhitePointYAttr }
+func (a WhitePointY) Cluster() zcl.ClusterID { return ColorControlID }
+func (a *WhitePointY) Value() *WhitePointY   { return a }
+func (a WhitePointY) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *WhitePointYInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *WhitePointY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = WhitePointYInCieXyy(*nt)
+	*a = WhitePointY(*nt)
 	return br, err
 }
 
-func (a WhitePointYInCieXyy) Readable() bool   { return true }
-func (a WhitePointYInCieXyy) Writable() bool   { return true }
-func (a WhitePointYInCieXyy) Reportable() bool { return false }
-func (a WhitePointYInCieXyy) SceneIndex() int  { return -1 }
+func (a WhitePointY) Readable() bool   { return true }
+func (a WhitePointY) Writable() bool   { return true }
+func (a WhitePointY) Reportable() bool { return false }
+func (a WhitePointY) SceneIndex() int  { return -1 }
 
-func (a WhitePointYInCieXyy) String() string {
+func (a WhitePointY) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const ColorPointRedXInCieXyyAttr zcl.AttrID = 50
+// ColorPointRedX is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x, as defined in the
+// CIE xyY Color Space, of the red color point of the device.
+// x = ColorPointRX / 65536 (ColorPointRX in the range 0 to 65279 inclusive)
+//
+type ColorPointRedX zcl.Zu16
 
-type ColorPointRedXInCieXyy zcl.Zu16
+const ColorPointRedXAttr zcl.AttrID = 50
 
-func (a ColorPointRedXInCieXyy) ID() zcl.AttrID                  { return ColorPointRedXInCieXyyAttr }
-func (a ColorPointRedXInCieXyy) Cluster() zcl.ClusterID          { return ColorControlID }
-func (a *ColorPointRedXInCieXyy) Value() *ColorPointRedXInCieXyy { return a }
-func (a ColorPointRedXInCieXyy) MarshalZcl() ([]byte, error) {
+func (a ColorPointRedX) ID() zcl.AttrID          { return ColorPointRedXAttr }
+func (a ColorPointRedX) Cluster() zcl.ClusterID  { return ColorControlID }
+func (a *ColorPointRedX) Value() *ColorPointRedX { return a }
+func (a ColorPointRedX) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *ColorPointRedXInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *ColorPointRedX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedXInCieXyy(*nt)
+	*a = ColorPointRedX(*nt)
 	return br, err
 }
 
-func (a ColorPointRedXInCieXyy) Readable() bool   { return true }
-func (a ColorPointRedXInCieXyy) Writable() bool   { return true }
-func (a ColorPointRedXInCieXyy) Reportable() bool { return false }
-func (a ColorPointRedXInCieXyy) SceneIndex() int  { return -1 }
+func (a ColorPointRedX) Readable() bool   { return true }
+func (a ColorPointRedX) Writable() bool   { return true }
+func (a ColorPointRedX) Reportable() bool { return false }
+func (a ColorPointRedX) SceneIndex() int  { return -1 }
 
-func (a ColorPointRedXInCieXyy) String() string {
+func (a ColorPointRedX) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const ColorPointRedYInCieXyyAttr zcl.AttrID = 51
+// ColorPointRedY is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y, as defined in the
+// CIE xyY Color Space, of the red color point of the device.
+// y = ColorPointRY / 65536 (ColorPointRY in the range 0 to 65279 inclusive)
+//
+type ColorPointRedY zcl.Zu16
 
-type ColorPointRedYInCieXyy zcl.Zu16
+const ColorPointRedYAttr zcl.AttrID = 51
 
-func (a ColorPointRedYInCieXyy) ID() zcl.AttrID                  { return ColorPointRedYInCieXyyAttr }
-func (a ColorPointRedYInCieXyy) Cluster() zcl.ClusterID          { return ColorControlID }
-func (a *ColorPointRedYInCieXyy) Value() *ColorPointRedYInCieXyy { return a }
-func (a ColorPointRedYInCieXyy) MarshalZcl() ([]byte, error) {
+func (a ColorPointRedY) ID() zcl.AttrID          { return ColorPointRedYAttr }
+func (a ColorPointRedY) Cluster() zcl.ClusterID  { return ColorControlID }
+func (a *ColorPointRedY) Value() *ColorPointRedY { return a }
+func (a ColorPointRedY) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *ColorPointRedYInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *ColorPointRedY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedYInCieXyy(*nt)
+	*a = ColorPointRedY(*nt)
 	return br, err
 }
 
-func (a ColorPointRedYInCieXyy) Readable() bool   { return true }
-func (a ColorPointRedYInCieXyy) Writable() bool   { return true }
-func (a ColorPointRedYInCieXyy) Reportable() bool { return false }
-func (a ColorPointRedYInCieXyy) SceneIndex() int  { return -1 }
+func (a ColorPointRedY) Readable() bool   { return true }
+func (a ColorPointRedY) Writable() bool   { return true }
+func (a ColorPointRedY) Reportable() bool { return false }
+func (a ColorPointRedY) SceneIndex() int  { return -1 }
 
-func (a ColorPointRedYInCieXyy) String() string {
+func (a ColorPointRedY) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// ColorPointRedIntensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the relative intensity of the red color
+// point as defined in the Dimming Light Curve in the Ballast Configuration
+// cluster, normalized such that the color point with the highest relative
+// intensity contains the value 0xfe
+//
+type ColorPointRedIntensity zcl.Zu8
 
 const ColorPointRedIntensityAttr zcl.AttrID = 52
-
-type ColorPointRedIntensity zcl.Zu8
 
 func (a ColorPointRedIntensity) ID() zcl.AttrID                  { return ColorPointRedIntensityAttr }
 func (a ColorPointRedIntensity) Cluster() zcl.ClusterID          { return ColorControlID }
@@ -2679,61 +2920,77 @@ func (a ColorPointRedIntensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const ColorPointGreenXInCieXyyAttr zcl.AttrID = 54
+// ColorPointGreenX is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x, as defined in the
+// CIE xyY Color Space, of the green color point of the device.
+// x = ColorPointGX / 65536 (ColorPointGX in the range 0 to 65279 inclusive)
+//
+type ColorPointGreenX zcl.Zu16
 
-type ColorPointGreenXInCieXyy zcl.Zu16
+const ColorPointGreenXAttr zcl.AttrID = 54
 
-func (a ColorPointGreenXInCieXyy) ID() zcl.AttrID                    { return ColorPointGreenXInCieXyyAttr }
-func (a ColorPointGreenXInCieXyy) Cluster() zcl.ClusterID            { return ColorControlID }
-func (a *ColorPointGreenXInCieXyy) Value() *ColorPointGreenXInCieXyy { return a }
-func (a ColorPointGreenXInCieXyy) MarshalZcl() ([]byte, error) {
+func (a ColorPointGreenX) ID() zcl.AttrID            { return ColorPointGreenXAttr }
+func (a ColorPointGreenX) Cluster() zcl.ClusterID    { return ColorControlID }
+func (a *ColorPointGreenX) Value() *ColorPointGreenX { return a }
+func (a ColorPointGreenX) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *ColorPointGreenXInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *ColorPointGreenX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenXInCieXyy(*nt)
+	*a = ColorPointGreenX(*nt)
 	return br, err
 }
 
-func (a ColorPointGreenXInCieXyy) Readable() bool   { return true }
-func (a ColorPointGreenXInCieXyy) Writable() bool   { return true }
-func (a ColorPointGreenXInCieXyy) Reportable() bool { return false }
-func (a ColorPointGreenXInCieXyy) SceneIndex() int  { return -1 }
+func (a ColorPointGreenX) Readable() bool   { return true }
+func (a ColorPointGreenX) Writable() bool   { return true }
+func (a ColorPointGreenX) Reportable() bool { return false }
+func (a ColorPointGreenX) SceneIndex() int  { return -1 }
 
-func (a ColorPointGreenXInCieXyy) String() string {
+func (a ColorPointGreenX) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const ColorPointGreenYInCieXyyAttr zcl.AttrID = 55
+// ColorPointGreenY is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y, as defined in the
+// CIE xyY Color Space, of the green color point of the device.
+// y = ColorPointGY / 65536 (ColorPointGY in the range 0 to 65279 inclusive)
+//
+type ColorPointGreenY zcl.Zu16
 
-type ColorPointGreenYInCieXyy zcl.Zu16
+const ColorPointGreenYAttr zcl.AttrID = 55
 
-func (a ColorPointGreenYInCieXyy) ID() zcl.AttrID                    { return ColorPointGreenYInCieXyyAttr }
-func (a ColorPointGreenYInCieXyy) Cluster() zcl.ClusterID            { return ColorControlID }
-func (a *ColorPointGreenYInCieXyy) Value() *ColorPointGreenYInCieXyy { return a }
-func (a ColorPointGreenYInCieXyy) MarshalZcl() ([]byte, error) {
+func (a ColorPointGreenY) ID() zcl.AttrID            { return ColorPointGreenYAttr }
+func (a ColorPointGreenY) Cluster() zcl.ClusterID    { return ColorControlID }
+func (a *ColorPointGreenY) Value() *ColorPointGreenY { return a }
+func (a ColorPointGreenY) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *ColorPointGreenYInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *ColorPointGreenY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenYInCieXyy(*nt)
+	*a = ColorPointGreenY(*nt)
 	return br, err
 }
 
-func (a ColorPointGreenYInCieXyy) Readable() bool   { return true }
-func (a ColorPointGreenYInCieXyy) Writable() bool   { return true }
-func (a ColorPointGreenYInCieXyy) Reportable() bool { return false }
-func (a ColorPointGreenYInCieXyy) SceneIndex() int  { return -1 }
+func (a ColorPointGreenY) Readable() bool   { return true }
+func (a ColorPointGreenY) Writable() bool   { return true }
+func (a ColorPointGreenY) Reportable() bool { return false }
+func (a ColorPointGreenY) SceneIndex() int  { return -1 }
 
-func (a ColorPointGreenYInCieXyy) String() string {
+func (a ColorPointGreenY) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// ColorPointGreenIntensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the relative intensity of the green
+// color point as defined in the Dimming Light Curve in the Ballast Configuration
+// cluster, normalized such that the color point with the highest relative
+// intensity contains the value 0xfe
+//
+type ColorPointGreenIntensity zcl.Zu8
 
 const ColorPointGreenIntensityAttr zcl.AttrID = 56
-
-type ColorPointGreenIntensity zcl.Zu8
 
 func (a ColorPointGreenIntensity) ID() zcl.AttrID                    { return ColorPointGreenIntensityAttr }
 func (a ColorPointGreenIntensity) Cluster() zcl.ClusterID            { return ColorControlID }
@@ -2757,61 +3014,77 @@ func (a ColorPointGreenIntensity) String() string {
 	return zcl.Sprintf("%s", zcl.Zu8(a))
 }
 
-const ColorPointBlueXInCieXyyAttr zcl.AttrID = 58
+// ColorPointBlueX is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value x, as defined in the
+// CIE xyY Color Space, of the blue color point of the device.
+// x = ColorPointBX / 65536 (ColorPointBX in the range 0 to 65279 inclusive)
+//
+type ColorPointBlueX zcl.Zu16
 
-type ColorPointBlueXInCieXyy zcl.Zu16
+const ColorPointBlueXAttr zcl.AttrID = 58
 
-func (a ColorPointBlueXInCieXyy) ID() zcl.AttrID                   { return ColorPointBlueXInCieXyyAttr }
-func (a ColorPointBlueXInCieXyy) Cluster() zcl.ClusterID           { return ColorControlID }
-func (a *ColorPointBlueXInCieXyy) Value() *ColorPointBlueXInCieXyy { return a }
-func (a ColorPointBlueXInCieXyy) MarshalZcl() ([]byte, error) {
+func (a ColorPointBlueX) ID() zcl.AttrID           { return ColorPointBlueXAttr }
+func (a ColorPointBlueX) Cluster() zcl.ClusterID   { return ColorControlID }
+func (a *ColorPointBlueX) Value() *ColorPointBlueX { return a }
+func (a ColorPointBlueX) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *ColorPointBlueXInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *ColorPointBlueX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueXInCieXyy(*nt)
+	*a = ColorPointBlueX(*nt)
 	return br, err
 }
 
-func (a ColorPointBlueXInCieXyy) Readable() bool   { return true }
-func (a ColorPointBlueXInCieXyy) Writable() bool   { return true }
-func (a ColorPointBlueXInCieXyy) Reportable() bool { return false }
-func (a ColorPointBlueXInCieXyy) SceneIndex() int  { return -1 }
+func (a ColorPointBlueX) Readable() bool   { return true }
+func (a ColorPointBlueX) Writable() bool   { return true }
+func (a ColorPointBlueX) Reportable() bool { return false }
+func (a ColorPointBlueX) SceneIndex() int  { return -1 }
 
-func (a ColorPointBlueXInCieXyy) String() string {
+func (a ColorPointBlueX) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
 
-const ColorPointBlueYInCieXyyAttr zcl.AttrID = 59
+// ColorPointBlueY is an autogenerated attribute in the ColorControl cluster
+// It contains the normalized chromaticity value y, as defined in the
+// CIE xyY Color Space, of the blue color point of the device.
+// y = ColorPointBY / 65536 (ColorPointBY in the range 0 to 65279 inclusive)
+//
+type ColorPointBlueY zcl.Zu16
 
-type ColorPointBlueYInCieXyy zcl.Zu16
+const ColorPointBlueYAttr zcl.AttrID = 59
 
-func (a ColorPointBlueYInCieXyy) ID() zcl.AttrID                   { return ColorPointBlueYInCieXyyAttr }
-func (a ColorPointBlueYInCieXyy) Cluster() zcl.ClusterID           { return ColorControlID }
-func (a *ColorPointBlueYInCieXyy) Value() *ColorPointBlueYInCieXyy { return a }
-func (a ColorPointBlueYInCieXyy) MarshalZcl() ([]byte, error) {
+func (a ColorPointBlueY) ID() zcl.AttrID           { return ColorPointBlueYAttr }
+func (a ColorPointBlueY) Cluster() zcl.ClusterID   { return ColorControlID }
+func (a *ColorPointBlueY) Value() *ColorPointBlueY { return a }
+func (a ColorPointBlueY) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
-func (a *ColorPointBlueYInCieXyy) UnmarshalZcl(b []byte) ([]byte, error) {
+func (a *ColorPointBlueY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueYInCieXyy(*nt)
+	*a = ColorPointBlueY(*nt)
 	return br, err
 }
 
-func (a ColorPointBlueYInCieXyy) Readable() bool   { return true }
-func (a ColorPointBlueYInCieXyy) Writable() bool   { return true }
-func (a ColorPointBlueYInCieXyy) Reportable() bool { return false }
-func (a ColorPointBlueYInCieXyy) SceneIndex() int  { return -1 }
+func (a ColorPointBlueY) Readable() bool   { return true }
+func (a ColorPointBlueY) Writable() bool   { return true }
+func (a ColorPointBlueY) Reportable() bool { return false }
+func (a ColorPointBlueY) SceneIndex() int  { return -1 }
 
-func (a ColorPointBlueYInCieXyy) String() string {
+func (a ColorPointBlueY) String() string {
 	return zcl.Sprintf("%s", zcl.Zu16(a))
 }
+
+// ColorPointBlueIntensity is an autogenerated attribute in the ColorControl cluster
+// It contains a representation of the relative intensity of the blue
+// color point as defined in the Dimming Light Curve in the Ballast Configuration
+// cluster, normalized such that the color point with the highest relative
+// intensity contains the value 0xfe
+//
+type ColorPointBlueIntensity zcl.Zu8
 
 const ColorPointBlueIntensityAttr zcl.AttrID = 60
-
-type ColorPointBlueIntensity zcl.Zu8
 
 func (a ColorPointBlueIntensity) ID() zcl.AttrID                   { return ColorPointBlueIntensityAttr }
 func (a ColorPointBlueIntensity) Cluster() zcl.ClusterID           { return ColorControlID }
