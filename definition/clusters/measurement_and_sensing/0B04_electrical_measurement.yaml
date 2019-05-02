@@ -373,13 +373,13 @@ server:
         type: s16
         access: r
         default: "0x8000"
-        unit: VoltAmpereReactive
+        unit: VoltAmperesReactive
       - id: "0x050F"
         name: Apparent Power
         type: u16
         access: r
         default: "0xFFFF"
-        unit: VoltAmpere
+        unit: VoltAmperes
       - id: "0x0510"
         name: Power Factor
         type: s8
@@ -624,13 +624,13 @@ server:
         type: s16
         access: r
         default: "0x8000"
-        unit: VoltAmpereReactive
+        unit: VoltAmperesReactive
       - id: "0x090F"
         name: Apparent Power Phase B
         type: u16
         access: r
         default: "0xFFFF"
-        unit: VoltAmpere
+        unit: VoltAmperes
       - id: "0x0910"
         name: Power Factor Phase B
         type: s8
@@ -765,13 +765,13 @@ server:
         type: s16
         access: r
         default: "0x8000"
-        unit: VoltAmpereReactive
+        unit: VoltAmperesReactive
       - id: "0x0A0F"
         name: Apparent Power Phase C
         type: u16
         access: r
         default: "0xFFFF"
-        unit: VoltAmpere
+        unit: VoltAmperes
       - id: "0x0A10"
         name: Power Factor Phase C
         type: s8

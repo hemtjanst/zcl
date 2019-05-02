@@ -8,6 +8,7 @@ type EngineeringUnit uint16
 
 const (
 	DecibelMilliWatts CustomUnit = iota
+	MilliAmpereHours
 )
 
 func (u CustomUnit) Format(v float64) string {

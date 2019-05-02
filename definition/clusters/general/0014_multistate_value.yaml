@@ -1,4 +1,80 @@
+# status: done
 id: "0x0014"
 name: Multistate Value (Basic)
-server: {}
+server:
+  attr:
+    - id: "0x000E"
+      name: Multi Value State Text
+      type: cstring
+      access: rw
+    - id: "0x001C"
+      name: Multi Value Description
+      type: cstring
+      access: rw
+    - id: "0x004A"
+      name: Multi Value Number of states
+      type: u16
+      access: rw
+      default: "0"
+      required: true
+    - id: "0x0051"
+      name: Multi Value Out of service
+      type: bool
+      access: rw
+      default: "0"
+      required: true
+    - id: "0x0055"
+      name: Multi Value Present value
+      type: u16
+      access: rw
+      default: "0"
+      report: true
+      required: true
+    - id: "0x0057"
+      name: Multi Value Priority Array
+      access: rw
+      listsize: 16
+      type: array
+      arraytype: struct
+      structattr:
+        - id: "0x0000"
+          type: bool
+        - id: "0x0001"
+          type: u16
+    - id: "0x0067"
+      name: Multi Value Reliability
+      type: enum8
+      access: rw
+      values:
+        "0x00": "No fault detected"
+        "0x01": "No Sensor"
+        "0x02": "Over Range"
+        "0x03": "Under Range"
+        "0x04": "Open Loop"
+        "0x05": "Shorted Loop"
+        "0x06": "No Output"
+        "0x07": "Unreliable (other)"
+        "0x08": "Process Error"
+        "0x09": "Multi state fault"
+        "0x0A": "Configuration Error"
+    - id: "0x0068"
+      name: Multi Value Relinquish Default
+      type: u16
+      access: rw
+    - id: "0x006F"
+      name: Multi Value Status flags
+      type: bmp8
+      access: r
+      default: "0"
+      report: true
+      required: true
+      bits:
+        "0": In Alarm
+        "1": Fault
+        "2": Overidden
+        "3": Out of Service
+    - id: "0x0100"
+      name: Multi Value Application Type
+      access: r
+      type: u32
 client: {}

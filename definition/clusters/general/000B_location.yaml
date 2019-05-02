@@ -33,7 +33,7 @@ server:
       type: u8
       range: 0x00,0x64
       access: r
-      unit: Percents
+      unit: Percent
     - id: "0x0004"
       name: Number of Devices
       type: u8

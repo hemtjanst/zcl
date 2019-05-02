@@ -156,6 +156,11 @@ server:
         description: This command causes the lock device to unlock the door.
         dir: recv
         required: m
+      - id: "0x02"
+        name: Toggle Lock
+        description: This command causes the lock device to toggle.
+        dir: recv
+        required: o
       - id: "0x04"
         name: Get Log Record
         description: Request a log record.
@@ -167,10 +172,44 @@ server:
             type: u16
             default: "0x0000"
             required: true
+      - id: "0x20"
+        name: Operationg Event Notification
+        description: The door lock server sends out operation event notification when
+            the event is triggered by the various event sources.
+        dir: send
+        required: o
+        payloadattr:
+          - id: "0x0000"
+            name: Operation Event Source
+            type: u8
+            required: true
+          - id: "0x0001"
+            name: Operation Event Code
+            type: u8
+            required: true
+          - id: "0x0002"
+            name: User ID
+            type: u16
+            required: true
+          - id: "0x0003"
+            name: PIN
+            type: u8
+            default: "0x0000"
+            required: true
+          - id: "0x0004"
+            name: ZigBee Local Time
+            type: u32
+            required: true
+          - id: "0x0005"
+            name: Data
+            type: cstring
+            required: true
+client:
+    cmd:
       - id: "0x04"
         name: Get Log Record Response
         description: Returns the specified log record.
-        dir: send
+        dir: recv
         required: m
         payloadattr:
           - id: "0x0000"
@@ -205,36 +244,3 @@ server:
             name: PIN
             type: cstring
             required: true
-      - id: "0x20"
-        name: Operationg Event Notification
-        description: The door lock server sends out operation event notification when
-            the event is triggered by the various event sources.
-        dir: send
-        required: o
-        payloadattr:
-          - id: "0x0000"
-            name: Operation Event Source
-            type: u8
-            required: true
-          - id: "0x0001"
-            name: Operation Event Code
-            type: u8
-            required: true
-          - id: "0x0002"
-            name: User ID
-            type: u16
-            required: true
-          - id: "0x0003"
-            name: PIN
-            type: u8
-            default: "0x0000"
-            required: true
-          - id: "0x0004"
-            name: ZigBee Local Time
-            type: u32
-            required: true
-          - id: "0x0005"
-            name: Data
-            type: cstring
-            required: true
-client: {}

@@ -141,7 +141,7 @@ server:
         access: rw
         required: yes
         range: 0x0000,0xffff
-      - id: "0x0030"
+      - id: "0x0031"
         name: Parent Retry Threshold
         type: u8
         access: rw

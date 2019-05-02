@@ -34,6 +34,18 @@ server:
         name: Analog Input Reliability
         type: enum8
         access: rw
+        values:
+          "0x00": "No fault detected"
+          "0x01": "No Sensor"
+          "0x02": "Over Range"
+          "0x03": "Under Range"
+          "0x04": "Open Loop"
+          "0x05": "Shorted Loop"
+          "0x06": "No Output"
+          "0x07": "Unreliable (other)"
+          "0x08": "Process Error"
+          "0x09": "Multi state fault"
+          "0x0A": "Configuration Error"
       - id: "0x006A"
         name: Analog Input Resolution
         type: float
@@ -46,10 +58,10 @@ server:
         required: true
         report: true
         bits:
-            "1": In Alarm
-            "2": Fault
-            "4": Overidden
-            "8": Out of Service
+            "0": In Alarm
+            "1": Fault
+            "2": Overidden
+            "3": Out of Service
       - id: "0x0075"
         name: Analog Input Engineering Units
         type: EngineeringUnit

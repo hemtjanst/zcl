@@ -86,9 +86,11 @@ server:
         name: Initiate Normal Operation Mode
         dir: recv
         required: o
+client:
+    cmd:
       - id: "0x00"
         name: Zone Status Change Notification
-        dir: send
+        dir: recv
         required: m
         payloadattr:
           - id: "0x0000"
@@ -121,7 +123,7 @@ server:
             required: true
       - id: "0x01"
         name: Zone Enroll request
-        dir: send
+        dir: recv
         required: m
         payloadattr:
           - id: "0x0000"
@@ -146,4 +148,3 @@ server:
             name: Manufacturer Code
             type: u16
             required: true
-client: {}
