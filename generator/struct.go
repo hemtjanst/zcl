@@ -146,6 +146,8 @@ type Attr struct {
 	ShowAs      string          `xml:"showas,attr" toml:"showas,omitempty" yaml:"showas,omitempty" json:"showas,omitempty"`
 	ListSize    string          `xml:"listSize,attr" toml:"listsize,omitempty" yaml:"listsize,omitempty" json:"listsize,omitempty"`
 	Enumeration Name            `xml:"enumeration,attr" toml:"enumeration,omitempty" yaml:"enumeration,omitempty" json:"enumeration,omitempty"`
+	Unit        string          `xml:"unit,attr" toml:"unit,omitempty" yaml:"unit,omitempty" json:"unit,omitempty"`
+	Multiplier  int             `xml:"multiplier,attr" toml:"multiplier,omitempty" yaml:"multiplier,omitempty" json:"multiplier,omitempty"`
 	Desc        Desc            `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
 	Values      map[string]Name `xml:"value" toml:"values,omitempty" yaml:"values,omitempty" json:"values,omitempty"`
 	Bits        map[string]Name `xml:"bit" toml:"bits,omitempty" yaml:"bits,omitempty" json:"bits,omitempty"`

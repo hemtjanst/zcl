@@ -103,15 +103,14 @@ func (a {{$an}}) Writable() bool { return {{if .CanWrite}}true{{else}}false{{end
 func (a {{$an}}) Reportable() bool { return {{if .Report}}true{{else}}false{{end}} }
 func (a {{$an}}) SceneIndex() int { return {{if .Scene}}{{.Scene}}{{else}}-1{{end}} }
 
-func (a {{$an}}) String() string {
-    {{if .Values}}switch a { {{range $vk,$vv := .Values}}
+func (a {{$an}}) String() string { {{if .Values}}switch a { {{range $vk,$vv := .Values}}
         case {{$vk}}: return "{{$vv}}"{{end}}
-    }{{end}}
-    {{if .Bits}}
+    }{{end}}{{if .Bits}}
     var bstr []string
     {{range $vk,$vv := .Bits}}if a.Is{{$vv.Fmt}}() { bstr = append(bstr, "{{$vv}}") }
-    {{end}}return zcl.StrJoin(bstr, ", ")
-    {{else}}
+    {{end}}return zcl.StrJoin(bstr, ", "){{else if eq .Unit "s"}}
+    return zcl.Duration(int(a), {{.Multiplier}}).String(){{else if .Unit}}
+    return zcl.Sprintf("%f%s", float64(a){{if .Multiplier}}/{{.Multiplier}}{{end}}, "{{.Unit}}"){{else}}
     return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%s{{end}}", zcl.{{.Type.Type}}(a)){{end}}
 }
 
