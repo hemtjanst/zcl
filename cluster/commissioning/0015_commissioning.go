@@ -122,7 +122,7 @@ func (v *RestartDevice) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RestartDevice) OptionsString() string {
+func (v RestartDevice) OptionsString() string {
 	var bstr []string
 	if zcl.BitmapTest([]byte(v.Options), 0) {
 		bstr = append(bstr, "Don't replace attributes on restart")
@@ -132,20 +132,22 @@ func (v *RestartDevice) OptionsString() string {
 	}
 	return zcl.StrJoin(bstr, ", ")
 }
-func (v *RestartDevice) DelayString() string {
+func (v RestartDevice) DelayString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Delay))
 }
-func (v *RestartDevice) JitterString() string {
+func (v RestartDevice) JitterString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Jitter))
 }
 
-func (v *RestartDevice) String() string {
+func (v RestartDevice) String() string {
 	var str []string
 	str = append(str, "Options["+v.OptionsString()+"]")
 	str = append(str, "Delay["+v.DelayString()+"]")
 	str = append(str, "Jitter["+v.JitterString()+"]")
 	return "RestartDevice{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RestartDevice) Name() string { return "Restart Device" }
 
 // The Save Startup Parameters Request command allows for the current attribute set to be stored under a given index.
 type SaveStartupParameters struct {
@@ -206,19 +208,21 @@ func (v *SaveStartupParameters) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *SaveStartupParameters) OptionsString() string {
+func (v SaveStartupParameters) OptionsString() string {
 	return zcl.Sprintf("%v", zcl.Zbmp8(v.Options))
 }
-func (v *SaveStartupParameters) IndexString() string {
+func (v SaveStartupParameters) IndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Index))
 }
 
-func (v *SaveStartupParameters) String() string {
+func (v SaveStartupParameters) String() string {
 	var str []string
 	str = append(str, "Options["+v.OptionsString()+"]")
 	str = append(str, "Index["+v.IndexString()+"]")
 	return "SaveStartupParameters{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (SaveStartupParameters) Name() string { return "Save Startup Parameters" }
 
 // This command allows a saved startup parameters attribute set to be restored to current status overwriting whatever was there previously.
 type RestoreStartupParameters struct {
@@ -279,19 +283,21 @@ func (v *RestoreStartupParameters) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RestoreStartupParameters) OptionsString() string {
+func (v RestoreStartupParameters) OptionsString() string {
 	return zcl.Sprintf("%v", zcl.Zbmp8(v.Options))
 }
-func (v *RestoreStartupParameters) IndexString() string {
+func (v RestoreStartupParameters) IndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Index))
 }
 
-func (v *RestoreStartupParameters) String() string {
+func (v RestoreStartupParameters) String() string {
 	var str []string
 	str = append(str, "Options["+v.OptionsString()+"]")
 	str = append(str, "Index["+v.IndexString()+"]")
 	return "RestoreStartupParameters{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RestoreStartupParameters) Name() string { return "Restore Startup Parameters" }
 
 // This command allows current startup parameters attribute set and one or all of the saved attribute sets to be set to default values. There is also an option for erasing the index under which an attribute set is saved thereby freeing up storage capacity.
 type ResetStartupParameters struct {
@@ -352,7 +358,7 @@ func (v *ResetStartupParameters) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *ResetStartupParameters) OptionsString() string {
+func (v ResetStartupParameters) OptionsString() string {
 	var bstr []string
 	if zcl.BitmapTest([]byte(v.Options), 0) {
 		bstr = append(bstr, "Reset Current")
@@ -365,16 +371,18 @@ func (v *ResetStartupParameters) OptionsString() string {
 	}
 	return zcl.StrJoin(bstr, ", ")
 }
-func (v *ResetStartupParameters) IndexString() string {
+func (v ResetStartupParameters) IndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Index))
 }
 
-func (v *ResetStartupParameters) String() string {
+func (v ResetStartupParameters) String() string {
 	var str []string
 	str = append(str, "Options["+v.OptionsString()+"]")
 	str = append(str, "Index["+v.IndexString()+"]")
 	return "ResetStartupParameters{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ResetStartupParameters) Name() string { return "Reset Startup Parameters" }
 
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
 type RestartDeviceResponse struct {
@@ -424,15 +432,17 @@ func (v *RestartDeviceResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RestartDeviceResponse) StatusString() string {
+func (v RestartDeviceResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 
-func (v *RestartDeviceResponse) String() string {
+func (v RestartDeviceResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	return "RestartDeviceResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RestartDeviceResponse) Name() string { return "Restart Device Response" }
 
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
 type SaveStartupParametersResponse struct {
@@ -482,15 +492,17 @@ func (v *SaveStartupParametersResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *SaveStartupParametersResponse) StatusString() string {
+func (v SaveStartupParametersResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 
-func (v *SaveStartupParametersResponse) String() string {
+func (v SaveStartupParametersResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	return "SaveStartupParametersResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (SaveStartupParametersResponse) Name() string { return "Save Startup Parameters Response" }
 
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
 type RestoreStartupParametersResponse struct {
@@ -540,15 +552,17 @@ func (v *RestoreStartupParametersResponse) UnmarshalZcl(b []byte) ([]byte, error
 	return b, nil
 }
 
-func (v *RestoreStartupParametersResponse) StatusString() string {
+func (v RestoreStartupParametersResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 
-func (v *RestoreStartupParametersResponse) String() string {
+func (v RestoreStartupParametersResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	return "RestoreStartupParametersResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RestoreStartupParametersResponse) Name() string { return "Restore Startup Parameters Response" }
 
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
 type ResetStartupParametersResponse struct {
@@ -598,15 +612,17 @@ func (v *ResetStartupParametersResponse) UnmarshalZcl(b []byte) ([]byte, error) 
 	return b, nil
 }
 
-func (v *ResetStartupParametersResponse) StatusString() string {
+func (v ResetStartupParametersResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 
-func (v *ResetStartupParametersResponse) String() string {
+func (v ResetStartupParametersResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	return "ResetStartupParametersResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ResetStartupParametersResponse) Name() string { return "Reset Startup Parameters Response" }
 
 // ShortAddress is an autogenerated attribute in the Commissioning cluster
 type ShortAddress zcl.Zu16
@@ -625,11 +641,11 @@ func (a *ShortAddress) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ShortAddress(*nt)
 	return br, err
 }
-
-func (a ShortAddress) Readable() bool   { return true }
-func (a ShortAddress) Writable() bool   { return true }
-func (a ShortAddress) Reportable() bool { return false }
-func (a ShortAddress) SceneIndex() int  { return -1 }
+func (ShortAddress) Name() string     { return "Short Address" }
+func (ShortAddress) Readable() bool   { return true }
+func (ShortAddress) Writable() bool   { return true }
+func (ShortAddress) Reportable() bool { return false }
+func (ShortAddress) SceneIndex() int  { return -1 }
 
 func (a ShortAddress) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
@@ -652,11 +668,11 @@ func (a *ExtendedPanId) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ExtendedPanId(*nt)
 	return br, err
 }
-
-func (a ExtendedPanId) Readable() bool   { return true }
-func (a ExtendedPanId) Writable() bool   { return true }
-func (a ExtendedPanId) Reportable() bool { return false }
-func (a ExtendedPanId) SceneIndex() int  { return -1 }
+func (ExtendedPanId) Name() string     { return "Extended PAN ID" }
+func (ExtendedPanId) Readable() bool   { return true }
+func (ExtendedPanId) Writable() bool   { return true }
+func (ExtendedPanId) Reportable() bool { return false }
+func (ExtendedPanId) SceneIndex() int  { return -1 }
 
 func (a ExtendedPanId) String() string {
 	return zcl.Sprintf("%v", zcl.Zuid(a))
@@ -679,11 +695,11 @@ func (a *PanId) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PanId(*nt)
 	return br, err
 }
-
-func (a PanId) Readable() bool   { return true }
-func (a PanId) Writable() bool   { return true }
-func (a PanId) Reportable() bool { return false }
-func (a PanId) SceneIndex() int  { return -1 }
+func (PanId) Name() string     { return "PAN ID" }
+func (PanId) Readable() bool   { return true }
+func (PanId) Writable() bool   { return true }
+func (PanId) Reportable() bool { return false }
+func (PanId) SceneIndex() int  { return -1 }
 
 func (a PanId) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
@@ -706,11 +722,11 @@ func (a *ChannelMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ChannelMask(*nt)
 	return br, err
 }
-
-func (a ChannelMask) Readable() bool   { return true }
-func (a ChannelMask) Writable() bool   { return true }
-func (a ChannelMask) Reportable() bool { return false }
-func (a ChannelMask) SceneIndex() int  { return -1 }
+func (ChannelMask) Name() string     { return "Channel Mask" }
+func (ChannelMask) Readable() bool   { return true }
+func (ChannelMask) Writable() bool   { return true }
+func (ChannelMask) Reportable() bool { return false }
+func (ChannelMask) SceneIndex() int  { return -1 }
 
 func (a ChannelMask) String() string {
 	var bstr []string
@@ -894,11 +910,11 @@ func (a *ProtocolVersion) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ProtocolVersion(*nt)
 	return br, err
 }
-
-func (a ProtocolVersion) Readable() bool   { return true }
-func (a ProtocolVersion) Writable() bool   { return true }
-func (a ProtocolVersion) Reportable() bool { return false }
-func (a ProtocolVersion) SceneIndex() int  { return -1 }
+func (ProtocolVersion) Name() string     { return "Protocol Version" }
+func (ProtocolVersion) Readable() bool   { return true }
+func (ProtocolVersion) Writable() bool   { return true }
+func (ProtocolVersion) Reportable() bool { return false }
+func (ProtocolVersion) SceneIndex() int  { return -1 }
 
 func (a ProtocolVersion) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -921,11 +937,11 @@ func (a *StackProfile) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = StackProfile(*nt)
 	return br, err
 }
-
-func (a StackProfile) Readable() bool   { return true }
-func (a StackProfile) Writable() bool   { return true }
-func (a StackProfile) Reportable() bool { return false }
-func (a StackProfile) SceneIndex() int  { return -1 }
+func (StackProfile) Name() string     { return "Stack Profile" }
+func (StackProfile) Readable() bool   { return true }
+func (StackProfile) Writable() bool   { return true }
+func (StackProfile) Reportable() bool { return false }
+func (StackProfile) SceneIndex() int  { return -1 }
 
 func (a StackProfile) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -948,11 +964,11 @@ func (a *StartupControl) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = StartupControl(*nt)
 	return br, err
 }
-
-func (a StartupControl) Readable() bool   { return true }
-func (a StartupControl) Writable() bool   { return true }
-func (a StartupControl) Reportable() bool { return false }
-func (a StartupControl) SceneIndex() int  { return -1 }
+func (StartupControl) Name() string     { return "Startup Control" }
+func (StartupControl) Readable() bool   { return true }
+func (StartupControl) Writable() bool   { return true }
+func (StartupControl) Reportable() bool { return false }
+func (StartupControl) SceneIndex() int  { return -1 }
 
 func (a StartupControl) String() string {
 	switch a {
@@ -1009,11 +1025,11 @@ func (a *TrustCenterAddress) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TrustCenterAddress(*nt)
 	return br, err
 }
-
-func (a TrustCenterAddress) Readable() bool   { return true }
-func (a TrustCenterAddress) Writable() bool   { return true }
-func (a TrustCenterAddress) Reportable() bool { return false }
-func (a TrustCenterAddress) SceneIndex() int  { return -1 }
+func (TrustCenterAddress) Name() string     { return "Trust Center Address" }
+func (TrustCenterAddress) Readable() bool   { return true }
+func (TrustCenterAddress) Writable() bool   { return true }
+func (TrustCenterAddress) Reportable() bool { return false }
+func (TrustCenterAddress) SceneIndex() int  { return -1 }
 
 func (a TrustCenterAddress) String() string {
 	return zcl.Sprintf("%v", zcl.Zuid(a))
@@ -1036,11 +1052,11 @@ func (a *TrustCenterMasterKey) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TrustCenterMasterKey(*nt)
 	return br, err
 }
-
-func (a TrustCenterMasterKey) Readable() bool   { return true }
-func (a TrustCenterMasterKey) Writable() bool   { return true }
-func (a TrustCenterMasterKey) Reportable() bool { return false }
-func (a TrustCenterMasterKey) SceneIndex() int  { return -1 }
+func (TrustCenterMasterKey) Name() string     { return "Trust Center Master Key" }
+func (TrustCenterMasterKey) Readable() bool   { return true }
+func (TrustCenterMasterKey) Writable() bool   { return true }
+func (TrustCenterMasterKey) Reportable() bool { return false }
+func (TrustCenterMasterKey) SceneIndex() int  { return -1 }
 
 func (a TrustCenterMasterKey) String() string {
 	return zcl.Sprintf("%v", zcl.Zseckey(a))
@@ -1063,11 +1079,11 @@ func (a *NetworkKey) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NetworkKey(*nt)
 	return br, err
 }
-
-func (a NetworkKey) Readable() bool   { return true }
-func (a NetworkKey) Writable() bool   { return true }
-func (a NetworkKey) Reportable() bool { return false }
-func (a NetworkKey) SceneIndex() int  { return -1 }
+func (NetworkKey) Name() string     { return "Network Key" }
+func (NetworkKey) Readable() bool   { return true }
+func (NetworkKey) Writable() bool   { return true }
+func (NetworkKey) Reportable() bool { return false }
+func (NetworkKey) SceneIndex() int  { return -1 }
 
 func (a NetworkKey) String() string {
 	return zcl.Sprintf("%v", zcl.Zseckey(a))
@@ -1090,11 +1106,11 @@ func (a *UseInsecureJoin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = UseInsecureJoin(*nt)
 	return br, err
 }
-
-func (a UseInsecureJoin) Readable() bool   { return true }
-func (a UseInsecureJoin) Writable() bool   { return true }
-func (a UseInsecureJoin) Reportable() bool { return false }
-func (a UseInsecureJoin) SceneIndex() int  { return -1 }
+func (UseInsecureJoin) Name() string     { return "Use Insecure Join" }
+func (UseInsecureJoin) Readable() bool   { return true }
+func (UseInsecureJoin) Writable() bool   { return true }
+func (UseInsecureJoin) Reportable() bool { return false }
+func (UseInsecureJoin) SceneIndex() int  { return -1 }
 
 func (a UseInsecureJoin) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -1117,11 +1133,11 @@ func (a *PreconfiguredLinkKey) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PreconfiguredLinkKey(*nt)
 	return br, err
 }
-
-func (a PreconfiguredLinkKey) Readable() bool   { return true }
-func (a PreconfiguredLinkKey) Writable() bool   { return true }
-func (a PreconfiguredLinkKey) Reportable() bool { return false }
-func (a PreconfiguredLinkKey) SceneIndex() int  { return -1 }
+func (PreconfiguredLinkKey) Name() string     { return "Preconfigured Link Key" }
+func (PreconfiguredLinkKey) Readable() bool   { return true }
+func (PreconfiguredLinkKey) Writable() bool   { return true }
+func (PreconfiguredLinkKey) Reportable() bool { return false }
+func (PreconfiguredLinkKey) SceneIndex() int  { return -1 }
 
 func (a PreconfiguredLinkKey) String() string {
 	return zcl.Sprintf("%v", zcl.Zseckey(a))
@@ -1144,11 +1160,11 @@ func (a *NetworkKeySeqNum) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NetworkKeySeqNum(*nt)
 	return br, err
 }
-
-func (a NetworkKeySeqNum) Readable() bool   { return true }
-func (a NetworkKeySeqNum) Writable() bool   { return true }
-func (a NetworkKeySeqNum) Reportable() bool { return false }
-func (a NetworkKeySeqNum) SceneIndex() int  { return -1 }
+func (NetworkKeySeqNum) Name() string     { return "Network Key Seq Num" }
+func (NetworkKeySeqNum) Readable() bool   { return true }
+func (NetworkKeySeqNum) Writable() bool   { return true }
+func (NetworkKeySeqNum) Reportable() bool { return false }
+func (NetworkKeySeqNum) SceneIndex() int  { return -1 }
 
 func (a NetworkKeySeqNum) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1171,11 +1187,11 @@ func (a *NetworkKeyType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NetworkKeyType(*nt)
 	return br, err
 }
-
-func (a NetworkKeyType) Readable() bool   { return true }
-func (a NetworkKeyType) Writable() bool   { return true }
-func (a NetworkKeyType) Reportable() bool { return false }
-func (a NetworkKeyType) SceneIndex() int  { return -1 }
+func (NetworkKeyType) Name() string     { return "Network Key Type" }
+func (NetworkKeyType) Readable() bool   { return true }
+func (NetworkKeyType) Writable() bool   { return true }
+func (NetworkKeyType) Reportable() bool { return false }
+func (NetworkKeyType) SceneIndex() int  { return -1 }
 
 func (a NetworkKeyType) String() string {
 	switch a {
@@ -1216,11 +1232,11 @@ func (a *NetworkManagerAddress) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NetworkManagerAddress(*nt)
 	return br, err
 }
-
-func (a NetworkManagerAddress) Readable() bool   { return true }
-func (a NetworkManagerAddress) Writable() bool   { return true }
-func (a NetworkManagerAddress) Reportable() bool { return false }
-func (a NetworkManagerAddress) SceneIndex() int  { return -1 }
+func (NetworkManagerAddress) Name() string     { return "Network Manager Address" }
+func (NetworkManagerAddress) Readable() bool   { return true }
+func (NetworkManagerAddress) Writable() bool   { return true }
+func (NetworkManagerAddress) Reportable() bool { return false }
+func (NetworkManagerAddress) SceneIndex() int  { return -1 }
 
 func (a NetworkManagerAddress) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1243,11 +1259,11 @@ func (a *ScanAttempts) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ScanAttempts(*nt)
 	return br, err
 }
-
-func (a ScanAttempts) Readable() bool   { return true }
-func (a ScanAttempts) Writable() bool   { return true }
-func (a ScanAttempts) Reportable() bool { return false }
-func (a ScanAttempts) SceneIndex() int  { return -1 }
+func (ScanAttempts) Name() string     { return "Scan Attempts" }
+func (ScanAttempts) Readable() bool   { return true }
+func (ScanAttempts) Writable() bool   { return true }
+func (ScanAttempts) Reportable() bool { return false }
+func (ScanAttempts) SceneIndex() int  { return -1 }
 
 func (a ScanAttempts) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1270,11 +1286,11 @@ func (a *TimeBetweenScans) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TimeBetweenScans(*nt)
 	return br, err
 }
-
-func (a TimeBetweenScans) Readable() bool   { return true }
-func (a TimeBetweenScans) Writable() bool   { return true }
-func (a TimeBetweenScans) Reportable() bool { return false }
-func (a TimeBetweenScans) SceneIndex() int  { return -1 }
+func (TimeBetweenScans) Name() string     { return "Time Between Scans" }
+func (TimeBetweenScans) Readable() bool   { return true }
+func (TimeBetweenScans) Writable() bool   { return true }
+func (TimeBetweenScans) Reportable() bool { return false }
+func (TimeBetweenScans) SceneIndex() int  { return -1 }
 
 func (a TimeBetweenScans) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1297,11 +1313,11 @@ func (a *RejoinInterval) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RejoinInterval(*nt)
 	return br, err
 }
-
-func (a RejoinInterval) Readable() bool   { return true }
-func (a RejoinInterval) Writable() bool   { return true }
-func (a RejoinInterval) Reportable() bool { return false }
-func (a RejoinInterval) SceneIndex() int  { return -1 }
+func (RejoinInterval) Name() string     { return "Rejoin Interval" }
+func (RejoinInterval) Readable() bool   { return true }
+func (RejoinInterval) Writable() bool   { return true }
+func (RejoinInterval) Reportable() bool { return false }
+func (RejoinInterval) SceneIndex() int  { return -1 }
 
 func (a RejoinInterval) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1324,11 +1340,11 @@ func (a *MaxRejoinInterval) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxRejoinInterval(*nt)
 	return br, err
 }
-
-func (a MaxRejoinInterval) Readable() bool   { return true }
-func (a MaxRejoinInterval) Writable() bool   { return true }
-func (a MaxRejoinInterval) Reportable() bool { return false }
-func (a MaxRejoinInterval) SceneIndex() int  { return -1 }
+func (MaxRejoinInterval) Name() string     { return "Max Rejoin Interval" }
+func (MaxRejoinInterval) Readable() bool   { return true }
+func (MaxRejoinInterval) Writable() bool   { return true }
+func (MaxRejoinInterval) Reportable() bool { return false }
+func (MaxRejoinInterval) SceneIndex() int  { return -1 }
 
 func (a MaxRejoinInterval) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1351,11 +1367,11 @@ func (a *IndirectPollRate) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = IndirectPollRate(*nt)
 	return br, err
 }
-
-func (a IndirectPollRate) Readable() bool   { return true }
-func (a IndirectPollRate) Writable() bool   { return true }
-func (a IndirectPollRate) Reportable() bool { return false }
-func (a IndirectPollRate) SceneIndex() int  { return -1 }
+func (IndirectPollRate) Name() string     { return "Indirect Poll Rate" }
+func (IndirectPollRate) Readable() bool   { return true }
+func (IndirectPollRate) Writable() bool   { return true }
+func (IndirectPollRate) Reportable() bool { return false }
+func (IndirectPollRate) SceneIndex() int  { return -1 }
 
 func (a IndirectPollRate) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1378,11 +1394,11 @@ func (a *ParentRetryThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ParentRetryThreshold(*nt)
 	return br, err
 }
-
-func (a ParentRetryThreshold) Readable() bool   { return true }
-func (a ParentRetryThreshold) Writable() bool   { return true }
-func (a ParentRetryThreshold) Reportable() bool { return false }
-func (a ParentRetryThreshold) SceneIndex() int  { return -1 }
+func (ParentRetryThreshold) Name() string     { return "Parent Retry Threshold" }
+func (ParentRetryThreshold) Readable() bool   { return true }
+func (ParentRetryThreshold) Writable() bool   { return true }
+func (ParentRetryThreshold) Reportable() bool { return false }
+func (ParentRetryThreshold) SceneIndex() int  { return -1 }
 
 func (a ParentRetryThreshold) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1405,11 +1421,11 @@ func (a *ConcentratorFlag) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ConcentratorFlag(*nt)
 	return br, err
 }
-
-func (a ConcentratorFlag) Readable() bool   { return true }
-func (a ConcentratorFlag) Writable() bool   { return true }
-func (a ConcentratorFlag) Reportable() bool { return false }
-func (a ConcentratorFlag) SceneIndex() int  { return -1 }
+func (ConcentratorFlag) Name() string     { return "Concentrator Flag" }
+func (ConcentratorFlag) Readable() bool   { return true }
+func (ConcentratorFlag) Writable() bool   { return true }
+func (ConcentratorFlag) Reportable() bool { return false }
+func (ConcentratorFlag) SceneIndex() int  { return -1 }
 
 func (a ConcentratorFlag) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -1432,11 +1448,11 @@ func (a *ConcentratorRadius) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ConcentratorRadius(*nt)
 	return br, err
 }
-
-func (a ConcentratorRadius) Readable() bool   { return true }
-func (a ConcentratorRadius) Writable() bool   { return true }
-func (a ConcentratorRadius) Reportable() bool { return false }
-func (a ConcentratorRadius) SceneIndex() int  { return -1 }
+func (ConcentratorRadius) Name() string     { return "Concentrator Radius" }
+func (ConcentratorRadius) Readable() bool   { return true }
+func (ConcentratorRadius) Writable() bool   { return true }
+func (ConcentratorRadius) Reportable() bool { return false }
+func (ConcentratorRadius) SceneIndex() int  { return -1 }
 
 func (a ConcentratorRadius) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1459,11 +1475,11 @@ func (a *ConcentratorDiscoveryTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ConcentratorDiscoveryTime(*nt)
 	return br, err
 }
-
-func (a ConcentratorDiscoveryTime) Readable() bool   { return true }
-func (a ConcentratorDiscoveryTime) Writable() bool   { return true }
-func (a ConcentratorDiscoveryTime) Reportable() bool { return false }
-func (a ConcentratorDiscoveryTime) SceneIndex() int  { return -1 }
+func (ConcentratorDiscoveryTime) Name() string     { return "Concentrator Discovery Time" }
+func (ConcentratorDiscoveryTime) Readable() bool   { return true }
+func (ConcentratorDiscoveryTime) Writable() bool   { return true }
+func (ConcentratorDiscoveryTime) Reportable() bool { return false }
+func (ConcentratorDiscoveryTime) SceneIndex() int  { return -1 }
 
 func (a ConcentratorDiscoveryTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1486,11 +1502,11 @@ func (a *MacAddress) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MacAddress(*nt)
 	return br, err
 }
-
-func (a MacAddress) Readable() bool   { return true }
-func (a MacAddress) Writable() bool   { return true }
-func (a MacAddress) Reportable() bool { return false }
-func (a MacAddress) SceneIndex() int  { return -1 }
+func (MacAddress) Name() string     { return "MAC Address" }
+func (MacAddress) Readable() bool   { return true }
+func (MacAddress) Writable() bool   { return true }
+func (MacAddress) Reportable() bool { return false }
+func (MacAddress) SceneIndex() int  { return -1 }
 
 func (a MacAddress) String() string {
 	return zcl.Sprintf("%v", zcl.Zuid(a))

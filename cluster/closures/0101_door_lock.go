@@ -74,10 +74,12 @@ func (v *LockDoor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *LockDoor) String() string {
+func (v LockDoor) String() string {
 	var str []string
 	return "LockDoor{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (LockDoor) Name() string { return "Lock Door" }
 
 // This command causes the lock device to unlock the door.
 type UnlockDoor struct {
@@ -109,10 +111,12 @@ func (v *UnlockDoor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *UnlockDoor) String() string {
+func (v UnlockDoor) String() string {
 	var str []string
 	return "UnlockDoor{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (UnlockDoor) Name() string { return "Unlock Door" }
 
 // This command causes the lock device to toggle.
 type ToggleLock struct {
@@ -144,10 +148,12 @@ func (v *ToggleLock) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *ToggleLock) String() string {
+func (v ToggleLock) String() string {
 	var str []string
 	return "ToggleLock{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ToggleLock) Name() string { return "Toggle Lock" }
 
 // Request a log record.
 type GetLogRecord struct {
@@ -197,15 +203,17 @@ func (v *GetLogRecord) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetLogRecord) LogIndexString() string {
+func (v GetLogRecord) LogIndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.LogIndex))
 }
 
-func (v *GetLogRecord) String() string {
+func (v GetLogRecord) String() string {
 	var str []string
 	str = append(str, "LogIndex["+v.LogIndexString()+"]")
 	return "GetLogRecord{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetLogRecord) Name() string { return "Get Log Record" }
 
 // The door lock server sends out operation event notification when the event is triggered by the various event sources.
 type OperationgEventNotification struct {
@@ -310,26 +318,26 @@ func (v *OperationgEventNotification) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *OperationgEventNotification) OperationEventSourceString() string {
+func (v OperationgEventNotification) OperationEventSourceString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.OperationEventSource))
 }
-func (v *OperationgEventNotification) OperationEventCodeString() string {
+func (v OperationgEventNotification) OperationEventCodeString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.OperationEventCode))
 }
-func (v *OperationgEventNotification) UserIdString() string {
+func (v OperationgEventNotification) UserIdString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.UserId))
 }
-func (v *OperationgEventNotification) PinString() string {
+func (v OperationgEventNotification) PinString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Pin))
 }
-func (v *OperationgEventNotification) ZigbeeLocalTimeString() string {
+func (v OperationgEventNotification) ZigbeeLocalTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu32(v.ZigbeeLocalTime))
 }
-func (v *OperationgEventNotification) DataString() string {
+func (v OperationgEventNotification) DataString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.Data))
 }
 
-func (v *OperationgEventNotification) String() string {
+func (v OperationgEventNotification) String() string {
 	var str []string
 	str = append(str, "OperationEventSource["+v.OperationEventSourceString()+"]")
 	str = append(str, "OperationEventCode["+v.OperationEventCodeString()+"]")
@@ -339,6 +347,8 @@ func (v *OperationgEventNotification) String() string {
 	str = append(str, "Data["+v.DataString()+"]")
 	return "OperationgEventNotification{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (OperationgEventNotification) Name() string { return "Operationg Event Notification" }
 
 // Returns the specified log record.
 type GetLogRecordResponse struct {
@@ -454,13 +464,13 @@ func (v *GetLogRecordResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetLogRecordResponse) LogEntryIdString() string {
+func (v GetLogRecordResponse) LogEntryIdString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.LogEntryId))
 }
-func (v *GetLogRecordResponse) TimestampString() string {
+func (v GetLogRecordResponse) TimestampString() string {
 	return zcl.Sprintf("%v", zcl.Zu32(v.Timestamp))
 }
-func (v *GetLogRecordResponse) EventTypeString() string {
+func (v GetLogRecordResponse) EventTypeString() string {
 	switch v.EventType {
 	case 0x00:
 		return "Operation"
@@ -471,20 +481,20 @@ func (v *GetLogRecordResponse) EventTypeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.EventType))
 }
-func (v *GetLogRecordResponse) SourceString() string {
+func (v GetLogRecordResponse) SourceString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Source))
 }
-func (v *GetLogRecordResponse) EventIdAlarmCodeString() string {
+func (v GetLogRecordResponse) EventIdAlarmCodeString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.EventIdAlarmCode))
 }
-func (v *GetLogRecordResponse) UserIdString() string {
+func (v GetLogRecordResponse) UserIdString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.UserId))
 }
-func (v *GetLogRecordResponse) PinString() string {
+func (v GetLogRecordResponse) PinString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.Pin))
 }
 
-func (v *GetLogRecordResponse) String() string {
+func (v GetLogRecordResponse) String() string {
 	var str []string
 	str = append(str, "LogEntryId["+v.LogEntryIdString()+"]")
 	str = append(str, "Timestamp["+v.TimestampString()+"]")
@@ -495,6 +505,8 @@ func (v *GetLogRecordResponse) String() string {
 	str = append(str, "Pin["+v.PinString()+"]")
 	return "GetLogRecordResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetLogRecordResponse) Name() string { return "Get Log Record Response" }
 
 // LockState is an autogenerated attribute in the DoorLock cluster
 type LockState zcl.Zenum8
@@ -513,11 +525,11 @@ func (a *LockState) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LockState(*nt)
 	return br, err
 }
-
-func (a LockState) Readable() bool   { return true }
-func (a LockState) Writable() bool   { return false }
-func (a LockState) Reportable() bool { return false }
-func (a LockState) SceneIndex() int  { return -1 }
+func (LockState) Name() string     { return "Lock State" }
+func (LockState) Readable() bool   { return true }
+func (LockState) Writable() bool   { return false }
+func (LockState) Reportable() bool { return false }
+func (LockState) SceneIndex() int  { return -1 }
 
 func (a LockState) String() string {
 	switch a {
@@ -574,11 +586,11 @@ func (a *LockType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LockType(*nt)
 	return br, err
 }
-
-func (a LockType) Readable() bool   { return true }
-func (a LockType) Writable() bool   { return false }
-func (a LockType) Reportable() bool { return false }
-func (a LockType) SceneIndex() int  { return -1 }
+func (LockType) Name() string     { return "Lock Type" }
+func (LockType) Readable() bool   { return true }
+func (LockType) Writable() bool   { return false }
+func (LockType) Reportable() bool { return false }
+func (LockType) SceneIndex() int  { return -1 }
 
 func (a LockType) String() string {
 	switch a {
@@ -691,11 +703,11 @@ func (a *ActuatorEnabled) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActuatorEnabled(*nt)
 	return br, err
 }
-
-func (a ActuatorEnabled) Readable() bool   { return true }
-func (a ActuatorEnabled) Writable() bool   { return false }
-func (a ActuatorEnabled) Reportable() bool { return false }
-func (a ActuatorEnabled) SceneIndex() int  { return -1 }
+func (ActuatorEnabled) Name() string     { return "Actuator enabled" }
+func (ActuatorEnabled) Readable() bool   { return true }
+func (ActuatorEnabled) Writable() bool   { return false }
+func (ActuatorEnabled) Reportable() bool { return false }
+func (ActuatorEnabled) SceneIndex() int  { return -1 }
 
 func (a ActuatorEnabled) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -718,11 +730,11 @@ func (a *NumberOfLogRecordsSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NumberOfLogRecordsSupported(*nt)
 	return br, err
 }
-
-func (a NumberOfLogRecordsSupported) Readable() bool   { return true }
-func (a NumberOfLogRecordsSupported) Writable() bool   { return false }
-func (a NumberOfLogRecordsSupported) Reportable() bool { return false }
-func (a NumberOfLogRecordsSupported) SceneIndex() int  { return -1 }
+func (NumberOfLogRecordsSupported) Name() string     { return "Number Of Log Records Supported" }
+func (NumberOfLogRecordsSupported) Readable() bool   { return true }
+func (NumberOfLogRecordsSupported) Writable() bool   { return false }
+func (NumberOfLogRecordsSupported) Reportable() bool { return false }
+func (NumberOfLogRecordsSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfLogRecordsSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -745,11 +757,11 @@ func (a *NumberOfTotalUsersSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NumberOfTotalUsersSupported(*nt)
 	return br, err
 }
-
-func (a NumberOfTotalUsersSupported) Readable() bool   { return true }
-func (a NumberOfTotalUsersSupported) Writable() bool   { return false }
-func (a NumberOfTotalUsersSupported) Reportable() bool { return false }
-func (a NumberOfTotalUsersSupported) SceneIndex() int  { return -1 }
+func (NumberOfTotalUsersSupported) Name() string     { return "Number Of Total Users Supported" }
+func (NumberOfTotalUsersSupported) Readable() bool   { return true }
+func (NumberOfTotalUsersSupported) Writable() bool   { return false }
+func (NumberOfTotalUsersSupported) Reportable() bool { return false }
+func (NumberOfTotalUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfTotalUsersSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -772,11 +784,11 @@ func (a *NumberOfPinUsersSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NumberOfPinUsersSupported(*nt)
 	return br, err
 }
-
-func (a NumberOfPinUsersSupported) Readable() bool   { return true }
-func (a NumberOfPinUsersSupported) Writable() bool   { return false }
-func (a NumberOfPinUsersSupported) Reportable() bool { return false }
-func (a NumberOfPinUsersSupported) SceneIndex() int  { return -1 }
+func (NumberOfPinUsersSupported) Name() string     { return "Number Of PIN Users Supported" }
+func (NumberOfPinUsersSupported) Readable() bool   { return true }
+func (NumberOfPinUsersSupported) Writable() bool   { return false }
+func (NumberOfPinUsersSupported) Reportable() bool { return false }
+func (NumberOfPinUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfPinUsersSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -799,11 +811,11 @@ func (a *NumberOfRfidUsersSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NumberOfRfidUsersSupported(*nt)
 	return br, err
 }
-
-func (a NumberOfRfidUsersSupported) Readable() bool   { return true }
-func (a NumberOfRfidUsersSupported) Writable() bool   { return false }
-func (a NumberOfRfidUsersSupported) Reportable() bool { return false }
-func (a NumberOfRfidUsersSupported) SceneIndex() int  { return -1 }
+func (NumberOfRfidUsersSupported) Name() string     { return "Number Of RFID Users Supported" }
+func (NumberOfRfidUsersSupported) Readable() bool   { return true }
+func (NumberOfRfidUsersSupported) Writable() bool   { return false }
+func (NumberOfRfidUsersSupported) Reportable() bool { return false }
+func (NumberOfRfidUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfRfidUsersSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -830,11 +842,13 @@ func (a *NumberOfWeekdaySchedulesSupportedPerUser) UnmarshalZcl(b []byte) ([]byt
 	*a = NumberOfWeekdaySchedulesSupportedPerUser(*nt)
 	return br, err
 }
-
-func (a NumberOfWeekdaySchedulesSupportedPerUser) Readable() bool   { return true }
-func (a NumberOfWeekdaySchedulesSupportedPerUser) Writable() bool   { return false }
-func (a NumberOfWeekdaySchedulesSupportedPerUser) Reportable() bool { return false }
-func (a NumberOfWeekdaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
+func (NumberOfWeekdaySchedulesSupportedPerUser) Name() string {
+	return "Number Of WeekDay Schedules Supported Per User"
+}
+func (NumberOfWeekdaySchedulesSupportedPerUser) Readable() bool   { return true }
+func (NumberOfWeekdaySchedulesSupportedPerUser) Writable() bool   { return false }
+func (NumberOfWeekdaySchedulesSupportedPerUser) Reportable() bool { return false }
+func (NumberOfWeekdaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
 
 func (a NumberOfWeekdaySchedulesSupportedPerUser) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -861,11 +875,13 @@ func (a *NumberOfYearDaySchedulesSupportedPerUser) UnmarshalZcl(b []byte) ([]byt
 	*a = NumberOfYearDaySchedulesSupportedPerUser(*nt)
 	return br, err
 }
-
-func (a NumberOfYearDaySchedulesSupportedPerUser) Readable() bool   { return true }
-func (a NumberOfYearDaySchedulesSupportedPerUser) Writable() bool   { return false }
-func (a NumberOfYearDaySchedulesSupportedPerUser) Reportable() bool { return false }
-func (a NumberOfYearDaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
+func (NumberOfYearDaySchedulesSupportedPerUser) Name() string {
+	return "Number Of Year Day Schedules Supported Per User"
+}
+func (NumberOfYearDaySchedulesSupportedPerUser) Readable() bool   { return true }
+func (NumberOfYearDaySchedulesSupportedPerUser) Writable() bool   { return false }
+func (NumberOfYearDaySchedulesSupportedPerUser) Reportable() bool { return false }
+func (NumberOfYearDaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
 
 func (a NumberOfYearDaySchedulesSupportedPerUser) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -890,11 +906,11 @@ func (a *NumberOfHolidaySchedulesSupported) UnmarshalZcl(b []byte) ([]byte, erro
 	*a = NumberOfHolidaySchedulesSupported(*nt)
 	return br, err
 }
-
-func (a NumberOfHolidaySchedulesSupported) Readable() bool   { return true }
-func (a NumberOfHolidaySchedulesSupported) Writable() bool   { return false }
-func (a NumberOfHolidaySchedulesSupported) Reportable() bool { return false }
-func (a NumberOfHolidaySchedulesSupported) SceneIndex() int  { return -1 }
+func (NumberOfHolidaySchedulesSupported) Name() string     { return "Number Of Holiday Schedules Supported" }
+func (NumberOfHolidaySchedulesSupported) Readable() bool   { return true }
+func (NumberOfHolidaySchedulesSupported) Writable() bool   { return false }
+func (NumberOfHolidaySchedulesSupported) Reportable() bool { return false }
+func (NumberOfHolidaySchedulesSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfHolidaySchedulesSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -917,11 +933,11 @@ func (a *EnableLogging) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = EnableLogging(*nt)
 	return br, err
 }
-
-func (a EnableLogging) Readable() bool   { return true }
-func (a EnableLogging) Writable() bool   { return true }
-func (a EnableLogging) Reportable() bool { return false }
-func (a EnableLogging) SceneIndex() int  { return -1 }
+func (EnableLogging) Name() string     { return "Enable Logging" }
+func (EnableLogging) Readable() bool   { return true }
+func (EnableLogging) Writable() bool   { return true }
+func (EnableLogging) Reportable() bool { return false }
+func (EnableLogging) SceneIndex() int  { return -1 }
 
 func (a EnableLogging) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -944,11 +960,11 @@ func (a *ZigbeeSecurityLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ZigbeeSecurityLevel(*nt)
 	return br, err
 }
-
-func (a ZigbeeSecurityLevel) Readable() bool   { return true }
-func (a ZigbeeSecurityLevel) Writable() bool   { return false }
-func (a ZigbeeSecurityLevel) Reportable() bool { return false }
-func (a ZigbeeSecurityLevel) SceneIndex() int  { return -1 }
+func (ZigbeeSecurityLevel) Name() string     { return "Zigbee Security Level" }
+func (ZigbeeSecurityLevel) Readable() bool   { return true }
+func (ZigbeeSecurityLevel) Writable() bool   { return false }
+func (ZigbeeSecurityLevel) Reportable() bool { return false }
+func (ZigbeeSecurityLevel) SceneIndex() int  { return -1 }
 
 func (a ZigbeeSecurityLevel) String() string {
 	switch a {
@@ -989,11 +1005,11 @@ func (a *AlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AlarmMask(*nt)
 	return br, err
 }
-
-func (a AlarmMask) Readable() bool   { return true }
-func (a AlarmMask) Writable() bool   { return true }
-func (a AlarmMask) Reportable() bool { return false }
-func (a AlarmMask) SceneIndex() int  { return -1 }
+func (AlarmMask) Name() string     { return "Alarm Mask" }
+func (AlarmMask) Readable() bool   { return true }
+func (AlarmMask) Writable() bool   { return true }
+func (AlarmMask) Reportable() bool { return false }
+func (AlarmMask) SceneIndex() int  { return -1 }
 
 func (a AlarmMask) String() string {
 	var bstr []string
@@ -1087,11 +1103,11 @@ func (a *RfOperationEventMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RfOperationEventMask(*nt)
 	return br, err
 }
-
-func (a RfOperationEventMask) Readable() bool   { return true }
-func (a RfOperationEventMask) Writable() bool   { return true }
-func (a RfOperationEventMask) Reportable() bool { return false }
-func (a RfOperationEventMask) SceneIndex() int  { return -1 }
+func (RfOperationEventMask) Name() string     { return "RF Operation Event Mask" }
+func (RfOperationEventMask) Readable() bool   { return true }
+func (RfOperationEventMask) Writable() bool   { return true }
+func (RfOperationEventMask) Reportable() bool { return false }
+func (RfOperationEventMask) SceneIndex() int  { return -1 }
 
 func (a RfOperationEventMask) String() string {
 	var bstr []string
@@ -1185,11 +1201,11 @@ func (a *ManualOperationEventMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ManualOperationEventMask(*nt)
 	return br, err
 }
-
-func (a ManualOperationEventMask) Readable() bool   { return true }
-func (a ManualOperationEventMask) Writable() bool   { return true }
-func (a ManualOperationEventMask) Reportable() bool { return false }
-func (a ManualOperationEventMask) SceneIndex() int  { return -1 }
+func (ManualOperationEventMask) Name() string     { return "Manual Operation Event Mask" }
+func (ManualOperationEventMask) Readable() bool   { return true }
+func (ManualOperationEventMask) Writable() bool   { return true }
+func (ManualOperationEventMask) Reportable() bool { return false }
+func (ManualOperationEventMask) SceneIndex() int  { return -1 }
 
 func (a ManualOperationEventMask) String() string {
 	var bstr []string
@@ -1323,11 +1339,11 @@ func (a *EventType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = EventType(*nt)
 	return br, err
 }
-
-func (a EventType) Readable() bool   { return true }
-func (a EventType) Writable() bool   { return false }
-func (a EventType) Reportable() bool { return false }
-func (a EventType) SceneIndex() int  { return -1 }
+func (EventType) Name() string     { return "Event Type" }
+func (EventType) Readable() bool   { return true }
+func (EventType) Writable() bool   { return false }
+func (EventType) Reportable() bool { return false }
+func (EventType) SceneIndex() int  { return -1 }
 
 func (a EventType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1350,11 +1366,11 @@ func (a *TiltAngle) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TiltAngle(*nt)
 	return br, err
 }
-
-func (a TiltAngle) Readable() bool   { return true }
-func (a TiltAngle) Writable() bool   { return false }
-func (a TiltAngle) Reportable() bool { return false }
-func (a TiltAngle) SceneIndex() int  { return -1 }
+func (TiltAngle) Name() string     { return "Tilt Angle" }
+func (TiltAngle) Readable() bool   { return true }
+func (TiltAngle) Writable() bool   { return false }
+func (TiltAngle) Reportable() bool { return false }
+func (TiltAngle) SceneIndex() int  { return -1 }
 
 func (a TiltAngle) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1377,11 +1393,11 @@ func (a *VibrationStrength) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = VibrationStrength(*nt)
 	return br, err
 }
-
-func (a VibrationStrength) Readable() bool   { return true }
-func (a VibrationStrength) Writable() bool   { return false }
-func (a VibrationStrength) Reportable() bool { return false }
-func (a VibrationStrength) SceneIndex() int  { return -1 }
+func (VibrationStrength) Name() string     { return "Vibration Strength" }
+func (VibrationStrength) Readable() bool   { return true }
+func (VibrationStrength) Writable() bool   { return false }
+func (VibrationStrength) Reportable() bool { return false }
+func (VibrationStrength) SceneIndex() int  { return -1 }
 
 func (a VibrationStrength) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu32(a))
@@ -1404,11 +1420,11 @@ func (a *Orientation) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Orientation(*nt)
 	return br, err
 }
-
-func (a Orientation) Readable() bool   { return true }
-func (a Orientation) Writable() bool   { return false }
-func (a Orientation) Reportable() bool { return false }
-func (a Orientation) SceneIndex() int  { return -1 }
+func (Orientation) Name() string     { return "Orientation" }
+func (Orientation) Readable() bool   { return true }
+func (Orientation) Writable() bool   { return false }
+func (Orientation) Reportable() bool { return false }
+func (Orientation) SceneIndex() int  { return -1 }
 
 func (a Orientation) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu48(a))

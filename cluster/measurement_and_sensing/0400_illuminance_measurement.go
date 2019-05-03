@@ -45,11 +45,11 @@ func (a *MeasuredIlluminance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MeasuredIlluminance(*nt)
 	return br, err
 }
-
-func (a MeasuredIlluminance) Readable() bool   { return true }
-func (a MeasuredIlluminance) Writable() bool   { return false }
-func (a MeasuredIlluminance) Reportable() bool { return false }
-func (a MeasuredIlluminance) SceneIndex() int  { return -1 }
+func (MeasuredIlluminance) Name() string     { return "Measured Illuminance" }
+func (MeasuredIlluminance) Readable() bool   { return true }
+func (MeasuredIlluminance) Writable() bool   { return false }
+func (MeasuredIlluminance) Reportable() bool { return false }
+func (MeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MeasuredIlluminance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -72,11 +72,11 @@ func (a *MinMeasuredIlluminance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinMeasuredIlluminance(*nt)
 	return br, err
 }
-
-func (a MinMeasuredIlluminance) Readable() bool   { return true }
-func (a MinMeasuredIlluminance) Writable() bool   { return false }
-func (a MinMeasuredIlluminance) Reportable() bool { return true }
-func (a MinMeasuredIlluminance) SceneIndex() int  { return -1 }
+func (MinMeasuredIlluminance) Name() string     { return "Min Measured Illuminance" }
+func (MinMeasuredIlluminance) Readable() bool   { return true }
+func (MinMeasuredIlluminance) Writable() bool   { return false }
+func (MinMeasuredIlluminance) Reportable() bool { return true }
+func (MinMeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredIlluminance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -99,11 +99,11 @@ func (a *MaxMeasuredIlluminance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxMeasuredIlluminance(*nt)
 	return br, err
 }
-
-func (a MaxMeasuredIlluminance) Readable() bool   { return true }
-func (a MaxMeasuredIlluminance) Writable() bool   { return false }
-func (a MaxMeasuredIlluminance) Reportable() bool { return false }
-func (a MaxMeasuredIlluminance) SceneIndex() int  { return -1 }
+func (MaxMeasuredIlluminance) Name() string     { return "Max Measured Illuminance" }
+func (MaxMeasuredIlluminance) Readable() bool   { return true }
+func (MaxMeasuredIlluminance) Writable() bool   { return false }
+func (MaxMeasuredIlluminance) Reportable() bool { return false }
+func (MaxMeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredIlluminance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -126,11 +126,11 @@ func (a *IlluminanceTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = IlluminanceTolerance(*nt)
 	return br, err
 }
-
-func (a IlluminanceTolerance) Readable() bool   { return true }
-func (a IlluminanceTolerance) Writable() bool   { return false }
-func (a IlluminanceTolerance) Reportable() bool { return false }
-func (a IlluminanceTolerance) SceneIndex() int  { return -1 }
+func (IlluminanceTolerance) Name() string     { return "Illuminance Tolerance" }
+func (IlluminanceTolerance) Readable() bool   { return true }
+func (IlluminanceTolerance) Writable() bool   { return false }
+func (IlluminanceTolerance) Reportable() bool { return false }
+func (IlluminanceTolerance) SceneIndex() int  { return -1 }
 
 func (a IlluminanceTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -153,11 +153,11 @@ func (a *LightSensorType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LightSensorType(*nt)
 	return br, err
 }
-
-func (a LightSensorType) Readable() bool   { return true }
-func (a LightSensorType) Writable() bool   { return false }
-func (a LightSensorType) Reportable() bool { return false }
-func (a LightSensorType) SceneIndex() int  { return -1 }
+func (LightSensorType) Name() string     { return "Light Sensor Type" }
+func (LightSensorType) Readable() bool   { return true }
+func (LightSensorType) Writable() bool   { return false }
+func (LightSensorType) Reportable() bool { return false }
+func (LightSensorType) SceneIndex() int  { return -1 }
 
 func (a LightSensorType) String() string {
 	switch a {
@@ -206,11 +206,11 @@ func (a *Hysteresis) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Hysteresis(*nt)
 	return br, err
 }
-
-func (a Hysteresis) Readable() bool   { return true }
-func (a Hysteresis) Writable() bool   { return true }
-func (a Hysteresis) Reportable() bool { return false }
-func (a Hysteresis) SceneIndex() int  { return -1 }
+func (Hysteresis) Name() string     { return "Hysteresis" }
+func (Hysteresis) Readable() bool   { return true }
+func (Hysteresis) Writable() bool   { return true }
+func (Hysteresis) Reportable() bool { return false }
+func (Hysteresis) SceneIndex() int  { return -1 }
 
 func (a Hysteresis) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -234,11 +234,11 @@ func (a *MaxUpSpeed) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxUpSpeed(*nt)
 	return br, err
 }
-
-func (a MaxUpSpeed) Readable() bool   { return true }
-func (a MaxUpSpeed) Writable() bool   { return true }
-func (a MaxUpSpeed) Reportable() bool { return false }
-func (a MaxUpSpeed) SceneIndex() int  { return -1 }
+func (MaxUpSpeed) Name() string     { return "Max Up Speed" }
+func (MaxUpSpeed) Readable() bool   { return true }
+func (MaxUpSpeed) Writable() bool   { return true }
+func (MaxUpSpeed) Reportable() bool { return false }
+func (MaxUpSpeed) SceneIndex() int  { return -1 }
 
 func (a MaxUpSpeed) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -262,11 +262,11 @@ func (a *MaxDownSpeed) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxDownSpeed(*nt)
 	return br, err
 }
-
-func (a MaxDownSpeed) Readable() bool   { return true }
-func (a MaxDownSpeed) Writable() bool   { return true }
-func (a MaxDownSpeed) Reportable() bool { return false }
-func (a MaxDownSpeed) SceneIndex() int  { return -1 }
+func (MaxDownSpeed) Name() string     { return "Max Down Speed" }
+func (MaxDownSpeed) Readable() bool   { return true }
+func (MaxDownSpeed) Writable() bool   { return true }
+func (MaxDownSpeed) Reportable() bool { return false }
+func (MaxDownSpeed) SceneIndex() int  { return -1 }
 
 func (a MaxDownSpeed) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -290,11 +290,11 @@ func (a *TargetValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TargetValue(*nt)
 	return br, err
 }
-
-func (a TargetValue) Readable() bool   { return true }
-func (a TargetValue) Writable() bool   { return true }
-func (a TargetValue) Reportable() bool { return false }
-func (a TargetValue) SceneIndex() int  { return -1 }
+func (TargetValue) Name() string     { return "Target Value" }
+func (TargetValue) Readable() bool   { return true }
+func (TargetValue) Writable() bool   { return true }
+func (TargetValue) Reportable() bool { return false }
+func (TargetValue) SceneIndex() int  { return -1 }
 
 func (a TargetValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -318,11 +318,11 @@ func (a *StartupType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = StartupType(*nt)
 	return br, err
 }
-
-func (a StartupType) Readable() bool   { return true }
-func (a StartupType) Writable() bool   { return true }
-func (a StartupType) Reportable() bool { return false }
-func (a StartupType) SceneIndex() int  { return -1 }
+func (StartupType) Name() string     { return "Startup Type" }
+func (StartupType) Readable() bool   { return true }
+func (StartupType) Writable() bool   { return true }
+func (StartupType) Reportable() bool { return false }
+func (StartupType) SceneIndex() int  { return -1 }
 
 func (a StartupType) String() string {
 	switch a {

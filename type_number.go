@@ -109,8 +109,7 @@ func (u *Zu8) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (u Zu8) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(1, uint64(u)) }
 func (u *Zu8) Values() []Val              { return []Val{u} }
 func (u *Zu8) ID() TypeID                 { return 32 }
-
-//func (u Zu8) Valid() bool { return u != Zu8(255) }
+func (u Zu8) Valid() bool                 { return u < 0xFF }
 
 // Zu16 is Unsigned 16-bit integer (0xffff = invalid). A/D = A
 type Zu16 uint16
@@ -123,8 +122,7 @@ func (u *Zu16) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (u Zu16) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(u)) }
 func (u *Zu16) Values() []Val              { return []Val{u} }
 func (u *Zu16) ID() TypeID                 { return 33 }
-
-//func (u Zu16) Valid() bool { return u != Zu16(65535) }
+func (u Zu16) Valid() bool                 { return u < 0xFFFF }
 
 // Zu24 is Unsigned 24-bit integer (0xffffff = invalid). A/D = A
 type Zu24 uint32
@@ -137,8 +135,7 @@ func (u *Zu24) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (u Zu24) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(3, uint64(u)) }
 func (u *Zu24) Values() []Val              { return []Val{u} }
 func (u *Zu24) ID() TypeID                 { return 34 }
-
-//func (u Zu24) Valid() bool { return u != Zu24(16777215) }
+func (u Zu24) Valid() bool                 { return u < 0xFFFFFF }
 
 // Zu32 is Unsigned 32-bit integer (0xffffffff = invalid). A/D = A
 type Zu32 uint32
@@ -151,8 +148,7 @@ func (u *Zu32) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (u Zu32) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(4, uint64(u)) }
 func (u *Zu32) Values() []Val              { return []Val{u} }
 func (u *Zu32) ID() TypeID                 { return 35 }
-
-//func (u Zu32) Valid() bool { return u != Zu32(4294967295) }
+func (u Zu32) Valid() bool                 { return u < 0xFFFFFFFF }
 
 // Zu40 is Unsigned 40-bit integer (0xffffffffff = invalid). A/D = A
 type Zu40 uint64
@@ -165,8 +161,7 @@ func (u *Zu40) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (u Zu40) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(5, uint64(u)) }
 func (u *Zu40) Values() []Val              { return []Val{u} }
 func (u *Zu40) ID() TypeID                 { return 36 }
-
-//func (u Zu40) Valid() bool { return u != Zu40(1099511627775) }
+func (u Zu40) Valid() bool                 { return u < 0xFFFFFFFFFF }
 
 // Zu48 is Unsigned 48-bit integer (0xffffffffffff = invalid). A/D = A
 type Zu48 uint64
@@ -180,7 +175,7 @@ func (u Zu48) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(6, uint64(u
 func (u *Zu48) Values() []Val              { return []Val{u} }
 func (u *Zu48) ID() TypeID                 { return 37 }
 
-//func (u Zu48) Valid() bool { return u != Zu48(281474976710655) }
+func (u Zu48) Valid() bool { return u < 0xFFFFFFFFFFFF }
 
 // Zu56 is Unsigned 56-bit integer (0xffffffffffffff = invalid). A/D = A
 type Zu56 uint64
@@ -194,7 +189,7 @@ func (u Zu56) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(7, uint64(u
 func (u *Zu56) Values() []Val              { return []Val{u} }
 func (u *Zu56) ID() TypeID                 { return 38 }
 
-//func (u Zu56) Valid() bool { return u != Zu56(72057594037927935) }
+func (u Zu56) Valid() bool { return u < 0xFFFFFFFFFFFFFF }
 
 // Zu64 is Unsigned 64-bit integer (0xffffffffffffffff = invalid). A/D = A
 type Zu64 uint64
@@ -208,7 +203,7 @@ func (u Zu64) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(8, uint64(u
 func (u *Zu64) Values() []Val              { return []Val{u} }
 func (u *Zu64) ID() TypeID                 { return 39 }
 
-//func (u Zu64) Valid() bool { return u != Zu64(18446744073709551615) }
+func (u Zu64) Valid() bool { return u < 0xFFFFFFFFFFFFFFFF }
 
 // Zs8 is Signed 8-bit integer (0x80 = invalid). A/D = A
 type Zs8 int8

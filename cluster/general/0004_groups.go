@@ -89,19 +89,21 @@ func (v *AddGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *AddGroup) GroupIdString() string {
+func (v AddGroup) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *AddGroup) GroupNameString() string {
+func (v AddGroup) GroupNameString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
 }
 
-func (v *AddGroup) String() string {
+func (v AddGroup) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "GroupName["+v.GroupNameString()+"]")
 	return "AddGroup{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (AddGroup) Name() string { return "Add group" }
 
 // Get the name of a group.
 type ViewGroup struct {
@@ -151,15 +153,17 @@ func (v *ViewGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *ViewGroup) GroupIdString() string {
+func (v ViewGroup) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 
-func (v *ViewGroup) String() string {
+func (v ViewGroup) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	return "ViewGroup{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ViewGroup) Name() string { return "View group" }
 
 // Get the group membership of the device. Send an empty group list to request all group memberships
 type GetGroupMembership struct {
@@ -209,15 +213,17 @@ func (v *GetGroupMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetGroupMembership) GroupListString() string {
+func (v GetGroupMembership) GroupListString() string {
 	return zcl.Sprintf("0x%X", zcl.Zset(v.GroupList))
 }
 
-func (v *GetGroupMembership) String() string {
+func (v GetGroupMembership) String() string {
 	var str []string
 	str = append(str, "GroupList["+v.GroupListString()+"]")
 	return "GetGroupMembership{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetGroupMembership) Name() string { return "Get group membership" }
 
 // Remove a group from the device.
 type RemoveGroup struct {
@@ -267,15 +273,17 @@ func (v *RemoveGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RemoveGroup) GroupIdString() string {
+func (v RemoveGroup) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 
-func (v *RemoveGroup) String() string {
+func (v RemoveGroup) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	return "RemoveGroup{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RemoveGroup) Name() string { return "Remove group" }
 
 // Remove all group from the device.
 type RemoveAllGroups struct {
@@ -307,10 +315,12 @@ func (v *RemoveAllGroups) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RemoveAllGroups) String() string {
+func (v RemoveAllGroups) String() string {
 	var str []string
 	return "RemoveAllGroups{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RemoveAllGroups) Name() string { return "Remove all groups" }
 
 // Add a group to the device if the device is currently identifying itself (using the identify cluster)
 type AddGroupIfIdentifying struct {
@@ -371,19 +381,21 @@ func (v *AddGroupIfIdentifying) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *AddGroupIfIdentifying) GroupIdString() string {
+func (v AddGroupIfIdentifying) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *AddGroupIfIdentifying) GroupNameString() string {
+func (v AddGroupIfIdentifying) GroupNameString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
 }
 
-func (v *AddGroupIfIdentifying) String() string {
+func (v AddGroupIfIdentifying) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "GroupName["+v.GroupNameString()+"]")
 	return "AddGroupIfIdentifying{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (AddGroupIfIdentifying) Name() string { return "Add group if identifying" }
 
 // The Response to the add group request.
 type AddGroupResponse struct {
@@ -444,19 +456,21 @@ func (v *AddGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *AddGroupResponse) StatusString() string {
+func (v AddGroupResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *AddGroupResponse) GroupIdString() string {
+func (v AddGroupResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 
-func (v *AddGroupResponse) String() string {
+func (v AddGroupResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	return "AddGroupResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (AddGroupResponse) Name() string { return "Add group response" }
 
 // The Response to the view group request.
 type ViewGroupResponse struct {
@@ -528,23 +542,25 @@ func (v *ViewGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *ViewGroupResponse) StatusString() string {
+func (v ViewGroupResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *ViewGroupResponse) GroupIdString() string {
+func (v ViewGroupResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *ViewGroupResponse) GroupNameString() string {
+func (v ViewGroupResponse) GroupNameString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
 }
 
-func (v *ViewGroupResponse) String() string {
+func (v ViewGroupResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "GroupName["+v.GroupNameString()+"]")
 	return "ViewGroupResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ViewGroupResponse) Name() string { return "View group response" }
 
 // The Response to the get group membership request.
 type GetGroupMembershipResponse struct {
@@ -608,19 +624,21 @@ func (v *GetGroupMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetGroupMembershipResponse) CapacityString() string {
+func (v GetGroupMembershipResponse) CapacityString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Capacity))
 }
-func (v *GetGroupMembershipResponse) GroupListString() string {
+func (v GetGroupMembershipResponse) GroupListString() string {
 	return zcl.Sprintf("0x%X", zcl.Zset(v.GroupList))
 }
 
-func (v *GetGroupMembershipResponse) String() string {
+func (v GetGroupMembershipResponse) String() string {
 	var str []string
 	str = append(str, "Capacity["+v.CapacityString()+"]")
 	str = append(str, "GroupList["+v.GroupListString()+"]")
 	return "GetGroupMembershipResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetGroupMembershipResponse) Name() string { return "Get group membership response" }
 
 // The Response to the remove group request.
 type RemoveGroupResponse struct {
@@ -681,19 +699,21 @@ func (v *RemoveGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RemoveGroupResponse) StatusString() string {
+func (v RemoveGroupResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *RemoveGroupResponse) GroupIdString() string {
+func (v RemoveGroupResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 
-func (v *RemoveGroupResponse) String() string {
+func (v RemoveGroupResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	return "RemoveGroupResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RemoveGroupResponse) Name() string { return "Remove group response" }
 
 // GroupNameSupport is an autogenerated attribute in the Groups cluster
 type GroupNameSupport zcl.Zbmp8
@@ -712,11 +732,11 @@ func (a *GroupNameSupport) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = GroupNameSupport(*nt)
 	return br, err
 }
-
-func (a GroupNameSupport) Readable() bool   { return true }
-func (a GroupNameSupport) Writable() bool   { return false }
-func (a GroupNameSupport) Reportable() bool { return false }
-func (a GroupNameSupport) SceneIndex() int  { return -1 }
+func (GroupNameSupport) Name() string     { return "Group Name Support" }
+func (GroupNameSupport) Readable() bool   { return true }
+func (GroupNameSupport) Writable() bool   { return false }
+func (GroupNameSupport) Reportable() bool { return false }
+func (GroupNameSupport) SceneIndex() int  { return -1 }
 
 func (a GroupNameSupport) String() string {
 	var bstr []string

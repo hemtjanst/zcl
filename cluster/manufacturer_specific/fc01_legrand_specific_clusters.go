@@ -38,11 +38,11 @@ func (a *Dimmer) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Dimmer(*nt)
 	return br, err
 }
-
-func (a Dimmer) Readable() bool   { return true }
-func (a Dimmer) Writable() bool   { return true }
-func (a Dimmer) Reportable() bool { return false }
-func (a Dimmer) SceneIndex() int  { return -1 }
+func (Dimmer) Name() string     { return "Dimmer" }
+func (Dimmer) Readable() bool   { return true }
+func (Dimmer) Writable() bool   { return true }
+func (Dimmer) Reportable() bool { return false }
+func (Dimmer) SceneIndex() int  { return -1 }
 
 func (a Dimmer) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zdat16(a))
@@ -66,11 +66,11 @@ func (a *Led) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Led(*nt)
 	return br, err
 }
-
-func (a Led) Readable() bool   { return true }
-func (a Led) Writable() bool   { return true }
-func (a Led) Reportable() bool { return false }
-func (a Led) SceneIndex() int  { return -1 }
+func (Led) Name() string     { return "LED" }
+func (Led) Readable() bool   { return true }
+func (Led) Writable() bool   { return true }
+func (Led) Reportable() bool { return false }
+func (Led) SceneIndex() int  { return -1 }
 
 func (a Led) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))

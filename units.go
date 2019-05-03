@@ -18,6 +18,11 @@ const (
 
 func (u CustomUnit) Format(n float64) string {
 	v := strconv.FormatFloat(n, 'f', -1, 64)
+	v2 := fmt.Sprintf("%.3f", n)
+	if len(v2) < len(v) {
+		v = v2
+	}
+
 	switch u {
 	case DecibelMilliWatts:
 		return fmt.Sprintf("%sdBm", v)
@@ -637,149 +642,153 @@ func (u Unit) Format(n float64) string {
 		suf = "s"
 	}
 	v := strconv.FormatFloat(n, 'f', -1, 64)
+	v2 := fmt.Sprintf("%.3f", n)
+	if len(v2) < len(v) {
+		v = v2
+	}
 	switch u {
 	case SquareMeters:
-		return fmt.Sprintf("%s m²", v)
+		return v + "m²"
 	case SquareFeet:
-		return fmt.Sprintf("%s ft²", v)
+		return v + "ft²"
 	case Milliamperes:
-		return fmt.Sprintf("%s mA", v)
+		return v + "mA"
 	case Amperes:
-		return fmt.Sprintf("%s A", v)
+		return v + "A"
 	case Ohms:
-		return fmt.Sprintf("%s Ω", v)
+		return v + " Ω"
 	case Volts:
-		return fmt.Sprintf("%s V", v)
+		return v + "V"
 	case KiloVolts:
-		return fmt.Sprintf("%s kV", v)
+		return v + "kV"
 	case MegaVolts:
-		return fmt.Sprintf("%s MV", v)
+		return v + "MV"
 	case VoltAmperes:
-		return fmt.Sprintf("%s VA", v)
+		return v + "VA"
 	case KiloVoltAmperes:
-		return fmt.Sprintf("%s kVA", v)
+		return v + "kVA"
 	case MegaVoltAmperes:
-		return fmt.Sprintf("%s MVA", v)
+		return v + "MVA"
 	case VoltAmperesReactive:
-		return fmt.Sprintf("%s var", v)
+		return v + " var"
 	case KiloVoltAmperesReactive:
-		return fmt.Sprintf("%s kvar", v)
+		return v + " kvar"
 	case MegaVoltAmperesReactive:
-		return fmt.Sprintf("%s Mvar", v)
+		return v + " Mvar"
 	case DegreesPhase:
-		return fmt.Sprintf("%s °", v)
+		return v + "°"
 	case PowerFactor:
-		return fmt.Sprintf("%s PFC", v)
+		return v + " PFC"
 	case Joules:
-		return fmt.Sprintf("%s J", v)
+		return v + "J"
 	case Kilojoules:
-		return fmt.Sprintf("%s kJ", v)
+		return v + "kJ"
 	case WattHours:
-		return fmt.Sprintf("%s Wh", v)
+		return v + "Wh"
 	case KilowattHours:
-		return fmt.Sprintf("%s kWh", v)
+		return v + "kWh"
 	case BTUs:
-		return fmt.Sprintf("%s BTU", v)
+		return v + " BTU"
 	case Therms:
-		return fmt.Sprintf("%s thm", v) // == 100000 BTU
+		return v + " thm" // == 100000 BTU
 	case TonHours:
-		return fmt.Sprintf("%s Th", v)
+		return v + " Th"
 	case JoulesPerKilogramDryAir:
-		return fmt.Sprintf("%s J/kg dry air", v)
+		return v + " J/kg dry air"
 	case BTUsPerPoundDryAir:
-		return fmt.Sprintf("%s BTU/lbs dry air", v)
+		return v + " BTU/lbs dry air"
 	case CyclesPerHour:
-		return fmt.Sprintf("%s cycles/hr", v)
+		return v + " cycles/hr"
 	case CyclesPerMinute:
-		return fmt.Sprintf("%s cycles/min", v)
+		return v + " cycles/min"
 	case Hertz:
-		return fmt.Sprintf("%s Hz", v)
+		return v + "Hz"
 	case GramsOfWaterPerKilogramDryAir:
-		return fmt.Sprintf("%s g water/kg dry air", v)
+		return v + "g water/kg dry air"
 	case PercentRelativeHumidity:
-		return fmt.Sprintf("%s %% RH", v)
+		return v + "% RH"
 	case Millimeters:
-		return fmt.Sprintf("%smm", v)
+		return v + "mm"
 	case Meters:
-		return fmt.Sprintf("%sm", v)
+		return v + "m"
 	case Inches:
-		return fmt.Sprintf("%s\"", v)
+		return v + "in"
 	case Feet:
-		return fmt.Sprintf("%s'", v)
+		return v + "ft"
 	case WattsPerSquareFoot:
-		return fmt.Sprintf("%s W/ft²", v)
+		return v + "W/ft²"
 	case WattsPerSquareMeter:
-		return fmt.Sprintf("%s W/m²", v)
+		return v + "W/m²"
 	case Lumens:
-		return fmt.Sprintf("%s lm", v)
+		return v + "lm"
 	case Luxes:
-		return fmt.Sprintf("%s lux", v)
+		return v + "lux"
 	case FootCandles:
-		return fmt.Sprintf("%s lm/ft²", v)
+		return v + "lm/ft²"
 	case Kilograms:
-		return fmt.Sprintf("%s kg", v)
+		return v + "kg"
 	case PoundsMass:
-		return fmt.Sprintf("%s lbm", v)
+		return v + "lbm"
 	case Tons:
-		return fmt.Sprintf("%s ton", v)
+		return v + "ton"
 	case KilogramsPerSecond:
-		return fmt.Sprintf("%s kg/s", v)
+		return v + "kg/s"
 	case KilogramsPerMinute:
-		return fmt.Sprintf("%s kg/min", v)
+		return v + "kg/min"
 	case KilogramsPerHour:
-		return fmt.Sprintf("%s kg/h", v)
+		return v + "kg/h"
 	case PoundsMassPerMinute:
-		return fmt.Sprintf("%s lbm/min", v)
+		return v + "lbm/min"
 	case PoundsMassPerHour:
-		return fmt.Sprintf("%s lbm/h", v)
+		return v + "lbm/h"
 	case Watts:
-		return fmt.Sprintf("%s W", v)
+		return v + "W"
 	case Kilowatts:
-		return fmt.Sprintf("%s kW", v)
+		return v + "kW"
 	case Megawatts:
-		return fmt.Sprintf("%s MW", v)
+		return v + "MW"
 	case BTUsPerHour:
-		return fmt.Sprintf("%s BTU/h", v)
+		return v + " BTU/h"
 	case Horsepower:
-		return fmt.Sprintf("%s hp", v)
+		return v + "hp"
 	case TonsRefrigeration:
-		return fmt.Sprintf("%s TR", v)
+		return v + " TR"
 	case Pascals:
-		return fmt.Sprintf("%s Pa", v)
+		return v + "Pa"
 	case Kilopascals:
-		return fmt.Sprintf("%s kPa", v)
+		return v + "kPa"
 	case Bars:
-		return fmt.Sprintf("%s bar", v)
+		return v + " bar"
 	case PoundsForcePerSquareInch:
-		return fmt.Sprintf("%s lbf/in²", v)
+		return v + "lbf/in²"
 	case CentimetersOfWater:
-		return fmt.Sprintf("%s cm h2o", v)
+		return v + "cm h2o"
 	case InchesOfWater:
-		return fmt.Sprintf("%s in h2o", v)
+		return v + "in h2o"
 	case MillimetersOfMercury:
-		return fmt.Sprintf("%s mmHg", v)
+		return v + "mmHg"
 	case CentimetersOfMercury:
-		return fmt.Sprintf("%s cmHg", v)
+		return v + "cmHg"
 	case InchesOfMercury:
-		return fmt.Sprintf("%s inHg", v)
+		return v + "inHg"
 	case DegreesCelsius:
-		return fmt.Sprintf("%s°C", v)
+		return v + "°C"
 	case DegreesKelvin:
-		return fmt.Sprintf("%sK", v)
+		return v + "K"
 	case DegreesFahrenheit:
-		return fmt.Sprintf("%s°F", v)
+		return v + "°F"
 	case DegreeDaysCelsius:
-		return fmt.Sprintf("%s°C DD", v)
+		return v + "°C DD"
 	case DegreeDaysFahrenheit:
-		return fmt.Sprintf("%s°F DD", v)
+		return v + "°F DD"
 	case Years:
-		return fmt.Sprintf("%s year%s", v, suf)
+		return v + " year" + suf
 	case Months:
-		return fmt.Sprintf("%s month%s", v, suf)
+		return v + " month" + suf
 	case Weeks:
-		return fmt.Sprintf("%s week%s", v, suf)
+		return v + " week" + suf
 	case Days:
-		return fmt.Sprintf("%s day%s", v, suf)
+		return v + " day" + suf
 	case Hours:
 		return time.Duration(n * float64(time.Hour)).String()
 	case Minutes:
@@ -787,236 +796,236 @@ func (u Unit) Format(n float64) string {
 	case Seconds:
 		return time.Duration(n * float64(time.Second)).String()
 	case MetersPerSecond:
-		return fmt.Sprintf("%s m/s", v)
+		return v + "m/s"
 	case KilometersPerHour:
-		return fmt.Sprintf("%s km/h", v)
+		return v + "km/h"
 	case FeetPerSecond:
-		return fmt.Sprintf("%s ft/s", v)
+		return v + "ft/s"
 	case FeetPerMinute:
-		return fmt.Sprintf("%s ft/min", v)
+		return v + "ft/min"
 	case MilesPerHour:
-		return fmt.Sprintf("%s mph", v)
+		return v + "mph"
 	case CubicFeet:
-		return fmt.Sprintf("%s ft³", v)
+		return v + "ft³"
 	case CubicMeters:
-		return fmt.Sprintf("%s m³", v)
+		return v + "m³"
 	case ImperialGallons:
-		return fmt.Sprintf("%s gal (Imp.)", v)
+		return v + "gal (Imp.)"
 	case Liters:
-		return fmt.Sprintf("%s L", v)
+		return v + "L"
 	case UsGallons:
-		return fmt.Sprintf("%s gal (US)", v)
+		return v + "gal (US)"
 	case CubicFeetPerMinute:
-		return fmt.Sprintf("%s ft³/min", v)
+		return v + "ft³/min"
 	case CubicMetersPerSecond:
-		return fmt.Sprintf("%s m³/s", v)
+		return v + "m³/s"
 	case ImperialGallonsPerMinute:
-		return fmt.Sprintf("%s gal/min (Imp.)", v)
+		return v + "gal/min (Imp.)"
 	case LitersPerSecond:
-		return fmt.Sprintf("%s L/s", v)
+		return v + "L/s"
 	case LitersPerMinute:
-		return fmt.Sprintf("%s L/min", v)
+		return v + "L/min"
 	case UsGallonsPerMinute:
-		return fmt.Sprintf("%s gal/min (US)", v)
+		return v + "gal/min (US)"
 	case DegreesAngular:
-		return fmt.Sprintf("%s°", v)
+		return v + "°"
 	case DegreesCelsiusPerHour:
-		return fmt.Sprintf("%s°C/h", v)
+		return v + "°C/h"
 	case DegreesCelsiusPerMinute:
-		return fmt.Sprintf("%s°C/min", v)
+		return v + "°C/min"
 	case DegreesFahrenheitPerHour:
-		return fmt.Sprintf("%s°F/h", v)
+		return v + "°F/h"
 	case DegreesFahrenheitPerMinute:
-		return fmt.Sprintf("%s°F/min", v)
+		return v + "°F/min"
 	case NoUnits:
-		return fmt.Sprintf("%s", v)
+		return v
 	case PartsPerMillion:
-		return fmt.Sprintf("%s ppm", v)
+		return v + "ppm"
 	case PartsPerBillion:
-		return fmt.Sprintf("%s ppb", v)
+		return v + "ppb"
 	case Percent:
-		return fmt.Sprintf("%s%%", v)
+		return v + "%"
 	case PercentPerSecond:
-		return fmt.Sprintf("%s %%/s", v)
+		return v + "%/s"
 	case PerMinute:
-		return fmt.Sprintf("%s/min", v)
+		return v + "/min"
 	case PerSecond:
-		return fmt.Sprintf("%s/s", v)
+		return v + "/s"
 	case PsiPerDegreeFahrenheit:
-		return fmt.Sprintf("%s psi/°F", v)
+		return v + "psi/°F"
 	case Radians:
-		return fmt.Sprintf("%s rad", v)
+		return v + "rad"
 	case RevolutionsPerMinute:
-		return fmt.Sprintf("%s RPM", v)
+		return v + "RPM"
 	case Currency1:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency2:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency3:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency4:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency5:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency6:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency7:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency8:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency9:
-		return fmt.Sprintf("%s", v)
+		return v
 	case Currency10:
-		return fmt.Sprintf("%s", v)
+		return v
 	case SquareInches:
-		return fmt.Sprintf("%s in²", v)
+		return v + "in²"
 	case SquareCentimeters:
-		return fmt.Sprintf("%s cm²", v)
+		return v + "cm²"
 	case BTUsPerPound:
-		return fmt.Sprintf("%s BTU/lbs", v)
+		return v + " BTU/lbs"
 	case Centimeters:
-		return fmt.Sprintf("%s cm", v)
+		return v + "cm"
 	case PoundsMassPerSecond:
-		return fmt.Sprintf("%s lbm/s", v)
+		return v + "lbm/s"
 	case DeltaDegreesFahrenheit:
-		return fmt.Sprintf("%s delta °F", v)
+		return v + " delta °F"
 	case DeltaDegreesKelvin:
-		return fmt.Sprintf("%s delta-K", v)
+		return v + " delta-K"
 	case Kilohms:
-		return fmt.Sprintf("%s kΩ", v)
+		return v + " kΩ"
 	case Megohms:
-		return fmt.Sprintf("%s MΩ", v)
+		return v + " MΩ"
 	case Millivolts:
-		return fmt.Sprintf("%s mV", v)
+		return v + "mV"
 	case KilojoulesPerKilogram:
-		return fmt.Sprintf("%s kJ/kg", v)
+		return v + "kJ/kg"
 	case Megajoules:
-		return fmt.Sprintf("%s MJ", v)
+		return v + " MJ"
 	case JoulesPerDegreeKelvin:
-		return fmt.Sprintf("%s J/°K", v)
+		return v + " J/°K"
 	case JoulesPerKilogramDegreeKelvin:
-		return fmt.Sprintf("%s J/kg-K", v)
+		return v + " J/kg-K"
 	case Kilohertz:
-		return fmt.Sprintf("%s kHz", v)
+		return v + "kHz"
 	case Megahertz:
-		return fmt.Sprintf("%s MHz", v)
+		return v + "MHz"
 	case PerHour:
-		return fmt.Sprintf("%s/h", v)
+		return v + "/h"
 	case Milliwatts:
-		return fmt.Sprintf("%s mW", v)
+		return v + "mW"
 	case Hectopascals:
-		return fmt.Sprintf("%s hpa", v)
+		return v + " hpa"
 	case Millibars:
-		return fmt.Sprintf("%s mbar", v)
+		return v + " mbar"
 	case CubicMetersPerHour:
-		return fmt.Sprintf("%s m³/h", v)
+		return v + "m³/h"
 	case LitersPerHour:
-		return fmt.Sprintf("%s L/h", v)
+		return v + "L/h"
 	case KilowattHoursPerSquareMeter:
-		return fmt.Sprintf("%s kWh/m²", v)
+		return v + "kWh/m²"
 	case KilowattHoursPerSquareFoot:
-		return fmt.Sprintf("%s kWh/ft²", v)
+		return v + "kWh/ft²"
 	case MegajoulesPerSquareMeter:
-		return fmt.Sprintf("%s MJ/m²", v)
+		return v + " MJ/m²"
 	case MegajoulesPerSquareFoot:
-		return fmt.Sprintf("%s MJ/ft²", v)
+		return v + " MJ/ft²"
 	case WattsPerSquareMeterDegreeKelvin:
-		return fmt.Sprintf("%s W/m²-K", v)
+		return v + "W/m²-K"
 	case CubicFeetPerSecond:
-		return fmt.Sprintf("%s ft³/s", v)
+		return v + "ft³/s"
 	case PercentObscurationPerFoot:
-		return fmt.Sprintf("%s %% obscuration/ft", v)
+		return v + "% obscuration/ft"
 	case PercentObscurationPerMeter:
-		return fmt.Sprintf("%s %% obscuration/m", v)
+		return v + "% obscuration/m"
 	case Milliohms:
-		return fmt.Sprintf("%s mΩ", v)
+		return v + " mΩ"
 	case MegawattHours:
-		return fmt.Sprintf("%s MWh", v)
+		return v + "MWh"
 	case KiloBTUs:
-		return fmt.Sprintf("%s kBTU", v)
+		return v + " kBTU"
 	case MegaBTUs:
-		return fmt.Sprintf("%s MBTU", v)
+		return v + " MBTU"
 	case KilojoulesPerKilogramDryAir:
-		return fmt.Sprintf("%s KJ/kg dry air", v)
+		return v + " KJ/kg dry air"
 	case MegajoulesPerKilogramDryAir:
-		return fmt.Sprintf("%s MJ/kg dry air", v)
+		return v + " MJ/kg dry air"
 	case KilojoulesPerDegreeKelvin:
-		return fmt.Sprintf("%s KJ/deg-K", v)
+		return v + " KJ/deg-K"
 	case MegajoulesPerDegreeKelvin:
-		return fmt.Sprintf("%s MJ/deg-K", v)
+		return v + " MJ/deg-K"
 	case Newton:
-		return fmt.Sprintf("%s N", v)
+		return v + "N"
 	case GramsPerSecond:
-		return fmt.Sprintf("%s g/s", v)
+		return v + "g/s"
 	case GramsPerMinute:
-		return fmt.Sprintf("%s g/min", v)
+		return v + "g/min"
 	case TonsPerHour:
-		return fmt.Sprintf("%s tons/h", v)
+		return v + " tons/h"
 	case KiloBTUsPerHour:
-		return fmt.Sprintf("%s kBTU/h", v)
+		return v + " kBTU/h"
 	case HundredthsSeconds:
 		return time.Duration(n * float64(time.Millisecond) * 10).String()
 	case Milliseconds:
 		return time.Duration(n * float64(time.Millisecond)).String()
 	case NewtonMeters:
-		return fmt.Sprintf("%s Nm", v)
+		return v + "Nm"
 	case MillimetersPerSecond:
-		return fmt.Sprintf("%s mm/s", v)
+		return v + "mm/s"
 	case MillimetersPerMinute:
-		return fmt.Sprintf("%s mm/min", v)
+		return v + "mm/min"
 	case MetersPerMinute:
-		return fmt.Sprintf("%s m/min", v)
+		return v + "m/min"
 	case MetersPerHour:
-		return fmt.Sprintf("%s m/h", v)
+		return v + "m/h"
 	case CubicMetersPerMinute:
-		return fmt.Sprintf("%s m³/min", v)
+		return v + "m³/min"
 	case MetersPerSecondPerSecond:
-		return fmt.Sprintf("%s m/s²", v)
+		return v + "m/s²"
 	case AmperesPerMeter:
-		return fmt.Sprintf("%s A/m", v)
+		return v + "A/m"
 	case AmperesPerSquareMeter:
-		return fmt.Sprintf("%s A/m²", v)
+		return v + "A/m²"
 	case AmpereSquareMeters:
-		return fmt.Sprintf("%s Am²", v)
+		return v + "Am²"
 	case Farads:
-		return fmt.Sprintf("%s Farad%s", v, suf)
+		return v + " Farad" + suf
 	case Henrys:
-		return fmt.Sprintf("%s Henry%s", v, suf)
+		return v + " Henry" + suf
 	case OhmMeters:
-		return fmt.Sprintf("%s Ωm", v)
+		return v + " Ωm"
 	case Siemens:
-		return fmt.Sprintf("%s Siemens", v)
+		return v + " Siemens"
 	case SiemensPerMeter:
-		return fmt.Sprintf("%s Siemens/m", v)
+		return v + " Siemens/m"
 	case Teslas:
-		return fmt.Sprintf("%s Tesla%s", v, suf)
+		return v + " Tesla" + suf
 	case VoltsPerDegreeKelvin:
-		return fmt.Sprintf("%s V/deg-K", v)
+		return v + "V/deg-K"
 	case VoltsPerMeter:
-		return fmt.Sprintf("%s V/m", v)
+		return v + "V/m"
 	case Webers:
-		return fmt.Sprintf("%s Weber%s", v, suf)
+		return v + " Weber" + suf
 	case Candelas:
-		return fmt.Sprintf("%s Candela%s", v, suf)
+		return v + " Candela" + suf
 	case CandelasPerSquareMeter:
-		return fmt.Sprintf("%s Candela/m²", v)
+		return v + " Candela/m²"
 	case KelvinsPerHour:
-		return fmt.Sprintf("%s K/h", v)
+		return v + "K/h"
 	case KelvinsPerMinute:
-		return fmt.Sprintf("%s K/min", v)
+		return v + "K/min"
 	case JouleSeconds:
-		return fmt.Sprintf("%s Js", v)
+		return v + " Js"
 	case SquareMetersPerNewton:
-		return fmt.Sprintf("%s m²/N", v)
+		return v + "m²/N"
 	case KilogramPerCubicMeter:
-		return fmt.Sprintf("%s kg/m³", v)
+		return v + "kg/m³"
 	case NewtonSeconds:
-		return fmt.Sprintf("%s Ns", v)
+		return v + "Ns"
 	case NewtonsPerMeter:
-		return fmt.Sprintf("%s N/m", v)
+		return v + "N/m"
 	case WattsPerMeterPerDegreeKelvin:
-		return fmt.Sprintf("%s W/m/deg-K", v)
+		return v + " W/m/deg-K"
 	default:
-		return fmt.Sprintf("%s", v)
+		return v
 	}
 }

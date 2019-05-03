@@ -43,11 +43,11 @@ func (a *MeasuredPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MeasuredPressure(*nt)
 	return br, err
 }
-
-func (a MeasuredPressure) Readable() bool   { return true }
-func (a MeasuredPressure) Writable() bool   { return false }
-func (a MeasuredPressure) Reportable() bool { return true }
-func (a MeasuredPressure) SceneIndex() int  { return -1 }
+func (MeasuredPressure) Name() string     { return "Measured Pressure" }
+func (MeasuredPressure) Readable() bool   { return true }
+func (MeasuredPressure) Writable() bool   { return false }
+func (MeasuredPressure) Reportable() bool { return true }
+func (MeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MeasuredPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -70,11 +70,11 @@ func (a *MinMeasuredPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinMeasuredPressure(*nt)
 	return br, err
 }
-
-func (a MinMeasuredPressure) Readable() bool   { return true }
-func (a MinMeasuredPressure) Writable() bool   { return false }
-func (a MinMeasuredPressure) Reportable() bool { return false }
-func (a MinMeasuredPressure) SceneIndex() int  { return -1 }
+func (MinMeasuredPressure) Name() string     { return "Min Measured Pressure" }
+func (MinMeasuredPressure) Readable() bool   { return true }
+func (MinMeasuredPressure) Writable() bool   { return false }
+func (MinMeasuredPressure) Reportable() bool { return false }
+func (MinMeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -97,11 +97,11 @@ func (a *MaxMeasuredPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxMeasuredPressure(*nt)
 	return br, err
 }
-
-func (a MaxMeasuredPressure) Readable() bool   { return true }
-func (a MaxMeasuredPressure) Writable() bool   { return false }
-func (a MaxMeasuredPressure) Reportable() bool { return false }
-func (a MaxMeasuredPressure) SceneIndex() int  { return -1 }
+func (MaxMeasuredPressure) Name() string     { return "Max Measured Pressure" }
+func (MaxMeasuredPressure) Readable() bool   { return true }
+func (MaxMeasuredPressure) Writable() bool   { return false }
+func (MaxMeasuredPressure) Reportable() bool { return false }
+func (MaxMeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -124,11 +124,11 @@ func (a *PressureTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PressureTolerance(*nt)
 	return br, err
 }
-
-func (a PressureTolerance) Readable() bool   { return true }
-func (a PressureTolerance) Writable() bool   { return false }
-func (a PressureTolerance) Reportable() bool { return true }
-func (a PressureTolerance) SceneIndex() int  { return -1 }
+func (PressureTolerance) Name() string     { return "Pressure Tolerance" }
+func (PressureTolerance) Readable() bool   { return true }
+func (PressureTolerance) Writable() bool   { return false }
+func (PressureTolerance) Reportable() bool { return true }
+func (PressureTolerance) SceneIndex() int  { return -1 }
 
 func (a PressureTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -151,11 +151,11 @@ func (a *ScaledPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ScaledPressure(*nt)
 	return br, err
 }
-
-func (a ScaledPressure) Readable() bool   { return true }
-func (a ScaledPressure) Writable() bool   { return false }
-func (a ScaledPressure) Reportable() bool { return false }
-func (a ScaledPressure) SceneIndex() int  { return -1 }
+func (ScaledPressure) Name() string     { return "Scaled Pressure" }
+func (ScaledPressure) Readable() bool   { return true }
+func (ScaledPressure) Writable() bool   { return false }
+func (ScaledPressure) Reportable() bool { return false }
+func (ScaledPressure) SceneIndex() int  { return -1 }
 
 func (a ScaledPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -178,11 +178,11 @@ func (a *MinScaledPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinScaledPressure(*nt)
 	return br, err
 }
-
-func (a MinScaledPressure) Readable() bool   { return true }
-func (a MinScaledPressure) Writable() bool   { return false }
-func (a MinScaledPressure) Reportable() bool { return false }
-func (a MinScaledPressure) SceneIndex() int  { return -1 }
+func (MinScaledPressure) Name() string     { return "Min Scaled Pressure" }
+func (MinScaledPressure) Readable() bool   { return true }
+func (MinScaledPressure) Writable() bool   { return false }
+func (MinScaledPressure) Reportable() bool { return false }
+func (MinScaledPressure) SceneIndex() int  { return -1 }
 
 func (a MinScaledPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -205,11 +205,11 @@ func (a *MaxScaledPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxScaledPressure(*nt)
 	return br, err
 }
-
-func (a MaxScaledPressure) Readable() bool   { return true }
-func (a MaxScaledPressure) Writable() bool   { return false }
-func (a MaxScaledPressure) Reportable() bool { return false }
-func (a MaxScaledPressure) SceneIndex() int  { return -1 }
+func (MaxScaledPressure) Name() string     { return "Max Scaled Pressure" }
+func (MaxScaledPressure) Readable() bool   { return true }
+func (MaxScaledPressure) Writable() bool   { return false }
+func (MaxScaledPressure) Reportable() bool { return false }
+func (MaxScaledPressure) SceneIndex() int  { return -1 }
 
 func (a MaxScaledPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -232,11 +232,11 @@ func (a *ScaledPressureTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ScaledPressureTolerance(*nt)
 	return br, err
 }
-
-func (a ScaledPressureTolerance) Readable() bool   { return true }
-func (a ScaledPressureTolerance) Writable() bool   { return false }
-func (a ScaledPressureTolerance) Reportable() bool { return false }
-func (a ScaledPressureTolerance) SceneIndex() int  { return -1 }
+func (ScaledPressureTolerance) Name() string     { return "Scaled Pressure Tolerance" }
+func (ScaledPressureTolerance) Readable() bool   { return true }
+func (ScaledPressureTolerance) Writable() bool   { return false }
+func (ScaledPressureTolerance) Reportable() bool { return false }
+func (ScaledPressureTolerance) SceneIndex() int  { return -1 }
 
 func (a ScaledPressureTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -259,11 +259,11 @@ func (a *Scale) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Scale(*nt)
 	return br, err
 }
-
-func (a Scale) Readable() bool   { return true }
-func (a Scale) Writable() bool   { return false }
-func (a Scale) Reportable() bool { return false }
-func (a Scale) SceneIndex() int  { return -1 }
+func (Scale) Name() string     { return "Scale" }
+func (Scale) Readable() bool   { return true }
+func (Scale) Writable() bool   { return false }
+func (Scale) Reportable() bool { return false }
+func (Scale) SceneIndex() int  { return -1 }
 
 func (a Scale) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))

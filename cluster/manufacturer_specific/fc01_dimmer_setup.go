@@ -38,11 +38,11 @@ func (a *Capabilities) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Capabilities(*nt)
 	return br, err
 }
-
-func (a Capabilities) Readable() bool   { return true }
-func (a Capabilities) Writable() bool   { return false }
-func (a Capabilities) Reportable() bool { return false }
-func (a Capabilities) SceneIndex() int  { return -1 }
+func (Capabilities) Name() string     { return "Capabilities" }
+func (Capabilities) Readable() bool   { return true }
+func (Capabilities) Writable() bool   { return false }
+func (Capabilities) Reportable() bool { return false }
+func (Capabilities) SceneIndex() int  { return -1 }
 
 func (a Capabilities) String() string {
 	var bstr []string
@@ -116,11 +116,11 @@ func (a *Status) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Status(*nt)
 	return br, err
 }
-
-func (a Status) Readable() bool   { return true }
-func (a Status) Writable() bool   { return false }
-func (a Status) Reportable() bool { return false }
-func (a Status) SceneIndex() int  { return -1 }
+func (Status) Name() string     { return "Status" }
+func (Status) Readable() bool   { return true }
+func (Status) Writable() bool   { return false }
+func (Status) Reportable() bool { return false }
+func (Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
 	var bstr []string
@@ -204,11 +204,11 @@ func (a *Mode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Mode(*nt)
 	return br, err
 }
-
-func (a Mode) Readable() bool   { return true }
-func (a Mode) Writable() bool   { return false }
-func (a Mode) Reportable() bool { return false }
-func (a Mode) SceneIndex() int  { return -1 }
+func (Mode) Name() string     { return "Mode" }
+func (Mode) Readable() bool   { return true }
+func (Mode) Writable() bool   { return false }
+func (Mode) Reportable() bool { return false }
+func (Mode) SceneIndex() int  { return -1 }
 
 func (a Mode) String() string {
 	var bstr []string

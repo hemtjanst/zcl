@@ -43,11 +43,11 @@ func (a *MultiValueStateText) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueStateText(*nt)
 	return br, err
 }
-
-func (a MultiValueStateText) Readable() bool   { return true }
-func (a MultiValueStateText) Writable() bool   { return true }
-func (a MultiValueStateText) Reportable() bool { return false }
-func (a MultiValueStateText) SceneIndex() int  { return -1 }
+func (MultiValueStateText) Name() string     { return "Multi Value State Text" }
+func (MultiValueStateText) Readable() bool   { return true }
+func (MultiValueStateText) Writable() bool   { return true }
+func (MultiValueStateText) Reportable() bool { return false }
+func (MultiValueStateText) SceneIndex() int  { return -1 }
 
 func (a MultiValueStateText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -70,11 +70,11 @@ func (a *MultiValueDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueDescription(*nt)
 	return br, err
 }
-
-func (a MultiValueDescription) Readable() bool   { return true }
-func (a MultiValueDescription) Writable() bool   { return true }
-func (a MultiValueDescription) Reportable() bool { return false }
-func (a MultiValueDescription) SceneIndex() int  { return -1 }
+func (MultiValueDescription) Name() string     { return "Multi Value Description" }
+func (MultiValueDescription) Readable() bool   { return true }
+func (MultiValueDescription) Writable() bool   { return true }
+func (MultiValueDescription) Reportable() bool { return false }
+func (MultiValueDescription) SceneIndex() int  { return -1 }
 
 func (a MultiValueDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -97,11 +97,11 @@ func (a *MultiValueNumberOfStates) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueNumberOfStates(*nt)
 	return br, err
 }
-
-func (a MultiValueNumberOfStates) Readable() bool   { return true }
-func (a MultiValueNumberOfStates) Writable() bool   { return true }
-func (a MultiValueNumberOfStates) Reportable() bool { return false }
-func (a MultiValueNumberOfStates) SceneIndex() int  { return -1 }
+func (MultiValueNumberOfStates) Name() string     { return "Multi Value Number of states" }
+func (MultiValueNumberOfStates) Readable() bool   { return true }
+func (MultiValueNumberOfStates) Writable() bool   { return true }
+func (MultiValueNumberOfStates) Reportable() bool { return false }
+func (MultiValueNumberOfStates) SceneIndex() int  { return -1 }
 
 func (a MultiValueNumberOfStates) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -124,11 +124,11 @@ func (a *MultiValueOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueOutOfService(*nt)
 	return br, err
 }
-
-func (a MultiValueOutOfService) Readable() bool   { return true }
-func (a MultiValueOutOfService) Writable() bool   { return true }
-func (a MultiValueOutOfService) Reportable() bool { return false }
-func (a MultiValueOutOfService) SceneIndex() int  { return -1 }
+func (MultiValueOutOfService) Name() string     { return "Multi Value Out of service" }
+func (MultiValueOutOfService) Readable() bool   { return true }
+func (MultiValueOutOfService) Writable() bool   { return true }
+func (MultiValueOutOfService) Reportable() bool { return false }
+func (MultiValueOutOfService) SceneIndex() int  { return -1 }
 
 func (a MultiValueOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -151,11 +151,11 @@ func (a *MultiValuePresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValuePresentValue(*nt)
 	return br, err
 }
-
-func (a MultiValuePresentValue) Readable() bool   { return true }
-func (a MultiValuePresentValue) Writable() bool   { return true }
-func (a MultiValuePresentValue) Reportable() bool { return true }
-func (a MultiValuePresentValue) SceneIndex() int  { return -1 }
+func (MultiValuePresentValue) Name() string     { return "Multi Value Present value" }
+func (MultiValuePresentValue) Readable() bool   { return true }
+func (MultiValuePresentValue) Writable() bool   { return true }
+func (MultiValuePresentValue) Reportable() bool { return true }
+func (MultiValuePresentValue) SceneIndex() int  { return -1 }
 
 func (a MultiValuePresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -178,11 +178,11 @@ func (a *MultiValuePriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValuePriorityArray(*nt)
 	return br, err
 }
-
-func (a MultiValuePriorityArray) Readable() bool   { return true }
-func (a MultiValuePriorityArray) Writable() bool   { return true }
-func (a MultiValuePriorityArray) Reportable() bool { return false }
-func (a MultiValuePriorityArray) SceneIndex() int  { return -1 }
+func (MultiValuePriorityArray) Name() string     { return "Multi Value Priority Array" }
+func (MultiValuePriorityArray) Readable() bool   { return true }
+func (MultiValuePriorityArray) Writable() bool   { return true }
+func (MultiValuePriorityArray) Reportable() bool { return false }
+func (MultiValuePriorityArray) SceneIndex() int  { return -1 }
 
 func (a MultiValuePriorityArray) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -205,11 +205,11 @@ func (a *MultiValueReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueReliability(*nt)
 	return br, err
 }
-
-func (a MultiValueReliability) Readable() bool   { return true }
-func (a MultiValueReliability) Writable() bool   { return true }
-func (a MultiValueReliability) Reportable() bool { return false }
-func (a MultiValueReliability) SceneIndex() int  { return -1 }
+func (MultiValueReliability) Name() string     { return "Multi Value Reliability" }
+func (MultiValueReliability) Readable() bool   { return true }
+func (MultiValueReliability) Writable() bool   { return true }
+func (MultiValueReliability) Reportable() bool { return false }
+func (MultiValueReliability) SceneIndex() int  { return -1 }
 
 func (a MultiValueReliability) String() string {
 	switch a {
@@ -322,11 +322,11 @@ func (a *MultiValueRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueRelinquishDefault(*nt)
 	return br, err
 }
-
-func (a MultiValueRelinquishDefault) Readable() bool   { return true }
-func (a MultiValueRelinquishDefault) Writable() bool   { return true }
-func (a MultiValueRelinquishDefault) Reportable() bool { return false }
-func (a MultiValueRelinquishDefault) SceneIndex() int  { return -1 }
+func (MultiValueRelinquishDefault) Name() string     { return "Multi Value Relinquish Default" }
+func (MultiValueRelinquishDefault) Readable() bool   { return true }
+func (MultiValueRelinquishDefault) Writable() bool   { return true }
+func (MultiValueRelinquishDefault) Reportable() bool { return false }
+func (MultiValueRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a MultiValueRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -349,11 +349,11 @@ func (a *MultiValueStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueStatusFlags(*nt)
 	return br, err
 }
-
-func (a MultiValueStatusFlags) Readable() bool   { return true }
-func (a MultiValueStatusFlags) Writable() bool   { return false }
-func (a MultiValueStatusFlags) Reportable() bool { return true }
-func (a MultiValueStatusFlags) SceneIndex() int  { return -1 }
+func (MultiValueStatusFlags) Name() string     { return "Multi Value Status flags" }
+func (MultiValueStatusFlags) Readable() bool   { return true }
+func (MultiValueStatusFlags) Writable() bool   { return false }
+func (MultiValueStatusFlags) Reportable() bool { return true }
+func (MultiValueStatusFlags) SceneIndex() int  { return -1 }
 
 func (a MultiValueStatusFlags) String() string {
 	var bstr []string
@@ -417,11 +417,11 @@ func (a *MultiValueApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiValueApplicationType(*nt)
 	return br, err
 }
-
-func (a MultiValueApplicationType) Readable() bool   { return true }
-func (a MultiValueApplicationType) Writable() bool   { return false }
-func (a MultiValueApplicationType) Reportable() bool { return false }
-func (a MultiValueApplicationType) SceneIndex() int  { return -1 }
+func (MultiValueApplicationType) Name() string     { return "Multi Value Application Type" }
+func (MultiValueApplicationType) Readable() bool   { return true }
+func (MultiValueApplicationType) Writable() bool   { return false }
+func (MultiValueApplicationType) Reportable() bool { return false }
+func (MultiValueApplicationType) SceneIndex() int  { return -1 }
 
 func (a MultiValueApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

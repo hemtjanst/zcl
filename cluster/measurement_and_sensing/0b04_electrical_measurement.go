@@ -230,10 +230,10 @@ func (v *GetProfileInfoResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetProfileInfoResponse) ProfileCountString() string {
+func (v GetProfileInfoResponse) ProfileCountString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.ProfileCount))
 }
-func (v *GetProfileInfoResponse) ProfileIntervalPeriodString() string {
+func (v GetProfileInfoResponse) ProfileIntervalPeriodString() string {
 	switch v.ProfileIntervalPeriod {
 	case 0x00:
 		return "Daily"
@@ -254,14 +254,14 @@ func (v *GetProfileInfoResponse) ProfileIntervalPeriodString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.ProfileIntervalPeriod))
 }
-func (v *GetProfileInfoResponse) MaxNumberOfIntervalsString() string {
+func (v GetProfileInfoResponse) MaxNumberOfIntervalsString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.MaxNumberOfIntervals))
 }
-func (v *GetProfileInfoResponse) ListOfAttributesString() string {
+func (v GetProfileInfoResponse) ListOfAttributesString() string {
 	return zcl.Sprintf("%v", zcl.Zarray(v.ListOfAttributes))
 }
 
-func (v *GetProfileInfoResponse) String() string {
+func (v GetProfileInfoResponse) String() string {
 	var str []string
 	str = append(str, "ProfileCount["+v.ProfileCountString()+"]")
 	str = append(str, "ProfileIntervalPeriod["+v.ProfileIntervalPeriodString()+"]")
@@ -269,6 +269,8 @@ func (v *GetProfileInfoResponse) String() string {
 	str = append(str, "ListOfAttributes["+v.ListOfAttributesString()+"]")
 	return "GetProfileInfoResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetProfileInfoResponse) Name() string { return "Get Profile Info Response" }
 
 type GetMeasurementProfileResponse struct {
 	StartTime                  zcl.Zutc
@@ -372,10 +374,10 @@ func (v *GetMeasurementProfileResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetMeasurementProfileResponse) StartTimeString() string {
+func (v GetMeasurementProfileResponse) StartTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zutc(v.StartTime))
 }
-func (v *GetMeasurementProfileResponse) StatusString() string {
+func (v GetMeasurementProfileResponse) StatusString() string {
 	switch v.Status {
 	case 0x00:
 		return "Success"
@@ -390,7 +392,7 @@ func (v *GetMeasurementProfileResponse) StatusString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.Status))
 }
-func (v *GetMeasurementProfileResponse) ProfileIntervalPeriodString() string {
+func (v GetMeasurementProfileResponse) ProfileIntervalPeriodString() string {
 	switch v.ProfileIntervalPeriod {
 	case 0x00:
 		return "Daily"
@@ -411,17 +413,17 @@ func (v *GetMeasurementProfileResponse) ProfileIntervalPeriodString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.ProfileIntervalPeriod))
 }
-func (v *GetMeasurementProfileResponse) NumberOfIntervalsDeliveredString() string {
+func (v GetMeasurementProfileResponse) NumberOfIntervalsDeliveredString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.NumberOfIntervalsDelivered))
 }
-func (v *GetMeasurementProfileResponse) AttributeIdString() string {
+func (v GetMeasurementProfileResponse) AttributeIdString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.AttributeId))
 }
-func (v *GetMeasurementProfileResponse) IntervalsString() string {
+func (v GetMeasurementProfileResponse) IntervalsString() string {
 	return zcl.Sprintf("%v", zcl.Zarray(v.Intervals))
 }
 
-func (v *GetMeasurementProfileResponse) String() string {
+func (v GetMeasurementProfileResponse) String() string {
 	var str []string
 	str = append(str, "StartTime["+v.StartTimeString()+"]")
 	str = append(str, "Status["+v.StatusString()+"]")
@@ -431,6 +433,8 @@ func (v *GetMeasurementProfileResponse) String() string {
 	str = append(str, "Intervals["+v.IntervalsString()+"]")
 	return "GetMeasurementProfileResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetMeasurementProfileResponse) Name() string { return "Get Measurement Profile Response" }
 
 type GetProfileInfo struct {
 }
@@ -461,10 +465,12 @@ func (v *GetProfileInfo) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetProfileInfo) String() string {
+func (v GetProfileInfo) String() string {
 	var str []string
 	return "GetProfileInfo{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetProfileInfo) Name() string { return "Get Profile Info" }
 
 type GetMeasurementProfile struct {
 	AttributeId       zcl.Zu16
@@ -535,23 +541,25 @@ func (v *GetMeasurementProfile) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetMeasurementProfile) AttributeIdString() string {
+func (v GetMeasurementProfile) AttributeIdString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.AttributeId))
 }
-func (v *GetMeasurementProfile) StartTimeString() string {
+func (v GetMeasurementProfile) StartTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zutc(v.StartTime))
 }
-func (v *GetMeasurementProfile) NumberOfIntervalsString() string {
+func (v GetMeasurementProfile) NumberOfIntervalsString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.NumberOfIntervals))
 }
 
-func (v *GetMeasurementProfile) String() string {
+func (v GetMeasurementProfile) String() string {
 	var str []string
 	str = append(str, "AttributeId["+v.AttributeIdString()+"]")
 	str = append(str, "StartTime["+v.StartTimeString()+"]")
 	str = append(str, "NumberOfIntervals["+v.NumberOfIntervalsString()+"]")
 	return "GetMeasurementProfile{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetMeasurementProfile) Name() string { return "Get Measurement Profile" }
 
 // MeasurementType is an autogenerated attribute in the ElectricalMeasurement cluster
 type MeasurementType zcl.Zbmp32
@@ -570,11 +578,11 @@ func (a *MeasurementType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MeasurementType(*nt)
 	return br, err
 }
-
-func (a MeasurementType) Readable() bool   { return true }
-func (a MeasurementType) Writable() bool   { return false }
-func (a MeasurementType) Reportable() bool { return false }
-func (a MeasurementType) SceneIndex() int  { return -1 }
+func (MeasurementType) Name() string     { return "Measurement Type" }
+func (MeasurementType) Readable() bool   { return true }
+func (MeasurementType) Writable() bool   { return false }
+func (MeasurementType) Reportable() bool { return false }
+func (MeasurementType) SceneIndex() int  { return -1 }
 
 func (a MeasurementType) String() string {
 	var bstr []string
@@ -688,11 +696,11 @@ func (a *DcVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcVoltage(*nt)
 	return br, err
 }
-
-func (a DcVoltage) Readable() bool   { return true }
-func (a DcVoltage) Writable() bool   { return false }
-func (a DcVoltage) Reportable() bool { return false }
-func (a DcVoltage) SceneIndex() int  { return -1 }
+func (DcVoltage) Name() string     { return "DC Voltage" }
+func (DcVoltage) Readable() bool   { return true }
+func (DcVoltage) Writable() bool   { return false }
+func (DcVoltage) Reportable() bool { return false }
+func (DcVoltage) SceneIndex() int  { return -1 }
 
 func (a DcVoltage) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -715,11 +723,11 @@ func (a *DcVoltageMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcVoltageMin(*nt)
 	return br, err
 }
-
-func (a DcVoltageMin) Readable() bool   { return true }
-func (a DcVoltageMin) Writable() bool   { return false }
-func (a DcVoltageMin) Reportable() bool { return false }
-func (a DcVoltageMin) SceneIndex() int  { return -1 }
+func (DcVoltageMin) Name() string     { return "DC Voltage Min" }
+func (DcVoltageMin) Readable() bool   { return true }
+func (DcVoltageMin) Writable() bool   { return false }
+func (DcVoltageMin) Reportable() bool { return false }
+func (DcVoltageMin) SceneIndex() int  { return -1 }
 
 func (a DcVoltageMin) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -742,11 +750,11 @@ func (a *DcVoltageMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcVoltageMax(*nt)
 	return br, err
 }
-
-func (a DcVoltageMax) Readable() bool   { return true }
-func (a DcVoltageMax) Writable() bool   { return false }
-func (a DcVoltageMax) Reportable() bool { return false }
-func (a DcVoltageMax) SceneIndex() int  { return -1 }
+func (DcVoltageMax) Name() string     { return "DC Voltage Max" }
+func (DcVoltageMax) Readable() bool   { return true }
+func (DcVoltageMax) Writable() bool   { return false }
+func (DcVoltageMax) Reportable() bool { return false }
+func (DcVoltageMax) SceneIndex() int  { return -1 }
 
 func (a DcVoltageMax) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -769,11 +777,11 @@ func (a *DcCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcCurrent(*nt)
 	return br, err
 }
-
-func (a DcCurrent) Readable() bool   { return true }
-func (a DcCurrent) Writable() bool   { return false }
-func (a DcCurrent) Reportable() bool { return false }
-func (a DcCurrent) SceneIndex() int  { return -1 }
+func (DcCurrent) Name() string     { return "DC Current" }
+func (DcCurrent) Readable() bool   { return true }
+func (DcCurrent) Writable() bool   { return false }
+func (DcCurrent) Reportable() bool { return false }
+func (DcCurrent) SceneIndex() int  { return -1 }
 
 func (a DcCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -796,11 +804,11 @@ func (a *DcCurrentMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcCurrentMin(*nt)
 	return br, err
 }
-
-func (a DcCurrentMin) Readable() bool   { return true }
-func (a DcCurrentMin) Writable() bool   { return false }
-func (a DcCurrentMin) Reportable() bool { return false }
-func (a DcCurrentMin) SceneIndex() int  { return -1 }
+func (DcCurrentMin) Name() string     { return "DC Current Min" }
+func (DcCurrentMin) Readable() bool   { return true }
+func (DcCurrentMin) Writable() bool   { return false }
+func (DcCurrentMin) Reportable() bool { return false }
+func (DcCurrentMin) SceneIndex() int  { return -1 }
 
 func (a DcCurrentMin) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -823,11 +831,11 @@ func (a *DcCurrentMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcCurrentMax(*nt)
 	return br, err
 }
-
-func (a DcCurrentMax) Readable() bool   { return true }
-func (a DcCurrentMax) Writable() bool   { return false }
-func (a DcCurrentMax) Reportable() bool { return false }
-func (a DcCurrentMax) SceneIndex() int  { return -1 }
+func (DcCurrentMax) Name() string     { return "DC Current Max" }
+func (DcCurrentMax) Readable() bool   { return true }
+func (DcCurrentMax) Writable() bool   { return false }
+func (DcCurrentMax) Reportable() bool { return false }
+func (DcCurrentMax) SceneIndex() int  { return -1 }
 
 func (a DcCurrentMax) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -850,11 +858,11 @@ func (a *DcPower) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcPower(*nt)
 	return br, err
 }
-
-func (a DcPower) Readable() bool   { return true }
-func (a DcPower) Writable() bool   { return false }
-func (a DcPower) Reportable() bool { return false }
-func (a DcPower) SceneIndex() int  { return -1 }
+func (DcPower) Name() string     { return "DC Power" }
+func (DcPower) Readable() bool   { return true }
+func (DcPower) Writable() bool   { return false }
+func (DcPower) Reportable() bool { return false }
+func (DcPower) SceneIndex() int  { return -1 }
 
 func (a DcPower) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -877,11 +885,11 @@ func (a *DcPowerMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcPowerMin(*nt)
 	return br, err
 }
-
-func (a DcPowerMin) Readable() bool   { return true }
-func (a DcPowerMin) Writable() bool   { return false }
-func (a DcPowerMin) Reportable() bool { return false }
-func (a DcPowerMin) SceneIndex() int  { return -1 }
+func (DcPowerMin) Name() string     { return "DC Power Min" }
+func (DcPowerMin) Readable() bool   { return true }
+func (DcPowerMin) Writable() bool   { return false }
+func (DcPowerMin) Reportable() bool { return false }
+func (DcPowerMin) SceneIndex() int  { return -1 }
 
 func (a DcPowerMin) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -904,11 +912,11 @@ func (a *DcPowerMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcPowerMax(*nt)
 	return br, err
 }
-
-func (a DcPowerMax) Readable() bool   { return true }
-func (a DcPowerMax) Writable() bool   { return false }
-func (a DcPowerMax) Reportable() bool { return false }
-func (a DcPowerMax) SceneIndex() int  { return -1 }
+func (DcPowerMax) Name() string     { return "DC Power Max" }
+func (DcPowerMax) Readable() bool   { return true }
+func (DcPowerMax) Writable() bool   { return false }
+func (DcPowerMax) Reportable() bool { return false }
+func (DcPowerMax) SceneIndex() int  { return -1 }
 
 func (a DcPowerMax) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -931,11 +939,11 @@ func (a *DcVoltageMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcVoltageMultiplier(*nt)
 	return br, err
 }
-
-func (a DcVoltageMultiplier) Readable() bool   { return true }
-func (a DcVoltageMultiplier) Writable() bool   { return false }
-func (a DcVoltageMultiplier) Reportable() bool { return false }
-func (a DcVoltageMultiplier) SceneIndex() int  { return -1 }
+func (DcVoltageMultiplier) Name() string     { return "DC Voltage Multiplier" }
+func (DcVoltageMultiplier) Readable() bool   { return true }
+func (DcVoltageMultiplier) Writable() bool   { return false }
+func (DcVoltageMultiplier) Reportable() bool { return false }
+func (DcVoltageMultiplier) SceneIndex() int  { return -1 }
 
 func (a DcVoltageMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -958,11 +966,11 @@ func (a *DcVoltageDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcVoltageDivisor(*nt)
 	return br, err
 }
-
-func (a DcVoltageDivisor) Readable() bool   { return true }
-func (a DcVoltageDivisor) Writable() bool   { return false }
-func (a DcVoltageDivisor) Reportable() bool { return false }
-func (a DcVoltageDivisor) SceneIndex() int  { return -1 }
+func (DcVoltageDivisor) Name() string     { return "DC Voltage Divisor" }
+func (DcVoltageDivisor) Readable() bool   { return true }
+func (DcVoltageDivisor) Writable() bool   { return false }
+func (DcVoltageDivisor) Reportable() bool { return false }
+func (DcVoltageDivisor) SceneIndex() int  { return -1 }
 
 func (a DcVoltageDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -985,11 +993,11 @@ func (a *DcCurrentMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcCurrentMultiplier(*nt)
 	return br, err
 }
-
-func (a DcCurrentMultiplier) Readable() bool   { return true }
-func (a DcCurrentMultiplier) Writable() bool   { return false }
-func (a DcCurrentMultiplier) Reportable() bool { return false }
-func (a DcCurrentMultiplier) SceneIndex() int  { return -1 }
+func (DcCurrentMultiplier) Name() string     { return "DC Current Multiplier" }
+func (DcCurrentMultiplier) Readable() bool   { return true }
+func (DcCurrentMultiplier) Writable() bool   { return false }
+func (DcCurrentMultiplier) Reportable() bool { return false }
+func (DcCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a DcCurrentMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1012,11 +1020,11 @@ func (a *DcCurrentDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcCurrentDivisor(*nt)
 	return br, err
 }
-
-func (a DcCurrentDivisor) Readable() bool   { return true }
-func (a DcCurrentDivisor) Writable() bool   { return false }
-func (a DcCurrentDivisor) Reportable() bool { return false }
-func (a DcCurrentDivisor) SceneIndex() int  { return -1 }
+func (DcCurrentDivisor) Name() string     { return "DC Current Divisor" }
+func (DcCurrentDivisor) Readable() bool   { return true }
+func (DcCurrentDivisor) Writable() bool   { return false }
+func (DcCurrentDivisor) Reportable() bool { return false }
+func (DcCurrentDivisor) SceneIndex() int  { return -1 }
 
 func (a DcCurrentDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1039,11 +1047,11 @@ func (a *DcPowerMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcPowerMultiplier(*nt)
 	return br, err
 }
-
-func (a DcPowerMultiplier) Readable() bool   { return true }
-func (a DcPowerMultiplier) Writable() bool   { return false }
-func (a DcPowerMultiplier) Reportable() bool { return false }
-func (a DcPowerMultiplier) SceneIndex() int  { return -1 }
+func (DcPowerMultiplier) Name() string     { return "DC Power Multiplier" }
+func (DcPowerMultiplier) Readable() bool   { return true }
+func (DcPowerMultiplier) Writable() bool   { return false }
+func (DcPowerMultiplier) Reportable() bool { return false }
+func (DcPowerMultiplier) SceneIndex() int  { return -1 }
 
 func (a DcPowerMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1066,11 +1074,11 @@ func (a *DcPowerDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcPowerDivisor(*nt)
 	return br, err
 }
-
-func (a DcPowerDivisor) Readable() bool   { return true }
-func (a DcPowerDivisor) Writable() bool   { return false }
-func (a DcPowerDivisor) Reportable() bool { return false }
-func (a DcPowerDivisor) SceneIndex() int  { return -1 }
+func (DcPowerDivisor) Name() string     { return "DC Power Divisor" }
+func (DcPowerDivisor) Readable() bool   { return true }
+func (DcPowerDivisor) Writable() bool   { return false }
+func (DcPowerDivisor) Reportable() bool { return false }
+func (DcPowerDivisor) SceneIndex() int  { return -1 }
 
 func (a DcPowerDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1093,11 +1101,11 @@ func (a *AcFrequency) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcFrequency(*nt)
 	return br, err
 }
-
-func (a AcFrequency) Readable() bool   { return true }
-func (a AcFrequency) Writable() bool   { return false }
-func (a AcFrequency) Reportable() bool { return false }
-func (a AcFrequency) SceneIndex() int  { return -1 }
+func (AcFrequency) Name() string     { return "AC Frequency" }
+func (AcFrequency) Readable() bool   { return true }
+func (AcFrequency) Writable() bool   { return false }
+func (AcFrequency) Reportable() bool { return false }
+func (AcFrequency) SceneIndex() int  { return -1 }
 
 func (a AcFrequency) String() string {
 	return zcl.Hertz.Format(float64(a))
@@ -1120,11 +1128,11 @@ func (a *AcFrequencyMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcFrequencyMin(*nt)
 	return br, err
 }
-
-func (a AcFrequencyMin) Readable() bool   { return true }
-func (a AcFrequencyMin) Writable() bool   { return false }
-func (a AcFrequencyMin) Reportable() bool { return false }
-func (a AcFrequencyMin) SceneIndex() int  { return -1 }
+func (AcFrequencyMin) Name() string     { return "AC Frequency Min" }
+func (AcFrequencyMin) Readable() bool   { return true }
+func (AcFrequencyMin) Writable() bool   { return false }
+func (AcFrequencyMin) Reportable() bool { return false }
+func (AcFrequencyMin) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyMin) String() string {
 	return zcl.Hertz.Format(float64(a))
@@ -1147,11 +1155,11 @@ func (a *AcFrequencyMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcFrequencyMax(*nt)
 	return br, err
 }
-
-func (a AcFrequencyMax) Readable() bool   { return true }
-func (a AcFrequencyMax) Writable() bool   { return false }
-func (a AcFrequencyMax) Reportable() bool { return false }
-func (a AcFrequencyMax) SceneIndex() int  { return -1 }
+func (AcFrequencyMax) Name() string     { return "AC Frequency Max" }
+func (AcFrequencyMax) Readable() bool   { return true }
+func (AcFrequencyMax) Writable() bool   { return false }
+func (AcFrequencyMax) Reportable() bool { return false }
+func (AcFrequencyMax) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyMax) String() string {
 	return zcl.Hertz.Format(float64(a))
@@ -1174,11 +1182,11 @@ func (a *NeutralCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NeutralCurrent(*nt)
 	return br, err
 }
-
-func (a NeutralCurrent) Readable() bool   { return true }
-func (a NeutralCurrent) Writable() bool   { return false }
-func (a NeutralCurrent) Reportable() bool { return false }
-func (a NeutralCurrent) SceneIndex() int  { return -1 }
+func (NeutralCurrent) Name() string     { return "Neutral Current" }
+func (NeutralCurrent) Readable() bool   { return true }
+func (NeutralCurrent) Writable() bool   { return false }
+func (NeutralCurrent) Reportable() bool { return false }
+func (NeutralCurrent) SceneIndex() int  { return -1 }
 
 func (a NeutralCurrent) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1201,11 +1209,11 @@ func (a *TotalActivePower) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TotalActivePower(*nt)
 	return br, err
 }
-
-func (a TotalActivePower) Readable() bool   { return true }
-func (a TotalActivePower) Writable() bool   { return false }
-func (a TotalActivePower) Reportable() bool { return false }
-func (a TotalActivePower) SceneIndex() int  { return -1 }
+func (TotalActivePower) Name() string     { return "Total Active Power" }
+func (TotalActivePower) Readable() bool   { return true }
+func (TotalActivePower) Writable() bool   { return false }
+func (TotalActivePower) Reportable() bool { return false }
+func (TotalActivePower) SceneIndex() int  { return -1 }
 
 func (a TotalActivePower) String() string {
 	return zcl.Kilowatts.Format(float64(a))
@@ -1228,11 +1236,11 @@ func (a *TotalReactivePower) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TotalReactivePower(*nt)
 	return br, err
 }
-
-func (a TotalReactivePower) Readable() bool   { return true }
-func (a TotalReactivePower) Writable() bool   { return false }
-func (a TotalReactivePower) Reportable() bool { return false }
-func (a TotalReactivePower) SceneIndex() int  { return -1 }
+func (TotalReactivePower) Name() string     { return "Total Reactive Power" }
+func (TotalReactivePower) Readable() bool   { return true }
+func (TotalReactivePower) Writable() bool   { return false }
+func (TotalReactivePower) Reportable() bool { return false }
+func (TotalReactivePower) SceneIndex() int  { return -1 }
 
 func (a TotalReactivePower) String() string {
 	return zcl.KiloVoltAmperes.Format(float64(a))
@@ -1255,11 +1263,11 @@ func (a *TotalApparentPower) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TotalApparentPower(*nt)
 	return br, err
 }
-
-func (a TotalApparentPower) Readable() bool   { return true }
-func (a TotalApparentPower) Writable() bool   { return false }
-func (a TotalApparentPower) Reportable() bool { return false }
-func (a TotalApparentPower) SceneIndex() int  { return -1 }
+func (TotalApparentPower) Name() string     { return "Total Apparent Power" }
+func (TotalApparentPower) Readable() bool   { return true }
+func (TotalApparentPower) Writable() bool   { return false }
+func (TotalApparentPower) Reportable() bool { return false }
+func (TotalApparentPower) SceneIndex() int  { return -1 }
 
 func (a TotalApparentPower) String() string {
 	return zcl.KiloVoltAmperes.Format(float64(a))
@@ -1282,11 +1290,11 @@ func (a *Measured1StHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Measured1StHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a Measured1StHarmonicCurrent) Readable() bool   { return true }
-func (a Measured1StHarmonicCurrent) Writable() bool   { return false }
-func (a Measured1StHarmonicCurrent) Reportable() bool { return false }
-func (a Measured1StHarmonicCurrent) SceneIndex() int  { return -1 }
+func (Measured1StHarmonicCurrent) Name() string     { return "Measured 1st Harmonic Current" }
+func (Measured1StHarmonicCurrent) Readable() bool   { return true }
+func (Measured1StHarmonicCurrent) Writable() bool   { return false }
+func (Measured1StHarmonicCurrent) Reportable() bool { return false }
+func (Measured1StHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured1StHarmonicCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1309,11 +1317,11 @@ func (a *Measured3RdHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Measured3RdHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a Measured3RdHarmonicCurrent) Readable() bool   { return true }
-func (a Measured3RdHarmonicCurrent) Writable() bool   { return false }
-func (a Measured3RdHarmonicCurrent) Reportable() bool { return false }
-func (a Measured3RdHarmonicCurrent) SceneIndex() int  { return -1 }
+func (Measured3RdHarmonicCurrent) Name() string     { return "Measured 3rd Harmonic Current" }
+func (Measured3RdHarmonicCurrent) Readable() bool   { return true }
+func (Measured3RdHarmonicCurrent) Writable() bool   { return false }
+func (Measured3RdHarmonicCurrent) Reportable() bool { return false }
+func (Measured3RdHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured3RdHarmonicCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1336,11 +1344,11 @@ func (a *Measured5ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Measured5ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a Measured5ThHarmonicCurrent) Readable() bool   { return true }
-func (a Measured5ThHarmonicCurrent) Writable() bool   { return false }
-func (a Measured5ThHarmonicCurrent) Reportable() bool { return false }
-func (a Measured5ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (Measured5ThHarmonicCurrent) Name() string     { return "Measured 5th Harmonic Current" }
+func (Measured5ThHarmonicCurrent) Readable() bool   { return true }
+func (Measured5ThHarmonicCurrent) Writable() bool   { return false }
+func (Measured5ThHarmonicCurrent) Reportable() bool { return false }
+func (Measured5ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured5ThHarmonicCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1363,11 +1371,11 @@ func (a *Measured7ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Measured7ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a Measured7ThHarmonicCurrent) Readable() bool   { return true }
-func (a Measured7ThHarmonicCurrent) Writable() bool   { return false }
-func (a Measured7ThHarmonicCurrent) Reportable() bool { return false }
-func (a Measured7ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (Measured7ThHarmonicCurrent) Name() string     { return "Measured 7th Harmonic Current" }
+func (Measured7ThHarmonicCurrent) Readable() bool   { return true }
+func (Measured7ThHarmonicCurrent) Writable() bool   { return false }
+func (Measured7ThHarmonicCurrent) Reportable() bool { return false }
+func (Measured7ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured7ThHarmonicCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1390,11 +1398,11 @@ func (a *Measured9ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Measured9ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a Measured9ThHarmonicCurrent) Readable() bool   { return true }
-func (a Measured9ThHarmonicCurrent) Writable() bool   { return false }
-func (a Measured9ThHarmonicCurrent) Reportable() bool { return false }
-func (a Measured9ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (Measured9ThHarmonicCurrent) Name() string     { return "Measured 9th Harmonic Current" }
+func (Measured9ThHarmonicCurrent) Readable() bool   { return true }
+func (Measured9ThHarmonicCurrent) Writable() bool   { return false }
+func (Measured9ThHarmonicCurrent) Reportable() bool { return false }
+func (Measured9ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured9ThHarmonicCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1417,11 +1425,11 @@ func (a *Measured11ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Measured11ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a Measured11ThHarmonicCurrent) Readable() bool   { return true }
-func (a Measured11ThHarmonicCurrent) Writable() bool   { return false }
-func (a Measured11ThHarmonicCurrent) Reportable() bool { return false }
-func (a Measured11ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (Measured11ThHarmonicCurrent) Name() string     { return "Measured 11th Harmonic Current" }
+func (Measured11ThHarmonicCurrent) Readable() bool   { return true }
+func (Measured11ThHarmonicCurrent) Writable() bool   { return false }
+func (Measured11ThHarmonicCurrent) Reportable() bool { return false }
+func (Measured11ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a Measured11ThHarmonicCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1444,11 +1452,11 @@ func (a *MeasuredPhase1StHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error)
 	*a = MeasuredPhase1StHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a MeasuredPhase1StHarmonicCurrent) Readable() bool   { return true }
-func (a MeasuredPhase1StHarmonicCurrent) Writable() bool   { return false }
-func (a MeasuredPhase1StHarmonicCurrent) Reportable() bool { return false }
-func (a MeasuredPhase1StHarmonicCurrent) SceneIndex() int  { return -1 }
+func (MeasuredPhase1StHarmonicCurrent) Name() string     { return "Measured Phase 1st Harmonic Current" }
+func (MeasuredPhase1StHarmonicCurrent) Readable() bool   { return true }
+func (MeasuredPhase1StHarmonicCurrent) Writable() bool   { return false }
+func (MeasuredPhase1StHarmonicCurrent) Reportable() bool { return false }
+func (MeasuredPhase1StHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase1StHarmonicCurrent) String() string {
 	return zcl.DegreesPhase.Format(float64(a))
@@ -1471,11 +1479,11 @@ func (a *MeasuredPhase3RdHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error)
 	*a = MeasuredPhase3RdHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a MeasuredPhase3RdHarmonicCurrent) Readable() bool   { return true }
-func (a MeasuredPhase3RdHarmonicCurrent) Writable() bool   { return false }
-func (a MeasuredPhase3RdHarmonicCurrent) Reportable() bool { return false }
-func (a MeasuredPhase3RdHarmonicCurrent) SceneIndex() int  { return -1 }
+func (MeasuredPhase3RdHarmonicCurrent) Name() string     { return "Measured Phase 3rd Harmonic Current" }
+func (MeasuredPhase3RdHarmonicCurrent) Readable() bool   { return true }
+func (MeasuredPhase3RdHarmonicCurrent) Writable() bool   { return false }
+func (MeasuredPhase3RdHarmonicCurrent) Reportable() bool { return false }
+func (MeasuredPhase3RdHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase3RdHarmonicCurrent) String() string {
 	return zcl.DegreesPhase.Format(float64(a))
@@ -1498,11 +1506,11 @@ func (a *MeasuredPhase5ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error)
 	*a = MeasuredPhase5ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a MeasuredPhase5ThHarmonicCurrent) Readable() bool   { return true }
-func (a MeasuredPhase5ThHarmonicCurrent) Writable() bool   { return false }
-func (a MeasuredPhase5ThHarmonicCurrent) Reportable() bool { return false }
-func (a MeasuredPhase5ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (MeasuredPhase5ThHarmonicCurrent) Name() string     { return "Measured Phase 5th Harmonic Current" }
+func (MeasuredPhase5ThHarmonicCurrent) Readable() bool   { return true }
+func (MeasuredPhase5ThHarmonicCurrent) Writable() bool   { return false }
+func (MeasuredPhase5ThHarmonicCurrent) Reportable() bool { return false }
+func (MeasuredPhase5ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase5ThHarmonicCurrent) String() string {
 	return zcl.DegreesPhase.Format(float64(a))
@@ -1525,11 +1533,11 @@ func (a *MeasuredPhase7ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error)
 	*a = MeasuredPhase7ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a MeasuredPhase7ThHarmonicCurrent) Readable() bool   { return true }
-func (a MeasuredPhase7ThHarmonicCurrent) Writable() bool   { return false }
-func (a MeasuredPhase7ThHarmonicCurrent) Reportable() bool { return false }
-func (a MeasuredPhase7ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (MeasuredPhase7ThHarmonicCurrent) Name() string     { return "Measured Phase 7th Harmonic Current" }
+func (MeasuredPhase7ThHarmonicCurrent) Readable() bool   { return true }
+func (MeasuredPhase7ThHarmonicCurrent) Writable() bool   { return false }
+func (MeasuredPhase7ThHarmonicCurrent) Reportable() bool { return false }
+func (MeasuredPhase7ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase7ThHarmonicCurrent) String() string {
 	return zcl.DegreesPhase.Format(float64(a))
@@ -1552,11 +1560,11 @@ func (a *MeasuredPhase9ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error)
 	*a = MeasuredPhase9ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a MeasuredPhase9ThHarmonicCurrent) Readable() bool   { return true }
-func (a MeasuredPhase9ThHarmonicCurrent) Writable() bool   { return false }
-func (a MeasuredPhase9ThHarmonicCurrent) Reportable() bool { return false }
-func (a MeasuredPhase9ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (MeasuredPhase9ThHarmonicCurrent) Name() string     { return "Measured Phase 9th Harmonic Current" }
+func (MeasuredPhase9ThHarmonicCurrent) Readable() bool   { return true }
+func (MeasuredPhase9ThHarmonicCurrent) Writable() bool   { return false }
+func (MeasuredPhase9ThHarmonicCurrent) Reportable() bool { return false }
+func (MeasuredPhase9ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase9ThHarmonicCurrent) String() string {
 	return zcl.DegreesPhase.Format(float64(a))
@@ -1579,11 +1587,11 @@ func (a *MeasuredPhase11ThHarmonicCurrent) UnmarshalZcl(b []byte) ([]byte, error
 	*a = MeasuredPhase11ThHarmonicCurrent(*nt)
 	return br, err
 }
-
-func (a MeasuredPhase11ThHarmonicCurrent) Readable() bool   { return true }
-func (a MeasuredPhase11ThHarmonicCurrent) Writable() bool   { return false }
-func (a MeasuredPhase11ThHarmonicCurrent) Reportable() bool { return false }
-func (a MeasuredPhase11ThHarmonicCurrent) SceneIndex() int  { return -1 }
+func (MeasuredPhase11ThHarmonicCurrent) Name() string     { return "Measured Phase 11th Harmonic Current" }
+func (MeasuredPhase11ThHarmonicCurrent) Readable() bool   { return true }
+func (MeasuredPhase11ThHarmonicCurrent) Writable() bool   { return false }
+func (MeasuredPhase11ThHarmonicCurrent) Reportable() bool { return false }
+func (MeasuredPhase11ThHarmonicCurrent) SceneIndex() int  { return -1 }
 
 func (a MeasuredPhase11ThHarmonicCurrent) String() string {
 	return zcl.DegreesPhase.Format(float64(a))
@@ -1606,11 +1614,11 @@ func (a *AcFrequencyMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcFrequencyMultiplier(*nt)
 	return br, err
 }
-
-func (a AcFrequencyMultiplier) Readable() bool   { return true }
-func (a AcFrequencyMultiplier) Writable() bool   { return false }
-func (a AcFrequencyMultiplier) Reportable() bool { return false }
-func (a AcFrequencyMultiplier) SceneIndex() int  { return -1 }
+func (AcFrequencyMultiplier) Name() string     { return "AC Frequency Multiplier" }
+func (AcFrequencyMultiplier) Readable() bool   { return true }
+func (AcFrequencyMultiplier) Writable() bool   { return false }
+func (AcFrequencyMultiplier) Reportable() bool { return false }
+func (AcFrequencyMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1633,11 +1641,11 @@ func (a *AcFrequencyDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcFrequencyDivisor(*nt)
 	return br, err
 }
-
-func (a AcFrequencyDivisor) Readable() bool   { return true }
-func (a AcFrequencyDivisor) Writable() bool   { return false }
-func (a AcFrequencyDivisor) Reportable() bool { return false }
-func (a AcFrequencyDivisor) SceneIndex() int  { return -1 }
+func (AcFrequencyDivisor) Name() string     { return "AC Frequency Divisor" }
+func (AcFrequencyDivisor) Readable() bool   { return true }
+func (AcFrequencyDivisor) Writable() bool   { return false }
+func (AcFrequencyDivisor) Reportable() bool { return false }
+func (AcFrequencyDivisor) SceneIndex() int  { return -1 }
 
 func (a AcFrequencyDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1660,11 +1668,11 @@ func (a *PowerMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerMultiplier(*nt)
 	return br, err
 }
-
-func (a PowerMultiplier) Readable() bool   { return true }
-func (a PowerMultiplier) Writable() bool   { return false }
-func (a PowerMultiplier) Reportable() bool { return false }
-func (a PowerMultiplier) SceneIndex() int  { return -1 }
+func (PowerMultiplier) Name() string     { return "Power Multiplier" }
+func (PowerMultiplier) Readable() bool   { return true }
+func (PowerMultiplier) Writable() bool   { return false }
+func (PowerMultiplier) Reportable() bool { return false }
+func (PowerMultiplier) SceneIndex() int  { return -1 }
 
 func (a PowerMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -1687,11 +1695,11 @@ func (a *PowerDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerDivisor(*nt)
 	return br, err
 }
-
-func (a PowerDivisor) Readable() bool   { return true }
-func (a PowerDivisor) Writable() bool   { return false }
-func (a PowerDivisor) Reportable() bool { return false }
-func (a PowerDivisor) SceneIndex() int  { return -1 }
+func (PowerDivisor) Name() string     { return "Power Divisor" }
+func (PowerDivisor) Readable() bool   { return true }
+func (PowerDivisor) Writable() bool   { return false }
+func (PowerDivisor) Reportable() bool { return false }
+func (PowerDivisor) SceneIndex() int  { return -1 }
 
 func (a PowerDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -1714,11 +1722,11 @@ func (a *HarmonicCurrentMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = HarmonicCurrentMultiplier(*nt)
 	return br, err
 }
-
-func (a HarmonicCurrentMultiplier) Readable() bool   { return true }
-func (a HarmonicCurrentMultiplier) Writable() bool   { return false }
-func (a HarmonicCurrentMultiplier) Reportable() bool { return false }
-func (a HarmonicCurrentMultiplier) SceneIndex() int  { return -1 }
+func (HarmonicCurrentMultiplier) Name() string     { return "Harmonic Current Multiplier" }
+func (HarmonicCurrentMultiplier) Readable() bool   { return true }
+func (HarmonicCurrentMultiplier) Writable() bool   { return false }
+func (HarmonicCurrentMultiplier) Reportable() bool { return false }
+func (HarmonicCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a HarmonicCurrentMultiplier) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1741,11 +1749,11 @@ func (a *PhaseHarmonicCurrentMultiplier) UnmarshalZcl(b []byte) ([]byte, error) 
 	*a = PhaseHarmonicCurrentMultiplier(*nt)
 	return br, err
 }
-
-func (a PhaseHarmonicCurrentMultiplier) Readable() bool   { return true }
-func (a PhaseHarmonicCurrentMultiplier) Writable() bool   { return false }
-func (a PhaseHarmonicCurrentMultiplier) Reportable() bool { return false }
-func (a PhaseHarmonicCurrentMultiplier) SceneIndex() int  { return -1 }
+func (PhaseHarmonicCurrentMultiplier) Name() string     { return "Phase Harmonic Current Multiplier" }
+func (PhaseHarmonicCurrentMultiplier) Readable() bool   { return true }
+func (PhaseHarmonicCurrentMultiplier) Writable() bool   { return false }
+func (PhaseHarmonicCurrentMultiplier) Reportable() bool { return false }
+func (PhaseHarmonicCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a PhaseHarmonicCurrentMultiplier) String() string {
 	return zcl.DegreesPhase.Format(float64(a))
@@ -1768,11 +1776,11 @@ func (a *LineCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LineCurrent(*nt)
 	return br, err
 }
-
-func (a LineCurrent) Readable() bool   { return true }
-func (a LineCurrent) Writable() bool   { return false }
-func (a LineCurrent) Reportable() bool { return false }
-func (a LineCurrent) SceneIndex() int  { return -1 }
+func (LineCurrent) Name() string     { return "Line Current" }
+func (LineCurrent) Readable() bool   { return true }
+func (LineCurrent) Writable() bool   { return false }
+func (LineCurrent) Reportable() bool { return false }
+func (LineCurrent) SceneIndex() int  { return -1 }
 
 func (a LineCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1795,11 +1803,11 @@ func (a *ActiveCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActiveCurrent(*nt)
 	return br, err
 }
-
-func (a ActiveCurrent) Readable() bool   { return true }
-func (a ActiveCurrent) Writable() bool   { return false }
-func (a ActiveCurrent) Reportable() bool { return false }
-func (a ActiveCurrent) SceneIndex() int  { return -1 }
+func (ActiveCurrent) Name() string     { return "Active Current" }
+func (ActiveCurrent) Readable() bool   { return true }
+func (ActiveCurrent) Writable() bool   { return false }
+func (ActiveCurrent) Reportable() bool { return false }
+func (ActiveCurrent) SceneIndex() int  { return -1 }
 
 func (a ActiveCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1822,11 +1830,11 @@ func (a *ReactiveCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ReactiveCurrent(*nt)
 	return br, err
 }
-
-func (a ReactiveCurrent) Readable() bool   { return true }
-func (a ReactiveCurrent) Writable() bool   { return false }
-func (a ReactiveCurrent) Reportable() bool { return false }
-func (a ReactiveCurrent) SceneIndex() int  { return -1 }
+func (ReactiveCurrent) Name() string     { return "Reactive Current" }
+func (ReactiveCurrent) Readable() bool   { return true }
+func (ReactiveCurrent) Writable() bool   { return false }
+func (ReactiveCurrent) Reportable() bool { return false }
+func (ReactiveCurrent) SceneIndex() int  { return -1 }
 
 func (a ReactiveCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1849,11 +1857,11 @@ func (a *RmsVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltage(*nt)
 	return br, err
 }
-
-func (a RmsVoltage) Readable() bool   { return true }
-func (a RmsVoltage) Writable() bool   { return false }
-func (a RmsVoltage) Reportable() bool { return false }
-func (a RmsVoltage) SceneIndex() int  { return -1 }
+func (RmsVoltage) Name() string     { return "RMS Voltage" }
+func (RmsVoltage) Readable() bool   { return true }
+func (RmsVoltage) Writable() bool   { return false }
+func (RmsVoltage) Reportable() bool { return false }
+func (RmsVoltage) SceneIndex() int  { return -1 }
 
 func (a RmsVoltage) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -1876,11 +1884,11 @@ func (a *RmsVoltageMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageMin(*nt)
 	return br, err
 }
-
-func (a RmsVoltageMin) Readable() bool   { return true }
-func (a RmsVoltageMin) Writable() bool   { return false }
-func (a RmsVoltageMin) Reportable() bool { return false }
-func (a RmsVoltageMin) SceneIndex() int  { return -1 }
+func (RmsVoltageMin) Name() string     { return "RMS Voltage Min" }
+func (RmsVoltageMin) Readable() bool   { return true }
+func (RmsVoltageMin) Writable() bool   { return false }
+func (RmsVoltageMin) Reportable() bool { return false }
+func (RmsVoltageMin) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMin) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -1903,11 +1911,11 @@ func (a *RmsVoltageMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageMax(*nt)
 	return br, err
 }
-
-func (a RmsVoltageMax) Readable() bool   { return true }
-func (a RmsVoltageMax) Writable() bool   { return false }
-func (a RmsVoltageMax) Reportable() bool { return false }
-func (a RmsVoltageMax) SceneIndex() int  { return -1 }
+func (RmsVoltageMax) Name() string     { return "RMS Voltage Max" }
+func (RmsVoltageMax) Readable() bool   { return true }
+func (RmsVoltageMax) Writable() bool   { return false }
+func (RmsVoltageMax) Reportable() bool { return false }
+func (RmsVoltageMax) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMax) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -1930,11 +1938,11 @@ func (a *RmsCurrent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrent(*nt)
 	return br, err
 }
-
-func (a RmsCurrent) Readable() bool   { return true }
-func (a RmsCurrent) Writable() bool   { return false }
-func (a RmsCurrent) Reportable() bool { return false }
-func (a RmsCurrent) SceneIndex() int  { return -1 }
+func (RmsCurrent) Name() string     { return "RMS Current" }
+func (RmsCurrent) Readable() bool   { return true }
+func (RmsCurrent) Writable() bool   { return false }
+func (RmsCurrent) Reportable() bool { return false }
+func (RmsCurrent) SceneIndex() int  { return -1 }
 
 func (a RmsCurrent) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1957,11 +1965,11 @@ func (a *RmsCurrentMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentMin(*nt)
 	return br, err
 }
-
-func (a RmsCurrentMin) Readable() bool   { return true }
-func (a RmsCurrentMin) Writable() bool   { return false }
-func (a RmsCurrentMin) Reportable() bool { return false }
-func (a RmsCurrentMin) SceneIndex() int  { return -1 }
+func (RmsCurrentMin) Name() string     { return "RMS Current Min" }
+func (RmsCurrentMin) Readable() bool   { return true }
+func (RmsCurrentMin) Writable() bool   { return false }
+func (RmsCurrentMin) Reportable() bool { return false }
+func (RmsCurrentMin) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMin) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -1984,11 +1992,11 @@ func (a *RmsCurrentMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentMax(*nt)
 	return br, err
 }
-
-func (a RmsCurrentMax) Readable() bool   { return true }
-func (a RmsCurrentMax) Writable() bool   { return false }
-func (a RmsCurrentMax) Reportable() bool { return false }
-func (a RmsCurrentMax) SceneIndex() int  { return -1 }
+func (RmsCurrentMax) Name() string     { return "RMS Current Max" }
+func (RmsCurrentMax) Readable() bool   { return true }
+func (RmsCurrentMax) Writable() bool   { return false }
+func (RmsCurrentMax) Reportable() bool { return false }
+func (RmsCurrentMax) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMax) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -2012,11 +2020,11 @@ func (a *ActivePower) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePower(*nt)
 	return br, err
 }
-
-func (a ActivePower) Readable() bool   { return true }
-func (a ActivePower) Writable() bool   { return false }
-func (a ActivePower) Reportable() bool { return false }
-func (a ActivePower) SceneIndex() int  { return -1 }
+func (ActivePower) Name() string     { return "Active Power" }
+func (ActivePower) Readable() bool   { return true }
+func (ActivePower) Writable() bool   { return false }
+func (ActivePower) Reportable() bool { return false }
+func (ActivePower) SceneIndex() int  { return -1 }
 
 func (a ActivePower) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -2039,11 +2047,11 @@ func (a *ActivePowerMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerMin(*nt)
 	return br, err
 }
-
-func (a ActivePowerMin) Readable() bool   { return true }
-func (a ActivePowerMin) Writable() bool   { return false }
-func (a ActivePowerMin) Reportable() bool { return false }
-func (a ActivePowerMin) SceneIndex() int  { return -1 }
+func (ActivePowerMin) Name() string     { return "Active Power Min" }
+func (ActivePowerMin) Readable() bool   { return true }
+func (ActivePowerMin) Writable() bool   { return false }
+func (ActivePowerMin) Reportable() bool { return false }
+func (ActivePowerMin) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMin) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -2066,11 +2074,11 @@ func (a *ActivePowerMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerMax(*nt)
 	return br, err
 }
-
-func (a ActivePowerMax) Readable() bool   { return true }
-func (a ActivePowerMax) Writable() bool   { return false }
-func (a ActivePowerMax) Reportable() bool { return false }
-func (a ActivePowerMax) SceneIndex() int  { return -1 }
+func (ActivePowerMax) Name() string     { return "Active Power Max" }
+func (ActivePowerMax) Readable() bool   { return true }
+func (ActivePowerMax) Writable() bool   { return false }
+func (ActivePowerMax) Reportable() bool { return false }
+func (ActivePowerMax) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMax) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -2093,11 +2101,11 @@ func (a *ReactivePower) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ReactivePower(*nt)
 	return br, err
 }
-
-func (a ReactivePower) Readable() bool   { return true }
-func (a ReactivePower) Writable() bool   { return false }
-func (a ReactivePower) Reportable() bool { return false }
-func (a ReactivePower) SceneIndex() int  { return -1 }
+func (ReactivePower) Name() string     { return "Reactive Power" }
+func (ReactivePower) Readable() bool   { return true }
+func (ReactivePower) Writable() bool   { return false }
+func (ReactivePower) Reportable() bool { return false }
+func (ReactivePower) SceneIndex() int  { return -1 }
 
 func (a ReactivePower) String() string {
 	return zcl.VoltAmperesReactive.Format(float64(a))
@@ -2120,11 +2128,11 @@ func (a *ApparentPower) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApparentPower(*nt)
 	return br, err
 }
-
-func (a ApparentPower) Readable() bool   { return true }
-func (a ApparentPower) Writable() bool   { return false }
-func (a ApparentPower) Reportable() bool { return false }
-func (a ApparentPower) SceneIndex() int  { return -1 }
+func (ApparentPower) Name() string     { return "Apparent Power" }
+func (ApparentPower) Readable() bool   { return true }
+func (ApparentPower) Writable() bool   { return false }
+func (ApparentPower) Reportable() bool { return false }
+func (ApparentPower) SceneIndex() int  { return -1 }
 
 func (a ApparentPower) String() string {
 	return zcl.VoltAmperes.Format(float64(a))
@@ -2147,11 +2155,11 @@ func (a *PowerFactor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerFactor(*nt)
 	return br, err
 }
-
-func (a PowerFactor) Readable() bool   { return true }
-func (a PowerFactor) Writable() bool   { return false }
-func (a PowerFactor) Reportable() bool { return false }
-func (a PowerFactor) SceneIndex() int  { return -1 }
+func (PowerFactor) Name() string     { return "Power Factor" }
+func (PowerFactor) Readable() bool   { return true }
+func (PowerFactor) Writable() bool   { return false }
+func (PowerFactor) Reportable() bool { return false }
+func (PowerFactor) SceneIndex() int  { return -1 }
 
 func (a PowerFactor) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))
@@ -2176,11 +2184,13 @@ func (a *AverageRmsVoltageMeasurementPeriod) UnmarshalZcl(b []byte) ([]byte, err
 	*a = AverageRmsVoltageMeasurementPeriod(*nt)
 	return br, err
 }
-
-func (a AverageRmsVoltageMeasurementPeriod) Readable() bool   { return true }
-func (a AverageRmsVoltageMeasurementPeriod) Writable() bool   { return true }
-func (a AverageRmsVoltageMeasurementPeriod) Reportable() bool { return false }
-func (a AverageRmsVoltageMeasurementPeriod) SceneIndex() int  { return -1 }
+func (AverageRmsVoltageMeasurementPeriod) Name() string {
+	return "Average RMS Voltage Measurement Period"
+}
+func (AverageRmsVoltageMeasurementPeriod) Readable() bool   { return true }
+func (AverageRmsVoltageMeasurementPeriod) Writable() bool   { return true }
+func (AverageRmsVoltageMeasurementPeriod) Reportable() bool { return false }
+func (AverageRmsVoltageMeasurementPeriod) SceneIndex() int  { return -1 }
 
 func (a AverageRmsVoltageMeasurementPeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2203,11 +2213,11 @@ func (a *AverageRmsOvervoltageCounter) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AverageRmsOvervoltageCounter(*nt)
 	return br, err
 }
-
-func (a AverageRmsOvervoltageCounter) Readable() bool   { return true }
-func (a AverageRmsOvervoltageCounter) Writable() bool   { return true }
-func (a AverageRmsOvervoltageCounter) Reportable() bool { return false }
-func (a AverageRmsOvervoltageCounter) SceneIndex() int  { return -1 }
+func (AverageRmsOvervoltageCounter) Name() string     { return "Average RMS Overvoltage Counter" }
+func (AverageRmsOvervoltageCounter) Readable() bool   { return true }
+func (AverageRmsOvervoltageCounter) Writable() bool   { return true }
+func (AverageRmsOvervoltageCounter) Reportable() bool { return false }
+func (AverageRmsOvervoltageCounter) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltageCounter) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2230,11 +2240,11 @@ func (a *AverageRmsUndervoltageCounter) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AverageRmsUndervoltageCounter(*nt)
 	return br, err
 }
-
-func (a AverageRmsUndervoltageCounter) Readable() bool   { return true }
-func (a AverageRmsUndervoltageCounter) Writable() bool   { return true }
-func (a AverageRmsUndervoltageCounter) Reportable() bool { return false }
-func (a AverageRmsUndervoltageCounter) SceneIndex() int  { return -1 }
+func (AverageRmsUndervoltageCounter) Name() string     { return "Average RMS Undervoltage Counter" }
+func (AverageRmsUndervoltageCounter) Readable() bool   { return true }
+func (AverageRmsUndervoltageCounter) Writable() bool   { return true }
+func (AverageRmsUndervoltageCounter) Reportable() bool { return false }
+func (AverageRmsUndervoltageCounter) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltageCounter) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2257,11 +2267,11 @@ func (a *RmsExtremeOvervoltagePeriod) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsExtremeOvervoltagePeriod(*nt)
 	return br, err
 }
-
-func (a RmsExtremeOvervoltagePeriod) Readable() bool   { return true }
-func (a RmsExtremeOvervoltagePeriod) Writable() bool   { return true }
-func (a RmsExtremeOvervoltagePeriod) Reportable() bool { return false }
-func (a RmsExtremeOvervoltagePeriod) SceneIndex() int  { return -1 }
+func (RmsExtremeOvervoltagePeriod) Name() string     { return "RMS Extreme Overvoltage Period" }
+func (RmsExtremeOvervoltagePeriod) Readable() bool   { return true }
+func (RmsExtremeOvervoltagePeriod) Writable() bool   { return true }
+func (RmsExtremeOvervoltagePeriod) Reportable() bool { return false }
+func (RmsExtremeOvervoltagePeriod) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltagePeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2284,11 +2294,11 @@ func (a *RmsExtremeUndervoltagePeriod) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsExtremeUndervoltagePeriod(*nt)
 	return br, err
 }
-
-func (a RmsExtremeUndervoltagePeriod) Readable() bool   { return true }
-func (a RmsExtremeUndervoltagePeriod) Writable() bool   { return true }
-func (a RmsExtremeUndervoltagePeriod) Reportable() bool { return false }
-func (a RmsExtremeUndervoltagePeriod) SceneIndex() int  { return -1 }
+func (RmsExtremeUndervoltagePeriod) Name() string     { return "RMS Extreme Undervoltage Period" }
+func (RmsExtremeUndervoltagePeriod) Readable() bool   { return true }
+func (RmsExtremeUndervoltagePeriod) Writable() bool   { return true }
+func (RmsExtremeUndervoltagePeriod) Reportable() bool { return false }
+func (RmsExtremeUndervoltagePeriod) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltagePeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2311,11 +2321,11 @@ func (a *RmsVoltageSagPeriod) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSagPeriod(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSagPeriod) Readable() bool   { return true }
-func (a RmsVoltageSagPeriod) Writable() bool   { return true }
-func (a RmsVoltageSagPeriod) Reportable() bool { return false }
-func (a RmsVoltageSagPeriod) SceneIndex() int  { return -1 }
+func (RmsVoltageSagPeriod) Name() string     { return "RMS Voltage Sag Period" }
+func (RmsVoltageSagPeriod) Readable() bool   { return true }
+func (RmsVoltageSagPeriod) Writable() bool   { return true }
+func (RmsVoltageSagPeriod) Reportable() bool { return false }
+func (RmsVoltageSagPeriod) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSagPeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2338,11 +2348,11 @@ func (a *RmsVoltageSwellPeriod) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSwellPeriod(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSwellPeriod) Readable() bool   { return true }
-func (a RmsVoltageSwellPeriod) Writable() bool   { return true }
-func (a RmsVoltageSwellPeriod) Reportable() bool { return false }
-func (a RmsVoltageSwellPeriod) SceneIndex() int  { return -1 }
+func (RmsVoltageSwellPeriod) Name() string     { return "RMS Voltage Swell Period" }
+func (RmsVoltageSwellPeriod) Readable() bool   { return true }
+func (RmsVoltageSwellPeriod) Writable() bool   { return true }
+func (RmsVoltageSwellPeriod) Reportable() bool { return false }
+func (RmsVoltageSwellPeriod) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwellPeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2365,11 +2375,11 @@ func (a *AcVoltageMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcVoltageMultiplier(*nt)
 	return br, err
 }
-
-func (a AcVoltageMultiplier) Readable() bool   { return true }
-func (a AcVoltageMultiplier) Writable() bool   { return false }
-func (a AcVoltageMultiplier) Reportable() bool { return false }
-func (a AcVoltageMultiplier) SceneIndex() int  { return -1 }
+func (AcVoltageMultiplier) Name() string     { return "AC Voltage Multiplier" }
+func (AcVoltageMultiplier) Readable() bool   { return true }
+func (AcVoltageMultiplier) Writable() bool   { return false }
+func (AcVoltageMultiplier) Reportable() bool { return false }
+func (AcVoltageMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcVoltageMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2392,11 +2402,11 @@ func (a *AcVoltageDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcVoltageDivisor(*nt)
 	return br, err
 }
-
-func (a AcVoltageDivisor) Readable() bool   { return true }
-func (a AcVoltageDivisor) Writable() bool   { return false }
-func (a AcVoltageDivisor) Reportable() bool { return false }
-func (a AcVoltageDivisor) SceneIndex() int  { return -1 }
+func (AcVoltageDivisor) Name() string     { return "AC Voltage Divisor" }
+func (AcVoltageDivisor) Readable() bool   { return true }
+func (AcVoltageDivisor) Writable() bool   { return false }
+func (AcVoltageDivisor) Reportable() bool { return false }
+func (AcVoltageDivisor) SceneIndex() int  { return -1 }
 
 func (a AcVoltageDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2419,11 +2429,11 @@ func (a *AcCurrentMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcCurrentMultiplier(*nt)
 	return br, err
 }
-
-func (a AcCurrentMultiplier) Readable() bool   { return true }
-func (a AcCurrentMultiplier) Writable() bool   { return false }
-func (a AcCurrentMultiplier) Reportable() bool { return false }
-func (a AcCurrentMultiplier) SceneIndex() int  { return -1 }
+func (AcCurrentMultiplier) Name() string     { return "AC Current Multiplier" }
+func (AcCurrentMultiplier) Readable() bool   { return true }
+func (AcCurrentMultiplier) Writable() bool   { return false }
+func (AcCurrentMultiplier) Reportable() bool { return false }
+func (AcCurrentMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcCurrentMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2446,11 +2456,11 @@ func (a *AcCurrentDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcCurrentDivisor(*nt)
 	return br, err
 }
-
-func (a AcCurrentDivisor) Readable() bool   { return true }
-func (a AcCurrentDivisor) Writable() bool   { return false }
-func (a AcCurrentDivisor) Reportable() bool { return false }
-func (a AcCurrentDivisor) SceneIndex() int  { return -1 }
+func (AcCurrentDivisor) Name() string     { return "AC Current Divisor" }
+func (AcCurrentDivisor) Readable() bool   { return true }
+func (AcCurrentDivisor) Writable() bool   { return false }
+func (AcCurrentDivisor) Reportable() bool { return false }
+func (AcCurrentDivisor) SceneIndex() int  { return -1 }
 
 func (a AcCurrentDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2473,11 +2483,11 @@ func (a *AcPowerMultiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcPowerMultiplier(*nt)
 	return br, err
 }
-
-func (a AcPowerMultiplier) Readable() bool   { return true }
-func (a AcPowerMultiplier) Writable() bool   { return false }
-func (a AcPowerMultiplier) Reportable() bool { return false }
-func (a AcPowerMultiplier) SceneIndex() int  { return -1 }
+func (AcPowerMultiplier) Name() string     { return "AC Power Multiplier" }
+func (AcPowerMultiplier) Readable() bool   { return true }
+func (AcPowerMultiplier) Writable() bool   { return false }
+func (AcPowerMultiplier) Reportable() bool { return false }
+func (AcPowerMultiplier) SceneIndex() int  { return -1 }
 
 func (a AcPowerMultiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2500,11 +2510,11 @@ func (a *AcPowerDivisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcPowerDivisor(*nt)
 	return br, err
 }
-
-func (a AcPowerDivisor) Readable() bool   { return true }
-func (a AcPowerDivisor) Writable() bool   { return false }
-func (a AcPowerDivisor) Reportable() bool { return false }
-func (a AcPowerDivisor) SceneIndex() int  { return -1 }
+func (AcPowerDivisor) Name() string     { return "AC Power Divisor" }
+func (AcPowerDivisor) Readable() bool   { return true }
+func (AcPowerDivisor) Writable() bool   { return false }
+func (AcPowerDivisor) Reportable() bool { return false }
+func (AcPowerDivisor) SceneIndex() int  { return -1 }
 
 func (a AcPowerDivisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2527,11 +2537,11 @@ func (a *DcOverloadAlarmsMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcOverloadAlarmsMask(*nt)
 	return br, err
 }
-
-func (a DcOverloadAlarmsMask) Readable() bool   { return true }
-func (a DcOverloadAlarmsMask) Writable() bool   { return true }
-func (a DcOverloadAlarmsMask) Reportable() bool { return false }
-func (a DcOverloadAlarmsMask) SceneIndex() int  { return -1 }
+func (DcOverloadAlarmsMask) Name() string     { return "DC Overload Alarms Mask" }
+func (DcOverloadAlarmsMask) Readable() bool   { return true }
+func (DcOverloadAlarmsMask) Writable() bool   { return true }
+func (DcOverloadAlarmsMask) Reportable() bool { return false }
+func (DcOverloadAlarmsMask) SceneIndex() int  { return -1 }
 
 func (a DcOverloadAlarmsMask) String() string {
 	var bstr []string
@@ -2575,11 +2585,11 @@ func (a *DcVoltageOverload) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcVoltageOverload(*nt)
 	return br, err
 }
-
-func (a DcVoltageOverload) Readable() bool   { return true }
-func (a DcVoltageOverload) Writable() bool   { return false }
-func (a DcVoltageOverload) Reportable() bool { return false }
-func (a DcVoltageOverload) SceneIndex() int  { return -1 }
+func (DcVoltageOverload) Name() string     { return "DC Voltage Overload" }
+func (DcVoltageOverload) Readable() bool   { return true }
+func (DcVoltageOverload) Writable() bool   { return false }
+func (DcVoltageOverload) Reportable() bool { return false }
+func (DcVoltageOverload) SceneIndex() int  { return -1 }
 
 func (a DcVoltageOverload) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2602,11 +2612,11 @@ func (a *DcCurrentOverload) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DcCurrentOverload(*nt)
 	return br, err
 }
-
-func (a DcCurrentOverload) Readable() bool   { return true }
-func (a DcCurrentOverload) Writable() bool   { return false }
-func (a DcCurrentOverload) Reportable() bool { return false }
-func (a DcCurrentOverload) SceneIndex() int  { return -1 }
+func (DcCurrentOverload) Name() string     { return "DC Current Overload" }
+func (DcCurrentOverload) Readable() bool   { return true }
+func (DcCurrentOverload) Writable() bool   { return false }
+func (DcCurrentOverload) Reportable() bool { return false }
+func (DcCurrentOverload) SceneIndex() int  { return -1 }
 
 func (a DcCurrentOverload) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2629,11 +2639,11 @@ func (a *AcOverloadAlarmsMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcOverloadAlarmsMask(*nt)
 	return br, err
 }
-
-func (a AcOverloadAlarmsMask) Readable() bool   { return true }
-func (a AcOverloadAlarmsMask) Writable() bool   { return true }
-func (a AcOverloadAlarmsMask) Reportable() bool { return false }
-func (a AcOverloadAlarmsMask) SceneIndex() int  { return -1 }
+func (AcOverloadAlarmsMask) Name() string     { return "AC Overload Alarms Mask" }
+func (AcOverloadAlarmsMask) Readable() bool   { return true }
+func (AcOverloadAlarmsMask) Writable() bool   { return true }
+func (AcOverloadAlarmsMask) Reportable() bool { return false }
+func (AcOverloadAlarmsMask) SceneIndex() int  { return -1 }
 
 func (a AcOverloadAlarmsMask) String() string {
 	var bstr []string
@@ -2757,11 +2767,11 @@ func (a *AcVoltageOverload) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcVoltageOverload(*nt)
 	return br, err
 }
-
-func (a AcVoltageOverload) Readable() bool   { return true }
-func (a AcVoltageOverload) Writable() bool   { return false }
-func (a AcVoltageOverload) Reportable() bool { return false }
-func (a AcVoltageOverload) SceneIndex() int  { return -1 }
+func (AcVoltageOverload) Name() string     { return "AC Voltage Overload" }
+func (AcVoltageOverload) Readable() bool   { return true }
+func (AcVoltageOverload) Writable() bool   { return false }
+func (AcVoltageOverload) Reportable() bool { return false }
+func (AcVoltageOverload) SceneIndex() int  { return -1 }
 
 func (a AcVoltageOverload) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2784,11 +2794,11 @@ func (a *AcCurrentOverload) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcCurrentOverload(*nt)
 	return br, err
 }
-
-func (a AcCurrentOverload) Readable() bool   { return true }
-func (a AcCurrentOverload) Writable() bool   { return false }
-func (a AcCurrentOverload) Reportable() bool { return false }
-func (a AcCurrentOverload) SceneIndex() int  { return -1 }
+func (AcCurrentOverload) Name() string     { return "AC Current Overload" }
+func (AcCurrentOverload) Readable() bool   { return true }
+func (AcCurrentOverload) Writable() bool   { return false }
+func (AcCurrentOverload) Reportable() bool { return false }
+func (AcCurrentOverload) SceneIndex() int  { return -1 }
 
 func (a AcCurrentOverload) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2811,11 +2821,11 @@ func (a *AcActivePowerOverload) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcActivePowerOverload(*nt)
 	return br, err
 }
-
-func (a AcActivePowerOverload) Readable() bool   { return true }
-func (a AcActivePowerOverload) Writable() bool   { return false }
-func (a AcActivePowerOverload) Reportable() bool { return false }
-func (a AcActivePowerOverload) SceneIndex() int  { return -1 }
+func (AcActivePowerOverload) Name() string     { return "AC Active Power Overload" }
+func (AcActivePowerOverload) Readable() bool   { return true }
+func (AcActivePowerOverload) Writable() bool   { return false }
+func (AcActivePowerOverload) Reportable() bool { return false }
+func (AcActivePowerOverload) SceneIndex() int  { return -1 }
 
 func (a AcActivePowerOverload) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2838,11 +2848,11 @@ func (a *AcReactivePowerOverload) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AcReactivePowerOverload(*nt)
 	return br, err
 }
-
-func (a AcReactivePowerOverload) Readable() bool   { return true }
-func (a AcReactivePowerOverload) Writable() bool   { return false }
-func (a AcReactivePowerOverload) Reportable() bool { return false }
-func (a AcReactivePowerOverload) SceneIndex() int  { return -1 }
+func (AcReactivePowerOverload) Name() string     { return "AC Reactive Power Overload" }
+func (AcReactivePowerOverload) Readable() bool   { return true }
+func (AcReactivePowerOverload) Writable() bool   { return false }
+func (AcReactivePowerOverload) Reportable() bool { return false }
+func (AcReactivePowerOverload) SceneIndex() int  { return -1 }
 
 func (a AcReactivePowerOverload) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2865,11 +2875,11 @@ func (a *AverageRmsOvervoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AverageRmsOvervoltage(*nt)
 	return br, err
 }
-
-func (a AverageRmsOvervoltage) Readable() bool   { return true }
-func (a AverageRmsOvervoltage) Writable() bool   { return false }
-func (a AverageRmsOvervoltage) Reportable() bool { return false }
-func (a AverageRmsOvervoltage) SceneIndex() int  { return -1 }
+func (AverageRmsOvervoltage) Name() string     { return "Average RMS Overvoltage" }
+func (AverageRmsOvervoltage) Readable() bool   { return true }
+func (AverageRmsOvervoltage) Writable() bool   { return false }
+func (AverageRmsOvervoltage) Reportable() bool { return false }
+func (AverageRmsOvervoltage) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltage) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2892,11 +2902,11 @@ func (a *AverageRmsUndervoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AverageRmsUndervoltage(*nt)
 	return br, err
 }
-
-func (a AverageRmsUndervoltage) Readable() bool   { return true }
-func (a AverageRmsUndervoltage) Writable() bool   { return false }
-func (a AverageRmsUndervoltage) Reportable() bool { return false }
-func (a AverageRmsUndervoltage) SceneIndex() int  { return -1 }
+func (AverageRmsUndervoltage) Name() string     { return "Average RMS Undervoltage" }
+func (AverageRmsUndervoltage) Readable() bool   { return true }
+func (AverageRmsUndervoltage) Writable() bool   { return false }
+func (AverageRmsUndervoltage) Reportable() bool { return false }
+func (AverageRmsUndervoltage) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltage) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2919,11 +2929,11 @@ func (a *RmsExtremeOvervoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsExtremeOvervoltage(*nt)
 	return br, err
 }
-
-func (a RmsExtremeOvervoltage) Readable() bool   { return true }
-func (a RmsExtremeOvervoltage) Writable() bool   { return false }
-func (a RmsExtremeOvervoltage) Reportable() bool { return false }
-func (a RmsExtremeOvervoltage) SceneIndex() int  { return -1 }
+func (RmsExtremeOvervoltage) Name() string     { return "RMS Extreme Overvoltage" }
+func (RmsExtremeOvervoltage) Readable() bool   { return true }
+func (RmsExtremeOvervoltage) Writable() bool   { return false }
+func (RmsExtremeOvervoltage) Reportable() bool { return false }
+func (RmsExtremeOvervoltage) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltage) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2946,11 +2956,11 @@ func (a *RmsExtremeUndervoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsExtremeUndervoltage(*nt)
 	return br, err
 }
-
-func (a RmsExtremeUndervoltage) Readable() bool   { return true }
-func (a RmsExtremeUndervoltage) Writable() bool   { return false }
-func (a RmsExtremeUndervoltage) Reportable() bool { return false }
-func (a RmsExtremeUndervoltage) SceneIndex() int  { return -1 }
+func (RmsExtremeUndervoltage) Name() string     { return "RMS Extreme Undervoltage" }
+func (RmsExtremeUndervoltage) Readable() bool   { return true }
+func (RmsExtremeUndervoltage) Writable() bool   { return false }
+func (RmsExtremeUndervoltage) Reportable() bool { return false }
+func (RmsExtremeUndervoltage) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltage) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -2973,11 +2983,11 @@ func (a *RmsVoltageSag) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSag(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSag) Readable() bool   { return true }
-func (a RmsVoltageSag) Writable() bool   { return false }
-func (a RmsVoltageSag) Reportable() bool { return false }
-func (a RmsVoltageSag) SceneIndex() int  { return -1 }
+func (RmsVoltageSag) Name() string     { return "RMS Voltage Sag" }
+func (RmsVoltageSag) Readable() bool   { return true }
+func (RmsVoltageSag) Writable() bool   { return false }
+func (RmsVoltageSag) Reportable() bool { return false }
+func (RmsVoltageSag) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSag) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -3000,11 +3010,11 @@ func (a *RmsVoltageSwell) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSwell(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSwell) Readable() bool   { return true }
-func (a RmsVoltageSwell) Writable() bool   { return false }
-func (a RmsVoltageSwell) Reportable() bool { return false }
-func (a RmsVoltageSwell) SceneIndex() int  { return -1 }
+func (RmsVoltageSwell) Name() string     { return "RMS Voltage Swell" }
+func (RmsVoltageSwell) Readable() bool   { return true }
+func (RmsVoltageSwell) Writable() bool   { return false }
+func (RmsVoltageSwell) Reportable() bool { return false }
+func (RmsVoltageSwell) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwell) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -3027,11 +3037,11 @@ func (a *LineCurrentPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LineCurrentPhaseB(*nt)
 	return br, err
 }
-
-func (a LineCurrentPhaseB) Readable() bool   { return true }
-func (a LineCurrentPhaseB) Writable() bool   { return false }
-func (a LineCurrentPhaseB) Reportable() bool { return false }
-func (a LineCurrentPhaseB) SceneIndex() int  { return -1 }
+func (LineCurrentPhaseB) Name() string     { return "Line Current Phase B" }
+func (LineCurrentPhaseB) Readable() bool   { return true }
+func (LineCurrentPhaseB) Writable() bool   { return false }
+func (LineCurrentPhaseB) Reportable() bool { return false }
+func (LineCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a LineCurrentPhaseB) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3054,11 +3064,11 @@ func (a *ActiveCurrentPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActiveCurrentPhaseB(*nt)
 	return br, err
 }
-
-func (a ActiveCurrentPhaseB) Readable() bool   { return true }
-func (a ActiveCurrentPhaseB) Writable() bool   { return false }
-func (a ActiveCurrentPhaseB) Reportable() bool { return false }
-func (a ActiveCurrentPhaseB) SceneIndex() int  { return -1 }
+func (ActiveCurrentPhaseB) Name() string     { return "Active Current Phase B" }
+func (ActiveCurrentPhaseB) Readable() bool   { return true }
+func (ActiveCurrentPhaseB) Writable() bool   { return false }
+func (ActiveCurrentPhaseB) Reportable() bool { return false }
+func (ActiveCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActiveCurrentPhaseB) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3081,11 +3091,11 @@ func (a *ReactiveCurrentPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ReactiveCurrentPhaseB(*nt)
 	return br, err
 }
-
-func (a ReactiveCurrentPhaseB) Readable() bool   { return true }
-func (a ReactiveCurrentPhaseB) Writable() bool   { return false }
-func (a ReactiveCurrentPhaseB) Reportable() bool { return false }
-func (a ReactiveCurrentPhaseB) SceneIndex() int  { return -1 }
+func (ReactiveCurrentPhaseB) Name() string     { return "Reactive Current Phase B" }
+func (ReactiveCurrentPhaseB) Readable() bool   { return true }
+func (ReactiveCurrentPhaseB) Writable() bool   { return false }
+func (ReactiveCurrentPhaseB) Reportable() bool { return false }
+func (ReactiveCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a ReactiveCurrentPhaseB) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3108,11 +3118,11 @@ func (a *RmsVoltagePhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltagePhaseB(*nt)
 	return br, err
 }
-
-func (a RmsVoltagePhaseB) Readable() bool   { return true }
-func (a RmsVoltagePhaseB) Writable() bool   { return false }
-func (a RmsVoltagePhaseB) Reportable() bool { return false }
-func (a RmsVoltagePhaseB) SceneIndex() int  { return -1 }
+func (RmsVoltagePhaseB) Name() string     { return "RMS Voltage Phase B" }
+func (RmsVoltagePhaseB) Readable() bool   { return true }
+func (RmsVoltagePhaseB) Writable() bool   { return false }
+func (RmsVoltagePhaseB) Reportable() bool { return false }
+func (RmsVoltagePhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltagePhaseB) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -3135,11 +3145,11 @@ func (a *RmsVoltageMinPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageMinPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsVoltageMinPhaseB) Readable() bool   { return true }
-func (a RmsVoltageMinPhaseB) Writable() bool   { return false }
-func (a RmsVoltageMinPhaseB) Reportable() bool { return false }
-func (a RmsVoltageMinPhaseB) SceneIndex() int  { return -1 }
+func (RmsVoltageMinPhaseB) Name() string     { return "RMS Voltage Min Phase B" }
+func (RmsVoltageMinPhaseB) Readable() bool   { return true }
+func (RmsVoltageMinPhaseB) Writable() bool   { return false }
+func (RmsVoltageMinPhaseB) Reportable() bool { return false }
+func (RmsVoltageMinPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMinPhaseB) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -3162,11 +3172,11 @@ func (a *RmsVoltageMaxPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageMaxPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsVoltageMaxPhaseB) Readable() bool   { return true }
-func (a RmsVoltageMaxPhaseB) Writable() bool   { return false }
-func (a RmsVoltageMaxPhaseB) Reportable() bool { return false }
-func (a RmsVoltageMaxPhaseB) SceneIndex() int  { return -1 }
+func (RmsVoltageMaxPhaseB) Name() string     { return "RMS Voltage Max Phase B" }
+func (RmsVoltageMaxPhaseB) Readable() bool   { return true }
+func (RmsVoltageMaxPhaseB) Writable() bool   { return false }
+func (RmsVoltageMaxPhaseB) Reportable() bool { return false }
+func (RmsVoltageMaxPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMaxPhaseB) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -3189,11 +3199,11 @@ func (a *RmsCurrentPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsCurrentPhaseB) Readable() bool   { return true }
-func (a RmsCurrentPhaseB) Writable() bool   { return false }
-func (a RmsCurrentPhaseB) Reportable() bool { return false }
-func (a RmsCurrentPhaseB) SceneIndex() int  { return -1 }
+func (RmsCurrentPhaseB) Name() string     { return "RMS Current Phase B" }
+func (RmsCurrentPhaseB) Readable() bool   { return true }
+func (RmsCurrentPhaseB) Writable() bool   { return false }
+func (RmsCurrentPhaseB) Reportable() bool { return false }
+func (RmsCurrentPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentPhaseB) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3216,11 +3226,11 @@ func (a *RmsCurrentMinPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentMinPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsCurrentMinPhaseB) Readable() bool   { return true }
-func (a RmsCurrentMinPhaseB) Writable() bool   { return false }
-func (a RmsCurrentMinPhaseB) Reportable() bool { return false }
-func (a RmsCurrentMinPhaseB) SceneIndex() int  { return -1 }
+func (RmsCurrentMinPhaseB) Name() string     { return "RMS Current Min Phase B" }
+func (RmsCurrentMinPhaseB) Readable() bool   { return true }
+func (RmsCurrentMinPhaseB) Writable() bool   { return false }
+func (RmsCurrentMinPhaseB) Reportable() bool { return false }
+func (RmsCurrentMinPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMinPhaseB) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3243,11 +3253,11 @@ func (a *RmsCurrentMaxPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentMaxPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsCurrentMaxPhaseB) Readable() bool   { return true }
-func (a RmsCurrentMaxPhaseB) Writable() bool   { return false }
-func (a RmsCurrentMaxPhaseB) Reportable() bool { return false }
-func (a RmsCurrentMaxPhaseB) SceneIndex() int  { return -1 }
+func (RmsCurrentMaxPhaseB) Name() string     { return "RMS Current Max Phase B" }
+func (RmsCurrentMaxPhaseB) Readable() bool   { return true }
+func (RmsCurrentMaxPhaseB) Writable() bool   { return false }
+func (RmsCurrentMaxPhaseB) Reportable() bool { return false }
+func (RmsCurrentMaxPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMaxPhaseB) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3271,11 +3281,11 @@ func (a *ActivePowerPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerPhaseB(*nt)
 	return br, err
 }
-
-func (a ActivePowerPhaseB) Readable() bool   { return true }
-func (a ActivePowerPhaseB) Writable() bool   { return false }
-func (a ActivePowerPhaseB) Reportable() bool { return false }
-func (a ActivePowerPhaseB) SceneIndex() int  { return -1 }
+func (ActivePowerPhaseB) Name() string     { return "Active Power Phase B" }
+func (ActivePowerPhaseB) Readable() bool   { return true }
+func (ActivePowerPhaseB) Writable() bool   { return false }
+func (ActivePowerPhaseB) Reportable() bool { return false }
+func (ActivePowerPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActivePowerPhaseB) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -3298,11 +3308,11 @@ func (a *ActivePowerMinPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerMinPhaseB(*nt)
 	return br, err
 }
-
-func (a ActivePowerMinPhaseB) Readable() bool   { return true }
-func (a ActivePowerMinPhaseB) Writable() bool   { return false }
-func (a ActivePowerMinPhaseB) Reportable() bool { return false }
-func (a ActivePowerMinPhaseB) SceneIndex() int  { return -1 }
+func (ActivePowerMinPhaseB) Name() string     { return "Active Power Min Phase B" }
+func (ActivePowerMinPhaseB) Readable() bool   { return true }
+func (ActivePowerMinPhaseB) Writable() bool   { return false }
+func (ActivePowerMinPhaseB) Reportable() bool { return false }
+func (ActivePowerMinPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMinPhaseB) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -3325,11 +3335,11 @@ func (a *ActivePowerMaxPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerMaxPhaseB(*nt)
 	return br, err
 }
-
-func (a ActivePowerMaxPhaseB) Readable() bool   { return true }
-func (a ActivePowerMaxPhaseB) Writable() bool   { return false }
-func (a ActivePowerMaxPhaseB) Reportable() bool { return false }
-func (a ActivePowerMaxPhaseB) SceneIndex() int  { return -1 }
+func (ActivePowerMaxPhaseB) Name() string     { return "Active Power Max Phase B" }
+func (ActivePowerMaxPhaseB) Readable() bool   { return true }
+func (ActivePowerMaxPhaseB) Writable() bool   { return false }
+func (ActivePowerMaxPhaseB) Reportable() bool { return false }
+func (ActivePowerMaxPhaseB) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMaxPhaseB) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -3352,11 +3362,11 @@ func (a *ReactivePowerPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ReactivePowerPhaseB(*nt)
 	return br, err
 }
-
-func (a ReactivePowerPhaseB) Readable() bool   { return true }
-func (a ReactivePowerPhaseB) Writable() bool   { return false }
-func (a ReactivePowerPhaseB) Reportable() bool { return false }
-func (a ReactivePowerPhaseB) SceneIndex() int  { return -1 }
+func (ReactivePowerPhaseB) Name() string     { return "Reactive Power Phase B" }
+func (ReactivePowerPhaseB) Readable() bool   { return true }
+func (ReactivePowerPhaseB) Writable() bool   { return false }
+func (ReactivePowerPhaseB) Reportable() bool { return false }
+func (ReactivePowerPhaseB) SceneIndex() int  { return -1 }
 
 func (a ReactivePowerPhaseB) String() string {
 	return zcl.VoltAmperesReactive.Format(float64(a))
@@ -3379,11 +3389,11 @@ func (a *ApparentPowerPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApparentPowerPhaseB(*nt)
 	return br, err
 }
-
-func (a ApparentPowerPhaseB) Readable() bool   { return true }
-func (a ApparentPowerPhaseB) Writable() bool   { return false }
-func (a ApparentPowerPhaseB) Reportable() bool { return false }
-func (a ApparentPowerPhaseB) SceneIndex() int  { return -1 }
+func (ApparentPowerPhaseB) Name() string     { return "Apparent Power Phase B" }
+func (ApparentPowerPhaseB) Readable() bool   { return true }
+func (ApparentPowerPhaseB) Writable() bool   { return false }
+func (ApparentPowerPhaseB) Reportable() bool { return false }
+func (ApparentPowerPhaseB) SceneIndex() int  { return -1 }
 
 func (a ApparentPowerPhaseB) String() string {
 	return zcl.VoltAmperes.Format(float64(a))
@@ -3406,11 +3416,11 @@ func (a *PowerFactorPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerFactorPhaseB(*nt)
 	return br, err
 }
-
-func (a PowerFactorPhaseB) Readable() bool   { return true }
-func (a PowerFactorPhaseB) Writable() bool   { return false }
-func (a PowerFactorPhaseB) Reportable() bool { return false }
-func (a PowerFactorPhaseB) SceneIndex() int  { return -1 }
+func (PowerFactorPhaseB) Name() string     { return "Power Factor Phase B" }
+func (PowerFactorPhaseB) Readable() bool   { return true }
+func (PowerFactorPhaseB) Writable() bool   { return false }
+func (PowerFactorPhaseB) Reportable() bool { return false }
+func (PowerFactorPhaseB) SceneIndex() int  { return -1 }
 
 func (a PowerFactorPhaseB) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))
@@ -3439,11 +3449,13 @@ func (a *AverageRmsVoltageMeasurementPeriodPhaseB) UnmarshalZcl(b []byte) ([]byt
 	*a = AverageRmsVoltageMeasurementPeriodPhaseB(*nt)
 	return br, err
 }
-
-func (a AverageRmsVoltageMeasurementPeriodPhaseB) Readable() bool   { return true }
-func (a AverageRmsVoltageMeasurementPeriodPhaseB) Writable() bool   { return true }
-func (a AverageRmsVoltageMeasurementPeriodPhaseB) Reportable() bool { return false }
-func (a AverageRmsVoltageMeasurementPeriodPhaseB) SceneIndex() int  { return -1 }
+func (AverageRmsVoltageMeasurementPeriodPhaseB) Name() string {
+	return "Average RMS Voltage Measurement Period Phase B"
+}
+func (AverageRmsVoltageMeasurementPeriodPhaseB) Readable() bool   { return true }
+func (AverageRmsVoltageMeasurementPeriodPhaseB) Writable() bool   { return true }
+func (AverageRmsVoltageMeasurementPeriodPhaseB) Reportable() bool { return false }
+func (AverageRmsVoltageMeasurementPeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a AverageRmsVoltageMeasurementPeriodPhaseB) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -3468,11 +3480,13 @@ func (a *AverageRmsOvervoltageCounterPhaseB) UnmarshalZcl(b []byte) ([]byte, err
 	*a = AverageRmsOvervoltageCounterPhaseB(*nt)
 	return br, err
 }
-
-func (a AverageRmsOvervoltageCounterPhaseB) Readable() bool   { return true }
-func (a AverageRmsOvervoltageCounterPhaseB) Writable() bool   { return true }
-func (a AverageRmsOvervoltageCounterPhaseB) Reportable() bool { return false }
-func (a AverageRmsOvervoltageCounterPhaseB) SceneIndex() int  { return -1 }
+func (AverageRmsOvervoltageCounterPhaseB) Name() string {
+	return "Average RMS Overvoltage Counter Phase B"
+}
+func (AverageRmsOvervoltageCounterPhaseB) Readable() bool   { return true }
+func (AverageRmsOvervoltageCounterPhaseB) Writable() bool   { return true }
+func (AverageRmsOvervoltageCounterPhaseB) Reportable() bool { return false }
+func (AverageRmsOvervoltageCounterPhaseB) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltageCounterPhaseB) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3497,11 +3511,13 @@ func (a *AverageRmsUndervoltageCounterPhaseB) UnmarshalZcl(b []byte) ([]byte, er
 	*a = AverageRmsUndervoltageCounterPhaseB(*nt)
 	return br, err
 }
-
-func (a AverageRmsUndervoltageCounterPhaseB) Readable() bool   { return true }
-func (a AverageRmsUndervoltageCounterPhaseB) Writable() bool   { return true }
-func (a AverageRmsUndervoltageCounterPhaseB) Reportable() bool { return false }
-func (a AverageRmsUndervoltageCounterPhaseB) SceneIndex() int  { return -1 }
+func (AverageRmsUndervoltageCounterPhaseB) Name() string {
+	return "Average RMS Undervoltage Counter Phase B"
+}
+func (AverageRmsUndervoltageCounterPhaseB) Readable() bool   { return true }
+func (AverageRmsUndervoltageCounterPhaseB) Writable() bool   { return true }
+func (AverageRmsUndervoltageCounterPhaseB) Reportable() bool { return false }
+func (AverageRmsUndervoltageCounterPhaseB) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltageCounterPhaseB) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3526,11 +3542,13 @@ func (a *RmsExtremeOvervoltagePeriodPhaseB) UnmarshalZcl(b []byte) ([]byte, erro
 	*a = RmsExtremeOvervoltagePeriodPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsExtremeOvervoltagePeriodPhaseB) Readable() bool   { return true }
-func (a RmsExtremeOvervoltagePeriodPhaseB) Writable() bool   { return true }
-func (a RmsExtremeOvervoltagePeriodPhaseB) Reportable() bool { return false }
-func (a RmsExtremeOvervoltagePeriodPhaseB) SceneIndex() int  { return -1 }
+func (RmsExtremeOvervoltagePeriodPhaseB) Name() string {
+	return "RMS Extreme Overvoltage Period Phase B"
+}
+func (RmsExtremeOvervoltagePeriodPhaseB) Readable() bool   { return true }
+func (RmsExtremeOvervoltagePeriodPhaseB) Writable() bool   { return true }
+func (RmsExtremeOvervoltagePeriodPhaseB) Reportable() bool { return false }
+func (RmsExtremeOvervoltagePeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltagePeriodPhaseB) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -3555,11 +3573,13 @@ func (a *RmsExtremeUndervoltagePeriodPhaseB) UnmarshalZcl(b []byte) ([]byte, err
 	*a = RmsExtremeUndervoltagePeriodPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsExtremeUndervoltagePeriodPhaseB) Readable() bool   { return true }
-func (a RmsExtremeUndervoltagePeriodPhaseB) Writable() bool   { return true }
-func (a RmsExtremeUndervoltagePeriodPhaseB) Reportable() bool { return false }
-func (a RmsExtremeUndervoltagePeriodPhaseB) SceneIndex() int  { return -1 }
+func (RmsExtremeUndervoltagePeriodPhaseB) Name() string {
+	return "RMS Extreme Undervoltage Period Phase B"
+}
+func (RmsExtremeUndervoltagePeriodPhaseB) Readable() bool   { return true }
+func (RmsExtremeUndervoltagePeriodPhaseB) Writable() bool   { return true }
+func (RmsExtremeUndervoltagePeriodPhaseB) Reportable() bool { return false }
+func (RmsExtremeUndervoltagePeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltagePeriodPhaseB) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -3582,11 +3602,11 @@ func (a *RmsVoltageSagPeriodPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSagPeriodPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSagPeriodPhaseB) Readable() bool   { return true }
-func (a RmsVoltageSagPeriodPhaseB) Writable() bool   { return true }
-func (a RmsVoltageSagPeriodPhaseB) Reportable() bool { return false }
-func (a RmsVoltageSagPeriodPhaseB) SceneIndex() int  { return -1 }
+func (RmsVoltageSagPeriodPhaseB) Name() string     { return "RMS Voltage Sag Period Phase B" }
+func (RmsVoltageSagPeriodPhaseB) Readable() bool   { return true }
+func (RmsVoltageSagPeriodPhaseB) Writable() bool   { return true }
+func (RmsVoltageSagPeriodPhaseB) Reportable() bool { return false }
+func (RmsVoltageSagPeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSagPeriodPhaseB) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -3609,11 +3629,11 @@ func (a *RmsVoltageSwellPeriodPhaseB) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSwellPeriodPhaseB(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSwellPeriodPhaseB) Readable() bool   { return true }
-func (a RmsVoltageSwellPeriodPhaseB) Writable() bool   { return true }
-func (a RmsVoltageSwellPeriodPhaseB) Reportable() bool { return false }
-func (a RmsVoltageSwellPeriodPhaseB) SceneIndex() int  { return -1 }
+func (RmsVoltageSwellPeriodPhaseB) Name() string     { return "RMS Voltage Swell Period Phase B" }
+func (RmsVoltageSwellPeriodPhaseB) Readable() bool   { return true }
+func (RmsVoltageSwellPeriodPhaseB) Writable() bool   { return true }
+func (RmsVoltageSwellPeriodPhaseB) Reportable() bool { return false }
+func (RmsVoltageSwellPeriodPhaseB) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwellPeriodPhaseB) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -3636,11 +3656,11 @@ func (a *LineCurrentPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LineCurrentPhaseC(*nt)
 	return br, err
 }
-
-func (a LineCurrentPhaseC) Readable() bool   { return true }
-func (a LineCurrentPhaseC) Writable() bool   { return false }
-func (a LineCurrentPhaseC) Reportable() bool { return false }
-func (a LineCurrentPhaseC) SceneIndex() int  { return -1 }
+func (LineCurrentPhaseC) Name() string     { return "Line Current Phase C" }
+func (LineCurrentPhaseC) Readable() bool   { return true }
+func (LineCurrentPhaseC) Writable() bool   { return false }
+func (LineCurrentPhaseC) Reportable() bool { return false }
+func (LineCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a LineCurrentPhaseC) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3663,11 +3683,11 @@ func (a *ActiveCurrentPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActiveCurrentPhaseC(*nt)
 	return br, err
 }
-
-func (a ActiveCurrentPhaseC) Readable() bool   { return true }
-func (a ActiveCurrentPhaseC) Writable() bool   { return false }
-func (a ActiveCurrentPhaseC) Reportable() bool { return false }
-func (a ActiveCurrentPhaseC) SceneIndex() int  { return -1 }
+func (ActiveCurrentPhaseC) Name() string     { return "Active Current Phase C" }
+func (ActiveCurrentPhaseC) Readable() bool   { return true }
+func (ActiveCurrentPhaseC) Writable() bool   { return false }
+func (ActiveCurrentPhaseC) Reportable() bool { return false }
+func (ActiveCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActiveCurrentPhaseC) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3690,11 +3710,11 @@ func (a *ReactiveCurrentPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ReactiveCurrentPhaseC(*nt)
 	return br, err
 }
-
-func (a ReactiveCurrentPhaseC) Readable() bool   { return true }
-func (a ReactiveCurrentPhaseC) Writable() bool   { return false }
-func (a ReactiveCurrentPhaseC) Reportable() bool { return false }
-func (a ReactiveCurrentPhaseC) SceneIndex() int  { return -1 }
+func (ReactiveCurrentPhaseC) Name() string     { return "Reactive Current Phase C" }
+func (ReactiveCurrentPhaseC) Readable() bool   { return true }
+func (ReactiveCurrentPhaseC) Writable() bool   { return false }
+func (ReactiveCurrentPhaseC) Reportable() bool { return false }
+func (ReactiveCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a ReactiveCurrentPhaseC) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3717,11 +3737,11 @@ func (a *RmsVoltagePhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltagePhaseC(*nt)
 	return br, err
 }
-
-func (a RmsVoltagePhaseC) Readable() bool   { return true }
-func (a RmsVoltagePhaseC) Writable() bool   { return false }
-func (a RmsVoltagePhaseC) Reportable() bool { return false }
-func (a RmsVoltagePhaseC) SceneIndex() int  { return -1 }
+func (RmsVoltagePhaseC) Name() string     { return "RMS Voltage Phase C" }
+func (RmsVoltagePhaseC) Readable() bool   { return true }
+func (RmsVoltagePhaseC) Writable() bool   { return false }
+func (RmsVoltagePhaseC) Reportable() bool { return false }
+func (RmsVoltagePhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltagePhaseC) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -3744,11 +3764,11 @@ func (a *RmsVoltageMinPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageMinPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsVoltageMinPhaseC) Readable() bool   { return true }
-func (a RmsVoltageMinPhaseC) Writable() bool   { return false }
-func (a RmsVoltageMinPhaseC) Reportable() bool { return false }
-func (a RmsVoltageMinPhaseC) SceneIndex() int  { return -1 }
+func (RmsVoltageMinPhaseC) Name() string     { return "RMS Voltage Min Phase C" }
+func (RmsVoltageMinPhaseC) Readable() bool   { return true }
+func (RmsVoltageMinPhaseC) Writable() bool   { return false }
+func (RmsVoltageMinPhaseC) Reportable() bool { return false }
+func (RmsVoltageMinPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMinPhaseC) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -3771,11 +3791,11 @@ func (a *RmsVoltageMaxPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageMaxPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsVoltageMaxPhaseC) Readable() bool   { return true }
-func (a RmsVoltageMaxPhaseC) Writable() bool   { return false }
-func (a RmsVoltageMaxPhaseC) Reportable() bool { return false }
-func (a RmsVoltageMaxPhaseC) SceneIndex() int  { return -1 }
+func (RmsVoltageMaxPhaseC) Name() string     { return "RMS Voltage Max Phase C" }
+func (RmsVoltageMaxPhaseC) Readable() bool   { return true }
+func (RmsVoltageMaxPhaseC) Writable() bool   { return false }
+func (RmsVoltageMaxPhaseC) Reportable() bool { return false }
+func (RmsVoltageMaxPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageMaxPhaseC) String() string {
 	return zcl.Volts.Format(float64(a))
@@ -3798,11 +3818,11 @@ func (a *RmsCurrentPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsCurrentPhaseC) Readable() bool   { return true }
-func (a RmsCurrentPhaseC) Writable() bool   { return false }
-func (a RmsCurrentPhaseC) Reportable() bool { return false }
-func (a RmsCurrentPhaseC) SceneIndex() int  { return -1 }
+func (RmsCurrentPhaseC) Name() string     { return "RMS Current Phase C" }
+func (RmsCurrentPhaseC) Readable() bool   { return true }
+func (RmsCurrentPhaseC) Writable() bool   { return false }
+func (RmsCurrentPhaseC) Reportable() bool { return false }
+func (RmsCurrentPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentPhaseC) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3825,11 +3845,11 @@ func (a *RmsCurrentMinPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentMinPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsCurrentMinPhaseC) Readable() bool   { return true }
-func (a RmsCurrentMinPhaseC) Writable() bool   { return false }
-func (a RmsCurrentMinPhaseC) Reportable() bool { return false }
-func (a RmsCurrentMinPhaseC) SceneIndex() int  { return -1 }
+func (RmsCurrentMinPhaseC) Name() string     { return "RMS Current Min Phase C" }
+func (RmsCurrentMinPhaseC) Readable() bool   { return true }
+func (RmsCurrentMinPhaseC) Writable() bool   { return false }
+func (RmsCurrentMinPhaseC) Reportable() bool { return false }
+func (RmsCurrentMinPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMinPhaseC) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3852,11 +3872,11 @@ func (a *RmsCurrentMaxPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsCurrentMaxPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsCurrentMaxPhaseC) Readable() bool   { return true }
-func (a RmsCurrentMaxPhaseC) Writable() bool   { return false }
-func (a RmsCurrentMaxPhaseC) Reportable() bool { return false }
-func (a RmsCurrentMaxPhaseC) SceneIndex() int  { return -1 }
+func (RmsCurrentMaxPhaseC) Name() string     { return "RMS Current Max Phase C" }
+func (RmsCurrentMaxPhaseC) Readable() bool   { return true }
+func (RmsCurrentMaxPhaseC) Writable() bool   { return false }
+func (RmsCurrentMaxPhaseC) Reportable() bool { return false }
+func (RmsCurrentMaxPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsCurrentMaxPhaseC) String() string {
 	return zcl.Amperes.Format(float64(a))
@@ -3880,11 +3900,11 @@ func (a *ActivePowerPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerPhaseC(*nt)
 	return br, err
 }
-
-func (a ActivePowerPhaseC) Readable() bool   { return true }
-func (a ActivePowerPhaseC) Writable() bool   { return false }
-func (a ActivePowerPhaseC) Reportable() bool { return false }
-func (a ActivePowerPhaseC) SceneIndex() int  { return -1 }
+func (ActivePowerPhaseC) Name() string     { return "Active Power Phase C" }
+func (ActivePowerPhaseC) Readable() bool   { return true }
+func (ActivePowerPhaseC) Writable() bool   { return false }
+func (ActivePowerPhaseC) Reportable() bool { return false }
+func (ActivePowerPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActivePowerPhaseC) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -3907,11 +3927,11 @@ func (a *ActivePowerMinPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerMinPhaseC(*nt)
 	return br, err
 }
-
-func (a ActivePowerMinPhaseC) Readable() bool   { return true }
-func (a ActivePowerMinPhaseC) Writable() bool   { return false }
-func (a ActivePowerMinPhaseC) Reportable() bool { return false }
-func (a ActivePowerMinPhaseC) SceneIndex() int  { return -1 }
+func (ActivePowerMinPhaseC) Name() string     { return "Active Power Min Phase C" }
+func (ActivePowerMinPhaseC) Readable() bool   { return true }
+func (ActivePowerMinPhaseC) Writable() bool   { return false }
+func (ActivePowerMinPhaseC) Reportable() bool { return false }
+func (ActivePowerMinPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMinPhaseC) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -3934,11 +3954,11 @@ func (a *ActivePowerMaxPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActivePowerMaxPhaseC(*nt)
 	return br, err
 }
-
-func (a ActivePowerMaxPhaseC) Readable() bool   { return true }
-func (a ActivePowerMaxPhaseC) Writable() bool   { return false }
-func (a ActivePowerMaxPhaseC) Reportable() bool { return false }
-func (a ActivePowerMaxPhaseC) SceneIndex() int  { return -1 }
+func (ActivePowerMaxPhaseC) Name() string     { return "Active Power Max Phase C" }
+func (ActivePowerMaxPhaseC) Readable() bool   { return true }
+func (ActivePowerMaxPhaseC) Writable() bool   { return false }
+func (ActivePowerMaxPhaseC) Reportable() bool { return false }
+func (ActivePowerMaxPhaseC) SceneIndex() int  { return -1 }
 
 func (a ActivePowerMaxPhaseC) String() string {
 	return zcl.Watts.Format(float64(a))
@@ -3961,11 +3981,11 @@ func (a *ReactivePowerPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ReactivePowerPhaseC(*nt)
 	return br, err
 }
-
-func (a ReactivePowerPhaseC) Readable() bool   { return true }
-func (a ReactivePowerPhaseC) Writable() bool   { return false }
-func (a ReactivePowerPhaseC) Reportable() bool { return false }
-func (a ReactivePowerPhaseC) SceneIndex() int  { return -1 }
+func (ReactivePowerPhaseC) Name() string     { return "Reactive Power Phase C" }
+func (ReactivePowerPhaseC) Readable() bool   { return true }
+func (ReactivePowerPhaseC) Writable() bool   { return false }
+func (ReactivePowerPhaseC) Reportable() bool { return false }
+func (ReactivePowerPhaseC) SceneIndex() int  { return -1 }
 
 func (a ReactivePowerPhaseC) String() string {
 	return zcl.VoltAmperesReactive.Format(float64(a))
@@ -3988,11 +4008,11 @@ func (a *ApparentPowerPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApparentPowerPhaseC(*nt)
 	return br, err
 }
-
-func (a ApparentPowerPhaseC) Readable() bool   { return true }
-func (a ApparentPowerPhaseC) Writable() bool   { return false }
-func (a ApparentPowerPhaseC) Reportable() bool { return false }
-func (a ApparentPowerPhaseC) SceneIndex() int  { return -1 }
+func (ApparentPowerPhaseC) Name() string     { return "Apparent Power Phase C" }
+func (ApparentPowerPhaseC) Readable() bool   { return true }
+func (ApparentPowerPhaseC) Writable() bool   { return false }
+func (ApparentPowerPhaseC) Reportable() bool { return false }
+func (ApparentPowerPhaseC) SceneIndex() int  { return -1 }
 
 func (a ApparentPowerPhaseC) String() string {
 	return zcl.VoltAmperes.Format(float64(a))
@@ -4015,11 +4035,11 @@ func (a *PowerFactorPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerFactorPhaseC(*nt)
 	return br, err
 }
-
-func (a PowerFactorPhaseC) Readable() bool   { return true }
-func (a PowerFactorPhaseC) Writable() bool   { return false }
-func (a PowerFactorPhaseC) Reportable() bool { return false }
-func (a PowerFactorPhaseC) SceneIndex() int  { return -1 }
+func (PowerFactorPhaseC) Name() string     { return "Power Factor Phase C" }
+func (PowerFactorPhaseC) Readable() bool   { return true }
+func (PowerFactorPhaseC) Writable() bool   { return false }
+func (PowerFactorPhaseC) Reportable() bool { return false }
+func (PowerFactorPhaseC) SceneIndex() int  { return -1 }
 
 func (a PowerFactorPhaseC) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))
@@ -4048,11 +4068,13 @@ func (a *AverageRmsVoltageMeasurementPeriodPhaseC) UnmarshalZcl(b []byte) ([]byt
 	*a = AverageRmsVoltageMeasurementPeriodPhaseC(*nt)
 	return br, err
 }
-
-func (a AverageRmsVoltageMeasurementPeriodPhaseC) Readable() bool   { return true }
-func (a AverageRmsVoltageMeasurementPeriodPhaseC) Writable() bool   { return true }
-func (a AverageRmsVoltageMeasurementPeriodPhaseC) Reportable() bool { return false }
-func (a AverageRmsVoltageMeasurementPeriodPhaseC) SceneIndex() int  { return -1 }
+func (AverageRmsVoltageMeasurementPeriodPhaseC) Name() string {
+	return "Average RMS Voltage Measurement Period Phase C"
+}
+func (AverageRmsVoltageMeasurementPeriodPhaseC) Readable() bool   { return true }
+func (AverageRmsVoltageMeasurementPeriodPhaseC) Writable() bool   { return true }
+func (AverageRmsVoltageMeasurementPeriodPhaseC) Reportable() bool { return false }
+func (AverageRmsVoltageMeasurementPeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a AverageRmsVoltageMeasurementPeriodPhaseC) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -4077,11 +4099,13 @@ func (a *AverageRmsOvervoltageCounterPhaseC) UnmarshalZcl(b []byte) ([]byte, err
 	*a = AverageRmsOvervoltageCounterPhaseC(*nt)
 	return br, err
 }
-
-func (a AverageRmsOvervoltageCounterPhaseC) Readable() bool   { return true }
-func (a AverageRmsOvervoltageCounterPhaseC) Writable() bool   { return true }
-func (a AverageRmsOvervoltageCounterPhaseC) Reportable() bool { return false }
-func (a AverageRmsOvervoltageCounterPhaseC) SceneIndex() int  { return -1 }
+func (AverageRmsOvervoltageCounterPhaseC) Name() string {
+	return "Average RMS Overvoltage Counter Phase C"
+}
+func (AverageRmsOvervoltageCounterPhaseC) Readable() bool   { return true }
+func (AverageRmsOvervoltageCounterPhaseC) Writable() bool   { return true }
+func (AverageRmsOvervoltageCounterPhaseC) Reportable() bool { return false }
+func (AverageRmsOvervoltageCounterPhaseC) SceneIndex() int  { return -1 }
 
 func (a AverageRmsOvervoltageCounterPhaseC) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -4106,11 +4130,13 @@ func (a *AverageRmsUndervoltageCounterPhaseC) UnmarshalZcl(b []byte) ([]byte, er
 	*a = AverageRmsUndervoltageCounterPhaseC(*nt)
 	return br, err
 }
-
-func (a AverageRmsUndervoltageCounterPhaseC) Readable() bool   { return true }
-func (a AverageRmsUndervoltageCounterPhaseC) Writable() bool   { return true }
-func (a AverageRmsUndervoltageCounterPhaseC) Reportable() bool { return false }
-func (a AverageRmsUndervoltageCounterPhaseC) SceneIndex() int  { return -1 }
+func (AverageRmsUndervoltageCounterPhaseC) Name() string {
+	return "Average RMS Undervoltage Counter Phase C"
+}
+func (AverageRmsUndervoltageCounterPhaseC) Readable() bool   { return true }
+func (AverageRmsUndervoltageCounterPhaseC) Writable() bool   { return true }
+func (AverageRmsUndervoltageCounterPhaseC) Reportable() bool { return false }
+func (AverageRmsUndervoltageCounterPhaseC) SceneIndex() int  { return -1 }
 
 func (a AverageRmsUndervoltageCounterPhaseC) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -4135,11 +4161,13 @@ func (a *RmsExtremeOvervoltagePeriodPhaseC) UnmarshalZcl(b []byte) ([]byte, erro
 	*a = RmsExtremeOvervoltagePeriodPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsExtremeOvervoltagePeriodPhaseC) Readable() bool   { return true }
-func (a RmsExtremeOvervoltagePeriodPhaseC) Writable() bool   { return true }
-func (a RmsExtremeOvervoltagePeriodPhaseC) Reportable() bool { return false }
-func (a RmsExtremeOvervoltagePeriodPhaseC) SceneIndex() int  { return -1 }
+func (RmsExtremeOvervoltagePeriodPhaseC) Name() string {
+	return "RMS Extreme Overvoltage Period Phase C"
+}
+func (RmsExtremeOvervoltagePeriodPhaseC) Readable() bool   { return true }
+func (RmsExtremeOvervoltagePeriodPhaseC) Writable() bool   { return true }
+func (RmsExtremeOvervoltagePeriodPhaseC) Reportable() bool { return false }
+func (RmsExtremeOvervoltagePeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeOvervoltagePeriodPhaseC) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -4164,11 +4192,13 @@ func (a *RmsExtremeUndervoltagePeriodPhaseC) UnmarshalZcl(b []byte) ([]byte, err
 	*a = RmsExtremeUndervoltagePeriodPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsExtremeUndervoltagePeriodPhaseC) Readable() bool   { return true }
-func (a RmsExtremeUndervoltagePeriodPhaseC) Writable() bool   { return true }
-func (a RmsExtremeUndervoltagePeriodPhaseC) Reportable() bool { return false }
-func (a RmsExtremeUndervoltagePeriodPhaseC) SceneIndex() int  { return -1 }
+func (RmsExtremeUndervoltagePeriodPhaseC) Name() string {
+	return "RMS Extreme Undervoltage Period Phase C"
+}
+func (RmsExtremeUndervoltagePeriodPhaseC) Readable() bool   { return true }
+func (RmsExtremeUndervoltagePeriodPhaseC) Writable() bool   { return true }
+func (RmsExtremeUndervoltagePeriodPhaseC) Reportable() bool { return false }
+func (RmsExtremeUndervoltagePeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsExtremeUndervoltagePeriodPhaseC) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -4191,11 +4221,11 @@ func (a *RmsVoltageSagPeriodPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSagPeriodPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSagPeriodPhaseC) Readable() bool   { return true }
-func (a RmsVoltageSagPeriodPhaseC) Writable() bool   { return true }
-func (a RmsVoltageSagPeriodPhaseC) Reportable() bool { return false }
-func (a RmsVoltageSagPeriodPhaseC) SceneIndex() int  { return -1 }
+func (RmsVoltageSagPeriodPhaseC) Name() string     { return "RMS Voltage Sag Period Phase C" }
+func (RmsVoltageSagPeriodPhaseC) Readable() bool   { return true }
+func (RmsVoltageSagPeriodPhaseC) Writable() bool   { return true }
+func (RmsVoltageSagPeriodPhaseC) Reportable() bool { return false }
+func (RmsVoltageSagPeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSagPeriodPhaseC) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -4218,11 +4248,11 @@ func (a *RmsVoltageSwellPeriodPhaseC) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RmsVoltageSwellPeriodPhaseC(*nt)
 	return br, err
 }
-
-func (a RmsVoltageSwellPeriodPhaseC) Readable() bool   { return true }
-func (a RmsVoltageSwellPeriodPhaseC) Writable() bool   { return true }
-func (a RmsVoltageSwellPeriodPhaseC) Reportable() bool { return false }
-func (a RmsVoltageSwellPeriodPhaseC) SceneIndex() int  { return -1 }
+func (RmsVoltageSwellPeriodPhaseC) Name() string     { return "RMS Voltage Swell Period Phase C" }
+func (RmsVoltageSwellPeriodPhaseC) Readable() bool   { return true }
+func (RmsVoltageSwellPeriodPhaseC) Writable() bool   { return true }
+func (RmsVoltageSwellPeriodPhaseC) Reportable() bool { return false }
+func (RmsVoltageSwellPeriodPhaseC) SceneIndex() int  { return -1 }
 
 func (a RmsVoltageSwellPeriodPhaseC) String() string {
 	return zcl.Seconds.Format(float64(a))

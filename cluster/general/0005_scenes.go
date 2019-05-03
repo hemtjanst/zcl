@@ -142,23 +142,23 @@ func (v *AddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *AddScene) GroupIdString() string {
+func (v AddScene) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *AddScene) SceneIdString() string {
+func (v AddScene) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
-func (v *AddScene) TransitionTimeString() string {
+func (v AddScene) TransitionTimeString() string {
 	return zcl.Seconds.Format(float64(v.TransitionTime))
 }
-func (v *AddScene) SceneNameString() string {
+func (v AddScene) SceneNameString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
 }
-func (v *AddScene) ExtensionFieldSetsString() string {
+func (v AddScene) ExtensionFieldSetsString() string {
 	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
 }
 
-func (v *AddScene) String() string {
+func (v AddScene) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
@@ -167,6 +167,8 @@ func (v *AddScene) String() string {
 	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
 	return "AddScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (AddScene) Name() string { return "Add scene" }
 
 // Views the scenes of a group.
 type ViewScene struct {
@@ -227,19 +229,21 @@ func (v *ViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *ViewScene) GroupIdString() string {
+func (v ViewScene) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *ViewScene) SceneIdString() string {
+func (v ViewScene) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *ViewScene) String() string {
+func (v ViewScene) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "ViewScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ViewScene) Name() string { return "View scene" }
 
 // Removes a scenes of a group.
 type RemoveScene struct {
@@ -300,19 +304,21 @@ func (v *RemoveScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RemoveScene) GroupIdString() string {
+func (v RemoveScene) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *RemoveScene) SceneIdString() string {
+func (v RemoveScene) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *RemoveScene) String() string {
+func (v RemoveScene) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "RemoveScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RemoveScene) Name() string { return "Remove scene" }
 
 // Removes all scenes of a group.
 type RemoveAllScenes struct {
@@ -362,15 +368,17 @@ func (v *RemoveAllScenes) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RemoveAllScenes) GroupIdString() string {
+func (v RemoveAllScenes) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 
-func (v *RemoveAllScenes) String() string {
+func (v RemoveAllScenes) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	return "RemoveAllScenes{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RemoveAllScenes) Name() string { return "Remove all scenes" }
 
 // Stores a scene of a group for a device.
 type StoreScene struct {
@@ -431,19 +439,21 @@ func (v *StoreScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StoreScene) GroupIdString() string {
+func (v StoreScene) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *StoreScene) SceneIdString() string {
+func (v StoreScene) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *StoreScene) String() string {
+func (v StoreScene) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "StoreScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StoreScene) Name() string { return "Store scene" }
 
 // Recalls a scene of a group for a device.
 type RecallScene struct {
@@ -504,19 +514,21 @@ func (v *RecallScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RecallScene) GroupIdString() string {
+func (v RecallScene) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *RecallScene) SceneIdString() string {
+func (v RecallScene) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *RecallScene) String() string {
+func (v RecallScene) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "RecallScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RecallScene) Name() string { return "Recall scene" }
 
 // Get the scenes of a group for a device.
 type GetSceneMembership struct {
@@ -566,15 +578,17 @@ func (v *GetSceneMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetSceneMembership) GroupIdString() string {
+func (v GetSceneMembership) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 
-func (v *GetSceneMembership) String() string {
+func (v GetSceneMembership) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	return "GetSceneMembership{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetSceneMembership) Name() string { return "Get scene membership" }
 
 // Same as Add Scene, except that transition time is specified in 1/10 s
 type EnhancedAddScene struct {
@@ -668,23 +682,23 @@ func (v *EnhancedAddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *EnhancedAddScene) GroupIdString() string {
+func (v EnhancedAddScene) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *EnhancedAddScene) SceneIdString() string {
+func (v EnhancedAddScene) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
-func (v *EnhancedAddScene) TransitionTimeString() string {
+func (v EnhancedAddScene) TransitionTimeString() string {
 	return zcl.Seconds.Format(float64(v.TransitionTime) / 0.1)
 }
-func (v *EnhancedAddScene) SceneNameString() string {
+func (v EnhancedAddScene) SceneNameString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
 }
-func (v *EnhancedAddScene) ExtensionFieldSetsString() string {
+func (v EnhancedAddScene) ExtensionFieldSetsString() string {
 	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
 }
 
-func (v *EnhancedAddScene) String() string {
+func (v EnhancedAddScene) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
@@ -693,6 +707,8 @@ func (v *EnhancedAddScene) String() string {
 	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
 	return "EnhancedAddScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (EnhancedAddScene) Name() string { return "Enhanced Add Scene" }
 
 // Views the scenes of a group (returning transition time with 1/10s precision).
 type EnhancedViewScene struct {
@@ -753,19 +769,21 @@ func (v *EnhancedViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *EnhancedViewScene) GroupIdString() string {
+func (v EnhancedViewScene) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *EnhancedViewScene) SceneIdString() string {
+func (v EnhancedViewScene) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *EnhancedViewScene) String() string {
+func (v EnhancedViewScene) String() string {
 	var str []string
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "EnhancedViewScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (EnhancedViewScene) Name() string { return "Enhanced View Scene" }
 
 type CopyScene struct {
 	Mode        zcl.Zbmp8
@@ -858,27 +876,27 @@ func (v *CopyScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *CopyScene) ModeString() string {
+func (v CopyScene) ModeString() string {
 	var bstr []string
 	if zcl.BitmapTest([]byte(v.Mode), 0) {
 		bstr = append(bstr, "Copy All Scenes")
 	}
 	return zcl.StrJoin(bstr, ", ")
 }
-func (v *CopyScene) FromGroupIdString() string {
+func (v CopyScene) FromGroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.FromGroupId))
 }
-func (v *CopyScene) FromSceneIdString() string {
+func (v CopyScene) FromSceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.FromSceneId))
 }
-func (v *CopyScene) ToGroupIdString() string {
+func (v CopyScene) ToGroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.ToGroupId))
 }
-func (v *CopyScene) ToSceneIdString() string {
+func (v CopyScene) ToSceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.ToSceneId))
 }
 
-func (v *CopyScene) String() string {
+func (v CopyScene) String() string {
 	var str []string
 	str = append(str, "Mode["+v.ModeString()+"]")
 	str = append(str, "FromGroupId["+v.FromGroupIdString()+"]")
@@ -887,6 +905,8 @@ func (v *CopyScene) String() string {
 	str = append(str, "ToSceneId["+v.ToSceneIdString()+"]")
 	return "CopyScene{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (CopyScene) Name() string { return "Copy Scene" }
 
 // Response to the add scene command.
 type AddSceneResponse struct {
@@ -958,23 +978,25 @@ func (v *AddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *AddSceneResponse) StatusString() string {
+func (v AddSceneResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *AddSceneResponse) GroupIdString() string {
+func (v AddSceneResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *AddSceneResponse) SceneIdString() string {
+func (v AddSceneResponse) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *AddSceneResponse) String() string {
+func (v AddSceneResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "AddSceneResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (AddSceneResponse) Name() string { return "Add scene response" }
 
 // Response to the view scene command.
 type ViewSceneResponse struct {
@@ -1079,26 +1101,26 @@ func (v *ViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *ViewSceneResponse) StatusString() string {
+func (v ViewSceneResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *ViewSceneResponse) GroupIdString() string {
+func (v ViewSceneResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *ViewSceneResponse) SceneIdString() string {
+func (v ViewSceneResponse) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
-func (v *ViewSceneResponse) TransitionTimeString() string {
+func (v ViewSceneResponse) TransitionTimeString() string {
 	return zcl.Seconds.Format(float64(v.TransitionTime))
 }
-func (v *ViewSceneResponse) SceneNameString() string {
+func (v ViewSceneResponse) SceneNameString() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
 }
-func (v *ViewSceneResponse) ExtensionFieldSetsString() string {
+func (v ViewSceneResponse) ExtensionFieldSetsString() string {
 	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
 }
 
-func (v *ViewSceneResponse) String() string {
+func (v ViewSceneResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
@@ -1108,6 +1130,8 @@ func (v *ViewSceneResponse) String() string {
 	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
 	return "ViewSceneResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ViewSceneResponse) Name() string { return "View scene response" }
 
 // Response to the remove scene command.
 type RemoveSceneResponse struct {
@@ -1179,23 +1203,25 @@ func (v *RemoveSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RemoveSceneResponse) StatusString() string {
+func (v RemoveSceneResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *RemoveSceneResponse) GroupIdString() string {
+func (v RemoveSceneResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *RemoveSceneResponse) SceneIdString() string {
+func (v RemoveSceneResponse) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *RemoveSceneResponse) String() string {
+func (v RemoveSceneResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "RemoveSceneResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RemoveSceneResponse) Name() string { return "Remove scene response" }
 
 // Response to the remove all scenes command.
 type RemoveAllScenesResponse struct {
@@ -1256,19 +1282,21 @@ func (v *RemoveAllScenesResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *RemoveAllScenesResponse) StatusString() string {
+func (v RemoveAllScenesResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *RemoveAllScenesResponse) GroupIdString() string {
+func (v RemoveAllScenesResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 
-func (v *RemoveAllScenesResponse) String() string {
+func (v RemoveAllScenesResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	return "RemoveAllScenesResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (RemoveAllScenesResponse) Name() string { return "Remove all scenes response" }
 
 // Response to the store scene command.
 type StoreSceneResponse struct {
@@ -1340,23 +1368,25 @@ func (v *StoreSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StoreSceneResponse) StatusString() string {
+func (v StoreSceneResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *StoreSceneResponse) GroupIdString() string {
+func (v StoreSceneResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *StoreSceneResponse) SceneIdString() string {
+func (v StoreSceneResponse) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *StoreSceneResponse) String() string {
+func (v StoreSceneResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	return "StoreSceneResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StoreSceneResponse) Name() string { return "Store scene response" }
 
 // Shows details about scene membership.
 type GetSceneMembershipResponse struct {
@@ -1439,20 +1469,20 @@ func (v *GetSceneMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetSceneMembershipResponse) StatusString() string {
+func (v GetSceneMembershipResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *GetSceneMembershipResponse) CapacityString() string {
+func (v GetSceneMembershipResponse) CapacityString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Capacity))
 }
-func (v *GetSceneMembershipResponse) GroupIdString() string {
+func (v GetSceneMembershipResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *GetSceneMembershipResponse) SceneListString() string {
+func (v GetSceneMembershipResponse) SceneListString() string {
 	return zcl.Sprintf("0x%X", zcl.Zset(v.SceneList))
 }
 
-func (v *GetSceneMembershipResponse) String() string {
+func (v GetSceneMembershipResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "Capacity["+v.CapacityString()+"]")
@@ -1460,6 +1490,8 @@ func (v *GetSceneMembershipResponse) String() string {
 	str = append(str, "SceneList["+v.SceneListString()+"]")
 	return "GetSceneMembershipResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetSceneMembershipResponse) Name() string { return "Get scene membership response" }
 
 type EnhancedAddSceneResponse struct {
 	Status  zcl.Status
@@ -1530,17 +1562,17 @@ func (v *EnhancedAddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *EnhancedAddSceneResponse) StatusString() string {
+func (v EnhancedAddSceneResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *EnhancedAddSceneResponse) GroupIdString() string {
+func (v EnhancedAddSceneResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *EnhancedAddSceneResponse) SceneIdString() string {
+func (v EnhancedAddSceneResponse) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
 
-func (v *EnhancedAddSceneResponse) String() string {
+func (v EnhancedAddSceneResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
@@ -1548,13 +1580,15 @@ func (v *EnhancedAddSceneResponse) String() string {
 	return "EnhancedAddSceneResponse{" + zcl.StrJoin(str, " ") + "}"
 }
 
+func (EnhancedAddSceneResponse) Name() string { return "Enhanced Add Scene response" }
+
 // A scene description.
 type EnhancedViewSceneResponse struct {
 	Status             zcl.Status
 	GroupId            zcl.Zu16
 	SceneId            zcl.Zu8
 	TransitionTime     zcl.Zu16
-	Name               zcl.Zcstring
+	SceneName          zcl.Zcstring
 	ExtensionFieldSets zcl.SceneExtensionSet
 }
 
@@ -1566,7 +1600,7 @@ func (v *EnhancedViewSceneResponse) Values() []zcl.Val {
 		&v.GroupId,
 		&v.SceneId,
 		&v.TransitionTime,
-		&v.Name,
+		&v.SceneName,
 		&v.ExtensionFieldSets,
 	}
 }
@@ -1608,7 +1642,7 @@ func (v EnhancedViewSceneResponse) MarshalZcl() ([]byte, error) {
 	}
 	data = append(data, tmp...)
 
-	if tmp, err = v.Name.MarshalZcl(); err != nil {
+	if tmp, err = v.SceneName.MarshalZcl(); err != nil {
 		return nil, err
 	}
 	data = append(data, tmp...)
@@ -1640,7 +1674,7 @@ func (v *EnhancedViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.Name).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.SceneName).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -1651,35 +1685,37 @@ func (v *EnhancedViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *EnhancedViewSceneResponse) StatusString() string {
+func (v EnhancedViewSceneResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *EnhancedViewSceneResponse) GroupIdString() string {
+func (v EnhancedViewSceneResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
-func (v *EnhancedViewSceneResponse) SceneIdString() string {
+func (v EnhancedViewSceneResponse) SceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
 }
-func (v *EnhancedViewSceneResponse) TransitionTimeString() string {
+func (v EnhancedViewSceneResponse) TransitionTimeString() string {
 	return zcl.Seconds.Format(float64(v.TransitionTime) / 0.1)
 }
-func (v *EnhancedViewSceneResponse) NameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.Name))
+func (v EnhancedViewSceneResponse) SceneNameString() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
 }
-func (v *EnhancedViewSceneResponse) ExtensionFieldSetsString() string {
+func (v EnhancedViewSceneResponse) ExtensionFieldSetsString() string {
 	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
 }
 
-func (v *EnhancedViewSceneResponse) String() string {
+func (v EnhancedViewSceneResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "GroupId["+v.GroupIdString()+"]")
 	str = append(str, "SceneId["+v.SceneIdString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	str = append(str, "Name["+v.NameString()+"]")
+	str = append(str, "SceneName["+v.SceneNameString()+"]")
 	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
 	return "EnhancedViewSceneResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (EnhancedViewSceneResponse) Name() string { return "Enhanced View Scene response" }
 
 type CopySceneResponse struct {
 	Status      zcl.Status
@@ -1750,23 +1786,25 @@ func (v *CopySceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *CopySceneResponse) StatusString() string {
+func (v CopySceneResponse) StatusString() string {
 	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
-func (v *CopySceneResponse) FromGroupIdString() string {
+func (v CopySceneResponse) FromGroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.FromGroupId))
 }
-func (v *CopySceneResponse) FromSceneIdString() string {
+func (v CopySceneResponse) FromSceneIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.FromSceneId))
 }
 
-func (v *CopySceneResponse) String() string {
+func (v CopySceneResponse) String() string {
 	var str []string
 	str = append(str, "Status["+v.StatusString()+"]")
 	str = append(str, "FromGroupId["+v.FromGroupIdString()+"]")
 	str = append(str, "FromSceneId["+v.FromSceneIdString()+"]")
 	return "CopySceneResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (CopySceneResponse) Name() string { return "Copy Scene Response" }
 
 // SceneCount is an autogenerated attribute in the Scenes cluster
 type SceneCount zcl.Zu8
@@ -1785,11 +1823,11 @@ func (a *SceneCount) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = SceneCount(*nt)
 	return br, err
 }
-
-func (a SceneCount) Readable() bool   { return true }
-func (a SceneCount) Writable() bool   { return false }
-func (a SceneCount) Reportable() bool { return false }
-func (a SceneCount) SceneIndex() int  { return -1 }
+func (SceneCount) Name() string     { return "Scene Count" }
+func (SceneCount) Readable() bool   { return true }
+func (SceneCount) Writable() bool   { return false }
+func (SceneCount) Reportable() bool { return false }
+func (SceneCount) SceneIndex() int  { return -1 }
 
 func (a SceneCount) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
@@ -1812,11 +1850,11 @@ func (a *CurrentScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentScene(*nt)
 	return br, err
 }
-
-func (a CurrentScene) Readable() bool   { return true }
-func (a CurrentScene) Writable() bool   { return false }
-func (a CurrentScene) Reportable() bool { return false }
-func (a CurrentScene) SceneIndex() int  { return -1 }
+func (CurrentScene) Name() string     { return "Current Scene" }
+func (CurrentScene) Readable() bool   { return true }
+func (CurrentScene) Writable() bool   { return false }
+func (CurrentScene) Reportable() bool { return false }
+func (CurrentScene) SceneIndex() int  { return -1 }
 
 func (a CurrentScene) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
@@ -1839,11 +1877,11 @@ func (a *CurrentGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentGroup(*nt)
 	return br, err
 }
-
-func (a CurrentGroup) Readable() bool   { return true }
-func (a CurrentGroup) Writable() bool   { return false }
-func (a CurrentGroup) Reportable() bool { return false }
-func (a CurrentGroup) SceneIndex() int  { return -1 }
+func (CurrentGroup) Name() string     { return "Current Group" }
+func (CurrentGroup) Readable() bool   { return true }
+func (CurrentGroup) Writable() bool   { return false }
+func (CurrentGroup) Reportable() bool { return false }
+func (CurrentGroup) SceneIndex() int  { return -1 }
 
 func (a CurrentGroup) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
@@ -1866,11 +1904,11 @@ func (a *SceneValid) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = SceneValid(*nt)
 	return br, err
 }
-
-func (a SceneValid) Readable() bool   { return true }
-func (a SceneValid) Writable() bool   { return false }
-func (a SceneValid) Reportable() bool { return false }
-func (a SceneValid) SceneIndex() int  { return -1 }
+func (SceneValid) Name() string     { return "Scene Valid" }
+func (SceneValid) Readable() bool   { return true }
+func (SceneValid) Writable() bool   { return false }
+func (SceneValid) Reportable() bool { return false }
+func (SceneValid) SceneIndex() int  { return -1 }
 
 func (a SceneValid) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -1893,11 +1931,11 @@ func (a *SceneNameSupport) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = SceneNameSupport(*nt)
 	return br, err
 }
-
-func (a SceneNameSupport) Readable() bool   { return true }
-func (a SceneNameSupport) Writable() bool   { return false }
-func (a SceneNameSupport) Reportable() bool { return false }
-func (a SceneNameSupport) SceneIndex() int  { return -1 }
+func (SceneNameSupport) Name() string     { return "Scene Name Support" }
+func (SceneNameSupport) Readable() bool   { return true }
+func (SceneNameSupport) Writable() bool   { return false }
+func (SceneNameSupport) Reportable() bool { return false }
+func (SceneNameSupport) SceneIndex() int  { return -1 }
 
 func (a SceneNameSupport) String() string {
 	var bstr []string
@@ -1931,11 +1969,11 @@ func (a *LastConfiguredby) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LastConfiguredby(*nt)
 	return br, err
 }
-
-func (a LastConfiguredby) Readable() bool   { return true }
-func (a LastConfiguredby) Writable() bool   { return false }
-func (a LastConfiguredby) Reportable() bool { return false }
-func (a LastConfiguredby) SceneIndex() int  { return -1 }
+func (LastConfiguredby) Name() string     { return "Last ConfiguredBy" }
+func (LastConfiguredby) Readable() bool   { return true }
+func (LastConfiguredby) Writable() bool   { return false }
+func (LastConfiguredby) Reportable() bool { return false }
+func (LastConfiguredby) SceneIndex() int  { return -1 }
 
 func (a LastConfiguredby) String() string {
 	return zcl.Sprintf("%v", zcl.Zuid(a))

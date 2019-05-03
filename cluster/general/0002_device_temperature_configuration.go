@@ -43,11 +43,11 @@ func (a *CurrentTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentTemperature(*nt)
 	return br, err
 }
-
-func (a CurrentTemperature) Readable() bool   { return true }
-func (a CurrentTemperature) Writable() bool   { return false }
-func (a CurrentTemperature) Reportable() bool { return false }
-func (a CurrentTemperature) SceneIndex() int  { return -1 }
+func (CurrentTemperature) Name() string     { return "Current Temperature" }
+func (CurrentTemperature) Readable() bool   { return true }
+func (CurrentTemperature) Writable() bool   { return false }
+func (CurrentTemperature) Reportable() bool { return false }
+func (CurrentTemperature) SceneIndex() int  { return -1 }
 
 func (a CurrentTemperature) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -70,11 +70,11 @@ func (a *MinTempExperienced) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinTempExperienced(*nt)
 	return br, err
 }
-
-func (a MinTempExperienced) Readable() bool   { return true }
-func (a MinTempExperienced) Writable() bool   { return false }
-func (a MinTempExperienced) Reportable() bool { return false }
-func (a MinTempExperienced) SceneIndex() int  { return -1 }
+func (MinTempExperienced) Name() string     { return "Min Temp Experienced" }
+func (MinTempExperienced) Readable() bool   { return true }
+func (MinTempExperienced) Writable() bool   { return false }
+func (MinTempExperienced) Reportable() bool { return false }
+func (MinTempExperienced) SceneIndex() int  { return -1 }
 
 func (a MinTempExperienced) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -97,11 +97,11 @@ func (a *MaxTempExperienced) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxTempExperienced(*nt)
 	return br, err
 }
-
-func (a MaxTempExperienced) Readable() bool   { return true }
-func (a MaxTempExperienced) Writable() bool   { return false }
-func (a MaxTempExperienced) Reportable() bool { return false }
-func (a MaxTempExperienced) SceneIndex() int  { return -1 }
+func (MaxTempExperienced) Name() string     { return "Max Temp Experienced" }
+func (MaxTempExperienced) Readable() bool   { return true }
+func (MaxTempExperienced) Writable() bool   { return false }
+func (MaxTempExperienced) Reportable() bool { return false }
+func (MaxTempExperienced) SceneIndex() int  { return -1 }
 
 func (a MaxTempExperienced) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -125,11 +125,11 @@ func (a *OverTempTotalDwell) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = OverTempTotalDwell(*nt)
 	return br, err
 }
-
-func (a OverTempTotalDwell) Readable() bool   { return false }
-func (a OverTempTotalDwell) Writable() bool   { return false }
-func (a OverTempTotalDwell) Reportable() bool { return false }
-func (a OverTempTotalDwell) SceneIndex() int  { return -1 }
+func (OverTempTotalDwell) Name() string     { return "Over Temp Total Dwell" }
+func (OverTempTotalDwell) Readable() bool   { return false }
+func (OverTempTotalDwell) Writable() bool   { return false }
+func (OverTempTotalDwell) Reportable() bool { return false }
+func (OverTempTotalDwell) SceneIndex() int  { return -1 }
 
 func (a OverTempTotalDwell) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -152,11 +152,11 @@ func (a *DeviceTempAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DeviceTempAlarmMask(*nt)
 	return br, err
 }
-
-func (a DeviceTempAlarmMask) Readable() bool   { return true }
-func (a DeviceTempAlarmMask) Writable() bool   { return true }
-func (a DeviceTempAlarmMask) Reportable() bool { return false }
-func (a DeviceTempAlarmMask) SceneIndex() int  { return -1 }
+func (DeviceTempAlarmMask) Name() string     { return "Device Temp Alarm Mask" }
+func (DeviceTempAlarmMask) Readable() bool   { return true }
+func (DeviceTempAlarmMask) Writable() bool   { return true }
+func (DeviceTempAlarmMask) Reportable() bool { return false }
+func (DeviceTempAlarmMask) SceneIndex() int  { return -1 }
 
 func (a DeviceTempAlarmMask) String() string {
 	var bstr []string
@@ -202,11 +202,11 @@ func (a *LowTempThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LowTempThreshold(*nt)
 	return br, err
 }
-
-func (a LowTempThreshold) Readable() bool   { return true }
-func (a LowTempThreshold) Writable() bool   { return true }
-func (a LowTempThreshold) Reportable() bool { return false }
-func (a LowTempThreshold) SceneIndex() int  { return -1 }
+func (LowTempThreshold) Name() string     { return "Low Temp Threshold" }
+func (LowTempThreshold) Readable() bool   { return true }
+func (LowTempThreshold) Writable() bool   { return true }
+func (LowTempThreshold) Reportable() bool { return false }
+func (LowTempThreshold) SceneIndex() int  { return -1 }
 
 func (a LowTempThreshold) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -231,11 +231,11 @@ func (a *HighTempThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = HighTempThreshold(*nt)
 	return br, err
 }
-
-func (a HighTempThreshold) Readable() bool   { return true }
-func (a HighTempThreshold) Writable() bool   { return true }
-func (a HighTempThreshold) Reportable() bool { return false }
-func (a HighTempThreshold) SceneIndex() int  { return -1 }
+func (HighTempThreshold) Name() string     { return "High Temp Threshold" }
+func (HighTempThreshold) Readable() bool   { return true }
+func (HighTempThreshold) Writable() bool   { return true }
+func (HighTempThreshold) Reportable() bool { return false }
+func (HighTempThreshold) SceneIndex() int  { return -1 }
 
 func (a HighTempThreshold) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -258,11 +258,11 @@ func (a *LowTempDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LowTempDwellTripPoint(*nt)
 	return br, err
 }
-
-func (a LowTempDwellTripPoint) Readable() bool   { return false }
-func (a LowTempDwellTripPoint) Writable() bool   { return false }
-func (a LowTempDwellTripPoint) Reportable() bool { return false }
-func (a LowTempDwellTripPoint) SceneIndex() int  { return -1 }
+func (LowTempDwellTripPoint) Name() string     { return "Low Temp Dwell Trip Point" }
+func (LowTempDwellTripPoint) Readable() bool   { return false }
+func (LowTempDwellTripPoint) Writable() bool   { return false }
+func (LowTempDwellTripPoint) Reportable() bool { return false }
+func (LowTempDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a LowTempDwellTripPoint) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -285,11 +285,11 @@ func (a *HighTempDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = HighTempDwellTripPoint(*nt)
 	return br, err
 }
-
-func (a HighTempDwellTripPoint) Readable() bool   { return false }
-func (a HighTempDwellTripPoint) Writable() bool   { return false }
-func (a HighTempDwellTripPoint) Reportable() bool { return false }
-func (a HighTempDwellTripPoint) SceneIndex() int  { return -1 }
+func (HighTempDwellTripPoint) Name() string     { return "High Temp Dwell Trip Point" }
+func (HighTempDwellTripPoint) Readable() bool   { return false }
+func (HighTempDwellTripPoint) Writable() bool   { return false }
+func (HighTempDwellTripPoint) Reportable() bool { return false }
+func (HighTempDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a HighTempDwellTripPoint) String() string {
 	return zcl.Seconds.Format(float64(a))

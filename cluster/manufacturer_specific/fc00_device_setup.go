@@ -37,11 +37,11 @@ func (a *InputConfigurations) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = InputConfigurations(*nt)
 	return br, err
 }
-
-func (a InputConfigurations) Readable() bool   { return true }
-func (a InputConfigurations) Writable() bool   { return false }
-func (a InputConfigurations) Reportable() bool { return false }
-func (a InputConfigurations) SceneIndex() int  { return -1 }
+func (InputConfigurations) Name() string     { return "Input Configurations" }
+func (InputConfigurations) Readable() bool   { return true }
+func (InputConfigurations) Writable() bool   { return false }
+func (InputConfigurations) Reportable() bool { return false }
+func (InputConfigurations) SceneIndex() int  { return -1 }
 
 func (a InputConfigurations) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -64,11 +64,11 @@ func (a *InputActions) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = InputActions(*nt)
 	return br, err
 }
-
-func (a InputActions) Readable() bool   { return true }
-func (a InputActions) Writable() bool   { return false }
-func (a InputActions) Reportable() bool { return false }
-func (a InputActions) SceneIndex() int  { return -1 }
+func (InputActions) Name() string     { return "Input Actions" }
+func (InputActions) Readable() bool   { return true }
+func (InputActions) Writable() bool   { return false }
+func (InputActions) Reportable() bool { return false }
+func (InputActions) SceneIndex() int  { return -1 }
 
 func (a InputActions) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))

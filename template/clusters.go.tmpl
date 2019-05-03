@@ -81,7 +81,7 @@ func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAt
     {{ end }}return b, nil
 }
 
-{{range .PayloadAttr}}{{$pa:=.}}func (v *{{$cmd.Name.Fmt}}) {{.Name.Fmt}}String() string { {{if .Values}}switch v.{{$pa.Name.Fmt}} { {{range $vk,$vv := .Values}}
+{{range .PayloadAttr}}{{$pa:=.}}func (v {{$cmd.Name.Fmt}}) {{.Name.Fmt}}String() string { {{if .Values}}switch v.{{$pa.Name.Fmt}} { {{range $vk,$vv := .Values}}
     case {{$vk}}: return "{{$vv}}"{{end}}
 }{{end}}{{if .Bits}}
     var bstr []string
@@ -93,11 +93,13 @@ func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAt
 }
 {{end}}
 
-func (v *{{.Name.Fmt}}) String() string {
+func (v {{.Name.Fmt}}) String() string {
     var str []string{{range .PayloadAttr}}
     str = append(str, "{{.Name.Fmt}}[" + v.{{.Name.Fmt}}String() + "]"){{end}}
     return "{{.Name.Fmt}}{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func ({{.Name.Fmt}}) Name() string { return "{{.Name}}" }
 
 {{end}}
 {{range .Attr}}{{$an:=.Name.Fmt}}
@@ -117,11 +119,11 @@ func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
     *a = {{.Name.Fmt}}(*nt)
     return br, err
 }
-
-func (a {{$an}}) Readable() bool { return {{if .CanRead}}true{{else}}false{{end}} }
-func (a {{$an}}) Writable() bool { return {{if .CanWrite}}true{{else}}false{{end}} }
-func (a {{$an}}) Reportable() bool { return {{if .Report}}true{{else}}false{{end}} }
-func (a {{$an}}) SceneIndex() int { return {{if .Scene}}{{.Scene}}{{else}}-1{{end}} }
+func ({{$an}}) Name() string { return "{{.Name}}" }
+func ({{$an}}) Readable() bool { return {{if .CanRead}}true{{else}}false{{end}} }
+func ({{$an}}) Writable() bool { return {{if .CanWrite}}true{{else}}false{{end}} }
+func ({{$an}}) Reportable() bool { return {{if .Report}}true{{else}}false{{end}} }
+func ({{$an}}) SceneIndex() int { return {{if .Scene}}{{.Scene}}{{else}}-1{{end}} }
 
 func (a {{$an}}) String() string { {{if .Values}}switch a { {{range $vk,$vv := .Values}}
         case {{$vk}}: return "{{$vv}}"{{end}}

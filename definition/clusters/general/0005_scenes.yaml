@@ -486,7 +486,7 @@ client:
             multiplier: 0.1
             showas: dec
           - id: "0x0004"
-            name: Name
+            name: Scene Name
             type: cstring
             required: true
           - id: "0x0005"

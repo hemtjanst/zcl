@@ -36,11 +36,11 @@ func (a *LevelStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LevelStatus(*nt)
 	return br, err
 }
-
-func (a LevelStatus) Readable() bool   { return true }
-func (a LevelStatus) Writable() bool   { return false }
-func (a LevelStatus) Reportable() bool { return true }
-func (a LevelStatus) SceneIndex() int  { return -1 }
+func (LevelStatus) Name() string     { return "Level Status" }
+func (LevelStatus) Readable() bool   { return true }
+func (LevelStatus) Writable() bool   { return false }
+func (LevelStatus) Reportable() bool { return true }
+func (LevelStatus) SceneIndex() int  { return -1 }
 
 func (a LevelStatus) String() string {
 	switch a {
@@ -89,11 +89,11 @@ func (a *IlluminanceSensorType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = IlluminanceSensorType(*nt)
 	return br, err
 }
-
-func (a IlluminanceSensorType) Readable() bool   { return true }
-func (a IlluminanceSensorType) Writable() bool   { return false }
-func (a IlluminanceSensorType) Reportable() bool { return false }
-func (a IlluminanceSensorType) SceneIndex() int  { return -1 }
+func (IlluminanceSensorType) Name() string     { return "Illuminance Sensor Type" }
+func (IlluminanceSensorType) Readable() bool   { return true }
+func (IlluminanceSensorType) Writable() bool   { return false }
+func (IlluminanceSensorType) Reportable() bool { return false }
+func (IlluminanceSensorType) SceneIndex() int  { return -1 }
 
 func (a IlluminanceSensorType) String() string {
 	switch a {
@@ -142,11 +142,11 @@ func (a *IlluminanceTargetLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = IlluminanceTargetLevel(*nt)
 	return br, err
 }
-
-func (a IlluminanceTargetLevel) Readable() bool   { return true }
-func (a IlluminanceTargetLevel) Writable() bool   { return true }
-func (a IlluminanceTargetLevel) Reportable() bool { return false }
-func (a IlluminanceTargetLevel) SceneIndex() int  { return -1 }
+func (IlluminanceTargetLevel) Name() string     { return "Illuminance Target Level" }
+func (IlluminanceTargetLevel) Readable() bool   { return true }
+func (IlluminanceTargetLevel) Writable() bool   { return true }
+func (IlluminanceTargetLevel) Reportable() bool { return false }
+func (IlluminanceTargetLevel) SceneIndex() int  { return -1 }
 
 func (a IlluminanceTargetLevel) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

@@ -71,15 +71,17 @@ func (v *GetGroupIdentifiers) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetGroupIdentifiers) StartIndexString() string {
+func (v GetGroupIdentifiers) StartIndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
 
-func (v *GetGroupIdentifiers) String() string {
+func (v GetGroupIdentifiers) String() string {
 	var str []string
 	str = append(str, "StartIndex["+v.StartIndexString()+"]")
 	return "GetGroupIdentifiers{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetGroupIdentifiers) Name() string { return "Get group identifiers" }
 
 // The get endpoint list request command is used to retrieve addressing information for each endpoint the device is using in its unicast communication in controlling different (remote) devices.
 type GetEndpointList struct {
@@ -129,15 +131,17 @@ func (v *GetEndpointList) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetEndpointList) StartIndexString() string {
+func (v GetEndpointList) StartIndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
 
-func (v *GetEndpointList) String() string {
+func (v GetEndpointList) String() string {
 	var str []string
 	str = append(str, "StartIndex["+v.StartIndexString()+"]")
 	return "GetEndpointList{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetEndpointList) Name() string { return "Get endpoint list" }
 
 // Non standard write MAC address (DDEL).
 type WriteMacAddress struct {
@@ -187,15 +191,17 @@ func (v *WriteMacAddress) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *WriteMacAddress) MacAddressString() string {
+func (v WriteMacAddress) MacAddressString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu64(v.MacAddress))
 }
 
-func (v *WriteMacAddress) String() string {
+func (v WriteMacAddress) String() string {
 	var str []string
 	str = append(str, "MacAddress["+v.MacAddressString()+"]")
 	return "WriteMacAddress{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (WriteMacAddress) Name() string { return "Write MAC address" }
 
 // The get group identifiers response command allows a remote device to respond to the get group identifiers request command.
 type GetGroupIdentifiersResponse struct {
@@ -289,23 +295,23 @@ func (v *GetGroupIdentifiersResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetGroupIdentifiersResponse) TotalString() string {
+func (v GetGroupIdentifiersResponse) TotalString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Total))
 }
-func (v *GetGroupIdentifiersResponse) StartIndexString() string {
+func (v GetGroupIdentifiersResponse) StartIndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
-func (v *GetGroupIdentifiersResponse) CountString() string {
+func (v GetGroupIdentifiersResponse) CountString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Count))
 }
-func (v *GetGroupIdentifiersResponse) FirstGroupIdString() string {
+func (v GetGroupIdentifiersResponse) FirstGroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.FirstGroupId))
 }
-func (v *GetGroupIdentifiersResponse) FirstGroupTypeString() string {
+func (v GetGroupIdentifiersResponse) FirstGroupTypeString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.FirstGroupType))
 }
 
-func (v *GetGroupIdentifiersResponse) String() string {
+func (v GetGroupIdentifiersResponse) String() string {
 	var str []string
 	str = append(str, "Total["+v.TotalString()+"]")
 	str = append(str, "StartIndex["+v.StartIndexString()+"]")
@@ -314,6 +320,8 @@ func (v *GetGroupIdentifiersResponse) String() string {
 	str = append(str, "FirstGroupType["+v.FirstGroupTypeString()+"]")
 	return "GetGroupIdentifiersResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetGroupIdentifiersResponse) Name() string { return "Get group identifiers response" }
 
 // The get group identifiers response command allows a remote device to respond to the get group identifiers request command.
 type GetEndpointListResponse struct {
@@ -440,32 +448,32 @@ func (v *GetEndpointListResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *GetEndpointListResponse) TotalString() string {
+func (v GetEndpointListResponse) TotalString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Total))
 }
-func (v *GetEndpointListResponse) StartIndexString() string {
+func (v GetEndpointListResponse) StartIndexString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
-func (v *GetEndpointListResponse) CountString() string {
+func (v GetEndpointListResponse) CountString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Count))
 }
-func (v *GetEndpointListResponse) NwkAddressString() string {
+func (v GetEndpointListResponse) NwkAddressString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.NwkAddress))
 }
-func (v *GetEndpointListResponse) EndpointString() string {
+func (v GetEndpointListResponse) EndpointString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.Endpoint))
 }
-func (v *GetEndpointListResponse) ProfileIdString() string {
+func (v GetEndpointListResponse) ProfileIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.ProfileId))
 }
-func (v *GetEndpointListResponse) DeviceIdString() string {
+func (v GetEndpointListResponse) DeviceIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.DeviceId))
 }
-func (v *GetEndpointListResponse) VersionString() string {
+func (v GetEndpointListResponse) VersionString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(v.Version))
 }
 
-func (v *GetEndpointListResponse) String() string {
+func (v GetEndpointListResponse) String() string {
 	var str []string
 	str = append(str, "Total["+v.TotalString()+"]")
 	str = append(str, "StartIndex["+v.StartIndexString()+"]")
@@ -477,3 +485,5 @@ func (v *GetEndpointListResponse) String() string {
 	str = append(str, "Version["+v.VersionString()+"]")
 	return "GetEndpointListResponse{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (GetEndpointListResponse) Name() string { return "Get endpoint list response" }

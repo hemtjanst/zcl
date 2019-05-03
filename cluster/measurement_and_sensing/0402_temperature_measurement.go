@@ -38,11 +38,11 @@ func (a *MeasuredTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MeasuredTemperature(*nt)
 	return br, err
 }
-
-func (a MeasuredTemperature) Readable() bool   { return true }
-func (a MeasuredTemperature) Writable() bool   { return false }
-func (a MeasuredTemperature) Reportable() bool { return true }
-func (a MeasuredTemperature) SceneIndex() int  { return -1 }
+func (MeasuredTemperature) Name() string     { return "Measured Temperature" }
+func (MeasuredTemperature) Readable() bool   { return true }
+func (MeasuredTemperature) Writable() bool   { return false }
+func (MeasuredTemperature) Reportable() bool { return true }
+func (MeasuredTemperature) SceneIndex() int  { return -1 }
 
 func (a MeasuredTemperature) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -65,11 +65,11 @@ func (a *MinMeasuredTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinMeasuredTemperature(*nt)
 	return br, err
 }
-
-func (a MinMeasuredTemperature) Readable() bool   { return true }
-func (a MinMeasuredTemperature) Writable() bool   { return false }
-func (a MinMeasuredTemperature) Reportable() bool { return false }
-func (a MinMeasuredTemperature) SceneIndex() int  { return -1 }
+func (MinMeasuredTemperature) Name() string     { return "Min Measured Temperature" }
+func (MinMeasuredTemperature) Readable() bool   { return true }
+func (MinMeasuredTemperature) Writable() bool   { return false }
+func (MinMeasuredTemperature) Reportable() bool { return false }
+func (MinMeasuredTemperature) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredTemperature) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -92,11 +92,11 @@ func (a *MaxMeasuredTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxMeasuredTemperature(*nt)
 	return br, err
 }
-
-func (a MaxMeasuredTemperature) Readable() bool   { return true }
-func (a MaxMeasuredTemperature) Writable() bool   { return false }
-func (a MaxMeasuredTemperature) Reportable() bool { return false }
-func (a MaxMeasuredTemperature) SceneIndex() int  { return -1 }
+func (MaxMeasuredTemperature) Name() string     { return "Max Measured Temperature" }
+func (MaxMeasuredTemperature) Readable() bool   { return true }
+func (MaxMeasuredTemperature) Writable() bool   { return false }
+func (MaxMeasuredTemperature) Reportable() bool { return false }
+func (MaxMeasuredTemperature) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredTemperature) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -119,11 +119,11 @@ func (a *TemperatureTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TemperatureTolerance(*nt)
 	return br, err
 }
-
-func (a TemperatureTolerance) Readable() bool   { return true }
-func (a TemperatureTolerance) Writable() bool   { return false }
-func (a TemperatureTolerance) Reportable() bool { return true }
-func (a TemperatureTolerance) SceneIndex() int  { return -1 }
+func (TemperatureTolerance) Name() string     { return "Temperature Tolerance" }
+func (TemperatureTolerance) Readable() bool   { return true }
+func (TemperatureTolerance) Writable() bool   { return false }
+func (TemperatureTolerance) Reportable() bool { return true }
+func (TemperatureTolerance) SceneIndex() int  { return -1 }
 
 func (a TemperatureTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

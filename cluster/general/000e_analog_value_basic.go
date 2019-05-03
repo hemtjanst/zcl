@@ -44,11 +44,11 @@ func (a *AnalogValueDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueDescription(*nt)
 	return br, err
 }
-
-func (a AnalogValueDescription) Readable() bool   { return true }
-func (a AnalogValueDescription) Writable() bool   { return true }
-func (a AnalogValueDescription) Reportable() bool { return false }
-func (a AnalogValueDescription) SceneIndex() int  { return -1 }
+func (AnalogValueDescription) Name() string     { return "Analog Value Description" }
+func (AnalogValueDescription) Readable() bool   { return true }
+func (AnalogValueDescription) Writable() bool   { return true }
+func (AnalogValueDescription) Reportable() bool { return false }
+func (AnalogValueDescription) SceneIndex() int  { return -1 }
 
 func (a AnalogValueDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -71,11 +71,11 @@ func (a *AnalogValueOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueOutOfService(*nt)
 	return br, err
 }
-
-func (a AnalogValueOutOfService) Readable() bool   { return true }
-func (a AnalogValueOutOfService) Writable() bool   { return true }
-func (a AnalogValueOutOfService) Reportable() bool { return false }
-func (a AnalogValueOutOfService) SceneIndex() int  { return -1 }
+func (AnalogValueOutOfService) Name() string     { return "Analog Value Out of service" }
+func (AnalogValueOutOfService) Readable() bool   { return true }
+func (AnalogValueOutOfService) Writable() bool   { return true }
+func (AnalogValueOutOfService) Reportable() bool { return false }
+func (AnalogValueOutOfService) SceneIndex() int  { return -1 }
 
 func (a AnalogValueOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -98,11 +98,11 @@ func (a *AnalogValuePresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValuePresentValue(*nt)
 	return br, err
 }
-
-func (a AnalogValuePresentValue) Readable() bool   { return true }
-func (a AnalogValuePresentValue) Writable() bool   { return true }
-func (a AnalogValuePresentValue) Reportable() bool { return true }
-func (a AnalogValuePresentValue) SceneIndex() int  { return -1 }
+func (AnalogValuePresentValue) Name() string     { return "Analog Value Present value" }
+func (AnalogValuePresentValue) Readable() bool   { return true }
+func (AnalogValuePresentValue) Writable() bool   { return true }
+func (AnalogValuePresentValue) Reportable() bool { return true }
+func (AnalogValuePresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogValuePresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -125,11 +125,11 @@ func (a *AnalogValuePriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValuePriorityArray(*nt)
 	return br, err
 }
-
-func (a AnalogValuePriorityArray) Readable() bool   { return true }
-func (a AnalogValuePriorityArray) Writable() bool   { return true }
-func (a AnalogValuePriorityArray) Reportable() bool { return false }
-func (a AnalogValuePriorityArray) SceneIndex() int  { return -1 }
+func (AnalogValuePriorityArray) Name() string     { return "Analog Value Priority Array" }
+func (AnalogValuePriorityArray) Readable() bool   { return true }
+func (AnalogValuePriorityArray) Writable() bool   { return true }
+func (AnalogValuePriorityArray) Reportable() bool { return false }
+func (AnalogValuePriorityArray) SceneIndex() int  { return -1 }
 
 func (a AnalogValuePriorityArray) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -152,11 +152,11 @@ func (a *AnalogValueReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueReliability(*nt)
 	return br, err
 }
-
-func (a AnalogValueReliability) Readable() bool   { return true }
-func (a AnalogValueReliability) Writable() bool   { return true }
-func (a AnalogValueReliability) Reportable() bool { return false }
-func (a AnalogValueReliability) SceneIndex() int  { return -1 }
+func (AnalogValueReliability) Name() string     { return "Analog Value Reliability" }
+func (AnalogValueReliability) Readable() bool   { return true }
+func (AnalogValueReliability) Writable() bool   { return true }
+func (AnalogValueReliability) Reportable() bool { return false }
+func (AnalogValueReliability) SceneIndex() int  { return -1 }
 
 func (a AnalogValueReliability) String() string {
 	switch a {
@@ -269,11 +269,11 @@ func (a *AnalogValueRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueRelinquishDefault(*nt)
 	return br, err
 }
-
-func (a AnalogValueRelinquishDefault) Readable() bool   { return true }
-func (a AnalogValueRelinquishDefault) Writable() bool   { return true }
-func (a AnalogValueRelinquishDefault) Reportable() bool { return false }
-func (a AnalogValueRelinquishDefault) SceneIndex() int  { return -1 }
+func (AnalogValueRelinquishDefault) Name() string     { return "Analog Value Relinquish Default" }
+func (AnalogValueRelinquishDefault) Readable() bool   { return true }
+func (AnalogValueRelinquishDefault) Writable() bool   { return true }
+func (AnalogValueRelinquishDefault) Reportable() bool { return false }
+func (AnalogValueRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a AnalogValueRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -296,11 +296,11 @@ func (a *AnalogValueResolution) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueResolution(*nt)
 	return br, err
 }
-
-func (a AnalogValueResolution) Readable() bool   { return true }
-func (a AnalogValueResolution) Writable() bool   { return true }
-func (a AnalogValueResolution) Reportable() bool { return false }
-func (a AnalogValueResolution) SceneIndex() int  { return -1 }
+func (AnalogValueResolution) Name() string     { return "Analog Value Resolution" }
+func (AnalogValueResolution) Readable() bool   { return true }
+func (AnalogValueResolution) Writable() bool   { return true }
+func (AnalogValueResolution) Reportable() bool { return false }
+func (AnalogValueResolution) SceneIndex() int  { return -1 }
 
 func (a AnalogValueResolution) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -323,11 +323,11 @@ func (a *AnalogValueStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueStatusFlags(*nt)
 	return br, err
 }
-
-func (a AnalogValueStatusFlags) Readable() bool   { return true }
-func (a AnalogValueStatusFlags) Writable() bool   { return false }
-func (a AnalogValueStatusFlags) Reportable() bool { return true }
-func (a AnalogValueStatusFlags) SceneIndex() int  { return -1 }
+func (AnalogValueStatusFlags) Name() string     { return "Analog Value Status flags" }
+func (AnalogValueStatusFlags) Readable() bool   { return true }
+func (AnalogValueStatusFlags) Writable() bool   { return false }
+func (AnalogValueStatusFlags) Reportable() bool { return true }
+func (AnalogValueStatusFlags) SceneIndex() int  { return -1 }
 
 func (a AnalogValueStatusFlags) String() string {
 	var bstr []string
@@ -391,11 +391,11 @@ func (a *AnalogValueEngineeringUnits) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueEngineeringUnits(*nt)
 	return br, err
 }
-
-func (a AnalogValueEngineeringUnits) Readable() bool   { return true }
-func (a AnalogValueEngineeringUnits) Writable() bool   { return true }
-func (a AnalogValueEngineeringUnits) Reportable() bool { return false }
-func (a AnalogValueEngineeringUnits) SceneIndex() int  { return -1 }
+func (AnalogValueEngineeringUnits) Name() string     { return "Analog Value Engineering Units" }
+func (AnalogValueEngineeringUnits) Readable() bool   { return true }
+func (AnalogValueEngineeringUnits) Writable() bool   { return true }
+func (AnalogValueEngineeringUnits) Reportable() bool { return false }
+func (AnalogValueEngineeringUnits) SceneIndex() int  { return -1 }
 
 func (a AnalogValueEngineeringUnits) String() string {
 	return zcl.Sprintf("%v", zcl.EngineeringUnit(a))
@@ -418,11 +418,11 @@ func (a *AnalogValueApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AnalogValueApplicationType(*nt)
 	return br, err
 }
-
-func (a AnalogValueApplicationType) Readable() bool   { return true }
-func (a AnalogValueApplicationType) Writable() bool   { return false }
-func (a AnalogValueApplicationType) Reportable() bool { return false }
-func (a AnalogValueApplicationType) SceneIndex() int  { return -1 }
+func (AnalogValueApplicationType) Name() string     { return "Analog Value Application Type" }
+func (AnalogValueApplicationType) Readable() bool   { return true }
+func (AnalogValueApplicationType) Writable() bool   { return false }
+func (AnalogValueApplicationType) Reportable() bool { return false }
+func (AnalogValueApplicationType) SceneIndex() int  { return -1 }
 
 func (a AnalogValueApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

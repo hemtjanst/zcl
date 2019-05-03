@@ -95,19 +95,21 @@ func (v *MoveToLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveToLevel) LevelString() string {
+func (v MoveToLevel) LevelString() string {
 	return zcl.Percent.Format(float64(v.Level) / 2.54)
 }
-func (v *MoveToLevel) TransistionTimeString() string {
+func (v MoveToLevel) TransistionTimeString() string {
 	return zcl.Seconds.Format(float64(v.TransistionTime) / 10)
 }
 
-func (v *MoveToLevel) String() string {
+func (v MoveToLevel) String() string {
 	var str []string
 	str = append(str, "Level["+v.LevelString()+"]")
 	str = append(str, "TransistionTime["+v.TransistionTimeString()+"]")
 	return "MoveToLevel{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveToLevel) Name() string { return "Move to Level" }
 
 type Move struct {
 	MoveMode zcl.Zenum8
@@ -167,7 +169,7 @@ func (v *Move) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *Move) MoveModeString() string {
+func (v Move) MoveModeString() string {
 	switch v.MoveMode {
 	case 0x00:
 		return "Up"
@@ -176,16 +178,18 @@ func (v *Move) MoveModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
-func (v *Move) RateString() string {
+func (v Move) RateString() string {
 	return zcl.PercentPerSecond.Format(float64(v.Rate) / 2.54)
 }
 
-func (v *Move) String() string {
+func (v Move) String() string {
 	var str []string
 	str = append(str, "MoveMode["+v.MoveModeString()+"]")
 	str = append(str, "Rate["+v.RateString()+"]")
 	return "Move{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (Move) Name() string { return "Move" }
 
 type Step struct {
 	StepMode       zcl.Zenum8
@@ -256,7 +260,7 @@ func (v *Step) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *Step) StepModeString() string {
+func (v Step) StepModeString() string {
 	switch v.StepMode {
 	case 0x00:
 		return "Up"
@@ -265,20 +269,22 @@ func (v *Step) StepModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
-func (v *Step) StepSizeString() string {
+func (v Step) StepSizeString() string {
 	return zcl.Percent.Format(float64(v.StepSize) / 2.54)
 }
-func (v *Step) TransitionTimeString() string {
+func (v Step) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *Step) String() string {
+func (v Step) String() string {
 	var str []string
 	str = append(str, "StepMode["+v.StepModeString()+"]")
 	str = append(str, "StepSize["+v.StepSizeString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "Step{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (Step) Name() string { return "Step" }
 
 type Stop struct {
 }
@@ -309,10 +315,12 @@ func (v *Stop) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *Stop) String() string {
+func (v Stop) String() string {
 	var str []string
 	return "Stop{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (Stop) Name() string { return "Stop" }
 
 type MoveToLevelWithOnOff struct {
 	Level           zcl.Zu8
@@ -372,19 +380,21 @@ func (v *MoveToLevelWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveToLevelWithOnOff) LevelString() string {
+func (v MoveToLevelWithOnOff) LevelString() string {
 	return zcl.Percent.Format(float64(v.Level) / 2.54)
 }
-func (v *MoveToLevelWithOnOff) TransistionTimeString() string {
+func (v MoveToLevelWithOnOff) TransistionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransistionTime))
 }
 
-func (v *MoveToLevelWithOnOff) String() string {
+func (v MoveToLevelWithOnOff) String() string {
 	var str []string
 	str = append(str, "Level["+v.LevelString()+"]")
 	str = append(str, "TransistionTime["+v.TransistionTimeString()+"]")
 	return "MoveToLevelWithOnOff{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveToLevelWithOnOff) Name() string { return "Move to Level (with On/Off)" }
 
 type MoveWithOnOff struct {
 	MoveMode zcl.Zenum8
@@ -444,7 +454,7 @@ func (v *MoveWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveWithOnOff) MoveModeString() string {
+func (v MoveWithOnOff) MoveModeString() string {
 	switch v.MoveMode {
 	case 0x00:
 		return "Up"
@@ -453,16 +463,18 @@ func (v *MoveWithOnOff) MoveModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
-func (v *MoveWithOnOff) RateString() string {
+func (v MoveWithOnOff) RateString() string {
 	return zcl.PercentPerSecond.Format(float64(v.Rate) / 2.54)
 }
 
-func (v *MoveWithOnOff) String() string {
+func (v MoveWithOnOff) String() string {
 	var str []string
 	str = append(str, "MoveMode["+v.MoveModeString()+"]")
 	str = append(str, "Rate["+v.RateString()+"]")
 	return "MoveWithOnOff{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveWithOnOff) Name() string { return "Move (with On/Off)" }
 
 type StepWithOnOff struct {
 	StepMode       zcl.Zenum8
@@ -533,7 +545,7 @@ func (v *StepWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StepWithOnOff) StepModeString() string {
+func (v StepWithOnOff) StepModeString() string {
 	switch v.StepMode {
 	case 0x00:
 		return "Up"
@@ -542,20 +554,22 @@ func (v *StepWithOnOff) StepModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
-func (v *StepWithOnOff) StepSizeString() string {
+func (v StepWithOnOff) StepSizeString() string {
 	return zcl.Percent.Format(float64(v.StepSize) / 2.54)
 }
-func (v *StepWithOnOff) TransitionTimeString() string {
+func (v StepWithOnOff) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *StepWithOnOff) String() string {
+func (v StepWithOnOff) String() string {
 	var str []string
 	str = append(str, "StepMode["+v.StepModeString()+"]")
 	str = append(str, "StepSize["+v.StepSizeString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "StepWithOnOff{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StepWithOnOff) Name() string { return "Step (with On/Off)" }
 
 type StopWithOnOff struct {
 }
@@ -586,10 +600,12 @@ func (v *StopWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StopWithOnOff) String() string {
+func (v StopWithOnOff) String() string {
 	var str []string
 	return "StopWithOnOff{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StopWithOnOff) Name() string { return "Stop (with On/Off)" }
 
 // CurrentLevel is an autogenerated attribute in the LevelControl cluster
 // The CurrentLevel attribute represents the current level of this device. meaning of 'level' is device dependent.
@@ -609,11 +625,11 @@ func (a *CurrentLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentLevel(*nt)
 	return br, err
 }
-
-func (a CurrentLevel) Readable() bool   { return true }
-func (a CurrentLevel) Writable() bool   { return false }
-func (a CurrentLevel) Reportable() bool { return true }
-func (a CurrentLevel) SceneIndex() int  { return 1 }
+func (CurrentLevel) Name() string     { return "Current Level" }
+func (CurrentLevel) Readable() bool   { return true }
+func (CurrentLevel) Writable() bool   { return false }
+func (CurrentLevel) Reportable() bool { return true }
+func (CurrentLevel) SceneIndex() int  { return 1 }
 
 func (a CurrentLevel) String() string {
 	return zcl.Percent.Format(float64(a) / 2.54)
@@ -637,11 +653,11 @@ func (a *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RemainingTime(*nt)
 	return br, err
 }
-
-func (a RemainingTime) Readable() bool   { return true }
-func (a RemainingTime) Writable() bool   { return false }
-func (a RemainingTime) Reportable() bool { return false }
-func (a RemainingTime) SceneIndex() int  { return -1 }
+func (RemainingTime) Name() string     { return "Remaining Time" }
+func (RemainingTime) Readable() bool   { return true }
+func (RemainingTime) Writable() bool   { return false }
+func (RemainingTime) Reportable() bool { return false }
+func (RemainingTime) SceneIndex() int  { return -1 }
 
 func (a RemainingTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -665,11 +681,11 @@ func (a *Unknown) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Unknown(*nt)
 	return br, err
 }
-
-func (a Unknown) Readable() bool   { return true }
-func (a Unknown) Writable() bool   { return true }
-func (a Unknown) Reportable() bool { return false }
-func (a Unknown) SceneIndex() int  { return -1 }
+func (Unknown) Name() string     { return "Unknown" }
+func (Unknown) Readable() bool   { return true }
+func (Unknown) Writable() bool   { return true }
+func (Unknown) Reportable() bool { return false }
+func (Unknown) SceneIndex() int  { return -1 }
 
 func (a Unknown) String() string {
 	return zcl.Sprintf("%v", zcl.Zbmp8(a))
@@ -693,11 +709,11 @@ func (a *OnoffTransistionTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = OnoffTransistionTime(*nt)
 	return br, err
 }
-
-func (a OnoffTransistionTime) Readable() bool   { return true }
-func (a OnoffTransistionTime) Writable() bool   { return true }
-func (a OnoffTransistionTime) Reportable() bool { return false }
-func (a OnoffTransistionTime) SceneIndex() int  { return -1 }
+func (OnoffTransistionTime) Name() string     { return "OnOff Transistion Time" }
+func (OnoffTransistionTime) Readable() bool   { return true }
+func (OnoffTransistionTime) Writable() bool   { return true }
+func (OnoffTransistionTime) Reportable() bool { return false }
+func (OnoffTransistionTime) SceneIndex() int  { return -1 }
 
 func (a OnoffTransistionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -721,11 +737,11 @@ func (a *OnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = OnLevel(*nt)
 	return br, err
 }
-
-func (a OnLevel) Readable() bool   { return true }
-func (a OnLevel) Writable() bool   { return true }
-func (a OnLevel) Reportable() bool { return false }
-func (a OnLevel) SceneIndex() int  { return -1 }
+func (OnLevel) Name() string     { return "On Level" }
+func (OnLevel) Readable() bool   { return true }
+func (OnLevel) Writable() bool   { return true }
+func (OnLevel) Reportable() bool { return false }
+func (OnLevel) SceneIndex() int  { return -1 }
 
 func (a OnLevel) String() string {
 	return zcl.Percent.Format(float64(a) / 2.54)
@@ -748,11 +764,11 @@ func (a *OnTransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = OnTransitionTime(*nt)
 	return br, err
 }
-
-func (a OnTransitionTime) Readable() bool   { return true }
-func (a OnTransitionTime) Writable() bool   { return true }
-func (a OnTransitionTime) Reportable() bool { return false }
-func (a OnTransitionTime) SceneIndex() int  { return -1 }
+func (OnTransitionTime) Name() string     { return "On Transition Time" }
+func (OnTransitionTime) Readable() bool   { return true }
+func (OnTransitionTime) Writable() bool   { return true }
+func (OnTransitionTime) Reportable() bool { return false }
+func (OnTransitionTime) SceneIndex() int  { return -1 }
 
 func (a OnTransitionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -775,11 +791,11 @@ func (a *OffTransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = OffTransitionTime(*nt)
 	return br, err
 }
-
-func (a OffTransitionTime) Readable() bool   { return true }
-func (a OffTransitionTime) Writable() bool   { return true }
-func (a OffTransitionTime) Reportable() bool { return false }
-func (a OffTransitionTime) SceneIndex() int  { return -1 }
+func (OffTransitionTime) Name() string     { return "Off Transition Time" }
+func (OffTransitionTime) Readable() bool   { return true }
+func (OffTransitionTime) Writable() bool   { return true }
+func (OffTransitionTime) Reportable() bool { return false }
+func (OffTransitionTime) SceneIndex() int  { return -1 }
 
 func (a OffTransitionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -802,11 +818,11 @@ func (a *DefaultMoveRate) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DefaultMoveRate(*nt)
 	return br, err
 }
-
-func (a DefaultMoveRate) Readable() bool   { return true }
-func (a DefaultMoveRate) Writable() bool   { return true }
-func (a DefaultMoveRate) Reportable() bool { return false }
-func (a DefaultMoveRate) SceneIndex() int  { return -1 }
+func (DefaultMoveRate) Name() string     { return "Default Move Rate" }
+func (DefaultMoveRate) Readable() bool   { return true }
+func (DefaultMoveRate) Writable() bool   { return true }
+func (DefaultMoveRate) Reportable() bool { return false }
+func (DefaultMoveRate) SceneIndex() int  { return -1 }
 
 func (a DefaultMoveRate) String() string {
 	return zcl.PercentPerSecond.Format(float64(a) / 2.54)
@@ -829,11 +845,11 @@ func (a *PoweronLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PoweronLevel(*nt)
 	return br, err
 }
-
-func (a PoweronLevel) Readable() bool   { return true }
-func (a PoweronLevel) Writable() bool   { return true }
-func (a PoweronLevel) Reportable() bool { return false }
-func (a PoweronLevel) SceneIndex() int  { return -1 }
+func (PoweronLevel) Name() string     { return "PowerOn Level" }
+func (PoweronLevel) Readable() bool   { return true }
+func (PoweronLevel) Writable() bool   { return true }
+func (PoweronLevel) Reportable() bool { return false }
+func (PoweronLevel) SceneIndex() int  { return -1 }
 
 func (a PoweronLevel) String() string {
 	return zcl.Percent.Format(float64(a) / 2.54)

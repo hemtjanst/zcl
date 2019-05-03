@@ -1,7 +1,9 @@
 package zcl
 
 import (
+	"encoding/binary"
 	"fmt"
+	"net"
 )
 
 type Zbool uint8
@@ -16,6 +18,16 @@ func (t *Zbool) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (t *Zbool) Values() []Val              { return []Val{t} }
 func (t Zbool) MarshalZcl() ([]byte, error) { return []byte{byte(t)}, nil }
 func (t Zbool) ID() TypeID                  { return 16 }
+func (t Zbool) Valid() bool                 { return t < 2 }
+func (t Zbool) String() string {
+	if t == 1 {
+		return "true"
+	}
+	if t == 0 {
+		return "false"
+	}
+	return fmt.Sprintf("Bool(0x%02x)", uint8(t))
+}
 
 // Zcid is Cluster ID (0xffff = invalid). A/D = D
 type Zcid uint16
@@ -29,8 +41,7 @@ func (c Zcid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(c
 func (c *Zcid) Values() []Val              { return []Val{c} }
 func (c Zcid) ID() TypeID                  { return 232 }
 func (c Zcid) String() string              { return fmt.Sprintf("0x%04x", uint16(c)) }
-
-//func (c Zcid) Valid() bool { return c != Zcid(65535) }
+func (c Zcid) Valid() bool                 { return c != Zcid(0xFFFF) }
 
 // Zaid is Attribute ID (0xffff = invalid). A/D = D
 type Zaid uint16
@@ -43,9 +54,8 @@ func (a *Zaid) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (a Zaid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(a)) }
 func (a *Zaid) Values() []Val              { return []Val{a} }
 func (a *Zaid) ID() TypeID                 { return 233 }
-func (c Zaid) String() string              { return fmt.Sprintf("0x%04x", uint16(c)) }
-
-//func (a Zaid) Valid() bool { return a != Zaid(65535) }
+func (a Zaid) String() string              { return fmt.Sprintf("0x%04x", uint16(a)) }
+func (a Zaid) Valid() bool                 { return a != Zaid(0xFFFF) }
 
 // Zoid is BACnet OID (0xffffffff = invalid). A/D = D
 type Zoid uint32
@@ -58,8 +68,12 @@ func (o *Zoid) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (o Zoid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(4, uint64(o)) }
 func (o *Zoid) Values() []Val              { return []Val{o} }
 func (o *Zoid) ID() TypeID                 { return 234 }
-
-//func (o Zoid) Valid() bool { return o != Zoid(4294967295) }
+func (o Zoid) Valid() bool                 { return o != Zoid(0xFFFFFFFF) }
+func (o Zoid) String() string {
+	ot := (o & 0xFFC00000) >> 22
+	oi := o & 0x003FFFFF
+	return fmt.Sprintf("%d:%d", ot, oi)
+}
 
 // Zuid is IEEE address (0xffffffffffffffff = invalid). A/D = D
 type Zuid uint64
@@ -72,8 +86,12 @@ func (u *Zuid) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (u Zuid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(8, uint64(u)) }
 func (u *Zuid) Values() []Val              { return []Val{u} }
 func (u *Zuid) ID() TypeID                 { return 240 }
-
-//func (u Zuid) Valid() bool { return u != Zuid(18446744073709551615) }
+func (u Zuid) Valid() bool                 { return u != Zuid(0xFFFFFFFFFFFFFFFF) }
+func (u Zuid) String() string {
+	b := make([]byte, 8)
+	binary.BigEndian.PutUint64(b, uint64(u))
+	return net.HardwareAddr(b).String()
+}
 
 // Zseckey is 128-bit security key. A/D = D
 type Zseckey []byte
@@ -86,3 +104,6 @@ func (s *Zseckey) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (s Zseckey) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(16, []byte(s)) }
 func (s *Zseckey) Values() []Val              { return []Val{s} }
 func (s *Zseckey) ID() TypeID                 { return 241 }
+func (s Zseckey) String() string {
+	return net.HardwareAddr(s).String()
+}

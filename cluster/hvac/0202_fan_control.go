@@ -36,11 +36,11 @@ func (a *FanMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = FanMode(*nt)
 	return br, err
 }
-
-func (a FanMode) Readable() bool   { return true }
-func (a FanMode) Writable() bool   { return true }
-func (a FanMode) Reportable() bool { return false }
-func (a FanMode) SceneIndex() int  { return -1 }
+func (FanMode) Name() string     { return "Fan Mode" }
+func (FanMode) Readable() bool   { return true }
+func (FanMode) Writable() bool   { return true }
+func (FanMode) Reportable() bool { return false }
+func (FanMode) SceneIndex() int  { return -1 }
 
 func (a FanMode) String() string {
 	switch a {
@@ -121,11 +121,11 @@ func (a *FanModeSequence) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = FanModeSequence(*nt)
 	return br, err
 }
-
-func (a FanModeSequence) Readable() bool   { return true }
-func (a FanModeSequence) Writable() bool   { return true }
-func (a FanModeSequence) Reportable() bool { return false }
-func (a FanModeSequence) SceneIndex() int  { return -1 }
+func (FanModeSequence) Name() string     { return "Fan Mode Sequence" }
+func (FanModeSequence) Readable() bool   { return true }
+func (FanModeSequence) Writable() bool   { return true }
+func (FanModeSequence) Reportable() bool { return false }
+func (FanModeSequence) SceneIndex() int  { return -1 }
 
 func (a FanModeSequence) String() string {
 	switch a {

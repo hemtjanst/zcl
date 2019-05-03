@@ -44,11 +44,11 @@ func (a *Time) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Time(*nt)
 	return br, err
 }
-
-func (a Time) Readable() bool   { return true }
-func (a Time) Writable() bool   { return true }
-func (a Time) Reportable() bool { return false }
-func (a Time) SceneIndex() int  { return -1 }
+func (Time) Name() string     { return "Time" }
+func (Time) Readable() bool   { return true }
+func (Time) Writable() bool   { return true }
+func (Time) Reportable() bool { return false }
+func (Time) SceneIndex() int  { return -1 }
 
 func (a Time) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -71,11 +71,11 @@ func (a *TimeStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TimeStatus(*nt)
 	return br, err
 }
-
-func (a TimeStatus) Readable() bool   { return true }
-func (a TimeStatus) Writable() bool   { return true }
-func (a TimeStatus) Reportable() bool { return false }
-func (a TimeStatus) SceneIndex() int  { return -1 }
+func (TimeStatus) Name() string     { return "Time Status" }
+func (TimeStatus) Readable() bool   { return true }
+func (TimeStatus) Writable() bool   { return true }
+func (TimeStatus) Reportable() bool { return false }
+func (TimeStatus) SceneIndex() int  { return -1 }
 
 func (a TimeStatus) String() string {
 	var bstr []string
@@ -140,11 +140,11 @@ func (a *TimeZone) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = TimeZone(*nt)
 	return br, err
 }
-
-func (a TimeZone) Readable() bool   { return true }
-func (a TimeZone) Writable() bool   { return true }
-func (a TimeZone) Reportable() bool { return false }
-func (a TimeZone) SceneIndex() int  { return -1 }
+func (TimeZone) Name() string     { return "Time Zone" }
+func (TimeZone) Readable() bool   { return true }
+func (TimeZone) Writable() bool   { return true }
+func (TimeZone) Reportable() bool { return false }
+func (TimeZone) SceneIndex() int  { return -1 }
 
 func (a TimeZone) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -168,11 +168,11 @@ func (a *DstStart) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DstStart(*nt)
 	return br, err
 }
-
-func (a DstStart) Readable() bool   { return true }
-func (a DstStart) Writable() bool   { return true }
-func (a DstStart) Reportable() bool { return false }
-func (a DstStart) SceneIndex() int  { return -1 }
+func (DstStart) Name() string     { return "Dst Start" }
+func (DstStart) Readable() bool   { return true }
+func (DstStart) Writable() bool   { return true }
+func (DstStart) Reportable() bool { return false }
+func (DstStart) SceneIndex() int  { return -1 }
 
 func (a DstStart) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -196,11 +196,11 @@ func (a *DstEnd) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DstEnd(*nt)
 	return br, err
 }
-
-func (a DstEnd) Readable() bool   { return true }
-func (a DstEnd) Writable() bool   { return true }
-func (a DstEnd) Reportable() bool { return false }
-func (a DstEnd) SceneIndex() int  { return -1 }
+func (DstEnd) Name() string     { return "Dst End" }
+func (DstEnd) Readable() bool   { return true }
+func (DstEnd) Writable() bool   { return true }
+func (DstEnd) Reportable() bool { return false }
+func (DstEnd) SceneIndex() int  { return -1 }
 
 func (a DstEnd) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -223,11 +223,11 @@ func (a *DstShift) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DstShift(*nt)
 	return br, err
 }
-
-func (a DstShift) Readable() bool   { return true }
-func (a DstShift) Writable() bool   { return true }
-func (a DstShift) Reportable() bool { return false }
-func (a DstShift) SceneIndex() int  { return -1 }
+func (DstShift) Name() string     { return "Dst Shift" }
+func (DstShift) Readable() bool   { return true }
+func (DstShift) Writable() bool   { return true }
+func (DstShift) Reportable() bool { return false }
+func (DstShift) SceneIndex() int  { return -1 }
 
 func (a DstShift) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -251,11 +251,11 @@ func (a *StandardTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = StandardTime(*nt)
 	return br, err
 }
-
-func (a StandardTime) Readable() bool   { return true }
-func (a StandardTime) Writable() bool   { return false }
-func (a StandardTime) Reportable() bool { return false }
-func (a StandardTime) SceneIndex() int  { return -1 }
+func (StandardTime) Name() string     { return "Standard Time" }
+func (StandardTime) Readable() bool   { return true }
+func (StandardTime) Writable() bool   { return false }
+func (StandardTime) Reportable() bool { return false }
+func (StandardTime) SceneIndex() int  { return -1 }
 
 func (a StandardTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -279,11 +279,11 @@ func (a *LocalTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LocalTime(*nt)
 	return br, err
 }
-
-func (a LocalTime) Readable() bool   { return true }
-func (a LocalTime) Writable() bool   { return false }
-func (a LocalTime) Reportable() bool { return false }
-func (a LocalTime) SceneIndex() int  { return -1 }
+func (LocalTime) Name() string     { return "Local Time" }
+func (LocalTime) Readable() bool   { return true }
+func (LocalTime) Writable() bool   { return false }
+func (LocalTime) Reportable() bool { return false }
+func (LocalTime) SceneIndex() int  { return -1 }
 
 func (a LocalTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -306,11 +306,11 @@ func (a *LastSetTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LastSetTime(*nt)
 	return br, err
 }
-
-func (a LastSetTime) Readable() bool   { return true }
-func (a LastSetTime) Writable() bool   { return false }
-func (a LastSetTime) Reportable() bool { return false }
-func (a LastSetTime) SceneIndex() int  { return -1 }
+func (LastSetTime) Name() string     { return "Last Set Time" }
+func (LastSetTime) Readable() bool   { return true }
+func (LastSetTime) Writable() bool   { return false }
+func (LastSetTime) Reportable() bool { return false }
+func (LastSetTime) SceneIndex() int  { return -1 }
 
 func (a LastSetTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -333,11 +333,11 @@ func (a *ValidUntilTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ValidUntilTime(*nt)
 	return br, err
 }
-
-func (a ValidUntilTime) Readable() bool   { return true }
-func (a ValidUntilTime) Writable() bool   { return true }
-func (a ValidUntilTime) Reportable() bool { return false }
-func (a ValidUntilTime) SceneIndex() int  { return -1 }
+func (ValidUntilTime) Name() string     { return "Valid Until Time" }
+func (ValidUntilTime) Readable() bool   { return true }
+func (ValidUntilTime) Writable() bool   { return true }
+func (ValidUntilTime) Reportable() bool { return false }
+func (ValidUntilTime) SceneIndex() int  { return -1 }
 
 func (a ValidUntilTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))

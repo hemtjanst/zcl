@@ -37,11 +37,11 @@ func (a *MeasuredRelativeHumidity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MeasuredRelativeHumidity(*nt)
 	return br, err
 }
-
-func (a MeasuredRelativeHumidity) Readable() bool   { return true }
-func (a MeasuredRelativeHumidity) Writable() bool   { return false }
-func (a MeasuredRelativeHumidity) Reportable() bool { return true }
-func (a MeasuredRelativeHumidity) SceneIndex() int  { return -1 }
+func (MeasuredRelativeHumidity) Name() string     { return "Measured Relative humidity" }
+func (MeasuredRelativeHumidity) Readable() bool   { return true }
+func (MeasuredRelativeHumidity) Writable() bool   { return false }
+func (MeasuredRelativeHumidity) Reportable() bool { return true }
+func (MeasuredRelativeHumidity) SceneIndex() int  { return -1 }
 
 func (a MeasuredRelativeHumidity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -64,11 +64,11 @@ func (a *MinMeasuredRelativeHumidity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinMeasuredRelativeHumidity(*nt)
 	return br, err
 }
-
-func (a MinMeasuredRelativeHumidity) Readable() bool   { return true }
-func (a MinMeasuredRelativeHumidity) Writable() bool   { return false }
-func (a MinMeasuredRelativeHumidity) Reportable() bool { return false }
-func (a MinMeasuredRelativeHumidity) SceneIndex() int  { return -1 }
+func (MinMeasuredRelativeHumidity) Name() string     { return "Min Measured Relative humidity" }
+func (MinMeasuredRelativeHumidity) Readable() bool   { return true }
+func (MinMeasuredRelativeHumidity) Writable() bool   { return false }
+func (MinMeasuredRelativeHumidity) Reportable() bool { return false }
+func (MinMeasuredRelativeHumidity) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredRelativeHumidity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -91,11 +91,11 @@ func (a *MaxMeasuredRelativeHumidity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxMeasuredRelativeHumidity(*nt)
 	return br, err
 }
-
-func (a MaxMeasuredRelativeHumidity) Readable() bool   { return true }
-func (a MaxMeasuredRelativeHumidity) Writable() bool   { return false }
-func (a MaxMeasuredRelativeHumidity) Reportable() bool { return false }
-func (a MaxMeasuredRelativeHumidity) SceneIndex() int  { return -1 }
+func (MaxMeasuredRelativeHumidity) Name() string     { return "Max Measured Relative humidity" }
+func (MaxMeasuredRelativeHumidity) Readable() bool   { return true }
+func (MaxMeasuredRelativeHumidity) Writable() bool   { return false }
+func (MaxMeasuredRelativeHumidity) Reportable() bool { return false }
+func (MaxMeasuredRelativeHumidity) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredRelativeHumidity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -118,11 +118,11 @@ func (a *RelativeHumidityTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RelativeHumidityTolerance(*nt)
 	return br, err
 }
-
-func (a RelativeHumidityTolerance) Readable() bool   { return true }
-func (a RelativeHumidityTolerance) Writable() bool   { return false }
-func (a RelativeHumidityTolerance) Reportable() bool { return true }
-func (a RelativeHumidityTolerance) SceneIndex() int  { return -1 }
+func (RelativeHumidityTolerance) Name() string     { return "Relative humidity Tolerance" }
+func (RelativeHumidityTolerance) Readable() bool   { return true }
+func (RelativeHumidityTolerance) Writable() bool   { return false }
+func (RelativeHumidityTolerance) Reportable() bool { return true }
+func (RelativeHumidityTolerance) SceneIndex() int  { return -1 }
 
 func (a RelativeHumidityTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

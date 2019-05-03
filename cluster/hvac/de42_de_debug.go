@@ -36,11 +36,11 @@ func (a *DebugEnabled) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DebugEnabled(*nt)
 	return br, err
 }
-
-func (a DebugEnabled) Readable() bool   { return true }
-func (a DebugEnabled) Writable() bool   { return true }
-func (a DebugEnabled) Reportable() bool { return false }
-func (a DebugEnabled) SceneIndex() int  { return -1 }
+func (DebugEnabled) Name() string     { return "Debug enabled" }
+func (DebugEnabled) Readable() bool   { return true }
+func (DebugEnabled) Writable() bool   { return true }
+func (DebugEnabled) Reportable() bool { return false }
+func (DebugEnabled) SceneIndex() int  { return -1 }
 
 func (a DebugEnabled) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -63,11 +63,11 @@ func (a *DebugDestination) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DebugDestination(*nt)
 	return br, err
 }
-
-func (a DebugDestination) Readable() bool   { return true }
-func (a DebugDestination) Writable() bool   { return true }
-func (a DebugDestination) Reportable() bool { return false }
-func (a DebugDestination) SceneIndex() int  { return -1 }
+func (DebugDestination) Name() string     { return "Debug destination" }
+func (DebugDestination) Readable() bool   { return true }
+func (DebugDestination) Writable() bool   { return true }
+func (DebugDestination) Reportable() bool { return false }
+func (DebugDestination) SceneIndex() int  { return -1 }
 
 func (a DebugDestination) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))

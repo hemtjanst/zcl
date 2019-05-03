@@ -37,11 +37,11 @@ func (a *Unknown1) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Unknown1(*nt)
 	return br, err
 }
-
-func (a Unknown1) Readable() bool   { return true }
-func (a Unknown1) Writable() bool   { return true }
-func (a Unknown1) Reportable() bool { return false }
-func (a Unknown1) SceneIndex() int  { return -1 }
+func (Unknown1) Name() string     { return "Unknown 1" }
+func (Unknown1) Readable() bool   { return true }
+func (Unknown1) Writable() bool   { return true }
+func (Unknown1) Reportable() bool { return false }
+func (Unknown1) SceneIndex() int  { return -1 }
 
 func (a Unknown1) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
@@ -64,11 +64,11 @@ func (a *Unknown2) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Unknown2(*nt)
 	return br, err
 }
-
-func (a Unknown2) Readable() bool   { return true }
-func (a Unknown2) Writable() bool   { return true }
-func (a Unknown2) Reportable() bool { return false }
-func (a Unknown2) SceneIndex() int  { return -1 }
+func (Unknown2) Name() string     { return "Unknown 2" }
+func (Unknown2) Readable() bool   { return true }
+func (Unknown2) Writable() bool   { return true }
+func (Unknown2) Reportable() bool { return false }
+func (Unknown2) SceneIndex() int  { return -1 }
 
 func (a Unknown2) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))

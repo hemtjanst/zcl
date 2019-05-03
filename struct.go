@@ -67,6 +67,8 @@ type Val interface {
 type Attr interface {
 	Val
 	ID() AttrID
+	Name() string
+	String() string
 	Cluster() ClusterID
 	Readable() bool
 	Writable() bool
@@ -77,6 +79,8 @@ type Attr interface {
 type Command interface {
 	Val
 	ID() CommandID
+	Name() string
+	String() string
 	Cluster() ClusterID
 	MnfCode() []byte
 }

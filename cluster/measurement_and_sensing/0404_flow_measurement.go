@@ -37,11 +37,11 @@ func (a *MeasuredFlow) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MeasuredFlow(*nt)
 	return br, err
 }
-
-func (a MeasuredFlow) Readable() bool   { return true }
-func (a MeasuredFlow) Writable() bool   { return false }
-func (a MeasuredFlow) Reportable() bool { return true }
-func (a MeasuredFlow) SceneIndex() int  { return -1 }
+func (MeasuredFlow) Name() string     { return "Measured Flow" }
+func (MeasuredFlow) Readable() bool   { return true }
+func (MeasuredFlow) Writable() bool   { return false }
+func (MeasuredFlow) Reportable() bool { return true }
+func (MeasuredFlow) SceneIndex() int  { return -1 }
 
 func (a MeasuredFlow) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -64,11 +64,11 @@ func (a *MinMeasuredFlow) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinMeasuredFlow(*nt)
 	return br, err
 }
-
-func (a MinMeasuredFlow) Readable() bool   { return true }
-func (a MinMeasuredFlow) Writable() bool   { return false }
-func (a MinMeasuredFlow) Reportable() bool { return false }
-func (a MinMeasuredFlow) SceneIndex() int  { return -1 }
+func (MinMeasuredFlow) Name() string     { return "Min Measured Flow" }
+func (MinMeasuredFlow) Readable() bool   { return true }
+func (MinMeasuredFlow) Writable() bool   { return false }
+func (MinMeasuredFlow) Reportable() bool { return false }
+func (MinMeasuredFlow) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredFlow) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -91,11 +91,11 @@ func (a *MaxMeasuredFlow) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxMeasuredFlow(*nt)
 	return br, err
 }
-
-func (a MaxMeasuredFlow) Readable() bool   { return true }
-func (a MaxMeasuredFlow) Writable() bool   { return false }
-func (a MaxMeasuredFlow) Reportable() bool { return false }
-func (a MaxMeasuredFlow) SceneIndex() int  { return -1 }
+func (MaxMeasuredFlow) Name() string     { return "Max Measured Flow" }
+func (MaxMeasuredFlow) Readable() bool   { return true }
+func (MaxMeasuredFlow) Writable() bool   { return false }
+func (MaxMeasuredFlow) Reportable() bool { return false }
+func (MaxMeasuredFlow) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredFlow) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -118,11 +118,11 @@ func (a *FlowTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = FlowTolerance(*nt)
 	return br, err
 }
-
-func (a FlowTolerance) Readable() bool   { return true }
-func (a FlowTolerance) Writable() bool   { return false }
-func (a FlowTolerance) Reportable() bool { return true }
-func (a FlowTolerance) SceneIndex() int  { return -1 }
+func (FlowTolerance) Name() string     { return "Flow Tolerance" }
+func (FlowTolerance) Readable() bool   { return true }
+func (FlowTolerance) Writable() bool   { return false }
+func (FlowTolerance) Reportable() bool { return true }
+func (FlowTolerance) SceneIndex() int  { return -1 }
 
 func (a FlowTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

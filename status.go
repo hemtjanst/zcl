@@ -85,7 +85,7 @@ func (e Status) String() string {
 	case CalibrationError:
 		return "CalibrationError"
 	default:
-		return fmt.Sprintf("Unknown(0x%02X)", uint(e))
+		return fmt.Sprintf("Status(0x%02X)", uint(e))
 	}
 }
 

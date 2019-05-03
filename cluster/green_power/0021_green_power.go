@@ -43,11 +43,11 @@ func (a *MaxSinkTableEntries) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxSinkTableEntries(*nt)
 	return br, err
 }
-
-func (a MaxSinkTableEntries) Readable() bool   { return true }
-func (a MaxSinkTableEntries) Writable() bool   { return false }
-func (a MaxSinkTableEntries) Reportable() bool { return false }
-func (a MaxSinkTableEntries) SceneIndex() int  { return -1 }
+func (MaxSinkTableEntries) Name() string     { return "Max Sink Table Entries" }
+func (MaxSinkTableEntries) Readable() bool   { return true }
+func (MaxSinkTableEntries) Writable() bool   { return false }
+func (MaxSinkTableEntries) Reportable() bool { return false }
+func (MaxSinkTableEntries) SceneIndex() int  { return -1 }
 
 func (a MaxSinkTableEntries) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu8(a))
@@ -71,11 +71,11 @@ func (a *SinkTable) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = SinkTable(*nt)
 	return br, err
 }
-
-func (a SinkTable) Readable() bool   { return true }
-func (a SinkTable) Writable() bool   { return false }
-func (a SinkTable) Reportable() bool { return false }
-func (a SinkTable) SceneIndex() int  { return -1 }
+func (SinkTable) Name() string     { return "Sink Table" }
+func (SinkTable) Readable() bool   { return true }
+func (SinkTable) Writable() bool   { return false }
+func (SinkTable) Reportable() bool { return false }
+func (SinkTable) SceneIndex() int  { return -1 }
 
 func (a SinkTable) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zlostring(a))
@@ -99,11 +99,11 @@ func (a *CommunicationMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CommunicationMode(*nt)
 	return br, err
 }
-
-func (a CommunicationMode) Readable() bool   { return true }
-func (a CommunicationMode) Writable() bool   { return true }
-func (a CommunicationMode) Reportable() bool { return false }
-func (a CommunicationMode) SceneIndex() int  { return -1 }
+func (CommunicationMode) Name() string     { return "Communication Mode" }
+func (CommunicationMode) Readable() bool   { return true }
+func (CommunicationMode) Writable() bool   { return true }
+func (CommunicationMode) Reportable() bool { return false }
+func (CommunicationMode) SceneIndex() int  { return -1 }
 
 func (a CommunicationMode) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
@@ -127,11 +127,11 @@ func (a *CommissioningExitMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CommissioningExitMode(*nt)
 	return br, err
 }
-
-func (a CommissioningExitMode) Readable() bool   { return true }
-func (a CommissioningExitMode) Writable() bool   { return true }
-func (a CommissioningExitMode) Reportable() bool { return false }
-func (a CommissioningExitMode) SceneIndex() int  { return -1 }
+func (CommissioningExitMode) Name() string     { return "Commissioning Exit Mode" }
+func (CommissioningExitMode) Readable() bool   { return true }
+func (CommissioningExitMode) Writable() bool   { return true }
+func (CommissioningExitMode) Reportable() bool { return false }
+func (CommissioningExitMode) SceneIndex() int  { return -1 }
 
 func (a CommissioningExitMode) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
@@ -155,11 +155,11 @@ func (a *CommissioningWindow) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CommissioningWindow(*nt)
 	return br, err
 }
-
-func (a CommissioningWindow) Readable() bool   { return true }
-func (a CommissioningWindow) Writable() bool   { return true }
-func (a CommissioningWindow) Reportable() bool { return false }
-func (a CommissioningWindow) SceneIndex() int  { return -1 }
+func (CommissioningWindow) Name() string     { return "Commissioning Window" }
+func (CommissioningWindow) Readable() bool   { return true }
+func (CommissioningWindow) Writable() bool   { return true }
+func (CommissioningWindow) Reportable() bool { return false }
+func (CommissioningWindow) SceneIndex() int  { return -1 }
 
 func (a CommissioningWindow) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(a))
@@ -183,11 +183,11 @@ func (a *SecurityLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = SecurityLevel(*nt)
 	return br, err
 }
-
-func (a SecurityLevel) Readable() bool   { return true }
-func (a SecurityLevel) Writable() bool   { return true }
-func (a SecurityLevel) Reportable() bool { return false }
-func (a SecurityLevel) SceneIndex() int  { return -1 }
+func (SecurityLevel) Name() string     { return "Security Level" }
+func (SecurityLevel) Readable() bool   { return true }
+func (SecurityLevel) Writable() bool   { return true }
+func (SecurityLevel) Reportable() bool { return false }
+func (SecurityLevel) SceneIndex() int  { return -1 }
 
 func (a SecurityLevel) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp8(a))
@@ -211,11 +211,11 @@ func (a *Functionality) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Functionality(*nt)
 	return br, err
 }
-
-func (a Functionality) Readable() bool   { return true }
-func (a Functionality) Writable() bool   { return false }
-func (a Functionality) Reportable() bool { return false }
-func (a Functionality) SceneIndex() int  { return -1 }
+func (Functionality) Name() string     { return "Functionality" }
+func (Functionality) Readable() bool   { return true }
+func (Functionality) Writable() bool   { return false }
+func (Functionality) Reportable() bool { return false }
+func (Functionality) SceneIndex() int  { return -1 }
 
 func (a Functionality) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp24(a))
@@ -239,11 +239,11 @@ func (a *ActiveFunctionality) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ActiveFunctionality(*nt)
 	return br, err
 }
-
-func (a ActiveFunctionality) Readable() bool   { return true }
-func (a ActiveFunctionality) Writable() bool   { return false }
-func (a ActiveFunctionality) Reportable() bool { return false }
-func (a ActiveFunctionality) SceneIndex() int  { return -1 }
+func (ActiveFunctionality) Name() string     { return "Active Functionality" }
+func (ActiveFunctionality) Readable() bool   { return true }
+func (ActiveFunctionality) Writable() bool   { return false }
+func (ActiveFunctionality) Reportable() bool { return false }
+func (ActiveFunctionality) SceneIndex() int  { return -1 }
 
 func (a ActiveFunctionality) String() string {
 	return zcl.Sprintf("0x%X", zcl.Zbmp24(a))

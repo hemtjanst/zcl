@@ -43,11 +43,11 @@ func (a *MultiOutputStateText) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputStateText(*nt)
 	return br, err
 }
-
-func (a MultiOutputStateText) Readable() bool   { return true }
-func (a MultiOutputStateText) Writable() bool   { return true }
-func (a MultiOutputStateText) Reportable() bool { return false }
-func (a MultiOutputStateText) SceneIndex() int  { return -1 }
+func (MultiOutputStateText) Name() string     { return "Multi Output State Text" }
+func (MultiOutputStateText) Readable() bool   { return true }
+func (MultiOutputStateText) Writable() bool   { return true }
+func (MultiOutputStateText) Reportable() bool { return false }
+func (MultiOutputStateText) SceneIndex() int  { return -1 }
 
 func (a MultiOutputStateText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -70,11 +70,11 @@ func (a *MultiOutputDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputDescription(*nt)
 	return br, err
 }
-
-func (a MultiOutputDescription) Readable() bool   { return true }
-func (a MultiOutputDescription) Writable() bool   { return true }
-func (a MultiOutputDescription) Reportable() bool { return false }
-func (a MultiOutputDescription) SceneIndex() int  { return -1 }
+func (MultiOutputDescription) Name() string     { return "Multi Output Description" }
+func (MultiOutputDescription) Readable() bool   { return true }
+func (MultiOutputDescription) Writable() bool   { return true }
+func (MultiOutputDescription) Reportable() bool { return false }
+func (MultiOutputDescription) SceneIndex() int  { return -1 }
 
 func (a MultiOutputDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -97,11 +97,11 @@ func (a *MultiOutputNumberOfStates) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputNumberOfStates(*nt)
 	return br, err
 }
-
-func (a MultiOutputNumberOfStates) Readable() bool   { return true }
-func (a MultiOutputNumberOfStates) Writable() bool   { return true }
-func (a MultiOutputNumberOfStates) Reportable() bool { return false }
-func (a MultiOutputNumberOfStates) SceneIndex() int  { return -1 }
+func (MultiOutputNumberOfStates) Name() string     { return "Multi Output Number of states" }
+func (MultiOutputNumberOfStates) Readable() bool   { return true }
+func (MultiOutputNumberOfStates) Writable() bool   { return true }
+func (MultiOutputNumberOfStates) Reportable() bool { return false }
+func (MultiOutputNumberOfStates) SceneIndex() int  { return -1 }
 
 func (a MultiOutputNumberOfStates) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -124,11 +124,11 @@ func (a *MultiOutputOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputOutOfService(*nt)
 	return br, err
 }
-
-func (a MultiOutputOutOfService) Readable() bool   { return true }
-func (a MultiOutputOutOfService) Writable() bool   { return true }
-func (a MultiOutputOutOfService) Reportable() bool { return false }
-func (a MultiOutputOutOfService) SceneIndex() int  { return -1 }
+func (MultiOutputOutOfService) Name() string     { return "Multi Output Out of service" }
+func (MultiOutputOutOfService) Readable() bool   { return true }
+func (MultiOutputOutOfService) Writable() bool   { return true }
+func (MultiOutputOutOfService) Reportable() bool { return false }
+func (MultiOutputOutOfService) SceneIndex() int  { return -1 }
 
 func (a MultiOutputOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -151,11 +151,11 @@ func (a *MultiOutputPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputPresentValue(*nt)
 	return br, err
 }
-
-func (a MultiOutputPresentValue) Readable() bool   { return true }
-func (a MultiOutputPresentValue) Writable() bool   { return true }
-func (a MultiOutputPresentValue) Reportable() bool { return true }
-func (a MultiOutputPresentValue) SceneIndex() int  { return -1 }
+func (MultiOutputPresentValue) Name() string     { return "Multi Output Present value" }
+func (MultiOutputPresentValue) Readable() bool   { return true }
+func (MultiOutputPresentValue) Writable() bool   { return true }
+func (MultiOutputPresentValue) Reportable() bool { return true }
+func (MultiOutputPresentValue) SceneIndex() int  { return -1 }
 
 func (a MultiOutputPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -178,11 +178,11 @@ func (a *MultiOutputPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputPriorityArray(*nt)
 	return br, err
 }
-
-func (a MultiOutputPriorityArray) Readable() bool   { return true }
-func (a MultiOutputPriorityArray) Writable() bool   { return true }
-func (a MultiOutputPriorityArray) Reportable() bool { return false }
-func (a MultiOutputPriorityArray) SceneIndex() int  { return -1 }
+func (MultiOutputPriorityArray) Name() string     { return "Multi Output Priority Array" }
+func (MultiOutputPriorityArray) Readable() bool   { return true }
+func (MultiOutputPriorityArray) Writable() bool   { return true }
+func (MultiOutputPriorityArray) Reportable() bool { return false }
+func (MultiOutputPriorityArray) SceneIndex() int  { return -1 }
 
 func (a MultiOutputPriorityArray) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -205,11 +205,11 @@ func (a *MultiOutputReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputReliability(*nt)
 	return br, err
 }
-
-func (a MultiOutputReliability) Readable() bool   { return true }
-func (a MultiOutputReliability) Writable() bool   { return true }
-func (a MultiOutputReliability) Reportable() bool { return false }
-func (a MultiOutputReliability) SceneIndex() int  { return -1 }
+func (MultiOutputReliability) Name() string     { return "Multi Output Reliability" }
+func (MultiOutputReliability) Readable() bool   { return true }
+func (MultiOutputReliability) Writable() bool   { return true }
+func (MultiOutputReliability) Reportable() bool { return false }
+func (MultiOutputReliability) SceneIndex() int  { return -1 }
 
 func (a MultiOutputReliability) String() string {
 	switch a {
@@ -322,11 +322,11 @@ func (a *MultiOutputRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputRelinquishDefault(*nt)
 	return br, err
 }
-
-func (a MultiOutputRelinquishDefault) Readable() bool   { return true }
-func (a MultiOutputRelinquishDefault) Writable() bool   { return true }
-func (a MultiOutputRelinquishDefault) Reportable() bool { return false }
-func (a MultiOutputRelinquishDefault) SceneIndex() int  { return -1 }
+func (MultiOutputRelinquishDefault) Name() string     { return "Multi Output Relinquish Default" }
+func (MultiOutputRelinquishDefault) Readable() bool   { return true }
+func (MultiOutputRelinquishDefault) Writable() bool   { return true }
+func (MultiOutputRelinquishDefault) Reportable() bool { return false }
+func (MultiOutputRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a MultiOutputRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -349,11 +349,11 @@ func (a *MultiOutputStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputStatusFlags(*nt)
 	return br, err
 }
-
-func (a MultiOutputStatusFlags) Readable() bool   { return true }
-func (a MultiOutputStatusFlags) Writable() bool   { return false }
-func (a MultiOutputStatusFlags) Reportable() bool { return true }
-func (a MultiOutputStatusFlags) SceneIndex() int  { return -1 }
+func (MultiOutputStatusFlags) Name() string     { return "Multi Output Status flags" }
+func (MultiOutputStatusFlags) Readable() bool   { return true }
+func (MultiOutputStatusFlags) Writable() bool   { return false }
+func (MultiOutputStatusFlags) Reportable() bool { return true }
+func (MultiOutputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a MultiOutputStatusFlags) String() string {
 	var bstr []string
@@ -417,11 +417,11 @@ func (a *MultiOutputApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MultiOutputApplicationType(*nt)
 	return br, err
 }
-
-func (a MultiOutputApplicationType) Readable() bool   { return true }
-func (a MultiOutputApplicationType) Writable() bool   { return false }
-func (a MultiOutputApplicationType) Reportable() bool { return false }
-func (a MultiOutputApplicationType) SceneIndex() int  { return -1 }
+func (MultiOutputApplicationType) Name() string     { return "Multi Output Application Type" }
+func (MultiOutputApplicationType) Readable() bool   { return true }
+func (MultiOutputApplicationType) Writable() bool   { return false }
+func (MultiOutputApplicationType) Reportable() bool { return false }
+func (MultiOutputApplicationType) SceneIndex() int  { return -1 }
 
 func (a MultiOutputApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

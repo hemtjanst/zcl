@@ -53,11 +53,11 @@ func (a *PhysicalMinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PhysicalMinLevel(*nt)
 	return br, err
 }
-
-func (a PhysicalMinLevel) Readable() bool   { return true }
-func (a PhysicalMinLevel) Writable() bool   { return false }
-func (a PhysicalMinLevel) Reportable() bool { return false }
-func (a PhysicalMinLevel) SceneIndex() int  { return -1 }
+func (PhysicalMinLevel) Name() string     { return "Physical Min Level" }
+func (PhysicalMinLevel) Readable() bool   { return true }
+func (PhysicalMinLevel) Writable() bool   { return false }
+func (PhysicalMinLevel) Reportable() bool { return false }
+func (PhysicalMinLevel) SceneIndex() int  { return -1 }
 
 func (a PhysicalMinLevel) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -83,11 +83,11 @@ func (a *PhysicalMaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PhysicalMaxLevel(*nt)
 	return br, err
 }
-
-func (a PhysicalMaxLevel) Readable() bool   { return true }
-func (a PhysicalMaxLevel) Writable() bool   { return false }
-func (a PhysicalMaxLevel) Reportable() bool { return false }
-func (a PhysicalMaxLevel) SceneIndex() int  { return -1 }
+func (PhysicalMaxLevel) Name() string     { return "Physical Max Level" }
+func (PhysicalMaxLevel) Readable() bool   { return true }
+func (PhysicalMaxLevel) Writable() bool   { return false }
+func (PhysicalMaxLevel) Reportable() bool { return false }
+func (PhysicalMaxLevel) SceneIndex() int  { return -1 }
 
 func (a PhysicalMaxLevel) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -115,11 +115,11 @@ func (a *BallastStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BallastStatus(*nt)
 	return br, err
 }
-
-func (a BallastStatus) Readable() bool   { return true }
-func (a BallastStatus) Writable() bool   { return false }
-func (a BallastStatus) Reportable() bool { return false }
-func (a BallastStatus) SceneIndex() int  { return -1 }
+func (BallastStatus) Name() string     { return "Ballast Status" }
+func (BallastStatus) Readable() bool   { return true }
+func (BallastStatus) Writable() bool   { return false }
+func (BallastStatus) Reportable() bool { return false }
+func (BallastStatus) SceneIndex() int  { return -1 }
 
 func (a BallastStatus) String() string {
 	var bstr []string
@@ -168,11 +168,11 @@ func (a *MinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MinLevel(*nt)
 	return br, err
 }
-
-func (a MinLevel) Readable() bool   { return true }
-func (a MinLevel) Writable() bool   { return true }
-func (a MinLevel) Reportable() bool { return false }
-func (a MinLevel) SceneIndex() int  { return -1 }
+func (MinLevel) Name() string     { return "Min Level" }
+func (MinLevel) Readable() bool   { return true }
+func (MinLevel) Writable() bool   { return true }
+func (MinLevel) Reportable() bool { return false }
+func (MinLevel) SceneIndex() int  { return -1 }
 
 func (a MinLevel) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -200,11 +200,11 @@ func (a *MaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MaxLevel(*nt)
 	return br, err
 }
-
-func (a MaxLevel) Readable() bool   { return true }
-func (a MaxLevel) Writable() bool   { return true }
-func (a MaxLevel) Reportable() bool { return false }
-func (a MaxLevel) SceneIndex() int  { return -1 }
+func (MaxLevel) Name() string     { return "Max Level" }
+func (MaxLevel) Readable() bool   { return true }
+func (MaxLevel) Writable() bool   { return true }
+func (MaxLevel) Reportable() bool { return false }
+func (MaxLevel) SceneIndex() int  { return -1 }
 
 func (a MaxLevel) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -232,11 +232,11 @@ func (a *PowerOnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerOnLevel(*nt)
 	return br, err
 }
-
-func (a PowerOnLevel) Readable() bool   { return true }
-func (a PowerOnLevel) Writable() bool   { return true }
-func (a PowerOnLevel) Reportable() bool { return false }
-func (a PowerOnLevel) SceneIndex() int  { return -1 }
+func (PowerOnLevel) Name() string     { return "Power On Level" }
+func (PowerOnLevel) Readable() bool   { return true }
+func (PowerOnLevel) Writable() bool   { return true }
+func (PowerOnLevel) Reportable() bool { return false }
+func (PowerOnLevel) SceneIndex() int  { return -1 }
 
 func (a PowerOnLevel) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -262,11 +262,11 @@ func (a *PowerOnFadeTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerOnFadeTime(*nt)
 	return br, err
 }
-
-func (a PowerOnFadeTime) Readable() bool   { return true }
-func (a PowerOnFadeTime) Writable() bool   { return true }
-func (a PowerOnFadeTime) Reportable() bool { return false }
-func (a PowerOnFadeTime) SceneIndex() int  { return -1 }
+func (PowerOnFadeTime) Name() string     { return "Power On Fade Time" }
+func (PowerOnFadeTime) Readable() bool   { return true }
+func (PowerOnFadeTime) Writable() bool   { return true }
+func (PowerOnFadeTime) Reportable() bool { return false }
+func (PowerOnFadeTime) SceneIndex() int  { return -1 }
 
 func (a PowerOnFadeTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -291,11 +291,11 @@ func (a *IntrinsicBallastFactor) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = IntrinsicBallastFactor(*nt)
 	return br, err
 }
-
-func (a IntrinsicBallastFactor) Readable() bool   { return true }
-func (a IntrinsicBallastFactor) Writable() bool   { return true }
-func (a IntrinsicBallastFactor) Reportable() bool { return false }
-func (a IntrinsicBallastFactor) SceneIndex() int  { return -1 }
+func (IntrinsicBallastFactor) Name() string     { return "Intrinsic Ballast Factor" }
+func (IntrinsicBallastFactor) Readable() bool   { return true }
+func (IntrinsicBallastFactor) Writable() bool   { return true }
+func (IntrinsicBallastFactor) Reportable() bool { return false }
+func (IntrinsicBallastFactor) SceneIndex() int  { return -1 }
 
 func (a IntrinsicBallastFactor) String() string {
 	return zcl.Percent.Format(float64(a))
@@ -324,11 +324,11 @@ func (a *BallastFactorAdjustment) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BallastFactorAdjustment(*nt)
 	return br, err
 }
-
-func (a BallastFactorAdjustment) Readable() bool   { return true }
-func (a BallastFactorAdjustment) Writable() bool   { return true }
-func (a BallastFactorAdjustment) Reportable() bool { return false }
-func (a BallastFactorAdjustment) SceneIndex() int  { return -1 }
+func (BallastFactorAdjustment) Name() string     { return "Ballast Factor Adjustment" }
+func (BallastFactorAdjustment) Readable() bool   { return true }
+func (BallastFactorAdjustment) Writable() bool   { return true }
+func (BallastFactorAdjustment) Reportable() bool { return false }
+func (BallastFactorAdjustment) SceneIndex() int  { return -1 }
 
 func (a BallastFactorAdjustment) String() string {
 	return zcl.Percent.Format(float64(a))
@@ -352,11 +352,11 @@ func (a *LampQuantity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LampQuantity(*nt)
 	return br, err
 }
-
-func (a LampQuantity) Readable() bool   { return true }
-func (a LampQuantity) Writable() bool   { return false }
-func (a LampQuantity) Reportable() bool { return false }
-func (a LampQuantity) SceneIndex() int  { return -1 }
+func (LampQuantity) Name() string     { return "Lamp Quantity" }
+func (LampQuantity) Readable() bool   { return true }
+func (LampQuantity) Writable() bool   { return false }
+func (LampQuantity) Reportable() bool { return false }
+func (LampQuantity) SceneIndex() int  { return -1 }
 
 func (a LampQuantity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -379,11 +379,11 @@ func (a *LampType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LampType(*nt)
 	return br, err
 }
-
-func (a LampType) Readable() bool   { return true }
-func (a LampType) Writable() bool   { return true }
-func (a LampType) Reportable() bool { return false }
-func (a LampType) SceneIndex() int  { return -1 }
+func (LampType) Name() string     { return "Lamp Type" }
+func (LampType) Readable() bool   { return true }
+func (LampType) Writable() bool   { return true }
+func (LampType) Reportable() bool { return false }
+func (LampType) SceneIndex() int  { return -1 }
 
 func (a LampType) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -408,11 +408,11 @@ func (a *LampManufacturer) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LampManufacturer(*nt)
 	return br, err
 }
-
-func (a LampManufacturer) Readable() bool   { return true }
-func (a LampManufacturer) Writable() bool   { return true }
-func (a LampManufacturer) Reportable() bool { return false }
-func (a LampManufacturer) SceneIndex() int  { return -1 }
+func (LampManufacturer) Name() string     { return "Lamp Manufacturer" }
+func (LampManufacturer) Readable() bool   { return true }
+func (LampManufacturer) Writable() bool   { return true }
+func (LampManufacturer) Reportable() bool { return false }
+func (LampManufacturer) SceneIndex() int  { return -1 }
 
 func (a LampManufacturer) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -437,11 +437,11 @@ func (a *LampRatedHours) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LampRatedHours(*nt)
 	return br, err
 }
-
-func (a LampRatedHours) Readable() bool   { return true }
-func (a LampRatedHours) Writable() bool   { return true }
-func (a LampRatedHours) Reportable() bool { return false }
-func (a LampRatedHours) SceneIndex() int  { return -1 }
+func (LampRatedHours) Name() string     { return "Lamp Rated Hours" }
+func (LampRatedHours) Readable() bool   { return true }
+func (LampRatedHours) Writable() bool   { return true }
+func (LampRatedHours) Reportable() bool { return false }
+func (LampRatedHours) SceneIndex() int  { return -1 }
 
 func (a LampRatedHours) String() string {
 	return zcl.Sprintf("%v", zcl.Zu24(a))
@@ -468,11 +468,11 @@ func (a *LampBurnHours) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LampBurnHours(*nt)
 	return br, err
 }
-
-func (a LampBurnHours) Readable() bool   { return true }
-func (a LampBurnHours) Writable() bool   { return true }
-func (a LampBurnHours) Reportable() bool { return false }
-func (a LampBurnHours) SceneIndex() int  { return -1 }
+func (LampBurnHours) Name() string     { return "Lamp Burn Hours" }
+func (LampBurnHours) Readable() bool   { return true }
+func (LampBurnHours) Writable() bool   { return true }
+func (LampBurnHours) Reportable() bool { return false }
+func (LampBurnHours) SceneIndex() int  { return -1 }
 
 func (a LampBurnHours) String() string {
 	return zcl.Sprintf("%v", zcl.Zu24(a))
@@ -497,11 +497,11 @@ func (a *LampAlarmMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LampAlarmMode(*nt)
 	return br, err
 }
-
-func (a LampAlarmMode) Readable() bool   { return true }
-func (a LampAlarmMode) Writable() bool   { return true }
-func (a LampAlarmMode) Reportable() bool { return false }
-func (a LampAlarmMode) SceneIndex() int  { return -1 }
+func (LampAlarmMode) Name() string     { return "Lamp Alarm Mode" }
+func (LampAlarmMode) Readable() bool   { return true }
+func (LampAlarmMode) Writable() bool   { return true }
+func (LampAlarmMode) Reportable() bool { return false }
+func (LampAlarmMode) SceneIndex() int  { return -1 }
 
 func (a LampAlarmMode) String() string {
 	var bstr []string
@@ -537,11 +537,11 @@ func (a *LampBurnHoursTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LampBurnHoursTripPoint(*nt)
 	return br, err
 }
-
-func (a LampBurnHoursTripPoint) Readable() bool   { return true }
-func (a LampBurnHoursTripPoint) Writable() bool   { return true }
-func (a LampBurnHoursTripPoint) Reportable() bool { return false }
-func (a LampBurnHoursTripPoint) SceneIndex() int  { return -1 }
+func (LampBurnHoursTripPoint) Name() string     { return "Lamp Burn Hours Trip Point" }
+func (LampBurnHoursTripPoint) Readable() bool   { return true }
+func (LampBurnHoursTripPoint) Writable() bool   { return true }
+func (LampBurnHoursTripPoint) Reportable() bool { return false }
+func (LampBurnHoursTripPoint) SceneIndex() int  { return -1 }
 
 func (a LampBurnHoursTripPoint) String() string {
 	return zcl.Sprintf("%v", zcl.Zu24(a))

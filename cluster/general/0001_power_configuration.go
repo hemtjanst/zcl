@@ -57,11 +57,11 @@ func (a *MainsVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MainsVoltage(*nt)
 	return br, err
 }
-
-func (a MainsVoltage) Readable() bool   { return true }
-func (a MainsVoltage) Writable() bool   { return false }
-func (a MainsVoltage) Reportable() bool { return false }
-func (a MainsVoltage) SceneIndex() int  { return -1 }
+func (MainsVoltage) Name() string     { return "Mains Voltage" }
+func (MainsVoltage) Readable() bool   { return true }
+func (MainsVoltage) Writable() bool   { return false }
+func (MainsVoltage) Reportable() bool { return false }
+func (MainsVoltage) SceneIndex() int  { return -1 }
 
 func (a MainsVoltage) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -89,11 +89,11 @@ func (a *MainsFrequency) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MainsFrequency(*nt)
 	return br, err
 }
-
-func (a MainsFrequency) Readable() bool   { return true }
-func (a MainsFrequency) Writable() bool   { return false }
-func (a MainsFrequency) Reportable() bool { return false }
-func (a MainsFrequency) SceneIndex() int  { return -1 }
+func (MainsFrequency) Name() string     { return "Mains Frequency" }
+func (MainsFrequency) Readable() bool   { return true }
+func (MainsFrequency) Writable() bool   { return false }
+func (MainsFrequency) Reportable() bool { return false }
+func (MainsFrequency) SceneIndex() int  { return -1 }
 
 func (a MainsFrequency) String() string {
 	return zcl.Hertz.Format(float64(a) / 2)
@@ -116,11 +116,11 @@ func (a *MainsAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MainsAlarmMask(*nt)
 	return br, err
 }
-
-func (a MainsAlarmMask) Readable() bool   { return true }
-func (a MainsAlarmMask) Writable() bool   { return true }
-func (a MainsAlarmMask) Reportable() bool { return false }
-func (a MainsAlarmMask) SceneIndex() int  { return -1 }
+func (MainsAlarmMask) Name() string     { return "Mains Alarm Mask" }
+func (MainsAlarmMask) Readable() bool   { return true }
+func (MainsAlarmMask) Writable() bool   { return true }
+func (MainsAlarmMask) Reportable() bool { return false }
+func (MainsAlarmMask) SceneIndex() int  { return -1 }
 
 func (a MainsAlarmMask) String() string {
 	var bstr []string
@@ -174,11 +174,11 @@ func (a *MainsVoltageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MainsVoltageMinThreshold(*nt)
 	return br, err
 }
-
-func (a MainsVoltageMinThreshold) Readable() bool   { return true }
-func (a MainsVoltageMinThreshold) Writable() bool   { return true }
-func (a MainsVoltageMinThreshold) Reportable() bool { return false }
-func (a MainsVoltageMinThreshold) SceneIndex() int  { return -1 }
+func (MainsVoltageMinThreshold) Name() string     { return "Mains Voltage Min Threshold" }
+func (MainsVoltageMinThreshold) Readable() bool   { return true }
+func (MainsVoltageMinThreshold) Writable() bool   { return true }
+func (MainsVoltageMinThreshold) Reportable() bool { return false }
+func (MainsVoltageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageMinThreshold) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -201,11 +201,11 @@ func (a *MainsVoltageMaxThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MainsVoltageMaxThreshold(*nt)
 	return br, err
 }
-
-func (a MainsVoltageMaxThreshold) Readable() bool   { return true }
-func (a MainsVoltageMaxThreshold) Writable() bool   { return true }
-func (a MainsVoltageMaxThreshold) Reportable() bool { return false }
-func (a MainsVoltageMaxThreshold) SceneIndex() int  { return -1 }
+func (MainsVoltageMaxThreshold) Name() string     { return "Mains Voltage Max Threshold" }
+func (MainsVoltageMaxThreshold) Readable() bool   { return true }
+func (MainsVoltageMaxThreshold) Writable() bool   { return true }
+func (MainsVoltageMaxThreshold) Reportable() bool { return false }
+func (MainsVoltageMaxThreshold) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageMaxThreshold) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -230,11 +230,11 @@ func (a *MainsVoltageDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MainsVoltageDwellTripPoint(*nt)
 	return br, err
 }
-
-func (a MainsVoltageDwellTripPoint) Readable() bool   { return true }
-func (a MainsVoltageDwellTripPoint) Writable() bool   { return true }
-func (a MainsVoltageDwellTripPoint) Reportable() bool { return false }
-func (a MainsVoltageDwellTripPoint) SceneIndex() int  { return -1 }
+func (MainsVoltageDwellTripPoint) Name() string     { return "Mains Voltage Dwell Trip Point" }
+func (MainsVoltageDwellTripPoint) Readable() bool   { return true }
+func (MainsVoltageDwellTripPoint) Writable() bool   { return true }
+func (MainsVoltageDwellTripPoint) Reportable() bool { return false }
+func (MainsVoltageDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageDwellTripPoint) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -257,11 +257,11 @@ func (a *BatteryVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryVoltage(*nt)
 	return br, err
 }
-
-func (a BatteryVoltage) Readable() bool   { return true }
-func (a BatteryVoltage) Writable() bool   { return false }
-func (a BatteryVoltage) Reportable() bool { return false }
-func (a BatteryVoltage) SceneIndex() int  { return -1 }
+func (BatteryVoltage) Name() string     { return "Battery Voltage" }
+func (BatteryVoltage) Readable() bool   { return true }
+func (BatteryVoltage) Writable() bool   { return false }
+func (BatteryVoltage) Reportable() bool { return false }
+func (BatteryVoltage) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltage) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -284,11 +284,11 @@ func (a *BatteryPercentageRemaining) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryPercentageRemaining(*nt)
 	return br, err
 }
-
-func (a BatteryPercentageRemaining) Readable() bool   { return true }
-func (a BatteryPercentageRemaining) Writable() bool   { return false }
-func (a BatteryPercentageRemaining) Reportable() bool { return true }
-func (a BatteryPercentageRemaining) SceneIndex() int  { return -1 }
+func (BatteryPercentageRemaining) Name() string     { return "Battery Percentage Remaining" }
+func (BatteryPercentageRemaining) Readable() bool   { return true }
+func (BatteryPercentageRemaining) Writable() bool   { return false }
+func (BatteryPercentageRemaining) Reportable() bool { return true }
+func (BatteryPercentageRemaining) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageRemaining) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -311,11 +311,11 @@ func (a *BatteryManufacturer) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryManufacturer(*nt)
 	return br, err
 }
-
-func (a BatteryManufacturer) Readable() bool   { return true }
-func (a BatteryManufacturer) Writable() bool   { return true }
-func (a BatteryManufacturer) Reportable() bool { return false }
-func (a BatteryManufacturer) SceneIndex() int  { return -1 }
+func (BatteryManufacturer) Name() string     { return "Battery Manufacturer" }
+func (BatteryManufacturer) Readable() bool   { return true }
+func (BatteryManufacturer) Writable() bool   { return true }
+func (BatteryManufacturer) Reportable() bool { return false }
+func (BatteryManufacturer) SceneIndex() int  { return -1 }
 
 func (a BatteryManufacturer) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -338,11 +338,11 @@ func (a *BatterySize) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatterySize(*nt)
 	return br, err
 }
-
-func (a BatterySize) Readable() bool   { return true }
-func (a BatterySize) Writable() bool   { return true }
-func (a BatterySize) Reportable() bool { return false }
-func (a BatterySize) SceneIndex() int  { return -1 }
+func (BatterySize) Name() string     { return "Battery Size" }
+func (BatterySize) Readable() bool   { return true }
+func (BatterySize) Writable() bool   { return true }
+func (BatterySize) Reportable() bool { return false }
+func (BatterySize) SceneIndex() int  { return -1 }
 
 func (a BatterySize) String() string {
 	switch a {
@@ -447,11 +447,11 @@ func (a *BatteryAhrRating) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryAhrRating(*nt)
 	return br, err
 }
-
-func (a BatteryAhrRating) Readable() bool   { return true }
-func (a BatteryAhrRating) Writable() bool   { return true }
-func (a BatteryAhrRating) Reportable() bool { return false }
-func (a BatteryAhrRating) SceneIndex() int  { return -1 }
+func (BatteryAhrRating) Name() string     { return "Battery AHr Rating" }
+func (BatteryAhrRating) Readable() bool   { return true }
+func (BatteryAhrRating) Writable() bool   { return true }
+func (BatteryAhrRating) Reportable() bool { return false }
+func (BatteryAhrRating) SceneIndex() int  { return -1 }
 
 func (a BatteryAhrRating) String() string {
 	return zcl.MilliAmpereHours.Format(float64(a) / 0.1)
@@ -474,11 +474,11 @@ func (a *BatteryQuantity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryQuantity(*nt)
 	return br, err
 }
-
-func (a BatteryQuantity) Readable() bool   { return true }
-func (a BatteryQuantity) Writable() bool   { return true }
-func (a BatteryQuantity) Reportable() bool { return false }
-func (a BatteryQuantity) SceneIndex() int  { return -1 }
+func (BatteryQuantity) Name() string     { return "Battery Quantity" }
+func (BatteryQuantity) Readable() bool   { return true }
+func (BatteryQuantity) Writable() bool   { return true }
+func (BatteryQuantity) Reportable() bool { return false }
+func (BatteryQuantity) SceneIndex() int  { return -1 }
 
 func (a BatteryQuantity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -501,11 +501,11 @@ func (a *BatteryRatedVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryRatedVoltage(*nt)
 	return br, err
 }
-
-func (a BatteryRatedVoltage) Readable() bool   { return true }
-func (a BatteryRatedVoltage) Writable() bool   { return true }
-func (a BatteryRatedVoltage) Reportable() bool { return false }
-func (a BatteryRatedVoltage) SceneIndex() int  { return -1 }
+func (BatteryRatedVoltage) Name() string     { return "Battery Rated Voltage" }
+func (BatteryRatedVoltage) Readable() bool   { return true }
+func (BatteryRatedVoltage) Writable() bool   { return true }
+func (BatteryRatedVoltage) Reportable() bool { return false }
+func (BatteryRatedVoltage) SceneIndex() int  { return -1 }
 
 func (a BatteryRatedVoltage) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -528,11 +528,11 @@ func (a *BatteryAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryAlarmMask(*nt)
 	return br, err
 }
-
-func (a BatteryAlarmMask) Readable() bool   { return true }
-func (a BatteryAlarmMask) Writable() bool   { return true }
-func (a BatteryAlarmMask) Reportable() bool { return false }
-func (a BatteryAlarmMask) SceneIndex() int  { return -1 }
+func (BatteryAlarmMask) Name() string     { return "Battery Alarm Mask" }
+func (BatteryAlarmMask) Readable() bool   { return true }
+func (BatteryAlarmMask) Writable() bool   { return true }
+func (BatteryAlarmMask) Reportable() bool { return false }
+func (BatteryAlarmMask) SceneIndex() int  { return -1 }
 
 func (a BatteryAlarmMask) String() string {
 	var bstr []string
@@ -596,11 +596,11 @@ func (a *BatteryVoltageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryVoltageMinThreshold(*nt)
 	return br, err
 }
-
-func (a BatteryVoltageMinThreshold) Readable() bool   { return true }
-func (a BatteryVoltageMinThreshold) Writable() bool   { return true }
-func (a BatteryVoltageMinThreshold) Reportable() bool { return false }
-func (a BatteryVoltageMinThreshold) SceneIndex() int  { return -1 }
+func (BatteryVoltageMinThreshold) Name() string     { return "Battery Voltage Min Threshold" }
+func (BatteryVoltageMinThreshold) Readable() bool   { return true }
+func (BatteryVoltageMinThreshold) Writable() bool   { return true }
+func (BatteryVoltageMinThreshold) Reportable() bool { return false }
+func (BatteryVoltageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageMinThreshold) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -623,11 +623,11 @@ func (a *BatteryVoltageThreshold1) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryVoltageThreshold1(*nt)
 	return br, err
 }
-
-func (a BatteryVoltageThreshold1) Readable() bool   { return true }
-func (a BatteryVoltageThreshold1) Writable() bool   { return true }
-func (a BatteryVoltageThreshold1) Reportable() bool { return false }
-func (a BatteryVoltageThreshold1) SceneIndex() int  { return -1 }
+func (BatteryVoltageThreshold1) Name() string     { return "Battery Voltage Threshold 1" }
+func (BatteryVoltageThreshold1) Readable() bool   { return true }
+func (BatteryVoltageThreshold1) Writable() bool   { return true }
+func (BatteryVoltageThreshold1) Reportable() bool { return false }
+func (BatteryVoltageThreshold1) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold1) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -650,11 +650,11 @@ func (a *BatteryVoltageThreshold2) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryVoltageThreshold2(*nt)
 	return br, err
 }
-
-func (a BatteryVoltageThreshold2) Readable() bool   { return true }
-func (a BatteryVoltageThreshold2) Writable() bool   { return true }
-func (a BatteryVoltageThreshold2) Reportable() bool { return false }
-func (a BatteryVoltageThreshold2) SceneIndex() int  { return -1 }
+func (BatteryVoltageThreshold2) Name() string     { return "Battery Voltage Threshold 2" }
+func (BatteryVoltageThreshold2) Readable() bool   { return true }
+func (BatteryVoltageThreshold2) Writable() bool   { return true }
+func (BatteryVoltageThreshold2) Reportable() bool { return false }
+func (BatteryVoltageThreshold2) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold2) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -677,11 +677,11 @@ func (a *BatteryVoltageThreshold3) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryVoltageThreshold3(*nt)
 	return br, err
 }
-
-func (a BatteryVoltageThreshold3) Readable() bool   { return true }
-func (a BatteryVoltageThreshold3) Writable() bool   { return true }
-func (a BatteryVoltageThreshold3) Reportable() bool { return false }
-func (a BatteryVoltageThreshold3) SceneIndex() int  { return -1 }
+func (BatteryVoltageThreshold3) Name() string     { return "Battery Voltage Threshold 3" }
+func (BatteryVoltageThreshold3) Readable() bool   { return true }
+func (BatteryVoltageThreshold3) Writable() bool   { return true }
+func (BatteryVoltageThreshold3) Reportable() bool { return false }
+func (BatteryVoltageThreshold3) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold3) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -704,11 +704,11 @@ func (a *BatteryPercentageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryPercentageMinThreshold(*nt)
 	return br, err
 }
-
-func (a BatteryPercentageMinThreshold) Readable() bool   { return true }
-func (a BatteryPercentageMinThreshold) Writable() bool   { return true }
-func (a BatteryPercentageMinThreshold) Reportable() bool { return false }
-func (a BatteryPercentageMinThreshold) SceneIndex() int  { return -1 }
+func (BatteryPercentageMinThreshold) Name() string     { return "Battery Percentage Min Threshold" }
+func (BatteryPercentageMinThreshold) Readable() bool   { return true }
+func (BatteryPercentageMinThreshold) Writable() bool   { return true }
+func (BatteryPercentageMinThreshold) Reportable() bool { return false }
+func (BatteryPercentageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageMinThreshold) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -731,11 +731,11 @@ func (a *BatteryPercentageThreshold1) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryPercentageThreshold1(*nt)
 	return br, err
 }
-
-func (a BatteryPercentageThreshold1) Readable() bool   { return true }
-func (a BatteryPercentageThreshold1) Writable() bool   { return true }
-func (a BatteryPercentageThreshold1) Reportable() bool { return false }
-func (a BatteryPercentageThreshold1) SceneIndex() int  { return -1 }
+func (BatteryPercentageThreshold1) Name() string     { return "Battery Percentage Threshold 1" }
+func (BatteryPercentageThreshold1) Readable() bool   { return true }
+func (BatteryPercentageThreshold1) Writable() bool   { return true }
+func (BatteryPercentageThreshold1) Reportable() bool { return false }
+func (BatteryPercentageThreshold1) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold1) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -758,11 +758,11 @@ func (a *BatteryPercentageThreshold2) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryPercentageThreshold2(*nt)
 	return br, err
 }
-
-func (a BatteryPercentageThreshold2) Readable() bool   { return true }
-func (a BatteryPercentageThreshold2) Writable() bool   { return true }
-func (a BatteryPercentageThreshold2) Reportable() bool { return false }
-func (a BatteryPercentageThreshold2) SceneIndex() int  { return -1 }
+func (BatteryPercentageThreshold2) Name() string     { return "Battery Percentage Threshold 2" }
+func (BatteryPercentageThreshold2) Readable() bool   { return true }
+func (BatteryPercentageThreshold2) Writable() bool   { return true }
+func (BatteryPercentageThreshold2) Reportable() bool { return false }
+func (BatteryPercentageThreshold2) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold2) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -785,11 +785,11 @@ func (a *BatteryPercentageThreshold3) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryPercentageThreshold3(*nt)
 	return br, err
 }
-
-func (a BatteryPercentageThreshold3) Readable() bool   { return true }
-func (a BatteryPercentageThreshold3) Writable() bool   { return true }
-func (a BatteryPercentageThreshold3) Reportable() bool { return false }
-func (a BatteryPercentageThreshold3) SceneIndex() int  { return -1 }
+func (BatteryPercentageThreshold3) Name() string     { return "Battery Percentage Threshold 3" }
+func (BatteryPercentageThreshold3) Readable() bool   { return true }
+func (BatteryPercentageThreshold3) Writable() bool   { return true }
+func (BatteryPercentageThreshold3) Reportable() bool { return false }
+func (BatteryPercentageThreshold3) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold3) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -812,11 +812,11 @@ func (a *BatteryAlarmState) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BatteryAlarmState(*nt)
 	return br, err
 }
-
-func (a BatteryAlarmState) Readable() bool   { return true }
-func (a BatteryAlarmState) Writable() bool   { return true }
-func (a BatteryAlarmState) Reportable() bool { return false }
-func (a BatteryAlarmState) SceneIndex() int  { return -1 }
+func (BatteryAlarmState) Name() string     { return "Battery Alarm State" }
+func (BatteryAlarmState) Readable() bool   { return true }
+func (BatteryAlarmState) Writable() bool   { return true }
+func (BatteryAlarmState) Reportable() bool { return false }
+func (BatteryAlarmState) SceneIndex() int  { return -1 }
 
 func (a BatteryAlarmState) String() string {
 	var bstr []string

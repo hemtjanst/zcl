@@ -66,11 +66,11 @@ func (a *NumberOfResets) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NumberOfResets(*nt)
 	return br, err
 }
-
-func (a NumberOfResets) Readable() bool   { return true }
-func (a NumberOfResets) Writable() bool   { return false }
-func (a NumberOfResets) Reportable() bool { return false }
-func (a NumberOfResets) SceneIndex() int  { return -1 }
+func (NumberOfResets) Name() string     { return "Number of Resets" }
+func (NumberOfResets) Readable() bool   { return true }
+func (NumberOfResets) Writable() bool   { return false }
+func (NumberOfResets) Reportable() bool { return false }
+func (NumberOfResets) SceneIndex() int  { return -1 }
 
 func (a NumberOfResets) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -93,11 +93,11 @@ func (a *PersistensMemoryWrites) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PersistensMemoryWrites(*nt)
 	return br, err
 }
-
-func (a PersistensMemoryWrites) Readable() bool   { return true }
-func (a PersistensMemoryWrites) Writable() bool   { return false }
-func (a PersistensMemoryWrites) Reportable() bool { return false }
-func (a PersistensMemoryWrites) SceneIndex() int  { return -1 }
+func (PersistensMemoryWrites) Name() string     { return "Persistens Memory Writes" }
+func (PersistensMemoryWrites) Readable() bool   { return true }
+func (PersistensMemoryWrites) Writable() bool   { return false }
+func (PersistensMemoryWrites) Reportable() bool { return false }
+func (PersistensMemoryWrites) SceneIndex() int  { return -1 }
 
 func (a PersistensMemoryWrites) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -120,11 +120,11 @@ func (a *MacRxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MacRxBcast(*nt)
 	return br, err
 }
-
-func (a MacRxBcast) Readable() bool   { return true }
-func (a MacRxBcast) Writable() bool   { return false }
-func (a MacRxBcast) Reportable() bool { return false }
-func (a MacRxBcast) SceneIndex() int  { return -1 }
+func (MacRxBcast) Name() string     { return "Mac Rx Bcast" }
+func (MacRxBcast) Readable() bool   { return true }
+func (MacRxBcast) Writable() bool   { return false }
+func (MacRxBcast) Reportable() bool { return false }
+func (MacRxBcast) SceneIndex() int  { return -1 }
 
 func (a MacRxBcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -147,11 +147,11 @@ func (a *MacTxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MacTxBcast(*nt)
 	return br, err
 }
-
-func (a MacTxBcast) Readable() bool   { return true }
-func (a MacTxBcast) Writable() bool   { return false }
-func (a MacTxBcast) Reportable() bool { return false }
-func (a MacTxBcast) SceneIndex() int  { return -1 }
+func (MacTxBcast) Name() string     { return "Mac Tx Bcast" }
+func (MacTxBcast) Readable() bool   { return true }
+func (MacTxBcast) Writable() bool   { return false }
+func (MacTxBcast) Reportable() bool { return false }
+func (MacTxBcast) SceneIndex() int  { return -1 }
 
 func (a MacTxBcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -174,11 +174,11 @@ func (a *MacRxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MacRxUcast(*nt)
 	return br, err
 }
-
-func (a MacRxUcast) Readable() bool   { return true }
-func (a MacRxUcast) Writable() bool   { return false }
-func (a MacRxUcast) Reportable() bool { return false }
-func (a MacRxUcast) SceneIndex() int  { return -1 }
+func (MacRxUcast) Name() string     { return "Mac Rx Ucast" }
+func (MacRxUcast) Readable() bool   { return true }
+func (MacRxUcast) Writable() bool   { return false }
+func (MacRxUcast) Reportable() bool { return false }
+func (MacRxUcast) SceneIndex() int  { return -1 }
 
 func (a MacRxUcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -201,11 +201,11 @@ func (a *MacTxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MacTxUcast(*nt)
 	return br, err
 }
-
-func (a MacTxUcast) Readable() bool   { return true }
-func (a MacTxUcast) Writable() bool   { return false }
-func (a MacTxUcast) Reportable() bool { return false }
-func (a MacTxUcast) SceneIndex() int  { return -1 }
+func (MacTxUcast) Name() string     { return "Mac Tx Ucast" }
+func (MacTxUcast) Readable() bool   { return true }
+func (MacTxUcast) Writable() bool   { return false }
+func (MacTxUcast) Reportable() bool { return false }
+func (MacTxUcast) SceneIndex() int  { return -1 }
 
 func (a MacTxUcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -228,11 +228,11 @@ func (a *MacTxUcastRetry) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MacTxUcastRetry(*nt)
 	return br, err
 }
-
-func (a MacTxUcastRetry) Readable() bool   { return true }
-func (a MacTxUcastRetry) Writable() bool   { return false }
-func (a MacTxUcastRetry) Reportable() bool { return false }
-func (a MacTxUcastRetry) SceneIndex() int  { return -1 }
+func (MacTxUcastRetry) Name() string     { return "Mac Tx Ucast Retry" }
+func (MacTxUcastRetry) Readable() bool   { return true }
+func (MacTxUcastRetry) Writable() bool   { return false }
+func (MacTxUcastRetry) Reportable() bool { return false }
+func (MacTxUcastRetry) SceneIndex() int  { return -1 }
 
 func (a MacTxUcastRetry) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -255,11 +255,11 @@ func (a *MacTxUcastFail) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = MacTxUcastFail(*nt)
 	return br, err
 }
-
-func (a MacTxUcastFail) Readable() bool   { return true }
-func (a MacTxUcastFail) Writable() bool   { return false }
-func (a MacTxUcastFail) Reportable() bool { return false }
-func (a MacTxUcastFail) SceneIndex() int  { return -1 }
+func (MacTxUcastFail) Name() string     { return "Mac Tx Ucast Fail" }
+func (MacTxUcastFail) Readable() bool   { return true }
+func (MacTxUcastFail) Writable() bool   { return false }
+func (MacTxUcastFail) Reportable() bool { return false }
+func (MacTxUcastFail) SceneIndex() int  { return -1 }
 
 func (a MacTxUcastFail) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -282,11 +282,11 @@ func (a *ApsRxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsRxBcast(*nt)
 	return br, err
 }
-
-func (a ApsRxBcast) Readable() bool   { return true }
-func (a ApsRxBcast) Writable() bool   { return false }
-func (a ApsRxBcast) Reportable() bool { return false }
-func (a ApsRxBcast) SceneIndex() int  { return -1 }
+func (ApsRxBcast) Name() string     { return "APS Rx Bcast" }
+func (ApsRxBcast) Readable() bool   { return true }
+func (ApsRxBcast) Writable() bool   { return false }
+func (ApsRxBcast) Reportable() bool { return false }
+func (ApsRxBcast) SceneIndex() int  { return -1 }
 
 func (a ApsRxBcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -309,11 +309,11 @@ func (a *ApsTxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsTxBcast(*nt)
 	return br, err
 }
-
-func (a ApsTxBcast) Readable() bool   { return true }
-func (a ApsTxBcast) Writable() bool   { return false }
-func (a ApsTxBcast) Reportable() bool { return false }
-func (a ApsTxBcast) SceneIndex() int  { return -1 }
+func (ApsTxBcast) Name() string     { return "APS Tx Bcast" }
+func (ApsTxBcast) Readable() bool   { return true }
+func (ApsTxBcast) Writable() bool   { return false }
+func (ApsTxBcast) Reportable() bool { return false }
+func (ApsTxBcast) SceneIndex() int  { return -1 }
 
 func (a ApsTxBcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -336,11 +336,11 @@ func (a *ApsRxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsRxUcast(*nt)
 	return br, err
 }
-
-func (a ApsRxUcast) Readable() bool   { return true }
-func (a ApsRxUcast) Writable() bool   { return false }
-func (a ApsRxUcast) Reportable() bool { return false }
-func (a ApsRxUcast) SceneIndex() int  { return -1 }
+func (ApsRxUcast) Name() string     { return "APS Rx Ucast" }
+func (ApsRxUcast) Readable() bool   { return true }
+func (ApsRxUcast) Writable() bool   { return false }
+func (ApsRxUcast) Reportable() bool { return false }
+func (ApsRxUcast) SceneIndex() int  { return -1 }
 
 func (a ApsRxUcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -363,11 +363,11 @@ func (a *ApsTxUcastSuccess) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsTxUcastSuccess(*nt)
 	return br, err
 }
-
-func (a ApsTxUcastSuccess) Readable() bool   { return true }
-func (a ApsTxUcastSuccess) Writable() bool   { return false }
-func (a ApsTxUcastSuccess) Reportable() bool { return false }
-func (a ApsTxUcastSuccess) SceneIndex() int  { return -1 }
+func (ApsTxUcastSuccess) Name() string     { return "APS Tx Ucast Success" }
+func (ApsTxUcastSuccess) Readable() bool   { return true }
+func (ApsTxUcastSuccess) Writable() bool   { return false }
+func (ApsTxUcastSuccess) Reportable() bool { return false }
+func (ApsTxUcastSuccess) SceneIndex() int  { return -1 }
 
 func (a ApsTxUcastSuccess) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -390,11 +390,11 @@ func (a *ApsTxUcastRetry) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsTxUcastRetry(*nt)
 	return br, err
 }
-
-func (a ApsTxUcastRetry) Readable() bool   { return true }
-func (a ApsTxUcastRetry) Writable() bool   { return false }
-func (a ApsTxUcastRetry) Reportable() bool { return false }
-func (a ApsTxUcastRetry) SceneIndex() int  { return -1 }
+func (ApsTxUcastRetry) Name() string     { return "APS Tx Ucast Retry" }
+func (ApsTxUcastRetry) Readable() bool   { return true }
+func (ApsTxUcastRetry) Writable() bool   { return false }
+func (ApsTxUcastRetry) Reportable() bool { return false }
+func (ApsTxUcastRetry) SceneIndex() int  { return -1 }
 
 func (a ApsTxUcastRetry) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -417,11 +417,11 @@ func (a *ApsTxUcastFail) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsTxUcastFail(*nt)
 	return br, err
 }
-
-func (a ApsTxUcastFail) Readable() bool   { return true }
-func (a ApsTxUcastFail) Writable() bool   { return false }
-func (a ApsTxUcastFail) Reportable() bool { return false }
-func (a ApsTxUcastFail) SceneIndex() int  { return -1 }
+func (ApsTxUcastFail) Name() string     { return "APS Tx Ucast Fail" }
+func (ApsTxUcastFail) Readable() bool   { return true }
+func (ApsTxUcastFail) Writable() bool   { return false }
+func (ApsTxUcastFail) Reportable() bool { return false }
+func (ApsTxUcastFail) SceneIndex() int  { return -1 }
 
 func (a ApsTxUcastFail) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -444,11 +444,11 @@ func (a *RouteDiscInitiated) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RouteDiscInitiated(*nt)
 	return br, err
 }
-
-func (a RouteDiscInitiated) Readable() bool   { return true }
-func (a RouteDiscInitiated) Writable() bool   { return false }
-func (a RouteDiscInitiated) Reportable() bool { return false }
-func (a RouteDiscInitiated) SceneIndex() int  { return -1 }
+func (RouteDiscInitiated) Name() string     { return "Route Disc Initiated" }
+func (RouteDiscInitiated) Readable() bool   { return true }
+func (RouteDiscInitiated) Writable() bool   { return false }
+func (RouteDiscInitiated) Reportable() bool { return false }
+func (RouteDiscInitiated) SceneIndex() int  { return -1 }
 
 func (a RouteDiscInitiated) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -471,11 +471,11 @@ func (a *NeighborAdded) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NeighborAdded(*nt)
 	return br, err
 }
-
-func (a NeighborAdded) Readable() bool   { return true }
-func (a NeighborAdded) Writable() bool   { return false }
-func (a NeighborAdded) Reportable() bool { return false }
-func (a NeighborAdded) SceneIndex() int  { return -1 }
+func (NeighborAdded) Name() string     { return "Neighbor Added" }
+func (NeighborAdded) Readable() bool   { return true }
+func (NeighborAdded) Writable() bool   { return false }
+func (NeighborAdded) Reportable() bool { return false }
+func (NeighborAdded) SceneIndex() int  { return -1 }
 
 func (a NeighborAdded) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -498,11 +498,11 @@ func (a *NeighborRemoved) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NeighborRemoved(*nt)
 	return br, err
 }
-
-func (a NeighborRemoved) Readable() bool   { return true }
-func (a NeighborRemoved) Writable() bool   { return false }
-func (a NeighborRemoved) Reportable() bool { return false }
-func (a NeighborRemoved) SceneIndex() int  { return -1 }
+func (NeighborRemoved) Name() string     { return "Neighbor Removed" }
+func (NeighborRemoved) Readable() bool   { return true }
+func (NeighborRemoved) Writable() bool   { return false }
+func (NeighborRemoved) Reportable() bool { return false }
+func (NeighborRemoved) SceneIndex() int  { return -1 }
 
 func (a NeighborRemoved) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -525,11 +525,11 @@ func (a *NeighborStale) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NeighborStale(*nt)
 	return br, err
 }
-
-func (a NeighborStale) Readable() bool   { return true }
-func (a NeighborStale) Writable() bool   { return false }
-func (a NeighborStale) Reportable() bool { return false }
-func (a NeighborStale) SceneIndex() int  { return -1 }
+func (NeighborStale) Name() string     { return "Neighbor Stale" }
+func (NeighborStale) Readable() bool   { return true }
+func (NeighborStale) Writable() bool   { return false }
+func (NeighborStale) Reportable() bool { return false }
+func (NeighborStale) SceneIndex() int  { return -1 }
 
 func (a NeighborStale) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -552,11 +552,11 @@ func (a *JoinIndication) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = JoinIndication(*nt)
 	return br, err
 }
-
-func (a JoinIndication) Readable() bool   { return true }
-func (a JoinIndication) Writable() bool   { return false }
-func (a JoinIndication) Reportable() bool { return false }
-func (a JoinIndication) SceneIndex() int  { return -1 }
+func (JoinIndication) Name() string     { return "Join Indication" }
+func (JoinIndication) Readable() bool   { return true }
+func (JoinIndication) Writable() bool   { return false }
+func (JoinIndication) Reportable() bool { return false }
+func (JoinIndication) SceneIndex() int  { return -1 }
 
 func (a JoinIndication) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -579,11 +579,11 @@ func (a *ChildMoved) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ChildMoved(*nt)
 	return br, err
 }
-
-func (a ChildMoved) Readable() bool   { return true }
-func (a ChildMoved) Writable() bool   { return false }
-func (a ChildMoved) Reportable() bool { return false }
-func (a ChildMoved) SceneIndex() int  { return -1 }
+func (ChildMoved) Name() string     { return "Child Moved" }
+func (ChildMoved) Readable() bool   { return true }
+func (ChildMoved) Writable() bool   { return false }
+func (ChildMoved) Reportable() bool { return false }
+func (ChildMoved) SceneIndex() int  { return -1 }
 
 func (a ChildMoved) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -606,11 +606,11 @@ func (a *NwkFcFailure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NwkFcFailure(*nt)
 	return br, err
 }
-
-func (a NwkFcFailure) Readable() bool   { return true }
-func (a NwkFcFailure) Writable() bool   { return false }
-func (a NwkFcFailure) Reportable() bool { return false }
-func (a NwkFcFailure) SceneIndex() int  { return -1 }
+func (NwkFcFailure) Name() string     { return "NWK FC Failure" }
+func (NwkFcFailure) Readable() bool   { return true }
+func (NwkFcFailure) Writable() bool   { return false }
+func (NwkFcFailure) Reportable() bool { return false }
+func (NwkFcFailure) SceneIndex() int  { return -1 }
 
 func (a NwkFcFailure) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -633,11 +633,11 @@ func (a *ApsFcFailure) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsFcFailure(*nt)
 	return br, err
 }
-
-func (a ApsFcFailure) Readable() bool   { return true }
-func (a ApsFcFailure) Writable() bool   { return false }
-func (a ApsFcFailure) Reportable() bool { return false }
-func (a ApsFcFailure) SceneIndex() int  { return -1 }
+func (ApsFcFailure) Name() string     { return "APS FC Failure" }
+func (ApsFcFailure) Readable() bool   { return true }
+func (ApsFcFailure) Writable() bool   { return false }
+func (ApsFcFailure) Reportable() bool { return false }
+func (ApsFcFailure) SceneIndex() int  { return -1 }
 
 func (a ApsFcFailure) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -660,11 +660,11 @@ func (a *ApsUnauthorizedKey) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsUnauthorizedKey(*nt)
 	return br, err
 }
-
-func (a ApsUnauthorizedKey) Readable() bool   { return true }
-func (a ApsUnauthorizedKey) Writable() bool   { return false }
-func (a ApsUnauthorizedKey) Reportable() bool { return false }
-func (a ApsUnauthorizedKey) SceneIndex() int  { return -1 }
+func (ApsUnauthorizedKey) Name() string     { return "APS Unauthorized Key" }
+func (ApsUnauthorizedKey) Readable() bool   { return true }
+func (ApsUnauthorizedKey) Writable() bool   { return false }
+func (ApsUnauthorizedKey) Reportable() bool { return false }
+func (ApsUnauthorizedKey) SceneIndex() int  { return -1 }
 
 func (a ApsUnauthorizedKey) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -687,11 +687,11 @@ func (a *NwkDecryptFailures) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NwkDecryptFailures(*nt)
 	return br, err
 }
-
-func (a NwkDecryptFailures) Readable() bool   { return true }
-func (a NwkDecryptFailures) Writable() bool   { return false }
-func (a NwkDecryptFailures) Reportable() bool { return false }
-func (a NwkDecryptFailures) SceneIndex() int  { return -1 }
+func (NwkDecryptFailures) Name() string     { return "NWK Decrypt Failures" }
+func (NwkDecryptFailures) Readable() bool   { return true }
+func (NwkDecryptFailures) Writable() bool   { return false }
+func (NwkDecryptFailures) Reportable() bool { return false }
+func (NwkDecryptFailures) SceneIndex() int  { return -1 }
 
 func (a NwkDecryptFailures) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -714,11 +714,11 @@ func (a *ApsDecryptFailures) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ApsDecryptFailures(*nt)
 	return br, err
 }
-
-func (a ApsDecryptFailures) Readable() bool   { return true }
-func (a ApsDecryptFailures) Writable() bool   { return false }
-func (a ApsDecryptFailures) Reportable() bool { return false }
-func (a ApsDecryptFailures) SceneIndex() int  { return -1 }
+func (ApsDecryptFailures) Name() string     { return "APS Decrypt Failures" }
+func (ApsDecryptFailures) Readable() bool   { return true }
+func (ApsDecryptFailures) Writable() bool   { return false }
+func (ApsDecryptFailures) Reportable() bool { return false }
+func (ApsDecryptFailures) SceneIndex() int  { return -1 }
 
 func (a ApsDecryptFailures) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -741,11 +741,11 @@ func (a *PacketBufferAllocFailures) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PacketBufferAllocFailures(*nt)
 	return br, err
 }
-
-func (a PacketBufferAllocFailures) Readable() bool   { return true }
-func (a PacketBufferAllocFailures) Writable() bool   { return false }
-func (a PacketBufferAllocFailures) Reportable() bool { return false }
-func (a PacketBufferAllocFailures) SceneIndex() int  { return -1 }
+func (PacketBufferAllocFailures) Name() string     { return "Packet Buffer Alloc Failures" }
+func (PacketBufferAllocFailures) Readable() bool   { return true }
+func (PacketBufferAllocFailures) Writable() bool   { return false }
+func (PacketBufferAllocFailures) Reportable() bool { return false }
+func (PacketBufferAllocFailures) SceneIndex() int  { return -1 }
 
 func (a PacketBufferAllocFailures) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -768,11 +768,11 @@ func (a *RelayedUcast) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RelayedUcast(*nt)
 	return br, err
 }
-
-func (a RelayedUcast) Readable() bool   { return true }
-func (a RelayedUcast) Writable() bool   { return false }
-func (a RelayedUcast) Reportable() bool { return false }
-func (a RelayedUcast) SceneIndex() int  { return -1 }
+func (RelayedUcast) Name() string     { return "Relayed Ucast" }
+func (RelayedUcast) Readable() bool   { return true }
+func (RelayedUcast) Writable() bool   { return false }
+func (RelayedUcast) Reportable() bool { return false }
+func (RelayedUcast) SceneIndex() int  { return -1 }
 
 func (a RelayedUcast) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -795,11 +795,11 @@ func (a *PhyToMacQueueLimitReached) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PhyToMacQueueLimitReached(*nt)
 	return br, err
 }
-
-func (a PhyToMacQueueLimitReached) Readable() bool   { return true }
-func (a PhyToMacQueueLimitReached) Writable() bool   { return false }
-func (a PhyToMacQueueLimitReached) Reportable() bool { return false }
-func (a PhyToMacQueueLimitReached) SceneIndex() int  { return -1 }
+func (PhyToMacQueueLimitReached) Name() string     { return "Phy to MAC queue limit reached" }
+func (PhyToMacQueueLimitReached) Readable() bool   { return true }
+func (PhyToMacQueueLimitReached) Writable() bool   { return false }
+func (PhyToMacQueueLimitReached) Reportable() bool { return false }
+func (PhyToMacQueueLimitReached) SceneIndex() int  { return -1 }
 
 func (a PhyToMacQueueLimitReached) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -822,11 +822,11 @@ func (a *PacketValidateDropcount) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PacketValidateDropcount(*nt)
 	return br, err
 }
-
-func (a PacketValidateDropcount) Readable() bool   { return true }
-func (a PacketValidateDropcount) Writable() bool   { return false }
-func (a PacketValidateDropcount) Reportable() bool { return false }
-func (a PacketValidateDropcount) SceneIndex() int  { return -1 }
+func (PacketValidateDropcount) Name() string     { return "Packet Validate Dropcount" }
+func (PacketValidateDropcount) Readable() bool   { return true }
+func (PacketValidateDropcount) Writable() bool   { return false }
+func (PacketValidateDropcount) Reportable() bool { return false }
+func (PacketValidateDropcount) SceneIndex() int  { return -1 }
 
 func (a PacketValidateDropcount) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -849,11 +849,11 @@ func (a *AvgMacRetryPerApsMsgSent) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = AvgMacRetryPerApsMsgSent(*nt)
 	return br, err
 }
-
-func (a AvgMacRetryPerApsMsgSent) Readable() bool   { return true }
-func (a AvgMacRetryPerApsMsgSent) Writable() bool   { return false }
-func (a AvgMacRetryPerApsMsgSent) Reportable() bool { return false }
-func (a AvgMacRetryPerApsMsgSent) SceneIndex() int  { return -1 }
+func (AvgMacRetryPerApsMsgSent) Name() string     { return "Avg MAC Retry per APS Msg Sent" }
+func (AvgMacRetryPerApsMsgSent) Readable() bool   { return true }
+func (AvgMacRetryPerApsMsgSent) Writable() bool   { return false }
+func (AvgMacRetryPerApsMsgSent) Reportable() bool { return false }
+func (AvgMacRetryPerApsMsgSent) SceneIndex() int  { return -1 }
 
 func (a AvgMacRetryPerApsMsgSent) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -876,11 +876,11 @@ func (a *LastMessageLqi) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LastMessageLqi(*nt)
 	return br, err
 }
-
-func (a LastMessageLqi) Readable() bool   { return true }
-func (a LastMessageLqi) Writable() bool   { return false }
-func (a LastMessageLqi) Reportable() bool { return false }
-func (a LastMessageLqi) SceneIndex() int  { return -1 }
+func (LastMessageLqi) Name() string     { return "Last Message LQI" }
+func (LastMessageLqi) Readable() bool   { return true }
+func (LastMessageLqi) Writable() bool   { return false }
+func (LastMessageLqi) Reportable() bool { return false }
+func (LastMessageLqi) SceneIndex() int  { return -1 }
 
 func (a LastMessageLqi) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -903,11 +903,11 @@ func (a *LastMessageRssi) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = LastMessageRssi(*nt)
 	return br, err
 }
-
-func (a LastMessageRssi) Readable() bool   { return true }
-func (a LastMessageRssi) Writable() bool   { return false }
-func (a LastMessageRssi) Reportable() bool { return false }
-func (a LastMessageRssi) SceneIndex() int  { return -1 }
+func (LastMessageRssi) Name() string     { return "Last Message RSSI" }
+func (LastMessageRssi) Readable() bool   { return true }
+func (LastMessageRssi) Writable() bool   { return false }
+func (LastMessageRssi) Reportable() bool { return false }
+func (LastMessageRssi) SceneIndex() int  { return -1 }
 
 func (a LastMessageRssi) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))

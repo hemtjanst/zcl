@@ -166,10 +166,10 @@ func (v *MoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveToHue) HueString() string {
+func (v MoveToHue) HueString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Hue))
 }
-func (v *MoveToHue) DirectionString() string {
+func (v MoveToHue) DirectionString() string {
 	switch v.Direction {
 	case 0x00:
 		return "Shortest distance"
@@ -182,17 +182,19 @@ func (v *MoveToHue) DirectionString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
 }
-func (v *MoveToHue) TransitionTimeString() string {
+func (v MoveToHue) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *MoveToHue) String() string {
+func (v MoveToHue) String() string {
 	var str []string
 	str = append(str, "Hue["+v.HueString()+"]")
 	str = append(str, "Direction["+v.DirectionString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "MoveToHue{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveToHue) Name() string { return "Move to hue" }
 
 type MoveHue struct {
 	MoveMode zcl.Zenum8
@@ -252,7 +254,7 @@ func (v *MoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveHue) MoveModeString() string {
+func (v MoveHue) MoveModeString() string {
 	switch v.MoveMode {
 	case 0x00:
 		return "Stop"
@@ -263,16 +265,18 @@ func (v *MoveHue) MoveModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
-func (v *MoveHue) RateString() string {
+func (v MoveHue) RateString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Rate))
 }
 
-func (v *MoveHue) String() string {
+func (v MoveHue) String() string {
 	var str []string
 	str = append(str, "MoveMode["+v.MoveModeString()+"]")
 	str = append(str, "Rate["+v.RateString()+"]")
 	return "MoveHue{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveHue) Name() string { return "Move hue" }
 
 type StepHue struct {
 	StepMode zcl.Zenum8
@@ -344,7 +348,7 @@ func (v *StepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StepHue) StepModeString() string {
+func (v StepHue) StepModeString() string {
 	switch v.StepMode {
 	case 0x01:
 		return "Up"
@@ -353,20 +357,22 @@ func (v *StepHue) StepModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
-func (v *StepHue) StepSizeString() string {
+func (v StepHue) StepSizeString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.StepSize))
 }
-func (v *StepHue) TransitionTimeString() string {
+func (v StepHue) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.TransitionTime))
 }
 
-func (v *StepHue) String() string {
+func (v StepHue) String() string {
 	var str []string
 	str = append(str, "StepMode["+v.StepModeString()+"]")
 	str = append(str, "StepSize["+v.StepSizeString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "StepHue{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StepHue) Name() string { return "Step hue" }
 
 type MoveToSaturation struct {
 	Saturation zcl.Zu8
@@ -427,19 +433,21 @@ func (v *MoveToSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveToSaturation) SaturationString() string {
+func (v MoveToSaturation) SaturationString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
 }
-func (v *MoveToSaturation) TransitionTimeString() string {
+func (v MoveToSaturation) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *MoveToSaturation) String() string {
+func (v MoveToSaturation) String() string {
 	var str []string
 	str = append(str, "Saturation["+v.SaturationString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "MoveToSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveToSaturation) Name() string { return "Move to saturation" }
 
 type MoveSaturation struct {
 	MoveMode zcl.Zenum8
@@ -500,7 +508,7 @@ func (v *MoveSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveSaturation) MoveModeString() string {
+func (v MoveSaturation) MoveModeString() string {
 	switch v.MoveMode {
 	case 0x00:
 		return "Stop"
@@ -511,16 +519,18 @@ func (v *MoveSaturation) MoveModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
-func (v *MoveSaturation) RateString() string {
+func (v MoveSaturation) RateString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Rate))
 }
 
-func (v *MoveSaturation) String() string {
+func (v MoveSaturation) String() string {
 	var str []string
 	str = append(str, "MoveMode["+v.MoveModeString()+"]")
 	str = append(str, "Rate["+v.RateString()+"]")
 	return "MoveSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveSaturation) Name() string { return "Move saturation" }
 
 type StepSaturation struct {
 	StepMode zcl.Zenum8
@@ -592,7 +602,7 @@ func (v *StepSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StepSaturation) StepModeString() string {
+func (v StepSaturation) StepModeString() string {
 	switch v.StepMode {
 	case 0x01:
 		return "Up"
@@ -601,20 +611,22 @@ func (v *StepSaturation) StepModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
-func (v *StepSaturation) StepSizeString() string {
+func (v StepSaturation) StepSizeString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.StepSize))
 }
-func (v *StepSaturation) TransitionTimeString() string {
+func (v StepSaturation) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.TransitionTime))
 }
 
-func (v *StepSaturation) String() string {
+func (v StepSaturation) String() string {
 	var str []string
 	str = append(str, "StepMode["+v.StepModeString()+"]")
 	str = append(str, "StepSize["+v.StepSizeString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "StepSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StepSaturation) Name() string { return "Step saturation" }
 
 type MoveToHueAndSaturation struct {
 	Hue        zcl.Zu8
@@ -686,23 +698,25 @@ func (v *MoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveToHueAndSaturation) HueString() string {
+func (v MoveToHueAndSaturation) HueString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Hue))
 }
-func (v *MoveToHueAndSaturation) SaturationString() string {
+func (v MoveToHueAndSaturation) SaturationString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
 }
-func (v *MoveToHueAndSaturation) TransitionTimeString() string {
+func (v MoveToHueAndSaturation) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *MoveToHueAndSaturation) String() string {
+func (v MoveToHueAndSaturation) String() string {
 	var str []string
 	str = append(str, "Hue["+v.HueString()+"]")
 	str = append(str, "Saturation["+v.SaturationString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "MoveToHueAndSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveToHueAndSaturation) Name() string { return "Move to hue and saturation" }
 
 type MoveToColor struct {
 	ColorX zcl.Zu16
@@ -774,23 +788,25 @@ func (v *MoveToColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveToColor) ColorXString() string {
+func (v MoveToColor) ColorXString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.ColorX))
 }
-func (v *MoveToColor) ColorYString() string {
+func (v MoveToColor) ColorYString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.ColorY))
 }
-func (v *MoveToColor) TransitionTimeString() string {
+func (v MoveToColor) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *MoveToColor) String() string {
+func (v MoveToColor) String() string {
 	var str []string
 	str = append(str, "ColorX["+v.ColorXString()+"]")
 	str = append(str, "ColorY["+v.ColorYString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "MoveToColor{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveToColor) Name() string { return "Move to color" }
 
 type MoveColor struct {
 	// The steps per second.
@@ -852,19 +868,21 @@ func (v *MoveColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveColor) RateXString() string {
+func (v MoveColor) RateXString() string {
 	return zcl.Sprintf("%v", zcl.Zs16(v.RateX))
 }
-func (v *MoveColor) RateYString() string {
+func (v MoveColor) RateYString() string {
 	return zcl.Sprintf("%v", zcl.Zs16(v.RateY))
 }
 
-func (v *MoveColor) String() string {
+func (v MoveColor) String() string {
 	var str []string
 	str = append(str, "RateX["+v.RateXString()+"]")
 	str = append(str, "RateY["+v.RateYString()+"]")
 	return "MoveColor{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveColor) Name() string { return "Move color" }
 
 type StepColor struct {
 	StepX zcl.Zs16
@@ -936,23 +954,25 @@ func (v *StepColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StepColor) StepXString() string {
+func (v StepColor) StepXString() string {
 	return zcl.Sprintf("%v", zcl.Zs16(v.StepX))
 }
-func (v *StepColor) StepYString() string {
+func (v StepColor) StepYString() string {
 	return zcl.Sprintf("%v", zcl.Zs16(v.StepY))
 }
-func (v *StepColor) TransitionTimeString() string {
+func (v StepColor) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *StepColor) String() string {
+func (v StepColor) String() string {
 	var str []string
 	str = append(str, "StepX["+v.StepXString()+"]")
 	str = append(str, "StepY["+v.StepYString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "StepColor{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StepColor) Name() string { return "Step color" }
 
 type MoveToColorTemperature struct {
 	ColorTemperature zcl.Zu16
@@ -1013,19 +1033,21 @@ func (v *MoveToColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveToColorTemperature) ColorTemperatureString() string {
+func (v MoveToColorTemperature) ColorTemperatureString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperature))
 }
-func (v *MoveToColorTemperature) TransitionTimeString() string {
+func (v MoveToColorTemperature) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *MoveToColorTemperature) String() string {
+func (v MoveToColorTemperature) String() string {
 	var str []string
 	str = append(str, "ColorTemperature["+v.ColorTemperatureString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "MoveToColorTemperature{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveToColorTemperature) Name() string { return "Move to color temperature" }
 
 type EnhancedMoveToHue struct {
 	EnhancedHue zcl.Zu16
@@ -1097,10 +1119,10 @@ func (v *EnhancedMoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *EnhancedMoveToHue) EnhancedHueString() string {
+func (v EnhancedMoveToHue) EnhancedHueString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.EnhancedHue))
 }
-func (v *EnhancedMoveToHue) DirectionString() string {
+func (v EnhancedMoveToHue) DirectionString() string {
 	switch v.Direction {
 	case 0x00:
 		return "Shortest distance"
@@ -1113,17 +1135,19 @@ func (v *EnhancedMoveToHue) DirectionString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
 }
-func (v *EnhancedMoveToHue) TransitionTimeString() string {
+func (v EnhancedMoveToHue) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *EnhancedMoveToHue) String() string {
+func (v EnhancedMoveToHue) String() string {
 	var str []string
 	str = append(str, "EnhancedHue["+v.EnhancedHueString()+"]")
 	str = append(str, "Direction["+v.DirectionString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "EnhancedMoveToHue{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (EnhancedMoveToHue) Name() string { return "Enhanced move to hue" }
 
 type EnhancedMoveHue struct {
 	MoveMode zcl.Zenum8
@@ -1184,7 +1208,7 @@ func (v *EnhancedMoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *EnhancedMoveHue) MoveModeString() string {
+func (v EnhancedMoveHue) MoveModeString() string {
 	switch v.MoveMode {
 	case 0x00:
 		return "Stop"
@@ -1195,16 +1219,18 @@ func (v *EnhancedMoveHue) MoveModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
-func (v *EnhancedMoveHue) RateString() string {
+func (v EnhancedMoveHue) RateString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.Rate))
 }
 
-func (v *EnhancedMoveHue) String() string {
+func (v EnhancedMoveHue) String() string {
 	var str []string
 	str = append(str, "MoveMode["+v.MoveModeString()+"]")
 	str = append(str, "Rate["+v.RateString()+"]")
 	return "EnhancedMoveHue{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (EnhancedMoveHue) Name() string { return "Enhanced move hue" }
 
 type EnhancedStepHue struct {
 	StepMode zcl.Zenum8
@@ -1276,7 +1302,7 @@ func (v *EnhancedStepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *EnhancedStepHue) StepModeString() string {
+func (v EnhancedStepHue) StepModeString() string {
 	switch v.StepMode {
 	case 0x01:
 		return "Up"
@@ -1285,20 +1311,22 @@ func (v *EnhancedStepHue) StepModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
-func (v *EnhancedStepHue) StepSizeString() string {
+func (v EnhancedStepHue) StepSizeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.StepSize))
 }
-func (v *EnhancedStepHue) TransitionTimeString() string {
+func (v EnhancedStepHue) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *EnhancedStepHue) String() string {
+func (v EnhancedStepHue) String() string {
 	var str []string
 	str = append(str, "StepMode["+v.StepModeString()+"]")
 	str = append(str, "StepSize["+v.StepSizeString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "EnhancedStepHue{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (EnhancedStepHue) Name() string { return "Enhanced step hue" }
 
 type EnhancedMoveToHueAndSaturation struct {
 	EnhancedHue zcl.Zu16
@@ -1370,23 +1398,25 @@ func (v *EnhancedMoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) 
 	return b, nil
 }
 
-func (v *EnhancedMoveToHueAndSaturation) EnhancedHueString() string {
+func (v EnhancedMoveToHueAndSaturation) EnhancedHueString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.EnhancedHue))
 }
-func (v *EnhancedMoveToHueAndSaturation) SaturationString() string {
+func (v EnhancedMoveToHueAndSaturation) SaturationString() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
 }
-func (v *EnhancedMoveToHueAndSaturation) TransitionTimeString() string {
+func (v EnhancedMoveToHueAndSaturation) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
-func (v *EnhancedMoveToHueAndSaturation) String() string {
+func (v EnhancedMoveToHueAndSaturation) String() string {
 	var str []string
 	str = append(str, "EnhancedHue["+v.EnhancedHueString()+"]")
 	str = append(str, "Saturation["+v.SaturationString()+"]")
 	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
 	return "EnhancedMoveToHueAndSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (EnhancedMoveToHueAndSaturation) Name() string { return "Enhanced move to hue and saturation" }
 
 type ColorLoopSet struct {
 	UpdateFlags zcl.Zbmp8
@@ -1480,7 +1510,7 @@ func (v *ColorLoopSet) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *ColorLoopSet) UpdateFlagsString() string {
+func (v ColorLoopSet) UpdateFlagsString() string {
 	var bstr []string
 	if zcl.BitmapTest([]byte(v.UpdateFlags), 0) {
 		bstr = append(bstr, "Update action")
@@ -1496,7 +1526,7 @@ func (v *ColorLoopSet) UpdateFlagsString() string {
 	}
 	return zcl.StrJoin(bstr, ", ")
 }
-func (v *ColorLoopSet) ActionString() string {
+func (v ColorLoopSet) ActionString() string {
 	switch v.Action {
 	case 0x00:
 		return "De-activate color loop"
@@ -1507,7 +1537,7 @@ func (v *ColorLoopSet) ActionString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.Action))
 }
-func (v *ColorLoopSet) DirectionString() string {
+func (v ColorLoopSet) DirectionString() string {
 	switch v.Direction {
 	case 0x00:
 		return "Decrement hue"
@@ -1516,14 +1546,14 @@ func (v *ColorLoopSet) DirectionString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
 }
-func (v *ColorLoopSet) TimeString() string {
+func (v ColorLoopSet) TimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.Time))
 }
-func (v *ColorLoopSet) StartHueString() string {
+func (v ColorLoopSet) StartHueString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.StartHue))
 }
 
-func (v *ColorLoopSet) String() string {
+func (v ColorLoopSet) String() string {
 	var str []string
 	str = append(str, "UpdateFlags["+v.UpdateFlagsString()+"]")
 	str = append(str, "Action["+v.ActionString()+"]")
@@ -1532,6 +1562,8 @@ func (v *ColorLoopSet) String() string {
 	str = append(str, "StartHue["+v.StartHueString()+"]")
 	return "ColorLoopSet{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (ColorLoopSet) Name() string { return "Color loop set" }
 
 // Stops move to and step commands. It has no effect on a active
 // color loop.
@@ -1564,10 +1596,12 @@ func (v *StopMoveStep) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StopMoveStep) String() string {
+func (v StopMoveStep) String() string {
 	var str []string
 	return "StopMoveStep{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StopMoveStep) Name() string { return "Stop move step" }
 
 type MoveColorTemperature struct {
 	MoveMode zcl.Zenum8
@@ -1654,7 +1688,7 @@ func (v *MoveColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *MoveColorTemperature) MoveModeString() string {
+func (v MoveColorTemperature) MoveModeString() string {
 	switch v.MoveMode {
 	case 0x00:
 		return "Stop"
@@ -1665,17 +1699,17 @@ func (v *MoveColorTemperature) MoveModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
-func (v *MoveColorTemperature) RateString() string {
+func (v MoveColorTemperature) RateString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.Rate))
 }
-func (v *MoveColorTemperature) ColorTemperatureMinString() string {
+func (v MoveColorTemperature) ColorTemperatureMinString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMin))
 }
-func (v *MoveColorTemperature) ColorTemperatureMaxString() string {
+func (v MoveColorTemperature) ColorTemperatureMaxString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMax))
 }
 
-func (v *MoveColorTemperature) String() string {
+func (v MoveColorTemperature) String() string {
 	var str []string
 	str = append(str, "MoveMode["+v.MoveModeString()+"]")
 	str = append(str, "Rate["+v.RateString()+"]")
@@ -1683,6 +1717,8 @@ func (v *MoveColorTemperature) String() string {
 	str = append(str, "ColorTemperatureMax["+v.ColorTemperatureMaxString()+"]")
 	return "MoveColorTemperature{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (MoveColorTemperature) Name() string { return "Move color temperature" }
 
 type StepColorTemperature struct {
 	StepMode zcl.Zenum8
@@ -1780,7 +1816,7 @@ func (v *StepColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *StepColorTemperature) StepModeString() string {
+func (v StepColorTemperature) StepModeString() string {
 	switch v.StepMode {
 	case 0x01:
 		return "Up"
@@ -1789,20 +1825,20 @@ func (v *StepColorTemperature) StepModeString() string {
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
-func (v *StepColorTemperature) StepSizeString() string {
+func (v StepColorTemperature) StepSizeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.StepSize))
 }
-func (v *StepColorTemperature) TransitionTimeString() string {
+func (v StepColorTemperature) TransitionTimeString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
-func (v *StepColorTemperature) ColorTemperatureMinimumMiredsString() string {
+func (v StepColorTemperature) ColorTemperatureMinimumMiredsString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMinimumMireds))
 }
-func (v *StepColorTemperature) ColorTemperatureMaximumMiredsString() string {
+func (v StepColorTemperature) ColorTemperatureMaximumMiredsString() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMaximumMireds))
 }
 
-func (v *StepColorTemperature) String() string {
+func (v StepColorTemperature) String() string {
 	var str []string
 	str = append(str, "StepMode["+v.StepModeString()+"]")
 	str = append(str, "StepSize["+v.StepSizeString()+"]")
@@ -1811,6 +1847,8 @@ func (v *StepColorTemperature) String() string {
 	str = append(str, "ColorTemperatureMaximumMireds["+v.ColorTemperatureMaximumMiredsString()+"]")
 	return "StepColorTemperature{" + zcl.StrJoin(str, " ") + "}"
 }
+
+func (StepColorTemperature) Name() string { return "Step color temperature" }
 
 // CurrentHue is an autogenerated attribute in the ColorControl cluster
 // It contains the current hue value of the light. Hue = CurrentHue x 360 / 254
@@ -1831,11 +1869,11 @@ func (a *CurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentHue(*nt)
 	return br, err
 }
-
-func (a CurrentHue) Readable() bool   { return true }
-func (a CurrentHue) Writable() bool   { return false }
-func (a CurrentHue) Reportable() bool { return true }
-func (a CurrentHue) SceneIndex() int  { return -1 }
+func (CurrentHue) Name() string     { return "Current hue" }
+func (CurrentHue) Readable() bool   { return true }
+func (CurrentHue) Writable() bool   { return false }
+func (CurrentHue) Reportable() bool { return true }
+func (CurrentHue) SceneIndex() int  { return -1 }
 
 func (a CurrentHue) String() string {
 	return zcl.DegreesAngular.Format(float64(a) / 0.70556)
@@ -1861,11 +1899,11 @@ func (a *CurrentSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentSaturation(*nt)
 	return br, err
 }
-
-func (a CurrentSaturation) Readable() bool   { return true }
-func (a CurrentSaturation) Writable() bool   { return false }
-func (a CurrentSaturation) Reportable() bool { return true }
-func (a CurrentSaturation) SceneIndex() int  { return 4 }
+func (CurrentSaturation) Name() string     { return "Current saturation" }
+func (CurrentSaturation) Readable() bool   { return true }
+func (CurrentSaturation) Writable() bool   { return false }
+func (CurrentSaturation) Reportable() bool { return true }
+func (CurrentSaturation) SceneIndex() int  { return 4 }
 
 func (a CurrentSaturation) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1890,11 +1928,11 @@ func (a *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = RemainingTime(*nt)
 	return br, err
 }
-
-func (a RemainingTime) Readable() bool   { return true }
-func (a RemainingTime) Writable() bool   { return false }
-func (a RemainingTime) Reportable() bool { return false }
-func (a RemainingTime) SceneIndex() int  { return -1 }
+func (RemainingTime) Name() string     { return "Remaining time" }
+func (RemainingTime) Readable() bool   { return true }
+func (RemainingTime) Writable() bool   { return false }
+func (RemainingTime) Reportable() bool { return false }
+func (RemainingTime) SceneIndex() int  { return -1 }
 
 func (a RemainingTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -1920,11 +1958,11 @@ func (a *CurrentX) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentX(*nt)
 	return br, err
 }
-
-func (a CurrentX) Readable() bool   { return true }
-func (a CurrentX) Writable() bool   { return false }
-func (a CurrentX) Reportable() bool { return true }
-func (a CurrentX) SceneIndex() int  { return 1 }
+func (CurrentX) Name() string     { return "Current X" }
+func (CurrentX) Readable() bool   { return true }
+func (CurrentX) Writable() bool   { return false }
+func (CurrentX) Reportable() bool { return true }
+func (CurrentX) SceneIndex() int  { return 1 }
 
 func (a CurrentX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1950,11 +1988,11 @@ func (a *CurrentY) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CurrentY(*nt)
 	return br, err
 }
-
-func (a CurrentY) Readable() bool   { return true }
-func (a CurrentY) Writable() bool   { return false }
-func (a CurrentY) Reportable() bool { return true }
-func (a CurrentY) SceneIndex() int  { return 2 }
+func (CurrentY) Name() string     { return "Current Y" }
+func (CurrentY) Readable() bool   { return true }
+func (CurrentY) Writable() bool   { return false }
+func (CurrentY) Reportable() bool { return true }
+func (CurrentY) SceneIndex() int  { return 2 }
 
 func (a CurrentY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1979,11 +2017,11 @@ func (a *DriftCompensation) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DriftCompensation(*nt)
 	return br, err
 }
-
-func (a DriftCompensation) Readable() bool   { return true }
-func (a DriftCompensation) Writable() bool   { return false }
-func (a DriftCompensation) Reportable() bool { return false }
-func (a DriftCompensation) SceneIndex() int  { return -1 }
+func (DriftCompensation) Name() string     { return "Drift Compensation" }
+func (DriftCompensation) Readable() bool   { return true }
+func (DriftCompensation) Writable() bool   { return false }
+func (DriftCompensation) Reportable() bool { return false }
+func (DriftCompensation) SceneIndex() int  { return -1 }
 
 func (a DriftCompensation) String() string {
 	switch a {
@@ -2050,11 +2088,11 @@ func (a *CompensationText) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = CompensationText(*nt)
 	return br, err
 }
-
-func (a CompensationText) Readable() bool   { return true }
-func (a CompensationText) Writable() bool   { return false }
-func (a CompensationText) Reportable() bool { return false }
-func (a CompensationText) SceneIndex() int  { return -1 }
+func (CompensationText) Name() string     { return "Compensation Text" }
+func (CompensationText) Readable() bool   { return true }
+func (CompensationText) Writable() bool   { return false }
+func (CompensationText) Reportable() bool { return false }
+func (CompensationText) SceneIndex() int  { return -1 }
 
 func (a CompensationText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -2083,11 +2121,11 @@ func (a *ColorTemperatureMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorTemperatureMireds(*nt)
 	return br, err
 }
-
-func (a ColorTemperatureMireds) Readable() bool   { return true }
-func (a ColorTemperatureMireds) Writable() bool   { return false }
-func (a ColorTemperatureMireds) Reportable() bool { return true }
-func (a ColorTemperatureMireds) SceneIndex() int  { return -1 }
+func (ColorTemperatureMireds) Name() string     { return "Color temperature Mireds" }
+func (ColorTemperatureMireds) Readable() bool   { return true }
+func (ColorTemperatureMireds) Writable() bool   { return false }
+func (ColorTemperatureMireds) Reportable() bool { return true }
+func (ColorTemperatureMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperatureMireds) String() string {
 	return zcl.Mired.Format(float64(a))
@@ -2113,11 +2151,11 @@ func (a *ColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorMode(*nt)
 	return br, err
 }
-
-func (a ColorMode) Readable() bool   { return true }
-func (a ColorMode) Writable() bool   { return false }
-func (a ColorMode) Reportable() bool { return false }
-func (a ColorMode) SceneIndex() int  { return -1 }
+func (ColorMode) Name() string     { return "Color Mode" }
+func (ColorMode) Readable() bool   { return true }
+func (ColorMode) Writable() bool   { return false }
+func (ColorMode) Reportable() bool { return false }
+func (ColorMode) SceneIndex() int  { return -1 }
 
 func (a ColorMode) String() string {
 	switch a {
@@ -2174,11 +2212,11 @@ func (a *EnhancedCurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = EnhancedCurrentHue(*nt)
 	return br, err
 }
-
-func (a EnhancedCurrentHue) Readable() bool   { return true }
-func (a EnhancedCurrentHue) Writable() bool   { return false }
-func (a EnhancedCurrentHue) Reportable() bool { return false }
-func (a EnhancedCurrentHue) SceneIndex() int  { return 3 }
+func (EnhancedCurrentHue) Name() string     { return "Enhanced current hue" }
+func (EnhancedCurrentHue) Readable() bool   { return true }
+func (EnhancedCurrentHue) Writable() bool   { return false }
+func (EnhancedCurrentHue) Reportable() bool { return false }
+func (EnhancedCurrentHue) SceneIndex() int  { return 3 }
 
 func (a EnhancedCurrentHue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2203,11 +2241,11 @@ func (a *EnhancedColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = EnhancedColorMode(*nt)
 	return br, err
 }
-
-func (a EnhancedColorMode) Readable() bool   { return true }
-func (a EnhancedColorMode) Writable() bool   { return false }
-func (a EnhancedColorMode) Reportable() bool { return false }
-func (a EnhancedColorMode) SceneIndex() int  { return -1 }
+func (EnhancedColorMode) Name() string     { return "Enhanced color mode" }
+func (EnhancedColorMode) Readable() bool   { return true }
+func (EnhancedColorMode) Writable() bool   { return false }
+func (EnhancedColorMode) Reportable() bool { return false }
+func (EnhancedColorMode) SceneIndex() int  { return -1 }
 
 func (a EnhancedColorMode) String() string {
 	switch a {
@@ -2266,11 +2304,11 @@ func (a *ColorLoopActive) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorLoopActive(*nt)
 	return br, err
 }
-
-func (a ColorLoopActive) Readable() bool   { return true }
-func (a ColorLoopActive) Writable() bool   { return false }
-func (a ColorLoopActive) Reportable() bool { return false }
-func (a ColorLoopActive) SceneIndex() int  { return 5 }
+func (ColorLoopActive) Name() string     { return "Color loop active" }
+func (ColorLoopActive) Readable() bool   { return true }
+func (ColorLoopActive) Writable() bool   { return false }
+func (ColorLoopActive) Reportable() bool { return false }
+func (ColorLoopActive) SceneIndex() int  { return 5 }
 
 func (a ColorLoopActive) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2296,11 +2334,11 @@ func (a *ColorLoopDirection) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorLoopDirection(*nt)
 	return br, err
 }
-
-func (a ColorLoopDirection) Readable() bool   { return true }
-func (a ColorLoopDirection) Writable() bool   { return false }
-func (a ColorLoopDirection) Reportable() bool { return false }
-func (a ColorLoopDirection) SceneIndex() int  { return 6 }
+func (ColorLoopDirection) Name() string     { return "Color loop direction" }
+func (ColorLoopDirection) Readable() bool   { return true }
+func (ColorLoopDirection) Writable() bool   { return false }
+func (ColorLoopDirection) Reportable() bool { return false }
+func (ColorLoopDirection) SceneIndex() int  { return 6 }
 
 func (a ColorLoopDirection) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2325,11 +2363,11 @@ func (a *ColorLoopTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorLoopTime(*nt)
 	return br, err
 }
-
-func (a ColorLoopTime) Readable() bool   { return true }
-func (a ColorLoopTime) Writable() bool   { return false }
-func (a ColorLoopTime) Reportable() bool { return false }
-func (a ColorLoopTime) SceneIndex() int  { return 7 }
+func (ColorLoopTime) Name() string     { return "Color loop time" }
+func (ColorLoopTime) Readable() bool   { return true }
+func (ColorLoopTime) Writable() bool   { return false }
+func (ColorLoopTime) Reportable() bool { return false }
+func (ColorLoopTime) SceneIndex() int  { return 7 }
 
 func (a ColorLoopTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2354,11 +2392,11 @@ func (a *ColorLoopStartEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorLoopStartEnhancedHue(*nt)
 	return br, err
 }
-
-func (a ColorLoopStartEnhancedHue) Readable() bool   { return true }
-func (a ColorLoopStartEnhancedHue) Writable() bool   { return false }
-func (a ColorLoopStartEnhancedHue) Reportable() bool { return false }
-func (a ColorLoopStartEnhancedHue) SceneIndex() int  { return -1 }
+func (ColorLoopStartEnhancedHue) Name() string     { return "Color loop start enhanced hue" }
+func (ColorLoopStartEnhancedHue) Readable() bool   { return true }
+func (ColorLoopStartEnhancedHue) Writable() bool   { return false }
+func (ColorLoopStartEnhancedHue) Reportable() bool { return false }
+func (ColorLoopStartEnhancedHue) SceneIndex() int  { return -1 }
 
 func (a ColorLoopStartEnhancedHue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2384,11 +2422,11 @@ func (a *ColorLoopStoredEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorLoopStoredEnhancedHue(*nt)
 	return br, err
 }
-
-func (a ColorLoopStoredEnhancedHue) Readable() bool   { return true }
-func (a ColorLoopStoredEnhancedHue) Writable() bool   { return false }
-func (a ColorLoopStoredEnhancedHue) Reportable() bool { return false }
-func (a ColorLoopStoredEnhancedHue) SceneIndex() int  { return -1 }
+func (ColorLoopStoredEnhancedHue) Name() string     { return "Color loop stored enhanced hue" }
+func (ColorLoopStoredEnhancedHue) Readable() bool   { return true }
+func (ColorLoopStoredEnhancedHue) Writable() bool   { return false }
+func (ColorLoopStoredEnhancedHue) Reportable() bool { return false }
+func (ColorLoopStoredEnhancedHue) SceneIndex() int  { return -1 }
 
 func (a ColorLoopStoredEnhancedHue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2413,11 +2451,11 @@ func (a *ColorCapabilities) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorCapabilities(*nt)
 	return br, err
 }
-
-func (a ColorCapabilities) Readable() bool   { return true }
-func (a ColorCapabilities) Writable() bool   { return false }
-func (a ColorCapabilities) Reportable() bool { return false }
-func (a ColorCapabilities) SceneIndex() int  { return -1 }
+func (ColorCapabilities) Name() string     { return "Color capabilities" }
+func (ColorCapabilities) Readable() bool   { return true }
+func (ColorCapabilities) Writable() bool   { return false }
+func (ColorCapabilities) Reportable() bool { return false }
+func (ColorCapabilities) SceneIndex() int  { return -1 }
 
 func (a ColorCapabilities) String() string {
 	var bstr []string
@@ -2497,11 +2535,11 @@ func (a *ColorTemperaturePhysicalMinMireds) UnmarshalZcl(b []byte) ([]byte, erro
 	*a = ColorTemperaturePhysicalMinMireds(*nt)
 	return br, err
 }
-
-func (a ColorTemperaturePhysicalMinMireds) Readable() bool   { return true }
-func (a ColorTemperaturePhysicalMinMireds) Writable() bool   { return false }
-func (a ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
-func (a ColorTemperaturePhysicalMinMireds) SceneIndex() int  { return -1 }
+func (ColorTemperaturePhysicalMinMireds) Name() string     { return "Color temperature physical min Mireds" }
+func (ColorTemperaturePhysicalMinMireds) Readable() bool   { return true }
+func (ColorTemperaturePhysicalMinMireds) Writable() bool   { return false }
+func (ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
+func (ColorTemperaturePhysicalMinMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperaturePhysicalMinMireds) String() string {
 	return zcl.Mired.Format(float64(a))
@@ -2530,11 +2568,11 @@ func (a *ColorTemperaturePhysicalMaxMireds) UnmarshalZcl(b []byte) ([]byte, erro
 	*a = ColorTemperaturePhysicalMaxMireds(*nt)
 	return br, err
 }
-
-func (a ColorTemperaturePhysicalMaxMireds) Readable() bool   { return true }
-func (a ColorTemperaturePhysicalMaxMireds) Writable() bool   { return false }
-func (a ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
-func (a ColorTemperaturePhysicalMaxMireds) SceneIndex() int  { return -1 }
+func (ColorTemperaturePhysicalMaxMireds) Name() string     { return "Color temperature physical max Mireds" }
+func (ColorTemperaturePhysicalMaxMireds) Readable() bool   { return true }
+func (ColorTemperaturePhysicalMaxMireds) Writable() bool   { return false }
+func (ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
+func (ColorTemperaturePhysicalMaxMireds) SceneIndex() int  { return -1 }
 
 func (a ColorTemperaturePhysicalMaxMireds) String() string {
 	return zcl.Mired.Format(float64(a))
@@ -2557,11 +2595,11 @@ func (a *PowerOnColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PowerOnColorTemperature(*nt)
 	return br, err
 }
-
-func (a PowerOnColorTemperature) Readable() bool   { return true }
-func (a PowerOnColorTemperature) Writable() bool   { return true }
-func (a PowerOnColorTemperature) Reportable() bool { return false }
-func (a PowerOnColorTemperature) SceneIndex() int  { return -1 }
+func (PowerOnColorTemperature) Name() string     { return "Power-on color temperature" }
+func (PowerOnColorTemperature) Readable() bool   { return true }
+func (PowerOnColorTemperature) Writable() bool   { return true }
+func (PowerOnColorTemperature) Reportable() bool { return false }
+func (PowerOnColorTemperature) SceneIndex() int  { return -1 }
 
 func (a PowerOnColorTemperature) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2586,11 +2624,11 @@ func (a *NumberOfPrimaries) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = NumberOfPrimaries(*nt)
 	return br, err
 }
-
-func (a NumberOfPrimaries) Readable() bool   { return true }
-func (a NumberOfPrimaries) Writable() bool   { return false }
-func (a NumberOfPrimaries) Reportable() bool { return false }
-func (a NumberOfPrimaries) SceneIndex() int  { return -1 }
+func (NumberOfPrimaries) Name() string     { return "Number of primaries" }
+func (NumberOfPrimaries) Readable() bool   { return true }
+func (NumberOfPrimaries) Writable() bool   { return false }
+func (NumberOfPrimaries) Reportable() bool { return false }
+func (NumberOfPrimaries) SceneIndex() int  { return -1 }
 
 func (a NumberOfPrimaries) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2616,11 +2654,11 @@ func (a *Primary1X) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary1X(*nt)
 	return br, err
 }
-
-func (a Primary1X) Readable() bool   { return true }
-func (a Primary1X) Writable() bool   { return false }
-func (a Primary1X) Reportable() bool { return false }
-func (a Primary1X) SceneIndex() int  { return -1 }
+func (Primary1X) Name() string     { return "Primary1 X" }
+func (Primary1X) Readable() bool   { return true }
+func (Primary1X) Writable() bool   { return false }
+func (Primary1X) Reportable() bool { return false }
+func (Primary1X) SceneIndex() int  { return -1 }
 
 func (a Primary1X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2646,11 +2684,11 @@ func (a *Primary1Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary1Y(*nt)
 	return br, err
 }
-
-func (a Primary1Y) Readable() bool   { return true }
-func (a Primary1Y) Writable() bool   { return false }
-func (a Primary1Y) Reportable() bool { return false }
-func (a Primary1Y) SceneIndex() int  { return -1 }
+func (Primary1Y) Name() string     { return "Primary1 Y" }
+func (Primary1Y) Readable() bool   { return true }
+func (Primary1Y) Writable() bool   { return false }
+func (Primary1Y) Reportable() bool { return false }
+func (Primary1Y) SceneIndex() int  { return -1 }
 
 func (a Primary1Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2678,11 +2716,11 @@ func (a *Primary1Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary1Intensity(*nt)
 	return br, err
 }
-
-func (a Primary1Intensity) Readable() bool   { return true }
-func (a Primary1Intensity) Writable() bool   { return false }
-func (a Primary1Intensity) Reportable() bool { return false }
-func (a Primary1Intensity) SceneIndex() int  { return -1 }
+func (Primary1Intensity) Name() string     { return "Primary1 intensity" }
+func (Primary1Intensity) Readable() bool   { return true }
+func (Primary1Intensity) Writable() bool   { return false }
+func (Primary1Intensity) Reportable() bool { return false }
+func (Primary1Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary1Intensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2708,11 +2746,11 @@ func (a *Primary2X) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary2X(*nt)
 	return br, err
 }
-
-func (a Primary2X) Readable() bool   { return true }
-func (a Primary2X) Writable() bool   { return false }
-func (a Primary2X) Reportable() bool { return false }
-func (a Primary2X) SceneIndex() int  { return -1 }
+func (Primary2X) Name() string     { return "Primary2 X" }
+func (Primary2X) Readable() bool   { return true }
+func (Primary2X) Writable() bool   { return false }
+func (Primary2X) Reportable() bool { return false }
+func (Primary2X) SceneIndex() int  { return -1 }
 
 func (a Primary2X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2738,11 +2776,11 @@ func (a *Primary2Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary2Y(*nt)
 	return br, err
 }
-
-func (a Primary2Y) Readable() bool   { return true }
-func (a Primary2Y) Writable() bool   { return false }
-func (a Primary2Y) Reportable() bool { return false }
-func (a Primary2Y) SceneIndex() int  { return -1 }
+func (Primary2Y) Name() string     { return "Primary2 Y" }
+func (Primary2Y) Readable() bool   { return true }
+func (Primary2Y) Writable() bool   { return false }
+func (Primary2Y) Reportable() bool { return false }
+func (Primary2Y) SceneIndex() int  { return -1 }
 
 func (a Primary2Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2770,11 +2808,11 @@ func (a *Primary2Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary2Intensity(*nt)
 	return br, err
 }
-
-func (a Primary2Intensity) Readable() bool   { return true }
-func (a Primary2Intensity) Writable() bool   { return false }
-func (a Primary2Intensity) Reportable() bool { return false }
-func (a Primary2Intensity) SceneIndex() int  { return -1 }
+func (Primary2Intensity) Name() string     { return "Primary2 intensity" }
+func (Primary2Intensity) Readable() bool   { return true }
+func (Primary2Intensity) Writable() bool   { return false }
+func (Primary2Intensity) Reportable() bool { return false }
+func (Primary2Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary2Intensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2800,11 +2838,11 @@ func (a *Primary3X) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary3X(*nt)
 	return br, err
 }
-
-func (a Primary3X) Readable() bool   { return true }
-func (a Primary3X) Writable() bool   { return false }
-func (a Primary3X) Reportable() bool { return false }
-func (a Primary3X) SceneIndex() int  { return -1 }
+func (Primary3X) Name() string     { return "Primary3 X" }
+func (Primary3X) Readable() bool   { return true }
+func (Primary3X) Writable() bool   { return false }
+func (Primary3X) Reportable() bool { return false }
+func (Primary3X) SceneIndex() int  { return -1 }
 
 func (a Primary3X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2830,11 +2868,11 @@ func (a *Primary3Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary3Y(*nt)
 	return br, err
 }
-
-func (a Primary3Y) Readable() bool   { return true }
-func (a Primary3Y) Writable() bool   { return false }
-func (a Primary3Y) Reportable() bool { return false }
-func (a Primary3Y) SceneIndex() int  { return -1 }
+func (Primary3Y) Name() string     { return "Primary3 Y" }
+func (Primary3Y) Readable() bool   { return true }
+func (Primary3Y) Writable() bool   { return false }
+func (Primary3Y) Reportable() bool { return false }
+func (Primary3Y) SceneIndex() int  { return -1 }
 
 func (a Primary3Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2862,11 +2900,11 @@ func (a *Primary3Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary3Intensity(*nt)
 	return br, err
 }
-
-func (a Primary3Intensity) Readable() bool   { return true }
-func (a Primary3Intensity) Writable() bool   { return false }
-func (a Primary3Intensity) Reportable() bool { return false }
-func (a Primary3Intensity) SceneIndex() int  { return -1 }
+func (Primary3Intensity) Name() string     { return "Primary3 intensity" }
+func (Primary3Intensity) Readable() bool   { return true }
+func (Primary3Intensity) Writable() bool   { return false }
+func (Primary3Intensity) Reportable() bool { return false }
+func (Primary3Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary3Intensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2892,11 +2930,11 @@ func (a *Primary4X) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary4X(*nt)
 	return br, err
 }
-
-func (a Primary4X) Readable() bool   { return true }
-func (a Primary4X) Writable() bool   { return false }
-func (a Primary4X) Reportable() bool { return false }
-func (a Primary4X) SceneIndex() int  { return -1 }
+func (Primary4X) Name() string     { return "Primary4 X" }
+func (Primary4X) Readable() bool   { return true }
+func (Primary4X) Writable() bool   { return false }
+func (Primary4X) Reportable() bool { return false }
+func (Primary4X) SceneIndex() int  { return -1 }
 
 func (a Primary4X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2922,11 +2960,11 @@ func (a *Primary4Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary4Y(*nt)
 	return br, err
 }
-
-func (a Primary4Y) Readable() bool   { return true }
-func (a Primary4Y) Writable() bool   { return false }
-func (a Primary4Y) Reportable() bool { return false }
-func (a Primary4Y) SceneIndex() int  { return -1 }
+func (Primary4Y) Name() string     { return "Primary4 Y" }
+func (Primary4Y) Readable() bool   { return true }
+func (Primary4Y) Writable() bool   { return false }
+func (Primary4Y) Reportable() bool { return false }
+func (Primary4Y) SceneIndex() int  { return -1 }
 
 func (a Primary4Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2954,11 +2992,11 @@ func (a *Primary4Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary4Intensity(*nt)
 	return br, err
 }
-
-func (a Primary4Intensity) Readable() bool   { return true }
-func (a Primary4Intensity) Writable() bool   { return false }
-func (a Primary4Intensity) Reportable() bool { return false }
-func (a Primary4Intensity) SceneIndex() int  { return -1 }
+func (Primary4Intensity) Name() string     { return "Primary4 intensity" }
+func (Primary4Intensity) Readable() bool   { return true }
+func (Primary4Intensity) Writable() bool   { return false }
+func (Primary4Intensity) Reportable() bool { return false }
+func (Primary4Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary4Intensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2984,11 +3022,11 @@ func (a *Primary5X) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary5X(*nt)
 	return br, err
 }
-
-func (a Primary5X) Readable() bool   { return true }
-func (a Primary5X) Writable() bool   { return false }
-func (a Primary5X) Reportable() bool { return false }
-func (a Primary5X) SceneIndex() int  { return -1 }
+func (Primary5X) Name() string     { return "Primary5 X" }
+func (Primary5X) Readable() bool   { return true }
+func (Primary5X) Writable() bool   { return false }
+func (Primary5X) Reportable() bool { return false }
+func (Primary5X) SceneIndex() int  { return -1 }
 
 func (a Primary5X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3014,11 +3052,11 @@ func (a *Primary5Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary5Y(*nt)
 	return br, err
 }
-
-func (a Primary5Y) Readable() bool   { return true }
-func (a Primary5Y) Writable() bool   { return false }
-func (a Primary5Y) Reportable() bool { return false }
-func (a Primary5Y) SceneIndex() int  { return -1 }
+func (Primary5Y) Name() string     { return "Primary5 Y" }
+func (Primary5Y) Readable() bool   { return true }
+func (Primary5Y) Writable() bool   { return false }
+func (Primary5Y) Reportable() bool { return false }
+func (Primary5Y) SceneIndex() int  { return -1 }
 
 func (a Primary5Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3046,11 +3084,11 @@ func (a *Primary5Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary5Intensity(*nt)
 	return br, err
 }
-
-func (a Primary5Intensity) Readable() bool   { return true }
-func (a Primary5Intensity) Writable() bool   { return false }
-func (a Primary5Intensity) Reportable() bool { return false }
-func (a Primary5Intensity) SceneIndex() int  { return -1 }
+func (Primary5Intensity) Name() string     { return "Primary5 intensity" }
+func (Primary5Intensity) Readable() bool   { return true }
+func (Primary5Intensity) Writable() bool   { return false }
+func (Primary5Intensity) Reportable() bool { return false }
+func (Primary5Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary5Intensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -3076,11 +3114,11 @@ func (a *Primary6X) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary6X(*nt)
 	return br, err
 }
-
-func (a Primary6X) Readable() bool   { return true }
-func (a Primary6X) Writable() bool   { return false }
-func (a Primary6X) Reportable() bool { return false }
-func (a Primary6X) SceneIndex() int  { return -1 }
+func (Primary6X) Name() string     { return "Primary6 X" }
+func (Primary6X) Readable() bool   { return true }
+func (Primary6X) Writable() bool   { return false }
+func (Primary6X) Reportable() bool { return false }
+func (Primary6X) SceneIndex() int  { return -1 }
 
 func (a Primary6X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3106,11 +3144,11 @@ func (a *Primary6Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary6Y(*nt)
 	return br, err
 }
-
-func (a Primary6Y) Readable() bool   { return true }
-func (a Primary6Y) Writable() bool   { return false }
-func (a Primary6Y) Reportable() bool { return false }
-func (a Primary6Y) SceneIndex() int  { return -1 }
+func (Primary6Y) Name() string     { return "Primary6 Y" }
+func (Primary6Y) Readable() bool   { return true }
+func (Primary6Y) Writable() bool   { return false }
+func (Primary6Y) Reportable() bool { return false }
+func (Primary6Y) SceneIndex() int  { return -1 }
 
 func (a Primary6Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3138,11 +3176,11 @@ func (a *Primary6Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Primary6Intensity(*nt)
 	return br, err
 }
-
-func (a Primary6Intensity) Readable() bool   { return true }
-func (a Primary6Intensity) Writable() bool   { return false }
-func (a Primary6Intensity) Reportable() bool { return false }
-func (a Primary6Intensity) SceneIndex() int  { return -1 }
+func (Primary6Intensity) Name() string     { return "Primary6 intensity" }
+func (Primary6Intensity) Readable() bool   { return true }
+func (Primary6Intensity) Writable() bool   { return false }
+func (Primary6Intensity) Reportable() bool { return false }
+func (Primary6Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary6Intensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -3168,11 +3206,11 @@ func (a *WhitePointX) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = WhitePointX(*nt)
 	return br, err
 }
-
-func (a WhitePointX) Readable() bool   { return true }
-func (a WhitePointX) Writable() bool   { return true }
-func (a WhitePointX) Reportable() bool { return false }
-func (a WhitePointX) SceneIndex() int  { return -1 }
+func (WhitePointX) Name() string     { return "White Point X" }
+func (WhitePointX) Readable() bool   { return true }
+func (WhitePointX) Writable() bool   { return true }
+func (WhitePointX) Reportable() bool { return false }
+func (WhitePointX) SceneIndex() int  { return -1 }
 
 func (a WhitePointX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3198,11 +3236,11 @@ func (a *WhitePointY) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = WhitePointY(*nt)
 	return br, err
 }
-
-func (a WhitePointY) Readable() bool   { return true }
-func (a WhitePointY) Writable() bool   { return true }
-func (a WhitePointY) Reportable() bool { return false }
-func (a WhitePointY) SceneIndex() int  { return -1 }
+func (WhitePointY) Name() string     { return "White Point Y" }
+func (WhitePointY) Readable() bool   { return true }
+func (WhitePointY) Writable() bool   { return true }
+func (WhitePointY) Reportable() bool { return false }
+func (WhitePointY) SceneIndex() int  { return -1 }
 
 func (a WhitePointY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3228,11 +3266,11 @@ func (a *ColorPointRedX) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointRedX(*nt)
 	return br, err
 }
-
-func (a ColorPointRedX) Readable() bool   { return true }
-func (a ColorPointRedX) Writable() bool   { return true }
-func (a ColorPointRedX) Reportable() bool { return false }
-func (a ColorPointRedX) SceneIndex() int  { return -1 }
+func (ColorPointRedX) Name() string     { return "Color Point Red X" }
+func (ColorPointRedX) Readable() bool   { return true }
+func (ColorPointRedX) Writable() bool   { return true }
+func (ColorPointRedX) Reportable() bool { return false }
+func (ColorPointRedX) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3258,11 +3296,11 @@ func (a *ColorPointRedY) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointRedY(*nt)
 	return br, err
 }
-
-func (a ColorPointRedY) Readable() bool   { return true }
-func (a ColorPointRedY) Writable() bool   { return true }
-func (a ColorPointRedY) Reportable() bool { return false }
-func (a ColorPointRedY) SceneIndex() int  { return -1 }
+func (ColorPointRedY) Name() string     { return "Color Point Red Y" }
+func (ColorPointRedY) Readable() bool   { return true }
+func (ColorPointRedY) Writable() bool   { return true }
+func (ColorPointRedY) Reportable() bool { return false }
+func (ColorPointRedY) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3289,11 +3327,11 @@ func (a *ColorPointRedIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointRedIntensity(*nt)
 	return br, err
 }
-
-func (a ColorPointRedIntensity) Readable() bool   { return true }
-func (a ColorPointRedIntensity) Writable() bool   { return true }
-func (a ColorPointRedIntensity) Reportable() bool { return false }
-func (a ColorPointRedIntensity) SceneIndex() int  { return -1 }
+func (ColorPointRedIntensity) Name() string     { return "Color Point Red intensity" }
+func (ColorPointRedIntensity) Readable() bool   { return true }
+func (ColorPointRedIntensity) Writable() bool   { return true }
+func (ColorPointRedIntensity) Reportable() bool { return false }
+func (ColorPointRedIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedIntensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -3319,11 +3357,11 @@ func (a *ColorPointGreenX) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointGreenX(*nt)
 	return br, err
 }
-
-func (a ColorPointGreenX) Readable() bool   { return true }
-func (a ColorPointGreenX) Writable() bool   { return true }
-func (a ColorPointGreenX) Reportable() bool { return false }
-func (a ColorPointGreenX) SceneIndex() int  { return -1 }
+func (ColorPointGreenX) Name() string     { return "Color Point Green X" }
+func (ColorPointGreenX) Readable() bool   { return true }
+func (ColorPointGreenX) Writable() bool   { return true }
+func (ColorPointGreenX) Reportable() bool { return false }
+func (ColorPointGreenX) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3349,11 +3387,11 @@ func (a *ColorPointGreenY) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointGreenY(*nt)
 	return br, err
 }
-
-func (a ColorPointGreenY) Readable() bool   { return true }
-func (a ColorPointGreenY) Writable() bool   { return true }
-func (a ColorPointGreenY) Reportable() bool { return false }
-func (a ColorPointGreenY) SceneIndex() int  { return -1 }
+func (ColorPointGreenY) Name() string     { return "Color Point Green Y" }
+func (ColorPointGreenY) Readable() bool   { return true }
+func (ColorPointGreenY) Writable() bool   { return true }
+func (ColorPointGreenY) Reportable() bool { return false }
+func (ColorPointGreenY) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3380,11 +3418,11 @@ func (a *ColorPointGreenIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointGreenIntensity(*nt)
 	return br, err
 }
-
-func (a ColorPointGreenIntensity) Readable() bool   { return true }
-func (a ColorPointGreenIntensity) Writable() bool   { return true }
-func (a ColorPointGreenIntensity) Reportable() bool { return false }
-func (a ColorPointGreenIntensity) SceneIndex() int  { return -1 }
+func (ColorPointGreenIntensity) Name() string     { return "Color Point Green intensity" }
+func (ColorPointGreenIntensity) Readable() bool   { return true }
+func (ColorPointGreenIntensity) Writable() bool   { return true }
+func (ColorPointGreenIntensity) Reportable() bool { return false }
+func (ColorPointGreenIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenIntensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -3410,11 +3448,11 @@ func (a *ColorPointBlueX) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointBlueX(*nt)
 	return br, err
 }
-
-func (a ColorPointBlueX) Readable() bool   { return true }
-func (a ColorPointBlueX) Writable() bool   { return true }
-func (a ColorPointBlueX) Reportable() bool { return false }
-func (a ColorPointBlueX) SceneIndex() int  { return -1 }
+func (ColorPointBlueX) Name() string     { return "Color Point Blue X" }
+func (ColorPointBlueX) Readable() bool   { return true }
+func (ColorPointBlueX) Writable() bool   { return true }
+func (ColorPointBlueX) Reportable() bool { return false }
+func (ColorPointBlueX) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3440,11 +3478,11 @@ func (a *ColorPointBlueY) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointBlueY(*nt)
 	return br, err
 }
-
-func (a ColorPointBlueY) Readable() bool   { return true }
-func (a ColorPointBlueY) Writable() bool   { return true }
-func (a ColorPointBlueY) Reportable() bool { return false }
-func (a ColorPointBlueY) SceneIndex() int  { return -1 }
+func (ColorPointBlueY) Name() string     { return "Color Point Blue Y" }
+func (ColorPointBlueY) Readable() bool   { return true }
+func (ColorPointBlueY) Writable() bool   { return true }
+func (ColorPointBlueY) Reportable() bool { return false }
+func (ColorPointBlueY) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -3471,11 +3509,11 @@ func (a *ColorPointBlueIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ColorPointBlueIntensity(*nt)
 	return br, err
 }
-
-func (a ColorPointBlueIntensity) Readable() bool   { return true }
-func (a ColorPointBlueIntensity) Writable() bool   { return true }
-func (a ColorPointBlueIntensity) Reportable() bool { return false }
-func (a ColorPointBlueIntensity) SceneIndex() int  { return -1 }
+func (ColorPointBlueIntensity) Name() string     { return "Color Point Blue intensity" }
+func (ColorPointBlueIntensity) Readable() bool   { return true }
+func (ColorPointBlueIntensity) Writable() bool   { return true }
+func (ColorPointBlueIntensity) Reportable() bool { return false }
+func (ColorPointBlueIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueIntensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))

@@ -39,11 +39,11 @@ func (a *PhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = PhysicalClosedLimit(*nt)
 	return br, err
 }
-
-func (a PhysicalClosedLimit) Readable() bool   { return true }
-func (a PhysicalClosedLimit) Writable() bool   { return false }
-func (a PhysicalClosedLimit) Reportable() bool { return false }
-func (a PhysicalClosedLimit) SceneIndex() int  { return -1 }
+func (PhysicalClosedLimit) Name() string     { return "Physical Closed Limit" }
+func (PhysicalClosedLimit) Readable() bool   { return true }
+func (PhysicalClosedLimit) Writable() bool   { return false }
+func (PhysicalClosedLimit) Reportable() bool { return false }
+func (PhysicalClosedLimit) SceneIndex() int  { return -1 }
 
 func (a PhysicalClosedLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -66,11 +66,11 @@ func (a *Motorstepsize) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Motorstepsize(*nt)
 	return br, err
 }
-
-func (a Motorstepsize) Readable() bool   { return true }
-func (a Motorstepsize) Writable() bool   { return false }
-func (a Motorstepsize) Reportable() bool { return false }
-func (a Motorstepsize) SceneIndex() int  { return -1 }
+func (Motorstepsize) Name() string     { return "MotorStepSize" }
+func (Motorstepsize) Readable() bool   { return true }
+func (Motorstepsize) Writable() bool   { return false }
+func (Motorstepsize) Reportable() bool { return false }
+func (Motorstepsize) SceneIndex() int  { return -1 }
 
 func (a Motorstepsize) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -93,11 +93,11 @@ func (a *Status) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Status(*nt)
 	return br, err
 }
-
-func (a Status) Readable() bool   { return true }
-func (a Status) Writable() bool   { return true }
-func (a Status) Reportable() bool { return false }
-func (a Status) SceneIndex() int  { return -1 }
+func (Status) Name() string     { return "Status" }
+func (Status) Readable() bool   { return true }
+func (Status) Writable() bool   { return true }
+func (Status) Reportable() bool { return false }
+func (Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
 	var bstr []string
@@ -161,11 +161,11 @@ func (a *ClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = ClosedLimit(*nt)
 	return br, err
 }
-
-func (a ClosedLimit) Readable() bool   { return true }
-func (a ClosedLimit) Writable() bool   { return true }
-func (a ClosedLimit) Reportable() bool { return false }
-func (a ClosedLimit) SceneIndex() int  { return -1 }
+func (ClosedLimit) Name() string     { return "Closed Limit" }
+func (ClosedLimit) Readable() bool   { return true }
+func (ClosedLimit) Writable() bool   { return true }
+func (ClosedLimit) Reportable() bool { return false }
+func (ClosedLimit) SceneIndex() int  { return -1 }
 
 func (a ClosedLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -188,11 +188,11 @@ func (a *Mode) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Mode(*nt)
 	return br, err
 }
-
-func (a Mode) Readable() bool   { return true }
-func (a Mode) Writable() bool   { return true }
-func (a Mode) Reportable() bool { return false }
-func (a Mode) SceneIndex() int  { return -1 }
+func (Mode) Name() string     { return "Mode" }
+func (Mode) Readable() bool   { return true }
+func (Mode) Writable() bool   { return true }
+func (Mode) Reportable() bool { return false }
+func (Mode) SceneIndex() int  { return -1 }
 
 func (a Mode) String() string {
 	switch a {

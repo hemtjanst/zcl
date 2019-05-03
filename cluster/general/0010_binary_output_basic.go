@@ -46,11 +46,11 @@ func (a *BinaryOutputActiveText) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputActiveText(*nt)
 	return br, err
 }
-
-func (a BinaryOutputActiveText) Readable() bool   { return true }
-func (a BinaryOutputActiveText) Writable() bool   { return true }
-func (a BinaryOutputActiveText) Reportable() bool { return false }
-func (a BinaryOutputActiveText) SceneIndex() int  { return -1 }
+func (BinaryOutputActiveText) Name() string     { return "Binary Output Active Text" }
+func (BinaryOutputActiveText) Readable() bool   { return true }
+func (BinaryOutputActiveText) Writable() bool   { return true }
+func (BinaryOutputActiveText) Reportable() bool { return false }
+func (BinaryOutputActiveText) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputActiveText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -73,11 +73,11 @@ func (a *BinaryOutputDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputDescription(*nt)
 	return br, err
 }
-
-func (a BinaryOutputDescription) Readable() bool   { return true }
-func (a BinaryOutputDescription) Writable() bool   { return true }
-func (a BinaryOutputDescription) Reportable() bool { return false }
-func (a BinaryOutputDescription) SceneIndex() int  { return -1 }
+func (BinaryOutputDescription) Name() string     { return "Binary Output Description" }
+func (BinaryOutputDescription) Readable() bool   { return true }
+func (BinaryOutputDescription) Writable() bool   { return true }
+func (BinaryOutputDescription) Reportable() bool { return false }
+func (BinaryOutputDescription) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -100,11 +100,11 @@ func (a *BinaryOutputInactiveText) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputInactiveText(*nt)
 	return br, err
 }
-
-func (a BinaryOutputInactiveText) Readable() bool   { return true }
-func (a BinaryOutputInactiveText) Writable() bool   { return true }
-func (a BinaryOutputInactiveText) Reportable() bool { return false }
-func (a BinaryOutputInactiveText) SceneIndex() int  { return -1 }
+func (BinaryOutputInactiveText) Name() string     { return "Binary Output Inactive Text" }
+func (BinaryOutputInactiveText) Readable() bool   { return true }
+func (BinaryOutputInactiveText) Writable() bool   { return true }
+func (BinaryOutputInactiveText) Reportable() bool { return false }
+func (BinaryOutputInactiveText) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputInactiveText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -127,11 +127,11 @@ func (a *BinaryOutputMinimumOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputMinimumOffTime(*nt)
 	return br, err
 }
-
-func (a BinaryOutputMinimumOffTime) Readable() bool   { return true }
-func (a BinaryOutputMinimumOffTime) Writable() bool   { return true }
-func (a BinaryOutputMinimumOffTime) Reportable() bool { return false }
-func (a BinaryOutputMinimumOffTime) SceneIndex() int  { return -1 }
+func (BinaryOutputMinimumOffTime) Name() string     { return "Binary Output Minimum Off Time" }
+func (BinaryOutputMinimumOffTime) Readable() bool   { return true }
+func (BinaryOutputMinimumOffTime) Writable() bool   { return true }
+func (BinaryOutputMinimumOffTime) Reportable() bool { return false }
+func (BinaryOutputMinimumOffTime) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputMinimumOffTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -154,11 +154,11 @@ func (a *BinaryOutputMaximumOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputMaximumOffTime(*nt)
 	return br, err
 }
-
-func (a BinaryOutputMaximumOffTime) Readable() bool   { return true }
-func (a BinaryOutputMaximumOffTime) Writable() bool   { return true }
-func (a BinaryOutputMaximumOffTime) Reportable() bool { return false }
-func (a BinaryOutputMaximumOffTime) SceneIndex() int  { return -1 }
+func (BinaryOutputMaximumOffTime) Name() string     { return "Binary Output Maximum Off Time" }
+func (BinaryOutputMaximumOffTime) Readable() bool   { return true }
+func (BinaryOutputMaximumOffTime) Writable() bool   { return true }
+func (BinaryOutputMaximumOffTime) Reportable() bool { return false }
+func (BinaryOutputMaximumOffTime) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputMaximumOffTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -181,11 +181,11 @@ func (a *BinaryOutputOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputOutOfService(*nt)
 	return br, err
 }
-
-func (a BinaryOutputOutOfService) Readable() bool   { return true }
-func (a BinaryOutputOutOfService) Writable() bool   { return true }
-func (a BinaryOutputOutOfService) Reportable() bool { return false }
-func (a BinaryOutputOutOfService) SceneIndex() int  { return -1 }
+func (BinaryOutputOutOfService) Name() string     { return "Binary Output Out of Service" }
+func (BinaryOutputOutOfService) Readable() bool   { return true }
+func (BinaryOutputOutOfService) Writable() bool   { return true }
+func (BinaryOutputOutOfService) Reportable() bool { return false }
+func (BinaryOutputOutOfService) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -208,11 +208,11 @@ func (a *BinaryOutputPolarity) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputPolarity(*nt)
 	return br, err
 }
-
-func (a BinaryOutputPolarity) Readable() bool   { return true }
-func (a BinaryOutputPolarity) Writable() bool   { return false }
-func (a BinaryOutputPolarity) Reportable() bool { return false }
-func (a BinaryOutputPolarity) SceneIndex() int  { return -1 }
+func (BinaryOutputPolarity) Name() string     { return "Binary Output Polarity" }
+func (BinaryOutputPolarity) Readable() bool   { return true }
+func (BinaryOutputPolarity) Writable() bool   { return false }
+func (BinaryOutputPolarity) Reportable() bool { return false }
+func (BinaryOutputPolarity) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputPolarity) String() string {
 	switch a {
@@ -253,11 +253,11 @@ func (a *BinaryOutputPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputPresentValue(*nt)
 	return br, err
 }
-
-func (a BinaryOutputPresentValue) Readable() bool   { return true }
-func (a BinaryOutputPresentValue) Writable() bool   { return true }
-func (a BinaryOutputPresentValue) Reportable() bool { return true }
-func (a BinaryOutputPresentValue) SceneIndex() int  { return -1 }
+func (BinaryOutputPresentValue) Name() string     { return "Binary Output Present Value" }
+func (BinaryOutputPresentValue) Readable() bool   { return true }
+func (BinaryOutputPresentValue) Writable() bool   { return true }
+func (BinaryOutputPresentValue) Reportable() bool { return true }
+func (BinaryOutputPresentValue) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -280,11 +280,11 @@ func (a *BinaryOutputPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputPriorityArray(*nt)
 	return br, err
 }
-
-func (a BinaryOutputPriorityArray) Readable() bool   { return true }
-func (a BinaryOutputPriorityArray) Writable() bool   { return true }
-func (a BinaryOutputPriorityArray) Reportable() bool { return false }
-func (a BinaryOutputPriorityArray) SceneIndex() int  { return -1 }
+func (BinaryOutputPriorityArray) Name() string     { return "Binary Output Priority Array" }
+func (BinaryOutputPriorityArray) Readable() bool   { return true }
+func (BinaryOutputPriorityArray) Writable() bool   { return true }
+func (BinaryOutputPriorityArray) Reportable() bool { return false }
+func (BinaryOutputPriorityArray) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputPriorityArray) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -307,11 +307,11 @@ func (a *BinaryOutputReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputReliability(*nt)
 	return br, err
 }
-
-func (a BinaryOutputReliability) Readable() bool   { return true }
-func (a BinaryOutputReliability) Writable() bool   { return true }
-func (a BinaryOutputReliability) Reportable() bool { return false }
-func (a BinaryOutputReliability) SceneIndex() int  { return -1 }
+func (BinaryOutputReliability) Name() string     { return "Binary Output Reliability" }
+func (BinaryOutputReliability) Readable() bool   { return true }
+func (BinaryOutputReliability) Writable() bool   { return true }
+func (BinaryOutputReliability) Reportable() bool { return false }
+func (BinaryOutputReliability) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputReliability) String() string {
 	switch a {
@@ -424,11 +424,11 @@ func (a *BinaryOutputRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputRelinquishDefault(*nt)
 	return br, err
 }
-
-func (a BinaryOutputRelinquishDefault) Readable() bool   { return true }
-func (a BinaryOutputRelinquishDefault) Writable() bool   { return true }
-func (a BinaryOutputRelinquishDefault) Reportable() bool { return false }
-func (a BinaryOutputRelinquishDefault) SceneIndex() int  { return -1 }
+func (BinaryOutputRelinquishDefault) Name() string     { return "Binary Output Relinquish Default" }
+func (BinaryOutputRelinquishDefault) Readable() bool   { return true }
+func (BinaryOutputRelinquishDefault) Writable() bool   { return true }
+func (BinaryOutputRelinquishDefault) Reportable() bool { return false }
+func (BinaryOutputRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -451,11 +451,11 @@ func (a *BinaryOutputStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputStatusFlags(*nt)
 	return br, err
 }
-
-func (a BinaryOutputStatusFlags) Readable() bool   { return true }
-func (a BinaryOutputStatusFlags) Writable() bool   { return false }
-func (a BinaryOutputStatusFlags) Reportable() bool { return true }
-func (a BinaryOutputStatusFlags) SceneIndex() int  { return -1 }
+func (BinaryOutputStatusFlags) Name() string     { return "Binary Output Status Flags" }
+func (BinaryOutputStatusFlags) Readable() bool   { return true }
+func (BinaryOutputStatusFlags) Writable() bool   { return false }
+func (BinaryOutputStatusFlags) Reportable() bool { return true }
+func (BinaryOutputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputStatusFlags) String() string {
 	var bstr []string
@@ -519,11 +519,11 @@ func (a *BinaryOutputApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = BinaryOutputApplicationType(*nt)
 	return br, err
 }
-
-func (a BinaryOutputApplicationType) Readable() bool   { return true }
-func (a BinaryOutputApplicationType) Writable() bool   { return false }
-func (a BinaryOutputApplicationType) Reportable() bool { return false }
-func (a BinaryOutputApplicationType) SceneIndex() int  { return -1 }
+func (BinaryOutputApplicationType) Name() string     { return "Binary Output Application Type" }
+func (BinaryOutputApplicationType) Readable() bool   { return true }
+func (BinaryOutputApplicationType) Writable() bool   { return false }
+func (BinaryOutputApplicationType) Reportable() bool { return false }
+func (BinaryOutputApplicationType) SceneIndex() int  { return -1 }
 
 func (a BinaryOutputApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

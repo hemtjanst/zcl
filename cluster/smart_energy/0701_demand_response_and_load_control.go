@@ -38,11 +38,11 @@ func (a *UtilityEnrolmentGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = UtilityEnrolmentGroup(*nt)
 	return br, err
 }
-
-func (a UtilityEnrolmentGroup) Readable() bool   { return true }
-func (a UtilityEnrolmentGroup) Writable() bool   { return true }
-func (a UtilityEnrolmentGroup) Reportable() bool { return false }
-func (a UtilityEnrolmentGroup) SceneIndex() int  { return -1 }
+func (UtilityEnrolmentGroup) Name() string     { return "Utility Enrolment Group" }
+func (UtilityEnrolmentGroup) Readable() bool   { return true }
+func (UtilityEnrolmentGroup) Writable() bool   { return true }
+func (UtilityEnrolmentGroup) Reportable() bool { return false }
+func (UtilityEnrolmentGroup) SceneIndex() int  { return -1 }
 
 func (a UtilityEnrolmentGroup) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -65,11 +65,11 @@ func (a *StartRandomizeMinutes) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = StartRandomizeMinutes(*nt)
 	return br, err
 }
-
-func (a StartRandomizeMinutes) Readable() bool   { return true }
-func (a StartRandomizeMinutes) Writable() bool   { return true }
-func (a StartRandomizeMinutes) Reportable() bool { return false }
-func (a StartRandomizeMinutes) SceneIndex() int  { return -1 }
+func (StartRandomizeMinutes) Name() string     { return "Start Randomize Minutes" }
+func (StartRandomizeMinutes) Readable() bool   { return true }
+func (StartRandomizeMinutes) Writable() bool   { return true }
+func (StartRandomizeMinutes) Reportable() bool { return false }
+func (StartRandomizeMinutes) SceneIndex() int  { return -1 }
 
 func (a StartRandomizeMinutes) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -92,11 +92,11 @@ func (a *StopRandomizeMinutes) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = StopRandomizeMinutes(*nt)
 	return br, err
 }
-
-func (a StopRandomizeMinutes) Readable() bool   { return true }
-func (a StopRandomizeMinutes) Writable() bool   { return true }
-func (a StopRandomizeMinutes) Reportable() bool { return false }
-func (a StopRandomizeMinutes) SceneIndex() int  { return -1 }
+func (StopRandomizeMinutes) Name() string     { return "Stop Randomize Minutes" }
+func (StopRandomizeMinutes) Readable() bool   { return true }
+func (StopRandomizeMinutes) Writable() bool   { return true }
+func (StopRandomizeMinutes) Reportable() bool { return false }
+func (StopRandomizeMinutes) SceneIndex() int  { return -1 }
 
 func (a StopRandomizeMinutes) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -119,11 +119,11 @@ func (a *DeviceClassValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = DeviceClassValue(*nt)
 	return br, err
 }
-
-func (a DeviceClassValue) Readable() bool   { return true }
-func (a DeviceClassValue) Writable() bool   { return false }
-func (a DeviceClassValue) Reportable() bool { return false }
-func (a DeviceClassValue) SceneIndex() int  { return -1 }
+func (DeviceClassValue) Name() string     { return "Device Class Value" }
+func (DeviceClassValue) Readable() bool   { return true }
+func (DeviceClassValue) Writable() bool   { return false }
+func (DeviceClassValue) Reportable() bool { return false }
+func (DeviceClassValue) SceneIndex() int  { return -1 }
 
 func (a DeviceClassValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

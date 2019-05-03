@@ -37,11 +37,11 @@ func (a *Switchtype) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Switchtype(*nt)
 	return br, err
 }
-
-func (a Switchtype) Readable() bool   { return true }
-func (a Switchtype) Writable() bool   { return false }
-func (a Switchtype) Reportable() bool { return false }
-func (a Switchtype) SceneIndex() int  { return -1 }
+func (Switchtype) Name() string     { return "SwitchType" }
+func (Switchtype) Readable() bool   { return true }
+func (Switchtype) Writable() bool   { return false }
+func (Switchtype) Reportable() bool { return false }
+func (Switchtype) SceneIndex() int  { return -1 }
 
 func (a Switchtype) String() string {
 	switch a {
@@ -91,11 +91,11 @@ func (a *Switchactions) UnmarshalZcl(b []byte) ([]byte, error) {
 	*a = Switchactions(*nt)
 	return br, err
 }
-
-func (a Switchactions) Readable() bool   { return true }
-func (a Switchactions) Writable() bool   { return true }
-func (a Switchactions) Reportable() bool { return false }
-func (a Switchactions) SceneIndex() int  { return -1 }
+func (Switchactions) Name() string     { return "SwitchActions" }
+func (Switchactions) Readable() bool   { return true }
+func (Switchactions) Writable() bool   { return true }
+func (Switchactions) Reportable() bool { return false }
+func (Switchactions) SceneIndex() int  { return -1 }
 
 func (a Switchactions) String() string {
 	switch a {
