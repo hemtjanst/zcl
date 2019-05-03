@@ -81,6 +81,24 @@ func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAt
     {{ end }}return b, nil
 }
 
+{{range .PayloadAttr}}{{$pa:=.}}func (v *{{$cmd.Name.Fmt}}) {{.Name.Fmt}}String() string { {{if .Values}}switch v.{{$pa.Name.Fmt}} { {{range $vk,$vv := .Values}}
+    case {{$vk}}: return "{{$vv}}"{{end}}
+}{{end}}{{if .Bits}}
+    var bstr []string
+    {{range $vk,$vv := .Bits}}if zcl.BitmapTest([]byte(v.{{$pa.Name.Fmt}}), {{$vk}}) { bstr = append(bstr, "{{$vv}}") }
+    {{end}}return zcl.StrJoin(bstr, ", "){{else if eq .Unit "s"}}
+{{else if .Unit}}
+    return zcl.{{.Unit}}.Format(float64(v.{{$pa.Name.Fmt}}){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else}}
+    return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%s{{end}}", zcl.{{.Type.Type}}(v.{{$pa.Name.Fmt}})){{end}}
+}
+{{end}}
+
+func (v *{{.Name.Fmt}}) String() string {
+    var str []string{{range .PayloadAttr}}
+    str = append(str, "{{.Name.Fmt}}[" + v.{{.Name.Fmt}}String() + "]"){{end}}
+    return "{{.Name.Fmt}}{" + zcl.StrJoin(str, " ") + "}"
+}
+
 {{end}}
 {{range .Attr}}{{$an:=.Name.Fmt}}
 

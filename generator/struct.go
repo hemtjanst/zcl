@@ -573,10 +573,14 @@ func (d Desc) Comment() string {
 		return ""
 	}
 	parts := strings.Split(string(d), "\n")
-	for i, v := range parts {
-		parts[i] = strings.TrimSpace(v)
+	var out []string
+	for _, v := range parts {
+		p := strings.TrimSpace(v)
+		if p != "" {
+			out = append(out, p)
+		}
 	}
 
-	return fmt.Sprintf("// %s\n", strings.Join(parts, "\n// "))
+	return fmt.Sprintf("// %s\n", strings.Join(out, "\n// "))
 
 }

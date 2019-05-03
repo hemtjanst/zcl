@@ -122,6 +122,31 @@ func (v *RestartDevice) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *RestartDevice) OptionsString() string {
+	var bstr []string
+	if zcl.BitmapTest([]byte(v.Options), 0) {
+		bstr = append(bstr, "Don't replace attributes on restart")
+	}
+	if zcl.BitmapTest([]byte(v.Options), 1) {
+		bstr = append(bstr, "Immediate")
+	}
+	return zcl.StrJoin(bstr, ", ")
+}
+func (v *RestartDevice) DelayString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Delay))
+}
+func (v *RestartDevice) JitterString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Jitter))
+}
+
+func (v *RestartDevice) String() string {
+	var str []string
+	str = append(str, "Options["+v.OptionsString()+"]")
+	str = append(str, "Delay["+v.DelayString()+"]")
+	str = append(str, "Jitter["+v.JitterString()+"]")
+	return "RestartDevice{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // The Save Startup Parameters Request command allows for the current attribute set to be stored under a given index.
 type SaveStartupParameters struct {
 	Options zcl.Zbmp8
@@ -179,6 +204,20 @@ func (v *SaveStartupParameters) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *SaveStartupParameters) OptionsString() string {
+	return zcl.Sprintf("%s", zcl.Zbmp8(v.Options))
+}
+func (v *SaveStartupParameters) IndexString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Index))
+}
+
+func (v *SaveStartupParameters) String() string {
+	var str []string
+	str = append(str, "Options["+v.OptionsString()+"]")
+	str = append(str, "Index["+v.IndexString()+"]")
+	return "SaveStartupParameters{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // This command allows a saved startup parameters attribute set to be restored to current status overwriting whatever was there previously.
@@ -240,6 +279,20 @@ func (v *RestoreStartupParameters) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *RestoreStartupParameters) OptionsString() string {
+	return zcl.Sprintf("%s", zcl.Zbmp8(v.Options))
+}
+func (v *RestoreStartupParameters) IndexString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Index))
+}
+
+func (v *RestoreStartupParameters) String() string {
+	var str []string
+	str = append(str, "Options["+v.OptionsString()+"]")
+	str = append(str, "Index["+v.IndexString()+"]")
+	return "RestoreStartupParameters{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // This command allows current startup parameters attribute set and one or all of the saved attribute sets to be set to default values. There is also an option for erasing the index under which an attribute set is saved thereby freeing up storage capacity.
 type ResetStartupParameters struct {
 	Options zcl.Zbmp8
@@ -299,6 +352,30 @@ func (v *ResetStartupParameters) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *ResetStartupParameters) OptionsString() string {
+	var bstr []string
+	if zcl.BitmapTest([]byte(v.Options), 0) {
+		bstr = append(bstr, "Reset Current")
+	}
+	if zcl.BitmapTest([]byte(v.Options), 1) {
+		bstr = append(bstr, "Reset All")
+	}
+	if zcl.BitmapTest([]byte(v.Options), 2) {
+		bstr = append(bstr, "Erase Index")
+	}
+	return zcl.StrJoin(bstr, ", ")
+}
+func (v *ResetStartupParameters) IndexString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Index))
+}
+
+func (v *ResetStartupParameters) String() string {
+	var str []string
+	str = append(str, "Options["+v.OptionsString()+"]")
+	str = append(str, "Index["+v.IndexString()+"]")
+	return "ResetStartupParameters{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
 type RestartDeviceResponse struct {
 	Status zcl.Status
@@ -345,6 +422,16 @@ func (v *RestartDeviceResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *RestartDeviceResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+
+func (v *RestartDeviceResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	return "RestartDeviceResponse{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
@@ -395,6 +482,16 @@ func (v *SaveStartupParametersResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *SaveStartupParametersResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+
+func (v *SaveStartupParametersResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	return "SaveStartupParametersResponse{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
 type RestoreStartupParametersResponse struct {
 	Status zcl.Status
@@ -443,6 +540,16 @@ func (v *RestoreStartupParametersResponse) UnmarshalZcl(b []byte) ([]byte, error
 	return b, nil
 }
 
+func (v *RestoreStartupParametersResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+
+func (v *RestoreStartupParametersResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	return "RestoreStartupParametersResponse{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // On receipt of this command the client is made aware that the server has received the corresponding request and is informed of the status of the request.
 type ResetStartupParametersResponse struct {
 	Status zcl.Status
@@ -489,6 +596,16 @@ func (v *ResetStartupParametersResponse) UnmarshalZcl(b []byte) ([]byte, error) 
 	}
 
 	return b, nil
+}
+
+func (v *ResetStartupParametersResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+
+func (v *ResetStartupParametersResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	return "ResetStartupParametersResponse{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // ShortAddress is an autogenerated attribute in the Commissioning cluster

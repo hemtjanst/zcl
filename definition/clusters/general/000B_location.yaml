@@ -6,12 +6,14 @@ server:
     attr:
     - id: "0x0000"
       name: Location Type
-      type: bmp8
       access: rw
       required: true
-      bits:
-        "0": Absolute location
-        "1": Two dimensional
+      type: enum8
+      values:
+        "0x00": 3D Location
+        "0x01": Absolute 3D Location
+        "0x02": 2D Location
+        "0x03": Absolute 2D Location
     - id: "0x0001"
       name: Location Method
       type: enum8
@@ -363,12 +365,14 @@ client:
           - id: "0x0001"
             name: Location Type
             type: enum8
+            values:
+              "0x00": 3D Location
+              "0x01": Absolute 3D Location
+              "0x02": 2D Location
+              "0x03": Absolute 2D Location
             cond:
               - attr: 0x0000
                 value: 0x00
-            bits:
-              "0": Absolute location
-              "1": Two dimensional
           - id: "0x0002"
             name: X Coordinate
             type: s16
@@ -464,9 +468,11 @@ client:
           - id: "0x0000"
             name: Location Type
             type: enum8
-            bits:
-              "0": Absolute location
-              "1": Two dimensional
+            values:
+              "0x00": 3D Location
+              "0x01": Absolute 3D Location
+              "0x02": 2D Location
+              "0x03": Absolute 2D Location
           - id: "0x0001"
             name: X Coordinate
             type: s16
@@ -542,9 +548,11 @@ client:
           - id: "0x0000"
             name: Location Type
             type: enum8
-            bits:
-              "0": Absolute location
-              "1": Two dimensional
+            values:
+              "0x00": 3D Location
+              "0x01": Absolute 3D Location
+              "0x02": 2D Location
+              "0x03": Absolute 2D Location
           - id: "0x0001"
             name: X Coordinate
             type: s16
@@ -592,9 +600,11 @@ client:
           - id: "0x0000"
             name: Location Type
             type: enum8
-            bits:
-              "0": Absolute location
-              "1": Two dimensional
+            values:
+              "0x00": 3D Location
+              "0x01": Absolute 3D Location
+              "0x02": 2D Location
+              "0x03": Absolute 2D Location
       - id: "0x05"
         response: "0x04"
         name: RSSI Request

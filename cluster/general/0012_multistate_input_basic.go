@@ -2,7 +2,6 @@
 // and accessing various characteristics of that measurement. The cluster is typically
 // used to implement a sensor that measures a physical quantity that can take on
 // one of a number of discrete states.
-//
 package general
 
 import (

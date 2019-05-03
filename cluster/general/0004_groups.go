@@ -89,6 +89,20 @@ func (v *AddGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *AddGroup) GroupIdString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
+}
+func (v *AddGroup) GroupNameString() string {
+	return zcl.Sprintf("%s", zcl.Zcstring(v.GroupName))
+}
+
+func (v *AddGroup) String() string {
+	var str []string
+	str = append(str, "GroupId["+v.GroupIdString()+"]")
+	str = append(str, "GroupName["+v.GroupNameString()+"]")
+	return "AddGroup{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // Get the name of a group.
 type ViewGroup struct {
 	GroupId zcl.Zu16
@@ -135,6 +149,16 @@ func (v *ViewGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *ViewGroup) GroupIdString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
+}
+
+func (v *ViewGroup) String() string {
+	var str []string
+	str = append(str, "GroupId["+v.GroupIdString()+"]")
+	return "ViewGroup{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // Get the group membership of the device. Send an empty group list to request all group memberships
@@ -185,6 +209,16 @@ func (v *GetGroupMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *GetGroupMembership) GroupListString() string {
+	return zcl.Sprintf("0x%X", zcl.Zset(v.GroupList))
+}
+
+func (v *GetGroupMembership) String() string {
+	var str []string
+	str = append(str, "GroupList["+v.GroupListString()+"]")
+	return "GetGroupMembership{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // Remove a group from the device.
 type RemoveGroup struct {
 	GroupId zcl.Zu16
@@ -233,6 +267,16 @@ func (v *RemoveGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *RemoveGroup) GroupIdString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
+}
+
+func (v *RemoveGroup) String() string {
+	var str []string
+	str = append(str, "GroupId["+v.GroupIdString()+"]")
+	return "RemoveGroup{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // Remove all group from the device.
 type RemoveAllGroups struct {
 }
@@ -261,6 +305,11 @@ func (v RemoveAllGroups) MarshalZcl() ([]byte, error) {
 
 func (v *RemoveAllGroups) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
+}
+
+func (v *RemoveAllGroups) String() string {
+	var str []string
+	return "RemoveAllGroups{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // Add a group to the device if the device is currently identifying itself (using the identify cluster)
@@ -322,6 +371,20 @@ func (v *AddGroupIfIdentifying) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *AddGroupIfIdentifying) GroupIdString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
+}
+func (v *AddGroupIfIdentifying) GroupNameString() string {
+	return zcl.Sprintf("%s", zcl.Zcstring(v.GroupName))
+}
+
+func (v *AddGroupIfIdentifying) String() string {
+	var str []string
+	str = append(str, "GroupId["+v.GroupIdString()+"]")
+	str = append(str, "GroupName["+v.GroupNameString()+"]")
+	return "AddGroupIfIdentifying{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // The Response to the add group request.
 type AddGroupResponse struct {
 	Status  zcl.Status
@@ -379,6 +442,20 @@ func (v *AddGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *AddGroupResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+func (v *AddGroupResponse) GroupIdString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
+}
+
+func (v *AddGroupResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	str = append(str, "GroupId["+v.GroupIdString()+"]")
+	return "AddGroupResponse{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // The Response to the view group request.
@@ -451,12 +528,29 @@ func (v *ViewGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *ViewGroupResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+func (v *ViewGroupResponse) GroupIdString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
+}
+func (v *ViewGroupResponse) GroupNameString() string {
+	return zcl.Sprintf("%s", zcl.Zcstring(v.GroupName))
+}
+
+func (v *ViewGroupResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	str = append(str, "GroupId["+v.GroupIdString()+"]")
+	str = append(str, "GroupName["+v.GroupNameString()+"]")
+	return "ViewGroupResponse{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // The Response to the get group membership request.
 type GetGroupMembershipResponse struct {
 	// The remaining number of groups that can be added.
 	// If set to 0xFE, at least one more group can be added (exact number unknown)
 	// If set to 0xFF, it's unknown if any more groups can be added
-	//
 	Capacity  zcl.Zu8
 	GroupList zcl.Zset
 }
@@ -512,6 +606,20 @@ func (v *GetGroupMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *GetGroupMembershipResponse) CapacityString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Capacity))
+}
+func (v *GetGroupMembershipResponse) GroupListString() string {
+	return zcl.Sprintf("0x%X", zcl.Zset(v.GroupList))
+}
+
+func (v *GetGroupMembershipResponse) String() string {
+	var str []string
+	str = append(str, "Capacity["+v.CapacityString()+"]")
+	str = append(str, "GroupList["+v.GroupListString()+"]")
+	return "GetGroupMembershipResponse{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // The Response to the remove group request.
@@ -571,6 +679,20 @@ func (v *RemoveGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *RemoveGroupResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+func (v *RemoveGroupResponse) GroupIdString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
+}
+
+func (v *RemoveGroupResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	str = append(str, "GroupId["+v.GroupIdString()+"]")
+	return "RemoveGroupResponse{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // GroupNameSupport is an autogenerated attribute in the Groups cluster

@@ -141,6 +141,32 @@ func (v *SetAbsoluteLocation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *SetAbsoluteLocation) XCoordinateString() string {
+	return zcl.Meters.Format(float64(v.XCoordinate) / 10)
+}
+func (v *SetAbsoluteLocation) YCoordinateString() string {
+	return zcl.Meters.Format(float64(v.YCoordinate) / 10)
+}
+func (v *SetAbsoluteLocation) ZCoordinateString() string {
+	return zcl.Meters.Format(float64(v.ZCoordinate) / 10)
+}
+func (v *SetAbsoluteLocation) PowerString() string {
+	return zcl.DecibelMilliWatts.Format(float64(v.Power) / 100)
+}
+func (v *SetAbsoluteLocation) PathLossExponentString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.PathLossExponent))
+}
+
+func (v *SetAbsoluteLocation) String() string {
+	var str []string
+	str = append(str, "XCoordinate["+v.XCoordinateString()+"]")
+	str = append(str, "YCoordinate["+v.YCoordinateString()+"]")
+	str = append(str, "ZCoordinate["+v.ZCoordinateString()+"]")
+	str = append(str, "Power["+v.PowerString()+"]")
+	str = append(str, "PathLossExponent["+v.PathLossExponentString()+"]")
+	return "SetAbsoluteLocation{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type SetDeviceConfiguration struct {
 	Power zcl.Zs16
 	// Rate at which the signal power decays with increasing distance
@@ -234,6 +260,32 @@ func (v *SetDeviceConfiguration) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *SetDeviceConfiguration) PowerString() string {
+	return zcl.DecibelMilliWatts.Format(float64(v.Power) / 100)
+}
+func (v *SetDeviceConfiguration) PathLossExponentString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.PathLossExponent))
+}
+func (v *SetDeviceConfiguration) CalculationPeriodString() string {
+	return zcl.Seconds.Format(float64(v.CalculationPeriod))
+}
+func (v *SetDeviceConfiguration) NumberRssiMeasurementsString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.NumberRssiMeasurements))
+}
+func (v *SetDeviceConfiguration) ReportingPeriodString() string {
+	return zcl.Seconds.Format(float64(v.ReportingPeriod))
+}
+
+func (v *SetDeviceConfiguration) String() string {
+	var str []string
+	str = append(str, "Power["+v.PowerString()+"]")
+	str = append(str, "PathLossExponent["+v.PathLossExponentString()+"]")
+	str = append(str, "CalculationPeriod["+v.CalculationPeriodString()+"]")
+	str = append(str, "NumberRssiMeasurements["+v.NumberRssiMeasurementsString()+"]")
+	str = append(str, "ReportingPeriod["+v.ReportingPeriodString()+"]")
+	return "SetDeviceConfiguration{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type GetDeviceConfiguration struct {
 	TargetAddress zcl.Zuid
 }
@@ -279,6 +331,16 @@ func (v *GetDeviceConfiguration) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *GetDeviceConfiguration) TargetAddressString() string {
+	return zcl.Sprintf("%s", zcl.Zuid(v.TargetAddress))
+}
+
+func (v *GetDeviceConfiguration) String() string {
+	var str []string
+	str = append(str, "TargetAddress["+v.TargetAddressString()+"]")
+	return "GetDeviceConfiguration{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type GetLocationData struct {
@@ -348,6 +410,40 @@ func (v *GetLocationData) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *GetLocationData) FlagsString() string {
+	var bstr []string
+	if zcl.BitmapTest([]byte(v.Flags), 0) {
+		bstr = append(bstr, "Absolute Only")
+	}
+	if zcl.BitmapTest([]byte(v.Flags), 1) {
+		bstr = append(bstr, "Recalculate")
+	}
+	if zcl.BitmapTest([]byte(v.Flags), 2) {
+		bstr = append(bstr, "Broadcast Indicator")
+	}
+	if zcl.BitmapTest([]byte(v.Flags), 3) {
+		bstr = append(bstr, "Broadcast Response")
+	}
+	if zcl.BitmapTest([]byte(v.Flags), 4) {
+		bstr = append(bstr, "Compact Response")
+	}
+	return zcl.StrJoin(bstr, ", ")
+}
+func (v *GetLocationData) NumberResponsesString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.NumberResponses))
+}
+func (v *GetLocationData) TargetAddressString() string {
+	return zcl.Sprintf("%s", zcl.Zuid(v.TargetAddress))
+}
+
+func (v *GetLocationData) String() string {
+	var str []string
+	str = append(str, "Flags["+v.FlagsString()+"]")
+	str = append(str, "NumberResponses["+v.NumberResponsesString()+"]")
+	str = append(str, "TargetAddress["+v.TargetAddressString()+"]")
+	return "GetLocationData{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type RssiResponse struct {
@@ -452,6 +548,36 @@ func (v *RssiResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *RssiResponse) ReplyingDeviceString() string {
+	return zcl.Sprintf("%s", zcl.Zuid(v.ReplyingDevice))
+}
+func (v *RssiResponse) XCoordinateString() string {
+	return zcl.Meters.Format(float64(v.XCoordinate) / 10)
+}
+func (v *RssiResponse) YCoordinateString() string {
+	return zcl.Meters.Format(float64(v.YCoordinate) / 10)
+}
+func (v *RssiResponse) ZCoordinateString() string {
+	return zcl.Meters.Format(float64(v.ZCoordinate) / 10)
+}
+func (v *RssiResponse) RssiString() string {
+	return zcl.DecibelMilliWatts.Format(float64(v.Rssi))
+}
+func (v *RssiResponse) NumberRssiMeasurementsString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.NumberRssiMeasurements))
+}
+
+func (v *RssiResponse) String() string {
+	var str []string
+	str = append(str, "ReplyingDevice["+v.ReplyingDeviceString()+"]")
+	str = append(str, "XCoordinate["+v.XCoordinateString()+"]")
+	str = append(str, "YCoordinate["+v.YCoordinateString()+"]")
+	str = append(str, "ZCoordinate["+v.ZCoordinateString()+"]")
+	str = append(str, "Rssi["+v.RssiString()+"]")
+	str = append(str, "NumberRssiMeasurements["+v.NumberRssiMeasurementsString()+"]")
+	return "RssiResponse{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type SendPings struct {
 	TargetAddress zcl.Zuid
 	// Number of measurements to use to generate one location estimate
@@ -520,6 +646,24 @@ func (v *SendPings) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *SendPings) TargetAddressString() string {
+	return zcl.Sprintf("%s", zcl.Zuid(v.TargetAddress))
+}
+func (v *SendPings) NumberRssiMeasurementsString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.NumberRssiMeasurements))
+}
+func (v *SendPings) CalculationPeriodString() string {
+	return zcl.Seconds.Format(float64(v.CalculationPeriod))
+}
+
+func (v *SendPings) String() string {
+	var str []string
+	str = append(str, "TargetAddress["+v.TargetAddressString()+"]")
+	str = append(str, "NumberRssiMeasurements["+v.NumberRssiMeasurementsString()+"]")
+	str = append(str, "CalculationPeriod["+v.CalculationPeriodString()+"]")
+	return "SendPings{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type AnchorNodeAnnounce struct {
@@ -602,6 +746,28 @@ func (v *AnchorNodeAnnounce) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *AnchorNodeAnnounce) AnchorNodeAddressString() string {
+	return zcl.Sprintf("%s", zcl.Zuid(v.AnchorNodeAddress))
+}
+func (v *AnchorNodeAnnounce) XCoordinateString() string {
+	return zcl.Meters.Format(float64(v.XCoordinate) / 10)
+}
+func (v *AnchorNodeAnnounce) YCoordinateString() string {
+	return zcl.Meters.Format(float64(v.YCoordinate) / 10)
+}
+func (v *AnchorNodeAnnounce) ZCoordinateString() string {
+	return zcl.Meters.Format(float64(v.ZCoordinate) / 10)
+}
+
+func (v *AnchorNodeAnnounce) String() string {
+	var str []string
+	str = append(str, "AnchorNodeAddress["+v.AnchorNodeAddressString()+"]")
+	str = append(str, "XCoordinate["+v.XCoordinateString()+"]")
+	str = append(str, "YCoordinate["+v.YCoordinateString()+"]")
+	str = append(str, "ZCoordinate["+v.ZCoordinateString()+"]")
+	return "AnchorNodeAnnounce{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type DistanceMeasure struct {
 	TargetAddress zcl.Zu16
 	Resolution    zcl.Zenum8
@@ -658,6 +824,28 @@ func (v *DistanceMeasure) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *DistanceMeasure) TargetAddressString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TargetAddress))
+}
+func (v *DistanceMeasure) ResolutionString() string {
+	switch v.Resolution {
+	case 0x00:
+		return "High"
+	case 0x01:
+		return "Mid"
+	case 0x02:
+		return "Low"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.Resolution))
+}
+
+func (v *DistanceMeasure) String() string {
+	var str []string
+	str = append(str, "TargetAddress["+v.TargetAddressString()+"]")
+	str = append(str, "Resolution["+v.ResolutionString()+"]")
+	return "DistanceMeasure{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type DeviceConfigurationResponse struct {
@@ -782,6 +970,36 @@ func (v *DeviceConfigurationResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *DeviceConfigurationResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+func (v *DeviceConfigurationResponse) PowerString() string {
+	return zcl.DecibelMilliWatts.Format(float64(v.Power) / 100)
+}
+func (v *DeviceConfigurationResponse) PathLossExponentString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.PathLossExponent))
+}
+func (v *DeviceConfigurationResponse) CalculationPeriodString() string {
+	return zcl.Seconds.Format(float64(v.CalculationPeriod))
+}
+func (v *DeviceConfigurationResponse) NumberRssiMeasurementsString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.NumberRssiMeasurements))
+}
+func (v *DeviceConfigurationResponse) ReportingPeriodString() string {
+	return zcl.Seconds.Format(float64(v.ReportingPeriod))
+}
+
+func (v *DeviceConfigurationResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	str = append(str, "Power["+v.PowerString()+"]")
+	str = append(str, "PathLossExponent["+v.PathLossExponentString()+"]")
+	str = append(str, "CalculationPeriod["+v.CalculationPeriodString()+"]")
+	str = append(str, "NumberRssiMeasurements["+v.NumberRssiMeasurementsString()+"]")
+	str = append(str, "ReportingPeriod["+v.ReportingPeriodString()+"]")
+	return "DeviceConfigurationResponse{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type LocationDataResponse struct {
@@ -967,6 +1185,74 @@ func (v *LocationDataResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *LocationDataResponse) StatusString() string {
+	return zcl.Sprintf("%s", zcl.Status(v.Status))
+}
+func (v *LocationDataResponse) LocationTypeString() string {
+	switch v.LocationType {
+	case 0x00:
+		return "3D Location"
+	case 0x01:
+		return "Absolute 3D Location"
+	case 0x02:
+		return "2D Location"
+	case 0x03:
+		return "Absolute 2D Location"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.LocationType))
+}
+func (v *LocationDataResponse) XCoordinateString() string {
+	return zcl.Meters.Format(float64(v.XCoordinate) / 10)
+}
+func (v *LocationDataResponse) YCoordinateString() string {
+	return zcl.Meters.Format(float64(v.YCoordinate) / 10)
+}
+func (v *LocationDataResponse) ZCoordinateString() string {
+	return zcl.Meters.Format(float64(v.ZCoordinate) / 10)
+}
+func (v *LocationDataResponse) PowerString() string {
+	return zcl.DecibelMilliWatts.Format(float64(v.Power) / 100)
+}
+func (v *LocationDataResponse) PathLossExponentString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.PathLossExponent))
+}
+func (v *LocationDataResponse) LocationMethodString() string {
+	switch v.LocationMethod {
+	case 0x00:
+		return "Lateration"
+	case 0x01:
+		return "Signposting"
+	case 0x02:
+		return "RF fingerprinting"
+	case 0x03:
+		return "Out of band"
+	case 0x04:
+		return "Centralized"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.LocationMethod))
+}
+func (v *LocationDataResponse) QualityMeasureString() string {
+	return zcl.Percent.Format(float64(v.QualityMeasure))
+}
+func (v *LocationDataResponse) LocationAgeString() string {
+	return zcl.Seconds.Format(float64(v.LocationAge))
+}
+
+func (v *LocationDataResponse) String() string {
+	var str []string
+	str = append(str, "Status["+v.StatusString()+"]")
+	str = append(str, "LocationType["+v.LocationTypeString()+"]")
+	str = append(str, "XCoordinate["+v.XCoordinateString()+"]")
+	str = append(str, "YCoordinate["+v.YCoordinateString()+"]")
+	str = append(str, "ZCoordinate["+v.ZCoordinateString()+"]")
+	str = append(str, "Power["+v.PowerString()+"]")
+	str = append(str, "PathLossExponent["+v.PathLossExponentString()+"]")
+	str = append(str, "LocationMethod["+v.LocationMethodString()+"]")
+	str = append(str, "QualityMeasure["+v.QualityMeasureString()+"]")
+	str = append(str, "LocationAge["+v.LocationAgeString()+"]")
+	return "LocationDataResponse{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type LocationDataNotification struct {
 	LocationType zcl.Zenum8
 	XCoordinate  zcl.Zs16
@@ -1119,6 +1405,70 @@ func (v *LocationDataNotification) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *LocationDataNotification) LocationTypeString() string {
+	switch v.LocationType {
+	case 0x00:
+		return "3D Location"
+	case 0x01:
+		return "Absolute 3D Location"
+	case 0x02:
+		return "2D Location"
+	case 0x03:
+		return "Absolute 2D Location"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.LocationType))
+}
+func (v *LocationDataNotification) XCoordinateString() string {
+	return zcl.Meters.Format(float64(v.XCoordinate) / 10)
+}
+func (v *LocationDataNotification) YCoordinateString() string {
+	return zcl.Meters.Format(float64(v.YCoordinate) / 10)
+}
+func (v *LocationDataNotification) ZCoordinateString() string {
+	return zcl.Meters.Format(float64(v.ZCoordinate) / 10)
+}
+func (v *LocationDataNotification) PowerString() string {
+	return zcl.DecibelMilliWatts.Format(float64(v.Power) / 100)
+}
+func (v *LocationDataNotification) PathLossExponentString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.PathLossExponent))
+}
+func (v *LocationDataNotification) LocationMethodString() string {
+	switch v.LocationMethod {
+	case 0x00:
+		return "Lateration"
+	case 0x01:
+		return "Signposting"
+	case 0x02:
+		return "RF fingerprinting"
+	case 0x03:
+		return "Out of band"
+	case 0x04:
+		return "Centralized"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.LocationMethod))
+}
+func (v *LocationDataNotification) QualityMeasureString() string {
+	return zcl.Percent.Format(float64(v.QualityMeasure))
+}
+func (v *LocationDataNotification) LocationAgeString() string {
+	return zcl.Seconds.Format(float64(v.LocationAge))
+}
+
+func (v *LocationDataNotification) String() string {
+	var str []string
+	str = append(str, "LocationType["+v.LocationTypeString()+"]")
+	str = append(str, "XCoordinate["+v.XCoordinateString()+"]")
+	str = append(str, "YCoordinate["+v.YCoordinateString()+"]")
+	str = append(str, "ZCoordinate["+v.ZCoordinateString()+"]")
+	str = append(str, "Power["+v.PowerString()+"]")
+	str = append(str, "PathLossExponent["+v.PathLossExponentString()+"]")
+	str = append(str, "LocationMethod["+v.LocationMethodString()+"]")
+	str = append(str, "QualityMeasure["+v.QualityMeasureString()+"]")
+	str = append(str, "LocationAge["+v.LocationAgeString()+"]")
+	return "LocationDataNotification{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type CompactLocationDataNotification struct {
 	LocationType   zcl.Zenum8
 	XCoordinate    zcl.Zs16
@@ -1233,6 +1583,46 @@ func (v *CompactLocationDataNotification) UnmarshalZcl(b []byte) ([]byte, error)
 	return b, nil
 }
 
+func (v *CompactLocationDataNotification) LocationTypeString() string {
+	switch v.LocationType {
+	case 0x00:
+		return "3D Location"
+	case 0x01:
+		return "Absolute 3D Location"
+	case 0x02:
+		return "2D Location"
+	case 0x03:
+		return "Absolute 2D Location"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.LocationType))
+}
+func (v *CompactLocationDataNotification) XCoordinateString() string {
+	return zcl.Meters.Format(float64(v.XCoordinate) / 10)
+}
+func (v *CompactLocationDataNotification) YCoordinateString() string {
+	return zcl.Meters.Format(float64(v.YCoordinate) / 10)
+}
+func (v *CompactLocationDataNotification) ZCoordinateString() string {
+	return zcl.Meters.Format(float64(v.ZCoordinate) / 10)
+}
+func (v *CompactLocationDataNotification) QualityMeasureString() string {
+	return zcl.Percent.Format(float64(v.QualityMeasure))
+}
+func (v *CompactLocationDataNotification) LocationAgeString() string {
+	return zcl.Seconds.Format(float64(v.LocationAge))
+}
+
+func (v *CompactLocationDataNotification) String() string {
+	var str []string
+	str = append(str, "LocationType["+v.LocationTypeString()+"]")
+	str = append(str, "XCoordinate["+v.XCoordinateString()+"]")
+	str = append(str, "YCoordinate["+v.YCoordinateString()+"]")
+	str = append(str, "ZCoordinate["+v.ZCoordinateString()+"]")
+	str = append(str, "QualityMeasure["+v.QualityMeasureString()+"]")
+	str = append(str, "LocationAge["+v.LocationAgeString()+"]")
+	return "CompactLocationDataNotification{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type RssiPing struct {
 	LocationType zcl.Zenum8
 }
@@ -1280,6 +1670,26 @@ func (v *RssiPing) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *RssiPing) LocationTypeString() string {
+	switch v.LocationType {
+	case 0x00:
+		return "3D Location"
+	case 0x01:
+		return "Absolute 3D Location"
+	case 0x02:
+		return "2D Location"
+	case 0x03:
+		return "Absolute 2D Location"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.LocationType))
+}
+
+func (v *RssiPing) String() string {
+	var str []string
+	str = append(str, "LocationType["+v.LocationTypeString()+"]")
+	return "RssiPing{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type RssiRequest struct {
 }
 
@@ -1307,6 +1717,11 @@ func (v RssiRequest) MarshalZcl() ([]byte, error) {
 
 func (v *RssiRequest) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
+}
+
+func (v *RssiRequest) String() string {
+	var str []string
+	return "RssiRequest{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type ReportRssiMeasurements struct {
@@ -1367,6 +1782,20 @@ func (v *ReportRssiMeasurements) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *ReportRssiMeasurements) MeasuringDeviceString() string {
+	return zcl.Sprintf("%s", zcl.Zuid(v.MeasuringDevice))
+}
+func (v *ReportRssiMeasurements) NeighborsInfoString() string {
+	return zcl.Sprintf("%s", zcl.Zset(v.NeighborsInfo))
+}
+
+func (v *ReportRssiMeasurements) String() string {
+	var str []string
+	str = append(str, "MeasuringDevice["+v.MeasuringDeviceString()+"]")
+	str = append(str, "NeighborsInfo["+v.NeighborsInfoString()+"]")
+	return "ReportRssiMeasurements{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type RequestOwnLocation struct {
 	BlindNodeAddress zcl.Zuid
 }
@@ -1412,6 +1841,16 @@ func (v *RequestOwnLocation) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *RequestOwnLocation) BlindNodeAddressString() string {
+	return zcl.Sprintf("%s", zcl.Zuid(v.BlindNodeAddress))
+}
+
+func (v *RequestOwnLocation) String() string {
+	var str []string
+	str = append(str, "BlindNodeAddress["+v.BlindNodeAddressString()+"]")
+	return "RequestOwnLocation{" + zcl.StrJoin(str, " ") + "}"
 }
 
 // Returns the result of a distance measure.
@@ -1484,8 +1923,26 @@ func (v *DistanceMeasureResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *DistanceMeasureResponse) TargetAddressString() string {
+	return zcl.Sprintf("0x%X", zcl.Zu16(v.TargetAddress))
+}
+func (v *DistanceMeasureResponse) DistanceMeterString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.DistanceMeter))
+}
+func (v *DistanceMeasureResponse) QualityIndexString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.QualityIndex))
+}
+
+func (v *DistanceMeasureResponse) String() string {
+	var str []string
+	str = append(str, "TargetAddress["+v.TargetAddressString()+"]")
+	str = append(str, "DistanceMeter["+v.DistanceMeterString()+"]")
+	str = append(str, "QualityIndex["+v.QualityIndexString()+"]")
+	return "DistanceMeasureResponse{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // LocationType is an autogenerated attribute in the Location cluster
-type LocationType zcl.Zbmp8
+type LocationType zcl.Zenum8
 
 const LocationTypeAttr zcl.AttrID = 0
 
@@ -1493,10 +1950,10 @@ func (a LocationType) ID() zcl.AttrID         { return LocationTypeAttr }
 func (a LocationType) Cluster() zcl.ClusterID { return LocationID }
 func (a *LocationType) Value() *LocationType  { return a }
 func (a LocationType) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
+	return zcl.Zenum8(a).MarshalZcl()
 }
 func (a *LocationType) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zbmp8)
+	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocationType(*nt)
 	return br, err
@@ -1508,29 +1965,42 @@ func (a LocationType) Reportable() bool { return false }
 func (a LocationType) SceneIndex() int  { return -1 }
 
 func (a LocationType) String() string {
-	var bstr []string
-	if a.IsAbsoluteLocation() {
-		bstr = append(bstr, "Absolute location")
+	switch a {
+	case 0x00:
+		return "3D Location"
+	case 0x01:
+		return "Absolute 3D Location"
+	case 0x02:
+		return "2D Location"
+	case 0x03:
+		return "Absolute 2D Location"
 	}
-	if a.IsTwoDimensional() {
-		bstr = append(bstr, "Two dimensional")
-	}
-	return zcl.StrJoin(bstr, ", ")
+	return zcl.Sprintf("%s", zcl.Zenum8(a))
 }
 
-func (a LocationType) IsAbsoluteLocation() bool {
-	return zcl.BitmapTest([]byte(a), 0)
-}
-func (a *LocationType) SetAbsoluteLocation(b bool) {
-	*a = LocationType(zcl.BitmapSet([]byte(*a), 0, b))
-}
+// Is3DLocation checks if LocationType equals the value for 3D Location (0x00)
+func (a LocationType) Is3DLocation() bool { return a == 0x00 }
 
-func (a LocationType) IsTwoDimensional() bool {
-	return zcl.BitmapTest([]byte(a), 1)
-}
-func (a *LocationType) SetTwoDimensional(b bool) {
-	*a = LocationType(zcl.BitmapSet([]byte(*a), 1, b))
-}
+// Set3DLocation sets LocationType to 3D Location (0x00)
+func (a *LocationType) Set3DLocation() { *a = 0x00 }
+
+// IsAbsolute3DLocation checks if LocationType equals the value for Absolute 3D Location (0x01)
+func (a LocationType) IsAbsolute3DLocation() bool { return a == 0x01 }
+
+// SetAbsolute3DLocation sets LocationType to Absolute 3D Location (0x01)
+func (a *LocationType) SetAbsolute3DLocation() { *a = 0x01 }
+
+// Is2DLocation checks if LocationType equals the value for 2D Location (0x02)
+func (a LocationType) Is2DLocation() bool { return a == 0x02 }
+
+// Set2DLocation sets LocationType to 2D Location (0x02)
+func (a *LocationType) Set2DLocation() { *a = 0x02 }
+
+// IsAbsolute2DLocation checks if LocationType equals the value for Absolute 2D Location (0x03)
+func (a LocationType) IsAbsolute2DLocation() bool { return a == 0x03 }
+
+// SetAbsolute2DLocation sets LocationType to Absolute 2D Location (0x03)
+func (a *LocationType) SetAbsolute2DLocation() { *a = 0x03 }
 
 // LocationMethod is an autogenerated attribute in the Location cluster
 type LocationMethod zcl.Zenum8

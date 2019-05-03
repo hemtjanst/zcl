@@ -1,6 +1,5 @@
 // Attributes and commands for controlling the color properties of a color-capable
 // light.
-//
 package lighting
 
 import (
@@ -167,6 +166,34 @@ func (v *MoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *MoveToHue) HueString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Hue))
+}
+func (v *MoveToHue) DirectionString() string {
+	switch v.Direction {
+	case 0x00:
+		return "Shortest distance"
+	case 0x01:
+		return "Longest Distance"
+	case 0x02:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.Direction))
+}
+func (v *MoveToHue) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *MoveToHue) String() string {
+	var str []string
+	str = append(str, "Hue["+v.HueString()+"]")
+	str = append(str, "Direction["+v.DirectionString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "MoveToHue{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type MoveHue struct {
 	MoveMode zcl.Zenum8
 	Rate     zcl.Zu8
@@ -223,6 +250,28 @@ func (v *MoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *MoveHue) MoveModeString() string {
+	switch v.MoveMode {
+	case 0x00:
+		return "Stop"
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+}
+func (v *MoveHue) RateString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Rate))
+}
+
+func (v *MoveHue) String() string {
+	var str []string
+	str = append(str, "MoveMode["+v.MoveModeString()+"]")
+	str = append(str, "Rate["+v.RateString()+"]")
+	return "MoveHue{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type StepHue struct {
@@ -295,6 +344,30 @@ func (v *StepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *StepHue) StepModeString() string {
+	switch v.StepMode {
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+}
+func (v *StepHue) StepSizeString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.StepSize))
+}
+func (v *StepHue) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.TransitionTime))
+}
+
+func (v *StepHue) String() string {
+	var str []string
+	str = append(str, "StepMode["+v.StepModeString()+"]")
+	str = append(str, "StepSize["+v.StepSizeString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "StepHue{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type MoveToSaturation struct {
 	Saturation zcl.Zu8
 	// The transitiontime in 1/10 seconds.
@@ -354,6 +427,20 @@ func (v *MoveToSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *MoveToSaturation) SaturationString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Saturation))
+}
+func (v *MoveToSaturation) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *MoveToSaturation) String() string {
+	var str []string
+	str = append(str, "Saturation["+v.SaturationString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "MoveToSaturation{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type MoveSaturation struct {
 	MoveMode zcl.Zenum8
 	// The steps per second.
@@ -411,6 +498,28 @@ func (v *MoveSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *MoveSaturation) MoveModeString() string {
+	switch v.MoveMode {
+	case 0x00:
+		return "Stop"
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+}
+func (v *MoveSaturation) RateString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Rate))
+}
+
+func (v *MoveSaturation) String() string {
+	var str []string
+	str = append(str, "MoveMode["+v.MoveModeString()+"]")
+	str = append(str, "Rate["+v.RateString()+"]")
+	return "MoveSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type StepSaturation struct {
@@ -483,6 +592,30 @@ func (v *StepSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *StepSaturation) StepModeString() string {
+	switch v.StepMode {
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+}
+func (v *StepSaturation) StepSizeString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.StepSize))
+}
+func (v *StepSaturation) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.TransitionTime))
+}
+
+func (v *StepSaturation) String() string {
+	var str []string
+	str = append(str, "StepMode["+v.StepModeString()+"]")
+	str = append(str, "StepSize["+v.StepSizeString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "StepSaturation{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type MoveToHueAndSaturation struct {
 	Hue        zcl.Zu8
 	Saturation zcl.Zu8
@@ -551,6 +684,24 @@ func (v *MoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *MoveToHueAndSaturation) HueString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Hue))
+}
+func (v *MoveToHueAndSaturation) SaturationString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Saturation))
+}
+func (v *MoveToHueAndSaturation) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *MoveToHueAndSaturation) String() string {
+	var str []string
+	str = append(str, "Hue["+v.HueString()+"]")
+	str = append(str, "Saturation["+v.SaturationString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "MoveToHueAndSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type MoveToColor struct {
@@ -623,6 +774,24 @@ func (v *MoveToColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *MoveToColor) ColorXString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.ColorX))
+}
+func (v *MoveToColor) ColorYString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.ColorY))
+}
+func (v *MoveToColor) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *MoveToColor) String() string {
+	var str []string
+	str = append(str, "ColorX["+v.ColorXString()+"]")
+	str = append(str, "ColorY["+v.ColorYString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "MoveToColor{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type MoveColor struct {
 	// The steps per second.
 	RateX zcl.Zs16
@@ -681,6 +850,20 @@ func (v *MoveColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *MoveColor) RateXString() string {
+	return zcl.Sprintf("%s", zcl.Zs16(v.RateX))
+}
+func (v *MoveColor) RateYString() string {
+	return zcl.Sprintf("%s", zcl.Zs16(v.RateY))
+}
+
+func (v *MoveColor) String() string {
+	var str []string
+	str = append(str, "RateX["+v.RateXString()+"]")
+	str = append(str, "RateY["+v.RateYString()+"]")
+	return "MoveColor{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type StepColor struct {
@@ -753,6 +936,24 @@ func (v *StepColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *StepColor) StepXString() string {
+	return zcl.Sprintf("%s", zcl.Zs16(v.StepX))
+}
+func (v *StepColor) StepYString() string {
+	return zcl.Sprintf("%s", zcl.Zs16(v.StepY))
+}
+func (v *StepColor) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *StepColor) String() string {
+	var str []string
+	str = append(str, "StepX["+v.StepXString()+"]")
+	str = append(str, "StepY["+v.StepYString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "StepColor{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type MoveToColorTemperature struct {
 	ColorTemperature zcl.Zu16
 	// The transitiontime in 1/10 seconds.
@@ -810,6 +1011,20 @@ func (v *MoveToColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *MoveToColorTemperature) ColorTemperatureString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperature))
+}
+func (v *MoveToColorTemperature) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *MoveToColorTemperature) String() string {
+	var str []string
+	str = append(str, "ColorTemperature["+v.ColorTemperatureString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "MoveToColorTemperature{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type EnhancedMoveToHue struct {
@@ -882,6 +1097,34 @@ func (v *EnhancedMoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *EnhancedMoveToHue) EnhancedHueString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.EnhancedHue))
+}
+func (v *EnhancedMoveToHue) DirectionString() string {
+	switch v.Direction {
+	case 0x00:
+		return "Shortest distance"
+	case 0x01:
+		return "Longest Distance"
+	case 0x02:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.Direction))
+}
+func (v *EnhancedMoveToHue) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *EnhancedMoveToHue) String() string {
+	var str []string
+	str = append(str, "EnhancedHue["+v.EnhancedHueString()+"]")
+	str = append(str, "Direction["+v.DirectionString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "EnhancedMoveToHue{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type EnhancedMoveHue struct {
 	MoveMode zcl.Zenum8
 	// Steps per second.
@@ -939,6 +1182,28 @@ func (v *EnhancedMoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+func (v *EnhancedMoveHue) MoveModeString() string {
+	switch v.MoveMode {
+	case 0x00:
+		return "Stop"
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+}
+func (v *EnhancedMoveHue) RateString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.Rate))
+}
+
+func (v *EnhancedMoveHue) String() string {
+	var str []string
+	str = append(str, "MoveMode["+v.MoveModeString()+"]")
+	str = append(str, "Rate["+v.RateString()+"]")
+	return "EnhancedMoveHue{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type EnhancedStepHue struct {
@@ -1011,6 +1276,30 @@ func (v *EnhancedStepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *EnhancedStepHue) StepModeString() string {
+	switch v.StepMode {
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+}
+func (v *EnhancedStepHue) StepSizeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.StepSize))
+}
+func (v *EnhancedStepHue) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *EnhancedStepHue) String() string {
+	var str []string
+	str = append(str, "StepMode["+v.StepModeString()+"]")
+	str = append(str, "StepSize["+v.StepSizeString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "EnhancedStepHue{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type EnhancedMoveToHueAndSaturation struct {
 	EnhancedHue zcl.Zu16
 	Saturation  zcl.Zu8
@@ -1079,6 +1368,24 @@ func (v *EnhancedMoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) 
 	}
 
 	return b, nil
+}
+
+func (v *EnhancedMoveToHueAndSaturation) EnhancedHueString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.EnhancedHue))
+}
+func (v *EnhancedMoveToHueAndSaturation) SaturationString() string {
+	return zcl.Sprintf("%s", zcl.Zu8(v.Saturation))
+}
+func (v *EnhancedMoveToHueAndSaturation) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+
+func (v *EnhancedMoveToHueAndSaturation) String() string {
+	var str []string
+	str = append(str, "EnhancedHue["+v.EnhancedHueString()+"]")
+	str = append(str, "Saturation["+v.SaturationString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	return "EnhancedMoveToHueAndSaturation{" + zcl.StrJoin(str, " ") + "}"
 }
 
 type ColorLoopSet struct {
@@ -1173,9 +1480,61 @@ func (v *ColorLoopSet) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *ColorLoopSet) UpdateFlagsString() string {
+	var bstr []string
+	if zcl.BitmapTest([]byte(v.UpdateFlags), 0) {
+		bstr = append(bstr, "Update action")
+	}
+	if zcl.BitmapTest([]byte(v.UpdateFlags), 1) {
+		bstr = append(bstr, "Update direction")
+	}
+	if zcl.BitmapTest([]byte(v.UpdateFlags), 2) {
+		bstr = append(bstr, "Update time")
+	}
+	if zcl.BitmapTest([]byte(v.UpdateFlags), 3) {
+		bstr = append(bstr, "Update start hue")
+	}
+	return zcl.StrJoin(bstr, ", ")
+}
+func (v *ColorLoopSet) ActionString() string {
+	switch v.Action {
+	case 0x00:
+		return "De-activate color loop"
+	case 0x01:
+		return "Activate from ColorLoopStartEnhancedHue"
+	case 0x02:
+		return "Activate from EnhancedCurrentHue"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.Action))
+}
+func (v *ColorLoopSet) DirectionString() string {
+	switch v.Direction {
+	case 0x00:
+		return "Decrement hue"
+	case 0x01:
+		return "Increment hue"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.Direction))
+}
+func (v *ColorLoopSet) TimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.Time))
+}
+func (v *ColorLoopSet) StartHueString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.StartHue))
+}
+
+func (v *ColorLoopSet) String() string {
+	var str []string
+	str = append(str, "UpdateFlags["+v.UpdateFlagsString()+"]")
+	str = append(str, "Action["+v.ActionString()+"]")
+	str = append(str, "Direction["+v.DirectionString()+"]")
+	str = append(str, "Time["+v.TimeString()+"]")
+	str = append(str, "StartHue["+v.StartHueString()+"]")
+	return "ColorLoopSet{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // Stops move to and step commands. It has no effect on a active
 // color loop.
-//
 type StopMoveStep struct {
 }
 
@@ -1205,17 +1564,20 @@ func (v *StopMoveStep) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *StopMoveStep) String() string {
+	var str []string
+	return "StopMoveStep{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type MoveColorTemperature struct {
 	MoveMode zcl.Zenum8
 	// Steps per second.
 	Rate zcl.Zu16
 	// Specifies a lower bound on the color temperature for the
 	// current move operation.
-	//
 	ColorTemperatureMin zcl.Zu16
 	// Specifies a upper bound on the color temperature for the
 	// current move operation.
-	//
 	ColorTemperatureMax zcl.Zu16
 }
 
@@ -1292,6 +1654,36 @@ func (v *MoveColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *MoveColorTemperature) MoveModeString() string {
+	switch v.MoveMode {
+	case 0x00:
+		return "Stop"
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+}
+func (v *MoveColorTemperature) RateString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.Rate))
+}
+func (v *MoveColorTemperature) ColorTemperatureMinString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMin))
+}
+func (v *MoveColorTemperature) ColorTemperatureMaxString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMax))
+}
+
+func (v *MoveColorTemperature) String() string {
+	var str []string
+	str = append(str, "MoveMode["+v.MoveModeString()+"]")
+	str = append(str, "Rate["+v.RateString()+"]")
+	str = append(str, "ColorTemperatureMin["+v.ColorTemperatureMinString()+"]")
+	str = append(str, "ColorTemperatureMax["+v.ColorTemperatureMaxString()+"]")
+	return "MoveColorTemperature{" + zcl.StrJoin(str, " ") + "}"
+}
+
 type StepColorTemperature struct {
 	StepMode zcl.Zenum8
 	StepSize zcl.Zu16
@@ -1299,11 +1691,9 @@ type StepColorTemperature struct {
 	TransitionTime zcl.Zu16
 	// Specifies a lower bound on the color temperature for the
 	// current step operation.
-	//
 	ColorTemperatureMinimumMireds zcl.Zu16
 	// Specifies a upper bound on the color temperature for the
 	// current step operation.
-	//
 	ColorTemperatureMaximumMireds zcl.Zu16
 }
 
@@ -1390,10 +1780,41 @@ func (v *StepColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+func (v *StepColorTemperature) StepModeString() string {
+	switch v.StepMode {
+	case 0x01:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+}
+func (v *StepColorTemperature) StepSizeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.StepSize))
+}
+func (v *StepColorTemperature) TransitionTimeString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+}
+func (v *StepColorTemperature) ColorTemperatureMinimumMiredsString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMinimumMireds))
+}
+func (v *StepColorTemperature) ColorTemperatureMaximumMiredsString() string {
+	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMaximumMireds))
+}
+
+func (v *StepColorTemperature) String() string {
+	var str []string
+	str = append(str, "StepMode["+v.StepModeString()+"]")
+	str = append(str, "StepSize["+v.StepSizeString()+"]")
+	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
+	str = append(str, "ColorTemperatureMinimumMireds["+v.ColorTemperatureMinimumMiredsString()+"]")
+	str = append(str, "ColorTemperatureMaximumMireds["+v.ColorTemperatureMaximumMiredsString()+"]")
+	return "StepColorTemperature{" + zcl.StrJoin(str, " ") + "}"
+}
+
 // CurrentHue is an autogenerated attribute in the ColorControl cluster
 // It contains the current hue value of the light. Hue = CurrentHue x 360 / 254
 // (CurrentHue in the range 0 - 254 inclusive)
-//
 type CurrentHue zcl.Zu8
 
 const CurrentHueAttr zcl.AttrID = 0
@@ -1424,7 +1845,6 @@ func (a CurrentHue) String() string {
 // It holds the current saturation value of the light.
 // Saturation = CurrentSaturation/254 (CurrentSaturation in the range
 // 0 - 254 inclusive)
-//
 type CurrentSaturation zcl.Zu8
 
 const CurrentSaturationAttr zcl.AttrID = 1
@@ -1454,7 +1874,6 @@ func (a CurrentSaturation) String() string {
 // RemainingTime is an autogenerated attribute in the ColorControl cluster
 // It holds the time remaining, in 1/10ths of a second, until the currently
 // active command will be complete
-//
 type RemainingTime zcl.Zu16
 
 const RemainingTimeAttr zcl.AttrID = 2
@@ -1485,7 +1904,6 @@ func (a RemainingTime) String() string {
 // It contains the current value of the normalized chromaticity value x,
 // as defined in the CIE xyY Color Space. x = CurrentX / 65536 (CurrentX
 // in the range 0 to 65279 inclusive)
-//
 type CurrentX zcl.Zu16
 
 const CurrentXAttr zcl.AttrID = 3
@@ -1516,7 +1934,6 @@ func (a CurrentX) String() string {
 // It contains the current value of the normalized chromaticity value y,
 // as defined in the CIE xyY Color Space. y = CurrentY / 65536 (CurrentY
 // in the range 0 to 65279 inclusive)
-//
 type CurrentY zcl.Zu16
 
 const CurrentYAttr zcl.AttrID = 4
@@ -1546,7 +1963,6 @@ func (a CurrentY) String() string {
 // DriftCompensation is an autogenerated attribute in the ColorControl cluster
 // It indicates what mechanism, if any, is in use for compensation for
 // color/intensity drift over time
-//
 type DriftCompensation zcl.Zenum8
 
 const DriftCompensationAttr zcl.AttrID = 5
@@ -1618,7 +2034,6 @@ func (a *DriftCompensation) SetOpticalColorMonitoringAndFeedback() { *a = 0x04 }
 // CompensationText is an autogenerated attribute in the ColorControl cluster
 // It holds a textual indication of what mechanism, if any, is in use to
 // compensate for color/intensity drift over time
-//
 type CompensationText zcl.Zcstring
 
 const CompensationTextAttr zcl.AttrID = 6
@@ -1652,7 +2067,6 @@ func (a CompensationText) String() string {
 // kelvin). Color temperature in kelvins = 1,000,000 / ColorTemperatureMireds,
 // where ColorTemperatureMireds is in the range 1 to 65279 mireds inclusive,
 // giving a color temperature range from 1,000,000 kelvins to 15.32 kelvins
-//
 type ColorTemperatureMireds zcl.Zu16
 
 const ColorTemperatureMiredsAttr zcl.AttrID = 7
@@ -1683,7 +2097,6 @@ func (a ColorTemperatureMireds) String() string {
 // It indicates which attributes are currently determining the color of
 // the device. This attribute is optional if the device does not implement
 // CurrentHue and CurrentSaturation
-//
 type ColorMode zcl.Zenum8
 
 const ColorModeAttr zcl.AttrID = 8
@@ -1745,7 +2158,6 @@ func (a *ColorMode) SetColorTemperature() { *a = 0x02 }
 // zoom for the user. To provide compatibility with standard ZCL, the
 // CurrentHue attribute contains a hue value in the range 0 to 254,
 // calculated from the EnhancedCurrentHue attribute
-//
 type EnhancedCurrentHue zcl.Zu16
 
 const EnhancedCurrentHueAttr zcl.AttrID = 16384
@@ -1775,7 +2187,6 @@ func (a EnhancedCurrentHue) String() string {
 // EnhancedColorMode is an autogenerated attribute in the ColorControl cluster
 // It specifies which attributes are currently determining the color of
 // the device
-//
 type EnhancedColorMode zcl.Zenum8
 
 const EnhancedColorModeAttr zcl.AttrID = 16385
@@ -1839,7 +2250,6 @@ func (a *EnhancedColorMode) SetEnhancedCurrentHueAndCurrentSaturation() { *a = 0
 // ColorLoopActive is an autogenerated attribute in the ColorControl cluster
 // It specifies the current active status of the color loop. 0x00 means
 // inactive, 0x01 means active
-//
 type ColorLoopActive zcl.Zu8
 
 const ColorLoopActiveAttr zcl.AttrID = 16386
@@ -1870,7 +2280,6 @@ func (a ColorLoopActive) String() string {
 // It specifies the current direction of the color loop. If this attribute
 // has the value 0x00, the EnhancedCurrentHue is be decremented. If this
 // attribute has the value 0x01, the EnhancedCurrentHue is incremented
-//
 type ColorLoopDirection zcl.Zu8
 
 const ColorLoopDirectionAttr zcl.AttrID = 16387
@@ -1900,7 +2309,6 @@ func (a ColorLoopDirection) String() string {
 // ColorLoopTime is an autogenerated attribute in the ColorControl cluster
 // It specifies the number of seconds it takes to perform a full color
 // loop, i.e., to cycle all values of EnhancedCurrentHue
-//
 type ColorLoopTime zcl.Zu16
 
 const ColorLoopTimeAttr zcl.AttrID = 16388
@@ -1930,7 +2338,6 @@ func (a ColorLoopTime) String() string {
 // ColorLoopStartEnhancedHue is an autogenerated attribute in the ColorControl cluster
 // It specifies the value of the EnhancedCurrentHue attribute from which
 // the color loop starts
-//
 type ColorLoopStartEnhancedHue zcl.Zu16
 
 const ColorLoopStartEnhancedHueAttr zcl.AttrID = 16389
@@ -1961,7 +2368,6 @@ func (a ColorLoopStartEnhancedHue) String() string {
 // It specifies the value of the EnhancedCurrentHue attribute before the
 // color loop was started. Once the color loop is complete, It is restored
 // to this value
-//
 type ColorLoopStoredEnhancedHue zcl.Zu16
 
 const ColorLoopStoredEnhancedHueAttr zcl.AttrID = 16390
@@ -1991,7 +2397,6 @@ func (a ColorLoopStoredEnhancedHue) String() string {
 // ColorCapabilities is an autogenerated attribute in the ColorControl cluster
 // It specifies the color capabilities of the device supporting the color
 // control cluster
-//
 type ColorCapabilities zcl.Zbmp16
 
 const ColorCapabilitiesAttr zcl.AttrID = 16394
@@ -2074,7 +2479,6 @@ func (a *ColorCapabilities) SetColorTemperature(b bool) {
 // ColorTempPhysicalMinMireds corresponds to the maximum color
 // temperature in Kelvins supported by the hardware.
 // ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds
-//
 type ColorTemperaturePhysicalMinMireds zcl.Zu16
 
 const ColorTemperaturePhysicalMinMiredsAttr zcl.AttrID = 16395
@@ -2108,7 +2512,6 @@ func (a ColorTemperaturePhysicalMinMireds) String() string {
 // ColorTempPhysicalMaxMireds corresponds to the minimum color
 // temperature in Kelvins supported by the hardware.
 // ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds
-//
 type ColorTemperaturePhysicalMaxMireds zcl.Zu16
 
 const ColorTemperaturePhysicalMaxMiredsAttr zcl.AttrID = 16396
@@ -2167,7 +2570,6 @@ func (a PowerOnColorTemperature) String() string {
 // NumberOfPrimaries is an autogenerated attribute in the ColorControl cluster
 // It contains the number of color primaries implemented on this device.
 // A value of 0xff indicates that the number of primaries is unknown
-//
 type NumberOfPrimaries zcl.Zu8
 
 const NumberOfPrimariesAttr zcl.AttrID = 16
@@ -2198,7 +2600,6 @@ func (a NumberOfPrimaries) String() string {
 // It contains the normalized chromaticity value x for this primary, as
 // defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
 // in the range 0 to 65279 inclusive)
-//
 type Primary1X zcl.Zu16
 
 const Primary1XAttr zcl.AttrID = 17
@@ -2229,7 +2630,6 @@ func (a Primary1X) String() string {
 // It contains the normalized chromaticity value y for this primary, as
 // defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
 // in the range 0 to 65279 inclusive)
-//
 type Primary1Y zcl.Zu16
 
 const Primary1YAttr zcl.AttrID = 18
@@ -2262,7 +2662,6 @@ func (a Primary1Y) String() string {
 // normalized such that the primary with the highest maximum intensity
 // contains the value 0xfe. A value of 0xff indicates that this primary is
 // not available
-//
 type Primary1Intensity zcl.Zu8
 
 const Primary1IntensityAttr zcl.AttrID = 19
@@ -2293,7 +2692,6 @@ func (a Primary1Intensity) String() string {
 // It contains the normalized chromaticity value x for this primary, as
 // defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
 // in the range 0 to 65279 inclusive)
-//
 type Primary2X zcl.Zu16
 
 const Primary2XAttr zcl.AttrID = 21
@@ -2324,7 +2722,6 @@ func (a Primary2X) String() string {
 // It contains the normalized chromaticity value y for this primary, as
 // defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
 // in the range 0 to 65279 inclusive)
-//
 type Primary2Y zcl.Zu16
 
 const Primary2YAttr zcl.AttrID = 22
@@ -2357,7 +2754,6 @@ func (a Primary2Y) String() string {
 // normalized such that the primary with the highest maximum intensity
 // contains the value 0xfe. A value of 0xff indicates that this primary is
 // not available
-//
 type Primary2Intensity zcl.Zu8
 
 const Primary2IntensityAttr zcl.AttrID = 23
@@ -2388,7 +2784,6 @@ func (a Primary2Intensity) String() string {
 // It contains the normalized chromaticity value x for this primary, as
 // defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
 // in the range 0 to 65279 inclusive)
-//
 type Primary3X zcl.Zu16
 
 const Primary3XAttr zcl.AttrID = 25
@@ -2419,7 +2814,6 @@ func (a Primary3X) String() string {
 // It contains the normalized chromaticity value y for this primary, as
 // defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
 // in the range 0 to 65279 inclusive)
-//
 type Primary3Y zcl.Zu16
 
 const Primary3YAttr zcl.AttrID = 26
@@ -2452,7 +2846,6 @@ func (a Primary3Y) String() string {
 // normalized such that the primary with the highest maximum intensity
 // contains the value 0xfe. A value of 0xff indicates that this primary is
 // not available
-//
 type Primary3Intensity zcl.Zu8
 
 const Primary3IntensityAttr zcl.AttrID = 27
@@ -2483,7 +2876,6 @@ func (a Primary3Intensity) String() string {
 // It contains the normalized chromaticity value x for this primary, as
 // defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
 // in the range 0 to 65279 inclusive)
-//
 type Primary4X zcl.Zu16
 
 const Primary4XAttr zcl.AttrID = 32
@@ -2514,7 +2906,6 @@ func (a Primary4X) String() string {
 // It contains the normalized chromaticity value y for this primary, as
 // defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
 // in the range 0 to 65279 inclusive)
-//
 type Primary4Y zcl.Zu16
 
 const Primary4YAttr zcl.AttrID = 33
@@ -2547,7 +2938,6 @@ func (a Primary4Y) String() string {
 // normalized such that the primary with the highest maximum intensity
 // contains the value 0xfe. A value of 0xff indicates that this primary is
 // not available
-//
 type Primary4Intensity zcl.Zu8
 
 const Primary4IntensityAttr zcl.AttrID = 34
@@ -2578,7 +2968,6 @@ func (a Primary4Intensity) String() string {
 // It contains the normalized chromaticity value x for this primary, as
 // defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
 // in the range 0 to 65279 inclusive)
-//
 type Primary5X zcl.Zu16
 
 const Primary5XAttr zcl.AttrID = 36
@@ -2609,7 +2998,6 @@ func (a Primary5X) String() string {
 // It contains the normalized chromaticity value y for this primary, as
 // defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
 // in the range 0 to 65279 inclusive)
-//
 type Primary5Y zcl.Zu16
 
 const Primary5YAttr zcl.AttrID = 37
@@ -2642,7 +3030,6 @@ func (a Primary5Y) String() string {
 // normalized such that the primary with the highest maximum intensity
 // contains the value 0xfe. A value of 0xff indicates that this primary is
 // not available
-//
 type Primary5Intensity zcl.Zu8
 
 const Primary5IntensityAttr zcl.AttrID = 38
@@ -2673,7 +3060,6 @@ func (a Primary5Intensity) String() string {
 // It contains the normalized chromaticity value x for this primary, as
 // defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
 // in the range 0 to 65279 inclusive)
-//
 type Primary6X zcl.Zu16
 
 const Primary6XAttr zcl.AttrID = 40
@@ -2704,7 +3090,6 @@ func (a Primary6X) String() string {
 // It contains the normalized chromaticity value y for this primary, as
 // defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
 // in the range 0 to 65279 inclusive)
-//
 type Primary6Y zcl.Zu16
 
 const Primary6YAttr zcl.AttrID = 41
@@ -2737,7 +3122,6 @@ func (a Primary6Y) String() string {
 // normalized such that the primary with the highest maximum intensity
 // contains the value 0xfe. A value of 0xff indicates that this primary is
 // not available
-//
 type Primary6Intensity zcl.Zu8
 
 const Primary6IntensityAttr zcl.AttrID = 42
@@ -2768,7 +3152,6 @@ func (a Primary6Intensity) String() string {
 // It contains the normalized chromaticity value x, as defined in the
 // CIE xyY Color Space, of the current white point of the device.
 // x = WhitePointX / 65536 (WhitePointX in the range 0 to 65279 inclusive)
-//
 type WhitePointX zcl.Zu16
 
 const WhitePointXAttr zcl.AttrID = 48
@@ -2799,7 +3182,6 @@ func (a WhitePointX) String() string {
 // It contains the normalized chromaticity value y, as defined in the
 // CIE xyY Color Space, of the current white point of the device.
 // y = WhitePointY / 65536 (WhitePointY in the range 0 to 65279 inclusive)
-//
 type WhitePointY zcl.Zu16
 
 const WhitePointYAttr zcl.AttrID = 49
@@ -2830,7 +3212,6 @@ func (a WhitePointY) String() string {
 // It contains the normalized chromaticity value x, as defined in the
 // CIE xyY Color Space, of the red color point of the device.
 // x = ColorPointRX / 65536 (ColorPointRX in the range 0 to 65279 inclusive)
-//
 type ColorPointRedX zcl.Zu16
 
 const ColorPointRedXAttr zcl.AttrID = 50
@@ -2861,7 +3242,6 @@ func (a ColorPointRedX) String() string {
 // It contains the normalized chromaticity value y, as defined in the
 // CIE xyY Color Space, of the red color point of the device.
 // y = ColorPointRY / 65536 (ColorPointRY in the range 0 to 65279 inclusive)
-//
 type ColorPointRedY zcl.Zu16
 
 const ColorPointRedYAttr zcl.AttrID = 51
@@ -2893,7 +3273,6 @@ func (a ColorPointRedY) String() string {
 // point as defined in the Dimming Light Curve in the Ballast Configuration
 // cluster, normalized such that the color point with the highest relative
 // intensity contains the value 0xfe
-//
 type ColorPointRedIntensity zcl.Zu8
 
 const ColorPointRedIntensityAttr zcl.AttrID = 52
@@ -2924,7 +3303,6 @@ func (a ColorPointRedIntensity) String() string {
 // It contains the normalized chromaticity value x, as defined in the
 // CIE xyY Color Space, of the green color point of the device.
 // x = ColorPointGX / 65536 (ColorPointGX in the range 0 to 65279 inclusive)
-//
 type ColorPointGreenX zcl.Zu16
 
 const ColorPointGreenXAttr zcl.AttrID = 54
@@ -2955,7 +3333,6 @@ func (a ColorPointGreenX) String() string {
 // It contains the normalized chromaticity value y, as defined in the
 // CIE xyY Color Space, of the green color point of the device.
 // y = ColorPointGY / 65536 (ColorPointGY in the range 0 to 65279 inclusive)
-//
 type ColorPointGreenY zcl.Zu16
 
 const ColorPointGreenYAttr zcl.AttrID = 55
@@ -2987,7 +3364,6 @@ func (a ColorPointGreenY) String() string {
 // color point as defined in the Dimming Light Curve in the Ballast Configuration
 // cluster, normalized such that the color point with the highest relative
 // intensity contains the value 0xfe
-//
 type ColorPointGreenIntensity zcl.Zu8
 
 const ColorPointGreenIntensityAttr zcl.AttrID = 56
@@ -3018,7 +3394,6 @@ func (a ColorPointGreenIntensity) String() string {
 // It contains the normalized chromaticity value x, as defined in the
 // CIE xyY Color Space, of the blue color point of the device.
 // x = ColorPointBX / 65536 (ColorPointBX in the range 0 to 65279 inclusive)
-//
 type ColorPointBlueX zcl.Zu16
 
 const ColorPointBlueXAttr zcl.AttrID = 58
@@ -3049,7 +3424,6 @@ func (a ColorPointBlueX) String() string {
 // It contains the normalized chromaticity value y, as defined in the
 // CIE xyY Color Space, of the blue color point of the device.
 // y = ColorPointBY / 65536 (ColorPointBY in the range 0 to 65279 inclusive)
-//
 type ColorPointBlueY zcl.Zu16
 
 const ColorPointBlueYAttr zcl.AttrID = 59
@@ -3081,7 +3455,6 @@ func (a ColorPointBlueY) String() string {
 // color point as defined in the Dimming Light Curve in the Ballast Configuration
 // cluster, normalized such that the color point with the highest relative
 // intensity contains the value 0xfe
-//
 type ColorPointBlueIntensity zcl.Zu8
 
 const ColorPointBlueIntensityAttr zcl.AttrID = 60
