@@ -167,7 +167,7 @@ func (v *MoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *MoveToHue) HueString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Hue))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Hue))
 }
 func (v *MoveToHue) DirectionString() string {
 	switch v.Direction {
@@ -180,10 +180,10 @@ func (v *MoveToHue) DirectionString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.Direction))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
 }
 func (v *MoveToHue) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *MoveToHue) String() string {
@@ -261,10 +261,10 @@ func (v *MoveHue) MoveModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
 func (v *MoveHue) RateString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Rate))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Rate))
 }
 
 func (v *MoveHue) String() string {
@@ -351,13 +351,13 @@ func (v *StepHue) StepModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
 func (v *StepHue) StepSizeString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.StepSize))
+	return zcl.Sprintf("%v", zcl.Zu8(v.StepSize))
 }
 func (v *StepHue) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu8(v.TransitionTime))
 }
 
 func (v *StepHue) String() string {
@@ -428,10 +428,10 @@ func (v *MoveToSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *MoveToSaturation) SaturationString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Saturation))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
 }
 func (v *MoveToSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *MoveToSaturation) String() string {
@@ -509,10 +509,10 @@ func (v *MoveSaturation) MoveModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
 func (v *MoveSaturation) RateString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Rate))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Rate))
 }
 
 func (v *MoveSaturation) String() string {
@@ -599,13 +599,13 @@ func (v *StepSaturation) StepModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
 func (v *StepSaturation) StepSizeString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.StepSize))
+	return zcl.Sprintf("%v", zcl.Zu8(v.StepSize))
 }
 func (v *StepSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu8(v.TransitionTime))
 }
 
 func (v *StepSaturation) String() string {
@@ -687,13 +687,13 @@ func (v *MoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *MoveToHueAndSaturation) HueString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Hue))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Hue))
 }
 func (v *MoveToHueAndSaturation) SaturationString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Saturation))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
 }
 func (v *MoveToHueAndSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *MoveToHueAndSaturation) String() string {
@@ -775,13 +775,13 @@ func (v *MoveToColor) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *MoveToColor) ColorXString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ColorX))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ColorX))
 }
 func (v *MoveToColor) ColorYString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ColorY))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ColorY))
 }
 func (v *MoveToColor) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *MoveToColor) String() string {
@@ -853,10 +853,10 @@ func (v *MoveColor) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *MoveColor) RateXString() string {
-	return zcl.Sprintf("%s", zcl.Zs16(v.RateX))
+	return zcl.Sprintf("%v", zcl.Zs16(v.RateX))
 }
 func (v *MoveColor) RateYString() string {
-	return zcl.Sprintf("%s", zcl.Zs16(v.RateY))
+	return zcl.Sprintf("%v", zcl.Zs16(v.RateY))
 }
 
 func (v *MoveColor) String() string {
@@ -937,13 +937,13 @@ func (v *StepColor) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *StepColor) StepXString() string {
-	return zcl.Sprintf("%s", zcl.Zs16(v.StepX))
+	return zcl.Sprintf("%v", zcl.Zs16(v.StepX))
 }
 func (v *StepColor) StepYString() string {
-	return zcl.Sprintf("%s", zcl.Zs16(v.StepY))
+	return zcl.Sprintf("%v", zcl.Zs16(v.StepY))
 }
 func (v *StepColor) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *StepColor) String() string {
@@ -1014,10 +1014,10 @@ func (v *MoveToColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *MoveToColorTemperature) ColorTemperatureString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperature))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperature))
 }
 func (v *MoveToColorTemperature) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *MoveToColorTemperature) String() string {
@@ -1098,7 +1098,7 @@ func (v *EnhancedMoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *EnhancedMoveToHue) EnhancedHueString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.EnhancedHue))
+	return zcl.Sprintf("%v", zcl.Zu16(v.EnhancedHue))
 }
 func (v *EnhancedMoveToHue) DirectionString() string {
 	switch v.Direction {
@@ -1111,10 +1111,10 @@ func (v *EnhancedMoveToHue) DirectionString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.Direction))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
 }
 func (v *EnhancedMoveToHue) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *EnhancedMoveToHue) String() string {
@@ -1193,10 +1193,10 @@ func (v *EnhancedMoveHue) MoveModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
 func (v *EnhancedMoveHue) RateString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.Rate))
+	return zcl.Sprintf("%v", zcl.Zu16(v.Rate))
 }
 
 func (v *EnhancedMoveHue) String() string {
@@ -1283,13 +1283,13 @@ func (v *EnhancedStepHue) StepModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
 func (v *EnhancedStepHue) StepSizeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.StepSize))
+	return zcl.Sprintf("%v", zcl.Zu16(v.StepSize))
 }
 func (v *EnhancedStepHue) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *EnhancedStepHue) String() string {
@@ -1371,13 +1371,13 @@ func (v *EnhancedMoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) 
 }
 
 func (v *EnhancedMoveToHueAndSaturation) EnhancedHueString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.EnhancedHue))
+	return zcl.Sprintf("%v", zcl.Zu16(v.EnhancedHue))
 }
 func (v *EnhancedMoveToHueAndSaturation) SaturationString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Saturation))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
 }
 func (v *EnhancedMoveToHueAndSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 
 func (v *EnhancedMoveToHueAndSaturation) String() string {
@@ -1505,7 +1505,7 @@ func (v *ColorLoopSet) ActionString() string {
 	case 0x02:
 		return "Activate from EnhancedCurrentHue"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.Action))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.Action))
 }
 func (v *ColorLoopSet) DirectionString() string {
 	switch v.Direction {
@@ -1514,13 +1514,13 @@ func (v *ColorLoopSet) DirectionString() string {
 	case 0x01:
 		return "Increment hue"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.Direction))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
 }
 func (v *ColorLoopSet) TimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.Time))
+	return zcl.Sprintf("%v", zcl.Zu16(v.Time))
 }
 func (v *ColorLoopSet) StartHueString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.StartHue))
+	return zcl.Sprintf("%v", zcl.Zu16(v.StartHue))
 }
 
 func (v *ColorLoopSet) String() string {
@@ -1663,16 +1663,16 @@ func (v *MoveColorTemperature) MoveModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.MoveMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
 }
 func (v *MoveColorTemperature) RateString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.Rate))
+	return zcl.Sprintf("%v", zcl.Zu16(v.Rate))
 }
 func (v *MoveColorTemperature) ColorTemperatureMinString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMin))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMin))
 }
 func (v *MoveColorTemperature) ColorTemperatureMaxString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMax))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMax))
 }
 
 func (v *MoveColorTemperature) String() string {
@@ -1787,19 +1787,19 @@ func (v *StepColorTemperature) StepModeString() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.StepMode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
 }
 func (v *StepColorTemperature) StepSizeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.StepSize))
+	return zcl.Sprintf("%v", zcl.Zu16(v.StepSize))
 }
 func (v *StepColorTemperature) TransitionTimeString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.TransitionTime))
+	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
 }
 func (v *StepColorTemperature) ColorTemperatureMinimumMiredsString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMinimumMireds))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMinimumMireds))
 }
 func (v *StepColorTemperature) ColorTemperatureMaximumMiredsString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ColorTemperatureMaximumMireds))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMaximumMireds))
 }
 
 func (v *StepColorTemperature) String() string {
@@ -1868,7 +1868,7 @@ func (a CurrentSaturation) Reportable() bool { return true }
 func (a CurrentSaturation) SceneIndex() int  { return 4 }
 
 func (a CurrentSaturation) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // RemainingTime is an autogenerated attribute in the ColorControl cluster
@@ -1927,7 +1927,7 @@ func (a CurrentX) Reportable() bool { return true }
 func (a CurrentX) SceneIndex() int  { return 1 }
 
 func (a CurrentX) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // CurrentY is an autogenerated attribute in the ColorControl cluster
@@ -1957,7 +1957,7 @@ func (a CurrentY) Reportable() bool { return true }
 func (a CurrentY) SceneIndex() int  { return 2 }
 
 func (a CurrentY) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // DriftCompensation is an autogenerated attribute in the ColorControl cluster
@@ -1998,7 +1998,7 @@ func (a DriftCompensation) String() string {
 	case 0x04:
 		return "Optical color monitoring and feedback"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
 // IsNone checks if DriftCompensation equals the value for None (0x00)
@@ -2057,7 +2057,7 @@ func (a CompensationText) Reportable() bool { return false }
 func (a CompensationText) SceneIndex() int  { return -1 }
 
 func (a CompensationText) String() string {
-	return zcl.Sprintf("%s", zcl.Zcstring(a))
+	return zcl.Sprintf("%v", zcl.Zcstring(a))
 }
 
 // ColorTemperatureMireds is an autogenerated attribute in the ColorControl cluster
@@ -2128,7 +2128,7 @@ func (a ColorMode) String() string {
 	case 0x02:
 		return "Color temperature"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
 // IsCurrentHueAndCurrentSaturation checks if ColorMode equals the value for Current hue and current saturation (0x00)
@@ -2181,7 +2181,7 @@ func (a EnhancedCurrentHue) Reportable() bool { return false }
 func (a EnhancedCurrentHue) SceneIndex() int  { return 3 }
 
 func (a EnhancedCurrentHue) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // EnhancedColorMode is an autogenerated attribute in the ColorControl cluster
@@ -2220,7 +2220,7 @@ func (a EnhancedColorMode) String() string {
 	case 0x03:
 		return "Enhanced current hue and current saturation"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
 // IsCurrentHueAndCurrentSaturation checks if EnhancedColorMode equals the value for Current hue and current saturation (0x00)
@@ -2273,7 +2273,7 @@ func (a ColorLoopActive) Reportable() bool { return false }
 func (a ColorLoopActive) SceneIndex() int  { return 5 }
 
 func (a ColorLoopActive) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // ColorLoopDirection is an autogenerated attribute in the ColorControl cluster
@@ -2303,7 +2303,7 @@ func (a ColorLoopDirection) Reportable() bool { return false }
 func (a ColorLoopDirection) SceneIndex() int  { return 6 }
 
 func (a ColorLoopDirection) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // ColorLoopTime is an autogenerated attribute in the ColorControl cluster
@@ -2332,7 +2332,7 @@ func (a ColorLoopTime) Reportable() bool { return false }
 func (a ColorLoopTime) SceneIndex() int  { return 7 }
 
 func (a ColorLoopTime) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorLoopStartEnhancedHue is an autogenerated attribute in the ColorControl cluster
@@ -2361,7 +2361,7 @@ func (a ColorLoopStartEnhancedHue) Reportable() bool { return false }
 func (a ColorLoopStartEnhancedHue) SceneIndex() int  { return -1 }
 
 func (a ColorLoopStartEnhancedHue) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorLoopStoredEnhancedHue is an autogenerated attribute in the ColorControl cluster
@@ -2391,7 +2391,7 @@ func (a ColorLoopStoredEnhancedHue) Reportable() bool { return false }
 func (a ColorLoopStoredEnhancedHue) SceneIndex() int  { return -1 }
 
 func (a ColorLoopStoredEnhancedHue) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorCapabilities is an autogenerated attribute in the ColorControl cluster
@@ -2564,7 +2564,7 @@ func (a PowerOnColorTemperature) Reportable() bool { return false }
 func (a PowerOnColorTemperature) SceneIndex() int  { return -1 }
 
 func (a PowerOnColorTemperature) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // NumberOfPrimaries is an autogenerated attribute in the ColorControl cluster
@@ -2593,7 +2593,7 @@ func (a NumberOfPrimaries) Reportable() bool { return false }
 func (a NumberOfPrimaries) SceneIndex() int  { return -1 }
 
 func (a NumberOfPrimaries) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // Primary1X is an autogenerated attribute in the ColorControl cluster
@@ -2623,7 +2623,7 @@ func (a Primary1X) Reportable() bool { return false }
 func (a Primary1X) SceneIndex() int  { return -1 }
 
 func (a Primary1X) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary1Y is an autogenerated attribute in the ColorControl cluster
@@ -2653,7 +2653,7 @@ func (a Primary1Y) Reportable() bool { return false }
 func (a Primary1Y) SceneIndex() int  { return -1 }
 
 func (a Primary1Y) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary1Intensity is an autogenerated attribute in the ColorControl cluster
@@ -2685,7 +2685,7 @@ func (a Primary1Intensity) Reportable() bool { return false }
 func (a Primary1Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary1Intensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // Primary2X is an autogenerated attribute in the ColorControl cluster
@@ -2715,7 +2715,7 @@ func (a Primary2X) Reportable() bool { return false }
 func (a Primary2X) SceneIndex() int  { return -1 }
 
 func (a Primary2X) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary2Y is an autogenerated attribute in the ColorControl cluster
@@ -2745,7 +2745,7 @@ func (a Primary2Y) Reportable() bool { return false }
 func (a Primary2Y) SceneIndex() int  { return -1 }
 
 func (a Primary2Y) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary2Intensity is an autogenerated attribute in the ColorControl cluster
@@ -2777,7 +2777,7 @@ func (a Primary2Intensity) Reportable() bool { return false }
 func (a Primary2Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary2Intensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // Primary3X is an autogenerated attribute in the ColorControl cluster
@@ -2807,7 +2807,7 @@ func (a Primary3X) Reportable() bool { return false }
 func (a Primary3X) SceneIndex() int  { return -1 }
 
 func (a Primary3X) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary3Y is an autogenerated attribute in the ColorControl cluster
@@ -2837,7 +2837,7 @@ func (a Primary3Y) Reportable() bool { return false }
 func (a Primary3Y) SceneIndex() int  { return -1 }
 
 func (a Primary3Y) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary3Intensity is an autogenerated attribute in the ColorControl cluster
@@ -2869,7 +2869,7 @@ func (a Primary3Intensity) Reportable() bool { return false }
 func (a Primary3Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary3Intensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // Primary4X is an autogenerated attribute in the ColorControl cluster
@@ -2899,7 +2899,7 @@ func (a Primary4X) Reportable() bool { return false }
 func (a Primary4X) SceneIndex() int  { return -1 }
 
 func (a Primary4X) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary4Y is an autogenerated attribute in the ColorControl cluster
@@ -2929,7 +2929,7 @@ func (a Primary4Y) Reportable() bool { return false }
 func (a Primary4Y) SceneIndex() int  { return -1 }
 
 func (a Primary4Y) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary4Intensity is an autogenerated attribute in the ColorControl cluster
@@ -2961,7 +2961,7 @@ func (a Primary4Intensity) Reportable() bool { return false }
 func (a Primary4Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary4Intensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // Primary5X is an autogenerated attribute in the ColorControl cluster
@@ -2991,7 +2991,7 @@ func (a Primary5X) Reportable() bool { return false }
 func (a Primary5X) SceneIndex() int  { return -1 }
 
 func (a Primary5X) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary5Y is an autogenerated attribute in the ColorControl cluster
@@ -3021,7 +3021,7 @@ func (a Primary5Y) Reportable() bool { return false }
 func (a Primary5Y) SceneIndex() int  { return -1 }
 
 func (a Primary5Y) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary5Intensity is an autogenerated attribute in the ColorControl cluster
@@ -3053,7 +3053,7 @@ func (a Primary5Intensity) Reportable() bool { return false }
 func (a Primary5Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary5Intensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // Primary6X is an autogenerated attribute in the ColorControl cluster
@@ -3083,7 +3083,7 @@ func (a Primary6X) Reportable() bool { return false }
 func (a Primary6X) SceneIndex() int  { return -1 }
 
 func (a Primary6X) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary6Y is an autogenerated attribute in the ColorControl cluster
@@ -3113,7 +3113,7 @@ func (a Primary6Y) Reportable() bool { return false }
 func (a Primary6Y) SceneIndex() int  { return -1 }
 
 func (a Primary6Y) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // Primary6Intensity is an autogenerated attribute in the ColorControl cluster
@@ -3145,7 +3145,7 @@ func (a Primary6Intensity) Reportable() bool { return false }
 func (a Primary6Intensity) SceneIndex() int  { return -1 }
 
 func (a Primary6Intensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // WhitePointX is an autogenerated attribute in the ColorControl cluster
@@ -3175,7 +3175,7 @@ func (a WhitePointX) Reportable() bool { return false }
 func (a WhitePointX) SceneIndex() int  { return -1 }
 
 func (a WhitePointX) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // WhitePointY is an autogenerated attribute in the ColorControl cluster
@@ -3205,7 +3205,7 @@ func (a WhitePointY) Reportable() bool { return false }
 func (a WhitePointY) SceneIndex() int  { return -1 }
 
 func (a WhitePointY) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorPointRedX is an autogenerated attribute in the ColorControl cluster
@@ -3235,7 +3235,7 @@ func (a ColorPointRedX) Reportable() bool { return false }
 func (a ColorPointRedX) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedX) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorPointRedY is an autogenerated attribute in the ColorControl cluster
@@ -3265,7 +3265,7 @@ func (a ColorPointRedY) Reportable() bool { return false }
 func (a ColorPointRedY) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedY) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorPointRedIntensity is an autogenerated attribute in the ColorControl cluster
@@ -3296,7 +3296,7 @@ func (a ColorPointRedIntensity) Reportable() bool { return false }
 func (a ColorPointRedIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointRedIntensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // ColorPointGreenX is an autogenerated attribute in the ColorControl cluster
@@ -3326,7 +3326,7 @@ func (a ColorPointGreenX) Reportable() bool { return false }
 func (a ColorPointGreenX) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenX) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorPointGreenY is an autogenerated attribute in the ColorControl cluster
@@ -3356,7 +3356,7 @@ func (a ColorPointGreenY) Reportable() bool { return false }
 func (a ColorPointGreenY) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenY) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorPointGreenIntensity is an autogenerated attribute in the ColorControl cluster
@@ -3387,7 +3387,7 @@ func (a ColorPointGreenIntensity) Reportable() bool { return false }
 func (a ColorPointGreenIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointGreenIntensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // ColorPointBlueX is an autogenerated attribute in the ColorControl cluster
@@ -3417,7 +3417,7 @@ func (a ColorPointBlueX) Reportable() bool { return false }
 func (a ColorPointBlueX) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueX) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorPointBlueY is an autogenerated attribute in the ColorControl cluster
@@ -3447,7 +3447,7 @@ func (a ColorPointBlueY) Reportable() bool { return false }
 func (a ColorPointBlueY) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueY) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 // ColorPointBlueIntensity is an autogenerated attribute in the ColorControl cluster
@@ -3478,5 +3478,5 @@ func (a ColorPointBlueIntensity) Reportable() bool { return false }
 func (a ColorPointBlueIntensity) SceneIndex() int  { return -1 }
 
 func (a ColorPointBlueIntensity) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }

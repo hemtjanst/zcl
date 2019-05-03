@@ -368,16 +368,16 @@ func (v *GetAlarmResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *GetAlarmResponse) StatusString() string {
-	return zcl.Sprintf("%s", zcl.Status(v.Status))
+	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 func (v *GetAlarmResponse) AlarmCodeString() string {
-	return zcl.Sprintf("%s", zcl.Zenum8(v.AlarmCode))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.AlarmCode))
 }
 func (v *GetAlarmResponse) ClusterIdString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.ClusterId))
+	return zcl.Sprintf("%v", zcl.Zu16(v.ClusterId))
 }
 func (v *GetAlarmResponse) TimestampString() string {
-	return zcl.Sprintf("%s", zcl.Zutc(v.Timestamp))
+	return zcl.Sprintf("%v", zcl.Zutc(v.Timestamp))
 }
 
 func (v *GetAlarmResponse) String() string {
@@ -414,5 +414,5 @@ func (a AlarmCount) Reportable() bool { return false }
 func (a AlarmCount) SceneIndex() int  { return -1 }
 
 func (a AlarmCount) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }

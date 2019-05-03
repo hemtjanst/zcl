@@ -127,10 +127,10 @@ func (v *StartWarning) OptionsString() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 func (v *StartWarning) WarningDurationString() string {
-	return zcl.Sprintf("%s", zcl.Zu16(v.WarningDuration))
+	return zcl.Sprintf("%v", zcl.Zu16(v.WarningDuration))
 }
 func (v *StartWarning) StrobeDutyCycleString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.StrobeDutyCycle))
+	return zcl.Sprintf("%v", zcl.Zu8(v.StrobeDutyCycle))
 }
 func (v *StartWarning) StrobeLevelString() string {
 	switch v.StrobeLevel {
@@ -143,7 +143,7 @@ func (v *StartWarning) StrobeLevelString() string {
 	case 0x03:
 		return "Very high"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.StrobeLevel))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.StrobeLevel))
 }
 
 func (v *StartWarning) String() string {
@@ -249,5 +249,5 @@ func (a MaxDuration) Reportable() bool { return false }
 func (a MaxDuration) SceneIndex() int  { return -1 }
 
 func (a MaxDuration) String() string {
-	return zcl.Sprintf("%s", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }

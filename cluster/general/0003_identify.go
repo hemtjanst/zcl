@@ -194,14 +194,14 @@ func (v *TriggerEffect) EffectIdentifierString() string {
 	case 0xFF:
 		return "Stop"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.EffectIdentifier))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.EffectIdentifier))
 }
 func (v *TriggerEffect) EffectVariantString() string {
 	switch v.EffectVariant {
 	case 0x00:
 		return "Default"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(v.EffectVariant))
+	return zcl.Sprintf("%v", zcl.Zenum8(v.EffectVariant))
 }
 
 func (v *TriggerEffect) String() string {

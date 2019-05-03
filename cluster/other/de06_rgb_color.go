@@ -114,16 +114,16 @@ func (v *SetColor) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *SetColor) RedString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Red))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Red))
 }
 func (v *SetColor) GreenString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Green))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Green))
 }
 func (v *SetColor) BlueString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Blue))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Blue))
 }
 func (v *SetColor) SetIndexString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.SetIndex))
+	return zcl.Sprintf("%v", zcl.Zu8(v.SetIndex))
 }
 func (v *SetColor) OptionsString() string {
 	var bstr []string
@@ -197,5 +197,5 @@ func (a Colorsetcount) Reportable() bool { return false }
 func (a Colorsetcount) SceneIndex() int  { return -1 }
 
 func (a Colorsetcount) String() string {
-	return zcl.Sprintf("%s", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }

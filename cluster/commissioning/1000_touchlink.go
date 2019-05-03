@@ -72,7 +72,7 @@ func (v *GetGroupIdentifiers) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *GetGroupIdentifiers) StartIndexString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.StartIndex))
+	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
 
 func (v *GetGroupIdentifiers) String() string {
@@ -130,7 +130,7 @@ func (v *GetEndpointList) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *GetEndpointList) StartIndexString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.StartIndex))
+	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
 
 func (v *GetEndpointList) String() string {
@@ -290,13 +290,13 @@ func (v *GetGroupIdentifiersResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *GetGroupIdentifiersResponse) TotalString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Total))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Total))
 }
 func (v *GetGroupIdentifiersResponse) StartIndexString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.StartIndex))
+	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
 func (v *GetGroupIdentifiersResponse) CountString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Count))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Count))
 }
 func (v *GetGroupIdentifiersResponse) FirstGroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.FirstGroupId))
@@ -441,13 +441,13 @@ func (v *GetEndpointListResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *GetEndpointListResponse) TotalString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Total))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Total))
 }
 func (v *GetEndpointListResponse) StartIndexString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.StartIndex))
+	return zcl.Sprintf("%v", zcl.Zu8(v.StartIndex))
 }
 func (v *GetEndpointListResponse) CountString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Count))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Count))
 }
 func (v *GetEndpointListResponse) NwkAddressString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.NwkAddress))

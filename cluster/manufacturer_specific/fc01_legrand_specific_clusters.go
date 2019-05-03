@@ -73,5 +73,5 @@ func (a Led) Reportable() bool { return false }
 func (a Led) SceneIndex() int  { return -1 }
 
 func (a Led) String() string {
-	return zcl.Sprintf("%s", zcl.Zbool(a))
+	return zcl.Sprintf("%v", zcl.Zbool(a))
 }

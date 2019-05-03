@@ -52,7 +52,7 @@ func (a Switchtype) String() string {
 	case 0x02:
 		return "Multifunction"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
 // IsToggle checks if Switchtype equals the value for Toggle (0x00)
@@ -106,7 +106,7 @@ func (a Switchactions) String() string {
 	case 0x02:
 		return "Toggle"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
 // IsOnOff checks if Switchactions equals the value for On-Off (0x00)

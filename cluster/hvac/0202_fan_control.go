@@ -59,7 +59,7 @@ func (a FanMode) String() string {
 	case 0x06:
 		return "Smart"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
 // IsOff checks if FanMode equals the value for Off (0x00)
@@ -140,7 +140,7 @@ func (a FanModeSequence) String() string {
 	case 0x04:
 		return "On/Auto"
 	}
-	return zcl.Sprintf("%s", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
 // IsLowMedHigh checks if FanModeSequence equals the value for Low/Med/High (0x00)

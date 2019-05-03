@@ -89,7 +89,7 @@ func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAt
     {{end}}return zcl.StrJoin(bstr, ", "){{else if eq .Unit "s"}}
 {{else if .Unit}}
     return zcl.{{.Unit}}.Format(float64(v.{{$pa.Name.Fmt}}){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else}}
-    return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%s{{end}}", zcl.{{.Type.Type}}(v.{{$pa.Name.Fmt}})){{end}}
+    return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%v{{end}}", zcl.{{.Type.Type}}(v.{{$pa.Name.Fmt}})){{end}}
 }
 {{end}}
 
@@ -131,7 +131,7 @@ func (a {{$an}}) String() string { {{if .Values}}switch a { {{range $vk,$vv := .
     {{end}}return zcl.StrJoin(bstr, ", "){{else if eq .Unit "s"}}
     {{else if .Unit}}
     return zcl.{{.Unit}}.Format(float64(a){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else}}
-    return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%s{{end}}", zcl.{{.Type.Type}}(a)){{end}}
+    return zcl.Sprintf("{{if eq .ShowAs "hex"}}0x%X{{else}}%v{{end}}", zcl.{{.Type.Type}}(a)){{end}}
 }
 
 {{range $vk,$vv := .Bits}}

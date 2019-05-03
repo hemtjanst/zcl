@@ -93,7 +93,7 @@ func (v *AddGroup) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 func (v *AddGroup) GroupNameString() string {
-	return zcl.Sprintf("%s", zcl.Zcstring(v.GroupName))
+	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
 }
 
 func (v *AddGroup) String() string {
@@ -375,7 +375,7 @@ func (v *AddGroupIfIdentifying) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 func (v *AddGroupIfIdentifying) GroupNameString() string {
-	return zcl.Sprintf("%s", zcl.Zcstring(v.GroupName))
+	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
 }
 
 func (v *AddGroupIfIdentifying) String() string {
@@ -445,7 +445,7 @@ func (v *AddGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *AddGroupResponse) StatusString() string {
-	return zcl.Sprintf("%s", zcl.Status(v.Status))
+	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 func (v *AddGroupResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
@@ -529,13 +529,13 @@ func (v *ViewGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *ViewGroupResponse) StatusString() string {
-	return zcl.Sprintf("%s", zcl.Status(v.Status))
+	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 func (v *ViewGroupResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
 }
 func (v *ViewGroupResponse) GroupNameString() string {
-	return zcl.Sprintf("%s", zcl.Zcstring(v.GroupName))
+	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
 }
 
 func (v *ViewGroupResponse) String() string {
@@ -609,7 +609,7 @@ func (v *GetGroupMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *GetGroupMembershipResponse) CapacityString() string {
-	return zcl.Sprintf("%s", zcl.Zu8(v.Capacity))
+	return zcl.Sprintf("%v", zcl.Zu8(v.Capacity))
 }
 func (v *GetGroupMembershipResponse) GroupListString() string {
 	return zcl.Sprintf("0x%X", zcl.Zset(v.GroupList))
@@ -682,7 +682,7 @@ func (v *RemoveGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 }
 
 func (v *RemoveGroupResponse) StatusString() string {
-	return zcl.Sprintf("%s", zcl.Status(v.Status))
+	return zcl.Sprintf("%v", zcl.Status(v.Status))
 }
 func (v *RemoveGroupResponse) GroupIdString() string {
 	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
