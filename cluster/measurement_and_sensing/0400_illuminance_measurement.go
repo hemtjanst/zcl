@@ -33,23 +33,22 @@ type MeasuredIlluminance zcl.Zu16
 
 const MeasuredIlluminanceAttr zcl.AttrID = 0
 
-func (a MeasuredIlluminance) ID() zcl.AttrID               { return MeasuredIlluminanceAttr }
-func (a MeasuredIlluminance) Cluster() zcl.ClusterID       { return IlluminanceMeasurementID }
+func (MeasuredIlluminance) ID() zcl.AttrID                 { return MeasuredIlluminanceAttr }
+func (MeasuredIlluminance) Cluster() zcl.ClusterID         { return IlluminanceMeasurementID }
+func (MeasuredIlluminance) Name() string                   { return "Measured Illuminance" }
+func (MeasuredIlluminance) Readable() bool                 { return true }
+func (MeasuredIlluminance) Writable() bool                 { return false }
+func (MeasuredIlluminance) Reportable() bool               { return false }
+func (MeasuredIlluminance) SceneIndex() int                { return -1 }
 func (a *MeasuredIlluminance) Value() *MeasuredIlluminance { return a }
-func (a MeasuredIlluminance) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MeasuredIlluminance) MarshalZcl() ([]byte, error)  { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MeasuredIlluminance) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MeasuredIlluminance(*nt)
 	return br, err
 }
-func (MeasuredIlluminance) Name() string     { return "Measured Illuminance" }
-func (MeasuredIlluminance) Readable() bool   { return true }
-func (MeasuredIlluminance) Writable() bool   { return false }
-func (MeasuredIlluminance) Reportable() bool { return false }
-func (MeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MeasuredIlluminance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -60,23 +59,22 @@ type MinMeasuredIlluminance zcl.Zu16
 
 const MinMeasuredIlluminanceAttr zcl.AttrID = 1
 
-func (a MinMeasuredIlluminance) ID() zcl.AttrID                  { return MinMeasuredIlluminanceAttr }
-func (a MinMeasuredIlluminance) Cluster() zcl.ClusterID          { return IlluminanceMeasurementID }
+func (MinMeasuredIlluminance) ID() zcl.AttrID                    { return MinMeasuredIlluminanceAttr }
+func (MinMeasuredIlluminance) Cluster() zcl.ClusterID            { return IlluminanceMeasurementID }
+func (MinMeasuredIlluminance) Name() string                      { return "Min Measured Illuminance" }
+func (MinMeasuredIlluminance) Readable() bool                    { return true }
+func (MinMeasuredIlluminance) Writable() bool                    { return false }
+func (MinMeasuredIlluminance) Reportable() bool                  { return true }
+func (MinMeasuredIlluminance) SceneIndex() int                   { return -1 }
 func (a *MinMeasuredIlluminance) Value() *MinMeasuredIlluminance { return a }
-func (a MinMeasuredIlluminance) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MinMeasuredIlluminance) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MinMeasuredIlluminance) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MinMeasuredIlluminance(*nt)
 	return br, err
 }
-func (MinMeasuredIlluminance) Name() string     { return "Min Measured Illuminance" }
-func (MinMeasuredIlluminance) Readable() bool   { return true }
-func (MinMeasuredIlluminance) Writable() bool   { return false }
-func (MinMeasuredIlluminance) Reportable() bool { return true }
-func (MinMeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredIlluminance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -87,23 +85,22 @@ type MaxMeasuredIlluminance zcl.Zu16
 
 const MaxMeasuredIlluminanceAttr zcl.AttrID = 2
 
-func (a MaxMeasuredIlluminance) ID() zcl.AttrID                  { return MaxMeasuredIlluminanceAttr }
-func (a MaxMeasuredIlluminance) Cluster() zcl.ClusterID          { return IlluminanceMeasurementID }
+func (MaxMeasuredIlluminance) ID() zcl.AttrID                    { return MaxMeasuredIlluminanceAttr }
+func (MaxMeasuredIlluminance) Cluster() zcl.ClusterID            { return IlluminanceMeasurementID }
+func (MaxMeasuredIlluminance) Name() string                      { return "Max Measured Illuminance" }
+func (MaxMeasuredIlluminance) Readable() bool                    { return true }
+func (MaxMeasuredIlluminance) Writable() bool                    { return false }
+func (MaxMeasuredIlluminance) Reportable() bool                  { return false }
+func (MaxMeasuredIlluminance) SceneIndex() int                   { return -1 }
 func (a *MaxMeasuredIlluminance) Value() *MaxMeasuredIlluminance { return a }
-func (a MaxMeasuredIlluminance) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MaxMeasuredIlluminance) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MaxMeasuredIlluminance) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxMeasuredIlluminance(*nt)
 	return br, err
 }
-func (MaxMeasuredIlluminance) Name() string     { return "Max Measured Illuminance" }
-func (MaxMeasuredIlluminance) Readable() bool   { return true }
-func (MaxMeasuredIlluminance) Writable() bool   { return false }
-func (MaxMeasuredIlluminance) Reportable() bool { return false }
-func (MaxMeasuredIlluminance) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredIlluminance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -114,23 +111,22 @@ type IlluminanceTolerance zcl.Zu16
 
 const IlluminanceToleranceAttr zcl.AttrID = 3
 
-func (a IlluminanceTolerance) ID() zcl.AttrID                { return IlluminanceToleranceAttr }
-func (a IlluminanceTolerance) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
+func (IlluminanceTolerance) ID() zcl.AttrID                  { return IlluminanceToleranceAttr }
+func (IlluminanceTolerance) Cluster() zcl.ClusterID          { return IlluminanceMeasurementID }
+func (IlluminanceTolerance) Name() string                    { return "Illuminance Tolerance" }
+func (IlluminanceTolerance) Readable() bool                  { return true }
+func (IlluminanceTolerance) Writable() bool                  { return false }
+func (IlluminanceTolerance) Reportable() bool                { return false }
+func (IlluminanceTolerance) SceneIndex() int                 { return -1 }
 func (a *IlluminanceTolerance) Value() *IlluminanceTolerance { return a }
-func (a IlluminanceTolerance) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a IlluminanceTolerance) MarshalZcl() ([]byte, error)   { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *IlluminanceTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = IlluminanceTolerance(*nt)
 	return br, err
 }
-func (IlluminanceTolerance) Name() string     { return "Illuminance Tolerance" }
-func (IlluminanceTolerance) Readable() bool   { return true }
-func (IlluminanceTolerance) Writable() bool   { return false }
-func (IlluminanceTolerance) Reportable() bool { return false }
-func (IlluminanceTolerance) SceneIndex() int  { return -1 }
 
 func (a IlluminanceTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -141,23 +137,22 @@ type LightSensorType zcl.Zenum8
 
 const LightSensorTypeAttr zcl.AttrID = 4
 
-func (a LightSensorType) ID() zcl.AttrID           { return LightSensorTypeAttr }
-func (a LightSensorType) Cluster() zcl.ClusterID   { return IlluminanceMeasurementID }
-func (a *LightSensorType) Value() *LightSensorType { return a }
-func (a LightSensorType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (LightSensorType) ID() zcl.AttrID                { return LightSensorTypeAttr }
+func (LightSensorType) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
+func (LightSensorType) Name() string                  { return "Light Sensor Type" }
+func (LightSensorType) Readable() bool                { return true }
+func (LightSensorType) Writable() bool                { return false }
+func (LightSensorType) Reportable() bool              { return false }
+func (LightSensorType) SceneIndex() int               { return -1 }
+func (a *LightSensorType) Value() *LightSensorType    { return a }
+func (a LightSensorType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *LightSensorType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LightSensorType(*nt)
 	return br, err
 }
-func (LightSensorType) Name() string     { return "Light Sensor Type" }
-func (LightSensorType) Readable() bool   { return true }
-func (LightSensorType) Writable() bool   { return false }
-func (LightSensorType) Reportable() bool { return false }
-func (LightSensorType) SceneIndex() int  { return -1 }
 
 func (a LightSensorType) String() string {
 	switch a {
@@ -194,23 +189,22 @@ type Hysteresis zcl.Zu16
 
 const HysteresisAttr zcl.AttrID = 61440
 
-func (a Hysteresis) ID() zcl.AttrID         { return HysteresisAttr }
-func (a Hysteresis) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
-func (a *Hysteresis) Value() *Hysteresis    { return a }
-func (a Hysteresis) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (Hysteresis) ID() zcl.AttrID                { return HysteresisAttr }
+func (Hysteresis) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
+func (Hysteresis) Name() string                  { return "Hysteresis" }
+func (Hysteresis) Readable() bool                { return true }
+func (Hysteresis) Writable() bool                { return true }
+func (Hysteresis) Reportable() bool              { return false }
+func (Hysteresis) SceneIndex() int               { return -1 }
+func (a *Hysteresis) Value() *Hysteresis         { return a }
+func (a Hysteresis) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *Hysteresis) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Hysteresis(*nt)
 	return br, err
 }
-func (Hysteresis) Name() string     { return "Hysteresis" }
-func (Hysteresis) Readable() bool   { return true }
-func (Hysteresis) Writable() bool   { return true }
-func (Hysteresis) Reportable() bool { return false }
-func (Hysteresis) SceneIndex() int  { return -1 }
 
 func (a Hysteresis) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -222,23 +216,22 @@ type MaxUpSpeed zcl.Zu16
 
 const MaxUpSpeedAttr zcl.AttrID = 61441
 
-func (a MaxUpSpeed) ID() zcl.AttrID         { return MaxUpSpeedAttr }
-func (a MaxUpSpeed) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
-func (a *MaxUpSpeed) Value() *MaxUpSpeed    { return a }
-func (a MaxUpSpeed) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (MaxUpSpeed) ID() zcl.AttrID                { return MaxUpSpeedAttr }
+func (MaxUpSpeed) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
+func (MaxUpSpeed) Name() string                  { return "Max Up Speed" }
+func (MaxUpSpeed) Readable() bool                { return true }
+func (MaxUpSpeed) Writable() bool                { return true }
+func (MaxUpSpeed) Reportable() bool              { return false }
+func (MaxUpSpeed) SceneIndex() int               { return -1 }
+func (a *MaxUpSpeed) Value() *MaxUpSpeed         { return a }
+func (a MaxUpSpeed) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MaxUpSpeed) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxUpSpeed(*nt)
 	return br, err
 }
-func (MaxUpSpeed) Name() string     { return "Max Up Speed" }
-func (MaxUpSpeed) Readable() bool   { return true }
-func (MaxUpSpeed) Writable() bool   { return true }
-func (MaxUpSpeed) Reportable() bool { return false }
-func (MaxUpSpeed) SceneIndex() int  { return -1 }
 
 func (a MaxUpSpeed) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -250,23 +243,22 @@ type MaxDownSpeed zcl.Zu16
 
 const MaxDownSpeedAttr zcl.AttrID = 61442
 
-func (a MaxDownSpeed) ID() zcl.AttrID         { return MaxDownSpeedAttr }
-func (a MaxDownSpeed) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
-func (a *MaxDownSpeed) Value() *MaxDownSpeed  { return a }
-func (a MaxDownSpeed) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (MaxDownSpeed) ID() zcl.AttrID                { return MaxDownSpeedAttr }
+func (MaxDownSpeed) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
+func (MaxDownSpeed) Name() string                  { return "Max Down Speed" }
+func (MaxDownSpeed) Readable() bool                { return true }
+func (MaxDownSpeed) Writable() bool                { return true }
+func (MaxDownSpeed) Reportable() bool              { return false }
+func (MaxDownSpeed) SceneIndex() int               { return -1 }
+func (a *MaxDownSpeed) Value() *MaxDownSpeed       { return a }
+func (a MaxDownSpeed) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MaxDownSpeed) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxDownSpeed(*nt)
 	return br, err
 }
-func (MaxDownSpeed) Name() string     { return "Max Down Speed" }
-func (MaxDownSpeed) Readable() bool   { return true }
-func (MaxDownSpeed) Writable() bool   { return true }
-func (MaxDownSpeed) Reportable() bool { return false }
-func (MaxDownSpeed) SceneIndex() int  { return -1 }
 
 func (a MaxDownSpeed) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -278,23 +270,22 @@ type TargetValue zcl.Zu16
 
 const TargetValueAttr zcl.AttrID = 61443
 
-func (a TargetValue) ID() zcl.AttrID         { return TargetValueAttr }
-func (a TargetValue) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
-func (a *TargetValue) Value() *TargetValue   { return a }
-func (a TargetValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (TargetValue) ID() zcl.AttrID                { return TargetValueAttr }
+func (TargetValue) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
+func (TargetValue) Name() string                  { return "Target Value" }
+func (TargetValue) Readable() bool                { return true }
+func (TargetValue) Writable() bool                { return true }
+func (TargetValue) Reportable() bool              { return false }
+func (TargetValue) SceneIndex() int               { return -1 }
+func (a *TargetValue) Value() *TargetValue        { return a }
+func (a TargetValue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *TargetValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = TargetValue(*nt)
 	return br, err
 }
-func (TargetValue) Name() string     { return "Target Value" }
-func (TargetValue) Readable() bool   { return true }
-func (TargetValue) Writable() bool   { return true }
-func (TargetValue) Reportable() bool { return false }
-func (TargetValue) SceneIndex() int  { return -1 }
 
 func (a TargetValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -306,23 +297,22 @@ type StartupType zcl.Zenum8
 
 const StartupTypeAttr zcl.AttrID = 61444
 
-func (a StartupType) ID() zcl.AttrID         { return StartupTypeAttr }
-func (a StartupType) Cluster() zcl.ClusterID { return IlluminanceMeasurementID }
-func (a *StartupType) Value() *StartupType   { return a }
-func (a StartupType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (StartupType) ID() zcl.AttrID                { return StartupTypeAttr }
+func (StartupType) Cluster() zcl.ClusterID        { return IlluminanceMeasurementID }
+func (StartupType) Name() string                  { return "Startup Type" }
+func (StartupType) Readable() bool                { return true }
+func (StartupType) Writable() bool                { return true }
+func (StartupType) Reportable() bool              { return false }
+func (StartupType) SceneIndex() int               { return -1 }
+func (a *StartupType) Value() *StartupType        { return a }
+func (a StartupType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *StartupType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = StartupType(*nt)
 	return br, err
 }
-func (StartupType) Name() string     { return "Startup Type" }
-func (StartupType) Readable() bool   { return true }
-func (StartupType) Writable() bool   { return true }
-func (StartupType) Reportable() bool { return false }
-func (StartupType) SceneIndex() int  { return -1 }
 
 func (a StartupType) String() string {
 	switch a {

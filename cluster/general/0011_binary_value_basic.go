@@ -33,23 +33,22 @@ type BinaryValueActiveText zcl.Zcstring
 
 const BinaryValueActiveTextAttr zcl.AttrID = 4
 
-func (a BinaryValueActiveText) ID() zcl.AttrID                 { return BinaryValueActiveTextAttr }
-func (a BinaryValueActiveText) Cluster() zcl.ClusterID         { return BinaryValueBasicID }
+func (BinaryValueActiveText) ID() zcl.AttrID                   { return BinaryValueActiveTextAttr }
+func (BinaryValueActiveText) Cluster() zcl.ClusterID           { return BinaryValueBasicID }
+func (BinaryValueActiveText) Name() string                     { return "Binary Value Active Text" }
+func (BinaryValueActiveText) Readable() bool                   { return true }
+func (BinaryValueActiveText) Writable() bool                   { return true }
+func (BinaryValueActiveText) Reportable() bool                 { return false }
+func (BinaryValueActiveText) SceneIndex() int                  { return -1 }
 func (a *BinaryValueActiveText) Value() *BinaryValueActiveText { return a }
-func (a BinaryValueActiveText) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a BinaryValueActiveText) MarshalZcl() ([]byte, error)    { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *BinaryValueActiveText) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueActiveText(*nt)
 	return br, err
 }
-func (BinaryValueActiveText) Name() string     { return "Binary Value Active Text" }
-func (BinaryValueActiveText) Readable() bool   { return true }
-func (BinaryValueActiveText) Writable() bool   { return true }
-func (BinaryValueActiveText) Reportable() bool { return false }
-func (BinaryValueActiveText) SceneIndex() int  { return -1 }
 
 func (a BinaryValueActiveText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -60,23 +59,22 @@ type BinaryValueDescription zcl.Zcstring
 
 const BinaryValueDescriptionAttr zcl.AttrID = 28
 
-func (a BinaryValueDescription) ID() zcl.AttrID                  { return BinaryValueDescriptionAttr }
-func (a BinaryValueDescription) Cluster() zcl.ClusterID          { return BinaryValueBasicID }
+func (BinaryValueDescription) ID() zcl.AttrID                    { return BinaryValueDescriptionAttr }
+func (BinaryValueDescription) Cluster() zcl.ClusterID            { return BinaryValueBasicID }
+func (BinaryValueDescription) Name() string                      { return "Binary Value Description" }
+func (BinaryValueDescription) Readable() bool                    { return true }
+func (BinaryValueDescription) Writable() bool                    { return true }
+func (BinaryValueDescription) Reportable() bool                  { return false }
+func (BinaryValueDescription) SceneIndex() int                   { return -1 }
 func (a *BinaryValueDescription) Value() *BinaryValueDescription { return a }
-func (a BinaryValueDescription) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a BinaryValueDescription) MarshalZcl() ([]byte, error)     { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *BinaryValueDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueDescription(*nt)
 	return br, err
 }
-func (BinaryValueDescription) Name() string     { return "Binary Value Description" }
-func (BinaryValueDescription) Readable() bool   { return true }
-func (BinaryValueDescription) Writable() bool   { return true }
-func (BinaryValueDescription) Reportable() bool { return false }
-func (BinaryValueDescription) SceneIndex() int  { return -1 }
 
 func (a BinaryValueDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -87,23 +85,22 @@ type BinaryValueInactiveText zcl.Zcstring
 
 const BinaryValueInactiveTextAttr zcl.AttrID = 46
 
-func (a BinaryValueInactiveText) ID() zcl.AttrID                   { return BinaryValueInactiveTextAttr }
-func (a BinaryValueInactiveText) Cluster() zcl.ClusterID           { return BinaryValueBasicID }
+func (BinaryValueInactiveText) ID() zcl.AttrID                     { return BinaryValueInactiveTextAttr }
+func (BinaryValueInactiveText) Cluster() zcl.ClusterID             { return BinaryValueBasicID }
+func (BinaryValueInactiveText) Name() string                       { return "Binary Value Inactive Text" }
+func (BinaryValueInactiveText) Readable() bool                     { return true }
+func (BinaryValueInactiveText) Writable() bool                     { return true }
+func (BinaryValueInactiveText) Reportable() bool                   { return false }
+func (BinaryValueInactiveText) SceneIndex() int                    { return -1 }
 func (a *BinaryValueInactiveText) Value() *BinaryValueInactiveText { return a }
-func (a BinaryValueInactiveText) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a BinaryValueInactiveText) MarshalZcl() ([]byte, error)      { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *BinaryValueInactiveText) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueInactiveText(*nt)
 	return br, err
 }
-func (BinaryValueInactiveText) Name() string     { return "Binary Value Inactive Text" }
-func (BinaryValueInactiveText) Readable() bool   { return true }
-func (BinaryValueInactiveText) Writable() bool   { return true }
-func (BinaryValueInactiveText) Reportable() bool { return false }
-func (BinaryValueInactiveText) SceneIndex() int  { return -1 }
 
 func (a BinaryValueInactiveText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -114,23 +111,22 @@ type BinaryValueMinimumOffTime zcl.Zu32
 
 const BinaryValueMinimumOffTimeAttr zcl.AttrID = 66
 
-func (a BinaryValueMinimumOffTime) ID() zcl.AttrID                     { return BinaryValueMinimumOffTimeAttr }
-func (a BinaryValueMinimumOffTime) Cluster() zcl.ClusterID             { return BinaryValueBasicID }
+func (BinaryValueMinimumOffTime) ID() zcl.AttrID                       { return BinaryValueMinimumOffTimeAttr }
+func (BinaryValueMinimumOffTime) Cluster() zcl.ClusterID               { return BinaryValueBasicID }
+func (BinaryValueMinimumOffTime) Name() string                         { return "Binary Value Minimum Off Time" }
+func (BinaryValueMinimumOffTime) Readable() bool                       { return true }
+func (BinaryValueMinimumOffTime) Writable() bool                       { return true }
+func (BinaryValueMinimumOffTime) Reportable() bool                     { return false }
+func (BinaryValueMinimumOffTime) SceneIndex() int                      { return -1 }
 func (a *BinaryValueMinimumOffTime) Value() *BinaryValueMinimumOffTime { return a }
-func (a BinaryValueMinimumOffTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a BinaryValueMinimumOffTime) MarshalZcl() ([]byte, error)        { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *BinaryValueMinimumOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueMinimumOffTime(*nt)
 	return br, err
 }
-func (BinaryValueMinimumOffTime) Name() string     { return "Binary Value Minimum Off Time" }
-func (BinaryValueMinimumOffTime) Readable() bool   { return true }
-func (BinaryValueMinimumOffTime) Writable() bool   { return true }
-func (BinaryValueMinimumOffTime) Reportable() bool { return false }
-func (BinaryValueMinimumOffTime) SceneIndex() int  { return -1 }
 
 func (a BinaryValueMinimumOffTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -141,23 +137,22 @@ type BinaryValueMaximumOffTime zcl.Zu32
 
 const BinaryValueMaximumOffTimeAttr zcl.AttrID = 67
 
-func (a BinaryValueMaximumOffTime) ID() zcl.AttrID                     { return BinaryValueMaximumOffTimeAttr }
-func (a BinaryValueMaximumOffTime) Cluster() zcl.ClusterID             { return BinaryValueBasicID }
+func (BinaryValueMaximumOffTime) ID() zcl.AttrID                       { return BinaryValueMaximumOffTimeAttr }
+func (BinaryValueMaximumOffTime) Cluster() zcl.ClusterID               { return BinaryValueBasicID }
+func (BinaryValueMaximumOffTime) Name() string                         { return "Binary Value Maximum Off Time" }
+func (BinaryValueMaximumOffTime) Readable() bool                       { return true }
+func (BinaryValueMaximumOffTime) Writable() bool                       { return true }
+func (BinaryValueMaximumOffTime) Reportable() bool                     { return false }
+func (BinaryValueMaximumOffTime) SceneIndex() int                      { return -1 }
 func (a *BinaryValueMaximumOffTime) Value() *BinaryValueMaximumOffTime { return a }
-func (a BinaryValueMaximumOffTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a BinaryValueMaximumOffTime) MarshalZcl() ([]byte, error)        { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *BinaryValueMaximumOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueMaximumOffTime(*nt)
 	return br, err
 }
-func (BinaryValueMaximumOffTime) Name() string     { return "Binary Value Maximum Off Time" }
-func (BinaryValueMaximumOffTime) Readable() bool   { return true }
-func (BinaryValueMaximumOffTime) Writable() bool   { return true }
-func (BinaryValueMaximumOffTime) Reportable() bool { return false }
-func (BinaryValueMaximumOffTime) SceneIndex() int  { return -1 }
 
 func (a BinaryValueMaximumOffTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -168,23 +163,22 @@ type BinaryValueOutOfService zcl.Zbool
 
 const BinaryValueOutOfServiceAttr zcl.AttrID = 81
 
-func (a BinaryValueOutOfService) ID() zcl.AttrID                   { return BinaryValueOutOfServiceAttr }
-func (a BinaryValueOutOfService) Cluster() zcl.ClusterID           { return BinaryValueBasicID }
+func (BinaryValueOutOfService) ID() zcl.AttrID                     { return BinaryValueOutOfServiceAttr }
+func (BinaryValueOutOfService) Cluster() zcl.ClusterID             { return BinaryValueBasicID }
+func (BinaryValueOutOfService) Name() string                       { return "Binary Value Out of Service" }
+func (BinaryValueOutOfService) Readable() bool                     { return true }
+func (BinaryValueOutOfService) Writable() bool                     { return true }
+func (BinaryValueOutOfService) Reportable() bool                   { return false }
+func (BinaryValueOutOfService) SceneIndex() int                    { return -1 }
 func (a *BinaryValueOutOfService) Value() *BinaryValueOutOfService { return a }
-func (a BinaryValueOutOfService) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (a BinaryValueOutOfService) MarshalZcl() ([]byte, error)      { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *BinaryValueOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueOutOfService(*nt)
 	return br, err
 }
-func (BinaryValueOutOfService) Name() string     { return "Binary Value Out of Service" }
-func (BinaryValueOutOfService) Readable() bool   { return true }
-func (BinaryValueOutOfService) Writable() bool   { return true }
-func (BinaryValueOutOfService) Reportable() bool { return false }
-func (BinaryValueOutOfService) SceneIndex() int  { return -1 }
 
 func (a BinaryValueOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -195,23 +189,22 @@ type BinaryValuePresentValue zcl.Zbool
 
 const BinaryValuePresentValueAttr zcl.AttrID = 85
 
-func (a BinaryValuePresentValue) ID() zcl.AttrID                   { return BinaryValuePresentValueAttr }
-func (a BinaryValuePresentValue) Cluster() zcl.ClusterID           { return BinaryValueBasicID }
+func (BinaryValuePresentValue) ID() zcl.AttrID                     { return BinaryValuePresentValueAttr }
+func (BinaryValuePresentValue) Cluster() zcl.ClusterID             { return BinaryValueBasicID }
+func (BinaryValuePresentValue) Name() string                       { return "Binary Value Present Value" }
+func (BinaryValuePresentValue) Readable() bool                     { return true }
+func (BinaryValuePresentValue) Writable() bool                     { return true }
+func (BinaryValuePresentValue) Reportable() bool                   { return true }
+func (BinaryValuePresentValue) SceneIndex() int                    { return -1 }
 func (a *BinaryValuePresentValue) Value() *BinaryValuePresentValue { return a }
-func (a BinaryValuePresentValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (a BinaryValuePresentValue) MarshalZcl() ([]byte, error)      { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *BinaryValuePresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValuePresentValue(*nt)
 	return br, err
 }
-func (BinaryValuePresentValue) Name() string     { return "Binary Value Present Value" }
-func (BinaryValuePresentValue) Readable() bool   { return true }
-func (BinaryValuePresentValue) Writable() bool   { return true }
-func (BinaryValuePresentValue) Reportable() bool { return true }
-func (BinaryValuePresentValue) SceneIndex() int  { return -1 }
 
 func (a BinaryValuePresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -222,23 +215,22 @@ type BinaryValuePriorityArray zcl.Zarray
 
 const BinaryValuePriorityArrayAttr zcl.AttrID = 87
 
-func (a BinaryValuePriorityArray) ID() zcl.AttrID                    { return BinaryValuePriorityArrayAttr }
-func (a BinaryValuePriorityArray) Cluster() zcl.ClusterID            { return BinaryValueBasicID }
+func (BinaryValuePriorityArray) ID() zcl.AttrID                      { return BinaryValuePriorityArrayAttr }
+func (BinaryValuePriorityArray) Cluster() zcl.ClusterID              { return BinaryValueBasicID }
+func (BinaryValuePriorityArray) Name() string                        { return "Binary Value Priority Array" }
+func (BinaryValuePriorityArray) Readable() bool                      { return true }
+func (BinaryValuePriorityArray) Writable() bool                      { return true }
+func (BinaryValuePriorityArray) Reportable() bool                    { return false }
+func (BinaryValuePriorityArray) SceneIndex() int                     { return -1 }
 func (a *BinaryValuePriorityArray) Value() *BinaryValuePriorityArray { return a }
-func (a BinaryValuePriorityArray) MarshalZcl() ([]byte, error) {
-	return zcl.Zarray(a).MarshalZcl()
-}
+func (a BinaryValuePriorityArray) MarshalZcl() ([]byte, error)       { return zcl.Zarray(a).MarshalZcl() }
+
 func (a *BinaryValuePriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zarray)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValuePriorityArray(*nt)
 	return br, err
 }
-func (BinaryValuePriorityArray) Name() string     { return "Binary Value Priority Array" }
-func (BinaryValuePriorityArray) Readable() bool   { return true }
-func (BinaryValuePriorityArray) Writable() bool   { return true }
-func (BinaryValuePriorityArray) Reportable() bool { return false }
-func (BinaryValuePriorityArray) SceneIndex() int  { return -1 }
 
 func (a BinaryValuePriorityArray) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -249,23 +241,22 @@ type BinaryValueReliability zcl.Zenum8
 
 const BinaryValueReliabilityAttr zcl.AttrID = 103
 
-func (a BinaryValueReliability) ID() zcl.AttrID                  { return BinaryValueReliabilityAttr }
-func (a BinaryValueReliability) Cluster() zcl.ClusterID          { return BinaryValueBasicID }
+func (BinaryValueReliability) ID() zcl.AttrID                    { return BinaryValueReliabilityAttr }
+func (BinaryValueReliability) Cluster() zcl.ClusterID            { return BinaryValueBasicID }
+func (BinaryValueReliability) Name() string                      { return "Binary Value Reliability" }
+func (BinaryValueReliability) Readable() bool                    { return true }
+func (BinaryValueReliability) Writable() bool                    { return true }
+func (BinaryValueReliability) Reportable() bool                  { return false }
+func (BinaryValueReliability) SceneIndex() int                   { return -1 }
 func (a *BinaryValueReliability) Value() *BinaryValueReliability { return a }
-func (a BinaryValueReliability) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a BinaryValueReliability) MarshalZcl() ([]byte, error)     { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *BinaryValueReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueReliability(*nt)
 	return br, err
 }
-func (BinaryValueReliability) Name() string     { return "Binary Value Reliability" }
-func (BinaryValueReliability) Readable() bool   { return true }
-func (BinaryValueReliability) Writable() bool   { return true }
-func (BinaryValueReliability) Reportable() bool { return false }
-func (BinaryValueReliability) SceneIndex() int  { return -1 }
 
 func (a BinaryValueReliability) String() string {
 	switch a {
@@ -366,23 +357,22 @@ type BinaryValueRelinquishDefault zcl.Zbool
 
 const BinaryValueRelinquishDefaultAttr zcl.AttrID = 104
 
-func (a BinaryValueRelinquishDefault) ID() zcl.AttrID                        { return BinaryValueRelinquishDefaultAttr }
-func (a BinaryValueRelinquishDefault) Cluster() zcl.ClusterID                { return BinaryValueBasicID }
+func (BinaryValueRelinquishDefault) ID() zcl.AttrID                          { return BinaryValueRelinquishDefaultAttr }
+func (BinaryValueRelinquishDefault) Cluster() zcl.ClusterID                  { return BinaryValueBasicID }
+func (BinaryValueRelinquishDefault) Name() string                            { return "Binary Value Relinquish Default" }
+func (BinaryValueRelinquishDefault) Readable() bool                          { return true }
+func (BinaryValueRelinquishDefault) Writable() bool                          { return true }
+func (BinaryValueRelinquishDefault) Reportable() bool                        { return false }
+func (BinaryValueRelinquishDefault) SceneIndex() int                         { return -1 }
 func (a *BinaryValueRelinquishDefault) Value() *BinaryValueRelinquishDefault { return a }
-func (a BinaryValueRelinquishDefault) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (a BinaryValueRelinquishDefault) MarshalZcl() ([]byte, error)           { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *BinaryValueRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueRelinquishDefault(*nt)
 	return br, err
 }
-func (BinaryValueRelinquishDefault) Name() string     { return "Binary Value Relinquish Default" }
-func (BinaryValueRelinquishDefault) Readable() bool   { return true }
-func (BinaryValueRelinquishDefault) Writable() bool   { return true }
-func (BinaryValueRelinquishDefault) Reportable() bool { return false }
-func (BinaryValueRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a BinaryValueRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -393,23 +383,22 @@ type BinaryValueStatusFlags zcl.Zbmp8
 
 const BinaryValueStatusFlagsAttr zcl.AttrID = 111
 
-func (a BinaryValueStatusFlags) ID() zcl.AttrID                  { return BinaryValueStatusFlagsAttr }
-func (a BinaryValueStatusFlags) Cluster() zcl.ClusterID          { return BinaryValueBasicID }
+func (BinaryValueStatusFlags) ID() zcl.AttrID                    { return BinaryValueStatusFlagsAttr }
+func (BinaryValueStatusFlags) Cluster() zcl.ClusterID            { return BinaryValueBasicID }
+func (BinaryValueStatusFlags) Name() string                      { return "Binary Value Status Flags" }
+func (BinaryValueStatusFlags) Readable() bool                    { return true }
+func (BinaryValueStatusFlags) Writable() bool                    { return false }
+func (BinaryValueStatusFlags) Reportable() bool                  { return true }
+func (BinaryValueStatusFlags) SceneIndex() int                   { return -1 }
 func (a *BinaryValueStatusFlags) Value() *BinaryValueStatusFlags { return a }
-func (a BinaryValueStatusFlags) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a BinaryValueStatusFlags) MarshalZcl() ([]byte, error)     { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *BinaryValueStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueStatusFlags(*nt)
 	return br, err
 }
-func (BinaryValueStatusFlags) Name() string     { return "Binary Value Status Flags" }
-func (BinaryValueStatusFlags) Readable() bool   { return true }
-func (BinaryValueStatusFlags) Writable() bool   { return false }
-func (BinaryValueStatusFlags) Reportable() bool { return true }
-func (BinaryValueStatusFlags) SceneIndex() int  { return -1 }
 
 func (a BinaryValueStatusFlags) String() string {
 	var bstr []string
@@ -461,23 +450,22 @@ type BinaryValueApplicationType zcl.Zu32
 
 const BinaryValueApplicationTypeAttr zcl.AttrID = 256
 
-func (a BinaryValueApplicationType) ID() zcl.AttrID                      { return BinaryValueApplicationTypeAttr }
-func (a BinaryValueApplicationType) Cluster() zcl.ClusterID              { return BinaryValueBasicID }
+func (BinaryValueApplicationType) ID() zcl.AttrID                        { return BinaryValueApplicationTypeAttr }
+func (BinaryValueApplicationType) Cluster() zcl.ClusterID                { return BinaryValueBasicID }
+func (BinaryValueApplicationType) Name() string                          { return "Binary Value Application Type" }
+func (BinaryValueApplicationType) Readable() bool                        { return true }
+func (BinaryValueApplicationType) Writable() bool                        { return false }
+func (BinaryValueApplicationType) Reportable() bool                      { return false }
+func (BinaryValueApplicationType) SceneIndex() int                       { return -1 }
 func (a *BinaryValueApplicationType) Value() *BinaryValueApplicationType { return a }
-func (a BinaryValueApplicationType) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a BinaryValueApplicationType) MarshalZcl() ([]byte, error)         { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *BinaryValueApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryValueApplicationType(*nt)
 	return br, err
 }
-func (BinaryValueApplicationType) Name() string     { return "Binary Value Application Type" }
-func (BinaryValueApplicationType) Readable() bool   { return true }
-func (BinaryValueApplicationType) Writable() bool   { return false }
-func (BinaryValueApplicationType) Reportable() bool { return false }
-func (BinaryValueApplicationType) SceneIndex() int  { return -1 }
 
 func (a BinaryValueApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

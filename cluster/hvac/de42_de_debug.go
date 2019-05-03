@@ -24,23 +24,22 @@ type DebugEnabled zcl.Zbool
 
 const DebugEnabledAttr zcl.AttrID = 0
 
-func (a DebugEnabled) ID() zcl.AttrID         { return DebugEnabledAttr }
-func (a DebugEnabled) Cluster() zcl.ClusterID { return DeDebugID }
-func (a *DebugEnabled) Value() *DebugEnabled  { return a }
-func (a DebugEnabled) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (DebugEnabled) ID() zcl.AttrID                { return DebugEnabledAttr }
+func (DebugEnabled) Cluster() zcl.ClusterID        { return DeDebugID }
+func (DebugEnabled) Name() string                  { return "Debug enabled" }
+func (DebugEnabled) Readable() bool                { return true }
+func (DebugEnabled) Writable() bool                { return true }
+func (DebugEnabled) Reportable() bool              { return false }
+func (DebugEnabled) SceneIndex() int               { return -1 }
+func (a *DebugEnabled) Value() *DebugEnabled       { return a }
+func (a DebugEnabled) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *DebugEnabled) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DebugEnabled(*nt)
 	return br, err
 }
-func (DebugEnabled) Name() string     { return "Debug enabled" }
-func (DebugEnabled) Readable() bool   { return true }
-func (DebugEnabled) Writable() bool   { return true }
-func (DebugEnabled) Reportable() bool { return false }
-func (DebugEnabled) SceneIndex() int  { return -1 }
 
 func (a DebugEnabled) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -51,24 +50,23 @@ type DebugDestination zcl.Zu16
 
 const DebugDestinationAttr zcl.AttrID = 1
 
-func (a DebugDestination) ID() zcl.AttrID            { return DebugDestinationAttr }
-func (a DebugDestination) Cluster() zcl.ClusterID    { return DeDebugID }
-func (a *DebugDestination) Value() *DebugDestination { return a }
-func (a DebugDestination) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (DebugDestination) ID() zcl.AttrID                { return DebugDestinationAttr }
+func (DebugDestination) Cluster() zcl.ClusterID        { return DeDebugID }
+func (DebugDestination) Name() string                  { return "Debug destination" }
+func (DebugDestination) Readable() bool                { return true }
+func (DebugDestination) Writable() bool                { return true }
+func (DebugDestination) Reportable() bool              { return false }
+func (DebugDestination) SceneIndex() int               { return -1 }
+func (a *DebugDestination) Value() *DebugDestination   { return a }
+func (a DebugDestination) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *DebugDestination) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DebugDestination(*nt)
 	return br, err
 }
-func (DebugDestination) Name() string     { return "Debug destination" }
-func (DebugDestination) Readable() bool   { return true }
-func (DebugDestination) Writable() bool   { return true }
-func (DebugDestination) Reportable() bool { return false }
-func (DebugDestination) SceneIndex() int  { return -1 }
 
 func (a DebugDestination) String() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(a))
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }

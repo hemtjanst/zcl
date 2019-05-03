@@ -371,23 +371,22 @@ type Onoff zcl.Zbool
 
 const OnoffAttr zcl.AttrID = 0
 
-func (a Onoff) ID() zcl.AttrID         { return OnoffAttr }
-func (a Onoff) Cluster() zcl.ClusterID { return OnOffID }
-func (a *Onoff) Value() *Onoff         { return a }
-func (a Onoff) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (Onoff) ID() zcl.AttrID                { return OnoffAttr }
+func (Onoff) Cluster() zcl.ClusterID        { return OnOffID }
+func (Onoff) Name() string                  { return "OnOff" }
+func (Onoff) Readable() bool                { return true }
+func (Onoff) Writable() bool                { return false }
+func (Onoff) Reportable() bool              { return true }
+func (Onoff) SceneIndex() int               { return 1 }
+func (a *Onoff) Value() *Onoff              { return a }
+func (a Onoff) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *Onoff) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Onoff(*nt)
 	return br, err
 }
-func (Onoff) Name() string     { return "OnOff" }
-func (Onoff) Readable() bool   { return true }
-func (Onoff) Writable() bool   { return false }
-func (Onoff) Reportable() bool { return true }
-func (Onoff) SceneIndex() int  { return 1 }
 
 func (a Onoff) String() string {
 	switch a {
@@ -416,23 +415,22 @@ type Globalscenecontrol zcl.Zbool
 
 const GlobalscenecontrolAttr zcl.AttrID = 16384
 
-func (a Globalscenecontrol) ID() zcl.AttrID              { return GlobalscenecontrolAttr }
-func (a Globalscenecontrol) Cluster() zcl.ClusterID      { return OnOffID }
+func (Globalscenecontrol) ID() zcl.AttrID                { return GlobalscenecontrolAttr }
+func (Globalscenecontrol) Cluster() zcl.ClusterID        { return OnOffID }
+func (Globalscenecontrol) Name() string                  { return "GlobalSceneControl" }
+func (Globalscenecontrol) Readable() bool                { return true }
+func (Globalscenecontrol) Writable() bool                { return false }
+func (Globalscenecontrol) Reportable() bool              { return false }
+func (Globalscenecontrol) SceneIndex() int               { return -1 }
 func (a *Globalscenecontrol) Value() *Globalscenecontrol { return a }
-func (a Globalscenecontrol) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (a Globalscenecontrol) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *Globalscenecontrol) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Globalscenecontrol(*nt)
 	return br, err
 }
-func (Globalscenecontrol) Name() string     { return "GlobalSceneControl" }
-func (Globalscenecontrol) Readable() bool   { return true }
-func (Globalscenecontrol) Writable() bool   { return false }
-func (Globalscenecontrol) Reportable() bool { return false }
-func (Globalscenecontrol) SceneIndex() int  { return -1 }
 
 func (a Globalscenecontrol) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -443,23 +441,22 @@ type Ontime zcl.Zu16
 
 const OntimeAttr zcl.AttrID = 16385
 
-func (a Ontime) ID() zcl.AttrID         { return OntimeAttr }
-func (a Ontime) Cluster() zcl.ClusterID { return OnOffID }
-func (a *Ontime) Value() *Ontime        { return a }
-func (a Ontime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (Ontime) ID() zcl.AttrID                { return OntimeAttr }
+func (Ontime) Cluster() zcl.ClusterID        { return OnOffID }
+func (Ontime) Name() string                  { return "OnTime" }
+func (Ontime) Readable() bool                { return true }
+func (Ontime) Writable() bool                { return false }
+func (Ontime) Reportable() bool              { return false }
+func (Ontime) SceneIndex() int               { return -1 }
+func (a *Ontime) Value() *Ontime             { return a }
+func (a Ontime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *Ontime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Ontime(*nt)
 	return br, err
 }
-func (Ontime) Name() string     { return "OnTime" }
-func (Ontime) Readable() bool   { return true }
-func (Ontime) Writable() bool   { return false }
-func (Ontime) Reportable() bool { return false }
-func (Ontime) SceneIndex() int  { return -1 }
 
 func (a Ontime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -470,23 +467,22 @@ type Offwaittime zcl.Zu16
 
 const OffwaittimeAttr zcl.AttrID = 16386
 
-func (a Offwaittime) ID() zcl.AttrID         { return OffwaittimeAttr }
-func (a Offwaittime) Cluster() zcl.ClusterID { return OnOffID }
-func (a *Offwaittime) Value() *Offwaittime   { return a }
-func (a Offwaittime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (Offwaittime) ID() zcl.AttrID                { return OffwaittimeAttr }
+func (Offwaittime) Cluster() zcl.ClusterID        { return OnOffID }
+func (Offwaittime) Name() string                  { return "OffWaitTime" }
+func (Offwaittime) Readable() bool                { return true }
+func (Offwaittime) Writable() bool                { return false }
+func (Offwaittime) Reportable() bool              { return false }
+func (Offwaittime) SceneIndex() int               { return -1 }
+func (a *Offwaittime) Value() *Offwaittime        { return a }
+func (a Offwaittime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *Offwaittime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Offwaittime(*nt)
 	return br, err
 }
-func (Offwaittime) Name() string     { return "OffWaitTime" }
-func (Offwaittime) Readable() bool   { return true }
-func (Offwaittime) Writable() bool   { return false }
-func (Offwaittime) Reportable() bool { return false }
-func (Offwaittime) SceneIndex() int  { return -1 }
 
 func (a Offwaittime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -497,23 +493,22 @@ type PoweronOnoff zcl.Zenum8
 
 const PoweronOnoffAttr zcl.AttrID = 16387
 
-func (a PoweronOnoff) ID() zcl.AttrID         { return PoweronOnoffAttr }
-func (a PoweronOnoff) Cluster() zcl.ClusterID { return OnOffID }
-func (a *PoweronOnoff) Value() *PoweronOnoff  { return a }
-func (a PoweronOnoff) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (PoweronOnoff) ID() zcl.AttrID                { return PoweronOnoffAttr }
+func (PoweronOnoff) Cluster() zcl.ClusterID        { return OnOffID }
+func (PoweronOnoff) Name() string                  { return "PowerOn OnOff" }
+func (PoweronOnoff) Readable() bool                { return true }
+func (PoweronOnoff) Writable() bool                { return true }
+func (PoweronOnoff) Reportable() bool              { return false }
+func (PoweronOnoff) SceneIndex() int               { return -1 }
+func (a *PoweronOnoff) Value() *PoweronOnoff       { return a }
+func (a PoweronOnoff) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *PoweronOnoff) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PoweronOnoff(*nt)
 	return br, err
 }
-func (PoweronOnoff) Name() string     { return "PowerOn OnOff" }
-func (PoweronOnoff) Readable() bool   { return true }
-func (PoweronOnoff) Writable() bool   { return true }
-func (PoweronOnoff) Reportable() bool { return false }
-func (PoweronOnoff) SceneIndex() int  { return -1 }
 
 func (a PoweronOnoff) String() string {
 	switch a {

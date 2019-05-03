@@ -25,23 +25,22 @@ type Switchtype zcl.Zenum8
 
 const SwitchtypeAttr zcl.AttrID = 0
 
-func (a Switchtype) ID() zcl.AttrID         { return SwitchtypeAttr }
-func (a Switchtype) Cluster() zcl.ClusterID { return OnOffSwitchConfigurationID }
-func (a *Switchtype) Value() *Switchtype    { return a }
-func (a Switchtype) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (Switchtype) ID() zcl.AttrID                { return SwitchtypeAttr }
+func (Switchtype) Cluster() zcl.ClusterID        { return OnOffSwitchConfigurationID }
+func (Switchtype) Name() string                  { return "SwitchType" }
+func (Switchtype) Readable() bool                { return true }
+func (Switchtype) Writable() bool                { return false }
+func (Switchtype) Reportable() bool              { return false }
+func (Switchtype) SceneIndex() int               { return -1 }
+func (a *Switchtype) Value() *Switchtype         { return a }
+func (a Switchtype) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *Switchtype) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Switchtype(*nt)
 	return br, err
 }
-func (Switchtype) Name() string     { return "SwitchType" }
-func (Switchtype) Readable() bool   { return true }
-func (Switchtype) Writable() bool   { return false }
-func (Switchtype) Reportable() bool { return false }
-func (Switchtype) SceneIndex() int  { return -1 }
 
 func (a Switchtype) String() string {
 	switch a {
@@ -79,23 +78,22 @@ type Switchactions zcl.Zenum8
 
 const SwitchactionsAttr zcl.AttrID = 16
 
-func (a Switchactions) ID() zcl.AttrID         { return SwitchactionsAttr }
-func (a Switchactions) Cluster() zcl.ClusterID { return OnOffSwitchConfigurationID }
-func (a *Switchactions) Value() *Switchactions { return a }
-func (a Switchactions) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (Switchactions) ID() zcl.AttrID                { return SwitchactionsAttr }
+func (Switchactions) Cluster() zcl.ClusterID        { return OnOffSwitchConfigurationID }
+func (Switchactions) Name() string                  { return "SwitchActions" }
+func (Switchactions) Readable() bool                { return true }
+func (Switchactions) Writable() bool                { return true }
+func (Switchactions) Reportable() bool              { return false }
+func (Switchactions) SceneIndex() int               { return -1 }
+func (a *Switchactions) Value() *Switchactions      { return a }
+func (a Switchactions) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *Switchactions) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Switchactions(*nt)
 	return br, err
 }
-func (Switchactions) Name() string     { return "SwitchActions" }
-func (Switchactions) Readable() bool   { return true }
-func (Switchactions) Writable() bool   { return true }
-func (Switchactions) Reportable() bool { return false }
-func (Switchactions) SceneIndex() int  { return -1 }
 
 func (a Switchactions) String() string {
 	switch a {

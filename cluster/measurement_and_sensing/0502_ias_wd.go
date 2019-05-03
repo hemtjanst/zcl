@@ -234,23 +234,22 @@ type MaxDuration zcl.Zu16
 
 const MaxDurationAttr zcl.AttrID = 0
 
-func (a MaxDuration) ID() zcl.AttrID         { return MaxDurationAttr }
-func (a MaxDuration) Cluster() zcl.ClusterID { return IasWdID }
-func (a *MaxDuration) Value() *MaxDuration   { return a }
-func (a MaxDuration) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (MaxDuration) ID() zcl.AttrID                { return MaxDurationAttr }
+func (MaxDuration) Cluster() zcl.ClusterID        { return IasWdID }
+func (MaxDuration) Name() string                  { return "Max Duration" }
+func (MaxDuration) Readable() bool                { return true }
+func (MaxDuration) Writable() bool                { return true }
+func (MaxDuration) Reportable() bool              { return false }
+func (MaxDuration) SceneIndex() int               { return -1 }
+func (a *MaxDuration) Value() *MaxDuration        { return a }
+func (a MaxDuration) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MaxDuration) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxDuration(*nt)
 	return br, err
 }
-func (MaxDuration) Name() string     { return "Max Duration" }
-func (MaxDuration) Readable() bool   { return true }
-func (MaxDuration) Writable() bool   { return true }
-func (MaxDuration) Reportable() bool { return false }
-func (MaxDuration) SceneIndex() int  { return -1 }
 
 func (a MaxDuration) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

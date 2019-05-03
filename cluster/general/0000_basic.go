@@ -86,23 +86,22 @@ type ClusterRevision zcl.Zu16
 
 const ClusterRevisionAttr zcl.AttrID = 65533
 
-func (a ClusterRevision) ID() zcl.AttrID           { return ClusterRevisionAttr }
-func (a ClusterRevision) Cluster() zcl.ClusterID   { return BasicID }
-func (a *ClusterRevision) Value() *ClusterRevision { return a }
-func (a ClusterRevision) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (ClusterRevision) ID() zcl.AttrID                { return ClusterRevisionAttr }
+func (ClusterRevision) Cluster() zcl.ClusterID        { return BasicID }
+func (ClusterRevision) Name() string                  { return "Cluster Revision" }
+func (ClusterRevision) Readable() bool                { return true }
+func (ClusterRevision) Writable() bool                { return true }
+func (ClusterRevision) Reportable() bool              { return false }
+func (ClusterRevision) SceneIndex() int               { return -1 }
+func (a *ClusterRevision) Value() *ClusterRevision    { return a }
+func (a ClusterRevision) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *ClusterRevision) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ClusterRevision(*nt)
 	return br, err
 }
-func (ClusterRevision) Name() string     { return "Cluster Revision" }
-func (ClusterRevision) Readable() bool   { return true }
-func (ClusterRevision) Writable() bool   { return true }
-func (ClusterRevision) Reportable() bool { return false }
-func (ClusterRevision) SceneIndex() int  { return -1 }
 
 func (a ClusterRevision) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -113,23 +112,22 @@ type ZclVersion zcl.Zu8
 
 const ZclVersionAttr zcl.AttrID = 0
 
-func (a ZclVersion) ID() zcl.AttrID         { return ZclVersionAttr }
-func (a ZclVersion) Cluster() zcl.ClusterID { return BasicID }
-func (a *ZclVersion) Value() *ZclVersion    { return a }
-func (a ZclVersion) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (ZclVersion) ID() zcl.AttrID                { return ZclVersionAttr }
+func (ZclVersion) Cluster() zcl.ClusterID        { return BasicID }
+func (ZclVersion) Name() string                  { return "ZCL Version" }
+func (ZclVersion) Readable() bool                { return true }
+func (ZclVersion) Writable() bool                { return false }
+func (ZclVersion) Reportable() bool              { return false }
+func (ZclVersion) SceneIndex() int               { return -1 }
+func (a *ZclVersion) Value() *ZclVersion         { return a }
+func (a ZclVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *ZclVersion) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ZclVersion(*nt)
 	return br, err
 }
-func (ZclVersion) Name() string     { return "ZCL Version" }
-func (ZclVersion) Readable() bool   { return true }
-func (ZclVersion) Writable() bool   { return false }
-func (ZclVersion) Reportable() bool { return false }
-func (ZclVersion) SceneIndex() int  { return -1 }
 
 func (a ZclVersion) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -140,23 +138,22 @@ type ApplicationVersion zcl.Zu8
 
 const ApplicationVersionAttr zcl.AttrID = 1
 
-func (a ApplicationVersion) ID() zcl.AttrID              { return ApplicationVersionAttr }
-func (a ApplicationVersion) Cluster() zcl.ClusterID      { return BasicID }
+func (ApplicationVersion) ID() zcl.AttrID                { return ApplicationVersionAttr }
+func (ApplicationVersion) Cluster() zcl.ClusterID        { return BasicID }
+func (ApplicationVersion) Name() string                  { return "Application Version" }
+func (ApplicationVersion) Readable() bool                { return true }
+func (ApplicationVersion) Writable() bool                { return false }
+func (ApplicationVersion) Reportable() bool              { return false }
+func (ApplicationVersion) SceneIndex() int               { return -1 }
 func (a *ApplicationVersion) Value() *ApplicationVersion { return a }
-func (a ApplicationVersion) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a ApplicationVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *ApplicationVersion) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ApplicationVersion(*nt)
 	return br, err
 }
-func (ApplicationVersion) Name() string     { return "Application Version" }
-func (ApplicationVersion) Readable() bool   { return true }
-func (ApplicationVersion) Writable() bool   { return false }
-func (ApplicationVersion) Reportable() bool { return false }
-func (ApplicationVersion) SceneIndex() int  { return -1 }
 
 func (a ApplicationVersion) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -167,23 +164,22 @@ type StackVersion zcl.Zu8
 
 const StackVersionAttr zcl.AttrID = 2
 
-func (a StackVersion) ID() zcl.AttrID         { return StackVersionAttr }
-func (a StackVersion) Cluster() zcl.ClusterID { return BasicID }
-func (a *StackVersion) Value() *StackVersion  { return a }
-func (a StackVersion) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (StackVersion) ID() zcl.AttrID                { return StackVersionAttr }
+func (StackVersion) Cluster() zcl.ClusterID        { return BasicID }
+func (StackVersion) Name() string                  { return "Stack Version" }
+func (StackVersion) Readable() bool                { return true }
+func (StackVersion) Writable() bool                { return false }
+func (StackVersion) Reportable() bool              { return false }
+func (StackVersion) SceneIndex() int               { return -1 }
+func (a *StackVersion) Value() *StackVersion       { return a }
+func (a StackVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *StackVersion) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = StackVersion(*nt)
 	return br, err
 }
-func (StackVersion) Name() string     { return "Stack Version" }
-func (StackVersion) Readable() bool   { return true }
-func (StackVersion) Writable() bool   { return false }
-func (StackVersion) Reportable() bool { return false }
-func (StackVersion) SceneIndex() int  { return -1 }
 
 func (a StackVersion) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -194,23 +190,22 @@ type HwVersion zcl.Zu8
 
 const HwVersionAttr zcl.AttrID = 3
 
-func (a HwVersion) ID() zcl.AttrID         { return HwVersionAttr }
-func (a HwVersion) Cluster() zcl.ClusterID { return BasicID }
-func (a *HwVersion) Value() *HwVersion     { return a }
-func (a HwVersion) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (HwVersion) ID() zcl.AttrID                { return HwVersionAttr }
+func (HwVersion) Cluster() zcl.ClusterID        { return BasicID }
+func (HwVersion) Name() string                  { return "HW Version" }
+func (HwVersion) Readable() bool                { return true }
+func (HwVersion) Writable() bool                { return false }
+func (HwVersion) Reportable() bool              { return false }
+func (HwVersion) SceneIndex() int               { return -1 }
+func (a *HwVersion) Value() *HwVersion          { return a }
+func (a HwVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *HwVersion) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = HwVersion(*nt)
 	return br, err
 }
-func (HwVersion) Name() string     { return "HW Version" }
-func (HwVersion) Readable() bool   { return true }
-func (HwVersion) Writable() bool   { return false }
-func (HwVersion) Reportable() bool { return false }
-func (HwVersion) SceneIndex() int  { return -1 }
 
 func (a HwVersion) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -221,23 +216,22 @@ type ManufacturerName zcl.Zcstring
 
 const ManufacturerNameAttr zcl.AttrID = 4
 
-func (a ManufacturerName) ID() zcl.AttrID            { return ManufacturerNameAttr }
-func (a ManufacturerName) Cluster() zcl.ClusterID    { return BasicID }
-func (a *ManufacturerName) Value() *ManufacturerName { return a }
-func (a ManufacturerName) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (ManufacturerName) ID() zcl.AttrID                { return ManufacturerNameAttr }
+func (ManufacturerName) Cluster() zcl.ClusterID        { return BasicID }
+func (ManufacturerName) Name() string                  { return "Manufacturer Name" }
+func (ManufacturerName) Readable() bool                { return true }
+func (ManufacturerName) Writable() bool                { return false }
+func (ManufacturerName) Reportable() bool              { return false }
+func (ManufacturerName) SceneIndex() int               { return -1 }
+func (a *ManufacturerName) Value() *ManufacturerName   { return a }
+func (a ManufacturerName) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *ManufacturerName) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ManufacturerName(*nt)
 	return br, err
 }
-func (ManufacturerName) Name() string     { return "Manufacturer Name" }
-func (ManufacturerName) Readable() bool   { return true }
-func (ManufacturerName) Writable() bool   { return false }
-func (ManufacturerName) Reportable() bool { return false }
-func (ManufacturerName) SceneIndex() int  { return -1 }
 
 func (a ManufacturerName) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -248,23 +242,22 @@ type ModelIdentifier zcl.Zcstring
 
 const ModelIdentifierAttr zcl.AttrID = 5
 
-func (a ModelIdentifier) ID() zcl.AttrID           { return ModelIdentifierAttr }
-func (a ModelIdentifier) Cluster() zcl.ClusterID   { return BasicID }
-func (a *ModelIdentifier) Value() *ModelIdentifier { return a }
-func (a ModelIdentifier) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (ModelIdentifier) ID() zcl.AttrID                { return ModelIdentifierAttr }
+func (ModelIdentifier) Cluster() zcl.ClusterID        { return BasicID }
+func (ModelIdentifier) Name() string                  { return "Model Identifier" }
+func (ModelIdentifier) Readable() bool                { return true }
+func (ModelIdentifier) Writable() bool                { return false }
+func (ModelIdentifier) Reportable() bool              { return false }
+func (ModelIdentifier) SceneIndex() int               { return -1 }
+func (a *ModelIdentifier) Value() *ModelIdentifier    { return a }
+func (a ModelIdentifier) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *ModelIdentifier) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ModelIdentifier(*nt)
 	return br, err
 }
-func (ModelIdentifier) Name() string     { return "Model Identifier" }
-func (ModelIdentifier) Readable() bool   { return true }
-func (ModelIdentifier) Writable() bool   { return false }
-func (ModelIdentifier) Reportable() bool { return false }
-func (ModelIdentifier) SceneIndex() int  { return -1 }
 
 func (a ModelIdentifier) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -275,23 +268,22 @@ type DateCode zcl.Zcstring
 
 const DateCodeAttr zcl.AttrID = 6
 
-func (a DateCode) ID() zcl.AttrID         { return DateCodeAttr }
-func (a DateCode) Cluster() zcl.ClusterID { return BasicID }
-func (a *DateCode) Value() *DateCode      { return a }
-func (a DateCode) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (DateCode) ID() zcl.AttrID                { return DateCodeAttr }
+func (DateCode) Cluster() zcl.ClusterID        { return BasicID }
+func (DateCode) Name() string                  { return "Date Code" }
+func (DateCode) Readable() bool                { return true }
+func (DateCode) Writable() bool                { return false }
+func (DateCode) Reportable() bool              { return false }
+func (DateCode) SceneIndex() int               { return -1 }
+func (a *DateCode) Value() *DateCode           { return a }
+func (a DateCode) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *DateCode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DateCode(*nt)
 	return br, err
 }
-func (DateCode) Name() string     { return "Date Code" }
-func (DateCode) Readable() bool   { return true }
-func (DateCode) Writable() bool   { return false }
-func (DateCode) Reportable() bool { return false }
-func (DateCode) SceneIndex() int  { return -1 }
 
 func (a DateCode) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -302,23 +294,22 @@ type PowerSource zcl.Zenum8
 
 const PowerSourceAttr zcl.AttrID = 7
 
-func (a PowerSource) ID() zcl.AttrID         { return PowerSourceAttr }
-func (a PowerSource) Cluster() zcl.ClusterID { return BasicID }
-func (a *PowerSource) Value() *PowerSource   { return a }
-func (a PowerSource) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (PowerSource) ID() zcl.AttrID                { return PowerSourceAttr }
+func (PowerSource) Cluster() zcl.ClusterID        { return BasicID }
+func (PowerSource) Name() string                  { return "Power Source" }
+func (PowerSource) Readable() bool                { return true }
+func (PowerSource) Writable() bool                { return false }
+func (PowerSource) Reportable() bool              { return false }
+func (PowerSource) SceneIndex() int               { return -1 }
+func (a *PowerSource) Value() *PowerSource        { return a }
+func (a PowerSource) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *PowerSource) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PowerSource(*nt)
 	return br, err
 }
-func (PowerSource) Name() string     { return "Power Source" }
-func (PowerSource) Readable() bool   { return true }
-func (PowerSource) Writable() bool   { return false }
-func (PowerSource) Reportable() bool { return false }
-func (PowerSource) SceneIndex() int  { return -1 }
 
 func (a PowerSource) String() string {
 	switch a {
@@ -443,23 +434,22 @@ type LocationDescription zcl.Zcstring
 
 const LocationDescriptionAttr zcl.AttrID = 16
 
-func (a LocationDescription) ID() zcl.AttrID               { return LocationDescriptionAttr }
-func (a LocationDescription) Cluster() zcl.ClusterID       { return BasicID }
+func (LocationDescription) ID() zcl.AttrID                 { return LocationDescriptionAttr }
+func (LocationDescription) Cluster() zcl.ClusterID         { return BasicID }
+func (LocationDescription) Name() string                   { return "Location Description" }
+func (LocationDescription) Readable() bool                 { return true }
+func (LocationDescription) Writable() bool                 { return true }
+func (LocationDescription) Reportable() bool               { return false }
+func (LocationDescription) SceneIndex() int                { return -1 }
 func (a *LocationDescription) Value() *LocationDescription { return a }
-func (a LocationDescription) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a LocationDescription) MarshalZcl() ([]byte, error)  { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *LocationDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocationDescription(*nt)
 	return br, err
 }
-func (LocationDescription) Name() string     { return "Location Description" }
-func (LocationDescription) Readable() bool   { return true }
-func (LocationDescription) Writable() bool   { return true }
-func (LocationDescription) Reportable() bool { return false }
-func (LocationDescription) SceneIndex() int  { return -1 }
 
 func (a LocationDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -470,23 +460,22 @@ type PhysicalEnvironment zcl.Zenum8
 
 const PhysicalEnvironmentAttr zcl.AttrID = 17
 
-func (a PhysicalEnvironment) ID() zcl.AttrID               { return PhysicalEnvironmentAttr }
-func (a PhysicalEnvironment) Cluster() zcl.ClusterID       { return BasicID }
+func (PhysicalEnvironment) ID() zcl.AttrID                 { return PhysicalEnvironmentAttr }
+func (PhysicalEnvironment) Cluster() zcl.ClusterID         { return BasicID }
+func (PhysicalEnvironment) Name() string                   { return "Physical Environment" }
+func (PhysicalEnvironment) Readable() bool                 { return true }
+func (PhysicalEnvironment) Writable() bool                 { return true }
+func (PhysicalEnvironment) Reportable() bool               { return false }
+func (PhysicalEnvironment) SceneIndex() int                { return -1 }
 func (a *PhysicalEnvironment) Value() *PhysicalEnvironment { return a }
-func (a PhysicalEnvironment) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a PhysicalEnvironment) MarshalZcl() ([]byte, error)  { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *PhysicalEnvironment) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PhysicalEnvironment(*nt)
 	return br, err
 }
-func (PhysicalEnvironment) Name() string     { return "Physical Environment" }
-func (PhysicalEnvironment) Readable() bool   { return true }
-func (PhysicalEnvironment) Writable() bool   { return true }
-func (PhysicalEnvironment) Reportable() bool { return false }
-func (PhysicalEnvironment) SceneIndex() int  { return -1 }
 
 func (a PhysicalEnvironment) String() string {
 	switch a {
@@ -1355,23 +1344,22 @@ type DeviceEnabled zcl.Zbool
 
 const DeviceEnabledAttr zcl.AttrID = 18
 
-func (a DeviceEnabled) ID() zcl.AttrID         { return DeviceEnabledAttr }
-func (a DeviceEnabled) Cluster() zcl.ClusterID { return BasicID }
-func (a *DeviceEnabled) Value() *DeviceEnabled { return a }
-func (a DeviceEnabled) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (DeviceEnabled) ID() zcl.AttrID                { return DeviceEnabledAttr }
+func (DeviceEnabled) Cluster() zcl.ClusterID        { return BasicID }
+func (DeviceEnabled) Name() string                  { return "Device Enabled" }
+func (DeviceEnabled) Readable() bool                { return true }
+func (DeviceEnabled) Writable() bool                { return true }
+func (DeviceEnabled) Reportable() bool              { return false }
+func (DeviceEnabled) SceneIndex() int               { return -1 }
+func (a *DeviceEnabled) Value() *DeviceEnabled      { return a }
+func (a DeviceEnabled) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *DeviceEnabled) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DeviceEnabled(*nt)
 	return br, err
 }
-func (DeviceEnabled) Name() string     { return "Device Enabled" }
-func (DeviceEnabled) Readable() bool   { return true }
-func (DeviceEnabled) Writable() bool   { return true }
-func (DeviceEnabled) Reportable() bool { return false }
-func (DeviceEnabled) SceneIndex() int  { return -1 }
 
 func (a DeviceEnabled) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -1382,23 +1370,22 @@ type AlarmMask zcl.Zbmp8
 
 const AlarmMaskAttr zcl.AttrID = 19
 
-func (a AlarmMask) ID() zcl.AttrID         { return AlarmMaskAttr }
-func (a AlarmMask) Cluster() zcl.ClusterID { return BasicID }
-func (a *AlarmMask) Value() *AlarmMask     { return a }
-func (a AlarmMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (AlarmMask) ID() zcl.AttrID                { return AlarmMaskAttr }
+func (AlarmMask) Cluster() zcl.ClusterID        { return BasicID }
+func (AlarmMask) Name() string                  { return "Alarm Mask" }
+func (AlarmMask) Readable() bool                { return true }
+func (AlarmMask) Writable() bool                { return true }
+func (AlarmMask) Reportable() bool              { return false }
+func (AlarmMask) SceneIndex() int               { return -1 }
+func (a *AlarmMask) Value() *AlarmMask          { return a }
+func (a AlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *AlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AlarmMask(*nt)
 	return br, err
 }
-func (AlarmMask) Name() string     { return "Alarm Mask" }
-func (AlarmMask) Readable() bool   { return true }
-func (AlarmMask) Writable() bool   { return true }
-func (AlarmMask) Reportable() bool { return false }
-func (AlarmMask) SceneIndex() int  { return -1 }
 
 func (a AlarmMask) String() string {
 	var bstr []string
@@ -1430,23 +1417,22 @@ type DisableLocalConfig zcl.Zbmp8
 
 const DisableLocalConfigAttr zcl.AttrID = 20
 
-func (a DisableLocalConfig) ID() zcl.AttrID              { return DisableLocalConfigAttr }
-func (a DisableLocalConfig) Cluster() zcl.ClusterID      { return BasicID }
+func (DisableLocalConfig) ID() zcl.AttrID                { return DisableLocalConfigAttr }
+func (DisableLocalConfig) Cluster() zcl.ClusterID        { return BasicID }
+func (DisableLocalConfig) Name() string                  { return "Disable Local Config" }
+func (DisableLocalConfig) Readable() bool                { return true }
+func (DisableLocalConfig) Writable() bool                { return true }
+func (DisableLocalConfig) Reportable() bool              { return false }
+func (DisableLocalConfig) SceneIndex() int               { return -1 }
 func (a *DisableLocalConfig) Value() *DisableLocalConfig { return a }
-func (a DisableLocalConfig) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a DisableLocalConfig) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *DisableLocalConfig) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DisableLocalConfig(*nt)
 	return br, err
 }
-func (DisableLocalConfig) Name() string     { return "Disable Local Config" }
-func (DisableLocalConfig) Readable() bool   { return true }
-func (DisableLocalConfig) Writable() bool   { return true }
-func (DisableLocalConfig) Reportable() bool { return false }
-func (DisableLocalConfig) SceneIndex() int  { return -1 }
 
 func (a DisableLocalConfig) String() string {
 	var bstr []string
@@ -1478,23 +1464,22 @@ type SwBuildId zcl.Zcstring
 
 const SwBuildIdAttr zcl.AttrID = 16384
 
-func (a SwBuildId) ID() zcl.AttrID         { return SwBuildIdAttr }
-func (a SwBuildId) Cluster() zcl.ClusterID { return BasicID }
-func (a *SwBuildId) Value() *SwBuildId     { return a }
-func (a SwBuildId) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (SwBuildId) ID() zcl.AttrID                { return SwBuildIdAttr }
+func (SwBuildId) Cluster() zcl.ClusterID        { return BasicID }
+func (SwBuildId) Name() string                  { return "SW Build ID" }
+func (SwBuildId) Readable() bool                { return true }
+func (SwBuildId) Writable() bool                { return false }
+func (SwBuildId) Reportable() bool              { return false }
+func (SwBuildId) SceneIndex() int               { return -1 }
+func (a *SwBuildId) Value() *SwBuildId          { return a }
+func (a SwBuildId) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *SwBuildId) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = SwBuildId(*nt)
 	return br, err
 }
-func (SwBuildId) Name() string     { return "SW Build ID" }
-func (SwBuildId) Readable() bool   { return true }
-func (SwBuildId) Writable() bool   { return false }
-func (SwBuildId) Reportable() bool { return false }
-func (SwBuildId) SceneIndex() int  { return -1 }
 
 func (a SwBuildId) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -1506,23 +1491,22 @@ type Unknown1 zcl.Zenum8
 
 const Unknown1Attr zcl.AttrID = 8
 
-func (a Unknown1) ID() zcl.AttrID         { return Unknown1Attr }
-func (a Unknown1) Cluster() zcl.ClusterID { return BasicID }
-func (a *Unknown1) Value() *Unknown1      { return a }
-func (a Unknown1) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (Unknown1) ID() zcl.AttrID                { return Unknown1Attr }
+func (Unknown1) Cluster() zcl.ClusterID        { return BasicID }
+func (Unknown1) Name() string                  { return "Unknown 1" }
+func (Unknown1) Readable() bool                { return true }
+func (Unknown1) Writable() bool                { return false }
+func (Unknown1) Reportable() bool              { return false }
+func (Unknown1) SceneIndex() int               { return -1 }
+func (a *Unknown1) Value() *Unknown1           { return a }
+func (a Unknown1) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *Unknown1) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Unknown1(*nt)
 	return br, err
 }
-func (Unknown1) Name() string     { return "Unknown 1" }
-func (Unknown1) Readable() bool   { return true }
-func (Unknown1) Writable() bool   { return false }
-func (Unknown1) Reportable() bool { return false }
-func (Unknown1) SceneIndex() int  { return -1 }
 
 func (a Unknown1) String() string {
 	return zcl.Sprintf("%v", zcl.Zenum8(a))
@@ -1534,23 +1518,22 @@ type Unknown2 zcl.Zenum8
 
 const Unknown2Attr zcl.AttrID = 9
 
-func (a Unknown2) ID() zcl.AttrID         { return Unknown2Attr }
-func (a Unknown2) Cluster() zcl.ClusterID { return BasicID }
-func (a *Unknown2) Value() *Unknown2      { return a }
-func (a Unknown2) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (Unknown2) ID() zcl.AttrID                { return Unknown2Attr }
+func (Unknown2) Cluster() zcl.ClusterID        { return BasicID }
+func (Unknown2) Name() string                  { return "Unknown 2" }
+func (Unknown2) Readable() bool                { return true }
+func (Unknown2) Writable() bool                { return false }
+func (Unknown2) Reportable() bool              { return false }
+func (Unknown2) SceneIndex() int               { return -1 }
+func (a *Unknown2) Value() *Unknown2           { return a }
+func (a Unknown2) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *Unknown2) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Unknown2(*nt)
 	return br, err
 }
-func (Unknown2) Name() string     { return "Unknown 2" }
-func (Unknown2) Readable() bool   { return true }
-func (Unknown2) Writable() bool   { return false }
-func (Unknown2) Reportable() bool { return false }
-func (Unknown2) SceneIndex() int  { return -1 }
 
 func (a Unknown2) String() string {
 	return zcl.Sprintf("%v", zcl.Zenum8(a))
@@ -1562,23 +1545,22 @@ type ProductCode zcl.Zostring
 
 const ProductCodeAttr zcl.AttrID = 10
 
-func (a ProductCode) ID() zcl.AttrID         { return ProductCodeAttr }
-func (a ProductCode) Cluster() zcl.ClusterID { return BasicID }
-func (a *ProductCode) Value() *ProductCode   { return a }
-func (a ProductCode) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (ProductCode) ID() zcl.AttrID                { return ProductCodeAttr }
+func (ProductCode) Cluster() zcl.ClusterID        { return BasicID }
+func (ProductCode) Name() string                  { return "Product code" }
+func (ProductCode) Readable() bool                { return true }
+func (ProductCode) Writable() bool                { return false }
+func (ProductCode) Reportable() bool              { return false }
+func (ProductCode) SceneIndex() int               { return -1 }
+func (a *ProductCode) Value() *ProductCode        { return a }
+func (a ProductCode) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *ProductCode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ProductCode(*nt)
 	return br, err
 }
-func (ProductCode) Name() string     { return "Product code" }
-func (ProductCode) Readable() bool   { return true }
-func (ProductCode) Writable() bool   { return false }
-func (ProductCode) Reportable() bool { return false }
-func (ProductCode) SceneIndex() int  { return -1 }
 
 func (a ProductCode) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))
@@ -1589,23 +1571,22 @@ type XiaomiSensitivity zcl.Zu8
 
 const XiaomiSensitivityAttr zcl.AttrID = 65293
 
-func (a XiaomiSensitivity) ID() zcl.AttrID             { return XiaomiSensitivityAttr }
-func (a XiaomiSensitivity) Cluster() zcl.ClusterID     { return BasicID }
-func (a *XiaomiSensitivity) Value() *XiaomiSensitivity { return a }
-func (a XiaomiSensitivity) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (XiaomiSensitivity) ID() zcl.AttrID                { return XiaomiSensitivityAttr }
+func (XiaomiSensitivity) Cluster() zcl.ClusterID        { return BasicID }
+func (XiaomiSensitivity) Name() string                  { return "Xiaomi Sensitivity" }
+func (XiaomiSensitivity) Readable() bool                { return true }
+func (XiaomiSensitivity) Writable() bool                { return true }
+func (XiaomiSensitivity) Reportable() bool              { return false }
+func (XiaomiSensitivity) SceneIndex() int               { return -1 }
+func (a *XiaomiSensitivity) Value() *XiaomiSensitivity  { return a }
+func (a XiaomiSensitivity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *XiaomiSensitivity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = XiaomiSensitivity(*nt)
 	return br, err
 }
-func (XiaomiSensitivity) Name() string     { return "Xiaomi Sensitivity" }
-func (XiaomiSensitivity) Readable() bool   { return true }
-func (XiaomiSensitivity) Writable() bool   { return true }
-func (XiaomiSensitivity) Reportable() bool { return false }
-func (XiaomiSensitivity) SceneIndex() int  { return -1 }
 
 func (a XiaomiSensitivity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1617,26 +1598,25 @@ type XiaomiDisconnect1 zcl.Zu8
 
 const XiaomiDisconnect1Attr zcl.AttrID = 65314
 
-func (a XiaomiDisconnect1) ID() zcl.AttrID             { return XiaomiDisconnect1Attr }
-func (a XiaomiDisconnect1) Cluster() zcl.ClusterID     { return BasicID }
-func (a *XiaomiDisconnect1) Value() *XiaomiDisconnect1 { return a }
-func (a XiaomiDisconnect1) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (XiaomiDisconnect1) ID() zcl.AttrID                { return XiaomiDisconnect1Attr }
+func (XiaomiDisconnect1) Cluster() zcl.ClusterID        { return BasicID }
+func (XiaomiDisconnect1) Name() string                  { return "Xiaomi Disconnect 1" }
+func (XiaomiDisconnect1) Readable() bool                { return true }
+func (XiaomiDisconnect1) Writable() bool                { return true }
+func (XiaomiDisconnect1) Reportable() bool              { return false }
+func (XiaomiDisconnect1) SceneIndex() int               { return -1 }
+func (a *XiaomiDisconnect1) Value() *XiaomiDisconnect1  { return a }
+func (a XiaomiDisconnect1) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *XiaomiDisconnect1) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = XiaomiDisconnect1(*nt)
 	return br, err
 }
-func (XiaomiDisconnect1) Name() string     { return "Xiaomi Disconnect 1" }
-func (XiaomiDisconnect1) Readable() bool   { return true }
-func (XiaomiDisconnect1) Writable() bool   { return true }
-func (XiaomiDisconnect1) Reportable() bool { return false }
-func (XiaomiDisconnect1) SceneIndex() int  { return -1 }
 
 func (a XiaomiDisconnect1) String() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // XiaomiDisconnect2 is an autogenerated attribute in the Basic cluster
@@ -1645,26 +1625,25 @@ type XiaomiDisconnect2 zcl.Zu8
 
 const XiaomiDisconnect2Attr zcl.AttrID = 65315
 
-func (a XiaomiDisconnect2) ID() zcl.AttrID             { return XiaomiDisconnect2Attr }
-func (a XiaomiDisconnect2) Cluster() zcl.ClusterID     { return BasicID }
-func (a *XiaomiDisconnect2) Value() *XiaomiDisconnect2 { return a }
-func (a XiaomiDisconnect2) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (XiaomiDisconnect2) ID() zcl.AttrID                { return XiaomiDisconnect2Attr }
+func (XiaomiDisconnect2) Cluster() zcl.ClusterID        { return BasicID }
+func (XiaomiDisconnect2) Name() string                  { return "Xiaomi Disconnect 2" }
+func (XiaomiDisconnect2) Readable() bool                { return true }
+func (XiaomiDisconnect2) Writable() bool                { return true }
+func (XiaomiDisconnect2) Reportable() bool              { return false }
+func (XiaomiDisconnect2) SceneIndex() int               { return -1 }
+func (a *XiaomiDisconnect2) Value() *XiaomiDisconnect2  { return a }
+func (a XiaomiDisconnect2) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *XiaomiDisconnect2) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = XiaomiDisconnect2(*nt)
 	return br, err
 }
-func (XiaomiDisconnect2) Name() string     { return "Xiaomi Disconnect 2" }
-func (XiaomiDisconnect2) Readable() bool   { return true }
-func (XiaomiDisconnect2) Writable() bool   { return true }
-func (XiaomiDisconnect2) Reportable() bool { return false }
-func (XiaomiDisconnect2) SceneIndex() int  { return -1 }
 
 func (a XiaomiDisconnect2) String() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(a))
+	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
 // Sensitivity is an autogenerated attribute in the Basic cluster
@@ -1672,23 +1651,22 @@ type Sensitivity zcl.Zenum8
 
 const SensitivityAttr zcl.AttrID = 48
 
-func (a Sensitivity) ID() zcl.AttrID         { return SensitivityAttr }
-func (a Sensitivity) Cluster() zcl.ClusterID { return BasicID }
-func (a *Sensitivity) Value() *Sensitivity   { return a }
-func (a Sensitivity) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (Sensitivity) ID() zcl.AttrID                { return SensitivityAttr }
+func (Sensitivity) Cluster() zcl.ClusterID        { return BasicID }
+func (Sensitivity) Name() string                  { return "Sensitivity" }
+func (Sensitivity) Readable() bool                { return true }
+func (Sensitivity) Writable() bool                { return true }
+func (Sensitivity) Reportable() bool              { return false }
+func (Sensitivity) SceneIndex() int               { return -1 }
+func (a *Sensitivity) Value() *Sensitivity        { return a }
+func (a Sensitivity) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *Sensitivity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Sensitivity(*nt)
 	return br, err
 }
-func (Sensitivity) Name() string     { return "Sensitivity" }
-func (Sensitivity) Readable() bool   { return true }
-func (Sensitivity) Writable() bool   { return true }
-func (Sensitivity) Reportable() bool { return false }
-func (Sensitivity) SceneIndex() int  { return -1 }
 
 func (a Sensitivity) String() string {
 	switch a {
@@ -1725,23 +1703,22 @@ type Configuration zcl.Zbmp16
 
 const ConfigurationAttr zcl.AttrID = 49
 
-func (a Configuration) ID() zcl.AttrID         { return ConfigurationAttr }
-func (a Configuration) Cluster() zcl.ClusterID { return BasicID }
-func (a *Configuration) Value() *Configuration { return a }
-func (a Configuration) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp16(a).MarshalZcl()
-}
+func (Configuration) ID() zcl.AttrID                { return ConfigurationAttr }
+func (Configuration) Cluster() zcl.ClusterID        { return BasicID }
+func (Configuration) Name() string                  { return "Configuration" }
+func (Configuration) Readable() bool                { return true }
+func (Configuration) Writable() bool                { return true }
+func (Configuration) Reportable() bool              { return false }
+func (Configuration) SceneIndex() int               { return -1 }
+func (a *Configuration) Value() *Configuration      { return a }
+func (a Configuration) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
+
 func (a *Configuration) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Configuration(*nt)
 	return br, err
 }
-func (Configuration) Name() string     { return "Configuration" }
-func (Configuration) Readable() bool   { return true }
-func (Configuration) Writable() bool   { return true }
-func (Configuration) Reportable() bool { return false }
-func (Configuration) SceneIndex() int  { return -1 }
 
 func (a Configuration) String() string {
 	var bstr []string
@@ -1783,23 +1760,22 @@ type Usertest zcl.Zbool
 
 const UsertestAttr zcl.AttrID = 50
 
-func (a Usertest) ID() zcl.AttrID         { return UsertestAttr }
-func (a Usertest) Cluster() zcl.ClusterID { return BasicID }
-func (a *Usertest) Value() *Usertest      { return a }
-func (a Usertest) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (Usertest) ID() zcl.AttrID                { return UsertestAttr }
+func (Usertest) Cluster() zcl.ClusterID        { return BasicID }
+func (Usertest) Name() string                  { return "Usertest" }
+func (Usertest) Readable() bool                { return true }
+func (Usertest) Writable() bool                { return true }
+func (Usertest) Reportable() bool              { return false }
+func (Usertest) SceneIndex() int               { return -1 }
+func (a *Usertest) Value() *Usertest           { return a }
+func (a Usertest) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *Usertest) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Usertest(*nt)
 	return br, err
 }
-func (Usertest) Name() string     { return "Usertest" }
-func (Usertest) Readable() bool   { return true }
-func (Usertest) Writable() bool   { return true }
-func (Usertest) Reportable() bool { return false }
-func (Usertest) SceneIndex() int  { return -1 }
 
 func (a Usertest) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -1810,23 +1786,22 @@ type LedIndication zcl.Zbool
 
 const LedIndicationAttr zcl.AttrID = 51
 
-func (a LedIndication) ID() zcl.AttrID         { return LedIndicationAttr }
-func (a LedIndication) Cluster() zcl.ClusterID { return BasicID }
-func (a *LedIndication) Value() *LedIndication { return a }
-func (a LedIndication) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (LedIndication) ID() zcl.AttrID                { return LedIndicationAttr }
+func (LedIndication) Cluster() zcl.ClusterID        { return BasicID }
+func (LedIndication) Name() string                  { return "LED Indication" }
+func (LedIndication) Readable() bool                { return true }
+func (LedIndication) Writable() bool                { return true }
+func (LedIndication) Reportable() bool              { return false }
+func (LedIndication) SceneIndex() int               { return -1 }
+func (a *LedIndication) Value() *LedIndication      { return a }
+func (a LedIndication) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *LedIndication) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LedIndication(*nt)
 	return br, err
 }
-func (LedIndication) Name() string     { return "LED Indication" }
-func (LedIndication) Readable() bool   { return true }
-func (LedIndication) Writable() bool   { return true }
-func (LedIndication) Reportable() bool { return false }
-func (LedIndication) SceneIndex() int  { return -1 }
 
 func (a LedIndication) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))

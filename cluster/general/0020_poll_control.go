@@ -67,23 +67,22 @@ type CheckInInterval zcl.Zu32
 
 const CheckInIntervalAttr zcl.AttrID = 0
 
-func (a CheckInInterval) ID() zcl.AttrID           { return CheckInIntervalAttr }
-func (a CheckInInterval) Cluster() zcl.ClusterID   { return PollControlID }
-func (a *CheckInInterval) Value() *CheckInInterval { return a }
-func (a CheckInInterval) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (CheckInInterval) ID() zcl.AttrID                { return CheckInIntervalAttr }
+func (CheckInInterval) Cluster() zcl.ClusterID        { return PollControlID }
+func (CheckInInterval) Name() string                  { return "Check-in Interval" }
+func (CheckInInterval) Readable() bool                { return true }
+func (CheckInInterval) Writable() bool                { return true }
+func (CheckInInterval) Reportable() bool              { return false }
+func (CheckInInterval) SceneIndex() int               { return -1 }
+func (a *CheckInInterval) Value() *CheckInInterval    { return a }
+func (a CheckInInterval) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *CheckInInterval) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CheckInInterval(*nt)
 	return br, err
 }
-func (CheckInInterval) Name() string     { return "Check-in Interval" }
-func (CheckInInterval) Readable() bool   { return true }
-func (CheckInInterval) Writable() bool   { return true }
-func (CheckInInterval) Reportable() bool { return false }
-func (CheckInInterval) SceneIndex() int  { return -1 }
 
 func (a CheckInInterval) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -94,23 +93,22 @@ type LongPollInterval zcl.Zu32
 
 const LongPollIntervalAttr zcl.AttrID = 1
 
-func (a LongPollInterval) ID() zcl.AttrID            { return LongPollIntervalAttr }
-func (a LongPollInterval) Cluster() zcl.ClusterID    { return PollControlID }
-func (a *LongPollInterval) Value() *LongPollInterval { return a }
-func (a LongPollInterval) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (LongPollInterval) ID() zcl.AttrID                { return LongPollIntervalAttr }
+func (LongPollInterval) Cluster() zcl.ClusterID        { return PollControlID }
+func (LongPollInterval) Name() string                  { return "Long Poll Interval" }
+func (LongPollInterval) Readable() bool                { return true }
+func (LongPollInterval) Writable() bool                { return false }
+func (LongPollInterval) Reportable() bool              { return false }
+func (LongPollInterval) SceneIndex() int               { return -1 }
+func (a *LongPollInterval) Value() *LongPollInterval   { return a }
+func (a LongPollInterval) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *LongPollInterval) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LongPollInterval(*nt)
 	return br, err
 }
-func (LongPollInterval) Name() string     { return "Long Poll Interval" }
-func (LongPollInterval) Readable() bool   { return true }
-func (LongPollInterval) Writable() bool   { return false }
-func (LongPollInterval) Reportable() bool { return false }
-func (LongPollInterval) SceneIndex() int  { return -1 }
 
 func (a LongPollInterval) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -121,23 +119,22 @@ type ShortPollInterval zcl.Zu16
 
 const ShortPollIntervalAttr zcl.AttrID = 2
 
-func (a ShortPollInterval) ID() zcl.AttrID             { return ShortPollIntervalAttr }
-func (a ShortPollInterval) Cluster() zcl.ClusterID     { return PollControlID }
-func (a *ShortPollInterval) Value() *ShortPollInterval { return a }
-func (a ShortPollInterval) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (ShortPollInterval) ID() zcl.AttrID                { return ShortPollIntervalAttr }
+func (ShortPollInterval) Cluster() zcl.ClusterID        { return PollControlID }
+func (ShortPollInterval) Name() string                  { return "Short Poll Interval" }
+func (ShortPollInterval) Readable() bool                { return true }
+func (ShortPollInterval) Writable() bool                { return false }
+func (ShortPollInterval) Reportable() bool              { return false }
+func (ShortPollInterval) SceneIndex() int               { return -1 }
+func (a *ShortPollInterval) Value() *ShortPollInterval  { return a }
+func (a ShortPollInterval) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *ShortPollInterval) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ShortPollInterval(*nt)
 	return br, err
 }
-func (ShortPollInterval) Name() string     { return "Short Poll Interval" }
-func (ShortPollInterval) Readable() bool   { return true }
-func (ShortPollInterval) Writable() bool   { return false }
-func (ShortPollInterval) Reportable() bool { return false }
-func (ShortPollInterval) SceneIndex() int  { return -1 }
 
 func (a ShortPollInterval) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -148,23 +145,22 @@ type FastPollTimeout zcl.Zu16
 
 const FastPollTimeoutAttr zcl.AttrID = 3
 
-func (a FastPollTimeout) ID() zcl.AttrID           { return FastPollTimeoutAttr }
-func (a FastPollTimeout) Cluster() zcl.ClusterID   { return PollControlID }
-func (a *FastPollTimeout) Value() *FastPollTimeout { return a }
-func (a FastPollTimeout) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (FastPollTimeout) ID() zcl.AttrID                { return FastPollTimeoutAttr }
+func (FastPollTimeout) Cluster() zcl.ClusterID        { return PollControlID }
+func (FastPollTimeout) Name() string                  { return "Fast Poll Timeout" }
+func (FastPollTimeout) Readable() bool                { return true }
+func (FastPollTimeout) Writable() bool                { return true }
+func (FastPollTimeout) Reportable() bool              { return false }
+func (FastPollTimeout) SceneIndex() int               { return -1 }
+func (a *FastPollTimeout) Value() *FastPollTimeout    { return a }
+func (a FastPollTimeout) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *FastPollTimeout) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = FastPollTimeout(*nt)
 	return br, err
 }
-func (FastPollTimeout) Name() string     { return "Fast Poll Timeout" }
-func (FastPollTimeout) Readable() bool   { return true }
-func (FastPollTimeout) Writable() bool   { return true }
-func (FastPollTimeout) Reportable() bool { return false }
-func (FastPollTimeout) SceneIndex() int  { return -1 }
 
 func (a FastPollTimeout) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -175,23 +171,22 @@ type CheckInIntervalMin zcl.Zu32
 
 const CheckInIntervalMinAttr zcl.AttrID = 4
 
-func (a CheckInIntervalMin) ID() zcl.AttrID              { return CheckInIntervalMinAttr }
-func (a CheckInIntervalMin) Cluster() zcl.ClusterID      { return PollControlID }
+func (CheckInIntervalMin) ID() zcl.AttrID                { return CheckInIntervalMinAttr }
+func (CheckInIntervalMin) Cluster() zcl.ClusterID        { return PollControlID }
+func (CheckInIntervalMin) Name() string                  { return "Check-in Interval Min" }
+func (CheckInIntervalMin) Readable() bool                { return true }
+func (CheckInIntervalMin) Writable() bool                { return false }
+func (CheckInIntervalMin) Reportable() bool              { return false }
+func (CheckInIntervalMin) SceneIndex() int               { return -1 }
 func (a *CheckInIntervalMin) Value() *CheckInIntervalMin { return a }
-func (a CheckInIntervalMin) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a CheckInIntervalMin) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *CheckInIntervalMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CheckInIntervalMin(*nt)
 	return br, err
 }
-func (CheckInIntervalMin) Name() string     { return "Check-in Interval Min" }
-func (CheckInIntervalMin) Readable() bool   { return true }
-func (CheckInIntervalMin) Writable() bool   { return false }
-func (CheckInIntervalMin) Reportable() bool { return false }
-func (CheckInIntervalMin) SceneIndex() int  { return -1 }
 
 func (a CheckInIntervalMin) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -202,23 +197,22 @@ type LongPollIntervalMin zcl.Zu32
 
 const LongPollIntervalMinAttr zcl.AttrID = 5
 
-func (a LongPollIntervalMin) ID() zcl.AttrID               { return LongPollIntervalMinAttr }
-func (a LongPollIntervalMin) Cluster() zcl.ClusterID       { return PollControlID }
+func (LongPollIntervalMin) ID() zcl.AttrID                 { return LongPollIntervalMinAttr }
+func (LongPollIntervalMin) Cluster() zcl.ClusterID         { return PollControlID }
+func (LongPollIntervalMin) Name() string                   { return "Long Poll Interval Min" }
+func (LongPollIntervalMin) Readable() bool                 { return true }
+func (LongPollIntervalMin) Writable() bool                 { return false }
+func (LongPollIntervalMin) Reportable() bool               { return false }
+func (LongPollIntervalMin) SceneIndex() int                { return -1 }
 func (a *LongPollIntervalMin) Value() *LongPollIntervalMin { return a }
-func (a LongPollIntervalMin) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a LongPollIntervalMin) MarshalZcl() ([]byte, error)  { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *LongPollIntervalMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LongPollIntervalMin(*nt)
 	return br, err
 }
-func (LongPollIntervalMin) Name() string     { return "Long Poll Interval Min" }
-func (LongPollIntervalMin) Readable() bool   { return true }
-func (LongPollIntervalMin) Writable() bool   { return false }
-func (LongPollIntervalMin) Reportable() bool { return false }
-func (LongPollIntervalMin) SceneIndex() int  { return -1 }
 
 func (a LongPollIntervalMin) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -229,23 +223,22 @@ type FastPollTimeoutMax zcl.Zu16
 
 const FastPollTimeoutMaxAttr zcl.AttrID = 6
 
-func (a FastPollTimeoutMax) ID() zcl.AttrID              { return FastPollTimeoutMaxAttr }
-func (a FastPollTimeoutMax) Cluster() zcl.ClusterID      { return PollControlID }
+func (FastPollTimeoutMax) ID() zcl.AttrID                { return FastPollTimeoutMaxAttr }
+func (FastPollTimeoutMax) Cluster() zcl.ClusterID        { return PollControlID }
+func (FastPollTimeoutMax) Name() string                  { return "Fast Poll Timeout Max" }
+func (FastPollTimeoutMax) Readable() bool                { return true }
+func (FastPollTimeoutMax) Writable() bool                { return false }
+func (FastPollTimeoutMax) Reportable() bool              { return false }
+func (FastPollTimeoutMax) SceneIndex() int               { return -1 }
 func (a *FastPollTimeoutMax) Value() *FastPollTimeoutMax { return a }
-func (a FastPollTimeoutMax) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a FastPollTimeoutMax) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *FastPollTimeoutMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = FastPollTimeoutMax(*nt)
 	return br, err
 }
-func (FastPollTimeoutMax) Name() string     { return "Fast Poll Timeout Max" }
-func (FastPollTimeoutMax) Readable() bool   { return true }
-func (FastPollTimeoutMax) Writable() bool   { return false }
-func (FastPollTimeoutMax) Reportable() bool { return false }
-func (FastPollTimeoutMax) SceneIndex() int  { return -1 }
 
 func (a FastPollTimeoutMax) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

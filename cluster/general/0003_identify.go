@@ -283,23 +283,22 @@ type IdentifyTime zcl.Zu16
 
 const IdentifyTimeAttr zcl.AttrID = 0
 
-func (a IdentifyTime) ID() zcl.AttrID         { return IdentifyTimeAttr }
-func (a IdentifyTime) Cluster() zcl.ClusterID { return IdentifyID }
-func (a *IdentifyTime) Value() *IdentifyTime  { return a }
-func (a IdentifyTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (IdentifyTime) ID() zcl.AttrID                { return IdentifyTimeAttr }
+func (IdentifyTime) Cluster() zcl.ClusterID        { return IdentifyID }
+func (IdentifyTime) Name() string                  { return "Identify Time" }
+func (IdentifyTime) Readable() bool                { return true }
+func (IdentifyTime) Writable() bool                { return true }
+func (IdentifyTime) Reportable() bool              { return false }
+func (IdentifyTime) SceneIndex() int               { return -1 }
+func (a *IdentifyTime) Value() *IdentifyTime       { return a }
+func (a IdentifyTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *IdentifyTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = IdentifyTime(*nt)
 	return br, err
 }
-func (IdentifyTime) Name() string     { return "Identify Time" }
-func (IdentifyTime) Readable() bool   { return true }
-func (IdentifyTime) Writable() bool   { return true }
-func (IdentifyTime) Reportable() bool { return false }
-func (IdentifyTime) SceneIndex() int  { return -1 }
 
 func (a IdentifyTime) String() string {
 	return zcl.Seconds.Format(float64(a))

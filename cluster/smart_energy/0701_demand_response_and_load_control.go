@@ -26,23 +26,22 @@ type UtilityEnrolmentGroup zcl.Zu8
 
 const UtilityEnrolmentGroupAttr zcl.AttrID = 0
 
-func (a UtilityEnrolmentGroup) ID() zcl.AttrID                 { return UtilityEnrolmentGroupAttr }
-func (a UtilityEnrolmentGroup) Cluster() zcl.ClusterID         { return DemandResponseAndLoadControlID }
+func (UtilityEnrolmentGroup) ID() zcl.AttrID                   { return UtilityEnrolmentGroupAttr }
+func (UtilityEnrolmentGroup) Cluster() zcl.ClusterID           { return DemandResponseAndLoadControlID }
+func (UtilityEnrolmentGroup) Name() string                     { return "Utility Enrolment Group" }
+func (UtilityEnrolmentGroup) Readable() bool                   { return true }
+func (UtilityEnrolmentGroup) Writable() bool                   { return true }
+func (UtilityEnrolmentGroup) Reportable() bool                 { return false }
+func (UtilityEnrolmentGroup) SceneIndex() int                  { return -1 }
 func (a *UtilityEnrolmentGroup) Value() *UtilityEnrolmentGroup { return a }
-func (a UtilityEnrolmentGroup) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a UtilityEnrolmentGroup) MarshalZcl() ([]byte, error)    { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *UtilityEnrolmentGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = UtilityEnrolmentGroup(*nt)
 	return br, err
 }
-func (UtilityEnrolmentGroup) Name() string     { return "Utility Enrolment Group" }
-func (UtilityEnrolmentGroup) Readable() bool   { return true }
-func (UtilityEnrolmentGroup) Writable() bool   { return true }
-func (UtilityEnrolmentGroup) Reportable() bool { return false }
-func (UtilityEnrolmentGroup) SceneIndex() int  { return -1 }
 
 func (a UtilityEnrolmentGroup) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -53,23 +52,22 @@ type StartRandomizeMinutes zcl.Zu8
 
 const StartRandomizeMinutesAttr zcl.AttrID = 1
 
-func (a StartRandomizeMinutes) ID() zcl.AttrID                 { return StartRandomizeMinutesAttr }
-func (a StartRandomizeMinutes) Cluster() zcl.ClusterID         { return DemandResponseAndLoadControlID }
+func (StartRandomizeMinutes) ID() zcl.AttrID                   { return StartRandomizeMinutesAttr }
+func (StartRandomizeMinutes) Cluster() zcl.ClusterID           { return DemandResponseAndLoadControlID }
+func (StartRandomizeMinutes) Name() string                     { return "Start Randomize Minutes" }
+func (StartRandomizeMinutes) Readable() bool                   { return true }
+func (StartRandomizeMinutes) Writable() bool                   { return true }
+func (StartRandomizeMinutes) Reportable() bool                 { return false }
+func (StartRandomizeMinutes) SceneIndex() int                  { return -1 }
 func (a *StartRandomizeMinutes) Value() *StartRandomizeMinutes { return a }
-func (a StartRandomizeMinutes) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a StartRandomizeMinutes) MarshalZcl() ([]byte, error)    { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *StartRandomizeMinutes) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = StartRandomizeMinutes(*nt)
 	return br, err
 }
-func (StartRandomizeMinutes) Name() string     { return "Start Randomize Minutes" }
-func (StartRandomizeMinutes) Readable() bool   { return true }
-func (StartRandomizeMinutes) Writable() bool   { return true }
-func (StartRandomizeMinutes) Reportable() bool { return false }
-func (StartRandomizeMinutes) SceneIndex() int  { return -1 }
 
 func (a StartRandomizeMinutes) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -80,23 +78,22 @@ type StopRandomizeMinutes zcl.Zu8
 
 const StopRandomizeMinutesAttr zcl.AttrID = 2
 
-func (a StopRandomizeMinutes) ID() zcl.AttrID                { return StopRandomizeMinutesAttr }
-func (a StopRandomizeMinutes) Cluster() zcl.ClusterID        { return DemandResponseAndLoadControlID }
+func (StopRandomizeMinutes) ID() zcl.AttrID                  { return StopRandomizeMinutesAttr }
+func (StopRandomizeMinutes) Cluster() zcl.ClusterID          { return DemandResponseAndLoadControlID }
+func (StopRandomizeMinutes) Name() string                    { return "Stop Randomize Minutes" }
+func (StopRandomizeMinutes) Readable() bool                  { return true }
+func (StopRandomizeMinutes) Writable() bool                  { return true }
+func (StopRandomizeMinutes) Reportable() bool                { return false }
+func (StopRandomizeMinutes) SceneIndex() int                 { return -1 }
 func (a *StopRandomizeMinutes) Value() *StopRandomizeMinutes { return a }
-func (a StopRandomizeMinutes) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a StopRandomizeMinutes) MarshalZcl() ([]byte, error)   { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *StopRandomizeMinutes) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = StopRandomizeMinutes(*nt)
 	return br, err
 }
-func (StopRandomizeMinutes) Name() string     { return "Stop Randomize Minutes" }
-func (StopRandomizeMinutes) Readable() bool   { return true }
-func (StopRandomizeMinutes) Writable() bool   { return true }
-func (StopRandomizeMinutes) Reportable() bool { return false }
-func (StopRandomizeMinutes) SceneIndex() int  { return -1 }
 
 func (a StopRandomizeMinutes) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -107,23 +104,22 @@ type DeviceClassValue zcl.Zu16
 
 const DeviceClassValueAttr zcl.AttrID = 3
 
-func (a DeviceClassValue) ID() zcl.AttrID            { return DeviceClassValueAttr }
-func (a DeviceClassValue) Cluster() zcl.ClusterID    { return DemandResponseAndLoadControlID }
-func (a *DeviceClassValue) Value() *DeviceClassValue { return a }
-func (a DeviceClassValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (DeviceClassValue) ID() zcl.AttrID                { return DeviceClassValueAttr }
+func (DeviceClassValue) Cluster() zcl.ClusterID        { return DemandResponseAndLoadControlID }
+func (DeviceClassValue) Name() string                  { return "Device Class Value" }
+func (DeviceClassValue) Readable() bool                { return true }
+func (DeviceClassValue) Writable() bool                { return false }
+func (DeviceClassValue) Reportable() bool              { return false }
+func (DeviceClassValue) SceneIndex() int               { return -1 }
+func (a *DeviceClassValue) Value() *DeviceClassValue   { return a }
+func (a DeviceClassValue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *DeviceClassValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DeviceClassValue(*nt)
 	return br, err
 }
-func (DeviceClassValue) Name() string     { return "Device Class Value" }
-func (DeviceClassValue) Readable() bool   { return true }
-func (DeviceClassValue) Writable() bool   { return false }
-func (DeviceClassValue) Reportable() bool { return false }
-func (DeviceClassValue) SceneIndex() int  { return -1 }
 
 func (a DeviceClassValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

@@ -26,23 +26,22 @@ type Capabilities zcl.Zbmp8
 
 const CapabilitiesAttr zcl.AttrID = 0
 
-func (a Capabilities) ID() zcl.AttrID         { return CapabilitiesAttr }
-func (a Capabilities) Cluster() zcl.ClusterID { return UbisysDimmerSetupID }
-func (a *Capabilities) Value() *Capabilities  { return a }
-func (a Capabilities) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Capabilities) ID() zcl.AttrID                { return CapabilitiesAttr }
+func (Capabilities) Cluster() zcl.ClusterID        { return UbisysDimmerSetupID }
+func (Capabilities) Name() string                  { return "Capabilities" }
+func (Capabilities) Readable() bool                { return true }
+func (Capabilities) Writable() bool                { return false }
+func (Capabilities) Reportable() bool              { return false }
+func (Capabilities) SceneIndex() int               { return -1 }
+func (a *Capabilities) Value() *Capabilities       { return a }
+func (a Capabilities) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Capabilities) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Capabilities(*nt)
 	return br, err
 }
-func (Capabilities) Name() string     { return "Capabilities" }
-func (Capabilities) Readable() bool   { return true }
-func (Capabilities) Writable() bool   { return false }
-func (Capabilities) Reportable() bool { return false }
-func (Capabilities) SceneIndex() int  { return -1 }
 
 func (a Capabilities) String() string {
 	var bstr []string
@@ -104,23 +103,22 @@ type Status zcl.Zbmp8
 
 const StatusAttr zcl.AttrID = 1
 
-func (a Status) ID() zcl.AttrID         { return StatusAttr }
-func (a Status) Cluster() zcl.ClusterID { return UbisysDimmerSetupID }
-func (a *Status) Value() *Status        { return a }
-func (a Status) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Status) ID() zcl.AttrID                { return StatusAttr }
+func (Status) Cluster() zcl.ClusterID        { return UbisysDimmerSetupID }
+func (Status) Name() string                  { return "Status" }
+func (Status) Readable() bool                { return true }
+func (Status) Writable() bool                { return false }
+func (Status) Reportable() bool              { return false }
+func (Status) SceneIndex() int               { return -1 }
+func (a *Status) Value() *Status             { return a }
+func (a Status) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Status) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Status(*nt)
 	return br, err
 }
-func (Status) Name() string     { return "Status" }
-func (Status) Readable() bool   { return true }
-func (Status) Writable() bool   { return false }
-func (Status) Reportable() bool { return false }
-func (Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
 	var bstr []string
@@ -192,23 +190,22 @@ type Mode zcl.Zbmp8
 
 const ModeAttr zcl.AttrID = 2
 
-func (a Mode) ID() zcl.AttrID         { return ModeAttr }
-func (a Mode) Cluster() zcl.ClusterID { return UbisysDimmerSetupID }
-func (a *Mode) Value() *Mode          { return a }
-func (a Mode) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Mode) ID() zcl.AttrID                { return ModeAttr }
+func (Mode) Cluster() zcl.ClusterID        { return UbisysDimmerSetupID }
+func (Mode) Name() string                  { return "Mode" }
+func (Mode) Readable() bool                { return true }
+func (Mode) Writable() bool                { return false }
+func (Mode) Reportable() bool              { return false }
+func (Mode) SceneIndex() int               { return -1 }
+func (a *Mode) Value() *Mode               { return a }
+func (a Mode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Mode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Mode(*nt)
 	return br, err
 }
-func (Mode) Name() string     { return "Mode" }
-func (Mode) Readable() bool   { return true }
-func (Mode) Writable() bool   { return false }
-func (Mode) Reportable() bool { return false }
-func (Mode) SceneIndex() int  { return -1 }
 
 func (a Mode) String() string {
 	var bstr []string

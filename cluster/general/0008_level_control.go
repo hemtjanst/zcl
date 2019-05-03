@@ -613,23 +613,22 @@ type CurrentLevel zcl.Zu8
 
 const CurrentLevelAttr zcl.AttrID = 0
 
-func (a CurrentLevel) ID() zcl.AttrID         { return CurrentLevelAttr }
-func (a CurrentLevel) Cluster() zcl.ClusterID { return LevelControlID }
-func (a *CurrentLevel) Value() *CurrentLevel  { return a }
-func (a CurrentLevel) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (CurrentLevel) ID() zcl.AttrID                { return CurrentLevelAttr }
+func (CurrentLevel) Cluster() zcl.ClusterID        { return LevelControlID }
+func (CurrentLevel) Name() string                  { return "Current Level" }
+func (CurrentLevel) Readable() bool                { return true }
+func (CurrentLevel) Writable() bool                { return false }
+func (CurrentLevel) Reportable() bool              { return true }
+func (CurrentLevel) SceneIndex() int               { return 1 }
+func (a *CurrentLevel) Value() *CurrentLevel       { return a }
+func (a CurrentLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *CurrentLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentLevel(*nt)
 	return br, err
 }
-func (CurrentLevel) Name() string     { return "Current Level" }
-func (CurrentLevel) Readable() bool   { return true }
-func (CurrentLevel) Writable() bool   { return false }
-func (CurrentLevel) Reportable() bool { return true }
-func (CurrentLevel) SceneIndex() int  { return 1 }
 
 func (a CurrentLevel) String() string {
 	return zcl.Percent.Format(float64(a) / 2.54)
@@ -641,23 +640,22 @@ type RemainingTime zcl.Zu16
 
 const RemainingTimeAttr zcl.AttrID = 1
 
-func (a RemainingTime) ID() zcl.AttrID         { return RemainingTimeAttr }
-func (a RemainingTime) Cluster() zcl.ClusterID { return LevelControlID }
-func (a *RemainingTime) Value() *RemainingTime { return a }
-func (a RemainingTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (RemainingTime) ID() zcl.AttrID                { return RemainingTimeAttr }
+func (RemainingTime) Cluster() zcl.ClusterID        { return LevelControlID }
+func (RemainingTime) Name() string                  { return "Remaining Time" }
+func (RemainingTime) Readable() bool                { return true }
+func (RemainingTime) Writable() bool                { return false }
+func (RemainingTime) Reportable() bool              { return false }
+func (RemainingTime) SceneIndex() int               { return -1 }
+func (a *RemainingTime) Value() *RemainingTime      { return a }
+func (a RemainingTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = RemainingTime(*nt)
 	return br, err
 }
-func (RemainingTime) Name() string     { return "Remaining Time" }
-func (RemainingTime) Readable() bool   { return true }
-func (RemainingTime) Writable() bool   { return false }
-func (RemainingTime) Reportable() bool { return false }
-func (RemainingTime) SceneIndex() int  { return -1 }
 
 func (a RemainingTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -669,23 +667,22 @@ type Unknown zcl.Zbmp8
 
 const UnknownAttr zcl.AttrID = 15
 
-func (a Unknown) ID() zcl.AttrID         { return UnknownAttr }
-func (a Unknown) Cluster() zcl.ClusterID { return LevelControlID }
-func (a *Unknown) Value() *Unknown       { return a }
-func (a Unknown) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Unknown) ID() zcl.AttrID                { return UnknownAttr }
+func (Unknown) Cluster() zcl.ClusterID        { return LevelControlID }
+func (Unknown) Name() string                  { return "Unknown" }
+func (Unknown) Readable() bool                { return true }
+func (Unknown) Writable() bool                { return true }
+func (Unknown) Reportable() bool              { return false }
+func (Unknown) SceneIndex() int               { return -1 }
+func (a *Unknown) Value() *Unknown            { return a }
+func (a Unknown) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Unknown) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Unknown(*nt)
 	return br, err
 }
-func (Unknown) Name() string     { return "Unknown" }
-func (Unknown) Readable() bool   { return true }
-func (Unknown) Writable() bool   { return true }
-func (Unknown) Reportable() bool { return false }
-func (Unknown) SceneIndex() int  { return -1 }
 
 func (a Unknown) String() string {
 	return zcl.Sprintf("%v", zcl.Zbmp8(a))
@@ -697,23 +694,22 @@ type OnoffTransistionTime zcl.Zu16
 
 const OnoffTransistionTimeAttr zcl.AttrID = 16
 
-func (a OnoffTransistionTime) ID() zcl.AttrID                { return OnoffTransistionTimeAttr }
-func (a OnoffTransistionTime) Cluster() zcl.ClusterID        { return LevelControlID }
+func (OnoffTransistionTime) ID() zcl.AttrID                  { return OnoffTransistionTimeAttr }
+func (OnoffTransistionTime) Cluster() zcl.ClusterID          { return LevelControlID }
+func (OnoffTransistionTime) Name() string                    { return "OnOff Transistion Time" }
+func (OnoffTransistionTime) Readable() bool                  { return true }
+func (OnoffTransistionTime) Writable() bool                  { return true }
+func (OnoffTransistionTime) Reportable() bool                { return false }
+func (OnoffTransistionTime) SceneIndex() int                 { return -1 }
 func (a *OnoffTransistionTime) Value() *OnoffTransistionTime { return a }
-func (a OnoffTransistionTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a OnoffTransistionTime) MarshalZcl() ([]byte, error)   { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *OnoffTransistionTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OnoffTransistionTime(*nt)
 	return br, err
 }
-func (OnoffTransistionTime) Name() string     { return "OnOff Transistion Time" }
-func (OnoffTransistionTime) Readable() bool   { return true }
-func (OnoffTransistionTime) Writable() bool   { return true }
-func (OnoffTransistionTime) Reportable() bool { return false }
-func (OnoffTransistionTime) SceneIndex() int  { return -1 }
 
 func (a OnoffTransistionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -725,23 +721,22 @@ type OnLevel zcl.Zu8
 
 const OnLevelAttr zcl.AttrID = 17
 
-func (a OnLevel) ID() zcl.AttrID         { return OnLevelAttr }
-func (a OnLevel) Cluster() zcl.ClusterID { return LevelControlID }
-func (a *OnLevel) Value() *OnLevel       { return a }
-func (a OnLevel) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (OnLevel) ID() zcl.AttrID                { return OnLevelAttr }
+func (OnLevel) Cluster() zcl.ClusterID        { return LevelControlID }
+func (OnLevel) Name() string                  { return "On Level" }
+func (OnLevel) Readable() bool                { return true }
+func (OnLevel) Writable() bool                { return true }
+func (OnLevel) Reportable() bool              { return false }
+func (OnLevel) SceneIndex() int               { return -1 }
+func (a *OnLevel) Value() *OnLevel            { return a }
+func (a OnLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *OnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OnLevel(*nt)
 	return br, err
 }
-func (OnLevel) Name() string     { return "On Level" }
-func (OnLevel) Readable() bool   { return true }
-func (OnLevel) Writable() bool   { return true }
-func (OnLevel) Reportable() bool { return false }
-func (OnLevel) SceneIndex() int  { return -1 }
 
 func (a OnLevel) String() string {
 	return zcl.Percent.Format(float64(a) / 2.54)
@@ -752,23 +747,22 @@ type OnTransitionTime zcl.Zu16
 
 const OnTransitionTimeAttr zcl.AttrID = 18
 
-func (a OnTransitionTime) ID() zcl.AttrID            { return OnTransitionTimeAttr }
-func (a OnTransitionTime) Cluster() zcl.ClusterID    { return LevelControlID }
-func (a *OnTransitionTime) Value() *OnTransitionTime { return a }
-func (a OnTransitionTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (OnTransitionTime) ID() zcl.AttrID                { return OnTransitionTimeAttr }
+func (OnTransitionTime) Cluster() zcl.ClusterID        { return LevelControlID }
+func (OnTransitionTime) Name() string                  { return "On Transition Time" }
+func (OnTransitionTime) Readable() bool                { return true }
+func (OnTransitionTime) Writable() bool                { return true }
+func (OnTransitionTime) Reportable() bool              { return false }
+func (OnTransitionTime) SceneIndex() int               { return -1 }
+func (a *OnTransitionTime) Value() *OnTransitionTime   { return a }
+func (a OnTransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *OnTransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OnTransitionTime(*nt)
 	return br, err
 }
-func (OnTransitionTime) Name() string     { return "On Transition Time" }
-func (OnTransitionTime) Readable() bool   { return true }
-func (OnTransitionTime) Writable() bool   { return true }
-func (OnTransitionTime) Reportable() bool { return false }
-func (OnTransitionTime) SceneIndex() int  { return -1 }
 
 func (a OnTransitionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -779,23 +773,22 @@ type OffTransitionTime zcl.Zu16
 
 const OffTransitionTimeAttr zcl.AttrID = 19
 
-func (a OffTransitionTime) ID() zcl.AttrID             { return OffTransitionTimeAttr }
-func (a OffTransitionTime) Cluster() zcl.ClusterID     { return LevelControlID }
-func (a *OffTransitionTime) Value() *OffTransitionTime { return a }
-func (a OffTransitionTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (OffTransitionTime) ID() zcl.AttrID                { return OffTransitionTimeAttr }
+func (OffTransitionTime) Cluster() zcl.ClusterID        { return LevelControlID }
+func (OffTransitionTime) Name() string                  { return "Off Transition Time" }
+func (OffTransitionTime) Readable() bool                { return true }
+func (OffTransitionTime) Writable() bool                { return true }
+func (OffTransitionTime) Reportable() bool              { return false }
+func (OffTransitionTime) SceneIndex() int               { return -1 }
+func (a *OffTransitionTime) Value() *OffTransitionTime  { return a }
+func (a OffTransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *OffTransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OffTransitionTime(*nt)
 	return br, err
 }
-func (OffTransitionTime) Name() string     { return "Off Transition Time" }
-func (OffTransitionTime) Readable() bool   { return true }
-func (OffTransitionTime) Writable() bool   { return true }
-func (OffTransitionTime) Reportable() bool { return false }
-func (OffTransitionTime) SceneIndex() int  { return -1 }
 
 func (a OffTransitionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
@@ -806,23 +799,22 @@ type DefaultMoveRate zcl.Zu8
 
 const DefaultMoveRateAttr zcl.AttrID = 20
 
-func (a DefaultMoveRate) ID() zcl.AttrID           { return DefaultMoveRateAttr }
-func (a DefaultMoveRate) Cluster() zcl.ClusterID   { return LevelControlID }
-func (a *DefaultMoveRate) Value() *DefaultMoveRate { return a }
-func (a DefaultMoveRate) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (DefaultMoveRate) ID() zcl.AttrID                { return DefaultMoveRateAttr }
+func (DefaultMoveRate) Cluster() zcl.ClusterID        { return LevelControlID }
+func (DefaultMoveRate) Name() string                  { return "Default Move Rate" }
+func (DefaultMoveRate) Readable() bool                { return true }
+func (DefaultMoveRate) Writable() bool                { return true }
+func (DefaultMoveRate) Reportable() bool              { return false }
+func (DefaultMoveRate) SceneIndex() int               { return -1 }
+func (a *DefaultMoveRate) Value() *DefaultMoveRate    { return a }
+func (a DefaultMoveRate) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *DefaultMoveRate) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DefaultMoveRate(*nt)
 	return br, err
 }
-func (DefaultMoveRate) Name() string     { return "Default Move Rate" }
-func (DefaultMoveRate) Readable() bool   { return true }
-func (DefaultMoveRate) Writable() bool   { return true }
-func (DefaultMoveRate) Reportable() bool { return false }
-func (DefaultMoveRate) SceneIndex() int  { return -1 }
 
 func (a DefaultMoveRate) String() string {
 	return zcl.PercentPerSecond.Format(float64(a) / 2.54)
@@ -833,23 +825,22 @@ type PoweronLevel zcl.Zu8
 
 const PoweronLevelAttr zcl.AttrID = 16384
 
-func (a PoweronLevel) ID() zcl.AttrID         { return PoweronLevelAttr }
-func (a PoweronLevel) Cluster() zcl.ClusterID { return LevelControlID }
-func (a *PoweronLevel) Value() *PoweronLevel  { return a }
-func (a PoweronLevel) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (PoweronLevel) ID() zcl.AttrID                { return PoweronLevelAttr }
+func (PoweronLevel) Cluster() zcl.ClusterID        { return LevelControlID }
+func (PoweronLevel) Name() string                  { return "PowerOn Level" }
+func (PoweronLevel) Readable() bool                { return true }
+func (PoweronLevel) Writable() bool                { return true }
+func (PoweronLevel) Reportable() bool              { return false }
+func (PoweronLevel) SceneIndex() int               { return -1 }
+func (a *PoweronLevel) Value() *PoweronLevel       { return a }
+func (a PoweronLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *PoweronLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PoweronLevel(*nt)
 	return br, err
 }
-func (PoweronLevel) Name() string     { return "PowerOn Level" }
-func (PoweronLevel) Readable() bool   { return true }
-func (PoweronLevel) Writable() bool   { return true }
-func (PoweronLevel) Reportable() bool { return false }
-func (PoweronLevel) SceneIndex() int  { return -1 }
 
 func (a PoweronLevel) String() string {
 	return zcl.Percent.Format(float64(a) / 2.54)

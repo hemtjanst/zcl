@@ -45,23 +45,22 @@ type MainsVoltage zcl.Zu16
 
 const MainsVoltageAttr zcl.AttrID = 0
 
-func (a MainsVoltage) ID() zcl.AttrID         { return MainsVoltageAttr }
-func (a MainsVoltage) Cluster() zcl.ClusterID { return PowerConfigurationID }
-func (a *MainsVoltage) Value() *MainsVoltage  { return a }
-func (a MainsVoltage) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (MainsVoltage) ID() zcl.AttrID                { return MainsVoltageAttr }
+func (MainsVoltage) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (MainsVoltage) Name() string                  { return "Mains Voltage" }
+func (MainsVoltage) Readable() bool                { return true }
+func (MainsVoltage) Writable() bool                { return false }
+func (MainsVoltage) Reportable() bool              { return false }
+func (MainsVoltage) SceneIndex() int               { return -1 }
+func (a *MainsVoltage) Value() *MainsVoltage       { return a }
+func (a MainsVoltage) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MainsVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MainsVoltage(*nt)
 	return br, err
 }
-func (MainsVoltage) Name() string     { return "Mains Voltage" }
-func (MainsVoltage) Readable() bool   { return true }
-func (MainsVoltage) Writable() bool   { return false }
-func (MainsVoltage) Reportable() bool { return false }
-func (MainsVoltage) SceneIndex() int  { return -1 }
 
 func (a MainsVoltage) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -77,23 +76,22 @@ type MainsFrequency zcl.Zu8
 
 const MainsFrequencyAttr zcl.AttrID = 1
 
-func (a MainsFrequency) ID() zcl.AttrID          { return MainsFrequencyAttr }
-func (a MainsFrequency) Cluster() zcl.ClusterID  { return PowerConfigurationID }
-func (a *MainsFrequency) Value() *MainsFrequency { return a }
-func (a MainsFrequency) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (MainsFrequency) ID() zcl.AttrID                { return MainsFrequencyAttr }
+func (MainsFrequency) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (MainsFrequency) Name() string                  { return "Mains Frequency" }
+func (MainsFrequency) Readable() bool                { return true }
+func (MainsFrequency) Writable() bool                { return false }
+func (MainsFrequency) Reportable() bool              { return false }
+func (MainsFrequency) SceneIndex() int               { return -1 }
+func (a *MainsFrequency) Value() *MainsFrequency     { return a }
+func (a MainsFrequency) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *MainsFrequency) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MainsFrequency(*nt)
 	return br, err
 }
-func (MainsFrequency) Name() string     { return "Mains Frequency" }
-func (MainsFrequency) Readable() bool   { return true }
-func (MainsFrequency) Writable() bool   { return false }
-func (MainsFrequency) Reportable() bool { return false }
-func (MainsFrequency) SceneIndex() int  { return -1 }
 
 func (a MainsFrequency) String() string {
 	return zcl.Hertz.Format(float64(a) / 2)
@@ -104,23 +102,22 @@ type MainsAlarmMask zcl.Zbmp8
 
 const MainsAlarmMaskAttr zcl.AttrID = 16
 
-func (a MainsAlarmMask) ID() zcl.AttrID          { return MainsAlarmMaskAttr }
-func (a MainsAlarmMask) Cluster() zcl.ClusterID  { return PowerConfigurationID }
-func (a *MainsAlarmMask) Value() *MainsAlarmMask { return a }
-func (a MainsAlarmMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (MainsAlarmMask) ID() zcl.AttrID                { return MainsAlarmMaskAttr }
+func (MainsAlarmMask) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (MainsAlarmMask) Name() string                  { return "Mains Alarm Mask" }
+func (MainsAlarmMask) Readable() bool                { return true }
+func (MainsAlarmMask) Writable() bool                { return true }
+func (MainsAlarmMask) Reportable() bool              { return false }
+func (MainsAlarmMask) SceneIndex() int               { return -1 }
+func (a *MainsAlarmMask) Value() *MainsAlarmMask     { return a }
+func (a MainsAlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *MainsAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MainsAlarmMask(*nt)
 	return br, err
 }
-func (MainsAlarmMask) Name() string     { return "Mains Alarm Mask" }
-func (MainsAlarmMask) Readable() bool   { return true }
-func (MainsAlarmMask) Writable() bool   { return true }
-func (MainsAlarmMask) Reportable() bool { return false }
-func (MainsAlarmMask) SceneIndex() int  { return -1 }
 
 func (a MainsAlarmMask) String() string {
 	var bstr []string
@@ -162,23 +159,22 @@ type MainsVoltageMinThreshold zcl.Zu16
 
 const MainsVoltageMinThresholdAttr zcl.AttrID = 17
 
-func (a MainsVoltageMinThreshold) ID() zcl.AttrID                    { return MainsVoltageMinThresholdAttr }
-func (a MainsVoltageMinThreshold) Cluster() zcl.ClusterID            { return PowerConfigurationID }
+func (MainsVoltageMinThreshold) ID() zcl.AttrID                      { return MainsVoltageMinThresholdAttr }
+func (MainsVoltageMinThreshold) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (MainsVoltageMinThreshold) Name() string                        { return "Mains Voltage Min Threshold" }
+func (MainsVoltageMinThreshold) Readable() bool                      { return true }
+func (MainsVoltageMinThreshold) Writable() bool                      { return true }
+func (MainsVoltageMinThreshold) Reportable() bool                    { return false }
+func (MainsVoltageMinThreshold) SceneIndex() int                     { return -1 }
 func (a *MainsVoltageMinThreshold) Value() *MainsVoltageMinThreshold { return a }
-func (a MainsVoltageMinThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MainsVoltageMinThreshold) MarshalZcl() ([]byte, error)       { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MainsVoltageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MainsVoltageMinThreshold(*nt)
 	return br, err
 }
-func (MainsVoltageMinThreshold) Name() string     { return "Mains Voltage Min Threshold" }
-func (MainsVoltageMinThreshold) Readable() bool   { return true }
-func (MainsVoltageMinThreshold) Writable() bool   { return true }
-func (MainsVoltageMinThreshold) Reportable() bool { return false }
-func (MainsVoltageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageMinThreshold) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -189,23 +185,22 @@ type MainsVoltageMaxThreshold zcl.Zu16
 
 const MainsVoltageMaxThresholdAttr zcl.AttrID = 18
 
-func (a MainsVoltageMaxThreshold) ID() zcl.AttrID                    { return MainsVoltageMaxThresholdAttr }
-func (a MainsVoltageMaxThreshold) Cluster() zcl.ClusterID            { return PowerConfigurationID }
+func (MainsVoltageMaxThreshold) ID() zcl.AttrID                      { return MainsVoltageMaxThresholdAttr }
+func (MainsVoltageMaxThreshold) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (MainsVoltageMaxThreshold) Name() string                        { return "Mains Voltage Max Threshold" }
+func (MainsVoltageMaxThreshold) Readable() bool                      { return true }
+func (MainsVoltageMaxThreshold) Writable() bool                      { return true }
+func (MainsVoltageMaxThreshold) Reportable() bool                    { return false }
+func (MainsVoltageMaxThreshold) SceneIndex() int                     { return -1 }
 func (a *MainsVoltageMaxThreshold) Value() *MainsVoltageMaxThreshold { return a }
-func (a MainsVoltageMaxThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MainsVoltageMaxThreshold) MarshalZcl() ([]byte, error)       { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MainsVoltageMaxThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MainsVoltageMaxThreshold(*nt)
 	return br, err
 }
-func (MainsVoltageMaxThreshold) Name() string     { return "Mains Voltage Max Threshold" }
-func (MainsVoltageMaxThreshold) Readable() bool   { return true }
-func (MainsVoltageMaxThreshold) Writable() bool   { return true }
-func (MainsVoltageMaxThreshold) Reportable() bool { return false }
-func (MainsVoltageMaxThreshold) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageMaxThreshold) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -218,23 +213,22 @@ type MainsVoltageDwellTripPoint zcl.Zu16
 
 const MainsVoltageDwellTripPointAttr zcl.AttrID = 19
 
-func (a MainsVoltageDwellTripPoint) ID() zcl.AttrID                      { return MainsVoltageDwellTripPointAttr }
-func (a MainsVoltageDwellTripPoint) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (MainsVoltageDwellTripPoint) ID() zcl.AttrID                        { return MainsVoltageDwellTripPointAttr }
+func (MainsVoltageDwellTripPoint) Cluster() zcl.ClusterID                { return PowerConfigurationID }
+func (MainsVoltageDwellTripPoint) Name() string                          { return "Mains Voltage Dwell Trip Point" }
+func (MainsVoltageDwellTripPoint) Readable() bool                        { return true }
+func (MainsVoltageDwellTripPoint) Writable() bool                        { return true }
+func (MainsVoltageDwellTripPoint) Reportable() bool                      { return false }
+func (MainsVoltageDwellTripPoint) SceneIndex() int                       { return -1 }
 func (a *MainsVoltageDwellTripPoint) Value() *MainsVoltageDwellTripPoint { return a }
-func (a MainsVoltageDwellTripPoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MainsVoltageDwellTripPoint) MarshalZcl() ([]byte, error)         { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MainsVoltageDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MainsVoltageDwellTripPoint(*nt)
 	return br, err
 }
-func (MainsVoltageDwellTripPoint) Name() string     { return "Mains Voltage Dwell Trip Point" }
-func (MainsVoltageDwellTripPoint) Readable() bool   { return true }
-func (MainsVoltageDwellTripPoint) Writable() bool   { return true }
-func (MainsVoltageDwellTripPoint) Reportable() bool { return false }
-func (MainsVoltageDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a MainsVoltageDwellTripPoint) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -245,23 +239,22 @@ type BatteryVoltage zcl.Zu8
 
 const BatteryVoltageAttr zcl.AttrID = 32
 
-func (a BatteryVoltage) ID() zcl.AttrID          { return BatteryVoltageAttr }
-func (a BatteryVoltage) Cluster() zcl.ClusterID  { return PowerConfigurationID }
-func (a *BatteryVoltage) Value() *BatteryVoltage { return a }
-func (a BatteryVoltage) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (BatteryVoltage) ID() zcl.AttrID                { return BatteryVoltageAttr }
+func (BatteryVoltage) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (BatteryVoltage) Name() string                  { return "Battery Voltage" }
+func (BatteryVoltage) Readable() bool                { return true }
+func (BatteryVoltage) Writable() bool                { return false }
+func (BatteryVoltage) Reportable() bool              { return false }
+func (BatteryVoltage) SceneIndex() int               { return -1 }
+func (a *BatteryVoltage) Value() *BatteryVoltage     { return a }
+func (a BatteryVoltage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryVoltage(*nt)
 	return br, err
 }
-func (BatteryVoltage) Name() string     { return "Battery Voltage" }
-func (BatteryVoltage) Readable() bool   { return true }
-func (BatteryVoltage) Writable() bool   { return false }
-func (BatteryVoltage) Reportable() bool { return false }
-func (BatteryVoltage) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltage) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -272,23 +265,22 @@ type BatteryPercentageRemaining zcl.Zu8
 
 const BatteryPercentageRemainingAttr zcl.AttrID = 33
 
-func (a BatteryPercentageRemaining) ID() zcl.AttrID                      { return BatteryPercentageRemainingAttr }
-func (a BatteryPercentageRemaining) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (BatteryPercentageRemaining) ID() zcl.AttrID                        { return BatteryPercentageRemainingAttr }
+func (BatteryPercentageRemaining) Cluster() zcl.ClusterID                { return PowerConfigurationID }
+func (BatteryPercentageRemaining) Name() string                          { return "Battery Percentage Remaining" }
+func (BatteryPercentageRemaining) Readable() bool                        { return true }
+func (BatteryPercentageRemaining) Writable() bool                        { return false }
+func (BatteryPercentageRemaining) Reportable() bool                      { return true }
+func (BatteryPercentageRemaining) SceneIndex() int                       { return -1 }
 func (a *BatteryPercentageRemaining) Value() *BatteryPercentageRemaining { return a }
-func (a BatteryPercentageRemaining) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryPercentageRemaining) MarshalZcl() ([]byte, error)         { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryPercentageRemaining) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryPercentageRemaining(*nt)
 	return br, err
 }
-func (BatteryPercentageRemaining) Name() string     { return "Battery Percentage Remaining" }
-func (BatteryPercentageRemaining) Readable() bool   { return true }
-func (BatteryPercentageRemaining) Writable() bool   { return false }
-func (BatteryPercentageRemaining) Reportable() bool { return true }
-func (BatteryPercentageRemaining) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageRemaining) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -299,23 +291,22 @@ type BatteryManufacturer zcl.Zcstring
 
 const BatteryManufacturerAttr zcl.AttrID = 48
 
-func (a BatteryManufacturer) ID() zcl.AttrID               { return BatteryManufacturerAttr }
-func (a BatteryManufacturer) Cluster() zcl.ClusterID       { return PowerConfigurationID }
+func (BatteryManufacturer) ID() zcl.AttrID                 { return BatteryManufacturerAttr }
+func (BatteryManufacturer) Cluster() zcl.ClusterID         { return PowerConfigurationID }
+func (BatteryManufacturer) Name() string                   { return "Battery Manufacturer" }
+func (BatteryManufacturer) Readable() bool                 { return true }
+func (BatteryManufacturer) Writable() bool                 { return true }
+func (BatteryManufacturer) Reportable() bool               { return false }
+func (BatteryManufacturer) SceneIndex() int                { return -1 }
 func (a *BatteryManufacturer) Value() *BatteryManufacturer { return a }
-func (a BatteryManufacturer) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a BatteryManufacturer) MarshalZcl() ([]byte, error)  { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *BatteryManufacturer) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryManufacturer(*nt)
 	return br, err
 }
-func (BatteryManufacturer) Name() string     { return "Battery Manufacturer" }
-func (BatteryManufacturer) Readable() bool   { return true }
-func (BatteryManufacturer) Writable() bool   { return true }
-func (BatteryManufacturer) Reportable() bool { return false }
-func (BatteryManufacturer) SceneIndex() int  { return -1 }
 
 func (a BatteryManufacturer) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -326,23 +317,22 @@ type BatterySize zcl.Zenum8
 
 const BatterySizeAttr zcl.AttrID = 49
 
-func (a BatterySize) ID() zcl.AttrID         { return BatterySizeAttr }
-func (a BatterySize) Cluster() zcl.ClusterID { return PowerConfigurationID }
-func (a *BatterySize) Value() *BatterySize   { return a }
-func (a BatterySize) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (BatterySize) ID() zcl.AttrID                { return BatterySizeAttr }
+func (BatterySize) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (BatterySize) Name() string                  { return "Battery Size" }
+func (BatterySize) Readable() bool                { return true }
+func (BatterySize) Writable() bool                { return true }
+func (BatterySize) Reportable() bool              { return false }
+func (BatterySize) SceneIndex() int               { return -1 }
+func (a *BatterySize) Value() *BatterySize        { return a }
+func (a BatterySize) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *BatterySize) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatterySize(*nt)
 	return br, err
 }
-func (BatterySize) Name() string     { return "Battery Size" }
-func (BatterySize) Readable() bool   { return true }
-func (BatterySize) Writable() bool   { return true }
-func (BatterySize) Reportable() bool { return false }
-func (BatterySize) SceneIndex() int  { return -1 }
 
 func (a BatterySize) String() string {
 	switch a {
@@ -435,23 +425,22 @@ type BatteryAhrRating zcl.Zu16
 
 const BatteryAhrRatingAttr zcl.AttrID = 50
 
-func (a BatteryAhrRating) ID() zcl.AttrID            { return BatteryAhrRatingAttr }
-func (a BatteryAhrRating) Cluster() zcl.ClusterID    { return PowerConfigurationID }
-func (a *BatteryAhrRating) Value() *BatteryAhrRating { return a }
-func (a BatteryAhrRating) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (BatteryAhrRating) ID() zcl.AttrID                { return BatteryAhrRatingAttr }
+func (BatteryAhrRating) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (BatteryAhrRating) Name() string                  { return "Battery AHr Rating" }
+func (BatteryAhrRating) Readable() bool                { return true }
+func (BatteryAhrRating) Writable() bool                { return true }
+func (BatteryAhrRating) Reportable() bool              { return false }
+func (BatteryAhrRating) SceneIndex() int               { return -1 }
+func (a *BatteryAhrRating) Value() *BatteryAhrRating   { return a }
+func (a BatteryAhrRating) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *BatteryAhrRating) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryAhrRating(*nt)
 	return br, err
 }
-func (BatteryAhrRating) Name() string     { return "Battery AHr Rating" }
-func (BatteryAhrRating) Readable() bool   { return true }
-func (BatteryAhrRating) Writable() bool   { return true }
-func (BatteryAhrRating) Reportable() bool { return false }
-func (BatteryAhrRating) SceneIndex() int  { return -1 }
 
 func (a BatteryAhrRating) String() string {
 	return zcl.MilliAmpereHours.Format(float64(a) / 0.1)
@@ -462,23 +451,22 @@ type BatteryQuantity zcl.Zu8
 
 const BatteryQuantityAttr zcl.AttrID = 51
 
-func (a BatteryQuantity) ID() zcl.AttrID           { return BatteryQuantityAttr }
-func (a BatteryQuantity) Cluster() zcl.ClusterID   { return PowerConfigurationID }
-func (a *BatteryQuantity) Value() *BatteryQuantity { return a }
-func (a BatteryQuantity) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (BatteryQuantity) ID() zcl.AttrID                { return BatteryQuantityAttr }
+func (BatteryQuantity) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (BatteryQuantity) Name() string                  { return "Battery Quantity" }
+func (BatteryQuantity) Readable() bool                { return true }
+func (BatteryQuantity) Writable() bool                { return true }
+func (BatteryQuantity) Reportable() bool              { return false }
+func (BatteryQuantity) SceneIndex() int               { return -1 }
+func (a *BatteryQuantity) Value() *BatteryQuantity    { return a }
+func (a BatteryQuantity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryQuantity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryQuantity(*nt)
 	return br, err
 }
-func (BatteryQuantity) Name() string     { return "Battery Quantity" }
-func (BatteryQuantity) Readable() bool   { return true }
-func (BatteryQuantity) Writable() bool   { return true }
-func (BatteryQuantity) Reportable() bool { return false }
-func (BatteryQuantity) SceneIndex() int  { return -1 }
 
 func (a BatteryQuantity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -489,23 +477,22 @@ type BatteryRatedVoltage zcl.Zu8
 
 const BatteryRatedVoltageAttr zcl.AttrID = 52
 
-func (a BatteryRatedVoltage) ID() zcl.AttrID               { return BatteryRatedVoltageAttr }
-func (a BatteryRatedVoltage) Cluster() zcl.ClusterID       { return PowerConfigurationID }
+func (BatteryRatedVoltage) ID() zcl.AttrID                 { return BatteryRatedVoltageAttr }
+func (BatteryRatedVoltage) Cluster() zcl.ClusterID         { return PowerConfigurationID }
+func (BatteryRatedVoltage) Name() string                   { return "Battery Rated Voltage" }
+func (BatteryRatedVoltage) Readable() bool                 { return true }
+func (BatteryRatedVoltage) Writable() bool                 { return true }
+func (BatteryRatedVoltage) Reportable() bool               { return false }
+func (BatteryRatedVoltage) SceneIndex() int                { return -1 }
 func (a *BatteryRatedVoltage) Value() *BatteryRatedVoltage { return a }
-func (a BatteryRatedVoltage) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryRatedVoltage) MarshalZcl() ([]byte, error)  { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryRatedVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryRatedVoltage(*nt)
 	return br, err
 }
-func (BatteryRatedVoltage) Name() string     { return "Battery Rated Voltage" }
-func (BatteryRatedVoltage) Readable() bool   { return true }
-func (BatteryRatedVoltage) Writable() bool   { return true }
-func (BatteryRatedVoltage) Reportable() bool { return false }
-func (BatteryRatedVoltage) SceneIndex() int  { return -1 }
 
 func (a BatteryRatedVoltage) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -516,23 +503,22 @@ type BatteryAlarmMask zcl.Zbmp8
 
 const BatteryAlarmMaskAttr zcl.AttrID = 53
 
-func (a BatteryAlarmMask) ID() zcl.AttrID            { return BatteryAlarmMaskAttr }
-func (a BatteryAlarmMask) Cluster() zcl.ClusterID    { return PowerConfigurationID }
-func (a *BatteryAlarmMask) Value() *BatteryAlarmMask { return a }
-func (a BatteryAlarmMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (BatteryAlarmMask) ID() zcl.AttrID                { return BatteryAlarmMaskAttr }
+func (BatteryAlarmMask) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (BatteryAlarmMask) Name() string                  { return "Battery Alarm Mask" }
+func (BatteryAlarmMask) Readable() bool                { return true }
+func (BatteryAlarmMask) Writable() bool                { return true }
+func (BatteryAlarmMask) Reportable() bool              { return false }
+func (BatteryAlarmMask) SceneIndex() int               { return -1 }
+func (a *BatteryAlarmMask) Value() *BatteryAlarmMask   { return a }
+func (a BatteryAlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *BatteryAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryAlarmMask(*nt)
 	return br, err
 }
-func (BatteryAlarmMask) Name() string     { return "Battery Alarm Mask" }
-func (BatteryAlarmMask) Readable() bool   { return true }
-func (BatteryAlarmMask) Writable() bool   { return true }
-func (BatteryAlarmMask) Reportable() bool { return false }
-func (BatteryAlarmMask) SceneIndex() int  { return -1 }
 
 func (a BatteryAlarmMask) String() string {
 	var bstr []string
@@ -584,23 +570,22 @@ type BatteryVoltageMinThreshold zcl.Zu8
 
 const BatteryVoltageMinThresholdAttr zcl.AttrID = 54
 
-func (a BatteryVoltageMinThreshold) ID() zcl.AttrID                      { return BatteryVoltageMinThresholdAttr }
-func (a BatteryVoltageMinThreshold) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (BatteryVoltageMinThreshold) ID() zcl.AttrID                        { return BatteryVoltageMinThresholdAttr }
+func (BatteryVoltageMinThreshold) Cluster() zcl.ClusterID                { return PowerConfigurationID }
+func (BatteryVoltageMinThreshold) Name() string                          { return "Battery Voltage Min Threshold" }
+func (BatteryVoltageMinThreshold) Readable() bool                        { return true }
+func (BatteryVoltageMinThreshold) Writable() bool                        { return true }
+func (BatteryVoltageMinThreshold) Reportable() bool                      { return false }
+func (BatteryVoltageMinThreshold) SceneIndex() int                       { return -1 }
 func (a *BatteryVoltageMinThreshold) Value() *BatteryVoltageMinThreshold { return a }
-func (a BatteryVoltageMinThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryVoltageMinThreshold) MarshalZcl() ([]byte, error)         { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryVoltageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryVoltageMinThreshold(*nt)
 	return br, err
 }
-func (BatteryVoltageMinThreshold) Name() string     { return "Battery Voltage Min Threshold" }
-func (BatteryVoltageMinThreshold) Readable() bool   { return true }
-func (BatteryVoltageMinThreshold) Writable() bool   { return true }
-func (BatteryVoltageMinThreshold) Reportable() bool { return false }
-func (BatteryVoltageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageMinThreshold) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -611,23 +596,22 @@ type BatteryVoltageThreshold1 zcl.Zu8
 
 const BatteryVoltageThreshold1Attr zcl.AttrID = 55
 
-func (a BatteryVoltageThreshold1) ID() zcl.AttrID                    { return BatteryVoltageThreshold1Attr }
-func (a BatteryVoltageThreshold1) Cluster() zcl.ClusterID            { return PowerConfigurationID }
+func (BatteryVoltageThreshold1) ID() zcl.AttrID                      { return BatteryVoltageThreshold1Attr }
+func (BatteryVoltageThreshold1) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (BatteryVoltageThreshold1) Name() string                        { return "Battery Voltage Threshold 1" }
+func (BatteryVoltageThreshold1) Readable() bool                      { return true }
+func (BatteryVoltageThreshold1) Writable() bool                      { return true }
+func (BatteryVoltageThreshold1) Reportable() bool                    { return false }
+func (BatteryVoltageThreshold1) SceneIndex() int                     { return -1 }
 func (a *BatteryVoltageThreshold1) Value() *BatteryVoltageThreshold1 { return a }
-func (a BatteryVoltageThreshold1) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryVoltageThreshold1) MarshalZcl() ([]byte, error)       { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryVoltageThreshold1) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryVoltageThreshold1(*nt)
 	return br, err
 }
-func (BatteryVoltageThreshold1) Name() string     { return "Battery Voltage Threshold 1" }
-func (BatteryVoltageThreshold1) Readable() bool   { return true }
-func (BatteryVoltageThreshold1) Writable() bool   { return true }
-func (BatteryVoltageThreshold1) Reportable() bool { return false }
-func (BatteryVoltageThreshold1) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold1) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -638,23 +622,22 @@ type BatteryVoltageThreshold2 zcl.Zu8
 
 const BatteryVoltageThreshold2Attr zcl.AttrID = 56
 
-func (a BatteryVoltageThreshold2) ID() zcl.AttrID                    { return BatteryVoltageThreshold2Attr }
-func (a BatteryVoltageThreshold2) Cluster() zcl.ClusterID            { return PowerConfigurationID }
+func (BatteryVoltageThreshold2) ID() zcl.AttrID                      { return BatteryVoltageThreshold2Attr }
+func (BatteryVoltageThreshold2) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (BatteryVoltageThreshold2) Name() string                        { return "Battery Voltage Threshold 2" }
+func (BatteryVoltageThreshold2) Readable() bool                      { return true }
+func (BatteryVoltageThreshold2) Writable() bool                      { return true }
+func (BatteryVoltageThreshold2) Reportable() bool                    { return false }
+func (BatteryVoltageThreshold2) SceneIndex() int                     { return -1 }
 func (a *BatteryVoltageThreshold2) Value() *BatteryVoltageThreshold2 { return a }
-func (a BatteryVoltageThreshold2) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryVoltageThreshold2) MarshalZcl() ([]byte, error)       { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryVoltageThreshold2) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryVoltageThreshold2(*nt)
 	return br, err
 }
-func (BatteryVoltageThreshold2) Name() string     { return "Battery Voltage Threshold 2" }
-func (BatteryVoltageThreshold2) Readable() bool   { return true }
-func (BatteryVoltageThreshold2) Writable() bool   { return true }
-func (BatteryVoltageThreshold2) Reportable() bool { return false }
-func (BatteryVoltageThreshold2) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold2) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -665,23 +648,22 @@ type BatteryVoltageThreshold3 zcl.Zu8
 
 const BatteryVoltageThreshold3Attr zcl.AttrID = 57
 
-func (a BatteryVoltageThreshold3) ID() zcl.AttrID                    { return BatteryVoltageThreshold3Attr }
-func (a BatteryVoltageThreshold3) Cluster() zcl.ClusterID            { return PowerConfigurationID }
+func (BatteryVoltageThreshold3) ID() zcl.AttrID                      { return BatteryVoltageThreshold3Attr }
+func (BatteryVoltageThreshold3) Cluster() zcl.ClusterID              { return PowerConfigurationID }
+func (BatteryVoltageThreshold3) Name() string                        { return "Battery Voltage Threshold 3" }
+func (BatteryVoltageThreshold3) Readable() bool                      { return true }
+func (BatteryVoltageThreshold3) Writable() bool                      { return true }
+func (BatteryVoltageThreshold3) Reportable() bool                    { return false }
+func (BatteryVoltageThreshold3) SceneIndex() int                     { return -1 }
 func (a *BatteryVoltageThreshold3) Value() *BatteryVoltageThreshold3 { return a }
-func (a BatteryVoltageThreshold3) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryVoltageThreshold3) MarshalZcl() ([]byte, error)       { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryVoltageThreshold3) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryVoltageThreshold3(*nt)
 	return br, err
 }
-func (BatteryVoltageThreshold3) Name() string     { return "Battery Voltage Threshold 3" }
-func (BatteryVoltageThreshold3) Readable() bool   { return true }
-func (BatteryVoltageThreshold3) Writable() bool   { return true }
-func (BatteryVoltageThreshold3) Reportable() bool { return false }
-func (BatteryVoltageThreshold3) SceneIndex() int  { return -1 }
 
 func (a BatteryVoltageThreshold3) String() string {
 	return zcl.Volts.Format(float64(a) / 10)
@@ -692,23 +674,22 @@ type BatteryPercentageMinThreshold zcl.Zu8
 
 const BatteryPercentageMinThresholdAttr zcl.AttrID = 58
 
-func (a BatteryPercentageMinThreshold) ID() zcl.AttrID                         { return BatteryPercentageMinThresholdAttr }
-func (a BatteryPercentageMinThreshold) Cluster() zcl.ClusterID                 { return PowerConfigurationID }
+func (BatteryPercentageMinThreshold) ID() zcl.AttrID                           { return BatteryPercentageMinThresholdAttr }
+func (BatteryPercentageMinThreshold) Cluster() zcl.ClusterID                   { return PowerConfigurationID }
+func (BatteryPercentageMinThreshold) Name() string                             { return "Battery Percentage Min Threshold" }
+func (BatteryPercentageMinThreshold) Readable() bool                           { return true }
+func (BatteryPercentageMinThreshold) Writable() bool                           { return true }
+func (BatteryPercentageMinThreshold) Reportable() bool                         { return false }
+func (BatteryPercentageMinThreshold) SceneIndex() int                          { return -1 }
 func (a *BatteryPercentageMinThreshold) Value() *BatteryPercentageMinThreshold { return a }
-func (a BatteryPercentageMinThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryPercentageMinThreshold) MarshalZcl() ([]byte, error)            { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryPercentageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryPercentageMinThreshold(*nt)
 	return br, err
 }
-func (BatteryPercentageMinThreshold) Name() string     { return "Battery Percentage Min Threshold" }
-func (BatteryPercentageMinThreshold) Readable() bool   { return true }
-func (BatteryPercentageMinThreshold) Writable() bool   { return true }
-func (BatteryPercentageMinThreshold) Reportable() bool { return false }
-func (BatteryPercentageMinThreshold) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageMinThreshold) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -719,23 +700,22 @@ type BatteryPercentageThreshold1 zcl.Zu8
 
 const BatteryPercentageThreshold1Attr zcl.AttrID = 59
 
-func (a BatteryPercentageThreshold1) ID() zcl.AttrID                       { return BatteryPercentageThreshold1Attr }
-func (a BatteryPercentageThreshold1) Cluster() zcl.ClusterID               { return PowerConfigurationID }
+func (BatteryPercentageThreshold1) ID() zcl.AttrID                         { return BatteryPercentageThreshold1Attr }
+func (BatteryPercentageThreshold1) Cluster() zcl.ClusterID                 { return PowerConfigurationID }
+func (BatteryPercentageThreshold1) Name() string                           { return "Battery Percentage Threshold 1" }
+func (BatteryPercentageThreshold1) Readable() bool                         { return true }
+func (BatteryPercentageThreshold1) Writable() bool                         { return true }
+func (BatteryPercentageThreshold1) Reportable() bool                       { return false }
+func (BatteryPercentageThreshold1) SceneIndex() int                        { return -1 }
 func (a *BatteryPercentageThreshold1) Value() *BatteryPercentageThreshold1 { return a }
-func (a BatteryPercentageThreshold1) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryPercentageThreshold1) MarshalZcl() ([]byte, error)          { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryPercentageThreshold1) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryPercentageThreshold1(*nt)
 	return br, err
 }
-func (BatteryPercentageThreshold1) Name() string     { return "Battery Percentage Threshold 1" }
-func (BatteryPercentageThreshold1) Readable() bool   { return true }
-func (BatteryPercentageThreshold1) Writable() bool   { return true }
-func (BatteryPercentageThreshold1) Reportable() bool { return false }
-func (BatteryPercentageThreshold1) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold1) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -746,23 +726,22 @@ type BatteryPercentageThreshold2 zcl.Zu8
 
 const BatteryPercentageThreshold2Attr zcl.AttrID = 60
 
-func (a BatteryPercentageThreshold2) ID() zcl.AttrID                       { return BatteryPercentageThreshold2Attr }
-func (a BatteryPercentageThreshold2) Cluster() zcl.ClusterID               { return PowerConfigurationID }
+func (BatteryPercentageThreshold2) ID() zcl.AttrID                         { return BatteryPercentageThreshold2Attr }
+func (BatteryPercentageThreshold2) Cluster() zcl.ClusterID                 { return PowerConfigurationID }
+func (BatteryPercentageThreshold2) Name() string                           { return "Battery Percentage Threshold 2" }
+func (BatteryPercentageThreshold2) Readable() bool                         { return true }
+func (BatteryPercentageThreshold2) Writable() bool                         { return true }
+func (BatteryPercentageThreshold2) Reportable() bool                       { return false }
+func (BatteryPercentageThreshold2) SceneIndex() int                        { return -1 }
 func (a *BatteryPercentageThreshold2) Value() *BatteryPercentageThreshold2 { return a }
-func (a BatteryPercentageThreshold2) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryPercentageThreshold2) MarshalZcl() ([]byte, error)          { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryPercentageThreshold2) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryPercentageThreshold2(*nt)
 	return br, err
 }
-func (BatteryPercentageThreshold2) Name() string     { return "Battery Percentage Threshold 2" }
-func (BatteryPercentageThreshold2) Readable() bool   { return true }
-func (BatteryPercentageThreshold2) Writable() bool   { return true }
-func (BatteryPercentageThreshold2) Reportable() bool { return false }
-func (BatteryPercentageThreshold2) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold2) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -773,23 +752,22 @@ type BatteryPercentageThreshold3 zcl.Zu8
 
 const BatteryPercentageThreshold3Attr zcl.AttrID = 61
 
-func (a BatteryPercentageThreshold3) ID() zcl.AttrID                       { return BatteryPercentageThreshold3Attr }
-func (a BatteryPercentageThreshold3) Cluster() zcl.ClusterID               { return PowerConfigurationID }
+func (BatteryPercentageThreshold3) ID() zcl.AttrID                         { return BatteryPercentageThreshold3Attr }
+func (BatteryPercentageThreshold3) Cluster() zcl.ClusterID                 { return PowerConfigurationID }
+func (BatteryPercentageThreshold3) Name() string                           { return "Battery Percentage Threshold 3" }
+func (BatteryPercentageThreshold3) Readable() bool                         { return true }
+func (BatteryPercentageThreshold3) Writable() bool                         { return true }
+func (BatteryPercentageThreshold3) Reportable() bool                       { return false }
+func (BatteryPercentageThreshold3) SceneIndex() int                        { return -1 }
 func (a *BatteryPercentageThreshold3) Value() *BatteryPercentageThreshold3 { return a }
-func (a BatteryPercentageThreshold3) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a BatteryPercentageThreshold3) MarshalZcl() ([]byte, error)          { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *BatteryPercentageThreshold3) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryPercentageThreshold3(*nt)
 	return br, err
 }
-func (BatteryPercentageThreshold3) Name() string     { return "Battery Percentage Threshold 3" }
-func (BatteryPercentageThreshold3) Readable() bool   { return true }
-func (BatteryPercentageThreshold3) Writable() bool   { return true }
-func (BatteryPercentageThreshold3) Reportable() bool { return false }
-func (BatteryPercentageThreshold3) SceneIndex() int  { return -1 }
 
 func (a BatteryPercentageThreshold3) String() string {
 	return zcl.Percent.Format(float64(a) / 2)
@@ -800,23 +778,22 @@ type BatteryAlarmState zcl.Zbmp32
 
 const BatteryAlarmStateAttr zcl.AttrID = 62
 
-func (a BatteryAlarmState) ID() zcl.AttrID             { return BatteryAlarmStateAttr }
-func (a BatteryAlarmState) Cluster() zcl.ClusterID     { return PowerConfigurationID }
-func (a *BatteryAlarmState) Value() *BatteryAlarmState { return a }
-func (a BatteryAlarmState) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp32(a).MarshalZcl()
-}
+func (BatteryAlarmState) ID() zcl.AttrID                { return BatteryAlarmStateAttr }
+func (BatteryAlarmState) Cluster() zcl.ClusterID        { return PowerConfigurationID }
+func (BatteryAlarmState) Name() string                  { return "Battery Alarm State" }
+func (BatteryAlarmState) Readable() bool                { return true }
+func (BatteryAlarmState) Writable() bool                { return true }
+func (BatteryAlarmState) Reportable() bool              { return false }
+func (BatteryAlarmState) SceneIndex() int               { return -1 }
+func (a *BatteryAlarmState) Value() *BatteryAlarmState  { return a }
+func (a BatteryAlarmState) MarshalZcl() ([]byte, error) { return zcl.Zbmp32(a).MarshalZcl() }
+
 func (a *BatteryAlarmState) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = BatteryAlarmState(*nt)
 	return br, err
 }
-func (BatteryAlarmState) Name() string     { return "Battery Alarm State" }
-func (BatteryAlarmState) Readable() bool   { return true }
-func (BatteryAlarmState) Writable() bool   { return true }
-func (BatteryAlarmState) Reportable() bool { return false }
-func (BatteryAlarmState) SceneIndex() int  { return -1 }
 
 func (a BatteryAlarmState) String() string {
 	var bstr []string

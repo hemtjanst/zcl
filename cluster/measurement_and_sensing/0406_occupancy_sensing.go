@@ -31,23 +31,22 @@ type Occupancy zcl.Zbmp8
 
 const OccupancyAttr zcl.AttrID = 0
 
-func (a Occupancy) ID() zcl.AttrID         { return OccupancyAttr }
-func (a Occupancy) Cluster() zcl.ClusterID { return OccupancySensingID }
-func (a *Occupancy) Value() *Occupancy     { return a }
-func (a Occupancy) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Occupancy) ID() zcl.AttrID                { return OccupancyAttr }
+func (Occupancy) Cluster() zcl.ClusterID        { return OccupancySensingID }
+func (Occupancy) Name() string                  { return "Occupancy" }
+func (Occupancy) Readable() bool                { return true }
+func (Occupancy) Writable() bool                { return false }
+func (Occupancy) Reportable() bool              { return true }
+func (Occupancy) SceneIndex() int               { return -1 }
+func (a *Occupancy) Value() *Occupancy          { return a }
+func (a Occupancy) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Occupancy) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Occupancy(*nt)
 	return br, err
 }
-func (Occupancy) Name() string     { return "Occupancy" }
-func (Occupancy) Readable() bool   { return true }
-func (Occupancy) Writable() bool   { return false }
-func (Occupancy) Reportable() bool { return true }
-func (Occupancy) SceneIndex() int  { return -1 }
 
 func (a Occupancy) String() string {
 	return zcl.Sprintf("%v", zcl.Zbmp8(a))
@@ -58,23 +57,22 @@ type OccupancySensorType zcl.Zenum8
 
 const OccupancySensorTypeAttr zcl.AttrID = 1
 
-func (a OccupancySensorType) ID() zcl.AttrID               { return OccupancySensorTypeAttr }
-func (a OccupancySensorType) Cluster() zcl.ClusterID       { return OccupancySensingID }
+func (OccupancySensorType) ID() zcl.AttrID                 { return OccupancySensorTypeAttr }
+func (OccupancySensorType) Cluster() zcl.ClusterID         { return OccupancySensingID }
+func (OccupancySensorType) Name() string                   { return "Occupancy Sensor Type" }
+func (OccupancySensorType) Readable() bool                 { return true }
+func (OccupancySensorType) Writable() bool                 { return false }
+func (OccupancySensorType) Reportable() bool               { return false }
+func (OccupancySensorType) SceneIndex() int                { return -1 }
 func (a *OccupancySensorType) Value() *OccupancySensorType { return a }
-func (a OccupancySensorType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a OccupancySensorType) MarshalZcl() ([]byte, error)  { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *OccupancySensorType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OccupancySensorType(*nt)
 	return br, err
 }
-func (OccupancySensorType) Name() string     { return "Occupancy Sensor Type" }
-func (OccupancySensorType) Readable() bool   { return true }
-func (OccupancySensorType) Writable() bool   { return false }
-func (OccupancySensorType) Reportable() bool { return false }
-func (OccupancySensorType) SceneIndex() int  { return -1 }
 
 func (a OccupancySensorType) String() string {
 	switch a {
@@ -112,23 +110,22 @@ type PirOccupiedToUnoccupiedDelay zcl.Zu16
 
 const PirOccupiedToUnoccupiedDelayAttr zcl.AttrID = 16
 
-func (a PirOccupiedToUnoccupiedDelay) ID() zcl.AttrID                        { return PirOccupiedToUnoccupiedDelayAttr }
-func (a PirOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID                { return OccupancySensingID }
+func (PirOccupiedToUnoccupiedDelay) ID() zcl.AttrID                          { return PirOccupiedToUnoccupiedDelayAttr }
+func (PirOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID                  { return OccupancySensingID }
+func (PirOccupiedToUnoccupiedDelay) Name() string                            { return "PIR Occupied To Unoccupied Delay" }
+func (PirOccupiedToUnoccupiedDelay) Readable() bool                          { return true }
+func (PirOccupiedToUnoccupiedDelay) Writable() bool                          { return true }
+func (PirOccupiedToUnoccupiedDelay) Reportable() bool                        { return false }
+func (PirOccupiedToUnoccupiedDelay) SceneIndex() int                         { return -1 }
 func (a *PirOccupiedToUnoccupiedDelay) Value() *PirOccupiedToUnoccupiedDelay { return a }
-func (a PirOccupiedToUnoccupiedDelay) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a PirOccupiedToUnoccupiedDelay) MarshalZcl() ([]byte, error)           { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *PirOccupiedToUnoccupiedDelay) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PirOccupiedToUnoccupiedDelay(*nt)
 	return br, err
 }
-func (PirOccupiedToUnoccupiedDelay) Name() string     { return "PIR Occupied To Unoccupied Delay" }
-func (PirOccupiedToUnoccupiedDelay) Readable() bool   { return true }
-func (PirOccupiedToUnoccupiedDelay) Writable() bool   { return true }
-func (PirOccupiedToUnoccupiedDelay) Reportable() bool { return false }
-func (PirOccupiedToUnoccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a PirOccupiedToUnoccupiedDelay) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -140,23 +137,22 @@ type PirUnoccupiedToOccupiedDelay zcl.Zu16
 
 const PirUnoccupiedToOccupiedDelayAttr zcl.AttrID = 17
 
-func (a PirUnoccupiedToOccupiedDelay) ID() zcl.AttrID                        { return PirUnoccupiedToOccupiedDelayAttr }
-func (a PirUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID                { return OccupancySensingID }
+func (PirUnoccupiedToOccupiedDelay) ID() zcl.AttrID                          { return PirUnoccupiedToOccupiedDelayAttr }
+func (PirUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID                  { return OccupancySensingID }
+func (PirUnoccupiedToOccupiedDelay) Name() string                            { return "PIR Unoccupied To Occupied Delay" }
+func (PirUnoccupiedToOccupiedDelay) Readable() bool                          { return true }
+func (PirUnoccupiedToOccupiedDelay) Writable() bool                          { return true }
+func (PirUnoccupiedToOccupiedDelay) Reportable() bool                        { return false }
+func (PirUnoccupiedToOccupiedDelay) SceneIndex() int                         { return -1 }
 func (a *PirUnoccupiedToOccupiedDelay) Value() *PirUnoccupiedToOccupiedDelay { return a }
-func (a PirUnoccupiedToOccupiedDelay) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a PirUnoccupiedToOccupiedDelay) MarshalZcl() ([]byte, error)           { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *PirUnoccupiedToOccupiedDelay) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PirUnoccupiedToOccupiedDelay(*nt)
 	return br, err
 }
-func (PirUnoccupiedToOccupiedDelay) Name() string     { return "PIR Unoccupied To Occupied Delay" }
-func (PirUnoccupiedToOccupiedDelay) Readable() bool   { return true }
-func (PirUnoccupiedToOccupiedDelay) Writable() bool   { return true }
-func (PirUnoccupiedToOccupiedDelay) Reportable() bool { return false }
-func (PirUnoccupiedToOccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a PirUnoccupiedToOccupiedDelay) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -168,23 +164,22 @@ type PirUnoccupiedToOccupiedThreshold zcl.Zu8
 
 const PirUnoccupiedToOccupiedThresholdAttr zcl.AttrID = 18
 
-func (a PirUnoccupiedToOccupiedThreshold) ID() zcl.AttrID                            { return PirUnoccupiedToOccupiedThresholdAttr }
-func (a PirUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID                    { return OccupancySensingID }
+func (PirUnoccupiedToOccupiedThreshold) ID() zcl.AttrID                              { return PirUnoccupiedToOccupiedThresholdAttr }
+func (PirUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID                      { return OccupancySensingID }
+func (PirUnoccupiedToOccupiedThreshold) Name() string                                { return "PIR Unoccupied To Occupied Threshold" }
+func (PirUnoccupiedToOccupiedThreshold) Readable() bool                              { return true }
+func (PirUnoccupiedToOccupiedThreshold) Writable() bool                              { return true }
+func (PirUnoccupiedToOccupiedThreshold) Reportable() bool                            { return false }
+func (PirUnoccupiedToOccupiedThreshold) SceneIndex() int                             { return -1 }
 func (a *PirUnoccupiedToOccupiedThreshold) Value() *PirUnoccupiedToOccupiedThreshold { return a }
-func (a PirUnoccupiedToOccupiedThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a PirUnoccupiedToOccupiedThreshold) MarshalZcl() ([]byte, error)               { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *PirUnoccupiedToOccupiedThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PirUnoccupiedToOccupiedThreshold(*nt)
 	return br, err
 }
-func (PirUnoccupiedToOccupiedThreshold) Name() string     { return "PIR Unoccupied To Occupied Threshold" }
-func (PirUnoccupiedToOccupiedThreshold) Readable() bool   { return true }
-func (PirUnoccupiedToOccupiedThreshold) Writable() bool   { return true }
-func (PirUnoccupiedToOccupiedThreshold) Reportable() bool { return false }
-func (PirUnoccupiedToOccupiedThreshold) SceneIndex() int  { return -1 }
 
 func (a PirUnoccupiedToOccupiedThreshold) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -196,27 +191,28 @@ type UltrasonicOccupiedToUnoccupiedDelay zcl.Zu16
 
 const UltrasonicOccupiedToUnoccupiedDelayAttr zcl.AttrID = 32
 
-func (a UltrasonicOccupiedToUnoccupiedDelay) ID() zcl.AttrID {
+func (UltrasonicOccupiedToUnoccupiedDelay) ID() zcl.AttrID {
 	return UltrasonicOccupiedToUnoccupiedDelayAttr
 }
-func (a UltrasonicOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID                       { return OccupancySensingID }
+func (UltrasonicOccupiedToUnoccupiedDelay) Cluster() zcl.ClusterID { return OccupancySensingID }
+func (UltrasonicOccupiedToUnoccupiedDelay) Name() string {
+	return "Ultrasonic Occupied To Unoccupied Delay"
+}
+func (UltrasonicOccupiedToUnoccupiedDelay) Readable() bool                                 { return true }
+func (UltrasonicOccupiedToUnoccupiedDelay) Writable() bool                                 { return true }
+func (UltrasonicOccupiedToUnoccupiedDelay) Reportable() bool                               { return false }
+func (UltrasonicOccupiedToUnoccupiedDelay) SceneIndex() int                                { return -1 }
 func (a *UltrasonicOccupiedToUnoccupiedDelay) Value() *UltrasonicOccupiedToUnoccupiedDelay { return a }
 func (a UltrasonicOccupiedToUnoccupiedDelay) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
+
 func (a *UltrasonicOccupiedToUnoccupiedDelay) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = UltrasonicOccupiedToUnoccupiedDelay(*nt)
 	return br, err
 }
-func (UltrasonicOccupiedToUnoccupiedDelay) Name() string {
-	return "Ultrasonic Occupied To Unoccupied Delay"
-}
-func (UltrasonicOccupiedToUnoccupiedDelay) Readable() bool   { return true }
-func (UltrasonicOccupiedToUnoccupiedDelay) Writable() bool   { return true }
-func (UltrasonicOccupiedToUnoccupiedDelay) Reportable() bool { return false }
-func (UltrasonicOccupiedToUnoccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a UltrasonicOccupiedToUnoccupiedDelay) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -228,27 +224,28 @@ type UltrasonicUnoccupiedToOccupiedDelay zcl.Zu16
 
 const UltrasonicUnoccupiedToOccupiedDelayAttr zcl.AttrID = 33
 
-func (a UltrasonicUnoccupiedToOccupiedDelay) ID() zcl.AttrID {
+func (UltrasonicUnoccupiedToOccupiedDelay) ID() zcl.AttrID {
 	return UltrasonicUnoccupiedToOccupiedDelayAttr
 }
-func (a UltrasonicUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID                       { return OccupancySensingID }
+func (UltrasonicUnoccupiedToOccupiedDelay) Cluster() zcl.ClusterID { return OccupancySensingID }
+func (UltrasonicUnoccupiedToOccupiedDelay) Name() string {
+	return "Ultrasonic Unoccupied To Occupied Delay"
+}
+func (UltrasonicUnoccupiedToOccupiedDelay) Readable() bool                                 { return true }
+func (UltrasonicUnoccupiedToOccupiedDelay) Writable() bool                                 { return true }
+func (UltrasonicUnoccupiedToOccupiedDelay) Reportable() bool                               { return false }
+func (UltrasonicUnoccupiedToOccupiedDelay) SceneIndex() int                                { return -1 }
 func (a *UltrasonicUnoccupiedToOccupiedDelay) Value() *UltrasonicUnoccupiedToOccupiedDelay { return a }
 func (a UltrasonicUnoccupiedToOccupiedDelay) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
+
 func (a *UltrasonicUnoccupiedToOccupiedDelay) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = UltrasonicUnoccupiedToOccupiedDelay(*nt)
 	return br, err
 }
-func (UltrasonicUnoccupiedToOccupiedDelay) Name() string {
-	return "Ultrasonic Unoccupied To Occupied Delay"
-}
-func (UltrasonicUnoccupiedToOccupiedDelay) Readable() bool   { return true }
-func (UltrasonicUnoccupiedToOccupiedDelay) Writable() bool   { return true }
-func (UltrasonicUnoccupiedToOccupiedDelay) Reportable() bool { return false }
-func (UltrasonicUnoccupiedToOccupiedDelay) SceneIndex() int  { return -1 }
 
 func (a UltrasonicUnoccupiedToOccupiedDelay) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -260,22 +257,10 @@ type UltrasonicUnoccupiedToOccupiedThreshold zcl.Zu8
 
 const UltrasonicUnoccupiedToOccupiedThresholdAttr zcl.AttrID = 34
 
-func (a UltrasonicUnoccupiedToOccupiedThreshold) ID() zcl.AttrID {
+func (UltrasonicUnoccupiedToOccupiedThreshold) ID() zcl.AttrID {
 	return UltrasonicUnoccupiedToOccupiedThresholdAttr
 }
-func (a UltrasonicUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID { return OccupancySensingID }
-func (a *UltrasonicUnoccupiedToOccupiedThreshold) Value() *UltrasonicUnoccupiedToOccupiedThreshold {
-	return a
-}
-func (a UltrasonicUnoccupiedToOccupiedThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
-func (a *UltrasonicUnoccupiedToOccupiedThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = UltrasonicUnoccupiedToOccupiedThreshold(*nt)
-	return br, err
-}
+func (UltrasonicUnoccupiedToOccupiedThreshold) Cluster() zcl.ClusterID { return OccupancySensingID }
 func (UltrasonicUnoccupiedToOccupiedThreshold) Name() string {
 	return "Ultrasonic Unoccupied To Occupied Threshold"
 }
@@ -283,6 +268,19 @@ func (UltrasonicUnoccupiedToOccupiedThreshold) Readable() bool   { return true }
 func (UltrasonicUnoccupiedToOccupiedThreshold) Writable() bool   { return true }
 func (UltrasonicUnoccupiedToOccupiedThreshold) Reportable() bool { return false }
 func (UltrasonicUnoccupiedToOccupiedThreshold) SceneIndex() int  { return -1 }
+func (a *UltrasonicUnoccupiedToOccupiedThreshold) Value() *UltrasonicUnoccupiedToOccupiedThreshold {
+	return a
+}
+func (a UltrasonicUnoccupiedToOccupiedThreshold) MarshalZcl() ([]byte, error) {
+	return zcl.Zu8(a).MarshalZcl()
+}
+
+func (a *UltrasonicUnoccupiedToOccupiedThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = UltrasonicUnoccupiedToOccupiedThreshold(*nt)
+	return br, err
+}
 
 func (a UltrasonicUnoccupiedToOccupiedThreshold) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -293,23 +291,22 @@ type Sensitivity zcl.Zu8
 
 const SensitivityAttr zcl.AttrID = 48
 
-func (a Sensitivity) ID() zcl.AttrID         { return SensitivityAttr }
-func (a Sensitivity) Cluster() zcl.ClusterID { return OccupancySensingID }
-func (a *Sensitivity) Value() *Sensitivity   { return a }
-func (a Sensitivity) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (Sensitivity) ID() zcl.AttrID                { return SensitivityAttr }
+func (Sensitivity) Cluster() zcl.ClusterID        { return OccupancySensingID }
+func (Sensitivity) Name() string                  { return "Sensitivity" }
+func (Sensitivity) Readable() bool                { return true }
+func (Sensitivity) Writable() bool                { return true }
+func (Sensitivity) Reportable() bool              { return false }
+func (Sensitivity) SceneIndex() int               { return -1 }
+func (a *Sensitivity) Value() *Sensitivity        { return a }
+func (a Sensitivity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *Sensitivity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Sensitivity(*nt)
 	return br, err
 }
-func (Sensitivity) Name() string     { return "Sensitivity" }
-func (Sensitivity) Readable() bool   { return true }
-func (Sensitivity) Writable() bool   { return true }
-func (Sensitivity) Reportable() bool { return false }
-func (Sensitivity) SceneIndex() int  { return -1 }
 
 func (a Sensitivity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -320,23 +317,22 @@ type SensitivityMax zcl.Zu8
 
 const SensitivityMaxAttr zcl.AttrID = 49
 
-func (a SensitivityMax) ID() zcl.AttrID          { return SensitivityMaxAttr }
-func (a SensitivityMax) Cluster() zcl.ClusterID  { return OccupancySensingID }
-func (a *SensitivityMax) Value() *SensitivityMax { return a }
-func (a SensitivityMax) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (SensitivityMax) ID() zcl.AttrID                { return SensitivityMaxAttr }
+func (SensitivityMax) Cluster() zcl.ClusterID        { return OccupancySensingID }
+func (SensitivityMax) Name() string                  { return "Sensitivity max." }
+func (SensitivityMax) Readable() bool                { return true }
+func (SensitivityMax) Writable() bool                { return true }
+func (SensitivityMax) Reportable() bool              { return false }
+func (SensitivityMax) SceneIndex() int               { return -1 }
+func (a *SensitivityMax) Value() *SensitivityMax     { return a }
+func (a SensitivityMax) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *SensitivityMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = SensitivityMax(*nt)
 	return br, err
 }
-func (SensitivityMax) Name() string     { return "Sensitivity max." }
-func (SensitivityMax) Readable() bool   { return true }
-func (SensitivityMax) Writable() bool   { return true }
-func (SensitivityMax) Reportable() bool { return false }
-func (SensitivityMax) SceneIndex() int  { return -1 }
 
 func (a SensitivityMax) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))

@@ -24,23 +24,22 @@ type FanMode zcl.Zenum8
 
 const FanModeAttr zcl.AttrID = 0
 
-func (a FanMode) ID() zcl.AttrID         { return FanModeAttr }
-func (a FanMode) Cluster() zcl.ClusterID { return FanControlID }
-func (a *FanMode) Value() *FanMode       { return a }
-func (a FanMode) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (FanMode) ID() zcl.AttrID                { return FanModeAttr }
+func (FanMode) Cluster() zcl.ClusterID        { return FanControlID }
+func (FanMode) Name() string                  { return "Fan Mode" }
+func (FanMode) Readable() bool                { return true }
+func (FanMode) Writable() bool                { return true }
+func (FanMode) Reportable() bool              { return false }
+func (FanMode) SceneIndex() int               { return -1 }
+func (a *FanMode) Value() *FanMode            { return a }
+func (a FanMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *FanMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = FanMode(*nt)
 	return br, err
 }
-func (FanMode) Name() string     { return "Fan Mode" }
-func (FanMode) Readable() bool   { return true }
-func (FanMode) Writable() bool   { return true }
-func (FanMode) Reportable() bool { return false }
-func (FanMode) SceneIndex() int  { return -1 }
 
 func (a FanMode) String() string {
 	switch a {
@@ -109,23 +108,22 @@ type FanModeSequence zcl.Zenum8
 
 const FanModeSequenceAttr zcl.AttrID = 1
 
-func (a FanModeSequence) ID() zcl.AttrID           { return FanModeSequenceAttr }
-func (a FanModeSequence) Cluster() zcl.ClusterID   { return FanControlID }
-func (a *FanModeSequence) Value() *FanModeSequence { return a }
-func (a FanModeSequence) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (FanModeSequence) ID() zcl.AttrID                { return FanModeSequenceAttr }
+func (FanModeSequence) Cluster() zcl.ClusterID        { return FanControlID }
+func (FanModeSequence) Name() string                  { return "Fan Mode Sequence" }
+func (FanModeSequence) Readable() bool                { return true }
+func (FanModeSequence) Writable() bool                { return true }
+func (FanModeSequence) Reportable() bool              { return false }
+func (FanModeSequence) SceneIndex() int               { return -1 }
+func (a *FanModeSequence) Value() *FanModeSequence    { return a }
+func (a FanModeSequence) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *FanModeSequence) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = FanModeSequence(*nt)
 	return br, err
 }
-func (FanModeSequence) Name() string     { return "Fan Mode Sequence" }
-func (FanModeSequence) Readable() bool   { return true }
-func (FanModeSequence) Writable() bool   { return true }
-func (FanModeSequence) Reportable() bool { return false }
-func (FanModeSequence) SceneIndex() int  { return -1 }
 
 func (a FanModeSequence) String() string {
 	switch a {

@@ -31,23 +31,22 @@ type MultiOutputStateText zcl.Zcstring
 
 const MultiOutputStateTextAttr zcl.AttrID = 14
 
-func (a MultiOutputStateText) ID() zcl.AttrID                { return MultiOutputStateTextAttr }
-func (a MultiOutputStateText) Cluster() zcl.ClusterID        { return MultistateOutputBasicID }
+func (MultiOutputStateText) ID() zcl.AttrID                  { return MultiOutputStateTextAttr }
+func (MultiOutputStateText) Cluster() zcl.ClusterID          { return MultistateOutputBasicID }
+func (MultiOutputStateText) Name() string                    { return "Multi Output State Text" }
+func (MultiOutputStateText) Readable() bool                  { return true }
+func (MultiOutputStateText) Writable() bool                  { return true }
+func (MultiOutputStateText) Reportable() bool                { return false }
+func (MultiOutputStateText) SceneIndex() int                 { return -1 }
 func (a *MultiOutputStateText) Value() *MultiOutputStateText { return a }
-func (a MultiOutputStateText) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a MultiOutputStateText) MarshalZcl() ([]byte, error)   { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *MultiOutputStateText) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputStateText(*nt)
 	return br, err
 }
-func (MultiOutputStateText) Name() string     { return "Multi Output State Text" }
-func (MultiOutputStateText) Readable() bool   { return true }
-func (MultiOutputStateText) Writable() bool   { return true }
-func (MultiOutputStateText) Reportable() bool { return false }
-func (MultiOutputStateText) SceneIndex() int  { return -1 }
 
 func (a MultiOutputStateText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -58,23 +57,22 @@ type MultiOutputDescription zcl.Zcstring
 
 const MultiOutputDescriptionAttr zcl.AttrID = 28
 
-func (a MultiOutputDescription) ID() zcl.AttrID                  { return MultiOutputDescriptionAttr }
-func (a MultiOutputDescription) Cluster() zcl.ClusterID          { return MultistateOutputBasicID }
+func (MultiOutputDescription) ID() zcl.AttrID                    { return MultiOutputDescriptionAttr }
+func (MultiOutputDescription) Cluster() zcl.ClusterID            { return MultistateOutputBasicID }
+func (MultiOutputDescription) Name() string                      { return "Multi Output Description" }
+func (MultiOutputDescription) Readable() bool                    { return true }
+func (MultiOutputDescription) Writable() bool                    { return true }
+func (MultiOutputDescription) Reportable() bool                  { return false }
+func (MultiOutputDescription) SceneIndex() int                   { return -1 }
 func (a *MultiOutputDescription) Value() *MultiOutputDescription { return a }
-func (a MultiOutputDescription) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a MultiOutputDescription) MarshalZcl() ([]byte, error)     { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *MultiOutputDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputDescription(*nt)
 	return br, err
 }
-func (MultiOutputDescription) Name() string     { return "Multi Output Description" }
-func (MultiOutputDescription) Readable() bool   { return true }
-func (MultiOutputDescription) Writable() bool   { return true }
-func (MultiOutputDescription) Reportable() bool { return false }
-func (MultiOutputDescription) SceneIndex() int  { return -1 }
 
 func (a MultiOutputDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -85,23 +83,22 @@ type MultiOutputNumberOfStates zcl.Zu16
 
 const MultiOutputNumberOfStatesAttr zcl.AttrID = 74
 
-func (a MultiOutputNumberOfStates) ID() zcl.AttrID                     { return MultiOutputNumberOfStatesAttr }
-func (a MultiOutputNumberOfStates) Cluster() zcl.ClusterID             { return MultistateOutputBasicID }
+func (MultiOutputNumberOfStates) ID() zcl.AttrID                       { return MultiOutputNumberOfStatesAttr }
+func (MultiOutputNumberOfStates) Cluster() zcl.ClusterID               { return MultistateOutputBasicID }
+func (MultiOutputNumberOfStates) Name() string                         { return "Multi Output Number of states" }
+func (MultiOutputNumberOfStates) Readable() bool                       { return true }
+func (MultiOutputNumberOfStates) Writable() bool                       { return true }
+func (MultiOutputNumberOfStates) Reportable() bool                     { return false }
+func (MultiOutputNumberOfStates) SceneIndex() int                      { return -1 }
 func (a *MultiOutputNumberOfStates) Value() *MultiOutputNumberOfStates { return a }
-func (a MultiOutputNumberOfStates) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MultiOutputNumberOfStates) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MultiOutputNumberOfStates) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputNumberOfStates(*nt)
 	return br, err
 }
-func (MultiOutputNumberOfStates) Name() string     { return "Multi Output Number of states" }
-func (MultiOutputNumberOfStates) Readable() bool   { return true }
-func (MultiOutputNumberOfStates) Writable() bool   { return true }
-func (MultiOutputNumberOfStates) Reportable() bool { return false }
-func (MultiOutputNumberOfStates) SceneIndex() int  { return -1 }
 
 func (a MultiOutputNumberOfStates) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -112,23 +109,22 @@ type MultiOutputOutOfService zcl.Zbool
 
 const MultiOutputOutOfServiceAttr zcl.AttrID = 81
 
-func (a MultiOutputOutOfService) ID() zcl.AttrID                   { return MultiOutputOutOfServiceAttr }
-func (a MultiOutputOutOfService) Cluster() zcl.ClusterID           { return MultistateOutputBasicID }
+func (MultiOutputOutOfService) ID() zcl.AttrID                     { return MultiOutputOutOfServiceAttr }
+func (MultiOutputOutOfService) Cluster() zcl.ClusterID             { return MultistateOutputBasicID }
+func (MultiOutputOutOfService) Name() string                       { return "Multi Output Out of service" }
+func (MultiOutputOutOfService) Readable() bool                     { return true }
+func (MultiOutputOutOfService) Writable() bool                     { return true }
+func (MultiOutputOutOfService) Reportable() bool                   { return false }
+func (MultiOutputOutOfService) SceneIndex() int                    { return -1 }
 func (a *MultiOutputOutOfService) Value() *MultiOutputOutOfService { return a }
-func (a MultiOutputOutOfService) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (a MultiOutputOutOfService) MarshalZcl() ([]byte, error)      { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *MultiOutputOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputOutOfService(*nt)
 	return br, err
 }
-func (MultiOutputOutOfService) Name() string     { return "Multi Output Out of service" }
-func (MultiOutputOutOfService) Readable() bool   { return true }
-func (MultiOutputOutOfService) Writable() bool   { return true }
-func (MultiOutputOutOfService) Reportable() bool { return false }
-func (MultiOutputOutOfService) SceneIndex() int  { return -1 }
 
 func (a MultiOutputOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -139,23 +135,22 @@ type MultiOutputPresentValue zcl.Zu16
 
 const MultiOutputPresentValueAttr zcl.AttrID = 85
 
-func (a MultiOutputPresentValue) ID() zcl.AttrID                   { return MultiOutputPresentValueAttr }
-func (a MultiOutputPresentValue) Cluster() zcl.ClusterID           { return MultistateOutputBasicID }
+func (MultiOutputPresentValue) ID() zcl.AttrID                     { return MultiOutputPresentValueAttr }
+func (MultiOutputPresentValue) Cluster() zcl.ClusterID             { return MultistateOutputBasicID }
+func (MultiOutputPresentValue) Name() string                       { return "Multi Output Present value" }
+func (MultiOutputPresentValue) Readable() bool                     { return true }
+func (MultiOutputPresentValue) Writable() bool                     { return true }
+func (MultiOutputPresentValue) Reportable() bool                   { return true }
+func (MultiOutputPresentValue) SceneIndex() int                    { return -1 }
 func (a *MultiOutputPresentValue) Value() *MultiOutputPresentValue { return a }
-func (a MultiOutputPresentValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MultiOutputPresentValue) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MultiOutputPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputPresentValue(*nt)
 	return br, err
 }
-func (MultiOutputPresentValue) Name() string     { return "Multi Output Present value" }
-func (MultiOutputPresentValue) Readable() bool   { return true }
-func (MultiOutputPresentValue) Writable() bool   { return true }
-func (MultiOutputPresentValue) Reportable() bool { return true }
-func (MultiOutputPresentValue) SceneIndex() int  { return -1 }
 
 func (a MultiOutputPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -166,23 +161,22 @@ type MultiOutputPriorityArray zcl.Zarray
 
 const MultiOutputPriorityArrayAttr zcl.AttrID = 87
 
-func (a MultiOutputPriorityArray) ID() zcl.AttrID                    { return MultiOutputPriorityArrayAttr }
-func (a MultiOutputPriorityArray) Cluster() zcl.ClusterID            { return MultistateOutputBasicID }
+func (MultiOutputPriorityArray) ID() zcl.AttrID                      { return MultiOutputPriorityArrayAttr }
+func (MultiOutputPriorityArray) Cluster() zcl.ClusterID              { return MultistateOutputBasicID }
+func (MultiOutputPriorityArray) Name() string                        { return "Multi Output Priority Array" }
+func (MultiOutputPriorityArray) Readable() bool                      { return true }
+func (MultiOutputPriorityArray) Writable() bool                      { return true }
+func (MultiOutputPriorityArray) Reportable() bool                    { return false }
+func (MultiOutputPriorityArray) SceneIndex() int                     { return -1 }
 func (a *MultiOutputPriorityArray) Value() *MultiOutputPriorityArray { return a }
-func (a MultiOutputPriorityArray) MarshalZcl() ([]byte, error) {
-	return zcl.Zarray(a).MarshalZcl()
-}
+func (a MultiOutputPriorityArray) MarshalZcl() ([]byte, error)       { return zcl.Zarray(a).MarshalZcl() }
+
 func (a *MultiOutputPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zarray)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputPriorityArray(*nt)
 	return br, err
 }
-func (MultiOutputPriorityArray) Name() string     { return "Multi Output Priority Array" }
-func (MultiOutputPriorityArray) Readable() bool   { return true }
-func (MultiOutputPriorityArray) Writable() bool   { return true }
-func (MultiOutputPriorityArray) Reportable() bool { return false }
-func (MultiOutputPriorityArray) SceneIndex() int  { return -1 }
 
 func (a MultiOutputPriorityArray) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -193,23 +187,22 @@ type MultiOutputReliability zcl.Zenum8
 
 const MultiOutputReliabilityAttr zcl.AttrID = 103
 
-func (a MultiOutputReliability) ID() zcl.AttrID                  { return MultiOutputReliabilityAttr }
-func (a MultiOutputReliability) Cluster() zcl.ClusterID          { return MultistateOutputBasicID }
+func (MultiOutputReliability) ID() zcl.AttrID                    { return MultiOutputReliabilityAttr }
+func (MultiOutputReliability) Cluster() zcl.ClusterID            { return MultistateOutputBasicID }
+func (MultiOutputReliability) Name() string                      { return "Multi Output Reliability" }
+func (MultiOutputReliability) Readable() bool                    { return true }
+func (MultiOutputReliability) Writable() bool                    { return true }
+func (MultiOutputReliability) Reportable() bool                  { return false }
+func (MultiOutputReliability) SceneIndex() int                   { return -1 }
 func (a *MultiOutputReliability) Value() *MultiOutputReliability { return a }
-func (a MultiOutputReliability) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a MultiOutputReliability) MarshalZcl() ([]byte, error)     { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *MultiOutputReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputReliability(*nt)
 	return br, err
 }
-func (MultiOutputReliability) Name() string     { return "Multi Output Reliability" }
-func (MultiOutputReliability) Readable() bool   { return true }
-func (MultiOutputReliability) Writable() bool   { return true }
-func (MultiOutputReliability) Reportable() bool { return false }
-func (MultiOutputReliability) SceneIndex() int  { return -1 }
 
 func (a MultiOutputReliability) String() string {
 	switch a {
@@ -310,23 +303,22 @@ type MultiOutputRelinquishDefault zcl.Zu16
 
 const MultiOutputRelinquishDefaultAttr zcl.AttrID = 104
 
-func (a MultiOutputRelinquishDefault) ID() zcl.AttrID                        { return MultiOutputRelinquishDefaultAttr }
-func (a MultiOutputRelinquishDefault) Cluster() zcl.ClusterID                { return MultistateOutputBasicID }
+func (MultiOutputRelinquishDefault) ID() zcl.AttrID                          { return MultiOutputRelinquishDefaultAttr }
+func (MultiOutputRelinquishDefault) Cluster() zcl.ClusterID                  { return MultistateOutputBasicID }
+func (MultiOutputRelinquishDefault) Name() string                            { return "Multi Output Relinquish Default" }
+func (MultiOutputRelinquishDefault) Readable() bool                          { return true }
+func (MultiOutputRelinquishDefault) Writable() bool                          { return true }
+func (MultiOutputRelinquishDefault) Reportable() bool                        { return false }
+func (MultiOutputRelinquishDefault) SceneIndex() int                         { return -1 }
 func (a *MultiOutputRelinquishDefault) Value() *MultiOutputRelinquishDefault { return a }
-func (a MultiOutputRelinquishDefault) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MultiOutputRelinquishDefault) MarshalZcl() ([]byte, error)           { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MultiOutputRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputRelinquishDefault(*nt)
 	return br, err
 }
-func (MultiOutputRelinquishDefault) Name() string     { return "Multi Output Relinquish Default" }
-func (MultiOutputRelinquishDefault) Readable() bool   { return true }
-func (MultiOutputRelinquishDefault) Writable() bool   { return true }
-func (MultiOutputRelinquishDefault) Reportable() bool { return false }
-func (MultiOutputRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a MultiOutputRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -337,23 +329,22 @@ type MultiOutputStatusFlags zcl.Zbmp8
 
 const MultiOutputStatusFlagsAttr zcl.AttrID = 111
 
-func (a MultiOutputStatusFlags) ID() zcl.AttrID                  { return MultiOutputStatusFlagsAttr }
-func (a MultiOutputStatusFlags) Cluster() zcl.ClusterID          { return MultistateOutputBasicID }
+func (MultiOutputStatusFlags) ID() zcl.AttrID                    { return MultiOutputStatusFlagsAttr }
+func (MultiOutputStatusFlags) Cluster() zcl.ClusterID            { return MultistateOutputBasicID }
+func (MultiOutputStatusFlags) Name() string                      { return "Multi Output Status flags" }
+func (MultiOutputStatusFlags) Readable() bool                    { return true }
+func (MultiOutputStatusFlags) Writable() bool                    { return false }
+func (MultiOutputStatusFlags) Reportable() bool                  { return true }
+func (MultiOutputStatusFlags) SceneIndex() int                   { return -1 }
 func (a *MultiOutputStatusFlags) Value() *MultiOutputStatusFlags { return a }
-func (a MultiOutputStatusFlags) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a MultiOutputStatusFlags) MarshalZcl() ([]byte, error)     { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *MultiOutputStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputStatusFlags(*nt)
 	return br, err
 }
-func (MultiOutputStatusFlags) Name() string     { return "Multi Output Status flags" }
-func (MultiOutputStatusFlags) Readable() bool   { return true }
-func (MultiOutputStatusFlags) Writable() bool   { return false }
-func (MultiOutputStatusFlags) Reportable() bool { return true }
-func (MultiOutputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a MultiOutputStatusFlags) String() string {
 	var bstr []string
@@ -405,23 +396,22 @@ type MultiOutputApplicationType zcl.Zu32
 
 const MultiOutputApplicationTypeAttr zcl.AttrID = 256
 
-func (a MultiOutputApplicationType) ID() zcl.AttrID                      { return MultiOutputApplicationTypeAttr }
-func (a MultiOutputApplicationType) Cluster() zcl.ClusterID              { return MultistateOutputBasicID }
+func (MultiOutputApplicationType) ID() zcl.AttrID                        { return MultiOutputApplicationTypeAttr }
+func (MultiOutputApplicationType) Cluster() zcl.ClusterID                { return MultistateOutputBasicID }
+func (MultiOutputApplicationType) Name() string                          { return "Multi Output Application Type" }
+func (MultiOutputApplicationType) Readable() bool                        { return true }
+func (MultiOutputApplicationType) Writable() bool                        { return false }
+func (MultiOutputApplicationType) Reportable() bool                      { return false }
+func (MultiOutputApplicationType) SceneIndex() int                       { return -1 }
 func (a *MultiOutputApplicationType) Value() *MultiOutputApplicationType { return a }
-func (a MultiOutputApplicationType) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a MultiOutputApplicationType) MarshalZcl() ([]byte, error)         { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *MultiOutputApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiOutputApplicationType(*nt)
 	return br, err
 }
-func (MultiOutputApplicationType) Name() string     { return "Multi Output Application Type" }
-func (MultiOutputApplicationType) Readable() bool   { return true }
-func (MultiOutputApplicationType) Writable() bool   { return false }
-func (MultiOutputApplicationType) Reportable() bool { return false }
-func (MultiOutputApplicationType) SceneIndex() int  { return -1 }
 
 func (a MultiOutputApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

@@ -168,23 +168,22 @@ type Tier1PriceLabel zcl.Zostring
 
 const Tier1PriceLabelAttr zcl.AttrID = 0
 
-func (a Tier1PriceLabel) ID() zcl.AttrID           { return Tier1PriceLabelAttr }
-func (a Tier1PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
-func (a *Tier1PriceLabel) Value() *Tier1PriceLabel { return a }
-func (a Tier1PriceLabel) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (Tier1PriceLabel) ID() zcl.AttrID                { return Tier1PriceLabelAttr }
+func (Tier1PriceLabel) Cluster() zcl.ClusterID        { return PriceID }
+func (Tier1PriceLabel) Name() string                  { return "Tier1 Price Label" }
+func (Tier1PriceLabel) Readable() bool                { return true }
+func (Tier1PriceLabel) Writable() bool                { return true }
+func (Tier1PriceLabel) Reportable() bool              { return false }
+func (Tier1PriceLabel) SceneIndex() int               { return -1 }
+func (a *Tier1PriceLabel) Value() *Tier1PriceLabel    { return a }
+func (a Tier1PriceLabel) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *Tier1PriceLabel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Tier1PriceLabel(*nt)
 	return br, err
 }
-func (Tier1PriceLabel) Name() string     { return "Tier1 Price Label" }
-func (Tier1PriceLabel) Readable() bool   { return true }
-func (Tier1PriceLabel) Writable() bool   { return true }
-func (Tier1PriceLabel) Reportable() bool { return false }
-func (Tier1PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier1PriceLabel) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))
@@ -195,23 +194,22 @@ type Tier2PriceLabel zcl.Zostring
 
 const Tier2PriceLabelAttr zcl.AttrID = 1
 
-func (a Tier2PriceLabel) ID() zcl.AttrID           { return Tier2PriceLabelAttr }
-func (a Tier2PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
-func (a *Tier2PriceLabel) Value() *Tier2PriceLabel { return a }
-func (a Tier2PriceLabel) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (Tier2PriceLabel) ID() zcl.AttrID                { return Tier2PriceLabelAttr }
+func (Tier2PriceLabel) Cluster() zcl.ClusterID        { return PriceID }
+func (Tier2PriceLabel) Name() string                  { return "Tier2 Price Label" }
+func (Tier2PriceLabel) Readable() bool                { return true }
+func (Tier2PriceLabel) Writable() bool                { return true }
+func (Tier2PriceLabel) Reportable() bool              { return false }
+func (Tier2PriceLabel) SceneIndex() int               { return -1 }
+func (a *Tier2PriceLabel) Value() *Tier2PriceLabel    { return a }
+func (a Tier2PriceLabel) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *Tier2PriceLabel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Tier2PriceLabel(*nt)
 	return br, err
 }
-func (Tier2PriceLabel) Name() string     { return "Tier2 Price Label" }
-func (Tier2PriceLabel) Readable() bool   { return true }
-func (Tier2PriceLabel) Writable() bool   { return true }
-func (Tier2PriceLabel) Reportable() bool { return false }
-func (Tier2PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier2PriceLabel) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))
@@ -222,23 +220,22 @@ type Tier3PriceLabel zcl.Zostring
 
 const Tier3PriceLabelAttr zcl.AttrID = 2
 
-func (a Tier3PriceLabel) ID() zcl.AttrID           { return Tier3PriceLabelAttr }
-func (a Tier3PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
-func (a *Tier3PriceLabel) Value() *Tier3PriceLabel { return a }
-func (a Tier3PriceLabel) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (Tier3PriceLabel) ID() zcl.AttrID                { return Tier3PriceLabelAttr }
+func (Tier3PriceLabel) Cluster() zcl.ClusterID        { return PriceID }
+func (Tier3PriceLabel) Name() string                  { return "Tier3 Price Label" }
+func (Tier3PriceLabel) Readable() bool                { return true }
+func (Tier3PriceLabel) Writable() bool                { return true }
+func (Tier3PriceLabel) Reportable() bool              { return false }
+func (Tier3PriceLabel) SceneIndex() int               { return -1 }
+func (a *Tier3PriceLabel) Value() *Tier3PriceLabel    { return a }
+func (a Tier3PriceLabel) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *Tier3PriceLabel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Tier3PriceLabel(*nt)
 	return br, err
 }
-func (Tier3PriceLabel) Name() string     { return "Tier3 Price Label" }
-func (Tier3PriceLabel) Readable() bool   { return true }
-func (Tier3PriceLabel) Writable() bool   { return true }
-func (Tier3PriceLabel) Reportable() bool { return false }
-func (Tier3PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier3PriceLabel) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))
@@ -249,23 +246,22 @@ type Tier4PriceLabel zcl.Zostring
 
 const Tier4PriceLabelAttr zcl.AttrID = 3
 
-func (a Tier4PriceLabel) ID() zcl.AttrID           { return Tier4PriceLabelAttr }
-func (a Tier4PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
-func (a *Tier4PriceLabel) Value() *Tier4PriceLabel { return a }
-func (a Tier4PriceLabel) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (Tier4PriceLabel) ID() zcl.AttrID                { return Tier4PriceLabelAttr }
+func (Tier4PriceLabel) Cluster() zcl.ClusterID        { return PriceID }
+func (Tier4PriceLabel) Name() string                  { return "Tier4 Price Label" }
+func (Tier4PriceLabel) Readable() bool                { return true }
+func (Tier4PriceLabel) Writable() bool                { return true }
+func (Tier4PriceLabel) Reportable() bool              { return false }
+func (Tier4PriceLabel) SceneIndex() int               { return -1 }
+func (a *Tier4PriceLabel) Value() *Tier4PriceLabel    { return a }
+func (a Tier4PriceLabel) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *Tier4PriceLabel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Tier4PriceLabel(*nt)
 	return br, err
 }
-func (Tier4PriceLabel) Name() string     { return "Tier4 Price Label" }
-func (Tier4PriceLabel) Readable() bool   { return true }
-func (Tier4PriceLabel) Writable() bool   { return true }
-func (Tier4PriceLabel) Reportable() bool { return false }
-func (Tier4PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier4PriceLabel) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))
@@ -276,23 +272,22 @@ type Tier5PriceLabel zcl.Zostring
 
 const Tier5PriceLabelAttr zcl.AttrID = 4
 
-func (a Tier5PriceLabel) ID() zcl.AttrID           { return Tier5PriceLabelAttr }
-func (a Tier5PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
-func (a *Tier5PriceLabel) Value() *Tier5PriceLabel { return a }
-func (a Tier5PriceLabel) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (Tier5PriceLabel) ID() zcl.AttrID                { return Tier5PriceLabelAttr }
+func (Tier5PriceLabel) Cluster() zcl.ClusterID        { return PriceID }
+func (Tier5PriceLabel) Name() string                  { return "Tier5 Price Label" }
+func (Tier5PriceLabel) Readable() bool                { return true }
+func (Tier5PriceLabel) Writable() bool                { return true }
+func (Tier5PriceLabel) Reportable() bool              { return false }
+func (Tier5PriceLabel) SceneIndex() int               { return -1 }
+func (a *Tier5PriceLabel) Value() *Tier5PriceLabel    { return a }
+func (a Tier5PriceLabel) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *Tier5PriceLabel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Tier5PriceLabel(*nt)
 	return br, err
 }
-func (Tier5PriceLabel) Name() string     { return "Tier5 Price Label" }
-func (Tier5PriceLabel) Readable() bool   { return true }
-func (Tier5PriceLabel) Writable() bool   { return true }
-func (Tier5PriceLabel) Reportable() bool { return false }
-func (Tier5PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier5PriceLabel) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))
@@ -303,23 +298,22 @@ type Tier6PriceLabel zcl.Zostring
 
 const Tier6PriceLabelAttr zcl.AttrID = 5
 
-func (a Tier6PriceLabel) ID() zcl.AttrID           { return Tier6PriceLabelAttr }
-func (a Tier6PriceLabel) Cluster() zcl.ClusterID   { return PriceID }
-func (a *Tier6PriceLabel) Value() *Tier6PriceLabel { return a }
-func (a Tier6PriceLabel) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (Tier6PriceLabel) ID() zcl.AttrID                { return Tier6PriceLabelAttr }
+func (Tier6PriceLabel) Cluster() zcl.ClusterID        { return PriceID }
+func (Tier6PriceLabel) Name() string                  { return "Tier6 Price Label" }
+func (Tier6PriceLabel) Readable() bool                { return true }
+func (Tier6PriceLabel) Writable() bool                { return true }
+func (Tier6PriceLabel) Reportable() bool              { return false }
+func (Tier6PriceLabel) SceneIndex() int               { return -1 }
+func (a *Tier6PriceLabel) Value() *Tier6PriceLabel    { return a }
+func (a Tier6PriceLabel) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *Tier6PriceLabel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Tier6PriceLabel(*nt)
 	return br, err
 }
-func (Tier6PriceLabel) Name() string     { return "Tier6 Price Label" }
-func (Tier6PriceLabel) Readable() bool   { return true }
-func (Tier6PriceLabel) Writable() bool   { return true }
-func (Tier6PriceLabel) Reportable() bool { return false }
-func (Tier6PriceLabel) SceneIndex() int  { return -1 }
 
 func (a Tier6PriceLabel) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))

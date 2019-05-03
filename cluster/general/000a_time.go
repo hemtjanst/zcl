@@ -32,23 +32,22 @@ type Time zcl.Zutc
 
 const TimeAttr zcl.AttrID = 0
 
-func (a Time) ID() zcl.AttrID         { return TimeAttr }
-func (a Time) Cluster() zcl.ClusterID { return TimeID }
-func (a *Time) Value() *Time          { return a }
-func (a Time) MarshalZcl() ([]byte, error) {
-	return zcl.Zutc(a).MarshalZcl()
-}
+func (Time) ID() zcl.AttrID                { return TimeAttr }
+func (Time) Cluster() zcl.ClusterID        { return TimeID }
+func (Time) Name() string                  { return "Time" }
+func (Time) Readable() bool                { return true }
+func (Time) Writable() bool                { return true }
+func (Time) Reportable() bool              { return false }
+func (Time) SceneIndex() int               { return -1 }
+func (a *Time) Value() *Time               { return a }
+func (a Time) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
+
 func (a *Time) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zutc)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Time(*nt)
 	return br, err
 }
-func (Time) Name() string     { return "Time" }
-func (Time) Readable() bool   { return true }
-func (Time) Writable() bool   { return true }
-func (Time) Reportable() bool { return false }
-func (Time) SceneIndex() int  { return -1 }
 
 func (a Time) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -59,23 +58,22 @@ type TimeStatus zcl.Zbmp8
 
 const TimeStatusAttr zcl.AttrID = 1
 
-func (a TimeStatus) ID() zcl.AttrID         { return TimeStatusAttr }
-func (a TimeStatus) Cluster() zcl.ClusterID { return TimeID }
-func (a *TimeStatus) Value() *TimeStatus    { return a }
-func (a TimeStatus) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (TimeStatus) ID() zcl.AttrID                { return TimeStatusAttr }
+func (TimeStatus) Cluster() zcl.ClusterID        { return TimeID }
+func (TimeStatus) Name() string                  { return "Time Status" }
+func (TimeStatus) Readable() bool                { return true }
+func (TimeStatus) Writable() bool                { return true }
+func (TimeStatus) Reportable() bool              { return false }
+func (TimeStatus) SceneIndex() int               { return -1 }
+func (a *TimeStatus) Value() *TimeStatus         { return a }
+func (a TimeStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *TimeStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = TimeStatus(*nt)
 	return br, err
 }
-func (TimeStatus) Name() string     { return "Time Status" }
-func (TimeStatus) Readable() bool   { return true }
-func (TimeStatus) Writable() bool   { return true }
-func (TimeStatus) Reportable() bool { return false }
-func (TimeStatus) SceneIndex() int  { return -1 }
 
 func (a TimeStatus) String() string {
 	var bstr []string
@@ -128,23 +126,22 @@ type TimeZone zcl.Zs32
 
 const TimeZoneAttr zcl.AttrID = 2
 
-func (a TimeZone) ID() zcl.AttrID         { return TimeZoneAttr }
-func (a TimeZone) Cluster() zcl.ClusterID { return TimeID }
-func (a *TimeZone) Value() *TimeZone      { return a }
-func (a TimeZone) MarshalZcl() ([]byte, error) {
-	return zcl.Zs32(a).MarshalZcl()
-}
+func (TimeZone) ID() zcl.AttrID                { return TimeZoneAttr }
+func (TimeZone) Cluster() zcl.ClusterID        { return TimeID }
+func (TimeZone) Name() string                  { return "Time Zone" }
+func (TimeZone) Readable() bool                { return true }
+func (TimeZone) Writable() bool                { return true }
+func (TimeZone) Reportable() bool              { return false }
+func (TimeZone) SceneIndex() int               { return -1 }
+func (a *TimeZone) Value() *TimeZone           { return a }
+func (a TimeZone) MarshalZcl() ([]byte, error) { return zcl.Zs32(a).MarshalZcl() }
+
 func (a *TimeZone) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = TimeZone(*nt)
 	return br, err
 }
-func (TimeZone) Name() string     { return "Time Zone" }
-func (TimeZone) Readable() bool   { return true }
-func (TimeZone) Writable() bool   { return true }
-func (TimeZone) Reportable() bool { return false }
-func (TimeZone) SceneIndex() int  { return -1 }
 
 func (a TimeZone) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -156,23 +153,22 @@ type DstStart zcl.Zutc
 
 const DstStartAttr zcl.AttrID = 3
 
-func (a DstStart) ID() zcl.AttrID         { return DstStartAttr }
-func (a DstStart) Cluster() zcl.ClusterID { return TimeID }
-func (a *DstStart) Value() *DstStart      { return a }
-func (a DstStart) MarshalZcl() ([]byte, error) {
-	return zcl.Zutc(a).MarshalZcl()
-}
+func (DstStart) ID() zcl.AttrID                { return DstStartAttr }
+func (DstStart) Cluster() zcl.ClusterID        { return TimeID }
+func (DstStart) Name() string                  { return "Dst Start" }
+func (DstStart) Readable() bool                { return true }
+func (DstStart) Writable() bool                { return true }
+func (DstStart) Reportable() bool              { return false }
+func (DstStart) SceneIndex() int               { return -1 }
+func (a *DstStart) Value() *DstStart           { return a }
+func (a DstStart) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
+
 func (a *DstStart) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zutc)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DstStart(*nt)
 	return br, err
 }
-func (DstStart) Name() string     { return "Dst Start" }
-func (DstStart) Readable() bool   { return true }
-func (DstStart) Writable() bool   { return true }
-func (DstStart) Reportable() bool { return false }
-func (DstStart) SceneIndex() int  { return -1 }
 
 func (a DstStart) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -184,23 +180,22 @@ type DstEnd zcl.Zutc
 
 const DstEndAttr zcl.AttrID = 4
 
-func (a DstEnd) ID() zcl.AttrID         { return DstEndAttr }
-func (a DstEnd) Cluster() zcl.ClusterID { return TimeID }
-func (a *DstEnd) Value() *DstEnd        { return a }
-func (a DstEnd) MarshalZcl() ([]byte, error) {
-	return zcl.Zutc(a).MarshalZcl()
-}
+func (DstEnd) ID() zcl.AttrID                { return DstEndAttr }
+func (DstEnd) Cluster() zcl.ClusterID        { return TimeID }
+func (DstEnd) Name() string                  { return "Dst End" }
+func (DstEnd) Readable() bool                { return true }
+func (DstEnd) Writable() bool                { return true }
+func (DstEnd) Reportable() bool              { return false }
+func (DstEnd) SceneIndex() int               { return -1 }
+func (a *DstEnd) Value() *DstEnd             { return a }
+func (a DstEnd) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
+
 func (a *DstEnd) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zutc)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DstEnd(*nt)
 	return br, err
 }
-func (DstEnd) Name() string     { return "Dst End" }
-func (DstEnd) Readable() bool   { return true }
-func (DstEnd) Writable() bool   { return true }
-func (DstEnd) Reportable() bool { return false }
-func (DstEnd) SceneIndex() int  { return -1 }
 
 func (a DstEnd) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -211,23 +206,22 @@ type DstShift zcl.Zs32
 
 const DstShiftAttr zcl.AttrID = 5
 
-func (a DstShift) ID() zcl.AttrID         { return DstShiftAttr }
-func (a DstShift) Cluster() zcl.ClusterID { return TimeID }
-func (a *DstShift) Value() *DstShift      { return a }
-func (a DstShift) MarshalZcl() ([]byte, error) {
-	return zcl.Zs32(a).MarshalZcl()
-}
+func (DstShift) ID() zcl.AttrID                { return DstShiftAttr }
+func (DstShift) Cluster() zcl.ClusterID        { return TimeID }
+func (DstShift) Name() string                  { return "Dst Shift" }
+func (DstShift) Readable() bool                { return true }
+func (DstShift) Writable() bool                { return true }
+func (DstShift) Reportable() bool              { return false }
+func (DstShift) SceneIndex() int               { return -1 }
+func (a *DstShift) Value() *DstShift           { return a }
+func (a DstShift) MarshalZcl() ([]byte, error) { return zcl.Zs32(a).MarshalZcl() }
+
 func (a *DstShift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DstShift(*nt)
 	return br, err
 }
-func (DstShift) Name() string     { return "Dst Shift" }
-func (DstShift) Readable() bool   { return true }
-func (DstShift) Writable() bool   { return true }
-func (DstShift) Reportable() bool { return false }
-func (DstShift) SceneIndex() int  { return -1 }
 
 func (a DstShift) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -239,23 +233,22 @@ type StandardTime zcl.Zu32
 
 const StandardTimeAttr zcl.AttrID = 6
 
-func (a StandardTime) ID() zcl.AttrID         { return StandardTimeAttr }
-func (a StandardTime) Cluster() zcl.ClusterID { return TimeID }
-func (a *StandardTime) Value() *StandardTime  { return a }
-func (a StandardTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (StandardTime) ID() zcl.AttrID                { return StandardTimeAttr }
+func (StandardTime) Cluster() zcl.ClusterID        { return TimeID }
+func (StandardTime) Name() string                  { return "Standard Time" }
+func (StandardTime) Readable() bool                { return true }
+func (StandardTime) Writable() bool                { return false }
+func (StandardTime) Reportable() bool              { return false }
+func (StandardTime) SceneIndex() int               { return -1 }
+func (a *StandardTime) Value() *StandardTime       { return a }
+func (a StandardTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *StandardTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = StandardTime(*nt)
 	return br, err
 }
-func (StandardTime) Name() string     { return "Standard Time" }
-func (StandardTime) Readable() bool   { return true }
-func (StandardTime) Writable() bool   { return false }
-func (StandardTime) Reportable() bool { return false }
-func (StandardTime) SceneIndex() int  { return -1 }
 
 func (a StandardTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -267,23 +260,22 @@ type LocalTime zcl.Zu32
 
 const LocalTimeAttr zcl.AttrID = 7
 
-func (a LocalTime) ID() zcl.AttrID         { return LocalTimeAttr }
-func (a LocalTime) Cluster() zcl.ClusterID { return TimeID }
-func (a *LocalTime) Value() *LocalTime     { return a }
-func (a LocalTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (LocalTime) ID() zcl.AttrID                { return LocalTimeAttr }
+func (LocalTime) Cluster() zcl.ClusterID        { return TimeID }
+func (LocalTime) Name() string                  { return "Local Time" }
+func (LocalTime) Readable() bool                { return true }
+func (LocalTime) Writable() bool                { return false }
+func (LocalTime) Reportable() bool              { return false }
+func (LocalTime) SceneIndex() int               { return -1 }
+func (a *LocalTime) Value() *LocalTime          { return a }
+func (a LocalTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *LocalTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocalTime(*nt)
 	return br, err
 }
-func (LocalTime) Name() string     { return "Local Time" }
-func (LocalTime) Readable() bool   { return true }
-func (LocalTime) Writable() bool   { return false }
-func (LocalTime) Reportable() bool { return false }
-func (LocalTime) SceneIndex() int  { return -1 }
 
 func (a LocalTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -294,23 +286,22 @@ type LastSetTime zcl.Zutc
 
 const LastSetTimeAttr zcl.AttrID = 8
 
-func (a LastSetTime) ID() zcl.AttrID         { return LastSetTimeAttr }
-func (a LastSetTime) Cluster() zcl.ClusterID { return TimeID }
-func (a *LastSetTime) Value() *LastSetTime   { return a }
-func (a LastSetTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zutc(a).MarshalZcl()
-}
+func (LastSetTime) ID() zcl.AttrID                { return LastSetTimeAttr }
+func (LastSetTime) Cluster() zcl.ClusterID        { return TimeID }
+func (LastSetTime) Name() string                  { return "Last Set Time" }
+func (LastSetTime) Readable() bool                { return true }
+func (LastSetTime) Writable() bool                { return false }
+func (LastSetTime) Reportable() bool              { return false }
+func (LastSetTime) SceneIndex() int               { return -1 }
+func (a *LastSetTime) Value() *LastSetTime        { return a }
+func (a LastSetTime) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
+
 func (a *LastSetTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zutc)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LastSetTime(*nt)
 	return br, err
 }
-func (LastSetTime) Name() string     { return "Last Set Time" }
-func (LastSetTime) Readable() bool   { return true }
-func (LastSetTime) Writable() bool   { return false }
-func (LastSetTime) Reportable() bool { return false }
-func (LastSetTime) SceneIndex() int  { return -1 }
 
 func (a LastSetTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
@@ -321,23 +312,22 @@ type ValidUntilTime zcl.Zutc
 
 const ValidUntilTimeAttr zcl.AttrID = 9
 
-func (a ValidUntilTime) ID() zcl.AttrID          { return ValidUntilTimeAttr }
-func (a ValidUntilTime) Cluster() zcl.ClusterID  { return TimeID }
-func (a *ValidUntilTime) Value() *ValidUntilTime { return a }
-func (a ValidUntilTime) MarshalZcl() ([]byte, error) {
-	return zcl.Zutc(a).MarshalZcl()
-}
+func (ValidUntilTime) ID() zcl.AttrID                { return ValidUntilTimeAttr }
+func (ValidUntilTime) Cluster() zcl.ClusterID        { return TimeID }
+func (ValidUntilTime) Name() string                  { return "Valid Until Time" }
+func (ValidUntilTime) Readable() bool                { return true }
+func (ValidUntilTime) Writable() bool                { return true }
+func (ValidUntilTime) Reportable() bool              { return false }
+func (ValidUntilTime) SceneIndex() int               { return -1 }
+func (a *ValidUntilTime) Value() *ValidUntilTime     { return a }
+func (a ValidUntilTime) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
+
 func (a *ValidUntilTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zutc)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ValidUntilTime(*nt)
 	return br, err
 }
-func (ValidUntilTime) Name() string     { return "Valid Until Time" }
-func (ValidUntilTime) Readable() bool   { return true }
-func (ValidUntilTime) Writable() bool   { return true }
-func (ValidUntilTime) Reportable() bool { return false }
-func (ValidUntilTime) SceneIndex() int  { return -1 }
 
 func (a ValidUntilTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))

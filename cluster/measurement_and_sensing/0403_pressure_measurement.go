@@ -31,23 +31,22 @@ type MeasuredPressure zcl.Zs16
 
 const MeasuredPressureAttr zcl.AttrID = 0
 
-func (a MeasuredPressure) ID() zcl.AttrID            { return MeasuredPressureAttr }
-func (a MeasuredPressure) Cluster() zcl.ClusterID    { return PressureMeasurementID }
-func (a *MeasuredPressure) Value() *MeasuredPressure { return a }
-func (a MeasuredPressure) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (MeasuredPressure) ID() zcl.AttrID                { return MeasuredPressureAttr }
+func (MeasuredPressure) Cluster() zcl.ClusterID        { return PressureMeasurementID }
+func (MeasuredPressure) Name() string                  { return "Measured Pressure" }
+func (MeasuredPressure) Readable() bool                { return true }
+func (MeasuredPressure) Writable() bool                { return false }
+func (MeasuredPressure) Reportable() bool              { return true }
+func (MeasuredPressure) SceneIndex() int               { return -1 }
+func (a *MeasuredPressure) Value() *MeasuredPressure   { return a }
+func (a MeasuredPressure) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MeasuredPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MeasuredPressure(*nt)
 	return br, err
 }
-func (MeasuredPressure) Name() string     { return "Measured Pressure" }
-func (MeasuredPressure) Readable() bool   { return true }
-func (MeasuredPressure) Writable() bool   { return false }
-func (MeasuredPressure) Reportable() bool { return true }
-func (MeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MeasuredPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -58,23 +57,22 @@ type MinMeasuredPressure zcl.Zs16
 
 const MinMeasuredPressureAttr zcl.AttrID = 1
 
-func (a MinMeasuredPressure) ID() zcl.AttrID               { return MinMeasuredPressureAttr }
-func (a MinMeasuredPressure) Cluster() zcl.ClusterID       { return PressureMeasurementID }
+func (MinMeasuredPressure) ID() zcl.AttrID                 { return MinMeasuredPressureAttr }
+func (MinMeasuredPressure) Cluster() zcl.ClusterID         { return PressureMeasurementID }
+func (MinMeasuredPressure) Name() string                   { return "Min Measured Pressure" }
+func (MinMeasuredPressure) Readable() bool                 { return true }
+func (MinMeasuredPressure) Writable() bool                 { return false }
+func (MinMeasuredPressure) Reportable() bool               { return false }
+func (MinMeasuredPressure) SceneIndex() int                { return -1 }
 func (a *MinMeasuredPressure) Value() *MinMeasuredPressure { return a }
-func (a MinMeasuredPressure) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MinMeasuredPressure) MarshalZcl() ([]byte, error)  { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MinMeasuredPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MinMeasuredPressure(*nt)
 	return br, err
 }
-func (MinMeasuredPressure) Name() string     { return "Min Measured Pressure" }
-func (MinMeasuredPressure) Readable() bool   { return true }
-func (MinMeasuredPressure) Writable() bool   { return false }
-func (MinMeasuredPressure) Reportable() bool { return false }
-func (MinMeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MinMeasuredPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -85,23 +83,22 @@ type MaxMeasuredPressure zcl.Zs16
 
 const MaxMeasuredPressureAttr zcl.AttrID = 2
 
-func (a MaxMeasuredPressure) ID() zcl.AttrID               { return MaxMeasuredPressureAttr }
-func (a MaxMeasuredPressure) Cluster() zcl.ClusterID       { return PressureMeasurementID }
+func (MaxMeasuredPressure) ID() zcl.AttrID                 { return MaxMeasuredPressureAttr }
+func (MaxMeasuredPressure) Cluster() zcl.ClusterID         { return PressureMeasurementID }
+func (MaxMeasuredPressure) Name() string                   { return "Max Measured Pressure" }
+func (MaxMeasuredPressure) Readable() bool                 { return true }
+func (MaxMeasuredPressure) Writable() bool                 { return false }
+func (MaxMeasuredPressure) Reportable() bool               { return false }
+func (MaxMeasuredPressure) SceneIndex() int                { return -1 }
 func (a *MaxMeasuredPressure) Value() *MaxMeasuredPressure { return a }
-func (a MaxMeasuredPressure) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MaxMeasuredPressure) MarshalZcl() ([]byte, error)  { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MaxMeasuredPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxMeasuredPressure(*nt)
 	return br, err
 }
-func (MaxMeasuredPressure) Name() string     { return "Max Measured Pressure" }
-func (MaxMeasuredPressure) Readable() bool   { return true }
-func (MaxMeasuredPressure) Writable() bool   { return false }
-func (MaxMeasuredPressure) Reportable() bool { return false }
-func (MaxMeasuredPressure) SceneIndex() int  { return -1 }
 
 func (a MaxMeasuredPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -112,23 +109,22 @@ type PressureTolerance zcl.Zu16
 
 const PressureToleranceAttr zcl.AttrID = 3
 
-func (a PressureTolerance) ID() zcl.AttrID             { return PressureToleranceAttr }
-func (a PressureTolerance) Cluster() zcl.ClusterID     { return PressureMeasurementID }
-func (a *PressureTolerance) Value() *PressureTolerance { return a }
-func (a PressureTolerance) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (PressureTolerance) ID() zcl.AttrID                { return PressureToleranceAttr }
+func (PressureTolerance) Cluster() zcl.ClusterID        { return PressureMeasurementID }
+func (PressureTolerance) Name() string                  { return "Pressure Tolerance" }
+func (PressureTolerance) Readable() bool                { return true }
+func (PressureTolerance) Writable() bool                { return false }
+func (PressureTolerance) Reportable() bool              { return true }
+func (PressureTolerance) SceneIndex() int               { return -1 }
+func (a *PressureTolerance) Value() *PressureTolerance  { return a }
+func (a PressureTolerance) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *PressureTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PressureTolerance(*nt)
 	return br, err
 }
-func (PressureTolerance) Name() string     { return "Pressure Tolerance" }
-func (PressureTolerance) Readable() bool   { return true }
-func (PressureTolerance) Writable() bool   { return false }
-func (PressureTolerance) Reportable() bool { return true }
-func (PressureTolerance) SceneIndex() int  { return -1 }
 
 func (a PressureTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -139,23 +135,22 @@ type ScaledPressure zcl.Zs16
 
 const ScaledPressureAttr zcl.AttrID = 16
 
-func (a ScaledPressure) ID() zcl.AttrID          { return ScaledPressureAttr }
-func (a ScaledPressure) Cluster() zcl.ClusterID  { return PressureMeasurementID }
-func (a *ScaledPressure) Value() *ScaledPressure { return a }
-func (a ScaledPressure) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (ScaledPressure) ID() zcl.AttrID                { return ScaledPressureAttr }
+func (ScaledPressure) Cluster() zcl.ClusterID        { return PressureMeasurementID }
+func (ScaledPressure) Name() string                  { return "Scaled Pressure" }
+func (ScaledPressure) Readable() bool                { return true }
+func (ScaledPressure) Writable() bool                { return false }
+func (ScaledPressure) Reportable() bool              { return false }
+func (ScaledPressure) SceneIndex() int               { return -1 }
+func (a *ScaledPressure) Value() *ScaledPressure     { return a }
+func (a ScaledPressure) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *ScaledPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ScaledPressure(*nt)
 	return br, err
 }
-func (ScaledPressure) Name() string     { return "Scaled Pressure" }
-func (ScaledPressure) Readable() bool   { return true }
-func (ScaledPressure) Writable() bool   { return false }
-func (ScaledPressure) Reportable() bool { return false }
-func (ScaledPressure) SceneIndex() int  { return -1 }
 
 func (a ScaledPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -166,23 +161,22 @@ type MinScaledPressure zcl.Zs16
 
 const MinScaledPressureAttr zcl.AttrID = 17
 
-func (a MinScaledPressure) ID() zcl.AttrID             { return MinScaledPressureAttr }
-func (a MinScaledPressure) Cluster() zcl.ClusterID     { return PressureMeasurementID }
-func (a *MinScaledPressure) Value() *MinScaledPressure { return a }
-func (a MinScaledPressure) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (MinScaledPressure) ID() zcl.AttrID                { return MinScaledPressureAttr }
+func (MinScaledPressure) Cluster() zcl.ClusterID        { return PressureMeasurementID }
+func (MinScaledPressure) Name() string                  { return "Min Scaled Pressure" }
+func (MinScaledPressure) Readable() bool                { return true }
+func (MinScaledPressure) Writable() bool                { return false }
+func (MinScaledPressure) Reportable() bool              { return false }
+func (MinScaledPressure) SceneIndex() int               { return -1 }
+func (a *MinScaledPressure) Value() *MinScaledPressure  { return a }
+func (a MinScaledPressure) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MinScaledPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MinScaledPressure(*nt)
 	return br, err
 }
-func (MinScaledPressure) Name() string     { return "Min Scaled Pressure" }
-func (MinScaledPressure) Readable() bool   { return true }
-func (MinScaledPressure) Writable() bool   { return false }
-func (MinScaledPressure) Reportable() bool { return false }
-func (MinScaledPressure) SceneIndex() int  { return -1 }
 
 func (a MinScaledPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -193,23 +187,22 @@ type MaxScaledPressure zcl.Zs16
 
 const MaxScaledPressureAttr zcl.AttrID = 18
 
-func (a MaxScaledPressure) ID() zcl.AttrID             { return MaxScaledPressureAttr }
-func (a MaxScaledPressure) Cluster() zcl.ClusterID     { return PressureMeasurementID }
-func (a *MaxScaledPressure) Value() *MaxScaledPressure { return a }
-func (a MaxScaledPressure) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (MaxScaledPressure) ID() zcl.AttrID                { return MaxScaledPressureAttr }
+func (MaxScaledPressure) Cluster() zcl.ClusterID        { return PressureMeasurementID }
+func (MaxScaledPressure) Name() string                  { return "Max Scaled Pressure" }
+func (MaxScaledPressure) Readable() bool                { return true }
+func (MaxScaledPressure) Writable() bool                { return false }
+func (MaxScaledPressure) Reportable() bool              { return false }
+func (MaxScaledPressure) SceneIndex() int               { return -1 }
+func (a *MaxScaledPressure) Value() *MaxScaledPressure  { return a }
+func (a MaxScaledPressure) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MaxScaledPressure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxScaledPressure(*nt)
 	return br, err
 }
-func (MaxScaledPressure) Name() string     { return "Max Scaled Pressure" }
-func (MaxScaledPressure) Readable() bool   { return true }
-func (MaxScaledPressure) Writable() bool   { return false }
-func (MaxScaledPressure) Reportable() bool { return false }
-func (MaxScaledPressure) SceneIndex() int  { return -1 }
 
 func (a MaxScaledPressure) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -220,23 +213,22 @@ type ScaledPressureTolerance zcl.Zu16
 
 const ScaledPressureToleranceAttr zcl.AttrID = 19
 
-func (a ScaledPressureTolerance) ID() zcl.AttrID                   { return ScaledPressureToleranceAttr }
-func (a ScaledPressureTolerance) Cluster() zcl.ClusterID           { return PressureMeasurementID }
+func (ScaledPressureTolerance) ID() zcl.AttrID                     { return ScaledPressureToleranceAttr }
+func (ScaledPressureTolerance) Cluster() zcl.ClusterID             { return PressureMeasurementID }
+func (ScaledPressureTolerance) Name() string                       { return "Scaled Pressure Tolerance" }
+func (ScaledPressureTolerance) Readable() bool                     { return true }
+func (ScaledPressureTolerance) Writable() bool                     { return false }
+func (ScaledPressureTolerance) Reportable() bool                   { return false }
+func (ScaledPressureTolerance) SceneIndex() int                    { return -1 }
 func (a *ScaledPressureTolerance) Value() *ScaledPressureTolerance { return a }
-func (a ScaledPressureTolerance) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a ScaledPressureTolerance) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *ScaledPressureTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ScaledPressureTolerance(*nt)
 	return br, err
 }
-func (ScaledPressureTolerance) Name() string     { return "Scaled Pressure Tolerance" }
-func (ScaledPressureTolerance) Readable() bool   { return true }
-func (ScaledPressureTolerance) Writable() bool   { return false }
-func (ScaledPressureTolerance) Reportable() bool { return false }
-func (ScaledPressureTolerance) SceneIndex() int  { return -1 }
 
 func (a ScaledPressureTolerance) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -247,23 +239,22 @@ type Scale zcl.Zs8
 
 const ScaleAttr zcl.AttrID = 20
 
-func (a Scale) ID() zcl.AttrID         { return ScaleAttr }
-func (a Scale) Cluster() zcl.ClusterID { return PressureMeasurementID }
-func (a *Scale) Value() *Scale         { return a }
-func (a Scale) MarshalZcl() ([]byte, error) {
-	return zcl.Zs8(a).MarshalZcl()
-}
+func (Scale) ID() zcl.AttrID                { return ScaleAttr }
+func (Scale) Cluster() zcl.ClusterID        { return PressureMeasurementID }
+func (Scale) Name() string                  { return "Scale" }
+func (Scale) Readable() bool                { return true }
+func (Scale) Writable() bool                { return false }
+func (Scale) Reportable() bool              { return false }
+func (Scale) SceneIndex() int               { return -1 }
+func (a *Scale) Value() *Scale              { return a }
+func (a Scale) MarshalZcl() ([]byte, error) { return zcl.Zs8(a).MarshalZcl() }
+
 func (a *Scale) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Scale(*nt)
 	return br, err
 }
-func (Scale) Name() string     { return "Scale" }
-func (Scale) Readable() bool   { return true }
-func (Scale) Writable() bool   { return false }
-func (Scale) Reportable() bool { return false }
-func (Scale) SceneIndex() int  { return -1 }
 
 func (a Scale) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))

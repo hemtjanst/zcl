@@ -25,23 +25,22 @@ type InputConfigurations zcl.Zarray
 
 const InputConfigurationsAttr zcl.AttrID = 0
 
-func (a InputConfigurations) ID() zcl.AttrID               { return InputConfigurationsAttr }
-func (a InputConfigurations) Cluster() zcl.ClusterID       { return UbisysDeviceSetupID }
+func (InputConfigurations) ID() zcl.AttrID                 { return InputConfigurationsAttr }
+func (InputConfigurations) Cluster() zcl.ClusterID         { return UbisysDeviceSetupID }
+func (InputConfigurations) Name() string                   { return "Input Configurations" }
+func (InputConfigurations) Readable() bool                 { return true }
+func (InputConfigurations) Writable() bool                 { return false }
+func (InputConfigurations) Reportable() bool               { return false }
+func (InputConfigurations) SceneIndex() int                { return -1 }
 func (a *InputConfigurations) Value() *InputConfigurations { return a }
-func (a InputConfigurations) MarshalZcl() ([]byte, error) {
-	return zcl.Zarray(a).MarshalZcl()
-}
+func (a InputConfigurations) MarshalZcl() ([]byte, error)  { return zcl.Zarray(a).MarshalZcl() }
+
 func (a *InputConfigurations) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zarray)
 	br, err := nt.UnmarshalZcl(b)
 	*a = InputConfigurations(*nt)
 	return br, err
 }
-func (InputConfigurations) Name() string     { return "Input Configurations" }
-func (InputConfigurations) Readable() bool   { return true }
-func (InputConfigurations) Writable() bool   { return false }
-func (InputConfigurations) Reportable() bool { return false }
-func (InputConfigurations) SceneIndex() int  { return -1 }
 
 func (a InputConfigurations) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -52,23 +51,22 @@ type InputActions zcl.Zarray
 
 const InputActionsAttr zcl.AttrID = 1
 
-func (a InputActions) ID() zcl.AttrID         { return InputActionsAttr }
-func (a InputActions) Cluster() zcl.ClusterID { return UbisysDeviceSetupID }
-func (a *InputActions) Value() *InputActions  { return a }
-func (a InputActions) MarshalZcl() ([]byte, error) {
-	return zcl.Zarray(a).MarshalZcl()
-}
+func (InputActions) ID() zcl.AttrID                { return InputActionsAttr }
+func (InputActions) Cluster() zcl.ClusterID        { return UbisysDeviceSetupID }
+func (InputActions) Name() string                  { return "Input Actions" }
+func (InputActions) Readable() bool                { return true }
+func (InputActions) Writable() bool                { return false }
+func (InputActions) Reportable() bool              { return false }
+func (InputActions) SceneIndex() int               { return -1 }
+func (a *InputActions) Value() *InputActions       { return a }
+func (a InputActions) MarshalZcl() ([]byte, error) { return zcl.Zarray(a).MarshalZcl() }
+
 func (a *InputActions) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zarray)
 	br, err := nt.UnmarshalZcl(b)
 	*a = InputActions(*nt)
 	return br, err
 }
-func (InputActions) Name() string     { return "Input Actions" }
-func (InputActions) Readable() bool   { return true }
-func (InputActions) Writable() bool   { return false }
-func (InputActions) Reportable() bool { return false }
-func (InputActions) SceneIndex() int  { return -1 }
 
 func (a InputActions) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))

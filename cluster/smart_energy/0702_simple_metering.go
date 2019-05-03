@@ -247,23 +247,22 @@ type CurrentSummationDelivered zcl.Zu48
 
 const CurrentSummationDeliveredAttr zcl.AttrID = 0
 
-func (a CurrentSummationDelivered) ID() zcl.AttrID                     { return CurrentSummationDeliveredAttr }
-func (a CurrentSummationDelivered) Cluster() zcl.ClusterID             { return SimpleMeteringID }
+func (CurrentSummationDelivered) ID() zcl.AttrID                       { return CurrentSummationDeliveredAttr }
+func (CurrentSummationDelivered) Cluster() zcl.ClusterID               { return SimpleMeteringID }
+func (CurrentSummationDelivered) Name() string                         { return "Current Summation Delivered" }
+func (CurrentSummationDelivered) Readable() bool                       { return true }
+func (CurrentSummationDelivered) Writable() bool                       { return false }
+func (CurrentSummationDelivered) Reportable() bool                     { return false }
+func (CurrentSummationDelivered) SceneIndex() int                      { return -1 }
 func (a *CurrentSummationDelivered) Value() *CurrentSummationDelivered { return a }
-func (a CurrentSummationDelivered) MarshalZcl() ([]byte, error) {
-	return zcl.Zu48(a).MarshalZcl()
-}
+func (a CurrentSummationDelivered) MarshalZcl() ([]byte, error)        { return zcl.Zu48(a).MarshalZcl() }
+
 func (a *CurrentSummationDelivered) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu48)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentSummationDelivered(*nt)
 	return br, err
 }
-func (CurrentSummationDelivered) Name() string     { return "Current Summation Delivered" }
-func (CurrentSummationDelivered) Readable() bool   { return true }
-func (CurrentSummationDelivered) Writable() bool   { return false }
-func (CurrentSummationDelivered) Reportable() bool { return false }
-func (CurrentSummationDelivered) SceneIndex() int  { return -1 }
 
 func (a CurrentSummationDelivered) String() string {
 	return zcl.Sprintf("%v", zcl.Zu48(a))
@@ -274,23 +273,22 @@ type Status zcl.Zbmp8
 
 const StatusAttr zcl.AttrID = 512
 
-func (a Status) ID() zcl.AttrID         { return StatusAttr }
-func (a Status) Cluster() zcl.ClusterID { return SimpleMeteringID }
-func (a *Status) Value() *Status        { return a }
-func (a Status) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Status) ID() zcl.AttrID                { return StatusAttr }
+func (Status) Cluster() zcl.ClusterID        { return SimpleMeteringID }
+func (Status) Name() string                  { return "Status" }
+func (Status) Readable() bool                { return true }
+func (Status) Writable() bool                { return false }
+func (Status) Reportable() bool              { return false }
+func (Status) SceneIndex() int               { return -1 }
+func (a *Status) Value() *Status             { return a }
+func (a Status) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Status) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Status(*nt)
 	return br, err
 }
-func (Status) Name() string     { return "Status" }
-func (Status) Readable() bool   { return true }
-func (Status) Writable() bool   { return false }
-func (Status) Reportable() bool { return false }
-func (Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
 	var bstr []string
@@ -372,23 +370,22 @@ type UnitOfMeasure zcl.Zenum8
 
 const UnitOfMeasureAttr zcl.AttrID = 768
 
-func (a UnitOfMeasure) ID() zcl.AttrID         { return UnitOfMeasureAttr }
-func (a UnitOfMeasure) Cluster() zcl.ClusterID { return SimpleMeteringID }
-func (a *UnitOfMeasure) Value() *UnitOfMeasure { return a }
-func (a UnitOfMeasure) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (UnitOfMeasure) ID() zcl.AttrID                { return UnitOfMeasureAttr }
+func (UnitOfMeasure) Cluster() zcl.ClusterID        { return SimpleMeteringID }
+func (UnitOfMeasure) Name() string                  { return "Unit of Measure" }
+func (UnitOfMeasure) Readable() bool                { return true }
+func (UnitOfMeasure) Writable() bool                { return false }
+func (UnitOfMeasure) Reportable() bool              { return false }
+func (UnitOfMeasure) SceneIndex() int               { return -1 }
+func (a *UnitOfMeasure) Value() *UnitOfMeasure      { return a }
+func (a UnitOfMeasure) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *UnitOfMeasure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = UnitOfMeasure(*nt)
 	return br, err
 }
-func (UnitOfMeasure) Name() string     { return "Unit of Measure" }
-func (UnitOfMeasure) Readable() bool   { return true }
-func (UnitOfMeasure) Writable() bool   { return false }
-func (UnitOfMeasure) Reportable() bool { return false }
-func (UnitOfMeasure) SceneIndex() int  { return -1 }
 
 func (a UnitOfMeasure) String() string {
 	switch a {
@@ -561,23 +558,22 @@ type Multiplier zcl.Zu24
 
 const MultiplierAttr zcl.AttrID = 769
 
-func (a Multiplier) ID() zcl.AttrID         { return MultiplierAttr }
-func (a Multiplier) Cluster() zcl.ClusterID { return SimpleMeteringID }
-func (a *Multiplier) Value() *Multiplier    { return a }
-func (a Multiplier) MarshalZcl() ([]byte, error) {
-	return zcl.Zu24(a).MarshalZcl()
-}
+func (Multiplier) ID() zcl.AttrID                { return MultiplierAttr }
+func (Multiplier) Cluster() zcl.ClusterID        { return SimpleMeteringID }
+func (Multiplier) Name() string                  { return "Multiplier" }
+func (Multiplier) Readable() bool                { return true }
+func (Multiplier) Writable() bool                { return false }
+func (Multiplier) Reportable() bool              { return false }
+func (Multiplier) SceneIndex() int               { return -1 }
+func (a *Multiplier) Value() *Multiplier         { return a }
+func (a Multiplier) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
+
 func (a *Multiplier) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Multiplier(*nt)
 	return br, err
 }
-func (Multiplier) Name() string     { return "Multiplier" }
-func (Multiplier) Readable() bool   { return true }
-func (Multiplier) Writable() bool   { return false }
-func (Multiplier) Reportable() bool { return false }
-func (Multiplier) SceneIndex() int  { return -1 }
 
 func (a Multiplier) String() string {
 	return zcl.Sprintf("%v", zcl.Zu24(a))
@@ -588,23 +584,22 @@ type Divisor zcl.Zu24
 
 const DivisorAttr zcl.AttrID = 770
 
-func (a Divisor) ID() zcl.AttrID         { return DivisorAttr }
-func (a Divisor) Cluster() zcl.ClusterID { return SimpleMeteringID }
-func (a *Divisor) Value() *Divisor       { return a }
-func (a Divisor) MarshalZcl() ([]byte, error) {
-	return zcl.Zu24(a).MarshalZcl()
-}
+func (Divisor) ID() zcl.AttrID                { return DivisorAttr }
+func (Divisor) Cluster() zcl.ClusterID        { return SimpleMeteringID }
+func (Divisor) Name() string                  { return "Divisor" }
+func (Divisor) Readable() bool                { return true }
+func (Divisor) Writable() bool                { return false }
+func (Divisor) Reportable() bool              { return false }
+func (Divisor) SceneIndex() int               { return -1 }
+func (a *Divisor) Value() *Divisor            { return a }
+func (a Divisor) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
+
 func (a *Divisor) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Divisor(*nt)
 	return br, err
 }
-func (Divisor) Name() string     { return "Divisor" }
-func (Divisor) Readable() bool   { return true }
-func (Divisor) Writable() bool   { return false }
-func (Divisor) Reportable() bool { return false }
-func (Divisor) SceneIndex() int  { return -1 }
 
 func (a Divisor) String() string {
 	return zcl.Sprintf("%v", zcl.Zu24(a))
@@ -615,23 +610,22 @@ type SummationFormatting zcl.Zbmp8
 
 const SummationFormattingAttr zcl.AttrID = 771
 
-func (a SummationFormatting) ID() zcl.AttrID               { return SummationFormattingAttr }
-func (a SummationFormatting) Cluster() zcl.ClusterID       { return SimpleMeteringID }
+func (SummationFormatting) ID() zcl.AttrID                 { return SummationFormattingAttr }
+func (SummationFormatting) Cluster() zcl.ClusterID         { return SimpleMeteringID }
+func (SummationFormatting) Name() string                   { return "Summation Formatting" }
+func (SummationFormatting) Readable() bool                 { return true }
+func (SummationFormatting) Writable() bool                 { return false }
+func (SummationFormatting) Reportable() bool               { return false }
+func (SummationFormatting) SceneIndex() int                { return -1 }
 func (a *SummationFormatting) Value() *SummationFormatting { return a }
-func (a SummationFormatting) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a SummationFormatting) MarshalZcl() ([]byte, error)  { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *SummationFormatting) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = SummationFormatting(*nt)
 	return br, err
 }
-func (SummationFormatting) Name() string     { return "Summation Formatting" }
-func (SummationFormatting) Readable() bool   { return true }
-func (SummationFormatting) Writable() bool   { return false }
-func (SummationFormatting) Reportable() bool { return false }
-func (SummationFormatting) SceneIndex() int  { return -1 }
 
 func (a SummationFormatting) String() string {
 	var bstr []string
@@ -663,23 +657,22 @@ type MeteringDeviceType zcl.Zenum8
 
 const MeteringDeviceTypeAttr zcl.AttrID = 774
 
-func (a MeteringDeviceType) ID() zcl.AttrID              { return MeteringDeviceTypeAttr }
-func (a MeteringDeviceType) Cluster() zcl.ClusterID      { return SimpleMeteringID }
+func (MeteringDeviceType) ID() zcl.AttrID                { return MeteringDeviceTypeAttr }
+func (MeteringDeviceType) Cluster() zcl.ClusterID        { return SimpleMeteringID }
+func (MeteringDeviceType) Name() string                  { return "Metering Device Type" }
+func (MeteringDeviceType) Readable() bool                { return true }
+func (MeteringDeviceType) Writable() bool                { return false }
+func (MeteringDeviceType) Reportable() bool              { return false }
+func (MeteringDeviceType) SceneIndex() int               { return -1 }
 func (a *MeteringDeviceType) Value() *MeteringDeviceType { return a }
-func (a MeteringDeviceType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a MeteringDeviceType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *MeteringDeviceType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MeteringDeviceType(*nt)
 	return br, err
 }
-func (MeteringDeviceType) Name() string     { return "Metering Device Type" }
-func (MeteringDeviceType) Readable() bool   { return true }
-func (MeteringDeviceType) Writable() bool   { return false }
-func (MeteringDeviceType) Reportable() bool { return false }
-func (MeteringDeviceType) SceneIndex() int  { return -1 }
 
 func (a MeteringDeviceType) String() string {
 	switch a {
@@ -796,23 +789,22 @@ type InstantaneousDemand zcl.Zs24
 
 const InstantaneousDemandAttr zcl.AttrID = 1024
 
-func (a InstantaneousDemand) ID() zcl.AttrID               { return InstantaneousDemandAttr }
-func (a InstantaneousDemand) Cluster() zcl.ClusterID       { return SimpleMeteringID }
+func (InstantaneousDemand) ID() zcl.AttrID                 { return InstantaneousDemandAttr }
+func (InstantaneousDemand) Cluster() zcl.ClusterID         { return SimpleMeteringID }
+func (InstantaneousDemand) Name() string                   { return "Instantaneous Demand" }
+func (InstantaneousDemand) Readable() bool                 { return true }
+func (InstantaneousDemand) Writable() bool                 { return false }
+func (InstantaneousDemand) Reportable() bool               { return false }
+func (InstantaneousDemand) SceneIndex() int                { return -1 }
 func (a *InstantaneousDemand) Value() *InstantaneousDemand { return a }
-func (a InstantaneousDemand) MarshalZcl() ([]byte, error) {
-	return zcl.Zs24(a).MarshalZcl()
-}
+func (a InstantaneousDemand) MarshalZcl() ([]byte, error)  { return zcl.Zs24(a).MarshalZcl() }
+
 func (a *InstantaneousDemand) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs24)
 	br, err := nt.UnmarshalZcl(b)
 	*a = InstantaneousDemand(*nt)
 	return br, err
 }
-func (InstantaneousDemand) Name() string     { return "Instantaneous Demand" }
-func (InstantaneousDemand) Readable() bool   { return true }
-func (InstantaneousDemand) Writable() bool   { return false }
-func (InstantaneousDemand) Reportable() bool { return false }
-func (InstantaneousDemand) SceneIndex() int  { return -1 }
 
 func (a InstantaneousDemand) String() string {
 	return zcl.Sprintf("%v", zcl.Zs24(a))

@@ -145,23 +145,22 @@ type LocalTemperature zcl.Zs16
 
 const LocalTemperatureAttr zcl.AttrID = 0
 
-func (a LocalTemperature) ID() zcl.AttrID            { return LocalTemperatureAttr }
-func (a LocalTemperature) Cluster() zcl.ClusterID    { return ThermostatID }
-func (a *LocalTemperature) Value() *LocalTemperature { return a }
-func (a LocalTemperature) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (LocalTemperature) ID() zcl.AttrID                { return LocalTemperatureAttr }
+func (LocalTemperature) Cluster() zcl.ClusterID        { return ThermostatID }
+func (LocalTemperature) Name() string                  { return "Local Temperature" }
+func (LocalTemperature) Readable() bool                { return true }
+func (LocalTemperature) Writable() bool                { return false }
+func (LocalTemperature) Reportable() bool              { return false }
+func (LocalTemperature) SceneIndex() int               { return -1 }
+func (a *LocalTemperature) Value() *LocalTemperature   { return a }
+func (a LocalTemperature) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *LocalTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocalTemperature(*nt)
 	return br, err
 }
-func (LocalTemperature) Name() string     { return "Local Temperature" }
-func (LocalTemperature) Readable() bool   { return true }
-func (LocalTemperature) Writable() bool   { return false }
-func (LocalTemperature) Reportable() bool { return false }
-func (LocalTemperature) SceneIndex() int  { return -1 }
 
 func (a LocalTemperature) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -172,23 +171,22 @@ type OutdoorTemperature zcl.Zs16
 
 const OutdoorTemperatureAttr zcl.AttrID = 1
 
-func (a OutdoorTemperature) ID() zcl.AttrID              { return OutdoorTemperatureAttr }
-func (a OutdoorTemperature) Cluster() zcl.ClusterID      { return ThermostatID }
+func (OutdoorTemperature) ID() zcl.AttrID                { return OutdoorTemperatureAttr }
+func (OutdoorTemperature) Cluster() zcl.ClusterID        { return ThermostatID }
+func (OutdoorTemperature) Name() string                  { return "Outdoor Temperature" }
+func (OutdoorTemperature) Readable() bool                { return true }
+func (OutdoorTemperature) Writable() bool                { return false }
+func (OutdoorTemperature) Reportable() bool              { return false }
+func (OutdoorTemperature) SceneIndex() int               { return -1 }
 func (a *OutdoorTemperature) Value() *OutdoorTemperature { return a }
-func (a OutdoorTemperature) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a OutdoorTemperature) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *OutdoorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OutdoorTemperature(*nt)
 	return br, err
 }
-func (OutdoorTemperature) Name() string     { return "Outdoor Temperature" }
-func (OutdoorTemperature) Readable() bool   { return true }
-func (OutdoorTemperature) Writable() bool   { return false }
-func (OutdoorTemperature) Reportable() bool { return false }
-func (OutdoorTemperature) SceneIndex() int  { return -1 }
 
 func (a OutdoorTemperature) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -199,23 +197,22 @@ type Occupancy zcl.Zbmp8
 
 const OccupancyAttr zcl.AttrID = 2
 
-func (a Occupancy) ID() zcl.AttrID         { return OccupancyAttr }
-func (a Occupancy) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *Occupancy) Value() *Occupancy     { return a }
-func (a Occupancy) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Occupancy) ID() zcl.AttrID                { return OccupancyAttr }
+func (Occupancy) Cluster() zcl.ClusterID        { return ThermostatID }
+func (Occupancy) Name() string                  { return "Occupancy" }
+func (Occupancy) Readable() bool                { return true }
+func (Occupancy) Writable() bool                { return false }
+func (Occupancy) Reportable() bool              { return false }
+func (Occupancy) SceneIndex() int               { return -1 }
+func (a *Occupancy) Value() *Occupancy          { return a }
+func (a Occupancy) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Occupancy) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Occupancy(*nt)
 	return br, err
 }
-func (Occupancy) Name() string     { return "Occupancy" }
-func (Occupancy) Readable() bool   { return true }
-func (Occupancy) Writable() bool   { return false }
-func (Occupancy) Reportable() bool { return false }
-func (Occupancy) SceneIndex() int  { return -1 }
 
 func (a Occupancy) String() string {
 	return zcl.Sprintf("%v", zcl.Zbmp8(a))
@@ -226,23 +223,22 @@ type AbsMinHeatSetpointLimit zcl.Zs16
 
 const AbsMinHeatSetpointLimitAttr zcl.AttrID = 3
 
-func (a AbsMinHeatSetpointLimit) ID() zcl.AttrID                   { return AbsMinHeatSetpointLimitAttr }
-func (a AbsMinHeatSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
+func (AbsMinHeatSetpointLimit) ID() zcl.AttrID                     { return AbsMinHeatSetpointLimitAttr }
+func (AbsMinHeatSetpointLimit) Cluster() zcl.ClusterID             { return ThermostatID }
+func (AbsMinHeatSetpointLimit) Name() string                       { return "Abs Min Heat Setpoint Limit" }
+func (AbsMinHeatSetpointLimit) Readable() bool                     { return true }
+func (AbsMinHeatSetpointLimit) Writable() bool                     { return false }
+func (AbsMinHeatSetpointLimit) Reportable() bool                   { return false }
+func (AbsMinHeatSetpointLimit) SceneIndex() int                    { return -1 }
 func (a *AbsMinHeatSetpointLimit) Value() *AbsMinHeatSetpointLimit { return a }
-func (a AbsMinHeatSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a AbsMinHeatSetpointLimit) MarshalZcl() ([]byte, error)      { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *AbsMinHeatSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AbsMinHeatSetpointLimit(*nt)
 	return br, err
 }
-func (AbsMinHeatSetpointLimit) Name() string     { return "Abs Min Heat Setpoint Limit" }
-func (AbsMinHeatSetpointLimit) Readable() bool   { return true }
-func (AbsMinHeatSetpointLimit) Writable() bool   { return false }
-func (AbsMinHeatSetpointLimit) Reportable() bool { return false }
-func (AbsMinHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMinHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -253,23 +249,22 @@ type AbsMaxHeatSetpointLimit zcl.Zs16
 
 const AbsMaxHeatSetpointLimitAttr zcl.AttrID = 4
 
-func (a AbsMaxHeatSetpointLimit) ID() zcl.AttrID                   { return AbsMaxHeatSetpointLimitAttr }
-func (a AbsMaxHeatSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
+func (AbsMaxHeatSetpointLimit) ID() zcl.AttrID                     { return AbsMaxHeatSetpointLimitAttr }
+func (AbsMaxHeatSetpointLimit) Cluster() zcl.ClusterID             { return ThermostatID }
+func (AbsMaxHeatSetpointLimit) Name() string                       { return "Abs Max Heat Setpoint Limit" }
+func (AbsMaxHeatSetpointLimit) Readable() bool                     { return true }
+func (AbsMaxHeatSetpointLimit) Writable() bool                     { return false }
+func (AbsMaxHeatSetpointLimit) Reportable() bool                   { return false }
+func (AbsMaxHeatSetpointLimit) SceneIndex() int                    { return -1 }
 func (a *AbsMaxHeatSetpointLimit) Value() *AbsMaxHeatSetpointLimit { return a }
-func (a AbsMaxHeatSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a AbsMaxHeatSetpointLimit) MarshalZcl() ([]byte, error)      { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *AbsMaxHeatSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AbsMaxHeatSetpointLimit(*nt)
 	return br, err
 }
-func (AbsMaxHeatSetpointLimit) Name() string     { return "Abs Max Heat Setpoint Limit" }
-func (AbsMaxHeatSetpointLimit) Readable() bool   { return true }
-func (AbsMaxHeatSetpointLimit) Writable() bool   { return false }
-func (AbsMaxHeatSetpointLimit) Reportable() bool { return false }
-func (AbsMaxHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMaxHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -280,23 +275,22 @@ type AbsMinCoolSetpointLimit zcl.Zs16
 
 const AbsMinCoolSetpointLimitAttr zcl.AttrID = 5
 
-func (a AbsMinCoolSetpointLimit) ID() zcl.AttrID                   { return AbsMinCoolSetpointLimitAttr }
-func (a AbsMinCoolSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
+func (AbsMinCoolSetpointLimit) ID() zcl.AttrID                     { return AbsMinCoolSetpointLimitAttr }
+func (AbsMinCoolSetpointLimit) Cluster() zcl.ClusterID             { return ThermostatID }
+func (AbsMinCoolSetpointLimit) Name() string                       { return "Abs Min Cool Setpoint Limit" }
+func (AbsMinCoolSetpointLimit) Readable() bool                     { return true }
+func (AbsMinCoolSetpointLimit) Writable() bool                     { return false }
+func (AbsMinCoolSetpointLimit) Reportable() bool                   { return false }
+func (AbsMinCoolSetpointLimit) SceneIndex() int                    { return -1 }
 func (a *AbsMinCoolSetpointLimit) Value() *AbsMinCoolSetpointLimit { return a }
-func (a AbsMinCoolSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a AbsMinCoolSetpointLimit) MarshalZcl() ([]byte, error)      { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *AbsMinCoolSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AbsMinCoolSetpointLimit(*nt)
 	return br, err
 }
-func (AbsMinCoolSetpointLimit) Name() string     { return "Abs Min Cool Setpoint Limit" }
-func (AbsMinCoolSetpointLimit) Readable() bool   { return true }
-func (AbsMinCoolSetpointLimit) Writable() bool   { return false }
-func (AbsMinCoolSetpointLimit) Reportable() bool { return false }
-func (AbsMinCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMinCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -307,23 +301,22 @@ type AbsMaxCoolSetpointLimit zcl.Zs16
 
 const AbsMaxCoolSetpointLimitAttr zcl.AttrID = 6
 
-func (a AbsMaxCoolSetpointLimit) ID() zcl.AttrID                   { return AbsMaxCoolSetpointLimitAttr }
-func (a AbsMaxCoolSetpointLimit) Cluster() zcl.ClusterID           { return ThermostatID }
+func (AbsMaxCoolSetpointLimit) ID() zcl.AttrID                     { return AbsMaxCoolSetpointLimitAttr }
+func (AbsMaxCoolSetpointLimit) Cluster() zcl.ClusterID             { return ThermostatID }
+func (AbsMaxCoolSetpointLimit) Name() string                       { return "Abs Max Cool Setpoint Limit" }
+func (AbsMaxCoolSetpointLimit) Readable() bool                     { return true }
+func (AbsMaxCoolSetpointLimit) Writable() bool                     { return false }
+func (AbsMaxCoolSetpointLimit) Reportable() bool                   { return false }
+func (AbsMaxCoolSetpointLimit) SceneIndex() int                    { return -1 }
 func (a *AbsMaxCoolSetpointLimit) Value() *AbsMaxCoolSetpointLimit { return a }
-func (a AbsMaxCoolSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a AbsMaxCoolSetpointLimit) MarshalZcl() ([]byte, error)      { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *AbsMaxCoolSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AbsMaxCoolSetpointLimit(*nt)
 	return br, err
 }
-func (AbsMaxCoolSetpointLimit) Name() string     { return "Abs Max Cool Setpoint Limit" }
-func (AbsMaxCoolSetpointLimit) Readable() bool   { return true }
-func (AbsMaxCoolSetpointLimit) Writable() bool   { return false }
-func (AbsMaxCoolSetpointLimit) Reportable() bool { return false }
-func (AbsMaxCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a AbsMaxCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -334,23 +327,22 @@ type PiCoolingDemand zcl.Zu8
 
 const PiCoolingDemandAttr zcl.AttrID = 7
 
-func (a PiCoolingDemand) ID() zcl.AttrID           { return PiCoolingDemandAttr }
-func (a PiCoolingDemand) Cluster() zcl.ClusterID   { return ThermostatID }
-func (a *PiCoolingDemand) Value() *PiCoolingDemand { return a }
-func (a PiCoolingDemand) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (PiCoolingDemand) ID() zcl.AttrID                { return PiCoolingDemandAttr }
+func (PiCoolingDemand) Cluster() zcl.ClusterID        { return ThermostatID }
+func (PiCoolingDemand) Name() string                  { return "PI Cooling Demand" }
+func (PiCoolingDemand) Readable() bool                { return true }
+func (PiCoolingDemand) Writable() bool                { return false }
+func (PiCoolingDemand) Reportable() bool              { return false }
+func (PiCoolingDemand) SceneIndex() int               { return -1 }
+func (a *PiCoolingDemand) Value() *PiCoolingDemand    { return a }
+func (a PiCoolingDemand) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *PiCoolingDemand) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PiCoolingDemand(*nt)
 	return br, err
 }
-func (PiCoolingDemand) Name() string     { return "PI Cooling Demand" }
-func (PiCoolingDemand) Readable() bool   { return true }
-func (PiCoolingDemand) Writable() bool   { return false }
-func (PiCoolingDemand) Reportable() bool { return false }
-func (PiCoolingDemand) SceneIndex() int  { return -1 }
 
 func (a PiCoolingDemand) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -361,23 +353,22 @@ type PiHeatingDemand zcl.Zu8
 
 const PiHeatingDemandAttr zcl.AttrID = 8
 
-func (a PiHeatingDemand) ID() zcl.AttrID           { return PiHeatingDemandAttr }
-func (a PiHeatingDemand) Cluster() zcl.ClusterID   { return ThermostatID }
-func (a *PiHeatingDemand) Value() *PiHeatingDemand { return a }
-func (a PiHeatingDemand) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (PiHeatingDemand) ID() zcl.AttrID                { return PiHeatingDemandAttr }
+func (PiHeatingDemand) Cluster() zcl.ClusterID        { return ThermostatID }
+func (PiHeatingDemand) Name() string                  { return "PI Heating Demand" }
+func (PiHeatingDemand) Readable() bool                { return true }
+func (PiHeatingDemand) Writable() bool                { return false }
+func (PiHeatingDemand) Reportable() bool              { return false }
+func (PiHeatingDemand) SceneIndex() int               { return -1 }
+func (a *PiHeatingDemand) Value() *PiHeatingDemand    { return a }
+func (a PiHeatingDemand) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *PiHeatingDemand) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PiHeatingDemand(*nt)
 	return br, err
 }
-func (PiHeatingDemand) Name() string     { return "PI Heating Demand" }
-func (PiHeatingDemand) Readable() bool   { return true }
-func (PiHeatingDemand) Writable() bool   { return false }
-func (PiHeatingDemand) Reportable() bool { return false }
-func (PiHeatingDemand) SceneIndex() int  { return -1 }
 
 func (a PiHeatingDemand) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -388,23 +379,22 @@ type HvacSystemTypeConfiguration zcl.Zbmp8
 
 const HvacSystemTypeConfigurationAttr zcl.AttrID = 9
 
-func (a HvacSystemTypeConfiguration) ID() zcl.AttrID                       { return HvacSystemTypeConfigurationAttr }
-func (a HvacSystemTypeConfiguration) Cluster() zcl.ClusterID               { return ThermostatID }
+func (HvacSystemTypeConfiguration) ID() zcl.AttrID                         { return HvacSystemTypeConfigurationAttr }
+func (HvacSystemTypeConfiguration) Cluster() zcl.ClusterID                 { return ThermostatID }
+func (HvacSystemTypeConfiguration) Name() string                           { return "HVAC System Type Configuration" }
+func (HvacSystemTypeConfiguration) Readable() bool                         { return true }
+func (HvacSystemTypeConfiguration) Writable() bool                         { return true }
+func (HvacSystemTypeConfiguration) Reportable() bool                       { return false }
+func (HvacSystemTypeConfiguration) SceneIndex() int                        { return -1 }
 func (a *HvacSystemTypeConfiguration) Value() *HvacSystemTypeConfiguration { return a }
-func (a HvacSystemTypeConfiguration) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a HvacSystemTypeConfiguration) MarshalZcl() ([]byte, error)          { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *HvacSystemTypeConfiguration) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = HvacSystemTypeConfiguration(*nt)
 	return br, err
 }
-func (HvacSystemTypeConfiguration) Name() string     { return "HVAC System Type Configuration" }
-func (HvacSystemTypeConfiguration) Readable() bool   { return true }
-func (HvacSystemTypeConfiguration) Writable() bool   { return true }
-func (HvacSystemTypeConfiguration) Reportable() bool { return false }
-func (HvacSystemTypeConfiguration) SceneIndex() int  { return -1 }
 
 func (a HvacSystemTypeConfiguration) String() string {
 	return zcl.Sprintf("%v", zcl.Zbmp8(a))
@@ -415,23 +405,22 @@ type LocalTemperatureCalibration zcl.Zs8
 
 const LocalTemperatureCalibrationAttr zcl.AttrID = 16
 
-func (a LocalTemperatureCalibration) ID() zcl.AttrID                       { return LocalTemperatureCalibrationAttr }
-func (a LocalTemperatureCalibration) Cluster() zcl.ClusterID               { return ThermostatID }
+func (LocalTemperatureCalibration) ID() zcl.AttrID                         { return LocalTemperatureCalibrationAttr }
+func (LocalTemperatureCalibration) Cluster() zcl.ClusterID                 { return ThermostatID }
+func (LocalTemperatureCalibration) Name() string                           { return "Local Temperature Calibration" }
+func (LocalTemperatureCalibration) Readable() bool                         { return true }
+func (LocalTemperatureCalibration) Writable() bool                         { return true }
+func (LocalTemperatureCalibration) Reportable() bool                       { return false }
+func (LocalTemperatureCalibration) SceneIndex() int                        { return -1 }
 func (a *LocalTemperatureCalibration) Value() *LocalTemperatureCalibration { return a }
-func (a LocalTemperatureCalibration) MarshalZcl() ([]byte, error) {
-	return zcl.Zs8(a).MarshalZcl()
-}
+func (a LocalTemperatureCalibration) MarshalZcl() ([]byte, error)          { return zcl.Zs8(a).MarshalZcl() }
+
 func (a *LocalTemperatureCalibration) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocalTemperatureCalibration(*nt)
 	return br, err
 }
-func (LocalTemperatureCalibration) Name() string     { return "Local Temperature Calibration" }
-func (LocalTemperatureCalibration) Readable() bool   { return true }
-func (LocalTemperatureCalibration) Writable() bool   { return true }
-func (LocalTemperatureCalibration) Reportable() bool { return false }
-func (LocalTemperatureCalibration) SceneIndex() int  { return -1 }
 
 func (a LocalTemperatureCalibration) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))
@@ -442,23 +431,22 @@ type OccupiedCoolingSetpoint zcl.Zs16
 
 const OccupiedCoolingSetpointAttr zcl.AttrID = 17
 
-func (a OccupiedCoolingSetpoint) ID() zcl.AttrID                   { return OccupiedCoolingSetpointAttr }
-func (a OccupiedCoolingSetpoint) Cluster() zcl.ClusterID           { return ThermostatID }
+func (OccupiedCoolingSetpoint) ID() zcl.AttrID                     { return OccupiedCoolingSetpointAttr }
+func (OccupiedCoolingSetpoint) Cluster() zcl.ClusterID             { return ThermostatID }
+func (OccupiedCoolingSetpoint) Name() string                       { return "Occupied Cooling Setpoint" }
+func (OccupiedCoolingSetpoint) Readable() bool                     { return true }
+func (OccupiedCoolingSetpoint) Writable() bool                     { return true }
+func (OccupiedCoolingSetpoint) Reportable() bool                   { return false }
+func (OccupiedCoolingSetpoint) SceneIndex() int                    { return -1 }
 func (a *OccupiedCoolingSetpoint) Value() *OccupiedCoolingSetpoint { return a }
-func (a OccupiedCoolingSetpoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a OccupiedCoolingSetpoint) MarshalZcl() ([]byte, error)      { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *OccupiedCoolingSetpoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OccupiedCoolingSetpoint(*nt)
 	return br, err
 }
-func (OccupiedCoolingSetpoint) Name() string     { return "Occupied Cooling Setpoint" }
-func (OccupiedCoolingSetpoint) Readable() bool   { return true }
-func (OccupiedCoolingSetpoint) Writable() bool   { return true }
-func (OccupiedCoolingSetpoint) Reportable() bool { return false }
-func (OccupiedCoolingSetpoint) SceneIndex() int  { return -1 }
 
 func (a OccupiedCoolingSetpoint) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -469,23 +457,22 @@ type OccupiedHeatingSetpoint zcl.Zs16
 
 const OccupiedHeatingSetpointAttr zcl.AttrID = 18
 
-func (a OccupiedHeatingSetpoint) ID() zcl.AttrID                   { return OccupiedHeatingSetpointAttr }
-func (a OccupiedHeatingSetpoint) Cluster() zcl.ClusterID           { return ThermostatID }
+func (OccupiedHeatingSetpoint) ID() zcl.AttrID                     { return OccupiedHeatingSetpointAttr }
+func (OccupiedHeatingSetpoint) Cluster() zcl.ClusterID             { return ThermostatID }
+func (OccupiedHeatingSetpoint) Name() string                       { return "Occupied Heating Setpoint" }
+func (OccupiedHeatingSetpoint) Readable() bool                     { return true }
+func (OccupiedHeatingSetpoint) Writable() bool                     { return true }
+func (OccupiedHeatingSetpoint) Reportable() bool                   { return false }
+func (OccupiedHeatingSetpoint) SceneIndex() int                    { return -1 }
 func (a *OccupiedHeatingSetpoint) Value() *OccupiedHeatingSetpoint { return a }
-func (a OccupiedHeatingSetpoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a OccupiedHeatingSetpoint) MarshalZcl() ([]byte, error)      { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *OccupiedHeatingSetpoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OccupiedHeatingSetpoint(*nt)
 	return br, err
 }
-func (OccupiedHeatingSetpoint) Name() string     { return "Occupied Heating Setpoint" }
-func (OccupiedHeatingSetpoint) Readable() bool   { return true }
-func (OccupiedHeatingSetpoint) Writable() bool   { return true }
-func (OccupiedHeatingSetpoint) Reportable() bool { return false }
-func (OccupiedHeatingSetpoint) SceneIndex() int  { return -1 }
 
 func (a OccupiedHeatingSetpoint) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -496,23 +483,22 @@ type UnoccupiedCoolingSetpoint zcl.Zs16
 
 const UnoccupiedCoolingSetpointAttr zcl.AttrID = 19
 
-func (a UnoccupiedCoolingSetpoint) ID() zcl.AttrID                     { return UnoccupiedCoolingSetpointAttr }
-func (a UnoccupiedCoolingSetpoint) Cluster() zcl.ClusterID             { return ThermostatID }
+func (UnoccupiedCoolingSetpoint) ID() zcl.AttrID                       { return UnoccupiedCoolingSetpointAttr }
+func (UnoccupiedCoolingSetpoint) Cluster() zcl.ClusterID               { return ThermostatID }
+func (UnoccupiedCoolingSetpoint) Name() string                         { return "Unoccupied Cooling Setpoint" }
+func (UnoccupiedCoolingSetpoint) Readable() bool                       { return true }
+func (UnoccupiedCoolingSetpoint) Writable() bool                       { return true }
+func (UnoccupiedCoolingSetpoint) Reportable() bool                     { return false }
+func (UnoccupiedCoolingSetpoint) SceneIndex() int                      { return -1 }
 func (a *UnoccupiedCoolingSetpoint) Value() *UnoccupiedCoolingSetpoint { return a }
-func (a UnoccupiedCoolingSetpoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a UnoccupiedCoolingSetpoint) MarshalZcl() ([]byte, error)        { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *UnoccupiedCoolingSetpoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = UnoccupiedCoolingSetpoint(*nt)
 	return br, err
 }
-func (UnoccupiedCoolingSetpoint) Name() string     { return "Unoccupied Cooling Setpoint" }
-func (UnoccupiedCoolingSetpoint) Readable() bool   { return true }
-func (UnoccupiedCoolingSetpoint) Writable() bool   { return true }
-func (UnoccupiedCoolingSetpoint) Reportable() bool { return false }
-func (UnoccupiedCoolingSetpoint) SceneIndex() int  { return -1 }
 
 func (a UnoccupiedCoolingSetpoint) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -523,23 +509,22 @@ type UnoccupiedHeatingSetpoint zcl.Zs16
 
 const UnoccupiedHeatingSetpointAttr zcl.AttrID = 20
 
-func (a UnoccupiedHeatingSetpoint) ID() zcl.AttrID                     { return UnoccupiedHeatingSetpointAttr }
-func (a UnoccupiedHeatingSetpoint) Cluster() zcl.ClusterID             { return ThermostatID }
+func (UnoccupiedHeatingSetpoint) ID() zcl.AttrID                       { return UnoccupiedHeatingSetpointAttr }
+func (UnoccupiedHeatingSetpoint) Cluster() zcl.ClusterID               { return ThermostatID }
+func (UnoccupiedHeatingSetpoint) Name() string                         { return "Unoccupied Heating Setpoint" }
+func (UnoccupiedHeatingSetpoint) Readable() bool                       { return true }
+func (UnoccupiedHeatingSetpoint) Writable() bool                       { return true }
+func (UnoccupiedHeatingSetpoint) Reportable() bool                     { return false }
+func (UnoccupiedHeatingSetpoint) SceneIndex() int                      { return -1 }
 func (a *UnoccupiedHeatingSetpoint) Value() *UnoccupiedHeatingSetpoint { return a }
-func (a UnoccupiedHeatingSetpoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a UnoccupiedHeatingSetpoint) MarshalZcl() ([]byte, error)        { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *UnoccupiedHeatingSetpoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = UnoccupiedHeatingSetpoint(*nt)
 	return br, err
 }
-func (UnoccupiedHeatingSetpoint) Name() string     { return "Unoccupied Heating Setpoint" }
-func (UnoccupiedHeatingSetpoint) Readable() bool   { return true }
-func (UnoccupiedHeatingSetpoint) Writable() bool   { return true }
-func (UnoccupiedHeatingSetpoint) Reportable() bool { return false }
-func (UnoccupiedHeatingSetpoint) SceneIndex() int  { return -1 }
 
 func (a UnoccupiedHeatingSetpoint) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -550,23 +535,22 @@ type MinHeatSetpointLimit zcl.Zs16
 
 const MinHeatSetpointLimitAttr zcl.AttrID = 21
 
-func (a MinHeatSetpointLimit) ID() zcl.AttrID                { return MinHeatSetpointLimitAttr }
-func (a MinHeatSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
+func (MinHeatSetpointLimit) ID() zcl.AttrID                  { return MinHeatSetpointLimitAttr }
+func (MinHeatSetpointLimit) Cluster() zcl.ClusterID          { return ThermostatID }
+func (MinHeatSetpointLimit) Name() string                    { return "Min Heat Setpoint Limit" }
+func (MinHeatSetpointLimit) Readable() bool                  { return true }
+func (MinHeatSetpointLimit) Writable() bool                  { return true }
+func (MinHeatSetpointLimit) Reportable() bool                { return false }
+func (MinHeatSetpointLimit) SceneIndex() int                 { return -1 }
 func (a *MinHeatSetpointLimit) Value() *MinHeatSetpointLimit { return a }
-func (a MinHeatSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MinHeatSetpointLimit) MarshalZcl() ([]byte, error)   { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MinHeatSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MinHeatSetpointLimit(*nt)
 	return br, err
 }
-func (MinHeatSetpointLimit) Name() string     { return "Min Heat Setpoint Limit" }
-func (MinHeatSetpointLimit) Readable() bool   { return true }
-func (MinHeatSetpointLimit) Writable() bool   { return true }
-func (MinHeatSetpointLimit) Reportable() bool { return false }
-func (MinHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MinHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -577,23 +561,22 @@ type MaxHeatSetpointLimit zcl.Zs16
 
 const MaxHeatSetpointLimitAttr zcl.AttrID = 22
 
-func (a MaxHeatSetpointLimit) ID() zcl.AttrID                { return MaxHeatSetpointLimitAttr }
-func (a MaxHeatSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
+func (MaxHeatSetpointLimit) ID() zcl.AttrID                  { return MaxHeatSetpointLimitAttr }
+func (MaxHeatSetpointLimit) Cluster() zcl.ClusterID          { return ThermostatID }
+func (MaxHeatSetpointLimit) Name() string                    { return "Max Heat Setpoint Limit" }
+func (MaxHeatSetpointLimit) Readable() bool                  { return true }
+func (MaxHeatSetpointLimit) Writable() bool                  { return true }
+func (MaxHeatSetpointLimit) Reportable() bool                { return false }
+func (MaxHeatSetpointLimit) SceneIndex() int                 { return -1 }
 func (a *MaxHeatSetpointLimit) Value() *MaxHeatSetpointLimit { return a }
-func (a MaxHeatSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MaxHeatSetpointLimit) MarshalZcl() ([]byte, error)   { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MaxHeatSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxHeatSetpointLimit(*nt)
 	return br, err
 }
-func (MaxHeatSetpointLimit) Name() string     { return "Max Heat Setpoint Limit" }
-func (MaxHeatSetpointLimit) Readable() bool   { return true }
-func (MaxHeatSetpointLimit) Writable() bool   { return true }
-func (MaxHeatSetpointLimit) Reportable() bool { return false }
-func (MaxHeatSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MaxHeatSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -604,23 +587,22 @@ type MinCoolSetpointLimit zcl.Zs16
 
 const MinCoolSetpointLimitAttr zcl.AttrID = 23
 
-func (a MinCoolSetpointLimit) ID() zcl.AttrID                { return MinCoolSetpointLimitAttr }
-func (a MinCoolSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
+func (MinCoolSetpointLimit) ID() zcl.AttrID                  { return MinCoolSetpointLimitAttr }
+func (MinCoolSetpointLimit) Cluster() zcl.ClusterID          { return ThermostatID }
+func (MinCoolSetpointLimit) Name() string                    { return "Min Cool Setpoint Limit" }
+func (MinCoolSetpointLimit) Readable() bool                  { return true }
+func (MinCoolSetpointLimit) Writable() bool                  { return true }
+func (MinCoolSetpointLimit) Reportable() bool                { return false }
+func (MinCoolSetpointLimit) SceneIndex() int                 { return -1 }
 func (a *MinCoolSetpointLimit) Value() *MinCoolSetpointLimit { return a }
-func (a MinCoolSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MinCoolSetpointLimit) MarshalZcl() ([]byte, error)   { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MinCoolSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MinCoolSetpointLimit(*nt)
 	return br, err
 }
-func (MinCoolSetpointLimit) Name() string     { return "Min Cool Setpoint Limit" }
-func (MinCoolSetpointLimit) Readable() bool   { return true }
-func (MinCoolSetpointLimit) Writable() bool   { return true }
-func (MinCoolSetpointLimit) Reportable() bool { return false }
-func (MinCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MinCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -631,23 +613,22 @@ type MaxCoolSetpointLimit zcl.Zs16
 
 const MaxCoolSetpointLimitAttr zcl.AttrID = 24
 
-func (a MaxCoolSetpointLimit) ID() zcl.AttrID                { return MaxCoolSetpointLimitAttr }
-func (a MaxCoolSetpointLimit) Cluster() zcl.ClusterID        { return ThermostatID }
+func (MaxCoolSetpointLimit) ID() zcl.AttrID                  { return MaxCoolSetpointLimitAttr }
+func (MaxCoolSetpointLimit) Cluster() zcl.ClusterID          { return ThermostatID }
+func (MaxCoolSetpointLimit) Name() string                    { return "Max Cool Setpoint Limit" }
+func (MaxCoolSetpointLimit) Readable() bool                  { return true }
+func (MaxCoolSetpointLimit) Writable() bool                  { return true }
+func (MaxCoolSetpointLimit) Reportable() bool                { return false }
+func (MaxCoolSetpointLimit) SceneIndex() int                 { return -1 }
 func (a *MaxCoolSetpointLimit) Value() *MaxCoolSetpointLimit { return a }
-func (a MaxCoolSetpointLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MaxCoolSetpointLimit) MarshalZcl() ([]byte, error)   { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MaxCoolSetpointLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxCoolSetpointLimit(*nt)
 	return br, err
 }
-func (MaxCoolSetpointLimit) Name() string     { return "Max Cool Setpoint Limit" }
-func (MaxCoolSetpointLimit) Readable() bool   { return true }
-func (MaxCoolSetpointLimit) Writable() bool   { return true }
-func (MaxCoolSetpointLimit) Reportable() bool { return false }
-func (MaxCoolSetpointLimit) SceneIndex() int  { return -1 }
 
 func (a MaxCoolSetpointLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -658,23 +639,22 @@ type MinSetpointDeadBand zcl.Zs8
 
 const MinSetpointDeadBandAttr zcl.AttrID = 25
 
-func (a MinSetpointDeadBand) ID() zcl.AttrID               { return MinSetpointDeadBandAttr }
-func (a MinSetpointDeadBand) Cluster() zcl.ClusterID       { return ThermostatID }
+func (MinSetpointDeadBand) ID() zcl.AttrID                 { return MinSetpointDeadBandAttr }
+func (MinSetpointDeadBand) Cluster() zcl.ClusterID         { return ThermostatID }
+func (MinSetpointDeadBand) Name() string                   { return "Min Setpoint Dead Band" }
+func (MinSetpointDeadBand) Readable() bool                 { return true }
+func (MinSetpointDeadBand) Writable() bool                 { return true }
+func (MinSetpointDeadBand) Reportable() bool               { return false }
+func (MinSetpointDeadBand) SceneIndex() int                { return -1 }
 func (a *MinSetpointDeadBand) Value() *MinSetpointDeadBand { return a }
-func (a MinSetpointDeadBand) MarshalZcl() ([]byte, error) {
-	return zcl.Zs8(a).MarshalZcl()
-}
+func (a MinSetpointDeadBand) MarshalZcl() ([]byte, error)  { return zcl.Zs8(a).MarshalZcl() }
+
 func (a *MinSetpointDeadBand) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MinSetpointDeadBand(*nt)
 	return br, err
 }
-func (MinSetpointDeadBand) Name() string     { return "Min Setpoint Dead Band" }
-func (MinSetpointDeadBand) Readable() bool   { return true }
-func (MinSetpointDeadBand) Writable() bool   { return true }
-func (MinSetpointDeadBand) Reportable() bool { return false }
-func (MinSetpointDeadBand) SceneIndex() int  { return -1 }
 
 func (a MinSetpointDeadBand) String() string {
 	return zcl.Sprintf("%v", zcl.Zs8(a))
@@ -685,23 +665,22 @@ type RemoteSensing zcl.Zbmp8
 
 const RemoteSensingAttr zcl.AttrID = 26
 
-func (a RemoteSensing) ID() zcl.AttrID         { return RemoteSensingAttr }
-func (a RemoteSensing) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *RemoteSensing) Value() *RemoteSensing { return a }
-func (a RemoteSensing) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (RemoteSensing) ID() zcl.AttrID                { return RemoteSensingAttr }
+func (RemoteSensing) Cluster() zcl.ClusterID        { return ThermostatID }
+func (RemoteSensing) Name() string                  { return "Remote Sensing" }
+func (RemoteSensing) Readable() bool                { return true }
+func (RemoteSensing) Writable() bool                { return true }
+func (RemoteSensing) Reportable() bool              { return false }
+func (RemoteSensing) SceneIndex() int               { return -1 }
+func (a *RemoteSensing) Value() *RemoteSensing      { return a }
+func (a RemoteSensing) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *RemoteSensing) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = RemoteSensing(*nt)
 	return br, err
 }
-func (RemoteSensing) Name() string     { return "Remote Sensing" }
-func (RemoteSensing) Readable() bool   { return true }
-func (RemoteSensing) Writable() bool   { return true }
-func (RemoteSensing) Reportable() bool { return false }
-func (RemoteSensing) SceneIndex() int  { return -1 }
 
 func (a RemoteSensing) String() string {
 	var bstr []string
@@ -743,23 +722,22 @@ type ControlSequenceOfOperation zcl.Zenum8
 
 const ControlSequenceOfOperationAttr zcl.AttrID = 27
 
-func (a ControlSequenceOfOperation) ID() zcl.AttrID                      { return ControlSequenceOfOperationAttr }
-func (a ControlSequenceOfOperation) Cluster() zcl.ClusterID              { return ThermostatID }
+func (ControlSequenceOfOperation) ID() zcl.AttrID                        { return ControlSequenceOfOperationAttr }
+func (ControlSequenceOfOperation) Cluster() zcl.ClusterID                { return ThermostatID }
+func (ControlSequenceOfOperation) Name() string                          { return "Control Sequence Of Operation" }
+func (ControlSequenceOfOperation) Readable() bool                        { return true }
+func (ControlSequenceOfOperation) Writable() bool                        { return true }
+func (ControlSequenceOfOperation) Reportable() bool                      { return false }
+func (ControlSequenceOfOperation) SceneIndex() int                       { return -1 }
 func (a *ControlSequenceOfOperation) Value() *ControlSequenceOfOperation { return a }
-func (a ControlSequenceOfOperation) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a ControlSequenceOfOperation) MarshalZcl() ([]byte, error)         { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *ControlSequenceOfOperation) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ControlSequenceOfOperation(*nt)
 	return br, err
 }
-func (ControlSequenceOfOperation) Name() string     { return "Control Sequence Of Operation" }
-func (ControlSequenceOfOperation) Readable() bool   { return true }
-func (ControlSequenceOfOperation) Writable() bool   { return true }
-func (ControlSequenceOfOperation) Reportable() bool { return false }
-func (ControlSequenceOfOperation) SceneIndex() int  { return -1 }
 
 func (a ControlSequenceOfOperation) String() string {
 	switch a {
@@ -820,23 +798,22 @@ type SystemMode zcl.Zenum8
 
 const SystemModeAttr zcl.AttrID = 28
 
-func (a SystemMode) ID() zcl.AttrID         { return SystemModeAttr }
-func (a SystemMode) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *SystemMode) Value() *SystemMode    { return a }
-func (a SystemMode) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (SystemMode) ID() zcl.AttrID                { return SystemModeAttr }
+func (SystemMode) Cluster() zcl.ClusterID        { return ThermostatID }
+func (SystemMode) Name() string                  { return "System Mode" }
+func (SystemMode) Readable() bool                { return true }
+func (SystemMode) Writable() bool                { return true }
+func (SystemMode) Reportable() bool              { return false }
+func (SystemMode) SceneIndex() int               { return -1 }
+func (a *SystemMode) Value() *SystemMode         { return a }
+func (a SystemMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *SystemMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = SystemMode(*nt)
 	return br, err
 }
-func (SystemMode) Name() string     { return "System Mode" }
-func (SystemMode) Readable() bool   { return true }
-func (SystemMode) Writable() bool   { return true }
-func (SystemMode) Reportable() bool { return false }
-func (SystemMode) SceneIndex() int  { return -1 }
 
 func (a SystemMode) String() string {
 	switch a {
@@ -921,23 +898,22 @@ type AlarmMask zcl.Zbmp8
 
 const AlarmMaskAttr zcl.AttrID = 29
 
-func (a AlarmMask) ID() zcl.AttrID         { return AlarmMaskAttr }
-func (a AlarmMask) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *AlarmMask) Value() *AlarmMask     { return a }
-func (a AlarmMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (AlarmMask) ID() zcl.AttrID                { return AlarmMaskAttr }
+func (AlarmMask) Cluster() zcl.ClusterID        { return ThermostatID }
+func (AlarmMask) Name() string                  { return "Alarm Mask" }
+func (AlarmMask) Readable() bool                { return true }
+func (AlarmMask) Writable() bool                { return false }
+func (AlarmMask) Reportable() bool              { return false }
+func (AlarmMask) SceneIndex() int               { return -1 }
+func (a *AlarmMask) Value() *AlarmMask          { return a }
+func (a AlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *AlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AlarmMask(*nt)
 	return br, err
 }
-func (AlarmMask) Name() string     { return "Alarm Mask" }
-func (AlarmMask) Readable() bool   { return true }
-func (AlarmMask) Writable() bool   { return false }
-func (AlarmMask) Reportable() bool { return false }
-func (AlarmMask) SceneIndex() int  { return -1 }
 
 func (a AlarmMask) String() string {
 	var bstr []string
@@ -979,23 +955,22 @@ type ThermostatRunningMode zcl.Zenum8
 
 const ThermostatRunningModeAttr zcl.AttrID = 30
 
-func (a ThermostatRunningMode) ID() zcl.AttrID                 { return ThermostatRunningModeAttr }
-func (a ThermostatRunningMode) Cluster() zcl.ClusterID         { return ThermostatID }
+func (ThermostatRunningMode) ID() zcl.AttrID                   { return ThermostatRunningModeAttr }
+func (ThermostatRunningMode) Cluster() zcl.ClusterID           { return ThermostatID }
+func (ThermostatRunningMode) Name() string                     { return "Thermostat Running Mode" }
+func (ThermostatRunningMode) Readable() bool                   { return true }
+func (ThermostatRunningMode) Writable() bool                   { return false }
+func (ThermostatRunningMode) Reportable() bool                 { return false }
+func (ThermostatRunningMode) SceneIndex() int                  { return -1 }
 func (a *ThermostatRunningMode) Value() *ThermostatRunningMode { return a }
-func (a ThermostatRunningMode) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a ThermostatRunningMode) MarshalZcl() ([]byte, error)    { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *ThermostatRunningMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ThermostatRunningMode(*nt)
 	return br, err
 }
-func (ThermostatRunningMode) Name() string     { return "Thermostat Running Mode" }
-func (ThermostatRunningMode) Readable() bool   { return true }
-func (ThermostatRunningMode) Writable() bool   { return false }
-func (ThermostatRunningMode) Reportable() bool { return false }
-func (ThermostatRunningMode) SceneIndex() int  { return -1 }
 
 func (a ThermostatRunningMode) String() string {
 	switch a {
@@ -1032,23 +1007,22 @@ type StartOfWeek zcl.Zenum8
 
 const StartOfWeekAttr zcl.AttrID = 32
 
-func (a StartOfWeek) ID() zcl.AttrID         { return StartOfWeekAttr }
-func (a StartOfWeek) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *StartOfWeek) Value() *StartOfWeek   { return a }
-func (a StartOfWeek) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (StartOfWeek) ID() zcl.AttrID                { return StartOfWeekAttr }
+func (StartOfWeek) Cluster() zcl.ClusterID        { return ThermostatID }
+func (StartOfWeek) Name() string                  { return "Start of Week" }
+func (StartOfWeek) Readable() bool                { return true }
+func (StartOfWeek) Writable() bool                { return false }
+func (StartOfWeek) Reportable() bool              { return false }
+func (StartOfWeek) SceneIndex() int               { return -1 }
+func (a *StartOfWeek) Value() *StartOfWeek        { return a }
+func (a StartOfWeek) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *StartOfWeek) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = StartOfWeek(*nt)
 	return br, err
 }
-func (StartOfWeek) Name() string     { return "Start of Week" }
-func (StartOfWeek) Readable() bool   { return true }
-func (StartOfWeek) Writable() bool   { return false }
-func (StartOfWeek) Reportable() bool { return false }
-func (StartOfWeek) SceneIndex() int  { return -1 }
 
 func (a StartOfWeek) String() string {
 	switch a {
@@ -1117,23 +1091,22 @@ type NumberOfWeeklyTransitions zcl.Zu8
 
 const NumberOfWeeklyTransitionsAttr zcl.AttrID = 33
 
-func (a NumberOfWeeklyTransitions) ID() zcl.AttrID                     { return NumberOfWeeklyTransitionsAttr }
-func (a NumberOfWeeklyTransitions) Cluster() zcl.ClusterID             { return ThermostatID }
+func (NumberOfWeeklyTransitions) ID() zcl.AttrID                       { return NumberOfWeeklyTransitionsAttr }
+func (NumberOfWeeklyTransitions) Cluster() zcl.ClusterID               { return ThermostatID }
+func (NumberOfWeeklyTransitions) Name() string                         { return "Number of Weekly Transitions" }
+func (NumberOfWeeklyTransitions) Readable() bool                       { return true }
+func (NumberOfWeeklyTransitions) Writable() bool                       { return false }
+func (NumberOfWeeklyTransitions) Reportable() bool                     { return false }
+func (NumberOfWeeklyTransitions) SceneIndex() int                      { return -1 }
 func (a *NumberOfWeeklyTransitions) Value() *NumberOfWeeklyTransitions { return a }
-func (a NumberOfWeeklyTransitions) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a NumberOfWeeklyTransitions) MarshalZcl() ([]byte, error)        { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *NumberOfWeeklyTransitions) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfWeeklyTransitions(*nt)
 	return br, err
 }
-func (NumberOfWeeklyTransitions) Name() string     { return "Number of Weekly Transitions" }
-func (NumberOfWeeklyTransitions) Readable() bool   { return true }
-func (NumberOfWeeklyTransitions) Writable() bool   { return false }
-func (NumberOfWeeklyTransitions) Reportable() bool { return false }
-func (NumberOfWeeklyTransitions) SceneIndex() int  { return -1 }
 
 func (a NumberOfWeeklyTransitions) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1144,23 +1117,22 @@ type NumberOfDailTransitions zcl.Zu8
 
 const NumberOfDailTransitionsAttr zcl.AttrID = 34
 
-func (a NumberOfDailTransitions) ID() zcl.AttrID                   { return NumberOfDailTransitionsAttr }
-func (a NumberOfDailTransitions) Cluster() zcl.ClusterID           { return ThermostatID }
+func (NumberOfDailTransitions) ID() zcl.AttrID                     { return NumberOfDailTransitionsAttr }
+func (NumberOfDailTransitions) Cluster() zcl.ClusterID             { return ThermostatID }
+func (NumberOfDailTransitions) Name() string                       { return "Number of Dail Transitions" }
+func (NumberOfDailTransitions) Readable() bool                     { return true }
+func (NumberOfDailTransitions) Writable() bool                     { return false }
+func (NumberOfDailTransitions) Reportable() bool                   { return false }
+func (NumberOfDailTransitions) SceneIndex() int                    { return -1 }
 func (a *NumberOfDailTransitions) Value() *NumberOfDailTransitions { return a }
-func (a NumberOfDailTransitions) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a NumberOfDailTransitions) MarshalZcl() ([]byte, error)      { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *NumberOfDailTransitions) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfDailTransitions(*nt)
 	return br, err
 }
-func (NumberOfDailTransitions) Name() string     { return "Number of Dail Transitions" }
-func (NumberOfDailTransitions) Readable() bool   { return true }
-func (NumberOfDailTransitions) Writable() bool   { return false }
-func (NumberOfDailTransitions) Reportable() bool { return false }
-func (NumberOfDailTransitions) SceneIndex() int  { return -1 }
 
 func (a NumberOfDailTransitions) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1171,23 +1143,22 @@ type TemperatureSetpointHold zcl.Zenum8
 
 const TemperatureSetpointHoldAttr zcl.AttrID = 35
 
-func (a TemperatureSetpointHold) ID() zcl.AttrID                   { return TemperatureSetpointHoldAttr }
-func (a TemperatureSetpointHold) Cluster() zcl.ClusterID           { return ThermostatID }
+func (TemperatureSetpointHold) ID() zcl.AttrID                     { return TemperatureSetpointHoldAttr }
+func (TemperatureSetpointHold) Cluster() zcl.ClusterID             { return ThermostatID }
+func (TemperatureSetpointHold) Name() string                       { return "Temperature Setpoint Hold" }
+func (TemperatureSetpointHold) Readable() bool                     { return true }
+func (TemperatureSetpointHold) Writable() bool                     { return false }
+func (TemperatureSetpointHold) Reportable() bool                   { return false }
+func (TemperatureSetpointHold) SceneIndex() int                    { return -1 }
 func (a *TemperatureSetpointHold) Value() *TemperatureSetpointHold { return a }
-func (a TemperatureSetpointHold) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a TemperatureSetpointHold) MarshalZcl() ([]byte, error)      { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *TemperatureSetpointHold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = TemperatureSetpointHold(*nt)
 	return br, err
 }
-func (TemperatureSetpointHold) Name() string     { return "Temperature Setpoint Hold" }
-func (TemperatureSetpointHold) Readable() bool   { return true }
-func (TemperatureSetpointHold) Writable() bool   { return false }
-func (TemperatureSetpointHold) Reportable() bool { return false }
-func (TemperatureSetpointHold) SceneIndex() int  { return -1 }
 
 func (a TemperatureSetpointHold) String() string {
 	switch a {
@@ -1216,23 +1187,22 @@ type TemperatureSetpointHoldDuration zcl.Zu8
 
 const TemperatureSetpointHoldDurationAttr zcl.AttrID = 36
 
-func (a TemperatureSetpointHoldDuration) ID() zcl.AttrID                           { return TemperatureSetpointHoldDurationAttr }
-func (a TemperatureSetpointHoldDuration) Cluster() zcl.ClusterID                   { return ThermostatID }
+func (TemperatureSetpointHoldDuration) ID() zcl.AttrID                             { return TemperatureSetpointHoldDurationAttr }
+func (TemperatureSetpointHoldDuration) Cluster() zcl.ClusterID                     { return ThermostatID }
+func (TemperatureSetpointHoldDuration) Name() string                               { return "Temperature Setpoint Hold Duration" }
+func (TemperatureSetpointHoldDuration) Readable() bool                             { return true }
+func (TemperatureSetpointHoldDuration) Writable() bool                             { return true }
+func (TemperatureSetpointHoldDuration) Reportable() bool                           { return false }
+func (TemperatureSetpointHoldDuration) SceneIndex() int                            { return -1 }
 func (a *TemperatureSetpointHoldDuration) Value() *TemperatureSetpointHoldDuration { return a }
-func (a TemperatureSetpointHoldDuration) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a TemperatureSetpointHoldDuration) MarshalZcl() ([]byte, error)              { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *TemperatureSetpointHoldDuration) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = TemperatureSetpointHoldDuration(*nt)
 	return br, err
 }
-func (TemperatureSetpointHoldDuration) Name() string     { return "Temperature Setpoint Hold Duration" }
-func (TemperatureSetpointHoldDuration) Readable() bool   { return true }
-func (TemperatureSetpointHoldDuration) Writable() bool   { return true }
-func (TemperatureSetpointHoldDuration) Reportable() bool { return false }
-func (TemperatureSetpointHoldDuration) SceneIndex() int  { return -1 }
 
 func (a TemperatureSetpointHoldDuration) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1243,27 +1213,28 @@ type ThermostatProgrammingOperationMode zcl.Zbmp8
 
 const ThermostatProgrammingOperationModeAttr zcl.AttrID = 37
 
-func (a ThermostatProgrammingOperationMode) ID() zcl.AttrID {
+func (ThermostatProgrammingOperationMode) ID() zcl.AttrID {
 	return ThermostatProgrammingOperationModeAttr
 }
-func (a ThermostatProgrammingOperationMode) Cluster() zcl.ClusterID                      { return ThermostatID }
+func (ThermostatProgrammingOperationMode) Cluster() zcl.ClusterID { return ThermostatID }
+func (ThermostatProgrammingOperationMode) Name() string {
+	return "Thermostat Programming Operation Mode"
+}
+func (ThermostatProgrammingOperationMode) Readable() bool                                { return true }
+func (ThermostatProgrammingOperationMode) Writable() bool                                { return true }
+func (ThermostatProgrammingOperationMode) Reportable() bool                              { return false }
+func (ThermostatProgrammingOperationMode) SceneIndex() int                               { return -1 }
 func (a *ThermostatProgrammingOperationMode) Value() *ThermostatProgrammingOperationMode { return a }
 func (a ThermostatProgrammingOperationMode) MarshalZcl() ([]byte, error) {
 	return zcl.Zbmp8(a).MarshalZcl()
 }
+
 func (a *ThermostatProgrammingOperationMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ThermostatProgrammingOperationMode(*nt)
 	return br, err
 }
-func (ThermostatProgrammingOperationMode) Name() string {
-	return "Thermostat Programming Operation Mode"
-}
-func (ThermostatProgrammingOperationMode) Readable() bool   { return true }
-func (ThermostatProgrammingOperationMode) Writable() bool   { return true }
-func (ThermostatProgrammingOperationMode) Reportable() bool { return false }
-func (ThermostatProgrammingOperationMode) SceneIndex() int  { return -1 }
 
 func (a ThermostatProgrammingOperationMode) String() string {
 	var bstr []string
@@ -1305,23 +1276,22 @@ type ThermostatRunningState zcl.Zbmp16
 
 const ThermostatRunningStateAttr zcl.AttrID = 41
 
-func (a ThermostatRunningState) ID() zcl.AttrID                  { return ThermostatRunningStateAttr }
-func (a ThermostatRunningState) Cluster() zcl.ClusterID          { return ThermostatID }
+func (ThermostatRunningState) ID() zcl.AttrID                    { return ThermostatRunningStateAttr }
+func (ThermostatRunningState) Cluster() zcl.ClusterID            { return ThermostatID }
+func (ThermostatRunningState) Name() string                      { return "Thermostat Running State" }
+func (ThermostatRunningState) Readable() bool                    { return true }
+func (ThermostatRunningState) Writable() bool                    { return false }
+func (ThermostatRunningState) Reportable() bool                  { return false }
+func (ThermostatRunningState) SceneIndex() int                   { return -1 }
 func (a *ThermostatRunningState) Value() *ThermostatRunningState { return a }
-func (a ThermostatRunningState) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp16(a).MarshalZcl()
-}
+func (a ThermostatRunningState) MarshalZcl() ([]byte, error)     { return zcl.Zbmp16(a).MarshalZcl() }
+
 func (a *ThermostatRunningState) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ThermostatRunningState(*nt)
 	return br, err
 }
-func (ThermostatRunningState) Name() string     { return "Thermostat Running State" }
-func (ThermostatRunningState) Readable() bool   { return true }
-func (ThermostatRunningState) Writable() bool   { return false }
-func (ThermostatRunningState) Reportable() bool { return false }
-func (ThermostatRunningState) SceneIndex() int  { return -1 }
 
 func (a ThermostatRunningState) String() string {
 	var bstr []string
@@ -1403,23 +1373,22 @@ type TrvMode zcl.Zenum8
 
 const TrvModeAttr zcl.AttrID = 16384
 
-func (a TrvMode) ID() zcl.AttrID         { return TrvModeAttr }
-func (a TrvMode) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *TrvMode) Value() *TrvMode       { return a }
-func (a TrvMode) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (TrvMode) ID() zcl.AttrID                { return TrvModeAttr }
+func (TrvMode) Cluster() zcl.ClusterID        { return ThermostatID }
+func (TrvMode) Name() string                  { return "TRV Mode" }
+func (TrvMode) Readable() bool                { return true }
+func (TrvMode) Writable() bool                { return true }
+func (TrvMode) Reportable() bool              { return false }
+func (TrvMode) SceneIndex() int               { return -1 }
+func (a *TrvMode) Value() *TrvMode            { return a }
+func (a TrvMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *TrvMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = TrvMode(*nt)
 	return br, err
 }
-func (TrvMode) Name() string     { return "TRV Mode" }
-func (TrvMode) Readable() bool   { return true }
-func (TrvMode) Writable() bool   { return true }
-func (TrvMode) Reportable() bool { return false }
-func (TrvMode) SceneIndex() int  { return -1 }
 
 func (a TrvMode) String() string {
 	switch a {
@@ -1456,23 +1425,22 @@ type SetValvePosition zcl.Zu8
 
 const SetValvePositionAttr zcl.AttrID = 16385
 
-func (a SetValvePosition) ID() zcl.AttrID            { return SetValvePositionAttr }
-func (a SetValvePosition) Cluster() zcl.ClusterID    { return ThermostatID }
-func (a *SetValvePosition) Value() *SetValvePosition { return a }
-func (a SetValvePosition) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (SetValvePosition) ID() zcl.AttrID                { return SetValvePositionAttr }
+func (SetValvePosition) Cluster() zcl.ClusterID        { return ThermostatID }
+func (SetValvePosition) Name() string                  { return "Set Valve Position" }
+func (SetValvePosition) Readable() bool                { return true }
+func (SetValvePosition) Writable() bool                { return true }
+func (SetValvePosition) Reportable() bool              { return false }
+func (SetValvePosition) SceneIndex() int               { return -1 }
+func (a *SetValvePosition) Value() *SetValvePosition   { return a }
+func (a SetValvePosition) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *SetValvePosition) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = SetValvePosition(*nt)
 	return br, err
 }
-func (SetValvePosition) Name() string     { return "Set Valve Position" }
-func (SetValvePosition) Readable() bool   { return true }
-func (SetValvePosition) Writable() bool   { return true }
-func (SetValvePosition) Reportable() bool { return false }
-func (SetValvePosition) SceneIndex() int  { return -1 }
 
 func (a SetValvePosition) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -1483,23 +1451,22 @@ type Errors zcl.Zu8
 
 const ErrorsAttr zcl.AttrID = 16386
 
-func (a Errors) ID() zcl.AttrID         { return ErrorsAttr }
-func (a Errors) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *Errors) Value() *Errors        { return a }
-func (a Errors) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (Errors) ID() zcl.AttrID                { return ErrorsAttr }
+func (Errors) Cluster() zcl.ClusterID        { return ThermostatID }
+func (Errors) Name() string                  { return "Errors" }
+func (Errors) Readable() bool                { return true }
+func (Errors) Writable() bool                { return false }
+func (Errors) Reportable() bool              { return false }
+func (Errors) SceneIndex() int               { return -1 }
+func (a *Errors) Value() *Errors             { return a }
+func (a Errors) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *Errors) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Errors(*nt)
 	return br, err
 }
-func (Errors) Name() string     { return "Errors" }
-func (Errors) Readable() bool   { return true }
-func (Errors) Writable() bool   { return false }
-func (Errors) Reportable() bool { return false }
-func (Errors) SceneIndex() int  { return -1 }
 
 func (a Errors) String() string {
 	switch a {
@@ -1536,23 +1503,22 @@ type CurrentTemperatureSetpoint zcl.Zs16
 
 const CurrentTemperatureSetpointAttr zcl.AttrID = 16387
 
-func (a CurrentTemperatureSetpoint) ID() zcl.AttrID                      { return CurrentTemperatureSetpointAttr }
-func (a CurrentTemperatureSetpoint) Cluster() zcl.ClusterID              { return ThermostatID }
+func (CurrentTemperatureSetpoint) ID() zcl.AttrID                        { return CurrentTemperatureSetpointAttr }
+func (CurrentTemperatureSetpoint) Cluster() zcl.ClusterID                { return ThermostatID }
+func (CurrentTemperatureSetpoint) Name() string                          { return "Current Temperature Setpoint" }
+func (CurrentTemperatureSetpoint) Readable() bool                        { return true }
+func (CurrentTemperatureSetpoint) Writable() bool                        { return true }
+func (CurrentTemperatureSetpoint) Reportable() bool                      { return false }
+func (CurrentTemperatureSetpoint) SceneIndex() int                       { return -1 }
 func (a *CurrentTemperatureSetpoint) Value() *CurrentTemperatureSetpoint { return a }
-func (a CurrentTemperatureSetpoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a CurrentTemperatureSetpoint) MarshalZcl() ([]byte, error)         { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *CurrentTemperatureSetpoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentTemperatureSetpoint(*nt)
 	return br, err
 }
-func (CurrentTemperatureSetpoint) Name() string     { return "Current Temperature Setpoint" }
-func (CurrentTemperatureSetpoint) Readable() bool   { return true }
-func (CurrentTemperatureSetpoint) Writable() bool   { return true }
-func (CurrentTemperatureSetpoint) Reportable() bool { return false }
-func (CurrentTemperatureSetpoint) SceneIndex() int  { return -1 }
 
 func (a CurrentTemperatureSetpoint) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
@@ -1563,24 +1529,23 @@ type HostFlags zcl.Zu24
 
 const HostFlagsAttr zcl.AttrID = 16392
 
-func (a HostFlags) ID() zcl.AttrID         { return HostFlagsAttr }
-func (a HostFlags) Cluster() zcl.ClusterID { return ThermostatID }
-func (a *HostFlags) Value() *HostFlags     { return a }
-func (a HostFlags) MarshalZcl() ([]byte, error) {
-	return zcl.Zu24(a).MarshalZcl()
-}
+func (HostFlags) ID() zcl.AttrID                { return HostFlagsAttr }
+func (HostFlags) Cluster() zcl.ClusterID        { return ThermostatID }
+func (HostFlags) Name() string                  { return "Host Flags" }
+func (HostFlags) Readable() bool                { return true }
+func (HostFlags) Writable() bool                { return true }
+func (HostFlags) Reportable() bool              { return false }
+func (HostFlags) SceneIndex() int               { return -1 }
+func (a *HostFlags) Value() *HostFlags          { return a }
+func (a HostFlags) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
+
 func (a *HostFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
 	*a = HostFlags(*nt)
 	return br, err
 }
-func (HostFlags) Name() string     { return "Host Flags" }
-func (HostFlags) Readable() bool   { return true }
-func (HostFlags) Writable() bool   { return true }
-func (HostFlags) Reportable() bool { return false }
-func (HostFlags) SceneIndex() int  { return -1 }
 
 func (a HostFlags) String() string {
-	return zcl.Sprintf("0x%X", zcl.Zu24(a))
+	return zcl.Sprintf("%v", zcl.Zu24(a))
 }

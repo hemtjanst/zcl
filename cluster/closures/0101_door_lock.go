@@ -513,23 +513,22 @@ type LockState zcl.Zenum8
 
 const LockStateAttr zcl.AttrID = 0
 
-func (a LockState) ID() zcl.AttrID         { return LockStateAttr }
-func (a LockState) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *LockState) Value() *LockState     { return a }
-func (a LockState) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (LockState) ID() zcl.AttrID                { return LockStateAttr }
+func (LockState) Cluster() zcl.ClusterID        { return DoorLockID }
+func (LockState) Name() string                  { return "Lock State" }
+func (LockState) Readable() bool                { return true }
+func (LockState) Writable() bool                { return false }
+func (LockState) Reportable() bool              { return false }
+func (LockState) SceneIndex() int               { return -1 }
+func (a *LockState) Value() *LockState          { return a }
+func (a LockState) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *LockState) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LockState(*nt)
 	return br, err
 }
-func (LockState) Name() string     { return "Lock State" }
-func (LockState) Readable() bool   { return true }
-func (LockState) Writable() bool   { return false }
-func (LockState) Reportable() bool { return false }
-func (LockState) SceneIndex() int  { return -1 }
 
 func (a LockState) String() string {
 	switch a {
@@ -574,23 +573,22 @@ type LockType zcl.Zenum8
 
 const LockTypeAttr zcl.AttrID = 1
 
-func (a LockType) ID() zcl.AttrID         { return LockTypeAttr }
-func (a LockType) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *LockType) Value() *LockType      { return a }
-func (a LockType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (LockType) ID() zcl.AttrID                { return LockTypeAttr }
+func (LockType) Cluster() zcl.ClusterID        { return DoorLockID }
+func (LockType) Name() string                  { return "Lock Type" }
+func (LockType) Readable() bool                { return true }
+func (LockType) Writable() bool                { return false }
+func (LockType) Reportable() bool              { return false }
+func (LockType) SceneIndex() int               { return -1 }
+func (a *LockType) Value() *LockType           { return a }
+func (a LockType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *LockType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LockType(*nt)
 	return br, err
 }
-func (LockType) Name() string     { return "Lock Type" }
-func (LockType) Readable() bool   { return true }
-func (LockType) Writable() bool   { return false }
-func (LockType) Reportable() bool { return false }
-func (LockType) SceneIndex() int  { return -1 }
 
 func (a LockType) String() string {
 	switch a {
@@ -691,23 +689,22 @@ type ActuatorEnabled zcl.Zbool
 
 const ActuatorEnabledAttr zcl.AttrID = 2
 
-func (a ActuatorEnabled) ID() zcl.AttrID           { return ActuatorEnabledAttr }
-func (a ActuatorEnabled) Cluster() zcl.ClusterID   { return DoorLockID }
-func (a *ActuatorEnabled) Value() *ActuatorEnabled { return a }
-func (a ActuatorEnabled) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (ActuatorEnabled) ID() zcl.AttrID                { return ActuatorEnabledAttr }
+func (ActuatorEnabled) Cluster() zcl.ClusterID        { return DoorLockID }
+func (ActuatorEnabled) Name() string                  { return "Actuator enabled" }
+func (ActuatorEnabled) Readable() bool                { return true }
+func (ActuatorEnabled) Writable() bool                { return false }
+func (ActuatorEnabled) Reportable() bool              { return false }
+func (ActuatorEnabled) SceneIndex() int               { return -1 }
+func (a *ActuatorEnabled) Value() *ActuatorEnabled    { return a }
+func (a ActuatorEnabled) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *ActuatorEnabled) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ActuatorEnabled(*nt)
 	return br, err
 }
-func (ActuatorEnabled) Name() string     { return "Actuator enabled" }
-func (ActuatorEnabled) Readable() bool   { return true }
-func (ActuatorEnabled) Writable() bool   { return false }
-func (ActuatorEnabled) Reportable() bool { return false }
-func (ActuatorEnabled) SceneIndex() int  { return -1 }
 
 func (a ActuatorEnabled) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -718,23 +715,22 @@ type NumberOfLogRecordsSupported zcl.Zu16
 
 const NumberOfLogRecordsSupportedAttr zcl.AttrID = 16
 
-func (a NumberOfLogRecordsSupported) ID() zcl.AttrID                       { return NumberOfLogRecordsSupportedAttr }
-func (a NumberOfLogRecordsSupported) Cluster() zcl.ClusterID               { return DoorLockID }
+func (NumberOfLogRecordsSupported) ID() zcl.AttrID                         { return NumberOfLogRecordsSupportedAttr }
+func (NumberOfLogRecordsSupported) Cluster() zcl.ClusterID                 { return DoorLockID }
+func (NumberOfLogRecordsSupported) Name() string                           { return "Number Of Log Records Supported" }
+func (NumberOfLogRecordsSupported) Readable() bool                         { return true }
+func (NumberOfLogRecordsSupported) Writable() bool                         { return false }
+func (NumberOfLogRecordsSupported) Reportable() bool                       { return false }
+func (NumberOfLogRecordsSupported) SceneIndex() int                        { return -1 }
 func (a *NumberOfLogRecordsSupported) Value() *NumberOfLogRecordsSupported { return a }
-func (a NumberOfLogRecordsSupported) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a NumberOfLogRecordsSupported) MarshalZcl() ([]byte, error)          { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *NumberOfLogRecordsSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfLogRecordsSupported(*nt)
 	return br, err
 }
-func (NumberOfLogRecordsSupported) Name() string     { return "Number Of Log Records Supported" }
-func (NumberOfLogRecordsSupported) Readable() bool   { return true }
-func (NumberOfLogRecordsSupported) Writable() bool   { return false }
-func (NumberOfLogRecordsSupported) Reportable() bool { return false }
-func (NumberOfLogRecordsSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfLogRecordsSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -745,23 +741,22 @@ type NumberOfTotalUsersSupported zcl.Zu16
 
 const NumberOfTotalUsersSupportedAttr zcl.AttrID = 17
 
-func (a NumberOfTotalUsersSupported) ID() zcl.AttrID                       { return NumberOfTotalUsersSupportedAttr }
-func (a NumberOfTotalUsersSupported) Cluster() zcl.ClusterID               { return DoorLockID }
+func (NumberOfTotalUsersSupported) ID() zcl.AttrID                         { return NumberOfTotalUsersSupportedAttr }
+func (NumberOfTotalUsersSupported) Cluster() zcl.ClusterID                 { return DoorLockID }
+func (NumberOfTotalUsersSupported) Name() string                           { return "Number Of Total Users Supported" }
+func (NumberOfTotalUsersSupported) Readable() bool                         { return true }
+func (NumberOfTotalUsersSupported) Writable() bool                         { return false }
+func (NumberOfTotalUsersSupported) Reportable() bool                       { return false }
+func (NumberOfTotalUsersSupported) SceneIndex() int                        { return -1 }
 func (a *NumberOfTotalUsersSupported) Value() *NumberOfTotalUsersSupported { return a }
-func (a NumberOfTotalUsersSupported) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a NumberOfTotalUsersSupported) MarshalZcl() ([]byte, error)          { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *NumberOfTotalUsersSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfTotalUsersSupported(*nt)
 	return br, err
 }
-func (NumberOfTotalUsersSupported) Name() string     { return "Number Of Total Users Supported" }
-func (NumberOfTotalUsersSupported) Readable() bool   { return true }
-func (NumberOfTotalUsersSupported) Writable() bool   { return false }
-func (NumberOfTotalUsersSupported) Reportable() bool { return false }
-func (NumberOfTotalUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfTotalUsersSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -772,23 +767,22 @@ type NumberOfPinUsersSupported zcl.Zu16
 
 const NumberOfPinUsersSupportedAttr zcl.AttrID = 18
 
-func (a NumberOfPinUsersSupported) ID() zcl.AttrID                     { return NumberOfPinUsersSupportedAttr }
-func (a NumberOfPinUsersSupported) Cluster() zcl.ClusterID             { return DoorLockID }
+func (NumberOfPinUsersSupported) ID() zcl.AttrID                       { return NumberOfPinUsersSupportedAttr }
+func (NumberOfPinUsersSupported) Cluster() zcl.ClusterID               { return DoorLockID }
+func (NumberOfPinUsersSupported) Name() string                         { return "Number Of PIN Users Supported" }
+func (NumberOfPinUsersSupported) Readable() bool                       { return true }
+func (NumberOfPinUsersSupported) Writable() bool                       { return false }
+func (NumberOfPinUsersSupported) Reportable() bool                     { return false }
+func (NumberOfPinUsersSupported) SceneIndex() int                      { return -1 }
 func (a *NumberOfPinUsersSupported) Value() *NumberOfPinUsersSupported { return a }
-func (a NumberOfPinUsersSupported) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a NumberOfPinUsersSupported) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *NumberOfPinUsersSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfPinUsersSupported(*nt)
 	return br, err
 }
-func (NumberOfPinUsersSupported) Name() string     { return "Number Of PIN Users Supported" }
-func (NumberOfPinUsersSupported) Readable() bool   { return true }
-func (NumberOfPinUsersSupported) Writable() bool   { return false }
-func (NumberOfPinUsersSupported) Reportable() bool { return false }
-func (NumberOfPinUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfPinUsersSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -799,23 +793,22 @@ type NumberOfRfidUsersSupported zcl.Zu16
 
 const NumberOfRfidUsersSupportedAttr zcl.AttrID = 19
 
-func (a NumberOfRfidUsersSupported) ID() zcl.AttrID                      { return NumberOfRfidUsersSupportedAttr }
-func (a NumberOfRfidUsersSupported) Cluster() zcl.ClusterID              { return DoorLockID }
+func (NumberOfRfidUsersSupported) ID() zcl.AttrID                        { return NumberOfRfidUsersSupportedAttr }
+func (NumberOfRfidUsersSupported) Cluster() zcl.ClusterID                { return DoorLockID }
+func (NumberOfRfidUsersSupported) Name() string                          { return "Number Of RFID Users Supported" }
+func (NumberOfRfidUsersSupported) Readable() bool                        { return true }
+func (NumberOfRfidUsersSupported) Writable() bool                        { return false }
+func (NumberOfRfidUsersSupported) Reportable() bool                      { return false }
+func (NumberOfRfidUsersSupported) SceneIndex() int                       { return -1 }
 func (a *NumberOfRfidUsersSupported) Value() *NumberOfRfidUsersSupported { return a }
-func (a NumberOfRfidUsersSupported) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a NumberOfRfidUsersSupported) MarshalZcl() ([]byte, error)         { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *NumberOfRfidUsersSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfRfidUsersSupported(*nt)
 	return br, err
 }
-func (NumberOfRfidUsersSupported) Name() string     { return "Number Of RFID Users Supported" }
-func (NumberOfRfidUsersSupported) Readable() bool   { return true }
-func (NumberOfRfidUsersSupported) Writable() bool   { return false }
-func (NumberOfRfidUsersSupported) Reportable() bool { return false }
-func (NumberOfRfidUsersSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfRfidUsersSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -826,22 +819,10 @@ type NumberOfWeekdaySchedulesSupportedPerUser zcl.Zu8
 
 const NumberOfWeekdaySchedulesSupportedPerUserAttr zcl.AttrID = 20
 
-func (a NumberOfWeekdaySchedulesSupportedPerUser) ID() zcl.AttrID {
+func (NumberOfWeekdaySchedulesSupportedPerUser) ID() zcl.AttrID {
 	return NumberOfWeekdaySchedulesSupportedPerUserAttr
 }
-func (a NumberOfWeekdaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *NumberOfWeekdaySchedulesSupportedPerUser) Value() *NumberOfWeekdaySchedulesSupportedPerUser {
-	return a
-}
-func (a NumberOfWeekdaySchedulesSupportedPerUser) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
-func (a *NumberOfWeekdaySchedulesSupportedPerUser) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = NumberOfWeekdaySchedulesSupportedPerUser(*nt)
-	return br, err
-}
+func (NumberOfWeekdaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockID }
 func (NumberOfWeekdaySchedulesSupportedPerUser) Name() string {
 	return "Number Of WeekDay Schedules Supported Per User"
 }
@@ -849,6 +830,19 @@ func (NumberOfWeekdaySchedulesSupportedPerUser) Readable() bool   { return true 
 func (NumberOfWeekdaySchedulesSupportedPerUser) Writable() bool   { return false }
 func (NumberOfWeekdaySchedulesSupportedPerUser) Reportable() bool { return false }
 func (NumberOfWeekdaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
+func (a *NumberOfWeekdaySchedulesSupportedPerUser) Value() *NumberOfWeekdaySchedulesSupportedPerUser {
+	return a
+}
+func (a NumberOfWeekdaySchedulesSupportedPerUser) MarshalZcl() ([]byte, error) {
+	return zcl.Zu8(a).MarshalZcl()
+}
+
+func (a *NumberOfWeekdaySchedulesSupportedPerUser) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NumberOfWeekdaySchedulesSupportedPerUser(*nt)
+	return br, err
+}
 
 func (a NumberOfWeekdaySchedulesSupportedPerUser) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -859,22 +853,10 @@ type NumberOfYearDaySchedulesSupportedPerUser zcl.Zu8
 
 const NumberOfYearDaySchedulesSupportedPerUserAttr zcl.AttrID = 21
 
-func (a NumberOfYearDaySchedulesSupportedPerUser) ID() zcl.AttrID {
+func (NumberOfYearDaySchedulesSupportedPerUser) ID() zcl.AttrID {
 	return NumberOfYearDaySchedulesSupportedPerUserAttr
 }
-func (a NumberOfYearDaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *NumberOfYearDaySchedulesSupportedPerUser) Value() *NumberOfYearDaySchedulesSupportedPerUser {
-	return a
-}
-func (a NumberOfYearDaySchedulesSupportedPerUser) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
-func (a *NumberOfYearDaySchedulesSupportedPerUser) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = NumberOfYearDaySchedulesSupportedPerUser(*nt)
-	return br, err
-}
+func (NumberOfYearDaySchedulesSupportedPerUser) Cluster() zcl.ClusterID { return DoorLockID }
 func (NumberOfYearDaySchedulesSupportedPerUser) Name() string {
 	return "Number Of Year Day Schedules Supported Per User"
 }
@@ -882,6 +864,19 @@ func (NumberOfYearDaySchedulesSupportedPerUser) Readable() bool   { return true 
 func (NumberOfYearDaySchedulesSupportedPerUser) Writable() bool   { return false }
 func (NumberOfYearDaySchedulesSupportedPerUser) Reportable() bool { return false }
 func (NumberOfYearDaySchedulesSupportedPerUser) SceneIndex() int  { return -1 }
+func (a *NumberOfYearDaySchedulesSupportedPerUser) Value() *NumberOfYearDaySchedulesSupportedPerUser {
+	return a
+}
+func (a NumberOfYearDaySchedulesSupportedPerUser) MarshalZcl() ([]byte, error) {
+	return zcl.Zu8(a).MarshalZcl()
+}
+
+func (a *NumberOfYearDaySchedulesSupportedPerUser) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NumberOfYearDaySchedulesSupportedPerUser(*nt)
+	return br, err
+}
 
 func (a NumberOfYearDaySchedulesSupportedPerUser) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -892,25 +887,24 @@ type NumberOfHolidaySchedulesSupported zcl.Zu8
 
 const NumberOfHolidaySchedulesSupportedAttr zcl.AttrID = 22
 
-func (a NumberOfHolidaySchedulesSupported) ID() zcl.AttrID {
-	return NumberOfHolidaySchedulesSupportedAttr
-}
-func (a NumberOfHolidaySchedulesSupported) Cluster() zcl.ClusterID                     { return DoorLockID }
+func (NumberOfHolidaySchedulesSupported) ID() zcl.AttrID                               { return NumberOfHolidaySchedulesSupportedAttr }
+func (NumberOfHolidaySchedulesSupported) Cluster() zcl.ClusterID                       { return DoorLockID }
+func (NumberOfHolidaySchedulesSupported) Name() string                                 { return "Number Of Holiday Schedules Supported" }
+func (NumberOfHolidaySchedulesSupported) Readable() bool                               { return true }
+func (NumberOfHolidaySchedulesSupported) Writable() bool                               { return false }
+func (NumberOfHolidaySchedulesSupported) Reportable() bool                             { return false }
+func (NumberOfHolidaySchedulesSupported) SceneIndex() int                              { return -1 }
 func (a *NumberOfHolidaySchedulesSupported) Value() *NumberOfHolidaySchedulesSupported { return a }
 func (a NumberOfHolidaySchedulesSupported) MarshalZcl() ([]byte, error) {
 	return zcl.Zu8(a).MarshalZcl()
 }
+
 func (a *NumberOfHolidaySchedulesSupported) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfHolidaySchedulesSupported(*nt)
 	return br, err
 }
-func (NumberOfHolidaySchedulesSupported) Name() string     { return "Number Of Holiday Schedules Supported" }
-func (NumberOfHolidaySchedulesSupported) Readable() bool   { return true }
-func (NumberOfHolidaySchedulesSupported) Writable() bool   { return false }
-func (NumberOfHolidaySchedulesSupported) Reportable() bool { return false }
-func (NumberOfHolidaySchedulesSupported) SceneIndex() int  { return -1 }
 
 func (a NumberOfHolidaySchedulesSupported) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -921,23 +915,22 @@ type EnableLogging zcl.Zbool
 
 const EnableLoggingAttr zcl.AttrID = 32
 
-func (a EnableLogging) ID() zcl.AttrID         { return EnableLoggingAttr }
-func (a EnableLogging) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *EnableLogging) Value() *EnableLogging { return a }
-func (a EnableLogging) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (EnableLogging) ID() zcl.AttrID                { return EnableLoggingAttr }
+func (EnableLogging) Cluster() zcl.ClusterID        { return DoorLockID }
+func (EnableLogging) Name() string                  { return "Enable Logging" }
+func (EnableLogging) Readable() bool                { return true }
+func (EnableLogging) Writable() bool                { return true }
+func (EnableLogging) Reportable() bool              { return false }
+func (EnableLogging) SceneIndex() int               { return -1 }
+func (a *EnableLogging) Value() *EnableLogging      { return a }
+func (a EnableLogging) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *EnableLogging) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = EnableLogging(*nt)
 	return br, err
 }
-func (EnableLogging) Name() string     { return "Enable Logging" }
-func (EnableLogging) Readable() bool   { return true }
-func (EnableLogging) Writable() bool   { return true }
-func (EnableLogging) Reportable() bool { return false }
-func (EnableLogging) SceneIndex() int  { return -1 }
 
 func (a EnableLogging) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -948,23 +941,22 @@ type ZigbeeSecurityLevel zcl.Zenum8
 
 const ZigbeeSecurityLevelAttr zcl.AttrID = 52
 
-func (a ZigbeeSecurityLevel) ID() zcl.AttrID               { return ZigbeeSecurityLevelAttr }
-func (a ZigbeeSecurityLevel) Cluster() zcl.ClusterID       { return DoorLockID }
+func (ZigbeeSecurityLevel) ID() zcl.AttrID                 { return ZigbeeSecurityLevelAttr }
+func (ZigbeeSecurityLevel) Cluster() zcl.ClusterID         { return DoorLockID }
+func (ZigbeeSecurityLevel) Name() string                   { return "Zigbee Security Level" }
+func (ZigbeeSecurityLevel) Readable() bool                 { return true }
+func (ZigbeeSecurityLevel) Writable() bool                 { return false }
+func (ZigbeeSecurityLevel) Reportable() bool               { return false }
+func (ZigbeeSecurityLevel) SceneIndex() int                { return -1 }
 func (a *ZigbeeSecurityLevel) Value() *ZigbeeSecurityLevel { return a }
-func (a ZigbeeSecurityLevel) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a ZigbeeSecurityLevel) MarshalZcl() ([]byte, error)  { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *ZigbeeSecurityLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ZigbeeSecurityLevel(*nt)
 	return br, err
 }
-func (ZigbeeSecurityLevel) Name() string     { return "Zigbee Security Level" }
-func (ZigbeeSecurityLevel) Readable() bool   { return true }
-func (ZigbeeSecurityLevel) Writable() bool   { return false }
-func (ZigbeeSecurityLevel) Reportable() bool { return false }
-func (ZigbeeSecurityLevel) SceneIndex() int  { return -1 }
 
 func (a ZigbeeSecurityLevel) String() string {
 	switch a {
@@ -993,23 +985,22 @@ type AlarmMask zcl.Zbmp16
 
 const AlarmMaskAttr zcl.AttrID = 64
 
-func (a AlarmMask) ID() zcl.AttrID         { return AlarmMaskAttr }
-func (a AlarmMask) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *AlarmMask) Value() *AlarmMask     { return a }
-func (a AlarmMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp16(a).MarshalZcl()
-}
+func (AlarmMask) ID() zcl.AttrID                { return AlarmMaskAttr }
+func (AlarmMask) Cluster() zcl.ClusterID        { return DoorLockID }
+func (AlarmMask) Name() string                  { return "Alarm Mask" }
+func (AlarmMask) Readable() bool                { return true }
+func (AlarmMask) Writable() bool                { return true }
+func (AlarmMask) Reportable() bool              { return false }
+func (AlarmMask) SceneIndex() int               { return -1 }
+func (a *AlarmMask) Value() *AlarmMask          { return a }
+func (a AlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
+
 func (a *AlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AlarmMask(*nt)
 	return br, err
 }
-func (AlarmMask) Name() string     { return "Alarm Mask" }
-func (AlarmMask) Readable() bool   { return true }
-func (AlarmMask) Writable() bool   { return true }
-func (AlarmMask) Reportable() bool { return false }
-func (AlarmMask) SceneIndex() int  { return -1 }
 
 func (a AlarmMask) String() string {
 	var bstr []string
@@ -1091,23 +1082,22 @@ type RfOperationEventMask zcl.Zbmp16
 
 const RfOperationEventMaskAttr zcl.AttrID = 66
 
-func (a RfOperationEventMask) ID() zcl.AttrID                { return RfOperationEventMaskAttr }
-func (a RfOperationEventMask) Cluster() zcl.ClusterID        { return DoorLockID }
+func (RfOperationEventMask) ID() zcl.AttrID                  { return RfOperationEventMaskAttr }
+func (RfOperationEventMask) Cluster() zcl.ClusterID          { return DoorLockID }
+func (RfOperationEventMask) Name() string                    { return "RF Operation Event Mask" }
+func (RfOperationEventMask) Readable() bool                  { return true }
+func (RfOperationEventMask) Writable() bool                  { return true }
+func (RfOperationEventMask) Reportable() bool                { return false }
+func (RfOperationEventMask) SceneIndex() int                 { return -1 }
 func (a *RfOperationEventMask) Value() *RfOperationEventMask { return a }
-func (a RfOperationEventMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp16(a).MarshalZcl()
-}
+func (a RfOperationEventMask) MarshalZcl() ([]byte, error)   { return zcl.Zbmp16(a).MarshalZcl() }
+
 func (a *RfOperationEventMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = RfOperationEventMask(*nt)
 	return br, err
 }
-func (RfOperationEventMask) Name() string     { return "RF Operation Event Mask" }
-func (RfOperationEventMask) Readable() bool   { return true }
-func (RfOperationEventMask) Writable() bool   { return true }
-func (RfOperationEventMask) Reportable() bool { return false }
-func (RfOperationEventMask) SceneIndex() int  { return -1 }
 
 func (a RfOperationEventMask) String() string {
 	var bstr []string
@@ -1189,23 +1179,22 @@ type ManualOperationEventMask zcl.Zbmp16
 
 const ManualOperationEventMaskAttr zcl.AttrID = 67
 
-func (a ManualOperationEventMask) ID() zcl.AttrID                    { return ManualOperationEventMaskAttr }
-func (a ManualOperationEventMask) Cluster() zcl.ClusterID            { return DoorLockID }
+func (ManualOperationEventMask) ID() zcl.AttrID                      { return ManualOperationEventMaskAttr }
+func (ManualOperationEventMask) Cluster() zcl.ClusterID              { return DoorLockID }
+func (ManualOperationEventMask) Name() string                        { return "Manual Operation Event Mask" }
+func (ManualOperationEventMask) Readable() bool                      { return true }
+func (ManualOperationEventMask) Writable() bool                      { return true }
+func (ManualOperationEventMask) Reportable() bool                    { return false }
+func (ManualOperationEventMask) SceneIndex() int                     { return -1 }
 func (a *ManualOperationEventMask) Value() *ManualOperationEventMask { return a }
-func (a ManualOperationEventMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp16(a).MarshalZcl()
-}
+func (a ManualOperationEventMask) MarshalZcl() ([]byte, error)       { return zcl.Zbmp16(a).MarshalZcl() }
+
 func (a *ManualOperationEventMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ManualOperationEventMask(*nt)
 	return br, err
 }
-func (ManualOperationEventMask) Name() string     { return "Manual Operation Event Mask" }
-func (ManualOperationEventMask) Readable() bool   { return true }
-func (ManualOperationEventMask) Writable() bool   { return true }
-func (ManualOperationEventMask) Reportable() bool { return false }
-func (ManualOperationEventMask) SceneIndex() int  { return -1 }
 
 func (a ManualOperationEventMask) String() string {
 	var bstr []string
@@ -1327,23 +1316,22 @@ type EventType zcl.Zu16
 
 const EventTypeAttr zcl.AttrID = 85
 
-func (a EventType) ID() zcl.AttrID         { return EventTypeAttr }
-func (a EventType) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *EventType) Value() *EventType     { return a }
-func (a EventType) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (EventType) ID() zcl.AttrID                { return EventTypeAttr }
+func (EventType) Cluster() zcl.ClusterID        { return DoorLockID }
+func (EventType) Name() string                  { return "Event Type" }
+func (EventType) Readable() bool                { return true }
+func (EventType) Writable() bool                { return false }
+func (EventType) Reportable() bool              { return false }
+func (EventType) SceneIndex() int               { return -1 }
+func (a *EventType) Value() *EventType          { return a }
+func (a EventType) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *EventType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = EventType(*nt)
 	return br, err
 }
-func (EventType) Name() string     { return "Event Type" }
-func (EventType) Readable() bool   { return true }
-func (EventType) Writable() bool   { return false }
-func (EventType) Reportable() bool { return false }
-func (EventType) SceneIndex() int  { return -1 }
 
 func (a EventType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1354,23 +1342,22 @@ type TiltAngle zcl.Zu16
 
 const TiltAngleAttr zcl.AttrID = 1283
 
-func (a TiltAngle) ID() zcl.AttrID         { return TiltAngleAttr }
-func (a TiltAngle) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *TiltAngle) Value() *TiltAngle     { return a }
-func (a TiltAngle) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (TiltAngle) ID() zcl.AttrID                { return TiltAngleAttr }
+func (TiltAngle) Cluster() zcl.ClusterID        { return DoorLockID }
+func (TiltAngle) Name() string                  { return "Tilt Angle" }
+func (TiltAngle) Readable() bool                { return true }
+func (TiltAngle) Writable() bool                { return false }
+func (TiltAngle) Reportable() bool              { return false }
+func (TiltAngle) SceneIndex() int               { return -1 }
+func (a *TiltAngle) Value() *TiltAngle          { return a }
+func (a TiltAngle) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *TiltAngle) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = TiltAngle(*nt)
 	return br, err
 }
-func (TiltAngle) Name() string     { return "Tilt Angle" }
-func (TiltAngle) Readable() bool   { return true }
-func (TiltAngle) Writable() bool   { return false }
-func (TiltAngle) Reportable() bool { return false }
-func (TiltAngle) SceneIndex() int  { return -1 }
 
 func (a TiltAngle) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1381,26 +1368,25 @@ type VibrationStrength zcl.Zu32
 
 const VibrationStrengthAttr zcl.AttrID = 1285
 
-func (a VibrationStrength) ID() zcl.AttrID             { return VibrationStrengthAttr }
-func (a VibrationStrength) Cluster() zcl.ClusterID     { return DoorLockID }
-func (a *VibrationStrength) Value() *VibrationStrength { return a }
-func (a VibrationStrength) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (VibrationStrength) ID() zcl.AttrID                { return VibrationStrengthAttr }
+func (VibrationStrength) Cluster() zcl.ClusterID        { return DoorLockID }
+func (VibrationStrength) Name() string                  { return "Vibration Strength" }
+func (VibrationStrength) Readable() bool                { return true }
+func (VibrationStrength) Writable() bool                { return false }
+func (VibrationStrength) Reportable() bool              { return false }
+func (VibrationStrength) SceneIndex() int               { return -1 }
+func (a *VibrationStrength) Value() *VibrationStrength  { return a }
+func (a VibrationStrength) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *VibrationStrength) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = VibrationStrength(*nt)
 	return br, err
 }
-func (VibrationStrength) Name() string     { return "Vibration Strength" }
-func (VibrationStrength) Readable() bool   { return true }
-func (VibrationStrength) Writable() bool   { return false }
-func (VibrationStrength) Reportable() bool { return false }
-func (VibrationStrength) SceneIndex() int  { return -1 }
 
 func (a VibrationStrength) String() string {
-	return zcl.Sprintf("0x%X", zcl.Zu32(a))
+	return zcl.Sprintf("%v", zcl.Zu32(a))
 }
 
 // Orientation is an autogenerated attribute in the DoorLock cluster
@@ -1408,24 +1394,23 @@ type Orientation zcl.Zu48
 
 const OrientationAttr zcl.AttrID = 1288
 
-func (a Orientation) ID() zcl.AttrID         { return OrientationAttr }
-func (a Orientation) Cluster() zcl.ClusterID { return DoorLockID }
-func (a *Orientation) Value() *Orientation   { return a }
-func (a Orientation) MarshalZcl() ([]byte, error) {
-	return zcl.Zu48(a).MarshalZcl()
-}
+func (Orientation) ID() zcl.AttrID                { return OrientationAttr }
+func (Orientation) Cluster() zcl.ClusterID        { return DoorLockID }
+func (Orientation) Name() string                  { return "Orientation" }
+func (Orientation) Readable() bool                { return true }
+func (Orientation) Writable() bool                { return false }
+func (Orientation) Reportable() bool              { return false }
+func (Orientation) SceneIndex() int               { return -1 }
+func (a *Orientation) Value() *Orientation        { return a }
+func (a Orientation) MarshalZcl() ([]byte, error) { return zcl.Zu48(a).MarshalZcl() }
+
 func (a *Orientation) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu48)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Orientation(*nt)
 	return br, err
 }
-func (Orientation) Name() string     { return "Orientation" }
-func (Orientation) Readable() bool   { return true }
-func (Orientation) Writable() bool   { return false }
-func (Orientation) Reportable() bool { return false }
-func (Orientation) SceneIndex() int  { return -1 }
 
 func (a Orientation) String() string {
-	return zcl.Sprintf("0x%X", zcl.Zu48(a))
+	return zcl.Sprintf("%v", zcl.Zu48(a))
 }

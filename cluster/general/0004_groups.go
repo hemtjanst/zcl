@@ -720,23 +720,22 @@ type GroupNameSupport zcl.Zbmp8
 
 const GroupNameSupportAttr zcl.AttrID = 0
 
-func (a GroupNameSupport) ID() zcl.AttrID            { return GroupNameSupportAttr }
-func (a GroupNameSupport) Cluster() zcl.ClusterID    { return GroupsID }
-func (a *GroupNameSupport) Value() *GroupNameSupport { return a }
-func (a GroupNameSupport) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (GroupNameSupport) ID() zcl.AttrID                { return GroupNameSupportAttr }
+func (GroupNameSupport) Cluster() zcl.ClusterID        { return GroupsID }
+func (GroupNameSupport) Name() string                  { return "Group Name Support" }
+func (GroupNameSupport) Readable() bool                { return true }
+func (GroupNameSupport) Writable() bool                { return false }
+func (GroupNameSupport) Reportable() bool              { return false }
+func (GroupNameSupport) SceneIndex() int               { return -1 }
+func (a *GroupNameSupport) Value() *GroupNameSupport   { return a }
+func (a GroupNameSupport) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *GroupNameSupport) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = GroupNameSupport(*nt)
 	return br, err
 }
-func (GroupNameSupport) Name() string     { return "Group Name Support" }
-func (GroupNameSupport) Readable() bool   { return true }
-func (GroupNameSupport) Writable() bool   { return false }
-func (GroupNameSupport) Reportable() bool { return false }
-func (GroupNameSupport) SceneIndex() int  { return -1 }
 
 func (a GroupNameSupport) String() string {
 	var bstr []string

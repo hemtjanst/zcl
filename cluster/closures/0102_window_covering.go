@@ -394,23 +394,22 @@ type WindowCoveringType zcl.Zenum8
 
 const WindowCoveringTypeAttr zcl.AttrID = 0
 
-func (a WindowCoveringType) ID() zcl.AttrID              { return WindowCoveringTypeAttr }
-func (a WindowCoveringType) Cluster() zcl.ClusterID      { return WindowCoveringID }
+func (WindowCoveringType) ID() zcl.AttrID                { return WindowCoveringTypeAttr }
+func (WindowCoveringType) Cluster() zcl.ClusterID        { return WindowCoveringID }
+func (WindowCoveringType) Name() string                  { return "Window Covering Type" }
+func (WindowCoveringType) Readable() bool                { return true }
+func (WindowCoveringType) Writable() bool                { return false }
+func (WindowCoveringType) Reportable() bool              { return false }
+func (WindowCoveringType) SceneIndex() int               { return -1 }
 func (a *WindowCoveringType) Value() *WindowCoveringType { return a }
-func (a WindowCoveringType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a WindowCoveringType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *WindowCoveringType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = WindowCoveringType(*nt)
 	return br, err
 }
-func (WindowCoveringType) Name() string     { return "Window Covering Type" }
-func (WindowCoveringType) Readable() bool   { return true }
-func (WindowCoveringType) Writable() bool   { return false }
-func (WindowCoveringType) Reportable() bool { return false }
-func (WindowCoveringType) SceneIndex() int  { return -1 }
 
 func (a WindowCoveringType) String() string {
 	switch a {
@@ -503,23 +502,22 @@ type PhysicalClosedLimitLift zcl.Zu16
 
 const PhysicalClosedLimitLiftAttr zcl.AttrID = 1
 
-func (a PhysicalClosedLimitLift) ID() zcl.AttrID                   { return PhysicalClosedLimitLiftAttr }
-func (a PhysicalClosedLimitLift) Cluster() zcl.ClusterID           { return WindowCoveringID }
+func (PhysicalClosedLimitLift) ID() zcl.AttrID                     { return PhysicalClosedLimitLiftAttr }
+func (PhysicalClosedLimitLift) Cluster() zcl.ClusterID             { return WindowCoveringID }
+func (PhysicalClosedLimitLift) Name() string                       { return "Physical Closed Limit - Lift" }
+func (PhysicalClosedLimitLift) Readable() bool                     { return true }
+func (PhysicalClosedLimitLift) Writable() bool                     { return false }
+func (PhysicalClosedLimitLift) Reportable() bool                   { return false }
+func (PhysicalClosedLimitLift) SceneIndex() int                    { return -1 }
 func (a *PhysicalClosedLimitLift) Value() *PhysicalClosedLimitLift { return a }
-func (a PhysicalClosedLimitLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a PhysicalClosedLimitLift) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *PhysicalClosedLimitLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PhysicalClosedLimitLift(*nt)
 	return br, err
 }
-func (PhysicalClosedLimitLift) Name() string     { return "Physical Closed Limit - Lift" }
-func (PhysicalClosedLimitLift) Readable() bool   { return true }
-func (PhysicalClosedLimitLift) Writable() bool   { return false }
-func (PhysicalClosedLimitLift) Reportable() bool { return false }
-func (PhysicalClosedLimitLift) SceneIndex() int  { return -1 }
 
 func (a PhysicalClosedLimitLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -530,23 +528,22 @@ type PhysicalClosedLimitTilt zcl.Zu16
 
 const PhysicalClosedLimitTiltAttr zcl.AttrID = 2
 
-func (a PhysicalClosedLimitTilt) ID() zcl.AttrID                   { return PhysicalClosedLimitTiltAttr }
-func (a PhysicalClosedLimitTilt) Cluster() zcl.ClusterID           { return WindowCoveringID }
+func (PhysicalClosedLimitTilt) ID() zcl.AttrID                     { return PhysicalClosedLimitTiltAttr }
+func (PhysicalClosedLimitTilt) Cluster() zcl.ClusterID             { return WindowCoveringID }
+func (PhysicalClosedLimitTilt) Name() string                       { return "Physical Closed Limit - Tilt" }
+func (PhysicalClosedLimitTilt) Readable() bool                     { return true }
+func (PhysicalClosedLimitTilt) Writable() bool                     { return false }
+func (PhysicalClosedLimitTilt) Reportable() bool                   { return false }
+func (PhysicalClosedLimitTilt) SceneIndex() int                    { return -1 }
 func (a *PhysicalClosedLimitTilt) Value() *PhysicalClosedLimitTilt { return a }
-func (a PhysicalClosedLimitTilt) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a PhysicalClosedLimitTilt) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *PhysicalClosedLimitTilt) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PhysicalClosedLimitTilt(*nt)
 	return br, err
 }
-func (PhysicalClosedLimitTilt) Name() string     { return "Physical Closed Limit - Tilt" }
-func (PhysicalClosedLimitTilt) Readable() bool   { return true }
-func (PhysicalClosedLimitTilt) Writable() bool   { return false }
-func (PhysicalClosedLimitTilt) Reportable() bool { return false }
-func (PhysicalClosedLimitTilt) SceneIndex() int  { return -1 }
 
 func (a PhysicalClosedLimitTilt) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -557,23 +554,22 @@ type CurrentPositionLift zcl.Zu16
 
 const CurrentPositionLiftAttr zcl.AttrID = 3
 
-func (a CurrentPositionLift) ID() zcl.AttrID               { return CurrentPositionLiftAttr }
-func (a CurrentPositionLift) Cluster() zcl.ClusterID       { return WindowCoveringID }
+func (CurrentPositionLift) ID() zcl.AttrID                 { return CurrentPositionLiftAttr }
+func (CurrentPositionLift) Cluster() zcl.ClusterID         { return WindowCoveringID }
+func (CurrentPositionLift) Name() string                   { return "Current Position - Lift" }
+func (CurrentPositionLift) Readable() bool                 { return true }
+func (CurrentPositionLift) Writable() bool                 { return false }
+func (CurrentPositionLift) Reportable() bool               { return false }
+func (CurrentPositionLift) SceneIndex() int                { return -1 }
 func (a *CurrentPositionLift) Value() *CurrentPositionLift { return a }
-func (a CurrentPositionLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a CurrentPositionLift) MarshalZcl() ([]byte, error)  { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *CurrentPositionLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentPositionLift(*nt)
 	return br, err
 }
-func (CurrentPositionLift) Name() string     { return "Current Position - Lift" }
-func (CurrentPositionLift) Readable() bool   { return true }
-func (CurrentPositionLift) Writable() bool   { return false }
-func (CurrentPositionLift) Reportable() bool { return false }
-func (CurrentPositionLift) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -584,23 +580,22 @@ type CurrentPositionTilt zcl.Zu16
 
 const CurrentPositionTiltAttr zcl.AttrID = 4
 
-func (a CurrentPositionTilt) ID() zcl.AttrID               { return CurrentPositionTiltAttr }
-func (a CurrentPositionTilt) Cluster() zcl.ClusterID       { return WindowCoveringID }
+func (CurrentPositionTilt) ID() zcl.AttrID                 { return CurrentPositionTiltAttr }
+func (CurrentPositionTilt) Cluster() zcl.ClusterID         { return WindowCoveringID }
+func (CurrentPositionTilt) Name() string                   { return "Current Position - Tilt" }
+func (CurrentPositionTilt) Readable() bool                 { return true }
+func (CurrentPositionTilt) Writable() bool                 { return false }
+func (CurrentPositionTilt) Reportable() bool               { return false }
+func (CurrentPositionTilt) SceneIndex() int                { return -1 }
 func (a *CurrentPositionTilt) Value() *CurrentPositionTilt { return a }
-func (a CurrentPositionTilt) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a CurrentPositionTilt) MarshalZcl() ([]byte, error)  { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *CurrentPositionTilt) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentPositionTilt(*nt)
 	return br, err
 }
-func (CurrentPositionTilt) Name() string     { return "Current Position - Tilt" }
-func (CurrentPositionTilt) Readable() bool   { return true }
-func (CurrentPositionTilt) Writable() bool   { return false }
-func (CurrentPositionTilt) Reportable() bool { return false }
-func (CurrentPositionTilt) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionTilt) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -611,23 +606,22 @@ type NumberOfActuationsLift zcl.Zu16
 
 const NumberOfActuationsLiftAttr zcl.AttrID = 5
 
-func (a NumberOfActuationsLift) ID() zcl.AttrID                  { return NumberOfActuationsLiftAttr }
-func (a NumberOfActuationsLift) Cluster() zcl.ClusterID          { return WindowCoveringID }
+func (NumberOfActuationsLift) ID() zcl.AttrID                    { return NumberOfActuationsLiftAttr }
+func (NumberOfActuationsLift) Cluster() zcl.ClusterID            { return WindowCoveringID }
+func (NumberOfActuationsLift) Name() string                      { return "Number of Actuations - Lift" }
+func (NumberOfActuationsLift) Readable() bool                    { return true }
+func (NumberOfActuationsLift) Writable() bool                    { return false }
+func (NumberOfActuationsLift) Reportable() bool                  { return false }
+func (NumberOfActuationsLift) SceneIndex() int                   { return -1 }
 func (a *NumberOfActuationsLift) Value() *NumberOfActuationsLift { return a }
-func (a NumberOfActuationsLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a NumberOfActuationsLift) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *NumberOfActuationsLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfActuationsLift(*nt)
 	return br, err
 }
-func (NumberOfActuationsLift) Name() string     { return "Number of Actuations - Lift" }
-func (NumberOfActuationsLift) Readable() bool   { return true }
-func (NumberOfActuationsLift) Writable() bool   { return false }
-func (NumberOfActuationsLift) Reportable() bool { return false }
-func (NumberOfActuationsLift) SceneIndex() int  { return -1 }
 
 func (a NumberOfActuationsLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -638,23 +632,22 @@ type NumberOfActuationsTilt zcl.Zu16
 
 const NumberOfActuationsTiltAttr zcl.AttrID = 6
 
-func (a NumberOfActuationsTilt) ID() zcl.AttrID                  { return NumberOfActuationsTiltAttr }
-func (a NumberOfActuationsTilt) Cluster() zcl.ClusterID          { return WindowCoveringID }
+func (NumberOfActuationsTilt) ID() zcl.AttrID                    { return NumberOfActuationsTiltAttr }
+func (NumberOfActuationsTilt) Cluster() zcl.ClusterID            { return WindowCoveringID }
+func (NumberOfActuationsTilt) Name() string                      { return "Number of Actuations - Tilt" }
+func (NumberOfActuationsTilt) Readable() bool                    { return true }
+func (NumberOfActuationsTilt) Writable() bool                    { return false }
+func (NumberOfActuationsTilt) Reportable() bool                  { return false }
+func (NumberOfActuationsTilt) SceneIndex() int                   { return -1 }
 func (a *NumberOfActuationsTilt) Value() *NumberOfActuationsTilt { return a }
-func (a NumberOfActuationsTilt) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a NumberOfActuationsTilt) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *NumberOfActuationsTilt) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfActuationsTilt(*nt)
 	return br, err
 }
-func (NumberOfActuationsTilt) Name() string     { return "Number of Actuations - Tilt" }
-func (NumberOfActuationsTilt) Readable() bool   { return true }
-func (NumberOfActuationsTilt) Writable() bool   { return false }
-func (NumberOfActuationsTilt) Reportable() bool { return false }
-func (NumberOfActuationsTilt) SceneIndex() int  { return -1 }
 
 func (a NumberOfActuationsTilt) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -665,23 +658,22 @@ type ConfigStatus zcl.Zbmp8
 
 const ConfigStatusAttr zcl.AttrID = 7
 
-func (a ConfigStatus) ID() zcl.AttrID         { return ConfigStatusAttr }
-func (a ConfigStatus) Cluster() zcl.ClusterID { return WindowCoveringID }
-func (a *ConfigStatus) Value() *ConfigStatus  { return a }
-func (a ConfigStatus) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (ConfigStatus) ID() zcl.AttrID                { return ConfigStatusAttr }
+func (ConfigStatus) Cluster() zcl.ClusterID        { return WindowCoveringID }
+func (ConfigStatus) Name() string                  { return "Config / Status" }
+func (ConfigStatus) Readable() bool                { return true }
+func (ConfigStatus) Writable() bool                { return false }
+func (ConfigStatus) Reportable() bool              { return false }
+func (ConfigStatus) SceneIndex() int               { return -1 }
+func (a *ConfigStatus) Value() *ConfigStatus       { return a }
+func (a ConfigStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *ConfigStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ConfigStatus(*nt)
 	return br, err
 }
-func (ConfigStatus) Name() string     { return "Config / Status" }
-func (ConfigStatus) Readable() bool   { return true }
-func (ConfigStatus) Writable() bool   { return false }
-func (ConfigStatus) Reportable() bool { return false }
-func (ConfigStatus) SceneIndex() int  { return -1 }
 
 func (a ConfigStatus) String() string {
 	var bstr []string
@@ -763,23 +755,22 @@ type CurrentPositionLiftPercentage zcl.Zu8
 
 const CurrentPositionLiftPercentageAttr zcl.AttrID = 8
 
-func (a CurrentPositionLiftPercentage) ID() zcl.AttrID                         { return CurrentPositionLiftPercentageAttr }
-func (a CurrentPositionLiftPercentage) Cluster() zcl.ClusterID                 { return WindowCoveringID }
+func (CurrentPositionLiftPercentage) ID() zcl.AttrID                           { return CurrentPositionLiftPercentageAttr }
+func (CurrentPositionLiftPercentage) Cluster() zcl.ClusterID                   { return WindowCoveringID }
+func (CurrentPositionLiftPercentage) Name() string                             { return "Current Position Lift Percentage" }
+func (CurrentPositionLiftPercentage) Readable() bool                           { return true }
+func (CurrentPositionLiftPercentage) Writable() bool                           { return false }
+func (CurrentPositionLiftPercentage) Reportable() bool                         { return false }
+func (CurrentPositionLiftPercentage) SceneIndex() int                          { return -1 }
 func (a *CurrentPositionLiftPercentage) Value() *CurrentPositionLiftPercentage { return a }
-func (a CurrentPositionLiftPercentage) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a CurrentPositionLiftPercentage) MarshalZcl() ([]byte, error)            { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *CurrentPositionLiftPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentPositionLiftPercentage(*nt)
 	return br, err
 }
-func (CurrentPositionLiftPercentage) Name() string     { return "Current Position Lift Percentage" }
-func (CurrentPositionLiftPercentage) Readable() bool   { return true }
-func (CurrentPositionLiftPercentage) Writable() bool   { return false }
-func (CurrentPositionLiftPercentage) Reportable() bool { return false }
-func (CurrentPositionLiftPercentage) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionLiftPercentage) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -790,23 +781,22 @@ type CurrentPositionTiltPercentage zcl.Zu8
 
 const CurrentPositionTiltPercentageAttr zcl.AttrID = 9
 
-func (a CurrentPositionTiltPercentage) ID() zcl.AttrID                         { return CurrentPositionTiltPercentageAttr }
-func (a CurrentPositionTiltPercentage) Cluster() zcl.ClusterID                 { return WindowCoveringID }
+func (CurrentPositionTiltPercentage) ID() zcl.AttrID                           { return CurrentPositionTiltPercentageAttr }
+func (CurrentPositionTiltPercentage) Cluster() zcl.ClusterID                   { return WindowCoveringID }
+func (CurrentPositionTiltPercentage) Name() string                             { return "Current Position Tilt Percentage" }
+func (CurrentPositionTiltPercentage) Readable() bool                           { return true }
+func (CurrentPositionTiltPercentage) Writable() bool                           { return false }
+func (CurrentPositionTiltPercentage) Reportable() bool                         { return false }
+func (CurrentPositionTiltPercentage) SceneIndex() int                          { return -1 }
 func (a *CurrentPositionTiltPercentage) Value() *CurrentPositionTiltPercentage { return a }
-func (a CurrentPositionTiltPercentage) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a CurrentPositionTiltPercentage) MarshalZcl() ([]byte, error)            { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *CurrentPositionTiltPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentPositionTiltPercentage(*nt)
 	return br, err
 }
-func (CurrentPositionTiltPercentage) Name() string     { return "Current Position Tilt Percentage" }
-func (CurrentPositionTiltPercentage) Readable() bool   { return true }
-func (CurrentPositionTiltPercentage) Writable() bool   { return false }
-func (CurrentPositionTiltPercentage) Reportable() bool { return false }
-func (CurrentPositionTiltPercentage) SceneIndex() int  { return -1 }
 
 func (a CurrentPositionTiltPercentage) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -817,23 +807,22 @@ type InstalledOpenLimitLift zcl.Zu16
 
 const InstalledOpenLimitLiftAttr zcl.AttrID = 16
 
-func (a InstalledOpenLimitLift) ID() zcl.AttrID                  { return InstalledOpenLimitLiftAttr }
-func (a InstalledOpenLimitLift) Cluster() zcl.ClusterID          { return WindowCoveringID }
+func (InstalledOpenLimitLift) ID() zcl.AttrID                    { return InstalledOpenLimitLiftAttr }
+func (InstalledOpenLimitLift) Cluster() zcl.ClusterID            { return WindowCoveringID }
+func (InstalledOpenLimitLift) Name() string                      { return "Installed Open Limit - Lift" }
+func (InstalledOpenLimitLift) Readable() bool                    { return true }
+func (InstalledOpenLimitLift) Writable() bool                    { return false }
+func (InstalledOpenLimitLift) Reportable() bool                  { return false }
+func (InstalledOpenLimitLift) SceneIndex() int                   { return -1 }
 func (a *InstalledOpenLimitLift) Value() *InstalledOpenLimitLift { return a }
-func (a InstalledOpenLimitLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a InstalledOpenLimitLift) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *InstalledOpenLimitLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = InstalledOpenLimitLift(*nt)
 	return br, err
 }
-func (InstalledOpenLimitLift) Name() string     { return "Installed Open Limit - Lift" }
-func (InstalledOpenLimitLift) Readable() bool   { return true }
-func (InstalledOpenLimitLift) Writable() bool   { return false }
-func (InstalledOpenLimitLift) Reportable() bool { return false }
-func (InstalledOpenLimitLift) SceneIndex() int  { return -1 }
 
 func (a InstalledOpenLimitLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -844,23 +833,22 @@ type InstalledClosedLimitLift zcl.Zu16
 
 const InstalledClosedLimitLiftAttr zcl.AttrID = 17
 
-func (a InstalledClosedLimitLift) ID() zcl.AttrID                    { return InstalledClosedLimitLiftAttr }
-func (a InstalledClosedLimitLift) Cluster() zcl.ClusterID            { return WindowCoveringID }
+func (InstalledClosedLimitLift) ID() zcl.AttrID                      { return InstalledClosedLimitLiftAttr }
+func (InstalledClosedLimitLift) Cluster() zcl.ClusterID              { return WindowCoveringID }
+func (InstalledClosedLimitLift) Name() string                        { return "Installed Closed Limit - Lift" }
+func (InstalledClosedLimitLift) Readable() bool                      { return true }
+func (InstalledClosedLimitLift) Writable() bool                      { return false }
+func (InstalledClosedLimitLift) Reportable() bool                    { return false }
+func (InstalledClosedLimitLift) SceneIndex() int                     { return -1 }
 func (a *InstalledClosedLimitLift) Value() *InstalledClosedLimitLift { return a }
-func (a InstalledClosedLimitLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a InstalledClosedLimitLift) MarshalZcl() ([]byte, error)       { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *InstalledClosedLimitLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = InstalledClosedLimitLift(*nt)
 	return br, err
 }
-func (InstalledClosedLimitLift) Name() string     { return "Installed Closed Limit - Lift" }
-func (InstalledClosedLimitLift) Readable() bool   { return true }
-func (InstalledClosedLimitLift) Writable() bool   { return false }
-func (InstalledClosedLimitLift) Reportable() bool { return false }
-func (InstalledClosedLimitLift) SceneIndex() int  { return -1 }
 
 func (a InstalledClosedLimitLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -871,23 +859,22 @@ type InstalledOpenLimitTiltA zcl.Zu16
 
 const InstalledOpenLimitTiltAAttr zcl.AttrID = 18
 
-func (a InstalledOpenLimitTiltA) ID() zcl.AttrID                   { return InstalledOpenLimitTiltAAttr }
-func (a InstalledOpenLimitTiltA) Cluster() zcl.ClusterID           { return WindowCoveringID }
+func (InstalledOpenLimitTiltA) ID() zcl.AttrID                     { return InstalledOpenLimitTiltAAttr }
+func (InstalledOpenLimitTiltA) Cluster() zcl.ClusterID             { return WindowCoveringID }
+func (InstalledOpenLimitTiltA) Name() string                       { return "Installed Open Limit - Tilt A" }
+func (InstalledOpenLimitTiltA) Readable() bool                     { return true }
+func (InstalledOpenLimitTiltA) Writable() bool                     { return false }
+func (InstalledOpenLimitTiltA) Reportable() bool                   { return false }
+func (InstalledOpenLimitTiltA) SceneIndex() int                    { return -1 }
 func (a *InstalledOpenLimitTiltA) Value() *InstalledOpenLimitTiltA { return a }
-func (a InstalledOpenLimitTiltA) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a InstalledOpenLimitTiltA) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *InstalledOpenLimitTiltA) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = InstalledOpenLimitTiltA(*nt)
 	return br, err
 }
-func (InstalledOpenLimitTiltA) Name() string     { return "Installed Open Limit - Tilt A" }
-func (InstalledOpenLimitTiltA) Readable() bool   { return true }
-func (InstalledOpenLimitTiltA) Writable() bool   { return false }
-func (InstalledOpenLimitTiltA) Reportable() bool { return false }
-func (InstalledOpenLimitTiltA) SceneIndex() int  { return -1 }
 
 func (a InstalledOpenLimitTiltA) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -898,23 +885,22 @@ type InstalledOpenLimitTiltB zcl.Zu16
 
 const InstalledOpenLimitTiltBAttr zcl.AttrID = 19
 
-func (a InstalledOpenLimitTiltB) ID() zcl.AttrID                   { return InstalledOpenLimitTiltBAttr }
-func (a InstalledOpenLimitTiltB) Cluster() zcl.ClusterID           { return WindowCoveringID }
+func (InstalledOpenLimitTiltB) ID() zcl.AttrID                     { return InstalledOpenLimitTiltBAttr }
+func (InstalledOpenLimitTiltB) Cluster() zcl.ClusterID             { return WindowCoveringID }
+func (InstalledOpenLimitTiltB) Name() string                       { return "Installed Open Limit - Tilt B" }
+func (InstalledOpenLimitTiltB) Readable() bool                     { return true }
+func (InstalledOpenLimitTiltB) Writable() bool                     { return false }
+func (InstalledOpenLimitTiltB) Reportable() bool                   { return false }
+func (InstalledOpenLimitTiltB) SceneIndex() int                    { return -1 }
 func (a *InstalledOpenLimitTiltB) Value() *InstalledOpenLimitTiltB { return a }
-func (a InstalledOpenLimitTiltB) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a InstalledOpenLimitTiltB) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *InstalledOpenLimitTiltB) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = InstalledOpenLimitTiltB(*nt)
 	return br, err
 }
-func (InstalledOpenLimitTiltB) Name() string     { return "Installed Open Limit - Tilt B" }
-func (InstalledOpenLimitTiltB) Readable() bool   { return true }
-func (InstalledOpenLimitTiltB) Writable() bool   { return false }
-func (InstalledOpenLimitTiltB) Reportable() bool { return false }
-func (InstalledOpenLimitTiltB) SceneIndex() int  { return -1 }
 
 func (a InstalledOpenLimitTiltB) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -925,23 +911,22 @@ type VelocityLift zcl.Zu16
 
 const VelocityLiftAttr zcl.AttrID = 20
 
-func (a VelocityLift) ID() zcl.AttrID         { return VelocityLiftAttr }
-func (a VelocityLift) Cluster() zcl.ClusterID { return WindowCoveringID }
-func (a *VelocityLift) Value() *VelocityLift  { return a }
-func (a VelocityLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (VelocityLift) ID() zcl.AttrID                { return VelocityLiftAttr }
+func (VelocityLift) Cluster() zcl.ClusterID        { return WindowCoveringID }
+func (VelocityLift) Name() string                  { return "Velocity - Lift" }
+func (VelocityLift) Readable() bool                { return true }
+func (VelocityLift) Writable() bool                { return true }
+func (VelocityLift) Reportable() bool              { return false }
+func (VelocityLift) SceneIndex() int               { return -1 }
+func (a *VelocityLift) Value() *VelocityLift       { return a }
+func (a VelocityLift) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *VelocityLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = VelocityLift(*nt)
 	return br, err
 }
-func (VelocityLift) Name() string     { return "Velocity - Lift" }
-func (VelocityLift) Readable() bool   { return true }
-func (VelocityLift) Writable() bool   { return true }
-func (VelocityLift) Reportable() bool { return false }
-func (VelocityLift) SceneIndex() int  { return -1 }
 
 func (a VelocityLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -952,23 +937,22 @@ type AccelerationTimeLift zcl.Zu16
 
 const AccelerationTimeLiftAttr zcl.AttrID = 21
 
-func (a AccelerationTimeLift) ID() zcl.AttrID                { return AccelerationTimeLiftAttr }
-func (a AccelerationTimeLift) Cluster() zcl.ClusterID        { return WindowCoveringID }
+func (AccelerationTimeLift) ID() zcl.AttrID                  { return AccelerationTimeLiftAttr }
+func (AccelerationTimeLift) Cluster() zcl.ClusterID          { return WindowCoveringID }
+func (AccelerationTimeLift) Name() string                    { return "Acceleration Time - Lift" }
+func (AccelerationTimeLift) Readable() bool                  { return true }
+func (AccelerationTimeLift) Writable() bool                  { return true }
+func (AccelerationTimeLift) Reportable() bool                { return false }
+func (AccelerationTimeLift) SceneIndex() int                 { return -1 }
 func (a *AccelerationTimeLift) Value() *AccelerationTimeLift { return a }
-func (a AccelerationTimeLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a AccelerationTimeLift) MarshalZcl() ([]byte, error)   { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *AccelerationTimeLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AccelerationTimeLift(*nt)
 	return br, err
 }
-func (AccelerationTimeLift) Name() string     { return "Acceleration Time - Lift" }
-func (AccelerationTimeLift) Readable() bool   { return true }
-func (AccelerationTimeLift) Writable() bool   { return true }
-func (AccelerationTimeLift) Reportable() bool { return false }
-func (AccelerationTimeLift) SceneIndex() int  { return -1 }
 
 func (a AccelerationTimeLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -979,23 +963,22 @@ type DecelerationTimeLift zcl.Zu16
 
 const DecelerationTimeLiftAttr zcl.AttrID = 22
 
-func (a DecelerationTimeLift) ID() zcl.AttrID                { return DecelerationTimeLiftAttr }
-func (a DecelerationTimeLift) Cluster() zcl.ClusterID        { return WindowCoveringID }
+func (DecelerationTimeLift) ID() zcl.AttrID                  { return DecelerationTimeLiftAttr }
+func (DecelerationTimeLift) Cluster() zcl.ClusterID          { return WindowCoveringID }
+func (DecelerationTimeLift) Name() string                    { return "Deceleration Time - Lift" }
+func (DecelerationTimeLift) Readable() bool                  { return true }
+func (DecelerationTimeLift) Writable() bool                  { return true }
+func (DecelerationTimeLift) Reportable() bool                { return false }
+func (DecelerationTimeLift) SceneIndex() int                 { return -1 }
 func (a *DecelerationTimeLift) Value() *DecelerationTimeLift { return a }
-func (a DecelerationTimeLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a DecelerationTimeLift) MarshalZcl() ([]byte, error)   { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *DecelerationTimeLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DecelerationTimeLift(*nt)
 	return br, err
 }
-func (DecelerationTimeLift) Name() string     { return "Deceleration Time - Lift" }
-func (DecelerationTimeLift) Readable() bool   { return true }
-func (DecelerationTimeLift) Writable() bool   { return true }
-func (DecelerationTimeLift) Reportable() bool { return false }
-func (DecelerationTimeLift) SceneIndex() int  { return -1 }
 
 func (a DecelerationTimeLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -1006,23 +989,22 @@ type WindowCoveringMode zcl.Zbmp8
 
 const WindowCoveringModeAttr zcl.AttrID = 23
 
-func (a WindowCoveringMode) ID() zcl.AttrID              { return WindowCoveringModeAttr }
-func (a WindowCoveringMode) Cluster() zcl.ClusterID      { return WindowCoveringID }
+func (WindowCoveringMode) ID() zcl.AttrID                { return WindowCoveringModeAttr }
+func (WindowCoveringMode) Cluster() zcl.ClusterID        { return WindowCoveringID }
+func (WindowCoveringMode) Name() string                  { return "Window Covering Mode" }
+func (WindowCoveringMode) Readable() bool                { return true }
+func (WindowCoveringMode) Writable() bool                { return true }
+func (WindowCoveringMode) Reportable() bool              { return false }
+func (WindowCoveringMode) SceneIndex() int               { return -1 }
 func (a *WindowCoveringMode) Value() *WindowCoveringMode { return a }
-func (a WindowCoveringMode) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a WindowCoveringMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *WindowCoveringMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = WindowCoveringMode(*nt)
 	return br, err
 }
-func (WindowCoveringMode) Name() string     { return "Window Covering Mode" }
-func (WindowCoveringMode) Readable() bool   { return true }
-func (WindowCoveringMode) Writable() bool   { return true }
-func (WindowCoveringMode) Reportable() bool { return false }
-func (WindowCoveringMode) SceneIndex() int  { return -1 }
 
 func (a WindowCoveringMode) String() string {
 	var bstr []string
@@ -1074,23 +1056,22 @@ type IntermediateSetpointsLift zcl.Zostring
 
 const IntermediateSetpointsLiftAttr zcl.AttrID = 24
 
-func (a IntermediateSetpointsLift) ID() zcl.AttrID                     { return IntermediateSetpointsLiftAttr }
-func (a IntermediateSetpointsLift) Cluster() zcl.ClusterID             { return WindowCoveringID }
+func (IntermediateSetpointsLift) ID() zcl.AttrID                       { return IntermediateSetpointsLiftAttr }
+func (IntermediateSetpointsLift) Cluster() zcl.ClusterID               { return WindowCoveringID }
+func (IntermediateSetpointsLift) Name() string                         { return "Intermediate Setpoints - Lift" }
+func (IntermediateSetpointsLift) Readable() bool                       { return true }
+func (IntermediateSetpointsLift) Writable() bool                       { return true }
+func (IntermediateSetpointsLift) Reportable() bool                     { return false }
+func (IntermediateSetpointsLift) SceneIndex() int                      { return -1 }
 func (a *IntermediateSetpointsLift) Value() *IntermediateSetpointsLift { return a }
-func (a IntermediateSetpointsLift) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (a IntermediateSetpointsLift) MarshalZcl() ([]byte, error)        { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *IntermediateSetpointsLift) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = IntermediateSetpointsLift(*nt)
 	return br, err
 }
-func (IntermediateSetpointsLift) Name() string     { return "Intermediate Setpoints - Lift" }
-func (IntermediateSetpointsLift) Readable() bool   { return true }
-func (IntermediateSetpointsLift) Writable() bool   { return true }
-func (IntermediateSetpointsLift) Reportable() bool { return false }
-func (IntermediateSetpointsLift) SceneIndex() int  { return -1 }
 
 func (a IntermediateSetpointsLift) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))
@@ -1101,23 +1082,22 @@ type IntermediateSetpointsTilt zcl.Zostring
 
 const IntermediateSetpointsTiltAttr zcl.AttrID = 25
 
-func (a IntermediateSetpointsTilt) ID() zcl.AttrID                     { return IntermediateSetpointsTiltAttr }
-func (a IntermediateSetpointsTilt) Cluster() zcl.ClusterID             { return WindowCoveringID }
+func (IntermediateSetpointsTilt) ID() zcl.AttrID                       { return IntermediateSetpointsTiltAttr }
+func (IntermediateSetpointsTilt) Cluster() zcl.ClusterID               { return WindowCoveringID }
+func (IntermediateSetpointsTilt) Name() string                         { return "Intermediate Setpoints - Tilt" }
+func (IntermediateSetpointsTilt) Readable() bool                       { return true }
+func (IntermediateSetpointsTilt) Writable() bool                       { return true }
+func (IntermediateSetpointsTilt) Reportable() bool                     { return false }
+func (IntermediateSetpointsTilt) SceneIndex() int                      { return -1 }
 func (a *IntermediateSetpointsTilt) Value() *IntermediateSetpointsTilt { return a }
-func (a IntermediateSetpointsTilt) MarshalZcl() ([]byte, error) {
-	return zcl.Zostring(a).MarshalZcl()
-}
+func (a IntermediateSetpointsTilt) MarshalZcl() ([]byte, error)        { return zcl.Zostring(a).MarshalZcl() }
+
 func (a *IntermediateSetpointsTilt) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = IntermediateSetpointsTilt(*nt)
 	return br, err
 }
-func (IntermediateSetpointsTilt) Name() string     { return "Intermediate Setpoints - Tilt" }
-func (IntermediateSetpointsTilt) Readable() bool   { return true }
-func (IntermediateSetpointsTilt) Writable() bool   { return true }
-func (IntermediateSetpointsTilt) Reportable() bool { return false }
-func (IntermediateSetpointsTilt) SceneIndex() int  { return -1 }
 
 func (a IntermediateSetpointsTilt) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(a))

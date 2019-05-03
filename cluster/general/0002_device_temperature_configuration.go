@@ -31,23 +31,22 @@ type CurrentTemperature zcl.Zs16
 
 const CurrentTemperatureAttr zcl.AttrID = 0
 
-func (a CurrentTemperature) ID() zcl.AttrID              { return CurrentTemperatureAttr }
-func (a CurrentTemperature) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
+func (CurrentTemperature) ID() zcl.AttrID                { return CurrentTemperatureAttr }
+func (CurrentTemperature) Cluster() zcl.ClusterID        { return DeviceTemperatureConfigurationID }
+func (CurrentTemperature) Name() string                  { return "Current Temperature" }
+func (CurrentTemperature) Readable() bool                { return true }
+func (CurrentTemperature) Writable() bool                { return false }
+func (CurrentTemperature) Reportable() bool              { return false }
+func (CurrentTemperature) SceneIndex() int               { return -1 }
 func (a *CurrentTemperature) Value() *CurrentTemperature { return a }
-func (a CurrentTemperature) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a CurrentTemperature) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *CurrentTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CurrentTemperature(*nt)
 	return br, err
 }
-func (CurrentTemperature) Name() string     { return "Current Temperature" }
-func (CurrentTemperature) Readable() bool   { return true }
-func (CurrentTemperature) Writable() bool   { return false }
-func (CurrentTemperature) Reportable() bool { return false }
-func (CurrentTemperature) SceneIndex() int  { return -1 }
 
 func (a CurrentTemperature) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -58,23 +57,22 @@ type MinTempExperienced zcl.Zs16
 
 const MinTempExperiencedAttr zcl.AttrID = 1
 
-func (a MinTempExperienced) ID() zcl.AttrID              { return MinTempExperiencedAttr }
-func (a MinTempExperienced) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
+func (MinTempExperienced) ID() zcl.AttrID                { return MinTempExperiencedAttr }
+func (MinTempExperienced) Cluster() zcl.ClusterID        { return DeviceTemperatureConfigurationID }
+func (MinTempExperienced) Name() string                  { return "Min Temp Experienced" }
+func (MinTempExperienced) Readable() bool                { return true }
+func (MinTempExperienced) Writable() bool                { return false }
+func (MinTempExperienced) Reportable() bool              { return false }
+func (MinTempExperienced) SceneIndex() int               { return -1 }
 func (a *MinTempExperienced) Value() *MinTempExperienced { return a }
-func (a MinTempExperienced) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MinTempExperienced) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MinTempExperienced) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MinTempExperienced(*nt)
 	return br, err
 }
-func (MinTempExperienced) Name() string     { return "Min Temp Experienced" }
-func (MinTempExperienced) Readable() bool   { return true }
-func (MinTempExperienced) Writable() bool   { return false }
-func (MinTempExperienced) Reportable() bool { return false }
-func (MinTempExperienced) SceneIndex() int  { return -1 }
 
 func (a MinTempExperienced) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -85,23 +83,22 @@ type MaxTempExperienced zcl.Zs16
 
 const MaxTempExperiencedAttr zcl.AttrID = 2
 
-func (a MaxTempExperienced) ID() zcl.AttrID              { return MaxTempExperiencedAttr }
-func (a MaxTempExperienced) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
+func (MaxTempExperienced) ID() zcl.AttrID                { return MaxTempExperiencedAttr }
+func (MaxTempExperienced) Cluster() zcl.ClusterID        { return DeviceTemperatureConfigurationID }
+func (MaxTempExperienced) Name() string                  { return "Max Temp Experienced" }
+func (MaxTempExperienced) Readable() bool                { return true }
+func (MaxTempExperienced) Writable() bool                { return false }
+func (MaxTempExperienced) Reportable() bool              { return false }
+func (MaxTempExperienced) SceneIndex() int               { return -1 }
 func (a *MaxTempExperienced) Value() *MaxTempExperienced { return a }
-func (a MaxTempExperienced) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (a MaxTempExperienced) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *MaxTempExperienced) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MaxTempExperienced(*nt)
 	return br, err
 }
-func (MaxTempExperienced) Name() string     { return "Max Temp Experienced" }
-func (MaxTempExperienced) Readable() bool   { return true }
-func (MaxTempExperienced) Writable() bool   { return false }
-func (MaxTempExperienced) Reportable() bool { return false }
-func (MaxTempExperienced) SceneIndex() int  { return -1 }
 
 func (a MaxTempExperienced) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -113,23 +110,22 @@ type OverTempTotalDwell zcl.Zu16
 
 const OverTempTotalDwellAttr zcl.AttrID = 3
 
-func (a OverTempTotalDwell) ID() zcl.AttrID              { return OverTempTotalDwellAttr }
-func (a OverTempTotalDwell) Cluster() zcl.ClusterID      { return DeviceTemperatureConfigurationID }
+func (OverTempTotalDwell) ID() zcl.AttrID                { return OverTempTotalDwellAttr }
+func (OverTempTotalDwell) Cluster() zcl.ClusterID        { return DeviceTemperatureConfigurationID }
+func (OverTempTotalDwell) Name() string                  { return "Over Temp Total Dwell" }
+func (OverTempTotalDwell) Readable() bool                { return false }
+func (OverTempTotalDwell) Writable() bool                { return false }
+func (OverTempTotalDwell) Reportable() bool              { return false }
+func (OverTempTotalDwell) SceneIndex() int               { return -1 }
 func (a *OverTempTotalDwell) Value() *OverTempTotalDwell { return a }
-func (a OverTempTotalDwell) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a OverTempTotalDwell) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *OverTempTotalDwell) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = OverTempTotalDwell(*nt)
 	return br, err
 }
-func (OverTempTotalDwell) Name() string     { return "Over Temp Total Dwell" }
-func (OverTempTotalDwell) Readable() bool   { return false }
-func (OverTempTotalDwell) Writable() bool   { return false }
-func (OverTempTotalDwell) Reportable() bool { return false }
-func (OverTempTotalDwell) SceneIndex() int  { return -1 }
 
 func (a OverTempTotalDwell) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -140,23 +136,22 @@ type DeviceTempAlarmMask zcl.Zbmp8
 
 const DeviceTempAlarmMaskAttr zcl.AttrID = 16
 
-func (a DeviceTempAlarmMask) ID() zcl.AttrID               { return DeviceTempAlarmMaskAttr }
-func (a DeviceTempAlarmMask) Cluster() zcl.ClusterID       { return DeviceTemperatureConfigurationID }
+func (DeviceTempAlarmMask) ID() zcl.AttrID                 { return DeviceTempAlarmMaskAttr }
+func (DeviceTempAlarmMask) Cluster() zcl.ClusterID         { return DeviceTemperatureConfigurationID }
+func (DeviceTempAlarmMask) Name() string                   { return "Device Temp Alarm Mask" }
+func (DeviceTempAlarmMask) Readable() bool                 { return true }
+func (DeviceTempAlarmMask) Writable() bool                 { return true }
+func (DeviceTempAlarmMask) Reportable() bool               { return false }
+func (DeviceTempAlarmMask) SceneIndex() int                { return -1 }
 func (a *DeviceTempAlarmMask) Value() *DeviceTempAlarmMask { return a }
-func (a DeviceTempAlarmMask) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a DeviceTempAlarmMask) MarshalZcl() ([]byte, error)  { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *DeviceTempAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = DeviceTempAlarmMask(*nt)
 	return br, err
 }
-func (DeviceTempAlarmMask) Name() string     { return "Device Temp Alarm Mask" }
-func (DeviceTempAlarmMask) Readable() bool   { return true }
-func (DeviceTempAlarmMask) Writable() bool   { return true }
-func (DeviceTempAlarmMask) Reportable() bool { return false }
-func (DeviceTempAlarmMask) SceneIndex() int  { return -1 }
 
 func (a DeviceTempAlarmMask) String() string {
 	var bstr []string
@@ -190,23 +185,22 @@ type LowTempThreshold zcl.Zs16
 
 const LowTempThresholdAttr zcl.AttrID = 17
 
-func (a LowTempThreshold) ID() zcl.AttrID            { return LowTempThresholdAttr }
-func (a LowTempThreshold) Cluster() zcl.ClusterID    { return DeviceTemperatureConfigurationID }
-func (a *LowTempThreshold) Value() *LowTempThreshold { return a }
-func (a LowTempThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (LowTempThreshold) ID() zcl.AttrID                { return LowTempThresholdAttr }
+func (LowTempThreshold) Cluster() zcl.ClusterID        { return DeviceTemperatureConfigurationID }
+func (LowTempThreshold) Name() string                  { return "Low Temp Threshold" }
+func (LowTempThreshold) Readable() bool                { return true }
+func (LowTempThreshold) Writable() bool                { return true }
+func (LowTempThreshold) Reportable() bool              { return false }
+func (LowTempThreshold) SceneIndex() int               { return -1 }
+func (a *LowTempThreshold) Value() *LowTempThreshold   { return a }
+func (a LowTempThreshold) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *LowTempThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LowTempThreshold(*nt)
 	return br, err
 }
-func (LowTempThreshold) Name() string     { return "Low Temp Threshold" }
-func (LowTempThreshold) Readable() bool   { return true }
-func (LowTempThreshold) Writable() bool   { return true }
-func (LowTempThreshold) Reportable() bool { return false }
-func (LowTempThreshold) SceneIndex() int  { return -1 }
 
 func (a LowTempThreshold) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -219,23 +213,22 @@ type HighTempThreshold zcl.Zs16
 
 const HighTempThresholdAttr zcl.AttrID = 18
 
-func (a HighTempThreshold) ID() zcl.AttrID             { return HighTempThresholdAttr }
-func (a HighTempThreshold) Cluster() zcl.ClusterID     { return DeviceTemperatureConfigurationID }
-func (a *HighTempThreshold) Value() *HighTempThreshold { return a }
-func (a HighTempThreshold) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (HighTempThreshold) ID() zcl.AttrID                { return HighTempThresholdAttr }
+func (HighTempThreshold) Cluster() zcl.ClusterID        { return DeviceTemperatureConfigurationID }
+func (HighTempThreshold) Name() string                  { return "High Temp Threshold" }
+func (HighTempThreshold) Readable() bool                { return true }
+func (HighTempThreshold) Writable() bool                { return true }
+func (HighTempThreshold) Reportable() bool              { return false }
+func (HighTempThreshold) SceneIndex() int               { return -1 }
+func (a *HighTempThreshold) Value() *HighTempThreshold  { return a }
+func (a HighTempThreshold) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *HighTempThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = HighTempThreshold(*nt)
 	return br, err
 }
-func (HighTempThreshold) Name() string     { return "High Temp Threshold" }
-func (HighTempThreshold) Readable() bool   { return true }
-func (HighTempThreshold) Writable() bool   { return true }
-func (HighTempThreshold) Reportable() bool { return false }
-func (HighTempThreshold) SceneIndex() int  { return -1 }
 
 func (a HighTempThreshold) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
@@ -246,23 +239,22 @@ type LowTempDwellTripPoint zcl.Zu24
 
 const LowTempDwellTripPointAttr zcl.AttrID = 19
 
-func (a LowTempDwellTripPoint) ID() zcl.AttrID                 { return LowTempDwellTripPointAttr }
-func (a LowTempDwellTripPoint) Cluster() zcl.ClusterID         { return DeviceTemperatureConfigurationID }
+func (LowTempDwellTripPoint) ID() zcl.AttrID                   { return LowTempDwellTripPointAttr }
+func (LowTempDwellTripPoint) Cluster() zcl.ClusterID           { return DeviceTemperatureConfigurationID }
+func (LowTempDwellTripPoint) Name() string                     { return "Low Temp Dwell Trip Point" }
+func (LowTempDwellTripPoint) Readable() bool                   { return false }
+func (LowTempDwellTripPoint) Writable() bool                   { return false }
+func (LowTempDwellTripPoint) Reportable() bool                 { return false }
+func (LowTempDwellTripPoint) SceneIndex() int                  { return -1 }
 func (a *LowTempDwellTripPoint) Value() *LowTempDwellTripPoint { return a }
-func (a LowTempDwellTripPoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zu24(a).MarshalZcl()
-}
+func (a LowTempDwellTripPoint) MarshalZcl() ([]byte, error)    { return zcl.Zu24(a).MarshalZcl() }
+
 func (a *LowTempDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LowTempDwellTripPoint(*nt)
 	return br, err
 }
-func (LowTempDwellTripPoint) Name() string     { return "Low Temp Dwell Trip Point" }
-func (LowTempDwellTripPoint) Readable() bool   { return false }
-func (LowTempDwellTripPoint) Writable() bool   { return false }
-func (LowTempDwellTripPoint) Reportable() bool { return false }
-func (LowTempDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a LowTempDwellTripPoint) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -273,23 +265,22 @@ type HighTempDwellTripPoint zcl.Zu24
 
 const HighTempDwellTripPointAttr zcl.AttrID = 20
 
-func (a HighTempDwellTripPoint) ID() zcl.AttrID                  { return HighTempDwellTripPointAttr }
-func (a HighTempDwellTripPoint) Cluster() zcl.ClusterID          { return DeviceTemperatureConfigurationID }
+func (HighTempDwellTripPoint) ID() zcl.AttrID                    { return HighTempDwellTripPointAttr }
+func (HighTempDwellTripPoint) Cluster() zcl.ClusterID            { return DeviceTemperatureConfigurationID }
+func (HighTempDwellTripPoint) Name() string                      { return "High Temp Dwell Trip Point" }
+func (HighTempDwellTripPoint) Readable() bool                    { return false }
+func (HighTempDwellTripPoint) Writable() bool                    { return false }
+func (HighTempDwellTripPoint) Reportable() bool                  { return false }
+func (HighTempDwellTripPoint) SceneIndex() int                   { return -1 }
 func (a *HighTempDwellTripPoint) Value() *HighTempDwellTripPoint { return a }
-func (a HighTempDwellTripPoint) MarshalZcl() ([]byte, error) {
-	return zcl.Zu24(a).MarshalZcl()
-}
+func (a HighTempDwellTripPoint) MarshalZcl() ([]byte, error)     { return zcl.Zu24(a).MarshalZcl() }
+
 func (a *HighTempDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
 	*a = HighTempDwellTripPoint(*nt)
 	return br, err
 }
-func (HighTempDwellTripPoint) Name() string     { return "High Temp Dwell Trip Point" }
-func (HighTempDwellTripPoint) Readable() bool   { return false }
-func (HighTempDwellTripPoint) Writable() bool   { return false }
-func (HighTempDwellTripPoint) Reportable() bool { return false }
-func (HighTempDwellTripPoint) SceneIndex() int  { return -1 }
 
 func (a HighTempDwellTripPoint) String() string {
 	return zcl.Seconds.Format(float64(a))

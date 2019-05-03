@@ -27,23 +27,22 @@ type PhysicalClosedLimit zcl.Zu16
 
 const PhysicalClosedLimitAttr zcl.AttrID = 0
 
-func (a PhysicalClosedLimit) ID() zcl.AttrID               { return PhysicalClosedLimitAttr }
-func (a PhysicalClosedLimit) Cluster() zcl.ClusterID       { return ShadeConfigurationID }
+func (PhysicalClosedLimit) ID() zcl.AttrID                 { return PhysicalClosedLimitAttr }
+func (PhysicalClosedLimit) Cluster() zcl.ClusterID         { return ShadeConfigurationID }
+func (PhysicalClosedLimit) Name() string                   { return "Physical Closed Limit" }
+func (PhysicalClosedLimit) Readable() bool                 { return true }
+func (PhysicalClosedLimit) Writable() bool                 { return false }
+func (PhysicalClosedLimit) Reportable() bool               { return false }
+func (PhysicalClosedLimit) SceneIndex() int                { return -1 }
 func (a *PhysicalClosedLimit) Value() *PhysicalClosedLimit { return a }
-func (a PhysicalClosedLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a PhysicalClosedLimit) MarshalZcl() ([]byte, error)  { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *PhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PhysicalClosedLimit(*nt)
 	return br, err
 }
-func (PhysicalClosedLimit) Name() string     { return "Physical Closed Limit" }
-func (PhysicalClosedLimit) Readable() bool   { return true }
-func (PhysicalClosedLimit) Writable() bool   { return false }
-func (PhysicalClosedLimit) Reportable() bool { return false }
-func (PhysicalClosedLimit) SceneIndex() int  { return -1 }
 
 func (a PhysicalClosedLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -54,23 +53,22 @@ type Motorstepsize zcl.Zu8
 
 const MotorstepsizeAttr zcl.AttrID = 1
 
-func (a Motorstepsize) ID() zcl.AttrID         { return MotorstepsizeAttr }
-func (a Motorstepsize) Cluster() zcl.ClusterID { return ShadeConfigurationID }
-func (a *Motorstepsize) Value() *Motorstepsize { return a }
-func (a Motorstepsize) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (Motorstepsize) ID() zcl.AttrID                { return MotorstepsizeAttr }
+func (Motorstepsize) Cluster() zcl.ClusterID        { return ShadeConfigurationID }
+func (Motorstepsize) Name() string                  { return "MotorStepSize" }
+func (Motorstepsize) Readable() bool                { return true }
+func (Motorstepsize) Writable() bool                { return false }
+func (Motorstepsize) Reportable() bool              { return false }
+func (Motorstepsize) SceneIndex() int               { return -1 }
+func (a *Motorstepsize) Value() *Motorstepsize      { return a }
+func (a Motorstepsize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *Motorstepsize) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Motorstepsize(*nt)
 	return br, err
 }
-func (Motorstepsize) Name() string     { return "MotorStepSize" }
-func (Motorstepsize) Readable() bool   { return true }
-func (Motorstepsize) Writable() bool   { return false }
-func (Motorstepsize) Reportable() bool { return false }
-func (Motorstepsize) SceneIndex() int  { return -1 }
 
 func (a Motorstepsize) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -81,23 +79,22 @@ type Status zcl.Zbmp8
 
 const StatusAttr zcl.AttrID = 2
 
-func (a Status) ID() zcl.AttrID         { return StatusAttr }
-func (a Status) Cluster() zcl.ClusterID { return ShadeConfigurationID }
-func (a *Status) Value() *Status        { return a }
-func (a Status) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (Status) ID() zcl.AttrID                { return StatusAttr }
+func (Status) Cluster() zcl.ClusterID        { return ShadeConfigurationID }
+func (Status) Name() string                  { return "Status" }
+func (Status) Readable() bool                { return true }
+func (Status) Writable() bool                { return true }
+func (Status) Reportable() bool              { return false }
+func (Status) SceneIndex() int               { return -1 }
+func (a *Status) Value() *Status             { return a }
+func (a Status) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *Status) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Status(*nt)
 	return br, err
 }
-func (Status) Name() string     { return "Status" }
-func (Status) Readable() bool   { return true }
-func (Status) Writable() bool   { return true }
-func (Status) Reportable() bool { return false }
-func (Status) SceneIndex() int  { return -1 }
 
 func (a Status) String() string {
 	var bstr []string
@@ -149,23 +146,22 @@ type ClosedLimit zcl.Zu16
 
 const ClosedLimitAttr zcl.AttrID = 16
 
-func (a ClosedLimit) ID() zcl.AttrID         { return ClosedLimitAttr }
-func (a ClosedLimit) Cluster() zcl.ClusterID { return ShadeConfigurationID }
-func (a *ClosedLimit) Value() *ClosedLimit   { return a }
-func (a ClosedLimit) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (ClosedLimit) ID() zcl.AttrID                { return ClosedLimitAttr }
+func (ClosedLimit) Cluster() zcl.ClusterID        { return ShadeConfigurationID }
+func (ClosedLimit) Name() string                  { return "Closed Limit" }
+func (ClosedLimit) Readable() bool                { return true }
+func (ClosedLimit) Writable() bool                { return true }
+func (ClosedLimit) Reportable() bool              { return false }
+func (ClosedLimit) SceneIndex() int               { return -1 }
+func (a *ClosedLimit) Value() *ClosedLimit        { return a }
+func (a ClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *ClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ClosedLimit(*nt)
 	return br, err
 }
-func (ClosedLimit) Name() string     { return "Closed Limit" }
-func (ClosedLimit) Readable() bool   { return true }
-func (ClosedLimit) Writable() bool   { return true }
-func (ClosedLimit) Reportable() bool { return false }
-func (ClosedLimit) SceneIndex() int  { return -1 }
 
 func (a ClosedLimit) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -176,23 +172,22 @@ type Mode zcl.Zenum8
 
 const ModeAttr zcl.AttrID = 17
 
-func (a Mode) ID() zcl.AttrID         { return ModeAttr }
-func (a Mode) Cluster() zcl.ClusterID { return ShadeConfigurationID }
-func (a *Mode) Value() *Mode          { return a }
-func (a Mode) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (Mode) ID() zcl.AttrID                { return ModeAttr }
+func (Mode) Cluster() zcl.ClusterID        { return ShadeConfigurationID }
+func (Mode) Name() string                  { return "Mode" }
+func (Mode) Readable() bool                { return true }
+func (Mode) Writable() bool                { return true }
+func (Mode) Reportable() bool              { return false }
+func (Mode) SceneIndex() int               { return -1 }
+func (a *Mode) Value() *Mode               { return a }
+func (a Mode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *Mode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Mode(*nt)
 	return br, err
 }
-func (Mode) Name() string     { return "Mode" }
-func (Mode) Readable() bool   { return true }
-func (Mode) Writable() bool   { return true }
-func (Mode) Reportable() bool { return false }
-func (Mode) SceneIndex() int  { return -1 }
 
 func (a Mode) String() string {
 	switch a {

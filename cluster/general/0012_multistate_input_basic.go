@@ -33,23 +33,22 @@ type MultiInputStateText zcl.Zcstring
 
 const MultiInputStateTextAttr zcl.AttrID = 14
 
-func (a MultiInputStateText) ID() zcl.AttrID               { return MultiInputStateTextAttr }
-func (a MultiInputStateText) Cluster() zcl.ClusterID       { return MultistateInputBasicID }
+func (MultiInputStateText) ID() zcl.AttrID                 { return MultiInputStateTextAttr }
+func (MultiInputStateText) Cluster() zcl.ClusterID         { return MultistateInputBasicID }
+func (MultiInputStateText) Name() string                   { return "Multi Input State Text" }
+func (MultiInputStateText) Readable() bool                 { return true }
+func (MultiInputStateText) Writable() bool                 { return true }
+func (MultiInputStateText) Reportable() bool               { return false }
+func (MultiInputStateText) SceneIndex() int                { return -1 }
 func (a *MultiInputStateText) Value() *MultiInputStateText { return a }
-func (a MultiInputStateText) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a MultiInputStateText) MarshalZcl() ([]byte, error)  { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *MultiInputStateText) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputStateText(*nt)
 	return br, err
 }
-func (MultiInputStateText) Name() string     { return "Multi Input State Text" }
-func (MultiInputStateText) Readable() bool   { return true }
-func (MultiInputStateText) Writable() bool   { return true }
-func (MultiInputStateText) Reportable() bool { return false }
-func (MultiInputStateText) SceneIndex() int  { return -1 }
 
 func (a MultiInputStateText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -60,23 +59,22 @@ type MultiInputDescription zcl.Zcstring
 
 const MultiInputDescriptionAttr zcl.AttrID = 28
 
-func (a MultiInputDescription) ID() zcl.AttrID                 { return MultiInputDescriptionAttr }
-func (a MultiInputDescription) Cluster() zcl.ClusterID         { return MultistateInputBasicID }
+func (MultiInputDescription) ID() zcl.AttrID                   { return MultiInputDescriptionAttr }
+func (MultiInputDescription) Cluster() zcl.ClusterID           { return MultistateInputBasicID }
+func (MultiInputDescription) Name() string                     { return "Multi Input Description" }
+func (MultiInputDescription) Readable() bool                   { return true }
+func (MultiInputDescription) Writable() bool                   { return true }
+func (MultiInputDescription) Reportable() bool                 { return false }
+func (MultiInputDescription) SceneIndex() int                  { return -1 }
 func (a *MultiInputDescription) Value() *MultiInputDescription { return a }
-func (a MultiInputDescription) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a MultiInputDescription) MarshalZcl() ([]byte, error)    { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *MultiInputDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputDescription(*nt)
 	return br, err
 }
-func (MultiInputDescription) Name() string     { return "Multi Input Description" }
-func (MultiInputDescription) Readable() bool   { return true }
-func (MultiInputDescription) Writable() bool   { return true }
-func (MultiInputDescription) Reportable() bool { return false }
-func (MultiInputDescription) SceneIndex() int  { return -1 }
 
 func (a MultiInputDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -87,23 +85,22 @@ type MultiInputNumberOfStates zcl.Zu16
 
 const MultiInputNumberOfStatesAttr zcl.AttrID = 74
 
-func (a MultiInputNumberOfStates) ID() zcl.AttrID                    { return MultiInputNumberOfStatesAttr }
-func (a MultiInputNumberOfStates) Cluster() zcl.ClusterID            { return MultistateInputBasicID }
+func (MultiInputNumberOfStates) ID() zcl.AttrID                      { return MultiInputNumberOfStatesAttr }
+func (MultiInputNumberOfStates) Cluster() zcl.ClusterID              { return MultistateInputBasicID }
+func (MultiInputNumberOfStates) Name() string                        { return "Multi Input Number of states" }
+func (MultiInputNumberOfStates) Readable() bool                      { return true }
+func (MultiInputNumberOfStates) Writable() bool                      { return true }
+func (MultiInputNumberOfStates) Reportable() bool                    { return false }
+func (MultiInputNumberOfStates) SceneIndex() int                     { return -1 }
 func (a *MultiInputNumberOfStates) Value() *MultiInputNumberOfStates { return a }
-func (a MultiInputNumberOfStates) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MultiInputNumberOfStates) MarshalZcl() ([]byte, error)       { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MultiInputNumberOfStates) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputNumberOfStates(*nt)
 	return br, err
 }
-func (MultiInputNumberOfStates) Name() string     { return "Multi Input Number of states" }
-func (MultiInputNumberOfStates) Readable() bool   { return true }
-func (MultiInputNumberOfStates) Writable() bool   { return true }
-func (MultiInputNumberOfStates) Reportable() bool { return false }
-func (MultiInputNumberOfStates) SceneIndex() int  { return -1 }
 
 func (a MultiInputNumberOfStates) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -114,23 +111,22 @@ type MultiInputOutOfService zcl.Zbool
 
 const MultiInputOutOfServiceAttr zcl.AttrID = 81
 
-func (a MultiInputOutOfService) ID() zcl.AttrID                  { return MultiInputOutOfServiceAttr }
-func (a MultiInputOutOfService) Cluster() zcl.ClusterID          { return MultistateInputBasicID }
+func (MultiInputOutOfService) ID() zcl.AttrID                    { return MultiInputOutOfServiceAttr }
+func (MultiInputOutOfService) Cluster() zcl.ClusterID            { return MultistateInputBasicID }
+func (MultiInputOutOfService) Name() string                      { return "Multi Input Out of service" }
+func (MultiInputOutOfService) Readable() bool                    { return true }
+func (MultiInputOutOfService) Writable() bool                    { return true }
+func (MultiInputOutOfService) Reportable() bool                  { return false }
+func (MultiInputOutOfService) SceneIndex() int                   { return -1 }
 func (a *MultiInputOutOfService) Value() *MultiInputOutOfService { return a }
-func (a MultiInputOutOfService) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (a MultiInputOutOfService) MarshalZcl() ([]byte, error)     { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *MultiInputOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputOutOfService(*nt)
 	return br, err
 }
-func (MultiInputOutOfService) Name() string     { return "Multi Input Out of service" }
-func (MultiInputOutOfService) Readable() bool   { return true }
-func (MultiInputOutOfService) Writable() bool   { return true }
-func (MultiInputOutOfService) Reportable() bool { return false }
-func (MultiInputOutOfService) SceneIndex() int  { return -1 }
 
 func (a MultiInputOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -141,23 +137,22 @@ type MultiInputPresentValue zcl.Zu16
 
 const MultiInputPresentValueAttr zcl.AttrID = 85
 
-func (a MultiInputPresentValue) ID() zcl.AttrID                  { return MultiInputPresentValueAttr }
-func (a MultiInputPresentValue) Cluster() zcl.ClusterID          { return MultistateInputBasicID }
+func (MultiInputPresentValue) ID() zcl.AttrID                    { return MultiInputPresentValueAttr }
+func (MultiInputPresentValue) Cluster() zcl.ClusterID            { return MultistateInputBasicID }
+func (MultiInputPresentValue) Name() string                      { return "Multi Input Present value" }
+func (MultiInputPresentValue) Readable() bool                    { return true }
+func (MultiInputPresentValue) Writable() bool                    { return true }
+func (MultiInputPresentValue) Reportable() bool                  { return true }
+func (MultiInputPresentValue) SceneIndex() int                   { return -1 }
 func (a *MultiInputPresentValue) Value() *MultiInputPresentValue { return a }
-func (a MultiInputPresentValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (a MultiInputPresentValue) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *MultiInputPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputPresentValue(*nt)
 	return br, err
 }
-func (MultiInputPresentValue) Name() string     { return "Multi Input Present value" }
-func (MultiInputPresentValue) Readable() bool   { return true }
-func (MultiInputPresentValue) Writable() bool   { return true }
-func (MultiInputPresentValue) Reportable() bool { return true }
-func (MultiInputPresentValue) SceneIndex() int  { return -1 }
 
 func (a MultiInputPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -168,23 +163,22 @@ type MultiInputReliability zcl.Zenum8
 
 const MultiInputReliabilityAttr zcl.AttrID = 103
 
-func (a MultiInputReliability) ID() zcl.AttrID                 { return MultiInputReliabilityAttr }
-func (a MultiInputReliability) Cluster() zcl.ClusterID         { return MultistateInputBasicID }
+func (MultiInputReliability) ID() zcl.AttrID                   { return MultiInputReliabilityAttr }
+func (MultiInputReliability) Cluster() zcl.ClusterID           { return MultistateInputBasicID }
+func (MultiInputReliability) Name() string                     { return "Multi Input Reliability" }
+func (MultiInputReliability) Readable() bool                   { return true }
+func (MultiInputReliability) Writable() bool                   { return true }
+func (MultiInputReliability) Reportable() bool                 { return false }
+func (MultiInputReliability) SceneIndex() int                  { return -1 }
 func (a *MultiInputReliability) Value() *MultiInputReliability { return a }
-func (a MultiInputReliability) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a MultiInputReliability) MarshalZcl() ([]byte, error)    { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *MultiInputReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputReliability(*nt)
 	return br, err
 }
-func (MultiInputReliability) Name() string     { return "Multi Input Reliability" }
-func (MultiInputReliability) Readable() bool   { return true }
-func (MultiInputReliability) Writable() bool   { return true }
-func (MultiInputReliability) Reportable() bool { return false }
-func (MultiInputReliability) SceneIndex() int  { return -1 }
 
 func (a MultiInputReliability) String() string {
 	switch a {
@@ -285,23 +279,22 @@ type MultiInputStatusFlags zcl.Zbmp8
 
 const MultiInputStatusFlagsAttr zcl.AttrID = 111
 
-func (a MultiInputStatusFlags) ID() zcl.AttrID                 { return MultiInputStatusFlagsAttr }
-func (a MultiInputStatusFlags) Cluster() zcl.ClusterID         { return MultistateInputBasicID }
+func (MultiInputStatusFlags) ID() zcl.AttrID                   { return MultiInputStatusFlagsAttr }
+func (MultiInputStatusFlags) Cluster() zcl.ClusterID           { return MultistateInputBasicID }
+func (MultiInputStatusFlags) Name() string                     { return "Multi Input Status flags" }
+func (MultiInputStatusFlags) Readable() bool                   { return true }
+func (MultiInputStatusFlags) Writable() bool                   { return false }
+func (MultiInputStatusFlags) Reportable() bool                 { return true }
+func (MultiInputStatusFlags) SceneIndex() int                  { return -1 }
 func (a *MultiInputStatusFlags) Value() *MultiInputStatusFlags { return a }
-func (a MultiInputStatusFlags) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a MultiInputStatusFlags) MarshalZcl() ([]byte, error)    { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *MultiInputStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputStatusFlags(*nt)
 	return br, err
 }
-func (MultiInputStatusFlags) Name() string     { return "Multi Input Status flags" }
-func (MultiInputStatusFlags) Readable() bool   { return true }
-func (MultiInputStatusFlags) Writable() bool   { return false }
-func (MultiInputStatusFlags) Reportable() bool { return true }
-func (MultiInputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a MultiInputStatusFlags) String() string {
 	var bstr []string
@@ -353,23 +346,22 @@ type MultiInputApplicationType zcl.Zu32
 
 const MultiInputApplicationTypeAttr zcl.AttrID = 256
 
-func (a MultiInputApplicationType) ID() zcl.AttrID                     { return MultiInputApplicationTypeAttr }
-func (a MultiInputApplicationType) Cluster() zcl.ClusterID             { return MultistateInputBasicID }
+func (MultiInputApplicationType) ID() zcl.AttrID                       { return MultiInputApplicationTypeAttr }
+func (MultiInputApplicationType) Cluster() zcl.ClusterID               { return MultistateInputBasicID }
+func (MultiInputApplicationType) Name() string                         { return "Multi Input Application Type" }
+func (MultiInputApplicationType) Readable() bool                       { return true }
+func (MultiInputApplicationType) Writable() bool                       { return false }
+func (MultiInputApplicationType) Reportable() bool                     { return false }
+func (MultiInputApplicationType) SceneIndex() int                      { return -1 }
 func (a *MultiInputApplicationType) Value() *MultiInputApplicationType { return a }
-func (a MultiInputApplicationType) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a MultiInputApplicationType) MarshalZcl() ([]byte, error)        { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *MultiInputApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultiInputApplicationType(*nt)
 	return br, err
 }
-func (MultiInputApplicationType) Name() string     { return "Multi Input Application Type" }
-func (MultiInputApplicationType) Readable() bool   { return true }
-func (MultiInputApplicationType) Writable() bool   { return false }
-func (MultiInputApplicationType) Reportable() bool { return false }
-func (MultiInputApplicationType) SceneIndex() int  { return -1 }
 
 func (a MultiInputApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

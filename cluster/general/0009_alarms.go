@@ -407,23 +407,22 @@ type AlarmCount zcl.Zu16
 
 const AlarmCountAttr zcl.AttrID = 0
 
-func (a AlarmCount) ID() zcl.AttrID         { return AlarmCountAttr }
-func (a AlarmCount) Cluster() zcl.ClusterID { return AlarmsID }
-func (a *AlarmCount) Value() *AlarmCount    { return a }
-func (a AlarmCount) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (AlarmCount) ID() zcl.AttrID                { return AlarmCountAttr }
+func (AlarmCount) Cluster() zcl.ClusterID        { return AlarmsID }
+func (AlarmCount) Name() string                  { return "Alarm Count" }
+func (AlarmCount) Readable() bool                { return true }
+func (AlarmCount) Writable() bool                { return true }
+func (AlarmCount) Reportable() bool              { return false }
+func (AlarmCount) SceneIndex() int               { return -1 }
+func (a *AlarmCount) Value() *AlarmCount         { return a }
+func (a AlarmCount) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *AlarmCount) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AlarmCount(*nt)
 	return br, err
 }
-func (AlarmCount) Name() string     { return "Alarm Count" }
-func (AlarmCount) Readable() bool   { return true }
-func (AlarmCount) Writable() bool   { return true }
-func (AlarmCount) Reportable() bool { return false }
-func (AlarmCount) SceneIndex() int  { return -1 }
 
 func (a AlarmCount) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))

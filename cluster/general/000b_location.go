@@ -1980,23 +1980,22 @@ type LocationType zcl.Zenum8
 
 const LocationTypeAttr zcl.AttrID = 0
 
-func (a LocationType) ID() zcl.AttrID         { return LocationTypeAttr }
-func (a LocationType) Cluster() zcl.ClusterID { return LocationID }
-func (a *LocationType) Value() *LocationType  { return a }
-func (a LocationType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (LocationType) ID() zcl.AttrID                { return LocationTypeAttr }
+func (LocationType) Cluster() zcl.ClusterID        { return LocationID }
+func (LocationType) Name() string                  { return "Location Type" }
+func (LocationType) Readable() bool                { return true }
+func (LocationType) Writable() bool                { return true }
+func (LocationType) Reportable() bool              { return false }
+func (LocationType) SceneIndex() int               { return -1 }
+func (a *LocationType) Value() *LocationType       { return a }
+func (a LocationType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *LocationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocationType(*nt)
 	return br, err
 }
-func (LocationType) Name() string     { return "Location Type" }
-func (LocationType) Readable() bool   { return true }
-func (LocationType) Writable() bool   { return true }
-func (LocationType) Reportable() bool { return false }
-func (LocationType) SceneIndex() int  { return -1 }
 
 func (a LocationType) String() string {
 	switch a {
@@ -2041,23 +2040,22 @@ type LocationMethod zcl.Zenum8
 
 const LocationMethodAttr zcl.AttrID = 1
 
-func (a LocationMethod) ID() zcl.AttrID          { return LocationMethodAttr }
-func (a LocationMethod) Cluster() zcl.ClusterID  { return LocationID }
-func (a *LocationMethod) Value() *LocationMethod { return a }
-func (a LocationMethod) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (LocationMethod) ID() zcl.AttrID                { return LocationMethodAttr }
+func (LocationMethod) Cluster() zcl.ClusterID        { return LocationID }
+func (LocationMethod) Name() string                  { return "Location Method" }
+func (LocationMethod) Readable() bool                { return true }
+func (LocationMethod) Writable() bool                { return true }
+func (LocationMethod) Reportable() bool              { return false }
+func (LocationMethod) SceneIndex() int               { return -1 }
+func (a *LocationMethod) Value() *LocationMethod     { return a }
+func (a LocationMethod) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *LocationMethod) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocationMethod(*nt)
 	return br, err
 }
-func (LocationMethod) Name() string     { return "Location Method" }
-func (LocationMethod) Readable() bool   { return true }
-func (LocationMethod) Writable() bool   { return true }
-func (LocationMethod) Reportable() bool { return false }
-func (LocationMethod) SceneIndex() int  { return -1 }
 
 func (a LocationMethod) String() string {
 	switch a {
@@ -2110,23 +2108,22 @@ type LocationAge zcl.Zu16
 
 const LocationAgeAttr zcl.AttrID = 2
 
-func (a LocationAge) ID() zcl.AttrID         { return LocationAgeAttr }
-func (a LocationAge) Cluster() zcl.ClusterID { return LocationID }
-func (a *LocationAge) Value() *LocationAge   { return a }
-func (a LocationAge) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (LocationAge) ID() zcl.AttrID                { return LocationAgeAttr }
+func (LocationAge) Cluster() zcl.ClusterID        { return LocationID }
+func (LocationAge) Name() string                  { return "Location Age" }
+func (LocationAge) Readable() bool                { return true }
+func (LocationAge) Writable() bool                { return false }
+func (LocationAge) Reportable() bool              { return false }
+func (LocationAge) SceneIndex() int               { return -1 }
+func (a *LocationAge) Value() *LocationAge        { return a }
+func (a LocationAge) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *LocationAge) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = LocationAge(*nt)
 	return br, err
 }
-func (LocationAge) Name() string     { return "Location Age" }
-func (LocationAge) Readable() bool   { return true }
-func (LocationAge) Writable() bool   { return false }
-func (LocationAge) Reportable() bool { return false }
-func (LocationAge) SceneIndex() int  { return -1 }
 
 func (a LocationAge) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2137,23 +2134,22 @@ type QualityMeasure zcl.Zu8
 
 const QualityMeasureAttr zcl.AttrID = 3
 
-func (a QualityMeasure) ID() zcl.AttrID          { return QualityMeasureAttr }
-func (a QualityMeasure) Cluster() zcl.ClusterID  { return LocationID }
-func (a *QualityMeasure) Value() *QualityMeasure { return a }
-func (a QualityMeasure) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (QualityMeasure) ID() zcl.AttrID                { return QualityMeasureAttr }
+func (QualityMeasure) Cluster() zcl.ClusterID        { return LocationID }
+func (QualityMeasure) Name() string                  { return "Quality Measure" }
+func (QualityMeasure) Readable() bool                { return true }
+func (QualityMeasure) Writable() bool                { return false }
+func (QualityMeasure) Reportable() bool              { return false }
+func (QualityMeasure) SceneIndex() int               { return -1 }
+func (a *QualityMeasure) Value() *QualityMeasure     { return a }
+func (a QualityMeasure) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *QualityMeasure) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = QualityMeasure(*nt)
 	return br, err
 }
-func (QualityMeasure) Name() string     { return "Quality Measure" }
-func (QualityMeasure) Readable() bool   { return true }
-func (QualityMeasure) Writable() bool   { return false }
-func (QualityMeasure) Reportable() bool { return false }
-func (QualityMeasure) SceneIndex() int  { return -1 }
 
 func (a QualityMeasure) String() string {
 	return zcl.Percent.Format(float64(a))
@@ -2164,23 +2160,22 @@ type NumberOfDevices zcl.Zu8
 
 const NumberOfDevicesAttr zcl.AttrID = 4
 
-func (a NumberOfDevices) ID() zcl.AttrID           { return NumberOfDevicesAttr }
-func (a NumberOfDevices) Cluster() zcl.ClusterID   { return LocationID }
-func (a *NumberOfDevices) Value() *NumberOfDevices { return a }
-func (a NumberOfDevices) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (NumberOfDevices) ID() zcl.AttrID                { return NumberOfDevicesAttr }
+func (NumberOfDevices) Cluster() zcl.ClusterID        { return LocationID }
+func (NumberOfDevices) Name() string                  { return "Number of Devices" }
+func (NumberOfDevices) Readable() bool                { return true }
+func (NumberOfDevices) Writable() bool                { return false }
+func (NumberOfDevices) Reportable() bool              { return false }
+func (NumberOfDevices) SceneIndex() int               { return -1 }
+func (a *NumberOfDevices) Value() *NumberOfDevices    { return a }
+func (a NumberOfDevices) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *NumberOfDevices) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberOfDevices(*nt)
 	return br, err
 }
-func (NumberOfDevices) Name() string     { return "Number of Devices" }
-func (NumberOfDevices) Readable() bool   { return true }
-func (NumberOfDevices) Writable() bool   { return false }
-func (NumberOfDevices) Reportable() bool { return false }
-func (NumberOfDevices) SceneIndex() int  { return -1 }
 
 func (a NumberOfDevices) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
@@ -2191,23 +2186,22 @@ type XCoordinate zcl.Zs16
 
 const XCoordinateAttr zcl.AttrID = 16
 
-func (a XCoordinate) ID() zcl.AttrID         { return XCoordinateAttr }
-func (a XCoordinate) Cluster() zcl.ClusterID { return LocationID }
-func (a *XCoordinate) Value() *XCoordinate   { return a }
-func (a XCoordinate) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (XCoordinate) ID() zcl.AttrID                { return XCoordinateAttr }
+func (XCoordinate) Cluster() zcl.ClusterID        { return LocationID }
+func (XCoordinate) Name() string                  { return "X Coordinate" }
+func (XCoordinate) Readable() bool                { return true }
+func (XCoordinate) Writable() bool                { return true }
+func (XCoordinate) Reportable() bool              { return false }
+func (XCoordinate) SceneIndex() int               { return -1 }
+func (a *XCoordinate) Value() *XCoordinate        { return a }
+func (a XCoordinate) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *XCoordinate) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = XCoordinate(*nt)
 	return br, err
 }
-func (XCoordinate) Name() string     { return "X Coordinate" }
-func (XCoordinate) Readable() bool   { return true }
-func (XCoordinate) Writable() bool   { return true }
-func (XCoordinate) Reportable() bool { return false }
-func (XCoordinate) SceneIndex() int  { return -1 }
 
 func (a XCoordinate) String() string {
 	return zcl.Meters.Format(float64(a) / 10)
@@ -2218,23 +2212,22 @@ type YCoordinate zcl.Zs16
 
 const YCoordinateAttr zcl.AttrID = 17
 
-func (a YCoordinate) ID() zcl.AttrID         { return YCoordinateAttr }
-func (a YCoordinate) Cluster() zcl.ClusterID { return LocationID }
-func (a *YCoordinate) Value() *YCoordinate   { return a }
-func (a YCoordinate) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (YCoordinate) ID() zcl.AttrID                { return YCoordinateAttr }
+func (YCoordinate) Cluster() zcl.ClusterID        { return LocationID }
+func (YCoordinate) Name() string                  { return "Y Coordinate" }
+func (YCoordinate) Readable() bool                { return true }
+func (YCoordinate) Writable() bool                { return true }
+func (YCoordinate) Reportable() bool              { return false }
+func (YCoordinate) SceneIndex() int               { return -1 }
+func (a *YCoordinate) Value() *YCoordinate        { return a }
+func (a YCoordinate) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *YCoordinate) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = YCoordinate(*nt)
 	return br, err
 }
-func (YCoordinate) Name() string     { return "Y Coordinate" }
-func (YCoordinate) Readable() bool   { return true }
-func (YCoordinate) Writable() bool   { return true }
-func (YCoordinate) Reportable() bool { return false }
-func (YCoordinate) SceneIndex() int  { return -1 }
 
 func (a YCoordinate) String() string {
 	return zcl.Meters.Format(float64(a) / 10)
@@ -2245,23 +2238,22 @@ type ZCoordinate zcl.Zs16
 
 const ZCoordinateAttr zcl.AttrID = 18
 
-func (a ZCoordinate) ID() zcl.AttrID         { return ZCoordinateAttr }
-func (a ZCoordinate) Cluster() zcl.ClusterID { return LocationID }
-func (a *ZCoordinate) Value() *ZCoordinate   { return a }
-func (a ZCoordinate) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (ZCoordinate) ID() zcl.AttrID                { return ZCoordinateAttr }
+func (ZCoordinate) Cluster() zcl.ClusterID        { return LocationID }
+func (ZCoordinate) Name() string                  { return "Z Coordinate" }
+func (ZCoordinate) Readable() bool                { return true }
+func (ZCoordinate) Writable() bool                { return true }
+func (ZCoordinate) Reportable() bool              { return false }
+func (ZCoordinate) SceneIndex() int               { return -1 }
+func (a *ZCoordinate) Value() *ZCoordinate        { return a }
+func (a ZCoordinate) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *ZCoordinate) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ZCoordinate(*nt)
 	return br, err
 }
-func (ZCoordinate) Name() string     { return "Z Coordinate" }
-func (ZCoordinate) Readable() bool   { return true }
-func (ZCoordinate) Writable() bool   { return true }
-func (ZCoordinate) Reportable() bool { return false }
-func (ZCoordinate) SceneIndex() int  { return -1 }
 
 func (a ZCoordinate) String() string {
 	return zcl.Meters.Format(float64(a) / 10)
@@ -2272,23 +2264,22 @@ type Power zcl.Zs16
 
 const PowerAttr zcl.AttrID = 19
 
-func (a Power) ID() zcl.AttrID         { return PowerAttr }
-func (a Power) Cluster() zcl.ClusterID { return LocationID }
-func (a *Power) Value() *Power         { return a }
-func (a Power) MarshalZcl() ([]byte, error) {
-	return zcl.Zs16(a).MarshalZcl()
-}
+func (Power) ID() zcl.AttrID                { return PowerAttr }
+func (Power) Cluster() zcl.ClusterID        { return LocationID }
+func (Power) Name() string                  { return "Power" }
+func (Power) Readable() bool                { return true }
+func (Power) Writable() bool                { return true }
+func (Power) Reportable() bool              { return false }
+func (Power) SceneIndex() int               { return -1 }
+func (a *Power) Value() *Power              { return a }
+func (a Power) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+
 func (a *Power) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = Power(*nt)
 	return br, err
 }
-func (Power) Name() string     { return "Power" }
-func (Power) Readable() bool   { return true }
-func (Power) Writable() bool   { return true }
-func (Power) Reportable() bool { return false }
-func (Power) SceneIndex() int  { return -1 }
 
 func (a Power) String() string {
 	return zcl.DecibelMilliWatts.Format(float64(a) / 100)
@@ -2300,23 +2291,22 @@ type PathLossExponent zcl.Zu16
 
 const PathLossExponentAttr zcl.AttrID = 20
 
-func (a PathLossExponent) ID() zcl.AttrID            { return PathLossExponentAttr }
-func (a PathLossExponent) Cluster() zcl.ClusterID    { return LocationID }
-func (a *PathLossExponent) Value() *PathLossExponent { return a }
-func (a PathLossExponent) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (PathLossExponent) ID() zcl.AttrID                { return PathLossExponentAttr }
+func (PathLossExponent) Cluster() zcl.ClusterID        { return LocationID }
+func (PathLossExponent) Name() string                  { return "Path loss Exponent" }
+func (PathLossExponent) Readable() bool                { return true }
+func (PathLossExponent) Writable() bool                { return true }
+func (PathLossExponent) Reportable() bool              { return false }
+func (PathLossExponent) SceneIndex() int               { return -1 }
+func (a *PathLossExponent) Value() *PathLossExponent   { return a }
+func (a PathLossExponent) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *PathLossExponent) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = PathLossExponent(*nt)
 	return br, err
 }
-func (PathLossExponent) Name() string     { return "Path loss Exponent" }
-func (PathLossExponent) Readable() bool   { return true }
-func (PathLossExponent) Writable() bool   { return true }
-func (PathLossExponent) Reportable() bool { return false }
-func (PathLossExponent) SceneIndex() int  { return -1 }
 
 func (a PathLossExponent) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
@@ -2327,23 +2317,22 @@ type ReportingPeriod zcl.Zu16
 
 const ReportingPeriodAttr zcl.AttrID = 21
 
-func (a ReportingPeriod) ID() zcl.AttrID           { return ReportingPeriodAttr }
-func (a ReportingPeriod) Cluster() zcl.ClusterID   { return LocationID }
-func (a *ReportingPeriod) Value() *ReportingPeriod { return a }
-func (a ReportingPeriod) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (ReportingPeriod) ID() zcl.AttrID                { return ReportingPeriodAttr }
+func (ReportingPeriod) Cluster() zcl.ClusterID        { return LocationID }
+func (ReportingPeriod) Name() string                  { return "Reporting Period" }
+func (ReportingPeriod) Readable() bool                { return true }
+func (ReportingPeriod) Writable() bool                { return true }
+func (ReportingPeriod) Reportable() bool              { return false }
+func (ReportingPeriod) SceneIndex() int               { return -1 }
+func (a *ReportingPeriod) Value() *ReportingPeriod    { return a }
+func (a ReportingPeriod) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *ReportingPeriod) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ReportingPeriod(*nt)
 	return br, err
 }
-func (ReportingPeriod) Name() string     { return "Reporting Period" }
-func (ReportingPeriod) Readable() bool   { return true }
-func (ReportingPeriod) Writable() bool   { return true }
-func (ReportingPeriod) Reportable() bool { return false }
-func (ReportingPeriod) SceneIndex() int  { return -1 }
 
 func (a ReportingPeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2354,23 +2343,22 @@ type CalculationPeriod zcl.Zu16
 
 const CalculationPeriodAttr zcl.AttrID = 22
 
-func (a CalculationPeriod) ID() zcl.AttrID             { return CalculationPeriodAttr }
-func (a CalculationPeriod) Cluster() zcl.ClusterID     { return LocationID }
-func (a *CalculationPeriod) Value() *CalculationPeriod { return a }
-func (a CalculationPeriod) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
+func (CalculationPeriod) ID() zcl.AttrID                { return CalculationPeriodAttr }
+func (CalculationPeriod) Cluster() zcl.ClusterID        { return LocationID }
+func (CalculationPeriod) Name() string                  { return "Calculation Period" }
+func (CalculationPeriod) Readable() bool                { return true }
+func (CalculationPeriod) Writable() bool                { return true }
+func (CalculationPeriod) Reportable() bool              { return false }
+func (CalculationPeriod) SceneIndex() int               { return -1 }
+func (a *CalculationPeriod) Value() *CalculationPeriod  { return a }
+func (a CalculationPeriod) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
 func (a *CalculationPeriod) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = CalculationPeriod(*nt)
 	return br, err
 }
-func (CalculationPeriod) Name() string     { return "Calculation Period" }
-func (CalculationPeriod) Readable() bool   { return true }
-func (CalculationPeriod) Writable() bool   { return true }
-func (CalculationPeriod) Reportable() bool { return false }
-func (CalculationPeriod) SceneIndex() int  { return -1 }
 
 func (a CalculationPeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
@@ -2382,23 +2370,22 @@ type NumberRssiMeasurements zcl.Zu8
 
 const NumberRssiMeasurementsAttr zcl.AttrID = 23
 
-func (a NumberRssiMeasurements) ID() zcl.AttrID                  { return NumberRssiMeasurementsAttr }
-func (a NumberRssiMeasurements) Cluster() zcl.ClusterID          { return LocationID }
+func (NumberRssiMeasurements) ID() zcl.AttrID                    { return NumberRssiMeasurementsAttr }
+func (NumberRssiMeasurements) Cluster() zcl.ClusterID            { return LocationID }
+func (NumberRssiMeasurements) Name() string                      { return "Number RSSI Measurements" }
+func (NumberRssiMeasurements) Readable() bool                    { return true }
+func (NumberRssiMeasurements) Writable() bool                    { return true }
+func (NumberRssiMeasurements) Reportable() bool                  { return false }
+func (NumberRssiMeasurements) SceneIndex() int                   { return -1 }
 func (a *NumberRssiMeasurements) Value() *NumberRssiMeasurements { return a }
-func (a NumberRssiMeasurements) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (a NumberRssiMeasurements) MarshalZcl() ([]byte, error)     { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *NumberRssiMeasurements) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = NumberRssiMeasurements(*nt)
 	return br, err
 }
-func (NumberRssiMeasurements) Name() string     { return "Number RSSI Measurements" }
-func (NumberRssiMeasurements) Readable() bool   { return true }
-func (NumberRssiMeasurements) Writable() bool   { return true }
-func (NumberRssiMeasurements) Reportable() bool { return false }
-func (NumberRssiMeasurements) SceneIndex() int  { return -1 }
 
 func (a NumberRssiMeasurements) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))

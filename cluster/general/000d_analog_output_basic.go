@@ -35,23 +35,22 @@ type AnalogOutputDescription zcl.Zcstring
 
 const AnalogOutputDescriptionAttr zcl.AttrID = 28
 
-func (a AnalogOutputDescription) ID() zcl.AttrID                   { return AnalogOutputDescriptionAttr }
-func (a AnalogOutputDescription) Cluster() zcl.ClusterID           { return AnalogOutputBasicID }
+func (AnalogOutputDescription) ID() zcl.AttrID                     { return AnalogOutputDescriptionAttr }
+func (AnalogOutputDescription) Cluster() zcl.ClusterID             { return AnalogOutputBasicID }
+func (AnalogOutputDescription) Name() string                       { return "Analog Output Description" }
+func (AnalogOutputDescription) Readable() bool                     { return true }
+func (AnalogOutputDescription) Writable() bool                     { return true }
+func (AnalogOutputDescription) Reportable() bool                   { return false }
+func (AnalogOutputDescription) SceneIndex() int                    { return -1 }
 func (a *AnalogOutputDescription) Value() *AnalogOutputDescription { return a }
-func (a AnalogOutputDescription) MarshalZcl() ([]byte, error) {
-	return zcl.Zcstring(a).MarshalZcl()
-}
+func (a AnalogOutputDescription) MarshalZcl() ([]byte, error)      { return zcl.Zcstring(a).MarshalZcl() }
+
 func (a *AnalogOutputDescription) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputDescription(*nt)
 	return br, err
 }
-func (AnalogOutputDescription) Name() string     { return "Analog Output Description" }
-func (AnalogOutputDescription) Readable() bool   { return true }
-func (AnalogOutputDescription) Writable() bool   { return true }
-func (AnalogOutputDescription) Reportable() bool { return false }
-func (AnalogOutputDescription) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputDescription) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
@@ -62,23 +61,22 @@ type AnalogOutputMaxPresentValue zcl.Zfloat
 
 const AnalogOutputMaxPresentValueAttr zcl.AttrID = 65
 
-func (a AnalogOutputMaxPresentValue) ID() zcl.AttrID                       { return AnalogOutputMaxPresentValueAttr }
-func (a AnalogOutputMaxPresentValue) Cluster() zcl.ClusterID               { return AnalogOutputBasicID }
+func (AnalogOutputMaxPresentValue) ID() zcl.AttrID                         { return AnalogOutputMaxPresentValueAttr }
+func (AnalogOutputMaxPresentValue) Cluster() zcl.ClusterID                 { return AnalogOutputBasicID }
+func (AnalogOutputMaxPresentValue) Name() string                           { return "Analog Output Max Present Value" }
+func (AnalogOutputMaxPresentValue) Readable() bool                         { return true }
+func (AnalogOutputMaxPresentValue) Writable() bool                         { return true }
+func (AnalogOutputMaxPresentValue) Reportable() bool                       { return false }
+func (AnalogOutputMaxPresentValue) SceneIndex() int                        { return -1 }
 func (a *AnalogOutputMaxPresentValue) Value() *AnalogOutputMaxPresentValue { return a }
-func (a AnalogOutputMaxPresentValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zfloat(a).MarshalZcl()
-}
+func (a AnalogOutputMaxPresentValue) MarshalZcl() ([]byte, error)          { return zcl.Zfloat(a).MarshalZcl() }
+
 func (a *AnalogOutputMaxPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zfloat)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputMaxPresentValue(*nt)
 	return br, err
 }
-func (AnalogOutputMaxPresentValue) Name() string     { return "Analog Output Max Present Value" }
-func (AnalogOutputMaxPresentValue) Readable() bool   { return true }
-func (AnalogOutputMaxPresentValue) Writable() bool   { return true }
-func (AnalogOutputMaxPresentValue) Reportable() bool { return false }
-func (AnalogOutputMaxPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputMaxPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -89,23 +87,22 @@ type AnalogOutputMinPresentValue zcl.Zfloat
 
 const AnalogOutputMinPresentValueAttr zcl.AttrID = 69
 
-func (a AnalogOutputMinPresentValue) ID() zcl.AttrID                       { return AnalogOutputMinPresentValueAttr }
-func (a AnalogOutputMinPresentValue) Cluster() zcl.ClusterID               { return AnalogOutputBasicID }
+func (AnalogOutputMinPresentValue) ID() zcl.AttrID                         { return AnalogOutputMinPresentValueAttr }
+func (AnalogOutputMinPresentValue) Cluster() zcl.ClusterID                 { return AnalogOutputBasicID }
+func (AnalogOutputMinPresentValue) Name() string                           { return "Analog Output Min Present Value" }
+func (AnalogOutputMinPresentValue) Readable() bool                         { return true }
+func (AnalogOutputMinPresentValue) Writable() bool                         { return true }
+func (AnalogOutputMinPresentValue) Reportable() bool                       { return false }
+func (AnalogOutputMinPresentValue) SceneIndex() int                        { return -1 }
 func (a *AnalogOutputMinPresentValue) Value() *AnalogOutputMinPresentValue { return a }
-func (a AnalogOutputMinPresentValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zfloat(a).MarshalZcl()
-}
+func (a AnalogOutputMinPresentValue) MarshalZcl() ([]byte, error)          { return zcl.Zfloat(a).MarshalZcl() }
+
 func (a *AnalogOutputMinPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zfloat)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputMinPresentValue(*nt)
 	return br, err
 }
-func (AnalogOutputMinPresentValue) Name() string     { return "Analog Output Min Present Value" }
-func (AnalogOutputMinPresentValue) Readable() bool   { return true }
-func (AnalogOutputMinPresentValue) Writable() bool   { return true }
-func (AnalogOutputMinPresentValue) Reportable() bool { return false }
-func (AnalogOutputMinPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputMinPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -116,23 +113,22 @@ type AnalogOutputOutOfService zcl.Zbool
 
 const AnalogOutputOutOfServiceAttr zcl.AttrID = 81
 
-func (a AnalogOutputOutOfService) ID() zcl.AttrID                    { return AnalogOutputOutOfServiceAttr }
-func (a AnalogOutputOutOfService) Cluster() zcl.ClusterID            { return AnalogOutputBasicID }
+func (AnalogOutputOutOfService) ID() zcl.AttrID                      { return AnalogOutputOutOfServiceAttr }
+func (AnalogOutputOutOfService) Cluster() zcl.ClusterID              { return AnalogOutputBasicID }
+func (AnalogOutputOutOfService) Name() string                        { return "Analog Output Out of service" }
+func (AnalogOutputOutOfService) Readable() bool                      { return true }
+func (AnalogOutputOutOfService) Writable() bool                      { return true }
+func (AnalogOutputOutOfService) Reportable() bool                    { return false }
+func (AnalogOutputOutOfService) SceneIndex() int                     { return -1 }
 func (a *AnalogOutputOutOfService) Value() *AnalogOutputOutOfService { return a }
-func (a AnalogOutputOutOfService) MarshalZcl() ([]byte, error) {
-	return zcl.Zbool(a).MarshalZcl()
-}
+func (a AnalogOutputOutOfService) MarshalZcl() ([]byte, error)       { return zcl.Zbool(a).MarshalZcl() }
+
 func (a *AnalogOutputOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbool)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputOutOfService(*nt)
 	return br, err
 }
-func (AnalogOutputOutOfService) Name() string     { return "Analog Output Out of service" }
-func (AnalogOutputOutOfService) Readable() bool   { return true }
-func (AnalogOutputOutOfService) Writable() bool   { return true }
-func (AnalogOutputOutOfService) Reportable() bool { return false }
-func (AnalogOutputOutOfService) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
@@ -143,23 +139,22 @@ type AnalogOutputPresentValue zcl.Zfloat
 
 const AnalogOutputPresentValueAttr zcl.AttrID = 85
 
-func (a AnalogOutputPresentValue) ID() zcl.AttrID                    { return AnalogOutputPresentValueAttr }
-func (a AnalogOutputPresentValue) Cluster() zcl.ClusterID            { return AnalogOutputBasicID }
+func (AnalogOutputPresentValue) ID() zcl.AttrID                      { return AnalogOutputPresentValueAttr }
+func (AnalogOutputPresentValue) Cluster() zcl.ClusterID              { return AnalogOutputBasicID }
+func (AnalogOutputPresentValue) Name() string                        { return "Analog Output Present value" }
+func (AnalogOutputPresentValue) Readable() bool                      { return true }
+func (AnalogOutputPresentValue) Writable() bool                      { return true }
+func (AnalogOutputPresentValue) Reportable() bool                    { return true }
+func (AnalogOutputPresentValue) SceneIndex() int                     { return -1 }
 func (a *AnalogOutputPresentValue) Value() *AnalogOutputPresentValue { return a }
-func (a AnalogOutputPresentValue) MarshalZcl() ([]byte, error) {
-	return zcl.Zfloat(a).MarshalZcl()
-}
+func (a AnalogOutputPresentValue) MarshalZcl() ([]byte, error)       { return zcl.Zfloat(a).MarshalZcl() }
+
 func (a *AnalogOutputPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zfloat)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputPresentValue(*nt)
 	return br, err
 }
-func (AnalogOutputPresentValue) Name() string     { return "Analog Output Present value" }
-func (AnalogOutputPresentValue) Readable() bool   { return true }
-func (AnalogOutputPresentValue) Writable() bool   { return true }
-func (AnalogOutputPresentValue) Reportable() bool { return true }
-func (AnalogOutputPresentValue) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -170,23 +165,22 @@ type AnalogOutputPriorityArray zcl.Zarray
 
 const AnalogOutputPriorityArrayAttr zcl.AttrID = 87
 
-func (a AnalogOutputPriorityArray) ID() zcl.AttrID                     { return AnalogOutputPriorityArrayAttr }
-func (a AnalogOutputPriorityArray) Cluster() zcl.ClusterID             { return AnalogOutputBasicID }
+func (AnalogOutputPriorityArray) ID() zcl.AttrID                       { return AnalogOutputPriorityArrayAttr }
+func (AnalogOutputPriorityArray) Cluster() zcl.ClusterID               { return AnalogOutputBasicID }
+func (AnalogOutputPriorityArray) Name() string                         { return "Analog Output Priority Array" }
+func (AnalogOutputPriorityArray) Readable() bool                       { return true }
+func (AnalogOutputPriorityArray) Writable() bool                       { return true }
+func (AnalogOutputPriorityArray) Reportable() bool                     { return false }
+func (AnalogOutputPriorityArray) SceneIndex() int                      { return -1 }
 func (a *AnalogOutputPriorityArray) Value() *AnalogOutputPriorityArray { return a }
-func (a AnalogOutputPriorityArray) MarshalZcl() ([]byte, error) {
-	return zcl.Zarray(a).MarshalZcl()
-}
+func (a AnalogOutputPriorityArray) MarshalZcl() ([]byte, error)        { return zcl.Zarray(a).MarshalZcl() }
+
 func (a *AnalogOutputPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zarray)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputPriorityArray(*nt)
 	return br, err
 }
-func (AnalogOutputPriorityArray) Name() string     { return "Analog Output Priority Array" }
-func (AnalogOutputPriorityArray) Readable() bool   { return true }
-func (AnalogOutputPriorityArray) Writable() bool   { return true }
-func (AnalogOutputPriorityArray) Reportable() bool { return false }
-func (AnalogOutputPriorityArray) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputPriorityArray) String() string {
 	return zcl.Sprintf("%v", zcl.Zarray(a))
@@ -197,23 +191,22 @@ type AnalogOutputReliability zcl.Zenum8
 
 const AnalogOutputReliabilityAttr zcl.AttrID = 103
 
-func (a AnalogOutputReliability) ID() zcl.AttrID                   { return AnalogOutputReliabilityAttr }
-func (a AnalogOutputReliability) Cluster() zcl.ClusterID           { return AnalogOutputBasicID }
+func (AnalogOutputReliability) ID() zcl.AttrID                     { return AnalogOutputReliabilityAttr }
+func (AnalogOutputReliability) Cluster() zcl.ClusterID             { return AnalogOutputBasicID }
+func (AnalogOutputReliability) Name() string                       { return "Analog Output Reliability" }
+func (AnalogOutputReliability) Readable() bool                     { return true }
+func (AnalogOutputReliability) Writable() bool                     { return true }
+func (AnalogOutputReliability) Reportable() bool                   { return false }
+func (AnalogOutputReliability) SceneIndex() int                    { return -1 }
 func (a *AnalogOutputReliability) Value() *AnalogOutputReliability { return a }
-func (a AnalogOutputReliability) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (a AnalogOutputReliability) MarshalZcl() ([]byte, error)      { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *AnalogOutputReliability) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputReliability(*nt)
 	return br, err
 }
-func (AnalogOutputReliability) Name() string     { return "Analog Output Reliability" }
-func (AnalogOutputReliability) Readable() bool   { return true }
-func (AnalogOutputReliability) Writable() bool   { return true }
-func (AnalogOutputReliability) Reportable() bool { return false }
-func (AnalogOutputReliability) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputReliability) String() string {
 	switch a {
@@ -314,23 +307,22 @@ type AnalogOutputRelinquishDefault zcl.Zfloat
 
 const AnalogOutputRelinquishDefaultAttr zcl.AttrID = 104
 
-func (a AnalogOutputRelinquishDefault) ID() zcl.AttrID                         { return AnalogOutputRelinquishDefaultAttr }
-func (a AnalogOutputRelinquishDefault) Cluster() zcl.ClusterID                 { return AnalogOutputBasicID }
+func (AnalogOutputRelinquishDefault) ID() zcl.AttrID                           { return AnalogOutputRelinquishDefaultAttr }
+func (AnalogOutputRelinquishDefault) Cluster() zcl.ClusterID                   { return AnalogOutputBasicID }
+func (AnalogOutputRelinquishDefault) Name() string                             { return "Analog Output Relinquish Default" }
+func (AnalogOutputRelinquishDefault) Readable() bool                           { return true }
+func (AnalogOutputRelinquishDefault) Writable() bool                           { return true }
+func (AnalogOutputRelinquishDefault) Reportable() bool                         { return false }
+func (AnalogOutputRelinquishDefault) SceneIndex() int                          { return -1 }
 func (a *AnalogOutputRelinquishDefault) Value() *AnalogOutputRelinquishDefault { return a }
-func (a AnalogOutputRelinquishDefault) MarshalZcl() ([]byte, error) {
-	return zcl.Zfloat(a).MarshalZcl()
-}
+func (a AnalogOutputRelinquishDefault) MarshalZcl() ([]byte, error)            { return zcl.Zfloat(a).MarshalZcl() }
+
 func (a *AnalogOutputRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zfloat)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputRelinquishDefault(*nt)
 	return br, err
 }
-func (AnalogOutputRelinquishDefault) Name() string     { return "Analog Output Relinquish Default" }
-func (AnalogOutputRelinquishDefault) Readable() bool   { return true }
-func (AnalogOutputRelinquishDefault) Writable() bool   { return true }
-func (AnalogOutputRelinquishDefault) Reportable() bool { return false }
-func (AnalogOutputRelinquishDefault) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -341,23 +333,22 @@ type AnalogOutputResolution zcl.Zfloat
 
 const AnalogOutputResolutionAttr zcl.AttrID = 106
 
-func (a AnalogOutputResolution) ID() zcl.AttrID                  { return AnalogOutputResolutionAttr }
-func (a AnalogOutputResolution) Cluster() zcl.ClusterID          { return AnalogOutputBasicID }
+func (AnalogOutputResolution) ID() zcl.AttrID                    { return AnalogOutputResolutionAttr }
+func (AnalogOutputResolution) Cluster() zcl.ClusterID            { return AnalogOutputBasicID }
+func (AnalogOutputResolution) Name() string                      { return "Analog Output Resolution" }
+func (AnalogOutputResolution) Readable() bool                    { return true }
+func (AnalogOutputResolution) Writable() bool                    { return true }
+func (AnalogOutputResolution) Reportable() bool                  { return false }
+func (AnalogOutputResolution) SceneIndex() int                   { return -1 }
 func (a *AnalogOutputResolution) Value() *AnalogOutputResolution { return a }
-func (a AnalogOutputResolution) MarshalZcl() ([]byte, error) {
-	return zcl.Zfloat(a).MarshalZcl()
-}
+func (a AnalogOutputResolution) MarshalZcl() ([]byte, error)     { return zcl.Zfloat(a).MarshalZcl() }
+
 func (a *AnalogOutputResolution) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zfloat)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputResolution(*nt)
 	return br, err
 }
-func (AnalogOutputResolution) Name() string     { return "Analog Output Resolution" }
-func (AnalogOutputResolution) Readable() bool   { return true }
-func (AnalogOutputResolution) Writable() bool   { return true }
-func (AnalogOutputResolution) Reportable() bool { return false }
-func (AnalogOutputResolution) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputResolution) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
@@ -368,23 +359,22 @@ type AnalogOutputStatusFlags zcl.Zbmp8
 
 const AnalogOutputStatusFlagsAttr zcl.AttrID = 111
 
-func (a AnalogOutputStatusFlags) ID() zcl.AttrID                   { return AnalogOutputStatusFlagsAttr }
-func (a AnalogOutputStatusFlags) Cluster() zcl.ClusterID           { return AnalogOutputBasicID }
+func (AnalogOutputStatusFlags) ID() zcl.AttrID                     { return AnalogOutputStatusFlagsAttr }
+func (AnalogOutputStatusFlags) Cluster() zcl.ClusterID             { return AnalogOutputBasicID }
+func (AnalogOutputStatusFlags) Name() string                       { return "Analog Output Status flags" }
+func (AnalogOutputStatusFlags) Readable() bool                     { return true }
+func (AnalogOutputStatusFlags) Writable() bool                     { return false }
+func (AnalogOutputStatusFlags) Reportable() bool                   { return true }
+func (AnalogOutputStatusFlags) SceneIndex() int                    { return -1 }
 func (a *AnalogOutputStatusFlags) Value() *AnalogOutputStatusFlags { return a }
-func (a AnalogOutputStatusFlags) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp8(a).MarshalZcl()
-}
+func (a AnalogOutputStatusFlags) MarshalZcl() ([]byte, error)      { return zcl.Zbmp8(a).MarshalZcl() }
+
 func (a *AnalogOutputStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputStatusFlags(*nt)
 	return br, err
 }
-func (AnalogOutputStatusFlags) Name() string     { return "Analog Output Status flags" }
-func (AnalogOutputStatusFlags) Readable() bool   { return true }
-func (AnalogOutputStatusFlags) Writable() bool   { return false }
-func (AnalogOutputStatusFlags) Reportable() bool { return true }
-func (AnalogOutputStatusFlags) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputStatusFlags) String() string {
 	var bstr []string
@@ -436,23 +426,24 @@ type AnalogOutputEngineeringUnits zcl.EngineeringUnit
 
 const AnalogOutputEngineeringUnitsAttr zcl.AttrID = 117
 
-func (a AnalogOutputEngineeringUnits) ID() zcl.AttrID                        { return AnalogOutputEngineeringUnitsAttr }
-func (a AnalogOutputEngineeringUnits) Cluster() zcl.ClusterID                { return AnalogOutputBasicID }
+func (AnalogOutputEngineeringUnits) ID() zcl.AttrID                          { return AnalogOutputEngineeringUnitsAttr }
+func (AnalogOutputEngineeringUnits) Cluster() zcl.ClusterID                  { return AnalogOutputBasicID }
+func (AnalogOutputEngineeringUnits) Name() string                            { return "Analog Output Engineering Units" }
+func (AnalogOutputEngineeringUnits) Readable() bool                          { return true }
+func (AnalogOutputEngineeringUnits) Writable() bool                          { return true }
+func (AnalogOutputEngineeringUnits) Reportable() bool                        { return false }
+func (AnalogOutputEngineeringUnits) SceneIndex() int                         { return -1 }
 func (a *AnalogOutputEngineeringUnits) Value() *AnalogOutputEngineeringUnits { return a }
 func (a AnalogOutputEngineeringUnits) MarshalZcl() ([]byte, error) {
 	return zcl.EngineeringUnit(a).MarshalZcl()
 }
+
 func (a *AnalogOutputEngineeringUnits) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.EngineeringUnit)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputEngineeringUnits(*nt)
 	return br, err
 }
-func (AnalogOutputEngineeringUnits) Name() string     { return "Analog Output Engineering Units" }
-func (AnalogOutputEngineeringUnits) Readable() bool   { return true }
-func (AnalogOutputEngineeringUnits) Writable() bool   { return true }
-func (AnalogOutputEngineeringUnits) Reportable() bool { return false }
-func (AnalogOutputEngineeringUnits) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputEngineeringUnits) String() string {
 	return zcl.Sprintf("%v", zcl.EngineeringUnit(a))
@@ -463,23 +454,22 @@ type AnalogOutputApplicationType zcl.Zu32
 
 const AnalogOutputApplicationTypeAttr zcl.AttrID = 256
 
-func (a AnalogOutputApplicationType) ID() zcl.AttrID                       { return AnalogOutputApplicationTypeAttr }
-func (a AnalogOutputApplicationType) Cluster() zcl.ClusterID               { return AnalogOutputBasicID }
+func (AnalogOutputApplicationType) ID() zcl.AttrID                         { return AnalogOutputApplicationTypeAttr }
+func (AnalogOutputApplicationType) Cluster() zcl.ClusterID                 { return AnalogOutputBasicID }
+func (AnalogOutputApplicationType) Name() string                           { return "Analog Output Application Type" }
+func (AnalogOutputApplicationType) Readable() bool                         { return true }
+func (AnalogOutputApplicationType) Writable() bool                         { return false }
+func (AnalogOutputApplicationType) Reportable() bool                       { return false }
+func (AnalogOutputApplicationType) SceneIndex() int                        { return -1 }
 func (a *AnalogOutputApplicationType) Value() *AnalogOutputApplicationType { return a }
-func (a AnalogOutputApplicationType) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a AnalogOutputApplicationType) MarshalZcl() ([]byte, error)          { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *AnalogOutputApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputApplicationType(*nt)
 	return br, err
 }
-func (AnalogOutputApplicationType) Name() string     { return "Analog Output Application Type" }
-func (AnalogOutputApplicationType) Readable() bool   { return true }
-func (AnalogOutputApplicationType) Writable() bool   { return false }
-func (AnalogOutputApplicationType) Reportable() bool { return false }
-func (AnalogOutputApplicationType) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputApplicationType) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
@@ -490,23 +480,22 @@ type AnalogOutputXiaomi0Xf000 zcl.Zu32
 
 const AnalogOutputXiaomi0Xf000Attr zcl.AttrID = 61440
 
-func (a AnalogOutputXiaomi0Xf000) ID() zcl.AttrID                    { return AnalogOutputXiaomi0Xf000Attr }
-func (a AnalogOutputXiaomi0Xf000) Cluster() zcl.ClusterID            { return AnalogOutputBasicID }
+func (AnalogOutputXiaomi0Xf000) ID() zcl.AttrID                      { return AnalogOutputXiaomi0Xf000Attr }
+func (AnalogOutputXiaomi0Xf000) Cluster() zcl.ClusterID              { return AnalogOutputBasicID }
+func (AnalogOutputXiaomi0Xf000) Name() string                        { return "Analog Output Xiaomi 0xf000" }
+func (AnalogOutputXiaomi0Xf000) Readable() bool                      { return true }
+func (AnalogOutputXiaomi0Xf000) Writable() bool                      { return false }
+func (AnalogOutputXiaomi0Xf000) Reportable() bool                    { return false }
+func (AnalogOutputXiaomi0Xf000) SceneIndex() int                     { return -1 }
 func (a *AnalogOutputXiaomi0Xf000) Value() *AnalogOutputXiaomi0Xf000 { return a }
-func (a AnalogOutputXiaomi0Xf000) MarshalZcl() ([]byte, error) {
-	return zcl.Zu32(a).MarshalZcl()
-}
+func (a AnalogOutputXiaomi0Xf000) MarshalZcl() ([]byte, error)       { return zcl.Zu32(a).MarshalZcl() }
+
 func (a *AnalogOutputXiaomi0Xf000) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu32)
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogOutputXiaomi0Xf000(*nt)
 	return br, err
 }
-func (AnalogOutputXiaomi0Xf000) Name() string     { return "Analog Output Xiaomi 0xf000" }
-func (AnalogOutputXiaomi0Xf000) Readable() bool   { return true }
-func (AnalogOutputXiaomi0Xf000) Writable() bool   { return false }
-func (AnalogOutputXiaomi0Xf000) Reportable() bool { return false }
-func (AnalogOutputXiaomi0Xf000) SceneIndex() int  { return -1 }
 
 func (a AnalogOutputXiaomi0Xf000) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))

@@ -390,23 +390,22 @@ type ZoneState zcl.Zenum8
 
 const ZoneStateAttr zcl.AttrID = 0
 
-func (a ZoneState) ID() zcl.AttrID         { return ZoneStateAttr }
-func (a ZoneState) Cluster() zcl.ClusterID { return IasZoneID }
-func (a *ZoneState) Value() *ZoneState     { return a }
-func (a ZoneState) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum8(a).MarshalZcl()
-}
+func (ZoneState) ID() zcl.AttrID                { return ZoneStateAttr }
+func (ZoneState) Cluster() zcl.ClusterID        { return IasZoneID }
+func (ZoneState) Name() string                  { return "Zone State" }
+func (ZoneState) Readable() bool                { return true }
+func (ZoneState) Writable() bool                { return false }
+func (ZoneState) Reportable() bool              { return false }
+func (ZoneState) SceneIndex() int               { return -1 }
+func (a *ZoneState) Value() *ZoneState          { return a }
+func (a ZoneState) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
 func (a *ZoneState) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ZoneState(*nt)
 	return br, err
 }
-func (ZoneState) Name() string     { return "Zone State" }
-func (ZoneState) Readable() bool   { return true }
-func (ZoneState) Writable() bool   { return false }
-func (ZoneState) Reportable() bool { return false }
-func (ZoneState) SceneIndex() int  { return -1 }
 
 func (a ZoneState) String() string {
 	switch a {
@@ -435,23 +434,22 @@ type ZoneType zcl.Zenum16
 
 const ZoneTypeAttr zcl.AttrID = 1
 
-func (a ZoneType) ID() zcl.AttrID         { return ZoneTypeAttr }
-func (a ZoneType) Cluster() zcl.ClusterID { return IasZoneID }
-func (a *ZoneType) Value() *ZoneType      { return a }
-func (a ZoneType) MarshalZcl() ([]byte, error) {
-	return zcl.Zenum16(a).MarshalZcl()
-}
+func (ZoneType) ID() zcl.AttrID                { return ZoneTypeAttr }
+func (ZoneType) Cluster() zcl.ClusterID        { return IasZoneID }
+func (ZoneType) Name() string                  { return "Zone Type" }
+func (ZoneType) Readable() bool                { return true }
+func (ZoneType) Writable() bool                { return false }
+func (ZoneType) Reportable() bool              { return false }
+func (ZoneType) SceneIndex() int               { return -1 }
+func (a *ZoneType) Value() *ZoneType           { return a }
+func (a ZoneType) MarshalZcl() ([]byte, error) { return zcl.Zenum16(a).MarshalZcl() }
+
 func (a *ZoneType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ZoneType(*nt)
 	return br, err
 }
-func (ZoneType) Name() string     { return "Zone Type" }
-func (ZoneType) Readable() bool   { return true }
-func (ZoneType) Writable() bool   { return false }
-func (ZoneType) Reportable() bool { return false }
-func (ZoneType) SceneIndex() int  { return -1 }
 
 func (a ZoneType) String() string {
 	switch a {
@@ -584,23 +582,22 @@ type ZoneStatus zcl.Zbmp16
 
 const ZoneStatusAttr zcl.AttrID = 2
 
-func (a ZoneStatus) ID() zcl.AttrID         { return ZoneStatusAttr }
-func (a ZoneStatus) Cluster() zcl.ClusterID { return IasZoneID }
-func (a *ZoneStatus) Value() *ZoneStatus    { return a }
-func (a ZoneStatus) MarshalZcl() ([]byte, error) {
-	return zcl.Zbmp16(a).MarshalZcl()
-}
+func (ZoneStatus) ID() zcl.AttrID                { return ZoneStatusAttr }
+func (ZoneStatus) Cluster() zcl.ClusterID        { return IasZoneID }
+func (ZoneStatus) Name() string                  { return "Zone Status" }
+func (ZoneStatus) Readable() bool                { return true }
+func (ZoneStatus) Writable() bool                { return false }
+func (ZoneStatus) Reportable() bool              { return false }
+func (ZoneStatus) SceneIndex() int               { return -1 }
+func (a *ZoneStatus) Value() *ZoneStatus         { return a }
+func (a ZoneStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
+
 func (a *ZoneStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp16)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ZoneStatus(*nt)
 	return br, err
 }
-func (ZoneStatus) Name() string     { return "Zone Status" }
-func (ZoneStatus) Readable() bool   { return true }
-func (ZoneStatus) Writable() bool   { return false }
-func (ZoneStatus) Reportable() bool { return false }
-func (ZoneStatus) SceneIndex() int  { return -1 }
 
 func (a ZoneStatus) String() string {
 	var bstr []string
@@ -712,23 +709,22 @@ type IasCieAddress zcl.Zuid
 
 const IasCieAddressAttr zcl.AttrID = 16
 
-func (a IasCieAddress) ID() zcl.AttrID         { return IasCieAddressAttr }
-func (a IasCieAddress) Cluster() zcl.ClusterID { return IasZoneID }
-func (a *IasCieAddress) Value() *IasCieAddress { return a }
-func (a IasCieAddress) MarshalZcl() ([]byte, error) {
-	return zcl.Zuid(a).MarshalZcl()
-}
+func (IasCieAddress) ID() zcl.AttrID                { return IasCieAddressAttr }
+func (IasCieAddress) Cluster() zcl.ClusterID        { return IasZoneID }
+func (IasCieAddress) Name() string                  { return "IAS_CIE_Address" }
+func (IasCieAddress) Readable() bool                { return true }
+func (IasCieAddress) Writable() bool                { return true }
+func (IasCieAddress) Reportable() bool              { return false }
+func (IasCieAddress) SceneIndex() int               { return -1 }
+func (a *IasCieAddress) Value() *IasCieAddress      { return a }
+func (a IasCieAddress) MarshalZcl() ([]byte, error) { return zcl.Zuid(a).MarshalZcl() }
+
 func (a *IasCieAddress) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zuid)
 	br, err := nt.UnmarshalZcl(b)
 	*a = IasCieAddress(*nt)
 	return br, err
 }
-func (IasCieAddress) Name() string     { return "IAS_CIE_Address" }
-func (IasCieAddress) Readable() bool   { return true }
-func (IasCieAddress) Writable() bool   { return true }
-func (IasCieAddress) Reportable() bool { return false }
-func (IasCieAddress) SceneIndex() int  { return -1 }
 
 func (a IasCieAddress) String() string {
 	return zcl.Sprintf("%v", zcl.Zuid(a))
@@ -739,23 +735,22 @@ type ZoneId zcl.Zu8
 
 const ZoneIdAttr zcl.AttrID = 17
 
-func (a ZoneId) ID() zcl.AttrID         { return ZoneIdAttr }
-func (a ZoneId) Cluster() zcl.ClusterID { return IasZoneID }
-func (a *ZoneId) Value() *ZoneId        { return a }
-func (a ZoneId) MarshalZcl() ([]byte, error) {
-	return zcl.Zu8(a).MarshalZcl()
-}
+func (ZoneId) ID() zcl.AttrID                { return ZoneIdAttr }
+func (ZoneId) Cluster() zcl.ClusterID        { return IasZoneID }
+func (ZoneId) Name() string                  { return "Zone ID" }
+func (ZoneId) Readable() bool                { return true }
+func (ZoneId) Writable() bool                { return false }
+func (ZoneId) Reportable() bool              { return false }
+func (ZoneId) SceneIndex() int               { return -1 }
+func (a *ZoneId) Value() *ZoneId             { return a }
+func (a ZoneId) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
 func (a *ZoneId) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
 	*a = ZoneId(*nt)
 	return br, err
 }
-func (ZoneId) Name() string     { return "Zone ID" }
-func (ZoneId) Readable() bool   { return true }
-func (ZoneId) Writable() bool   { return false }
-func (ZoneId) Reportable() bool { return false }
-func (ZoneId) SceneIndex() int  { return -1 }
 
 func (a ZoneId) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
