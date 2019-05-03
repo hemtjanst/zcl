@@ -16,16 +16,17 @@ const (
 	Mired
 )
 
-func (u CustomUnit) Format(v float64) string {
+func (u CustomUnit) Format(n float64) string {
+	v := strconv.FormatFloat(n, 'f', -1, 64)
 	switch u {
 	case DecibelMilliWatts:
-		return fmt.Sprintf("%fdBm", v)
+		return fmt.Sprintf("%sdBm", v)
 	case MilliAmpereHours:
-		return fmt.Sprintf("%fmAh", v)
+		return fmt.Sprintf("%smAh", v)
 	case Mired:
-		return fmt.Sprintf("%f mired", v)
+		return fmt.Sprintf("%s mired", v)
 	}
-	return fmt.Sprintf("%f", v)
+	return fmt.Sprintf("%s", v)
 }
 func (u CustomUnit) String() string {
 	switch u {
