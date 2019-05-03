@@ -147,7 +147,7 @@ type Attr struct {
 	ListSize    string          `xml:"listSize,attr" toml:"listsize,omitempty" yaml:"listsize,omitempty" json:"listsize,omitempty"`
 	Enumeration Name            `xml:"enumeration,attr" toml:"enumeration,omitempty" yaml:"enumeration,omitempty" json:"enumeration,omitempty"`
 	Unit        string          `xml:"unit,attr" toml:"unit,omitempty" yaml:"unit,omitempty" json:"unit,omitempty"`
-	Multiplier  int             `xml:"multiplier,attr" toml:"multiplier,omitempty" yaml:"multiplier,omitempty" json:"multiplier,omitempty"`
+	Multiplier  Multiplier      `xml:"multiplier,attr" toml:"multiplier,omitempty" yaml:"multiplier,omitempty" json:"multiplier,omitempty"`
 	Desc        Desc            `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
 	Values      map[string]Name `xml:"value" toml:"values,omitempty" yaml:"values,omitempty" json:"values,omitempty"`
 	Bits        map[string]Name `xml:"bit" toml:"bits,omitempty" yaml:"bits,omitempty" json:"bits,omitempty"`
@@ -375,6 +375,7 @@ type Hex string
 type MfCode string
 type Length string
 type Int string
+type Multiplier string
 
 func (i Int) Valid() bool {
 	if i == "" {
