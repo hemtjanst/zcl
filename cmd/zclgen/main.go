@@ -1,8 +1,8 @@
 package main
 
 import (
+	"hemtjan.st/zcl/generator"
 	"log"
-	"neotor.se/zcl/generator"
 )
 
 func check(err error) {
@@ -13,8 +13,8 @@ func check(err error) {
 
 func main() {
 
-	check(codegen.GenerateCluster(
-		"neotor.se/zcl",
+	check(generator.GenerateCluster(
+		"hemtjan.st/zcl",
 		"./definition",
 		"./template",
 		"./cluster",

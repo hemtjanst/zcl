@@ -1,4 +1,4 @@
-package codegen
+package generator
 
 import (
 	"encoding/hex"

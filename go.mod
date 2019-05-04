@@ -1,4 +1,4 @@
-module neotor.se/zcl
+module hemtjan.st/zcl
 
 go 1.12
 

@@ -1,4 +1,4 @@
-package codegen
+package generator
 
 import (
 	"gopkg.in/yaml.v2"
