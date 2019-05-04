@@ -1,7 +1,7 @@
 package other
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // KeyEstablishment

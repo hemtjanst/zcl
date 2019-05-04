@@ -2,7 +2,7 @@
 package hvac
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // DeDebug

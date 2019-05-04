@@ -2,7 +2,7 @@
 package closures
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // WindowCovering

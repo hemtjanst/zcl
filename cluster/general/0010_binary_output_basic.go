@@ -1,7 +1,7 @@
 package general
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // BinaryOutputBasic

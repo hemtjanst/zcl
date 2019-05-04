@@ -2,7 +2,7 @@
 package lighting
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // BallastConfiguration

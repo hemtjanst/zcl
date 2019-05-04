@@ -2,7 +2,7 @@
 package measurement_and_sensing
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // TemperatureMeasurement

@@ -2,7 +2,7 @@
 package smart_energy
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // Message

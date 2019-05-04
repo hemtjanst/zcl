@@ -2,7 +2,7 @@
 package green_power
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // GreenPower

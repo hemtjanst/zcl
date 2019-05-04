@@ -2,7 +2,7 @@
 package manufacturer_specific
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // Ikea

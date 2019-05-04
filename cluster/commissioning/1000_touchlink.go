@@ -2,7 +2,7 @@
 package commissioning
 
 import (
-	"neotor.se/zcl"
+	"hemtjan.st/zcl"
 )
 
 // Touchlink

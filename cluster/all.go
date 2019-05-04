@@ -1,17 +1,17 @@
 package cluster
 
 import (
-	"neotor.se/zcl"
-	"neotor.se/zcl/cluster/closures"
-	"neotor.se/zcl/cluster/commissioning"
-	"neotor.se/zcl/cluster/general"
-	"neotor.se/zcl/cluster/green_power"
-	"neotor.se/zcl/cluster/hvac"
-	"neotor.se/zcl/cluster/lighting"
-	"neotor.se/zcl/cluster/measurement_and_sensing"
-	"neotor.se/zcl/cluster/ota_upgrade"
-	"neotor.se/zcl/cluster/other"
-	"neotor.se/zcl/cluster/smart_energy"
+	"hemtjan.st/zcl"
+	"hemtjan.st/zcl/cluster/closures"
+	"hemtjan.st/zcl/cluster/commissioning"
+	"hemtjan.st/zcl/cluster/general"
+	"hemtjan.st/zcl/cluster/green_power"
+	"hemtjan.st/zcl/cluster/hvac"
+	"hemtjan.st/zcl/cluster/lighting"
+	"hemtjan.st/zcl/cluster/measurement_and_sensing"
+	"hemtjan.st/zcl/cluster/ota_upgrade"
+	"hemtjan.st/zcl/cluster/other"
+	"hemtjan.st/zcl/cluster/smart_energy"
 )
 
 var Clusters = map[zcl.ClusterID]zcl.Cluster{
