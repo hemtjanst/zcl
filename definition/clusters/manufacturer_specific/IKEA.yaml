@@ -1,0 +1,36 @@
+clusters:
+  - id: "0x0001"
+    server:
+      attr:
+      - id: "0x0008"
+        name: Unknown 1
+        description: IKEA control outlet specific.
+        type: enum8
+        access: r
+      - id: "0x0009"
+        name: Unknown 2
+        description: IKEA control outlet specific.
+        type: enum8
+        access: r
+
+
+  - id: "0xFC7C"
+    mnfcode: "0x117C"
+    name: IKEA
+    description: IKEA control outlet cluster.
+    server:
+    attr:
+      - id: "0x0010"
+        mnfcode: "0x117C"
+        name: Unknown 1
+        type: u8
+        access: rw
+        required: true
+        showas: hex
+      - id: "0xFFFD"
+        mnfcode: "0x117C"
+        name: Unknown 2
+        type: u16
+        access: rw
+        required: true
+        showas: hex

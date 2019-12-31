@@ -153,7 +153,7 @@ server:
             type: u16
             default: "0x0000"
             required: true
-            units: s
+            unit: Seconds
             multiplier: 10
       - id: "0x03"
         name: Stop
@@ -177,7 +177,7 @@ server:
             type: u16
             default: "0x0000"
             required: true
-            units: s
+            unit: Seconds
             multiplier: 10
       - id: "0x05"
         name: Move (with On/Off)
@@ -224,7 +224,7 @@ server:
             type: u16
             default: "0x0000"
             required: true
-            units: s
+            unit: Seconds
             multiplier: 10
       - id: "0x07"
         name: Stop (with On/Off)

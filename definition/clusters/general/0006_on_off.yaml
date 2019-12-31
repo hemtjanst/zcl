@@ -3,47 +3,86 @@ id: "0x0006"
 name: On/Off
 description: Attributes and commands for switching devices between 'On' and 'Off'
     states.
+
+types:
+  OnOff: &onOff
+    id: "0x0000"
+    name: On Off
+    type: bool
+    access: r
+    default: "0"
+    required: true
+    report: true
+    scene: 1
+    values:
+      "0x00": Off
+      "0x01": On
+  GlobalSceneControl: &globalSceneControl
+    id: "0x4000"
+    name: Global Scene Control
+    type: bool
+    access: r
+    default: "0"
+  OnTime: &onTime
+    id: "0x4001"
+    name: On Time
+    type: u16
+    access: r
+    default: "0"
+    unit: Seconds
+    multiplier: 10
+  OffWaitTime: &offWaitTime
+    id: "0x4002"
+    name: Off Wait Time
+    type: u16
+    access: r
+    default: "0"
+    unit: Seconds
+    multiplier: 10
+  PoweronOnOff: &poweronOnOff
+    id: "0x4003"
+    name: PowerOn On/Off
+    type: enum8
+    access: rw
+    default: "0x01"
+    values:
+      "0x00": Off
+      "0x01": On
+      "0xFF": Previous
+  EffectIdentifier: &effectIdentifier
+    name: Effect Identifier
+    description: when turning lights off
+    type: enum8
+    default: "0x00"
+    required: true
+    values:
+      "0x00": Delayed all off
+      "0x01": Dying light
+  EffectVariant: &effectVariant
+    name: Effect Variant
+    description:
+    type: enum8
+    default: "0x00"
+    required: true
+    values:
+      "0x00": Fade to off in 0.8 seconds / 20% dim up in 0.5 then fade to off in 1 second
+      "0x01": No Fade
+      "0x02": 50% dim down in 0.8s then fade off in 12s
+  OnOffControl: &onOffControl
+    name: On/off control
+    description:
+    type: bmp8
+    default: "0x00"
+    required: true
+    bits:
+      "0": Accept only when on
 server:
     attr:
-      - id: "0x0000"
-        name: OnOff
-        type: bool
-        access: r
-        default: "0"
-        required: true
-        report: true
-        scene: 1
-        values:
-            "0x00": Off
-            "0x01": On
-      - id: "0x4000"
-        name: GlobalSceneControl
-        type: bool
-        access: r
-        default: "0"
-      - id: "0x4001"
-        name: OnTime
-        type: u16
-        access: r
-        default: "0"
-        unit: Seconds
-        multiplier: 10
-      - id: "0x4002"
-        name: OffWaitTime
-        type: u16
-        access: r
-        default: "0"
-        unit: Seconds
-        multiplier: 10
-      - id: "0x4003"
-        name: PowerOn OnOff
-        type: enum8
-        access: rw
-        default: "0x01"
-        values:
-            "0x00": Off
-            "0x01": On
-            "0xFF": Previous
+      - *onOff
+      - *globalSceneControl
+      - *onTime
+      - *offWaitTime
+      - *poweronOnOff
     cmd:
       - id: "0x00"
         name: Off
@@ -71,27 +110,8 @@ server:
         dir: recv
         required: m
         payloadattr:
-          - id: "0x0000"
-            name: Effect identifier
-            description: The effect identifier field specifies the fading effect to
-                use.
-            type: enum8
-            default: "0x00"
-            required: true
-            values:
-                "0x00": Delayed all off
-                "0x01": Dying light
-          - id: "0x0001"
-            name: Effect variant
-            description: The effect identifier field specifies the effect variant
-                to use.
-            type: enum8
-            default: "0x00"
-            required: true
-            values:
-                "0x00": Fade to off in 0.8 seconds / 20% dim up in 0.5 then fade to off in 1 second
-                "0x01": No Fade
-                "0x02": 50% dim down in 0.8s then fade off in 12s
+          - *effectIdentifier
+          - *effectVariant
       - id: "0x41"
         name: On with recall global scene
         description: The on with recall global scene command allows the recall of
@@ -107,31 +127,7 @@ server:
         dir: recv
         required: m
         payloadattr:
-          - id: "0x0000"
-            name: On/off control
-            description: The effect identifier field specifies the fading effect to
-                use.
-            type: bmp8
-            default: "0x00"
-            required: true
-            bits:
-                "0": Accept only when on
-          - id: "0x0001"
-            name: On time
-            description: Length of time (in 1/10ths second) that the lamp is to remain
-                on.
-            type: u16
-            default: "0x0000"
-            required: true
-            unit: Seconds
-            multiplier: 10
-          - id: "0x0002"
-            name: Off wait time
-            description: Length of time (in 1/10ths second) that the lamp shall remain
-                off.
-            type: u16
-            default: "0x0000"
-            required: true
-            unit: Seconds
-            multiplier: 10
+          - *onOffControl
+          - *onTime
+          - *offWaitTime
 client: {}
