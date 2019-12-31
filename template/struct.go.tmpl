@@ -1,0 +1,8 @@
+{{.Desc.Comment}}package {{package}}
+
+import "{{path}}"
+type CommandID = zcl.CommandID
+
+{{range .Types}}{{if .Name}}
+{{renderType .}}
+{{end}}{{end}}

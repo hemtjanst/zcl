@@ -1,0 +1,33 @@
+package {{package}}
+
+import "{{path}}"
+
+{{$clid:=.ID.Uint}}
+{{$mfc:=.MfCode}}
+
+// {{ $sn := .MfCode.Stn .Name}}{{$sn}}{{if .MfCode.Valid}}
+// Manufacturer code 0x{{fmt "%04X" $mfc.Uint}}{{end}}
+const {{$sn}}ID zcl.ClusterID = {{$clid}}
+
+var {{$sn}}Cluster = zcl.Cluster{
+    Name: "{{.Name}}",
+    ServerCmd: map[zcl.CommandID]func() zcl.Command{ {{range .Server.Command}}
+        {{.Name.Fmt}}Command: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
+    },
+    ClientCmd: map[zcl.CommandID]func() zcl.Command{ {{range .Client.Command}}
+        {{.Name.Fmt}}Command: func() zcl.Command { return new({{.Name.Fmt}}) },{{end}}
+    },
+    ServerAttr: map[zcl.AttrID]func() zcl.Attr{ {{range .Server.Attr}}
+        {{.Name.Fmt}}Attr: func() zcl.Attr { return new({{.Name.Fmt}}) },{{end}}
+    },
+    ClientAttr: map[zcl.AttrID]func() zcl.Attr{ {{range .Client.Attr}}
+        {{.Name.Fmt}}Attr: func() zcl.Attr { return new({{.Name.Fmt}}) },{{end}}
+    },
+    SceneAttr: []zcl.AttrID{ {{range .Server.SceneAttr}}
+        {{.Name.Fmt}}Attr, {{end}}
+    },
+}
+
+{{range .Command}}
+{{renderCommand .}}
+{{end}}

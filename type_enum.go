@@ -3,6 +3,8 @@ package zcl
 // Zenum8 is 8-bit enumeration (0xff = invalid). A/D = D
 type Zenum8 uint8
 
+func (e Zenum8) String() string { return Sprintf("0x%02X", uint8(e)) }
+
 func (e *Zenum8) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := uintLEUnmarshalZcl(1, buf)
 	*e = Zenum8(val)
@@ -16,6 +18,8 @@ func (e Zenum8) Valid() bool { return e != Zenum8(0xFF) }
 
 // Zenum16 is 16-bit enumeration (0xffff = invalid). A/D = D
 type Zenum16 uint16
+
+func (e Zenum16) String() string { return Sprintf("0x%04X", uint16(e)) }
 
 func (e *Zenum16) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := uintLEUnmarshalZcl(2, buf)

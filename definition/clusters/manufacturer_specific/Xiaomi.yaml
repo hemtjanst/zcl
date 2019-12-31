@@ -1,4 +1,4 @@
-clusters:
+.clusters:
   - id: "0x0001"
     mnfcode: "0x115F"
     server:

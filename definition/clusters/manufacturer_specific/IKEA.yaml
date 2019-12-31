@@ -1,4 +1,4 @@
-clusters:
+.clusters:
   - id: "0x0001"
     server:
       attr:

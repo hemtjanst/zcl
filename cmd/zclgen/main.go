@@ -3,21 +3,37 @@ package main
 import (
 	"hemtjan.st/zcl/generator"
 	"log"
+	"os"
 )
 
-func check(err error) {
+const (
+	GenPath = "./cluster"
+	ZdoPath = GenPath + "/zdo"
+)
+
+func check(stage string, err error) {
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error while generating %s: %v", stage, err)
 	}
 }
 
 func main() {
 
-	check(generator.GenerateCluster(
+	os.MkdirAll(GenPath, 0755)
+	os.MkdirAll(ZdoPath, 0755)
+
+	check("zdo", generator.GenerateZdo(
 		"hemtjan.st/zcl",
 		"./definition",
 		"./template",
-		"./cluster",
+		ZdoPath,
+	))
+
+	check("cluster", generator.GenerateStruct(
+		"hemtjan.st/zcl",
+		"./definition",
+		"./template",
+		GenPath,
 	))
 
 }

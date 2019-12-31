@@ -9,23 +9,23 @@ import (
 )
 
 var nativeTypes = map[string]string{
-	"dat8":              "[]byte",
-	"dat16":             "[]byte",
-	"dat24":             "[]byte",
-	"dat32":             "[]byte",
-	"dat40":             "[]byte",
-	"dat48":             "[]byte",
-	"dat56":             "[]byte",
-	"dat64":             "[]byte",
+	"dat8":              "[1]byte",
+	"dat16":             "[2]byte",
+	"dat24":             "[3]byte",
+	"dat32":             "[4]byte",
+	"dat40":             "[5]byte",
+	"dat48":             "[6]byte",
+	"dat56":             "[7]byte",
+	"dat64":             "[8]byte",
 	"bool":              "uint8",
-	"bmp8":              "[]byte",
-	"bmp16":             "[]byte",
-	"bmp24":             "[]byte",
-	"bmp32":             "[]byte",
-	"bmp40":             "[]byte",
-	"bmp48":             "[]byte",
-	"bmp56":             "[]byte",
-	"bmp64":             "[]byte",
+	"bmp8":              "[1]byte",
+	"bmp16":             "[2]byte",
+	"bmp24":             "[3]byte",
+	"bmp32":             "[4]byte",
+	"bmp40":             "[5]byte",
+	"bmp48":             "[6]byte",
+	"bmp56":             "[7]byte",
+	"bmp64":             "[8]byte",
 	"u8":                "uint8",
 	"u16":               "uint16",
 	"u24":               "uint32",
@@ -99,9 +99,11 @@ func (c Command) TypeCode(mnf MfCode) uint8 {
 }
 
 type Condition struct {
-	Attr  Hex `toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
-	Value Hex `toml:"value,omitempty" yaml:"value,omitempty" json:"value,omitempty"`
-	Mask  Hex `toml:"mask,omitempty" yaml:"mask,omitempty" json:"mask,omitempty"`
+	Desc  Desc `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
+	Name  Name `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	Attr  Hex  `toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
+	Value Hex  `toml:"value,omitempty" yaml:"value,omitempty" json:"value,omitempty"`
+	Mask  Hex  `toml:"mask,omitempty" yaml:"mask,omitempty" json:"mask,omitempty"`
 }
 
 func (a Attr) Equal(o Attr) bool {
@@ -134,6 +136,7 @@ func (a Attr) Equal(o Attr) bool {
 type Attr struct {
 	ID          Hex             `xml:"id,attr" toml:"id,omitempty" yaml:"id,omitempty" json:"id,omitempty"`
 	Name        Name            `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	ArgName     Name            `xml:"argname,attr" toml:"argname,omitempty" yaml:"argname,omitempty" json:"argname,omitempty"`
 	Type        Type            `xml:"type,attr" toml:"type,omitempty" yaml:"type,omitempty" json:"type,omitempty"`
 	ArrayType   Type            `xml:"arrayType,attr" toml:"arraytype,omitempty" yaml:"arraytype,omitempty" json:"arraytype,omitempty"`
 	Access      string          `xml:"access,attr" toml:"access,omitempty" yaml:"access,omitempty" json:"access,omitempty"`
@@ -152,6 +155,7 @@ type Attr struct {
 	Values      map[string]Name `xml:"value" toml:"values,omitempty" yaml:"values,omitempty" json:"values,omitempty"`
 	Bits        map[string]Name `xml:"bit" toml:"bits,omitempty" yaml:"bits,omitempty" json:"bits,omitempty"`
 	Cond        []Condition     `xml:"payload>condition" toml:"cond,omitempty" yaml:"cond,omitempty" json:"cond,omitempty"`
+	Marshal     string          `xml:"marshal" toml:"marshal,omitempty" yaml:"marshal,omitempty" json:"marshal,omitempty"`
 }
 
 func (a Attr) CanRead() bool {
@@ -159,6 +163,12 @@ func (a Attr) CanRead() bool {
 }
 func (a Attr) CanWrite() bool {
 	return a.Access == "rw" || a.Access == "w"
+}
+func (a Attr) ArgNameFmt() string {
+	if a.ArgName != "" {
+		return a.ArgName.Fmt()
+	}
+	return a.Name.Fmt()
 }
 
 type AttrSet struct {
@@ -207,13 +217,38 @@ type Device struct {
 	Icon string `xml:"icon,attr"`
 }
 
+type Zdo struct {
+	TypeMap  map[string]Attr `xml:"types" toml:"types,omitempty" yaml:"types,omitempty" json:"types,omitempty"`
+	Commands []Command       `xml:"commands" toml:"commands,omitempty" yaml:"commands,omitempty" json:"commands,omitempty"`
+}
+
+func sortedTypes(a map[string]Attr) (o []Attr) {
+	for _, v := range a {
+		o = append(o, v)
+	}
+	sort.Slice(o, func(i, j int) bool {
+		return o[i].Name < o[j].Name
+	})
+	return
+}
+
+func (c Zdo) Types() []Attr {
+	return sortedTypes(c.TypeMap)
+}
+
 type Cluster struct {
-	ID     Hex     `xml:"id,attr" toml:"id,omitempty" yaml:"id,omitempty" json:"id,omitempty"`
-	Name   Name    `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
-	MfCode MfCode  `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
-	Desc   Desc    `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
-	Server CmdAttr `xml:"server" toml:"server,omitempty" yaml:"server,omitempty" json:"server,omitempty"`
-	Client CmdAttr `xml:"client" toml:"client,omitempty" yaml:"client,omitempty" json:"client,omitempty"`
+	TypeMap  map[string]Attr `xml:"types" toml:"types,omitempty" yaml:"types,omitempty" json:"types,omitempty"`
+	ID       Hex             `xml:"id,attr" toml:"id,omitempty" yaml:"id,omitempty" json:"id,omitempty"`
+	Name     Name            `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	MfCode   MfCode          `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
+	Desc     Desc            `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
+	Server   CmdAttr         `xml:"server" toml:"server,omitempty" yaml:"server,omitempty" json:"server,omitempty"`
+	Client   CmdAttr         `xml:"client" toml:"client,omitempty" yaml:"client,omitempty" json:"client,omitempty"`
+	Clusters []Cluster       `xml:"clusters" toml:"clusters,omitempty" yaml:"clusters,omitempty" json:"clusters,omitempty"`
+}
+
+func (c Cluster) Types() []Attr {
+	return sortedTypes(c.TypeMap)
 }
 
 func (c Cluster) Command() []Command {
@@ -473,6 +508,20 @@ func (h Hex) Hex() string {
 	return fmt.Sprintf("%x", h.Uint())
 }
 
+func (h Hex) Hex2() string {
+	if !h.Valid(64) {
+		return ""
+	}
+	return fmt.Sprintf("0x%02X", h.Uint())
+}
+
+func (h Hex) Hex4() string {
+	if !h.Valid(64) {
+		return ""
+	}
+	return fmt.Sprintf("0x%04X", h.Uint())
+}
+
 func (h Hex) Bytes(size int) []byte {
 	v := h.Trim()
 	if len(v) == 0 {
@@ -565,10 +614,10 @@ func (d Desc) Trim() string {
 	for i, v := range parts {
 		parts[i] = strings.TrimSpace(v)
 	}
-	return strings.Join(parts, " ")
+	return strings.TrimSpace(strings.Join(parts, " "))
 }
 
-func (d Desc) Comment() string {
+func (d Desc) Comment(prefix ...string) string {
 	if len(d) == 0 {
 		return ""
 	}
@@ -580,7 +629,12 @@ func (d Desc) Comment() string {
 			out = append(out, p)
 		}
 	}
-
-	return fmt.Sprintf("// %s\n", strings.Join(out, "\n// "))
+	var pfx string
+	if len(prefix) > 0 {
+		pfx = strings.TrimSpace(
+			strings.Join(prefix, " "),
+		) + " "
+	}
+	return fmt.Sprintf("// %s%s\n", pfx, strings.Join(out, "\n// "))
 
 }

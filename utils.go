@@ -9,6 +9,7 @@ import (
 var (
 	StrJoin = strings.Join
 	Sprintf = fmt.Sprintf
+	Errorf  = fmt.Errorf
 )
 
 func Duration(t int, m int) time.Duration {

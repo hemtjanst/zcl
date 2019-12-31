@@ -39,18 +39,30 @@ func (s *SceneExtensionSet) UnmarshalZcl(b []byte) ([]byte, error) {
 	return nil, nil
 }
 
+func (s SceneExtensionSet) String() string {
+	var str []string
+	for _, v := range s {
+		str = append(str, Sprintf("%v", v))
+	}
+	return StrJoin(str, ", ")
+}
+
 type sceneExtension struct {
 	cluster Zu16
-	data    Zostring
+	data    Zbytes
 }
 
 func (s sceneExtension) MarshalZcl() ([]byte, error) {
 	return []byte(s.data), nil
 }
 func (s *sceneExtension) UnmarshalZcl(b []byte) ([]byte, error) {
-	s.data = Zostring(b)
+	s.data = Zbytes(b)
 	return nil, nil
 }
 func (s *sceneExtension) ClusterID() uint16 {
 	return uint16(s.cluster)
+}
+
+func (s *sceneExtension) String() string {
+	return Sprintf("Cluster[0x%04X] %s", s.cluster, s.data.String())
 }

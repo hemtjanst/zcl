@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"github.com/h2so5/half"
 	"math"
+	"strconv"
 )
 
 func uintLEMarshalZcl(ln int, o uint64) ([]byte, error) {
@@ -97,6 +98,26 @@ func float64UnmarshalZcl(ln int, b []byte) (float64, []byte, error) {
 	ui := binary.LittleEndian.Uint64(b[0:8])
 	return math.Float64frombits(ui), b[8:], nil
 }
+
+func (u Zu8) String() string     { return strconv.FormatUint(uint64(u), 10) }
+func (u Zu16) String() string    { return strconv.FormatUint(uint64(u), 10) }
+func (u Zu24) String() string    { return strconv.FormatUint(uint64(u), 10) }
+func (u Zu32) String() string    { return strconv.FormatUint(uint64(u), 10) }
+func (u Zu40) String() string    { return strconv.FormatUint(uint64(u), 10) }
+func (u Zu48) String() string    { return strconv.FormatUint(uint64(u), 10) }
+func (u Zu56) String() string    { return strconv.FormatUint(uint64(u), 10) }
+func (u Zu64) String() string    { return strconv.FormatUint(uint64(u), 10) }
+func (s Zs8) String() string     { return strconv.FormatInt(int64(s), 10) }
+func (s Zs16) String() string    { return strconv.FormatInt(int64(s), 10) }
+func (s Zs24) String() string    { return strconv.FormatInt(int64(s), 10) }
+func (s Zs32) String() string    { return strconv.FormatInt(int64(s), 10) }
+func (s Zs40) String() string    { return strconv.FormatInt(int64(s), 10) }
+func (s Zs48) String() string    { return strconv.FormatInt(int64(s), 10) }
+func (s Zs56) String() string    { return strconv.FormatInt(int64(s), 10) }
+func (s Zs64) String() string    { return strconv.FormatInt(int64(s), 10) }
+func (s Zsemi) String() string   { return strconv.FormatFloat(float64(s), 'f', -1, 32) }
+func (f Zfloat) String() string  { return strconv.FormatFloat(float64(f), 'f', -1, 32) }
+func (d Zdouble) String() string { return strconv.FormatFloat(float64(d), 'f', -1, 64) }
 
 // Zu8 is Unsigned 8-bit integer (0xff = invalid). A/D = A
 type Zu8 uint8

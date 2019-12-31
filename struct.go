@@ -1,49 +1,32 @@
 package zcl
 
 import (
+	"errors"
 	"fmt"
 )
 
-type ClusterID Zu16
 type ProfileID Zu16
 type CommandID Zu8
+type ZdoCmdID Zu16
 type TypeID Zu8
-type AttrID Zu16
 
-func (i AttrID) MarshalZcl() ([]byte, error)    { return Zu16(i).MarshalZcl() }
-func (i ClusterID) MarshalZcl() ([]byte, error) { return Zu16(i).MarshalZcl() }
 func (i ProfileID) MarshalZcl() ([]byte, error) { return Zu16(i).MarshalZcl() }
 func (i CommandID) MarshalZcl() ([]byte, error) { return Zu8(i).MarshalZcl() }
 func (i TypeID) MarshalZcl() ([]byte, error)    { return Zu8(i).MarshalZcl() }
-
-type AttrDef interface {
-	ID() AttrID
-	Value() Val
-}
-
-type Attribute struct {
-	ID    AttrID
-	Value Val
-}
+func (i TypeID) New() Val                       { return NewValue(uint8(i)) }
 
 const (
-	ReadAttr  CommandID = 0
-	WriteAttr CommandID = 2
-
-	ErrNotEnoughData errType = "not enough data"
-	ErrTooMuchData   errType = "too much data"
-	ErrNotImpl       errType = "not implemented"
+	ErrNotEnoughData      errType = "not enough data"
+	ErrTooMuchData        errType = "too much data"
+	ErrNotImpl            errType = "not implemented"
+	ErrInvalidArrayLength errType = "invalid length for array"
+	ErrInvalidType        errType = "invalid type"
+	ErrTimeout            errType = "timeout"
 )
 
-type Cluster struct {
-	ServerCmd  map[CommandID]func() Command
-	ServerAttr map[AttrID]func() Attr
-	ClientCmd  map[CommandID]func() Command
-	ClientAttr map[AttrID]func() Attr
-	SceneAttr  []AttrID
-}
 type Frame struct {
 	ExpectReply bool
+	IsReply     bool
 	Profile     ProfileID
 	Cluster     ClusterID
 	MnfCode     []byte
@@ -59,30 +42,67 @@ func (f *Frame) Check() error {
 	return nil
 }
 
+func (f *Frame) MarshalZcl() ([]byte, error) {
+	data := []byte{f.Type & 0x03}
+	if f.IsReply {
+		data[0] = data[0] | 0x08
+	}
+	if len(f.MnfCode) == 2 {
+		data[0] = data[0] | 0x04
+		data = append(data, f.MnfCode...)
+	}
+	data = append(data, uint8(f.Seq), uint8(f.CommandID))
+
+	if f.Payload != nil {
+		payload, err := f.Payload.MarshalZcl()
+		if err != nil {
+			return nil, err
+		}
+		data = append(data, payload...)
+	}
+	return data, nil
+}
+
+func (f *Frame) UnmarshalZcl(b []byte) ([]byte, error) {
+	if len(b) < 3 {
+		return nil, errors.New("too few bytes(frame:0)")
+	}
+	st := b[0]
+	b = b[1:]
+	f.Type = st & 0x03
+	f.IsReply = st&0x08 == 0x08
+	if st&0x04 == 0x04 {
+		if len(b) < 4 {
+			return nil, errors.New("too few bytes(frame:1)")
+		}
+		f.MnfCode = b[0:2]
+		b = b[2:]
+	}
+	f.Seq = b[0]
+	f.CommandID = CommandID(b[1])
+	return b[2:], nil
+}
+
 type Val interface {
 	MarshalZcl() ([]byte, error)
 	UnmarshalZcl([]byte) ([]byte, error)
 }
 
-type Attr interface {
-	Val
-	ID() AttrID
-	Name() string
-	String() string
-	Cluster() ClusterID
-	Readable() bool
-	Writable() bool
-	Reportable() bool
-	SceneIndex() int
-}
-
 type Command interface {
 	Val
+	Values() []Val
 	ID() CommandID
 	Name() string
 	String() string
 	Cluster() ClusterID
 	MnfCode() []byte
+}
+type General interface {
+	Val
+	Values() []Val
+	ID() CommandID
+	Name() string
+	String() string
 }
 
 type errType string
@@ -91,13 +111,6 @@ func (i *AttrID) UnmarshalZcl(b []byte) ([]byte, error) {
 	v := new(Zu16)
 	b, err := v.UnmarshalZcl(b)
 	*i = AttrID(*v)
-	return b, err
-}
-
-func (i *ClusterID) UnmarshalZcl(b []byte) ([]byte, error) {
-	v := new(Zu16)
-	b, err := v.UnmarshalZcl(b)
-	*i = ClusterID(*v)
 	return b, err
 }
 
@@ -121,33 +134,6 @@ func (i *TypeID) UnmarshalZcl(b []byte) ([]byte, error) {
 	*i = TypeID(*v)
 	return b, err
 }
-
-func (a Attribute) MarshalZcl() ([]byte, error) {
-	b1, err := a.ID.MarshalZcl()
-	if err != nil {
-		return nil, err
-	}
-	b2, err := a.Value.MarshalZcl()
-	if err != nil {
-		return nil, err
-	}
-
-	return append(b1, b2...), nil
-}
-func (a *Attribute) UnmarshalZcl(b []byte) ([]byte, error) {
-	var err error
-	b, err = (&a.ID).UnmarshalZcl(b)
-	if err != nil {
-		return b, err
-	}
-	b, err = a.Value.UnmarshalZcl(b)
-	if err != nil {
-		return b, err
-	}
-	return b, nil
-
-}
-func (a *Attribute) Values() []Val { return []Val{&a.ID, a.Value} }
 
 func (e errType) Error() string { return string(e) }
 
@@ -263,6 +249,30 @@ func NewValue(dataType uint8) Val {
 		return new(Zseckey)
 	}
 	return nil
+}
+
+func (i TypeID) Analog() bool {
+	switch i {
+
+	case 32, 33, 34, 35, 36, 37, 38, 39:
+		// unsigned ints
+		return true
+
+	case 40, 41, 42, 43, 44, 45, 46, 47:
+		// signed ints
+		return true
+
+	case 56, 57, 58:
+		// floats
+		return true
+
+	case 224, 225, 226:
+		// time & date
+		return true
+
+	default:
+		return false
+	}
 }
 
 func (i TypeID) String() string {

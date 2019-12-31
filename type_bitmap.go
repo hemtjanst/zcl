@@ -25,112 +25,110 @@ func BitmapSet(a []byte, b uint, v bool) []byte {
 	return a
 }
 
-// Zbmp8 is 8-bit bitmap. A/D = D
-type Zbmp8 []byte
+func BitmapList(b []byte) []int {
+	var bits []int
+	i := 0
+	for ln := len(b) - 1; ln >= 0; ln-- {
+		for bit := 0x01; bit < 0xff; bit = bit << 1 { // 1 2 4 8 16 32 64 128
+			if b[ln]&uint8(bit) == uint8(bit) {
+				bits = append(bits, i)
+			}
+			i++
+		}
+	}
+	return bits
+}
+
+func BitmapStringer(b []byte) string {
+	bits := BitmapList(b)
+	return Sprintf("Bits%v", bits)
+}
+
+type Zbmp8 [1]byte
+type Zbmp16 [2]byte
+type Zbmp24 [3]byte
+type Zbmp32 [4]byte
+type Zbmp40 [5]byte
+type Zbmp48 [6]byte
+type Zbmp56 [7]byte
+type Zbmp64 [8]byte
+
+func (b Zbmp8) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp16) String() string              { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp24) String() string              { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp32) String() string              { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp40) String() string              { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp48) String() string              { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp56) String() string              { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp64) String() string              { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp8) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(1, []byte(b[:])) }
+func (b Zbmp16) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(2, []byte(b[:])) }
+func (b Zbmp24) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(3, []byte(b[:])) }
+func (b Zbmp32) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(4, []byte(b[:])) }
+func (b Zbmp40) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(5, []byte(b[:])) }
+func (b Zbmp48) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(6, []byte(b[:])) }
+func (b Zbmp56) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(7, []byte(b[:])) }
+func (b Zbmp64) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(8, []byte(b[:])) }
+func (b *Zbmp8) Values() []Val               { return []Val{b} }
+func (b *Zbmp16) Values() []Val              { return []Val{b} }
+func (b *Zbmp24) Values() []Val              { return []Val{b} }
+func (b *Zbmp32) Values() []Val              { return []Val{b} }
+func (b *Zbmp40) Values() []Val              { return []Val{b} }
+func (b *Zbmp48) Values() []Val              { return []Val{b} }
+func (b *Zbmp56) Values() []Val              { return []Val{b} }
+func (b *Zbmp64) Values() []Val              { return []Val{b} }
+func (b Zbmp8) ID() TypeID                   { return 24 }
+func (b Zbmp16) ID() TypeID                  { return 25 }
+func (b Zbmp24) ID() TypeID                  { return 26 }
+func (b Zbmp32) ID() TypeID                  { return 27 }
+func (b Zbmp40) ID() TypeID                  { return 28 }
+func (b Zbmp48) ID() TypeID                  { return 29 }
+func (b Zbmp56) ID() TypeID                  { return 30 }
+func (b Zbmp64) ID() TypeID                  { return 31 }
 
 func (b *Zbmp8) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(1, buf)
-	*b = Zbmp8(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp8) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(1, []byte(b)) }
-func (b *Zbmp8) Values() []Val              { return []Val{b} }
-func (b *Zbmp8) ID() TypeID                 { return 24 }
-
-//
-
-// Zbmp16 is 16-bit bitmap. A/D = D
-type Zbmp16 []byte
 
 func (b *Zbmp16) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(2, buf)
-	*b = Zbmp16(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp16) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(2, []byte(b)) }
-func (b *Zbmp16) Values() []Val              { return []Val{b} }
-func (b *Zbmp16) ID() TypeID                 { return 25 }
-
-//
-
-// Zbmp24 is 24-bit bitmap. A/D = D
-type Zbmp24 []byte
-
 func (b *Zbmp24) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(3, buf)
-	*b = Zbmp24(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp24) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(3, []byte(b)) }
-func (b *Zbmp24) Values() []Val              { return []Val{b} }
-func (b *Zbmp24) ID() TypeID                 { return 26 }
-
-//
-
-// Zbmp32 is 32-bit bitmap. A/D = D
-type Zbmp32 []byte
 
 func (b *Zbmp32) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(4, buf)
-	*b = Zbmp32(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp32) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(4, []byte(b)) }
-func (b *Zbmp32) Values() []Val              { return []Val{b} }
-func (b *Zbmp32) ID() TypeID                 { return 27 }
-
-//
-
-// Zbmp40 is 40-bit bitmap. A/D = D
-type Zbmp40 []byte
 
 func (b *Zbmp40) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(5, buf)
-	*b = Zbmp40(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp40) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(5, []byte(b)) }
-func (b *Zbmp40) Values() []Val              { return []Val{b} }
-func (b *Zbmp40) ID() TypeID                 { return 28 }
-
-//
-
-// Zbmp48 is 48-bit bitmap. A/D = D
-type Zbmp48 []byte
 
 func (b *Zbmp48) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(6, buf)
-	*b = Zbmp48(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp48) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(6, []byte(b)) }
-func (b *Zbmp48) Values() []Val              { return []Val{b} }
-func (b *Zbmp48) ID() TypeID                 { return 29 }
-
-//
-
-// Zbmp56 is 56-bit bitmap. A/D = D
-type Zbmp56 []byte
 
 func (b *Zbmp56) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(7, buf)
-	*b = Zbmp56(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp56) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(7, []byte(b)) }
-func (b *Zbmp56) Values() []Val              { return []Val{b} }
-func (b *Zbmp56) ID() TypeID                 { return 30 }
-
-//
-
-// Zbmp64 is 64-bit bitmap. A/D = D
-type Zbmp64 []byte
 
 func (b *Zbmp64) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(8, buf)
-	*b = Zbmp64(val)
+	copy((*b)[:], val)
 	return buf, err
 }
-func (b Zbmp64) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(8, []byte(b)) }
-func (b *Zbmp64) Values() []Val              { return []Val{b} }
-func (b *Zbmp64) ID() TypeID                 { return 31 }

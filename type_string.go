@@ -58,6 +58,7 @@ func (o *Zostring) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (o Zostring) MarshalZcl() ([]byte, error) { return stringMarshalZcl("o1", string(o)) }
 func (o *Zostring) Values() []Val              { return []Val{o} }
 func (o *Zostring) ID() TypeID                 { return 65 }
+func (o Zostring) String() string              { return string(o) }
 
 //func (o Zostring) Valid() bool { return o != Zostring(255) }
 
@@ -72,6 +73,7 @@ func (c *Zcstring) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (c Zcstring) MarshalZcl() ([]byte, error) { return stringMarshalZcl("o1", string(c)) }
 func (c *Zcstring) Values() []Val              { return []Val{c} }
 func (c *Zcstring) ID() TypeID                 { return 66 }
+func (c Zcstring) String() string              { return string(c) }
 
 //func (c Zcstring) Valid() bool { return c != Zcstring(255) }
 
@@ -86,6 +88,7 @@ func (l *Zlostring) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (l Zlostring) MarshalZcl() ([]byte, error) { return stringMarshalZcl("o2", string(l)) }
 func (l *Zlostring) Values() []Val              { return []Val{l} }
 func (l *Zlostring) ID() TypeID                 { return 67 }
+func (l Zlostring) String() string              { return string(l) }
 
 //func (l Zlostring) Valid() bool { return l != Zlostring(65535) }
 
@@ -100,5 +103,6 @@ func (l *Zlcstring) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (l Zlcstring) MarshalZcl() ([]byte, error) { return stringMarshalZcl("o2", string(l)) }
 func (l *Zlcstring) Values() []Val              { return []Val{l} }
 func (l *Zlcstring) ID() TypeID                 { return 68 }
+func (l Zlcstring) String() string              { return string(l) }
 
 //func (l Zlcstring) Valid() bool { return l != Zlcstring(65535) }
