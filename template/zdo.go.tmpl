@@ -1,0 +1,12 @@
+package zdo
+
+import "{{path}}"
+type CommandID = zcl.ZdoCmdID
+
+{{range .Types}}{{if .Name}}
+{{renderType .}}
+{{end}}{{end}}
+
+{{range .Commands}}
+{{renderCommand . .ID.Hex4}}
+{{end}}

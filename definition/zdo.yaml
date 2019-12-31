@@ -1,0 +1,575 @@
+manufacturer: &manufacturer
+  0x100B: Philips
+  0x1021: Legrand
+  0x10F2: Ubisys
+  0x117C: Ikea
+  0x115F: Xiaomi
+  0x1037: Eurotronic
+
+templates:
+  condSuccess: &__cond_success
+    name: Status
+    value: 0x00
+    description: "successful"
+
+types:
+  status: &status
+    name: Status
+    description: Code, command is normally empty unless status is `Success`
+    type: enum8
+    values:
+      0x00: Success
+      0x80: Invalid Request Type
+      0x81: Device Not Found
+      0x82: Invalid Endpoint
+      0x83: Not Active
+      0x84: Not Supported
+      0x85: Timeout
+      0x86: No Match
+      0x88: No Entry
+      0x89: No Descriptor
+      0x8A: Insufficient Space
+      0x8B: Not Permitted
+      0x8C: Table Full
+      0x8D: Not Authorized
+  ieee: &ieee
+    name: IEEE Address
+    description: is a 64-bit MAC address
+    type: uid
+  nwk: &nwk
+    name: NWK Address
+    description: is a 16-bit Network address
+    showas: hex
+    type: u16
+  endpoint: &endpoint
+    name: Endpoint
+    showas: hex
+    type: u8
+    range: 0x01,0xfe
+  endpointList: &endpointList
+    name: Endpoint List
+    type: set
+    arraytype: u8
+  addrReqType: &addrReqType
+    name: Request Type
+    description: should be set to 1 if extended response is requested, 0 otherwise
+    type: enum8
+    values:
+      0x00: Single Device Response
+      0x01: Extended Response
+  startIndex: &startIndex
+    name: Start Index
+    type: u8
+    description: >
+      provides the starting index for the requested elements of the associated list.
+  profileId: &profileId
+    name: Profile ID
+    showas: hex
+    type: u16
+  deviceType: &deviceType
+    name: Device Type
+    type: enum16
+    values:
+      0x0000: On/Off Switch
+      0x0001: Level Control Switch
+      0x0002: On/Off Output
+      0x0003: Level Controllable Output
+      0x0004: Scene Selector
+      0x0005: Configuration Tool
+      0x0006: Remote Control
+      0x0007: Combined Interface
+      0x0008: Range Extender
+      0x0009: Mains Power Outlet
+      0x000a: Door lock
+      0x000c: Simple sensor
+      0x0010: On/off plug-in unit
+      0x0051: Smart plug
+      0x0060: GP Proxy
+      0x0061: GP Proxy Basic
+      0x0062: GP Target Plus
+      0x0063: GP Target
+      0x0064: GP Commissioning Tool
+      0x0065: GP Combo
+      0x0066: GP Combo Basic
+      0x0100: On/Off Light
+      0x0101: Dimmable Light
+      0x0102: Color Dimmable Light
+      0x0103: On/Off Light Switch
+      0x0104: Dimmer Switch
+      0x0105: Color Dimmer Switch
+      0x0106: Light Sensor
+      0x0107: Occupancy Sensor
+      0x0108: On/off ballast
+      0x0109: Dimmable ballast
+      0x010a: On/off plugin unit
+      0x010b: Dimmable plugin unit
+      0x010c: Color temperature light
+      0x010d: Extended color light
+      0x010e: Light level sensor
+      0x0110: Dimmable plug-in unit
+      0x0200: Shade
+      0x0201: Shade Controller
+      0x0202: Window Covering Device
+      0x0210: Extended color light 2
+      0x0220: Color temperature light 2
+      0x0300: Heating/Cooling Unit
+      0x0301: Thermostat
+      0x0302: Temperature Sensor
+      0x0303: Pump
+      0x0304: Pump Controller
+      0x0305: Pressure Sensor
+      0x0306: Flow Sensor
+      0x0400: IAS Control and Indicating Equipment
+      0x0401: IAS Ancillary Control Equipment
+      0x0402: IAS Zone
+      0x0403: IAS Warning Device
+      0x0500: Energy Service Portal
+      0x0501: Metering Device
+      0x0502: In-Premise Display
+      0x0503: Programmable Communicating Thermostat (PCT)
+      0x0504: Load Control Device
+      0x0505: Smart Appliance
+      0x0506: Prepayment Terminal
+      0x0507: Device Management
+      0x0800: Color controller
+      0x0810: Color scene controller
+      0x0820: Non color controller
+      0x0830: Non color scene controller
+      0x0840: Control bridge
+      0x0850: On/off sensor
+
+
+  inClusterList: &inClusterList
+    name: In Cluster List
+    description: is a list of input clusters
+    type: set
+    arraytype: u16
+  outClusterList: &outClusterList
+    name: Out Cluster List
+    description: is a list of output clusters
+    type: set
+    arraytype: u16
+  deviceCap: &deviceCap
+    name: Capability
+    description: specifies the device:s capabilities
+    type: bmp8
+    bits:
+      0: Pan Coordinator
+      1: Full Function
+      2: Mains Power
+      3: RX on Idle
+      6: Security
+      7: Allocate Address
+  serverMask: &serverMask
+    name: Server Mask
+    type: bmp16
+    bits:
+      0: Primary Trust Center
+      1: Backup Trust Center
+      2: Primary Binding Table Cache
+      3: Backup Binding Table Cache
+      4: Primary Discovery Cache
+      5: Backup Discovery Cache
+      6: Network Manager
+  userDesc: &userDesc
+    name: User Desc
+    type: cstring
+    description: |
+      is a user provided ASCII string of 16 characters set on a remote device.
+      If the string is shorter than 16 characters it should be padded with space characters (0x20).
+      Control characters (0x00-0x1f) are not allowed.
+  nodeDescSize: &nodeDescSize
+    name: Node Desc Size
+    type: u8
+    description: Size in bytes of the Node Descriptor
+  powerDescSize: &powerDescSize
+    name: Power Desc Size
+    type: u8
+    description: Size in bytes of the Power Descriptor
+  activeEndpointSize: &activeEndpointSize
+    name: Active Endpoint Size
+    type: u8
+    description: Size in bytes of the Active Endpoints List
+  simpleDescSizeList: &simpleDescSizeList
+    name: Simple Desc Size List
+    type: set
+    arraytype: u8
+    description: List of sizes for the different Simple Descriptors
+
+  mnfCode: &mnfCode
+    name: Manufacturer Code
+    type: enum16
+    values:
+      <<: *manufacturer
+
+  ndLogicalType: &ndType
+    name: Type
+    type: bmp8
+    bits:
+      3: User Desc Available
+      4: Complex Desc Available
+      5: Router
+      6: End Device
+  ndFrequency: &ndFrequency
+    name: Frequency Bands
+    type: bmp8
+    bits:
+      0: "868.0-868.6 MHz"
+      2: "902.0-928 MHz"
+      3: "2400.0-2483.5 MHz"
+  ndMaxBufSize: &ndMaxBufSize
+    name: Max Buffer Size
+    type: u8
+    range: 0x00,0x7F
+    description: |
+      specifies the maximum size, in octets, of the network sub-layer data unit (NSDU) for this node.
+      This is the maximum size of data or commands passed to or from the application by the application support sub-layer,
+      before any fragmentation or re-assembly.
+  ndMaxRxSize: &ndMaxRxSize
+    name: Max Incoming Transfer size
+    type: u16
+    range: 0x00,0x7FFF
+    description: >
+      specifies the maximum size, in octets, of the application sub-layer data unit (ASDU) that can be transferred to
+      this node in one single message transfer.
+  ndMaxTxSize: &ndMaxTxSize
+    name: Max Outgoing Transfer size
+    type: u16
+    range: 0x00,0x7FFF
+    description: |
+      specifies the maximum size, in octets, of the application sub-layer data unit (ASDU) that can be transferred from
+      this node in one single message transfer.
+  ndDescCap: &ndDescCap
+    name: Descriptor Capability
+    type: bmp8
+    bits:
+      0: Extended Active Endpoint List Available
+      1: Extended Simple Descriptor List Available
+  npMode: &npMode
+    name: Power Mode
+    type: bmp8
+    bits:
+      0: Constant Power Available
+      1: Rechargeable battery Available
+      2: Disposable Battery Available
+      4: Check In Periodically
+      5: Check In on Action
+  npSource: &npSource
+    name: Current Power Source
+    type: enum8
+    values:
+      0x00: Constant Power (Critical)
+      0x04: Constant Power (33%)
+      0x08: Constant Power (66%)
+      0x0B: Constant Power (100%)
+      0x10: Rech. battery (Critical)
+      0x14: Rech. battery (33%)
+      0x18: Rech. battery (66%)
+      0x1B: Rech. battery (100%)
+      0x20: Battery (Critical)
+      0x24: Battery (33%)
+      0x28: Battery (66%)
+      0x2B: Battery (100%)
+
+  deviceVersion: &deviceVersion
+    name: Device Version
+    type: u8
+    default: 0x00
+    description: is dependant on profile
+
+  bindingTarget: &bindingTarget
+    name: Binding Target
+    type: u16
+    showas: hex
+    description: NWK Address
+  sourceAddress: &sourceAddress
+    name: Source Address
+    description: of device generating the request
+    type: uid
+  sourceEndpoint: &sourceEndpoint
+    name: Source Endpoint
+    description: of device generating the request
+    type: u8
+    showas: hex
+  associatedDevices: &associatedDevices
+    name: Associated Devices
+    type: list
+    arraytype: u16
+
+commands:
+  - name: NWK Address Request
+    id: "0x0000"
+    required: true
+    description: |
+      queries the 16-bit address of the Remote Device based on its known IEEE address.
+      The destination addressing on this command shall be unicast or broadcast to all
+      devices supporting RX on when Idle (0xFFFD)
+    payloadattr:
+      - *ieee
+      - *addrReqType
+      - *startIndex
+  - name: NWK Address Response
+    id: "0x8000"
+    required: true
+    description: |
+    payloadattr:
+      - *status
+      - *ieee
+      - *nwk
+      - type: u8
+        marshal: "2*len(v.AssociatedDevices.Content)"
+        cond:
+          - *__cond_success
+      - <<: *startIndex
+        cond:
+          - *__cond_success
+      - <<: *associatedDevices
+        cond:
+          - *__cond_success
+  - name: IEEE Address Request
+    id: "0x0001"
+    required: true
+    description: |
+      queries the 64-bit IEEE address of the Remote Device based on its known 16-bit NWK address.
+      The command should always be sent by unicast.
+    payloadattr:
+      - *nwk
+      - *addrReqType
+      - *startIndex
+  - name: Node Desc Request
+    id: "0x0002"
+    required: true
+    description: |
+      queries the node descriptor of a remote device. Should be unicast to the remote device directly,
+      or to a device that contains the discovery information of the remote device.
+    payloadattr:
+      - *nwk
+  - name: Power Desc Request
+    id: "0x0003"
+    required: true
+    description: |
+      queries the power descriptor of a remote device. Should be unicast to the remote device directly,
+      or to a device that contains the discovery information of the remote device.
+    payloadattr:
+      - *nwk
+  - name: Simple Desc Request
+    id: "0x0004"
+    required: true
+    description: |
+      queries the Simple Descriptor of a remote device on a specific endpoint.
+      Simple Descriptor contains information about which clusters the device supports on the given endpoint.
+      Should be unicast to the remote device directly, or to a device that contains the discovery information of the remote device.
+    payloadattr:
+      - *nwk
+      - *endpoint
+  - name: Active Endpoint Request
+    id: "0x0005"
+    required: true
+    description: |
+      queries the remote device for a list of active endpoints. Should be unicast to the remote device directly,
+      or to a device that contains the discovery information of the remote device.
+    payloadattr:
+      - *nwk
+  - name: Match Desc Request
+    id: "0x0006"
+    required: true
+    description: |
+      is used to find remote devices supporting a specific simple descriptor match criterion. Normally broadcast
+      to all devices supporting RX on when Idle (0xFFFD)
+    payloadattr:
+      - *nwk
+      - *profileId
+      - *inClusterList
+      - *outClusterList
+  - name: Complex Desc Request
+    id: "0x0010"
+    description: |
+      queries the Complex Descriptor of a remote device. Should be unicast to the remote device directly,
+      or to a device that contains the discovery information of the remote device.
+    payloadattr:
+      - *nwk
+  - name: User Desc Request
+    id: "0x0011"
+    description: |
+      queries the User Descriptor of a remote device. Should be unicast to the remote device directly,
+      or to a device that contains the discovery information of the remote device.
+    payloadattr:
+      - *nwk
+  - name: Discovery Cache Request
+    id: "0x0012"
+    description: >
+      locates a Primary Discovery Cache on the network. Should be addressed to broadcast RXOnWhenIdle (0xFFFD)
+    payloadattr:
+      - *nwk
+      - *ieee
+  - name: Device Announce
+    id: "0x0013"
+    required: true
+    description: |
+      is sent by a joining or returning device, identifying it's NWK address, IEEE address and capabilities.
+      Normally sent to broadcast RXOnWhenIdle (0xFFFD)
+    payloadattr:
+      - *nwk
+      - *ieee
+      - *deviceCap
+  - name: User Desc Set Request
+    id: "0x0014"
+    description: >
+      requests the remote device to update it's user descriptor.
+    payloadattr:
+      - *nwk
+      - *userDesc
+  - name: System Server Discover Request
+    id: "0x0015"
+    description: >
+      discovers the location of a particular system server or servers as indicated by the Server Mask.
+      Should be sent to broadcast RXOnWhenIdle (0xFFFD)
+    payloadattr:
+      - *serverMask
+  - name: Discovery Store Request
+    id: "0x0016"
+    description: |
+      sent to a Discovery Cache Node to allocate memory of the provided sizes for cache storage.
+      If the node already exists in cache, it will be removed to allow storage of updated values.
+      Should be sent to the unicast address of a discovery cache device.
+    payloadattr:
+      - *nwk
+      - *ieee
+      - *nodeDescSize
+      - *powerDescSize
+      - *activeEndpointSize
+      - *simpleDescSizeList
+  - name: Node Desc Store Request
+    id: "0x0017"
+    description: |
+      sent to a Discovery Cache Node to store the provided Node Descriptor.
+      A DiscoveryStoreRequest should be sent and acknowledged with successful status before requesting storage.
+      Should be sent to the unicast address of a discovery cache device.
+    payloadattr:
+      - *nwk
+      - *ieee
+      - *ndType
+      - *ndFrequency
+      - *deviceCap
+      - *mnfCode
+      - *ndMaxBufSize
+      - *ndMaxRxSize
+      - *serverMask
+      - *ndMaxTxSize
+      - *ndDescCap
+  - name: Power Desc Store Request
+    id: "0x0018"
+    description: |
+      sent to a Discovery Cache Node to store the provided Power Descriptor.
+      A DiscoveryStoreRequest should be sent and acknowledged with successful status before requesting storage.
+      Should be sent to the unicast address of a discovery cache device.
+    payloadattr:
+      - *nwk
+      - *ieee
+      - *npMode
+      - *npSource
+  - name: Active Endpoint Store Request
+    id: "0x0019"
+    description: |
+      sent to a Discovery Cache Node to store the provided Active Endpoint list.
+      A DiscoveryStoreRequest should be sent and acknowledged with successful status before requesting storage.
+      Should be sent to the unicast address of a discovery cache device.
+    payloadattr:
+      - *nwk
+      - *ieee
+      - *endpointList
+  - name: Simple Desc Store Request
+    id: "0x001A"
+    description: |
+      sent to a Discovery Cache Node to store the provided Simple Descriptor.
+      A DiscoveryStoreRequest should be sent and acknowledged with successful status before requesting storage.
+      Should be sent to the unicast address of a discovery cache device.
+    payloadattr:
+      - *nwk
+      - *ieee
+      - type: u8
+        marshal: "8 + 2*len(v.InClusterList.Content) + 2*len(v.OutClusterList.Content)"
+      - *endpoint
+      - *profileId
+      - *deviceType
+      - *deviceVersion
+      - *inClusterList
+      - *outClusterList
+  - name: Remove Node Cache Request
+    id: "0x001B"
+    description: >
+      sent to a Discovery Cache Node will request it to remove cached values for the provided node.
+      Should be sent to the unicast address of a discovery cache device.
+    payloadattr:
+      - *nwk
+      - *ieee
+  - name: Find Node Cache Request
+    id: "0x001C"
+    description: |
+      broadcast to the network will generate a response from the Primary Discovery Cache holding information
+      for the device of interest
+    payloadattr:
+      - *nwk
+      - *ieee
+  - name: Extended Simple Desc Request
+    id: "0x001D"
+    description: |
+      should be unicast to the remote device or a discovery cache node. It is used to request information from
+      nodes that implements a larger number of clusters than can be described by a SimpleDescRequest
+    payloadattr:
+      - *nwk
+      - *endpoint
+      - *startIndex
+  - name: Extended Active Endpoint Request
+    id: "0x001E"
+    description: |
+      should be unicast to the remote device or a discovery cache node. It is used to request information from
+      nodes that implements a larger number of endpoints than can be described by a ActiveEndpointRequest
+    payloadattr:
+      - *nwk
+      - *startIndex
+  - name: End Device Bind Request
+    id: "0x0020"
+    description: |
+      is sent to the ZigBee coordinator from two different devices simultaneously.
+      * If the supplied endpoint is outside the specified range - a reply is sent with status `InvalidEndpoint`
+      * If only one device sends the request within a pre-configure timeout - a reply is sent with status `Timeout`
+      * If the ProfileID doesn't match or none of the In/OutClusterList elements match - a reply is sent with status `NoMatch`
+      * Otherwise, a reply is sent with status `Success` to each device
+
+      The Coordinator then needs to either send `BindRequest` or `UnbindRequest` for each matched `ClusterID`.
+      This is done by first issuing a `UnbindRequest` with any of the matched `ClusterID`:
+      * If the reply status is `NoEntry` - `BindRequest` will instead be sent for each matched `ClusterID`
+      * If the reply status is `Success` - additional unbind requests are sent the rest of the matched cluster
+
+      This enables the request to toggle the binding.
+    payloadattr:
+      - *bindingTarget
+      - *sourceAddress
+      - *sourceEndpoint
+      - *profileId
+      - *inClusterList
+      - *outClusterList
+
+simpleDescriptor: &simpleDescriptor
+  - *endpoint
+  - *profileId
+  - *deviceType
+  - *deviceVersion
+  - *inClusterList
+  - *outClusterList
+
+powerDescriptor: &powerDescriptor
+  - *npMode
+  - *npSource
+
+nodeDescriptor: &nodeDescriptor
+  - *ndType
+  - *ndFrequency
+  - *deviceCap
+  - *mnfCode
+  - *ndMaxBufSize
+  - *ndMaxRxSize
+  - *serverMask
+  - *ndMaxTxSize
+  - *ndDescCap

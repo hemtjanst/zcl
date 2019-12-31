@@ -1,0 +1,66 @@
+{{$cmd := .}}{{.Desc.Comment .Name.Fmt}}type {{.Name.Fmt}} struct { {{range .PayloadAttr}}{{if .Name}}
+    {{.Desc.Comment .ArgNameFmt}}{{.ArgNameFmt}} {{.Name.Fmt}}{{end}}{{end}}
+}
+
+// {{.Name.Fmt}}Command is the Command ID of {{.Name.Fmt}}
+const {{.Name.Fmt}}Command CommandID = {{.ID.Hex4}}
+
+// Values returns all values of {{.Name.Fmt}}
+func (v *{{.Name.Fmt}}) Values() []zcl.Val {
+    return []zcl.Val{ {{range .PayloadAttr}}{{if .Name}}
+        &v.{{.ArgNameFmt}},{{end}}{{end}}
+    }
+}
+
+
+// Name of the command (needed to fulfill interface)
+func ({{.Name.Fmt}}) Name() string { return "{{.Name}}" }
+
+// ID of the command (needed to fulfill interface)
+func ({{.Name.Fmt}}) ID() CommandID { return {{.Name.Fmt}}Command }
+
+// Cluster ID of the command (needed to fulfill interface)
+func ({{.Name.Fmt}}) Cluster() zcl.ClusterID { return {{clusterID}} }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func ({{.Name.Fmt}}) MnfCode() []byte { return []byte{ {{mfc.ByteStr}} } }
+
+// MarshalZcl returns the wire format representation of {{.Name.Fmt}}
+func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}
+    var data []byte
+    var tmp []byte
+    var err error
+    {{range .PayloadAttr}}
+        {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{else}} { {{end}}{{if .Marshal}}
+        x := zcl.{{.Type.Type}}({{.Marshal}}){{end}}
+        if tmp, err = {{if .Marshal}}x{{else}}v.{{.ArgNameFmt}}{{end}}.MarshalZcl(); err != nil {
+        return nil, err
+        }
+        data = append(data, tmp...)
+    } {{end}}
+    return data, nil {{ else }}
+    return nil, nil {{ end }}
+}
+
+// UnmarshalZcl parses the wire format representation into the {{.Name.Fmt}} struct
+func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAttr}}
+    var err error
+    {{range .PayloadAttr}}
+        {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{end}}
+        if b, err = {{if .Name}}(&v.{{.ArgNameFmt}}){{else}}new(zcl.{{.Type.Type}}){{end}}.UnmarshalZcl(b); err != nil {
+        return b, err
+        }
+        {{if .Cond}} } {{end}}
+    {{end}}
+{{ end }}return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v {{.Name.Fmt}}) String() string {
+    return zcl.Sprintf(
+        "{{.Name.Fmt}}{" + zcl.StrJoin([]string{ {{range .PayloadAttr}}{{if .Name}}
+            "{{.ArgNameFmt}}(%v)",{{end}}{{end}}
+        }, " ")+"}", {{range .PayloadAttr}}{{if .Name}}
+        v.{{.ArgNameFmt}},{{end}}{{end}}
+    )
+}
