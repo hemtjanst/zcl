@@ -111,7 +111,7 @@ types:
     type: u16
     unit: Seconds
     range: 0x0000,0xfffe
-    multiplier: 0.1
+    multiplier: 10
   Direction: &direction
     name: Direction
     type: enum8
