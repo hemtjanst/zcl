@@ -27,14 +27,23 @@ templates:
     type: u8
     access: r
     range: 0x00,0xff
+  Level: &level
+    type: u8
+    range: 0x01,0xfe
+  Hours: &hours
+    type: u24
+    access: rw
+    range: 0x000000,0xfffffe
+    unit: Hours
 
 types:
   Time: &time
     name: Time
     description: Time in seconds used for a whole color loop.
     type: u16
+    unit: Seconds
   HueDirection: &hueDirection
-    name: Direction
+    name: Hue Direction
     type: enum8
     values:
       "0x00": Decrement hue
@@ -65,12 +74,12 @@ types:
     name: Color Temperature max
   ColorTemperatureMinMireds: &colorTemperatureMinMireds
     <<: *colorTemperature
-    name: Color Temperature minimum Mireds
-    unit: Mireds
+    name: Color Temperature min Mireds
+    unit: Mired
   ColorTemperatureMaxMireds: &colorTemperatureMaxMireds
     <<: *colorTemperature
-    name: Color Temperature maximum Mireds
-    unit: Mireds
+    name: Color Temperature max Mireds
+    unit: Mired
   StepMode: &stepMode
     name: Step mode
     type: enum8
@@ -131,6 +140,7 @@ types:
     multiplier: 0.70556
   EnhancedHue: &enhancedHue
     <<: *hue
+    name: Enhanced Hue
     type: u16
     range: 0x0000,0xfffe
     multiplier: 0.002756094
@@ -472,63 +482,60 @@ types:
     name: White Point Y
     access: rw
     range: 0x0000,0xffff
-  ColorPointRX: &colorPointRX
+  ColorPointRedX: &colorPointRX
     <<: *colorPointX
     id: "0x0032"
     name: Color Point Red X
     access: rw
     range: 0x0000,0xffff
-  ColorPointRY: &colorPointRY
+  ColorPointRedY: &colorPointRY
     <<: *colorPointY
     id: "0x0033"
     name: Color Point Red Y
     access: rw
     range: 0x0000,0xffff
-  ColorPointRIntensity: &colorPointRIntensity
+  ColorPointRedIntensity: &colorPointRIntensity
     <<: *colorIntensity
     id: "0x0034"
     name: Color Point Red intensity
     access: rw
     invalid: "0xff"
-  ColorPointGX: &colorPointGX
+  ColorPointGreenX: &colorPointGX
     <<: *colorPointX
     id: "0x0036"
     name: Color Point Green X
     access: rw
     range: 0x0000,0xffff
-  ColorPointGY: &colorPointGY
+  ColorPointGreenY: &colorPointGY
     <<: *colorPointY
     id: "0x0037"
     name: Color Point Green Y
     access: rw
     range: 0x0000,0xffff
-  ColorPointGIntensity: &colorPointGIntensity
+  ColorPointGreenIntensity: &colorPointGIntensity
     <<: *colorIntensity
     id: "0x0038"
     name: Color Point Green intensity
     access: rw
     invalid: "0xff"
-  ColorPointBX: &colorPointBX
+  ColorPointBlueX: &colorPointBX
     <<: *colorPointX
     id: "0x003a"
     name: Color Point Blue X
     access: rw
     range: 0x0000,0xffff
-  ColorPointBY: &colorPointBY
+  ColorPointBlueY: &colorPointBY
     <<: *colorPointY
     id: "0x003b"
     name: Color Point Blue Y
     access: rw
     range: 0x0000,0xffff
-  ColorPointBIntensity: &colorPointBIntensity
+  ColorPointBlueIntensity: &colorPointBIntensity
     <<: *colorIntensity
     id: "0x003c"
     name: Color Point Blue intensity
     access: rw
     invalid: "0xff"
-  Level: &level
-    type: u8
-    range: 0x01,0xfe
   PhysicalMinLevel: &physicalMinLevel
     <<: *level
     id: "0x0000"
@@ -565,9 +572,10 @@ types:
     bits:
         0: Non-operational
         1: Lamp not in socket
-    MinLevel: &minLevel
+  MinLevel: &minLevel
     <<: *level
     id: "0x0010"
+    name: Min Level
     descriptino: |
       specifies the minimum light level the ballast is permitted to use.
       It is specified in the range 0x01 to 0xfe, and specifies the light
@@ -579,6 +587,7 @@ types:
   MaxLevel: &maxLevel
     <<: *minLevel
     id: "0x0011"
+    name: Max Level
     description: |
       specifies the maximum light level the ballast is permitted to use.
       It is specified in the range 0x01 to 0xfe, and specifies the light
@@ -601,10 +610,11 @@ types:
     range: "0x00,0xfe"
   PowerOnTime: &powerOnTime
     <<: *transitionTime
+    name: Power-On Time
     id: "0x0013"
     access: rw
     default: "0x0000"
-  IntrinsicBallastFactor: &intrinsicBallastFactor:
+  IntrinsicBallastFactor: &intrinsicBallastFactor
     id: "0x0014"
     name: Intrinsic Ballast Factor
     description: |
@@ -629,7 +639,7 @@ types:
     default: "0xff"
     range: 0x64,0xff
     unit: Percent
-  Quantity: &quantity
+  LampQuantity: &lampQuantity
     id: "0x0020"
     name: Lamp Quantity
     description: |
@@ -653,21 +663,19 @@ types:
       lamps.
     type: cstring
     access: rw
-  Hours: &hours
-    type: u24
-    access: rw
-    range: 0x000000,0xfffffe
   LampRatedHours: &lampRatedHours
     <<: *hours
     id: "0x0032"
+    name: Lamp Rated Hours
     description: |
       specifies the number of hours of use the lamps are rated for by
       the manufacturer
     default: "0xffffff"
     invalid: "0xffffff"
-  LampBurnHours: &LampBurnHours
+  LampBurnHours: &lampBurnHours
     <<: *hours
     id: "0x033"
+    name: Lamp Burn Hours
     description: |
       specifies the length of time, in hours, the currently connected
       lamps have been operated, cumulative since the last re-lamping. Burn
@@ -695,7 +703,12 @@ types:
       specifies the number of hours the LampBurnHours attribute can
       reach before an alarm is generated
     default: "0xffffff"
-
+  ColorX: &colorX
+    <<: *colorPointX
+    name: Color X
+  ColorY: &colorY
+    <<: *colorPointY
+    name: Color Y
 
   
 
@@ -703,8 +716,8 @@ clusters:
   - id: "0x0300"
     name: Color control
     description: |
-      Attributes and commands for controlling the color properties of a color-capable
-      light.
+      provides attributes and commands for controlling the color properties
+      of a color-capable light
     server:
         attr:
           - *currentHue
@@ -806,12 +819,8 @@ clusters:
             dir: recv
             required: true
             payloadattr:
-              - id: "0x0000"
-                name: Color x
-                type: u16
-              - id: "0x0001"
-                name: Color y
-                type: u16
+              - *colorX
+              - *colorY
               - *transitionTime
           - id: "0x08"
             name: Move color
@@ -901,9 +910,9 @@ clusters:
               - *colorTemperatureMaxMireds
     client: {}
   - id: "0x0301"
-    name: Ballas Configuration
+    name: Ballast Configuration
     description: |
-      Attributes and commands to configure a ballast.
+      provides attributes and commands to configure a ballast.
     server:
         attr:
           - *physicalMinLevel
@@ -915,7 +924,7 @@ clusters:
           - *powerOnTime
           - *intrinsicBallastFactor
           - *ballastFactorAdjustment
-          - *quantity
+          - *lampQuantity
           - *lampType
           - *lampManufacturer
           - *lampRatedHours
