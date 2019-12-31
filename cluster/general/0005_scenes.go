@@ -1,14 +1,12 @@
-// Attributes and commands for scene configuration and manipulation.
 package general
 
-import (
-	"hemtjan.st/zcl"
-)
+import "hemtjan.st/zcl"
 
 // Scenes
 const ScenesID zcl.ClusterID = 5
 
 var ScenesCluster = zcl.Cluster{
+	Name: "Scenes",
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
 		AddSceneCommand:           func() zcl.Command { return new(AddScene) },
 		ViewSceneCommand:          func() zcl.Command { return new(ViewScene) },
@@ -33,89 +31,98 @@ var ScenesCluster = zcl.Cluster{
 		CopySceneResponseCommand:          func() zcl.Command { return new(CopySceneResponse) },
 	},
 	ServerAttr: map[zcl.AttrID]func() zcl.Attr{
-		SceneCountAttr:       func() zcl.Attr { return new(SceneCount) },
-		CurrentSceneAttr:     func() zcl.Attr { return new(CurrentScene) },
-		CurrentGroupAttr:     func() zcl.Attr { return new(CurrentGroup) },
-		SceneValidAttr:       func() zcl.Attr { return new(SceneValid) },
-		SceneNameSupportAttr: func() zcl.Attr { return new(SceneNameSupport) },
-		LastConfiguredbyAttr: func() zcl.Attr { return new(LastConfiguredby) },
+		SceneCountAttr:            func() zcl.Attr { return new(SceneCount) },
+		CurrentSceneAttr:          func() zcl.Attr { return new(CurrentScene) },
+		CurrentGroupAttr:          func() zcl.Attr { return new(CurrentGroup) },
+		SceneValidAttr:            func() zcl.Attr { return new(SceneValid) },
+		SceneNameSupportAttr:      func() zcl.Attr { return new(SceneNameSupport) },
+		SceneLastConfiguredByAttr: func() zcl.Attr { return new(SceneLastConfiguredBy) },
 	},
 	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
 	SceneAttr:  []zcl.AttrID{},
 }
 
-// Add a scenes to the group.
+// AddScene Add a scenes to the group.
 type AddScene struct {
-	GroupId        zcl.Zu16
-	SceneId        zcl.Zu8
-	TransitionTime zcl.Zu16
-	SceneName      zcl.Zcstring
-	// The format of each extension field set is a 16 bit field carrying the cluster ID,
+	GroupId           GroupId
+	SceneId           SceneId
+	TransitionTimeSec TransitionTimeSec
+	SceneName         SceneName
+	// SceneExtensions The format of each extension field set is a 16 bit field carrying the cluster ID,
 	// followed by an 8 bit length field and the set of scene extension fields specified
 	// in  the  relevant  cluster. The length field holds the length in octets of that
 	// extension field set. Extension field set format:
 	// {{clusterId1, length 1, {extension field set 1}}, {clusterId2, length 2, {extension field set 2}} ...}
 	// I.e. the field would be a repeating struct with [ClusterID uint16] [OctetLength uint8] [AttrID ...uint16]
-	ExtensionFieldSets zcl.SceneExtensionSet
+	SceneExtensions SceneExtensions
 }
 
-const AddSceneCommand zcl.CommandID = 0
+// AddSceneCommand is the Command ID of AddScene
+const AddSceneCommand CommandID = 0x0000
 
+// Values returns all values of AddScene
 func (v *AddScene) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
 		&v.SceneId,
-		&v.TransitionTime,
+		&v.TransitionTimeSec,
 		&v.SceneName,
-		&v.ExtensionFieldSets,
+		&v.SceneExtensions,
 	}
 }
 
-func (v AddScene) ID() zcl.CommandID {
-	return AddSceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (AddScene) Name() string { return "Add scene" }
 
-func (v AddScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (AddScene) ID() CommandID { return AddSceneCommand }
 
-func (v AddScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (AddScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (AddScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of AddScene
 func (v AddScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTimeSec.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneName.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneName.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ExtensionFieldSets.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneExtensions.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the AddScene struct
 func (v *AddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -127,7 +134,7 @@ func (v *AddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.TransitionTime).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.TransitionTimeSec).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -135,49 +142,41 @@ func (v *AddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ExtensionFieldSets).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.SceneExtensions).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
 	return b, nil
 }
 
-func (v AddScene) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v AddScene) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-func (v AddScene) TransitionTimeString() string {
-	return zcl.Seconds.Format(float64(v.TransitionTime))
-}
-func (v AddScene) SceneNameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
-}
-func (v AddScene) ExtensionFieldSetsString() string {
-	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v AddScene) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	str = append(str, "SceneName["+v.SceneNameString()+"]")
-	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
-	return "AddScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"AddScene{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"SceneId(%v)",
+			"TransitionTimeSec(%v)",
+			"SceneName(%v)",
+			"SceneExtensions(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.SceneId,
+		v.TransitionTimeSec,
+		v.SceneName,
+		v.SceneExtensions,
+	)
 }
 
-func (AddScene) Name() string { return "Add scene" }
-
-// Views the scenes of a group.
+// ViewScene Views the scenes of a group.
 type ViewScene struct {
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const ViewSceneCommand zcl.CommandID = 1
+// ViewSceneCommand is the Command ID of ViewScene
+const ViewSceneCommand CommandID = 0x0001
 
+// Values returns all values of ViewScene
 func (v *ViewScene) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
@@ -185,36 +184,40 @@ func (v *ViewScene) Values() []zcl.Val {
 	}
 }
 
-func (v ViewScene) ID() zcl.CommandID {
-	return ViewSceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ViewScene) Name() string { return "View scene" }
 
-func (v ViewScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (ViewScene) ID() CommandID { return ViewSceneCommand }
 
-func (v ViewScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ViewScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ViewScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ViewScene
 func (v ViewScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ViewScene struct
 func (v *ViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -229,30 +232,28 @@ func (v *ViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v ViewScene) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v ViewScene) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v ViewScene) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "ViewScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ViewScene{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (ViewScene) Name() string { return "View scene" }
-
-// Removes a scenes of a group.
+// RemoveScene Removes a scenes of a group.
 type RemoveScene struct {
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const RemoveSceneCommand zcl.CommandID = 2
+// RemoveSceneCommand is the Command ID of RemoveScene
+const RemoveSceneCommand CommandID = 0x0002
 
+// Values returns all values of RemoveScene
 func (v *RemoveScene) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
@@ -260,36 +261,40 @@ func (v *RemoveScene) Values() []zcl.Val {
 	}
 }
 
-func (v RemoveScene) ID() zcl.CommandID {
-	return RemoveSceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RemoveScene) Name() string { return "Remove scene" }
 
-func (v RemoveScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (RemoveScene) ID() CommandID { return RemoveSceneCommand }
 
-func (v RemoveScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RemoveScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RemoveScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RemoveScene
 func (v RemoveScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RemoveScene struct
 func (v *RemoveScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -304,60 +309,61 @@ func (v *RemoveScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v RemoveScene) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v RemoveScene) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v RemoveScene) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "RemoveScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"RemoveScene{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (RemoveScene) Name() string { return "Remove scene" }
-
-// Removes all scenes of a group.
+// RemoveAllScenes Removes all scenes of a group.
 type RemoveAllScenes struct {
-	GroupId zcl.Zu16
+	GroupId GroupId
 }
 
-const RemoveAllScenesCommand zcl.CommandID = 3
+// RemoveAllScenesCommand is the Command ID of RemoveAllScenes
+const RemoveAllScenesCommand CommandID = 0x0003
 
+// Values returns all values of RemoveAllScenes
 func (v *RemoveAllScenes) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
 	}
 }
 
-func (v RemoveAllScenes) ID() zcl.CommandID {
-	return RemoveAllScenesCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RemoveAllScenes) Name() string { return "Remove all scenes" }
 
-func (v RemoveAllScenes) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (RemoveAllScenes) ID() CommandID { return RemoveAllScenesCommand }
 
-func (v RemoveAllScenes) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RemoveAllScenes) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RemoveAllScenes) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RemoveAllScenes
 func (v RemoveAllScenes) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RemoveAllScenes struct
 func (v *RemoveAllScenes) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -368,26 +374,26 @@ func (v *RemoveAllScenes) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v RemoveAllScenes) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v RemoveAllScenes) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	return "RemoveAllScenes{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"RemoveAllScenes{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+	)
 }
 
-func (RemoveAllScenes) Name() string { return "Remove all scenes" }
-
-// Stores a scene of a group for a device.
+// StoreScene Stores a scene of a group for a device.
 type StoreScene struct {
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const StoreSceneCommand zcl.CommandID = 4
+// StoreSceneCommand is the Command ID of StoreScene
+const StoreSceneCommand CommandID = 0x0004
 
+// Values returns all values of StoreScene
 func (v *StoreScene) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
@@ -395,36 +401,40 @@ func (v *StoreScene) Values() []zcl.Val {
 	}
 }
 
-func (v StoreScene) ID() zcl.CommandID {
-	return StoreSceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (StoreScene) Name() string { return "Store scene" }
 
-func (v StoreScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (StoreScene) ID() CommandID { return StoreSceneCommand }
 
-func (v StoreScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (StoreScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (StoreScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of StoreScene
 func (v StoreScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the StoreScene struct
 func (v *StoreScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -439,30 +449,28 @@ func (v *StoreScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v StoreScene) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v StoreScene) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v StoreScene) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "StoreScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"StoreScene{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (StoreScene) Name() string { return "Store scene" }
-
-// Recalls a scene of a group for a device.
+// RecallScene Recalls a scene of a group for a device.
 type RecallScene struct {
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const RecallSceneCommand zcl.CommandID = 5
+// RecallSceneCommand is the Command ID of RecallScene
+const RecallSceneCommand CommandID = 0x0005
 
+// Values returns all values of RecallScene
 func (v *RecallScene) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
@@ -470,36 +478,40 @@ func (v *RecallScene) Values() []zcl.Val {
 	}
 }
 
-func (v RecallScene) ID() zcl.CommandID {
-	return RecallSceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RecallScene) Name() string { return "Recall scene" }
 
-func (v RecallScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (RecallScene) ID() CommandID { return RecallSceneCommand }
 
-func (v RecallScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RecallScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RecallScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RecallScene
 func (v RecallScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RecallScene struct
 func (v *RecallScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -514,60 +526,61 @@ func (v *RecallScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v RecallScene) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v RecallScene) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v RecallScene) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "RecallScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"RecallScene{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (RecallScene) Name() string { return "Recall scene" }
-
-// Get the scenes of a group for a device.
+// GetSceneMembership Get the scenes of a group for a device.
 type GetSceneMembership struct {
-	GroupId zcl.Zu16
+	GroupId GroupId
 }
 
-const GetSceneMembershipCommand zcl.CommandID = 6
+// GetSceneMembershipCommand is the Command ID of GetSceneMembership
+const GetSceneMembershipCommand CommandID = 0x0006
 
+// Values returns all values of GetSceneMembership
 func (v *GetSceneMembership) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
 	}
 }
 
-func (v GetSceneMembership) ID() zcl.CommandID {
-	return GetSceneMembershipCommand
-}
+// Name of the command (needed to fulfill interface)
+func (GetSceneMembership) Name() string { return "Get scene membership" }
 
-func (v GetSceneMembership) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (GetSceneMembership) ID() CommandID { return GetSceneMembershipCommand }
 
-func (v GetSceneMembership) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (GetSceneMembership) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (GetSceneMembership) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of GetSceneMembership
 func (v GetSceneMembership) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the GetSceneMembership struct
 func (v *GetSceneMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -578,84 +591,97 @@ func (v *GetSceneMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v GetSceneMembership) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v GetSceneMembership) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	return "GetSceneMembership{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"GetSceneMembership{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+	)
 }
 
-func (GetSceneMembership) Name() string { return "Get scene membership" }
-
-// Same as Add Scene, except that transition time is specified in 1/10 s
+// EnhancedAddScene Same as Add Scene, except that transition time is specified in 1/10 s
 type EnhancedAddScene struct {
-	GroupId            zcl.Zu16
-	SceneId            zcl.Zu8
-	TransitionTime     zcl.Zu16
-	SceneName          zcl.Zcstring
-	ExtensionFieldSets zcl.SceneExtensionSet
+	GroupId        GroupId
+	SceneId        SceneId
+	TransitionTime TransitionTime
+	SceneName      SceneName
+	// SceneExtensions The format of each extension field set is a 16 bit field carrying the cluster ID,
+	// followed by an 8 bit length field and the set of scene extension fields specified
+	// in  the  relevant  cluster. The length field holds the length in octets of that
+	// extension field set. Extension field set format:
+	// {{clusterId1, length 1, {extension field set 1}}, {clusterId2, length 2, {extension field set 2}} ...}
+	// I.e. the field would be a repeating struct with [ClusterID uint16] [OctetLength uint8] [AttrID ...uint16]
+	SceneExtensions SceneExtensions
 }
 
-const EnhancedAddSceneCommand zcl.CommandID = 64
+// EnhancedAddSceneCommand is the Command ID of EnhancedAddScene
+const EnhancedAddSceneCommand CommandID = 0x0040
 
+// Values returns all values of EnhancedAddScene
 func (v *EnhancedAddScene) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
 		&v.SceneId,
 		&v.TransitionTime,
 		&v.SceneName,
-		&v.ExtensionFieldSets,
+		&v.SceneExtensions,
 	}
 }
 
-func (v EnhancedAddScene) ID() zcl.CommandID {
-	return EnhancedAddSceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedAddScene) Name() string { return "Enhanced Add Scene" }
 
-func (v EnhancedAddScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedAddScene) ID() CommandID { return EnhancedAddSceneCommand }
 
-func (v EnhancedAddScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedAddScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedAddScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedAddScene
 func (v EnhancedAddScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneName.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneName.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ExtensionFieldSets.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneExtensions.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedAddScene struct
 func (v *EnhancedAddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -675,49 +701,41 @@ func (v *EnhancedAddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ExtensionFieldSets).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.SceneExtensions).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
 	return b, nil
 }
 
-func (v EnhancedAddScene) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v EnhancedAddScene) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-func (v EnhancedAddScene) TransitionTimeString() string {
-	return zcl.Seconds.Format(float64(v.TransitionTime) / 0.1)
-}
-func (v EnhancedAddScene) SceneNameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
-}
-func (v EnhancedAddScene) ExtensionFieldSetsString() string {
-	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedAddScene) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	str = append(str, "SceneName["+v.SceneNameString()+"]")
-	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
-	return "EnhancedAddScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedAddScene{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"SceneId(%v)",
+			"TransitionTime(%v)",
+			"SceneName(%v)",
+			"SceneExtensions(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.SceneId,
+		v.TransitionTime,
+		v.SceneName,
+		v.SceneExtensions,
+	)
 }
 
-func (EnhancedAddScene) Name() string { return "Enhanced Add Scene" }
-
-// Views the scenes of a group (returning transition time with 1/10s precision).
+// EnhancedViewScene Views the scenes of a group (returning transition time with 1/10s precision).
 type EnhancedViewScene struct {
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const EnhancedViewSceneCommand zcl.CommandID = 65
+// EnhancedViewSceneCommand is the Command ID of EnhancedViewScene
+const EnhancedViewSceneCommand CommandID = 0x0041
 
+// Values returns all values of EnhancedViewScene
 func (v *EnhancedViewScene) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
@@ -725,36 +743,40 @@ func (v *EnhancedViewScene) Values() []zcl.Val {
 	}
 }
 
-func (v EnhancedViewScene) ID() zcl.CommandID {
-	return EnhancedViewSceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedViewScene) Name() string { return "Enhanced View Scene" }
 
-func (v EnhancedViewScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedViewScene) ID() CommandID { return EnhancedViewSceneCommand }
 
-func (v EnhancedViewScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedViewScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedViewScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedViewScene
 func (v EnhancedViewScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedViewScene struct
 func (v *EnhancedViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -769,35 +791,33 @@ func (v *EnhancedViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v EnhancedViewScene) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v EnhancedViewScene) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedViewScene) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "EnhancedViewScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedViewScene{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.SceneId,
+	)
 }
-
-func (EnhancedViewScene) Name() string { return "Enhanced View Scene" }
 
 type CopyScene struct {
-	Mode        zcl.Zbmp8
-	FromGroupId zcl.Zu16
-	FromSceneId zcl.Zu8
-	ToGroupId   zcl.Zu16
-	ToSceneId   zcl.Zu8
+	SceneCopyMode SceneCopyMode
+	FromGroupId   GroupId
+	FromSceneId   SceneId
+	ToGroupId     GroupId
+	ToSceneId     SceneId
 }
 
-const CopySceneCommand zcl.CommandID = 66
+// CopySceneCommand is the Command ID of CopyScene
+const CopySceneCommand CommandID = 0x0042
 
+// Values returns all values of CopyScene
 func (v *CopyScene) Values() []zcl.Val {
 	return []zcl.Val{
-		&v.Mode,
+		&v.SceneCopyMode,
 		&v.FromGroupId,
 		&v.FromSceneId,
 		&v.ToGroupId,
@@ -805,55 +825,62 @@ func (v *CopyScene) Values() []zcl.Val {
 	}
 }
 
-func (v CopyScene) ID() zcl.CommandID {
-	return CopySceneCommand
-}
+// Name of the command (needed to fulfill interface)
+func (CopyScene) Name() string { return "Copy Scene" }
 
-func (v CopyScene) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (CopyScene) ID() CommandID { return CopySceneCommand }
 
-func (v CopyScene) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (CopyScene) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (CopyScene) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of CopyScene
 func (v CopyScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Mode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneCopyMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.FromGroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.FromGroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.FromSceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.FromSceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ToGroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ToGroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ToSceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ToSceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the CopyScene struct
 func (v *CopyScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
-	if b, err = (&v.Mode).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.SceneCopyMode).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -876,47 +903,35 @@ func (v *CopyScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v CopyScene) ModeString() string {
-	var bstr []string
-	if zcl.BitmapTest([]byte(v.Mode), 0) {
-		bstr = append(bstr, "Copy All Scenes")
-	}
-	return zcl.StrJoin(bstr, ", ")
-}
-func (v CopyScene) FromGroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.FromGroupId))
-}
-func (v CopyScene) FromSceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.FromSceneId))
-}
-func (v CopyScene) ToGroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.ToGroupId))
-}
-func (v CopyScene) ToSceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.ToSceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v CopyScene) String() string {
-	var str []string
-	str = append(str, "Mode["+v.ModeString()+"]")
-	str = append(str, "FromGroupId["+v.FromGroupIdString()+"]")
-	str = append(str, "FromSceneId["+v.FromSceneIdString()+"]")
-	str = append(str, "ToGroupId["+v.ToGroupIdString()+"]")
-	str = append(str, "ToSceneId["+v.ToSceneIdString()+"]")
-	return "CopyScene{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"CopyScene{"+zcl.StrJoin([]string{
+			"SceneCopyMode(%v)",
+			"FromGroupId(%v)",
+			"FromSceneId(%v)",
+			"ToGroupId(%v)",
+			"ToSceneId(%v)",
+		}, " ")+"}",
+		v.SceneCopyMode,
+		v.FromGroupId,
+		v.FromSceneId,
+		v.ToGroupId,
+		v.ToSceneId,
+	)
 }
 
-func (CopyScene) Name() string { return "Copy Scene" }
-
-// Response to the add scene command.
+// AddSceneResponse Response to the add scene command.
 type AddSceneResponse struct {
-	Status  zcl.Status
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	Status  Status
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const AddSceneResponseCommand zcl.CommandID = 0
+// AddSceneResponseCommand is the Command ID of AddSceneResponse
+const AddSceneResponseCommand CommandID = 0x0000
 
+// Values returns all values of AddSceneResponse
 func (v *AddSceneResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -925,41 +940,46 @@ func (v *AddSceneResponse) Values() []zcl.Val {
 	}
 }
 
-func (v AddSceneResponse) ID() zcl.CommandID {
-	return AddSceneResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (AddSceneResponse) Name() string { return "Add scene response" }
 
-func (v AddSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (AddSceneResponse) ID() CommandID { return AddSceneResponseCommand }
 
-func (v AddSceneResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (AddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (AddSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of AddSceneResponse
 func (v AddSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the AddSceneResponse struct
 func (v *AddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -978,99 +998,109 @@ func (v *AddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v AddSceneResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v AddSceneResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v AddSceneResponse) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v AddSceneResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "AddSceneResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"AddSceneResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (AddSceneResponse) Name() string { return "Add scene response" }
-
-// Response to the view scene command.
+// ViewSceneResponse Response to the view scene command.
 type ViewSceneResponse struct {
-	Status             zcl.Status
-	GroupId            zcl.Zu16
-	SceneId            zcl.Zu8
-	TransitionTime     zcl.Zu16
-	SceneName          zcl.Zcstring
-	ExtensionFieldSets zcl.SceneExtensionSet
+	Status            Status
+	GroupId           GroupId
+	SceneId           SceneId
+	TransitionTimeSec TransitionTimeSec
+	SceneName         SceneName
+	// SceneExtensions The format of each extension field set is a 16 bit field carrying the cluster ID,
+	// followed by an 8 bit length field and the set of scene extension fields specified
+	// in  the  relevant  cluster. The length field holds the length in octets of that
+	// extension field set. Extension field set format:
+	// {{clusterId1, length 1, {extension field set 1}}, {clusterId2, length 2, {extension field set 2}} ...}
+	// I.e. the field would be a repeating struct with [ClusterID uint16] [OctetLength uint8] [AttrID ...uint16]
+	SceneExtensions SceneExtensions
 }
 
-const ViewSceneResponseCommand zcl.CommandID = 1
+// ViewSceneResponseCommand is the Command ID of ViewSceneResponse
+const ViewSceneResponseCommand CommandID = 0x0001
 
+// Values returns all values of ViewSceneResponse
 func (v *ViewSceneResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
 		&v.GroupId,
 		&v.SceneId,
-		&v.TransitionTime,
+		&v.TransitionTimeSec,
 		&v.SceneName,
-		&v.ExtensionFieldSets,
+		&v.SceneExtensions,
 	}
 }
 
-func (v ViewSceneResponse) ID() zcl.CommandID {
-	return ViewSceneResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ViewSceneResponse) Name() string { return "View scene response" }
 
-func (v ViewSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (ViewSceneResponse) ID() CommandID { return ViewSceneResponseCommand }
 
-func (v ViewSceneResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ViewSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ViewSceneResponse
 func (v ViewSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTimeSec.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneName.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneName.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ExtensionFieldSets.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneExtensions.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ViewSceneResponse struct
 func (v *ViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1086,7 +1116,7 @@ func (v *ViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.TransitionTime).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.TransitionTimeSec).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -1094,54 +1124,44 @@ func (v *ViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ExtensionFieldSets).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.SceneExtensions).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
 	return b, nil
 }
 
-func (v ViewSceneResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v ViewSceneResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v ViewSceneResponse) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-func (v ViewSceneResponse) TransitionTimeString() string {
-	return zcl.Seconds.Format(float64(v.TransitionTime))
-}
-func (v ViewSceneResponse) SceneNameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
-}
-func (v ViewSceneResponse) ExtensionFieldSetsString() string {
-	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v ViewSceneResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	str = append(str, "SceneName["+v.SceneNameString()+"]")
-	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
-	return "ViewSceneResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ViewSceneResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+			"SceneId(%v)",
+			"TransitionTimeSec(%v)",
+			"SceneName(%v)",
+			"SceneExtensions(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+		v.SceneId,
+		v.TransitionTimeSec,
+		v.SceneName,
+		v.SceneExtensions,
+	)
 }
 
-func (ViewSceneResponse) Name() string { return "View scene response" }
-
-// Response to the remove scene command.
+// RemoveSceneResponse Response to the remove scene command.
 type RemoveSceneResponse struct {
-	Status  zcl.Status
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	Status  Status
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const RemoveSceneResponseCommand zcl.CommandID = 2
+// RemoveSceneResponseCommand is the Command ID of RemoveSceneResponse
+const RemoveSceneResponseCommand CommandID = 0x0002
 
+// Values returns all values of RemoveSceneResponse
 func (v *RemoveSceneResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -1150,41 +1170,46 @@ func (v *RemoveSceneResponse) Values() []zcl.Val {
 	}
 }
 
-func (v RemoveSceneResponse) ID() zcl.CommandID {
-	return RemoveSceneResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RemoveSceneResponse) Name() string { return "Remove scene response" }
 
-func (v RemoveSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (RemoveSceneResponse) ID() CommandID { return RemoveSceneResponseCommand }
 
-func (v RemoveSceneResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RemoveSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RemoveSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RemoveSceneResponse
 func (v RemoveSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RemoveSceneResponse struct
 func (v *RemoveSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1203,34 +1228,30 @@ func (v *RemoveSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v RemoveSceneResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v RemoveSceneResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v RemoveSceneResponse) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v RemoveSceneResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "RemoveSceneResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"RemoveSceneResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (RemoveSceneResponse) Name() string { return "Remove scene response" }
-
-// Response to the remove all scenes command.
+// RemoveAllScenesResponse Response to the remove all scenes command.
 type RemoveAllScenesResponse struct {
-	Status  zcl.Status
-	GroupId zcl.Zu16
+	Status  Status
+	GroupId GroupId
 }
 
-const RemoveAllScenesResponseCommand zcl.CommandID = 3
+// RemoveAllScenesResponseCommand is the Command ID of RemoveAllScenesResponse
+const RemoveAllScenesResponseCommand CommandID = 0x0003
 
+// Values returns all values of RemoveAllScenesResponse
 func (v *RemoveAllScenesResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -1238,36 +1259,40 @@ func (v *RemoveAllScenesResponse) Values() []zcl.Val {
 	}
 }
 
-func (v RemoveAllScenesResponse) ID() zcl.CommandID {
-	return RemoveAllScenesResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RemoveAllScenesResponse) Name() string { return "Remove all scenes response" }
 
-func (v RemoveAllScenesResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (RemoveAllScenesResponse) ID() CommandID { return RemoveAllScenesResponseCommand }
 
-func (v RemoveAllScenesResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RemoveAllScenesResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RemoveAllScenesResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RemoveAllScenesResponse
 func (v RemoveAllScenesResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RemoveAllScenesResponse struct
 func (v *RemoveAllScenesResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1282,31 +1307,29 @@ func (v *RemoveAllScenesResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v RemoveAllScenesResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v RemoveAllScenesResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v RemoveAllScenesResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	return "RemoveAllScenesResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"RemoveAllScenesResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+	)
 }
 
-func (RemoveAllScenesResponse) Name() string { return "Remove all scenes response" }
-
-// Response to the store scene command.
+// StoreSceneResponse Response to the store scene command.
 type StoreSceneResponse struct {
-	Status  zcl.Status
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	Status  Status
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const StoreSceneResponseCommand zcl.CommandID = 4
+// StoreSceneResponseCommand is the Command ID of StoreSceneResponse
+const StoreSceneResponseCommand CommandID = 0x0004
 
+// Values returns all values of StoreSceneResponse
 func (v *StoreSceneResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -1315,41 +1338,46 @@ func (v *StoreSceneResponse) Values() []zcl.Val {
 	}
 }
 
-func (v StoreSceneResponse) ID() zcl.CommandID {
-	return StoreSceneResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (StoreSceneResponse) Name() string { return "Store scene response" }
 
-func (v StoreSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (StoreSceneResponse) ID() CommandID { return StoreSceneResponseCommand }
 
-func (v StoreSceneResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (StoreSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (StoreSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of StoreSceneResponse
 func (v StoreSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the StoreSceneResponse struct
 func (v *StoreSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1368,85 +1396,88 @@ func (v *StoreSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v StoreSceneResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v StoreSceneResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v StoreSceneResponse) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v StoreSceneResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "StoreSceneResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"StoreSceneResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (StoreSceneResponse) Name() string { return "Store scene response" }
-
-// Shows details about scene membership.
+// GetSceneMembershipResponse Shows details about scene membership.
 type GetSceneMembershipResponse struct {
-	Status    zcl.Status
-	Capacity  zcl.Zu8
-	GroupId   zcl.Zu16
-	SceneList zcl.Zset
+	Status Status
+	// SceneCapacity specifies remaining number of scenes that can be added
+	SceneCapacity SceneCapacity
+	GroupId       GroupId
+	SceneList     SceneList
 }
 
-const GetSceneMembershipResponseCommand zcl.CommandID = 6
+// GetSceneMembershipResponseCommand is the Command ID of GetSceneMembershipResponse
+const GetSceneMembershipResponseCommand CommandID = 0x0006
 
+// Values returns all values of GetSceneMembershipResponse
 func (v *GetSceneMembershipResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
-		&v.Capacity,
+		&v.SceneCapacity,
 		&v.GroupId,
 		&v.SceneList,
 	}
 }
 
-func (v GetSceneMembershipResponse) ID() zcl.CommandID {
-	return GetSceneMembershipResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (GetSceneMembershipResponse) Name() string { return "Get scene membership response" }
 
-func (v GetSceneMembershipResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (GetSceneMembershipResponse) ID() CommandID { return GetSceneMembershipResponseCommand }
 
-func (v GetSceneMembershipResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (GetSceneMembershipResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (GetSceneMembershipResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of GetSceneMembershipResponse
 func (v GetSceneMembershipResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Capacity.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneCapacity.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneList.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneList.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the GetSceneMembershipResponse struct
 func (v *GetSceneMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1454,7 +1485,7 @@ func (v *GetSceneMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.Capacity).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.SceneCapacity).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -1469,38 +1500,32 @@ func (v *GetSceneMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v GetSceneMembershipResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v GetSceneMembershipResponse) CapacityString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Capacity))
-}
-func (v GetSceneMembershipResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v GetSceneMembershipResponse) SceneListString() string {
-	return zcl.Sprintf("0x%X", zcl.Zset(v.SceneList))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v GetSceneMembershipResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "Capacity["+v.CapacityString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneList["+v.SceneListString()+"]")
-	return "GetSceneMembershipResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"GetSceneMembershipResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"SceneCapacity(%v)",
+			"GroupId(%v)",
+			"SceneList(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.SceneCapacity,
+		v.GroupId,
+		v.SceneList,
+	)
 }
-
-func (GetSceneMembershipResponse) Name() string { return "Get scene membership response" }
 
 type EnhancedAddSceneResponse struct {
-	Status  zcl.Status
-	GroupId zcl.Zu16
-	SceneId zcl.Zu8
+	Status  Status
+	GroupId GroupId
+	SceneId SceneId
 }
 
-const EnhancedAddSceneResponseCommand zcl.CommandID = 64
+// EnhancedAddSceneResponseCommand is the Command ID of EnhancedAddSceneResponse
+const EnhancedAddSceneResponseCommand CommandID = 0x0040
 
+// Values returns all values of EnhancedAddSceneResponse
 func (v *EnhancedAddSceneResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -1509,41 +1534,46 @@ func (v *EnhancedAddSceneResponse) Values() []zcl.Val {
 	}
 }
 
-func (v EnhancedAddSceneResponse) ID() zcl.CommandID {
-	return EnhancedAddSceneResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedAddSceneResponse) Name() string { return "Enhanced Add Scene response" }
 
-func (v EnhancedAddSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedAddSceneResponse) ID() CommandID { return EnhancedAddSceneResponseCommand }
 
-func (v EnhancedAddSceneResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedAddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedAddSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedAddSceneResponse
 func (v EnhancedAddSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedAddSceneResponse struct
 func (v *EnhancedAddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1562,38 +1592,40 @@ func (v *EnhancedAddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v EnhancedAddSceneResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v EnhancedAddSceneResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v EnhancedAddSceneResponse) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedAddSceneResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	return "EnhancedAddSceneResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedAddSceneResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+			"SceneId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+		v.SceneId,
+	)
 }
 
-func (EnhancedAddSceneResponse) Name() string { return "Enhanced Add Scene response" }
-
-// A scene description.
+// EnhancedViewSceneResponse A scene description.
 type EnhancedViewSceneResponse struct {
-	Status             zcl.Status
-	GroupId            zcl.Zu16
-	SceneId            zcl.Zu8
-	TransitionTime     zcl.Zu16
-	SceneName          zcl.Zcstring
-	ExtensionFieldSets zcl.SceneExtensionSet
+	Status         Status
+	GroupId        GroupId
+	SceneId        SceneId
+	TransitionTime TransitionTime
+	SceneName      SceneName
+	// SceneExtensions The format of each extension field set is a 16 bit field carrying the cluster ID,
+	// followed by an 8 bit length field and the set of scene extension fields specified
+	// in  the  relevant  cluster. The length field holds the length in octets of that
+	// extension field set. Extension field set format:
+	// {{clusterId1, length 1, {extension field set 1}}, {clusterId2, length 2, {extension field set 2}} ...}
+	// I.e. the field would be a repeating struct with [ClusterID uint16] [OctetLength uint8] [AttrID ...uint16]
+	SceneExtensions SceneExtensions
 }
 
-const EnhancedViewSceneResponseCommand zcl.CommandID = 65
+// EnhancedViewSceneResponseCommand is the Command ID of EnhancedViewSceneResponse
+const EnhancedViewSceneResponseCommand CommandID = 0x0041
 
+// Values returns all values of EnhancedViewSceneResponse
 func (v *EnhancedViewSceneResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -1601,60 +1633,68 @@ func (v *EnhancedViewSceneResponse) Values() []zcl.Val {
 		&v.SceneId,
 		&v.TransitionTime,
 		&v.SceneName,
-		&v.ExtensionFieldSets,
+		&v.SceneExtensions,
 	}
 }
 
-func (v EnhancedViewSceneResponse) ID() zcl.CommandID {
-	return EnhancedViewSceneResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedViewSceneResponse) Name() string { return "Enhanced View Scene response" }
 
-func (v EnhancedViewSceneResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedViewSceneResponse) ID() CommandID { return EnhancedViewSceneResponseCommand }
 
-func (v EnhancedViewSceneResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedViewSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedViewSceneResponse
 func (v EnhancedViewSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.SceneName.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneName.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ExtensionFieldSets.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.SceneExtensions.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedViewSceneResponse struct
 func (v *EnhancedViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1678,53 +1718,43 @@ func (v *EnhancedViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ExtensionFieldSets).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.SceneExtensions).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
 	return b, nil
 }
 
-func (v EnhancedViewSceneResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v EnhancedViewSceneResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v EnhancedViewSceneResponse) SceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.SceneId))
-}
-func (v EnhancedViewSceneResponse) TransitionTimeString() string {
-	return zcl.Seconds.Format(float64(v.TransitionTime) / 0.1)
-}
-func (v EnhancedViewSceneResponse) SceneNameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.SceneName))
-}
-func (v EnhancedViewSceneResponse) ExtensionFieldSetsString() string {
-	return zcl.Sprintf("%v", zcl.SceneExtensionSet(v.ExtensionFieldSets))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedViewSceneResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "SceneId["+v.SceneIdString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	str = append(str, "SceneName["+v.SceneNameString()+"]")
-	str = append(str, "ExtensionFieldSets["+v.ExtensionFieldSetsString()+"]")
-	return "EnhancedViewSceneResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedViewSceneResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+			"SceneId(%v)",
+			"TransitionTime(%v)",
+			"SceneName(%v)",
+			"SceneExtensions(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+		v.SceneId,
+		v.TransitionTime,
+		v.SceneName,
+		v.SceneExtensions,
+	)
 }
-
-func (EnhancedViewSceneResponse) Name() string { return "Enhanced View Scene response" }
 
 type CopySceneResponse struct {
-	Status      zcl.Status
-	FromGroupId zcl.Zu16
-	FromSceneId zcl.Zu8
+	Status      Status
+	FromGroupId GroupId
+	FromSceneId SceneId
 }
 
-const CopySceneResponseCommand zcl.CommandID = 66
+// CopySceneResponseCommand is the Command ID of CopySceneResponse
+const CopySceneResponseCommand CommandID = 0x0042
 
+// Values returns all values of CopySceneResponse
 func (v *CopySceneResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -1733,41 +1763,46 @@ func (v *CopySceneResponse) Values() []zcl.Val {
 	}
 }
 
-func (v CopySceneResponse) ID() zcl.CommandID {
-	return CopySceneResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (CopySceneResponse) Name() string { return "Copy Scene Response" }
 
-func (v CopySceneResponse) Cluster() zcl.ClusterID {
-	return ScenesID
-}
+// ID of the command (needed to fulfill interface)
+func (CopySceneResponse) ID() CommandID { return CopySceneResponseCommand }
 
-func (v CopySceneResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (CopySceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (CopySceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of CopySceneResponse
 func (v CopySceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.FromGroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.FromGroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.FromSceneId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.FromSceneId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the CopySceneResponse struct
 func (v *CopySceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1786,189 +1821,16 @@ func (v *CopySceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v CopySceneResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v CopySceneResponse) FromGroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.FromGroupId))
-}
-func (v CopySceneResponse) FromSceneIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.FromSceneId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v CopySceneResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "FromGroupId["+v.FromGroupIdString()+"]")
-	str = append(str, "FromSceneId["+v.FromSceneIdString()+"]")
-	return "CopySceneResponse{" + zcl.StrJoin(str, " ") + "}"
-}
-
-func (CopySceneResponse) Name() string { return "Copy Scene Response" }
-
-// SceneCount is an autogenerated attribute in the Scenes cluster
-type SceneCount zcl.Zu8
-
-const SceneCountAttr zcl.AttrID = 0
-
-func (SceneCount) ID() zcl.AttrID                { return SceneCountAttr }
-func (SceneCount) Cluster() zcl.ClusterID        { return ScenesID }
-func (SceneCount) Name() string                  { return "Scene Count" }
-func (SceneCount) Readable() bool                { return true }
-func (SceneCount) Writable() bool                { return false }
-func (SceneCount) Reportable() bool              { return false }
-func (SceneCount) SceneIndex() int               { return -1 }
-func (a *SceneCount) Value() *SceneCount         { return a }
-func (a SceneCount) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *SceneCount) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = SceneCount(*nt)
-	return br, err
-}
-
-func (a SceneCount) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// CurrentScene is an autogenerated attribute in the Scenes cluster
-type CurrentScene zcl.Zu8
-
-const CurrentSceneAttr zcl.AttrID = 1
-
-func (CurrentScene) ID() zcl.AttrID                { return CurrentSceneAttr }
-func (CurrentScene) Cluster() zcl.ClusterID        { return ScenesID }
-func (CurrentScene) Name() string                  { return "Current Scene" }
-func (CurrentScene) Readable() bool                { return true }
-func (CurrentScene) Writable() bool                { return false }
-func (CurrentScene) Reportable() bool              { return false }
-func (CurrentScene) SceneIndex() int               { return -1 }
-func (a *CurrentScene) Value() *CurrentScene       { return a }
-func (a CurrentScene) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *CurrentScene) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentScene(*nt)
-	return br, err
-}
-
-func (a CurrentScene) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// CurrentGroup is an autogenerated attribute in the Scenes cluster
-type CurrentGroup zcl.Zu16
-
-const CurrentGroupAttr zcl.AttrID = 2
-
-func (CurrentGroup) ID() zcl.AttrID                { return CurrentGroupAttr }
-func (CurrentGroup) Cluster() zcl.ClusterID        { return ScenesID }
-func (CurrentGroup) Name() string                  { return "Current Group" }
-func (CurrentGroup) Readable() bool                { return true }
-func (CurrentGroup) Writable() bool                { return false }
-func (CurrentGroup) Reportable() bool              { return false }
-func (CurrentGroup) SceneIndex() int               { return -1 }
-func (a *CurrentGroup) Value() *CurrentGroup       { return a }
-func (a CurrentGroup) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *CurrentGroup) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentGroup(*nt)
-	return br, err
-}
-
-func (a CurrentGroup) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// SceneValid is an autogenerated attribute in the Scenes cluster
-type SceneValid zcl.Zbool
-
-const SceneValidAttr zcl.AttrID = 3
-
-func (SceneValid) ID() zcl.AttrID                { return SceneValidAttr }
-func (SceneValid) Cluster() zcl.ClusterID        { return ScenesID }
-func (SceneValid) Name() string                  { return "Scene Valid" }
-func (SceneValid) Readable() bool                { return true }
-func (SceneValid) Writable() bool                { return false }
-func (SceneValid) Reportable() bool              { return false }
-func (SceneValid) SceneIndex() int               { return -1 }
-func (a *SceneValid) Value() *SceneValid         { return a }
-func (a SceneValid) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
-
-func (a *SceneValid) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zbool)
-	br, err := nt.UnmarshalZcl(b)
-	*a = SceneValid(*nt)
-	return br, err
-}
-
-func (a SceneValid) String() string {
-	return zcl.Sprintf("%v", zcl.Zbool(a))
-}
-
-// SceneNameSupport is an autogenerated attribute in the Scenes cluster
-type SceneNameSupport zcl.Zbmp8
-
-const SceneNameSupportAttr zcl.AttrID = 4
-
-func (SceneNameSupport) ID() zcl.AttrID                { return SceneNameSupportAttr }
-func (SceneNameSupport) Cluster() zcl.ClusterID        { return ScenesID }
-func (SceneNameSupport) Name() string                  { return "Scene Name Support" }
-func (SceneNameSupport) Readable() bool                { return true }
-func (SceneNameSupport) Writable() bool                { return false }
-func (SceneNameSupport) Reportable() bool              { return false }
-func (SceneNameSupport) SceneIndex() int               { return -1 }
-func (a *SceneNameSupport) Value() *SceneNameSupport   { return a }
-func (a SceneNameSupport) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
-
-func (a *SceneNameSupport) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zbmp8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = SceneNameSupport(*nt)
-	return br, err
-}
-
-func (a SceneNameSupport) String() string {
-	var bstr []string
-	if a.IsNamesSupported() {
-		bstr = append(bstr, "Names Supported")
-	}
-	return zcl.StrJoin(bstr, ", ")
-}
-
-func (a SceneNameSupport) IsNamesSupported() bool {
-	return zcl.BitmapTest([]byte(a), 7)
-}
-func (a *SceneNameSupport) SetNamesSupported(b bool) {
-	*a = SceneNameSupport(zcl.BitmapSet([]byte(*a), 7, b))
-}
-
-// LastConfiguredby is an autogenerated attribute in the Scenes cluster
-type LastConfiguredby zcl.Zuid
-
-const LastConfiguredbyAttr zcl.AttrID = 5
-
-func (LastConfiguredby) ID() zcl.AttrID                { return LastConfiguredbyAttr }
-func (LastConfiguredby) Cluster() zcl.ClusterID        { return ScenesID }
-func (LastConfiguredby) Name() string                  { return "Last ConfiguredBy" }
-func (LastConfiguredby) Readable() bool                { return true }
-func (LastConfiguredby) Writable() bool                { return false }
-func (LastConfiguredby) Reportable() bool              { return false }
-func (LastConfiguredby) SceneIndex() int               { return -1 }
-func (a *LastConfiguredby) Value() *LastConfiguredby   { return a }
-func (a LastConfiguredby) MarshalZcl() ([]byte, error) { return zcl.Zuid(a).MarshalZcl() }
-
-func (a *LastConfiguredby) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zuid)
-	br, err := nt.UnmarshalZcl(b)
-	*a = LastConfiguredby(*nt)
-	return br, err
-}
-
-func (a LastConfiguredby) String() string {
-	return zcl.Sprintf("%v", zcl.Zuid(a))
+	return zcl.Sprintf(
+		"CopySceneResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"FromGroupId(%v)",
+			"FromSceneId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.FromGroupId,
+		v.FromSceneId,
+	)
 }

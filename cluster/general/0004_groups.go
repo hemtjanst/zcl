@@ -1,14 +1,12 @@
-// Attributes and commands for group configuration and manipulation.
 package general
 
-import (
-	"hemtjan.st/zcl"
-)
+import "hemtjan.st/zcl"
 
 // Groups
 const GroupsID zcl.ClusterID = 4
 
 var GroupsCluster = zcl.Cluster{
+	Name: "Groups",
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
 		AddGroupCommand:              func() zcl.Command { return new(AddGroup) },
 		ViewGroupCommand:             func() zcl.Command { return new(ViewGroup) },
@@ -30,14 +28,16 @@ var GroupsCluster = zcl.Cluster{
 	SceneAttr:  []zcl.AttrID{},
 }
 
-// Add a group to the device.
+// AddGroup will add a group to the device
 type AddGroup struct {
-	GroupId   zcl.Zu16
-	GroupName zcl.Zcstring
+	GroupId   GroupId
+	GroupName GroupName
 }
 
-const AddGroupCommand zcl.CommandID = 0
+// AddGroupCommand is the Command ID of AddGroup
+const AddGroupCommand CommandID = 0x0000
 
+// Values returns all values of AddGroup
 func (v *AddGroup) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
@@ -45,36 +45,40 @@ func (v *AddGroup) Values() []zcl.Val {
 	}
 }
 
-func (v AddGroup) ID() zcl.CommandID {
-	return AddGroupCommand
-}
+// Name of the command (needed to fulfill interface)
+func (AddGroup) Name() string { return "Add group" }
 
-func (v AddGroup) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (AddGroup) ID() CommandID { return AddGroupCommand }
 
-func (v AddGroup) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (AddGroup) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (AddGroup) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of AddGroup
 func (v AddGroup) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupName.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupName.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the AddGroup struct
 func (v *AddGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -89,60 +93,61 @@ func (v *AddGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v AddGroup) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v AddGroup) GroupNameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v AddGroup) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "GroupName["+v.GroupNameString()+"]")
-	return "AddGroup{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"AddGroup{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"GroupName(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.GroupName,
+	)
 }
 
-func (AddGroup) Name() string { return "Add group" }
-
-// Get the name of a group.
+// ViewGroup requests the name of a group
 type ViewGroup struct {
-	GroupId zcl.Zu16
+	GroupId GroupId
 }
 
-const ViewGroupCommand zcl.CommandID = 1
+// ViewGroupCommand is the Command ID of ViewGroup
+const ViewGroupCommand CommandID = 0x0001
 
+// Values returns all values of ViewGroup
 func (v *ViewGroup) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
 	}
 }
 
-func (v ViewGroup) ID() zcl.CommandID {
-	return ViewGroupCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ViewGroup) Name() string { return "View group" }
 
-func (v ViewGroup) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (ViewGroup) ID() CommandID { return ViewGroupCommand }
 
-func (v ViewGroup) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ViewGroup) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ViewGroup) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ViewGroup
 func (v ViewGroup) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ViewGroup struct
 func (v *ViewGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -153,56 +158,59 @@ func (v *ViewGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v ViewGroup) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v ViewGroup) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	return "ViewGroup{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ViewGroup{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+		}, " ")+"}",
+		v.GroupId,
+	)
 }
 
-func (ViewGroup) Name() string { return "View group" }
-
-// Get the group membership of the device. Send an empty group list to request all group memberships
+// GetGroupMembership fetches group membership(s). Request with empty list to request all memberships
 type GetGroupMembership struct {
-	GroupList zcl.Zset
+	GroupList GroupList
 }
 
-const GetGroupMembershipCommand zcl.CommandID = 2
+// GetGroupMembershipCommand is the Command ID of GetGroupMembership
+const GetGroupMembershipCommand CommandID = 0x0002
 
+// Values returns all values of GetGroupMembership
 func (v *GetGroupMembership) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupList,
 	}
 }
 
-func (v GetGroupMembership) ID() zcl.CommandID {
-	return GetGroupMembershipCommand
-}
+// Name of the command (needed to fulfill interface)
+func (GetGroupMembership) Name() string { return "Get group membership" }
 
-func (v GetGroupMembership) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (GetGroupMembership) ID() CommandID { return GetGroupMembershipCommand }
 
-func (v GetGroupMembership) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (GetGroupMembership) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (GetGroupMembership) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of GetGroupMembership
 func (v GetGroupMembership) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupList.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupList.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the GetGroupMembership struct
 func (v *GetGroupMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -213,123 +221,130 @@ func (v *GetGroupMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v GetGroupMembership) GroupListString() string {
-	return zcl.Sprintf("0x%X", zcl.Zset(v.GroupList))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v GetGroupMembership) String() string {
-	var str []string
-	str = append(str, "GroupList["+v.GroupListString()+"]")
-	return "GetGroupMembership{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"GetGroupMembership{"+zcl.StrJoin([]string{
+			"GroupList(%v)",
+		}, " ")+"}",
+		v.GroupList,
+	)
 }
 
-func (GetGroupMembership) Name() string { return "Get group membership" }
-
-// Remove a group from the device.
+// RemoveGroup Remove a group from the device.
 type RemoveGroup struct {
-	GroupId zcl.Zu16
+	GroupList GroupList
 }
 
-const RemoveGroupCommand zcl.CommandID = 3
+// RemoveGroupCommand is the Command ID of RemoveGroup
+const RemoveGroupCommand CommandID = 0x0003
 
+// Values returns all values of RemoveGroup
 func (v *RemoveGroup) Values() []zcl.Val {
 	return []zcl.Val{
-		&v.GroupId,
+		&v.GroupList,
 	}
 }
 
-func (v RemoveGroup) ID() zcl.CommandID {
-	return RemoveGroupCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RemoveGroup) Name() string { return "Remove group" }
 
-func (v RemoveGroup) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (RemoveGroup) ID() CommandID { return RemoveGroupCommand }
 
-func (v RemoveGroup) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RemoveGroup) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RemoveGroup) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RemoveGroup
 func (v RemoveGroup) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupList.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RemoveGroup struct
 func (v *RemoveGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
-	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.GroupList).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
 	return b, nil
 }
 
-func (v RemoveGroup) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v RemoveGroup) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	return "RemoveGroup{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"RemoveGroup{"+zcl.StrJoin([]string{
+			"GroupList(%v)",
+		}, " ")+"}",
+		v.GroupList,
+	)
 }
 
-func (RemoveGroup) Name() string { return "Remove group" }
-
-// Remove all group from the device.
+// RemoveAllGroups Remove all group from the device.
 type RemoveAllGroups struct {
 }
 
-const RemoveAllGroupsCommand zcl.CommandID = 4
+// RemoveAllGroupsCommand is the Command ID of RemoveAllGroups
+const RemoveAllGroupsCommand CommandID = 0x0004
 
+// Values returns all values of RemoveAllGroups
 func (v *RemoveAllGroups) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-func (v RemoveAllGroups) ID() zcl.CommandID {
-	return RemoveAllGroupsCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RemoveAllGroups) Name() string { return "Remove all groups" }
 
-func (v RemoveAllGroups) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (RemoveAllGroups) ID() CommandID { return RemoveAllGroupsCommand }
 
-func (v RemoveAllGroups) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RemoveAllGroups) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RemoveAllGroups) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RemoveAllGroups
 func (v RemoveAllGroups) MarshalZcl() ([]byte, error) {
 	return nil, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RemoveAllGroups struct
 func (v *RemoveAllGroups) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+// String returns a log-friendly string representation of the struct
 func (v RemoveAllGroups) String() string {
-	var str []string
-	return "RemoveAllGroups{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"RemoveAllGroups{" + zcl.StrJoin([]string{}, " ") + "}",
+	)
 }
 
-func (RemoveAllGroups) Name() string { return "Remove all groups" }
-
-// Add a group to the device if the device is currently identifying itself (using the identify cluster)
+// AddGroupIfIdentifying Add a group to the device if the device is currently identifying itself (using the identify cluster)
 type AddGroupIfIdentifying struct {
-	GroupId   zcl.Zu16
-	GroupName zcl.Zcstring
+	GroupId   GroupId
+	GroupName GroupName
 }
 
-const AddGroupIfIdentifyingCommand zcl.CommandID = 5
+// AddGroupIfIdentifyingCommand is the Command ID of AddGroupIfIdentifying
+const AddGroupIfIdentifyingCommand CommandID = 0x0005
 
+// Values returns all values of AddGroupIfIdentifying
 func (v *AddGroupIfIdentifying) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.GroupId,
@@ -337,36 +352,40 @@ func (v *AddGroupIfIdentifying) Values() []zcl.Val {
 	}
 }
 
-func (v AddGroupIfIdentifying) ID() zcl.CommandID {
-	return AddGroupIfIdentifyingCommand
-}
+// Name of the command (needed to fulfill interface)
+func (AddGroupIfIdentifying) Name() string { return "Add group if identifying" }
 
-func (v AddGroupIfIdentifying) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (AddGroupIfIdentifying) ID() CommandID { return AddGroupIfIdentifyingCommand }
 
-func (v AddGroupIfIdentifying) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (AddGroupIfIdentifying) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (AddGroupIfIdentifying) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of AddGroupIfIdentifying
 func (v AddGroupIfIdentifying) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupName.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupName.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the AddGroupIfIdentifying struct
 func (v *AddGroupIfIdentifying) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -381,30 +400,28 @@ func (v *AddGroupIfIdentifying) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v AddGroupIfIdentifying) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v AddGroupIfIdentifying) GroupNameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v AddGroupIfIdentifying) String() string {
-	var str []string
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "GroupName["+v.GroupNameString()+"]")
-	return "AddGroupIfIdentifying{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"AddGroupIfIdentifying{"+zcl.StrJoin([]string{
+			"GroupId(%v)",
+			"GroupName(%v)",
+		}, " ")+"}",
+		v.GroupId,
+		v.GroupName,
+	)
 }
 
-func (AddGroupIfIdentifying) Name() string { return "Add group if identifying" }
-
-// The Response to the add group request.
+// AddGroupResponse The Response to the add group request.
 type AddGroupResponse struct {
-	Status  zcl.Status
-	GroupId zcl.Zu16
+	Status  Status
+	GroupId GroupId
 }
 
-const AddGroupResponseCommand zcl.CommandID = 0
+// AddGroupResponseCommand is the Command ID of AddGroupResponse
+const AddGroupResponseCommand CommandID = 0x0000
 
+// Values returns all values of AddGroupResponse
 func (v *AddGroupResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -412,36 +429,40 @@ func (v *AddGroupResponse) Values() []zcl.Val {
 	}
 }
 
-func (v AddGroupResponse) ID() zcl.CommandID {
-	return AddGroupResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (AddGroupResponse) Name() string { return "Add group response" }
 
-func (v AddGroupResponse) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (AddGroupResponse) ID() CommandID { return AddGroupResponseCommand }
 
-func (v AddGroupResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (AddGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (AddGroupResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of AddGroupResponse
 func (v AddGroupResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the AddGroupResponse struct
 func (v *AddGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -456,31 +477,29 @@ func (v *AddGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v AddGroupResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v AddGroupResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v AddGroupResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	return "AddGroupResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"AddGroupResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+	)
 }
 
-func (AddGroupResponse) Name() string { return "Add group response" }
-
-// The Response to the view group request.
+// ViewGroupResponse The Response to the view group request.
 type ViewGroupResponse struct {
-	Status    zcl.Status
-	GroupId   zcl.Zu16
-	GroupName zcl.Zcstring
+	Status    Status
+	GroupId   GroupId
+	GroupName GroupName
 }
 
-const ViewGroupResponseCommand zcl.CommandID = 1
+// ViewGroupResponseCommand is the Command ID of ViewGroupResponse
+const ViewGroupResponseCommand CommandID = 0x0001
 
+// Values returns all values of ViewGroupResponse
 func (v *ViewGroupResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -489,41 +508,46 @@ func (v *ViewGroupResponse) Values() []zcl.Val {
 	}
 }
 
-func (v ViewGroupResponse) ID() zcl.CommandID {
-	return ViewGroupResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ViewGroupResponse) Name() string { return "View group response" }
 
-func (v ViewGroupResponse) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (ViewGroupResponse) ID() CommandID { return ViewGroupResponseCommand }
 
-func (v ViewGroupResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ViewGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ViewGroupResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ViewGroupResponse
 func (v ViewGroupResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupName.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupName.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ViewGroupResponse struct
 func (v *ViewGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -542,78 +566,78 @@ func (v *ViewGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v ViewGroupResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v ViewGroupResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-func (v ViewGroupResponse) GroupNameString() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(v.GroupName))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v ViewGroupResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	str = append(str, "GroupName["+v.GroupNameString()+"]")
-	return "ViewGroupResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ViewGroupResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+			"GroupName(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+		v.GroupName,
+	)
 }
 
-func (ViewGroupResponse) Name() string { return "View group response" }
-
-// The Response to the get group membership request.
+// GetGroupMembershipResponse The Response to the get group membership request.
 type GetGroupMembershipResponse struct {
-	// The remaining number of groups that can be added.
+	// GroupCapacity specifies remaining number of groups that can be added.
 	// If set to 0xFE, at least one more group can be added (exact number unknown)
 	// If set to 0xFF, it's unknown if any more groups can be added
-	Capacity  zcl.Zu8
-	GroupList zcl.Zset
+	GroupCapacity GroupCapacity
+	GroupList     GroupList
 }
 
-const GetGroupMembershipResponseCommand zcl.CommandID = 2
+// GetGroupMembershipResponseCommand is the Command ID of GetGroupMembershipResponse
+const GetGroupMembershipResponseCommand CommandID = 0x0002
 
+// Values returns all values of GetGroupMembershipResponse
 func (v *GetGroupMembershipResponse) Values() []zcl.Val {
 	return []zcl.Val{
-		&v.Capacity,
+		&v.GroupCapacity,
 		&v.GroupList,
 	}
 }
 
-func (v GetGroupMembershipResponse) ID() zcl.CommandID {
-	return GetGroupMembershipResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (GetGroupMembershipResponse) Name() string { return "Get group membership response" }
 
-func (v GetGroupMembershipResponse) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (GetGroupMembershipResponse) ID() CommandID { return GetGroupMembershipResponseCommand }
 
-func (v GetGroupMembershipResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (GetGroupMembershipResponse) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (GetGroupMembershipResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of GetGroupMembershipResponse
 func (v GetGroupMembershipResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Capacity.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupCapacity.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupList.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupList.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the GetGroupMembershipResponse struct
 func (v *GetGroupMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
-	if b, err = (&v.Capacity).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.GroupCapacity).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -624,30 +648,28 @@ func (v *GetGroupMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v GetGroupMembershipResponse) CapacityString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Capacity))
-}
-func (v GetGroupMembershipResponse) GroupListString() string {
-	return zcl.Sprintf("0x%X", zcl.Zset(v.GroupList))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v GetGroupMembershipResponse) String() string {
-	var str []string
-	str = append(str, "Capacity["+v.CapacityString()+"]")
-	str = append(str, "GroupList["+v.GroupListString()+"]")
-	return "GetGroupMembershipResponse{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"GetGroupMembershipResponse{"+zcl.StrJoin([]string{
+			"GroupCapacity(%v)",
+			"GroupList(%v)",
+		}, " ")+"}",
+		v.GroupCapacity,
+		v.GroupList,
+	)
 }
 
-func (GetGroupMembershipResponse) Name() string { return "Get group membership response" }
-
-// The Response to the remove group request.
+// RemoveGroupResponse The Response to the remove group request.
 type RemoveGroupResponse struct {
-	Status  zcl.Status
-	GroupId zcl.Zu16
+	Status  Status
+	GroupId GroupId
 }
 
-const RemoveGroupResponseCommand zcl.CommandID = 3
+// RemoveGroupResponseCommand is the Command ID of RemoveGroupResponse
+const RemoveGroupResponseCommand CommandID = 0x0003
 
+// Values returns all values of RemoveGroupResponse
 func (v *RemoveGroupResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
@@ -655,36 +677,40 @@ func (v *RemoveGroupResponse) Values() []zcl.Val {
 	}
 }
 
-func (v RemoveGroupResponse) ID() zcl.CommandID {
-	return RemoveGroupResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (RemoveGroupResponse) Name() string { return "Remove group response" }
 
-func (v RemoveGroupResponse) Cluster() zcl.ClusterID {
-	return GroupsID
-}
+// ID of the command (needed to fulfill interface)
+func (RemoveGroupResponse) ID() CommandID { return RemoveGroupResponseCommand }
 
-func (v RemoveGroupResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (RemoveGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (RemoveGroupResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of RemoveGroupResponse
 func (v RemoveGroupResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.GroupId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.GroupId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the RemoveGroupResponse struct
 func (v *RemoveGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -699,55 +725,14 @@ func (v *RemoveGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v RemoveGroupResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v RemoveGroupResponse) GroupIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.GroupId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v RemoveGroupResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "GroupId["+v.GroupIdString()+"]")
-	return "RemoveGroupResponse{" + zcl.StrJoin(str, " ") + "}"
-}
-
-func (RemoveGroupResponse) Name() string { return "Remove group response" }
-
-// GroupNameSupport is an autogenerated attribute in the Groups cluster
-type GroupNameSupport zcl.Zbmp8
-
-const GroupNameSupportAttr zcl.AttrID = 0
-
-func (GroupNameSupport) ID() zcl.AttrID                { return GroupNameSupportAttr }
-func (GroupNameSupport) Cluster() zcl.ClusterID        { return GroupsID }
-func (GroupNameSupport) Name() string                  { return "Group Name Support" }
-func (GroupNameSupport) Readable() bool                { return true }
-func (GroupNameSupport) Writable() bool                { return false }
-func (GroupNameSupport) Reportable() bool              { return false }
-func (GroupNameSupport) SceneIndex() int               { return -1 }
-func (a *GroupNameSupport) Value() *GroupNameSupport   { return a }
-func (a GroupNameSupport) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
-
-func (a *GroupNameSupport) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zbmp8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = GroupNameSupport(*nt)
-	return br, err
-}
-
-func (a GroupNameSupport) String() string {
-	var bstr []string
-	if a.IsNamesSupported() {
-		bstr = append(bstr, "Names Supported")
-	}
-	return zcl.StrJoin(bstr, ", ")
-}
-
-func (a GroupNameSupport) IsNamesSupported() bool {
-	return zcl.BitmapTest([]byte(a), 7)
-}
-func (a *GroupNameSupport) SetNamesSupported(b bool) {
-	*a = GroupNameSupport(zcl.BitmapSet([]byte(*a), 7, b))
+	return zcl.Sprintf(
+		"RemoveGroupResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"GroupId(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.GroupId,
+	)
 }

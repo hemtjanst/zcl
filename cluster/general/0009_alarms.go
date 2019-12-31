@@ -1,14 +1,12 @@
-// Sending alarm notifications and configuring alarm functionality.
 package general
 
-import (
-	"hemtjan.st/zcl"
-)
+import "hemtjan.st/zcl"
 
 // Alarms
 const AlarmsID zcl.ClusterID = 9
 
 var AlarmsCluster = zcl.Cluster{
+	Name: "Alarms",
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
 		ResetAlarmCommand:     func() zcl.Command { return new(ResetAlarm) },
 		ResetAllAlarmsCommand: func() zcl.Command { return new(ResetAllAlarms) },
@@ -27,12 +25,14 @@ var AlarmsCluster = zcl.Cluster{
 }
 
 type ResetAlarm struct {
-	AlarmCode zcl.Zu8
-	ClusterId zcl.Zu16
+	AlarmCode AlarmCode
+	ClusterId ClusterId
 }
 
-const ResetAlarmCommand zcl.CommandID = 0
+// ResetAlarmCommand is the Command ID of ResetAlarm
+const ResetAlarmCommand CommandID = 0x0000
 
+// Values returns all values of ResetAlarm
 func (v *ResetAlarm) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.AlarmCode,
@@ -40,36 +40,40 @@ func (v *ResetAlarm) Values() []zcl.Val {
 	}
 }
 
-func (v ResetAlarm) ID() zcl.CommandID {
-	return ResetAlarmCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ResetAlarm) Name() string { return "Reset alarm" }
 
-func (v ResetAlarm) Cluster() zcl.ClusterID {
-	return AlarmsID
-}
+// ID of the command (needed to fulfill interface)
+func (ResetAlarm) ID() CommandID { return ResetAlarmCommand }
 
-func (v ResetAlarm) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ResetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ResetAlarm) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ResetAlarm
 func (v ResetAlarm) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.AlarmCode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.AlarmCode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ClusterId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ClusterId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ResetAlarm struct
 func (v *ResetAlarm) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -84,140 +88,150 @@ func (v *ResetAlarm) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v ResetAlarm) AlarmCodeString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.AlarmCode))
-}
-func (v ResetAlarm) ClusterIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.ClusterId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v ResetAlarm) String() string {
-	var str []string
-	str = append(str, "AlarmCode["+v.AlarmCodeString()+"]")
-	str = append(str, "ClusterId["+v.ClusterIdString()+"]")
-	return "ResetAlarm{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ResetAlarm{"+zcl.StrJoin([]string{
+			"AlarmCode(%v)",
+			"ClusterId(%v)",
+		}, " ")+"}",
+		v.AlarmCode,
+		v.ClusterId,
+	)
 }
 
-func (ResetAlarm) Name() string { return "Reset alarm" }
-
-// Resets all alarms, causing triggered alarms to generate new notification
+// ResetAllAlarms Resets all alarms, causing triggered alarms to generate new notification
 type ResetAllAlarms struct {
 }
 
-const ResetAllAlarmsCommand zcl.CommandID = 1
+// ResetAllAlarmsCommand is the Command ID of ResetAllAlarms
+const ResetAllAlarmsCommand CommandID = 0x0001
 
+// Values returns all values of ResetAllAlarms
 func (v *ResetAllAlarms) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-func (v ResetAllAlarms) ID() zcl.CommandID {
-	return ResetAllAlarmsCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ResetAllAlarms) Name() string { return "Reset all alarms" }
 
-func (v ResetAllAlarms) Cluster() zcl.ClusterID {
-	return AlarmsID
-}
+// ID of the command (needed to fulfill interface)
+func (ResetAllAlarms) ID() CommandID { return ResetAllAlarmsCommand }
 
-func (v ResetAllAlarms) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ResetAllAlarms) Cluster() zcl.ClusterID { return AlarmsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ResetAllAlarms) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ResetAllAlarms
 func (v ResetAllAlarms) MarshalZcl() ([]byte, error) {
 	return nil, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ResetAllAlarms struct
 func (v *ResetAllAlarms) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+// String returns a log-friendly string representation of the struct
 func (v ResetAllAlarms) String() string {
-	var str []string
-	return "ResetAllAlarms{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ResetAllAlarms{" + zcl.StrJoin([]string{}, " ") + "}",
+	)
 }
 
-func (ResetAllAlarms) Name() string { return "Reset all alarms" }
-
-// Retrieves the earliest alarm and removes it from the table
+// GetAlarm Retrieves the earliest alarm and removes it from the table
 type GetAlarm struct {
 }
 
-const GetAlarmCommand zcl.CommandID = 2
+// GetAlarmCommand is the Command ID of GetAlarm
+const GetAlarmCommand CommandID = 0x0002
 
+// Values returns all values of GetAlarm
 func (v *GetAlarm) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-func (v GetAlarm) ID() zcl.CommandID {
-	return GetAlarmCommand
-}
+// Name of the command (needed to fulfill interface)
+func (GetAlarm) Name() string { return "Get Alarm" }
 
-func (v GetAlarm) Cluster() zcl.ClusterID {
-	return AlarmsID
-}
+// ID of the command (needed to fulfill interface)
+func (GetAlarm) ID() CommandID { return GetAlarmCommand }
 
-func (v GetAlarm) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (GetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (GetAlarm) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of GetAlarm
 func (v GetAlarm) MarshalZcl() ([]byte, error) {
 	return nil, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the GetAlarm struct
 func (v *GetAlarm) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+// String returns a log-friendly string representation of the struct
 func (v GetAlarm) String() string {
-	var str []string
-	return "GetAlarm{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"GetAlarm{" + zcl.StrJoin([]string{}, " ") + "}",
+	)
 }
 
-func (GetAlarm) Name() string { return "Get Alarm" }
-
-// Clears the alarm log
+// ResetAlarmLog Clears the alarm log
 type ResetAlarmLog struct {
 }
 
-const ResetAlarmLogCommand zcl.CommandID = 3
+// ResetAlarmLogCommand is the Command ID of ResetAlarmLog
+const ResetAlarmLogCommand CommandID = 0x0003
 
+// Values returns all values of ResetAlarmLog
 func (v *ResetAlarmLog) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-func (v ResetAlarmLog) ID() zcl.CommandID {
-	return ResetAlarmLogCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ResetAlarmLog) Name() string { return "Reset alarm log" }
 
-func (v ResetAlarmLog) Cluster() zcl.ClusterID {
-	return AlarmsID
-}
+// ID of the command (needed to fulfill interface)
+func (ResetAlarmLog) ID() CommandID { return ResetAlarmLogCommand }
 
-func (v ResetAlarmLog) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ResetAlarmLog) Cluster() zcl.ClusterID { return AlarmsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ResetAlarmLog) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ResetAlarmLog
 func (v ResetAlarmLog) MarshalZcl() ([]byte, error) {
 	return nil, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ResetAlarmLog struct
 func (v *ResetAlarmLog) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+// String returns a log-friendly string representation of the struct
 func (v ResetAlarmLog) String() string {
-	var str []string
-	return "ResetAlarmLog{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ResetAlarmLog{" + zcl.StrJoin([]string{}, " ") + "}",
+	)
 }
-
-func (ResetAlarmLog) Name() string { return "Reset alarm log" }
 
 type Alarm struct {
-	AlarmCode zcl.Zu8
-	ClusterId zcl.Zu16
+	AlarmCode AlarmCode
+	ClusterId ClusterId
 }
 
-const AlarmCommand zcl.CommandID = 0
+// AlarmCommand is the Command ID of Alarm
+const AlarmCommand CommandID = 0x0000
 
+// Values returns all values of Alarm
 func (v *Alarm) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.AlarmCode,
@@ -225,36 +239,40 @@ func (v *Alarm) Values() []zcl.Val {
 	}
 }
 
-func (v Alarm) ID() zcl.CommandID {
-	return AlarmCommand
-}
+// Name of the command (needed to fulfill interface)
+func (Alarm) Name() string { return "Alarm" }
 
-func (v Alarm) Cluster() zcl.ClusterID {
-	return AlarmsID
-}
+// ID of the command (needed to fulfill interface)
+func (Alarm) ID() CommandID { return AlarmCommand }
 
-func (v Alarm) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (Alarm) Cluster() zcl.ClusterID { return AlarmsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (Alarm) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of Alarm
 func (v Alarm) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.AlarmCode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.AlarmCode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ClusterId.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ClusterId.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the Alarm struct
 func (v *Alarm) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -269,86 +287,87 @@ func (v *Alarm) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v Alarm) AlarmCodeString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu8(v.AlarmCode))
-}
-func (v Alarm) ClusterIdString() string {
-	return zcl.Sprintf("0x%X", zcl.Zu16(v.ClusterId))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v Alarm) String() string {
-	var str []string
-	str = append(str, "AlarmCode["+v.AlarmCodeString()+"]")
-	str = append(str, "ClusterId["+v.ClusterIdString()+"]")
-	return "Alarm{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"Alarm{"+zcl.StrJoin([]string{
+			"AlarmCode(%v)",
+			"ClusterId(%v)",
+		}, " ")+"}",
+		v.AlarmCode,
+		v.ClusterId,
+	)
 }
-
-func (Alarm) Name() string { return "Alarm" }
 
 type GetAlarmResponse struct {
-	Status    zcl.Status
-	AlarmCode zcl.Zenum8
-	ClusterId zcl.Zu16
-	Timestamp zcl.Zutc
+	Status    Status
+	AlarmCode AlarmCode
+	ClusterId ClusterId
+	Time      Time
 }
 
-const GetAlarmResponseCommand zcl.CommandID = 1
+// GetAlarmResponseCommand is the Command ID of GetAlarmResponse
+const GetAlarmResponseCommand CommandID = 0x0001
 
+// Values returns all values of GetAlarmResponse
 func (v *GetAlarmResponse) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Status,
 		&v.AlarmCode,
 		&v.ClusterId,
-		&v.Timestamp,
+		&v.Time,
 	}
 }
 
-func (v GetAlarmResponse) ID() zcl.CommandID {
-	return GetAlarmResponseCommand
-}
+// Name of the command (needed to fulfill interface)
+func (GetAlarmResponse) Name() string { return "Get alarm response" }
 
-func (v GetAlarmResponse) Cluster() zcl.ClusterID {
-	return AlarmsID
-}
+// ID of the command (needed to fulfill interface)
+func (GetAlarmResponse) ID() CommandID { return GetAlarmResponseCommand }
 
-func (v GetAlarmResponse) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (GetAlarmResponse) Cluster() zcl.ClusterID { return AlarmsID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (GetAlarmResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of GetAlarmResponse
 func (v GetAlarmResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Status.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
+	// AlarmCode is only included if successful
 	if v.Status == 0x00 {
 		if tmp, err = v.AlarmCode.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-
+	// ClusterId is only included if successful
 	if v.Status == 0x00 {
 		if tmp, err = v.ClusterId.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-
+	// Time is only included if successful
 	if v.Status == 0x00 {
-		if tmp, err = v.Timestamp.MarshalZcl(); err != nil {
+		if tmp, err = v.Time.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the GetAlarmResponse struct
 func (v *GetAlarmResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -356,20 +375,23 @@ func (v *GetAlarmResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
+	// AlarmCode is only included if successful
 	if v.Status == 0x00 {
 		if b, err = (&v.AlarmCode).UnmarshalZcl(b); err != nil {
 			return b, err
 		}
 	}
 
+	// ClusterId is only included if successful
 	if v.Status == 0x00 {
 		if b, err = (&v.ClusterId).UnmarshalZcl(b); err != nil {
 			return b, err
 		}
 	}
 
+	// Time is only included if successful
 	if v.Status == 0x00 {
-		if b, err = (&v.Timestamp).UnmarshalZcl(b); err != nil {
+		if b, err = (&v.Time).UnmarshalZcl(b); err != nil {
 			return b, err
 		}
 	}
@@ -377,53 +399,18 @@ func (v *GetAlarmResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v GetAlarmResponse) StatusString() string {
-	return zcl.Sprintf("%v", zcl.Status(v.Status))
-}
-func (v GetAlarmResponse) AlarmCodeString() string {
-	return zcl.Sprintf("%v", zcl.Zenum8(v.AlarmCode))
-}
-func (v GetAlarmResponse) ClusterIdString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ClusterId))
-}
-func (v GetAlarmResponse) TimestampString() string {
-	return zcl.Sprintf("%v", zcl.Zutc(v.Timestamp))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v GetAlarmResponse) String() string {
-	var str []string
-	str = append(str, "Status["+v.StatusString()+"]")
-	str = append(str, "AlarmCode["+v.AlarmCodeString()+"]")
-	str = append(str, "ClusterId["+v.ClusterIdString()+"]")
-	str = append(str, "Timestamp["+v.TimestampString()+"]")
-	return "GetAlarmResponse{" + zcl.StrJoin(str, " ") + "}"
-}
-
-func (GetAlarmResponse) Name() string { return "Get alarm response" }
-
-// AlarmCount is an autogenerated attribute in the Alarms cluster
-// Number of alarms currently defined
-type AlarmCount zcl.Zu16
-
-const AlarmCountAttr zcl.AttrID = 0
-
-func (AlarmCount) ID() zcl.AttrID                { return AlarmCountAttr }
-func (AlarmCount) Cluster() zcl.ClusterID        { return AlarmsID }
-func (AlarmCount) Name() string                  { return "Alarm Count" }
-func (AlarmCount) Readable() bool                { return true }
-func (AlarmCount) Writable() bool                { return true }
-func (AlarmCount) Reportable() bool              { return false }
-func (AlarmCount) SceneIndex() int               { return -1 }
-func (a *AlarmCount) Value() *AlarmCount         { return a }
-func (a AlarmCount) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *AlarmCount) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = AlarmCount(*nt)
-	return br, err
-}
-
-func (a AlarmCount) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+	return zcl.Sprintf(
+		"GetAlarmResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"AlarmCode(%v)",
+			"ClusterId(%v)",
+			"Time(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.AlarmCode,
+		v.ClusterId,
+		v.Time,
+	)
 }

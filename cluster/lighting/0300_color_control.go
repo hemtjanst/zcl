@@ -1,15 +1,12 @@
-// Attributes and commands for controlling the color properties of a color-capable
-// light.
 package lighting
 
-import (
-	"hemtjan.st/zcl"
-)
+import "hemtjan.st/zcl"
 
 // ColorControl
 const ColorControlID zcl.ClusterID = 768
 
 var ColorControlCluster = zcl.Cluster{
+	Name: "Color control",
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
 		MoveToHueCommand:                      func() zcl.Command { return new(MoveToHue) },
 		MoveHueCommand:                        func() zcl.Command { return new(MoveHue) },
@@ -69,9 +66,6 @@ var ColorControlCluster = zcl.Cluster{
 		Primary5XAttr:                         func() zcl.Attr { return new(Primary5X) },
 		Primary5YAttr:                         func() zcl.Attr { return new(Primary5Y) },
 		Primary5IntensityAttr:                 func() zcl.Attr { return new(Primary5Intensity) },
-		Primary6XAttr:                         func() zcl.Attr { return new(Primary6X) },
-		Primary6YAttr:                         func() zcl.Attr { return new(Primary6Y) },
-		Primary6IntensityAttr:                 func() zcl.Attr { return new(Primary6Intensity) },
 		WhitePointXAttr:                       func() zcl.Attr { return new(WhitePointX) },
 		WhitePointYAttr:                       func() zcl.Attr { return new(WhitePointY) },
 		ColorPointRedXAttr:                    func() zcl.Attr { return new(ColorPointRedX) },
@@ -97,14 +91,16 @@ var ColorControlCluster = zcl.Cluster{
 }
 
 type MoveToHue struct {
-	Hue       zcl.Zu8
-	Direction zcl.Zenum8
-	// The transition time in 1/10ths of a second.
-	TransitionTime zcl.Zu16
+	Hue       Hue
+	Direction Direction
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const MoveToHueCommand zcl.CommandID = 0
+// MoveToHueCommand is the Command ID of MoveToHue
+const MoveToHueCommand CommandID = 0x0000
 
+// Values returns all values of MoveToHue
 func (v *MoveToHue) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Hue,
@@ -113,41 +109,46 @@ func (v *MoveToHue) Values() []zcl.Val {
 	}
 }
 
-func (v MoveToHue) ID() zcl.CommandID {
-	return MoveToHueCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveToHue) Name() string { return "Move to hue" }
 
-func (v MoveToHue) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveToHue) ID() CommandID { return MoveToHueCommand }
 
-func (v MoveToHue) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveToHue) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveToHue) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveToHue
 func (v MoveToHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Hue.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Hue.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Direction.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Direction.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveToHue struct
 func (v *MoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -166,43 +167,30 @@ func (v *MoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveToHue) HueString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Hue))
-}
-func (v MoveToHue) DirectionString() string {
-	switch v.Direction {
-	case 0x00:
-		return "Shortest distance"
-	case 0x01:
-		return "Longest Distance"
-	case 0x02:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
-}
-func (v MoveToHue) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveToHue) String() string {
-	var str []string
-	str = append(str, "Hue["+v.HueString()+"]")
-	str = append(str, "Direction["+v.DirectionString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "MoveToHue{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveToHue{"+zcl.StrJoin([]string{
+			"Hue(%v)",
+			"Direction(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.Hue,
+		v.Direction,
+		v.TransitionTime,
+	)
 }
-
-func (MoveToHue) Name() string { return "Move to hue" }
 
 type MoveHue struct {
-	MoveMode zcl.Zenum8
-	Rate     zcl.Zu8
+	MoveMode MoveMode
+	// Rate increment/steps per second
+	Rate Rate
 }
 
-const MoveHueCommand zcl.CommandID = 1
+// MoveHueCommand is the Command ID of MoveHue
+const MoveHueCommand CommandID = 0x0001
 
+// Values returns all values of MoveHue
 func (v *MoveHue) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.MoveMode,
@@ -210,36 +198,40 @@ func (v *MoveHue) Values() []zcl.Val {
 	}
 }
 
-func (v MoveHue) ID() zcl.CommandID {
-	return MoveHueCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveHue) Name() string { return "Move hue" }
 
-func (v MoveHue) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveHue) ID() CommandID { return MoveHueCommand }
 
-func (v MoveHue) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveHue) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveHue) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveHue
 func (v MoveHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Rate.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Rate.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveHue struct
 func (v *MoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -254,39 +246,29 @@ func (v *MoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveHue) MoveModeString() string {
-	switch v.MoveMode {
-	case 0x00:
-		return "Stop"
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
-}
-func (v MoveHue) RateString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Rate))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveHue) String() string {
-	var str []string
-	str = append(str, "MoveMode["+v.MoveModeString()+"]")
-	str = append(str, "Rate["+v.RateString()+"]")
-	return "MoveHue{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveHue{"+zcl.StrJoin([]string{
+			"MoveMode(%v)",
+			"Rate(%v)",
+		}, " ")+"}",
+		v.MoveMode,
+		v.Rate,
+	)
 }
-
-func (MoveHue) Name() string { return "Move hue" }
 
 type StepHue struct {
-	StepMode zcl.Zenum8
-	StepSize zcl.Zu8
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu8
+	StepMode StepMode
+	StepSize StepSize
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const StepHueCommand zcl.CommandID = 2
+// StepHueCommand is the Command ID of StepHue
+const StepHueCommand CommandID = 0x0002
 
+// Values returns all values of StepHue
 func (v *StepHue) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.StepMode,
@@ -295,41 +277,46 @@ func (v *StepHue) Values() []zcl.Val {
 	}
 }
 
-func (v StepHue) ID() zcl.CommandID {
-	return StepHueCommand
-}
+// Name of the command (needed to fulfill interface)
+func (StepHue) Name() string { return "Step hue" }
 
-func (v StepHue) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (StepHue) ID() CommandID { return StepHueCommand }
 
-func (v StepHue) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (StepHue) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (StepHue) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of StepHue
 func (v StepHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.StepMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.StepSize.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepSize.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the StepHue struct
 func (v *StepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -348,40 +335,30 @@ func (v *StepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v StepHue) StepModeString() string {
-	switch v.StepMode {
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
-}
-func (v StepHue) StepSizeString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.StepSize))
-}
-func (v StepHue) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v StepHue) String() string {
-	var str []string
-	str = append(str, "StepMode["+v.StepModeString()+"]")
-	str = append(str, "StepSize["+v.StepSizeString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "StepHue{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"StepHue{"+zcl.StrJoin([]string{
+			"StepMode(%v)",
+			"StepSize(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.StepMode,
+		v.StepSize,
+		v.TransitionTime,
+	)
 }
-
-func (StepHue) Name() string { return "Step hue" }
 
 type MoveToSaturation struct {
-	Saturation zcl.Zu8
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	Saturation Saturation
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const MoveToSaturationCommand zcl.CommandID = 3
+// MoveToSaturationCommand is the Command ID of MoveToSaturation
+const MoveToSaturationCommand CommandID = 0x0003
 
+// Values returns all values of MoveToSaturation
 func (v *MoveToSaturation) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Saturation,
@@ -389,36 +366,40 @@ func (v *MoveToSaturation) Values() []zcl.Val {
 	}
 }
 
-func (v MoveToSaturation) ID() zcl.CommandID {
-	return MoveToSaturationCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveToSaturation) Name() string { return "Move to saturation" }
 
-func (v MoveToSaturation) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveToSaturation) ID() CommandID { return MoveToSaturationCommand }
 
-func (v MoveToSaturation) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveToSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveToSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveToSaturation
 func (v MoveToSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Saturation.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Saturation.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveToSaturation struct
 func (v *MoveToSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -433,30 +414,28 @@ func (v *MoveToSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveToSaturation) SaturationString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
-}
-func (v MoveToSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveToSaturation) String() string {
-	var str []string
-	str = append(str, "Saturation["+v.SaturationString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "MoveToSaturation{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveToSaturation{"+zcl.StrJoin([]string{
+			"Saturation(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.Saturation,
+		v.TransitionTime,
+	)
 }
-
-func (MoveToSaturation) Name() string { return "Move to saturation" }
 
 type MoveSaturation struct {
-	MoveMode zcl.Zenum8
-	// The steps per second.
-	Rate zcl.Zu8
+	MoveMode MoveMode
+	// Rate increment/steps per second
+	Rate Rate
 }
 
-const MoveSaturationCommand zcl.CommandID = 4
+// MoveSaturationCommand is the Command ID of MoveSaturation
+const MoveSaturationCommand CommandID = 0x0004
 
+// Values returns all values of MoveSaturation
 func (v *MoveSaturation) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.MoveMode,
@@ -464,36 +443,40 @@ func (v *MoveSaturation) Values() []zcl.Val {
 	}
 }
 
-func (v MoveSaturation) ID() zcl.CommandID {
-	return MoveSaturationCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveSaturation) Name() string { return "Move saturation" }
 
-func (v MoveSaturation) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveSaturation) ID() CommandID { return MoveSaturationCommand }
 
-func (v MoveSaturation) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveSaturation
 func (v MoveSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Rate.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Rate.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveSaturation struct
 func (v *MoveSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -508,39 +491,29 @@ func (v *MoveSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveSaturation) MoveModeString() string {
-	switch v.MoveMode {
-	case 0x00:
-		return "Stop"
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
-}
-func (v MoveSaturation) RateString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Rate))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveSaturation) String() string {
-	var str []string
-	str = append(str, "MoveMode["+v.MoveModeString()+"]")
-	str = append(str, "Rate["+v.RateString()+"]")
-	return "MoveSaturation{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveSaturation{"+zcl.StrJoin([]string{
+			"MoveMode(%v)",
+			"Rate(%v)",
+		}, " ")+"}",
+		v.MoveMode,
+		v.Rate,
+	)
 }
-
-func (MoveSaturation) Name() string { return "Move saturation" }
 
 type StepSaturation struct {
-	StepMode zcl.Zenum8
-	StepSize zcl.Zu8
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu8
+	StepMode StepMode
+	StepSize StepSize
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const StepSaturationCommand zcl.CommandID = 5
+// StepSaturationCommand is the Command ID of StepSaturation
+const StepSaturationCommand CommandID = 0x0005
 
+// Values returns all values of StepSaturation
 func (v *StepSaturation) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.StepMode,
@@ -549,41 +522,46 @@ func (v *StepSaturation) Values() []zcl.Val {
 	}
 }
 
-func (v StepSaturation) ID() zcl.CommandID {
-	return StepSaturationCommand
-}
+// Name of the command (needed to fulfill interface)
+func (StepSaturation) Name() string { return "Step saturation" }
 
-func (v StepSaturation) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (StepSaturation) ID() CommandID { return StepSaturationCommand }
 
-func (v StepSaturation) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (StepSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (StepSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of StepSaturation
 func (v StepSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.StepMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.StepSize.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepSize.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the StepSaturation struct
 func (v *StepSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -602,41 +580,31 @@ func (v *StepSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v StepSaturation) StepModeString() string {
-	switch v.StepMode {
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
-}
-func (v StepSaturation) StepSizeString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.StepSize))
-}
-func (v StepSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v StepSaturation) String() string {
-	var str []string
-	str = append(str, "StepMode["+v.StepModeString()+"]")
-	str = append(str, "StepSize["+v.StepSizeString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "StepSaturation{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"StepSaturation{"+zcl.StrJoin([]string{
+			"StepMode(%v)",
+			"StepSize(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.StepMode,
+		v.StepSize,
+		v.TransitionTime,
+	)
 }
-
-func (StepSaturation) Name() string { return "Step saturation" }
 
 type MoveToHueAndSaturation struct {
-	Hue        zcl.Zu8
-	Saturation zcl.Zu8
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	Hue        Hue
+	Saturation Saturation
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const MoveToHueAndSaturationCommand zcl.CommandID = 6
+// MoveToHueAndSaturationCommand is the Command ID of MoveToHueAndSaturation
+const MoveToHueAndSaturationCommand CommandID = 0x0006
 
+// Values returns all values of MoveToHueAndSaturation
 func (v *MoveToHueAndSaturation) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Hue,
@@ -645,41 +613,46 @@ func (v *MoveToHueAndSaturation) Values() []zcl.Val {
 	}
 }
 
-func (v MoveToHueAndSaturation) ID() zcl.CommandID {
-	return MoveToHueAndSaturationCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveToHueAndSaturation) Name() string { return "Move to hue and saturation" }
 
-func (v MoveToHueAndSaturation) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveToHueAndSaturation) ID() CommandID { return MoveToHueAndSaturationCommand }
 
-func (v MoveToHueAndSaturation) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveToHueAndSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveToHueAndSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveToHueAndSaturation
 func (v MoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.Hue.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Hue.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Saturation.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Saturation.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveToHueAndSaturation struct
 func (v *MoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -698,35 +671,37 @@ func (v *MoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveToHueAndSaturation) HueString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Hue))
-}
-func (v MoveToHueAndSaturation) SaturationString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
-}
-func (v MoveToHueAndSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveToHueAndSaturation) String() string {
-	var str []string
-	str = append(str, "Hue["+v.HueString()+"]")
-	str = append(str, "Saturation["+v.SaturationString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "MoveToHueAndSaturation{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveToHueAndSaturation{"+zcl.StrJoin([]string{
+			"Hue(%v)",
+			"Saturation(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.Hue,
+		v.Saturation,
+		v.TransitionTime,
+	)
 }
-
-func (MoveToHueAndSaturation) Name() string { return "Move to hue and saturation" }
 
 type MoveToColor struct {
-	ColorX zcl.Zu16
-	ColorY zcl.Zu16
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	// ColorX contains the normalized chromaticity value x for this attribute, as
+	// defined in the CIE xyY Color Space. x = value / 65536 (value
+	// in the range 0 to 65279 inclusive)
+	ColorX ColorX
+	// ColorY contains the normalized chromaticity value y for this attribute, as
+	// defined in the CIE xyY Color Space. y = value / 65536 (value
+	// in the range 0 to 65279 inclusive)
+	ColorY ColorY
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const MoveToColorCommand zcl.CommandID = 7
+// MoveToColorCommand is the Command ID of MoveToColor
+const MoveToColorCommand CommandID = 0x0007
 
+// Values returns all values of MoveToColor
 func (v *MoveToColor) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.ColorX,
@@ -735,41 +710,46 @@ func (v *MoveToColor) Values() []zcl.Val {
 	}
 }
 
-func (v MoveToColor) ID() zcl.CommandID {
-	return MoveToColorCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveToColor) Name() string { return "Move to color" }
 
-func (v MoveToColor) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveToColor) ID() CommandID { return MoveToColorCommand }
 
-func (v MoveToColor) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveToColor) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveToColor) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveToColor
 func (v MoveToColor) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.ColorX.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ColorX.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ColorY.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ColorY.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveToColor struct
 func (v *MoveToColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -788,35 +768,31 @@ func (v *MoveToColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveToColor) ColorXString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ColorX))
-}
-func (v MoveToColor) ColorYString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ColorY))
-}
-func (v MoveToColor) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveToColor) String() string {
-	var str []string
-	str = append(str, "ColorX["+v.ColorXString()+"]")
-	str = append(str, "ColorY["+v.ColorYString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "MoveToColor{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveToColor{"+zcl.StrJoin([]string{
+			"ColorX(%v)",
+			"ColorY(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.ColorX,
+		v.ColorY,
+		v.TransitionTime,
+	)
 }
-
-func (MoveToColor) Name() string { return "Move to color" }
 
 type MoveColor struct {
-	// The steps per second.
-	RateX zcl.Zs16
-	// The steps per second.
-	RateY zcl.Zs16
+	// RateX increment/steps per second
+	RateX RateX
+	// RateY increment/steps per second
+	RateY RateY
 }
 
-const MoveColorCommand zcl.CommandID = 8
+// MoveColorCommand is the Command ID of MoveColor
+const MoveColorCommand CommandID = 0x0008
 
+// Values returns all values of MoveColor
 func (v *MoveColor) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.RateX,
@@ -824,36 +800,40 @@ func (v *MoveColor) Values() []zcl.Val {
 	}
 }
 
-func (v MoveColor) ID() zcl.CommandID {
-	return MoveColorCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveColor) Name() string { return "Move color" }
 
-func (v MoveColor) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveColor) ID() CommandID { return MoveColorCommand }
 
-func (v MoveColor) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveColor) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveColor) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveColor
 func (v MoveColor) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.RateX.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.RateX.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.RateY.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.RateY.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveColor struct
 func (v *MoveColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -868,31 +848,29 @@ func (v *MoveColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveColor) RateXString() string {
-	return zcl.Sprintf("%v", zcl.Zs16(v.RateX))
-}
-func (v MoveColor) RateYString() string {
-	return zcl.Sprintf("%v", zcl.Zs16(v.RateY))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveColor) String() string {
-	var str []string
-	str = append(str, "RateX["+v.RateXString()+"]")
-	str = append(str, "RateY["+v.RateYString()+"]")
-	return "MoveColor{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveColor{"+zcl.StrJoin([]string{
+			"RateX(%v)",
+			"RateY(%v)",
+		}, " ")+"}",
+		v.RateX,
+		v.RateY,
+	)
 }
-
-func (MoveColor) Name() string { return "Move color" }
 
 type StepColor struct {
-	StepX zcl.Zs16
-	StepY zcl.Zs16
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	StepX StepX
+	StepY StepY
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const StepColorCommand zcl.CommandID = 9
+// StepColorCommand is the Command ID of StepColor
+const StepColorCommand CommandID = 0x0009
 
+// Values returns all values of StepColor
 func (v *StepColor) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.StepX,
@@ -901,41 +879,46 @@ func (v *StepColor) Values() []zcl.Val {
 	}
 }
 
-func (v StepColor) ID() zcl.CommandID {
-	return StepColorCommand
-}
+// Name of the command (needed to fulfill interface)
+func (StepColor) Name() string { return "Step color" }
 
-func (v StepColor) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (StepColor) ID() CommandID { return StepColorCommand }
 
-func (v StepColor) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (StepColor) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (StepColor) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of StepColor
 func (v StepColor) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.StepX.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepX.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.StepY.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepY.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the StepColor struct
 func (v *StepColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -954,34 +937,30 @@ func (v *StepColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v StepColor) StepXString() string {
-	return zcl.Sprintf("%v", zcl.Zs16(v.StepX))
-}
-func (v StepColor) StepYString() string {
-	return zcl.Sprintf("%v", zcl.Zs16(v.StepY))
-}
-func (v StepColor) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v StepColor) String() string {
-	var str []string
-	str = append(str, "StepX["+v.StepXString()+"]")
-	str = append(str, "StepY["+v.StepYString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "StepColor{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"StepColor{"+zcl.StrJoin([]string{
+			"StepX(%v)",
+			"StepY(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.StepX,
+		v.StepY,
+		v.TransitionTime,
+	)
 }
-
-func (StepColor) Name() string { return "Step color" }
 
 type MoveToColorTemperature struct {
-	ColorTemperature zcl.Zu16
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	ColorTemperature ColorTemperature
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const MoveToColorTemperatureCommand zcl.CommandID = 10
+// MoveToColorTemperatureCommand is the Command ID of MoveToColorTemperature
+const MoveToColorTemperatureCommand CommandID = 0x000A
 
+// Values returns all values of MoveToColorTemperature
 func (v *MoveToColorTemperature) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.ColorTemperature,
@@ -989,36 +968,40 @@ func (v *MoveToColorTemperature) Values() []zcl.Val {
 	}
 }
 
-func (v MoveToColorTemperature) ID() zcl.CommandID {
-	return MoveToColorTemperatureCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveToColorTemperature) Name() string { return "Move to color temperature" }
 
-func (v MoveToColorTemperature) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveToColorTemperature) ID() CommandID { return MoveToColorTemperatureCommand }
 
-func (v MoveToColorTemperature) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveToColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveToColorTemperature) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveToColorTemperature
 func (v MoveToColorTemperature) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.ColorTemperature.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ColorTemperature.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveToColorTemperature struct
 func (v *MoveToColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1033,31 +1016,29 @@ func (v *MoveToColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveToColorTemperature) ColorTemperatureString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperature))
-}
-func (v MoveToColorTemperature) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveToColorTemperature) String() string {
-	var str []string
-	str = append(str, "ColorTemperature["+v.ColorTemperatureString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "MoveToColorTemperature{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveToColorTemperature{"+zcl.StrJoin([]string{
+			"ColorTemperature(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.ColorTemperature,
+		v.TransitionTime,
+	)
 }
-
-func (MoveToColorTemperature) Name() string { return "Move to color temperature" }
 
 type EnhancedMoveToHue struct {
-	EnhancedHue zcl.Zu16
-	Direction   zcl.Zenum8
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	EnhancedHue EnhancedHue
+	Direction   Direction
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const EnhancedMoveToHueCommand zcl.CommandID = 64
+// EnhancedMoveToHueCommand is the Command ID of EnhancedMoveToHue
+const EnhancedMoveToHueCommand CommandID = 0x0040
 
+// Values returns all values of EnhancedMoveToHue
 func (v *EnhancedMoveToHue) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.EnhancedHue,
@@ -1066,41 +1047,46 @@ func (v *EnhancedMoveToHue) Values() []zcl.Val {
 	}
 }
 
-func (v EnhancedMoveToHue) ID() zcl.CommandID {
-	return EnhancedMoveToHueCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedMoveToHue) Name() string { return "Enhanced move to hue" }
 
-func (v EnhancedMoveToHue) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedMoveToHue) ID() CommandID { return EnhancedMoveToHueCommand }
 
-func (v EnhancedMoveToHue) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedMoveToHue) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedMoveToHue) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedMoveToHue
 func (v EnhancedMoveToHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.EnhancedHue.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.EnhancedHue.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Direction.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Direction.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedMoveToHue struct
 func (v *EnhancedMoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1119,44 +1105,30 @@ func (v *EnhancedMoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v EnhancedMoveToHue) EnhancedHueString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.EnhancedHue))
-}
-func (v EnhancedMoveToHue) DirectionString() string {
-	switch v.Direction {
-	case 0x00:
-		return "Shortest distance"
-	case 0x01:
-		return "Longest Distance"
-	case 0x02:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
-}
-func (v EnhancedMoveToHue) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedMoveToHue) String() string {
-	var str []string
-	str = append(str, "EnhancedHue["+v.EnhancedHueString()+"]")
-	str = append(str, "Direction["+v.DirectionString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "EnhancedMoveToHue{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedMoveToHue{"+zcl.StrJoin([]string{
+			"EnhancedHue(%v)",
+			"Direction(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.EnhancedHue,
+		v.Direction,
+		v.TransitionTime,
+	)
 }
-
-func (EnhancedMoveToHue) Name() string { return "Enhanced move to hue" }
 
 type EnhancedMoveHue struct {
-	MoveMode zcl.Zenum8
-	// Steps per second.
-	Rate zcl.Zu16
+	MoveMode MoveMode
+	// Rate increment/steps per second
+	Rate Rate
 }
 
-const EnhancedMoveHueCommand zcl.CommandID = 65
+// EnhancedMoveHueCommand is the Command ID of EnhancedMoveHue
+const EnhancedMoveHueCommand CommandID = 0x0041
 
+// Values returns all values of EnhancedMoveHue
 func (v *EnhancedMoveHue) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.MoveMode,
@@ -1164,36 +1136,40 @@ func (v *EnhancedMoveHue) Values() []zcl.Val {
 	}
 }
 
-func (v EnhancedMoveHue) ID() zcl.CommandID {
-	return EnhancedMoveHueCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedMoveHue) Name() string { return "Enhanced move hue" }
 
-func (v EnhancedMoveHue) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedMoveHue) ID() CommandID { return EnhancedMoveHueCommand }
 
-func (v EnhancedMoveHue) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedMoveHue) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedMoveHue) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedMoveHue
 func (v EnhancedMoveHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Rate.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Rate.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedMoveHue struct
 func (v *EnhancedMoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1208,39 +1184,29 @@ func (v *EnhancedMoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v EnhancedMoveHue) MoveModeString() string {
-	switch v.MoveMode {
-	case 0x00:
-		return "Stop"
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
-}
-func (v EnhancedMoveHue) RateString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.Rate))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedMoveHue) String() string {
-	var str []string
-	str = append(str, "MoveMode["+v.MoveModeString()+"]")
-	str = append(str, "Rate["+v.RateString()+"]")
-	return "EnhancedMoveHue{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedMoveHue{"+zcl.StrJoin([]string{
+			"MoveMode(%v)",
+			"Rate(%v)",
+		}, " ")+"}",
+		v.MoveMode,
+		v.Rate,
+	)
 }
-
-func (EnhancedMoveHue) Name() string { return "Enhanced move hue" }
 
 type EnhancedStepHue struct {
-	StepMode zcl.Zenum8
-	StepSize zcl.Zu16
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	StepMode StepMode
+	StepSize StepSize
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const EnhancedStepHueCommand zcl.CommandID = 66
+// EnhancedStepHueCommand is the Command ID of EnhancedStepHue
+const EnhancedStepHueCommand CommandID = 0x0042
 
+// Values returns all values of EnhancedStepHue
 func (v *EnhancedStepHue) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.StepMode,
@@ -1249,41 +1215,46 @@ func (v *EnhancedStepHue) Values() []zcl.Val {
 	}
 }
 
-func (v EnhancedStepHue) ID() zcl.CommandID {
-	return EnhancedStepHueCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedStepHue) Name() string { return "Enhanced step hue" }
 
-func (v EnhancedStepHue) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedStepHue) ID() CommandID { return EnhancedStepHueCommand }
 
-func (v EnhancedStepHue) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedStepHue) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedStepHue) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedStepHue
 func (v EnhancedStepHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.StepMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.StepSize.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepSize.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedStepHue struct
 func (v *EnhancedStepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1302,41 +1273,31 @@ func (v *EnhancedStepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v EnhancedStepHue) StepModeString() string {
-	switch v.StepMode {
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
-}
-func (v EnhancedStepHue) StepSizeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.StepSize))
-}
-func (v EnhancedStepHue) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedStepHue) String() string {
-	var str []string
-	str = append(str, "StepMode["+v.StepModeString()+"]")
-	str = append(str, "StepSize["+v.StepSizeString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "EnhancedStepHue{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedStepHue{"+zcl.StrJoin([]string{
+			"StepMode(%v)",
+			"StepSize(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.StepMode,
+		v.StepSize,
+		v.TransitionTime,
+	)
 }
-
-func (EnhancedStepHue) Name() string { return "Enhanced step hue" }
 
 type EnhancedMoveToHueAndSaturation struct {
-	EnhancedHue zcl.Zu16
-	Saturation  zcl.Zu8
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
+	EnhancedHue EnhancedHue
+	Saturation  Saturation
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime TransitionTime
 }
 
-const EnhancedMoveToHueAndSaturationCommand zcl.CommandID = 67
+// EnhancedMoveToHueAndSaturationCommand is the Command ID of EnhancedMoveToHueAndSaturation
+const EnhancedMoveToHueAndSaturationCommand CommandID = 0x0043
 
+// Values returns all values of EnhancedMoveToHueAndSaturation
 func (v *EnhancedMoveToHueAndSaturation) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.EnhancedHue,
@@ -1345,41 +1306,46 @@ func (v *EnhancedMoveToHueAndSaturation) Values() []zcl.Val {
 	}
 }
 
-func (v EnhancedMoveToHueAndSaturation) ID() zcl.CommandID {
-	return EnhancedMoveToHueAndSaturationCommand
-}
+// Name of the command (needed to fulfill interface)
+func (EnhancedMoveToHueAndSaturation) Name() string { return "Enhanced move to hue and saturation" }
 
-func (v EnhancedMoveToHueAndSaturation) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (EnhancedMoveToHueAndSaturation) ID() CommandID { return EnhancedMoveToHueAndSaturationCommand }
 
-func (v EnhancedMoveToHueAndSaturation) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (EnhancedMoveToHueAndSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (EnhancedMoveToHueAndSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of EnhancedMoveToHueAndSaturation
 func (v EnhancedMoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.EnhancedHue.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.EnhancedHue.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Saturation.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Saturation.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the EnhancedMoveToHueAndSaturation struct
 func (v *EnhancedMoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1398,92 +1364,95 @@ func (v *EnhancedMoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) 
 	return b, nil
 }
 
-func (v EnhancedMoveToHueAndSaturation) EnhancedHueString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.EnhancedHue))
-}
-func (v EnhancedMoveToHueAndSaturation) SaturationString() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v.Saturation))
-}
-func (v EnhancedMoveToHueAndSaturation) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v EnhancedMoveToHueAndSaturation) String() string {
-	var str []string
-	str = append(str, "EnhancedHue["+v.EnhancedHueString()+"]")
-	str = append(str, "Saturation["+v.SaturationString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	return "EnhancedMoveToHueAndSaturation{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"EnhancedMoveToHueAndSaturation{"+zcl.StrJoin([]string{
+			"EnhancedHue(%v)",
+			"Saturation(%v)",
+			"TransitionTime(%v)",
+		}, " ")+"}",
+		v.EnhancedHue,
+		v.Saturation,
+		v.TransitionTime,
+	)
 }
-
-func (EnhancedMoveToHueAndSaturation) Name() string { return "Enhanced move to hue and saturation" }
 
 type ColorLoopSet struct {
-	UpdateFlags zcl.Zbmp8
-	Action      zcl.Zenum8
-	Direction   zcl.Zenum8
-	// Time in seconds used for a whole color loop.
-	Time     zcl.Zu16
-	StartHue zcl.Zu16
+	UpdateFlags  UpdateFlags
+	Action       Action
+	HueDirection HueDirection
+	// Time Time in seconds used for a whole color loop.
+	Time        Time
+	EnhancedHue EnhancedHue
 }
 
-const ColorLoopSetCommand zcl.CommandID = 68
+// ColorLoopSetCommand is the Command ID of ColorLoopSet
+const ColorLoopSetCommand CommandID = 0x0044
 
+// Values returns all values of ColorLoopSet
 func (v *ColorLoopSet) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.UpdateFlags,
 		&v.Action,
-		&v.Direction,
+		&v.HueDirection,
 		&v.Time,
-		&v.StartHue,
+		&v.EnhancedHue,
 	}
 }
 
-func (v ColorLoopSet) ID() zcl.CommandID {
-	return ColorLoopSetCommand
-}
+// Name of the command (needed to fulfill interface)
+func (ColorLoopSet) Name() string { return "Color loop set" }
 
-func (v ColorLoopSet) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (ColorLoopSet) ID() CommandID { return ColorLoopSetCommand }
 
-func (v ColorLoopSet) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (ColorLoopSet) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (ColorLoopSet) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of ColorLoopSet
 func (v ColorLoopSet) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.UpdateFlags.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.UpdateFlags.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Action.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Action.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Direction.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.HueDirection.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Time.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Time.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.StartHue.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.EnhancedHue.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the ColorLoopSet struct
 func (v *ColorLoopSet) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1495,7 +1464,7 @@ func (v *ColorLoopSet) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.Direction).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.HueDirection).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -1503,120 +1472,85 @@ func (v *ColorLoopSet) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.StartHue).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.EnhancedHue).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
 	return b, nil
 }
 
-func (v ColorLoopSet) UpdateFlagsString() string {
-	var bstr []string
-	if zcl.BitmapTest([]byte(v.UpdateFlags), 0) {
-		bstr = append(bstr, "Update action")
-	}
-	if zcl.BitmapTest([]byte(v.UpdateFlags), 1) {
-		bstr = append(bstr, "Update direction")
-	}
-	if zcl.BitmapTest([]byte(v.UpdateFlags), 2) {
-		bstr = append(bstr, "Update time")
-	}
-	if zcl.BitmapTest([]byte(v.UpdateFlags), 3) {
-		bstr = append(bstr, "Update start hue")
-	}
-	return zcl.StrJoin(bstr, ", ")
-}
-func (v ColorLoopSet) ActionString() string {
-	switch v.Action {
-	case 0x00:
-		return "De-activate color loop"
-	case 0x01:
-		return "Activate from ColorLoopStartEnhancedHue"
-	case 0x02:
-		return "Activate from EnhancedCurrentHue"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.Action))
-}
-func (v ColorLoopSet) DirectionString() string {
-	switch v.Direction {
-	case 0x00:
-		return "Decrement hue"
-	case 0x01:
-		return "Increment hue"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.Direction))
-}
-func (v ColorLoopSet) TimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.Time))
-}
-func (v ColorLoopSet) StartHueString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.StartHue))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v ColorLoopSet) String() string {
-	var str []string
-	str = append(str, "UpdateFlags["+v.UpdateFlagsString()+"]")
-	str = append(str, "Action["+v.ActionString()+"]")
-	str = append(str, "Direction["+v.DirectionString()+"]")
-	str = append(str, "Time["+v.TimeString()+"]")
-	str = append(str, "StartHue["+v.StartHueString()+"]")
-	return "ColorLoopSet{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"ColorLoopSet{"+zcl.StrJoin([]string{
+			"UpdateFlags(%v)",
+			"Action(%v)",
+			"HueDirection(%v)",
+			"Time(%v)",
+			"EnhancedHue(%v)",
+		}, " ")+"}",
+		v.UpdateFlags,
+		v.Action,
+		v.HueDirection,
+		v.Time,
+		v.EnhancedHue,
+	)
 }
 
-func (ColorLoopSet) Name() string { return "Color loop set" }
-
-// Stops move to and step commands. It has no effect on a active
+// StopMoveStep Stops move to and step commands. It has no effect on a active
 // color loop.
 type StopMoveStep struct {
 }
 
-const StopMoveStepCommand zcl.CommandID = 71
+// StopMoveStepCommand is the Command ID of StopMoveStep
+const StopMoveStepCommand CommandID = 0x0047
 
+// Values returns all values of StopMoveStep
 func (v *StopMoveStep) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-func (v StopMoveStep) ID() zcl.CommandID {
-	return StopMoveStepCommand
-}
+// Name of the command (needed to fulfill interface)
+func (StopMoveStep) Name() string { return "Stop move step" }
 
-func (v StopMoveStep) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (StopMoveStep) ID() CommandID { return StopMoveStepCommand }
 
-func (v StopMoveStep) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (StopMoveStep) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (StopMoveStep) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of StopMoveStep
 func (v StopMoveStep) MarshalZcl() ([]byte, error) {
 	return nil, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the StopMoveStep struct
 func (v *StopMoveStep) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
+// String returns a log-friendly string representation of the struct
 func (v StopMoveStep) String() string {
-	var str []string
-	return "StopMoveStep{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"StopMoveStep{" + zcl.StrJoin([]string{}, " ") + "}",
+	)
 }
-
-func (StopMoveStep) Name() string { return "Stop move step" }
 
 type MoveColorTemperature struct {
-	MoveMode zcl.Zenum8
-	// Steps per second.
-	Rate zcl.Zu16
-	// Specifies a lower bound on the color temperature for the
-	// current move operation.
-	ColorTemperatureMin zcl.Zu16
-	// Specifies a upper bound on the color temperature for the
-	// current move operation.
-	ColorTemperatureMax zcl.Zu16
+	MoveMode MoveMode
+	// Rate increment/steps per second
+	Rate                Rate
+	ColorTemperatureMin ColorTemperatureMin
+	ColorTemperatureMax ColorTemperatureMax
 }
 
-const MoveColorTemperatureCommand zcl.CommandID = 75
+// MoveColorTemperatureCommand is the Command ID of MoveColorTemperature
+const MoveColorTemperatureCommand CommandID = 0x004B
 
+// Values returns all values of MoveColorTemperature
 func (v *MoveColorTemperature) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.MoveMode,
@@ -1626,46 +1560,52 @@ func (v *MoveColorTemperature) Values() []zcl.Val {
 	}
 }
 
-func (v MoveColorTemperature) ID() zcl.CommandID {
-	return MoveColorTemperatureCommand
-}
+// Name of the command (needed to fulfill interface)
+func (MoveColorTemperature) Name() string { return "Move color temperature" }
 
-func (v MoveColorTemperature) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (MoveColorTemperature) ID() CommandID { return MoveColorTemperatureCommand }
 
-func (v MoveColorTemperature) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (MoveColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (MoveColorTemperature) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of MoveColorTemperature
 func (v MoveColorTemperature) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.MoveMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.Rate.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.Rate.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ColorTemperatureMin.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ColorTemperatureMin.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ColorTemperatureMax.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ColorTemperatureMax.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the MoveColorTemperature struct
 func (v *MoveColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1688,108 +1628,97 @@ func (v *MoveColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v MoveColorTemperature) MoveModeString() string {
-	switch v.MoveMode {
-	case 0x00:
-		return "Stop"
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.MoveMode))
-}
-func (v MoveColorTemperature) RateString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.Rate))
-}
-func (v MoveColorTemperature) ColorTemperatureMinString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMin))
-}
-func (v MoveColorTemperature) ColorTemperatureMaxString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMax))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v MoveColorTemperature) String() string {
-	var str []string
-	str = append(str, "MoveMode["+v.MoveModeString()+"]")
-	str = append(str, "Rate["+v.RateString()+"]")
-	str = append(str, "ColorTemperatureMin["+v.ColorTemperatureMinString()+"]")
-	str = append(str, "ColorTemperatureMax["+v.ColorTemperatureMaxString()+"]")
-	return "MoveColorTemperature{" + zcl.StrJoin(str, " ") + "}"
+	return zcl.Sprintf(
+		"MoveColorTemperature{"+zcl.StrJoin([]string{
+			"MoveMode(%v)",
+			"Rate(%v)",
+			"ColorTemperatureMin(%v)",
+			"ColorTemperatureMax(%v)",
+		}, " ")+"}",
+		v.MoveMode,
+		v.Rate,
+		v.ColorTemperatureMin,
+		v.ColorTemperatureMax,
+	)
 }
-
-func (MoveColorTemperature) Name() string { return "Move color temperature" }
 
 type StepColorTemperature struct {
-	StepMode zcl.Zenum8
-	StepSize zcl.Zu16
-	// The transitiontime in 1/10 seconds.
-	TransitionTime zcl.Zu16
-	// Specifies a lower bound on the color temperature for the
-	// current step operation.
-	ColorTemperatureMinimumMireds zcl.Zu16
-	// Specifies a upper bound on the color temperature for the
-	// current step operation.
-	ColorTemperatureMaximumMireds zcl.Zu16
+	StepMode StepMode
+	StepSize StepSize
+	// TransitionTime The transition time in 1/10ths of a second.
+	TransitionTime            TransitionTime
+	ColorTemperatureMinMireds ColorTemperatureMinMireds
+	ColorTemperatureMaxMireds ColorTemperatureMaxMireds
 }
 
-const StepColorTemperatureCommand zcl.CommandID = 76
+// StepColorTemperatureCommand is the Command ID of StepColorTemperature
+const StepColorTemperatureCommand CommandID = 0x004C
 
+// Values returns all values of StepColorTemperature
 func (v *StepColorTemperature) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.StepMode,
 		&v.StepSize,
 		&v.TransitionTime,
-		&v.ColorTemperatureMinimumMireds,
-		&v.ColorTemperatureMaximumMireds,
+		&v.ColorTemperatureMinMireds,
+		&v.ColorTemperatureMaxMireds,
 	}
 }
 
-func (v StepColorTemperature) ID() zcl.CommandID {
-	return StepColorTemperatureCommand
-}
+// Name of the command (needed to fulfill interface)
+func (StepColorTemperature) Name() string { return "Step color temperature" }
 
-func (v StepColorTemperature) Cluster() zcl.ClusterID {
-	return ColorControlID
-}
+// ID of the command (needed to fulfill interface)
+func (StepColorTemperature) ID() CommandID { return StepColorTemperatureCommand }
 
-func (v StepColorTemperature) MnfCode() []byte {
-	return []byte{}
-}
+// Cluster ID of the command (needed to fulfill interface)
+func (StepColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 
+// MnfCode returns the manufacturer code (if any) of the command
+func (StepColorTemperature) MnfCode() []byte { return []byte{} }
+
+// MarshalZcl returns the wire format representation of StepColorTemperature
 func (v StepColorTemperature) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	if tmp, err = v.StepMode.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepMode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.StepSize.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.StepSize.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.TransitionTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ColorTemperatureMinimumMireds.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ColorTemperatureMinMireds.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
-	if tmp, err = v.ColorTemperatureMaximumMireds.MarshalZcl(); err != nil {
-		return nil, err
+	{
+		if tmp, err = v.ColorTemperatureMaxMireds.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
 	}
-	data = append(data, tmp...)
-
 	return data, nil
 }
 
+// UnmarshalZcl parses the wire format representation into the StepColorTemperature struct
 func (v *StepColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 
@@ -1805,1666 +1734,31 @@ func (v *StepColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ColorTemperatureMinimumMireds).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.ColorTemperatureMinMireds).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
-	if b, err = (&v.ColorTemperatureMaximumMireds).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.ColorTemperatureMaxMireds).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
 	return b, nil
 }
 
-func (v StepColorTemperature) StepModeString() string {
-	switch v.StepMode {
-	case 0x01:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(v.StepMode))
-}
-func (v StepColorTemperature) StepSizeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.StepSize))
-}
-func (v StepColorTemperature) TransitionTimeString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.TransitionTime))
-}
-func (v StepColorTemperature) ColorTemperatureMinimumMiredsString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMinimumMireds))
-}
-func (v StepColorTemperature) ColorTemperatureMaximumMiredsString() string {
-	return zcl.Sprintf("%v", zcl.Zu16(v.ColorTemperatureMaximumMireds))
-}
-
+// String returns a log-friendly string representation of the struct
 func (v StepColorTemperature) String() string {
-	var str []string
-	str = append(str, "StepMode["+v.StepModeString()+"]")
-	str = append(str, "StepSize["+v.StepSizeString()+"]")
-	str = append(str, "TransitionTime["+v.TransitionTimeString()+"]")
-	str = append(str, "ColorTemperatureMinimumMireds["+v.ColorTemperatureMinimumMiredsString()+"]")
-	str = append(str, "ColorTemperatureMaximumMireds["+v.ColorTemperatureMaximumMiredsString()+"]")
-	return "StepColorTemperature{" + zcl.StrJoin(str, " ") + "}"
-}
-
-func (StepColorTemperature) Name() string { return "Step color temperature" }
-
-// CurrentHue is an autogenerated attribute in the ColorControl cluster
-// It contains the current hue value of the light. Hue = CurrentHue x 360 / 254
-// (CurrentHue in the range 0 - 254 inclusive)
-type CurrentHue zcl.Zu8
-
-const CurrentHueAttr zcl.AttrID = 0
-
-func (CurrentHue) ID() zcl.AttrID                { return CurrentHueAttr }
-func (CurrentHue) Cluster() zcl.ClusterID        { return ColorControlID }
-func (CurrentHue) Name() string                  { return "Current hue" }
-func (CurrentHue) Readable() bool                { return true }
-func (CurrentHue) Writable() bool                { return false }
-func (CurrentHue) Reportable() bool              { return true }
-func (CurrentHue) SceneIndex() int               { return -1 }
-func (a *CurrentHue) Value() *CurrentHue         { return a }
-func (a CurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *CurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentHue(*nt)
-	return br, err
-}
-
-func (a CurrentHue) String() string {
-	return zcl.DegreesAngular.Format(float64(a) / 0.70556)
-}
-
-// CurrentSaturation is an autogenerated attribute in the ColorControl cluster
-// It holds the current saturation value of the light.
-// Saturation = CurrentSaturation/254 (CurrentSaturation in the range
-// 0 - 254 inclusive)
-type CurrentSaturation zcl.Zu8
-
-const CurrentSaturationAttr zcl.AttrID = 1
-
-func (CurrentSaturation) ID() zcl.AttrID                { return CurrentSaturationAttr }
-func (CurrentSaturation) Cluster() zcl.ClusterID        { return ColorControlID }
-func (CurrentSaturation) Name() string                  { return "Current saturation" }
-func (CurrentSaturation) Readable() bool                { return true }
-func (CurrentSaturation) Writable() bool                { return false }
-func (CurrentSaturation) Reportable() bool              { return true }
-func (CurrentSaturation) SceneIndex() int               { return 4 }
-func (a *CurrentSaturation) Value() *CurrentSaturation  { return a }
-func (a CurrentSaturation) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *CurrentSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentSaturation(*nt)
-	return br, err
-}
-
-func (a CurrentSaturation) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// RemainingTime is an autogenerated attribute in the ColorControl cluster
-// It holds the time remaining, in 1/10ths of a second, until the currently
-// active command will be complete
-type RemainingTime zcl.Zu16
-
-const RemainingTimeAttr zcl.AttrID = 2
-
-func (RemainingTime) ID() zcl.AttrID                { return RemainingTimeAttr }
-func (RemainingTime) Cluster() zcl.ClusterID        { return ColorControlID }
-func (RemainingTime) Name() string                  { return "Remaining time" }
-func (RemainingTime) Readable() bool                { return true }
-func (RemainingTime) Writable() bool                { return false }
-func (RemainingTime) Reportable() bool              { return false }
-func (RemainingTime) SceneIndex() int               { return -1 }
-func (a *RemainingTime) Value() *RemainingTime      { return a }
-func (a RemainingTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = RemainingTime(*nt)
-	return br, err
-}
-
-func (a RemainingTime) String() string {
-	return zcl.Seconds.Format(float64(a) / 10)
-}
-
-// CurrentX is an autogenerated attribute in the ColorControl cluster
-// It contains the current value of the normalized chromaticity value x,
-// as defined in the CIE xyY Color Space. x = CurrentX / 65536 (CurrentX
-// in the range 0 to 65279 inclusive)
-type CurrentX zcl.Zu16
-
-const CurrentXAttr zcl.AttrID = 3
-
-func (CurrentX) ID() zcl.AttrID                { return CurrentXAttr }
-func (CurrentX) Cluster() zcl.ClusterID        { return ColorControlID }
-func (CurrentX) Name() string                  { return "Current X" }
-func (CurrentX) Readable() bool                { return true }
-func (CurrentX) Writable() bool                { return false }
-func (CurrentX) Reportable() bool              { return true }
-func (CurrentX) SceneIndex() int               { return 1 }
-func (a *CurrentX) Value() *CurrentX           { return a }
-func (a CurrentX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *CurrentX) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentX(*nt)
-	return br, err
-}
-
-func (a CurrentX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// CurrentY is an autogenerated attribute in the ColorControl cluster
-// It contains the current value of the normalized chromaticity value y,
-// as defined in the CIE xyY Color Space. y = CurrentY / 65536 (CurrentY
-// in the range 0 to 65279 inclusive)
-type CurrentY zcl.Zu16
-
-const CurrentYAttr zcl.AttrID = 4
-
-func (CurrentY) ID() zcl.AttrID                { return CurrentYAttr }
-func (CurrentY) Cluster() zcl.ClusterID        { return ColorControlID }
-func (CurrentY) Name() string                  { return "Current Y" }
-func (CurrentY) Readable() bool                { return true }
-func (CurrentY) Writable() bool                { return false }
-func (CurrentY) Reportable() bool              { return true }
-func (CurrentY) SceneIndex() int               { return 2 }
-func (a *CurrentY) Value() *CurrentY           { return a }
-func (a CurrentY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *CurrentY) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentY(*nt)
-	return br, err
-}
-
-func (a CurrentY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// DriftCompensation is an autogenerated attribute in the ColorControl cluster
-// It indicates what mechanism, if any, is in use for compensation for
-// color/intensity drift over time
-type DriftCompensation zcl.Zenum8
-
-const DriftCompensationAttr zcl.AttrID = 5
-
-func (DriftCompensation) ID() zcl.AttrID                { return DriftCompensationAttr }
-func (DriftCompensation) Cluster() zcl.ClusterID        { return ColorControlID }
-func (DriftCompensation) Name() string                  { return "Drift Compensation" }
-func (DriftCompensation) Readable() bool                { return true }
-func (DriftCompensation) Writable() bool                { return false }
-func (DriftCompensation) Reportable() bool              { return false }
-func (DriftCompensation) SceneIndex() int               { return -1 }
-func (a *DriftCompensation) Value() *DriftCompensation  { return a }
-func (a DriftCompensation) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
-
-func (a *DriftCompensation) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zenum8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = DriftCompensation(*nt)
-	return br, err
-}
-
-func (a DriftCompensation) String() string {
-	switch a {
-	case 0x00:
-		return "None"
-	case 0x01:
-		return "Other / Unknown"
-	case 0x02:
-		return "Temperature monitoring"
-	case 0x03:
-		return "Optical luminance monitoring and feedback"
-	case 0x04:
-		return "Optical color monitoring and feedback"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
-}
-
-// IsNone checks if DriftCompensation equals the value for None (0x00)
-func (a DriftCompensation) IsNone() bool { return a == 0x00 }
-
-// SetNone sets DriftCompensation to None (0x00)
-func (a *DriftCompensation) SetNone() { *a = 0x00 }
-
-// IsOtherUnknown checks if DriftCompensation equals the value for Other / Unknown (0x01)
-func (a DriftCompensation) IsOtherUnknown() bool { return a == 0x01 }
-
-// SetOtherUnknown sets DriftCompensation to Other / Unknown (0x01)
-func (a *DriftCompensation) SetOtherUnknown() { *a = 0x01 }
-
-// IsTemperatureMonitoring checks if DriftCompensation equals the value for Temperature monitoring (0x02)
-func (a DriftCompensation) IsTemperatureMonitoring() bool { return a == 0x02 }
-
-// SetTemperatureMonitoring sets DriftCompensation to Temperature monitoring (0x02)
-func (a *DriftCompensation) SetTemperatureMonitoring() { *a = 0x02 }
-
-// IsOpticalLuminanceMonitoringAndFeedback checks if DriftCompensation equals the value for Optical luminance monitoring and feedback (0x03)
-func (a DriftCompensation) IsOpticalLuminanceMonitoringAndFeedback() bool { return a == 0x03 }
-
-// SetOpticalLuminanceMonitoringAndFeedback sets DriftCompensation to Optical luminance monitoring and feedback (0x03)
-func (a *DriftCompensation) SetOpticalLuminanceMonitoringAndFeedback() { *a = 0x03 }
-
-// IsOpticalColorMonitoringAndFeedback checks if DriftCompensation equals the value for Optical color monitoring and feedback (0x04)
-func (a DriftCompensation) IsOpticalColorMonitoringAndFeedback() bool { return a == 0x04 }
-
-// SetOpticalColorMonitoringAndFeedback sets DriftCompensation to Optical color monitoring and feedback (0x04)
-func (a *DriftCompensation) SetOpticalColorMonitoringAndFeedback() { *a = 0x04 }
-
-// CompensationText is an autogenerated attribute in the ColorControl cluster
-// It holds a textual indication of what mechanism, if any, is in use to
-// compensate for color/intensity drift over time
-type CompensationText zcl.Zcstring
-
-const CompensationTextAttr zcl.AttrID = 6
-
-func (CompensationText) ID() zcl.AttrID                { return CompensationTextAttr }
-func (CompensationText) Cluster() zcl.ClusterID        { return ColorControlID }
-func (CompensationText) Name() string                  { return "Compensation Text" }
-func (CompensationText) Readable() bool                { return true }
-func (CompensationText) Writable() bool                { return false }
-func (CompensationText) Reportable() bool              { return false }
-func (CompensationText) SceneIndex() int               { return -1 }
-func (a *CompensationText) Value() *CompensationText   { return a }
-func (a CompensationText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
-
-func (a *CompensationText) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zcstring)
-	br, err := nt.UnmarshalZcl(b)
-	*a = CompensationText(*nt)
-	return br, err
-}
-
-func (a CompensationText) String() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(a))
-}
-
-// ColorTemperatureMireds is an autogenerated attribute in the ColorControl cluster
-// It contains a scaled inverse of the current value of the color
-// temperature. The unit of ColorTemperatureMireds is the mired
-// (micro reciprocal degree), a.k.a mirek (micro reciprocal
-// kelvin). Color temperature in kelvins = 1,000,000 / ColorTemperatureMireds,
-// where ColorTemperatureMireds is in the range 1 to 65279 mireds inclusive,
-// giving a color temperature range from 1,000,000 kelvins to 15.32 kelvins
-type ColorTemperatureMireds zcl.Zu16
-
-const ColorTemperatureMiredsAttr zcl.AttrID = 7
-
-func (ColorTemperatureMireds) ID() zcl.AttrID                    { return ColorTemperatureMiredsAttr }
-func (ColorTemperatureMireds) Cluster() zcl.ClusterID            { return ColorControlID }
-func (ColorTemperatureMireds) Name() string                      { return "Color temperature Mireds" }
-func (ColorTemperatureMireds) Readable() bool                    { return true }
-func (ColorTemperatureMireds) Writable() bool                    { return false }
-func (ColorTemperatureMireds) Reportable() bool                  { return true }
-func (ColorTemperatureMireds) SceneIndex() int                   { return -1 }
-func (a *ColorTemperatureMireds) Value() *ColorTemperatureMireds { return a }
-func (a ColorTemperatureMireds) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorTemperatureMireds) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperatureMireds(*nt)
-	return br, err
-}
-
-func (a ColorTemperatureMireds) String() string {
-	return zcl.Mired.Format(float64(a))
-}
-
-// ColorMode is an autogenerated attribute in the ColorControl cluster
-// It indicates which attributes are currently determining the color of
-// the device. This attribute is optional if the device does not implement
-// CurrentHue and CurrentSaturation
-type ColorMode zcl.Zenum8
-
-const ColorModeAttr zcl.AttrID = 8
-
-func (ColorMode) ID() zcl.AttrID                { return ColorModeAttr }
-func (ColorMode) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorMode) Name() string                  { return "Color Mode" }
-func (ColorMode) Readable() bool                { return true }
-func (ColorMode) Writable() bool                { return false }
-func (ColorMode) Reportable() bool              { return false }
-func (ColorMode) SceneIndex() int               { return -1 }
-func (a *ColorMode) Value() *ColorMode          { return a }
-func (a ColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
-
-func (a *ColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zenum8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorMode(*nt)
-	return br, err
-}
-
-func (a ColorMode) String() string {
-	switch a {
-	case 0x00:
-		return "Current hue and current saturation"
-	case 0x01:
-		return "Current X and Current Y"
-	case 0x02:
-		return "Color temperature"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
-}
-
-// IsCurrentHueAndCurrentSaturation checks if ColorMode equals the value for Current hue and current saturation (0x00)
-func (a ColorMode) IsCurrentHueAndCurrentSaturation() bool { return a == 0x00 }
-
-// SetCurrentHueAndCurrentSaturation sets ColorMode to Current hue and current saturation (0x00)
-func (a *ColorMode) SetCurrentHueAndCurrentSaturation() { *a = 0x00 }
-
-// IsCurrentXAndCurrentY checks if ColorMode equals the value for Current X and Current Y (0x01)
-func (a ColorMode) IsCurrentXAndCurrentY() bool { return a == 0x01 }
-
-// SetCurrentXAndCurrentY sets ColorMode to Current X and Current Y (0x01)
-func (a *ColorMode) SetCurrentXAndCurrentY() { *a = 0x01 }
-
-// IsColorTemperature checks if ColorMode equals the value for Color temperature (0x02)
-func (a ColorMode) IsColorTemperature() bool { return a == 0x02 }
-
-// SetColorTemperature sets ColorMode to Color temperature (0x02)
-func (a *ColorMode) SetColorTemperature() { *a = 0x02 }
-
-// EnhancedCurrentHue is an autogenerated attribute in the ColorControl cluster
-// It represents non-equidistant steps along the CIE 1931 color triangle,
-// and it provides 16-bits precision. The upper 8 bits of this attribute
-// are used as an index in the implementation specific XY lookup table to
-// provide the non-equidistance steps. The lower 8 bits are used to
-// interpolate between these steps in a linear way in order to provide color
-// zoom for the user. To provide compatibility with standard ZCL, the
-// CurrentHue attribute contains a hue value in the range 0 to 254,
-// calculated from the EnhancedCurrentHue attribute
-type EnhancedCurrentHue zcl.Zu16
-
-const EnhancedCurrentHueAttr zcl.AttrID = 16384
-
-func (EnhancedCurrentHue) ID() zcl.AttrID                { return EnhancedCurrentHueAttr }
-func (EnhancedCurrentHue) Cluster() zcl.ClusterID        { return ColorControlID }
-func (EnhancedCurrentHue) Name() string                  { return "Enhanced current hue" }
-func (EnhancedCurrentHue) Readable() bool                { return true }
-func (EnhancedCurrentHue) Writable() bool                { return false }
-func (EnhancedCurrentHue) Reportable() bool              { return false }
-func (EnhancedCurrentHue) SceneIndex() int               { return 3 }
-func (a *EnhancedCurrentHue) Value() *EnhancedCurrentHue { return a }
-func (a EnhancedCurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *EnhancedCurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = EnhancedCurrentHue(*nt)
-	return br, err
-}
-
-func (a EnhancedCurrentHue) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// EnhancedColorMode is an autogenerated attribute in the ColorControl cluster
-// It specifies which attributes are currently determining the color of
-// the device
-type EnhancedColorMode zcl.Zenum8
-
-const EnhancedColorModeAttr zcl.AttrID = 16385
-
-func (EnhancedColorMode) ID() zcl.AttrID                { return EnhancedColorModeAttr }
-func (EnhancedColorMode) Cluster() zcl.ClusterID        { return ColorControlID }
-func (EnhancedColorMode) Name() string                  { return "Enhanced color mode" }
-func (EnhancedColorMode) Readable() bool                { return true }
-func (EnhancedColorMode) Writable() bool                { return false }
-func (EnhancedColorMode) Reportable() bool              { return false }
-func (EnhancedColorMode) SceneIndex() int               { return -1 }
-func (a *EnhancedColorMode) Value() *EnhancedColorMode  { return a }
-func (a EnhancedColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
-
-func (a *EnhancedColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zenum8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = EnhancedColorMode(*nt)
-	return br, err
-}
-
-func (a EnhancedColorMode) String() string {
-	switch a {
-	case 0x00:
-		return "Current hue and current saturation"
-	case 0x01:
-		return "Current X and Current Y"
-	case 0x02:
-		return "Color temperature"
-	case 0x03:
-		return "Enhanced current hue and current saturation"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
-}
-
-// IsCurrentHueAndCurrentSaturation checks if EnhancedColorMode equals the value for Current hue and current saturation (0x00)
-func (a EnhancedColorMode) IsCurrentHueAndCurrentSaturation() bool { return a == 0x00 }
-
-// SetCurrentHueAndCurrentSaturation sets EnhancedColorMode to Current hue and current saturation (0x00)
-func (a *EnhancedColorMode) SetCurrentHueAndCurrentSaturation() { *a = 0x00 }
-
-// IsCurrentXAndCurrentY checks if EnhancedColorMode equals the value for Current X and Current Y (0x01)
-func (a EnhancedColorMode) IsCurrentXAndCurrentY() bool { return a == 0x01 }
-
-// SetCurrentXAndCurrentY sets EnhancedColorMode to Current X and Current Y (0x01)
-func (a *EnhancedColorMode) SetCurrentXAndCurrentY() { *a = 0x01 }
-
-// IsColorTemperature checks if EnhancedColorMode equals the value for Color temperature (0x02)
-func (a EnhancedColorMode) IsColorTemperature() bool { return a == 0x02 }
-
-// SetColorTemperature sets EnhancedColorMode to Color temperature (0x02)
-func (a *EnhancedColorMode) SetColorTemperature() { *a = 0x02 }
-
-// IsEnhancedCurrentHueAndCurrentSaturation checks if EnhancedColorMode equals the value for Enhanced current hue and current saturation (0x03)
-func (a EnhancedColorMode) IsEnhancedCurrentHueAndCurrentSaturation() bool { return a == 0x03 }
-
-// SetEnhancedCurrentHueAndCurrentSaturation sets EnhancedColorMode to Enhanced current hue and current saturation (0x03)
-func (a *EnhancedColorMode) SetEnhancedCurrentHueAndCurrentSaturation() { *a = 0x03 }
-
-// ColorLoopActive is an autogenerated attribute in the ColorControl cluster
-// It specifies the current active status of the color loop. 0x00 means
-// inactive, 0x01 means active
-type ColorLoopActive zcl.Zu8
-
-const ColorLoopActiveAttr zcl.AttrID = 16386
-
-func (ColorLoopActive) ID() zcl.AttrID                { return ColorLoopActiveAttr }
-func (ColorLoopActive) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorLoopActive) Name() string                  { return "Color loop active" }
-func (ColorLoopActive) Readable() bool                { return true }
-func (ColorLoopActive) Writable() bool                { return false }
-func (ColorLoopActive) Reportable() bool              { return false }
-func (ColorLoopActive) SceneIndex() int               { return 5 }
-func (a *ColorLoopActive) Value() *ColorLoopActive    { return a }
-func (a ColorLoopActive) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *ColorLoopActive) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopActive(*nt)
-	return br, err
-}
-
-func (a ColorLoopActive) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// ColorLoopDirection is an autogenerated attribute in the ColorControl cluster
-// It specifies the current direction of the color loop. If this attribute
-// has the value 0x00, the EnhancedCurrentHue is be decremented. If this
-// attribute has the value 0x01, the EnhancedCurrentHue is incremented
-type ColorLoopDirection zcl.Zu8
-
-const ColorLoopDirectionAttr zcl.AttrID = 16387
-
-func (ColorLoopDirection) ID() zcl.AttrID                { return ColorLoopDirectionAttr }
-func (ColorLoopDirection) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorLoopDirection) Name() string                  { return "Color loop direction" }
-func (ColorLoopDirection) Readable() bool                { return true }
-func (ColorLoopDirection) Writable() bool                { return false }
-func (ColorLoopDirection) Reportable() bool              { return false }
-func (ColorLoopDirection) SceneIndex() int               { return 6 }
-func (a *ColorLoopDirection) Value() *ColorLoopDirection { return a }
-func (a ColorLoopDirection) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *ColorLoopDirection) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopDirection(*nt)
-	return br, err
-}
-
-func (a ColorLoopDirection) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// ColorLoopTime is an autogenerated attribute in the ColorControl cluster
-// It specifies the number of seconds it takes to perform a full color
-// loop, i.e., to cycle all values of EnhancedCurrentHue
-type ColorLoopTime zcl.Zu16
-
-const ColorLoopTimeAttr zcl.AttrID = 16388
-
-func (ColorLoopTime) ID() zcl.AttrID                { return ColorLoopTimeAttr }
-func (ColorLoopTime) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorLoopTime) Name() string                  { return "Color loop time" }
-func (ColorLoopTime) Readable() bool                { return true }
-func (ColorLoopTime) Writable() bool                { return false }
-func (ColorLoopTime) Reportable() bool              { return false }
-func (ColorLoopTime) SceneIndex() int               { return 7 }
-func (a *ColorLoopTime) Value() *ColorLoopTime      { return a }
-func (a ColorLoopTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorLoopTime) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopTime(*nt)
-	return br, err
-}
-
-func (a ColorLoopTime) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorLoopStartEnhancedHue is an autogenerated attribute in the ColorControl cluster
-// It specifies the value of the EnhancedCurrentHue attribute from which
-// the color loop starts
-type ColorLoopStartEnhancedHue zcl.Zu16
-
-const ColorLoopStartEnhancedHueAttr zcl.AttrID = 16389
-
-func (ColorLoopStartEnhancedHue) ID() zcl.AttrID                       { return ColorLoopStartEnhancedHueAttr }
-func (ColorLoopStartEnhancedHue) Cluster() zcl.ClusterID               { return ColorControlID }
-func (ColorLoopStartEnhancedHue) Name() string                         { return "Color loop start enhanced hue" }
-func (ColorLoopStartEnhancedHue) Readable() bool                       { return true }
-func (ColorLoopStartEnhancedHue) Writable() bool                       { return false }
-func (ColorLoopStartEnhancedHue) Reportable() bool                     { return false }
-func (ColorLoopStartEnhancedHue) SceneIndex() int                      { return -1 }
-func (a *ColorLoopStartEnhancedHue) Value() *ColorLoopStartEnhancedHue { return a }
-func (a ColorLoopStartEnhancedHue) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorLoopStartEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopStartEnhancedHue(*nt)
-	return br, err
-}
-
-func (a ColorLoopStartEnhancedHue) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorLoopStoredEnhancedHue is an autogenerated attribute in the ColorControl cluster
-// It specifies the value of the EnhancedCurrentHue attribute before the
-// color loop was started. Once the color loop is complete, It is restored
-// to this value
-type ColorLoopStoredEnhancedHue zcl.Zu16
-
-const ColorLoopStoredEnhancedHueAttr zcl.AttrID = 16390
-
-func (ColorLoopStoredEnhancedHue) ID() zcl.AttrID                        { return ColorLoopStoredEnhancedHueAttr }
-func (ColorLoopStoredEnhancedHue) Cluster() zcl.ClusterID                { return ColorControlID }
-func (ColorLoopStoredEnhancedHue) Name() string                          { return "Color loop stored enhanced hue" }
-func (ColorLoopStoredEnhancedHue) Readable() bool                        { return true }
-func (ColorLoopStoredEnhancedHue) Writable() bool                        { return false }
-func (ColorLoopStoredEnhancedHue) Reportable() bool                      { return false }
-func (ColorLoopStoredEnhancedHue) SceneIndex() int                       { return -1 }
-func (a *ColorLoopStoredEnhancedHue) Value() *ColorLoopStoredEnhancedHue { return a }
-func (a ColorLoopStoredEnhancedHue) MarshalZcl() ([]byte, error)         { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorLoopStoredEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopStoredEnhancedHue(*nt)
-	return br, err
-}
-
-func (a ColorLoopStoredEnhancedHue) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorCapabilities is an autogenerated attribute in the ColorControl cluster
-// It specifies the color capabilities of the device supporting the color
-// control cluster
-type ColorCapabilities zcl.Zbmp16
-
-const ColorCapabilitiesAttr zcl.AttrID = 16394
-
-func (ColorCapabilities) ID() zcl.AttrID                { return ColorCapabilitiesAttr }
-func (ColorCapabilities) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorCapabilities) Name() string                  { return "Color capabilities" }
-func (ColorCapabilities) Readable() bool                { return true }
-func (ColorCapabilities) Writable() bool                { return false }
-func (ColorCapabilities) Reportable() bool              { return false }
-func (ColorCapabilities) SceneIndex() int               { return -1 }
-func (a *ColorCapabilities) Value() *ColorCapabilities  { return a }
-func (a ColorCapabilities) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
-
-func (a *ColorCapabilities) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zbmp16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorCapabilities(*nt)
-	return br, err
-}
-
-func (a ColorCapabilities) String() string {
-	var bstr []string
-	if a.IsHueSaturation() {
-		bstr = append(bstr, "Hue saturation")
-	}
-	if a.IsEnhancedHueSaturation() {
-		bstr = append(bstr, "Enhanced Hue saturation")
-	}
-	if a.IsColorLoop() {
-		bstr = append(bstr, "Color loop")
-	}
-	if a.IsCie1931Xy() {
-		bstr = append(bstr, "CIE 1931 XY")
-	}
-	if a.IsColorTemperature() {
-		bstr = append(bstr, "Color temperature")
-	}
-	return zcl.StrJoin(bstr, ", ")
-}
-
-func (a ColorCapabilities) IsHueSaturation() bool {
-	return zcl.BitmapTest([]byte(a), 0)
-}
-func (a *ColorCapabilities) SetHueSaturation(b bool) {
-	*a = ColorCapabilities(zcl.BitmapSet([]byte(*a), 0, b))
-}
-
-func (a ColorCapabilities) IsEnhancedHueSaturation() bool {
-	return zcl.BitmapTest([]byte(a), 1)
-}
-func (a *ColorCapabilities) SetEnhancedHueSaturation(b bool) {
-	*a = ColorCapabilities(zcl.BitmapSet([]byte(*a), 1, b))
-}
-
-func (a ColorCapabilities) IsColorLoop() bool {
-	return zcl.BitmapTest([]byte(a), 2)
-}
-func (a *ColorCapabilities) SetColorLoop(b bool) {
-	*a = ColorCapabilities(zcl.BitmapSet([]byte(*a), 2, b))
-}
-
-func (a ColorCapabilities) IsCie1931Xy() bool {
-	return zcl.BitmapTest([]byte(a), 3)
-}
-func (a *ColorCapabilities) SetCie1931Xy(b bool) {
-	*a = ColorCapabilities(zcl.BitmapSet([]byte(*a), 3, b))
-}
-
-func (a ColorCapabilities) IsColorTemperature() bool {
-	return zcl.BitmapTest([]byte(a), 4)
-}
-func (a *ColorCapabilities) SetColorTemperature(b bool) {
-	*a = ColorCapabilities(zcl.BitmapSet([]byte(*a), 4, b))
-}
-
-// ColorTemperaturePhysicalMinMireds is an autogenerated attribute in the ColorControl cluster
-// It indicates the minimum mired value supported by the hardware.
-// ColorTempPhysicalMinMireds corresponds to the maximum color
-// temperature in Kelvins supported by the hardware.
-// ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds
-type ColorTemperaturePhysicalMinMireds zcl.Zu16
-
-const ColorTemperaturePhysicalMinMiredsAttr zcl.AttrID = 16395
-
-func (ColorTemperaturePhysicalMinMireds) ID() zcl.AttrID                               { return ColorTemperaturePhysicalMinMiredsAttr }
-func (ColorTemperaturePhysicalMinMireds) Cluster() zcl.ClusterID                       { return ColorControlID }
-func (ColorTemperaturePhysicalMinMireds) Name() string                                 { return "Color temperature physical min Mireds" }
-func (ColorTemperaturePhysicalMinMireds) Readable() bool                               { return true }
-func (ColorTemperaturePhysicalMinMireds) Writable() bool                               { return false }
-func (ColorTemperaturePhysicalMinMireds) Reportable() bool                             { return false }
-func (ColorTemperaturePhysicalMinMireds) SceneIndex() int                              { return -1 }
-func (a *ColorTemperaturePhysicalMinMireds) Value() *ColorTemperaturePhysicalMinMireds { return a }
-func (a ColorTemperaturePhysicalMinMireds) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
-
-func (a *ColorTemperaturePhysicalMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperaturePhysicalMinMireds(*nt)
-	return br, err
-}
-
-func (a ColorTemperaturePhysicalMinMireds) String() string {
-	return zcl.Mired.Format(float64(a))
-}
-
-// ColorTemperaturePhysicalMaxMireds is an autogenerated attribute in the ColorControl cluster
-// It indicates the maximum mired value supported by the hardware.
-// ColorTempPhysicalMaxMireds corresponds to the minimum color
-// temperature in Kelvins supported by the hardware.
-// ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds
-type ColorTemperaturePhysicalMaxMireds zcl.Zu16
-
-const ColorTemperaturePhysicalMaxMiredsAttr zcl.AttrID = 16396
-
-func (ColorTemperaturePhysicalMaxMireds) ID() zcl.AttrID                               { return ColorTemperaturePhysicalMaxMiredsAttr }
-func (ColorTemperaturePhysicalMaxMireds) Cluster() zcl.ClusterID                       { return ColorControlID }
-func (ColorTemperaturePhysicalMaxMireds) Name() string                                 { return "Color temperature physical max Mireds" }
-func (ColorTemperaturePhysicalMaxMireds) Readable() bool                               { return true }
-func (ColorTemperaturePhysicalMaxMireds) Writable() bool                               { return false }
-func (ColorTemperaturePhysicalMaxMireds) Reportable() bool                             { return false }
-func (ColorTemperaturePhysicalMaxMireds) SceneIndex() int                              { return -1 }
-func (a *ColorTemperaturePhysicalMaxMireds) Value() *ColorTemperaturePhysicalMaxMireds { return a }
-func (a ColorTemperaturePhysicalMaxMireds) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
-}
-
-func (a *ColorTemperaturePhysicalMaxMireds) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperaturePhysicalMaxMireds(*nt)
-	return br, err
-}
-
-func (a ColorTemperaturePhysicalMaxMireds) String() string {
-	return zcl.Mired.Format(float64(a))
-}
-
-// PowerOnColorTemperature is an autogenerated attribute in the ColorControl cluster
-type PowerOnColorTemperature zcl.Zu16
-
-const PowerOnColorTemperatureAttr zcl.AttrID = 16400
-
-func (PowerOnColorTemperature) ID() zcl.AttrID                     { return PowerOnColorTemperatureAttr }
-func (PowerOnColorTemperature) Cluster() zcl.ClusterID             { return ColorControlID }
-func (PowerOnColorTemperature) Name() string                       { return "Power-on color temperature" }
-func (PowerOnColorTemperature) Readable() bool                     { return true }
-func (PowerOnColorTemperature) Writable() bool                     { return true }
-func (PowerOnColorTemperature) Reportable() bool                   { return false }
-func (PowerOnColorTemperature) SceneIndex() int                    { return -1 }
-func (a *PowerOnColorTemperature) Value() *PowerOnColorTemperature { return a }
-func (a PowerOnColorTemperature) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *PowerOnColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = PowerOnColorTemperature(*nt)
-	return br, err
-}
-
-func (a PowerOnColorTemperature) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// NumberOfPrimaries is an autogenerated attribute in the ColorControl cluster
-// It contains the number of color primaries implemented on this device.
-// A value of 0xff indicates that the number of primaries is unknown
-type NumberOfPrimaries zcl.Zu8
-
-const NumberOfPrimariesAttr zcl.AttrID = 16
-
-func (NumberOfPrimaries) ID() zcl.AttrID                { return NumberOfPrimariesAttr }
-func (NumberOfPrimaries) Cluster() zcl.ClusterID        { return ColorControlID }
-func (NumberOfPrimaries) Name() string                  { return "Number of primaries" }
-func (NumberOfPrimaries) Readable() bool                { return true }
-func (NumberOfPrimaries) Writable() bool                { return false }
-func (NumberOfPrimaries) Reportable() bool              { return false }
-func (NumberOfPrimaries) SceneIndex() int               { return -1 }
-func (a *NumberOfPrimaries) Value() *NumberOfPrimaries  { return a }
-func (a NumberOfPrimaries) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *NumberOfPrimaries) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = NumberOfPrimaries(*nt)
-	return br, err
-}
-
-func (a NumberOfPrimaries) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// Primary1X is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x for this primary, as
-// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
-// in the range 0 to 65279 inclusive)
-type Primary1X zcl.Zu16
-
-const Primary1XAttr zcl.AttrID = 17
-
-func (Primary1X) ID() zcl.AttrID                { return Primary1XAttr }
-func (Primary1X) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary1X) Name() string                  { return "Primary1 X" }
-func (Primary1X) Readable() bool                { return true }
-func (Primary1X) Writable() bool                { return false }
-func (Primary1X) Reportable() bool              { return false }
-func (Primary1X) SceneIndex() int               { return -1 }
-func (a *Primary1X) Value() *Primary1X          { return a }
-func (a Primary1X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary1X) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1X(*nt)
-	return br, err
-}
-
-func (a Primary1X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary1Y is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y for this primary, as
-// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
-// in the range 0 to 65279 inclusive)
-type Primary1Y zcl.Zu16
-
-const Primary1YAttr zcl.AttrID = 18
-
-func (Primary1Y) ID() zcl.AttrID                { return Primary1YAttr }
-func (Primary1Y) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary1Y) Name() string                  { return "Primary1 Y" }
-func (Primary1Y) Readable() bool                { return true }
-func (Primary1Y) Writable() bool                { return false }
-func (Primary1Y) Reportable() bool              { return false }
-func (Primary1Y) SceneIndex() int               { return -1 }
-func (a *Primary1Y) Value() *Primary1Y          { return a }
-func (a Primary1Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary1Y) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1Y(*nt)
-	return br, err
-}
-
-func (a Primary1Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary1Intensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the maximum intensity of this primary as
-// defined in the Dimming Light Curve in the Ballast Configuration cluster,
-// normalized such that the primary with the highest maximum intensity
-// contains the value 0xfe. A value of 0xff indicates that this primary is
-// not available
-type Primary1Intensity zcl.Zu8
-
-const Primary1IntensityAttr zcl.AttrID = 19
-
-func (Primary1Intensity) ID() zcl.AttrID                { return Primary1IntensityAttr }
-func (Primary1Intensity) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary1Intensity) Name() string                  { return "Primary1 intensity" }
-func (Primary1Intensity) Readable() bool                { return true }
-func (Primary1Intensity) Writable() bool                { return false }
-func (Primary1Intensity) Reportable() bool              { return false }
-func (Primary1Intensity) SceneIndex() int               { return -1 }
-func (a *Primary1Intensity) Value() *Primary1Intensity  { return a }
-func (a Primary1Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *Primary1Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1Intensity(*nt)
-	return br, err
-}
-
-func (a Primary1Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// Primary2X is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x for this primary, as
-// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
-// in the range 0 to 65279 inclusive)
-type Primary2X zcl.Zu16
-
-const Primary2XAttr zcl.AttrID = 21
-
-func (Primary2X) ID() zcl.AttrID                { return Primary2XAttr }
-func (Primary2X) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary2X) Name() string                  { return "Primary2 X" }
-func (Primary2X) Readable() bool                { return true }
-func (Primary2X) Writable() bool                { return false }
-func (Primary2X) Reportable() bool              { return false }
-func (Primary2X) SceneIndex() int               { return -1 }
-func (a *Primary2X) Value() *Primary2X          { return a }
-func (a Primary2X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary2X) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2X(*nt)
-	return br, err
-}
-
-func (a Primary2X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary2Y is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y for this primary, as
-// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
-// in the range 0 to 65279 inclusive)
-type Primary2Y zcl.Zu16
-
-const Primary2YAttr zcl.AttrID = 22
-
-func (Primary2Y) ID() zcl.AttrID                { return Primary2YAttr }
-func (Primary2Y) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary2Y) Name() string                  { return "Primary2 Y" }
-func (Primary2Y) Readable() bool                { return true }
-func (Primary2Y) Writable() bool                { return false }
-func (Primary2Y) Reportable() bool              { return false }
-func (Primary2Y) SceneIndex() int               { return -1 }
-func (a *Primary2Y) Value() *Primary2Y          { return a }
-func (a Primary2Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary2Y) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2Y(*nt)
-	return br, err
-}
-
-func (a Primary2Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary2Intensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the maximum intensity of this primary as
-// defined in the Dimming Light Curve in the Ballast Configuration cluster,
-// normalized such that the primary with the highest maximum intensity
-// contains the value 0xfe. A value of 0xff indicates that this primary is
-// not available
-type Primary2Intensity zcl.Zu8
-
-const Primary2IntensityAttr zcl.AttrID = 23
-
-func (Primary2Intensity) ID() zcl.AttrID                { return Primary2IntensityAttr }
-func (Primary2Intensity) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary2Intensity) Name() string                  { return "Primary2 intensity" }
-func (Primary2Intensity) Readable() bool                { return true }
-func (Primary2Intensity) Writable() bool                { return false }
-func (Primary2Intensity) Reportable() bool              { return false }
-func (Primary2Intensity) SceneIndex() int               { return -1 }
-func (a *Primary2Intensity) Value() *Primary2Intensity  { return a }
-func (a Primary2Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *Primary2Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2Intensity(*nt)
-	return br, err
-}
-
-func (a Primary2Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// Primary3X is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x for this primary, as
-// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
-// in the range 0 to 65279 inclusive)
-type Primary3X zcl.Zu16
-
-const Primary3XAttr zcl.AttrID = 25
-
-func (Primary3X) ID() zcl.AttrID                { return Primary3XAttr }
-func (Primary3X) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary3X) Name() string                  { return "Primary3 X" }
-func (Primary3X) Readable() bool                { return true }
-func (Primary3X) Writable() bool                { return false }
-func (Primary3X) Reportable() bool              { return false }
-func (Primary3X) SceneIndex() int               { return -1 }
-func (a *Primary3X) Value() *Primary3X          { return a }
-func (a Primary3X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary3X) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3X(*nt)
-	return br, err
-}
-
-func (a Primary3X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary3Y is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y for this primary, as
-// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
-// in the range 0 to 65279 inclusive)
-type Primary3Y zcl.Zu16
-
-const Primary3YAttr zcl.AttrID = 26
-
-func (Primary3Y) ID() zcl.AttrID                { return Primary3YAttr }
-func (Primary3Y) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary3Y) Name() string                  { return "Primary3 Y" }
-func (Primary3Y) Readable() bool                { return true }
-func (Primary3Y) Writable() bool                { return false }
-func (Primary3Y) Reportable() bool              { return false }
-func (Primary3Y) SceneIndex() int               { return -1 }
-func (a *Primary3Y) Value() *Primary3Y          { return a }
-func (a Primary3Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary3Y) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3Y(*nt)
-	return br, err
-}
-
-func (a Primary3Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary3Intensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the maximum intensity of this primary as
-// defined in the Dimming Light Curve in the Ballast Configuration cluster,
-// normalized such that the primary with the highest maximum intensity
-// contains the value 0xfe. A value of 0xff indicates that this primary is
-// not available
-type Primary3Intensity zcl.Zu8
-
-const Primary3IntensityAttr zcl.AttrID = 27
-
-func (Primary3Intensity) ID() zcl.AttrID                { return Primary3IntensityAttr }
-func (Primary3Intensity) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary3Intensity) Name() string                  { return "Primary3 intensity" }
-func (Primary3Intensity) Readable() bool                { return true }
-func (Primary3Intensity) Writable() bool                { return false }
-func (Primary3Intensity) Reportable() bool              { return false }
-func (Primary3Intensity) SceneIndex() int               { return -1 }
-func (a *Primary3Intensity) Value() *Primary3Intensity  { return a }
-func (a Primary3Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *Primary3Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3Intensity(*nt)
-	return br, err
-}
-
-func (a Primary3Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// Primary4X is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x for this primary, as
-// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
-// in the range 0 to 65279 inclusive)
-type Primary4X zcl.Zu16
-
-const Primary4XAttr zcl.AttrID = 32
-
-func (Primary4X) ID() zcl.AttrID                { return Primary4XAttr }
-func (Primary4X) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary4X) Name() string                  { return "Primary4 X" }
-func (Primary4X) Readable() bool                { return true }
-func (Primary4X) Writable() bool                { return false }
-func (Primary4X) Reportable() bool              { return false }
-func (Primary4X) SceneIndex() int               { return -1 }
-func (a *Primary4X) Value() *Primary4X          { return a }
-func (a Primary4X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary4X) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4X(*nt)
-	return br, err
-}
-
-func (a Primary4X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary4Y is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y for this primary, as
-// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
-// in the range 0 to 65279 inclusive)
-type Primary4Y zcl.Zu16
-
-const Primary4YAttr zcl.AttrID = 33
-
-func (Primary4Y) ID() zcl.AttrID                { return Primary4YAttr }
-func (Primary4Y) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary4Y) Name() string                  { return "Primary4 Y" }
-func (Primary4Y) Readable() bool                { return true }
-func (Primary4Y) Writable() bool                { return false }
-func (Primary4Y) Reportable() bool              { return false }
-func (Primary4Y) SceneIndex() int               { return -1 }
-func (a *Primary4Y) Value() *Primary4Y          { return a }
-func (a Primary4Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary4Y) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4Y(*nt)
-	return br, err
-}
-
-func (a Primary4Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary4Intensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the maximum intensity of this primary as
-// defined in the Dimming Light Curve in the Ballast Configuration cluster,
-// normalized such that the primary with the highest maximum intensity
-// contains the value 0xfe. A value of 0xff indicates that this primary is
-// not available
-type Primary4Intensity zcl.Zu8
-
-const Primary4IntensityAttr zcl.AttrID = 34
-
-func (Primary4Intensity) ID() zcl.AttrID                { return Primary4IntensityAttr }
-func (Primary4Intensity) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary4Intensity) Name() string                  { return "Primary4 intensity" }
-func (Primary4Intensity) Readable() bool                { return true }
-func (Primary4Intensity) Writable() bool                { return false }
-func (Primary4Intensity) Reportable() bool              { return false }
-func (Primary4Intensity) SceneIndex() int               { return -1 }
-func (a *Primary4Intensity) Value() *Primary4Intensity  { return a }
-func (a Primary4Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *Primary4Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4Intensity(*nt)
-	return br, err
-}
-
-func (a Primary4Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// Primary5X is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x for this primary, as
-// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
-// in the range 0 to 65279 inclusive)
-type Primary5X zcl.Zu16
-
-const Primary5XAttr zcl.AttrID = 36
-
-func (Primary5X) ID() zcl.AttrID                { return Primary5XAttr }
-func (Primary5X) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary5X) Name() string                  { return "Primary5 X" }
-func (Primary5X) Readable() bool                { return true }
-func (Primary5X) Writable() bool                { return false }
-func (Primary5X) Reportable() bool              { return false }
-func (Primary5X) SceneIndex() int               { return -1 }
-func (a *Primary5X) Value() *Primary5X          { return a }
-func (a Primary5X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary5X) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5X(*nt)
-	return br, err
-}
-
-func (a Primary5X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary5Y is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y for this primary, as
-// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
-// in the range 0 to 65279 inclusive)
-type Primary5Y zcl.Zu16
-
-const Primary5YAttr zcl.AttrID = 37
-
-func (Primary5Y) ID() zcl.AttrID                { return Primary5YAttr }
-func (Primary5Y) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary5Y) Name() string                  { return "Primary5 Y" }
-func (Primary5Y) Readable() bool                { return true }
-func (Primary5Y) Writable() bool                { return false }
-func (Primary5Y) Reportable() bool              { return false }
-func (Primary5Y) SceneIndex() int               { return -1 }
-func (a *Primary5Y) Value() *Primary5Y          { return a }
-func (a Primary5Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary5Y) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5Y(*nt)
-	return br, err
-}
-
-func (a Primary5Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary5Intensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the maximum intensity of this primary as
-// defined in the Dimming Light Curve in the Ballast Configuration cluster,
-// normalized such that the primary with the highest maximum intensity
-// contains the value 0xfe. A value of 0xff indicates that this primary is
-// not available
-type Primary5Intensity zcl.Zu8
-
-const Primary5IntensityAttr zcl.AttrID = 38
-
-func (Primary5Intensity) ID() zcl.AttrID                { return Primary5IntensityAttr }
-func (Primary5Intensity) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary5Intensity) Name() string                  { return "Primary5 intensity" }
-func (Primary5Intensity) Readable() bool                { return true }
-func (Primary5Intensity) Writable() bool                { return false }
-func (Primary5Intensity) Reportable() bool              { return false }
-func (Primary5Intensity) SceneIndex() int               { return -1 }
-func (a *Primary5Intensity) Value() *Primary5Intensity  { return a }
-func (a Primary5Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *Primary5Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5Intensity(*nt)
-	return br, err
-}
-
-func (a Primary5Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// Primary6X is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x for this primary, as
-// defined in the CIE xyY Color Space. x = PrimaryX / 65536 (PrimaryX
-// in the range 0 to 65279 inclusive)
-type Primary6X zcl.Zu16
-
-const Primary6XAttr zcl.AttrID = 40
-
-func (Primary6X) ID() zcl.AttrID                { return Primary6XAttr }
-func (Primary6X) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary6X) Name() string                  { return "Primary6 X" }
-func (Primary6X) Readable() bool                { return true }
-func (Primary6X) Writable() bool                { return false }
-func (Primary6X) Reportable() bool              { return false }
-func (Primary6X) SceneIndex() int               { return -1 }
-func (a *Primary6X) Value() *Primary6X          { return a }
-func (a Primary6X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary6X) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6X(*nt)
-	return br, err
-}
-
-func (a Primary6X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary6Y is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y for this primary, as
-// defined in the CIE xyY Color Space. y = PrimaryY / 65536 (PrimaryY
-// in the range 0 to 65279 inclusive)
-type Primary6Y zcl.Zu16
-
-const Primary6YAttr zcl.AttrID = 41
-
-func (Primary6Y) ID() zcl.AttrID                { return Primary6YAttr }
-func (Primary6Y) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary6Y) Name() string                  { return "Primary6 Y" }
-func (Primary6Y) Readable() bool                { return true }
-func (Primary6Y) Writable() bool                { return false }
-func (Primary6Y) Reportable() bool              { return false }
-func (Primary6Y) SceneIndex() int               { return -1 }
-func (a *Primary6Y) Value() *Primary6Y          { return a }
-func (a Primary6Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *Primary6Y) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6Y(*nt)
-	return br, err
-}
-
-func (a Primary6Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// Primary6Intensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the maximum intensity of this primary as
-// defined in the Dimming Light Curve in the Ballast Configuration cluster,
-// normalized such that the primary with the highest maximum intensity
-// contains the value 0xfe. A value of 0xff indicates that this primary is
-// not available
-type Primary6Intensity zcl.Zu8
-
-const Primary6IntensityAttr zcl.AttrID = 42
-
-func (Primary6Intensity) ID() zcl.AttrID                { return Primary6IntensityAttr }
-func (Primary6Intensity) Cluster() zcl.ClusterID        { return ColorControlID }
-func (Primary6Intensity) Name() string                  { return "Primary6 intensity" }
-func (Primary6Intensity) Readable() bool                { return true }
-func (Primary6Intensity) Writable() bool                { return false }
-func (Primary6Intensity) Reportable() bool              { return false }
-func (Primary6Intensity) SceneIndex() int               { return -1 }
-func (a *Primary6Intensity) Value() *Primary6Intensity  { return a }
-func (a Primary6Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *Primary6Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6Intensity(*nt)
-	return br, err
-}
-
-func (a Primary6Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// WhitePointX is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x, as defined in the
-// CIE xyY Color Space, of the current white point of the device.
-// x = WhitePointX / 65536 (WhitePointX in the range 0 to 65279 inclusive)
-type WhitePointX zcl.Zu16
-
-const WhitePointXAttr zcl.AttrID = 48
-
-func (WhitePointX) ID() zcl.AttrID                { return WhitePointXAttr }
-func (WhitePointX) Cluster() zcl.ClusterID        { return ColorControlID }
-func (WhitePointX) Name() string                  { return "White Point X" }
-func (WhitePointX) Readable() bool                { return true }
-func (WhitePointX) Writable() bool                { return true }
-func (WhitePointX) Reportable() bool              { return false }
-func (WhitePointX) SceneIndex() int               { return -1 }
-func (a *WhitePointX) Value() *WhitePointX        { return a }
-func (a WhitePointX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *WhitePointX) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = WhitePointX(*nt)
-	return br, err
-}
-
-func (a WhitePointX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// WhitePointY is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y, as defined in the
-// CIE xyY Color Space, of the current white point of the device.
-// y = WhitePointY / 65536 (WhitePointY in the range 0 to 65279 inclusive)
-type WhitePointY zcl.Zu16
-
-const WhitePointYAttr zcl.AttrID = 49
-
-func (WhitePointY) ID() zcl.AttrID                { return WhitePointYAttr }
-func (WhitePointY) Cluster() zcl.ClusterID        { return ColorControlID }
-func (WhitePointY) Name() string                  { return "White Point Y" }
-func (WhitePointY) Readable() bool                { return true }
-func (WhitePointY) Writable() bool                { return true }
-func (WhitePointY) Reportable() bool              { return false }
-func (WhitePointY) SceneIndex() int               { return -1 }
-func (a *WhitePointY) Value() *WhitePointY        { return a }
-func (a WhitePointY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *WhitePointY) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = WhitePointY(*nt)
-	return br, err
-}
-
-func (a WhitePointY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorPointRedX is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x, as defined in the
-// CIE xyY Color Space, of the red color point of the device.
-// x = ColorPointRX / 65536 (ColorPointRX in the range 0 to 65279 inclusive)
-type ColorPointRedX zcl.Zu16
-
-const ColorPointRedXAttr zcl.AttrID = 50
-
-func (ColorPointRedX) ID() zcl.AttrID                { return ColorPointRedXAttr }
-func (ColorPointRedX) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorPointRedX) Name() string                  { return "Color Point Red X" }
-func (ColorPointRedX) Readable() bool                { return true }
-func (ColorPointRedX) Writable() bool                { return true }
-func (ColorPointRedX) Reportable() bool              { return false }
-func (ColorPointRedX) SceneIndex() int               { return -1 }
-func (a *ColorPointRedX) Value() *ColorPointRedX     { return a }
-func (a ColorPointRedX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorPointRedX) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedX(*nt)
-	return br, err
-}
-
-func (a ColorPointRedX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorPointRedY is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y, as defined in the
-// CIE xyY Color Space, of the red color point of the device.
-// y = ColorPointRY / 65536 (ColorPointRY in the range 0 to 65279 inclusive)
-type ColorPointRedY zcl.Zu16
-
-const ColorPointRedYAttr zcl.AttrID = 51
-
-func (ColorPointRedY) ID() zcl.AttrID                { return ColorPointRedYAttr }
-func (ColorPointRedY) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorPointRedY) Name() string                  { return "Color Point Red Y" }
-func (ColorPointRedY) Readable() bool                { return true }
-func (ColorPointRedY) Writable() bool                { return true }
-func (ColorPointRedY) Reportable() bool              { return false }
-func (ColorPointRedY) SceneIndex() int               { return -1 }
-func (a *ColorPointRedY) Value() *ColorPointRedY     { return a }
-func (a ColorPointRedY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorPointRedY) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedY(*nt)
-	return br, err
-}
-
-func (a ColorPointRedY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorPointRedIntensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the relative intensity of the red color
-// point as defined in the Dimming Light Curve in the Ballast Configuration
-// cluster, normalized such that the color point with the highest relative
-// intensity contains the value 0xfe
-type ColorPointRedIntensity zcl.Zu8
-
-const ColorPointRedIntensityAttr zcl.AttrID = 52
-
-func (ColorPointRedIntensity) ID() zcl.AttrID                    { return ColorPointRedIntensityAttr }
-func (ColorPointRedIntensity) Cluster() zcl.ClusterID            { return ColorControlID }
-func (ColorPointRedIntensity) Name() string                      { return "Color Point Red intensity" }
-func (ColorPointRedIntensity) Readable() bool                    { return true }
-func (ColorPointRedIntensity) Writable() bool                    { return true }
-func (ColorPointRedIntensity) Reportable() bool                  { return false }
-func (ColorPointRedIntensity) SceneIndex() int                   { return -1 }
-func (a *ColorPointRedIntensity) Value() *ColorPointRedIntensity { return a }
-func (a ColorPointRedIntensity) MarshalZcl() ([]byte, error)     { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *ColorPointRedIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedIntensity(*nt)
-	return br, err
-}
-
-func (a ColorPointRedIntensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// ColorPointGreenX is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x, as defined in the
-// CIE xyY Color Space, of the green color point of the device.
-// x = ColorPointGX / 65536 (ColorPointGX in the range 0 to 65279 inclusive)
-type ColorPointGreenX zcl.Zu16
-
-const ColorPointGreenXAttr zcl.AttrID = 54
-
-func (ColorPointGreenX) ID() zcl.AttrID                { return ColorPointGreenXAttr }
-func (ColorPointGreenX) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorPointGreenX) Name() string                  { return "Color Point Green X" }
-func (ColorPointGreenX) Readable() bool                { return true }
-func (ColorPointGreenX) Writable() bool                { return true }
-func (ColorPointGreenX) Reportable() bool              { return false }
-func (ColorPointGreenX) SceneIndex() int               { return -1 }
-func (a *ColorPointGreenX) Value() *ColorPointGreenX   { return a }
-func (a ColorPointGreenX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorPointGreenX) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenX(*nt)
-	return br, err
-}
-
-func (a ColorPointGreenX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorPointGreenY is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y, as defined in the
-// CIE xyY Color Space, of the green color point of the device.
-// y = ColorPointGY / 65536 (ColorPointGY in the range 0 to 65279 inclusive)
-type ColorPointGreenY zcl.Zu16
-
-const ColorPointGreenYAttr zcl.AttrID = 55
-
-func (ColorPointGreenY) ID() zcl.AttrID                { return ColorPointGreenYAttr }
-func (ColorPointGreenY) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorPointGreenY) Name() string                  { return "Color Point Green Y" }
-func (ColorPointGreenY) Readable() bool                { return true }
-func (ColorPointGreenY) Writable() bool                { return true }
-func (ColorPointGreenY) Reportable() bool              { return false }
-func (ColorPointGreenY) SceneIndex() int               { return -1 }
-func (a *ColorPointGreenY) Value() *ColorPointGreenY   { return a }
-func (a ColorPointGreenY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorPointGreenY) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenY(*nt)
-	return br, err
-}
-
-func (a ColorPointGreenY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorPointGreenIntensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the relative intensity of the green
-// color point as defined in the Dimming Light Curve in the Ballast Configuration
-// cluster, normalized such that the color point with the highest relative
-// intensity contains the value 0xfe
-type ColorPointGreenIntensity zcl.Zu8
-
-const ColorPointGreenIntensityAttr zcl.AttrID = 56
-
-func (ColorPointGreenIntensity) ID() zcl.AttrID                      { return ColorPointGreenIntensityAttr }
-func (ColorPointGreenIntensity) Cluster() zcl.ClusterID              { return ColorControlID }
-func (ColorPointGreenIntensity) Name() string                        { return "Color Point Green intensity" }
-func (ColorPointGreenIntensity) Readable() bool                      { return true }
-func (ColorPointGreenIntensity) Writable() bool                      { return true }
-func (ColorPointGreenIntensity) Reportable() bool                    { return false }
-func (ColorPointGreenIntensity) SceneIndex() int                     { return -1 }
-func (a *ColorPointGreenIntensity) Value() *ColorPointGreenIntensity { return a }
-func (a ColorPointGreenIntensity) MarshalZcl() ([]byte, error)       { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *ColorPointGreenIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenIntensity(*nt)
-	return br, err
-}
-
-func (a ColorPointGreenIntensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
-}
-
-// ColorPointBlueX is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value x, as defined in the
-// CIE xyY Color Space, of the blue color point of the device.
-// x = ColorPointBX / 65536 (ColorPointBX in the range 0 to 65279 inclusive)
-type ColorPointBlueX zcl.Zu16
-
-const ColorPointBlueXAttr zcl.AttrID = 58
-
-func (ColorPointBlueX) ID() zcl.AttrID                { return ColorPointBlueXAttr }
-func (ColorPointBlueX) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorPointBlueX) Name() string                  { return "Color Point Blue X" }
-func (ColorPointBlueX) Readable() bool                { return true }
-func (ColorPointBlueX) Writable() bool                { return true }
-func (ColorPointBlueX) Reportable() bool              { return false }
-func (ColorPointBlueX) SceneIndex() int               { return -1 }
-func (a *ColorPointBlueX) Value() *ColorPointBlueX    { return a }
-func (a ColorPointBlueX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorPointBlueX) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueX(*nt)
-	return br, err
-}
-
-func (a ColorPointBlueX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorPointBlueY is an autogenerated attribute in the ColorControl cluster
-// It contains the normalized chromaticity value y, as defined in the
-// CIE xyY Color Space, of the blue color point of the device.
-// y = ColorPointBY / 65536 (ColorPointBY in the range 0 to 65279 inclusive)
-type ColorPointBlueY zcl.Zu16
-
-const ColorPointBlueYAttr zcl.AttrID = 59
-
-func (ColorPointBlueY) ID() zcl.AttrID                { return ColorPointBlueYAttr }
-func (ColorPointBlueY) Cluster() zcl.ClusterID        { return ColorControlID }
-func (ColorPointBlueY) Name() string                  { return "Color Point Blue Y" }
-func (ColorPointBlueY) Readable() bool                { return true }
-func (ColorPointBlueY) Writable() bool                { return true }
-func (ColorPointBlueY) Reportable() bool              { return false }
-func (ColorPointBlueY) SceneIndex() int               { return -1 }
-func (a *ColorPointBlueY) Value() *ColorPointBlueY    { return a }
-func (a ColorPointBlueY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
-
-func (a *ColorPointBlueY) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu16)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueY(*nt)
-	return br, err
-}
-
-func (a ColorPointBlueY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
-}
-
-// ColorPointBlueIntensity is an autogenerated attribute in the ColorControl cluster
-// It contains a representation of the relative intensity of the blue
-// color point as defined in the Dimming Light Curve in the Ballast Configuration
-// cluster, normalized such that the color point with the highest relative
-// intensity contains the value 0xfe
-type ColorPointBlueIntensity zcl.Zu8
-
-const ColorPointBlueIntensityAttr zcl.AttrID = 60
-
-func (ColorPointBlueIntensity) ID() zcl.AttrID                     { return ColorPointBlueIntensityAttr }
-func (ColorPointBlueIntensity) Cluster() zcl.ClusterID             { return ColorControlID }
-func (ColorPointBlueIntensity) Name() string                       { return "Color Point Blue intensity" }
-func (ColorPointBlueIntensity) Readable() bool                     { return true }
-func (ColorPointBlueIntensity) Writable() bool                     { return true }
-func (ColorPointBlueIntensity) Reportable() bool                   { return false }
-func (ColorPointBlueIntensity) SceneIndex() int                    { return -1 }
-func (a *ColorPointBlueIntensity) Value() *ColorPointBlueIntensity { return a }
-func (a ColorPointBlueIntensity) MarshalZcl() ([]byte, error)      { return zcl.Zu8(a).MarshalZcl() }
-
-func (a *ColorPointBlueIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueIntensity(*nt)
-	return br, err
-}
-
-func (a ColorPointBlueIntensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+	return zcl.Sprintf(
+		"StepColorTemperature{"+zcl.StrJoin([]string{
+			"StepMode(%v)",
+			"StepSize(%v)",
+			"TransitionTime(%v)",
+			"ColorTemperatureMinMireds(%v)",
+			"ColorTemperatureMaxMireds(%v)",
+		}, " ")+"}",
+		v.StepMode,
+		v.StepSize,
+		v.TransitionTime,
+		v.ColorTemperatureMinMireds,
+		v.ColorTemperatureMaxMireds,
+	)
 }
