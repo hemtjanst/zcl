@@ -1,6 +1,33 @@
 name: General
 description: |
   provides general/common attributes and operations for most zigbee devices
+
+templates:
+  condStatusSuccess: &__cond_status_success
+    name: Status
+    value: 0x00
+    description: "successful"
+  condLocationCalculated: &__cond_location_calculated
+    name: Location Type
+    mask: 0x0001
+    value: 0x00
+    description: "location type is calculated (i.e. absolute bit not set)"
+  condLocation3D: &__cond_location_3d
+    name: Location Type
+    mask: 0x02
+    value: 0x00
+    description: "location type is 3d (either absolute or calculated)"
+
+  locationCoordinate: &locationCoordinate
+    type: s16
+    range: -32768,32767
+    unit: Meters
+    multiplier: 10
+
+  targetAddress: &targetAddress
+    name: "Device"
+    argname: "Target Address"
+
 types:
   # Common types
   Status: &status
@@ -8,6 +35,19 @@ types:
     type: Status
     default: "0x00"
     required: true
+  TransitionTime: &transitionTime
+    name: Transition Time
+    decription: specifices time for transitioning between states using 1/10 second increments
+    type: u16
+    showas: dec
+    unit: Seconds
+    multiplier: 10
+    range: 0x0000,0xfffe
+    default: "0x0000"
+
+  Device: &device
+    name: "Device"
+    type: uid
 
   # 0000 Basic Cluster Attr
   ClusterRevision: &clusterRevision
@@ -16,7 +56,7 @@ types:
     type: u16
     access: rw
     default: "0"
-  ZCLVersion: &zclVersion
+  ZclVersion: &zclVersion
     id: "0x0000"
     name: ZCL Version
     type: u8
@@ -35,7 +75,7 @@ types:
     type: u8
     access: r
     default: "0"
-  HWVersion: &hwVersion
+  HwVersion: &hwVersion
     id: "0x0003"
     name: HW Version
     type: u8
@@ -225,7 +265,7 @@ types:
     bits:
       "0": Disable Factory Reset
       "1": Disable Device Configuration
-  SWBuildID: &swBuildID
+  SwBuildId: &swBuildID
     id: "0x4000"
     name: SW Build ID
     type: cstring
@@ -264,11 +304,11 @@ types:
   UserTest: &userTest
     id: "0x0032"
     mnfcode: "0x100B"
-    name: Usertest
+    name: User test
     type: bool
     access: rw
     default: "0"
-  LEDIndication: &ledIndication
+  LedIndication: &ledIndication
     id: "0x0033"
     mnfcode: "0x100B"
     name: LED Indication
@@ -373,9 +413,9 @@ types:
       "0x07": CR2
       "0x08": CR123A
       "0xFF": Unknown
-  BatteryAHrRating: &batteryAHrRating
+  BatteryCapacity: &batteryCapacity
     id: "0x0032"
-    name: Battery AHr Rating
+    name: Battery capacity
     type: u16
     unit: MilliAmpereHours
     multiplier: 0.1
@@ -610,7 +650,7 @@ types:
     required: true
     bits:
       "7": Names Supported
-  GroupID: &groupID
+  GroupId: &groupID
     name: Group ID
     type: u16
     required: true
@@ -633,6 +673,7 @@ types:
       If set to 0xFF, it's unknown if any more groups can be added
     type: u8
     default: "0x00"
+    showas: dec
     required: true
 
   # 0005 Scenes
@@ -682,34 +723,26 @@ types:
     name: Scene Last Configured By
     type: uid
     access: r
-  SceneID: &sceneID
+  SceneId: &sceneID
     name: Scene ID
     type: u8
     default: "0x00"
     required: true
     showas: hex
-  TransitionTime: &transitionTime
-    name: Transition time
+  TransitionTimeSec: &transitionTimeSec
+    <<: *transitionTime
+    name: Transition time (Sec)
     type: u16
     default: "0x0000"
     required: true
-    showas: hex
+    showas: dec
     unit: Seconds
-  TransitionTimeEnhanced: &transitionTimeEnhanced
-    name: Transition time Enhanced
-    decription: using 1/10 second increments
-    type: u16
-    default: "0x0000"
-    required: true
-    showas: hex
-    unit: Seconds
-    multiplier: 0.1
   SceneName: &sceneName
     name: Scene Name
     type: cstring
     required: true
-  SceneExtentions: &sceneExtensions
-    name: Scene Extension Field
+  SceneExtensions: &sceneExtensions
+    name: Scene Extensions
     description: |
       The format of each extension field set is a 16 bit field carrying the cluster ID,
       followed by an 8 bit length field and the set of scene extension fields specified
@@ -724,7 +757,18 @@ types:
     required: true
     bits:
       "0": "Copy All Scenes"
-
+  SceneCapacity: &sceneCapacity
+    name: Scene Capacity
+    description: specifies remaining number of scenes that can be added
+    type: u8
+    required: true
+    showas: dec
+  SceneList: &sceneList
+    name: Scene list
+    type: set
+    arraytype: u8
+    required: true
+    showas: hex
 
   # 0006 On/Off Cluster Attr
   OnOff: &onOff
@@ -801,6 +845,7 @@ types:
 
   # 0007 On/Off Switch Config
   SwitchType: &switchType
+    id: "0x0000"
     name: Switch type
     description: specifies the basic functionality of the On/Off switching device.
     type: enum8
@@ -812,7 +857,8 @@ types:
       "0x01": Momentary
       "0x02": Multifunction
   SwitchActions: &switchActions
-    name: SwitchActions
+    id: "0x0010"
+    name: Switch actions
     description: |
       specifies the commands of the On/Off cluster to be generated when the switch moves between its two states.
     type: enum8
@@ -825,9 +871,338 @@ types:
       "0x02": Toggle
 
   # 0008 Level Control
+  Level: &level
+    name: Level
+    type: u8
+    default: "0x00"
+    required: true
+    range: 0x00,0xfe
+    unit: Percent
+    multiplier: 2.54
+  CurrentLevel: &currentLevel
+    <<: *level
+    id: "0x0000"
+    name: Current Level
+    description: The CurrentLevel attribute represents the current level of this
+        device. meaning of 'level' is device dependent.
+    access: r
+    report: true
+    scene: 1
+  RemainingTime: &remainingTime
+    id: "0x0001"
+    name: Remaining Time
+    description: represents the time remaining until the current command is complete - it is specified in 1/10ths of a second.
+    type: u16
+    access: r
+    default: "0x0000"
+    multiplier: 10
+    unit: Seconds
+    range: 0x0000,0xffff
+  OnOffTransistionTime: &onOffTransistionTime
+    <<: *transitionTime
+    id: "0x0010"
+    name: On/Off Transistion Time
+    description: |
+      represents the time taken to move to or from the target level when On of Off commands are received
+      by an On/Off cluster on the same endpoint.
+      The actual time taken should be as close to OnOffTransitionTime as the device is able.
+    access: rw
+  OnLevel: &onLevel
+    <<: *level
+    id: "0x0011"
+    name: On Level
+    description: |
+        determines the value that the CurrentLevel attribute is set to when the OnOff attribute of an On/Off cluster on the
+        same endpoint is set to On. If the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.
+    access: rw
+  OnTransitionTime: &onTransitionTime
+    <<: *transitionTime
+    id: "0x0012"
+    name: On Transition Time
+    access: rw
+    multiplier: 10
+    unit: Seconds
+    range: 0x0000,0xfffe
+  OffTransitionTime: &offTransitionTime
+    id: "0x0013"
+    name: Off Transition Time
+    type: u16
+    access: rw
+    multiplier: 10
+    unit: Seconds
+    range: 0x0000,0xfffe
+  DefaultMoveRate: &defaultMoveRate
+    id: "0x0014"
+    name: Default Move Rate
+    type: u8
+    access: rw
+    range: 0x00,0xfe
+    unit: PercentPerSecond
+    multiplier: 2.54
+  PowerOnLevel: &powerOnLevel
+    <<: *level
+    id: "0x4000"
+    name: Power On level
+    access: rw
+  LevelDirection: &levelDirection
+    name: Level direction
+    type: enum8
+    default: "0x00"
+    required: true
+    values:
+        "0x00": Up
+        "0x01": Down
+  StepSize: &stepSize
+    name: Step size
+    type: u8
+    default: "0x00"
+    required: true
+    unit: Percent
+    multiplier: 2.54
+  Rate: &rate
+    name: Rate
+    type: u8
+    default: "0x00"
+    required: true
+    unit: PercentPerSecond
+    multiplier: 2.54
+
   # 0009 Alarms
+  AlarmCount: &alarmCount
+    id: "0x0000"
+    description: Number of alarms currently defined
+    name: Alarm Count
+    type: u16
+    access: rw
+    default: "0x00"
+  AlarmCode: &alarmCode
+    name: Alarm code
+    type: enum8
+    default: "0x00"
+    required: true
+  ClusterId: &clusterID
+    name: Cluster Id
+    type: u16
+    default: "0x0000"
+    required: true
+    showas: hex
+
   # 000A Time
+  Time: &time
+    id: "0x0000"
+    name: Time
+    type: utc
+    access: rw
+    required: true
+    range: 0x00000000,0xfffffffe
+  TimeStatus: &timeStatus
+    id: "0x0001"
+    name: Time Status
+    type: bmp8
+    access: rw
+    default: "0b00000000"
+    required: true
+    bits:
+        "0": Master Clock
+        "1": Synchronized
+        "2": Master for Timezone and Dst
+        "3": Superseding
+  TimeZone: &timeZone
+    id: "0x0002"
+    name: Time Zone
+    description: Offset during normal time from UTC in seconds
+    type: s32
+    access: rw
+    default: "0"
+    unit: Seconds
+    range: -86400,86400
+  DstStart: &dstStart
+    <<: *time
+    id: "0x0003"
+    name: Dst Start
+    access: rw
+  DstEnd: &dstEnd
+    <<: *time
+    id: "0x0004"
+    name: Dst End
+    access: rw
+  DstShift: &dstShift
+    id: "0x0005"
+    name: Dst Shift
+    type: s32
+    access: rw
+    default: "0"
+    range: -86400,86400
+    unit: Seconds
+  StandardTime: &standardTime
+    id: "0x0006"
+    name: Standard Time
+    description: Local time (without DST offset)
+    type: u32
+    access: r
+    range: 0x00000000,0xfffffffe
+  LocalTime: &localTime
+    id: "0x0007"
+    name: Local Time
+    description: Local time
+    type: u32
+    access: r
+    range: 0x00000000,0xfffffffe
+  LastSetTime: &lastSetTime
+    <<: *time
+    id: "0x0008"
+    name: Last Set Time
+    access: r
+  ValidUntilTime: &validUntilTime
+    <<: *time
+    id: "0x0009"
+    name: Valid Until Time
+    access: rw
+
   # 000B Location
+  LocationType: &locationType
+    id: "0x0000"
+    name: Location Type
+    access: rw
+    required: true
+    type: enum8
+    values:
+      "0x00": 3D Location
+      "0x01": Absolute 3D Location
+      "0x02": 2D Location
+      "0x03": Absolute 2D Location
+  LocationMethod: &locationMethod
+    id: "0x0001"
+    name: Location Method
+    type: enum8
+    access: rw
+    required: true
+    values:
+      "0x00": Lateration
+      "0x01": Signposting
+      "0x02": RF fingerprinting
+      "0x03": Out of band
+      "0x04": Centralized
+  LocationAge: &locationAge
+    id: "0x0002"
+    name: Location Age
+    type: u16
+    unit: Seconds
+    access: r
+  QualityMeasure: &qualityMeasure
+    id: "0x0003"
+    name: Quality Measure
+    type: u8
+    range: 0x00,0x64
+    access: r
+    unit: Percent
+  NumberOfDevices: &numberOfDevices
+    id: "0x0004"
+    name: Number of Devices
+    type: u8
+    access: r
+  XCoordinate: &xCoordinate
+    <<: *locationCoordinate
+    id: "0x0010"
+    name: X Coordinate
+    access: rw
+  YCoordinate: &yCoordinate
+    <<: *locationCoordinate
+    id: "0x0011"
+    name: Y Coordinate
+    access: rw
+  ZCoordinate: &zCoordinate
+    <<: *locationCoordinate
+    id: "0x0012"
+    name: Z Coordinate
+    access: rw
+  Power: &power
+    id: "0x0013"
+    name: Power
+    type: s16
+    range: -32768,32767
+    access: rw
+    unit: DecibelMilliWatts
+    multiplier: 100
+    invalid: 0x8000
+    required: true
+  PathLossExponent: &pathLossExponent
+    id: "0x0014"
+    name: Path loss Exponent
+    description: is the rate at which the signal power decays with increasing distance
+    type: u16
+    access: rw
+    required: true
+    multiplier: 0.01
+    invalid: 0xffff
+  ReportingPeriod: &reportingPeriod
+    id: "0x0015"
+    name: Reporting Period
+    type: u16
+    access: rw
+    unit: Seconds
+  CalculationPeriod: &calculationPeriod
+    id: "0x0016"
+    name: Calculation Period
+    type: u16
+    access: rw
+    unit: Seconds
+  NumberRssiMeasurements: &numberRssiMeasurements
+    id: "0x0017"
+    name: Number RSSI Measurements
+    description: is the number of measurements to use to generate one location estimate
+    type: u8
+    range: 0x01,0xff
+    access: rw
+  LocationFlags: &locationFlags
+    type: bmp8
+    name: Location flags
+    bits:
+      "0": Absolute Only
+      "1": Recalculate
+      "2": Broadcast Indicator
+      "3": Broadcast Response
+      "4": Compact Response
+  NumberResponses: &numberResponses
+    name: Number Responses
+    type: u8
+  Rssi: &rssi
+    name: RSSI
+    type: s8
+    unit: DecibelMilliWatts
+  Resolution: &resolution
+    name: Resolution
+    type: enum8
+    default: "0x00"
+    required: true
+    values:
+      "0x00": High
+      "0x01": Mid
+      "0x02": Low
+  NeighborsInfo: &neighborsInfo
+    name: Neighbors Info
+    type: set
+    arraytype: struct
+    structattr:
+      - *device
+      - *xCoordinate
+      - *yCoordinate
+      - *zCoordinate
+      - *rssi
+      - *numberRssiMeasurements
+  Distance: &distance
+    name: Distance
+    type: u16
+    default: "0"
+    required: true
+    unit: Meters
+    multiplier: 10 # verify
+  QualityIndex: &qualityIndex
+    name: Quality index
+    type: u16
+    default: "0"
+    required: true
+
   # 000C Analog Input
   # 000D Analog Output
   # 000E Analog Value
@@ -889,7 +1264,7 @@ clusters:
         - *batteryRemaining
         - *batteryManufacturer
         - *batterySize
-        - *batteryAHrRating
+        - *batteryCapacity
         - *batteryQuantity
         - *batteryRatedVoltage
         - *batteryAlarmMask
@@ -1126,7 +1501,7 @@ clusters:
             payloadattr:
               - *groupID
               - *sceneID
-              - *transitionTime
+              - *transitionTimeSec
               - *sceneName
               - *sceneExtensions
           - id: "0x01"
@@ -1190,7 +1565,7 @@ clusters:
             payloadattr:
               - *groupID
               - *sceneID
-              - *transitionTimeEnhanced
+              - *transitionTime
               - *sceneName
               - *sceneExtensions
           - id: "0x41"
@@ -1225,238 +1600,87 @@ clusters:
             dir: recv
             required: m
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0002"
-                name: Scene ID
-                type: u8
-                default: "0x00"
-                required: true
-                showas: hex
+              - *status
+              - *groupID
+              - *sceneID
           - id: "0x01"
             name: View scene response
             description: Response to the view scene command.
             dir: recv
             required: m
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0002"
-                name: Scene ID
-                type: u8
-                default: "0x00"
-                required: true
-                showas: hex
-              - id: "0x0003"
-                name: Transition time
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: dec
-                unit: Seconds
-              - id: "0x0004"
-                name: Scene Name
-                type: cstring
-                required: true
-              - id: "0x0005"
-                name: Extension Field Sets
-                type: SceneExtensionSet
-                required: true
+              - *status
+              - *groupID
+              - *sceneID
+              - *transitionTimeSec
+              - *sceneName
+              - *sceneExtensions
           - id: "0x02"
             name: Remove scene response
             description: Response to the remove scene command.
             dir: recv
             required: m
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0002"
-                name: Scene ID
-                type: u8
-                default: "0x00"
-                required: true
-                showas: hex
+              - *status
+              - *groupID
+              - *sceneID
           - id: "0x03"
             name: Remove all scenes response
             description: Response to the remove all scenes command.
             dir: recv
             required: m
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
+              - *status
+              - *groupID
           - id: "0x04"
             name: Store scene response
             description: Response to the store scene command.
             dir: recv
             required: m
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0002"
-                name: Scene ID
-                type: u8
-                default: "0x00"
-                required: true
-                showas: hex
+              - *status
+              - *groupID
+              - *sceneID
           - id: "0x06"
             name: Get scene membership response
             description: Shows details about scene membership.
             dir: recv
             required: m
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Capacity
-                type: u8
-                default: "0x00"
-                required: true
-                showas: dec
-              - id: "0x0002"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0003"
-                name: Scene list
-                type: set
-                arraytype: u8
-                default: "0x00"
-                required: true
-                showas: hex
+              - *status
+              - *sceneCapacity
+              - *groupID
+              - *sceneList
           - id: "0x40"
             name: Enhanced Add Scene response
             required: o
             dir: recv
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0002"
-                name: Scene ID
-                type: u8
-                default: "0x00"
-                required: true
-                showas: hex
+              - *status
+              - *groupID
+              - *sceneID
           - id: "0x41"
             name: Enhanced View Scene response
             description: A scene description.
             dir: recv
             required: o
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0002"
-                name: Scene ID
-                type: u8
-                default: "0x00"
-                required: true
-                showas: hex
-              - id: "0x0003"
-                name: Transition time
-                type: u16
-                default: "0x00"
-                required: true
-                unit: Seconds
-                multiplier: 0.1
-                showas: dec
-              - id: "0x0004"
-                name: Scene Name
-                type: cstring
-                required: true
-              - id: "0x0005"
-                name: Extension Field Sets
-                type: SceneExtensionSet
-                required: true
+              - *status
+              - *groupID
+              - *sceneID
+              - *transitionTime
+              - *sceneName
+              - *sceneExtensions
           - id: "0x42"
             name: Copy Scene Response
             required: o
             dir: recv
             payloadattr:
-              - id: "0x0000"
-                name: Status
-                type: Status
-                default: "0x00"
-                required: true
-              - id: "0x0001"
-                name: From Group ID
-                type: u16
-                default: "0x0000"
-                required: true
-                showas: hex
-              - id: "0x0002"
-                name: From Scene ID
-                type: u8
-                default: "0x00"
-                required: true
-                showas: hex
-
+              - *status
+              - <<: *groupID
+                argname: From Group ID
+              - <<: *sceneID
+                argname: From Scene ID
   - id: "0x0007"
     name: On/Off Switch Configuration
     description: Attributes and commands for configuring On/Off switching devices
@@ -1464,3 +1688,366 @@ clusters:
       attr:
         - *switchType
         - *switchActions
+  - id: "0x0008"
+    name: Level Control
+    description: |
+        provides an interface for controlling a characteristic of a device that can be set to a level.
+        For example the brightness of a light, the degree of closure of a door, or the power output of a heater.
+    server:
+        attr:
+          - *currentLevel
+          - *remainingTime
+          #- id: "0x000F"
+          #  name: Unknown
+          #  description: IKEA specific.
+          #  type: bmp8
+          #  access: rw
+          - *onOffTransistionTime
+          - *onLevel
+          - *onTransitionTime
+          - *offTransitionTime
+          - *defaultMoveRate
+          - *powerOnLevel
+        cmd:
+          - id: "0x00"
+            name: Move to Level
+            dir: recv
+            required: m
+            payloadattr:
+              - *level
+              - *transitionTime
+          - id: "0x01"
+            name: Move
+            dir: recv
+            required: m
+            payloadattr:
+              - *levelDirection
+              - *rate
+          - id: "0x02"
+            name: Step
+            dir: recv
+            required: m
+            payloadattr:
+              - *levelDirection
+              - *stepSize
+              - *transitionTime
+          - id: "0x03"
+            name: Stop
+            dir: recv
+            required: m
+          - id: "0x04"
+            name: Move to Level (with On/Off)
+            dir: recv
+            required: m
+            payloadattr:
+              - *level
+              - *transitionTime
+          - id: "0x05"
+            name: Move (with On/Off)
+            dir: recv
+            required: m
+            payloadattr:
+              - *levelDirection
+              - *rate
+          - id: "0x06"
+            name: Step (with On/Off)
+            dir: recv
+            required: m
+            payloadattr:
+              - *levelDirection
+              - *stepSize
+              - *transitionTime
+          - id: "0x07"
+            name: Stop (with On/Off)
+            dir: recv
+            required: m
+  - id: "0x0009"
+    name: Alarms
+    description: Sending alarm notifications and configuring alarm functionality.
+    server:
+        attr:
+          - *alarmCount
+        cmd:
+          - id: "0x00"
+            name: Reset alarm
+            dir: recv
+            required: m
+            payloadattr:
+              - *alarmCode
+              - *clusterID
+          - id: "0x01"
+            name: Reset all alarms
+            dir: recv
+            required: m
+            description: Resets all alarms, causing triggered alarms to generate new notification
+          - id: "0x02"
+            name: Get Alarm
+            response: "0x01"
+            required: o
+            description: Retrieves the earliest alarm and removes it from the table
+          - id: "0x03"
+            name: Reset alarm log
+            required: o
+            description: Clears the alarm log
+    client:
+        cmd:
+          - id: "0x00"
+            name: Alarm
+            dir: recv
+            required: m
+            payloadattr:
+              - *alarmCode
+              - *clusterID
+          - id: "0x01"
+            name: Get alarm response
+            dir: recv
+            required: o
+            payloadattr:
+              - *status
+              - <<: *alarmCode
+                cond:
+                  - *__cond_status_success
+              - <<: *clusterID
+                cond:
+                  - *__cond_status_success
+              - <<: *time
+                cond:
+                  - *__cond_status_success
+  - id: "0x000A"
+    name: Time
+    description: This cluster provides a basic interface to a real-time clock.
+    server:
+        attr:
+          - *time
+          - *timeStatus
+          - *timeZone
+          - *dstStart
+          - *dstEnd
+          - *dstShift
+          - *standardTime
+          - *localTime
+          - *lastSetTime
+          - *validUntilTime
+  - id: "0x000B"
+    name: Location
+    description: provides distance between devices
+    server:
+        attr:
+        - *locationType
+        - *locationMethod
+        - *locationAge
+        - *qualityMeasure
+        - *numberOfDevices
+        - *xCoordinate
+        - *yCoordinate
+        - *zCoordinate
+        - *power
+        - *pathLossExponent
+        - *reportingPeriod
+        - *calculationPeriod
+        - *numberRssiMeasurements
+        cmd:
+          - id: "0x00"
+            name: Set Absolute Location
+            required: m
+            dir: recv
+            payloadattr:
+              - *xCoordinate
+              - *yCoordinate
+              - *zCoordinate
+              - *power
+              - *pathLossExponent
+          - id: "0x01"
+            name: Set Device Configuration
+            required: m
+            dir: recv
+            payloadattr:
+              - *power
+              - *pathLossExponent
+              - *calculationPeriod
+              - *numberRssiMeasurements
+              - *reportingPeriod
+          - id: "0x02"
+            name: Get Device Configuration
+            required: m
+            dir: recv
+            response: "0x00"
+            payloadattr:
+              - *targetAddress
+          - id: "0x03"
+            name: Get Location Data
+            response: "0x01"
+            required: m
+            payloadattr:
+              - *locationFlags
+              - *numberResponses
+              - *targetAddress
+          - id: "0x04"
+            name: RSSI Response
+            required: m
+            dir: recv
+            payloadattr:
+              - *device
+              - *xCoordinate
+              - *yCoordinate
+              - *zCoordinate
+              - *rssi
+              - *numberRssiMeasurements
+          - id: "0x05"
+            name: Send Pings
+            required: o
+            response: "0x06"
+            payloadattr:
+              - *targetAddress
+              - *numberRssiMeasurements
+              - *calculationPeriod
+          - id: "0x06"
+            name: Anchor Node Announce
+            required: o
+            payloadattr:
+              - *device
+              - *xCoordinate
+              - *yCoordinate
+              - *zCoordinate
+          - id: "0x40"
+            name: Distance measure
+            dir: recv
+            required: m
+            response: "0x40"
+            showas: hex
+            payloadattr:
+              - *targetAddress
+              - *resolution
+    client:
+        cmd:
+          - id: "0x00"
+            name: Device Configuration Response
+            dir: recv
+            required: m
+            payloadattr:
+              - *status
+              - <<: *power
+                cond:
+                  - *__cond_status_success
+              - <<: *pathLossExponent
+                cond:
+                  - *__cond_status_success
+              - <<: *calculationPeriod
+                cond:
+                  - *__cond_status_success
+              - <<: *numberRssiMeasurements
+                cond:
+                  - *__cond_status_success
+              - <<: *reportingPeriod
+                cond:
+                  - *__cond_status_success
+          - id: "0x01"
+            name: Location Data Response
+            dir: recv
+            required: m
+            payloadattr:
+              - *status
+              - <<: *locationType
+                cond:
+                  - *__cond_status_success
+              - <<: *xCoordinate
+                cond:
+                  - *__cond_status_success
+              - <<: *yCoordinate
+                cond:
+                  - *__cond_status_success
+              - <<: *zCoordinate
+                cond:
+                  - *__cond_status_success
+              - <<: *power
+                cond:
+                  - *__cond_status_success
+              - <<: *pathLossExponent
+                cond:
+                  - *__cond_status_success
+              - <<: *locationMethod
+                cond:
+                  - *__cond_status_success
+                  - *__cond_location_calculated
+              - <<: *qualityMeasure
+                cond:
+                  - *__cond_status_success
+                  - *__cond_location_calculated
+              - <<: *locationAge
+                cond:
+                  - *__cond_status_success
+                  - *__cond_location_calculated
+          - id: "0x02"
+            name: Location Data Notification
+            dir: recv
+            required: m
+            payloadattr:
+              - *locationType
+              - *xCoordinate
+              - *yCoordinate
+              - <<: *zCoordinate
+                cond:
+                  - *__cond_location_3d
+              - *power
+              - *pathLossExponent
+              - <<: *locationMethod
+                cond:
+                  - *__cond_location_calculated
+              - <<: *qualityMeasure
+                cond:
+                  - *__cond_location_calculated
+              - <<: *locationAge
+                cond:
+                  - *__cond_location_calculated
+          - id: "0x03"
+            name: Compact Location Data Notification
+            dir: recv
+            required: m
+            payloadattr:
+              - *locationType
+              - *xCoordinate
+              - *yCoordinate
+              - <<: *zCoordinate
+                cond:
+                  - *__cond_location_3d
+              - <<: *qualityMeasure
+                cond:
+                  - *__cond_location_calculated
+              - <<: *locationAge
+                cond:
+                  - *__cond_location_calculated
+          - id: "0x04"
+            name: RSSI Ping
+            dir: recv
+            required: m
+            payloadattr:
+              - *locationType
+          - id: "0x05"
+            response: "0x04"
+            name: RSSI Request
+            dir: recv
+            required: o
+          - id: "0x06"
+            name: Report RSSI Measurements
+            dir: recv
+            required: o
+            payloadattr:
+              - *device
+              - *neighborsInfo
+          - id: "0x07"
+            name: Request Own Location
+            dir: recv
+            required: o
+            response: "0x00"
+            payloadattr:
+              - <<: *device
+                argname: "Blind Node Address"
+          - id: "0x40"
+            name: Distance measure response
+            description: Returns the result of a distance measure.
+            dir: recv
+            required: m
+            payloadattr:
+              - *targetAddress
+              - *distance
+              - *qualityIndex
