@@ -1212,9 +1212,429 @@ types:
   # 0012 Multistate Input
   # 0013 Multistate Output
   # 0014 Multistate value
+  BinaryActiveText: &binaryActiveText
+    id: "0x0004"
+    name: Binary Active Text
+    type: cstring
+    access: rw
+  MultistateText: &multistateText
+    id: "0x000E"
+    name: Multistate Text
+    type: cstring
+    access: rw
+  IODescription: &ioDescription
+    id: "0x001C"
+    name: I/O Description
+    type: cstring
+    access: rw
+  BinaryInactiveText: &binaryInactiveText
+    id: "0x002E"
+    name: Binary Inactive Text
+    type: cstring
+    access: rw
+  AnalogMaxPresentValue: &analogMaxPresentValue
+    id: "0x0041"
+    name: Analog Max Present Value
+    type: float
+    access: rw
+  BinaryMinOffTime: &binaryMinOffTime
+    id: "0x0042"
+    name: Binary Min Off-time
+    access: rw
+    type: u32
+  BinaryMaxOffTime: &binaryMaxOffTime
+    id: "0x0043"
+    name: Binary Max Off-time
+    access: rw
+    type: u32
+  AnalogMinPresentValue: &analogMinPresentValue
+    id: "0x0045"
+    name: Analog Min Present Value
+    type: float
+    access: rw
+  MultistateNumberOfStates: &multistateNumberOfStates
+    id: "0x004A"
+    name: Multistate Number of States
+    type: u16
+    access: rw
+    default: "0"
+    required: true
+  IOOutOfService: &ioOutOfService
+    id: "0x0051"
+    name: I/O Out of service
+    type: bool
+    access: rw
+    default: "0"
+    required: true
+  BinaryPolarity: &binaryPolarity
+    id: "0x0054"
+    name: Binary Polarity
+    type: enum8
+    access: r
+    values:
+      "0x00": "Normal"
+      "0x01": "Reverse"
+  AnalogPresentValue: &analogPresentValue
+    id: "0x0055"
+    name: Analog Present value
+    type: float
+    access: rw
+    default: "0"
+    required: true
+    report: true
+  BinaryPresentValue: &binaryPresentValue
+    id: "0x0055"
+    name: Binary Present Value
+    type: bool
+    access: rw
+    default: "0"
+    report: true
+    required: true
+  MultistatePresentValue: &multistatePresentValue
+    id: "0x0055"
+    name: Multistate Present value
+    type: u16
+    access: rw
+    default: "0"
+    report: true
+    required: true
+  AnalogPriorityArray: &analogPriorityArray
+    id: "0x0057"
+    name: Analog Priority Array
+    access: rw
+    listsize: 16
+    type: array
+    arraytype: struct
+    structattr:
+      - type: bool
+      - type: float
+  BinaryPriorityArray: &binaryPriorityArray
+    id: "0x0057"
+    name: Binary Priority Array
+    access: rw
+    listsize: 16
+    type: array
+    arraytype: struct
+    structattr:
+      - type: bool
+      - type: bool
+  MultistatePriorityArray: &multistatePriorityArray
+    id: "0x0057"
+    name: Multistate Priority Array
+    access: rw
+    listsize: 16
+    type: array
+    arraytype: struct
+    structattr:
+      - type: bool
+      - type: u16
+  IOReliability: &ioReliability
+    id: "0x0067"
+    name: I/O Reliability
+    type: enum8
+    access: rw
+    values:
+      "0x00": "No fault detected"
+      "0x01": "No Sensor"
+      "0x02": "Over Range"
+      "0x03": "Under Range"
+      "0x04": "Open Loop"
+      "0x05": "Shorted Loop"
+      "0x06": "No Output"
+      "0x07": "Unreliable (other)"
+      "0x08": "Process Error"
+      "0x09": "Multi state fault"
+      "0x0A": "Configuration Error"
+  AnalogRelinquishDefault: &analogRelinquishDefault
+    id: "0x0068"
+    name: Analog Relinquish Default
+    type: float
+    access: rw
+  BinaryRelinquishDefault: &binaryRelinquishDefault
+    id: "0x0068"
+    name: Binary Relinquish Default
+    type: bool
+    access: rw
+  MultistateRelinquishDefault: &multistateRelinquishDefault
+    id: "0x0068"
+    name: Multistate Relinquish Default
+    type: u16
+    access: rw
+  AnalogResolution: &analogResolution
+    id: "0x006A"
+    name: Analog Resolution
+    type: float
+    access: rw
+  IOStatusFlags: &ioStatusFlags
+    id: "0x006F"
+    name: I/O Status flags
+    type: bmp8
+    access: r
+    default: "0"
+    required: true
+    report: true
+    bits:
+      "0": In Alarm
+      "1": Fault
+      "2": Overidden
+      "3": Out of Service
+  IOUnitType: &ioUnitType
+    id: "0x0075"
+    name: I/O Unit Type
+    type: EngineeringUnit
+    access: rw
+  IOApplicationType: &ioApplicationType
+    id: "0x0100"
+    name: I/O Application Type
+    access: r
+    type: u32
+
   # 0020 Poll Control
+  CheckInInterval: &checkInInterval
+    id: "0x0000"
+    name: Check-in Interval
+    type: u32
+    access: rw
+    default: "0x3840"
+    required: true
+    range: 0x0,0x6e0000
+  LongPollInterval: &longPollInterval
+    id: "0x0001"
+    name: Long Poll Interval
+    type: u32
+    access: r
+    default: "0x14"
+    required: true
+    range: 0x04,0x6e0000
+  ShortPollInterval: &shortPollInterval
+    id: "0x0002"
+    name: Short Poll Interval
+    type: u16
+    access: r
+    default: "0x02"
+    required: true
+    range: 0x01,0xffff
+  FastPollTimeout: &fastPollTimeout
+    id: "0x0003"
+    name: Fast Poll Timeout
+    type: u16
+    access: rw
+    default: "0x028"
+    required: true
+    range: 0x01,0xffff
+  CheckInIntervalMin: &checkInIntervalMin
+    id: "0x0004"
+    name: Check-in Interval Min
+    type: u32
+    access: r
+    default: "0"
+  LongPollIntervalMin: &longPollIntervalMin
+    id: "0x0005"
+    name: Long Poll Interval Min
+    type: u32
+    access: r
+    default: "0"
+  FastPollTimeoutMax: &fastPollTimeoutMax
+    id: "0x0006"
+    name: Fast Poll Timeout Max
+    type: u16
+    access: r
+    default: "0"
+
   # 0B01 Meter Identification
   # 0B05 Diagnostics
+  NumberOfResets: &numberOfResets
+    id: "0x0000"
+    name: Number of Resets
+    type: u16
+    access: r
+    default: "0x0000"
+  PersistensMemoryWrites: &persistensMemoryWrites
+    id: "0x0001"
+    name: Persistens Memory Writes
+    type: u16
+    access: r
+    default: "0x0000"
+  MacRxBcast: &macRxBcast
+    id: "0x0100"
+    name: Mac Rx Bcast
+    type: u32
+    access: r
+    default: "0x00000000"
+  MacTxBcast: &macTxBcast
+    id: "0x0101"
+    name: Mac Tx Bcast
+    type: u32
+    access: r
+    default: "0x00000000"
+  MacRxUcast: &macRxUcast
+    id: "0x0102"
+    name: Mac Rx Ucast
+    type: u32
+    access: r
+    default: "0x00000000"
+  MacTxUcast: &macTxUcast
+    id: "0x0103"
+    name: Mac Tx Ucast
+    type: u32
+    access: r
+    default: "0x00000000"
+  MacTxUcastRetry: &macTxUcastRetry
+    id: "0x0104"
+    name: Mac Tx Ucast Retry
+    type: u16
+    access: r
+    default: "0x0000"
+  MacTxUcastFail: &macTxUcastFail
+    id: "0x0105"
+    name: Mac Tx Ucast Fail
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsRxBcast: &apsRxBcast
+    id: "0x0106"
+    name: APS Rx Bcast
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsTxBcast: &apsTxBcast
+    id: "0x0107"
+    name: APS Tx Bcast
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsRxUcast: &apsRxUcast
+    id: "0x0108"
+    name: APS Rx Ucast
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsTxUcastSuccess: &apsTxUcastSuccess
+    id: "0x0109"
+    name: APS Tx Ucast Success
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsTxUcastRetry: &apsTxUcastRetry
+    id: "0x010A"
+    name: APS Tx Ucast Retry
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsTxUcastFail: &apsTxUcastFail
+    id: "0x010B"
+    name: APS Tx Ucast Fail
+    type: u16
+    access: r
+    default: "0x0000"
+  RouteDiscInitiated: &routeDiscInitiated
+    id: "0x010C"
+    name: Route Disc Initiated
+    type: u16
+    access: r
+    default: "0x0000"
+  NeighborAdded: &neighborAdded
+    id: "0x010D"
+    name: Neighbor Added
+    type: u16
+    access: r
+    default: "0x0000"
+  NeighborRemoved: &neighborRemoved
+    id: "0x010E"
+    name: Neighbor Removed
+    type: u16
+    access: r
+    default: "0x0000"
+  NeighborStale: &neighborStale
+    id: "0x010F"
+    name: Neighbor Stale
+    type: u16
+    access: r
+    default: "0x0000"
+  JoinIndication: &joinIndication
+    id: "0x0110"
+    name: Join Indication
+    type: u16
+    access: r
+    default: "0x0000"
+  ChildMoved: &childMoved
+    id: "0x0111"
+    name: Child Moved
+    type: u16
+    access: r
+    default: "0x0000"
+  NwkFcFailure: &nwkFcFailure
+    id: "0x0112"
+    name: NWK FC Failure
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsFcFailure: &apsFcFailure
+    id: "0x0113"
+    name: APS FC Failure
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsUnauthorizedKey: &apsUnauthorizedKey
+    id: "0x0114"
+    name: APS Unauthorized Key
+    type: u16
+    access: r
+    default: "0x0000"
+  NwkDecryptFailures: &nwkDecryptFailures
+    id: "0x0115"
+    name: NWK Decrypt Failures
+    type: u16
+    access: r
+    default: "0x0000"
+  ApsDecryptFailures: &apsDecryptFailures
+    id: "0x0116"
+    name: APS Decrypt Failures
+    type: u16
+    access: r
+    default: "0x0000"
+  PacketBufferAllocFailures: &packetBufferAllocFailures
+    id: "0x0117"
+    name: Packet Buffer Alloc Failures
+    type: u16
+    access: r
+    default: "0x0000"
+  RelayedUcast: &relayedUcast
+    id: "0x0118"
+    name: Relayed Ucast
+    type: u16
+    access: r
+    default: "0x0000"
+  PhyToMacQueueLimitReached: &phyToMacQueueLimitReached
+    id: "0x0119"
+    name: Phy to MAC queue limit reached
+    type: u16
+    access: r
+    default: "0x0000"
+  PacketValidateDropcount: &packetValidateDropcount
+    id: "0x011A"
+    name: Packet Validate Dropcount
+    type: u16
+    access: r
+    default: "0x0000"
+  AvgMacRetryPerApsMsgSent: &avgMacRetryPerApsMsgSent
+    id: "0x011B"
+    name: Avg MAC Retry per APS Msg Sent
+    type: u16
+    access: r
+    default: "0x0000"
+  LastMessageLqi: &lastMessageLqi
+    id: "0x011C"
+    name: Last Message LQI
+    type: u8
+    access: r
+    default: "0x00"
+  LastMessageRssi: &lastMessageRssi
+    id: "0x011D"
+    name: Last Message RSSI
+    type: s8
+    access: r
+    default: "0x00"
 
 clusters:
   - id: "0x0000"
@@ -2051,3 +2471,210 @@ clusters:
               - *targetAddress
               - *distance
               - *qualityIndex
+  - id: "0x000C"
+    name: Analog Input
+    description: is an interface for reading the value of an analog measurement and accessing
+      various characteristics of that measurement.
+    server:
+      attr:
+        - *ioDescription
+        - *analogMaxPresentValue
+        - *analogMinPresentValue
+        - *ioOutOfService
+        - *analogPresentValue
+        - *ioReliability
+        - *analogResolution
+        - *ioStatusFlags
+        - *ioUnitType
+        - *ioApplicationType
+  - id: "0x000D"
+    name: Analog Output
+    description: is an interface for setting the value of an analog output (typically to the environment)
+      and accessing various characteristics of that value.
+    server:
+      attr:
+        - *ioDescription
+        - *analogMaxPresentValue
+        - *analogMinPresentValue
+        - *ioOutOfService
+        - *analogPresentValue
+        - *analogPriorityArray
+        - *ioReliability
+        - *analogRelinquishDefault
+        - *analogResolution
+        - *ioStatusFlags
+        - *ioUnitType
+        - *ioApplicationType
+        #- id: "0xF000"
+        #  name: Analog Output Xiaomi 0xf000
+        #  type: u32
+        #  access: r
+  - id: "0x000E"
+    name: Analog Value
+    description: is an interface for setting an analog value, typically used as a control
+      system parameter, and accessing various characteristics of that value.
+    server:
+      attr:
+        - *ioDescription
+        - *ioOutOfService
+        - *analogPresentValue
+        - *analogPriorityArray
+        - *ioReliability
+        - *analogRelinquishDefault
+        - *analogResolution
+        - *ioStatusFlags
+        - *ioUnitType
+        - *ioApplicationType
+  - id: "0x000F"
+    name: Binary Input
+    description: |
+      is an interface for reading the value of a binary measurement and accessing various characteristics of
+      that measurement. The cluster is typically used to implement a sensor that measures a two-state physical quantity.
+    server:
+      attr:
+        - *binaryActiveText
+        - *ioDescription
+        - *binaryInactiveText
+        - *ioOutOfService
+        - *binaryPolarity
+        - *binaryPresentValue
+        - *ioReliability
+        - *ioStatusFlags
+        - *ioApplicationType
+  - id: "0x0010"
+    name: Binary Output
+    server:
+      attr:
+        - *binaryActiveText
+        - *ioDescription
+        - *binaryInactiveText
+        - *binaryMinOffTime
+        - *binaryMaxOffTime
+        - *ioOutOfService
+        - *binaryPolarity
+        - *binaryPresentValue
+        - *binaryPriorityArray
+        - *ioReliability
+        - *binaryRelinquishDefault
+        - *ioStatusFlags
+        - *ioApplicationType
+  - id: "0x0011"
+    name: Binary Value
+    server:
+      attr:
+        - *binaryActiveText
+        - *ioDescription
+        - *binaryInactiveText
+        - *binaryMinOffTime
+        - *binaryMaxOffTime
+        - *ioOutOfService
+        - *binaryPresentValue
+        - *binaryPriorityArray
+        - *ioReliability
+        - *binaryRelinquishDefault
+        - *ioStatusFlags
+        - *ioApplicationType
+  - id: "0x0012"
+    name: Multistate Input
+    description: |
+      is an interface for reading the value of a multistate measurement
+      and accessing various characteristics of that measurement. The cluster is typically
+      used to implement a sensor that measures a physical quantity that can take on
+      one of a number of discrete states.
+    server:
+      attr:
+        - *multistateText
+        - *ioDescription
+        - *multistateNumberOfStates
+        - *ioOutOfService
+        - *multistatePresentValue
+        - *ioReliability
+        - *ioStatusFlags
+        - *ioApplicationType
+  - id: "0x0013"
+    name: Multistate Output
+    server:
+      attr:
+        - *multistateText
+        - *ioDescription
+        - *multistateNumberOfStates
+        - *ioOutOfService
+        - *multistatePresentValue
+        - *multistatePriorityArray
+        - *ioReliability
+        - *multistateRelinquishDefault
+        - *ioStatusFlags
+        - *ioApplicationType
+  - id: "0x0014"
+    name: Multistate Value
+    server:
+      attr:
+        - *multistateText
+        - *ioDescription
+        - *multistateNumberOfStates
+        - *ioOutOfService
+        - *multistatePresentValue
+        - *multistatePriorityArray
+        - *ioReliability
+        - *multistateRelinquishDefault
+        - *ioStatusFlags
+        - *ioApplicationType
+  - id: "0x0020"
+    name: Poll Control
+    description: Provides a mechanism for the management of an end device’s MAC Data Request
+      rate.
+    server:
+      attr:
+        - *checkInInterval
+        - *longPollInterval
+        - *shortPollInterval
+        - *fastPollTimeout
+        - *checkInIntervalMin
+        - *longPollIntervalMin
+        - *fastPollTimeoutMax
+      cmd:
+        - id: "0x00"
+          name: Check-in
+          dir: send
+          required: m
+  - id: "0x0B01"
+    name: Meter Identification
+    description: Attributes and commands that provide an interface tometer identification
+  - id: "0x0B05"
+    name: Diagnostics
+    description: The diagnostics cluster provides access to information regarding the
+      operation of the ZigBee stack over time.
+    server:
+      attr:
+        - *numberOfResets
+        - *persistensMemoryWrites
+        - *macRxBcast
+        - *macTxBcast
+        - *macRxUcast
+        - *macTxUcast
+        - *macTxUcastRetry
+        - *macTxUcastFail
+        - *apsRxBcast
+        - *apsTxBcast
+        - *apsRxUcast
+        - *apsTxUcastSuccess
+        - *apsTxUcastRetry
+        - *apsTxUcastFail
+        - *routeDiscInitiated
+        - *neighborAdded
+        - *neighborRemoved
+        - *neighborStale
+        - *joinIndication
+        - *childMoved
+        - *nwkFcFailure
+        - *apsFcFailure
+        - *apsUnauthorizedKey
+        - *nwkDecryptFailures
+        - *apsDecryptFailures
+        - *packetBufferAllocFailures
+        - *relayedUcast
+        - *phyToMacQueueLimitReached
+        - *packetValidateDropcount
+        - *avgMacRetryPerApsMsgSent
+        - *lastMessageLqi
+        - *lastMessageRssi
