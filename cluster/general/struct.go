@@ -5,6 +5,294 @@ import "hemtjan.st/zcl"
 
 type CommandID = zcl.CommandID
 
+type ApsDecryptFailures zcl.Zu16
+
+const ApsDecryptFailuresAttr zcl.AttrID = 278
+
+func (ApsDecryptFailures) ID() zcl.AttrID                { return ApsDecryptFailuresAttr }
+func (ApsDecryptFailures) Name() string                  { return "APS Decrypt Failures" }
+func (ApsDecryptFailures) Readable() bool                { return true }
+func (ApsDecryptFailures) Writable() bool                { return false }
+func (ApsDecryptFailures) Reportable() bool              { return false }
+func (ApsDecryptFailures) SceneIndex() int               { return -1 }
+func (a *ApsDecryptFailures) Value() *ApsDecryptFailures { return a }
+func (a ApsDecryptFailures) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsDecryptFailures) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsDecryptFailures(*nt)
+	return br, err
+}
+
+func (a *ApsDecryptFailures) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsDecryptFailures(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsDecryptFailures) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsFcFailure zcl.Zu16
+
+const ApsFcFailureAttr zcl.AttrID = 275
+
+func (ApsFcFailure) ID() zcl.AttrID                { return ApsFcFailureAttr }
+func (ApsFcFailure) Name() string                  { return "APS FC Failure" }
+func (ApsFcFailure) Readable() bool                { return true }
+func (ApsFcFailure) Writable() bool                { return false }
+func (ApsFcFailure) Reportable() bool              { return false }
+func (ApsFcFailure) SceneIndex() int               { return -1 }
+func (a *ApsFcFailure) Value() *ApsFcFailure       { return a }
+func (a ApsFcFailure) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsFcFailure) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsFcFailure(*nt)
+	return br, err
+}
+
+func (a *ApsFcFailure) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsFcFailure(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsFcFailure) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsRxBcast zcl.Zu16
+
+const ApsRxBcastAttr zcl.AttrID = 262
+
+func (ApsRxBcast) ID() zcl.AttrID                { return ApsRxBcastAttr }
+func (ApsRxBcast) Name() string                  { return "APS Rx Bcast" }
+func (ApsRxBcast) Readable() bool                { return true }
+func (ApsRxBcast) Writable() bool                { return false }
+func (ApsRxBcast) Reportable() bool              { return false }
+func (ApsRxBcast) SceneIndex() int               { return -1 }
+func (a *ApsRxBcast) Value() *ApsRxBcast         { return a }
+func (a ApsRxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsRxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsRxBcast(*nt)
+	return br, err
+}
+
+func (a *ApsRxBcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsRxBcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsRxBcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsRxUcast zcl.Zu16
+
+const ApsRxUcastAttr zcl.AttrID = 264
+
+func (ApsRxUcast) ID() zcl.AttrID                { return ApsRxUcastAttr }
+func (ApsRxUcast) Name() string                  { return "APS Rx Ucast" }
+func (ApsRxUcast) Readable() bool                { return true }
+func (ApsRxUcast) Writable() bool                { return false }
+func (ApsRxUcast) Reportable() bool              { return false }
+func (ApsRxUcast) SceneIndex() int               { return -1 }
+func (a *ApsRxUcast) Value() *ApsRxUcast         { return a }
+func (a ApsRxUcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsRxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsRxUcast(*nt)
+	return br, err
+}
+
+func (a *ApsRxUcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsRxUcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsRxUcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsTxBcast zcl.Zu16
+
+const ApsTxBcastAttr zcl.AttrID = 263
+
+func (ApsTxBcast) ID() zcl.AttrID                { return ApsTxBcastAttr }
+func (ApsTxBcast) Name() string                  { return "APS Tx Bcast" }
+func (ApsTxBcast) Readable() bool                { return true }
+func (ApsTxBcast) Writable() bool                { return false }
+func (ApsTxBcast) Reportable() bool              { return false }
+func (ApsTxBcast) SceneIndex() int               { return -1 }
+func (a *ApsTxBcast) Value() *ApsTxBcast         { return a }
+func (a ApsTxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsTxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsTxBcast(*nt)
+	return br, err
+}
+
+func (a *ApsTxBcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsTxBcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsTxBcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsTxUcastFail zcl.Zu16
+
+const ApsTxUcastFailAttr zcl.AttrID = 267
+
+func (ApsTxUcastFail) ID() zcl.AttrID                { return ApsTxUcastFailAttr }
+func (ApsTxUcastFail) Name() string                  { return "APS Tx Ucast Fail" }
+func (ApsTxUcastFail) Readable() bool                { return true }
+func (ApsTxUcastFail) Writable() bool                { return false }
+func (ApsTxUcastFail) Reportable() bool              { return false }
+func (ApsTxUcastFail) SceneIndex() int               { return -1 }
+func (a *ApsTxUcastFail) Value() *ApsTxUcastFail     { return a }
+func (a ApsTxUcastFail) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsTxUcastFail) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsTxUcastFail(*nt)
+	return br, err
+}
+
+func (a *ApsTxUcastFail) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsTxUcastFail(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsTxUcastFail) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsTxUcastRetry zcl.Zu16
+
+const ApsTxUcastRetryAttr zcl.AttrID = 266
+
+func (ApsTxUcastRetry) ID() zcl.AttrID                { return ApsTxUcastRetryAttr }
+func (ApsTxUcastRetry) Name() string                  { return "APS Tx Ucast Retry" }
+func (ApsTxUcastRetry) Readable() bool                { return true }
+func (ApsTxUcastRetry) Writable() bool                { return false }
+func (ApsTxUcastRetry) Reportable() bool              { return false }
+func (ApsTxUcastRetry) SceneIndex() int               { return -1 }
+func (a *ApsTxUcastRetry) Value() *ApsTxUcastRetry    { return a }
+func (a ApsTxUcastRetry) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsTxUcastRetry) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsTxUcastRetry(*nt)
+	return br, err
+}
+
+func (a *ApsTxUcastRetry) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsTxUcastRetry(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsTxUcastRetry) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsTxUcastSuccess zcl.Zu16
+
+const ApsTxUcastSuccessAttr zcl.AttrID = 265
+
+func (ApsTxUcastSuccess) ID() zcl.AttrID                { return ApsTxUcastSuccessAttr }
+func (ApsTxUcastSuccess) Name() string                  { return "APS Tx Ucast Success" }
+func (ApsTxUcastSuccess) Readable() bool                { return true }
+func (ApsTxUcastSuccess) Writable() bool                { return false }
+func (ApsTxUcastSuccess) Reportable() bool              { return false }
+func (ApsTxUcastSuccess) SceneIndex() int               { return -1 }
+func (a *ApsTxUcastSuccess) Value() *ApsTxUcastSuccess  { return a }
+func (a ApsTxUcastSuccess) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsTxUcastSuccess) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsTxUcastSuccess(*nt)
+	return br, err
+}
+
+func (a *ApsTxUcastSuccess) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsTxUcastSuccess(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsTxUcastSuccess) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type ApsUnauthorizedKey zcl.Zu16
+
+const ApsUnauthorizedKeyAttr zcl.AttrID = 276
+
+func (ApsUnauthorizedKey) ID() zcl.AttrID                { return ApsUnauthorizedKeyAttr }
+func (ApsUnauthorizedKey) Name() string                  { return "APS Unauthorized Key" }
+func (ApsUnauthorizedKey) Readable() bool                { return true }
+func (ApsUnauthorizedKey) Writable() bool                { return false }
+func (ApsUnauthorizedKey) Reportable() bool              { return false }
+func (ApsUnauthorizedKey) SceneIndex() int               { return -1 }
+func (a *ApsUnauthorizedKey) Value() *ApsUnauthorizedKey { return a }
+func (a ApsUnauthorizedKey) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ApsUnauthorizedKey) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ApsUnauthorizedKey(*nt)
+	return br, err
+}
+
+func (a *ApsUnauthorizedKey) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ApsUnauthorizedKey(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ApsUnauthorizedKey) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
 // AlarmCount Number of alarms currently defined
 type AlarmCount zcl.Zu16
 
@@ -115,6 +403,200 @@ func (a AlarmCode) String() string {
 	return zcl.Sprintf("%v", zcl.Zenum8(a))
 }
 
+type AnalogMaxPresentValue zcl.Zfloat
+
+const AnalogMaxPresentValueAttr zcl.AttrID = 65
+
+func (AnalogMaxPresentValue) ID() zcl.AttrID                   { return AnalogMaxPresentValueAttr }
+func (AnalogMaxPresentValue) Name() string                     { return "Analog Max Present Value" }
+func (AnalogMaxPresentValue) Readable() bool                   { return true }
+func (AnalogMaxPresentValue) Writable() bool                   { return true }
+func (AnalogMaxPresentValue) Reportable() bool                 { return false }
+func (AnalogMaxPresentValue) SceneIndex() int                  { return -1 }
+func (a *AnalogMaxPresentValue) Value() *AnalogMaxPresentValue { return a }
+func (a AnalogMaxPresentValue) MarshalZcl() ([]byte, error)    { return zcl.Zfloat(a).MarshalZcl() }
+
+func (a *AnalogMaxPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*a = AnalogMaxPresentValue(*nt)
+	return br, err
+}
+
+func (a *AnalogMaxPresentValue) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zfloat); ok {
+		*a = AnalogMaxPresentValue(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a AnalogMaxPresentValue) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(a))
+}
+
+type AnalogMinPresentValue zcl.Zfloat
+
+const AnalogMinPresentValueAttr zcl.AttrID = 69
+
+func (AnalogMinPresentValue) ID() zcl.AttrID                   { return AnalogMinPresentValueAttr }
+func (AnalogMinPresentValue) Name() string                     { return "Analog Min Present Value" }
+func (AnalogMinPresentValue) Readable() bool                   { return true }
+func (AnalogMinPresentValue) Writable() bool                   { return true }
+func (AnalogMinPresentValue) Reportable() bool                 { return false }
+func (AnalogMinPresentValue) SceneIndex() int                  { return -1 }
+func (a *AnalogMinPresentValue) Value() *AnalogMinPresentValue { return a }
+func (a AnalogMinPresentValue) MarshalZcl() ([]byte, error)    { return zcl.Zfloat(a).MarshalZcl() }
+
+func (a *AnalogMinPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*a = AnalogMinPresentValue(*nt)
+	return br, err
+}
+
+func (a *AnalogMinPresentValue) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zfloat); ok {
+		*a = AnalogMinPresentValue(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a AnalogMinPresentValue) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(a))
+}
+
+type AnalogPresentValue zcl.Zfloat
+
+const AnalogPresentValueAttr zcl.AttrID = 85
+
+func (AnalogPresentValue) ID() zcl.AttrID                { return AnalogPresentValueAttr }
+func (AnalogPresentValue) Name() string                  { return "Analog Present value" }
+func (AnalogPresentValue) Readable() bool                { return true }
+func (AnalogPresentValue) Writable() bool                { return true }
+func (AnalogPresentValue) Reportable() bool              { return true }
+func (AnalogPresentValue) SceneIndex() int               { return -1 }
+func (a *AnalogPresentValue) Value() *AnalogPresentValue { return a }
+func (a AnalogPresentValue) MarshalZcl() ([]byte, error) { return zcl.Zfloat(a).MarshalZcl() }
+
+func (a *AnalogPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*a = AnalogPresentValue(*nt)
+	return br, err
+}
+
+func (a *AnalogPresentValue) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zfloat); ok {
+		*a = AnalogPresentValue(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a AnalogPresentValue) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(a))
+}
+
+type AnalogPriorityArray zcl.Zarray
+
+const AnalogPriorityArrayAttr zcl.AttrID = 87
+
+func (AnalogPriorityArray) ID() zcl.AttrID                 { return AnalogPriorityArrayAttr }
+func (AnalogPriorityArray) Name() string                   { return "Analog Priority Array" }
+func (AnalogPriorityArray) Readable() bool                 { return true }
+func (AnalogPriorityArray) Writable() bool                 { return true }
+func (AnalogPriorityArray) Reportable() bool               { return false }
+func (AnalogPriorityArray) SceneIndex() int                { return -1 }
+func (a *AnalogPriorityArray) Value() *AnalogPriorityArray { return a }
+func (a AnalogPriorityArray) MarshalZcl() ([]byte, error) {
+	return nil, zcl.Errorf("not implemented")
+}
+
+func (a *AnalogPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zarray)
+	br, err := nt.UnmarshalZcl(b)
+	*a = AnalogPriorityArray(*nt)
+	return br, err
+}
+
+func (a *AnalogPriorityArray) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zarray); ok {
+		*a = AnalogPriorityArray(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a AnalogPriorityArray) String() string {
+	return zcl.Sprintf("%v", zcl.Zarray(a))
+}
+
+type AnalogRelinquishDefault zcl.Zfloat
+
+const AnalogRelinquishDefaultAttr zcl.AttrID = 104
+
+func (AnalogRelinquishDefault) ID() zcl.AttrID                     { return AnalogRelinquishDefaultAttr }
+func (AnalogRelinquishDefault) Name() string                       { return "Analog Relinquish Default" }
+func (AnalogRelinquishDefault) Readable() bool                     { return true }
+func (AnalogRelinquishDefault) Writable() bool                     { return true }
+func (AnalogRelinquishDefault) Reportable() bool                   { return false }
+func (AnalogRelinquishDefault) SceneIndex() int                    { return -1 }
+func (a *AnalogRelinquishDefault) Value() *AnalogRelinquishDefault { return a }
+func (a AnalogRelinquishDefault) MarshalZcl() ([]byte, error)      { return zcl.Zfloat(a).MarshalZcl() }
+
+func (a *AnalogRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*a = AnalogRelinquishDefault(*nt)
+	return br, err
+}
+
+func (a *AnalogRelinquishDefault) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zfloat); ok {
+		*a = AnalogRelinquishDefault(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a AnalogRelinquishDefault) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(a))
+}
+
+type AnalogResolution zcl.Zfloat
+
+const AnalogResolutionAttr zcl.AttrID = 106
+
+func (AnalogResolution) ID() zcl.AttrID                { return AnalogResolutionAttr }
+func (AnalogResolution) Name() string                  { return "Analog Resolution" }
+func (AnalogResolution) Readable() bool                { return true }
+func (AnalogResolution) Writable() bool                { return true }
+func (AnalogResolution) Reportable() bool              { return false }
+func (AnalogResolution) SceneIndex() int               { return -1 }
+func (a *AnalogResolution) Value() *AnalogResolution   { return a }
+func (a AnalogResolution) MarshalZcl() ([]byte, error) { return zcl.Zfloat(a).MarshalZcl() }
+
+func (a *AnalogResolution) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*a = AnalogResolution(*nt)
+	return br, err
+}
+
+func (a *AnalogResolution) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zfloat); ok {
+		*a = AnalogResolution(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a AnalogResolution) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(a))
+}
+
 type ApplicationVersion zcl.Zu8
 
 const ApplicationVersionAttr zcl.AttrID = 1
@@ -145,6 +627,38 @@ func (a *ApplicationVersion) SetValue(v zcl.Val) error {
 
 func (a ApplicationVersion) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
+}
+
+type AvgMacRetryPerApsMsgSent zcl.Zu16
+
+const AvgMacRetryPerApsMsgSentAttr zcl.AttrID = 283
+
+func (AvgMacRetryPerApsMsgSent) ID() zcl.AttrID                      { return AvgMacRetryPerApsMsgSentAttr }
+func (AvgMacRetryPerApsMsgSent) Name() string                        { return "Avg MAC Retry per APS Msg Sent" }
+func (AvgMacRetryPerApsMsgSent) Readable() bool                      { return true }
+func (AvgMacRetryPerApsMsgSent) Writable() bool                      { return false }
+func (AvgMacRetryPerApsMsgSent) Reportable() bool                    { return false }
+func (AvgMacRetryPerApsMsgSent) SceneIndex() int                     { return -1 }
+func (a *AvgMacRetryPerApsMsgSent) Value() *AvgMacRetryPerApsMsgSent { return a }
+func (a AvgMacRetryPerApsMsgSent) MarshalZcl() ([]byte, error)       { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *AvgMacRetryPerApsMsgSent) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = AvgMacRetryPerApsMsgSent(*nt)
+	return br, err
+}
+
+func (a *AvgMacRetryPerApsMsgSent) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = AvgMacRetryPerApsMsgSent(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a AvgMacRetryPerApsMsgSent) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 type BatteryAlarmMask zcl.Zbmp8
@@ -878,6 +1392,275 @@ func (a BatteryCapacity) String() string {
 	return zcl.MilliAmpereHours.Format(float64(a) / 0.1)
 }
 
+type BinaryActiveText zcl.Zcstring
+
+const BinaryActiveTextAttr zcl.AttrID = 4
+
+func (BinaryActiveText) ID() zcl.AttrID                { return BinaryActiveTextAttr }
+func (BinaryActiveText) Name() string                  { return "Binary Active Text" }
+func (BinaryActiveText) Readable() bool                { return true }
+func (BinaryActiveText) Writable() bool                { return true }
+func (BinaryActiveText) Reportable() bool              { return false }
+func (BinaryActiveText) SceneIndex() int               { return -1 }
+func (a *BinaryActiveText) Value() *BinaryActiveText   { return a }
+func (a BinaryActiveText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
+func (a *BinaryActiveText) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zcstring)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryActiveText(*nt)
+	return br, err
+}
+
+func (a *BinaryActiveText) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zcstring); ok {
+		*a = BinaryActiveText(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryActiveText) String() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(a))
+}
+
+type BinaryInactiveText zcl.Zcstring
+
+const BinaryInactiveTextAttr zcl.AttrID = 46
+
+func (BinaryInactiveText) ID() zcl.AttrID                { return BinaryInactiveTextAttr }
+func (BinaryInactiveText) Name() string                  { return "Binary Inactive Text" }
+func (BinaryInactiveText) Readable() bool                { return true }
+func (BinaryInactiveText) Writable() bool                { return true }
+func (BinaryInactiveText) Reportable() bool              { return false }
+func (BinaryInactiveText) SceneIndex() int               { return -1 }
+func (a *BinaryInactiveText) Value() *BinaryInactiveText { return a }
+func (a BinaryInactiveText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
+func (a *BinaryInactiveText) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zcstring)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryInactiveText(*nt)
+	return br, err
+}
+
+func (a *BinaryInactiveText) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zcstring); ok {
+		*a = BinaryInactiveText(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryInactiveText) String() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(a))
+}
+
+type BinaryMaxOffTime zcl.Zu32
+
+const BinaryMaxOffTimeAttr zcl.AttrID = 67
+
+func (BinaryMaxOffTime) ID() zcl.AttrID                { return BinaryMaxOffTimeAttr }
+func (BinaryMaxOffTime) Name() string                  { return "Binary Max Off-time" }
+func (BinaryMaxOffTime) Readable() bool                { return true }
+func (BinaryMaxOffTime) Writable() bool                { return true }
+func (BinaryMaxOffTime) Reportable() bool              { return false }
+func (BinaryMaxOffTime) SceneIndex() int               { return -1 }
+func (a *BinaryMaxOffTime) Value() *BinaryMaxOffTime   { return a }
+func (a BinaryMaxOffTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *BinaryMaxOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryMaxOffTime(*nt)
+	return br, err
+}
+
+func (a *BinaryMaxOffTime) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = BinaryMaxOffTime(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryMaxOffTime) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type BinaryMinOffTime zcl.Zu32
+
+const BinaryMinOffTimeAttr zcl.AttrID = 66
+
+func (BinaryMinOffTime) ID() zcl.AttrID                { return BinaryMinOffTimeAttr }
+func (BinaryMinOffTime) Name() string                  { return "Binary Min Off-time" }
+func (BinaryMinOffTime) Readable() bool                { return true }
+func (BinaryMinOffTime) Writable() bool                { return true }
+func (BinaryMinOffTime) Reportable() bool              { return false }
+func (BinaryMinOffTime) SceneIndex() int               { return -1 }
+func (a *BinaryMinOffTime) Value() *BinaryMinOffTime   { return a }
+func (a BinaryMinOffTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *BinaryMinOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryMinOffTime(*nt)
+	return br, err
+}
+
+func (a *BinaryMinOffTime) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = BinaryMinOffTime(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryMinOffTime) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type BinaryPolarity zcl.Zenum8
+
+const BinaryPolarityAttr zcl.AttrID = 84
+
+func (BinaryPolarity) ID() zcl.AttrID                { return BinaryPolarityAttr }
+func (BinaryPolarity) Name() string                  { return "Binary Polarity" }
+func (BinaryPolarity) Readable() bool                { return true }
+func (BinaryPolarity) Writable() bool                { return false }
+func (BinaryPolarity) Reportable() bool              { return false }
+func (BinaryPolarity) SceneIndex() int               { return -1 }
+func (a *BinaryPolarity) Value() *BinaryPolarity     { return a }
+func (a BinaryPolarity) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
+func (a *BinaryPolarity) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zenum8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryPolarity(*nt)
+	return br, err
+}
+
+func (a *BinaryPolarity) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zenum8); ok {
+		*a = BinaryPolarity(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryPolarity) String() string {
+	switch a {
+	case 0x00:
+		return "Normal"
+	case 0x01:
+		return "Reverse"
+	}
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
+}
+
+func (a BinaryPolarity) IsNormal() bool  { return a == 0x00 }
+func (a BinaryPolarity) IsReverse() bool { return a == 0x01 }
+func (a *BinaryPolarity) SetNormal()     { *a = 0x00 }
+func (a *BinaryPolarity) SetReverse()    { *a = 0x01 }
+
+type BinaryPresentValue zcl.Zbool
+
+const BinaryPresentValueAttr zcl.AttrID = 85
+
+func (BinaryPresentValue) ID() zcl.AttrID                { return BinaryPresentValueAttr }
+func (BinaryPresentValue) Name() string                  { return "Binary Present Value" }
+func (BinaryPresentValue) Readable() bool                { return true }
+func (BinaryPresentValue) Writable() bool                { return true }
+func (BinaryPresentValue) Reportable() bool              { return true }
+func (BinaryPresentValue) SceneIndex() int               { return -1 }
+func (a *BinaryPresentValue) Value() *BinaryPresentValue { return a }
+func (a BinaryPresentValue) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
+func (a *BinaryPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zbool)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryPresentValue(*nt)
+	return br, err
+}
+
+func (a *BinaryPresentValue) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zbool); ok {
+		*a = BinaryPresentValue(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryPresentValue) String() string {
+	return zcl.Sprintf("%v", zcl.Zbool(a))
+}
+
+type BinaryPriorityArray zcl.Zarray
+
+const BinaryPriorityArrayAttr zcl.AttrID = 87
+
+func (BinaryPriorityArray) ID() zcl.AttrID                 { return BinaryPriorityArrayAttr }
+func (BinaryPriorityArray) Name() string                   { return "Binary Priority Array" }
+func (BinaryPriorityArray) Readable() bool                 { return true }
+func (BinaryPriorityArray) Writable() bool                 { return true }
+func (BinaryPriorityArray) Reportable() bool               { return false }
+func (BinaryPriorityArray) SceneIndex() int                { return -1 }
+func (a *BinaryPriorityArray) Value() *BinaryPriorityArray { return a }
+func (a BinaryPriorityArray) MarshalZcl() ([]byte, error) {
+	return nil, zcl.Errorf("not implemented")
+}
+
+func (a *BinaryPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zarray)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryPriorityArray(*nt)
+	return br, err
+}
+
+func (a *BinaryPriorityArray) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zarray); ok {
+		*a = BinaryPriorityArray(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryPriorityArray) String() string {
+	return zcl.Sprintf("%v", zcl.Zarray(a))
+}
+
+type BinaryRelinquishDefault zcl.Zbool
+
+const BinaryRelinquishDefaultAttr zcl.AttrID = 104
+
+func (BinaryRelinquishDefault) ID() zcl.AttrID                     { return BinaryRelinquishDefaultAttr }
+func (BinaryRelinquishDefault) Name() string                       { return "Binary Relinquish Default" }
+func (BinaryRelinquishDefault) Readable() bool                     { return true }
+func (BinaryRelinquishDefault) Writable() bool                     { return true }
+func (BinaryRelinquishDefault) Reportable() bool                   { return false }
+func (BinaryRelinquishDefault) SceneIndex() int                    { return -1 }
+func (a *BinaryRelinquishDefault) Value() *BinaryRelinquishDefault { return a }
+func (a BinaryRelinquishDefault) MarshalZcl() ([]byte, error)      { return zcl.Zbool(a).MarshalZcl() }
+
+func (a *BinaryRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zbool)
+	br, err := nt.UnmarshalZcl(b)
+	*a = BinaryRelinquishDefault(*nt)
+	return br, err
+}
+
+func (a *BinaryRelinquishDefault) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zbool); ok {
+		*a = BinaryRelinquishDefault(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a BinaryRelinquishDefault) String() string {
+	return zcl.Sprintf("%v", zcl.Zbool(a))
+}
+
 type CalculationPeriod zcl.Zu16
 
 const CalculationPeriodAttr zcl.AttrID = 22
@@ -908,6 +1691,102 @@ func (a *CalculationPeriod) SetValue(v zcl.Val) error {
 
 func (a CalculationPeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
+}
+
+type CheckInInterval zcl.Zu32
+
+const CheckInIntervalAttr zcl.AttrID = 0
+
+func (CheckInInterval) ID() zcl.AttrID                { return CheckInIntervalAttr }
+func (CheckInInterval) Name() string                  { return "Check-in Interval" }
+func (CheckInInterval) Readable() bool                { return true }
+func (CheckInInterval) Writable() bool                { return true }
+func (CheckInInterval) Reportable() bool              { return false }
+func (CheckInInterval) SceneIndex() int               { return -1 }
+func (a *CheckInInterval) Value() *CheckInInterval    { return a }
+func (a CheckInInterval) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *CheckInInterval) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = CheckInInterval(*nt)
+	return br, err
+}
+
+func (a *CheckInInterval) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = CheckInInterval(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a CheckInInterval) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type CheckInIntervalMin zcl.Zu32
+
+const CheckInIntervalMinAttr zcl.AttrID = 4
+
+func (CheckInIntervalMin) ID() zcl.AttrID                { return CheckInIntervalMinAttr }
+func (CheckInIntervalMin) Name() string                  { return "Check-in Interval Min" }
+func (CheckInIntervalMin) Readable() bool                { return true }
+func (CheckInIntervalMin) Writable() bool                { return false }
+func (CheckInIntervalMin) Reportable() bool              { return false }
+func (CheckInIntervalMin) SceneIndex() int               { return -1 }
+func (a *CheckInIntervalMin) Value() *CheckInIntervalMin { return a }
+func (a CheckInIntervalMin) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *CheckInIntervalMin) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = CheckInIntervalMin(*nt)
+	return br, err
+}
+
+func (a *CheckInIntervalMin) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = CheckInIntervalMin(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a CheckInIntervalMin) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type ChildMoved zcl.Zu16
+
+const ChildMovedAttr zcl.AttrID = 273
+
+func (ChildMoved) ID() zcl.AttrID                { return ChildMovedAttr }
+func (ChildMoved) Name() string                  { return "Child Moved" }
+func (ChildMoved) Readable() bool                { return true }
+func (ChildMoved) Writable() bool                { return false }
+func (ChildMoved) Reportable() bool              { return false }
+func (ChildMoved) SceneIndex() int               { return -1 }
+func (a *ChildMoved) Value() *ChildMoved         { return a }
+func (a ChildMoved) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ChildMoved) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ChildMoved(*nt)
+	return br, err
+}
+
+func (a *ChildMoved) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ChildMoved(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ChildMoved) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 type ClusterId zcl.Zu16
@@ -1579,6 +2458,70 @@ func (a *EffectVariant) SetFadeToOffIn08Seconds20DimUpIn05ThenFadeToOffIn1Second
 func (a *EffectVariant) SetNoFade()                                                { *a = 0x01 }
 func (a *EffectVariant) Set50DimDownIn08SThenFadeOffIn12S()                        { *a = 0x02 }
 
+type FastPollTimeout zcl.Zu16
+
+const FastPollTimeoutAttr zcl.AttrID = 3
+
+func (FastPollTimeout) ID() zcl.AttrID                { return FastPollTimeoutAttr }
+func (FastPollTimeout) Name() string                  { return "Fast Poll Timeout" }
+func (FastPollTimeout) Readable() bool                { return true }
+func (FastPollTimeout) Writable() bool                { return true }
+func (FastPollTimeout) Reportable() bool              { return false }
+func (FastPollTimeout) SceneIndex() int               { return -1 }
+func (a *FastPollTimeout) Value() *FastPollTimeout    { return a }
+func (a FastPollTimeout) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *FastPollTimeout) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = FastPollTimeout(*nt)
+	return br, err
+}
+
+func (a *FastPollTimeout) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = FastPollTimeout(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a FastPollTimeout) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type FastPollTimeoutMax zcl.Zu16
+
+const FastPollTimeoutMaxAttr zcl.AttrID = 6
+
+func (FastPollTimeoutMax) ID() zcl.AttrID                { return FastPollTimeoutMaxAttr }
+func (FastPollTimeoutMax) Name() string                  { return "Fast Poll Timeout Max" }
+func (FastPollTimeoutMax) Readable() bool                { return true }
+func (FastPollTimeoutMax) Writable() bool                { return false }
+func (FastPollTimeoutMax) Reportable() bool              { return false }
+func (FastPollTimeoutMax) SceneIndex() int               { return -1 }
+func (a *FastPollTimeoutMax) Value() *FastPollTimeoutMax { return a }
+func (a FastPollTimeoutMax) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *FastPollTimeoutMax) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = FastPollTimeoutMax(*nt)
+	return br, err
+}
+
+func (a *FastPollTimeoutMax) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = FastPollTimeoutMax(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a FastPollTimeoutMax) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
 type GlobalSceneControl zcl.Zbool
 
 const GlobalSceneControlAttr zcl.AttrID = 16384
@@ -1857,6 +2800,270 @@ func (a HighTempThreshold) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
 }
 
+type IOApplicationType zcl.Zu32
+
+const IOApplicationTypeAttr zcl.AttrID = 256
+
+func (IOApplicationType) ID() zcl.AttrID                { return IOApplicationTypeAttr }
+func (IOApplicationType) Name() string                  { return "I/O Application Type" }
+func (IOApplicationType) Readable() bool                { return true }
+func (IOApplicationType) Writable() bool                { return false }
+func (IOApplicationType) Reportable() bool              { return false }
+func (IOApplicationType) SceneIndex() int               { return -1 }
+func (a *IOApplicationType) Value() *IOApplicationType  { return a }
+func (a IOApplicationType) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *IOApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = IOApplicationType(*nt)
+	return br, err
+}
+
+func (a *IOApplicationType) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = IOApplicationType(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a IOApplicationType) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type IODescription zcl.Zcstring
+
+const IODescriptionAttr zcl.AttrID = 28
+
+func (IODescription) ID() zcl.AttrID                { return IODescriptionAttr }
+func (IODescription) Name() string                  { return "I/O Description" }
+func (IODescription) Readable() bool                { return true }
+func (IODescription) Writable() bool                { return true }
+func (IODescription) Reportable() bool              { return false }
+func (IODescription) SceneIndex() int               { return -1 }
+func (a *IODescription) Value() *IODescription      { return a }
+func (a IODescription) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
+func (a *IODescription) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zcstring)
+	br, err := nt.UnmarshalZcl(b)
+	*a = IODescription(*nt)
+	return br, err
+}
+
+func (a *IODescription) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zcstring); ok {
+		*a = IODescription(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a IODescription) String() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(a))
+}
+
+type IOOutOfService zcl.Zbool
+
+const IOOutOfServiceAttr zcl.AttrID = 81
+
+func (IOOutOfService) ID() zcl.AttrID                { return IOOutOfServiceAttr }
+func (IOOutOfService) Name() string                  { return "I/O Out of service" }
+func (IOOutOfService) Readable() bool                { return true }
+func (IOOutOfService) Writable() bool                { return true }
+func (IOOutOfService) Reportable() bool              { return false }
+func (IOOutOfService) SceneIndex() int               { return -1 }
+func (a *IOOutOfService) Value() *IOOutOfService     { return a }
+func (a IOOutOfService) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
+
+func (a *IOOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zbool)
+	br, err := nt.UnmarshalZcl(b)
+	*a = IOOutOfService(*nt)
+	return br, err
+}
+
+func (a *IOOutOfService) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zbool); ok {
+		*a = IOOutOfService(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a IOOutOfService) String() string {
+	return zcl.Sprintf("%v", zcl.Zbool(a))
+}
+
+type IOReliability zcl.Zenum8
+
+const IOReliabilityAttr zcl.AttrID = 103
+
+func (IOReliability) ID() zcl.AttrID                { return IOReliabilityAttr }
+func (IOReliability) Name() string                  { return "I/O Reliability" }
+func (IOReliability) Readable() bool                { return true }
+func (IOReliability) Writable() bool                { return true }
+func (IOReliability) Reportable() bool              { return false }
+func (IOReliability) SceneIndex() int               { return -1 }
+func (a *IOReliability) Value() *IOReliability      { return a }
+func (a IOReliability) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
+func (a *IOReliability) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zenum8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = IOReliability(*nt)
+	return br, err
+}
+
+func (a *IOReliability) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zenum8); ok {
+		*a = IOReliability(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a IOReliability) String() string {
+	switch a {
+	case 0x00:
+		return "No fault detected"
+	case 0x01:
+		return "No Sensor"
+	case 0x02:
+		return "Over Range"
+	case 0x03:
+		return "Under Range"
+	case 0x04:
+		return "Open Loop"
+	case 0x05:
+		return "Shorted Loop"
+	case 0x06:
+		return "No Output"
+	case 0x07:
+		return "Unreliable (other)"
+	case 0x08:
+		return "Process Error"
+	case 0x09:
+		return "Multi state fault"
+	case 0x0A:
+		return "Configuration Error"
+	}
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
+}
+
+func (a IOReliability) IsNoFaultDetected() bool    { return a == 0x00 }
+func (a IOReliability) IsNoSensor() bool           { return a == 0x01 }
+func (a IOReliability) IsOverRange() bool          { return a == 0x02 }
+func (a IOReliability) IsUnderRange() bool         { return a == 0x03 }
+func (a IOReliability) IsOpenLoop() bool           { return a == 0x04 }
+func (a IOReliability) IsShortedLoop() bool        { return a == 0x05 }
+func (a IOReliability) IsNoOutput() bool           { return a == 0x06 }
+func (a IOReliability) IsUnreliableOther() bool    { return a == 0x07 }
+func (a IOReliability) IsProcessError() bool       { return a == 0x08 }
+func (a IOReliability) IsMultiStateFault() bool    { return a == 0x09 }
+func (a IOReliability) IsConfigurationError() bool { return a == 0x0A }
+func (a *IOReliability) SetNoFaultDetected()       { *a = 0x00 }
+func (a *IOReliability) SetNoSensor()              { *a = 0x01 }
+func (a *IOReliability) SetOverRange()             { *a = 0x02 }
+func (a *IOReliability) SetUnderRange()            { *a = 0x03 }
+func (a *IOReliability) SetOpenLoop()              { *a = 0x04 }
+func (a *IOReliability) SetShortedLoop()           { *a = 0x05 }
+func (a *IOReliability) SetNoOutput()              { *a = 0x06 }
+func (a *IOReliability) SetUnreliableOther()       { *a = 0x07 }
+func (a *IOReliability) SetProcessError()          { *a = 0x08 }
+func (a *IOReliability) SetMultiStateFault()       { *a = 0x09 }
+func (a *IOReliability) SetConfigurationError()    { *a = 0x0A }
+
+type IOStatusFlags zcl.Zbmp8
+
+const IOStatusFlagsAttr zcl.AttrID = 111
+
+func (IOStatusFlags) ID() zcl.AttrID                { return IOStatusFlagsAttr }
+func (IOStatusFlags) Name() string                  { return "I/O Status flags" }
+func (IOStatusFlags) Readable() bool                { return true }
+func (IOStatusFlags) Writable() bool                { return false }
+func (IOStatusFlags) Reportable() bool              { return true }
+func (IOStatusFlags) SceneIndex() int               { return -1 }
+func (a *IOStatusFlags) Value() *IOStatusFlags      { return a }
+func (a IOStatusFlags) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
+func (a *IOStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zbmp8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = IOStatusFlags(*nt)
+	return br, err
+}
+
+func (a *IOStatusFlags) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zbmp8); ok {
+		*a = IOStatusFlags(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a IOStatusFlags) String() string {
+	var bstr []string
+	bits := zcl.BitmapList(a[:])
+	for _, bit := range bits {
+		switch bit {
+		case 0:
+			bstr = append(bstr, "In Alarm")
+		case 1:
+			bstr = append(bstr, "Fault")
+		case 2:
+			bstr = append(bstr, "Overidden")
+		case 3:
+			bstr = append(bstr, "Out of Service")
+		default:
+			bstr = append(bstr, zcl.Sprintf("Unknown(%d)", bit))
+		}
+	}
+	return zcl.StrJoin(bstr, ", ")
+}
+
+func (a IOStatusFlags) IsInAlarm() bool         { return zcl.BitmapTest([]byte(a[:]), 0) }
+func (a IOStatusFlags) IsFault() bool           { return zcl.BitmapTest([]byte(a[:]), 1) }
+func (a IOStatusFlags) IsOveridden() bool       { return zcl.BitmapTest([]byte(a[:]), 2) }
+func (a IOStatusFlags) IsOutOfService() bool    { return zcl.BitmapTest([]byte(a[:]), 3) }
+func (a *IOStatusFlags) SetInAlarm(b bool)      { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b)) }
+func (a *IOStatusFlags) SetFault(b bool)        { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 1, b)) }
+func (a *IOStatusFlags) SetOveridden(b bool)    { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 2, b)) }
+func (a *IOStatusFlags) SetOutOfService(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 3, b)) }
+
+type IOUnitType zcl.EngineeringUnit
+
+const IOUnitTypeAttr zcl.AttrID = 117
+
+func (IOUnitType) ID() zcl.AttrID                { return IOUnitTypeAttr }
+func (IOUnitType) Name() string                  { return "I/O Unit Type" }
+func (IOUnitType) Readable() bool                { return true }
+func (IOUnitType) Writable() bool                { return true }
+func (IOUnitType) Reportable() bool              { return false }
+func (IOUnitType) SceneIndex() int               { return -1 }
+func (a *IOUnitType) Value() *IOUnitType         { return a }
+func (a IOUnitType) MarshalZcl() ([]byte, error) { return zcl.EngineeringUnit(a).MarshalZcl() }
+
+func (a *IOUnitType) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.EngineeringUnit)
+	br, err := nt.UnmarshalZcl(b)
+	*a = IOUnitType(*nt)
+	return br, err
+}
+
+func (a *IOUnitType) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.EngineeringUnit); ok {
+		*a = IOUnitType(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a IOUnitType) String() string {
+	return zcl.Sprintf("%v", zcl.EngineeringUnit(a))
+}
+
 // IdentifyEffect The effect identifier field specifies the identify effect to use.
 type IdentifyEffect zcl.Zenum8
 
@@ -1999,6 +3206,38 @@ func (a IdentifyTimeout) String() string {
 	return zcl.Seconds.Format(float64(a))
 }
 
+type JoinIndication zcl.Zu16
+
+const JoinIndicationAttr zcl.AttrID = 272
+
+func (JoinIndication) ID() zcl.AttrID                { return JoinIndicationAttr }
+func (JoinIndication) Name() string                  { return "Join Indication" }
+func (JoinIndication) Readable() bool                { return true }
+func (JoinIndication) Writable() bool                { return false }
+func (JoinIndication) Reportable() bool              { return false }
+func (JoinIndication) SceneIndex() int               { return -1 }
+func (a *JoinIndication) Value() *JoinIndication     { return a }
+func (a JoinIndication) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *JoinIndication) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = JoinIndication(*nt)
+	return br, err
+}
+
+func (a *JoinIndication) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = JoinIndication(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a JoinIndication) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
 type LedIndication zcl.Zbool
 
 const LedIndicationAttr zcl.AttrID = 51
@@ -2029,6 +3268,70 @@ func (a *LedIndication) SetValue(v zcl.Val) error {
 
 func (a LedIndication) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
+}
+
+type LastMessageLqi zcl.Zu8
+
+const LastMessageLqiAttr zcl.AttrID = 284
+
+func (LastMessageLqi) ID() zcl.AttrID                { return LastMessageLqiAttr }
+func (LastMessageLqi) Name() string                  { return "Last Message LQI" }
+func (LastMessageLqi) Readable() bool                { return true }
+func (LastMessageLqi) Writable() bool                { return false }
+func (LastMessageLqi) Reportable() bool              { return false }
+func (LastMessageLqi) SceneIndex() int               { return -1 }
+func (a *LastMessageLqi) Value() *LastMessageLqi     { return a }
+func (a LastMessageLqi) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+
+func (a *LastMessageLqi) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = LastMessageLqi(*nt)
+	return br, err
+}
+
+func (a *LastMessageLqi) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu8); ok {
+		*a = LastMessageLqi(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a LastMessageLqi) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(a))
+}
+
+type LastMessageRssi zcl.Zs8
+
+const LastMessageRssiAttr zcl.AttrID = 285
+
+func (LastMessageRssi) ID() zcl.AttrID                { return LastMessageRssiAttr }
+func (LastMessageRssi) Name() string                  { return "Last Message RSSI" }
+func (LastMessageRssi) Readable() bool                { return true }
+func (LastMessageRssi) Writable() bool                { return false }
+func (LastMessageRssi) Reportable() bool              { return false }
+func (LastMessageRssi) SceneIndex() int               { return -1 }
+func (a *LastMessageRssi) Value() *LastMessageRssi    { return a }
+func (a LastMessageRssi) MarshalZcl() ([]byte, error) { return zcl.Zs8(a).MarshalZcl() }
+
+func (a *LastMessageRssi) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zs8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = LastMessageRssi(*nt)
+	return br, err
+}
+
+func (a *LastMessageRssi) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zs8); ok {
+		*a = LastMessageRssi(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a LastMessageRssi) String() string {
+	return zcl.Sprintf("%v", zcl.Zs8(a))
 }
 
 type LastSetTime zcl.Zutc
@@ -2384,6 +3687,70 @@ func (a *LocationFlags) SetCompactResponse(b bool) {
 	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 4, b))
 }
 
+type LongPollInterval zcl.Zu32
+
+const LongPollIntervalAttr zcl.AttrID = 1
+
+func (LongPollInterval) ID() zcl.AttrID                { return LongPollIntervalAttr }
+func (LongPollInterval) Name() string                  { return "Long Poll Interval" }
+func (LongPollInterval) Readable() bool                { return true }
+func (LongPollInterval) Writable() bool                { return false }
+func (LongPollInterval) Reportable() bool              { return false }
+func (LongPollInterval) SceneIndex() int               { return -1 }
+func (a *LongPollInterval) Value() *LongPollInterval   { return a }
+func (a LongPollInterval) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *LongPollInterval) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = LongPollInterval(*nt)
+	return br, err
+}
+
+func (a *LongPollInterval) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = LongPollInterval(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a LongPollInterval) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type LongPollIntervalMin zcl.Zu32
+
+const LongPollIntervalMinAttr zcl.AttrID = 5
+
+func (LongPollIntervalMin) ID() zcl.AttrID                 { return LongPollIntervalMinAttr }
+func (LongPollIntervalMin) Name() string                   { return "Long Poll Interval Min" }
+func (LongPollIntervalMin) Readable() bool                 { return true }
+func (LongPollIntervalMin) Writable() bool                 { return false }
+func (LongPollIntervalMin) Reportable() bool               { return false }
+func (LongPollIntervalMin) SceneIndex() int                { return -1 }
+func (a *LongPollIntervalMin) Value() *LongPollIntervalMin { return a }
+func (a LongPollIntervalMin) MarshalZcl() ([]byte, error)  { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *LongPollIntervalMin) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = LongPollIntervalMin(*nt)
+	return br, err
+}
+
+func (a *LongPollIntervalMin) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = LongPollIntervalMin(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a LongPollIntervalMin) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
 type LowTempDwellTripPoint zcl.Zu24
 
 const LowTempDwellTripPointAttr zcl.AttrID = 19
@@ -2448,6 +3815,198 @@ func (a *LowTempThreshold) SetValue(v zcl.Val) error {
 
 func (a LowTempThreshold) String() string {
 	return zcl.DegreesCelsius.Format(float64(a))
+}
+
+type MacRxBcast zcl.Zu32
+
+const MacRxBcastAttr zcl.AttrID = 256
+
+func (MacRxBcast) ID() zcl.AttrID                { return MacRxBcastAttr }
+func (MacRxBcast) Name() string                  { return "Mac Rx Bcast" }
+func (MacRxBcast) Readable() bool                { return true }
+func (MacRxBcast) Writable() bool                { return false }
+func (MacRxBcast) Reportable() bool              { return false }
+func (MacRxBcast) SceneIndex() int               { return -1 }
+func (a *MacRxBcast) Value() *MacRxBcast         { return a }
+func (a MacRxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *MacRxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MacRxBcast(*nt)
+	return br, err
+}
+
+func (a *MacRxBcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = MacRxBcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MacRxBcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type MacRxUcast zcl.Zu32
+
+const MacRxUcastAttr zcl.AttrID = 258
+
+func (MacRxUcast) ID() zcl.AttrID                { return MacRxUcastAttr }
+func (MacRxUcast) Name() string                  { return "Mac Rx Ucast" }
+func (MacRxUcast) Readable() bool                { return true }
+func (MacRxUcast) Writable() bool                { return false }
+func (MacRxUcast) Reportable() bool              { return false }
+func (MacRxUcast) SceneIndex() int               { return -1 }
+func (a *MacRxUcast) Value() *MacRxUcast         { return a }
+func (a MacRxUcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *MacRxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MacRxUcast(*nt)
+	return br, err
+}
+
+func (a *MacRxUcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = MacRxUcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MacRxUcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type MacTxBcast zcl.Zu32
+
+const MacTxBcastAttr zcl.AttrID = 257
+
+func (MacTxBcast) ID() zcl.AttrID                { return MacTxBcastAttr }
+func (MacTxBcast) Name() string                  { return "Mac Tx Bcast" }
+func (MacTxBcast) Readable() bool                { return true }
+func (MacTxBcast) Writable() bool                { return false }
+func (MacTxBcast) Reportable() bool              { return false }
+func (MacTxBcast) SceneIndex() int               { return -1 }
+func (a *MacTxBcast) Value() *MacTxBcast         { return a }
+func (a MacTxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *MacTxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MacTxBcast(*nt)
+	return br, err
+}
+
+func (a *MacTxBcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = MacTxBcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MacTxBcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type MacTxUcast zcl.Zu32
+
+const MacTxUcastAttr zcl.AttrID = 259
+
+func (MacTxUcast) ID() zcl.AttrID                { return MacTxUcastAttr }
+func (MacTxUcast) Name() string                  { return "Mac Tx Ucast" }
+func (MacTxUcast) Readable() bool                { return true }
+func (MacTxUcast) Writable() bool                { return false }
+func (MacTxUcast) Reportable() bool              { return false }
+func (MacTxUcast) SceneIndex() int               { return -1 }
+func (a *MacTxUcast) Value() *MacTxUcast         { return a }
+func (a MacTxUcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
+
+func (a *MacTxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MacTxUcast(*nt)
+	return br, err
+}
+
+func (a *MacTxUcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu32); ok {
+		*a = MacTxUcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MacTxUcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(a))
+}
+
+type MacTxUcastFail zcl.Zu16
+
+const MacTxUcastFailAttr zcl.AttrID = 261
+
+func (MacTxUcastFail) ID() zcl.AttrID                { return MacTxUcastFailAttr }
+func (MacTxUcastFail) Name() string                  { return "Mac Tx Ucast Fail" }
+func (MacTxUcastFail) Readable() bool                { return true }
+func (MacTxUcastFail) Writable() bool                { return false }
+func (MacTxUcastFail) Reportable() bool              { return false }
+func (MacTxUcastFail) SceneIndex() int               { return -1 }
+func (a *MacTxUcastFail) Value() *MacTxUcastFail     { return a }
+func (a MacTxUcastFail) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *MacTxUcastFail) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MacTxUcastFail(*nt)
+	return br, err
+}
+
+func (a *MacTxUcastFail) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = MacTxUcastFail(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MacTxUcastFail) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type MacTxUcastRetry zcl.Zu16
+
+const MacTxUcastRetryAttr zcl.AttrID = 260
+
+func (MacTxUcastRetry) ID() zcl.AttrID                { return MacTxUcastRetryAttr }
+func (MacTxUcastRetry) Name() string                  { return "Mac Tx Ucast Retry" }
+func (MacTxUcastRetry) Readable() bool                { return true }
+func (MacTxUcastRetry) Writable() bool                { return false }
+func (MacTxUcastRetry) Reportable() bool              { return false }
+func (MacTxUcastRetry) SceneIndex() int               { return -1 }
+func (a *MacTxUcastRetry) Value() *MacTxUcastRetry    { return a }
+func (a MacTxUcastRetry) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *MacTxUcastRetry) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MacTxUcastRetry(*nt)
+	return br, err
+}
+
+func (a *MacTxUcastRetry) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = MacTxUcastRetry(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MacTxUcastRetry) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 type MainsAlarmMask zcl.Zbmp8
@@ -2806,6 +4365,328 @@ func (a ModelIdentifier) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
 }
 
+type MultistateNumberOfStates zcl.Zu16
+
+const MultistateNumberOfStatesAttr zcl.AttrID = 74
+
+func (MultistateNumberOfStates) ID() zcl.AttrID                      { return MultistateNumberOfStatesAttr }
+func (MultistateNumberOfStates) Name() string                        { return "Multistate Number of States" }
+func (MultistateNumberOfStates) Readable() bool                      { return true }
+func (MultistateNumberOfStates) Writable() bool                      { return true }
+func (MultistateNumberOfStates) Reportable() bool                    { return false }
+func (MultistateNumberOfStates) SceneIndex() int                     { return -1 }
+func (a *MultistateNumberOfStates) Value() *MultistateNumberOfStates { return a }
+func (a MultistateNumberOfStates) MarshalZcl() ([]byte, error)       { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *MultistateNumberOfStates) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MultistateNumberOfStates(*nt)
+	return br, err
+}
+
+func (a *MultistateNumberOfStates) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = MultistateNumberOfStates(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MultistateNumberOfStates) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type MultistatePresentValue zcl.Zu16
+
+const MultistatePresentValueAttr zcl.AttrID = 85
+
+func (MultistatePresentValue) ID() zcl.AttrID                    { return MultistatePresentValueAttr }
+func (MultistatePresentValue) Name() string                      { return "Multistate Present value" }
+func (MultistatePresentValue) Readable() bool                    { return true }
+func (MultistatePresentValue) Writable() bool                    { return true }
+func (MultistatePresentValue) Reportable() bool                  { return true }
+func (MultistatePresentValue) SceneIndex() int                   { return -1 }
+func (a *MultistatePresentValue) Value() *MultistatePresentValue { return a }
+func (a MultistatePresentValue) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *MultistatePresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MultistatePresentValue(*nt)
+	return br, err
+}
+
+func (a *MultistatePresentValue) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = MultistatePresentValue(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MultistatePresentValue) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type MultistatePriorityArray zcl.Zarray
+
+const MultistatePriorityArrayAttr zcl.AttrID = 87
+
+func (MultistatePriorityArray) ID() zcl.AttrID                     { return MultistatePriorityArrayAttr }
+func (MultistatePriorityArray) Name() string                       { return "Multistate Priority Array" }
+func (MultistatePriorityArray) Readable() bool                     { return true }
+func (MultistatePriorityArray) Writable() bool                     { return true }
+func (MultistatePriorityArray) Reportable() bool                   { return false }
+func (MultistatePriorityArray) SceneIndex() int                    { return -1 }
+func (a *MultistatePriorityArray) Value() *MultistatePriorityArray { return a }
+func (a MultistatePriorityArray) MarshalZcl() ([]byte, error) {
+	return nil, zcl.Errorf("not implemented")
+}
+
+func (a *MultistatePriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zarray)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MultistatePriorityArray(*nt)
+	return br, err
+}
+
+func (a *MultistatePriorityArray) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zarray); ok {
+		*a = MultistatePriorityArray(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MultistatePriorityArray) String() string {
+	return zcl.Sprintf("%v", zcl.Zarray(a))
+}
+
+type MultistateRelinquishDefault zcl.Zu16
+
+const MultistateRelinquishDefaultAttr zcl.AttrID = 104
+
+func (MultistateRelinquishDefault) ID() zcl.AttrID                         { return MultistateRelinquishDefaultAttr }
+func (MultistateRelinquishDefault) Name() string                           { return "Multistate Relinquish Default" }
+func (MultistateRelinquishDefault) Readable() bool                         { return true }
+func (MultistateRelinquishDefault) Writable() bool                         { return true }
+func (MultistateRelinquishDefault) Reportable() bool                       { return false }
+func (MultistateRelinquishDefault) SceneIndex() int                        { return -1 }
+func (a *MultistateRelinquishDefault) Value() *MultistateRelinquishDefault { return a }
+func (a MultistateRelinquishDefault) MarshalZcl() ([]byte, error)          { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *MultistateRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MultistateRelinquishDefault(*nt)
+	return br, err
+}
+
+func (a *MultistateRelinquishDefault) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = MultistateRelinquishDefault(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MultistateRelinquishDefault) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type MultistateText zcl.Zcstring
+
+const MultistateTextAttr zcl.AttrID = 14
+
+func (MultistateText) ID() zcl.AttrID                { return MultistateTextAttr }
+func (MultistateText) Name() string                  { return "Multistate Text" }
+func (MultistateText) Readable() bool                { return true }
+func (MultistateText) Writable() bool                { return true }
+func (MultistateText) Reportable() bool              { return false }
+func (MultistateText) SceneIndex() int               { return -1 }
+func (a *MultistateText) Value() *MultistateText     { return a }
+func (a MultistateText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+
+func (a *MultistateText) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zcstring)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MultistateText(*nt)
+	return br, err
+}
+
+func (a *MultistateText) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zcstring); ok {
+		*a = MultistateText(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MultistateText) String() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(a))
+}
+
+type NwkDecryptFailures zcl.Zu16
+
+const NwkDecryptFailuresAttr zcl.AttrID = 277
+
+func (NwkDecryptFailures) ID() zcl.AttrID                { return NwkDecryptFailuresAttr }
+func (NwkDecryptFailures) Name() string                  { return "NWK Decrypt Failures" }
+func (NwkDecryptFailures) Readable() bool                { return true }
+func (NwkDecryptFailures) Writable() bool                { return false }
+func (NwkDecryptFailures) Reportable() bool              { return false }
+func (NwkDecryptFailures) SceneIndex() int               { return -1 }
+func (a *NwkDecryptFailures) Value() *NwkDecryptFailures { return a }
+func (a NwkDecryptFailures) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *NwkDecryptFailures) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NwkDecryptFailures(*nt)
+	return br, err
+}
+
+func (a *NwkDecryptFailures) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = NwkDecryptFailures(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a NwkDecryptFailures) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type NwkFcFailure zcl.Zu16
+
+const NwkFcFailureAttr zcl.AttrID = 274
+
+func (NwkFcFailure) ID() zcl.AttrID                { return NwkFcFailureAttr }
+func (NwkFcFailure) Name() string                  { return "NWK FC Failure" }
+func (NwkFcFailure) Readable() bool                { return true }
+func (NwkFcFailure) Writable() bool                { return false }
+func (NwkFcFailure) Reportable() bool              { return false }
+func (NwkFcFailure) SceneIndex() int               { return -1 }
+func (a *NwkFcFailure) Value() *NwkFcFailure       { return a }
+func (a NwkFcFailure) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *NwkFcFailure) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NwkFcFailure(*nt)
+	return br, err
+}
+
+func (a *NwkFcFailure) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = NwkFcFailure(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a NwkFcFailure) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type NeighborAdded zcl.Zu16
+
+const NeighborAddedAttr zcl.AttrID = 269
+
+func (NeighborAdded) ID() zcl.AttrID                { return NeighborAddedAttr }
+func (NeighborAdded) Name() string                  { return "Neighbor Added" }
+func (NeighborAdded) Readable() bool                { return true }
+func (NeighborAdded) Writable() bool                { return false }
+func (NeighborAdded) Reportable() bool              { return false }
+func (NeighborAdded) SceneIndex() int               { return -1 }
+func (a *NeighborAdded) Value() *NeighborAdded      { return a }
+func (a NeighborAdded) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *NeighborAdded) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NeighborAdded(*nt)
+	return br, err
+}
+
+func (a *NeighborAdded) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = NeighborAdded(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a NeighborAdded) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type NeighborRemoved zcl.Zu16
+
+const NeighborRemovedAttr zcl.AttrID = 270
+
+func (NeighborRemoved) ID() zcl.AttrID                { return NeighborRemovedAttr }
+func (NeighborRemoved) Name() string                  { return "Neighbor Removed" }
+func (NeighborRemoved) Readable() bool                { return true }
+func (NeighborRemoved) Writable() bool                { return false }
+func (NeighborRemoved) Reportable() bool              { return false }
+func (NeighborRemoved) SceneIndex() int               { return -1 }
+func (a *NeighborRemoved) Value() *NeighborRemoved    { return a }
+func (a NeighborRemoved) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *NeighborRemoved) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NeighborRemoved(*nt)
+	return br, err
+}
+
+func (a *NeighborRemoved) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = NeighborRemoved(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a NeighborRemoved) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type NeighborStale zcl.Zu16
+
+const NeighborStaleAttr zcl.AttrID = 271
+
+func (NeighborStale) ID() zcl.AttrID                { return NeighborStaleAttr }
+func (NeighborStale) Name() string                  { return "Neighbor Stale" }
+func (NeighborStale) Readable() bool                { return true }
+func (NeighborStale) Writable() bool                { return false }
+func (NeighborStale) Reportable() bool              { return false }
+func (NeighborStale) SceneIndex() int               { return -1 }
+func (a *NeighborStale) Value() *NeighborStale      { return a }
+func (a NeighborStale) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *NeighborStale) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NeighborStale(*nt)
+	return br, err
+}
+
+func (a *NeighborStale) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = NeighborStale(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a NeighborStale) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
 type NeighborsInfo zcl.Zset
 
 func (a *NeighborsInfo) Value() *NeighborsInfo { return a }
@@ -2919,6 +4800,38 @@ func (a *NumberOfDevices) SetValue(v zcl.Val) error {
 
 func (a NumberOfDevices) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
+}
+
+type NumberOfResets zcl.Zu16
+
+const NumberOfResetsAttr zcl.AttrID = 0
+
+func (NumberOfResets) ID() zcl.AttrID                { return NumberOfResetsAttr }
+func (NumberOfResets) Name() string                  { return "Number of Resets" }
+func (NumberOfResets) Readable() bool                { return true }
+func (NumberOfResets) Writable() bool                { return false }
+func (NumberOfResets) Reportable() bool              { return false }
+func (NumberOfResets) SceneIndex() int               { return -1 }
+func (a *NumberOfResets) Value() *NumberOfResets     { return a }
+func (a NumberOfResets) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *NumberOfResets) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = NumberOfResets(*nt)
+	return br, err
+}
+
+func (a *NumberOfResets) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = NumberOfResets(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a NumberOfResets) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
 type OffTransitionTime zcl.Zu16
@@ -3233,6 +5146,70 @@ func (a OverTempTotalDwell) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
+type PacketBufferAllocFailures zcl.Zu16
+
+const PacketBufferAllocFailuresAttr zcl.AttrID = 279
+
+func (PacketBufferAllocFailures) ID() zcl.AttrID                       { return PacketBufferAllocFailuresAttr }
+func (PacketBufferAllocFailures) Name() string                         { return "Packet Buffer Alloc Failures" }
+func (PacketBufferAllocFailures) Readable() bool                       { return true }
+func (PacketBufferAllocFailures) Writable() bool                       { return false }
+func (PacketBufferAllocFailures) Reportable() bool                     { return false }
+func (PacketBufferAllocFailures) SceneIndex() int                      { return -1 }
+func (a *PacketBufferAllocFailures) Value() *PacketBufferAllocFailures { return a }
+func (a PacketBufferAllocFailures) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *PacketBufferAllocFailures) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = PacketBufferAllocFailures(*nt)
+	return br, err
+}
+
+func (a *PacketBufferAllocFailures) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = PacketBufferAllocFailures(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a PacketBufferAllocFailures) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type PacketValidateDropcount zcl.Zu16
+
+const PacketValidateDropcountAttr zcl.AttrID = 282
+
+func (PacketValidateDropcount) ID() zcl.AttrID                     { return PacketValidateDropcountAttr }
+func (PacketValidateDropcount) Name() string                       { return "Packet Validate Dropcount" }
+func (PacketValidateDropcount) Readable() bool                     { return true }
+func (PacketValidateDropcount) Writable() bool                     { return false }
+func (PacketValidateDropcount) Reportable() bool                   { return false }
+func (PacketValidateDropcount) SceneIndex() int                    { return -1 }
+func (a *PacketValidateDropcount) Value() *PacketValidateDropcount { return a }
+func (a PacketValidateDropcount) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *PacketValidateDropcount) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = PacketValidateDropcount(*nt)
+	return br, err
+}
+
+func (a *PacketValidateDropcount) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = PacketValidateDropcount(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a PacketValidateDropcount) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
 // PathLossExponent is the rate at which the signal power decays with increasing distance
 type PathLossExponent zcl.Zu16
 
@@ -3263,6 +5240,70 @@ func (a *PathLossExponent) SetValue(v zcl.Val) error {
 }
 
 func (a PathLossExponent) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type PersistensMemoryWrites zcl.Zu16
+
+const PersistensMemoryWritesAttr zcl.AttrID = 1
+
+func (PersistensMemoryWrites) ID() zcl.AttrID                    { return PersistensMemoryWritesAttr }
+func (PersistensMemoryWrites) Name() string                      { return "Persistens Memory Writes" }
+func (PersistensMemoryWrites) Readable() bool                    { return true }
+func (PersistensMemoryWrites) Writable() bool                    { return false }
+func (PersistensMemoryWrites) Reportable() bool                  { return false }
+func (PersistensMemoryWrites) SceneIndex() int                   { return -1 }
+func (a *PersistensMemoryWrites) Value() *PersistensMemoryWrites { return a }
+func (a PersistensMemoryWrites) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *PersistensMemoryWrites) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = PersistensMemoryWrites(*nt)
+	return br, err
+}
+
+func (a *PersistensMemoryWrites) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = PersistensMemoryWrites(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a PersistensMemoryWrites) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
+type PhyToMacQueueLimitReached zcl.Zu16
+
+const PhyToMacQueueLimitReachedAttr zcl.AttrID = 281
+
+func (PhyToMacQueueLimitReached) ID() zcl.AttrID                       { return PhyToMacQueueLimitReachedAttr }
+func (PhyToMacQueueLimitReached) Name() string                         { return "Phy to MAC queue limit reached" }
+func (PhyToMacQueueLimitReached) Readable() bool                       { return true }
+func (PhyToMacQueueLimitReached) Writable() bool                       { return false }
+func (PhyToMacQueueLimitReached) Reportable() bool                     { return false }
+func (PhyToMacQueueLimitReached) SceneIndex() int                      { return -1 }
+func (a *PhyToMacQueueLimitReached) Value() *PhyToMacQueueLimitReached { return a }
+func (a PhyToMacQueueLimitReached) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *PhyToMacQueueLimitReached) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = PhyToMacQueueLimitReached(*nt)
+	return br, err
+}
+
+func (a *PhyToMacQueueLimitReached) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = PhyToMacQueueLimitReached(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a PhyToMacQueueLimitReached) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
@@ -4068,6 +6109,38 @@ func (a Rate) String() string {
 	return zcl.PercentPerSecond.Format(float64(a) / 2.54)
 }
 
+type RelayedUcast zcl.Zu16
+
+const RelayedUcastAttr zcl.AttrID = 280
+
+func (RelayedUcast) ID() zcl.AttrID                { return RelayedUcastAttr }
+func (RelayedUcast) Name() string                  { return "Relayed Ucast" }
+func (RelayedUcast) Readable() bool                { return true }
+func (RelayedUcast) Writable() bool                { return false }
+func (RelayedUcast) Reportable() bool              { return false }
+func (RelayedUcast) SceneIndex() int               { return -1 }
+func (a *RelayedUcast) Value() *RelayedUcast       { return a }
+func (a RelayedUcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *RelayedUcast) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = RelayedUcast(*nt)
+	return br, err
+}
+
+func (a *RelayedUcast) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = RelayedUcast(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a RelayedUcast) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
+
 // RemainingTime represents the time remaining until the current command is complete - it is specified in 1/10ths of a second.
 type RemainingTime zcl.Zu16
 
@@ -4171,6 +6244,38 @@ func (a Resolution) IsLow() bool  { return a == 0x02 }
 func (a *Resolution) SetHigh()    { *a = 0x00 }
 func (a *Resolution) SetMid()     { *a = 0x01 }
 func (a *Resolution) SetLow()     { *a = 0x02 }
+
+type RouteDiscInitiated zcl.Zu16
+
+const RouteDiscInitiatedAttr zcl.AttrID = 268
+
+func (RouteDiscInitiated) ID() zcl.AttrID                { return RouteDiscInitiatedAttr }
+func (RouteDiscInitiated) Name() string                  { return "Route Disc Initiated" }
+func (RouteDiscInitiated) Readable() bool                { return true }
+func (RouteDiscInitiated) Writable() bool                { return false }
+func (RouteDiscInitiated) Reportable() bool              { return false }
+func (RouteDiscInitiated) SceneIndex() int               { return -1 }
+func (a *RouteDiscInitiated) Value() *RouteDiscInitiated { return a }
+func (a RouteDiscInitiated) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *RouteDiscInitiated) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = RouteDiscInitiated(*nt)
+	return br, err
+}
+
+func (a *RouteDiscInitiated) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = RouteDiscInitiated(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a RouteDiscInitiated) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
 
 type SwBuildId zcl.Zcstring
 
@@ -4559,6 +6664,38 @@ func (a Sensitivity) IsMax() bool     { return a == 0x02 }
 func (a *Sensitivity) SetDefault()    { *a = 0x00 }
 func (a *Sensitivity) SetHigh()       { *a = 0x01 }
 func (a *Sensitivity) SetMax()        { *a = 0x02 }
+
+type ShortPollInterval zcl.Zu16
+
+const ShortPollIntervalAttr zcl.AttrID = 2
+
+func (ShortPollInterval) ID() zcl.AttrID                { return ShortPollIntervalAttr }
+func (ShortPollInterval) Name() string                  { return "Short Poll Interval" }
+func (ShortPollInterval) Readable() bool                { return true }
+func (ShortPollInterval) Writable() bool                { return false }
+func (ShortPollInterval) Reportable() bool              { return false }
+func (ShortPollInterval) SceneIndex() int               { return -1 }
+func (a *ShortPollInterval) Value() *ShortPollInterval  { return a }
+func (a ShortPollInterval) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *ShortPollInterval) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ShortPollInterval(*nt)
+	return br, err
+}
+
+func (a *ShortPollInterval) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = ShortPollInterval(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ShortPollInterval) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(a))
+}
 
 type StackVersion zcl.Zu8
 
