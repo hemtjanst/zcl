@@ -972,6 +972,14 @@ types:
     range: 0x00,0xfe
     unit: PercentPerSecond
     multiplier: 2.54
+  LevelControlOptions: &levelControlOptions
+    id: "0x000f"
+    name: Level Control Options
+    description: is a bitmap that determines the default behavior of some cluster commands
+    type: bmp8
+    access: rw
+    bits:
+      "0x00": Execute if off
   PowerOnLevel: &powerOnLevel
     <<: *level
     id: "0x4000"
@@ -2175,16 +2183,12 @@ clusters:
         attr:
           - *currentLevel
           - *remainingTime
-          #- id: "0x000F"
-          #  name: Unknown
-          #  description: IKEA specific.
-          #  type: bmp8
-          #  access: rw
           - *onOffTransistionTime
           - *onLevel
           - *onTransitionTime
           - *offTransitionTime
           - *defaultMoveRate
+          - *levelControlOptions
           - *powerOnLevel
         cmd:
           - id: "0x00"
