@@ -251,6 +251,15 @@ types:
         "0x00": Current hue and current saturation
         "0x01": Current X and Current Y
         "0x02": Color temperature
+  ColorControlOptions: &colorControlOptions
+    id: "0x000f"
+    name: Color control options
+    description: |
+      is a bitmap that determines the default behavior of some cluster commands
+    type: bmp8
+    access: rw
+    bits:
+      "0x00": Execute if off
   EnhancedCurrentHue: &enhancedCurrentHue
     id: "0x4000"
     name: Enhanced current hue
@@ -741,6 +750,7 @@ clusters:
           - *compensationText
           - *colorTemperatureMireds
           - *colorMode
+          - *colorControlOptions
           - *enhancedCurrentHue
           - *enhancedColorMode
           - *colorLoopActive
