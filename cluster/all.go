@@ -2,11 +2,13 @@ package cluster
 
 import (
 	"hemtjan.st/zcl"
+	"hemtjan.st/zcl/cluster/closures"
 	"hemtjan.st/zcl/cluster/general"
 	"hemtjan.st/zcl/cluster/lighting"
 )
 
 var Clusters = map[zcl.ClusterID]zcl.Cluster{
+	closures.WindowCoveringID:                closures.WindowCoveringCluster,
 	general.AlarmsID:                         general.AlarmsCluster,
 	general.AnalogInputID:                    general.AnalogInputCluster,
 	general.AnalogOutputID:                   general.AnalogOutputCluster,

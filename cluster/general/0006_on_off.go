@@ -41,17 +41,28 @@ func (v *Off) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of Off
+func (v *Off) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (Off) Name() string { return "Off" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (Off) ID() CommandID { return OffCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (Off) Required() bool { return true }
+
+// Cluster ID of the command
 func (Off) Cluster() zcl.ClusterID { return OnOffID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Off) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (Off) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of Off
 func (v Off) MarshalZcl() ([]byte, error) {
@@ -82,17 +93,28 @@ func (v *On) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of On
+func (v *On) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (On) Name() string { return "On" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (On) ID() CommandID { return OnCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (On) Required() bool { return true }
+
+// Cluster ID of the command
 func (On) Cluster() zcl.ClusterID { return OnOffID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (On) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (On) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of On
 func (v On) MarshalZcl() ([]byte, error) {
@@ -123,17 +145,28 @@ func (v *Toggle) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of Toggle
+func (v *Toggle) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (Toggle) Name() string { return "Toggle" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (Toggle) ID() CommandID { return ToggleCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (Toggle) Required() bool { return true }
+
+// Cluster ID of the command
 func (Toggle) Cluster() zcl.ClusterID { return OnOffID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Toggle) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (Toggle) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of Toggle
 func (v Toggle) MarshalZcl() ([]byte, error) {
@@ -169,17 +202,31 @@ func (v *OffWithEffect) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of OffWithEffect
+func (v *OffWithEffect) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.EffectIdentifier,
+		&v.EffectVariant,
+	}
+}
+
+// Name of the command
 func (OffWithEffect) Name() string { return "Off with effect" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (OffWithEffect) ID() CommandID { return OffWithEffectCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (OffWithEffect) Required() bool { return true }
+
+// Cluster ID of the command
 func (OffWithEffect) Cluster() zcl.ClusterID { return OnOffID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (OffWithEffect) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (OffWithEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of OffWithEffect
 func (v OffWithEffect) MarshalZcl() ([]byte, error) {
@@ -241,17 +288,28 @@ func (v *OnWithRecallGlobalScene) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of OnWithRecallGlobalScene
+func (v *OnWithRecallGlobalScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (OnWithRecallGlobalScene) Name() string { return "On with recall global scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (OnWithRecallGlobalScene) ID() CommandID { return OnWithRecallGlobalSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (OnWithRecallGlobalScene) Required() bool { return true }
+
+// Cluster ID of the command
 func (OnWithRecallGlobalScene) Cluster() zcl.ClusterID { return OnOffID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (OnWithRecallGlobalScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (OnWithRecallGlobalScene) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of OnWithRecallGlobalScene
 func (v OnWithRecallGlobalScene) MarshalZcl() ([]byte, error) {
@@ -289,17 +347,32 @@ func (v *OnWithTimedOff) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of OnWithTimedOff
+func (v *OnWithTimedOff) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.OnOffControl,
+		&v.OnTime,
+		&v.OffWaitTime,
+	}
+}
+
+// Name of the command
 func (OnWithTimedOff) Name() string { return "On with timed off" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (OnWithTimedOff) ID() CommandID { return OnWithTimedOffCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (OnWithTimedOff) Required() bool { return true }
+
+// Cluster ID of the command
 func (OnWithTimedOff) Cluster() zcl.ClusterID { return OnOffID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (OnWithTimedOff) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (OnWithTimedOff) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of OnWithTimedOff
 func (v OnWithTimedOff) MarshalZcl() ([]byte, error) {

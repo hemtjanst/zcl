@@ -35,17 +35,28 @@ func (v *CheckIn) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of CheckIn
+func (v *CheckIn) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (CheckIn) Name() string { return "Check-in" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (CheckIn) ID() CommandID { return CheckInCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (CheckIn) Required() bool { return true }
+
+// Cluster ID of the command
 func (CheckIn) Cluster() zcl.ClusterID { return PollControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (CheckIn) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (CheckIn) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of CheckIn
 func (v CheckIn) MarshalZcl() ([]byte, error) {

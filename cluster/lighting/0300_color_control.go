@@ -39,6 +39,7 @@ var ColorControlCluster = zcl.Cluster{
 		CompensationTextAttr:                  func() zcl.Attr { return new(CompensationText) },
 		ColorTemperatureMiredsAttr:            func() zcl.Attr { return new(ColorTemperatureMireds) },
 		ColorModeAttr:                         func() zcl.Attr { return new(ColorMode) },
+		ColorControlOptionsAttr:               func() zcl.Attr { return new(ColorControlOptions) },
 		EnhancedCurrentHueAttr:                func() zcl.Attr { return new(EnhancedCurrentHue) },
 		EnhancedColorModeAttr:                 func() zcl.Attr { return new(EnhancedColorMode) },
 		ColorLoopActiveAttr:                   func() zcl.Attr { return new(ColorLoopActive) },
@@ -49,6 +50,7 @@ var ColorControlCluster = zcl.Cluster{
 		ColorCapabilitiesAttr:                 func() zcl.Attr { return new(ColorCapabilities) },
 		ColorTemperaturePhysicalMinMiredsAttr: func() zcl.Attr { return new(ColorTemperaturePhysicalMinMireds) },
 		ColorTemperaturePhysicalMaxMiredsAttr: func() zcl.Attr { return new(ColorTemperaturePhysicalMaxMireds) },
+		CoupleColorTempToLevelMinMiredsAttr:   func() zcl.Attr { return new(CoupleColorTempToLevelMinMireds) },
 		PowerOnColorTemperatureAttr:           func() zcl.Attr { return new(PowerOnColorTemperature) },
 		NumberOfPrimariesAttr:                 func() zcl.Attr { return new(NumberOfPrimaries) },
 		Primary1XAttr:                         func() zcl.Attr { return new(Primary1X) },
@@ -66,6 +68,9 @@ var ColorControlCluster = zcl.Cluster{
 		Primary5XAttr:                         func() zcl.Attr { return new(Primary5X) },
 		Primary5YAttr:                         func() zcl.Attr { return new(Primary5Y) },
 		Primary5IntensityAttr:                 func() zcl.Attr { return new(Primary5Intensity) },
+		Primary6XAttr:                         func() zcl.Attr { return new(Primary6X) },
+		Primary6YAttr:                         func() zcl.Attr { return new(Primary6Y) },
+		Primary6IntensityAttr:                 func() zcl.Attr { return new(Primary6Intensity) },
 		WhitePointXAttr:                       func() zcl.Attr { return new(WhitePointX) },
 		WhitePointYAttr:                       func() zcl.Attr { return new(WhitePointY) },
 		ColorPointRedXAttr:                    func() zcl.Attr { return new(ColorPointRedX) },
@@ -109,17 +114,32 @@ func (v *MoveToHue) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveToHue
+func (v *MoveToHue) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Hue,
+		&v.Direction,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (MoveToHue) Name() string { return "Move to hue" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveToHue) ID() CommandID { return MoveToHueCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveToHue) Required() bool { return false }
+
+// Cluster ID of the command
 func (MoveToHue) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveToHue) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveToHue) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToHue
 func (v MoveToHue) MarshalZcl() ([]byte, error) {
@@ -198,17 +218,31 @@ func (v *MoveHue) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveHue
+func (v *MoveHue) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.MoveMode,
+		&v.Rate,
+	}
+}
+
+// Name of the command
 func (MoveHue) Name() string { return "Move hue" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveHue) ID() CommandID { return MoveHueCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveHue) Required() bool { return false }
+
+// Cluster ID of the command
 func (MoveHue) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveHue) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveHue) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of MoveHue
 func (v MoveHue) MarshalZcl() ([]byte, error) {
@@ -277,17 +311,32 @@ func (v *StepHue) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StepHue
+func (v *StepHue) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.StepMode,
+		&v.StepSize,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (StepHue) Name() string { return "Step hue" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StepHue) ID() CommandID { return StepHueCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StepHue) Required() bool { return false }
+
+// Cluster ID of the command
 func (StepHue) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StepHue) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StepHue) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of StepHue
 func (v StepHue) MarshalZcl() ([]byte, error) {
@@ -366,17 +415,31 @@ func (v *MoveToSaturation) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveToSaturation
+func (v *MoveToSaturation) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Saturation,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (MoveToSaturation) Name() string { return "Move to saturation" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveToSaturation) ID() CommandID { return MoveToSaturationCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveToSaturation) Required() bool { return false }
+
+// Cluster ID of the command
 func (MoveToSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveToSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveToSaturation) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToSaturation
 func (v MoveToSaturation) MarshalZcl() ([]byte, error) {
@@ -443,17 +506,31 @@ func (v *MoveSaturation) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveSaturation
+func (v *MoveSaturation) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.MoveMode,
+		&v.Rate,
+	}
+}
+
+// Name of the command
 func (MoveSaturation) Name() string { return "Move saturation" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveSaturation) ID() CommandID { return MoveSaturationCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveSaturation) Required() bool { return false }
+
+// Cluster ID of the command
 func (MoveSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveSaturation) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of MoveSaturation
 func (v MoveSaturation) MarshalZcl() ([]byte, error) {
@@ -522,17 +599,32 @@ func (v *StepSaturation) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StepSaturation
+func (v *StepSaturation) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.StepMode,
+		&v.StepSize,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (StepSaturation) Name() string { return "Step saturation" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StepSaturation) ID() CommandID { return StepSaturationCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StepSaturation) Required() bool { return false }
+
+// Cluster ID of the command
 func (StepSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StepSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StepSaturation) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of StepSaturation
 func (v StepSaturation) MarshalZcl() ([]byte, error) {
@@ -613,17 +705,32 @@ func (v *MoveToHueAndSaturation) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveToHueAndSaturation
+func (v *MoveToHueAndSaturation) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Hue,
+		&v.Saturation,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (MoveToHueAndSaturation) Name() string { return "Move to hue and saturation" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveToHueAndSaturation) ID() CommandID { return MoveToHueAndSaturationCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveToHueAndSaturation) Required() bool { return false }
+
+// Cluster ID of the command
 func (MoveToHueAndSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveToHueAndSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveToHueAndSaturation) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToHueAndSaturation
 func (v MoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
@@ -710,17 +817,32 @@ func (v *MoveToColor) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveToColor
+func (v *MoveToColor) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.ColorX,
+		&v.ColorY,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (MoveToColor) Name() string { return "Move to color" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveToColor) ID() CommandID { return MoveToColorCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveToColor) Required() bool { return true }
+
+// Cluster ID of the command
 func (MoveToColor) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveToColor) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveToColor) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToColor
 func (v MoveToColor) MarshalZcl() ([]byte, error) {
@@ -800,17 +922,31 @@ func (v *MoveColor) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveColor
+func (v *MoveColor) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.RateX,
+		&v.RateY,
+	}
+}
+
+// Name of the command
 func (MoveColor) Name() string { return "Move color" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveColor) ID() CommandID { return MoveColorCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveColor) Required() bool { return false }
+
+// Cluster ID of the command
 func (MoveColor) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveColor) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveColor) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
 
 // MarshalZcl returns the wire format representation of MoveColor
 func (v MoveColor) MarshalZcl() ([]byte, error) {
@@ -879,17 +1015,32 @@ func (v *StepColor) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StepColor
+func (v *StepColor) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.StepX,
+		&v.StepY,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (StepColor) Name() string { return "Step color" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StepColor) ID() CommandID { return StepColorCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StepColor) Required() bool { return false }
+
+// Cluster ID of the command
 func (StepColor) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StepColor) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StepColor) MarshalJSON() ([]byte, error) { return []byte("9"), nil }
 
 // MarshalZcl returns the wire format representation of StepColor
 func (v StepColor) MarshalZcl() ([]byte, error) {
@@ -968,17 +1119,31 @@ func (v *MoveToColorTemperature) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveToColorTemperature
+func (v *MoveToColorTemperature) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.ColorTemperature,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (MoveToColorTemperature) Name() string { return "Move to color temperature" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveToColorTemperature) ID() CommandID { return MoveToColorTemperatureCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveToColorTemperature) Required() bool { return false }
+
+// Cluster ID of the command
 func (MoveToColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveToColorTemperature) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveToColorTemperature) MarshalJSON() ([]byte, error) { return []byte("10"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToColorTemperature
 func (v MoveToColorTemperature) MarshalZcl() ([]byte, error) {
@@ -1047,17 +1212,32 @@ func (v *EnhancedMoveToHue) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedMoveToHue
+func (v *EnhancedMoveToHue) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.EnhancedHue,
+		&v.Direction,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (EnhancedMoveToHue) Name() string { return "Enhanced move to hue" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedMoveToHue) ID() CommandID { return EnhancedMoveToHueCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedMoveToHue) Required() bool { return true }
+
+// Cluster ID of the command
 func (EnhancedMoveToHue) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedMoveToHue) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedMoveToHue) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedMoveToHue
 func (v EnhancedMoveToHue) MarshalZcl() ([]byte, error) {
@@ -1136,17 +1316,31 @@ func (v *EnhancedMoveHue) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedMoveHue
+func (v *EnhancedMoveHue) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.MoveMode,
+		&v.Rate,
+	}
+}
+
+// Name of the command
 func (EnhancedMoveHue) Name() string { return "Enhanced move hue" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedMoveHue) ID() CommandID { return EnhancedMoveHueCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedMoveHue) Required() bool { return true }
+
+// Cluster ID of the command
 func (EnhancedMoveHue) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedMoveHue) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedMoveHue) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedMoveHue
 func (v EnhancedMoveHue) MarshalZcl() ([]byte, error) {
@@ -1215,17 +1409,32 @@ func (v *EnhancedStepHue) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedStepHue
+func (v *EnhancedStepHue) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.StepMode,
+		&v.StepSize,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (EnhancedStepHue) Name() string { return "Enhanced step hue" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedStepHue) ID() CommandID { return EnhancedStepHueCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedStepHue) Required() bool { return true }
+
+// Cluster ID of the command
 func (EnhancedStepHue) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedStepHue) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedStepHue) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedStepHue
 func (v EnhancedStepHue) MarshalZcl() ([]byte, error) {
@@ -1306,17 +1515,32 @@ func (v *EnhancedMoveToHueAndSaturation) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedMoveToHueAndSaturation
+func (v *EnhancedMoveToHueAndSaturation) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.EnhancedHue,
+		&v.Saturation,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (EnhancedMoveToHueAndSaturation) Name() string { return "Enhanced move to hue and saturation" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedMoveToHueAndSaturation) ID() CommandID { return EnhancedMoveToHueAndSaturationCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedMoveToHueAndSaturation) Required() bool { return true }
+
+// Cluster ID of the command
 func (EnhancedMoveToHueAndSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedMoveToHueAndSaturation) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedMoveToHueAndSaturation) MarshalJSON() ([]byte, error) { return []byte("67"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedMoveToHueAndSaturation
 func (v EnhancedMoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
@@ -1401,17 +1625,34 @@ func (v *ColorLoopSet) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ColorLoopSet
+func (v *ColorLoopSet) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.UpdateFlags,
+		&v.Action,
+		&v.HueDirection,
+		&v.Time,
+		&v.EnhancedHue,
+	}
+}
+
+// Name of the command
 func (ColorLoopSet) Name() string { return "Color loop set" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ColorLoopSet) ID() CommandID { return ColorLoopSetCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ColorLoopSet) Required() bool { return true }
+
+// Cluster ID of the command
 func (ColorLoopSet) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ColorLoopSet) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ColorLoopSet) MarshalJSON() ([]byte, error) { return []byte("68"), nil }
 
 // MarshalZcl returns the wire format representation of ColorLoopSet
 func (v ColorLoopSet) MarshalZcl() ([]byte, error) {
@@ -1510,17 +1751,28 @@ func (v *StopMoveStep) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StopMoveStep
+func (v *StopMoveStep) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (StopMoveStep) Name() string { return "Stop move step" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StopMoveStep) ID() CommandID { return StopMoveStepCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StopMoveStep) Required() bool { return true }
+
+// Cluster ID of the command
 func (StopMoveStep) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StopMoveStep) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StopMoveStep) MarshalJSON() ([]byte, error) { return []byte("71"), nil }
 
 // MarshalZcl returns the wire format representation of StopMoveStep
 func (v StopMoveStep) MarshalZcl() ([]byte, error) {
@@ -1560,17 +1812,33 @@ func (v *MoveColorTemperature) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveColorTemperature
+func (v *MoveColorTemperature) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.MoveMode,
+		&v.Rate,
+		&v.ColorTemperatureMin,
+		&v.ColorTemperatureMax,
+	}
+}
+
+// Name of the command
 func (MoveColorTemperature) Name() string { return "Move color temperature" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveColorTemperature) ID() CommandID { return MoveColorTemperatureCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveColorTemperature) Required() bool { return true }
+
+// Cluster ID of the command
 func (MoveColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveColorTemperature) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveColorTemperature) MarshalJSON() ([]byte, error) { return []byte("75"), nil }
 
 // MarshalZcl returns the wire format representation of MoveColorTemperature
 func (v MoveColorTemperature) MarshalZcl() ([]byte, error) {
@@ -1667,17 +1935,34 @@ func (v *StepColorTemperature) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StepColorTemperature
+func (v *StepColorTemperature) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.StepMode,
+		&v.StepSize,
+		&v.TransitionTime,
+		&v.ColorTemperatureMinMireds,
+		&v.ColorTemperatureMaxMireds,
+	}
+}
+
+// Name of the command
 func (StepColorTemperature) Name() string { return "Step color temperature" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StepColorTemperature) ID() CommandID { return StepColorTemperatureCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StepColorTemperature) Required() bool { return true }
+
+// Cluster ID of the command
 func (StepColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StepColorTemperature) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StepColorTemperature) MarshalJSON() ([]byte, error) { return []byte("76"), nil }
 
 // MarshalZcl returns the wire format representation of StepColorTemperature
 func (v StepColorTemperature) MarshalZcl() ([]byte, error) {

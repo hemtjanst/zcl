@@ -6,7 +6,9 @@ type CommandID = zcl.CommandID
 
 type Action zcl.Zenum8
 
-func (a *Action) Value() *Action             { return a }
+func (Action) Name() string                  { return "Action" }
+func (a *Action) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *Action) Value() zcl.Val             { return a }
 func (a Action) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *Action) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -43,6 +45,14 @@ func (a *Action) SetDeActivateColorLoop()                      { *a = 0x00 }
 func (a *Action) SetActivateFromColorloopstartenhancedhue()    { *a = 0x01 }
 func (a *Action) SetActivateFromEnhancedcurrenthue()           { *a = 0x02 }
 
+func (Action) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "De-activate color loop"},
+		{Value: 0x01, Name: "Activate from ColorLoopStartEnhancedHue"},
+		{Value: 0x02, Name: "Activate from EnhancedCurrentHue"},
+	}
+}
+
 // BallastFactorAdjustment specifies the multiplication factor, as a percentage, to be applied
 // to the configured light output of the lamps. A typical usage of this
 // mechanism is to compensate for reduction in efficiency over the lifetime
@@ -53,14 +63,16 @@ type BallastFactorAdjustment zcl.Zu8
 
 const BallastFactorAdjustmentAttr zcl.AttrID = 21
 
-func (BallastFactorAdjustment) ID() zcl.AttrID                     { return BallastFactorAdjustmentAttr }
-func (BallastFactorAdjustment) Name() string                       { return "Ballast Factor Adjustment" }
-func (BallastFactorAdjustment) Readable() bool                     { return true }
-func (BallastFactorAdjustment) Writable() bool                     { return true }
-func (BallastFactorAdjustment) Reportable() bool                   { return false }
-func (BallastFactorAdjustment) SceneIndex() int                    { return -1 }
-func (a *BallastFactorAdjustment) Value() *BallastFactorAdjustment { return a }
-func (a BallastFactorAdjustment) MarshalZcl() ([]byte, error)      { return zcl.Zu8(a).MarshalZcl() }
+func (BallastFactorAdjustment) ID() zcl.AttrID   { return BallastFactorAdjustmentAttr }
+func (BallastFactorAdjustment) Readable() bool   { return true }
+func (BallastFactorAdjustment) Writable() bool   { return true }
+func (BallastFactorAdjustment) Reportable() bool { return false }
+func (BallastFactorAdjustment) SceneIndex() int  { return -1 }
+
+func (BallastFactorAdjustment) Name() string                  { return "Ballast Factor Adjustment" }
+func (a *BallastFactorAdjustment) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *BallastFactorAdjustment) Value() zcl.Val             { return a }
+func (a BallastFactorAdjustment) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BallastFactorAdjustment) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
@@ -90,13 +102,15 @@ type BallastStatus zcl.Zbmp8
 
 const BallastStatusAttr zcl.AttrID = 2
 
-func (BallastStatus) ID() zcl.AttrID                { return BallastStatusAttr }
+func (BallastStatus) ID() zcl.AttrID   { return BallastStatusAttr }
+func (BallastStatus) Readable() bool   { return true }
+func (BallastStatus) Writable() bool   { return false }
+func (BallastStatus) Reportable() bool { return false }
+func (BallastStatus) SceneIndex() int  { return -1 }
+
 func (BallastStatus) Name() string                  { return "Ballast Status" }
-func (BallastStatus) Readable() bool                { return true }
-func (BallastStatus) Writable() bool                { return false }
-func (BallastStatus) Reportable() bool              { return false }
-func (BallastStatus) SceneIndex() int               { return -1 }
-func (a *BallastStatus) Value() *BallastStatus      { return a }
+func (a *BallastStatus) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
+func (a *BallastStatus) Value() zcl.Val             { return a }
 func (a BallastStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *BallastStatus) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -137,6 +151,13 @@ func (a *BallastStatus) SetLampNotInSocket(b bool) {
 	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 1, b))
 }
 
+func (BallastStatus) MultiOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0, Name: "Non-operational"},
+		{Value: 1, Name: "Lamp not in socket"},
+	}
+}
+
 // ColorMode indicates which attributes are currently determining the color of
 // the device. This attribute is optional if the device does not implement
 // CurrentHue and CurrentSaturation
@@ -144,13 +165,15 @@ type ColorMode zcl.Zenum8
 
 const ColorModeAttr zcl.AttrID = 8
 
-func (ColorMode) ID() zcl.AttrID                { return ColorModeAttr }
+func (ColorMode) ID() zcl.AttrID   { return ColorModeAttr }
+func (ColorMode) Readable() bool   { return true }
+func (ColorMode) Writable() bool   { return false }
+func (ColorMode) Reportable() bool { return false }
+func (ColorMode) SceneIndex() int  { return -1 }
+
 func (ColorMode) Name() string                  { return "Color Mode" }
-func (ColorMode) Readable() bool                { return true }
-func (ColorMode) Writable() bool                { return false }
-func (ColorMode) Reportable() bool              { return false }
-func (ColorMode) SceneIndex() int               { return -1 }
-func (a *ColorMode) Value() *ColorMode          { return a }
+func (a *ColorMode) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *ColorMode) Value() zcl.Val             { return a }
 func (a ColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *ColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -187,6 +210,14 @@ func (a *ColorMode) SetCurrentHueAndCurrentSaturation()    { *a = 0x00 }
 func (a *ColorMode) SetCurrentXAndCurrentY()               { *a = 0x01 }
 func (a *ColorMode) SetColorTemperature()                  { *a = 0x02 }
 
+func (ColorMode) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Current hue and current saturation"},
+		{Value: 0x01, Name: "Current X and Current Y"},
+		{Value: 0x02, Name: "Color temperature"},
+	}
+}
+
 // ColorPointBlueX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
 // in the range 0 to 65279 inclusive)
@@ -194,13 +225,15 @@ type ColorPointBlueX zcl.Zu16
 
 const ColorPointBlueXAttr zcl.AttrID = 58
 
-func (ColorPointBlueX) ID() zcl.AttrID                { return ColorPointBlueXAttr }
+func (ColorPointBlueX) ID() zcl.AttrID   { return ColorPointBlueXAttr }
+func (ColorPointBlueX) Readable() bool   { return true }
+func (ColorPointBlueX) Writable() bool   { return true }
+func (ColorPointBlueX) Reportable() bool { return false }
+func (ColorPointBlueX) SceneIndex() int  { return -1 }
+
 func (ColorPointBlueX) Name() string                  { return "Color Point Blue X" }
-func (ColorPointBlueX) Readable() bool                { return true }
-func (ColorPointBlueX) Writable() bool                { return true }
-func (ColorPointBlueX) Reportable() bool              { return false }
-func (ColorPointBlueX) SceneIndex() int               { return -1 }
-func (a *ColorPointBlueX) Value() *ColorPointBlueX    { return a }
+func (a *ColorPointBlueX) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorPointBlueX) Value() zcl.Val             { return a }
 func (a ColorPointBlueX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorPointBlueX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -229,13 +262,15 @@ type ColorPointBlueY zcl.Zu16
 
 const ColorPointBlueYAttr zcl.AttrID = 59
 
-func (ColorPointBlueY) ID() zcl.AttrID                { return ColorPointBlueYAttr }
+func (ColorPointBlueY) ID() zcl.AttrID   { return ColorPointBlueYAttr }
+func (ColorPointBlueY) Readable() bool   { return true }
+func (ColorPointBlueY) Writable() bool   { return true }
+func (ColorPointBlueY) Reportable() bool { return false }
+func (ColorPointBlueY) SceneIndex() int  { return -1 }
+
 func (ColorPointBlueY) Name() string                  { return "Color Point Blue Y" }
-func (ColorPointBlueY) Readable() bool                { return true }
-func (ColorPointBlueY) Writable() bool                { return true }
-func (ColorPointBlueY) Reportable() bool              { return false }
-func (ColorPointBlueY) SceneIndex() int               { return -1 }
-func (a *ColorPointBlueY) Value() *ColorPointBlueY    { return a }
+func (a *ColorPointBlueY) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorPointBlueY) Value() zcl.Val             { return a }
 func (a ColorPointBlueY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorPointBlueY) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -266,14 +301,16 @@ type ColorPointBlueIntensity zcl.Zu8
 
 const ColorPointBlueIntensityAttr zcl.AttrID = 60
 
-func (ColorPointBlueIntensity) ID() zcl.AttrID                     { return ColorPointBlueIntensityAttr }
-func (ColorPointBlueIntensity) Name() string                       { return "Color Point Blue intensity" }
-func (ColorPointBlueIntensity) Readable() bool                     { return true }
-func (ColorPointBlueIntensity) Writable() bool                     { return true }
-func (ColorPointBlueIntensity) Reportable() bool                   { return false }
-func (ColorPointBlueIntensity) SceneIndex() int                    { return -1 }
-func (a *ColorPointBlueIntensity) Value() *ColorPointBlueIntensity { return a }
-func (a ColorPointBlueIntensity) MarshalZcl() ([]byte, error)      { return zcl.Zu8(a).MarshalZcl() }
+func (ColorPointBlueIntensity) ID() zcl.AttrID   { return ColorPointBlueIntensityAttr }
+func (ColorPointBlueIntensity) Readable() bool   { return true }
+func (ColorPointBlueIntensity) Writable() bool   { return true }
+func (ColorPointBlueIntensity) Reportable() bool { return false }
+func (ColorPointBlueIntensity) SceneIndex() int  { return -1 }
+
+func (ColorPointBlueIntensity) Name() string                  { return "Color Point Blue intensity" }
+func (a *ColorPointBlueIntensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *ColorPointBlueIntensity) Value() zcl.Val             { return a }
+func (a ColorPointBlueIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ColorPointBlueIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
@@ -301,13 +338,15 @@ type ColorPointGreenX zcl.Zu16
 
 const ColorPointGreenXAttr zcl.AttrID = 54
 
-func (ColorPointGreenX) ID() zcl.AttrID                { return ColorPointGreenXAttr }
+func (ColorPointGreenX) ID() zcl.AttrID   { return ColorPointGreenXAttr }
+func (ColorPointGreenX) Readable() bool   { return true }
+func (ColorPointGreenX) Writable() bool   { return true }
+func (ColorPointGreenX) Reportable() bool { return false }
+func (ColorPointGreenX) SceneIndex() int  { return -1 }
+
 func (ColorPointGreenX) Name() string                  { return "Color Point Green X" }
-func (ColorPointGreenX) Readable() bool                { return true }
-func (ColorPointGreenX) Writable() bool                { return true }
-func (ColorPointGreenX) Reportable() bool              { return false }
-func (ColorPointGreenX) SceneIndex() int               { return -1 }
-func (a *ColorPointGreenX) Value() *ColorPointGreenX   { return a }
+func (a *ColorPointGreenX) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorPointGreenX) Value() zcl.Val             { return a }
 func (a ColorPointGreenX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorPointGreenX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -336,13 +375,15 @@ type ColorPointGreenY zcl.Zu16
 
 const ColorPointGreenYAttr zcl.AttrID = 55
 
-func (ColorPointGreenY) ID() zcl.AttrID                { return ColorPointGreenYAttr }
+func (ColorPointGreenY) ID() zcl.AttrID   { return ColorPointGreenYAttr }
+func (ColorPointGreenY) Readable() bool   { return true }
+func (ColorPointGreenY) Writable() bool   { return true }
+func (ColorPointGreenY) Reportable() bool { return false }
+func (ColorPointGreenY) SceneIndex() int  { return -1 }
+
 func (ColorPointGreenY) Name() string                  { return "Color Point Green Y" }
-func (ColorPointGreenY) Readable() bool                { return true }
-func (ColorPointGreenY) Writable() bool                { return true }
-func (ColorPointGreenY) Reportable() bool              { return false }
-func (ColorPointGreenY) SceneIndex() int               { return -1 }
-func (a *ColorPointGreenY) Value() *ColorPointGreenY   { return a }
+func (a *ColorPointGreenY) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorPointGreenY) Value() zcl.Val             { return a }
 func (a ColorPointGreenY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorPointGreenY) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -373,14 +414,16 @@ type ColorPointGreenIntensity zcl.Zu8
 
 const ColorPointGreenIntensityAttr zcl.AttrID = 56
 
-func (ColorPointGreenIntensity) ID() zcl.AttrID                      { return ColorPointGreenIntensityAttr }
-func (ColorPointGreenIntensity) Name() string                        { return "Color Point Green intensity" }
-func (ColorPointGreenIntensity) Readable() bool                      { return true }
-func (ColorPointGreenIntensity) Writable() bool                      { return true }
-func (ColorPointGreenIntensity) Reportable() bool                    { return false }
-func (ColorPointGreenIntensity) SceneIndex() int                     { return -1 }
-func (a *ColorPointGreenIntensity) Value() *ColorPointGreenIntensity { return a }
-func (a ColorPointGreenIntensity) MarshalZcl() ([]byte, error)       { return zcl.Zu8(a).MarshalZcl() }
+func (ColorPointGreenIntensity) ID() zcl.AttrID   { return ColorPointGreenIntensityAttr }
+func (ColorPointGreenIntensity) Readable() bool   { return true }
+func (ColorPointGreenIntensity) Writable() bool   { return true }
+func (ColorPointGreenIntensity) Reportable() bool { return false }
+func (ColorPointGreenIntensity) SceneIndex() int  { return -1 }
+
+func (ColorPointGreenIntensity) Name() string                  { return "Color Point Green intensity" }
+func (a *ColorPointGreenIntensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *ColorPointGreenIntensity) Value() zcl.Val             { return a }
+func (a ColorPointGreenIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ColorPointGreenIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
@@ -408,13 +451,15 @@ type ColorPointRedX zcl.Zu16
 
 const ColorPointRedXAttr zcl.AttrID = 50
 
-func (ColorPointRedX) ID() zcl.AttrID                { return ColorPointRedXAttr }
+func (ColorPointRedX) ID() zcl.AttrID   { return ColorPointRedXAttr }
+func (ColorPointRedX) Readable() bool   { return true }
+func (ColorPointRedX) Writable() bool   { return true }
+func (ColorPointRedX) Reportable() bool { return false }
+func (ColorPointRedX) SceneIndex() int  { return -1 }
+
 func (ColorPointRedX) Name() string                  { return "Color Point Red X" }
-func (ColorPointRedX) Readable() bool                { return true }
-func (ColorPointRedX) Writable() bool                { return true }
-func (ColorPointRedX) Reportable() bool              { return false }
-func (ColorPointRedX) SceneIndex() int               { return -1 }
-func (a *ColorPointRedX) Value() *ColorPointRedX     { return a }
+func (a *ColorPointRedX) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorPointRedX) Value() zcl.Val             { return a }
 func (a ColorPointRedX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorPointRedX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -443,13 +488,15 @@ type ColorPointRedY zcl.Zu16
 
 const ColorPointRedYAttr zcl.AttrID = 51
 
-func (ColorPointRedY) ID() zcl.AttrID                { return ColorPointRedYAttr }
+func (ColorPointRedY) ID() zcl.AttrID   { return ColorPointRedYAttr }
+func (ColorPointRedY) Readable() bool   { return true }
+func (ColorPointRedY) Writable() bool   { return true }
+func (ColorPointRedY) Reportable() bool { return false }
+func (ColorPointRedY) SceneIndex() int  { return -1 }
+
 func (ColorPointRedY) Name() string                  { return "Color Point Red Y" }
-func (ColorPointRedY) Readable() bool                { return true }
-func (ColorPointRedY) Writable() bool                { return true }
-func (ColorPointRedY) Reportable() bool              { return false }
-func (ColorPointRedY) SceneIndex() int               { return -1 }
-func (a *ColorPointRedY) Value() *ColorPointRedY     { return a }
+func (a *ColorPointRedY) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorPointRedY) Value() zcl.Val             { return a }
 func (a ColorPointRedY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorPointRedY) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -480,14 +527,16 @@ type ColorPointRedIntensity zcl.Zu8
 
 const ColorPointRedIntensityAttr zcl.AttrID = 52
 
-func (ColorPointRedIntensity) ID() zcl.AttrID                    { return ColorPointRedIntensityAttr }
-func (ColorPointRedIntensity) Name() string                      { return "Color Point Red intensity" }
-func (ColorPointRedIntensity) Readable() bool                    { return true }
-func (ColorPointRedIntensity) Writable() bool                    { return true }
-func (ColorPointRedIntensity) Reportable() bool                  { return false }
-func (ColorPointRedIntensity) SceneIndex() int                   { return -1 }
-func (a *ColorPointRedIntensity) Value() *ColorPointRedIntensity { return a }
-func (a ColorPointRedIntensity) MarshalZcl() ([]byte, error)     { return zcl.Zu8(a).MarshalZcl() }
+func (ColorPointRedIntensity) ID() zcl.AttrID   { return ColorPointRedIntensityAttr }
+func (ColorPointRedIntensity) Readable() bool   { return true }
+func (ColorPointRedIntensity) Writable() bool   { return true }
+func (ColorPointRedIntensity) Reportable() bool { return false }
+func (ColorPointRedIntensity) SceneIndex() int  { return -1 }
+
+func (ColorPointRedIntensity) Name() string                  { return "Color Point Red intensity" }
+func (a *ColorPointRedIntensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *ColorPointRedIntensity) Value() zcl.Val             { return a }
+func (a ColorPointRedIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ColorPointRedIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
@@ -510,7 +559,9 @@ func (a ColorPointRedIntensity) String() string {
 
 type ColorTemperature zcl.Zu16
 
-func (a *ColorTemperature) Value() *ColorTemperature   { return a }
+func (ColorTemperature) Name() string                  { return "Color Temperature" }
+func (a *ColorTemperature) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperature) Value() zcl.Val             { return a }
 func (a ColorTemperature) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -534,8 +585,10 @@ func (a ColorTemperature) String() string {
 
 type ColorTemperatureMax zcl.Zu16
 
-func (a *ColorTemperatureMax) Value() *ColorTemperatureMax { return a }
-func (a ColorTemperatureMax) MarshalZcl() ([]byte, error)  { return zcl.Zu16(a).MarshalZcl() }
+func (ColorTemperatureMax) Name() string                  { return "Color Temperature max" }
+func (a *ColorTemperatureMax) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperatureMax) Value() zcl.Val             { return a }
+func (a ColorTemperatureMax) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorTemperatureMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -558,8 +611,10 @@ func (a ColorTemperatureMax) String() string {
 
 type ColorTemperatureMaxMireds zcl.Zu16
 
-func (a *ColorTemperatureMaxMireds) Value() *ColorTemperatureMaxMireds { return a }
-func (a ColorTemperatureMaxMireds) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
+func (ColorTemperatureMaxMireds) Name() string                  { return "Color Temperature max Mireds" }
+func (a *ColorTemperatureMaxMireds) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperatureMaxMireds) Value() zcl.Val             { return a }
+func (a ColorTemperatureMaxMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorTemperatureMaxMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -582,8 +637,10 @@ func (a ColorTemperatureMaxMireds) String() string {
 
 type ColorTemperatureMin zcl.Zu16
 
-func (a *ColorTemperatureMin) Value() *ColorTemperatureMin { return a }
-func (a ColorTemperatureMin) MarshalZcl() ([]byte, error)  { return zcl.Zu16(a).MarshalZcl() }
+func (ColorTemperatureMin) Name() string                  { return "Color Temperature min" }
+func (a *ColorTemperatureMin) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperatureMin) Value() zcl.Val             { return a }
+func (a ColorTemperatureMin) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorTemperatureMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -606,8 +663,10 @@ func (a ColorTemperatureMin) String() string {
 
 type ColorTemperatureMinMireds zcl.Zu16
 
-func (a *ColorTemperatureMinMireds) Value() *ColorTemperatureMinMireds { return a }
-func (a ColorTemperatureMinMireds) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
+func (ColorTemperatureMinMireds) Name() string                  { return "Color Temperature min Mireds" }
+func (a *ColorTemperatureMinMireds) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperatureMinMireds) Value() zcl.Val             { return a }
+func (a ColorTemperatureMinMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorTemperatureMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -633,7 +692,9 @@ func (a ColorTemperatureMinMireds) String() string {
 // in the range 0 to 65279 inclusive)
 type ColorX zcl.Zu16
 
-func (a *ColorX) Value() *ColorX             { return a }
+func (ColorX) Name() string                  { return "Color X" }
+func (a *ColorX) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorX) Value() zcl.Val             { return a }
 func (a ColorX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -660,7 +721,9 @@ func (a ColorX) String() string {
 // in the range 0 to 65279 inclusive)
 type ColorY zcl.Zu16
 
-func (a *ColorY) Value() *ColorY             { return a }
+func (ColorY) Name() string                  { return "Color Y" }
+func (a *ColorY) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorY) Value() zcl.Val             { return a }
 func (a ColorY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorY) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -688,13 +751,15 @@ type ColorCapabilities zcl.Zbmp16
 
 const ColorCapabilitiesAttr zcl.AttrID = 16394
 
-func (ColorCapabilities) ID() zcl.AttrID                { return ColorCapabilitiesAttr }
+func (ColorCapabilities) ID() zcl.AttrID   { return ColorCapabilitiesAttr }
+func (ColorCapabilities) Readable() bool   { return true }
+func (ColorCapabilities) Writable() bool   { return false }
+func (ColorCapabilities) Reportable() bool { return false }
+func (ColorCapabilities) SceneIndex() int  { return -1 }
+
 func (ColorCapabilities) Name() string                  { return "Color capabilities" }
-func (ColorCapabilities) Readable() bool                { return true }
-func (ColorCapabilities) Writable() bool                { return false }
-func (ColorCapabilities) Reportable() bool              { return false }
-func (ColorCapabilities) SceneIndex() int               { return -1 }
-func (a *ColorCapabilities) Value() *ColorCapabilities  { return a }
+func (a *ColorCapabilities) TypeID() zcl.TypeID         { return zcl.Zbmp16(*a).ID() }
+func (a *ColorCapabilities) Value() zcl.Val             { return a }
 func (a ColorCapabilities) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
 
 func (a *ColorCapabilities) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -751,19 +816,87 @@ func (a *ColorCapabilities) SetColorTemperature(b bool) {
 	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 4, b))
 }
 
+func (ColorCapabilities) MultiOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0, Name: "Hue saturation"},
+		{Value: 1, Name: "Enhanced Hue saturation"},
+		{Value: 2, Name: "Color loop"},
+		{Value: 3, Name: "CIE 1931 XY"},
+		{Value: 4, Name: "Color temperature"},
+	}
+}
+
+// ColorControlOptions is a bitmap that determines the default behavior of some cluster commands
+type ColorControlOptions zcl.Zbmp8
+
+const ColorControlOptionsAttr zcl.AttrID = 15
+
+func (ColorControlOptions) ID() zcl.AttrID   { return ColorControlOptionsAttr }
+func (ColorControlOptions) Readable() bool   { return true }
+func (ColorControlOptions) Writable() bool   { return true }
+func (ColorControlOptions) Reportable() bool { return false }
+func (ColorControlOptions) SceneIndex() int  { return -1 }
+
+func (ColorControlOptions) Name() string                  { return "Color control options" }
+func (a *ColorControlOptions) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
+func (a *ColorControlOptions) Value() zcl.Val             { return a }
+func (a ColorControlOptions) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+
+func (a *ColorControlOptions) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zbmp8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ColorControlOptions(*nt)
+	return br, err
+}
+
+func (a *ColorControlOptions) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zbmp8); ok {
+		*a = ColorControlOptions(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ColorControlOptions) String() string {
+	var bstr []string
+	bits := zcl.BitmapList(a[:])
+	for _, bit := range bits {
+		switch bit {
+		case 0x00:
+			bstr = append(bstr, "Execute if off")
+		default:
+			bstr = append(bstr, zcl.Sprintf("Unknown(%d)", bit))
+		}
+	}
+	return zcl.StrJoin(bstr, ", ")
+}
+
+func (a ColorControlOptions) IsExecuteIfOff() bool { return zcl.BitmapTest([]byte(a[:]), 0x00) }
+func (a *ColorControlOptions) SetExecuteIfOff(b bool) {
+	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0x00, b))
+}
+
+func (ColorControlOptions) MultiOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Execute if off"},
+	}
+}
+
 // ColorLoopActive specifies the current active status of the color loop. 0x00 means
 // inactive, 0x01 means active
 type ColorLoopActive zcl.Zu8
 
 const ColorLoopActiveAttr zcl.AttrID = 16386
 
-func (ColorLoopActive) ID() zcl.AttrID                { return ColorLoopActiveAttr }
+func (ColorLoopActive) ID() zcl.AttrID   { return ColorLoopActiveAttr }
+func (ColorLoopActive) Readable() bool   { return true }
+func (ColorLoopActive) Writable() bool   { return false }
+func (ColorLoopActive) Reportable() bool { return false }
+func (ColorLoopActive) SceneIndex() int  { return 5 }
+
 func (ColorLoopActive) Name() string                  { return "Color loop active" }
-func (ColorLoopActive) Readable() bool                { return true }
-func (ColorLoopActive) Writable() bool                { return false }
-func (ColorLoopActive) Reportable() bool              { return false }
-func (ColorLoopActive) SceneIndex() int               { return 5 }
-func (a *ColorLoopActive) Value() *ColorLoopActive    { return a }
+func (a *ColorLoopActive) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *ColorLoopActive) Value() zcl.Val             { return a }
 func (a ColorLoopActive) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ColorLoopActive) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -792,13 +925,15 @@ type ColorLoopDirection zcl.Zu8
 
 const ColorLoopDirectionAttr zcl.AttrID = 16387
 
-func (ColorLoopDirection) ID() zcl.AttrID                { return ColorLoopDirectionAttr }
+func (ColorLoopDirection) ID() zcl.AttrID   { return ColorLoopDirectionAttr }
+func (ColorLoopDirection) Readable() bool   { return true }
+func (ColorLoopDirection) Writable() bool   { return false }
+func (ColorLoopDirection) Reportable() bool { return false }
+func (ColorLoopDirection) SceneIndex() int  { return 6 }
+
 func (ColorLoopDirection) Name() string                  { return "Color loop direction" }
-func (ColorLoopDirection) Readable() bool                { return true }
-func (ColorLoopDirection) Writable() bool                { return false }
-func (ColorLoopDirection) Reportable() bool              { return false }
-func (ColorLoopDirection) SceneIndex() int               { return 6 }
-func (a *ColorLoopDirection) Value() *ColorLoopDirection { return a }
+func (a *ColorLoopDirection) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *ColorLoopDirection) Value() zcl.Val             { return a }
 func (a ColorLoopDirection) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ColorLoopDirection) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -826,14 +961,16 @@ type ColorLoopStartEnhancedHue zcl.Zu16
 
 const ColorLoopStartEnhancedHueAttr zcl.AttrID = 16389
 
-func (ColorLoopStartEnhancedHue) ID() zcl.AttrID                       { return ColorLoopStartEnhancedHueAttr }
-func (ColorLoopStartEnhancedHue) Name() string                         { return "Color loop start enhanced hue" }
-func (ColorLoopStartEnhancedHue) Readable() bool                       { return true }
-func (ColorLoopStartEnhancedHue) Writable() bool                       { return false }
-func (ColorLoopStartEnhancedHue) Reportable() bool                     { return false }
-func (ColorLoopStartEnhancedHue) SceneIndex() int                      { return -1 }
-func (a *ColorLoopStartEnhancedHue) Value() *ColorLoopStartEnhancedHue { return a }
-func (a ColorLoopStartEnhancedHue) MarshalZcl() ([]byte, error)        { return zcl.Zu16(a).MarshalZcl() }
+func (ColorLoopStartEnhancedHue) ID() zcl.AttrID   { return ColorLoopStartEnhancedHueAttr }
+func (ColorLoopStartEnhancedHue) Readable() bool   { return true }
+func (ColorLoopStartEnhancedHue) Writable() bool   { return false }
+func (ColorLoopStartEnhancedHue) Reportable() bool { return false }
+func (ColorLoopStartEnhancedHue) SceneIndex() int  { return -1 }
+
+func (ColorLoopStartEnhancedHue) Name() string                  { return "Color loop start enhanced hue" }
+func (a *ColorLoopStartEnhancedHue) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorLoopStartEnhancedHue) Value() zcl.Val             { return a }
+func (a ColorLoopStartEnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorLoopStartEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -861,14 +998,16 @@ type ColorLoopStoredEnhancedHue zcl.Zu16
 
 const ColorLoopStoredEnhancedHueAttr zcl.AttrID = 16390
 
-func (ColorLoopStoredEnhancedHue) ID() zcl.AttrID                        { return ColorLoopStoredEnhancedHueAttr }
-func (ColorLoopStoredEnhancedHue) Name() string                          { return "Color loop stored enhanced hue" }
-func (ColorLoopStoredEnhancedHue) Readable() bool                        { return true }
-func (ColorLoopStoredEnhancedHue) Writable() bool                        { return false }
-func (ColorLoopStoredEnhancedHue) Reportable() bool                      { return false }
-func (ColorLoopStoredEnhancedHue) SceneIndex() int                       { return -1 }
-func (a *ColorLoopStoredEnhancedHue) Value() *ColorLoopStoredEnhancedHue { return a }
-func (a ColorLoopStoredEnhancedHue) MarshalZcl() ([]byte, error)         { return zcl.Zu16(a).MarshalZcl() }
+func (ColorLoopStoredEnhancedHue) ID() zcl.AttrID   { return ColorLoopStoredEnhancedHueAttr }
+func (ColorLoopStoredEnhancedHue) Readable() bool   { return true }
+func (ColorLoopStoredEnhancedHue) Writable() bool   { return false }
+func (ColorLoopStoredEnhancedHue) Reportable() bool { return false }
+func (ColorLoopStoredEnhancedHue) SceneIndex() int  { return -1 }
+
+func (ColorLoopStoredEnhancedHue) Name() string                  { return "Color loop stored enhanced hue" }
+func (a *ColorLoopStoredEnhancedHue) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorLoopStoredEnhancedHue) Value() zcl.Val             { return a }
+func (a ColorLoopStoredEnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorLoopStoredEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -895,13 +1034,15 @@ type ColorLoopTime zcl.Zu16
 
 const ColorLoopTimeAttr zcl.AttrID = 16388
 
-func (ColorLoopTime) ID() zcl.AttrID                { return ColorLoopTimeAttr }
+func (ColorLoopTime) ID() zcl.AttrID   { return ColorLoopTimeAttr }
+func (ColorLoopTime) Readable() bool   { return true }
+func (ColorLoopTime) Writable() bool   { return false }
+func (ColorLoopTime) Reportable() bool { return false }
+func (ColorLoopTime) SceneIndex() int  { return 7 }
+
 func (ColorLoopTime) Name() string                  { return "Color loop time" }
-func (ColorLoopTime) Readable() bool                { return true }
-func (ColorLoopTime) Writable() bool                { return false }
-func (ColorLoopTime) Reportable() bool              { return false }
-func (ColorLoopTime) SceneIndex() int               { return 7 }
-func (a *ColorLoopTime) Value() *ColorLoopTime      { return a }
+func (a *ColorLoopTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorLoopTime) Value() zcl.Val             { return a }
 func (a ColorLoopTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorLoopTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -933,14 +1074,16 @@ type ColorTemperatureMireds zcl.Zu16
 
 const ColorTemperatureMiredsAttr zcl.AttrID = 7
 
-func (ColorTemperatureMireds) ID() zcl.AttrID                    { return ColorTemperatureMiredsAttr }
-func (ColorTemperatureMireds) Name() string                      { return "Color temperature Mireds" }
-func (ColorTemperatureMireds) Readable() bool                    { return true }
-func (ColorTemperatureMireds) Writable() bool                    { return false }
-func (ColorTemperatureMireds) Reportable() bool                  { return true }
-func (ColorTemperatureMireds) SceneIndex() int                   { return -1 }
-func (a *ColorTemperatureMireds) Value() *ColorTemperatureMireds { return a }
-func (a ColorTemperatureMireds) MarshalZcl() ([]byte, error)     { return zcl.Zu16(a).MarshalZcl() }
+func (ColorTemperatureMireds) ID() zcl.AttrID   { return ColorTemperatureMiredsAttr }
+func (ColorTemperatureMireds) Readable() bool   { return true }
+func (ColorTemperatureMireds) Writable() bool   { return false }
+func (ColorTemperatureMireds) Reportable() bool { return true }
+func (ColorTemperatureMireds) SceneIndex() int  { return -1 }
+
+func (ColorTemperatureMireds) Name() string                  { return "Color temperature Mireds" }
+func (a *ColorTemperatureMireds) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperatureMireds) Value() zcl.Val             { return a }
+func (a ColorTemperatureMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ColorTemperatureMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -969,13 +1112,15 @@ type ColorTemperaturePhysicalMaxMireds zcl.Zu16
 
 const ColorTemperaturePhysicalMaxMiredsAttr zcl.AttrID = 16396
 
-func (ColorTemperaturePhysicalMaxMireds) ID() zcl.AttrID                               { return ColorTemperaturePhysicalMaxMiredsAttr }
-func (ColorTemperaturePhysicalMaxMireds) Name() string                                 { return "Color temperature physical max Mireds" }
-func (ColorTemperaturePhysicalMaxMireds) Readable() bool                               { return true }
-func (ColorTemperaturePhysicalMaxMireds) Writable() bool                               { return false }
-func (ColorTemperaturePhysicalMaxMireds) Reportable() bool                             { return false }
-func (ColorTemperaturePhysicalMaxMireds) SceneIndex() int                              { return -1 }
-func (a *ColorTemperaturePhysicalMaxMireds) Value() *ColorTemperaturePhysicalMaxMireds { return a }
+func (ColorTemperaturePhysicalMaxMireds) ID() zcl.AttrID   { return ColorTemperaturePhysicalMaxMiredsAttr }
+func (ColorTemperaturePhysicalMaxMireds) Readable() bool   { return true }
+func (ColorTemperaturePhysicalMaxMireds) Writable() bool   { return false }
+func (ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
+func (ColorTemperaturePhysicalMaxMireds) SceneIndex() int  { return -1 }
+
+func (ColorTemperaturePhysicalMaxMireds) Name() string          { return "Color temperature physical max Mireds" }
+func (a *ColorTemperaturePhysicalMaxMireds) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperaturePhysicalMaxMireds) Value() zcl.Val     { return a }
 func (a ColorTemperaturePhysicalMaxMireds) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
@@ -1007,13 +1152,15 @@ type ColorTemperaturePhysicalMinMireds zcl.Zu16
 
 const ColorTemperaturePhysicalMinMiredsAttr zcl.AttrID = 16395
 
-func (ColorTemperaturePhysicalMinMireds) ID() zcl.AttrID                               { return ColorTemperaturePhysicalMinMiredsAttr }
-func (ColorTemperaturePhysicalMinMireds) Name() string                                 { return "Color temperature physical min Mireds" }
-func (ColorTemperaturePhysicalMinMireds) Readable() bool                               { return true }
-func (ColorTemperaturePhysicalMinMireds) Writable() bool                               { return false }
-func (ColorTemperaturePhysicalMinMireds) Reportable() bool                             { return false }
-func (ColorTemperaturePhysicalMinMireds) SceneIndex() int                              { return -1 }
-func (a *ColorTemperaturePhysicalMinMireds) Value() *ColorTemperaturePhysicalMinMireds { return a }
+func (ColorTemperaturePhysicalMinMireds) ID() zcl.AttrID   { return ColorTemperaturePhysicalMinMiredsAttr }
+func (ColorTemperaturePhysicalMinMireds) Readable() bool   { return true }
+func (ColorTemperaturePhysicalMinMireds) Writable() bool   { return false }
+func (ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
+func (ColorTemperaturePhysicalMinMireds) SceneIndex() int  { return -1 }
+
+func (ColorTemperaturePhysicalMinMireds) Name() string          { return "Color temperature physical min Mireds" }
+func (a *ColorTemperaturePhysicalMinMireds) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ColorTemperaturePhysicalMinMireds) Value() zcl.Val     { return a }
 func (a ColorTemperaturePhysicalMinMireds) MarshalZcl() ([]byte, error) {
 	return zcl.Zu16(a).MarshalZcl()
 }
@@ -1043,13 +1190,15 @@ type CompensationText zcl.Zcstring
 
 const CompensationTextAttr zcl.AttrID = 6
 
-func (CompensationText) ID() zcl.AttrID                { return CompensationTextAttr }
+func (CompensationText) ID() zcl.AttrID   { return CompensationTextAttr }
+func (CompensationText) Readable() bool   { return true }
+func (CompensationText) Writable() bool   { return false }
+func (CompensationText) Reportable() bool { return false }
+func (CompensationText) SceneIndex() int  { return -1 }
+
 func (CompensationText) Name() string                  { return "Compensation Text" }
-func (CompensationText) Readable() bool                { return true }
-func (CompensationText) Writable() bool                { return false }
-func (CompensationText) Reportable() bool              { return false }
-func (CompensationText) SceneIndex() int               { return -1 }
-func (a *CompensationText) Value() *CompensationText   { return a }
+func (a *CompensationText) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
+func (a *CompensationText) Value() zcl.Val             { return a }
 func (a CompensationText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *CompensationText) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1071,6 +1220,43 @@ func (a CompensationText) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
 }
 
+// CoupleColorTempToLevelMinMireds specifies a lower bound on the value of the ColorTemperatureMireds attribute for the purposes of coupling the
+// ColorTemperatureMireds attribute to the CurrentLevel attribute when the CoupleColorTempToLevel bit of the
+// Options attribute of the Level Control cluster is equal to 1
+type CoupleColorTempToLevelMinMireds zcl.Zu16
+
+const CoupleColorTempToLevelMinMiredsAttr zcl.AttrID = 16397
+
+func (CoupleColorTempToLevelMinMireds) ID() zcl.AttrID   { return CoupleColorTempToLevelMinMiredsAttr }
+func (CoupleColorTempToLevelMinMireds) Readable() bool   { return true }
+func (CoupleColorTempToLevelMinMireds) Writable() bool   { return false }
+func (CoupleColorTempToLevelMinMireds) Reportable() bool { return false }
+func (CoupleColorTempToLevelMinMireds) SceneIndex() int  { return -1 }
+
+func (CoupleColorTempToLevelMinMireds) Name() string                  { return "Couple Color Temp to Level Min Mireds" }
+func (a *CoupleColorTempToLevelMinMireds) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *CoupleColorTempToLevelMinMireds) Value() zcl.Val             { return a }
+func (a CoupleColorTempToLevelMinMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+
+func (a *CoupleColorTempToLevelMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu16)
+	br, err := nt.UnmarshalZcl(b)
+	*a = CoupleColorTempToLevelMinMireds(*nt)
+	return br, err
+}
+
+func (a *CoupleColorTempToLevelMinMireds) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zu16); ok {
+		*a = CoupleColorTempToLevelMinMireds(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a CoupleColorTempToLevelMinMireds) String() string {
+	return zcl.Mired.Format(float64(a))
+}
+
 // CurrentX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
 // in the range 0 to 65279 inclusive)
@@ -1078,13 +1264,15 @@ type CurrentX zcl.Zu16
 
 const CurrentXAttr zcl.AttrID = 3
 
-func (CurrentX) ID() zcl.AttrID                { return CurrentXAttr }
+func (CurrentX) ID() zcl.AttrID   { return CurrentXAttr }
+func (CurrentX) Readable() bool   { return true }
+func (CurrentX) Writable() bool   { return false }
+func (CurrentX) Reportable() bool { return true }
+func (CurrentX) SceneIndex() int  { return 1 }
+
 func (CurrentX) Name() string                  { return "Current X" }
-func (CurrentX) Readable() bool                { return true }
-func (CurrentX) Writable() bool                { return false }
-func (CurrentX) Reportable() bool              { return true }
-func (CurrentX) SceneIndex() int               { return 1 }
-func (a *CurrentX) Value() *CurrentX           { return a }
+func (a *CurrentX) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *CurrentX) Value() zcl.Val             { return a }
 func (a CurrentX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *CurrentX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1113,13 +1301,15 @@ type CurrentY zcl.Zu16
 
 const CurrentYAttr zcl.AttrID = 4
 
-func (CurrentY) ID() zcl.AttrID                { return CurrentYAttr }
+func (CurrentY) ID() zcl.AttrID   { return CurrentYAttr }
+func (CurrentY) Readable() bool   { return true }
+func (CurrentY) Writable() bool   { return false }
+func (CurrentY) Reportable() bool { return true }
+func (CurrentY) SceneIndex() int  { return 2 }
+
 func (CurrentY) Name() string                  { return "Current Y" }
-func (CurrentY) Readable() bool                { return true }
-func (CurrentY) Writable() bool                { return false }
-func (CurrentY) Reportable() bool              { return true }
-func (CurrentY) SceneIndex() int               { return 2 }
-func (a *CurrentY) Value() *CurrentY           { return a }
+func (a *CurrentY) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *CurrentY) Value() zcl.Val             { return a }
 func (a CurrentY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *CurrentY) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1147,13 +1337,15 @@ type CurrentHue zcl.Zu8
 
 const CurrentHueAttr zcl.AttrID = 0
 
-func (CurrentHue) ID() zcl.AttrID                { return CurrentHueAttr }
+func (CurrentHue) ID() zcl.AttrID   { return CurrentHueAttr }
+func (CurrentHue) Readable() bool   { return true }
+func (CurrentHue) Writable() bool   { return false }
+func (CurrentHue) Reportable() bool { return true }
+func (CurrentHue) SceneIndex() int  { return -1 }
+
 func (CurrentHue) Name() string                  { return "Current hue" }
-func (CurrentHue) Readable() bool                { return true }
-func (CurrentHue) Writable() bool                { return false }
-func (CurrentHue) Reportable() bool              { return true }
-func (CurrentHue) SceneIndex() int               { return -1 }
-func (a *CurrentHue) Value() *CurrentHue         { return a }
+func (a *CurrentHue) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *CurrentHue) Value() zcl.Val             { return a }
 func (a CurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *CurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1182,13 +1374,15 @@ type CurrentSaturation zcl.Zu8
 
 const CurrentSaturationAttr zcl.AttrID = 1
 
-func (CurrentSaturation) ID() zcl.AttrID                { return CurrentSaturationAttr }
+func (CurrentSaturation) ID() zcl.AttrID   { return CurrentSaturationAttr }
+func (CurrentSaturation) Readable() bool   { return true }
+func (CurrentSaturation) Writable() bool   { return false }
+func (CurrentSaturation) Reportable() bool { return true }
+func (CurrentSaturation) SceneIndex() int  { return 4 }
+
 func (CurrentSaturation) Name() string                  { return "Current saturation" }
-func (CurrentSaturation) Readable() bool                { return true }
-func (CurrentSaturation) Writable() bool                { return false }
-func (CurrentSaturation) Reportable() bool              { return true }
-func (CurrentSaturation) SceneIndex() int               { return 4 }
-func (a *CurrentSaturation) Value() *CurrentSaturation  { return a }
+func (a *CurrentSaturation) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *CurrentSaturation) Value() zcl.Val             { return a }
 func (a CurrentSaturation) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *CurrentSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1212,7 +1406,9 @@ func (a CurrentSaturation) String() string {
 
 type Direction zcl.Zenum8
 
-func (a *Direction) Value() *Direction          { return a }
+func (Direction) Name() string                  { return "Direction" }
+func (a *Direction) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *Direction) Value() zcl.Val             { return a }
 func (a Direction) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *Direction) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1253,19 +1449,30 @@ func (a *Direction) SetLongestDistance()     { *a = 0x01 }
 func (a *Direction) SetUp()                  { *a = 0x02 }
 func (a *Direction) SetDown()                { *a = 0x03 }
 
+func (Direction) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Shortest distance"},
+		{Value: 0x01, Name: "Longest Distance"},
+		{Value: 0x02, Name: "Up"},
+		{Value: 0x03, Name: "Down"},
+	}
+}
+
 // DriftCompensation indicates what mechanism, if any, is in use for compensation for
 // color/intensity drift over time
 type DriftCompensation zcl.Zenum8
 
 const DriftCompensationAttr zcl.AttrID = 5
 
-func (DriftCompensation) ID() zcl.AttrID                { return DriftCompensationAttr }
+func (DriftCompensation) ID() zcl.AttrID   { return DriftCompensationAttr }
+func (DriftCompensation) Readable() bool   { return true }
+func (DriftCompensation) Writable() bool   { return false }
+func (DriftCompensation) Reportable() bool { return false }
+func (DriftCompensation) SceneIndex() int  { return -1 }
+
 func (DriftCompensation) Name() string                  { return "Drift Compensation" }
-func (DriftCompensation) Readable() bool                { return true }
-func (DriftCompensation) Writable() bool                { return false }
-func (DriftCompensation) Reportable() bool              { return false }
-func (DriftCompensation) SceneIndex() int               { return -1 }
-func (a *DriftCompensation) Value() *DriftCompensation  { return a }
+func (a *DriftCompensation) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *DriftCompensation) Value() zcl.Val             { return a }
 func (a DriftCompensation) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *DriftCompensation) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1310,9 +1517,21 @@ func (a *DriftCompensation) SetTemperatureMonitoring()                    { *a =
 func (a *DriftCompensation) SetOpticalLuminanceMonitoringAndFeedback()    { *a = 0x03 }
 func (a *DriftCompensation) SetOpticalColorMonitoringAndFeedback()        { *a = 0x04 }
 
+func (DriftCompensation) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "None"},
+		{Value: 0x01, Name: "Other / Unknown"},
+		{Value: 0x02, Name: "Temperature monitoring"},
+		{Value: 0x03, Name: "Optical luminance monitoring and feedback"},
+		{Value: 0x04, Name: "Optical color monitoring and feedback"},
+	}
+}
+
 type EnhancedHue zcl.Zu16
 
-func (a *EnhancedHue) Value() *EnhancedHue        { return a }
+func (EnhancedHue) Name() string                  { return "Enhanced Hue" }
+func (a *EnhancedHue) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *EnhancedHue) Value() zcl.Val             { return a }
 func (a EnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *EnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1340,13 +1559,15 @@ type EnhancedColorMode zcl.Zenum8
 
 const EnhancedColorModeAttr zcl.AttrID = 16385
 
-func (EnhancedColorMode) ID() zcl.AttrID                { return EnhancedColorModeAttr }
+func (EnhancedColorMode) ID() zcl.AttrID   { return EnhancedColorModeAttr }
+func (EnhancedColorMode) Readable() bool   { return true }
+func (EnhancedColorMode) Writable() bool   { return false }
+func (EnhancedColorMode) Reportable() bool { return false }
+func (EnhancedColorMode) SceneIndex() int  { return -1 }
+
 func (EnhancedColorMode) Name() string                  { return "Enhanced color mode" }
-func (EnhancedColorMode) Readable() bool                { return true }
-func (EnhancedColorMode) Writable() bool                { return false }
-func (EnhancedColorMode) Reportable() bool              { return false }
-func (EnhancedColorMode) SceneIndex() int               { return -1 }
-func (a *EnhancedColorMode) Value() *EnhancedColorMode  { return a }
+func (a *EnhancedColorMode) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *EnhancedColorMode) Value() zcl.Val             { return a }
 func (a EnhancedColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *EnhancedColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1387,6 +1608,15 @@ func (a *EnhancedColorMode) SetCurrentXAndCurrentY()                       { *a 
 func (a *EnhancedColorMode) SetColorTemperature()                          { *a = 0x02 }
 func (a *EnhancedColorMode) SetEnhancedCurrentHueAndCurrentSaturation()    { *a = 0x03 }
 
+func (EnhancedColorMode) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Current hue and current saturation"},
+		{Value: 0x01, Name: "Current X and Current Y"},
+		{Value: 0x02, Name: "Color temperature"},
+		{Value: 0x03, Name: "Enhanced current hue and current saturation"},
+	}
+}
+
 // EnhancedCurrentHue represents non-equidistant steps along the CIE 1931 color triangle,
 // and it provides 16-bits precision. The upper 8 bits of this attribute
 // are used as an index in the implementation specific XY lookup table to
@@ -1399,13 +1629,15 @@ type EnhancedCurrentHue zcl.Zu16
 
 const EnhancedCurrentHueAttr zcl.AttrID = 16384
 
-func (EnhancedCurrentHue) ID() zcl.AttrID                { return EnhancedCurrentHueAttr }
+func (EnhancedCurrentHue) ID() zcl.AttrID   { return EnhancedCurrentHueAttr }
+func (EnhancedCurrentHue) Readable() bool   { return true }
+func (EnhancedCurrentHue) Writable() bool   { return false }
+func (EnhancedCurrentHue) Reportable() bool { return false }
+func (EnhancedCurrentHue) SceneIndex() int  { return 3 }
+
 func (EnhancedCurrentHue) Name() string                  { return "Enhanced current hue" }
-func (EnhancedCurrentHue) Readable() bool                { return true }
-func (EnhancedCurrentHue) Writable() bool                { return false }
-func (EnhancedCurrentHue) Reportable() bool              { return false }
-func (EnhancedCurrentHue) SceneIndex() int               { return 3 }
-func (a *EnhancedCurrentHue) Value() *EnhancedCurrentHue { return a }
+func (a *EnhancedCurrentHue) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *EnhancedCurrentHue) Value() zcl.Val             { return a }
 func (a EnhancedCurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *EnhancedCurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1429,7 +1661,9 @@ func (a EnhancedCurrentHue) String() string {
 
 type Hue zcl.Zu8
 
-func (a *Hue) Value() *Hue                { return a }
+func (Hue) Name() string                  { return "Hue" }
+func (a *Hue) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Hue) Value() zcl.Val             { return a }
 func (a Hue) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Hue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1453,7 +1687,9 @@ func (a Hue) String() string {
 
 type HueDirection zcl.Zenum8
 
-func (a *HueDirection) Value() *HueDirection       { return a }
+func (HueDirection) Name() string                  { return "Hue Direction" }
+func (a *HueDirection) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *HueDirection) Value() zcl.Val             { return a }
 func (a HueDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *HueDirection) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1486,20 +1722,29 @@ func (a HueDirection) IsIncrementHue() bool { return a == 0x01 }
 func (a *HueDirection) SetDecrementHue()    { *a = 0x00 }
 func (a *HueDirection) SetIncrementHue()    { *a = 0x01 }
 
+func (HueDirection) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Decrement hue"},
+		{Value: 0x01, Name: "Increment hue"},
+	}
+}
+
 // IntrinsicBallastFactor specifies, as a percentage, the ballast factor of the ballast/lamp
 // combination, prior to any adjustment.
 type IntrinsicBallastFactor zcl.Zu8
 
 const IntrinsicBallastFactorAttr zcl.AttrID = 20
 
-func (IntrinsicBallastFactor) ID() zcl.AttrID                    { return IntrinsicBallastFactorAttr }
-func (IntrinsicBallastFactor) Name() string                      { return "Intrinsic Ballast Factor" }
-func (IntrinsicBallastFactor) Readable() bool                    { return true }
-func (IntrinsicBallastFactor) Writable() bool                    { return true }
-func (IntrinsicBallastFactor) Reportable() bool                  { return false }
-func (IntrinsicBallastFactor) SceneIndex() int                   { return -1 }
-func (a *IntrinsicBallastFactor) Value() *IntrinsicBallastFactor { return a }
-func (a IntrinsicBallastFactor) MarshalZcl() ([]byte, error)     { return zcl.Zu8(a).MarshalZcl() }
+func (IntrinsicBallastFactor) ID() zcl.AttrID   { return IntrinsicBallastFactorAttr }
+func (IntrinsicBallastFactor) Readable() bool   { return true }
+func (IntrinsicBallastFactor) Writable() bool   { return true }
+func (IntrinsicBallastFactor) Reportable() bool { return false }
+func (IntrinsicBallastFactor) SceneIndex() int  { return -1 }
+
+func (IntrinsicBallastFactor) Name() string                  { return "Intrinsic Ballast Factor" }
+func (a *IntrinsicBallastFactor) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *IntrinsicBallastFactor) Value() zcl.Val             { return a }
+func (a IntrinsicBallastFactor) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *IntrinsicBallastFactor) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
@@ -1526,13 +1771,15 @@ type LampAlarmMode zcl.Zbmp8
 
 const LampAlarmModeAttr zcl.AttrID = 52
 
-func (LampAlarmMode) ID() zcl.AttrID                { return LampAlarmModeAttr }
+func (LampAlarmMode) ID() zcl.AttrID   { return LampAlarmModeAttr }
+func (LampAlarmMode) Readable() bool   { return true }
+func (LampAlarmMode) Writable() bool   { return true }
+func (LampAlarmMode) Reportable() bool { return false }
+func (LampAlarmMode) SceneIndex() int  { return -1 }
+
 func (LampAlarmMode) Name() string                  { return "Lamp Alarm Mode" }
-func (LampAlarmMode) Readable() bool                { return true }
-func (LampAlarmMode) Writable() bool                { return true }
-func (LampAlarmMode) Reportable() bool              { return false }
-func (LampAlarmMode) SceneIndex() int               { return -1 }
-func (a *LampAlarmMode) Value() *LampAlarmMode      { return a }
+func (a *LampAlarmMode) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
+func (a *LampAlarmMode) Value() zcl.Val             { return a }
 func (a LampAlarmMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *LampAlarmMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1567,6 +1814,12 @@ func (a LampAlarmMode) String() string {
 func (a LampAlarmMode) IsLampBurnHours() bool    { return zcl.BitmapTest([]byte(a[:]), 0) }
 func (a *LampAlarmMode) SetLampBurnHours(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b)) }
 
+func (LampAlarmMode) MultiOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0, Name: "Lamp Burn Hours"},
+	}
+}
+
 // LampBurnHours specifies the length of time, in hours, the currently connected
 // lamps have been operated, cumulative since the last re-lamping. Burn
 // hours are not accumulated if the lamps are off and are reset to 0
@@ -1575,13 +1828,15 @@ type LampBurnHours zcl.Zu24
 
 const LampBurnHoursAttr zcl.AttrID = 51
 
-func (LampBurnHours) ID() zcl.AttrID                { return LampBurnHoursAttr }
+func (LampBurnHours) ID() zcl.AttrID   { return LampBurnHoursAttr }
+func (LampBurnHours) Readable() bool   { return true }
+func (LampBurnHours) Writable() bool   { return true }
+func (LampBurnHours) Reportable() bool { return false }
+func (LampBurnHours) SceneIndex() int  { return -1 }
+
 func (LampBurnHours) Name() string                  { return "Lamp Burn Hours" }
-func (LampBurnHours) Readable() bool                { return true }
-func (LampBurnHours) Writable() bool                { return true }
-func (LampBurnHours) Reportable() bool              { return false }
-func (LampBurnHours) SceneIndex() int               { return -1 }
-func (a *LampBurnHours) Value() *LampBurnHours      { return a }
+func (a *LampBurnHours) TypeID() zcl.TypeID         { return zcl.Zu24(*a).ID() }
+func (a *LampBurnHours) Value() zcl.Val             { return a }
 func (a LampBurnHours) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
 
 func (a *LampBurnHours) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1609,14 +1864,16 @@ type LampBurnHoursTripPoint zcl.Zu24
 
 const LampBurnHoursTripPointAttr zcl.AttrID = 53
 
-func (LampBurnHoursTripPoint) ID() zcl.AttrID                    { return LampBurnHoursTripPointAttr }
-func (LampBurnHoursTripPoint) Name() string                      { return "Lamp Burn Hours Trip Point" }
-func (LampBurnHoursTripPoint) Readable() bool                    { return true }
-func (LampBurnHoursTripPoint) Writable() bool                    { return true }
-func (LampBurnHoursTripPoint) Reportable() bool                  { return false }
-func (LampBurnHoursTripPoint) SceneIndex() int                   { return -1 }
-func (a *LampBurnHoursTripPoint) Value() *LampBurnHoursTripPoint { return a }
-func (a LampBurnHoursTripPoint) MarshalZcl() ([]byte, error)     { return zcl.Zu24(a).MarshalZcl() }
+func (LampBurnHoursTripPoint) ID() zcl.AttrID   { return LampBurnHoursTripPointAttr }
+func (LampBurnHoursTripPoint) Readable() bool   { return true }
+func (LampBurnHoursTripPoint) Writable() bool   { return true }
+func (LampBurnHoursTripPoint) Reportable() bool { return false }
+func (LampBurnHoursTripPoint) SceneIndex() int  { return -1 }
+
+func (LampBurnHoursTripPoint) Name() string                  { return "Lamp Burn Hours Trip Point" }
+func (a *LampBurnHoursTripPoint) TypeID() zcl.TypeID         { return zcl.Zu24(*a).ID() }
+func (a *LampBurnHoursTripPoint) Value() zcl.Val             { return a }
+func (a LampBurnHoursTripPoint) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
 
 func (a *LampBurnHoursTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
@@ -1643,13 +1900,15 @@ type LampManufacturer zcl.Zcstring
 
 const LampManufacturerAttr zcl.AttrID = 49
 
-func (LampManufacturer) ID() zcl.AttrID                { return LampManufacturerAttr }
+func (LampManufacturer) ID() zcl.AttrID   { return LampManufacturerAttr }
+func (LampManufacturer) Readable() bool   { return true }
+func (LampManufacturer) Writable() bool   { return true }
+func (LampManufacturer) Reportable() bool { return false }
+func (LampManufacturer) SceneIndex() int  { return -1 }
+
 func (LampManufacturer) Name() string                  { return "Lamp Manufacturer" }
-func (LampManufacturer) Readable() bool                { return true }
-func (LampManufacturer) Writable() bool                { return true }
-func (LampManufacturer) Reportable() bool              { return false }
-func (LampManufacturer) SceneIndex() int               { return -1 }
-func (a *LampManufacturer) Value() *LampManufacturer   { return a }
+func (a *LampManufacturer) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
+func (a *LampManufacturer) Value() zcl.Val             { return a }
 func (a LampManufacturer) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *LampManufacturer) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1676,13 +1935,15 @@ type LampQuantity zcl.Zu8
 
 const LampQuantityAttr zcl.AttrID = 32
 
-func (LampQuantity) ID() zcl.AttrID                { return LampQuantityAttr }
+func (LampQuantity) ID() zcl.AttrID   { return LampQuantityAttr }
+func (LampQuantity) Readable() bool   { return true }
+func (LampQuantity) Writable() bool   { return false }
+func (LampQuantity) Reportable() bool { return false }
+func (LampQuantity) SceneIndex() int  { return -1 }
+
 func (LampQuantity) Name() string                  { return "Lamp Quantity" }
-func (LampQuantity) Readable() bool                { return true }
-func (LampQuantity) Writable() bool                { return false }
-func (LampQuantity) Reportable() bool              { return false }
-func (LampQuantity) SceneIndex() int               { return -1 }
-func (a *LampQuantity) Value() *LampQuantity       { return a }
+func (a *LampQuantity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *LampQuantity) Value() zcl.Val             { return a }
 func (a LampQuantity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *LampQuantity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1710,13 +1971,15 @@ type LampRatedHours zcl.Zu24
 
 const LampRatedHoursAttr zcl.AttrID = 50
 
-func (LampRatedHours) ID() zcl.AttrID                { return LampRatedHoursAttr }
+func (LampRatedHours) ID() zcl.AttrID   { return LampRatedHoursAttr }
+func (LampRatedHours) Readable() bool   { return true }
+func (LampRatedHours) Writable() bool   { return true }
+func (LampRatedHours) Reportable() bool { return false }
+func (LampRatedHours) SceneIndex() int  { return -1 }
+
 func (LampRatedHours) Name() string                  { return "Lamp Rated Hours" }
-func (LampRatedHours) Readable() bool                { return true }
-func (LampRatedHours) Writable() bool                { return true }
-func (LampRatedHours) Reportable() bool              { return false }
-func (LampRatedHours) SceneIndex() int               { return -1 }
-func (a *LampRatedHours) Value() *LampRatedHours     { return a }
+func (a *LampRatedHours) TypeID() zcl.TypeID         { return zcl.Zu24(*a).ID() }
+func (a *LampRatedHours) Value() zcl.Val             { return a }
 func (a LampRatedHours) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
 
 func (a *LampRatedHours) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1742,13 +2005,15 @@ type LampType zcl.Zcstring
 
 const LampTypeAttr zcl.AttrID = 48
 
-func (LampType) ID() zcl.AttrID                { return LampTypeAttr }
+func (LampType) ID() zcl.AttrID   { return LampTypeAttr }
+func (LampType) Readable() bool   { return true }
+func (LampType) Writable() bool   { return true }
+func (LampType) Reportable() bool { return false }
+func (LampType) SceneIndex() int  { return -1 }
+
 func (LampType) Name() string                  { return "Lamp Type" }
-func (LampType) Readable() bool                { return true }
-func (LampType) Writable() bool                { return true }
-func (LampType) Reportable() bool              { return false }
-func (LampType) SceneIndex() int               { return -1 }
-func (a *LampType) Value() *LampType           { return a }
+func (a *LampType) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
+func (a *LampType) Value() zcl.Val             { return a }
 func (a LampType) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *LampType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1779,13 +2044,15 @@ type MaxLevel zcl.Zu8
 
 const MaxLevelAttr zcl.AttrID = 17
 
-func (MaxLevel) ID() zcl.AttrID                { return MaxLevelAttr }
+func (MaxLevel) ID() zcl.AttrID   { return MaxLevelAttr }
+func (MaxLevel) Readable() bool   { return true }
+func (MaxLevel) Writable() bool   { return true }
+func (MaxLevel) Reportable() bool { return false }
+func (MaxLevel) SceneIndex() int  { return -1 }
+
 func (MaxLevel) Name() string                  { return "Max Level" }
-func (MaxLevel) Readable() bool                { return true }
-func (MaxLevel) Writable() bool                { return true }
-func (MaxLevel) Reportable() bool              { return false }
-func (MaxLevel) SceneIndex() int               { return -1 }
-func (a *MaxLevel) Value() *MaxLevel           { return a }
+func (a *MaxLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *MaxLevel) Value() zcl.Val             { return a }
 func (a MaxLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *MaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1811,13 +2078,15 @@ type MinLevel zcl.Zu8
 
 const MinLevelAttr zcl.AttrID = 16
 
-func (MinLevel) ID() zcl.AttrID                { return MinLevelAttr }
+func (MinLevel) ID() zcl.AttrID   { return MinLevelAttr }
+func (MinLevel) Readable() bool   { return true }
+func (MinLevel) Writable() bool   { return true }
+func (MinLevel) Reportable() bool { return false }
+func (MinLevel) SceneIndex() int  { return -1 }
+
 func (MinLevel) Name() string                  { return "Min Level" }
-func (MinLevel) Readable() bool                { return true }
-func (MinLevel) Writable() bool                { return true }
-func (MinLevel) Reportable() bool              { return false }
-func (MinLevel) SceneIndex() int               { return -1 }
-func (a *MinLevel) Value() *MinLevel           { return a }
+func (a *MinLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *MinLevel) Value() zcl.Val             { return a }
 func (a MinLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *MinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1841,7 +2110,9 @@ func (a MinLevel) String() string {
 
 type MoveMode zcl.Zenum8
 
-func (a *MoveMode) Value() *MoveMode           { return a }
+func (MoveMode) Name() string                  { return "Move mode" }
+func (a *MoveMode) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *MoveMode) Value() zcl.Val             { return a }
 func (a MoveMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *MoveMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1878,19 +2149,29 @@ func (a *MoveMode) SetStop()    { *a = 0x00 }
 func (a *MoveMode) SetUp()      { *a = 0x01 }
 func (a *MoveMode) SetDown()    { *a = 0x03 }
 
+func (MoveMode) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Stop"},
+		{Value: 0x01, Name: "Up"},
+		{Value: 0x03, Name: "Down"},
+	}
+}
+
 // NumberOfPrimaries contains the number of color primaries implemented on this device.
 // A value of 0xff indicates that the number of primaries is unknown
 type NumberOfPrimaries zcl.Zu8
 
 const NumberOfPrimariesAttr zcl.AttrID = 16
 
-func (NumberOfPrimaries) ID() zcl.AttrID                { return NumberOfPrimariesAttr }
+func (NumberOfPrimaries) ID() zcl.AttrID   { return NumberOfPrimariesAttr }
+func (NumberOfPrimaries) Readable() bool   { return true }
+func (NumberOfPrimaries) Writable() bool   { return false }
+func (NumberOfPrimaries) Reportable() bool { return false }
+func (NumberOfPrimaries) SceneIndex() int  { return -1 }
+
 func (NumberOfPrimaries) Name() string                  { return "Number of primaries" }
-func (NumberOfPrimaries) Readable() bool                { return true }
-func (NumberOfPrimaries) Writable() bool                { return false }
-func (NumberOfPrimaries) Reportable() bool              { return false }
-func (NumberOfPrimaries) SceneIndex() int               { return -1 }
-func (a *NumberOfPrimaries) Value() *NumberOfPrimaries  { return a }
+func (a *NumberOfPrimaries) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *NumberOfPrimaries) Value() zcl.Val             { return a }
 func (a NumberOfPrimaries) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *NumberOfPrimaries) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1919,13 +2200,15 @@ type PhysicalMaxLevel zcl.Zu8
 
 const PhysicalMaxLevelAttr zcl.AttrID = 1
 
-func (PhysicalMaxLevel) ID() zcl.AttrID                { return PhysicalMaxLevelAttr }
+func (PhysicalMaxLevel) ID() zcl.AttrID   { return PhysicalMaxLevelAttr }
+func (PhysicalMaxLevel) Readable() bool   { return true }
+func (PhysicalMaxLevel) Writable() bool   { return false }
+func (PhysicalMaxLevel) Reportable() bool { return false }
+func (PhysicalMaxLevel) SceneIndex() int  { return -1 }
+
 func (PhysicalMaxLevel) Name() string                  { return "Physical Max Level" }
-func (PhysicalMaxLevel) Readable() bool                { return true }
-func (PhysicalMaxLevel) Writable() bool                { return false }
-func (PhysicalMaxLevel) Reportable() bool              { return false }
-func (PhysicalMaxLevel) SceneIndex() int               { return -1 }
-func (a *PhysicalMaxLevel) Value() *PhysicalMaxLevel   { return a }
+func (a *PhysicalMaxLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *PhysicalMaxLevel) Value() zcl.Val             { return a }
 func (a PhysicalMaxLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *PhysicalMaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1954,13 +2237,15 @@ type PhysicalMinLevel zcl.Zu8
 
 const PhysicalMinLevelAttr zcl.AttrID = 0
 
-func (PhysicalMinLevel) ID() zcl.AttrID                { return PhysicalMinLevelAttr }
+func (PhysicalMinLevel) ID() zcl.AttrID   { return PhysicalMinLevelAttr }
+func (PhysicalMinLevel) Readable() bool   { return true }
+func (PhysicalMinLevel) Writable() bool   { return false }
+func (PhysicalMinLevel) Reportable() bool { return false }
+func (PhysicalMinLevel) SceneIndex() int  { return -1 }
+
 func (PhysicalMinLevel) Name() string                  { return "Physical Min Level" }
-func (PhysicalMinLevel) Readable() bool                { return true }
-func (PhysicalMinLevel) Writable() bool                { return false }
-func (PhysicalMinLevel) Reportable() bool              { return false }
-func (PhysicalMinLevel) SceneIndex() int               { return -1 }
-func (a *PhysicalMinLevel) Value() *PhysicalMinLevel   { return a }
+func (a *PhysicalMinLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *PhysicalMinLevel) Value() zcl.Val             { return a }
 func (a PhysicalMinLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *PhysicalMinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1991,13 +2276,15 @@ type PowerOnLevel zcl.Zu8
 
 const PowerOnLevelAttr zcl.AttrID = 18
 
-func (PowerOnLevel) ID() zcl.AttrID                { return PowerOnLevelAttr }
+func (PowerOnLevel) ID() zcl.AttrID   { return PowerOnLevelAttr }
+func (PowerOnLevel) Readable() bool   { return true }
+func (PowerOnLevel) Writable() bool   { return true }
+func (PowerOnLevel) Reportable() bool { return false }
+func (PowerOnLevel) SceneIndex() int  { return -1 }
+
 func (PowerOnLevel) Name() string                  { return "Power On level" }
-func (PowerOnLevel) Readable() bool                { return true }
-func (PowerOnLevel) Writable() bool                { return true }
-func (PowerOnLevel) Reportable() bool              { return false }
-func (PowerOnLevel) SceneIndex() int               { return -1 }
-func (a *PowerOnLevel) Value() *PowerOnLevel       { return a }
+func (a *PowerOnLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *PowerOnLevel) Value() zcl.Val             { return a }
 func (a PowerOnLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *PowerOnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2024,13 +2311,15 @@ type PowerOnTime zcl.Zu16
 
 const PowerOnTimeAttr zcl.AttrID = 19
 
-func (PowerOnTime) ID() zcl.AttrID                { return PowerOnTimeAttr }
+func (PowerOnTime) ID() zcl.AttrID   { return PowerOnTimeAttr }
+func (PowerOnTime) Readable() bool   { return true }
+func (PowerOnTime) Writable() bool   { return true }
+func (PowerOnTime) Reportable() bool { return false }
+func (PowerOnTime) SceneIndex() int  { return -1 }
+
 func (PowerOnTime) Name() string                  { return "Power-On Time" }
-func (PowerOnTime) Readable() bool                { return true }
-func (PowerOnTime) Writable() bool                { return true }
-func (PowerOnTime) Reportable() bool              { return false }
-func (PowerOnTime) SceneIndex() int               { return -1 }
-func (a *PowerOnTime) Value() *PowerOnTime        { return a }
+func (a *PowerOnTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *PowerOnTime) Value() zcl.Val             { return a }
 func (a PowerOnTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *PowerOnTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2056,14 +2345,16 @@ type PowerOnColorTemperature zcl.Zu16
 
 const PowerOnColorTemperatureAttr zcl.AttrID = 16400
 
-func (PowerOnColorTemperature) ID() zcl.AttrID                     { return PowerOnColorTemperatureAttr }
-func (PowerOnColorTemperature) Name() string                       { return "Power-on color temperature" }
-func (PowerOnColorTemperature) Readable() bool                     { return true }
-func (PowerOnColorTemperature) Writable() bool                     { return true }
-func (PowerOnColorTemperature) Reportable() bool                   { return false }
-func (PowerOnColorTemperature) SceneIndex() int                    { return -1 }
-func (a *PowerOnColorTemperature) Value() *PowerOnColorTemperature { return a }
-func (a PowerOnColorTemperature) MarshalZcl() ([]byte, error)      { return zcl.Zu16(a).MarshalZcl() }
+func (PowerOnColorTemperature) ID() zcl.AttrID   { return PowerOnColorTemperatureAttr }
+func (PowerOnColorTemperature) Readable() bool   { return true }
+func (PowerOnColorTemperature) Writable() bool   { return true }
+func (PowerOnColorTemperature) Reportable() bool { return false }
+func (PowerOnColorTemperature) SceneIndex() int  { return -1 }
+
+func (PowerOnColorTemperature) Name() string                  { return "Power-on color temperature" }
+func (a *PowerOnColorTemperature) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *PowerOnColorTemperature) Value() zcl.Val             { return a }
+func (a PowerOnColorTemperature) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *PowerOnColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -2091,13 +2382,15 @@ type Primary1X zcl.Zu16
 
 const Primary1XAttr zcl.AttrID = 17
 
-func (Primary1X) ID() zcl.AttrID                { return Primary1XAttr }
+func (Primary1X) ID() zcl.AttrID   { return Primary1XAttr }
+func (Primary1X) Readable() bool   { return true }
+func (Primary1X) Writable() bool   { return false }
+func (Primary1X) Reportable() bool { return false }
+func (Primary1X) SceneIndex() int  { return -1 }
+
 func (Primary1X) Name() string                  { return "Primary1 X" }
-func (Primary1X) Readable() bool                { return true }
-func (Primary1X) Writable() bool                { return false }
-func (Primary1X) Reportable() bool              { return false }
-func (Primary1X) SceneIndex() int               { return -1 }
-func (a *Primary1X) Value() *Primary1X          { return a }
+func (a *Primary1X) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary1X) Value() zcl.Val             { return a }
 func (a Primary1X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary1X) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2126,13 +2419,15 @@ type Primary1Y zcl.Zu16
 
 const Primary1YAttr zcl.AttrID = 18
 
-func (Primary1Y) ID() zcl.AttrID                { return Primary1YAttr }
+func (Primary1Y) ID() zcl.AttrID   { return Primary1YAttr }
+func (Primary1Y) Readable() bool   { return true }
+func (Primary1Y) Writable() bool   { return false }
+func (Primary1Y) Reportable() bool { return false }
+func (Primary1Y) SceneIndex() int  { return -1 }
+
 func (Primary1Y) Name() string                  { return "Primary1 Y" }
-func (Primary1Y) Readable() bool                { return true }
-func (Primary1Y) Writable() bool                { return false }
-func (Primary1Y) Reportable() bool              { return false }
-func (Primary1Y) SceneIndex() int               { return -1 }
-func (a *Primary1Y) Value() *Primary1Y          { return a }
+func (a *Primary1Y) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary1Y) Value() zcl.Val             { return a }
 func (a Primary1Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary1Y) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2163,13 +2458,15 @@ type Primary1Intensity zcl.Zu8
 
 const Primary1IntensityAttr zcl.AttrID = 19
 
-func (Primary1Intensity) ID() zcl.AttrID                { return Primary1IntensityAttr }
+func (Primary1Intensity) ID() zcl.AttrID   { return Primary1IntensityAttr }
+func (Primary1Intensity) Readable() bool   { return true }
+func (Primary1Intensity) Writable() bool   { return false }
+func (Primary1Intensity) Reportable() bool { return false }
+func (Primary1Intensity) SceneIndex() int  { return -1 }
+
 func (Primary1Intensity) Name() string                  { return "Primary1 intensity" }
-func (Primary1Intensity) Readable() bool                { return true }
-func (Primary1Intensity) Writable() bool                { return false }
-func (Primary1Intensity) Reportable() bool              { return false }
-func (Primary1Intensity) SceneIndex() int               { return -1 }
-func (a *Primary1Intensity) Value() *Primary1Intensity  { return a }
+func (a *Primary1Intensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Primary1Intensity) Value() zcl.Val             { return a }
 func (a Primary1Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Primary1Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2198,13 +2495,15 @@ type Primary2X zcl.Zu16
 
 const Primary2XAttr zcl.AttrID = 21
 
-func (Primary2X) ID() zcl.AttrID                { return Primary2XAttr }
+func (Primary2X) ID() zcl.AttrID   { return Primary2XAttr }
+func (Primary2X) Readable() bool   { return true }
+func (Primary2X) Writable() bool   { return false }
+func (Primary2X) Reportable() bool { return false }
+func (Primary2X) SceneIndex() int  { return -1 }
+
 func (Primary2X) Name() string                  { return "Primary2 X" }
-func (Primary2X) Readable() bool                { return true }
-func (Primary2X) Writable() bool                { return false }
-func (Primary2X) Reportable() bool              { return false }
-func (Primary2X) SceneIndex() int               { return -1 }
-func (a *Primary2X) Value() *Primary2X          { return a }
+func (a *Primary2X) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary2X) Value() zcl.Val             { return a }
 func (a Primary2X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary2X) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2233,13 +2532,15 @@ type Primary2Y zcl.Zu16
 
 const Primary2YAttr zcl.AttrID = 22
 
-func (Primary2Y) ID() zcl.AttrID                { return Primary2YAttr }
+func (Primary2Y) ID() zcl.AttrID   { return Primary2YAttr }
+func (Primary2Y) Readable() bool   { return true }
+func (Primary2Y) Writable() bool   { return false }
+func (Primary2Y) Reportable() bool { return false }
+func (Primary2Y) SceneIndex() int  { return -1 }
+
 func (Primary2Y) Name() string                  { return "Primary2 Y" }
-func (Primary2Y) Readable() bool                { return true }
-func (Primary2Y) Writable() bool                { return false }
-func (Primary2Y) Reportable() bool              { return false }
-func (Primary2Y) SceneIndex() int               { return -1 }
-func (a *Primary2Y) Value() *Primary2Y          { return a }
+func (a *Primary2Y) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary2Y) Value() zcl.Val             { return a }
 func (a Primary2Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary2Y) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2270,13 +2571,15 @@ type Primary2Intensity zcl.Zu8
 
 const Primary2IntensityAttr zcl.AttrID = 23
 
-func (Primary2Intensity) ID() zcl.AttrID                { return Primary2IntensityAttr }
+func (Primary2Intensity) ID() zcl.AttrID   { return Primary2IntensityAttr }
+func (Primary2Intensity) Readable() bool   { return true }
+func (Primary2Intensity) Writable() bool   { return false }
+func (Primary2Intensity) Reportable() bool { return false }
+func (Primary2Intensity) SceneIndex() int  { return -1 }
+
 func (Primary2Intensity) Name() string                  { return "Primary2 intensity" }
-func (Primary2Intensity) Readable() bool                { return true }
-func (Primary2Intensity) Writable() bool                { return false }
-func (Primary2Intensity) Reportable() bool              { return false }
-func (Primary2Intensity) SceneIndex() int               { return -1 }
-func (a *Primary2Intensity) Value() *Primary2Intensity  { return a }
+func (a *Primary2Intensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Primary2Intensity) Value() zcl.Val             { return a }
 func (a Primary2Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Primary2Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2305,13 +2608,15 @@ type Primary3X zcl.Zu16
 
 const Primary3XAttr zcl.AttrID = 25
 
-func (Primary3X) ID() zcl.AttrID                { return Primary3XAttr }
+func (Primary3X) ID() zcl.AttrID   { return Primary3XAttr }
+func (Primary3X) Readable() bool   { return true }
+func (Primary3X) Writable() bool   { return false }
+func (Primary3X) Reportable() bool { return false }
+func (Primary3X) SceneIndex() int  { return -1 }
+
 func (Primary3X) Name() string                  { return "Primary3 X" }
-func (Primary3X) Readable() bool                { return true }
-func (Primary3X) Writable() bool                { return false }
-func (Primary3X) Reportable() bool              { return false }
-func (Primary3X) SceneIndex() int               { return -1 }
-func (a *Primary3X) Value() *Primary3X          { return a }
+func (a *Primary3X) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary3X) Value() zcl.Val             { return a }
 func (a Primary3X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary3X) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2340,13 +2645,15 @@ type Primary3Y zcl.Zu16
 
 const Primary3YAttr zcl.AttrID = 26
 
-func (Primary3Y) ID() zcl.AttrID                { return Primary3YAttr }
+func (Primary3Y) ID() zcl.AttrID   { return Primary3YAttr }
+func (Primary3Y) Readable() bool   { return true }
+func (Primary3Y) Writable() bool   { return false }
+func (Primary3Y) Reportable() bool { return false }
+func (Primary3Y) SceneIndex() int  { return -1 }
+
 func (Primary3Y) Name() string                  { return "Primary3 Y" }
-func (Primary3Y) Readable() bool                { return true }
-func (Primary3Y) Writable() bool                { return false }
-func (Primary3Y) Reportable() bool              { return false }
-func (Primary3Y) SceneIndex() int               { return -1 }
-func (a *Primary3Y) Value() *Primary3Y          { return a }
+func (a *Primary3Y) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary3Y) Value() zcl.Val             { return a }
 func (a Primary3Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary3Y) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2377,13 +2684,15 @@ type Primary3Intensity zcl.Zu8
 
 const Primary3IntensityAttr zcl.AttrID = 27
 
-func (Primary3Intensity) ID() zcl.AttrID                { return Primary3IntensityAttr }
+func (Primary3Intensity) ID() zcl.AttrID   { return Primary3IntensityAttr }
+func (Primary3Intensity) Readable() bool   { return true }
+func (Primary3Intensity) Writable() bool   { return false }
+func (Primary3Intensity) Reportable() bool { return false }
+func (Primary3Intensity) SceneIndex() int  { return -1 }
+
 func (Primary3Intensity) Name() string                  { return "Primary3 intensity" }
-func (Primary3Intensity) Readable() bool                { return true }
-func (Primary3Intensity) Writable() bool                { return false }
-func (Primary3Intensity) Reportable() bool              { return false }
-func (Primary3Intensity) SceneIndex() int               { return -1 }
-func (a *Primary3Intensity) Value() *Primary3Intensity  { return a }
+func (a *Primary3Intensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Primary3Intensity) Value() zcl.Val             { return a }
 func (a Primary3Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Primary3Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2412,13 +2721,15 @@ type Primary4X zcl.Zu16
 
 const Primary4XAttr zcl.AttrID = 32
 
-func (Primary4X) ID() zcl.AttrID                { return Primary4XAttr }
+func (Primary4X) ID() zcl.AttrID   { return Primary4XAttr }
+func (Primary4X) Readable() bool   { return true }
+func (Primary4X) Writable() bool   { return false }
+func (Primary4X) Reportable() bool { return false }
+func (Primary4X) SceneIndex() int  { return -1 }
+
 func (Primary4X) Name() string                  { return "Primary4 X" }
-func (Primary4X) Readable() bool                { return true }
-func (Primary4X) Writable() bool                { return false }
-func (Primary4X) Reportable() bool              { return false }
-func (Primary4X) SceneIndex() int               { return -1 }
-func (a *Primary4X) Value() *Primary4X          { return a }
+func (a *Primary4X) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary4X) Value() zcl.Val             { return a }
 func (a Primary4X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary4X) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2447,13 +2758,15 @@ type Primary4Y zcl.Zu16
 
 const Primary4YAttr zcl.AttrID = 33
 
-func (Primary4Y) ID() zcl.AttrID                { return Primary4YAttr }
+func (Primary4Y) ID() zcl.AttrID   { return Primary4YAttr }
+func (Primary4Y) Readable() bool   { return true }
+func (Primary4Y) Writable() bool   { return false }
+func (Primary4Y) Reportable() bool { return false }
+func (Primary4Y) SceneIndex() int  { return -1 }
+
 func (Primary4Y) Name() string                  { return "Primary4 Y" }
-func (Primary4Y) Readable() bool                { return true }
-func (Primary4Y) Writable() bool                { return false }
-func (Primary4Y) Reportable() bool              { return false }
-func (Primary4Y) SceneIndex() int               { return -1 }
-func (a *Primary4Y) Value() *Primary4Y          { return a }
+func (a *Primary4Y) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary4Y) Value() zcl.Val             { return a }
 func (a Primary4Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary4Y) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2484,13 +2797,15 @@ type Primary4Intensity zcl.Zu8
 
 const Primary4IntensityAttr zcl.AttrID = 34
 
-func (Primary4Intensity) ID() zcl.AttrID                { return Primary4IntensityAttr }
+func (Primary4Intensity) ID() zcl.AttrID   { return Primary4IntensityAttr }
+func (Primary4Intensity) Readable() bool   { return true }
+func (Primary4Intensity) Writable() bool   { return false }
+func (Primary4Intensity) Reportable() bool { return false }
+func (Primary4Intensity) SceneIndex() int  { return -1 }
+
 func (Primary4Intensity) Name() string                  { return "Primary4 intensity" }
-func (Primary4Intensity) Readable() bool                { return true }
-func (Primary4Intensity) Writable() bool                { return false }
-func (Primary4Intensity) Reportable() bool              { return false }
-func (Primary4Intensity) SceneIndex() int               { return -1 }
-func (a *Primary4Intensity) Value() *Primary4Intensity  { return a }
+func (a *Primary4Intensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Primary4Intensity) Value() zcl.Val             { return a }
 func (a Primary4Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Primary4Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2519,13 +2834,15 @@ type Primary5X zcl.Zu16
 
 const Primary5XAttr zcl.AttrID = 36
 
-func (Primary5X) ID() zcl.AttrID                { return Primary5XAttr }
+func (Primary5X) ID() zcl.AttrID   { return Primary5XAttr }
+func (Primary5X) Readable() bool   { return true }
+func (Primary5X) Writable() bool   { return false }
+func (Primary5X) Reportable() bool { return false }
+func (Primary5X) SceneIndex() int  { return -1 }
+
 func (Primary5X) Name() string                  { return "Primary5 X" }
-func (Primary5X) Readable() bool                { return true }
-func (Primary5X) Writable() bool                { return false }
-func (Primary5X) Reportable() bool              { return false }
-func (Primary5X) SceneIndex() int               { return -1 }
-func (a *Primary5X) Value() *Primary5X          { return a }
+func (a *Primary5X) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary5X) Value() zcl.Val             { return a }
 func (a Primary5X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary5X) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2554,13 +2871,15 @@ type Primary5Y zcl.Zu16
 
 const Primary5YAttr zcl.AttrID = 37
 
-func (Primary5Y) ID() zcl.AttrID                { return Primary5YAttr }
+func (Primary5Y) ID() zcl.AttrID   { return Primary5YAttr }
+func (Primary5Y) Readable() bool   { return true }
+func (Primary5Y) Writable() bool   { return false }
+func (Primary5Y) Reportable() bool { return false }
+func (Primary5Y) SceneIndex() int  { return -1 }
+
 func (Primary5Y) Name() string                  { return "Primary5 Y" }
-func (Primary5Y) Readable() bool                { return true }
-func (Primary5Y) Writable() bool                { return false }
-func (Primary5Y) Reportable() bool              { return false }
-func (Primary5Y) SceneIndex() int               { return -1 }
-func (a *Primary5Y) Value() *Primary5Y          { return a }
+func (a *Primary5Y) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary5Y) Value() zcl.Val             { return a }
 func (a Primary5Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary5Y) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2591,13 +2910,15 @@ type Primary5Intensity zcl.Zu8
 
 const Primary5IntensityAttr zcl.AttrID = 38
 
-func (Primary5Intensity) ID() zcl.AttrID                { return Primary5IntensityAttr }
+func (Primary5Intensity) ID() zcl.AttrID   { return Primary5IntensityAttr }
+func (Primary5Intensity) Readable() bool   { return true }
+func (Primary5Intensity) Writable() bool   { return false }
+func (Primary5Intensity) Reportable() bool { return false }
+func (Primary5Intensity) SceneIndex() int  { return -1 }
+
 func (Primary5Intensity) Name() string                  { return "Primary5 intensity" }
-func (Primary5Intensity) Readable() bool                { return true }
-func (Primary5Intensity) Writable() bool                { return false }
-func (Primary5Intensity) Reportable() bool              { return false }
-func (Primary5Intensity) SceneIndex() int               { return -1 }
-func (a *Primary5Intensity) Value() *Primary5Intensity  { return a }
+func (a *Primary5Intensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Primary5Intensity) Value() zcl.Val             { return a }
 func (a Primary5Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Primary5Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2626,13 +2947,15 @@ type Primary6X zcl.Zu16
 
 const Primary6XAttr zcl.AttrID = 40
 
-func (Primary6X) ID() zcl.AttrID                { return Primary6XAttr }
+func (Primary6X) ID() zcl.AttrID   { return Primary6XAttr }
+func (Primary6X) Readable() bool   { return true }
+func (Primary6X) Writable() bool   { return false }
+func (Primary6X) Reportable() bool { return false }
+func (Primary6X) SceneIndex() int  { return -1 }
+
 func (Primary6X) Name() string                  { return "Primary6 X" }
-func (Primary6X) Readable() bool                { return true }
-func (Primary6X) Writable() bool                { return false }
-func (Primary6X) Reportable() bool              { return false }
-func (Primary6X) SceneIndex() int               { return -1 }
-func (a *Primary6X) Value() *Primary6X          { return a }
+func (a *Primary6X) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary6X) Value() zcl.Val             { return a }
 func (a Primary6X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary6X) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2661,13 +2984,15 @@ type Primary6Y zcl.Zu16
 
 const Primary6YAttr zcl.AttrID = 41
 
-func (Primary6Y) ID() zcl.AttrID                { return Primary6YAttr }
+func (Primary6Y) ID() zcl.AttrID   { return Primary6YAttr }
+func (Primary6Y) Readable() bool   { return true }
+func (Primary6Y) Writable() bool   { return false }
+func (Primary6Y) Reportable() bool { return false }
+func (Primary6Y) SceneIndex() int  { return -1 }
+
 func (Primary6Y) Name() string                  { return "Primary6 Y" }
-func (Primary6Y) Readable() bool                { return true }
-func (Primary6Y) Writable() bool                { return false }
-func (Primary6Y) Reportable() bool              { return false }
-func (Primary6Y) SceneIndex() int               { return -1 }
-func (a *Primary6Y) Value() *Primary6Y          { return a }
+func (a *Primary6Y) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Primary6Y) Value() zcl.Val             { return a }
 func (a Primary6Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Primary6Y) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2698,13 +3023,15 @@ type Primary6Intensity zcl.Zu8
 
 const Primary6IntensityAttr zcl.AttrID = 42
 
-func (Primary6Intensity) ID() zcl.AttrID                { return Primary6IntensityAttr }
+func (Primary6Intensity) ID() zcl.AttrID   { return Primary6IntensityAttr }
+func (Primary6Intensity) Readable() bool   { return true }
+func (Primary6Intensity) Writable() bool   { return false }
+func (Primary6Intensity) Reportable() bool { return false }
+func (Primary6Intensity) SceneIndex() int  { return -1 }
+
 func (Primary6Intensity) Name() string                  { return "Primary6 intensity" }
-func (Primary6Intensity) Readable() bool                { return true }
-func (Primary6Intensity) Writable() bool                { return false }
-func (Primary6Intensity) Reportable() bool              { return false }
-func (Primary6Intensity) SceneIndex() int               { return -1 }
-func (a *Primary6Intensity) Value() *Primary6Intensity  { return a }
+func (a *Primary6Intensity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Primary6Intensity) Value() zcl.Val             { return a }
 func (a Primary6Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Primary6Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2729,7 +3056,9 @@ func (a Primary6Intensity) String() string {
 // Rate increment/steps per second
 type Rate zcl.Zu8
 
-func (a *Rate) Value() *Rate               { return a }
+func (Rate) Name() string                  { return "Rate" }
+func (a *Rate) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Rate) Value() zcl.Val             { return a }
 func (a Rate) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Rate) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2754,7 +3083,9 @@ func (a Rate) String() string {
 // RateX increment/steps per second
 type RateX zcl.Zs16
 
-func (a *RateX) Value() *RateX              { return a }
+func (RateX) Name() string                  { return "Rate X" }
+func (a *RateX) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
+func (a *RateX) Value() zcl.Val             { return a }
 func (a RateX) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *RateX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2779,7 +3110,9 @@ func (a RateX) String() string {
 // RateY increment/steps per second
 type RateY zcl.Zs16
 
-func (a *RateY) Value() *RateY              { return a }
+func (RateY) Name() string                  { return "Rate Y" }
+func (a *RateY) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
+func (a *RateY) Value() zcl.Val             { return a }
 func (a RateY) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *RateY) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2807,13 +3140,15 @@ type RemainingTime zcl.Zu16
 
 const RemainingTimeAttr zcl.AttrID = 2
 
-func (RemainingTime) ID() zcl.AttrID                { return RemainingTimeAttr }
+func (RemainingTime) ID() zcl.AttrID   { return RemainingTimeAttr }
+func (RemainingTime) Readable() bool   { return true }
+func (RemainingTime) Writable() bool   { return false }
+func (RemainingTime) Reportable() bool { return false }
+func (RemainingTime) SceneIndex() int  { return -1 }
+
 func (RemainingTime) Name() string                  { return "Remaining time" }
-func (RemainingTime) Readable() bool                { return true }
-func (RemainingTime) Writable() bool                { return false }
-func (RemainingTime) Reportable() bool              { return false }
-func (RemainingTime) SceneIndex() int               { return -1 }
-func (a *RemainingTime) Value() *RemainingTime      { return a }
+func (a *RemainingTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *RemainingTime) Value() zcl.Val             { return a }
 func (a RemainingTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2837,7 +3172,9 @@ func (a RemainingTime) String() string {
 
 type Saturation zcl.Zu8
 
-func (a *Saturation) Value() *Saturation         { return a }
+func (Saturation) Name() string                  { return "Saturation" }
+func (a *Saturation) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *Saturation) Value() zcl.Val             { return a }
 func (a Saturation) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Saturation) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2861,7 +3198,9 @@ func (a Saturation) String() string {
 
 type StepX zcl.Zs16
 
-func (a *StepX) Value() *StepX              { return a }
+func (StepX) Name() string                  { return "Step X" }
+func (a *StepX) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
+func (a *StepX) Value() zcl.Val             { return a }
 func (a StepX) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *StepX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2885,7 +3224,9 @@ func (a StepX) String() string {
 
 type StepY zcl.Zs16
 
-func (a *StepY) Value() *StepY              { return a }
+func (StepY) Name() string                  { return "Step Y" }
+func (a *StepY) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
+func (a *StepY) Value() zcl.Val             { return a }
 func (a StepY) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *StepY) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2909,7 +3250,9 @@ func (a StepY) String() string {
 
 type StepMode zcl.Zenum8
 
-func (a *StepMode) Value() *StepMode           { return a }
+func (StepMode) Name() string                  { return "Step mode" }
+func (a *StepMode) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
+func (a *StepMode) Value() zcl.Val             { return a }
 func (a StepMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *StepMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2942,9 +3285,18 @@ func (a StepMode) IsDown() bool { return a == 0x03 }
 func (a *StepMode) SetUp()      { *a = 0x01 }
 func (a *StepMode) SetDown()    { *a = 0x03 }
 
+func (StepMode) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x01, Name: "Up"},
+		{Value: 0x03, Name: "Down"},
+	}
+}
+
 type StepSize zcl.Zu8
 
-func (a *StepSize) Value() *StepSize           { return a }
+func (StepSize) Name() string                  { return "Step size" }
+func (a *StepSize) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
+func (a *StepSize) Value() zcl.Val             { return a }
 func (a StepSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *StepSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2969,7 +3321,9 @@ func (a StepSize) String() string {
 // Time Time in seconds used for a whole color loop.
 type Time zcl.Zu16
 
-func (a *Time) Value() *Time               { return a }
+func (Time) Name() string                  { return "Time" }
+func (a *Time) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *Time) Value() zcl.Val             { return a }
 func (a Time) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Time) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2994,7 +3348,9 @@ func (a Time) String() string {
 // TransitionTime The transition time in 1/10ths of a second.
 type TransitionTime zcl.Zu16
 
-func (a *TransitionTime) Value() *TransitionTime     { return a }
+func (TransitionTime) Name() string                  { return "Transition time" }
+func (a *TransitionTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *TransitionTime) Value() zcl.Val             { return a }
 func (a TransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3018,7 +3374,9 @@ func (a TransitionTime) String() string {
 
 type UpdateFlags zcl.Zbmp8
 
-func (a *UpdateFlags) Value() *UpdateFlags        { return a }
+func (UpdateFlags) Name() string                  { return "Update flags" }
+func (a *UpdateFlags) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
+func (a *UpdateFlags) Value() zcl.Val             { return a }
 func (a UpdateFlags) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *UpdateFlags) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3065,6 +3423,15 @@ func (a *UpdateFlags) SetUpdateDirection(b bool) { copy((*a)[:], zcl.BitmapSet([
 func (a *UpdateFlags) SetUpdateTime(b bool)      { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 2, b)) }
 func (a *UpdateFlags) SetUpdateStartHue(b bool)  { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 3, b)) }
 
+func (UpdateFlags) MultiOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0, Name: "Update action"},
+		{Value: 1, Name: "Update direction"},
+		{Value: 2, Name: "Update time"},
+		{Value: 3, Name: "Update start hue"},
+	}
+}
+
 // WhitePointX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
 // in the range 0 to 65279 inclusive)
@@ -3072,13 +3439,15 @@ type WhitePointX zcl.Zu16
 
 const WhitePointXAttr zcl.AttrID = 48
 
-func (WhitePointX) ID() zcl.AttrID                { return WhitePointXAttr }
+func (WhitePointX) ID() zcl.AttrID   { return WhitePointXAttr }
+func (WhitePointX) Readable() bool   { return true }
+func (WhitePointX) Writable() bool   { return true }
+func (WhitePointX) Reportable() bool { return false }
+func (WhitePointX) SceneIndex() int  { return -1 }
+
 func (WhitePointX) Name() string                  { return "White Point X" }
-func (WhitePointX) Readable() bool                { return true }
-func (WhitePointX) Writable() bool                { return true }
-func (WhitePointX) Reportable() bool              { return false }
-func (WhitePointX) SceneIndex() int               { return -1 }
-func (a *WhitePointX) Value() *WhitePointX        { return a }
+func (a *WhitePointX) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *WhitePointX) Value() zcl.Val             { return a }
 func (a WhitePointX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *WhitePointX) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3107,13 +3476,15 @@ type WhitePointY zcl.Zu16
 
 const WhitePointYAttr zcl.AttrID = 49
 
-func (WhitePointY) ID() zcl.AttrID                { return WhitePointYAttr }
+func (WhitePointY) ID() zcl.AttrID   { return WhitePointYAttr }
+func (WhitePointY) Readable() bool   { return true }
+func (WhitePointY) Writable() bool   { return true }
+func (WhitePointY) Reportable() bool { return false }
+func (WhitePointY) SceneIndex() int  { return -1 }
+
 func (WhitePointY) Name() string                  { return "White Point Y" }
-func (WhitePointY) Readable() bool                { return true }
-func (WhitePointY) Writable() bool                { return true }
-func (WhitePointY) Reportable() bool              { return false }
-func (WhitePointY) SceneIndex() int               { return -1 }
-func (a *WhitePointY) Value() *WhitePointY        { return a }
+func (a *WhitePointY) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
+func (a *WhitePointY) Value() zcl.Val             { return a }
 func (a WhitePointY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *WhitePointY) UnmarshalZcl(b []byte) ([]byte, error) {

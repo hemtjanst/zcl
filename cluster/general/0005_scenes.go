@@ -8,16 +8,19 @@ const ScenesID zcl.ClusterID = 5
 var ScenesCluster = zcl.Cluster{
 	Name: "Scenes",
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
-		AddSceneCommand:           func() zcl.Command { return new(AddScene) },
-		ViewSceneCommand:          func() zcl.Command { return new(ViewScene) },
-		RemoveSceneCommand:        func() zcl.Command { return new(RemoveScene) },
-		RemoveAllScenesCommand:    func() zcl.Command { return new(RemoveAllScenes) },
-		StoreSceneCommand:         func() zcl.Command { return new(StoreScene) },
-		RecallSceneCommand:        func() zcl.Command { return new(RecallScene) },
-		GetSceneMembershipCommand: func() zcl.Command { return new(GetSceneMembership) },
-		EnhancedAddSceneCommand:   func() zcl.Command { return new(EnhancedAddScene) },
-		EnhancedViewSceneCommand:  func() zcl.Command { return new(EnhancedViewScene) },
-		CopySceneCommand:          func() zcl.Command { return new(CopyScene) },
+		AddSceneCommand:                 func() zcl.Command { return new(AddScene) },
+		ViewSceneCommand:                func() zcl.Command { return new(ViewScene) },
+		RemoveSceneCommand:              func() zcl.Command { return new(RemoveScene) },
+		RemoveAllScenesCommand:          func() zcl.Command { return new(RemoveAllScenes) },
+		StoreSceneCommand:               func() zcl.Command { return new(StoreScene) },
+		RecallSceneCommand:              func() zcl.Command { return new(RecallScene) },
+		GetSceneMembershipCommand:       func() zcl.Command { return new(GetSceneMembership) },
+		EnhancedAddSceneCommand:         func() zcl.Command { return new(EnhancedAddScene) },
+		EnhancedViewSceneCommand:        func() zcl.Command { return new(EnhancedViewScene) },
+		CopySceneCommand:                func() zcl.Command { return new(CopyScene) },
+		IkeaRemotePressCommand:          func() zcl.Command { return new(IkeaRemotePress) },
+		IkeaRemoteLongpressStartCommand: func() zcl.Command { return new(IkeaRemoteLongpressStart) },
+		IkeaRemoteLongpressStopCommand:  func() zcl.Command { return new(IkeaRemoteLongpressStop) },
 	},
 	ClientCmd: map[zcl.CommandID]func() zcl.Command{
 		AddSceneResponseCommand:           func() zcl.Command { return new(AddSceneResponse) },
@@ -71,17 +74,34 @@ func (v *AddScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of AddScene
+func (v *AddScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.SceneId,
+		&v.TransitionTimeSec,
+		&v.SceneName,
+		&v.SceneExtensions,
+	}
+}
+
+// Name of the command
 func (AddScene) Name() string { return "Add scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (AddScene) ID() CommandID { return AddSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (AddScene) Required() bool { return true }
+
+// Cluster ID of the command
 func (AddScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (AddScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (AddScene) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddScene
 func (v AddScene) MarshalZcl() ([]byte, error) {
@@ -184,17 +204,31 @@ func (v *ViewScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ViewScene
+func (v *ViewScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (ViewScene) Name() string { return "View scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ViewScene) ID() CommandID { return ViewSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ViewScene) Required() bool { return true }
+
+// Cluster ID of the command
 func (ViewScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ViewScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ViewScene) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewScene
 func (v ViewScene) MarshalZcl() ([]byte, error) {
@@ -261,17 +295,31 @@ func (v *RemoveScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RemoveScene
+func (v *RemoveScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (RemoveScene) Name() string { return "Remove scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RemoveScene) ID() CommandID { return RemoveSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RemoveScene) Required() bool { return true }
+
+// Cluster ID of the command
 func (RemoveScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RemoveScene) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveScene
 func (v RemoveScene) MarshalZcl() ([]byte, error) {
@@ -336,17 +384,30 @@ func (v *RemoveAllScenes) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RemoveAllScenes
+func (v *RemoveAllScenes) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+	}
+}
+
+// Name of the command
 func (RemoveAllScenes) Name() string { return "Remove all scenes" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RemoveAllScenes) ID() CommandID { return RemoveAllScenesCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RemoveAllScenes) Required() bool { return true }
+
+// Cluster ID of the command
 func (RemoveAllScenes) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveAllScenes) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RemoveAllScenes) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveAllScenes
 func (v RemoveAllScenes) MarshalZcl() ([]byte, error) {
@@ -401,17 +462,31 @@ func (v *StoreScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StoreScene
+func (v *StoreScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (StoreScene) Name() string { return "Store scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StoreScene) ID() CommandID { return StoreSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StoreScene) Required() bool { return true }
+
+// Cluster ID of the command
 func (StoreScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StoreScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StoreScene) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of StoreScene
 func (v StoreScene) MarshalZcl() ([]byte, error) {
@@ -478,17 +553,31 @@ func (v *RecallScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RecallScene
+func (v *RecallScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (RecallScene) Name() string { return "Recall scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RecallScene) ID() CommandID { return RecallSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RecallScene) Required() bool { return true }
+
+// Cluster ID of the command
 func (RecallScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RecallScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RecallScene) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of RecallScene
 func (v RecallScene) MarshalZcl() ([]byte, error) {
@@ -553,17 +642,30 @@ func (v *GetSceneMembership) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of GetSceneMembership
+func (v *GetSceneMembership) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+	}
+}
+
+// Name of the command
 func (GetSceneMembership) Name() string { return "Get scene membership" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (GetSceneMembership) ID() CommandID { return GetSceneMembershipCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (GetSceneMembership) Required() bool { return true }
+
+// Cluster ID of the command
 func (GetSceneMembership) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetSceneMembership) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (GetSceneMembership) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of GetSceneMembership
 func (v GetSceneMembership) MarshalZcl() ([]byte, error) {
@@ -630,17 +732,34 @@ func (v *EnhancedAddScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedAddScene
+func (v *EnhancedAddScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.SceneId,
+		&v.TransitionTime,
+		&v.SceneName,
+		&v.SceneExtensions,
+	}
+}
+
+// Name of the command
 func (EnhancedAddScene) Name() string { return "Enhanced Add Scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedAddScene) ID() CommandID { return EnhancedAddSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedAddScene) Required() bool { return true }
+
+// Cluster ID of the command
 func (EnhancedAddScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedAddScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedAddScene) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedAddScene
 func (v EnhancedAddScene) MarshalZcl() ([]byte, error) {
@@ -743,17 +862,31 @@ func (v *EnhancedViewScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedViewScene
+func (v *EnhancedViewScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (EnhancedViewScene) Name() string { return "Enhanced View Scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedViewScene) ID() CommandID { return EnhancedViewSceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedViewScene) Required() bool { return false }
+
+// Cluster ID of the command
 func (EnhancedViewScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedViewScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedViewScene) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedViewScene
 func (v EnhancedViewScene) MarshalZcl() ([]byte, error) {
@@ -825,17 +958,34 @@ func (v *CopyScene) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of CopyScene
+func (v *CopyScene) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.SceneCopyMode,
+		&v.FromGroupId,
+		&v.FromSceneId,
+		&v.ToGroupId,
+		&v.ToSceneId,
+	}
+}
+
+// Name of the command
 func (CopyScene) Name() string { return "Copy Scene" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (CopyScene) ID() CommandID { return CopySceneCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (CopyScene) Required() bool { return false }
+
+// Cluster ID of the command
 func (CopyScene) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (CopyScene) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (CopyScene) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of CopyScene
 func (v CopyScene) MarshalZcl() ([]byte, error) {
@@ -921,6 +1071,208 @@ func (v CopyScene) String() string {
 	)
 }
 
+// IkeaRemotePress Custom left/right action of Ikea remote
+type IkeaRemotePress struct {
+	IkeaRemoteDirection IkeaRemoteDirection
+}
+
+// IkeaRemotePressCommand is the Command ID of IkeaRemotePress
+const IkeaRemotePressCommand CommandID = 0x0007
+
+// Values returns all values of IkeaRemotePress
+func (v *IkeaRemotePress) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.IkeaRemoteDirection,
+	}
+}
+
+// Arguments returns all values of IkeaRemotePress
+func (v *IkeaRemotePress) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.IkeaRemoteDirection,
+	}
+}
+
+// Name of the command
+func (IkeaRemotePress) Name() string { return "Ikea Remote Press" }
+
+// ID of the command
+func (IkeaRemotePress) ID() CommandID { return IkeaRemotePressCommand }
+
+// Required
+func (IkeaRemotePress) Required() bool { return false }
+
+// Cluster ID of the command
+func (IkeaRemotePress) Cluster() zcl.ClusterID { return ScenesID }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (IkeaRemotePress) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (IkeaRemotePress) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+
+// MarshalZcl returns the wire format representation of IkeaRemotePress
+func (v IkeaRemotePress) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	var err error
+
+	{
+		if tmp, err = v.IkeaRemoteDirection.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the IkeaRemotePress struct
+func (v *IkeaRemotePress) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+
+	if b, err = (&v.IkeaRemoteDirection).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v IkeaRemotePress) String() string {
+	return zcl.Sprintf(
+		"IkeaRemotePress{"+zcl.StrJoin([]string{
+			"IkeaRemoteDirection(%v)",
+		}, " ")+"}",
+		v.IkeaRemoteDirection,
+	)
+}
+
+type IkeaRemoteLongpressStart struct {
+	IkeaRemoteDirection IkeaRemoteDirection
+}
+
+// IkeaRemoteLongpressStartCommand is the Command ID of IkeaRemoteLongpressStart
+const IkeaRemoteLongpressStartCommand CommandID = 0x0008
+
+// Values returns all values of IkeaRemoteLongpressStart
+func (v *IkeaRemoteLongpressStart) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.IkeaRemoteDirection,
+	}
+}
+
+// Arguments returns all values of IkeaRemoteLongpressStart
+func (v *IkeaRemoteLongpressStart) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.IkeaRemoteDirection,
+	}
+}
+
+// Name of the command
+func (IkeaRemoteLongpressStart) Name() string { return "Ikea Remote Longpress Start" }
+
+// ID of the command
+func (IkeaRemoteLongpressStart) ID() CommandID { return IkeaRemoteLongpressStartCommand }
+
+// Required
+func (IkeaRemoteLongpressStart) Required() bool { return false }
+
+// Cluster ID of the command
+func (IkeaRemoteLongpressStart) Cluster() zcl.ClusterID { return ScenesID }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (IkeaRemoteLongpressStart) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (IkeaRemoteLongpressStart) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
+
+// MarshalZcl returns the wire format representation of IkeaRemoteLongpressStart
+func (v IkeaRemoteLongpressStart) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	var err error
+
+	{
+		if tmp, err = v.IkeaRemoteDirection.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the IkeaRemoteLongpressStart struct
+func (v *IkeaRemoteLongpressStart) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+
+	if b, err = (&v.IkeaRemoteDirection).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v IkeaRemoteLongpressStart) String() string {
+	return zcl.Sprintf(
+		"IkeaRemoteLongpressStart{"+zcl.StrJoin([]string{
+			"IkeaRemoteDirection(%v)",
+		}, " ")+"}",
+		v.IkeaRemoteDirection,
+	)
+}
+
+type IkeaRemoteLongpressStop struct {
+}
+
+// IkeaRemoteLongpressStopCommand is the Command ID of IkeaRemoteLongpressStop
+const IkeaRemoteLongpressStopCommand CommandID = 0x0009
+
+// Values returns all values of IkeaRemoteLongpressStop
+func (v *IkeaRemoteLongpressStop) Values() []zcl.Val {
+	return []zcl.Val{}
+}
+
+// Arguments returns all values of IkeaRemoteLongpressStop
+func (v *IkeaRemoteLongpressStop) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
+func (IkeaRemoteLongpressStop) Name() string { return "Ikea Remote Longpress Stop" }
+
+// ID of the command
+func (IkeaRemoteLongpressStop) ID() CommandID { return IkeaRemoteLongpressStopCommand }
+
+// Required
+func (IkeaRemoteLongpressStop) Required() bool { return false }
+
+// Cluster ID of the command
+func (IkeaRemoteLongpressStop) Cluster() zcl.ClusterID { return ScenesID }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (IkeaRemoteLongpressStop) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (IkeaRemoteLongpressStop) MarshalJSON() ([]byte, error) { return []byte("9"), nil }
+
+// MarshalZcl returns the wire format representation of IkeaRemoteLongpressStop
+func (v IkeaRemoteLongpressStop) MarshalZcl() ([]byte, error) {
+	return nil, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the IkeaRemoteLongpressStop struct
+func (v *IkeaRemoteLongpressStop) UnmarshalZcl(b []byte) ([]byte, error) {
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v IkeaRemoteLongpressStop) String() string {
+	return zcl.Sprintf(
+		"IkeaRemoteLongpressStop{" + zcl.StrJoin([]string{}, " ") + "}",
+	)
+}
+
 // AddSceneResponse Response to the add scene command.
 type AddSceneResponse struct {
 	Status  Status
@@ -940,17 +1292,32 @@ func (v *AddSceneResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of AddSceneResponse
+func (v *AddSceneResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (AddSceneResponse) Name() string { return "Add scene response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (AddSceneResponse) ID() CommandID { return AddSceneResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (AddSceneResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (AddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (AddSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (AddSceneResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddSceneResponse
 func (v AddSceneResponse) MarshalZcl() ([]byte, error) {
@@ -1043,17 +1410,35 @@ func (v *ViewSceneResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ViewSceneResponse
+func (v *ViewSceneResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+		&v.SceneId,
+		&v.TransitionTimeSec,
+		&v.SceneName,
+		&v.SceneExtensions,
+	}
+}
+
+// Name of the command
 func (ViewSceneResponse) Name() string { return "View scene response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ViewSceneResponse) ID() CommandID { return ViewSceneResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ViewSceneResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (ViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ViewSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ViewSceneResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewSceneResponse
 func (v ViewSceneResponse) MarshalZcl() ([]byte, error) {
@@ -1170,17 +1555,32 @@ func (v *RemoveSceneResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RemoveSceneResponse
+func (v *RemoveSceneResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (RemoveSceneResponse) Name() string { return "Remove scene response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RemoveSceneResponse) ID() CommandID { return RemoveSceneResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RemoveSceneResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (RemoveSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RemoveSceneResponse) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveSceneResponse
 func (v RemoveSceneResponse) MarshalZcl() ([]byte, error) {
@@ -1259,17 +1659,31 @@ func (v *RemoveAllScenesResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RemoveAllScenesResponse
+func (v *RemoveAllScenesResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+	}
+}
+
+// Name of the command
 func (RemoveAllScenesResponse) Name() string { return "Remove all scenes response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RemoveAllScenesResponse) ID() CommandID { return RemoveAllScenesResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RemoveAllScenesResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (RemoveAllScenesResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveAllScenesResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RemoveAllScenesResponse) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveAllScenesResponse
 func (v RemoveAllScenesResponse) MarshalZcl() ([]byte, error) {
@@ -1338,17 +1752,32 @@ func (v *StoreSceneResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StoreSceneResponse
+func (v *StoreSceneResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (StoreSceneResponse) Name() string { return "Store scene response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StoreSceneResponse) ID() CommandID { return StoreSceneResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StoreSceneResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (StoreSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StoreSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StoreSceneResponse) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of StoreSceneResponse
 func (v StoreSceneResponse) MarshalZcl() ([]byte, error) {
@@ -1432,17 +1861,33 @@ func (v *GetSceneMembershipResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of GetSceneMembershipResponse
+func (v *GetSceneMembershipResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.SceneCapacity,
+		&v.GroupId,
+		&v.SceneList,
+	}
+}
+
+// Name of the command
 func (GetSceneMembershipResponse) Name() string { return "Get scene membership response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (GetSceneMembershipResponse) ID() CommandID { return GetSceneMembershipResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (GetSceneMembershipResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (GetSceneMembershipResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetSceneMembershipResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (GetSceneMembershipResponse) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of GetSceneMembershipResponse
 func (v GetSceneMembershipResponse) MarshalZcl() ([]byte, error) {
@@ -1534,17 +1979,32 @@ func (v *EnhancedAddSceneResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedAddSceneResponse
+func (v *EnhancedAddSceneResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+		&v.SceneId,
+	}
+}
+
+// Name of the command
 func (EnhancedAddSceneResponse) Name() string { return "Enhanced Add Scene response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedAddSceneResponse) ID() CommandID { return EnhancedAddSceneResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedAddSceneResponse) Required() bool { return false }
+
+// Cluster ID of the command
 func (EnhancedAddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedAddSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedAddSceneResponse) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedAddSceneResponse
 func (v EnhancedAddSceneResponse) MarshalZcl() ([]byte, error) {
@@ -1637,17 +2097,35 @@ func (v *EnhancedViewSceneResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of EnhancedViewSceneResponse
+func (v *EnhancedViewSceneResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+		&v.SceneId,
+		&v.TransitionTime,
+		&v.SceneName,
+		&v.SceneExtensions,
+	}
+}
+
+// Name of the command
 func (EnhancedViewSceneResponse) Name() string { return "Enhanced View Scene response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (EnhancedViewSceneResponse) ID() CommandID { return EnhancedViewSceneResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (EnhancedViewSceneResponse) Required() bool { return false }
+
+// Cluster ID of the command
 func (EnhancedViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedViewSceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (EnhancedViewSceneResponse) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedViewSceneResponse
 func (v EnhancedViewSceneResponse) MarshalZcl() ([]byte, error) {
@@ -1763,17 +2241,32 @@ func (v *CopySceneResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of CopySceneResponse
+func (v *CopySceneResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.FromGroupId,
+		&v.FromSceneId,
+	}
+}
+
+// Name of the command
 func (CopySceneResponse) Name() string { return "Copy Scene Response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (CopySceneResponse) ID() CommandID { return CopySceneResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (CopySceneResponse) Required() bool { return false }
+
+// Cluster ID of the command
 func (CopySceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (CopySceneResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (CopySceneResponse) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of CopySceneResponse
 func (v CopySceneResponse) MarshalZcl() ([]byte, error) {

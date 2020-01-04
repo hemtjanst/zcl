@@ -38,17 +38,30 @@ func (v *Identify) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of Identify
+func (v *Identify) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.IdentifyTime,
+	}
+}
+
+// Name of the command
 func (Identify) Name() string { return "Identify" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (Identify) ID() CommandID { return IdentifyCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (Identify) Required() bool { return true }
+
+// Cluster ID of the command
 func (Identify) Cluster() zcl.ClusterID { return IdentifyID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Identify) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (Identify) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of Identify
 func (v Identify) MarshalZcl() ([]byte, error) {
@@ -98,17 +111,28 @@ func (v *IdentifyQuery) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of IdentifyQuery
+func (v *IdentifyQuery) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (IdentifyQuery) Name() string { return "Identify Query" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (IdentifyQuery) ID() CommandID { return IdentifyQueryCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (IdentifyQuery) Required() bool { return true }
+
+// Cluster ID of the command
 func (IdentifyQuery) Cluster() zcl.ClusterID { return IdentifyID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (IdentifyQuery) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (IdentifyQuery) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of IdentifyQuery
 func (v IdentifyQuery) MarshalZcl() ([]byte, error) {
@@ -146,17 +170,31 @@ func (v *TriggerEffect) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of TriggerEffect
+func (v *TriggerEffect) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.IdentifyEffect,
+		&v.IdentifyEffectVariant,
+	}
+}
+
+// Name of the command
 func (TriggerEffect) Name() string { return "Trigger Effect" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (TriggerEffect) ID() CommandID { return TriggerEffectCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (TriggerEffect) Required() bool { return true }
+
+// Cluster ID of the command
 func (TriggerEffect) Cluster() zcl.ClusterID { return IdentifyID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (TriggerEffect) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (TriggerEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of TriggerEffect
 func (v TriggerEffect) MarshalZcl() ([]byte, error) {
@@ -222,17 +260,30 @@ func (v *IdentifyQueryResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of IdentifyQueryResponse
+func (v *IdentifyQueryResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.IdentifyTimeout,
+	}
+}
+
+// Name of the command
 func (IdentifyQueryResponse) Name() string { return "Identify Query Response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (IdentifyQueryResponse) ID() CommandID { return IdentifyQueryResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (IdentifyQueryResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (IdentifyQueryResponse) Cluster() zcl.ClusterID { return IdentifyID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (IdentifyQueryResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (IdentifyQueryResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of IdentifyQueryResponse
 func (v IdentifyQueryResponse) MarshalZcl() ([]byte, error) {

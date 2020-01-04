@@ -45,17 +45,31 @@ func (v *AddGroup) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of AddGroup
+func (v *AddGroup) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.GroupName,
+	}
+}
+
+// Name of the command
 func (AddGroup) Name() string { return "Add group" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (AddGroup) ID() CommandID { return AddGroupCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (AddGroup) Required() bool { return true }
+
+// Cluster ID of the command
 func (AddGroup) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (AddGroup) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (AddGroup) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddGroup
 func (v AddGroup) MarshalZcl() ([]byte, error) {
@@ -120,17 +134,30 @@ func (v *ViewGroup) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ViewGroup
+func (v *ViewGroup) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+	}
+}
+
+// Name of the command
 func (ViewGroup) Name() string { return "View group" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ViewGroup) ID() CommandID { return ViewGroupCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ViewGroup) Required() bool { return true }
+
+// Cluster ID of the command
 func (ViewGroup) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ViewGroup) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ViewGroup) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewGroup
 func (v ViewGroup) MarshalZcl() ([]byte, error) {
@@ -183,17 +210,30 @@ func (v *GetGroupMembership) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of GetGroupMembership
+func (v *GetGroupMembership) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupList,
+	}
+}
+
+// Name of the command
 func (GetGroupMembership) Name() string { return "Get group membership" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (GetGroupMembership) ID() CommandID { return GetGroupMembershipCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (GetGroupMembership) Required() bool { return true }
+
+// Cluster ID of the command
 func (GetGroupMembership) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetGroupMembership) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (GetGroupMembership) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of GetGroupMembership
 func (v GetGroupMembership) MarshalZcl() ([]byte, error) {
@@ -246,17 +286,30 @@ func (v *RemoveGroup) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RemoveGroup
+func (v *RemoveGroup) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupList,
+	}
+}
+
+// Name of the command
 func (RemoveGroup) Name() string { return "Remove group" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RemoveGroup) ID() CommandID { return RemoveGroupCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RemoveGroup) Required() bool { return true }
+
+// Cluster ID of the command
 func (RemoveGroup) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveGroup) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RemoveGroup) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveGroup
 func (v RemoveGroup) MarshalZcl() ([]byte, error) {
@@ -306,17 +359,28 @@ func (v *RemoveAllGroups) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RemoveAllGroups
+func (v *RemoveAllGroups) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (RemoveAllGroups) Name() string { return "Remove all groups" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RemoveAllGroups) ID() CommandID { return RemoveAllGroupsCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RemoveAllGroups) Required() bool { return true }
+
+// Cluster ID of the command
 func (RemoveAllGroups) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveAllGroups) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RemoveAllGroups) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveAllGroups
 func (v RemoveAllGroups) MarshalZcl() ([]byte, error) {
@@ -352,17 +416,31 @@ func (v *AddGroupIfIdentifying) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of AddGroupIfIdentifying
+func (v *AddGroupIfIdentifying) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupId,
+		&v.GroupName,
+	}
+}
+
+// Name of the command
 func (AddGroupIfIdentifying) Name() string { return "Add group if identifying" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (AddGroupIfIdentifying) ID() CommandID { return AddGroupIfIdentifyingCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (AddGroupIfIdentifying) Required() bool { return true }
+
+// Cluster ID of the command
 func (AddGroupIfIdentifying) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (AddGroupIfIdentifying) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (AddGroupIfIdentifying) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of AddGroupIfIdentifying
 func (v AddGroupIfIdentifying) MarshalZcl() ([]byte, error) {
@@ -429,17 +507,31 @@ func (v *AddGroupResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of AddGroupResponse
+func (v *AddGroupResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+	}
+}
+
+// Name of the command
 func (AddGroupResponse) Name() string { return "Add group response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (AddGroupResponse) ID() CommandID { return AddGroupResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (AddGroupResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (AddGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (AddGroupResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (AddGroupResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddGroupResponse
 func (v AddGroupResponse) MarshalZcl() ([]byte, error) {
@@ -508,17 +600,32 @@ func (v *ViewGroupResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ViewGroupResponse
+func (v *ViewGroupResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+		&v.GroupName,
+	}
+}
+
+// Name of the command
 func (ViewGroupResponse) Name() string { return "View group response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ViewGroupResponse) ID() CommandID { return ViewGroupResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ViewGroupResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (ViewGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ViewGroupResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ViewGroupResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewGroupResponse
 func (v ViewGroupResponse) MarshalZcl() ([]byte, error) {
@@ -600,17 +707,31 @@ func (v *GetGroupMembershipResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of GetGroupMembershipResponse
+func (v *GetGroupMembershipResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.GroupCapacity,
+		&v.GroupList,
+	}
+}
+
+// Name of the command
 func (GetGroupMembershipResponse) Name() string { return "Get group membership response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (GetGroupMembershipResponse) ID() CommandID { return GetGroupMembershipResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (GetGroupMembershipResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (GetGroupMembershipResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetGroupMembershipResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (GetGroupMembershipResponse) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of GetGroupMembershipResponse
 func (v GetGroupMembershipResponse) MarshalZcl() ([]byte, error) {
@@ -677,17 +798,31 @@ func (v *RemoveGroupResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of RemoveGroupResponse
+func (v *RemoveGroupResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.GroupId,
+	}
+}
+
+// Name of the command
 func (RemoveGroupResponse) Name() string { return "Remove group response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (RemoveGroupResponse) ID() CommandID { return RemoveGroupResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (RemoveGroupResponse) Required() bool { return true }
+
+// Cluster ID of the command
 func (RemoveGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveGroupResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (RemoveGroupResponse) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveGroupResponse
 func (v RemoveGroupResponse) MarshalZcl() ([]byte, error) {

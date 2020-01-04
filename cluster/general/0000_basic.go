@@ -21,6 +21,8 @@ var BasicCluster = zcl.Cluster{
 		ModelIdentifierAttr:     func() zcl.Attr { return new(ModelIdentifier) },
 		DateCodeAttr:            func() zcl.Attr { return new(DateCode) },
 		PowerSourceAttr:         func() zcl.Attr { return new(PowerSource) },
+		GenericDeviceClassAttr:  func() zcl.Attr { return new(GenericDeviceClass) },
+		GenericDeviceTypeAttr:   func() zcl.Attr { return new(GenericDeviceType) },
 		LocationDescriptionAttr: func() zcl.Attr { return new(LocationDescription) },
 		PhysicalEnvironmentAttr: func() zcl.Attr { return new(PhysicalEnvironment) },
 		DeviceEnabledAttr:       func() zcl.Attr { return new(DeviceEnabled) },
@@ -28,6 +30,7 @@ var BasicCluster = zcl.Cluster{
 		DisableLocalConfigAttr:  func() zcl.Attr { return new(DisableLocalConfig) },
 		SwBuildIdAttr:           func() zcl.Attr { return new(SwBuildId) },
 		ProductCodeAttr:         func() zcl.Attr { return new(ProductCode) },
+		ProductUrlAttr:          func() zcl.Attr { return new(ProductUrl) },
 		SensitivityAttr:         func() zcl.Attr { return new(Sensitivity) },
 		ConfigurationAttr:       func() zcl.Attr { return new(Configuration) },
 		UserTestAttr:            func() zcl.Attr { return new(UserTest) },
@@ -48,17 +51,28 @@ func (v *ResetToFactoryDefaults) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ResetToFactoryDefaults
+func (v *ResetToFactoryDefaults) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (ResetToFactoryDefaults) Name() string { return "Reset to Factory Defaults" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ResetToFactoryDefaults) ID() CommandID { return ResetToFactoryDefaultsCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ResetToFactoryDefaults) Required() bool { return false }
+
+// Cluster ID of the command
 func (ResetToFactoryDefaults) Cluster() zcl.ClusterID { return BasicID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ResetToFactoryDefaults) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ResetToFactoryDefaults) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of ResetToFactoryDefaults
 func (v ResetToFactoryDefaults) MarshalZcl() ([]byte, error) {

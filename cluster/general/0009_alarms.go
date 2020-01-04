@@ -40,17 +40,31 @@ func (v *ResetAlarm) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ResetAlarm
+func (v *ResetAlarm) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.AlarmCode,
+		&v.ClusterId,
+	}
+}
+
+// Name of the command
 func (ResetAlarm) Name() string { return "Reset alarm" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ResetAlarm) ID() CommandID { return ResetAlarmCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ResetAlarm) Required() bool { return true }
+
+// Cluster ID of the command
 func (ResetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ResetAlarm) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ResetAlarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of ResetAlarm
 func (v ResetAlarm) MarshalZcl() ([]byte, error) {
@@ -112,17 +126,28 @@ func (v *ResetAllAlarms) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ResetAllAlarms
+func (v *ResetAllAlarms) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (ResetAllAlarms) Name() string { return "Reset all alarms" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ResetAllAlarms) ID() CommandID { return ResetAllAlarmsCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ResetAllAlarms) Required() bool { return true }
+
+// Cluster ID of the command
 func (ResetAllAlarms) Cluster() zcl.ClusterID { return AlarmsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ResetAllAlarms) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ResetAllAlarms) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ResetAllAlarms
 func (v ResetAllAlarms) MarshalZcl() ([]byte, error) {
@@ -153,17 +178,28 @@ func (v *GetAlarm) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of GetAlarm
+func (v *GetAlarm) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (GetAlarm) Name() string { return "Get Alarm" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (GetAlarm) ID() CommandID { return GetAlarmCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (GetAlarm) Required() bool { return false }
+
+// Cluster ID of the command
 func (GetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetAlarm) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (GetAlarm) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of GetAlarm
 func (v GetAlarm) MarshalZcl() ([]byte, error) {
@@ -194,17 +230,28 @@ func (v *ResetAlarmLog) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of ResetAlarmLog
+func (v *ResetAlarmLog) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (ResetAlarmLog) Name() string { return "Reset alarm log" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (ResetAlarmLog) ID() CommandID { return ResetAlarmLogCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (ResetAlarmLog) Required() bool { return false }
+
+// Cluster ID of the command
 func (ResetAlarmLog) Cluster() zcl.ClusterID { return AlarmsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ResetAlarmLog) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ResetAlarmLog) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of ResetAlarmLog
 func (v ResetAlarmLog) MarshalZcl() ([]byte, error) {
@@ -239,17 +286,31 @@ func (v *Alarm) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of Alarm
+func (v *Alarm) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.AlarmCode,
+		&v.ClusterId,
+	}
+}
+
+// Name of the command
 func (Alarm) Name() string { return "Alarm" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (Alarm) ID() CommandID { return AlarmCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (Alarm) Required() bool { return true }
+
+// Cluster ID of the command
 func (Alarm) Cluster() zcl.ClusterID { return AlarmsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Alarm) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (Alarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of Alarm
 func (v Alarm) MarshalZcl() ([]byte, error) {
@@ -319,17 +380,33 @@ func (v *GetAlarmResponse) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of GetAlarmResponse
+func (v *GetAlarmResponse) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Status,
+		&v.AlarmCode,
+		&v.ClusterId,
+		&v.Time,
+	}
+}
+
+// Name of the command
 func (GetAlarmResponse) Name() string { return "Get alarm response" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (GetAlarmResponse) ID() CommandID { return GetAlarmResponseCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (GetAlarmResponse) Required() bool { return false }
+
+// Cluster ID of the command
 func (GetAlarmResponse) Cluster() zcl.ClusterID { return AlarmsID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetAlarmResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (GetAlarmResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of GetAlarmResponse
 func (v GetAlarmResponse) MarshalZcl() ([]byte, error) {

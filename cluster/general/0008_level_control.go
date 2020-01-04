@@ -26,6 +26,7 @@ var LevelControlCluster = zcl.Cluster{
 		OnTransitionTimeAttr:     func() zcl.Attr { return new(OnTransitionTime) },
 		OffTransitionTimeAttr:    func() zcl.Attr { return new(OffTransitionTime) },
 		DefaultMoveRateAttr:      func() zcl.Attr { return new(DefaultMoveRate) },
+		LevelControlOptionsAttr:  func() zcl.Attr { return new(LevelControlOptions) },
 		PowerOnLevelAttr:         func() zcl.Attr { return new(PowerOnLevel) },
 	},
 	ClientAttr: map[zcl.AttrID]func() zcl.Attr{},
@@ -50,17 +51,31 @@ func (v *MoveToLevel) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveToLevel
+func (v *MoveToLevel) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Level,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (MoveToLevel) Name() string { return "Move to Level" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveToLevel) ID() CommandID { return MoveToLevelCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveToLevel) Required() bool { return true }
+
+// Cluster ID of the command
 func (MoveToLevel) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveToLevel) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveToLevel) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToLevel
 func (v MoveToLevel) MarshalZcl() ([]byte, error) {
@@ -126,17 +141,31 @@ func (v *Move) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of Move
+func (v *Move) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.LevelDirection,
+		&v.Rate,
+	}
+}
+
+// Name of the command
 func (Move) Name() string { return "Move" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (Move) ID() CommandID { return MoveCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (Move) Required() bool { return true }
+
+// Cluster ID of the command
 func (Move) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Move) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (Move) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of Move
 func (v Move) MarshalZcl() ([]byte, error) {
@@ -204,17 +233,32 @@ func (v *Step) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of Step
+func (v *Step) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.LevelDirection,
+		&v.StepSize,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (Step) Name() string { return "Step" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (Step) ID() CommandID { return StepCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (Step) Required() bool { return true }
+
+// Cluster ID of the command
 func (Step) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Step) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (Step) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of Step
 func (v Step) MarshalZcl() ([]byte, error) {
@@ -287,17 +331,28 @@ func (v *Stop) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of Stop
+func (v *Stop) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (Stop) Name() string { return "Stop" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (Stop) ID() CommandID { return StopCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (Stop) Required() bool { return true }
+
+// Cluster ID of the command
 func (Stop) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Stop) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (Stop) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of Stop
 func (v Stop) MarshalZcl() ([]byte, error) {
@@ -332,17 +387,31 @@ func (v *MoveToLevelWithOnOff) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveToLevelWithOnOff
+func (v *MoveToLevelWithOnOff) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.Level,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (MoveToLevelWithOnOff) Name() string { return "Move to Level (with On/Off)" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveToLevelWithOnOff) ID() CommandID { return MoveToLevelWithOnOffCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveToLevelWithOnOff) Required() bool { return true }
+
+// Cluster ID of the command
 func (MoveToLevelWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveToLevelWithOnOff) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveToLevelWithOnOff) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToLevelWithOnOff
 func (v MoveToLevelWithOnOff) MarshalZcl() ([]byte, error) {
@@ -408,17 +477,31 @@ func (v *MoveWithOnOff) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of MoveWithOnOff
+func (v *MoveWithOnOff) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.LevelDirection,
+		&v.Rate,
+	}
+}
+
+// Name of the command
 func (MoveWithOnOff) Name() string { return "Move (with On/Off)" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (MoveWithOnOff) ID() CommandID { return MoveWithOnOffCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (MoveWithOnOff) Required() bool { return true }
+
+// Cluster ID of the command
 func (MoveWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (MoveWithOnOff) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MoveWithOnOff) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of MoveWithOnOff
 func (v MoveWithOnOff) MarshalZcl() ([]byte, error) {
@@ -486,17 +569,32 @@ func (v *StepWithOnOff) Values() []zcl.Val {
 	}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StepWithOnOff
+func (v *StepWithOnOff) Arguments() []zcl.Argument {
+	return []zcl.Argument{
+		&v.LevelDirection,
+		&v.StepSize,
+		&v.TransitionTime,
+	}
+}
+
+// Name of the command
 func (StepWithOnOff) Name() string { return "Step (with On/Off)" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StepWithOnOff) ID() CommandID { return StepWithOnOffCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StepWithOnOff) Required() bool { return true }
+
+// Cluster ID of the command
 func (StepWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StepWithOnOff) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StepWithOnOff) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of StepWithOnOff
 func (v StepWithOnOff) MarshalZcl() ([]byte, error) {
@@ -569,17 +667,28 @@ func (v *StopWithOnOff) Values() []zcl.Val {
 	return []zcl.Val{}
 }
 
-// Name of the command (needed to fulfill interface)
+// Arguments returns all values of StopWithOnOff
+func (v *StopWithOnOff) Arguments() []zcl.Argument {
+	return []zcl.Argument{}
+}
+
+// Name of the command
 func (StopWithOnOff) Name() string { return "Stop (with On/Off)" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func (StopWithOnOff) ID() CommandID { return StopWithOnOffCommand }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func (StopWithOnOff) Required() bool { return true }
+
+// Cluster ID of the command
 func (StopWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StopWithOnOff) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (StopWithOnOff) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
 
 // MarshalZcl returns the wire format representation of StopWithOnOff
 func (v StopWithOnOff) MarshalZcl() ([]byte, error) {
