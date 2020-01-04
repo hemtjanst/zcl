@@ -382,6 +382,18 @@ types:
     default: "0xfeff"
     range: 0x0000,0xfeff
     unit: Mired
+  CoupleColorTempToLevelMinMireds: &coupleColorTempToLevelMinMireds
+    id: "0x400D"
+    name: Couple Color Temp to Level Min Mireds
+    description: |
+      specifies a lower bound on the value of the ColorTemperatureMireds attribute for the purposes of coupling the
+      ColorTemperatureMireds attribute to the CurrentLevel attribute when the CoupleColorTempToLevel bit of the
+      Options attribute of the Level Control cluster is equal to 1
+    type: u16
+    access: r
+    default: "0x0000"
+    range: 0x0000,0xfeff
+    unit: Mired
   PowerOnColorTemperature: &powerOnColorTemperature
     id: "0x4010"
     name: Power-on color temperature
@@ -739,6 +751,7 @@ clusters:
           - *colorCapabilities
           - *colorTemperaturePhysicalMinMireds
           - *colorTemperaturePhysicalMaxMireds
+          - *coupleColorTempToLevelMinMireds
           - *powerOnColorTemperature
           - *numberOfPrimaries
           - *primary1X
@@ -756,6 +769,9 @@ clusters:
           - *primary5X
           - *primary5Y
           - *primary5Intensity
+          - *primary6X
+          - *primary6Y
+          - *primary6Intensity
           - *whitePointX
           - *whitePointY
           - *colorPointRX

@@ -4,7 +4,7 @@ manufacturer: &manufacturer
   0x10F2: Ubisys
   0x117C: Ikea
   0x115F: Xiaomi
-  0x1037: Eurotronic
+  0x1037: NXP
 
 templates:
   condSuccess: &__cond_success
@@ -295,11 +295,40 @@ types:
     name: Associated Devices
     type: list
     arraytype: u16
+  UnknownU8: &unknownU8
+    name: Unknown u8
+    type: u8
+
+.templates2:
+  simpleDescriptor: &simpleDescriptor
+    - *endpoint
+    - *profileId
+    - *deviceType
+    - *deviceVersion
+    - *inClusterList
+    - *outClusterList
+
+  powerDescriptor: &powerDescriptor
+    - *npMode
+    - *npSource
+
+  nodeDescriptor: &nodeDescriptor
+    - *ndType
+    - *ndFrequency
+    - *deviceCap
+    - *mnfCode
+    - *ndMaxBufSize
+    - *ndMaxRxSize
+    - *serverMask
+    - *ndMaxTxSize
+    - *ndDescCap
+
 
 commands:
   - name: NWK Address Request
     id: "0x0000"
     required: true
+    response: "0x8000"
     description: |
       queries the 16-bit address of the Remote Device based on its known IEEE address.
       The destination addressing on this command shall be unicast or broadcast to all
@@ -326,9 +355,12 @@ commands:
       - <<: *associatedDevices
         cond:
           - *__cond_success
+
+
   - name: IEEE Address Request
     id: "0x0001"
     required: true
+    response: "0x8001"
     description: |
       queries the 64-bit IEEE address of the Remote Device based on its known 16-bit NWK address.
       The command should always be sent by unicast.
@@ -336,25 +368,78 @@ commands:
       - *nwk
       - *addrReqType
       - *startIndex
+  - name: IEEE Address Response
+    id: "0x8001"
+    required: true
+    description: |
+    payloadattr:
+      - *status
+      - *ieee
+      - *nwk
+      - type: u8
+        marshal: "2*len(v.AssociatedDevices.Content)"
+        cond:
+          - *__cond_success
+      - <<: *startIndex
+        cond:
+          - *__cond_success
+      - <<: *associatedDevices
+        cond:
+          - *__cond_success
+
+
   - name: Node Desc Request
     id: "0x0002"
     required: true
+    response: "0x8002"
     description: |
       queries the node descriptor of a remote device. Should be unicast to the remote device directly,
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
+  - name: Node Desc Response
+    id: "0x8002"
+    required: true
+    playloadattr:
+      - *status
+      - *nwk
+      - <<: *unknownU8
+        argname: b1
+      - <<: *unknownU8
+        argname: b2
+      - *deviceCap
+      - *mnfCode
+      - *ndMaxBufSize
+      - *ndMaxRxSize
+      - *ndMaxTxSize
+      - *ndDescCap
+
+
   - name: Power Desc Request
     id: "0x0003"
     required: true
+    response: "0x8003"
     description: |
       queries the power descriptor of a remote device. Should be unicast to the remote device directly,
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
+  - name: Power Desc Response
+    id: "0x8003"
+    required: true
+    playloadattr:
+      - *status
+      - *nwk
+      - <<: *unknownU8
+        argname: b1
+      - <<: *unknownU8
+        argname: b2
+
+
   - name: Simple Desc Request
     id: "0x0004"
     required: true
+    response: "0x8004"
     description: |
       queries the Simple Descriptor of a remote device on a specific endpoint.
       Simple Descriptor contains information about which clusters the device supports on the given endpoint.
@@ -362,6 +447,10 @@ commands:
     payloadattr:
       - *nwk
       - *endpoint
+  - name: Simple Desc Response
+    id: "0x8004"
+
+
   - name: Active Endpoint Request
     id: "0x0005"
     required: true
@@ -370,6 +459,8 @@ commands:
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
+
+
   - name: Match Desc Request
     id: "0x0006"
     required: true
@@ -381,6 +472,8 @@ commands:
       - *profileId
       - *inClusterList
       - *outClusterList
+
+
   - name: Complex Desc Request
     id: "0x0010"
     description: |
@@ -388,6 +481,8 @@ commands:
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
+
+
   - name: User Desc Request
     id: "0x0011"
     description: |
@@ -395,6 +490,8 @@ commands:
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
+
+
   - name: Discovery Cache Request
     id: "0x0012"
     description: >
@@ -402,6 +499,8 @@ commands:
     payloadattr:
       - *nwk
       - *ieee
+
+
   - name: Device Announce
     id: "0x0013"
     required: true
@@ -412,6 +511,8 @@ commands:
       - *nwk
       - *ieee
       - *deviceCap
+
+
   - name: User Desc Set Request
     id: "0x0014"
     description: >
@@ -419,6 +520,8 @@ commands:
     payloadattr:
       - *nwk
       - *userDesc
+
+
   - name: System Server Discover Request
     id: "0x0015"
     description: >
@@ -426,6 +529,8 @@ commands:
       Should be sent to broadcast RXOnWhenIdle (0xFFFD)
     payloadattr:
       - *serverMask
+
+
   - name: Discovery Store Request
     id: "0x0016"
     description: |
@@ -439,6 +544,8 @@ commands:
       - *powerDescSize
       - *activeEndpointSize
       - *simpleDescSizeList
+
+
   - name: Node Desc Store Request
     id: "0x0017"
     description: |
@@ -457,6 +564,8 @@ commands:
       - *serverMask
       - *ndMaxTxSize
       - *ndDescCap
+
+
   - name: Power Desc Store Request
     id: "0x0018"
     description: |
@@ -468,6 +577,8 @@ commands:
       - *ieee
       - *npMode
       - *npSource
+
+
   - name: Active Endpoint Store Request
     id: "0x0019"
     description: |
@@ -478,6 +589,8 @@ commands:
       - *nwk
       - *ieee
       - *endpointList
+
+
   - name: Simple Desc Store Request
     id: "0x001A"
     description: |
@@ -495,6 +608,8 @@ commands:
       - *deviceVersion
       - *inClusterList
       - *outClusterList
+
+
   - name: Remove Node Cache Request
     id: "0x001B"
     description: >
@@ -550,26 +665,3 @@ commands:
       - *profileId
       - *inClusterList
       - *outClusterList
-
-simpleDescriptor: &simpleDescriptor
-  - *endpoint
-  - *profileId
-  - *deviceType
-  - *deviceVersion
-  - *inClusterList
-  - *outClusterList
-
-powerDescriptor: &powerDescriptor
-  - *npMode
-  - *npSource
-
-nodeDescriptor: &nodeDescriptor
-  - *ndType
-  - *ndFrequency
-  - *deviceCap
-  - *mnfCode
-  - *ndMaxBufSize
-  - *ndMaxRxSize
-  - *serverMask
-  - *ndMaxTxSize
-  - *ndDescCap

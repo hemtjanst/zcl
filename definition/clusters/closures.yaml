@@ -1,0 +1,220 @@
+name: Closures
+description:
+
+templates:
+  position: &position
+    type: u16
+
+types:
+  Position: &position
+    name: Position
+    type: u16
+  Percentage: &percentage
+    name: Percentage
+    type: u8
+    range: 0x00,0x64
+    unit: Percent
+  WindowCoveringType: &windowCoveringType
+    id: "0x0000"
+    name: Window Covering Type
+    type: enum8
+    access: r
+    default: "0x00"
+    required: true
+    values:
+      "0x00": Rollershade
+      "0x01": Rollershade - 2 Motor
+      "0x02": Rollershade - Exterior
+      "0x03": Rollershade - Exterior - 2 Motor
+      "0x04": Drapery
+      "0x05": Awning
+      "0x06": Shutter
+      "0x07": Tilt Blind - Tilt Only
+      "0x08": Tilt Blind - Lift and Tilt
+      "0x09": Projector Screen
+  LiftPhysicalClosedLimit: &liftPhysicalClosedLimit
+    <<: *position
+    id: "0x0001"
+    name: Lift - Physical Closed Limit
+    access: r
+  TiltPhysicalClosedLimit: &tiltPhysicalClosedLimit
+    <<: *position
+    id: "0x0002"
+    name: Tilt - Physical Closed Limit
+    access: r
+  LiftCurrentPosition: &liftCurrentPosition
+    <<: *position
+    id: "0x0003"
+    name: Lift - Current Position
+    access: r
+  TiltCurrentPosition: &tiltCurrentPosition
+    <<: *position
+    id: "0x0004"
+    name: Tilt - Current Position
+    access: r
+  LiftNumberOfActuations: &liftNumberOfActuations
+    id: "0x0005"
+    name: Lift - Number of Actuations
+    type: u16
+    access: r
+    default: "0x0000"
+  TiltNumberOfActuations: &tiltNumberOfActuations
+    id: "0x0006"
+    name: Tilt - Number of Actuations
+    type: u16
+    access: r
+    default: "0x0000"
+  ConfigStatus: &configStatus
+    id: "0x0007"
+    name: Config / Status
+    type: bmp8
+    access: r
+    default: "0x03"
+    bits:
+      "0": Operational
+      "1": Online
+      "2": Commands Reversed
+      "3": Lift control is Closed Loop
+      "4": Tilt control is Closed Loop
+      "5": 'Lift: Encoder Controlled'
+      "6": 'Tilt: Encoder Controlled'
+  LiftCurrentPositionPercentage: &liftCurrentPositionPercentage
+    <<: *percentage
+    id: "0x0008"
+    name: Lift Current Position Percentage
+    access: r
+  TiltCurrentPositionPercentage: &tiltCurrentPositionPercentage
+    <<: *percentage
+    id: "0x0009"
+    name: Tilt Current Position Percentage
+    access: r
+  LiftInstalledOpenLimit: &liftInstalledOpenLimit
+    <<: *position
+    id: "0x0010"
+    name: Lift - Installed Open Limit
+    access: r
+  LiftInstalledClosedLimit: &liftInstalledClosedLimit
+    <<: *position
+    id: "0x0011"
+    name: Lift - Installed Closed Limit
+    access: r
+    default: "0xffff"
+  TiltAInstalledOpenLimit: &tiltAInstalledOpenLimit
+    <<: *position
+    id: "0x0012"
+    name: Tilt A - Installed Open Limit
+    access: r
+    default: "0xffff"
+  TiltBInstalledOpenLimit: &tiltBInstalledOpenLimit
+    <<: *position
+    id: "0x0013"
+    name: Tilt B - Installed Open Limit
+    access: r
+    default: "0xffff"
+  LiftVelocity: &liftVelocity
+    id: "0x0014"
+    name: Lift - Velocity
+    type: u16
+    access: rw
+    default: "0x0000"
+  LiftAccelerationTime: &liftAccelerationTime
+    id: "0x0015"
+    name: Lift - Acceleration Time
+    type: u16
+    access: rw
+    default: "0x0000"
+  LiftDecelerationTime: &liftDecelerationTime
+    id: "0x0016"
+    name: Lift - Deceleration Time
+    type: u16
+    access: rw
+    default: "0x0000"
+  WindowCoveringMode: &windowCoveringMode
+    id: "0x0017"
+    name: Window Covering Mode
+    type: bmp8
+    access: rw
+    default: "0x0000"
+    bits:
+      "0": Reversed
+      "1": Calibration Mode
+      "2": Maintenance Mode
+      "3": LED feedback
+  LiftIntermediateSetpoints: &liftIntermediateSetpoints
+    id: "0x0018"
+    name: Lift - Intermediate Setpoints
+    type: ostring
+    access: rw
+    default: 1,0x0000
+  TiltIntermediateSetpoints: &tiltIntermediateSetpoints
+    id: "0x0019"
+    name: Tilt - Intermediate Setpoints
+    type: ostring
+    access: rw
+    default: 1,0x0000
+clusters:
+  - id: "0x0102"
+    name: Window Covering
+    description: The window covering cluster provides an interface for controlling and
+      adjusting automatic window coverings such as drapery motors, automatic shades,
+      and blinds.
+    server:
+      attr:
+        - *windowCoveringType
+        - *liftPhysicalClosedLimit
+        - *tiltPhysicalClosedLimit
+        - *liftCurrentPosition
+        - *tiltCurrentPosition
+        - *liftNumberOfActuations
+        - *tiltNumberOfActuations
+        - *configStatus
+        - *liftCurrentPositionPercentage
+        - *tiltCurrentPositionPercentage
+        - *liftInstalledOpenLimit
+        - *liftInstalledClosedLimit
+        - *tiltAInstalledOpenLimit
+        - *tiltBInstalledOpenLimit
+        - *liftVelocity
+        - *liftAccelerationTime
+        - *liftDecelerationTime
+        - *windowCoveringMode
+        - *liftIntermediateSetpoints
+        - *tiltIntermediateSetpoints
+
+      cmd:
+        - id: "0x00"
+          name: Up / Open
+          dir: recv
+          required: m
+        - id: "0x01"
+          name: Down / Close
+          dir: recv
+          required: m
+        - id: "0x02"
+          name: Stop
+          dir: recv
+          required: m
+        - id: "0x04"
+          name: Go To Lift Value
+          dir: recv
+          required: o
+          payloadattr:
+            - *position
+        - id: "0x05"
+          name: Go to Lift Percentage
+          dir: recv
+          required: o
+          payloadattr:
+            - *percentage
+        - id: "0x07"
+          name: Go to Tilt Value
+          dir: recv
+          required: o
+          payloadattr:
+            - *position
+        - id: "0x08"
+          name: Go to Tilt Percentage
+          dir: recv
+          required: o
+          payloadattr:
+            - *percentage

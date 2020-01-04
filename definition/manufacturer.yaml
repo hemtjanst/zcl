@@ -5,8 +5,8 @@ manufacturer:
     name: Legrand
   - id: 0x10F2
     name: Ubisys
-  - id: 0x117C
-    name: Ikea
+  - id: "0x117C" &ikea
+    name: "Ikea"
   - id: 0x115F
     name: Xiaomi
   - id: 0x1037

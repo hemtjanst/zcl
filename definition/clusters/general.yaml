@@ -28,6 +28,10 @@ templates:
     name: "Device"
     argname: "Target Address"
 
+  multistateValue: &multistateValue
+    type: bmp16
+
+
 types:
   # Common types
   Status: &status
@@ -790,6 +794,15 @@ types:
     required: true
     showas: hex
 
+  IkeaRemoteDirection: &ikeaRemoteDirection
+    name: Ikea Remote Direction
+    type: enum8
+    default: "0x00"
+    required: true
+    values:
+        "0x00": Right
+        "0x01": Left
+
   # 0006 On/Off Cluster Attr
   OnOff: &onOff
     id: "0x0000"
@@ -1313,7 +1326,7 @@ types:
   MultistatePresentValue: &multistatePresentValue
     id: "0x0055"
     name: Multistate Present value
-    type: u16
+    <<: *multistateValue
     access: rw
     default: "0"
     report: true
@@ -1347,7 +1360,7 @@ types:
     arraytype: struct
     structattr:
       - type: bool
-      - type: u16
+      - <<: *multistateValue
   IOReliability: &ioReliability
     id: "0x0067"
     name: I/O Reliability
@@ -1378,7 +1391,7 @@ types:
   MultistateRelinquishDefault: &multistateRelinquishDefault
     id: "0x0068"
     name: Multistate Relinquish Default
-    type: u16
+    <<: *multistateValue
     access: rw
   AnalogResolution: &analogResolution
     id: "0x006A"
@@ -1720,64 +1733,6 @@ clusters:
         - *batteryPercentageThreshold2
         - *batteryPercentageThreshold3
         - *batteryAlarmState
-  - id: "0x0006"
-    name: On/Off
-    description: Attributes and commands for switching devices between 'On' and 'Off'
-      states.
-    server:
-      attr:
-        - *onOff
-        - *globalSceneControl
-        - *onTime
-        - *offWaitTime
-        - *poweronOnOff
-      cmd:
-        - id: "0x00"
-          name: Off
-          description: On receipt of this command, a device shall enter its 'Off' state.
-            This state is device dependent, but it is recommended that it is used
-            for power off or similar functions.
-          dir: recv
-          required: m
-        - id: "0x01"
-          name: On
-          description: On receipt of this command, a device shall enter its 'On' state.
-            This state is device dependent, but it is recommended that it is used
-            for power on or similar functions.
-          dir: recv
-          required: m
-        - id: "0x02"
-          name: Toggle
-          description: On receipt of this command, if a device is in its ‘Off’ state
-            it shall enter its 'On' state. Otherwise, if it is in its ‘On’ state it
-            shall enter its 'Off' state.
-          dir: recv
-          required: m
-        - id: "0x40"
-          name: Off with effect
-          dir: recv
-          required: m
-          payloadattr:
-            - *effectIdentifier
-            - *effectVariant
-        - id: "0x41"
-          name: On with recall global scene
-          description: The on with recall global scene command allows the recall of
-            the light settings when the light was turned off.
-          dir: recv
-          required: m
-        - id: "0x42"
-          name: On with timed off
-          description: Allows lamps to be turned on for a specific duration with a guarded
-            off duration so that should the lamp be subsequently switched off, further
-            on with timed off commands, received during this time, are prevented from
-            turning the lamps back on.
-          dir: recv
-          required: m
-          payloadattr:
-            - *onOffControl
-            - *onTime
-            - *offWaitTime
   - id: "0x0002"
     name: Device Temperature Configuration
     description: Attributes for determining information about a device’s internal temperature,
@@ -2035,6 +1990,27 @@ clusters:
                 argname: To Group ID
               - <<: *sceneID
                 argname: To Scene ID
+
+
+          - id: "0x07"
+            name: Ikea Remote Press
+            mnfcode: "0x117c"
+            description: Custom left/right action of Ikea remote
+            dir: recv
+            payloadattr:
+              - *ikeaRemoteDirection
+          - id: "0x08"
+            name: Ikea Remote Longpress Start
+            mnfcode: "0x117c"
+            dir: recv
+            payloadattr:
+              - *ikeaRemoteDirection
+          - id: "0x09"
+            name: Ikea Remote Longpress Stop
+            mnfcode: "0x117c"
+            dir: recv
+            payloadattr:
+
     client:
         cmd:
           - id: "0x00"
@@ -2124,6 +2100,65 @@ clusters:
                 argname: From Group ID
               - <<: *sceneID
                 argname: From Scene ID
+
+  - id: "0x0006"
+    name: On/Off
+    description: Attributes and commands for switching devices between 'On' and 'Off'
+      states.
+    server:
+      attr:
+        - *onOff
+        - *globalSceneControl
+        - *onTime
+        - *offWaitTime
+        - *poweronOnOff
+      cmd:
+        - id: "0x00"
+          name: Off
+          description: On receipt of this command, a device shall enter its 'Off' state.
+            This state is device dependent, but it is recommended that it is used
+            for power off or similar functions.
+          dir: recv
+          required: m
+        - id: "0x01"
+          name: On
+          description: On receipt of this command, a device shall enter its 'On' state.
+            This state is device dependent, but it is recommended that it is used
+            for power on or similar functions.
+          dir: recv
+          required: m
+        - id: "0x02"
+          name: Toggle
+          description: On receipt of this command, if a device is in its ‘Off’ state
+            it shall enter its 'On' state. Otherwise, if it is in its ‘On’ state it
+            shall enter its 'Off' state.
+          dir: recv
+          required: m
+        - id: "0x40"
+          name: Off with effect
+          dir: recv
+          required: m
+          payloadattr:
+            - *effectIdentifier
+            - *effectVariant
+        - id: "0x41"
+          name: On with recall global scene
+          description: The on with recall global scene command allows the recall of
+            the light settings when the light was turned off.
+          dir: recv
+          required: m
+        - id: "0x42"
+          name: On with timed off
+          description: Allows lamps to be turned on for a specific duration with a guarded
+            off duration so that should the lamp be subsequently switched off, further
+            on with timed off commands, received during this time, are prevented from
+            turning the lamps back on.
+          dir: recv
+          required: m
+          payloadattr:
+            - *onOffControl
+            - *onTime
+            - *offWaitTime
   - id: "0x0007"
     name: On/Off Switch Configuration
     description: Attributes and commands for configuring On/Off switching devices
