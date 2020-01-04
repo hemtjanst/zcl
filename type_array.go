@@ -216,7 +216,7 @@ func (a *Zarray) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (a Zarray) MarshalZcl() ([]byte, error) { return ArrayMarshalZcl("2+sloc", a.Type, a.Content) }
 func (a *Zarray) Values() []Val              { return a.Content }
-func (a *Zarray) ID() TypeID                 { return 72 }
+func (a Zarray) ID() TypeID                  { return 72 }
 
 //func (a Zarray) Valid() bool { return a != Zarray(65535) }
 
@@ -238,7 +238,7 @@ func (s *Zstruct) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zstruct) MarshalZcl() ([]byte, error) { return StructMarshalZcl("2+sloc", []StructField(s)) }
 func (s *Zstruct) Values() []Val              { return []Val{s} }
-func (s *Zstruct) ID() TypeID                 { return 76 }
+func (s Zstruct) ID() TypeID                  { return 76 }
 
 //func (s Zstruct) Valid() bool { return s != Zstruct(65535) }
 
@@ -264,7 +264,7 @@ func (s *Zset) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (s Zset) MarshalZcl() ([]byte, error) { return arraySetMarshalZcl("sloc", s.Type, s.Content) }
 
 func (s *Zset) Values() []Val { return s.Content }
-func (s *Zset) ID() TypeID    { return 80 }
+func (s Zset) ID() TypeID     { return 80 }
 
 //func (s Zset) Valid() bool { return s != Zset(65535) }
 
@@ -289,7 +289,7 @@ func (b *Zbag) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (b Zbag) MarshalZcl() ([]byte, error) { return ArrayMarshalZcl("sloc", b.Type, b.Content) }
 func (b *Zbag) Values() []Val              { return b.Content }
-func (b *Zbag) ID() TypeID                 { return 81 }
+func (b Zbag) ID() TypeID                  { return 81 }
 
 //func (b Zbag) Valid() bool { return b != Zbag(65535) }
 
@@ -314,4 +314,4 @@ func (b *Zlist) UnmarshalZcl(buf []byte) ([]byte, error) {
 
 func (b Zlist) MarshalZcl() ([]byte, error) { return ArrayMarshalZcl("0", b.Type, b.Content) }
 func (b *Zlist) Values() []Val              { return b.Content }
-func (b *Zlist) ID() TypeID                 { return 81 }
+func (b Zlist) ID() TypeID                  { return 81 }

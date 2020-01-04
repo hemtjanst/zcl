@@ -8,7 +8,7 @@ import (
 
 const (
 	GenPath = "./cluster"
-	ZdoPath = GenPath + "/zdo"
+	ZdoPath = "./zdo"
 )
 
 func check(stage string, err error) {

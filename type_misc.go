@@ -53,7 +53,7 @@ func (a *Zaid) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (a Zaid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(a)) }
 func (a *Zaid) Values() []Val              { return []Val{a} }
-func (a *Zaid) ID() TypeID                 { return 233 }
+func (a Zaid) ID() TypeID                  { return 233 }
 func (a Zaid) String() string              { return fmt.Sprintf("0x%04x", uint16(a)) }
 func (a Zaid) Valid() bool                 { return a != Zaid(0xFFFF) }
 
@@ -67,7 +67,7 @@ func (o *Zoid) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (o Zoid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(4, uint64(o)) }
 func (o *Zoid) Values() []Val              { return []Val{o} }
-func (o *Zoid) ID() TypeID                 { return 234 }
+func (o Zoid) ID() TypeID                  { return 234 }
 func (o Zoid) Valid() bool                 { return o != Zoid(0xFFFFFFFF) }
 func (o Zoid) String() string {
 	ot := (o & 0xFFC00000) >> 22
@@ -85,12 +85,15 @@ func (u *Zuid) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zuid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(8, uint64(u)) }
 func (u *Zuid) Values() []Val              { return []Val{u} }
-func (u *Zuid) ID() TypeID                 { return 240 }
+func (u Zuid) ID() TypeID                  { return 240 }
 func (u Zuid) Valid() bool                 { return u != Zuid(0xFFFFFFFFFFFFFFFF) }
 func (u Zuid) String() string {
+	return u.HWAddr().String()
+}
+func (u Zuid) HWAddr() net.HardwareAddr {
 	b := make([]byte, 8)
 	binary.BigEndian.PutUint64(b, uint64(u))
-	return net.HardwareAddr(b).String()
+	return b
 }
 
 // Zseckey is 128-bit security key. A/D = D
@@ -103,7 +106,7 @@ func (s *Zseckey) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zseckey) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(16, []byte(s)) }
 func (s *Zseckey) Values() []Val              { return []Val{s} }
-func (s *Zseckey) ID() TypeID                 { return 241 }
+func (s Zseckey) ID() TypeID                  { return 241 }
 func (s Zseckey) String() string {
 	return net.HardwareAddr(s).String()
 }

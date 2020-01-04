@@ -129,7 +129,7 @@ func (u *Zu8) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu8) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(1, uint64(u)) }
 func (u *Zu8) Values() []Val              { return []Val{u} }
-func (u *Zu8) ID() TypeID                 { return 32 }
+func (u Zu8) ID() TypeID                  { return 32 }
 func (u Zu8) Valid() bool                 { return u < 0xFF }
 
 // Zu16 is Unsigned 16-bit integer (0xffff = invalid). A/D = A
@@ -142,7 +142,7 @@ func (u *Zu16) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu16) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(u)) }
 func (u *Zu16) Values() []Val              { return []Val{u} }
-func (u *Zu16) ID() TypeID                 { return 33 }
+func (u Zu16) ID() TypeID                  { return 33 }
 func (u Zu16) Valid() bool                 { return u < 0xFFFF }
 
 // Zu24 is Unsigned 24-bit integer (0xffffff = invalid). A/D = A
@@ -155,7 +155,7 @@ func (u *Zu24) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu24) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(3, uint64(u)) }
 func (u *Zu24) Values() []Val              { return []Val{u} }
-func (u *Zu24) ID() TypeID                 { return 34 }
+func (u Zu24) ID() TypeID                  { return 34 }
 func (u Zu24) Valid() bool                 { return u < 0xFFFFFF }
 
 // Zu32 is Unsigned 32-bit integer (0xffffffff = invalid). A/D = A
@@ -168,7 +168,7 @@ func (u *Zu32) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu32) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(4, uint64(u)) }
 func (u *Zu32) Values() []Val              { return []Val{u} }
-func (u *Zu32) ID() TypeID                 { return 35 }
+func (u Zu32) ID() TypeID                  { return 35 }
 func (u Zu32) Valid() bool                 { return u < 0xFFFFFFFF }
 
 // Zu40 is Unsigned 40-bit integer (0xffffffffff = invalid). A/D = A
@@ -181,7 +181,7 @@ func (u *Zu40) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu40) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(5, uint64(u)) }
 func (u *Zu40) Values() []Val              { return []Val{u} }
-func (u *Zu40) ID() TypeID                 { return 36 }
+func (u Zu40) ID() TypeID                  { return 36 }
 func (u Zu40) Valid() bool                 { return u < 0xFFFFFFFFFF }
 
 // Zu48 is Unsigned 48-bit integer (0xffffffffffff = invalid). A/D = A
@@ -194,7 +194,7 @@ func (u *Zu48) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu48) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(6, uint64(u)) }
 func (u *Zu48) Values() []Val              { return []Val{u} }
-func (u *Zu48) ID() TypeID                 { return 37 }
+func (u Zu48) ID() TypeID                  { return 37 }
 
 func (u Zu48) Valid() bool { return u < 0xFFFFFFFFFFFF }
 
@@ -208,7 +208,7 @@ func (u *Zu56) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu56) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(7, uint64(u)) }
 func (u *Zu56) Values() []Val              { return []Val{u} }
-func (u *Zu56) ID() TypeID                 { return 38 }
+func (u Zu56) ID() TypeID                  { return 38 }
 
 func (u Zu56) Valid() bool { return u < 0xFFFFFFFFFFFFFF }
 
@@ -222,7 +222,7 @@ func (u *Zu64) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zu64) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(8, uint64(u)) }
 func (u *Zu64) Values() []Val              { return []Val{u} }
-func (u *Zu64) ID() TypeID                 { return 39 }
+func (u Zu64) ID() TypeID                  { return 39 }
 
 func (u Zu64) Valid() bool { return u < 0xFFFFFFFFFFFFFFFF }
 
@@ -236,7 +236,7 @@ func (s *Zs8) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs8) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(1, int64(s)) }
 func (s *Zs8) Values() []Val              { return []Val{s} }
-func (s *Zs8) ID() TypeID                 { return 40 }
+func (s Zs8) ID() TypeID                  { return 40 }
 
 //func (s Zs8) Valid() bool { return s != Zs8(128) }
 
@@ -250,7 +250,7 @@ func (s *Zs16) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs16) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(2, int64(s)) }
 func (s *Zs16) Values() []Val              { return []Val{s} }
-func (s *Zs16) ID() TypeID                 { return 41 }
+func (s Zs16) ID() TypeID                  { return 41 }
 
 //func (s Zs16) Valid() bool { return s != Zs16(32768) }
 
@@ -264,7 +264,7 @@ func (s *Zs24) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs24) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(3, int64(s)) }
 func (s *Zs24) Values() []Val              { return []Val{s} }
-func (s *Zs24) ID() TypeID                 { return 42 }
+func (s Zs24) ID() TypeID                  { return 42 }
 
 //func (s Zs24) Valid() bool { return s != Zs24(8388608) }
 
@@ -278,7 +278,7 @@ func (s *Zs32) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs32) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(4, int64(s)) }
 func (s *Zs32) Values() []Val              { return []Val{s} }
-func (s *Zs32) ID() TypeID                 { return 43 }
+func (s Zs32) ID() TypeID                  { return 43 }
 
 //func (s Zs32) Valid() bool { return s != Zs32(2147483648) }
 
@@ -292,7 +292,7 @@ func (s *Zs40) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs40) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(5, int64(s)) }
 func (s *Zs40) Values() []Val              { return []Val{s} }
-func (s *Zs40) ID() TypeID                 { return 44 }
+func (s Zs40) ID() TypeID                  { return 44 }
 
 //func (s Zs40) Valid() bool { return s != Zs40(549755813888) }
 
@@ -306,7 +306,7 @@ func (s *Zs48) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs48) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(6, int64(s)) }
 func (s *Zs48) Values() []Val              { return []Val{s} }
-func (s *Zs48) ID() TypeID                 { return 45 }
+func (s Zs48) ID() TypeID                  { return 45 }
 
 //func (s Zs48) Valid() bool { return s != Zs48(140737488355328) }
 
@@ -320,7 +320,7 @@ func (s *Zs56) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs56) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(7, int64(s)) }
 func (s *Zs56) Values() []Val              { return []Val{s} }
-func (s *Zs56) ID() TypeID                 { return 46 }
+func (s Zs56) ID() TypeID                  { return 46 }
 
 //func (s Zs56) Valid() bool { return s != Zs56(36028797018963968) }
 
@@ -334,7 +334,7 @@ func (s *Zs64) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zs64) MarshalZcl() ([]byte, error) { return intLEMarshalZcl(8, int64(s)) }
 func (s *Zs64) Values() []Val              { return []Val{s} }
-func (s *Zs64) ID() TypeID                 { return 47 }
+func (s Zs64) ID() TypeID                  { return 47 }
 
 //func (s Zs64) Valid() bool { return s != Zs64(9223372036854775808) }
 
@@ -348,7 +348,7 @@ func (s *Zsemi) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zsemi) MarshalZcl() ([]byte, error) { return float32MarshalZcl(2, float32(s)) }
 func (s *Zsemi) Values() []Val              { return []Val{s} }
-func (s *Zsemi) ID() TypeID                 { return 56 }
+func (s Zsemi) ID() TypeID                  { return 56 }
 
 //func (s Zsemi) Valid() bool { return s != Zsemi(0) }
 
@@ -362,7 +362,7 @@ func (f *Zfloat) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (f Zfloat) MarshalZcl() ([]byte, error) { return float32MarshalZcl(4, float32(f)) }
 func (f *Zfloat) Values() []Val              { return []Val{f} }
-func (f *Zfloat) ID() TypeID                 { return 57 }
+func (f Zfloat) ID() TypeID                  { return 57 }
 
 //func (f Zfloat) Valid() bool { return f != Zfloat(0) }
 
@@ -376,6 +376,6 @@ func (d *Zdouble) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (d Zdouble) MarshalZcl() ([]byte, error) { return float64MarshalZcl(8, float64(d)) }
 func (d *Zdouble) Values() []Val              { return []Val{d} }
-func (d *Zdouble) ID() TypeID                 { return 58 }
+func (d Zdouble) ID() TypeID                  { return 58 }
 
 //func (d Zdouble) Valid() bool { return d != Zdouble(0) }

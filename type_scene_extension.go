@@ -7,6 +7,10 @@ type SceneExtension interface {
 
 type SceneExtensionSet []SceneExtension
 
+func (SceneExtensionSet) ID() TypeID {
+	return new(Zset).ID()
+}
+
 func (s SceneExtensionSet) MarshalZcl() ([]byte, error) {
 	var data []byte
 	for _, v := range s {

@@ -12,8 +12,9 @@ type TypeID Zu8
 
 func (i ProfileID) MarshalZcl() ([]byte, error) { return Zu16(i).MarshalZcl() }
 func (i CommandID) MarshalZcl() ([]byte, error) { return Zu8(i).MarshalZcl() }
+func (i ZdoCmdID) MarshalZcl() ([]byte, error)  { return Zu16(i).MarshalZcl() }
 func (i TypeID) MarshalZcl() ([]byte, error)    { return Zu8(i).MarshalZcl() }
-func (i TypeID) New() Val                       { return NewValue(uint8(i)) }
+func (i TypeID) New(val ...interface{}) Val     { return NewValue(uint8(i), val...) }
 
 const (
 	ErrNotEnoughData      errType = "not enough data"
@@ -49,7 +50,7 @@ func (f *Frame) MarshalZcl() ([]byte, error) {
 	}
 	if len(f.MnfCode) == 2 {
 		data[0] = data[0] | 0x04
-		data = append(data, f.MnfCode...)
+		data = append(data, f.MnfCode[1], f.MnfCode[0])
 	}
 	data = append(data, uint8(f.Seq), uint8(f.CommandID))
 
@@ -75,7 +76,7 @@ func (f *Frame) UnmarshalZcl(b []byte) ([]byte, error) {
 		if len(b) < 4 {
 			return nil, errors.New("too few bytes(frame:1)")
 		}
-		f.MnfCode = b[0:2]
+		f.MnfCode = []byte{b[1], b[0]}
 		b = b[2:]
 	}
 	f.Seq = b[0]
@@ -88,15 +89,27 @@ type Val interface {
 	UnmarshalZcl([]byte) ([]byte, error)
 }
 
+type Option struct {
+	Name  string
+	Value int
+}
+type EnumAttr interface {
+	Attr
+	SingleOptions() []Option
+}
+type BitmapAttr interface {
+	Attr
+	MultiOptions() []Option
+}
+
 type Command interface {
-	Val
-	Values() []Val
-	ID() CommandID
-	Name() string
-	String() string
+	General
+	Arguments() []Argument
 	Cluster() ClusterID
+	Required() bool
 	MnfCode() []byte
 }
+
 type General interface {
 	Val
 	Values() []Val
@@ -104,6 +117,19 @@ type General interface {
 	Name() string
 	String() string
 }
+
+type ZdoCommand interface {
+	Cluster() uint16
+	Values() []Val
+}
+
+/*type ZdoCommand interface {
+	Val
+	Values() []Val
+	ID() ZdoCmdID
+	Name() string
+	String() string
+}*/
 
 type errType string
 
@@ -128,6 +154,13 @@ func (i *CommandID) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, err
 }
 
+func (i *ZdoCmdID) UnmarshalZcl(b []byte) ([]byte, error) {
+	v := new(Zu16)
+	b, err := v.UnmarshalZcl(b)
+	*i = ZdoCmdID(*v)
+	return b, err
+}
+
 func (i *TypeID) UnmarshalZcl(b []byte) ([]byte, error) {
 	v := new(Zu8)
 	b, err := v.UnmarshalZcl(b)
@@ -137,10 +170,20 @@ func (i *TypeID) UnmarshalZcl(b []byte) ([]byte, error) {
 
 func (e errType) Error() string { return string(e) }
 
-func NewValue(dataType uint8) Val {
+func NewValue(dataType uint8, val ...interface{}) Val {
 	switch dataType {
 	case 8:
-		return new(Zdat8)
+		v := new(Zdat8)
+		if len(val) == 1 {
+			switch val[0].(type) {
+			case string:
+				vv := val[0].(string)
+				if len(vv) > 0 {
+					v[0] = vv[0]
+				}
+			}
+		}
+		return v
 	case 9:
 		return new(Zdat16)
 	case 10:
@@ -356,11 +399,11 @@ func (i TypeID) String() string {
 	case 58:
 		return "Double precicion"
 	case 65:
-		return "Octed string"
+		return "Octet string"
 	case 66:
 		return "Character string"
 	case 67:
-		return "Long octed string"
+		return "Long octet string"
 	case 68:
 		return "Long character string"
 	case 72:

@@ -12,18 +12,31 @@ func (v *{{.Name.Fmt}}) Values() []zcl.Val {
     }
 }
 
+// Arguments returns all values of {{.Name.Fmt}}
+func (v *{{.Name.Fmt}}) Arguments() []zcl.Argument {
+    return []zcl.Argument{ {{range .PayloadAttr}}{{if .Name}}
+        &v.{{.ArgNameFmt}},{{end}}{{end}}
+    }
+}
 
-// Name of the command (needed to fulfill interface)
+
+// Name of the command
 func ({{.Name.Fmt}}) Name() string { return "{{.Name}}" }
 
-// ID of the command (needed to fulfill interface)
+// ID of the command
 func ({{.Name.Fmt}}) ID() CommandID { return {{.Name.Fmt}}Command }
 
-// Cluster ID of the command (needed to fulfill interface)
+// Required
+func ({{.Name.Fmt}}) Required() bool { return {{if .Required.IsTrue}}true{{else}}false{{end}} }
+
+// Cluster ID of the command
 func ({{.Name.Fmt}}) Cluster() zcl.ClusterID { return {{clusterID}} }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func ({{.Name.Fmt}}) MnfCode() []byte { return []byte{ {{mfc.ByteStr}} } }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func ({{.Name.Fmt}}) MarshalJSON() ([]byte, error) { return []byte("{{.ID.Uint}}"), nil }
 
 // MarshalZcl returns the wire format representation of {{.Name.Fmt}}
 func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}

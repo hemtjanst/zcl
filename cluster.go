@@ -18,3 +18,38 @@ type Cluster struct {
 	ClientAttr map[AttrID]func() Attr
 	SceneAttr  []AttrID
 }
+
+func (c *Cluster) Attr(id uint16) Attr {
+	if c.ServerAttr != nil {
+		if v, ok := c.ServerAttr[AttrID(id)]; ok {
+			return v()
+		}
+	}
+	if c.ClientAttr != nil {
+		if v, ok := c.ClientAttr[AttrID(id)]; ok {
+			return v()
+		}
+	}
+	return nil
+}
+
+func (c *Cluster) CmdFn(id uint8) func() Command {
+	if c.ServerCmd != nil {
+		if v, ok := c.ServerCmd[CommandID(id)]; ok {
+			return v
+		}
+	}
+	if c.ClientCmd != nil {
+		if v, ok := c.ClientCmd[CommandID(id)]; ok {
+			return v
+		}
+	}
+	return nil
+}
+
+func (c *Cluster) Cmd(id uint8) Command {
+	if fn := c.CmdFn(id); fn != nil {
+		return fn()
+	}
+	return nil
+}
