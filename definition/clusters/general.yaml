@@ -121,6 +121,20 @@ types:
       "0x84": DC Source with battery backup
       "0x85": Emergency mains constantly powered with battery backup
       "0x86": Emergency mains and transfer switch with battery backup
+  GenericDeviceClass: &genericDeviceClass
+    id: "0x0008"
+    name: Generic Device Class
+    description: defines the field of application of the GenericDeviceType attribute
+    type: enum8
+    access: r
+    default: "0xFF"
+  GenericDeviceType: &genericDeviceType
+    id: "0x0009"
+    name: Generic Device Type
+    description: allows an application to show an icon on a rich user interface (e.g. smartphone app)
+    type: enum8
+    access: r
+    default: "0xFF"
   LocationDescription: &locationDescription
     id: "0x0010"
     name: Location Description
@@ -278,6 +292,12 @@ types:
     name: Product code
     description: As printed on the product.
     type: ostring
+    access: r
+  ProductUrl: &productUrl
+    id: "0x000B"
+    name: Product URL
+    description: specifies a link to a web page containing specific product information.
+    type: cstring
     access: r
   Sensitivity: &sensitivity
     id: "0x0030"
@@ -1653,6 +1673,8 @@ clusters:
         - *modelIdentifier
         - *dateCode
         - *powerSource
+        - *genericDeviceClass
+        - *genericDeviceType
         - *locationDescription
         - *physicalEnvironment
         - *deviceEnabled
@@ -1660,6 +1682,7 @@ clusters:
         - *disableLocalConfig
         - *swBuildID
         - *productCode
+        - *productUrl
         - *sensitivity
         - *configuration
         - *userTest
