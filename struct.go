@@ -18,7 +18,7 @@ func (i ProfileID) MarshalZcl() ([]byte, error) { return Zu16(i).MarshalZcl() }
 func (i CommandID) MarshalZcl() ([]byte, error) { return Zu8(i).MarshalZcl() }
 func (i ZdoCmdID) MarshalZcl() ([]byte, error)  { return Zu16(i).MarshalZcl() }
 func (i TypeID) MarshalZcl() ([]byte, error)    { return Zu8(i).MarshalZcl() }
-func (i TypeID) New(val ...interface{}) Val     { return NewValue(uint8(i), val...) }
+func (i TypeID) New() Val                       { return NewValue(uint8(i)) }
 
 const (
 	ErrNotEnoughData      errType = "not enough data"
@@ -184,7 +184,12 @@ func (i *TypeID) UnmarshalZcl(b []byte) ([]byte, error) {
 
 func (e errType) Error() string { return string(e) }
 
-func FromString(dataType uint8, v string) Val {
+func FromString(dataType uint8, val ...string) Val {
+	var v string
+	if len(val) == 0 {
+		return NewValue(dataType)
+	}
+	v = val[0]
 
 	// Decode in a few different formats
 	hs, err := hex.DecodeString(v)
@@ -297,7 +302,7 @@ func FromString(dataType uint8, v string) Val {
 	return nil
 }
 
-func NewValue(dataType uint8, val ...interface{}) Val {
+func NewValue(dataType uint8) Val {
 	switch dataType {
 	case 8:
 		return new(Zdat8)

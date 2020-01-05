@@ -27,7 +27,7 @@ func (v *DiscoverCommandsReceived) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v DiscoverCommandsReceived) Values() []zcl.Val {
+func (v *DiscoverCommandsReceived) Values() []zcl.Val {
 	return []zcl.Val{&v.StartIndex, &v.MaxEntries}
 }
 
@@ -66,7 +66,7 @@ func (v *DiscoverCommandsGenerated) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v DiscoverCommandsGenerated) Values() []zcl.Val {
+func (v *DiscoverCommandsGenerated) Values() []zcl.Val {
 	return []zcl.Val{&v.StartIndex, &v.MaxEntries}
 }
 
@@ -120,7 +120,7 @@ func (v *DiscoverCommandsReceivedResponse) UnmarshalZcl(b []byte) ([]byte, error
 	return b, nil
 }
 
-func (v DiscoverCommandsReceivedResponse) Values() (r []zcl.Val) {
+func (v *DiscoverCommandsReceivedResponse) Values() (r []zcl.Val) {
 	r = []zcl.Val{&v.DiscoveryComplete}
 	for _, c := range v.Commands {
 		r = append(r, &c)
@@ -178,7 +178,7 @@ func (v *DiscoverCommandsGeneratedResponse) UnmarshalZcl(b []byte) ([]byte, erro
 	return b, nil
 }
 
-func (v DiscoverCommandsGeneratedResponse) Values() (r []zcl.Val) {
+func (v *DiscoverCommandsGeneratedResponse) Values() (r []zcl.Val) {
 	r = []zcl.Val{&v.DiscoveryComplete}
 	for _, c := range v.Commands {
 		r = append(r, &c)

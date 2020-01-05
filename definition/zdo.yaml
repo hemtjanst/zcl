@@ -145,11 +145,13 @@ types:
     description: is a list of input clusters
     type: set
     arraytype: u16
+    marshalnotype: true
   outClusterList: &outClusterList
     name: Out Cluster List
     description: is a list of output clusters
     type: set
     arraytype: u16
+    marshalnotype: true
   deviceCap: &deviceCap
     name: Capability
     description: specifies the device:s capabilities
@@ -506,7 +508,9 @@ commands:
     id: "0x8006"
     payloadattr:
       - *status
-      - *endpointList
+      - <<: *endpointList
+        cond:
+          - *__cond_success
 
   - name: Complex Desc Request
     id: "0x0010"
@@ -519,8 +523,12 @@ commands:
     id: "0x8010"
     payloadattr:
       - *status
-      - *nwk
-      - *complexDescriptor
+      - <<: *nwk
+        cond:
+          - *__cond_success
+      - <<: *complexDescriptor
+        cond:
+          - *__cond_success
 
   - name: User Desc Request
     id: "0x0011"

@@ -20,6 +20,7 @@ type AttrInfo struct {
 }
 
 type Endpoint struct {
+	init       bool
 	dev        *Device
 	ep         uint8
 	profile    uint16
@@ -33,6 +34,7 @@ type Endpoint struct {
 	attr       map[zcl.ClusterID][]zcl.Attr
 }
 
+func (z *Endpoint) Device() *Device      { return z.dev }
 func (z *Endpoint) ID() uint8            { return z.ep }
 func (z *Endpoint) Type() zdo.DeviceType { return z.devType }
 func (z *Endpoint) Profile() uint16      { return z.profile }
@@ -235,11 +237,14 @@ func (z *Endpoint) Commands() (c []zcl.Command) {
 	return
 }
 
-func (z *Endpoint) Init(profile uint16) error {
+func (z *Endpoint) Init() error {
+	if z.init {
+		return nil
+	}
+	z.init = true
 	if z.attr == nil {
 		z.attr = map[zcl.ClusterID][]zcl.Attr{}
 	}
-	z.profile = profile
 
 	if err := z.ScanClusters(); err != nil {
 		return err

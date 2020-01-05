@@ -73,7 +73,7 @@ func (c *Zcstring) UnmarshalZcl(buf []byte) ([]byte, error) {
 func (c Zcstring) MarshalZcl() ([]byte, error) { return stringMarshalZcl("o1", string(c)) }
 func (c *Zcstring) Values() []Val              { return []Val{c} }
 func (c Zcstring) ID() TypeID                  { return 66 }
-func (c Zcstring) String() string              { return string(c) }
+func (c *Zcstring) String() string             { return string(*c) }
 
 //func (c Zcstring) Valid() bool { return c != Zcstring(255) }
 

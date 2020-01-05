@@ -44,6 +44,7 @@ func (z *Endpoint) ScanClusters() error {
 		return err
 	}
 
+	z.profile = uint16(sd.Profile)
 	z.devType = zdo.DeviceType(sd.DeviceType)
 	z.devVersion = uint8(sd.DeviceVersion)
 

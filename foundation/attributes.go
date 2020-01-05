@@ -5,29 +5,22 @@ import (
 	"hemtjan.st/zcl"
 )
 
-type ReadAttributes struct {
-	// AttributeList to read
-	AttributeList []zcl.AttrID
-}
+type AttributeList []zcl.AttrID
 
-func (v *ReadAttributes) Values() []zcl.Val {
+func (v *AttributeList) Values() []zcl.Val {
 	var val []zcl.Val
-	for _, a := range v.AttributeList {
+	for _, a := range *v {
 		val = append(val, &a)
 	}
 	return val
 }
 
-func (v ReadAttributes) ID() zcl.CommandID {
-	return ReadAttributesCommand
-}
-
-func (v ReadAttributes) MarshalZcl() ([]byte, error) {
+func (v AttributeList) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
 	var err error
 
-	for _, a := range v.AttributeList {
+	for _, a := range v {
 		if tmp, err = a.MarshalZcl(); err != nil {
 			return nil, err
 		}
@@ -36,7 +29,7 @@ func (v ReadAttributes) MarshalZcl() ([]byte, error) {
 	return data, nil
 }
 
-func (v *ReadAttributes) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *AttributeList) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
 	var list []zcl.AttrID
 
@@ -47,8 +40,32 @@ func (v *ReadAttributes) UnmarshalZcl(b []byte) ([]byte, error) {
 		}
 		list = append(list, *a)
 	}
-	v.AttributeList = list
+	*v = list
 	return b, nil
+}
+
+func (v *AttributeList) TypeID() zcl.TypeID { return new(zcl.Zlist).ID() }
+func (v *AttributeList) Name() string       { return "Attribute list" }
+func (v *AttributeList) String() string     { return fmt.Sprintf("%v", []zcl.AttrID(*v)) }
+
+type ReadAttributes struct {
+	// AttributeList to read
+	AttributeList AttributeList
+}
+
+func (v *ReadAttributes) Values() []zcl.Val {
+	return []zcl.Val{&v.AttributeList}
+}
+
+func (v ReadAttributes) ID() zcl.CommandID {
+	return ReadAttributesCommand
+}
+
+func (v ReadAttributes) MarshalZcl() ([]byte, error) {
+	return v.AttributeList.MarshalZcl()
+}
+func (v *ReadAttributes) UnmarshalZcl(b []byte) ([]byte, error) {
+	return v.AttributeList.UnmarshalZcl(b)
 }
 
 func (v ReadAttributes) AttributeListString() string {

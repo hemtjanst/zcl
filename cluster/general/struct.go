@@ -568,15 +568,13 @@ func (a *AnalogPriorityArray) Value() zcl.Val     { return a }
 func (AnalogPriorityArray) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
 
 func (a *AnalogPriorityArray) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zarray(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *AnalogPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zarray{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = AnalogPriorityArray(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *AnalogPriorityArray) SetValue(v zcl.Val) error {
@@ -1800,15 +1798,13 @@ func (a *BinaryPriorityArray) Value() zcl.Val     { return a }
 func (BinaryPriorityArray) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
 
 func (a *BinaryPriorityArray) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zarray(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *BinaryPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zarray{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = BinaryPriorityArray(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *BinaryPriorityArray) SetValue(v zcl.Val) error {
@@ -5208,15 +5204,13 @@ func (a *MultistatePriorityArray) Value() zcl.Val     { return a }
 func (MultistatePriorityArray) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
 
 func (a *MultistatePriorityArray) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zarray(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *MultistatePriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zarray{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = MultistatePriorityArray(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *MultistatePriorityArray) SetValue(v zcl.Val) error {
@@ -5485,15 +5479,13 @@ func (a *NeighborsInfo) Value() zcl.Val     { return a }
 func (NeighborsInfo) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
 
 func (a *NeighborsInfo) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zset(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *NeighborsInfo) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zset{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = NeighborsInfo(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *NeighborsInfo) SetValue(v zcl.Val) error {

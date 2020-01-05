@@ -138,8 +138,8 @@ func (d *Device) Init() error {
 	if activeEndpoints, ok := rsp.(*zdo.ActiveEndpointResponse); ok {
 		for _, ep := range activeEndpoints.EndpointList.ArrayValues() {
 			go func(ep uint8) {
-				if ep == 1 {
-					err := d.Endpoint(ep).Init(260)
+				if ep > 0 {
+					err := d.Endpoint(ep).Init()
 					if err != nil {
 						log.Printf("Error initializing endpoint %d on %04x: %s", ep, d.nwk, err)
 					}

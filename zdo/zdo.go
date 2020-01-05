@@ -154,15 +154,13 @@ func (a *AssociatedDevices) AddValues(val ...uint16) error {
 }
 
 func (a *AssociatedDevices) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zlist(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *AssociatedDevices) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zlist{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = AssociatedDevices(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *AssociatedDevices) SetValue(v zcl.Val) error {
@@ -1055,15 +1053,13 @@ func (a *InClusterList) AddValues(val ...uint16) error {
 }
 
 func (a *InClusterList) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zset(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *InClusterList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zset{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = InClusterList(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *InClusterList) SetValue(v zcl.Val) error {
@@ -1320,15 +1316,13 @@ func (a *OutClusterList) AddValues(val ...uint16) error {
 }
 
 func (a *OutClusterList) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zset(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *OutClusterList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zset{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = OutClusterList(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *OutClusterList) SetValue(v zcl.Val) error {
@@ -1638,15 +1632,13 @@ func (a *SimpleDescSizeList) AddValues(val ...uint8) error {
 }
 
 func (a *SimpleDescSizeList) MarshalZcl() ([]byte, error) {
-	a.Type = a.ArrayTypeID()
-	return zcl.Zset(*a).MarshalZcl()
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *SimpleDescSizeList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := &zcl.Zset{Type: a.ArrayTypeID()}
-	br, err := nt.UnmarshalZcl(b)
-	*a = SimpleDescSizeList(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *SimpleDescSizeList) SetValue(v zcl.Val) error {
@@ -3367,7 +3359,8 @@ func (v MatchDescResponse) MarshalZcl() ([]byte, error) {
 		}
 		data = append(data, tmp...)
 	}
-	{
+	// EndpointList is only included if successful
+	if v.Status == 0x00 {
 		if tmp, err = v.EndpointList.MarshalZcl(); err != nil {
 			return nil, err
 		}
@@ -3384,8 +3377,11 @@ func (v *MatchDescResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.EndpointList).UnmarshalZcl(b); err != nil {
-		return b, err
+	// EndpointList is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.EndpointList).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
 	return b, nil
@@ -3540,13 +3536,15 @@ func (v ComplexDescResponse) MarshalZcl() ([]byte, error) {
 		}
 		data = append(data, tmp...)
 	}
-	{
+	// NwkAddress is only included if successful
+	if v.Status == 0x00 {
 		if tmp, err = v.NwkAddress.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-	{
+	// ComplexDescriptor is only included if successful
+	if v.Status == 0x00 {
 		if tmp, err = v.ComplexDescriptor.MarshalZcl(); err != nil {
 			return nil, err
 		}
@@ -3563,12 +3561,18 @@ func (v *ComplexDescResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.NwkAddress).UnmarshalZcl(b); err != nil {
-		return b, err
+	// NwkAddress is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.NwkAddress).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.ComplexDescriptor).UnmarshalZcl(b); err != nil {
-		return b, err
+	// ComplexDescriptor is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.ComplexDescriptor).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
 	return b, nil
