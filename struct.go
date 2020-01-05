@@ -1,8 +1,12 @@
 package zcl
 
 import (
+	"encoding/hex"
 	"errors"
 	"fmt"
+	"log"
+	"strconv"
+	"strings"
 )
 
 type ProfileID Zu16
@@ -93,18 +97,23 @@ type Option struct {
 	Name  string
 	Value int
 }
-type EnumAttr interface {
-	Attr
+
+type EnumArg interface {
 	SingleOptions() []Option
 }
-type BitmapAttr interface {
-	Attr
+
+type BitmapArg interface {
 	MultiOptions() []Option
+}
+
+type ArgDesc struct {
+	Argument Argument
+	Name     string
 }
 
 type Command interface {
 	General
-	Arguments() []Argument
+	Arguments() []ArgDesc
 	Cluster() ClusterID
 	Required() bool
 	MnfCode() []byte
@@ -119,8 +128,13 @@ type General interface {
 }
 
 type ZdoCommand interface {
-	Cluster() uint16
+	Val
+	Arguments() []ArgDesc
+	Cluster() ClusterID
 	Values() []Val
+	ID() ZdoCmdID
+	Name() string
+	String() string
 }
 
 /*type ZdoCommand interface {
@@ -170,20 +184,123 @@ func (i *TypeID) UnmarshalZcl(b []byte) ([]byte, error) {
 
 func (e errType) Error() string { return string(e) }
 
+func FromString(dataType uint8, v string) Val {
+
+	// Decode in a few different formats
+	hs, err := hex.DecodeString(v)
+	if err != nil {
+		log.Printf("Cannot parse %s as hex: %v", v, err)
+	}
+	ui, err := strconv.ParseUint(v, 10, 64)
+	if err != nil {
+		log.Printf("Cannot parse %s as uint: %v", v, err)
+	}
+	si, err := strconv.ParseInt(v, 10, 64)
+	if err != nil {
+		log.Printf("Cannot parse %s as int: %v", v, err)
+	}
+	fl, err := strconv.ParseFloat(v, 64)
+	if err != nil {
+		log.Printf("Cannot parse %s as float: %v", v, err)
+	}
+
+	switch dataType {
+	case 16:
+		b := Zbool(0)
+		v = strings.ToLower(v)
+		if v == "1" || v == "true" || v == "yes" {
+			b = 1
+		}
+		return &b
+	case 32:
+		b := Zu8(ui)
+		return &b
+	case 33:
+		b := Zu16(ui)
+		return &b
+	case 34:
+		b := Zu24(ui)
+		return &b
+	case 35:
+		b := Zu32(ui)
+		return &b
+	case 36:
+		b := Zu40(ui)
+		return &b
+	case 37:
+		b := Zu48(ui)
+		return &b
+	case 38:
+		b := Zu56(ui)
+		return &b
+	case 39:
+		b := Zu64(ui)
+		return &b
+	case 40:
+		b := Zs8(si)
+		return &b
+	case 41:
+		b := Zs16(si)
+		return &b
+	case 42:
+		b := Zs24(si)
+		return &b
+	case 43:
+		b := Zs32(si)
+		return &b
+	case 44:
+		b := Zs40(si)
+		return &b
+	case 45:
+		b := Zs48(si)
+		return &b
+	case 46:
+		b := Zs56(si)
+		return &b
+	case 47:
+		b := Zs64(si)
+		return &b
+	case 48:
+		b := Zenum8(ui)
+		return &b
+	case 49:
+		b := Zenum16(ui)
+		return &b
+	case 56:
+		b := Zsemi(fl)
+		return &b
+	case 57:
+		b := Zfloat(fl)
+		return &b
+	case 58:
+		b := Zdouble(fl)
+		return &b
+	case 65:
+		b := Zostring(hs)
+		return &b
+	case 66:
+		b := Zcstring(v)
+		return &b
+	case 67:
+		b := Zlostring(hs)
+		return &b
+	case 68:
+		b := Zlcstring(v)
+		return &b
+	case 224:
+		//return &Ztime{}
+	case 225:
+		//return &Zdate{}
+	case 226:
+		//return &Zutc{}
+	}
+	return nil
+}
+
 func NewValue(dataType uint8, val ...interface{}) Val {
 	switch dataType {
 	case 8:
-		v := new(Zdat8)
-		if len(val) == 1 {
-			switch val[0].(type) {
-			case string:
-				vv := val[0].(string)
-				if len(vv) > 0 {
-					v[0] = vv[0]
-				}
-			}
-		}
-		return v
+		return new(Zdat8)
 	case 9:
 		return new(Zdat16)
 	case 10:

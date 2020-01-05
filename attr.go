@@ -50,6 +50,8 @@ type Argument interface {
 	TypeID() TypeID
 	Name() string
 	String() string
+	Value() Val
+	SetValue(v Val) error
 }
 
 type Attr interface {
@@ -59,8 +61,6 @@ type Attr interface {
 	Writable() bool
 	Reportable() bool
 	SceneIndex() int
-	Value() Val
-	SetValue(v Val) error
 }
 
 type ClusterAttrImpl struct {

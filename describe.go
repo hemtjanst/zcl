@@ -1,6 +1,7 @@
 package zcl
 
 import (
+	"log"
 	"reflect"
 )
 
@@ -12,6 +13,7 @@ type ValueDescription struct {
 	ListType     *ValueDescription
 	EnumValues   []Option
 	BitmapValues []Option
+	Default      Val
 }
 
 type CommandDescription struct {
@@ -25,25 +27,45 @@ type CommandDescription struct {
 
 func DescribeAttr(attr Argument) (desc ValueDescription) {
 	ft := reflect.TypeOf(attr)
+	desc.Name = ft.Elem().Name()
 
-	desc.List = ft.Kind() == reflect.Slice
-	if so, ok := ft.MethodByName("SingleOptions"); ok {
-		opts := so.Func.Call([]reflect.Value{})
-		for _, optVal := range opts {
-			opt := optVal.Interface()
-			if optOpt, ok := opt.(Option); ok {
-				desc.EnumValues = append(desc.EnumValues, optOpt)
-			}
-		}
+	if ea, ok := attr.(EnumArg); ok {
+		desc.EnumValues = ea.SingleOptions()
+	} else if ea, ok := attr.(BitmapArg); ok {
+		desc.BitmapValues = ea.MultiOptions()
 	}
-	if so, ok := ft.MethodByName("MultiOptions"); ok {
-		opts := so.Func.Call([]reflect.Value{})
-		for _, optVal := range opts {
-			opt := optVal.Interface()
-			if optOpt, ok := opt.(Option); ok {
-				desc.BitmapValues = append(desc.BitmapValues, optOpt)
-			}
+	desc.Type = attr.TypeID()
+	desc.List = ft.Kind() == reflect.Slice
+	return
+}
+
+func DescribeArgs(cmd interface{}) (v []ValueDescription) {
+	rv := reflect.ValueOf(cmd)
+	rf := reflect.TypeOf(cmd)
+	if rf.Kind() == reflect.Ptr {
+		rf = rf.Elem()
+		rv = rv.Elem()
+	}
+	if rf.Kind() != reflect.Struct {
+		return
+	}
+
+	for i := 0; i < rf.NumField(); i++ {
+		f := rf.Field(i)
+		fv := rv.Field(i)
+		//ft := f.Type
+
+		fd := ValueDescription{}
+		if attr, ok := fv.Interface().(Argument); ok {
+			fd = DescribeAttr(attr)
+		} else if attr, ok := fv.Addr().Interface().(Argument); ok {
+			fd = DescribeAttr(attr)
+		} else {
+			log.Printf("Unable to describe argument %s of %s: %s %#v", f.Name, rf.Name(), fv.Type(), fv)
 		}
+		fd.Index = i
+		fd.Name = f.Name
+		v = append(v, fd)
 	}
 	return
 }
@@ -66,21 +88,7 @@ func DescribeGeneral(cmd General) (desc CommandDescription) {
 			Name:  rf.Name(),
 		}}
 	case reflect.Struct:
-		for i := 0; i < rf.NumField(); i++ {
-			f := rf.Field(i)
-			fv := rv.Field(i)
-			//ft := f.Type
-
-			fd := ValueDescription{}
-			if attr, ok := fv.Interface().(Argument); ok {
-				fd = DescribeAttr(attr)
-			} else {
-
-			}
-			fd.Index = i
-			fd.Name = f.Name
-			desc.Arguments = append(desc.Arguments, fd)
-		}
+		desc.Arguments = DescribeArgs(cmd)
 	}
 
 	return
@@ -98,5 +106,20 @@ func DescribeCommand(cmd Command) (desc CommandDescription) {
 		desc.MnfCode = &mnf
 	}
 	desc.Required = cmd.Required()
+	return
+}
+
+func DescribeZdoCommand(cmd ZdoCommand) (desc CommandDescription) {
+	rf := reflect.TypeOf(cmd)
+	if rf.Kind() == reflect.Ptr {
+		rf = rf.Elem()
+	}
+
+	c := cmd.Cluster()
+	desc = CommandDescription{
+		Name:      rf.Name(),
+		Arguments: DescribeArgs(cmd),
+		ClusterID: &c,
+	}
 	return
 }
