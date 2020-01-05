@@ -75,13 +75,13 @@ func (v *AddScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of AddScene
-func (v *AddScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.SceneId,
-		&v.TransitionTimeSec,
-		&v.SceneName,
-		&v.SceneExtensions,
+func (v *AddScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
+		{Name: "TransitionTimeSec", Argument: &v.TransitionTimeSec},
+		{Name: "SceneName", Argument: &v.SceneName},
+		{Name: "SceneExtensions", Argument: &v.SceneExtensions},
 	}
 }
 
@@ -205,10 +205,10 @@ func (v *ViewScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ViewScene
-func (v *ViewScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.SceneId,
+func (v *ViewScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -296,10 +296,10 @@ func (v *RemoveScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveScene
-func (v *RemoveScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.SceneId,
+func (v *RemoveScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -385,9 +385,9 @@ func (v *RemoveAllScenes) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveAllScenes
-func (v *RemoveAllScenes) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
+func (v *RemoveAllScenes) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
 	}
 }
 
@@ -463,10 +463,10 @@ func (v *StoreScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StoreScene
-func (v *StoreScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.SceneId,
+func (v *StoreScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -554,10 +554,10 @@ func (v *RecallScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RecallScene
-func (v *RecallScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.SceneId,
+func (v *RecallScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -643,9 +643,9 @@ func (v *GetSceneMembership) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetSceneMembership
-func (v *GetSceneMembership) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
+func (v *GetSceneMembership) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
 	}
 }
 
@@ -733,13 +733,13 @@ func (v *EnhancedAddScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedAddScene
-func (v *EnhancedAddScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.SceneId,
-		&v.TransitionTime,
-		&v.SceneName,
-		&v.SceneExtensions,
+func (v *EnhancedAddScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
+		{Name: "SceneName", Argument: &v.SceneName},
+		{Name: "SceneExtensions", Argument: &v.SceneExtensions},
 	}
 }
 
@@ -863,10 +863,10 @@ func (v *EnhancedViewScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedViewScene
-func (v *EnhancedViewScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.SceneId,
+func (v *EnhancedViewScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -959,13 +959,13 @@ func (v *CopyScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of CopyScene
-func (v *CopyScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.SceneCopyMode,
-		&v.FromGroupId,
-		&v.FromSceneId,
-		&v.ToGroupId,
-		&v.ToSceneId,
+func (v *CopyScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "SceneCopyMode", Argument: &v.SceneCopyMode},
+		{Name: "FromGroupId", Argument: &v.FromGroupId},
+		{Name: "FromSceneId", Argument: &v.FromSceneId},
+		{Name: "ToGroupId", Argument: &v.ToGroupId},
+		{Name: "ToSceneId", Argument: &v.ToSceneId},
 	}
 }
 
@@ -1087,9 +1087,9 @@ func (v *IkeaRemotePress) Values() []zcl.Val {
 }
 
 // Arguments returns all values of IkeaRemotePress
-func (v *IkeaRemotePress) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.IkeaRemoteDirection,
+func (v *IkeaRemotePress) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "IkeaRemoteDirection", Argument: &v.IkeaRemoteDirection},
 	}
 }
 
@@ -1162,9 +1162,9 @@ func (v *IkeaRemoteLongpressStart) Values() []zcl.Val {
 }
 
 // Arguments returns all values of IkeaRemoteLongpressStart
-func (v *IkeaRemoteLongpressStart) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.IkeaRemoteDirection,
+func (v *IkeaRemoteLongpressStart) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "IkeaRemoteDirection", Argument: &v.IkeaRemoteDirection},
 	}
 }
 
@@ -1234,8 +1234,8 @@ func (v *IkeaRemoteLongpressStop) Values() []zcl.Val {
 }
 
 // Arguments returns all values of IkeaRemoteLongpressStop
-func (v *IkeaRemoteLongpressStop) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *IkeaRemoteLongpressStop) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -1293,11 +1293,11 @@ func (v *AddSceneResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of AddSceneResponse
-func (v *AddSceneResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
-		&v.SceneId,
+func (v *AddSceneResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -1411,14 +1411,14 @@ func (v *ViewSceneResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ViewSceneResponse
-func (v *ViewSceneResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
-		&v.SceneId,
-		&v.TransitionTimeSec,
-		&v.SceneName,
-		&v.SceneExtensions,
+func (v *ViewSceneResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
+		{Name: "TransitionTimeSec", Argument: &v.TransitionTimeSec},
+		{Name: "SceneName", Argument: &v.SceneName},
+		{Name: "SceneExtensions", Argument: &v.SceneExtensions},
 	}
 }
 
@@ -1556,11 +1556,11 @@ func (v *RemoveSceneResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveSceneResponse
-func (v *RemoveSceneResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
-		&v.SceneId,
+func (v *RemoveSceneResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -1660,10 +1660,10 @@ func (v *RemoveAllScenesResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveAllScenesResponse
-func (v *RemoveAllScenesResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
+func (v *RemoveAllScenesResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
 	}
 }
 
@@ -1753,11 +1753,11 @@ func (v *StoreSceneResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StoreSceneResponse
-func (v *StoreSceneResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
-		&v.SceneId,
+func (v *StoreSceneResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -1862,12 +1862,12 @@ func (v *GetSceneMembershipResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetSceneMembershipResponse
-func (v *GetSceneMembershipResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.SceneCapacity,
-		&v.GroupId,
-		&v.SceneList,
+func (v *GetSceneMembershipResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "SceneCapacity", Argument: &v.SceneCapacity},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneList", Argument: &v.SceneList},
 	}
 }
 
@@ -1980,11 +1980,11 @@ func (v *EnhancedAddSceneResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedAddSceneResponse
-func (v *EnhancedAddSceneResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
-		&v.SceneId,
+func (v *EnhancedAddSceneResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
 	}
 }
 
@@ -2098,14 +2098,14 @@ func (v *EnhancedViewSceneResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedViewSceneResponse
-func (v *EnhancedViewSceneResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
-		&v.SceneId,
-		&v.TransitionTime,
-		&v.SceneName,
-		&v.SceneExtensions,
+func (v *EnhancedViewSceneResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "SceneId", Argument: &v.SceneId},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
+		{Name: "SceneName", Argument: &v.SceneName},
+		{Name: "SceneExtensions", Argument: &v.SceneExtensions},
 	}
 }
 
@@ -2242,11 +2242,11 @@ func (v *CopySceneResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of CopySceneResponse
-func (v *CopySceneResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.FromGroupId,
-		&v.FromSceneId,
+func (v *CopySceneResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "FromGroupId", Argument: &v.FromGroupId},
+		{Name: "FromSceneId", Argument: &v.FromSceneId},
 	}
 }
 

@@ -50,6 +50,7 @@ types:
     name: Endpoint List
     type: set
     arraytype: u8
+    marshalnotype: yes
   addrReqType: &addrReqType
     name: Request Type
     description: should be set to 1 if extended response is requested, 0 otherwise
@@ -190,6 +191,12 @@ types:
     name: Active Endpoint Size
     type: u8
     description: Size in bytes of the Active Endpoints List
+  activeEndpointList: &activeEndpointList
+    name: Active Endpoint List
+    type: set
+    arraytype: u8
+    marshalnotype: yes
+    description: List of active endpoints
   simpleDescSizeList: &simpleDescSizeList
     name: Simple Desc Size List
     type: set
@@ -299,14 +306,22 @@ types:
     name: Unknown u8
     type: u8
 
-.templates2:
   simpleDescriptor: &simpleDescriptor
-    - *endpoint
-    - *profileId
-    - *deviceType
-    - *deviceVersion
-    - *inClusterList
-    - *outClusterList
+    name: Simple Descriptor
+    type: ostring
+    .structattr:
+      - *endpoint
+      - *profileId
+      - *deviceType
+      - *deviceVersion
+      - *inClusterList
+      - *outClusterList
+
+  complexDescriptor: &complexDescriptor
+    name: Complex Descriptor
+    type: ostring
+
+.templates2:
 
   powerDescriptor: &powerDescriptor
     - *npMode
@@ -346,7 +361,7 @@ commands:
       - *ieee
       - *nwk
       - type: u8
-        marshal: "2*len(v.AssociatedDevices.Content)"
+        marshal: "tmp = []byte{uint8(2*len(v.AssociatedDevices.Content))}"
         cond:
           - *__cond_success
       - <<: *startIndex
@@ -377,7 +392,7 @@ commands:
       - *ieee
       - *nwk
       - type: u8
-        marshal: "2*len(v.AssociatedDevices.Content)"
+        marshal: "tmp = []byte{uint8(2*len(v.AssociatedDevices.Content))}"
         cond:
           - *__cond_success
       - <<: *startIndex
@@ -449,6 +464,10 @@ commands:
       - *endpoint
   - name: Simple Desc Response
     id: "0x8004"
+    payloadattr:
+      - *status
+      - *nwk
+      - *simpleDescriptor
 
 
   - name: Active Endpoint Request
@@ -459,7 +478,17 @@ commands:
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
-
+  - name: Active Endpoint Response
+    id: "0x8005"
+    required: true
+    payloadattr:
+      - *status
+      - <<: *nwk
+        cond:
+          - *__cond_success
+      - <<: *endpointList
+        cond:
+          - *__cond_success
 
   - name: Match Desc Request
     id: "0x0006"
@@ -473,6 +502,11 @@ commands:
       - *inClusterList
       - *outClusterList
 
+  - name: Match Desc Response
+    id: "0x8006"
+    payloadattr:
+      - *status
+      - *endpointList
 
   - name: Complex Desc Request
     id: "0x0010"
@@ -481,7 +515,12 @@ commands:
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
-
+  - name: Complex Desc Response
+    id: "0x8010"
+    payloadattr:
+      - *status
+      - *nwk
+      - *complexDescriptor
 
   - name: User Desc Request
     id: "0x0011"
@@ -601,7 +640,7 @@ commands:
       - *nwk
       - *ieee
       - type: u8
-        marshal: "8 + 2*len(v.InClusterList.Content) + 2*len(v.OutClusterList.Content)"
+        marshal: "tmp = []byte{uint8(8 + 2*len(v.InClusterList.Content) + 2*len(v.OutClusterList.Content))}"
       - *endpoint
       - *profileId
       - *deviceType

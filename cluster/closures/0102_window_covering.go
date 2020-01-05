@@ -55,8 +55,8 @@ func (v *UpOpen) Values() []zcl.Val {
 }
 
 // Arguments returns all values of UpOpen
-func (v *UpOpen) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *UpOpen) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -106,8 +106,8 @@ func (v *DownClose) Values() []zcl.Val {
 }
 
 // Arguments returns all values of DownClose
-func (v *DownClose) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *DownClose) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -157,8 +157,8 @@ func (v *Stop) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Stop
-func (v *Stop) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *Stop) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -211,9 +211,9 @@ func (v *GoToLiftValue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GoToLiftValue
-func (v *GoToLiftValue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Position,
+func (v *GoToLiftValue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Position", Argument: &v.Position},
 	}
 }
 
@@ -286,9 +286,9 @@ func (v *GoToLiftPercentage) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GoToLiftPercentage
-func (v *GoToLiftPercentage) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Percentage,
+func (v *GoToLiftPercentage) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Percentage", Argument: &v.Percentage},
 	}
 }
 
@@ -361,9 +361,9 @@ func (v *GoToTiltValue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GoToTiltValue
-func (v *GoToTiltValue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Position,
+func (v *GoToTiltValue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Position", Argument: &v.Position},
 	}
 }
 
@@ -436,9 +436,9 @@ func (v *GoToTiltPercentage) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GoToTiltPercentage
-func (v *GoToTiltPercentage) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Percentage,
+func (v *GoToTiltPercentage) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Percentage", Argument: &v.Percentage},
 	}
 }
 

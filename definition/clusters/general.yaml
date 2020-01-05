@@ -687,6 +687,7 @@ types:
     name: Group list
     type: set
     arraytype: u16
+    marshalnotype: true
     required: true
     showas: hex
   GroupCapacity: &groupCapacity
@@ -791,6 +792,7 @@ types:
     name: Scene list
     type: set
     arraytype: u8
+    marshalnotype: true
     required: true
     showas: hex
 

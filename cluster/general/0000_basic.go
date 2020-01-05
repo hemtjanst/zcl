@@ -52,8 +52,8 @@ func (v *ResetToFactoryDefaults) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ResetToFactoryDefaults
-func (v *ResetToFactoryDefaults) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *ResetToFactoryDefaults) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command

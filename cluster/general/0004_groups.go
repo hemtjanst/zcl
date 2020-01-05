@@ -46,10 +46,10 @@ func (v *AddGroup) Values() []zcl.Val {
 }
 
 // Arguments returns all values of AddGroup
-func (v *AddGroup) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.GroupName,
+func (v *AddGroup) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "GroupName", Argument: &v.GroupName},
 	}
 }
 
@@ -135,9 +135,9 @@ func (v *ViewGroup) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ViewGroup
-func (v *ViewGroup) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
+func (v *ViewGroup) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
 	}
 }
 
@@ -211,9 +211,9 @@ func (v *GetGroupMembership) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetGroupMembership
-func (v *GetGroupMembership) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupList,
+func (v *GetGroupMembership) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupList", Argument: &v.GroupList},
 	}
 }
 
@@ -287,9 +287,9 @@ func (v *RemoveGroup) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveGroup
-func (v *RemoveGroup) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupList,
+func (v *RemoveGroup) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupList", Argument: &v.GroupList},
 	}
 }
 
@@ -360,8 +360,8 @@ func (v *RemoveAllGroups) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveAllGroups
-func (v *RemoveAllGroups) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *RemoveAllGroups) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -417,10 +417,10 @@ func (v *AddGroupIfIdentifying) Values() []zcl.Val {
 }
 
 // Arguments returns all values of AddGroupIfIdentifying
-func (v *AddGroupIfIdentifying) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupId,
-		&v.GroupName,
+func (v *AddGroupIfIdentifying) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "GroupName", Argument: &v.GroupName},
 	}
 }
 
@@ -508,10 +508,10 @@ func (v *AddGroupResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of AddGroupResponse
-func (v *AddGroupResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
+func (v *AddGroupResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
 	}
 }
 
@@ -601,11 +601,11 @@ func (v *ViewGroupResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ViewGroupResponse
-func (v *ViewGroupResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
-		&v.GroupName,
+func (v *ViewGroupResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
+		{Name: "GroupName", Argument: &v.GroupName},
 	}
 }
 
@@ -708,10 +708,10 @@ func (v *GetGroupMembershipResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetGroupMembershipResponse
-func (v *GetGroupMembershipResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.GroupCapacity,
-		&v.GroupList,
+func (v *GetGroupMembershipResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "GroupCapacity", Argument: &v.GroupCapacity},
+		{Name: "GroupList", Argument: &v.GroupList},
 	}
 }
 
@@ -799,10 +799,10 @@ func (v *RemoveGroupResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveGroupResponse
-func (v *RemoveGroupResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.GroupId,
+func (v *RemoveGroupResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "GroupId", Argument: &v.GroupId},
 	}
 }
 

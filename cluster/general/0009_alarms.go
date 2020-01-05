@@ -41,10 +41,10 @@ func (v *ResetAlarm) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ResetAlarm
-func (v *ResetAlarm) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.AlarmCode,
-		&v.ClusterId,
+func (v *ResetAlarm) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "AlarmCode", Argument: &v.AlarmCode},
+		{Name: "ClusterId", Argument: &v.ClusterId},
 	}
 }
 
@@ -127,8 +127,8 @@ func (v *ResetAllAlarms) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ResetAllAlarms
-func (v *ResetAllAlarms) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *ResetAllAlarms) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -179,8 +179,8 @@ func (v *GetAlarm) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetAlarm
-func (v *GetAlarm) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *GetAlarm) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -231,8 +231,8 @@ func (v *ResetAlarmLog) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ResetAlarmLog
-func (v *ResetAlarmLog) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *ResetAlarmLog) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -287,10 +287,10 @@ func (v *Alarm) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Alarm
-func (v *Alarm) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.AlarmCode,
-		&v.ClusterId,
+func (v *Alarm) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "AlarmCode", Argument: &v.AlarmCode},
+		{Name: "ClusterId", Argument: &v.ClusterId},
 	}
 }
 
@@ -381,12 +381,12 @@ func (v *GetAlarmResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetAlarmResponse
-func (v *GetAlarmResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.AlarmCode,
-		&v.ClusterId,
-		&v.Time,
+func (v *GetAlarmResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "AlarmCode", Argument: &v.AlarmCode},
+		{Name: "ClusterId", Argument: &v.ClusterId},
+		{Name: "Time", Argument: &v.Time},
 	}
 }
 

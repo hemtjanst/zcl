@@ -141,28 +141,30 @@ func (a Attr) Equal(o Attr) bool {
 }
 
 type Attr struct {
-	ID          Hex             `xml:"id,attr" toml:"id,omitempty" yaml:"id,omitempty" json:"id,omitempty"`
-	Name        Name            `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
-	ArgName     Name            `xml:"argname,attr" toml:"argname,omitempty" yaml:"argname,omitempty" json:"argname,omitempty"`
-	Type        Type            `xml:"type,attr" toml:"type,omitempty" yaml:"type,omitempty" json:"type,omitempty"`
-	ArrayType   Type            `xml:"arrayType,attr" toml:"arraytype,omitempty" yaml:"arraytype,omitempty" json:"arraytype,omitempty"`
-	Access      string          `xml:"access,attr" toml:"access,omitempty" yaml:"access,omitempty" json:"access,omitempty"`
-	Default     Hex             `xml:"default,attr" toml:"default,omitempty" yaml:"default,omitempty" json:"default,omitempty"`
-	Required    string          `xml:"required,attr" toml:"required,omitempty" yaml:"required,omitempty" json:"required,omitempty"`
-	Report      bool            `xml:"-" toml:"report,omitempty" yaml:"report,omitempty" json:"report,omitempty"`
-	Scene       Int             `xml:"-" toml:"scene,omitempty" yaml:"scene,omitempty" json:"scene,omitempty"`
-	Range       string          `xml:"range,attr" toml:"range,omitempty" yaml:"range,omitempty" json:"range,omitempty"`
-	MfCode      MfCode          `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
-	ShowAs      string          `xml:"showas,attr" toml:"showas,omitempty" yaml:"showas,omitempty" json:"showas,omitempty"`
-	ListSize    string          `xml:"listSize,attr" toml:"listsize,omitempty" yaml:"listsize,omitempty" json:"listsize,omitempty"`
-	Enumeration Name            `xml:"enumeration,attr" toml:"enumeration,omitempty" yaml:"enumeration,omitempty" json:"enumeration,omitempty"`
-	Unit        string          `xml:"unit,attr" toml:"unit,omitempty" yaml:"unit,omitempty" json:"unit,omitempty"`
-	Multiplier  Multiplier      `xml:"multiplier,attr" toml:"multiplier,omitempty" yaml:"multiplier,omitempty" json:"multiplier,omitempty"`
-	Desc        Desc            `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
-	Values      map[string]Name `xml:"value" toml:"values,omitempty" yaml:"values,omitempty" json:"values,omitempty"`
-	Bits        map[string]Name `xml:"bit" toml:"bits,omitempty" yaml:"bits,omitempty" json:"bits,omitempty"`
-	Cond        []Condition     `xml:"payload>condition" toml:"cond,omitempty" yaml:"cond,omitempty" json:"cond,omitempty"`
-	Marshal     string          `xml:"marshal" toml:"marshal,omitempty" yaml:"marshal,omitempty" json:"marshal,omitempty"`
+	ID            Hex             `xml:"id,attr" toml:"id,omitempty" yaml:"id,omitempty" json:"id,omitempty"`
+	Name          Name            `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	ArgName       Name            `xml:"argname,attr" toml:"argname,omitempty" yaml:"argname,omitempty" json:"argname,omitempty"`
+	Type          Type            `xml:"type,attr" toml:"type,omitempty" yaml:"type,omitempty" json:"type,omitempty"`
+	ArrayType     Type            `xml:"arrayType,attr" toml:"arraytype,omitempty" yaml:"arraytype,omitempty" json:"arraytype,omitempty"`
+	Access        string          `xml:"access,attr" toml:"access,omitempty" yaml:"access,omitempty" json:"access,omitempty"`
+	Default       Hex             `xml:"default,attr" toml:"default,omitempty" yaml:"default,omitempty" json:"default,omitempty"`
+	Required      string          `xml:"required,attr" toml:"required,omitempty" yaml:"required,omitempty" json:"required,omitempty"`
+	Report        bool            `xml:"-" toml:"report,omitempty" yaml:"report,omitempty" json:"report,omitempty"`
+	Scene         Int             `xml:"-" toml:"scene,omitempty" yaml:"scene,omitempty" json:"scene,omitempty"`
+	Range         string          `xml:"range,attr" toml:"range,omitempty" yaml:"range,omitempty" json:"range,omitempty"`
+	MfCode        MfCode          `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
+	ShowAs        string          `xml:"showas,attr" toml:"showas,omitempty" yaml:"showas,omitempty" json:"showas,omitempty"`
+	ListSize      string          `xml:"listSize,attr" toml:"listsize,omitempty" yaml:"listsize,omitempty" json:"listsize,omitempty"`
+	Enumeration   Name            `xml:"enumeration,attr" toml:"enumeration,omitempty" yaml:"enumeration,omitempty" json:"enumeration,omitempty"`
+	Unit          string          `xml:"unit,attr" toml:"unit,omitempty" yaml:"unit,omitempty" json:"unit,omitempty"`
+	Multiplier    Multiplier      `xml:"multiplier,attr" toml:"multiplier,omitempty" yaml:"multiplier,omitempty" json:"multiplier,omitempty"`
+	Desc          Desc            `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
+	Values        map[string]Name `xml:"value" toml:"values,omitempty" yaml:"values,omitempty" json:"values,omitempty"`
+	Bits          map[string]Name `xml:"bit" toml:"bits,omitempty" yaml:"bits,omitempty" json:"bits,omitempty"`
+	Cond          []Condition     `xml:"payload>condition" toml:"cond,omitempty" yaml:"cond,omitempty" json:"cond,omitempty"`
+	Marshal       string          `xml:"marshal" toml:"marshal,omitempty" yaml:"marshal,omitempty" json:"marshal,omitempty"`
+	Unmarshal     string          `xml:"unmarshal" toml:"unmarshal,omitempty" yaml:"unmarshal,omitempty" json:"unmarshal,omitempty"`
+	MarshalNoType bool            `xml:"marshalnotype" toml:"marshalnotype,omitempty" yaml:"marshalnotype,omitempty" json:"marshalnotype,omitempty"`
 }
 
 func (a Attr) CanRead() bool {

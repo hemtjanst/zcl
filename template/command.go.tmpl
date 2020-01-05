@@ -13,9 +13,9 @@ func (v *{{.Name.Fmt}}) Values() []zcl.Val {
 }
 
 // Arguments returns all values of {{.Name.Fmt}}
-func (v *{{.Name.Fmt}}) Arguments() []zcl.Argument {
-    return []zcl.Argument{ {{range .PayloadAttr}}{{if .Name}}
-        &v.{{.ArgNameFmt}},{{end}}{{end}}
+func (v *{{.Name.Fmt}}) Arguments() []zcl.ArgDesc {
+    return []zcl.ArgDesc{ {{range .PayloadAttr}}{{if .Name}}
+        {Name: "{{.ArgNameFmt}}", Argument: &v.{{.ArgNameFmt}} },{{end}}{{end}}
     }
 }
 
@@ -45,10 +45,10 @@ func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}
     var err error
     {{range .PayloadAttr}}
         {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{else}} { {{end}}{{if .Marshal}}
-        x := zcl.{{.Type.Type}}({{.Marshal}}){{end}}
-        if tmp, err = {{if .Marshal}}x{{else}}v.{{.ArgNameFmt}}{{end}}.MarshalZcl(); err != nil {
+        {{.Marshal}}{{else}}
+        if tmp, err = v.{{.ArgNameFmt}}.MarshalZcl(); err != nil {
         return nil, err
-        }
+        }{{end}}
         data = append(data, tmp...)
     } {{end}}
     return data, nil {{ else }}
@@ -59,10 +59,10 @@ func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}
 func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAttr}}
     var err error
     {{range .PayloadAttr}}
-        {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{end}}
-        if b, err = {{if .Name}}(&v.{{.ArgNameFmt}}){{else}}new(zcl.{{.Type.Type}}){{end}}.UnmarshalZcl(b); err != nil {
+        {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{end}}{{if .Unmarshal}}
+        {{.Unmarshal}}{{else}}if b, err = {{if .Name}}(&v.{{.ArgNameFmt}}){{else}}new(zcl.{{.Type.Type}}){{end}}.UnmarshalZcl(b); err != nil {
         return b, err
-        }
+        }{{end}}
         {{if .Cond}} } {{end}}
     {{end}}
 {{ end }}return b, nil

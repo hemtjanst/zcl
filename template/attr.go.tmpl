@@ -9,10 +9,55 @@ func ({{$an}}) SceneIndex() int { return {{if .Scene}}{{.Scene}}{{else}}-1{{end}
 func ({{$an}}) Name() string { return "{{.Name}}" }
 func (a *{{$an}}) TypeID() zcl.TypeID { return zcl.{{.Type.Type}}(*a).ID() }
 func (a *{{$an}}) Value() zcl.Val { return a }
-func (a {{$an}}) MarshalZcl() ([]byte, error) { {{if .ArrayType}}
-    return nil, zcl.Errorf("not implemented")
-{{else}}return zcl.{{.Type.Type}}(a).MarshalZcl(){{end}} }
 
+{{ if .ArrayType}}
+func ({{$an}}) ArrayTypeID() zcl.TypeID { return new(zcl.{{.ArrayType.Type}}).ID() }
+
+{{ if eq .ArrayType "struct" }}
+
+{{ else }}
+func (a *{{$an}}) ArrayValues() (o []{{.ArrayType.Native}}) {
+    for _, v := range a.Content {
+        if vv, ok := v.(*zcl.{{.ArrayType.Type}}); ok {
+            o = append(o, {{.ArrayType.Native}}(*vv))
+        }
+    }
+    return o
+}
+
+func (a *{{$an}}) SetValues(val []{{.ArrayType.Native}}) error {
+    a.Type = a.ArrayTypeID()
+    a.Content = []zcl.Val{}
+    return a.AddValues(val...)
+}
+
+func (a *{{$an}}) AddValues(val ...{{.ArrayType.Native}}) error {
+    a.Type = a.ArrayTypeID()
+    for _, v := range val {
+        nv := zcl.{{.ArrayType.Type}}(v)
+        a.Content = append(a.Content, &nv)
+    }
+    return nil
+}
+{{ end }}
+
+func (a *{{$an}}) MarshalZcl() ([]byte, error) { {{if .MarshalNoType}}
+    return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content){{ else }}
+    a.Type = a.ArrayTypeID()
+    return zcl.{{.Type.Type}}(*a).MarshalZcl(){{end}}
+}
+
+func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .MarshalNoType}}
+    var err error
+    a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+    return b, err{{ else }}
+    nt := &zcl.{{.Type.Type}}{Type: a.ArrayTypeID()}
+    br, err := nt.UnmarshalZcl(b)
+    *a = {{.Name.Fmt}}(*nt)
+    return br, err{{end}}
+}
+{{ else }}
+func (a {{$an}}) MarshalZcl() ([]byte, error) { return zcl.{{.Type.Type}}(a).MarshalZcl() }
 
 func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
     nt := new(zcl.{{.Type.Type}})
@@ -20,6 +65,7 @@ func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
     *a = {{.Name.Fmt}}(*nt)
     return br, err
 }
+{{ end }}
 
 func (a *{{$an}}) SetValue(v zcl.Val) error {
     if nv, ok := v.(*zcl.{{.Type.Type}}); ok {

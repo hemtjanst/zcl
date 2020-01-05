@@ -52,10 +52,10 @@ func (v *MoveToLevel) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveToLevel
-func (v *MoveToLevel) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Level,
-		&v.TransitionTime,
+func (v *MoveToLevel) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Level", Argument: &v.Level},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -142,10 +142,10 @@ func (v *Move) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Move
-func (v *Move) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LevelDirection,
-		&v.Rate,
+func (v *Move) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LevelDirection", Argument: &v.LevelDirection},
+		{Name: "Rate", Argument: &v.Rate},
 	}
 }
 
@@ -234,11 +234,11 @@ func (v *Step) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Step
-func (v *Step) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LevelDirection,
-		&v.StepSize,
-		&v.TransitionTime,
+func (v *Step) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LevelDirection", Argument: &v.LevelDirection},
+		{Name: "StepSize", Argument: &v.StepSize},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -332,8 +332,8 @@ func (v *Stop) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Stop
-func (v *Stop) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *Stop) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -388,10 +388,10 @@ func (v *MoveToLevelWithOnOff) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveToLevelWithOnOff
-func (v *MoveToLevelWithOnOff) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Level,
-		&v.TransitionTime,
+func (v *MoveToLevelWithOnOff) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Level", Argument: &v.Level},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -478,10 +478,10 @@ func (v *MoveWithOnOff) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveWithOnOff
-func (v *MoveWithOnOff) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LevelDirection,
-		&v.Rate,
+func (v *MoveWithOnOff) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LevelDirection", Argument: &v.LevelDirection},
+		{Name: "Rate", Argument: &v.Rate},
 	}
 }
 
@@ -570,11 +570,11 @@ func (v *StepWithOnOff) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StepWithOnOff
-func (v *StepWithOnOff) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LevelDirection,
-		&v.StepSize,
-		&v.TransitionTime,
+func (v *StepWithOnOff) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LevelDirection", Argument: &v.LevelDirection},
+		{Name: "StepSize", Argument: &v.StepSize},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -668,8 +668,8 @@ func (v *StopWithOnOff) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StopWithOnOff
-func (v *StopWithOnOff) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *StopWithOnOff) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command

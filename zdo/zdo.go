@@ -4,12 +4,102 @@ import "hemtjan.st/zcl"
 
 type CommandID = zcl.ZdoCmdID
 
+var Commands = map[zcl.ZdoCmdID]func() zcl.ZdoCommand{
+	NwkAddressRequestCommand:             func() zcl.ZdoCommand { return new(NwkAddressRequest) },
+	NwkAddressResponseCommand:            func() zcl.ZdoCommand { return new(NwkAddressResponse) },
+	IeeeAddressRequestCommand:            func() zcl.ZdoCommand { return new(IeeeAddressRequest) },
+	IeeeAddressResponseCommand:           func() zcl.ZdoCommand { return new(IeeeAddressResponse) },
+	NodeDescRequestCommand:               func() zcl.ZdoCommand { return new(NodeDescRequest) },
+	NodeDescResponseCommand:              func() zcl.ZdoCommand { return new(NodeDescResponse) },
+	PowerDescRequestCommand:              func() zcl.ZdoCommand { return new(PowerDescRequest) },
+	PowerDescResponseCommand:             func() zcl.ZdoCommand { return new(PowerDescResponse) },
+	SimpleDescRequestCommand:             func() zcl.ZdoCommand { return new(SimpleDescRequest) },
+	SimpleDescResponseCommand:            func() zcl.ZdoCommand { return new(SimpleDescResponse) },
+	ActiveEndpointRequestCommand:         func() zcl.ZdoCommand { return new(ActiveEndpointRequest) },
+	ActiveEndpointResponseCommand:        func() zcl.ZdoCommand { return new(ActiveEndpointResponse) },
+	MatchDescRequestCommand:              func() zcl.ZdoCommand { return new(MatchDescRequest) },
+	MatchDescResponseCommand:             func() zcl.ZdoCommand { return new(MatchDescResponse) },
+	ComplexDescRequestCommand:            func() zcl.ZdoCommand { return new(ComplexDescRequest) },
+	ComplexDescResponseCommand:           func() zcl.ZdoCommand { return new(ComplexDescResponse) },
+	UserDescRequestCommand:               func() zcl.ZdoCommand { return new(UserDescRequest) },
+	DiscoveryCacheRequestCommand:         func() zcl.ZdoCommand { return new(DiscoveryCacheRequest) },
+	DeviceAnnounceCommand:                func() zcl.ZdoCommand { return new(DeviceAnnounce) },
+	UserDescSetRequestCommand:            func() zcl.ZdoCommand { return new(UserDescSetRequest) },
+	SystemServerDiscoverRequestCommand:   func() zcl.ZdoCommand { return new(SystemServerDiscoverRequest) },
+	DiscoveryStoreRequestCommand:         func() zcl.ZdoCommand { return new(DiscoveryStoreRequest) },
+	NodeDescStoreRequestCommand:          func() zcl.ZdoCommand { return new(NodeDescStoreRequest) },
+	PowerDescStoreRequestCommand:         func() zcl.ZdoCommand { return new(PowerDescStoreRequest) },
+	ActiveEndpointStoreRequestCommand:    func() zcl.ZdoCommand { return new(ActiveEndpointStoreRequest) },
+	SimpleDescStoreRequestCommand:        func() zcl.ZdoCommand { return new(SimpleDescStoreRequest) },
+	RemoveNodeCacheRequestCommand:        func() zcl.ZdoCommand { return new(RemoveNodeCacheRequest) },
+	FindNodeCacheRequestCommand:          func() zcl.ZdoCommand { return new(FindNodeCacheRequest) },
+	ExtendedSimpleDescRequestCommand:     func() zcl.ZdoCommand { return new(ExtendedSimpleDescRequest) },
+	ExtendedActiveEndpointRequestCommand: func() zcl.ZdoCommand { return new(ExtendedActiveEndpointRequest) },
+	EndDeviceBindRequestCommand:          func() zcl.ZdoCommand { return new(EndDeviceBindRequest) },
+}
+
+// ActiveEndpointList List of active endpoints
+type ActiveEndpointList zcl.Zset
+
+func (ActiveEndpointList) Name() string          { return "Active Endpoint List" }
+func (a *ActiveEndpointList) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
+func (a *ActiveEndpointList) Value() zcl.Val     { return a }
+
+func (ActiveEndpointList) ArrayTypeID() zcl.TypeID { return new(zcl.Zu8).ID() }
+
+func (a *ActiveEndpointList) ArrayValues() (o []uint8) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu8); ok {
+			o = append(o, uint8(*vv))
+		}
+	}
+	return o
+}
+
+func (a *ActiveEndpointList) SetValues(val []uint8) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *ActiveEndpointList) AddValues(val ...uint8) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu8(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *ActiveEndpointList) MarshalZcl() ([]byte, error) {
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
+}
+
+func (a *ActiveEndpointList) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
+}
+
+func (a *ActiveEndpointList) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zset); ok {
+		*a = ActiveEndpointList(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ActiveEndpointList) String() string {
+	return zcl.Sprintf("%v", zcl.Zset(a))
+}
+
 // ActiveEndpointSize Size in bytes of the Active Endpoints List
 type ActiveEndpointSize zcl.Zu8
 
-func (ActiveEndpointSize) Name() string                  { return "Active Endpoint Size" }
-func (a *ActiveEndpointSize) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *ActiveEndpointSize) Value() zcl.Val             { return a }
+func (ActiveEndpointSize) Name() string          { return "Active Endpoint Size" }
+func (a *ActiveEndpointSize) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *ActiveEndpointSize) Value() zcl.Val     { return a }
+
 func (a ActiveEndpointSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ActiveEndpointSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -36,12 +126,40 @@ type AssociatedDevices zcl.Zlist
 func (AssociatedDevices) Name() string          { return "Associated Devices" }
 func (a *AssociatedDevices) TypeID() zcl.TypeID { return zcl.Zlist(*a).ID() }
 func (a *AssociatedDevices) Value() zcl.Val     { return a }
-func (a AssociatedDevices) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (AssociatedDevices) ArrayTypeID() zcl.TypeID { return new(zcl.Zu16).ID() }
+
+func (a *AssociatedDevices) ArrayValues() (o []uint16) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu16); ok {
+			o = append(o, uint16(*vv))
+		}
+	}
+	return o
+}
+
+func (a *AssociatedDevices) SetValues(val []uint16) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *AssociatedDevices) AddValues(val ...uint16) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu16(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *AssociatedDevices) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zlist(*a).MarshalZcl()
 }
 
 func (a *AssociatedDevices) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zlist)
+	nt := &zcl.Zlist{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = AssociatedDevices(*nt)
 	return br, err
@@ -62,9 +180,10 @@ func (a AssociatedDevices) String() string {
 // BindingTarget NWK Address
 type BindingTarget zcl.Zu16
 
-func (BindingTarget) Name() string                  { return "Binding Target" }
-func (a *BindingTarget) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *BindingTarget) Value() zcl.Val             { return a }
+func (BindingTarget) Name() string          { return "Binding Target" }
+func (a *BindingTarget) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *BindingTarget) Value() zcl.Val     { return a }
+
 func (a BindingTarget) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *BindingTarget) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -89,9 +208,10 @@ func (a BindingTarget) String() string {
 // Capability specifies the device:s capabilities
 type Capability zcl.Zbmp8
 
-func (Capability) Name() string                  { return "Capability" }
-func (a *Capability) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *Capability) Value() zcl.Val             { return a }
+func (Capability) Name() string          { return "Capability" }
+func (a *Capability) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *Capability) Value() zcl.Val     { return a }
+
 func (a Capability) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *Capability) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -157,11 +277,39 @@ func (Capability) MultiOptions() []zcl.Option {
 	}
 }
 
+type ComplexDescriptor zcl.Zostring
+
+func (ComplexDescriptor) Name() string          { return "Complex Descriptor" }
+func (a *ComplexDescriptor) TypeID() zcl.TypeID { return zcl.Zostring(*a).ID() }
+func (a *ComplexDescriptor) Value() zcl.Val     { return a }
+
+func (a ComplexDescriptor) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
+func (a *ComplexDescriptor) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zostring)
+	br, err := nt.UnmarshalZcl(b)
+	*a = ComplexDescriptor(*nt)
+	return br, err
+}
+
+func (a *ComplexDescriptor) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zostring); ok {
+		*a = ComplexDescriptor(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a ComplexDescriptor) String() string {
+	return zcl.Sprintf("%v", zcl.Zostring(a))
+}
+
 type CurrentPowerSource zcl.Zenum8
 
-func (CurrentPowerSource) Name() string                  { return "Current Power Source" }
-func (a *CurrentPowerSource) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *CurrentPowerSource) Value() zcl.Val             { return a }
+func (CurrentPowerSource) Name() string          { return "Current Power Source" }
+func (a *CurrentPowerSource) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *CurrentPowerSource) Value() zcl.Val     { return a }
+
 func (a CurrentPowerSource) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *CurrentPowerSource) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -253,9 +401,10 @@ func (CurrentPowerSource) SingleOptions() []zcl.Option {
 
 type DescriptorCapability zcl.Zbmp8
 
-func (DescriptorCapability) Name() string                  { return "Descriptor Capability" }
-func (a *DescriptorCapability) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *DescriptorCapability) Value() zcl.Val             { return a }
+func (DescriptorCapability) Name() string          { return "Descriptor Capability" }
+func (a *DescriptorCapability) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *DescriptorCapability) Value() zcl.Val     { return a }
+
 func (a DescriptorCapability) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *DescriptorCapability) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -311,9 +460,10 @@ func (DescriptorCapability) MultiOptions() []zcl.Option {
 
 type DeviceType zcl.Zenum16
 
-func (DeviceType) Name() string                  { return "Device Type" }
-func (a *DeviceType) TypeID() zcl.TypeID         { return zcl.Zenum16(*a).ID() }
-func (a *DeviceType) Value() zcl.Val             { return a }
+func (DeviceType) Name() string          { return "Device Type" }
+func (a *DeviceType) TypeID() zcl.TypeID { return zcl.Zenum16(*a).ID() }
+func (a *DeviceType) Value() zcl.Val     { return a }
+
 func (a DeviceType) MarshalZcl() ([]byte, error) { return zcl.Zenum16(a).MarshalZcl() }
 
 func (a *DeviceType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -681,9 +831,10 @@ func (DeviceType) SingleOptions() []zcl.Option {
 // DeviceVersion is dependant on profile
 type DeviceVersion zcl.Zu8
 
-func (DeviceVersion) Name() string                  { return "Device Version" }
-func (a *DeviceVersion) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *DeviceVersion) Value() zcl.Val             { return a }
+func (DeviceVersion) Name() string          { return "Device Version" }
+func (a *DeviceVersion) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *DeviceVersion) Value() zcl.Val     { return a }
+
 func (a DeviceVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *DeviceVersion) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -707,9 +858,10 @@ func (a DeviceVersion) String() string {
 
 type Endpoint zcl.Zu8
 
-func (Endpoint) Name() string                  { return "Endpoint" }
-func (a *Endpoint) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *Endpoint) Value() zcl.Val             { return a }
+func (Endpoint) Name() string          { return "Endpoint" }
+func (a *Endpoint) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *Endpoint) Value() zcl.Val     { return a }
+
 func (a Endpoint) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Endpoint) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -736,15 +888,41 @@ type EndpointList zcl.Zset
 func (EndpointList) Name() string          { return "Endpoint List" }
 func (a *EndpointList) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
 func (a *EndpointList) Value() zcl.Val     { return a }
-func (a EndpointList) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (EndpointList) ArrayTypeID() zcl.TypeID { return new(zcl.Zu8).ID() }
+
+func (a *EndpointList) ArrayValues() (o []uint8) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu8); ok {
+			o = append(o, uint8(*vv))
+		}
+	}
+	return o
+}
+
+func (a *EndpointList) SetValues(val []uint8) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *EndpointList) AddValues(val ...uint8) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu8(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *EndpointList) MarshalZcl() ([]byte, error) {
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *EndpointList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zset)
-	br, err := nt.UnmarshalZcl(b)
-	*a = EndpointList(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *EndpointList) SetValue(v zcl.Val) error {
@@ -761,9 +939,10 @@ func (a EndpointList) String() string {
 
 type FrequencyBands zcl.Zbmp8
 
-func (FrequencyBands) Name() string                  { return "Frequency Bands" }
-func (a *FrequencyBands) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *FrequencyBands) Value() zcl.Val             { return a }
+func (FrequencyBands) Name() string          { return "Frequency Bands" }
+func (a *FrequencyBands) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *FrequencyBands) Value() zcl.Val     { return a }
+
 func (a FrequencyBands) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *FrequencyBands) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -817,9 +996,10 @@ func (FrequencyBands) MultiOptions() []zcl.Option {
 // IeeeAddress is a 64-bit MAC address
 type IeeeAddress zcl.Zuid
 
-func (IeeeAddress) Name() string                  { return "IEEE Address" }
-func (a *IeeeAddress) TypeID() zcl.TypeID         { return zcl.Zuid(*a).ID() }
-func (a *IeeeAddress) Value() zcl.Val             { return a }
+func (IeeeAddress) Name() string          { return "IEEE Address" }
+func (a *IeeeAddress) TypeID() zcl.TypeID { return zcl.Zuid(*a).ID() }
+func (a *IeeeAddress) Value() zcl.Val     { return a }
+
 func (a IeeeAddress) MarshalZcl() ([]byte, error) { return zcl.Zuid(a).MarshalZcl() }
 
 func (a *IeeeAddress) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -847,12 +1027,40 @@ type InClusterList zcl.Zset
 func (InClusterList) Name() string          { return "In Cluster List" }
 func (a *InClusterList) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
 func (a *InClusterList) Value() zcl.Val     { return a }
-func (a InClusterList) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (InClusterList) ArrayTypeID() zcl.TypeID { return new(zcl.Zu16).ID() }
+
+func (a *InClusterList) ArrayValues() (o []uint16) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu16); ok {
+			o = append(o, uint16(*vv))
+		}
+	}
+	return o
+}
+
+func (a *InClusterList) SetValues(val []uint16) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *InClusterList) AddValues(val ...uint16) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu16(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *InClusterList) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zset(*a).MarshalZcl()
 }
 
 func (a *InClusterList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zset)
+	nt := &zcl.Zset{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = InClusterList(*nt)
 	return br, err
@@ -872,9 +1080,10 @@ func (a InClusterList) String() string {
 
 type ManufacturerCode zcl.Zenum16
 
-func (ManufacturerCode) Name() string                  { return "Manufacturer Code" }
-func (a *ManufacturerCode) TypeID() zcl.TypeID         { return zcl.Zenum16(*a).ID() }
-func (a *ManufacturerCode) Value() zcl.Val             { return a }
+func (ManufacturerCode) Name() string          { return "Manufacturer Code" }
+func (a *ManufacturerCode) TypeID() zcl.TypeID { return zcl.Zenum16(*a).ID() }
+func (a *ManufacturerCode) Value() zcl.Val     { return a }
+
 func (a ManufacturerCode) MarshalZcl() ([]byte, error) { return zcl.Zenum16(a).MarshalZcl() }
 
 func (a *ManufacturerCode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -939,9 +1148,10 @@ func (ManufacturerCode) SingleOptions() []zcl.Option {
 // before any fragmentation or re-assembly.
 type MaxBufferSize zcl.Zu8
 
-func (MaxBufferSize) Name() string                  { return "Max Buffer Size" }
-func (a *MaxBufferSize) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *MaxBufferSize) Value() zcl.Val             { return a }
+func (MaxBufferSize) Name() string          { return "Max Buffer Size" }
+func (a *MaxBufferSize) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *MaxBufferSize) Value() zcl.Val     { return a }
+
 func (a MaxBufferSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *MaxBufferSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -966,9 +1176,10 @@ func (a MaxBufferSize) String() string {
 // MaxIncomingTransferSize specifies the maximum size, in octets, of the application sub-layer data unit (ASDU) that can be transferred to this node in one single message transfer.
 type MaxIncomingTransferSize zcl.Zu16
 
-func (MaxIncomingTransferSize) Name() string                  { return "Max Incoming Transfer size" }
-func (a *MaxIncomingTransferSize) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MaxIncomingTransferSize) Value() zcl.Val             { return a }
+func (MaxIncomingTransferSize) Name() string          { return "Max Incoming Transfer size" }
+func (a *MaxIncomingTransferSize) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MaxIncomingTransferSize) Value() zcl.Val     { return a }
+
 func (a MaxIncomingTransferSize) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MaxIncomingTransferSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -994,9 +1205,10 @@ func (a MaxIncomingTransferSize) String() string {
 // this node in one single message transfer.
 type MaxOutgoingTransferSize zcl.Zu16
 
-func (MaxOutgoingTransferSize) Name() string                  { return "Max Outgoing Transfer size" }
-func (a *MaxOutgoingTransferSize) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MaxOutgoingTransferSize) Value() zcl.Val             { return a }
+func (MaxOutgoingTransferSize) Name() string          { return "Max Outgoing Transfer size" }
+func (a *MaxOutgoingTransferSize) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MaxOutgoingTransferSize) Value() zcl.Val     { return a }
+
 func (a MaxOutgoingTransferSize) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MaxOutgoingTransferSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1021,9 +1233,10 @@ func (a MaxOutgoingTransferSize) String() string {
 // NwkAddress is a 16-bit Network address
 type NwkAddress zcl.Zu16
 
-func (NwkAddress) Name() string                  { return "NWK Address" }
-func (a *NwkAddress) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *NwkAddress) Value() zcl.Val             { return a }
+func (NwkAddress) Name() string          { return "NWK Address" }
+func (a *NwkAddress) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *NwkAddress) Value() zcl.Val     { return a }
+
 func (a NwkAddress) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *NwkAddress) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1048,9 +1261,10 @@ func (a NwkAddress) String() string {
 // NodeDescSize Size in bytes of the Node Descriptor
 type NodeDescSize zcl.Zu8
 
-func (NodeDescSize) Name() string                  { return "Node Desc Size" }
-func (a *NodeDescSize) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *NodeDescSize) Value() zcl.Val             { return a }
+func (NodeDescSize) Name() string          { return "Node Desc Size" }
+func (a *NodeDescSize) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *NodeDescSize) Value() zcl.Val     { return a }
+
 func (a NodeDescSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *NodeDescSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1078,12 +1292,40 @@ type OutClusterList zcl.Zset
 func (OutClusterList) Name() string          { return "Out Cluster List" }
 func (a *OutClusterList) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
 func (a *OutClusterList) Value() zcl.Val     { return a }
-func (a OutClusterList) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (OutClusterList) ArrayTypeID() zcl.TypeID { return new(zcl.Zu16).ID() }
+
+func (a *OutClusterList) ArrayValues() (o []uint16) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu16); ok {
+			o = append(o, uint16(*vv))
+		}
+	}
+	return o
+}
+
+func (a *OutClusterList) SetValues(val []uint16) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *OutClusterList) AddValues(val ...uint16) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu16(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *OutClusterList) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zset(*a).MarshalZcl()
 }
 
 func (a *OutClusterList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zset)
+	nt := &zcl.Zset{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = OutClusterList(*nt)
 	return br, err
@@ -1104,9 +1346,10 @@ func (a OutClusterList) String() string {
 // PowerDescSize Size in bytes of the Power Descriptor
 type PowerDescSize zcl.Zu8
 
-func (PowerDescSize) Name() string                  { return "Power Desc Size" }
-func (a *PowerDescSize) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *PowerDescSize) Value() zcl.Val             { return a }
+func (PowerDescSize) Name() string          { return "Power Desc Size" }
+func (a *PowerDescSize) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *PowerDescSize) Value() zcl.Val     { return a }
+
 func (a PowerDescSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *PowerDescSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1130,9 +1373,10 @@ func (a PowerDescSize) String() string {
 
 type PowerMode zcl.Zbmp8
 
-func (PowerMode) Name() string                  { return "Power Mode" }
-func (a *PowerMode) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *PowerMode) Value() zcl.Val             { return a }
+func (PowerMode) Name() string          { return "Power Mode" }
+func (a *PowerMode) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *PowerMode) Value() zcl.Val     { return a }
+
 func (a PowerMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *PowerMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1203,9 +1447,10 @@ func (PowerMode) MultiOptions() []zcl.Option {
 
 type ProfileId zcl.Zu16
 
-func (ProfileId) Name() string                  { return "Profile ID" }
-func (a *ProfileId) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ProfileId) Value() zcl.Val             { return a }
+func (ProfileId) Name() string          { return "Profile ID" }
+func (a *ProfileId) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ProfileId) Value() zcl.Val     { return a }
+
 func (a ProfileId) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ProfileId) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1230,9 +1475,10 @@ func (a ProfileId) String() string {
 // RequestType should be set to 1 if extended response is requested, 0 otherwise
 type RequestType zcl.Zenum8
 
-func (RequestType) Name() string                  { return "Request Type" }
-func (a *RequestType) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *RequestType) Value() zcl.Val             { return a }
+func (RequestType) Name() string          { return "Request Type" }
+func (a *RequestType) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *RequestType) Value() zcl.Val     { return a }
+
 func (a RequestType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *RequestType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1274,9 +1520,10 @@ func (RequestType) SingleOptions() []zcl.Option {
 
 type ServerMask zcl.Zbmp16
 
-func (ServerMask) Name() string                  { return "Server Mask" }
-func (a *ServerMask) TypeID() zcl.TypeID         { return zcl.Zbmp16(*a).ID() }
-func (a *ServerMask) Value() zcl.Val             { return a }
+func (ServerMask) Name() string          { return "Server Mask" }
+func (a *ServerMask) TypeID() zcl.TypeID { return zcl.Zbmp16(*a).ID() }
+func (a *ServerMask) Value() zcl.Val     { return a }
+
 func (a ServerMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
 
 func (a *ServerMask) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1363,12 +1610,40 @@ type SimpleDescSizeList zcl.Zset
 func (SimpleDescSizeList) Name() string          { return "Simple Desc Size List" }
 func (a *SimpleDescSizeList) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
 func (a *SimpleDescSizeList) Value() zcl.Val     { return a }
-func (a SimpleDescSizeList) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (SimpleDescSizeList) ArrayTypeID() zcl.TypeID { return new(zcl.Zu8).ID() }
+
+func (a *SimpleDescSizeList) ArrayValues() (o []uint8) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu8); ok {
+			o = append(o, uint8(*vv))
+		}
+	}
+	return o
+}
+
+func (a *SimpleDescSizeList) SetValues(val []uint8) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *SimpleDescSizeList) AddValues(val ...uint8) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu8(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *SimpleDescSizeList) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zset(*a).MarshalZcl()
 }
 
 func (a *SimpleDescSizeList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zset)
+	nt := &zcl.Zset{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = SimpleDescSizeList(*nt)
 	return br, err
@@ -1386,12 +1661,40 @@ func (a SimpleDescSizeList) String() string {
 	return zcl.Sprintf("%v", zcl.Zset(a))
 }
 
+type SimpleDescriptor zcl.Zostring
+
+func (SimpleDescriptor) Name() string          { return "Simple Descriptor" }
+func (a *SimpleDescriptor) TypeID() zcl.TypeID { return zcl.Zostring(*a).ID() }
+func (a *SimpleDescriptor) Value() zcl.Val     { return a }
+
+func (a SimpleDescriptor) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+
+func (a *SimpleDescriptor) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zostring)
+	br, err := nt.UnmarshalZcl(b)
+	*a = SimpleDescriptor(*nt)
+	return br, err
+}
+
+func (a *SimpleDescriptor) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zostring); ok {
+		*a = SimpleDescriptor(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a SimpleDescriptor) String() string {
+	return zcl.Sprintf("%v", zcl.Zostring(a))
+}
+
 // SourceAddress of device generating the request
 type SourceAddress zcl.Zuid
 
-func (SourceAddress) Name() string                  { return "Source Address" }
-func (a *SourceAddress) TypeID() zcl.TypeID         { return zcl.Zuid(*a).ID() }
-func (a *SourceAddress) Value() zcl.Val             { return a }
+func (SourceAddress) Name() string          { return "Source Address" }
+func (a *SourceAddress) TypeID() zcl.TypeID { return zcl.Zuid(*a).ID() }
+func (a *SourceAddress) Value() zcl.Val     { return a }
+
 func (a SourceAddress) MarshalZcl() ([]byte, error) { return zcl.Zuid(a).MarshalZcl() }
 
 func (a *SourceAddress) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1416,9 +1719,10 @@ func (a SourceAddress) String() string {
 // SourceEndpoint of device generating the request
 type SourceEndpoint zcl.Zu8
 
-func (SourceEndpoint) Name() string                  { return "Source Endpoint" }
-func (a *SourceEndpoint) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *SourceEndpoint) Value() zcl.Val             { return a }
+func (SourceEndpoint) Name() string          { return "Source Endpoint" }
+func (a *SourceEndpoint) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *SourceEndpoint) Value() zcl.Val     { return a }
+
 func (a SourceEndpoint) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *SourceEndpoint) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1443,9 +1747,10 @@ func (a SourceEndpoint) String() string {
 // StartIndex provides the starting index for the requested elements of the associated list.
 type StartIndex zcl.Zu8
 
-func (StartIndex) Name() string                  { return "Start Index" }
-func (a *StartIndex) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *StartIndex) Value() zcl.Val             { return a }
+func (StartIndex) Name() string          { return "Start Index" }
+func (a *StartIndex) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *StartIndex) Value() zcl.Val     { return a }
+
 func (a StartIndex) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *StartIndex) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1470,9 +1775,10 @@ func (a StartIndex) String() string {
 // Status Code, command is normally empty unless status is `Success`
 type Status zcl.Zenum8
 
-func (Status) Name() string                  { return "Status" }
-func (a *Status) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *Status) Value() zcl.Val             { return a }
+func (Status) Name() string          { return "Status" }
+func (a *Status) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *Status) Value() zcl.Val     { return a }
+
 func (a Status) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *Status) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1574,9 +1880,10 @@ func (Status) SingleOptions() []zcl.Option {
 
 type Type zcl.Zbmp8
 
-func (Type) Name() string                  { return "Type" }
-func (a *Type) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *Type) Value() zcl.Val             { return a }
+func (Type) Name() string          { return "Type" }
+func (a *Type) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *Type) Value() zcl.Val     { return a }
+
 func (a Type) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *Type) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1634,9 +1941,10 @@ func (Type) MultiOptions() []zcl.Option {
 
 type UnknownU8 zcl.Zu8
 
-func (UnknownU8) Name() string                  { return "Unknown u8" }
-func (a *UnknownU8) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *UnknownU8) Value() zcl.Val             { return a }
+func (UnknownU8) Name() string          { return "Unknown u8" }
+func (a *UnknownU8) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *UnknownU8) Value() zcl.Val     { return a }
+
 func (a UnknownU8) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *UnknownU8) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1663,9 +1971,10 @@ func (a UnknownU8) String() string {
 // Control characters (0x00-0x1f) are not allowed.
 type UserDesc zcl.Zcstring
 
-func (UserDesc) Name() string                  { return "User Desc" }
-func (a *UserDesc) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *UserDesc) Value() zcl.Val             { return a }
+func (UserDesc) Name() string          { return "User Desc" }
+func (a *UserDesc) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *UserDesc) Value() zcl.Val     { return a }
+
 func (a UserDesc) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *UserDesc) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1712,11 +2021,11 @@ func (v *NwkAddressRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of NwkAddressRequest
-func (v *NwkAddressRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.IeeeAddress,
-		&v.RequestType,
-		&v.StartIndex,
+func (v *NwkAddressRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "RequestType", Argument: &v.RequestType},
+		{Name: "StartIndex", Argument: &v.StartIndex},
 	}
 }
 
@@ -1825,13 +2134,13 @@ func (v *NwkAddressResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of NwkAddressResponse
-func (v *NwkAddressResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.IeeeAddress,
-		&v.NwkAddress,
-		&v.StartIndex,
-		&v.AssociatedDevices,
+func (v *NwkAddressResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "StartIndex", Argument: &v.StartIndex},
+		{Name: "AssociatedDevices", Argument: &v.AssociatedDevices},
 	}
 }
 
@@ -1879,10 +2188,7 @@ func (v NwkAddressResponse) MarshalZcl() ([]byte, error) {
 	}
 	// is only included if successful
 	if v.Status == 0x00 {
-		x := zcl.Zu8(2 * len(v.AssociatedDevices.Content))
-		if tmp, err = x.MarshalZcl(); err != nil {
-			return nil, err
-		}
+		tmp = []byte{uint8(2 * len(v.AssociatedDevices.Content))}
 		data = append(data, tmp...)
 	}
 	// StartIndex is only included if successful
@@ -1984,11 +2290,11 @@ func (v *IeeeAddressRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of IeeeAddressRequest
-func (v *IeeeAddressRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.RequestType,
-		&v.StartIndex,
+func (v *IeeeAddressRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "RequestType", Argument: &v.RequestType},
+		{Name: "StartIndex", Argument: &v.StartIndex},
 	}
 }
 
@@ -2097,13 +2403,13 @@ func (v *IeeeAddressResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of IeeeAddressResponse
-func (v *IeeeAddressResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.IeeeAddress,
-		&v.NwkAddress,
-		&v.StartIndex,
-		&v.AssociatedDevices,
+func (v *IeeeAddressResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "StartIndex", Argument: &v.StartIndex},
+		{Name: "AssociatedDevices", Argument: &v.AssociatedDevices},
 	}
 }
 
@@ -2151,10 +2457,7 @@ func (v IeeeAddressResponse) MarshalZcl() ([]byte, error) {
 	}
 	// is only included if successful
 	if v.Status == 0x00 {
-		x := zcl.Zu8(2 * len(v.AssociatedDevices.Content))
-		if tmp, err = x.MarshalZcl(); err != nil {
-			return nil, err
-		}
+		tmp = []byte{uint8(2 * len(v.AssociatedDevices.Content))}
 		data = append(data, tmp...)
 	}
 	// StartIndex is only included if successful
@@ -2250,9 +2553,9 @@ func (v *NodeDescRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of NodeDescRequest
-func (v *NodeDescRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
+func (v *NodeDescRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
 	}
 }
 
@@ -2322,8 +2625,8 @@ func (v *NodeDescResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of NodeDescResponse
-func (v *NodeDescResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *NodeDescResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -2379,9 +2682,9 @@ func (v *PowerDescRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of PowerDescRequest
-func (v *PowerDescRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
+func (v *PowerDescRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
 	}
 }
 
@@ -2451,8 +2754,8 @@ func (v *PowerDescResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of PowerDescResponse
-func (v *PowerDescResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *PowerDescResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -2511,10 +2814,10 @@ func (v *SimpleDescRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of SimpleDescRequest
-func (v *SimpleDescRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.Endpoint,
+func (v *SimpleDescRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "Endpoint", Argument: &v.Endpoint},
 	}
 }
 
@@ -2585,6 +2888,11 @@ func (v SimpleDescRequest) String() string {
 }
 
 type SimpleDescResponse struct {
+	// Status Code, command is normally empty unless status is `Success`
+	Status Status
+	// NwkAddress is a 16-bit Network address
+	NwkAddress       NwkAddress
+	SimpleDescriptor SimpleDescriptor
 }
 
 // SimpleDescResponseCommand is the Command ID of SimpleDescResponse
@@ -2592,12 +2900,20 @@ const SimpleDescResponseCommand CommandID = 0x8004
 
 // Values returns all values of SimpleDescResponse
 func (v *SimpleDescResponse) Values() []zcl.Val {
-	return []zcl.Val{}
+	return []zcl.Val{
+		&v.Status,
+		&v.NwkAddress,
+		&v.SimpleDescriptor,
+	}
 }
 
 // Arguments returns all values of SimpleDescResponse
-func (v *SimpleDescResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *SimpleDescResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "SimpleDescriptor", Argument: &v.SimpleDescriptor},
+	}
 }
 
 // Name of the command
@@ -2620,18 +2936,61 @@ func (SimpleDescResponse) MarshalJSON() ([]byte, error) { return []byte("32772")
 
 // MarshalZcl returns the wire format representation of SimpleDescResponse
 func (v SimpleDescResponse) MarshalZcl() ([]byte, error) {
-	return nil, nil
+	var data []byte
+	var tmp []byte
+	var err error
+
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.NwkAddress.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.SimpleDescriptor.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
 }
 
 // UnmarshalZcl parses the wire format representation into the SimpleDescResponse struct
 func (v *SimpleDescResponse) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+
+	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.NwkAddress).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.SimpleDescriptor).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
 	return b, nil
 }
 
 // String returns a log-friendly string representation of the struct
 func (v SimpleDescResponse) String() string {
 	return zcl.Sprintf(
-		"SimpleDescResponse{" + zcl.StrJoin([]string{}, " ") + "}",
+		"SimpleDescResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"NwkAddress(%v)",
+			"SimpleDescriptor(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.NwkAddress,
+		v.SimpleDescriptor,
 	)
 }
 
@@ -2653,9 +3012,9 @@ func (v *ActiveEndpointRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ActiveEndpointRequest
-func (v *ActiveEndpointRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
+func (v *ActiveEndpointRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
 	}
 }
 
@@ -2713,6 +3072,121 @@ func (v ActiveEndpointRequest) String() string {
 	)
 }
 
+type ActiveEndpointResponse struct {
+	// Status Code, command is normally empty unless status is `Success`
+	Status Status
+	// NwkAddress is a 16-bit Network address
+	NwkAddress   NwkAddress
+	EndpointList EndpointList
+}
+
+// ActiveEndpointResponseCommand is the Command ID of ActiveEndpointResponse
+const ActiveEndpointResponseCommand CommandID = 0x8005
+
+// Values returns all values of ActiveEndpointResponse
+func (v *ActiveEndpointResponse) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.Status,
+		&v.NwkAddress,
+		&v.EndpointList,
+	}
+}
+
+// Arguments returns all values of ActiveEndpointResponse
+func (v *ActiveEndpointResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "EndpointList", Argument: &v.EndpointList},
+	}
+}
+
+// Name of the command
+func (ActiveEndpointResponse) Name() string { return "Active Endpoint Response" }
+
+// ID of the command
+func (ActiveEndpointResponse) ID() CommandID { return ActiveEndpointResponseCommand }
+
+// Required
+func (ActiveEndpointResponse) Required() bool { return true }
+
+// Cluster ID of the command
+func (ActiveEndpointResponse) Cluster() zcl.ClusterID { return 0x8005 }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (ActiveEndpointResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ActiveEndpointResponse) MarshalJSON() ([]byte, error) { return []byte("32773"), nil }
+
+// MarshalZcl returns the wire format representation of ActiveEndpointResponse
+func (v ActiveEndpointResponse) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	var err error
+
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	// NwkAddress is only included if successful
+	if v.Status == 0x00 {
+		if tmp, err = v.NwkAddress.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	// EndpointList is only included if successful
+	if v.Status == 0x00 {
+		if tmp, err = v.EndpointList.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the ActiveEndpointResponse struct
+func (v *ActiveEndpointResponse) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+
+	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	// NwkAddress is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.NwkAddress).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
+	}
+
+	// EndpointList is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.EndpointList).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v ActiveEndpointResponse) String() string {
+	return zcl.Sprintf(
+		"ActiveEndpointResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"NwkAddress(%v)",
+			"EndpointList(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.NwkAddress,
+		v.EndpointList,
+	)
+}
+
 // MatchDescRequest is used to find remote devices supporting a specific simple descriptor match criterion. Normally broadcast
 // to all devices supporting RX on when Idle (0xFFFD)
 type MatchDescRequest struct {
@@ -2739,12 +3213,12 @@ func (v *MatchDescRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MatchDescRequest
-func (v *MatchDescRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.ProfileId,
-		&v.InClusterList,
-		&v.OutClusterList,
+func (v *MatchDescRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "ProfileId", Argument: &v.ProfileId},
+		{Name: "InClusterList", Argument: &v.InClusterList},
+		{Name: "OutClusterList", Argument: &v.OutClusterList},
 	}
 }
 
@@ -2838,6 +3312,97 @@ func (v MatchDescRequest) String() string {
 	)
 }
 
+type MatchDescResponse struct {
+	// Status Code, command is normally empty unless status is `Success`
+	Status       Status
+	EndpointList EndpointList
+}
+
+// MatchDescResponseCommand is the Command ID of MatchDescResponse
+const MatchDescResponseCommand CommandID = 0x8006
+
+// Values returns all values of MatchDescResponse
+func (v *MatchDescResponse) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.Status,
+		&v.EndpointList,
+	}
+}
+
+// Arguments returns all values of MatchDescResponse
+func (v *MatchDescResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "EndpointList", Argument: &v.EndpointList},
+	}
+}
+
+// Name of the command
+func (MatchDescResponse) Name() string { return "Match Desc Response" }
+
+// ID of the command
+func (MatchDescResponse) ID() CommandID { return MatchDescResponseCommand }
+
+// Required
+func (MatchDescResponse) Required() bool { return false }
+
+// Cluster ID of the command
+func (MatchDescResponse) Cluster() zcl.ClusterID { return 0x8006 }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (MatchDescResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (MatchDescResponse) MarshalJSON() ([]byte, error) { return []byte("32774"), nil }
+
+// MarshalZcl returns the wire format representation of MatchDescResponse
+func (v MatchDescResponse) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	var err error
+
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.EndpointList.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the MatchDescResponse struct
+func (v *MatchDescResponse) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+
+	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.EndpointList).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v MatchDescResponse) String() string {
+	return zcl.Sprintf(
+		"MatchDescResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"EndpointList(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.EndpointList,
+	)
+}
+
 // ComplexDescRequest queries the Complex Descriptor of a remote device. Should be unicast to the remote device directly,
 // or to a device that contains the discovery information of the remote device.
 type ComplexDescRequest struct {
@@ -2856,9 +3421,9 @@ func (v *ComplexDescRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ComplexDescRequest
-func (v *ComplexDescRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
+func (v *ComplexDescRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
 	}
 }
 
@@ -2916,6 +3481,113 @@ func (v ComplexDescRequest) String() string {
 	)
 }
 
+type ComplexDescResponse struct {
+	// Status Code, command is normally empty unless status is `Success`
+	Status Status
+	// NwkAddress is a 16-bit Network address
+	NwkAddress        NwkAddress
+	ComplexDescriptor ComplexDescriptor
+}
+
+// ComplexDescResponseCommand is the Command ID of ComplexDescResponse
+const ComplexDescResponseCommand CommandID = 0x8010
+
+// Values returns all values of ComplexDescResponse
+func (v *ComplexDescResponse) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.Status,
+		&v.NwkAddress,
+		&v.ComplexDescriptor,
+	}
+}
+
+// Arguments returns all values of ComplexDescResponse
+func (v *ComplexDescResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "ComplexDescriptor", Argument: &v.ComplexDescriptor},
+	}
+}
+
+// Name of the command
+func (ComplexDescResponse) Name() string { return "Complex Desc Response" }
+
+// ID of the command
+func (ComplexDescResponse) ID() CommandID { return ComplexDescResponseCommand }
+
+// Required
+func (ComplexDescResponse) Required() bool { return false }
+
+// Cluster ID of the command
+func (ComplexDescResponse) Cluster() zcl.ClusterID { return 0x8010 }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (ComplexDescResponse) MnfCode() []byte { return []byte{} }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+func (ComplexDescResponse) MarshalJSON() ([]byte, error) { return []byte("32784"), nil }
+
+// MarshalZcl returns the wire format representation of ComplexDescResponse
+func (v ComplexDescResponse) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	var err error
+
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.NwkAddress.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.ComplexDescriptor.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the ComplexDescResponse struct
+func (v *ComplexDescResponse) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+
+	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.NwkAddress).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.ComplexDescriptor).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v ComplexDescResponse) String() string {
+	return zcl.Sprintf(
+		"ComplexDescResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"NwkAddress(%v)",
+			"ComplexDescriptor(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.NwkAddress,
+		v.ComplexDescriptor,
+	)
+}
+
 // UserDescRequest queries the User Descriptor of a remote device. Should be unicast to the remote device directly,
 // or to a device that contains the discovery information of the remote device.
 type UserDescRequest struct {
@@ -2934,9 +3606,9 @@ func (v *UserDescRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of UserDescRequest
-func (v *UserDescRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
+func (v *UserDescRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
 	}
 }
 
@@ -3014,10 +3686,10 @@ func (v *DiscoveryCacheRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of DiscoveryCacheRequest
-func (v *DiscoveryCacheRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
+func (v *DiscoveryCacheRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
 	}
 }
 
@@ -3111,11 +3783,11 @@ func (v *DeviceAnnounce) Values() []zcl.Val {
 }
 
 // Arguments returns all values of DeviceAnnounce
-func (v *DeviceAnnounce) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
-		&v.Capability,
+func (v *DeviceAnnounce) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "Capability", Argument: &v.Capability},
 	}
 }
 
@@ -3219,10 +3891,10 @@ func (v *UserDescSetRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of UserDescSetRequest
-func (v *UserDescSetRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.UserDesc,
+func (v *UserDescSetRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "UserDesc", Argument: &v.UserDesc},
 	}
 }
 
@@ -3308,9 +3980,9 @@ func (v *SystemServerDiscoverRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of SystemServerDiscoverRequest
-func (v *SystemServerDiscoverRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.ServerMask,
+func (v *SystemServerDiscoverRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "ServerMask", Argument: &v.ServerMask},
 	}
 }
 
@@ -3402,14 +4074,14 @@ func (v *DiscoveryStoreRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of DiscoveryStoreRequest
-func (v *DiscoveryStoreRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
-		&v.NodeDescSize,
-		&v.PowerDescSize,
-		&v.ActiveEndpointSize,
-		&v.SimpleDescSizeList,
+func (v *DiscoveryStoreRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "NodeDescSize", Argument: &v.NodeDescSize},
+		{Name: "PowerDescSize", Argument: &v.PowerDescSize},
+		{Name: "ActiveEndpointSize", Argument: &v.ActiveEndpointSize},
+		{Name: "SimpleDescSizeList", Argument: &v.SimpleDescSizeList},
 	}
 }
 
@@ -3574,19 +4246,19 @@ func (v *NodeDescStoreRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of NodeDescStoreRequest
-func (v *NodeDescStoreRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
-		&v.Type,
-		&v.FrequencyBands,
-		&v.Capability,
-		&v.ManufacturerCode,
-		&v.MaxBufferSize,
-		&v.MaxIncomingTransferSize,
-		&v.ServerMask,
-		&v.MaxOutgoingTransferSize,
-		&v.DescriptorCapability,
+func (v *NodeDescStoreRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "Type", Argument: &v.Type},
+		{Name: "FrequencyBands", Argument: &v.FrequencyBands},
+		{Name: "Capability", Argument: &v.Capability},
+		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
+		{Name: "MaxBufferSize", Argument: &v.MaxBufferSize},
+		{Name: "MaxIncomingTransferSize", Argument: &v.MaxIncomingTransferSize},
+		{Name: "ServerMask", Argument: &v.ServerMask},
+		{Name: "MaxOutgoingTransferSize", Argument: &v.MaxOutgoingTransferSize},
+		{Name: "DescriptorCapability", Argument: &v.DescriptorCapability},
 	}
 }
 
@@ -3790,12 +4462,12 @@ func (v *PowerDescStoreRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of PowerDescStoreRequest
-func (v *PowerDescStoreRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
-		&v.PowerMode,
-		&v.CurrentPowerSource,
+func (v *PowerDescStoreRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "PowerMode", Argument: &v.PowerMode},
+		{Name: "CurrentPowerSource", Argument: &v.CurrentPowerSource},
 	}
 }
 
@@ -3913,11 +4585,11 @@ func (v *ActiveEndpointStoreRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ActiveEndpointStoreRequest
-func (v *ActiveEndpointStoreRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
-		&v.EndpointList,
+func (v *ActiveEndpointStoreRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "EndpointList", Argument: &v.EndpointList},
 	}
 }
 
@@ -4036,16 +4708,16 @@ func (v *SimpleDescStoreRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of SimpleDescStoreRequest
-func (v *SimpleDescStoreRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
-		&v.Endpoint,
-		&v.ProfileId,
-		&v.DeviceType,
-		&v.DeviceVersion,
-		&v.InClusterList,
-		&v.OutClusterList,
+func (v *SimpleDescStoreRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
+		{Name: "Endpoint", Argument: &v.Endpoint},
+		{Name: "ProfileId", Argument: &v.ProfileId},
+		{Name: "DeviceType", Argument: &v.DeviceType},
+		{Name: "DeviceVersion", Argument: &v.DeviceVersion},
+		{Name: "InClusterList", Argument: &v.InClusterList},
+		{Name: "OutClusterList", Argument: &v.OutClusterList},
 	}
 }
 
@@ -4086,10 +4758,7 @@ func (v SimpleDescStoreRequest) MarshalZcl() ([]byte, error) {
 		data = append(data, tmp...)
 	}
 	{
-		x := zcl.Zu8(8 + 2*len(v.InClusterList.Content) + 2*len(v.OutClusterList.Content))
-		if tmp, err = x.MarshalZcl(); err != nil {
-			return nil, err
-		}
+		tmp = []byte{uint8(8 + 2*len(v.InClusterList.Content) + 2*len(v.OutClusterList.Content))}
 		data = append(data, tmp...)
 	}
 	{
@@ -4218,10 +4887,10 @@ func (v *RemoveNodeCacheRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RemoveNodeCacheRequest
-func (v *RemoveNodeCacheRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
+func (v *RemoveNodeCacheRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
 	}
 }
 
@@ -4312,10 +4981,10 @@ func (v *FindNodeCacheRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of FindNodeCacheRequest
-func (v *FindNodeCacheRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.IeeeAddress,
+func (v *FindNodeCacheRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "IeeeAddress", Argument: &v.IeeeAddress},
 	}
 }
 
@@ -4408,11 +5077,11 @@ func (v *ExtendedSimpleDescRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ExtendedSimpleDescRequest
-func (v *ExtendedSimpleDescRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.Endpoint,
-		&v.StartIndex,
+func (v *ExtendedSimpleDescRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "Endpoint", Argument: &v.Endpoint},
+		{Name: "StartIndex", Argument: &v.StartIndex},
 	}
 }
 
@@ -4515,10 +5184,10 @@ func (v *ExtendedActiveEndpointRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ExtendedActiveEndpointRequest
-func (v *ExtendedActiveEndpointRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.NwkAddress,
-		&v.StartIndex,
+func (v *ExtendedActiveEndpointRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "StartIndex", Argument: &v.StartIndex},
 	}
 }
 
@@ -4628,14 +5297,14 @@ func (v *EndDeviceBindRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EndDeviceBindRequest
-func (v *EndDeviceBindRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.BindingTarget,
-		&v.SourceAddress,
-		&v.SourceEndpoint,
-		&v.ProfileId,
-		&v.InClusterList,
-		&v.OutClusterList,
+func (v *EndDeviceBindRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "BindingTarget", Argument: &v.BindingTarget},
+		{Name: "SourceAddress", Argument: &v.SourceAddress},
+		{Name: "SourceEndpoint", Argument: &v.SourceEndpoint},
+		{Name: "ProfileId", Argument: &v.ProfileId},
+		{Name: "InClusterList", Argument: &v.InClusterList},
+		{Name: "OutClusterList", Argument: &v.OutClusterList},
 	}
 }
 

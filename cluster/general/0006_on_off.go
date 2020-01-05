@@ -42,8 +42,8 @@ func (v *Off) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Off
-func (v *Off) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *Off) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -94,8 +94,8 @@ func (v *On) Values() []zcl.Val {
 }
 
 // Arguments returns all values of On
-func (v *On) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *On) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -146,8 +146,8 @@ func (v *Toggle) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Toggle
-func (v *Toggle) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *Toggle) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -203,10 +203,10 @@ func (v *OffWithEffect) Values() []zcl.Val {
 }
 
 // Arguments returns all values of OffWithEffect
-func (v *OffWithEffect) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.EffectIdentifier,
-		&v.EffectVariant,
+func (v *OffWithEffect) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "EffectIdentifier", Argument: &v.EffectIdentifier},
+		{Name: "EffectVariant", Argument: &v.EffectVariant},
 	}
 }
 
@@ -289,8 +289,8 @@ func (v *OnWithRecallGlobalScene) Values() []zcl.Val {
 }
 
 // Arguments returns all values of OnWithRecallGlobalScene
-func (v *OnWithRecallGlobalScene) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *OnWithRecallGlobalScene) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -348,11 +348,11 @@ func (v *OnWithTimedOff) Values() []zcl.Val {
 }
 
 // Arguments returns all values of OnWithTimedOff
-func (v *OnWithTimedOff) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.OnOffControl,
-		&v.OnTime,
-		&v.OffWaitTime,
+func (v *OnWithTimedOff) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "OnOffControl", Argument: &v.OnOffControl},
+		{Name: "OnTime", Argument: &v.OnTime},
+		{Name: "OffWaitTime", Argument: &v.OffWaitTime},
 	}
 }
 

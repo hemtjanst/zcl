@@ -3,6 +3,10 @@ package zdo
 import "{{path}}"
 type CommandID = zcl.ZdoCmdID
 
+var Commands = map[zcl.ZdoCmdID]func() zcl.ZdoCommand{ {{range .Commands}}
+    {{.Name.Fmt}}Command: func() zcl.ZdoCommand { return new({{.Name.Fmt}}) },{{end}}
+}
+
 {{range .Types}}{{if .Name}}
 {{renderType .}}
 {{end}}{{end}}

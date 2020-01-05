@@ -15,9 +15,10 @@ func (ApsDecryptFailures) Writable() bool   { return false }
 func (ApsDecryptFailures) Reportable() bool { return false }
 func (ApsDecryptFailures) SceneIndex() int  { return -1 }
 
-func (ApsDecryptFailures) Name() string                  { return "APS Decrypt Failures" }
-func (a *ApsDecryptFailures) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsDecryptFailures) Value() zcl.Val             { return a }
+func (ApsDecryptFailures) Name() string          { return "APS Decrypt Failures" }
+func (a *ApsDecryptFailures) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsDecryptFailures) Value() zcl.Val     { return a }
+
 func (a ApsDecryptFailures) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsDecryptFailures) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -49,9 +50,10 @@ func (ApsFcFailure) Writable() bool   { return false }
 func (ApsFcFailure) Reportable() bool { return false }
 func (ApsFcFailure) SceneIndex() int  { return -1 }
 
-func (ApsFcFailure) Name() string                  { return "APS FC Failure" }
-func (a *ApsFcFailure) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsFcFailure) Value() zcl.Val             { return a }
+func (ApsFcFailure) Name() string          { return "APS FC Failure" }
+func (a *ApsFcFailure) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsFcFailure) Value() zcl.Val     { return a }
+
 func (a ApsFcFailure) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsFcFailure) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -83,9 +85,10 @@ func (ApsRxBcast) Writable() bool   { return false }
 func (ApsRxBcast) Reportable() bool { return false }
 func (ApsRxBcast) SceneIndex() int  { return -1 }
 
-func (ApsRxBcast) Name() string                  { return "APS Rx Bcast" }
-func (a *ApsRxBcast) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsRxBcast) Value() zcl.Val             { return a }
+func (ApsRxBcast) Name() string          { return "APS Rx Bcast" }
+func (a *ApsRxBcast) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsRxBcast) Value() zcl.Val     { return a }
+
 func (a ApsRxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsRxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -117,9 +120,10 @@ func (ApsRxUcast) Writable() bool   { return false }
 func (ApsRxUcast) Reportable() bool { return false }
 func (ApsRxUcast) SceneIndex() int  { return -1 }
 
-func (ApsRxUcast) Name() string                  { return "APS Rx Ucast" }
-func (a *ApsRxUcast) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsRxUcast) Value() zcl.Val             { return a }
+func (ApsRxUcast) Name() string          { return "APS Rx Ucast" }
+func (a *ApsRxUcast) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsRxUcast) Value() zcl.Val     { return a }
+
 func (a ApsRxUcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsRxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -151,9 +155,10 @@ func (ApsTxBcast) Writable() bool   { return false }
 func (ApsTxBcast) Reportable() bool { return false }
 func (ApsTxBcast) SceneIndex() int  { return -1 }
 
-func (ApsTxBcast) Name() string                  { return "APS Tx Bcast" }
-func (a *ApsTxBcast) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsTxBcast) Value() zcl.Val             { return a }
+func (ApsTxBcast) Name() string          { return "APS Tx Bcast" }
+func (a *ApsTxBcast) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsTxBcast) Value() zcl.Val     { return a }
+
 func (a ApsTxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsTxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -185,9 +190,10 @@ func (ApsTxUcastFail) Writable() bool   { return false }
 func (ApsTxUcastFail) Reportable() bool { return false }
 func (ApsTxUcastFail) SceneIndex() int  { return -1 }
 
-func (ApsTxUcastFail) Name() string                  { return "APS Tx Ucast Fail" }
-func (a *ApsTxUcastFail) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsTxUcastFail) Value() zcl.Val             { return a }
+func (ApsTxUcastFail) Name() string          { return "APS Tx Ucast Fail" }
+func (a *ApsTxUcastFail) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsTxUcastFail) Value() zcl.Val     { return a }
+
 func (a ApsTxUcastFail) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsTxUcastFail) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -219,9 +225,10 @@ func (ApsTxUcastRetry) Writable() bool   { return false }
 func (ApsTxUcastRetry) Reportable() bool { return false }
 func (ApsTxUcastRetry) SceneIndex() int  { return -1 }
 
-func (ApsTxUcastRetry) Name() string                  { return "APS Tx Ucast Retry" }
-func (a *ApsTxUcastRetry) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsTxUcastRetry) Value() zcl.Val             { return a }
+func (ApsTxUcastRetry) Name() string          { return "APS Tx Ucast Retry" }
+func (a *ApsTxUcastRetry) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsTxUcastRetry) Value() zcl.Val     { return a }
+
 func (a ApsTxUcastRetry) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsTxUcastRetry) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -253,9 +260,10 @@ func (ApsTxUcastSuccess) Writable() bool   { return false }
 func (ApsTxUcastSuccess) Reportable() bool { return false }
 func (ApsTxUcastSuccess) SceneIndex() int  { return -1 }
 
-func (ApsTxUcastSuccess) Name() string                  { return "APS Tx Ucast Success" }
-func (a *ApsTxUcastSuccess) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsTxUcastSuccess) Value() zcl.Val             { return a }
+func (ApsTxUcastSuccess) Name() string          { return "APS Tx Ucast Success" }
+func (a *ApsTxUcastSuccess) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsTxUcastSuccess) Value() zcl.Val     { return a }
+
 func (a ApsTxUcastSuccess) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsTxUcastSuccess) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -287,9 +295,10 @@ func (ApsUnauthorizedKey) Writable() bool   { return false }
 func (ApsUnauthorizedKey) Reportable() bool { return false }
 func (ApsUnauthorizedKey) SceneIndex() int  { return -1 }
 
-func (ApsUnauthorizedKey) Name() string                  { return "APS Unauthorized Key" }
-func (a *ApsUnauthorizedKey) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ApsUnauthorizedKey) Value() zcl.Val             { return a }
+func (ApsUnauthorizedKey) Name() string          { return "APS Unauthorized Key" }
+func (a *ApsUnauthorizedKey) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ApsUnauthorizedKey) Value() zcl.Val     { return a }
+
 func (a ApsUnauthorizedKey) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ApsUnauthorizedKey) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -322,9 +331,10 @@ func (AlarmCount) Writable() bool   { return true }
 func (AlarmCount) Reportable() bool { return false }
 func (AlarmCount) SceneIndex() int  { return -1 }
 
-func (AlarmCount) Name() string                  { return "Alarm Count" }
-func (a *AlarmCount) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *AlarmCount) Value() zcl.Val             { return a }
+func (AlarmCount) Name() string          { return "Alarm Count" }
+func (a *AlarmCount) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *AlarmCount) Value() zcl.Val     { return a }
+
 func (a AlarmCount) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *AlarmCount) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -356,9 +366,10 @@ func (AlarmMask) Writable() bool   { return true }
 func (AlarmMask) Reportable() bool { return false }
 func (AlarmMask) SceneIndex() int  { return -1 }
 
-func (AlarmMask) Name() string                  { return "Alarm Mask" }
-func (a *AlarmMask) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *AlarmMask) Value() zcl.Val             { return a }
+func (AlarmMask) Name() string          { return "Alarm Mask" }
+func (a *AlarmMask) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *AlarmMask) Value() zcl.Val     { return a }
+
 func (a AlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *AlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -410,9 +421,10 @@ func (AlarmMask) MultiOptions() []zcl.Option {
 
 type AlarmCode zcl.Zenum8
 
-func (AlarmCode) Name() string                  { return "Alarm code" }
-func (a *AlarmCode) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *AlarmCode) Value() zcl.Val             { return a }
+func (AlarmCode) Name() string          { return "Alarm code" }
+func (a *AlarmCode) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *AlarmCode) Value() zcl.Val     { return a }
+
 func (a AlarmCode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *AlarmCode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -444,9 +456,10 @@ func (AnalogMaxPresentValue) Writable() bool   { return true }
 func (AnalogMaxPresentValue) Reportable() bool { return false }
 func (AnalogMaxPresentValue) SceneIndex() int  { return -1 }
 
-func (AnalogMaxPresentValue) Name() string                  { return "Analog Max Present Value" }
-func (a *AnalogMaxPresentValue) TypeID() zcl.TypeID         { return zcl.Zfloat(*a).ID() }
-func (a *AnalogMaxPresentValue) Value() zcl.Val             { return a }
+func (AnalogMaxPresentValue) Name() string          { return "Analog Max Present Value" }
+func (a *AnalogMaxPresentValue) TypeID() zcl.TypeID { return zcl.Zfloat(*a).ID() }
+func (a *AnalogMaxPresentValue) Value() zcl.Val     { return a }
+
 func (a AnalogMaxPresentValue) MarshalZcl() ([]byte, error) { return zcl.Zfloat(a).MarshalZcl() }
 
 func (a *AnalogMaxPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -478,9 +491,10 @@ func (AnalogMinPresentValue) Writable() bool   { return true }
 func (AnalogMinPresentValue) Reportable() bool { return false }
 func (AnalogMinPresentValue) SceneIndex() int  { return -1 }
 
-func (AnalogMinPresentValue) Name() string                  { return "Analog Min Present Value" }
-func (a *AnalogMinPresentValue) TypeID() zcl.TypeID         { return zcl.Zfloat(*a).ID() }
-func (a *AnalogMinPresentValue) Value() zcl.Val             { return a }
+func (AnalogMinPresentValue) Name() string          { return "Analog Min Present Value" }
+func (a *AnalogMinPresentValue) TypeID() zcl.TypeID { return zcl.Zfloat(*a).ID() }
+func (a *AnalogMinPresentValue) Value() zcl.Val     { return a }
+
 func (a AnalogMinPresentValue) MarshalZcl() ([]byte, error) { return zcl.Zfloat(a).MarshalZcl() }
 
 func (a *AnalogMinPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -512,9 +526,10 @@ func (AnalogPresentValue) Writable() bool   { return true }
 func (AnalogPresentValue) Reportable() bool { return true }
 func (AnalogPresentValue) SceneIndex() int  { return -1 }
 
-func (AnalogPresentValue) Name() string                  { return "Analog Present value" }
-func (a *AnalogPresentValue) TypeID() zcl.TypeID         { return zcl.Zfloat(*a).ID() }
-func (a *AnalogPresentValue) Value() zcl.Val             { return a }
+func (AnalogPresentValue) Name() string          { return "Analog Present value" }
+func (a *AnalogPresentValue) TypeID() zcl.TypeID { return zcl.Zfloat(*a).ID() }
+func (a *AnalogPresentValue) Value() zcl.Val     { return a }
+
 func (a AnalogPresentValue) MarshalZcl() ([]byte, error) { return zcl.Zfloat(a).MarshalZcl() }
 
 func (a *AnalogPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -549,12 +564,16 @@ func (AnalogPriorityArray) SceneIndex() int  { return -1 }
 func (AnalogPriorityArray) Name() string          { return "Analog Priority Array" }
 func (a *AnalogPriorityArray) TypeID() zcl.TypeID { return zcl.Zarray(*a).ID() }
 func (a *AnalogPriorityArray) Value() zcl.Val     { return a }
-func (a AnalogPriorityArray) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (AnalogPriorityArray) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
+
+func (a *AnalogPriorityArray) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zarray(*a).MarshalZcl()
 }
 
 func (a *AnalogPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zarray)
+	nt := &zcl.Zarray{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = AnalogPriorityArray(*nt)
 	return br, err
@@ -582,9 +601,10 @@ func (AnalogRelinquishDefault) Writable() bool   { return true }
 func (AnalogRelinquishDefault) Reportable() bool { return false }
 func (AnalogRelinquishDefault) SceneIndex() int  { return -1 }
 
-func (AnalogRelinquishDefault) Name() string                  { return "Analog Relinquish Default" }
-func (a *AnalogRelinquishDefault) TypeID() zcl.TypeID         { return zcl.Zfloat(*a).ID() }
-func (a *AnalogRelinquishDefault) Value() zcl.Val             { return a }
+func (AnalogRelinquishDefault) Name() string          { return "Analog Relinquish Default" }
+func (a *AnalogRelinquishDefault) TypeID() zcl.TypeID { return zcl.Zfloat(*a).ID() }
+func (a *AnalogRelinquishDefault) Value() zcl.Val     { return a }
+
 func (a AnalogRelinquishDefault) MarshalZcl() ([]byte, error) { return zcl.Zfloat(a).MarshalZcl() }
 
 func (a *AnalogRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -616,9 +636,10 @@ func (AnalogResolution) Writable() bool   { return true }
 func (AnalogResolution) Reportable() bool { return false }
 func (AnalogResolution) SceneIndex() int  { return -1 }
 
-func (AnalogResolution) Name() string                  { return "Analog Resolution" }
-func (a *AnalogResolution) TypeID() zcl.TypeID         { return zcl.Zfloat(*a).ID() }
-func (a *AnalogResolution) Value() zcl.Val             { return a }
+func (AnalogResolution) Name() string          { return "Analog Resolution" }
+func (a *AnalogResolution) TypeID() zcl.TypeID { return zcl.Zfloat(*a).ID() }
+func (a *AnalogResolution) Value() zcl.Val     { return a }
+
 func (a AnalogResolution) MarshalZcl() ([]byte, error) { return zcl.Zfloat(a).MarshalZcl() }
 
 func (a *AnalogResolution) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -650,9 +671,10 @@ func (ApplicationVersion) Writable() bool   { return false }
 func (ApplicationVersion) Reportable() bool { return false }
 func (ApplicationVersion) SceneIndex() int  { return -1 }
 
-func (ApplicationVersion) Name() string                  { return "Application Version" }
-func (a *ApplicationVersion) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *ApplicationVersion) Value() zcl.Val             { return a }
+func (ApplicationVersion) Name() string          { return "Application Version" }
+func (a *ApplicationVersion) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *ApplicationVersion) Value() zcl.Val     { return a }
+
 func (a ApplicationVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ApplicationVersion) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -684,9 +706,10 @@ func (AvgMacRetryPerApsMsgSent) Writable() bool   { return false }
 func (AvgMacRetryPerApsMsgSent) Reportable() bool { return false }
 func (AvgMacRetryPerApsMsgSent) SceneIndex() int  { return -1 }
 
-func (AvgMacRetryPerApsMsgSent) Name() string                  { return "Avg MAC Retry per APS Msg Sent" }
-func (a *AvgMacRetryPerApsMsgSent) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *AvgMacRetryPerApsMsgSent) Value() zcl.Val             { return a }
+func (AvgMacRetryPerApsMsgSent) Name() string          { return "Avg MAC Retry per APS Msg Sent" }
+func (a *AvgMacRetryPerApsMsgSent) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *AvgMacRetryPerApsMsgSent) Value() zcl.Val     { return a }
+
 func (a AvgMacRetryPerApsMsgSent) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *AvgMacRetryPerApsMsgSent) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -718,9 +741,10 @@ func (BatteryAlarmMask) Writable() bool   { return true }
 func (BatteryAlarmMask) Reportable() bool { return false }
 func (BatteryAlarmMask) SceneIndex() int  { return -1 }
 
-func (BatteryAlarmMask) Name() string                  { return "Battery Alarm Mask" }
-func (a *BatteryAlarmMask) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *BatteryAlarmMask) Value() zcl.Val             { return a }
+func (BatteryAlarmMask) Name() string          { return "Battery Alarm Mask" }
+func (a *BatteryAlarmMask) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *BatteryAlarmMask) Value() zcl.Val     { return a }
+
 func (a BatteryAlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *BatteryAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -794,9 +818,10 @@ func (BatteryAlarmState) Writable() bool   { return true }
 func (BatteryAlarmState) Reportable() bool { return false }
 func (BatteryAlarmState) SceneIndex() int  { return -1 }
 
-func (BatteryAlarmState) Name() string                  { return "Battery Alarm State" }
-func (a *BatteryAlarmState) TypeID() zcl.TypeID         { return zcl.Zbmp32(*a).ID() }
-func (a *BatteryAlarmState) Value() zcl.Val             { return a }
+func (BatteryAlarmState) Name() string          { return "Battery Alarm State" }
+func (a *BatteryAlarmState) TypeID() zcl.TypeID { return zcl.Zbmp32(*a).ID() }
+func (a *BatteryAlarmState) Value() zcl.Val     { return a }
+
 func (a BatteryAlarmState) MarshalZcl() ([]byte, error) { return zcl.Zbmp32(a).MarshalZcl() }
 
 func (a *BatteryAlarmState) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -957,9 +982,10 @@ func (BatteryManufacturer) Writable() bool   { return true }
 func (BatteryManufacturer) Reportable() bool { return false }
 func (BatteryManufacturer) SceneIndex() int  { return -1 }
 
-func (BatteryManufacturer) Name() string                  { return "Battery Manufacturer" }
-func (a *BatteryManufacturer) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *BatteryManufacturer) Value() zcl.Val             { return a }
+func (BatteryManufacturer) Name() string          { return "Battery Manufacturer" }
+func (a *BatteryManufacturer) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *BatteryManufacturer) Value() zcl.Val     { return a }
+
 func (a BatteryManufacturer) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *BatteryManufacturer) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -991,9 +1017,10 @@ func (BatteryPercentageMinThreshold) Writable() bool   { return true }
 func (BatteryPercentageMinThreshold) Reportable() bool { return false }
 func (BatteryPercentageMinThreshold) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageMinThreshold) Name() string                  { return "Battery Percentage Min Threshold" }
-func (a *BatteryPercentageMinThreshold) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryPercentageMinThreshold) Value() zcl.Val             { return a }
+func (BatteryPercentageMinThreshold) Name() string          { return "Battery Percentage Min Threshold" }
+func (a *BatteryPercentageMinThreshold) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryPercentageMinThreshold) Value() zcl.Val     { return a }
+
 func (a BatteryPercentageMinThreshold) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryPercentageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1025,9 +1052,10 @@ func (BatteryPercentageThreshold1) Writable() bool   { return true }
 func (BatteryPercentageThreshold1) Reportable() bool { return false }
 func (BatteryPercentageThreshold1) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageThreshold1) Name() string                  { return "Battery Percentage Threshold 1" }
-func (a *BatteryPercentageThreshold1) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryPercentageThreshold1) Value() zcl.Val             { return a }
+func (BatteryPercentageThreshold1) Name() string          { return "Battery Percentage Threshold 1" }
+func (a *BatteryPercentageThreshold1) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryPercentageThreshold1) Value() zcl.Val     { return a }
+
 func (a BatteryPercentageThreshold1) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryPercentageThreshold1) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1059,9 +1087,10 @@ func (BatteryPercentageThreshold2) Writable() bool   { return true }
 func (BatteryPercentageThreshold2) Reportable() bool { return false }
 func (BatteryPercentageThreshold2) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageThreshold2) Name() string                  { return "Battery Percentage Threshold 2" }
-func (a *BatteryPercentageThreshold2) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryPercentageThreshold2) Value() zcl.Val             { return a }
+func (BatteryPercentageThreshold2) Name() string          { return "Battery Percentage Threshold 2" }
+func (a *BatteryPercentageThreshold2) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryPercentageThreshold2) Value() zcl.Val     { return a }
+
 func (a BatteryPercentageThreshold2) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryPercentageThreshold2) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1093,9 +1122,10 @@ func (BatteryPercentageThreshold3) Writable() bool   { return true }
 func (BatteryPercentageThreshold3) Reportable() bool { return false }
 func (BatteryPercentageThreshold3) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageThreshold3) Name() string                  { return "Battery Percentage Threshold 3" }
-func (a *BatteryPercentageThreshold3) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryPercentageThreshold3) Value() zcl.Val             { return a }
+func (BatteryPercentageThreshold3) Name() string          { return "Battery Percentage Threshold 3" }
+func (a *BatteryPercentageThreshold3) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryPercentageThreshold3) Value() zcl.Val     { return a }
+
 func (a BatteryPercentageThreshold3) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryPercentageThreshold3) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1127,9 +1157,10 @@ func (BatteryQuantity) Writable() bool   { return true }
 func (BatteryQuantity) Reportable() bool { return false }
 func (BatteryQuantity) SceneIndex() int  { return -1 }
 
-func (BatteryQuantity) Name() string                  { return "Battery Quantity" }
-func (a *BatteryQuantity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryQuantity) Value() zcl.Val             { return a }
+func (BatteryQuantity) Name() string          { return "Battery Quantity" }
+func (a *BatteryQuantity) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryQuantity) Value() zcl.Val     { return a }
+
 func (a BatteryQuantity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryQuantity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1161,9 +1192,10 @@ func (BatteryRatedVoltage) Writable() bool   { return true }
 func (BatteryRatedVoltage) Reportable() bool { return false }
 func (BatteryRatedVoltage) SceneIndex() int  { return -1 }
 
-func (BatteryRatedVoltage) Name() string                  { return "Battery Rated Voltage" }
-func (a *BatteryRatedVoltage) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryRatedVoltage) Value() zcl.Val             { return a }
+func (BatteryRatedVoltage) Name() string          { return "Battery Rated Voltage" }
+func (a *BatteryRatedVoltage) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryRatedVoltage) Value() zcl.Val     { return a }
+
 func (a BatteryRatedVoltage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryRatedVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1195,9 +1227,10 @@ func (BatteryRemaining) Writable() bool   { return false }
 func (BatteryRemaining) Reportable() bool { return true }
 func (BatteryRemaining) SceneIndex() int  { return -1 }
 
-func (BatteryRemaining) Name() string                  { return "Battery Remaining" }
-func (a *BatteryRemaining) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryRemaining) Value() zcl.Val             { return a }
+func (BatteryRemaining) Name() string          { return "Battery Remaining" }
+func (a *BatteryRemaining) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryRemaining) Value() zcl.Val     { return a }
+
 func (a BatteryRemaining) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryRemaining) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1229,9 +1262,10 @@ func (BatterySize) Writable() bool   { return true }
 func (BatterySize) Reportable() bool { return false }
 func (BatterySize) SceneIndex() int  { return -1 }
 
-func (BatterySize) Name() string                  { return "Battery Size" }
-func (a *BatterySize) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *BatterySize) Value() zcl.Val             { return a }
+func (BatterySize) Name() string          { return "Battery Size" }
+func (a *BatterySize) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *BatterySize) Value() zcl.Val     { return a }
+
 func (a BatterySize) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *BatterySize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1321,9 +1355,10 @@ func (BatteryVoltage) Writable() bool   { return false }
 func (BatteryVoltage) Reportable() bool { return false }
 func (BatteryVoltage) SceneIndex() int  { return -1 }
 
-func (BatteryVoltage) Name() string                  { return "Battery Voltage" }
-func (a *BatteryVoltage) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryVoltage) Value() zcl.Val             { return a }
+func (BatteryVoltage) Name() string          { return "Battery Voltage" }
+func (a *BatteryVoltage) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryVoltage) Value() zcl.Val     { return a }
+
 func (a BatteryVoltage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1355,9 +1390,10 @@ func (BatteryVoltageMinThreshold) Writable() bool   { return true }
 func (BatteryVoltageMinThreshold) Reportable() bool { return false }
 func (BatteryVoltageMinThreshold) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageMinThreshold) Name() string                  { return "Battery Voltage Min Threshold" }
-func (a *BatteryVoltageMinThreshold) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryVoltageMinThreshold) Value() zcl.Val             { return a }
+func (BatteryVoltageMinThreshold) Name() string          { return "Battery Voltage Min Threshold" }
+func (a *BatteryVoltageMinThreshold) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryVoltageMinThreshold) Value() zcl.Val     { return a }
+
 func (a BatteryVoltageMinThreshold) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryVoltageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1389,9 +1425,10 @@ func (BatteryVoltageThreshold1) Writable() bool   { return true }
 func (BatteryVoltageThreshold1) Reportable() bool { return false }
 func (BatteryVoltageThreshold1) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageThreshold1) Name() string                  { return "Battery Voltage Threshold 1" }
-func (a *BatteryVoltageThreshold1) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryVoltageThreshold1) Value() zcl.Val             { return a }
+func (BatteryVoltageThreshold1) Name() string          { return "Battery Voltage Threshold 1" }
+func (a *BatteryVoltageThreshold1) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryVoltageThreshold1) Value() zcl.Val     { return a }
+
 func (a BatteryVoltageThreshold1) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryVoltageThreshold1) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1423,9 +1460,10 @@ func (BatteryVoltageThreshold2) Writable() bool   { return true }
 func (BatteryVoltageThreshold2) Reportable() bool { return false }
 func (BatteryVoltageThreshold2) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageThreshold2) Name() string                  { return "Battery Voltage Threshold 2" }
-func (a *BatteryVoltageThreshold2) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryVoltageThreshold2) Value() zcl.Val             { return a }
+func (BatteryVoltageThreshold2) Name() string          { return "Battery Voltage Threshold 2" }
+func (a *BatteryVoltageThreshold2) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryVoltageThreshold2) Value() zcl.Val     { return a }
+
 func (a BatteryVoltageThreshold2) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryVoltageThreshold2) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1457,9 +1495,10 @@ func (BatteryVoltageThreshold3) Writable() bool   { return true }
 func (BatteryVoltageThreshold3) Reportable() bool { return false }
 func (BatteryVoltageThreshold3) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageThreshold3) Name() string                  { return "Battery Voltage Threshold 3" }
-func (a *BatteryVoltageThreshold3) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *BatteryVoltageThreshold3) Value() zcl.Val             { return a }
+func (BatteryVoltageThreshold3) Name() string          { return "Battery Voltage Threshold 3" }
+func (a *BatteryVoltageThreshold3) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *BatteryVoltageThreshold3) Value() zcl.Val     { return a }
+
 func (a BatteryVoltageThreshold3) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *BatteryVoltageThreshold3) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1491,9 +1530,10 @@ func (BatteryCapacity) Writable() bool   { return true }
 func (BatteryCapacity) Reportable() bool { return false }
 func (BatteryCapacity) SceneIndex() int  { return -1 }
 
-func (BatteryCapacity) Name() string                  { return "Battery capacity" }
-func (a *BatteryCapacity) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *BatteryCapacity) Value() zcl.Val             { return a }
+func (BatteryCapacity) Name() string          { return "Battery capacity" }
+func (a *BatteryCapacity) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *BatteryCapacity) Value() zcl.Val     { return a }
+
 func (a BatteryCapacity) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *BatteryCapacity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1525,9 +1565,10 @@ func (BinaryActiveText) Writable() bool   { return true }
 func (BinaryActiveText) Reportable() bool { return false }
 func (BinaryActiveText) SceneIndex() int  { return -1 }
 
-func (BinaryActiveText) Name() string                  { return "Binary Active Text" }
-func (a *BinaryActiveText) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *BinaryActiveText) Value() zcl.Val             { return a }
+func (BinaryActiveText) Name() string          { return "Binary Active Text" }
+func (a *BinaryActiveText) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *BinaryActiveText) Value() zcl.Val     { return a }
+
 func (a BinaryActiveText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *BinaryActiveText) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1559,9 +1600,10 @@ func (BinaryInactiveText) Writable() bool   { return true }
 func (BinaryInactiveText) Reportable() bool { return false }
 func (BinaryInactiveText) SceneIndex() int  { return -1 }
 
-func (BinaryInactiveText) Name() string                  { return "Binary Inactive Text" }
-func (a *BinaryInactiveText) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *BinaryInactiveText) Value() zcl.Val             { return a }
+func (BinaryInactiveText) Name() string          { return "Binary Inactive Text" }
+func (a *BinaryInactiveText) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *BinaryInactiveText) Value() zcl.Val     { return a }
+
 func (a BinaryInactiveText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *BinaryInactiveText) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1593,9 +1635,10 @@ func (BinaryMaxOffTime) Writable() bool   { return true }
 func (BinaryMaxOffTime) Reportable() bool { return false }
 func (BinaryMaxOffTime) SceneIndex() int  { return -1 }
 
-func (BinaryMaxOffTime) Name() string                  { return "Binary Max Off-time" }
-func (a *BinaryMaxOffTime) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *BinaryMaxOffTime) Value() zcl.Val             { return a }
+func (BinaryMaxOffTime) Name() string          { return "Binary Max Off-time" }
+func (a *BinaryMaxOffTime) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *BinaryMaxOffTime) Value() zcl.Val     { return a }
+
 func (a BinaryMaxOffTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *BinaryMaxOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1627,9 +1670,10 @@ func (BinaryMinOffTime) Writable() bool   { return true }
 func (BinaryMinOffTime) Reportable() bool { return false }
 func (BinaryMinOffTime) SceneIndex() int  { return -1 }
 
-func (BinaryMinOffTime) Name() string                  { return "Binary Min Off-time" }
-func (a *BinaryMinOffTime) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *BinaryMinOffTime) Value() zcl.Val             { return a }
+func (BinaryMinOffTime) Name() string          { return "Binary Min Off-time" }
+func (a *BinaryMinOffTime) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *BinaryMinOffTime) Value() zcl.Val     { return a }
+
 func (a BinaryMinOffTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *BinaryMinOffTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1661,9 +1705,10 @@ func (BinaryPolarity) Writable() bool   { return false }
 func (BinaryPolarity) Reportable() bool { return false }
 func (BinaryPolarity) SceneIndex() int  { return -1 }
 
-func (BinaryPolarity) Name() string                  { return "Binary Polarity" }
-func (a *BinaryPolarity) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *BinaryPolarity) Value() zcl.Val             { return a }
+func (BinaryPolarity) Name() string          { return "Binary Polarity" }
+func (a *BinaryPolarity) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *BinaryPolarity) Value() zcl.Val     { return a }
+
 func (a BinaryPolarity) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *BinaryPolarity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1713,9 +1758,10 @@ func (BinaryPresentValue) Writable() bool   { return true }
 func (BinaryPresentValue) Reportable() bool { return true }
 func (BinaryPresentValue) SceneIndex() int  { return -1 }
 
-func (BinaryPresentValue) Name() string                  { return "Binary Present Value" }
-func (a *BinaryPresentValue) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *BinaryPresentValue) Value() zcl.Val             { return a }
+func (BinaryPresentValue) Name() string          { return "Binary Present Value" }
+func (a *BinaryPresentValue) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *BinaryPresentValue) Value() zcl.Val     { return a }
+
 func (a BinaryPresentValue) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *BinaryPresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1750,12 +1796,16 @@ func (BinaryPriorityArray) SceneIndex() int  { return -1 }
 func (BinaryPriorityArray) Name() string          { return "Binary Priority Array" }
 func (a *BinaryPriorityArray) TypeID() zcl.TypeID { return zcl.Zarray(*a).ID() }
 func (a *BinaryPriorityArray) Value() zcl.Val     { return a }
-func (a BinaryPriorityArray) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (BinaryPriorityArray) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
+
+func (a *BinaryPriorityArray) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zarray(*a).MarshalZcl()
 }
 
 func (a *BinaryPriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zarray)
+	nt := &zcl.Zarray{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = BinaryPriorityArray(*nt)
 	return br, err
@@ -1783,9 +1833,10 @@ func (BinaryRelinquishDefault) Writable() bool   { return true }
 func (BinaryRelinquishDefault) Reportable() bool { return false }
 func (BinaryRelinquishDefault) SceneIndex() int  { return -1 }
 
-func (BinaryRelinquishDefault) Name() string                  { return "Binary Relinquish Default" }
-func (a *BinaryRelinquishDefault) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *BinaryRelinquishDefault) Value() zcl.Val             { return a }
+func (BinaryRelinquishDefault) Name() string          { return "Binary Relinquish Default" }
+func (a *BinaryRelinquishDefault) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *BinaryRelinquishDefault) Value() zcl.Val     { return a }
+
 func (a BinaryRelinquishDefault) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *BinaryRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1817,9 +1868,10 @@ func (CalculationPeriod) Writable() bool   { return true }
 func (CalculationPeriod) Reportable() bool { return false }
 func (CalculationPeriod) SceneIndex() int  { return -1 }
 
-func (CalculationPeriod) Name() string                  { return "Calculation Period" }
-func (a *CalculationPeriod) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *CalculationPeriod) Value() zcl.Val             { return a }
+func (CalculationPeriod) Name() string          { return "Calculation Period" }
+func (a *CalculationPeriod) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *CalculationPeriod) Value() zcl.Val     { return a }
+
 func (a CalculationPeriod) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *CalculationPeriod) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1851,9 +1903,10 @@ func (CheckInInterval) Writable() bool   { return true }
 func (CheckInInterval) Reportable() bool { return false }
 func (CheckInInterval) SceneIndex() int  { return -1 }
 
-func (CheckInInterval) Name() string                  { return "Check-in Interval" }
-func (a *CheckInInterval) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *CheckInInterval) Value() zcl.Val             { return a }
+func (CheckInInterval) Name() string          { return "Check-in Interval" }
+func (a *CheckInInterval) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *CheckInInterval) Value() zcl.Val     { return a }
+
 func (a CheckInInterval) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *CheckInInterval) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1885,9 +1938,10 @@ func (CheckInIntervalMin) Writable() bool   { return false }
 func (CheckInIntervalMin) Reportable() bool { return false }
 func (CheckInIntervalMin) SceneIndex() int  { return -1 }
 
-func (CheckInIntervalMin) Name() string                  { return "Check-in Interval Min" }
-func (a *CheckInIntervalMin) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *CheckInIntervalMin) Value() zcl.Val             { return a }
+func (CheckInIntervalMin) Name() string          { return "Check-in Interval Min" }
+func (a *CheckInIntervalMin) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *CheckInIntervalMin) Value() zcl.Val     { return a }
+
 func (a CheckInIntervalMin) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *CheckInIntervalMin) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1919,9 +1973,10 @@ func (ChildMoved) Writable() bool   { return false }
 func (ChildMoved) Reportable() bool { return false }
 func (ChildMoved) SceneIndex() int  { return -1 }
 
-func (ChildMoved) Name() string                  { return "Child Moved" }
-func (a *ChildMoved) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ChildMoved) Value() zcl.Val             { return a }
+func (ChildMoved) Name() string          { return "Child Moved" }
+func (a *ChildMoved) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ChildMoved) Value() zcl.Val     { return a }
+
 func (a ChildMoved) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ChildMoved) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1945,9 +2000,10 @@ func (a ChildMoved) String() string {
 
 type ClusterId zcl.Zu16
 
-func (ClusterId) Name() string                  { return "Cluster Id" }
-func (a *ClusterId) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ClusterId) Value() zcl.Val             { return a }
+func (ClusterId) Name() string          { return "Cluster Id" }
+func (a *ClusterId) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ClusterId) Value() zcl.Val     { return a }
+
 func (a ClusterId) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ClusterId) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -1979,9 +2035,10 @@ func (ClusterRevision) Writable() bool   { return true }
 func (ClusterRevision) Reportable() bool { return false }
 func (ClusterRevision) SceneIndex() int  { return -1 }
 
-func (ClusterRevision) Name() string                  { return "Cluster Revision" }
-func (a *ClusterRevision) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ClusterRevision) Value() zcl.Val             { return a }
+func (ClusterRevision) Name() string          { return "Cluster Revision" }
+func (a *ClusterRevision) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ClusterRevision) Value() zcl.Val     { return a }
+
 func (a ClusterRevision) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ClusterRevision) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2013,9 +2070,10 @@ func (Configuration) Writable() bool   { return true }
 func (Configuration) Reportable() bool { return false }
 func (Configuration) SceneIndex() int  { return -1 }
 
-func (Configuration) Name() string                  { return "Configuration" }
-func (a *Configuration) TypeID() zcl.TypeID         { return zcl.Zbmp16(*a).ID() }
-func (a *Configuration) Value() zcl.Val             { return a }
+func (Configuration) Name() string          { return "Configuration" }
+func (a *Configuration) TypeID() zcl.TypeID { return zcl.Zbmp16(*a).ID() }
+func (a *Configuration) Value() zcl.Val     { return a }
+
 func (a Configuration) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
 
 func (a *Configuration) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2082,9 +2140,10 @@ func (CurrentGroup) Writable() bool   { return false }
 func (CurrentGroup) Reportable() bool { return false }
 func (CurrentGroup) SceneIndex() int  { return -1 }
 
-func (CurrentGroup) Name() string                  { return "Current Group" }
-func (a *CurrentGroup) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *CurrentGroup) Value() zcl.Val             { return a }
+func (CurrentGroup) Name() string          { return "Current Group" }
+func (a *CurrentGroup) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *CurrentGroup) Value() zcl.Val     { return a }
+
 func (a CurrentGroup) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *CurrentGroup) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2117,9 +2176,10 @@ func (CurrentLevel) Writable() bool   { return false }
 func (CurrentLevel) Reportable() bool { return true }
 func (CurrentLevel) SceneIndex() int  { return 1 }
 
-func (CurrentLevel) Name() string                  { return "Current Level" }
-func (a *CurrentLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *CurrentLevel) Value() zcl.Val             { return a }
+func (CurrentLevel) Name() string          { return "Current Level" }
+func (a *CurrentLevel) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *CurrentLevel) Value() zcl.Val     { return a }
+
 func (a CurrentLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *CurrentLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2151,9 +2211,10 @@ func (CurrentScene) Writable() bool   { return false }
 func (CurrentScene) Reportable() bool { return false }
 func (CurrentScene) SceneIndex() int  { return -1 }
 
-func (CurrentScene) Name() string                  { return "Current Scene" }
-func (a *CurrentScene) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *CurrentScene) Value() zcl.Val             { return a }
+func (CurrentScene) Name() string          { return "Current Scene" }
+func (a *CurrentScene) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *CurrentScene) Value() zcl.Val     { return a }
+
 func (a CurrentScene) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *CurrentScene) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2185,9 +2246,10 @@ func (CurrentTemperature) Writable() bool   { return false }
 func (CurrentTemperature) Reportable() bool { return false }
 func (CurrentTemperature) SceneIndex() int  { return -1 }
 
-func (CurrentTemperature) Name() string                  { return "Current Temperature" }
-func (a *CurrentTemperature) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *CurrentTemperature) Value() zcl.Val             { return a }
+func (CurrentTemperature) Name() string          { return "Current Temperature" }
+func (a *CurrentTemperature) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *CurrentTemperature) Value() zcl.Val     { return a }
+
 func (a CurrentTemperature) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *CurrentTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2219,9 +2281,10 @@ func (DateCode) Writable() bool   { return false }
 func (DateCode) Reportable() bool { return false }
 func (DateCode) SceneIndex() int  { return -1 }
 
-func (DateCode) Name() string                  { return "Date Code" }
-func (a *DateCode) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *DateCode) Value() zcl.Val             { return a }
+func (DateCode) Name() string          { return "Date Code" }
+func (a *DateCode) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *DateCode) Value() zcl.Val     { return a }
+
 func (a DateCode) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *DateCode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2253,9 +2316,10 @@ func (DefaultMoveRate) Writable() bool   { return true }
 func (DefaultMoveRate) Reportable() bool { return false }
 func (DefaultMoveRate) SceneIndex() int  { return -1 }
 
-func (DefaultMoveRate) Name() string                  { return "Default Move Rate" }
-func (a *DefaultMoveRate) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *DefaultMoveRate) Value() zcl.Val             { return a }
+func (DefaultMoveRate) Name() string          { return "Default Move Rate" }
+func (a *DefaultMoveRate) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *DefaultMoveRate) Value() zcl.Val     { return a }
+
 func (a DefaultMoveRate) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *DefaultMoveRate) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2279,9 +2343,10 @@ func (a DefaultMoveRate) String() string {
 
 type Device zcl.Zuid
 
-func (Device) Name() string                  { return "Device" }
-func (a *Device) TypeID() zcl.TypeID         { return zcl.Zuid(*a).ID() }
-func (a *Device) Value() zcl.Val             { return a }
+func (Device) Name() string          { return "Device" }
+func (a *Device) TypeID() zcl.TypeID { return zcl.Zuid(*a).ID() }
+func (a *Device) Value() zcl.Val     { return a }
+
 func (a Device) MarshalZcl() ([]byte, error) { return zcl.Zuid(a).MarshalZcl() }
 
 func (a *Device) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2313,9 +2378,10 @@ func (DeviceEnabled) Writable() bool   { return true }
 func (DeviceEnabled) Reportable() bool { return false }
 func (DeviceEnabled) SceneIndex() int  { return -1 }
 
-func (DeviceEnabled) Name() string                  { return "Device Enabled" }
-func (a *DeviceEnabled) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *DeviceEnabled) Value() zcl.Val             { return a }
+func (DeviceEnabled) Name() string          { return "Device Enabled" }
+func (a *DeviceEnabled) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *DeviceEnabled) Value() zcl.Val     { return a }
+
 func (a DeviceEnabled) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *DeviceEnabled) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2347,9 +2413,10 @@ func (DeviceTempAlarmMask) Writable() bool   { return true }
 func (DeviceTempAlarmMask) Reportable() bool { return false }
 func (DeviceTempAlarmMask) SceneIndex() int  { return -1 }
 
-func (DeviceTempAlarmMask) Name() string                  { return "Device Temp Alarm Mask" }
-func (a *DeviceTempAlarmMask) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *DeviceTempAlarmMask) Value() zcl.Val             { return a }
+func (DeviceTempAlarmMask) Name() string          { return "Device Temp Alarm Mask" }
+func (a *DeviceTempAlarmMask) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *DeviceTempAlarmMask) Value() zcl.Val     { return a }
+
 func (a DeviceTempAlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *DeviceTempAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2409,9 +2476,10 @@ func (DisableLocalConfig) Writable() bool   { return true }
 func (DisableLocalConfig) Reportable() bool { return false }
 func (DisableLocalConfig) SceneIndex() int  { return -1 }
 
-func (DisableLocalConfig) Name() string                  { return "Disable Local Config" }
-func (a *DisableLocalConfig) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *DisableLocalConfig) Value() zcl.Val             { return a }
+func (DisableLocalConfig) Name() string          { return "Disable Local Config" }
+func (a *DisableLocalConfig) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *DisableLocalConfig) Value() zcl.Val     { return a }
+
 func (a DisableLocalConfig) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *DisableLocalConfig) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2465,9 +2533,10 @@ func (DisableLocalConfig) MultiOptions() []zcl.Option {
 
 type Distance zcl.Zu16
 
-func (Distance) Name() string                  { return "Distance" }
-func (a *Distance) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *Distance) Value() zcl.Val             { return a }
+func (Distance) Name() string          { return "Distance" }
+func (a *Distance) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *Distance) Value() zcl.Val     { return a }
+
 func (a Distance) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Distance) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2499,9 +2568,10 @@ func (DstEnd) Writable() bool   { return true }
 func (DstEnd) Reportable() bool { return false }
 func (DstEnd) SceneIndex() int  { return -1 }
 
-func (DstEnd) Name() string                  { return "Dst End" }
-func (a *DstEnd) TypeID() zcl.TypeID         { return zcl.Zutc(*a).ID() }
-func (a *DstEnd) Value() zcl.Val             { return a }
+func (DstEnd) Name() string          { return "Dst End" }
+func (a *DstEnd) TypeID() zcl.TypeID { return zcl.Zutc(*a).ID() }
+func (a *DstEnd) Value() zcl.Val     { return a }
+
 func (a DstEnd) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
 
 func (a *DstEnd) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2533,9 +2603,10 @@ func (DstShift) Writable() bool   { return true }
 func (DstShift) Reportable() bool { return false }
 func (DstShift) SceneIndex() int  { return -1 }
 
-func (DstShift) Name() string                  { return "Dst Shift" }
-func (a *DstShift) TypeID() zcl.TypeID         { return zcl.Zs32(*a).ID() }
-func (a *DstShift) Value() zcl.Val             { return a }
+func (DstShift) Name() string          { return "Dst Shift" }
+func (a *DstShift) TypeID() zcl.TypeID { return zcl.Zs32(*a).ID() }
+func (a *DstShift) Value() zcl.Val     { return a }
+
 func (a DstShift) MarshalZcl() ([]byte, error) { return zcl.Zs32(a).MarshalZcl() }
 
 func (a *DstShift) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2567,9 +2638,10 @@ func (DstStart) Writable() bool   { return true }
 func (DstStart) Reportable() bool { return false }
 func (DstStart) SceneIndex() int  { return -1 }
 
-func (DstStart) Name() string                  { return "Dst Start" }
-func (a *DstStart) TypeID() zcl.TypeID         { return zcl.Zutc(*a).ID() }
-func (a *DstStart) Value() zcl.Val             { return a }
+func (DstStart) Name() string          { return "Dst Start" }
+func (a *DstStart) TypeID() zcl.TypeID { return zcl.Zutc(*a).ID() }
+func (a *DstStart) Value() zcl.Val     { return a }
+
 func (a DstStart) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
 
 func (a *DstStart) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2594,9 +2666,10 @@ func (a DstStart) String() string {
 // EffectIdentifier when turning lights off
 type EffectIdentifier zcl.Zenum8
 
-func (EffectIdentifier) Name() string                  { return "Effect Identifier" }
-func (a *EffectIdentifier) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *EffectIdentifier) Value() zcl.Val             { return a }
+func (EffectIdentifier) Name() string          { return "Effect Identifier" }
+func (a *EffectIdentifier) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *EffectIdentifier) Value() zcl.Val     { return a }
+
 func (a EffectIdentifier) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *EffectIdentifier) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2638,9 +2711,10 @@ func (EffectIdentifier) SingleOptions() []zcl.Option {
 
 type EffectVariant zcl.Zenum8
 
-func (EffectVariant) Name() string                  { return "Effect Variant" }
-func (a *EffectVariant) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *EffectVariant) Value() zcl.Val             { return a }
+func (EffectVariant) Name() string          { return "Effect Variant" }
+func (a *EffectVariant) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *EffectVariant) Value() zcl.Val     { return a }
+
 func (a EffectVariant) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *EffectVariant) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2697,9 +2771,10 @@ func (FastPollTimeout) Writable() bool   { return true }
 func (FastPollTimeout) Reportable() bool { return false }
 func (FastPollTimeout) SceneIndex() int  { return -1 }
 
-func (FastPollTimeout) Name() string                  { return "Fast Poll Timeout" }
-func (a *FastPollTimeout) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *FastPollTimeout) Value() zcl.Val             { return a }
+func (FastPollTimeout) Name() string          { return "Fast Poll Timeout" }
+func (a *FastPollTimeout) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *FastPollTimeout) Value() zcl.Val     { return a }
+
 func (a FastPollTimeout) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *FastPollTimeout) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2731,9 +2806,10 @@ func (FastPollTimeoutMax) Writable() bool   { return false }
 func (FastPollTimeoutMax) Reportable() bool { return false }
 func (FastPollTimeoutMax) SceneIndex() int  { return -1 }
 
-func (FastPollTimeoutMax) Name() string                  { return "Fast Poll Timeout Max" }
-func (a *FastPollTimeoutMax) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *FastPollTimeoutMax) Value() zcl.Val             { return a }
+func (FastPollTimeoutMax) Name() string          { return "Fast Poll Timeout Max" }
+func (a *FastPollTimeoutMax) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *FastPollTimeoutMax) Value() zcl.Val     { return a }
+
 func (a FastPollTimeoutMax) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *FastPollTimeoutMax) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2766,9 +2842,10 @@ func (GenericDeviceClass) Writable() bool   { return false }
 func (GenericDeviceClass) Reportable() bool { return false }
 func (GenericDeviceClass) SceneIndex() int  { return -1 }
 
-func (GenericDeviceClass) Name() string                  { return "Generic Device Class" }
-func (a *GenericDeviceClass) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *GenericDeviceClass) Value() zcl.Val             { return a }
+func (GenericDeviceClass) Name() string          { return "Generic Device Class" }
+func (a *GenericDeviceClass) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *GenericDeviceClass) Value() zcl.Val     { return a }
+
 func (a GenericDeviceClass) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *GenericDeviceClass) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2801,9 +2878,10 @@ func (GenericDeviceType) Writable() bool   { return false }
 func (GenericDeviceType) Reportable() bool { return false }
 func (GenericDeviceType) SceneIndex() int  { return -1 }
 
-func (GenericDeviceType) Name() string                  { return "Generic Device Type" }
-func (a *GenericDeviceType) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *GenericDeviceType) Value() zcl.Val             { return a }
+func (GenericDeviceType) Name() string          { return "Generic Device Type" }
+func (a *GenericDeviceType) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *GenericDeviceType) Value() zcl.Val     { return a }
+
 func (a GenericDeviceType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *GenericDeviceType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2835,9 +2913,10 @@ func (GlobalSceneControl) Writable() bool   { return false }
 func (GlobalSceneControl) Reportable() bool { return false }
 func (GlobalSceneControl) SceneIndex() int  { return -1 }
 
-func (GlobalSceneControl) Name() string                  { return "Global Scene Control" }
-func (a *GlobalSceneControl) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *GlobalSceneControl) Value() zcl.Val             { return a }
+func (GlobalSceneControl) Name() string          { return "Global Scene Control" }
+func (a *GlobalSceneControl) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *GlobalSceneControl) Value() zcl.Val     { return a }
+
 func (a GlobalSceneControl) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *GlobalSceneControl) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2861,9 +2940,10 @@ func (a GlobalSceneControl) String() string {
 
 type GroupId zcl.Zu16
 
-func (GroupId) Name() string                  { return "Group ID" }
-func (a *GroupId) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *GroupId) Value() zcl.Val             { return a }
+func (GroupId) Name() string          { return "Group ID" }
+func (a *GroupId) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *GroupId) Value() zcl.Val     { return a }
+
 func (a GroupId) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *GroupId) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2895,9 +2975,10 @@ func (GroupNameSupport) Writable() bool   { return false }
 func (GroupNameSupport) Reportable() bool { return false }
 func (GroupNameSupport) SceneIndex() int  { return -1 }
 
-func (GroupNameSupport) Name() string                  { return "Group Name Support" }
-func (a *GroupNameSupport) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *GroupNameSupport) Value() zcl.Val             { return a }
+func (GroupNameSupport) Name() string          { return "Group Name Support" }
+func (a *GroupNameSupport) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *GroupNameSupport) Value() zcl.Val     { return a }
+
 func (a GroupNameSupport) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *GroupNameSupport) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2945,9 +3026,10 @@ func (GroupNameSupport) MultiOptions() []zcl.Option {
 // If set to 0xFF, it's unknown if any more groups can be added
 type GroupCapacity zcl.Zu8
 
-func (GroupCapacity) Name() string                  { return "Group capacity" }
-func (a *GroupCapacity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *GroupCapacity) Value() zcl.Val             { return a }
+func (GroupCapacity) Name() string          { return "Group capacity" }
+func (a *GroupCapacity) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *GroupCapacity) Value() zcl.Val     { return a }
+
 func (a GroupCapacity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *GroupCapacity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -2974,15 +3056,41 @@ type GroupList zcl.Zset
 func (GroupList) Name() string          { return "Group list" }
 func (a *GroupList) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
 func (a *GroupList) Value() zcl.Val     { return a }
-func (a GroupList) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (GroupList) ArrayTypeID() zcl.TypeID { return new(zcl.Zu16).ID() }
+
+func (a *GroupList) ArrayValues() (o []uint16) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu16); ok {
+			o = append(o, uint16(*vv))
+		}
+	}
+	return o
+}
+
+func (a *GroupList) SetValues(val []uint16) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *GroupList) AddValues(val ...uint16) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu16(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *GroupList) MarshalZcl() ([]byte, error) {
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *GroupList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zset)
-	br, err := nt.UnmarshalZcl(b)
-	*a = GroupList(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *GroupList) SetValue(v zcl.Val) error {
@@ -2999,9 +3107,10 @@ func (a GroupList) String() string {
 
 type GroupName zcl.Zcstring
 
-func (GroupName) Name() string                  { return "Group name" }
-func (a *GroupName) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *GroupName) Value() zcl.Val             { return a }
+func (GroupName) Name() string          { return "Group name" }
+func (a *GroupName) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *GroupName) Value() zcl.Val     { return a }
+
 func (a GroupName) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *GroupName) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3033,9 +3142,10 @@ func (HwVersion) Writable() bool   { return false }
 func (HwVersion) Reportable() bool { return false }
 func (HwVersion) SceneIndex() int  { return -1 }
 
-func (HwVersion) Name() string                  { return "HW Version" }
-func (a *HwVersion) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *HwVersion) Value() zcl.Val             { return a }
+func (HwVersion) Name() string          { return "HW Version" }
+func (a *HwVersion) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *HwVersion) Value() zcl.Val     { return a }
+
 func (a HwVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *HwVersion) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3067,9 +3177,10 @@ func (HighTempDwellTripPoint) Writable() bool   { return false }
 func (HighTempDwellTripPoint) Reportable() bool { return false }
 func (HighTempDwellTripPoint) SceneIndex() int  { return -1 }
 
-func (HighTempDwellTripPoint) Name() string                  { return "High Temp Dwell Trip Point" }
-func (a *HighTempDwellTripPoint) TypeID() zcl.TypeID         { return zcl.Zu24(*a).ID() }
-func (a *HighTempDwellTripPoint) Value() zcl.Val             { return a }
+func (HighTempDwellTripPoint) Name() string          { return "High Temp Dwell Trip Point" }
+func (a *HighTempDwellTripPoint) TypeID() zcl.TypeID { return zcl.Zu24(*a).ID() }
+func (a *HighTempDwellTripPoint) Value() zcl.Val     { return a }
+
 func (a HighTempDwellTripPoint) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
 
 func (a *HighTempDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3103,9 +3214,10 @@ func (HighTempThreshold) Writable() bool   { return true }
 func (HighTempThreshold) Reportable() bool { return false }
 func (HighTempThreshold) SceneIndex() int  { return -1 }
 
-func (HighTempThreshold) Name() string                  { return "High Temp Threshold" }
-func (a *HighTempThreshold) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *HighTempThreshold) Value() zcl.Val             { return a }
+func (HighTempThreshold) Name() string          { return "High Temp Threshold" }
+func (a *HighTempThreshold) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *HighTempThreshold) Value() zcl.Val     { return a }
+
 func (a HighTempThreshold) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *HighTempThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3137,9 +3249,10 @@ func (IOApplicationType) Writable() bool   { return false }
 func (IOApplicationType) Reportable() bool { return false }
 func (IOApplicationType) SceneIndex() int  { return -1 }
 
-func (IOApplicationType) Name() string                  { return "I/O Application Type" }
-func (a *IOApplicationType) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *IOApplicationType) Value() zcl.Val             { return a }
+func (IOApplicationType) Name() string          { return "I/O Application Type" }
+func (a *IOApplicationType) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *IOApplicationType) Value() zcl.Val     { return a }
+
 func (a IOApplicationType) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *IOApplicationType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3171,9 +3284,10 @@ func (IODescription) Writable() bool   { return true }
 func (IODescription) Reportable() bool { return false }
 func (IODescription) SceneIndex() int  { return -1 }
 
-func (IODescription) Name() string                  { return "I/O Description" }
-func (a *IODescription) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *IODescription) Value() zcl.Val             { return a }
+func (IODescription) Name() string          { return "I/O Description" }
+func (a *IODescription) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *IODescription) Value() zcl.Val     { return a }
+
 func (a IODescription) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *IODescription) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3205,9 +3319,10 @@ func (IOOutOfService) Writable() bool   { return true }
 func (IOOutOfService) Reportable() bool { return false }
 func (IOOutOfService) SceneIndex() int  { return -1 }
 
-func (IOOutOfService) Name() string                  { return "I/O Out of service" }
-func (a *IOOutOfService) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *IOOutOfService) Value() zcl.Val             { return a }
+func (IOOutOfService) Name() string          { return "I/O Out of service" }
+func (a *IOOutOfService) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *IOOutOfService) Value() zcl.Val     { return a }
+
 func (a IOOutOfService) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *IOOutOfService) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3239,9 +3354,10 @@ func (IOReliability) Writable() bool   { return true }
 func (IOReliability) Reportable() bool { return false }
 func (IOReliability) SceneIndex() int  { return -1 }
 
-func (IOReliability) Name() string                  { return "I/O Reliability" }
-func (a *IOReliability) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *IOReliability) Value() zcl.Val             { return a }
+func (IOReliability) Name() string          { return "I/O Reliability" }
+func (a *IOReliability) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *IOReliability) Value() zcl.Val     { return a }
+
 func (a IOReliability) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *IOReliability) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3336,9 +3452,10 @@ func (IOStatusFlags) Writable() bool   { return false }
 func (IOStatusFlags) Reportable() bool { return true }
 func (IOStatusFlags) SceneIndex() int  { return -1 }
 
-func (IOStatusFlags) Name() string                  { return "I/O Status flags" }
-func (a *IOStatusFlags) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *IOStatusFlags) Value() zcl.Val             { return a }
+func (IOStatusFlags) Name() string          { return "I/O Status flags" }
+func (a *IOStatusFlags) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *IOStatusFlags) Value() zcl.Val     { return a }
+
 func (a IOStatusFlags) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *IOStatusFlags) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3404,9 +3521,10 @@ func (IOUnitType) Writable() bool   { return true }
 func (IOUnitType) Reportable() bool { return false }
 func (IOUnitType) SceneIndex() int  { return -1 }
 
-func (IOUnitType) Name() string                  { return "I/O Unit Type" }
-func (a *IOUnitType) TypeID() zcl.TypeID         { return zcl.EngineeringUnit(*a).ID() }
-func (a *IOUnitType) Value() zcl.Val             { return a }
+func (IOUnitType) Name() string          { return "I/O Unit Type" }
+func (a *IOUnitType) TypeID() zcl.TypeID { return zcl.EngineeringUnit(*a).ID() }
+func (a *IOUnitType) Value() zcl.Val     { return a }
+
 func (a IOUnitType) MarshalZcl() ([]byte, error) { return zcl.EngineeringUnit(a).MarshalZcl() }
 
 func (a *IOUnitType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3431,9 +3549,10 @@ func (a IOUnitType) String() string {
 // IdentifyEffect The effect identifier field specifies the identify effect to use.
 type IdentifyEffect zcl.Zenum8
 
-func (IdentifyEffect) Name() string                  { return "Identify Effect" }
-func (a *IdentifyEffect) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *IdentifyEffect) Value() zcl.Val             { return a }
+func (IdentifyEffect) Name() string          { return "Identify Effect" }
+func (a *IdentifyEffect) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *IdentifyEffect) Value() zcl.Val     { return a }
+
 func (a IdentifyEffect) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *IdentifyEffect) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3496,9 +3615,10 @@ func (IdentifyEffect) SingleOptions() []zcl.Option {
 // IdentifyEffectVariant The effect identifier field specifies the identify effect to use.
 type IdentifyEffectVariant zcl.Zenum8
 
-func (IdentifyEffectVariant) Name() string                  { return "Identify Effect variant" }
-func (a *IdentifyEffectVariant) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *IdentifyEffectVariant) Value() zcl.Val             { return a }
+func (IdentifyEffectVariant) Name() string          { return "Identify Effect variant" }
+func (a *IdentifyEffectVariant) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *IdentifyEffectVariant) Value() zcl.Val     { return a }
+
 func (a IdentifyEffectVariant) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *IdentifyEffectVariant) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3544,9 +3664,10 @@ func (IdentifyTime) Writable() bool   { return true }
 func (IdentifyTime) Reportable() bool { return false }
 func (IdentifyTime) SceneIndex() int  { return -1 }
 
-func (IdentifyTime) Name() string                  { return "Identify Time" }
-func (a *IdentifyTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *IdentifyTime) Value() zcl.Val             { return a }
+func (IdentifyTime) Name() string          { return "Identify Time" }
+func (a *IdentifyTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *IdentifyTime) Value() zcl.Val     { return a }
+
 func (a IdentifyTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *IdentifyTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3571,9 +3692,10 @@ func (a IdentifyTime) String() string {
 // IdentifyTimeout The time in seconds for which a device will stay in identify mode.
 type IdentifyTimeout zcl.Zu16
 
-func (IdentifyTimeout) Name() string                  { return "Identify Timeout" }
-func (a *IdentifyTimeout) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *IdentifyTimeout) Value() zcl.Val             { return a }
+func (IdentifyTimeout) Name() string          { return "Identify Timeout" }
+func (a *IdentifyTimeout) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *IdentifyTimeout) Value() zcl.Val     { return a }
+
 func (a IdentifyTimeout) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *IdentifyTimeout) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3597,9 +3719,10 @@ func (a IdentifyTimeout) String() string {
 
 type IkeaRemoteDirection zcl.Zenum8
 
-func (IkeaRemoteDirection) Name() string                  { return "Ikea Remote Direction" }
-func (a *IkeaRemoteDirection) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *IkeaRemoteDirection) Value() zcl.Val             { return a }
+func (IkeaRemoteDirection) Name() string          { return "Ikea Remote Direction" }
+func (a *IkeaRemoteDirection) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *IkeaRemoteDirection) Value() zcl.Val     { return a }
+
 func (a IkeaRemoteDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *IkeaRemoteDirection) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3649,9 +3772,10 @@ func (JoinIndication) Writable() bool   { return false }
 func (JoinIndication) Reportable() bool { return false }
 func (JoinIndication) SceneIndex() int  { return -1 }
 
-func (JoinIndication) Name() string                  { return "Join Indication" }
-func (a *JoinIndication) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *JoinIndication) Value() zcl.Val             { return a }
+func (JoinIndication) Name() string          { return "Join Indication" }
+func (a *JoinIndication) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *JoinIndication) Value() zcl.Val     { return a }
+
 func (a JoinIndication) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *JoinIndication) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3683,9 +3807,10 @@ func (LedIndication) Writable() bool   { return true }
 func (LedIndication) Reportable() bool { return false }
 func (LedIndication) SceneIndex() int  { return -1 }
 
-func (LedIndication) Name() string                  { return "LED Indication" }
-func (a *LedIndication) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *LedIndication) Value() zcl.Val             { return a }
+func (LedIndication) Name() string          { return "LED Indication" }
+func (a *LedIndication) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *LedIndication) Value() zcl.Val     { return a }
+
 func (a LedIndication) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *LedIndication) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3717,9 +3842,10 @@ func (LastMessageLqi) Writable() bool   { return false }
 func (LastMessageLqi) Reportable() bool { return false }
 func (LastMessageLqi) SceneIndex() int  { return -1 }
 
-func (LastMessageLqi) Name() string                  { return "Last Message LQI" }
-func (a *LastMessageLqi) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *LastMessageLqi) Value() zcl.Val             { return a }
+func (LastMessageLqi) Name() string          { return "Last Message LQI" }
+func (a *LastMessageLqi) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *LastMessageLqi) Value() zcl.Val     { return a }
+
 func (a LastMessageLqi) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *LastMessageLqi) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3751,9 +3877,10 @@ func (LastMessageRssi) Writable() bool   { return false }
 func (LastMessageRssi) Reportable() bool { return false }
 func (LastMessageRssi) SceneIndex() int  { return -1 }
 
-func (LastMessageRssi) Name() string                  { return "Last Message RSSI" }
-func (a *LastMessageRssi) TypeID() zcl.TypeID         { return zcl.Zs8(*a).ID() }
-func (a *LastMessageRssi) Value() zcl.Val             { return a }
+func (LastMessageRssi) Name() string          { return "Last Message RSSI" }
+func (a *LastMessageRssi) TypeID() zcl.TypeID { return zcl.Zs8(*a).ID() }
+func (a *LastMessageRssi) Value() zcl.Val     { return a }
+
 func (a LastMessageRssi) MarshalZcl() ([]byte, error) { return zcl.Zs8(a).MarshalZcl() }
 
 func (a *LastMessageRssi) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3785,9 +3912,10 @@ func (LastSetTime) Writable() bool   { return false }
 func (LastSetTime) Reportable() bool { return false }
 func (LastSetTime) SceneIndex() int  { return -1 }
 
-func (LastSetTime) Name() string                  { return "Last Set Time" }
-func (a *LastSetTime) TypeID() zcl.TypeID         { return zcl.Zutc(*a).ID() }
-func (a *LastSetTime) Value() zcl.Val             { return a }
+func (LastSetTime) Name() string          { return "Last Set Time" }
+func (a *LastSetTime) TypeID() zcl.TypeID { return zcl.Zutc(*a).ID() }
+func (a *LastSetTime) Value() zcl.Val     { return a }
+
 func (a LastSetTime) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
 
 func (a *LastSetTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3811,9 +3939,10 @@ func (a LastSetTime) String() string {
 
 type Level zcl.Zu8
 
-func (Level) Name() string                  { return "Level" }
-func (a *Level) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *Level) Value() zcl.Val             { return a }
+func (Level) Name() string          { return "Level" }
+func (a *Level) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *Level) Value() zcl.Val     { return a }
+
 func (a Level) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Level) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3846,9 +3975,10 @@ func (LevelControlOptions) Writable() bool   { return true }
 func (LevelControlOptions) Reportable() bool { return false }
 func (LevelControlOptions) SceneIndex() int  { return -1 }
 
-func (LevelControlOptions) Name() string                  { return "Level Control Options" }
-func (a *LevelControlOptions) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *LevelControlOptions) Value() zcl.Val             { return a }
+func (LevelControlOptions) Name() string          { return "Level Control Options" }
+func (a *LevelControlOptions) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *LevelControlOptions) Value() zcl.Val     { return a }
+
 func (a LevelControlOptions) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *LevelControlOptions) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3893,9 +4023,10 @@ func (LevelControlOptions) MultiOptions() []zcl.Option {
 
 type LevelDirection zcl.Zenum8
 
-func (LevelDirection) Name() string                  { return "Level direction" }
-func (a *LevelDirection) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *LevelDirection) Value() zcl.Val             { return a }
+func (LevelDirection) Name() string          { return "Level direction" }
+func (a *LevelDirection) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *LevelDirection) Value() zcl.Val     { return a }
+
 func (a LevelDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *LevelDirection) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3946,9 +4077,10 @@ func (LocalTime) Writable() bool   { return false }
 func (LocalTime) Reportable() bool { return false }
 func (LocalTime) SceneIndex() int  { return -1 }
 
-func (LocalTime) Name() string                  { return "Local Time" }
-func (a *LocalTime) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *LocalTime) Value() zcl.Val             { return a }
+func (LocalTime) Name() string          { return "Local Time" }
+func (a *LocalTime) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *LocalTime) Value() zcl.Val     { return a }
+
 func (a LocalTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *LocalTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -3980,9 +4112,10 @@ func (LocationAge) Writable() bool   { return false }
 func (LocationAge) Reportable() bool { return false }
 func (LocationAge) SceneIndex() int  { return -1 }
 
-func (LocationAge) Name() string                  { return "Location Age" }
-func (a *LocationAge) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LocationAge) Value() zcl.Val             { return a }
+func (LocationAge) Name() string          { return "Location Age" }
+func (a *LocationAge) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LocationAge) Value() zcl.Val     { return a }
+
 func (a LocationAge) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LocationAge) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4014,9 +4147,10 @@ func (LocationDescription) Writable() bool   { return true }
 func (LocationDescription) Reportable() bool { return false }
 func (LocationDescription) SceneIndex() int  { return -1 }
 
-func (LocationDescription) Name() string                  { return "Location Description" }
-func (a *LocationDescription) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *LocationDescription) Value() zcl.Val             { return a }
+func (LocationDescription) Name() string          { return "Location Description" }
+func (a *LocationDescription) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *LocationDescription) Value() zcl.Val     { return a }
+
 func (a LocationDescription) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *LocationDescription) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4048,9 +4182,10 @@ func (LocationMethod) Writable() bool   { return true }
 func (LocationMethod) Reportable() bool { return false }
 func (LocationMethod) SceneIndex() int  { return -1 }
 
-func (LocationMethod) Name() string                  { return "Location Method" }
-func (a *LocationMethod) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *LocationMethod) Value() zcl.Val             { return a }
+func (LocationMethod) Name() string          { return "Location Method" }
+func (a *LocationMethod) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *LocationMethod) Value() zcl.Val     { return a }
+
 func (a LocationMethod) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *LocationMethod) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4115,9 +4250,10 @@ func (LocationType) Writable() bool   { return true }
 func (LocationType) Reportable() bool { return false }
 func (LocationType) SceneIndex() int  { return -1 }
 
-func (LocationType) Name() string                  { return "Location Type" }
-func (a *LocationType) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *LocationType) Value() zcl.Val             { return a }
+func (LocationType) Name() string          { return "Location Type" }
+func (a *LocationType) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *LocationType) Value() zcl.Val     { return a }
+
 func (a LocationType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *LocationType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4169,9 +4305,10 @@ func (LocationType) SingleOptions() []zcl.Option {
 
 type LocationFlags zcl.Zbmp8
 
-func (LocationFlags) Name() string                  { return "Location flags" }
-func (a *LocationFlags) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *LocationFlags) Value() zcl.Val             { return a }
+func (LocationFlags) Name() string          { return "Location flags" }
+func (a *LocationFlags) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *LocationFlags) Value() zcl.Val     { return a }
+
 func (a LocationFlags) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *LocationFlags) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4248,9 +4385,10 @@ func (LongPollInterval) Writable() bool   { return false }
 func (LongPollInterval) Reportable() bool { return false }
 func (LongPollInterval) SceneIndex() int  { return -1 }
 
-func (LongPollInterval) Name() string                  { return "Long Poll Interval" }
-func (a *LongPollInterval) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *LongPollInterval) Value() zcl.Val             { return a }
+func (LongPollInterval) Name() string          { return "Long Poll Interval" }
+func (a *LongPollInterval) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *LongPollInterval) Value() zcl.Val     { return a }
+
 func (a LongPollInterval) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *LongPollInterval) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4282,9 +4420,10 @@ func (LongPollIntervalMin) Writable() bool   { return false }
 func (LongPollIntervalMin) Reportable() bool { return false }
 func (LongPollIntervalMin) SceneIndex() int  { return -1 }
 
-func (LongPollIntervalMin) Name() string                  { return "Long Poll Interval Min" }
-func (a *LongPollIntervalMin) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *LongPollIntervalMin) Value() zcl.Val             { return a }
+func (LongPollIntervalMin) Name() string          { return "Long Poll Interval Min" }
+func (a *LongPollIntervalMin) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *LongPollIntervalMin) Value() zcl.Val     { return a }
+
 func (a LongPollIntervalMin) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *LongPollIntervalMin) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4316,9 +4455,10 @@ func (LowTempDwellTripPoint) Writable() bool   { return false }
 func (LowTempDwellTripPoint) Reportable() bool { return false }
 func (LowTempDwellTripPoint) SceneIndex() int  { return -1 }
 
-func (LowTempDwellTripPoint) Name() string                  { return "Low Temp Dwell Trip Point" }
-func (a *LowTempDwellTripPoint) TypeID() zcl.TypeID         { return zcl.Zu24(*a).ID() }
-func (a *LowTempDwellTripPoint) Value() zcl.Val             { return a }
+func (LowTempDwellTripPoint) Name() string          { return "Low Temp Dwell Trip Point" }
+func (a *LowTempDwellTripPoint) TypeID() zcl.TypeID { return zcl.Zu24(*a).ID() }
+func (a *LowTempDwellTripPoint) Value() zcl.Val     { return a }
+
 func (a LowTempDwellTripPoint) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
 
 func (a *LowTempDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4352,9 +4492,10 @@ func (LowTempThreshold) Writable() bool   { return true }
 func (LowTempThreshold) Reportable() bool { return false }
 func (LowTempThreshold) SceneIndex() int  { return -1 }
 
-func (LowTempThreshold) Name() string                  { return "Low Temp Threshold" }
-func (a *LowTempThreshold) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *LowTempThreshold) Value() zcl.Val             { return a }
+func (LowTempThreshold) Name() string          { return "Low Temp Threshold" }
+func (a *LowTempThreshold) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *LowTempThreshold) Value() zcl.Val     { return a }
+
 func (a LowTempThreshold) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *LowTempThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4386,9 +4527,10 @@ func (MacRxBcast) Writable() bool   { return false }
 func (MacRxBcast) Reportable() bool { return false }
 func (MacRxBcast) SceneIndex() int  { return -1 }
 
-func (MacRxBcast) Name() string                  { return "Mac Rx Bcast" }
-func (a *MacRxBcast) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *MacRxBcast) Value() zcl.Val             { return a }
+func (MacRxBcast) Name() string          { return "Mac Rx Bcast" }
+func (a *MacRxBcast) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *MacRxBcast) Value() zcl.Val     { return a }
+
 func (a MacRxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *MacRxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4420,9 +4562,10 @@ func (MacRxUcast) Writable() bool   { return false }
 func (MacRxUcast) Reportable() bool { return false }
 func (MacRxUcast) SceneIndex() int  { return -1 }
 
-func (MacRxUcast) Name() string                  { return "Mac Rx Ucast" }
-func (a *MacRxUcast) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *MacRxUcast) Value() zcl.Val             { return a }
+func (MacRxUcast) Name() string          { return "Mac Rx Ucast" }
+func (a *MacRxUcast) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *MacRxUcast) Value() zcl.Val     { return a }
+
 func (a MacRxUcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *MacRxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4454,9 +4597,10 @@ func (MacTxBcast) Writable() bool   { return false }
 func (MacTxBcast) Reportable() bool { return false }
 func (MacTxBcast) SceneIndex() int  { return -1 }
 
-func (MacTxBcast) Name() string                  { return "Mac Tx Bcast" }
-func (a *MacTxBcast) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *MacTxBcast) Value() zcl.Val             { return a }
+func (MacTxBcast) Name() string          { return "Mac Tx Bcast" }
+func (a *MacTxBcast) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *MacTxBcast) Value() zcl.Val     { return a }
+
 func (a MacTxBcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *MacTxBcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4488,9 +4632,10 @@ func (MacTxUcast) Writable() bool   { return false }
 func (MacTxUcast) Reportable() bool { return false }
 func (MacTxUcast) SceneIndex() int  { return -1 }
 
-func (MacTxUcast) Name() string                  { return "Mac Tx Ucast" }
-func (a *MacTxUcast) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *MacTxUcast) Value() zcl.Val             { return a }
+func (MacTxUcast) Name() string          { return "Mac Tx Ucast" }
+func (a *MacTxUcast) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *MacTxUcast) Value() zcl.Val     { return a }
+
 func (a MacTxUcast) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *MacTxUcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4522,9 +4667,10 @@ func (MacTxUcastFail) Writable() bool   { return false }
 func (MacTxUcastFail) Reportable() bool { return false }
 func (MacTxUcastFail) SceneIndex() int  { return -1 }
 
-func (MacTxUcastFail) Name() string                  { return "Mac Tx Ucast Fail" }
-func (a *MacTxUcastFail) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MacTxUcastFail) Value() zcl.Val             { return a }
+func (MacTxUcastFail) Name() string          { return "Mac Tx Ucast Fail" }
+func (a *MacTxUcastFail) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MacTxUcastFail) Value() zcl.Val     { return a }
+
 func (a MacTxUcastFail) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MacTxUcastFail) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4556,9 +4702,10 @@ func (MacTxUcastRetry) Writable() bool   { return false }
 func (MacTxUcastRetry) Reportable() bool { return false }
 func (MacTxUcastRetry) SceneIndex() int  { return -1 }
 
-func (MacTxUcastRetry) Name() string                  { return "Mac Tx Ucast Retry" }
-func (a *MacTxUcastRetry) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MacTxUcastRetry) Value() zcl.Val             { return a }
+func (MacTxUcastRetry) Name() string          { return "Mac Tx Ucast Retry" }
+func (a *MacTxUcastRetry) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MacTxUcastRetry) Value() zcl.Val     { return a }
+
 func (a MacTxUcastRetry) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MacTxUcastRetry) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4590,9 +4737,10 @@ func (MainsAlarmMask) Writable() bool   { return true }
 func (MainsAlarmMask) Reportable() bool { return false }
 func (MainsAlarmMask) SceneIndex() int  { return -1 }
 
-func (MainsAlarmMask) Name() string                  { return "Mains Alarm Mask" }
-func (a *MainsAlarmMask) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *MainsAlarmMask) Value() zcl.Val             { return a }
+func (MainsAlarmMask) Name() string          { return "Mains Alarm Mask" }
+func (a *MainsAlarmMask) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *MainsAlarmMask) Value() zcl.Val     { return a }
+
 func (a MainsAlarmMask) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *MainsAlarmMask) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4666,9 +4814,10 @@ func (MainsFrequency) Writable() bool   { return false }
 func (MainsFrequency) Reportable() bool { return false }
 func (MainsFrequency) SceneIndex() int  { return -1 }
 
-func (MainsFrequency) Name() string                  { return "Mains Frequency" }
-func (a *MainsFrequency) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *MainsFrequency) Value() zcl.Val             { return a }
+func (MainsFrequency) Name() string          { return "Mains Frequency" }
+func (a *MainsFrequency) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *MainsFrequency) Value() zcl.Val     { return a }
+
 func (a MainsFrequency) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *MainsFrequency) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4700,9 +4849,10 @@ func (MainsVoltage) Writable() bool   { return false }
 func (MainsVoltage) Reportable() bool { return false }
 func (MainsVoltage) SceneIndex() int  { return -1 }
 
-func (MainsVoltage) Name() string                  { return "Mains Voltage" }
-func (a *MainsVoltage) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MainsVoltage) Value() zcl.Val             { return a }
+func (MainsVoltage) Name() string          { return "Mains Voltage" }
+func (a *MainsVoltage) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MainsVoltage) Value() zcl.Val     { return a }
+
 func (a MainsVoltage) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MainsVoltage) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4736,9 +4886,10 @@ func (MainsVoltageDwellTripPoint) Writable() bool   { return true }
 func (MainsVoltageDwellTripPoint) Reportable() bool { return false }
 func (MainsVoltageDwellTripPoint) SceneIndex() int  { return -1 }
 
-func (MainsVoltageDwellTripPoint) Name() string                  { return "Mains Voltage Dwell Trip Point" }
-func (a *MainsVoltageDwellTripPoint) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MainsVoltageDwellTripPoint) Value() zcl.Val             { return a }
+func (MainsVoltageDwellTripPoint) Name() string          { return "Mains Voltage Dwell Trip Point" }
+func (a *MainsVoltageDwellTripPoint) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MainsVoltageDwellTripPoint) Value() zcl.Val     { return a }
+
 func (a MainsVoltageDwellTripPoint) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MainsVoltageDwellTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4770,9 +4921,10 @@ func (MainsVoltageMaxThreshold) Writable() bool   { return true }
 func (MainsVoltageMaxThreshold) Reportable() bool { return false }
 func (MainsVoltageMaxThreshold) SceneIndex() int  { return -1 }
 
-func (MainsVoltageMaxThreshold) Name() string                  { return "Mains Voltage Max Threshold" }
-func (a *MainsVoltageMaxThreshold) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MainsVoltageMaxThreshold) Value() zcl.Val             { return a }
+func (MainsVoltageMaxThreshold) Name() string          { return "Mains Voltage Max Threshold" }
+func (a *MainsVoltageMaxThreshold) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MainsVoltageMaxThreshold) Value() zcl.Val     { return a }
+
 func (a MainsVoltageMaxThreshold) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MainsVoltageMaxThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4804,9 +4956,10 @@ func (MainsVoltageMinThreshold) Writable() bool   { return true }
 func (MainsVoltageMinThreshold) Reportable() bool { return false }
 func (MainsVoltageMinThreshold) SceneIndex() int  { return -1 }
 
-func (MainsVoltageMinThreshold) Name() string                  { return "Mains Voltage Min Threshold" }
-func (a *MainsVoltageMinThreshold) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MainsVoltageMinThreshold) Value() zcl.Val             { return a }
+func (MainsVoltageMinThreshold) Name() string          { return "Mains Voltage Min Threshold" }
+func (a *MainsVoltageMinThreshold) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MainsVoltageMinThreshold) Value() zcl.Val     { return a }
+
 func (a MainsVoltageMinThreshold) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MainsVoltageMinThreshold) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4838,9 +4991,10 @@ func (ManufacturerName) Writable() bool   { return false }
 func (ManufacturerName) Reportable() bool { return false }
 func (ManufacturerName) SceneIndex() int  { return -1 }
 
-func (ManufacturerName) Name() string                  { return "Manufacturer Name" }
-func (a *ManufacturerName) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *ManufacturerName) Value() zcl.Val             { return a }
+func (ManufacturerName) Name() string          { return "Manufacturer Name" }
+func (a *ManufacturerName) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *ManufacturerName) Value() zcl.Val     { return a }
+
 func (a ManufacturerName) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *ManufacturerName) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4872,9 +5026,10 @@ func (MaxTempExperienced) Writable() bool   { return false }
 func (MaxTempExperienced) Reportable() bool { return false }
 func (MaxTempExperienced) SceneIndex() int  { return -1 }
 
-func (MaxTempExperienced) Name() string                  { return "Max Temp Experienced" }
-func (a *MaxTempExperienced) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *MaxTempExperienced) Value() zcl.Val             { return a }
+func (MaxTempExperienced) Name() string          { return "Max Temp Experienced" }
+func (a *MaxTempExperienced) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *MaxTempExperienced) Value() zcl.Val     { return a }
+
 func (a MaxTempExperienced) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *MaxTempExperienced) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4906,9 +5061,10 @@ func (MinTempExperienced) Writable() bool   { return false }
 func (MinTempExperienced) Reportable() bool { return false }
 func (MinTempExperienced) SceneIndex() int  { return -1 }
 
-func (MinTempExperienced) Name() string                  { return "Min Temp Experienced" }
-func (a *MinTempExperienced) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *MinTempExperienced) Value() zcl.Val             { return a }
+func (MinTempExperienced) Name() string          { return "Min Temp Experienced" }
+func (a *MinTempExperienced) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *MinTempExperienced) Value() zcl.Val     { return a }
+
 func (a MinTempExperienced) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *MinTempExperienced) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4940,9 +5096,10 @@ func (ModelIdentifier) Writable() bool   { return false }
 func (ModelIdentifier) Reportable() bool { return false }
 func (ModelIdentifier) SceneIndex() int  { return -1 }
 
-func (ModelIdentifier) Name() string                  { return "Model Identifier" }
-func (a *ModelIdentifier) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *ModelIdentifier) Value() zcl.Val             { return a }
+func (ModelIdentifier) Name() string          { return "Model Identifier" }
+func (a *ModelIdentifier) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *ModelIdentifier) Value() zcl.Val     { return a }
+
 func (a ModelIdentifier) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *ModelIdentifier) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -4974,9 +5131,10 @@ func (MultistateNumberOfStates) Writable() bool   { return true }
 func (MultistateNumberOfStates) Reportable() bool { return false }
 func (MultistateNumberOfStates) SceneIndex() int  { return -1 }
 
-func (MultistateNumberOfStates) Name() string                  { return "Multistate Number of States" }
-func (a *MultistateNumberOfStates) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *MultistateNumberOfStates) Value() zcl.Val             { return a }
+func (MultistateNumberOfStates) Name() string          { return "Multistate Number of States" }
+func (a *MultistateNumberOfStates) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *MultistateNumberOfStates) Value() zcl.Val     { return a }
+
 func (a MultistateNumberOfStates) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *MultistateNumberOfStates) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5008,9 +5166,10 @@ func (MultistatePresentValue) Writable() bool   { return true }
 func (MultistatePresentValue) Reportable() bool { return true }
 func (MultistatePresentValue) SceneIndex() int  { return -1 }
 
-func (MultistatePresentValue) Name() string                  { return "Multistate Present value" }
-func (a *MultistatePresentValue) TypeID() zcl.TypeID         { return zcl.Zbmp16(*a).ID() }
-func (a *MultistatePresentValue) Value() zcl.Val             { return a }
+func (MultistatePresentValue) Name() string          { return "Multistate Present value" }
+func (a *MultistatePresentValue) TypeID() zcl.TypeID { return zcl.Zbmp16(*a).ID() }
+func (a *MultistatePresentValue) Value() zcl.Val     { return a }
+
 func (a MultistatePresentValue) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
 
 func (a *MultistatePresentValue) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5045,12 +5204,16 @@ func (MultistatePriorityArray) SceneIndex() int  { return -1 }
 func (MultistatePriorityArray) Name() string          { return "Multistate Priority Array" }
 func (a *MultistatePriorityArray) TypeID() zcl.TypeID { return zcl.Zarray(*a).ID() }
 func (a *MultistatePriorityArray) Value() zcl.Val     { return a }
-func (a MultistatePriorityArray) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (MultistatePriorityArray) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
+
+func (a *MultistatePriorityArray) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zarray(*a).MarshalZcl()
 }
 
 func (a *MultistatePriorityArray) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zarray)
+	nt := &zcl.Zarray{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = MultistatePriorityArray(*nt)
 	return br, err
@@ -5078,9 +5241,10 @@ func (MultistateRelinquishDefault) Writable() bool   { return true }
 func (MultistateRelinquishDefault) Reportable() bool { return false }
 func (MultistateRelinquishDefault) SceneIndex() int  { return -1 }
 
-func (MultistateRelinquishDefault) Name() string                  { return "Multistate Relinquish Default" }
-func (a *MultistateRelinquishDefault) TypeID() zcl.TypeID         { return zcl.Zbmp16(*a).ID() }
-func (a *MultistateRelinquishDefault) Value() zcl.Val             { return a }
+func (MultistateRelinquishDefault) Name() string          { return "Multistate Relinquish Default" }
+func (a *MultistateRelinquishDefault) TypeID() zcl.TypeID { return zcl.Zbmp16(*a).ID() }
+func (a *MultistateRelinquishDefault) Value() zcl.Val     { return a }
+
 func (a MultistateRelinquishDefault) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
 
 func (a *MultistateRelinquishDefault) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5112,9 +5276,10 @@ func (MultistateText) Writable() bool   { return true }
 func (MultistateText) Reportable() bool { return false }
 func (MultistateText) SceneIndex() int  { return -1 }
 
-func (MultistateText) Name() string                  { return "Multistate Text" }
-func (a *MultistateText) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *MultistateText) Value() zcl.Val             { return a }
+func (MultistateText) Name() string          { return "Multistate Text" }
+func (a *MultistateText) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *MultistateText) Value() zcl.Val     { return a }
+
 func (a MultistateText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *MultistateText) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5146,9 +5311,10 @@ func (NwkDecryptFailures) Writable() bool   { return false }
 func (NwkDecryptFailures) Reportable() bool { return false }
 func (NwkDecryptFailures) SceneIndex() int  { return -1 }
 
-func (NwkDecryptFailures) Name() string                  { return "NWK Decrypt Failures" }
-func (a *NwkDecryptFailures) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *NwkDecryptFailures) Value() zcl.Val             { return a }
+func (NwkDecryptFailures) Name() string          { return "NWK Decrypt Failures" }
+func (a *NwkDecryptFailures) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *NwkDecryptFailures) Value() zcl.Val     { return a }
+
 func (a NwkDecryptFailures) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *NwkDecryptFailures) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5180,9 +5346,10 @@ func (NwkFcFailure) Writable() bool   { return false }
 func (NwkFcFailure) Reportable() bool { return false }
 func (NwkFcFailure) SceneIndex() int  { return -1 }
 
-func (NwkFcFailure) Name() string                  { return "NWK FC Failure" }
-func (a *NwkFcFailure) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *NwkFcFailure) Value() zcl.Val             { return a }
+func (NwkFcFailure) Name() string          { return "NWK FC Failure" }
+func (a *NwkFcFailure) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *NwkFcFailure) Value() zcl.Val     { return a }
+
 func (a NwkFcFailure) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *NwkFcFailure) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5214,9 +5381,10 @@ func (NeighborAdded) Writable() bool   { return false }
 func (NeighborAdded) Reportable() bool { return false }
 func (NeighborAdded) SceneIndex() int  { return -1 }
 
-func (NeighborAdded) Name() string                  { return "Neighbor Added" }
-func (a *NeighborAdded) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *NeighborAdded) Value() zcl.Val             { return a }
+func (NeighborAdded) Name() string          { return "Neighbor Added" }
+func (a *NeighborAdded) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *NeighborAdded) Value() zcl.Val     { return a }
+
 func (a NeighborAdded) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *NeighborAdded) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5248,9 +5416,10 @@ func (NeighborRemoved) Writable() bool   { return false }
 func (NeighborRemoved) Reportable() bool { return false }
 func (NeighborRemoved) SceneIndex() int  { return -1 }
 
-func (NeighborRemoved) Name() string                  { return "Neighbor Removed" }
-func (a *NeighborRemoved) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *NeighborRemoved) Value() zcl.Val             { return a }
+func (NeighborRemoved) Name() string          { return "Neighbor Removed" }
+func (a *NeighborRemoved) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *NeighborRemoved) Value() zcl.Val     { return a }
+
 func (a NeighborRemoved) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *NeighborRemoved) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5282,9 +5451,10 @@ func (NeighborStale) Writable() bool   { return false }
 func (NeighborStale) Reportable() bool { return false }
 func (NeighborStale) SceneIndex() int  { return -1 }
 
-func (NeighborStale) Name() string                  { return "Neighbor Stale" }
-func (a *NeighborStale) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *NeighborStale) Value() zcl.Val             { return a }
+func (NeighborStale) Name() string          { return "Neighbor Stale" }
+func (a *NeighborStale) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *NeighborStale) Value() zcl.Val     { return a }
+
 func (a NeighborStale) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *NeighborStale) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5311,12 +5481,16 @@ type NeighborsInfo zcl.Zset
 func (NeighborsInfo) Name() string          { return "Neighbors Info" }
 func (a *NeighborsInfo) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
 func (a *NeighborsInfo) Value() zcl.Val     { return a }
-func (a NeighborsInfo) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (NeighborsInfo) ArrayTypeID() zcl.TypeID { return new(zcl.Zstruct).ID() }
+
+func (a *NeighborsInfo) MarshalZcl() ([]byte, error) {
+	a.Type = a.ArrayTypeID()
+	return zcl.Zset(*a).MarshalZcl()
 }
 
 func (a *NeighborsInfo) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zset)
+	nt := &zcl.Zset{Type: a.ArrayTypeID()}
 	br, err := nt.UnmarshalZcl(b)
 	*a = NeighborsInfo(*nt)
 	return br, err
@@ -5345,9 +5519,10 @@ func (NumberRssiMeasurements) Writable() bool   { return true }
 func (NumberRssiMeasurements) Reportable() bool { return false }
 func (NumberRssiMeasurements) SceneIndex() int  { return -1 }
 
-func (NumberRssiMeasurements) Name() string                  { return "Number RSSI Measurements" }
-func (a *NumberRssiMeasurements) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *NumberRssiMeasurements) Value() zcl.Val             { return a }
+func (NumberRssiMeasurements) Name() string          { return "Number RSSI Measurements" }
+func (a *NumberRssiMeasurements) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *NumberRssiMeasurements) Value() zcl.Val     { return a }
+
 func (a NumberRssiMeasurements) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *NumberRssiMeasurements) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5371,9 +5546,10 @@ func (a NumberRssiMeasurements) String() string {
 
 type NumberResponses zcl.Zu8
 
-func (NumberResponses) Name() string                  { return "Number Responses" }
-func (a *NumberResponses) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *NumberResponses) Value() zcl.Val             { return a }
+func (NumberResponses) Name() string          { return "Number Responses" }
+func (a *NumberResponses) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *NumberResponses) Value() zcl.Val     { return a }
+
 func (a NumberResponses) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *NumberResponses) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5405,9 +5581,10 @@ func (NumberOfDevices) Writable() bool   { return false }
 func (NumberOfDevices) Reportable() bool { return false }
 func (NumberOfDevices) SceneIndex() int  { return -1 }
 
-func (NumberOfDevices) Name() string                  { return "Number of Devices" }
-func (a *NumberOfDevices) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *NumberOfDevices) Value() zcl.Val             { return a }
+func (NumberOfDevices) Name() string          { return "Number of Devices" }
+func (a *NumberOfDevices) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *NumberOfDevices) Value() zcl.Val     { return a }
+
 func (a NumberOfDevices) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *NumberOfDevices) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5439,9 +5616,10 @@ func (NumberOfResets) Writable() bool   { return false }
 func (NumberOfResets) Reportable() bool { return false }
 func (NumberOfResets) SceneIndex() int  { return -1 }
 
-func (NumberOfResets) Name() string                  { return "Number of Resets" }
-func (a *NumberOfResets) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *NumberOfResets) Value() zcl.Val             { return a }
+func (NumberOfResets) Name() string          { return "Number of Resets" }
+func (a *NumberOfResets) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *NumberOfResets) Value() zcl.Val     { return a }
+
 func (a NumberOfResets) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *NumberOfResets) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5473,9 +5651,10 @@ func (OffTransitionTime) Writable() bool   { return true }
 func (OffTransitionTime) Reportable() bool { return false }
 func (OffTransitionTime) SceneIndex() int  { return -1 }
 
-func (OffTransitionTime) Name() string                  { return "Off Transition Time" }
-func (a *OffTransitionTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *OffTransitionTime) Value() zcl.Val             { return a }
+func (OffTransitionTime) Name() string          { return "Off Transition Time" }
+func (a *OffTransitionTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *OffTransitionTime) Value() zcl.Val     { return a }
+
 func (a OffTransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *OffTransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5507,9 +5686,10 @@ func (OffWaitTime) Writable() bool   { return false }
 func (OffWaitTime) Reportable() bool { return false }
 func (OffWaitTime) SceneIndex() int  { return -1 }
 
-func (OffWaitTime) Name() string                  { return "Off Wait Time" }
-func (a *OffWaitTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *OffWaitTime) Value() zcl.Val             { return a }
+func (OffWaitTime) Name() string          { return "Off Wait Time" }
+func (a *OffWaitTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *OffWaitTime) Value() zcl.Val     { return a }
+
 func (a OffWaitTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *OffWaitTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5543,9 +5723,10 @@ func (OnLevel) Writable() bool   { return true }
 func (OnLevel) Reportable() bool { return false }
 func (OnLevel) SceneIndex() int  { return -1 }
 
-func (OnLevel) Name() string                  { return "On Level" }
-func (a *OnLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *OnLevel) Value() zcl.Val             { return a }
+func (OnLevel) Name() string          { return "On Level" }
+func (a *OnLevel) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *OnLevel) Value() zcl.Val     { return a }
+
 func (a OnLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *OnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5577,9 +5758,10 @@ func (OnOff) Writable() bool   { return false }
 func (OnOff) Reportable() bool { return true }
 func (OnOff) SceneIndex() int  { return 1 }
 
-func (OnOff) Name() string                  { return "On Off" }
-func (a *OnOff) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *OnOff) Value() zcl.Val             { return a }
+func (OnOff) Name() string          { return "On Off" }
+func (a *OnOff) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *OnOff) Value() zcl.Val     { return a }
+
 func (a OnOff) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *OnOff) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5629,9 +5811,10 @@ func (OnTime) Writable() bool   { return false }
 func (OnTime) Reportable() bool { return false }
 func (OnTime) SceneIndex() int  { return -1 }
 
-func (OnTime) Name() string                  { return "On Time" }
-func (a *OnTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *OnTime) Value() zcl.Val             { return a }
+func (OnTime) Name() string          { return "On Time" }
+func (a *OnTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *OnTime) Value() zcl.Val     { return a }
+
 func (a OnTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *OnTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5663,9 +5846,10 @@ func (OnTransitionTime) Writable() bool   { return true }
 func (OnTransitionTime) Reportable() bool { return false }
 func (OnTransitionTime) SceneIndex() int  { return -1 }
 
-func (OnTransitionTime) Name() string                  { return "On Transition Time" }
-func (a *OnTransitionTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *OnTransitionTime) Value() zcl.Val             { return a }
+func (OnTransitionTime) Name() string          { return "On Transition Time" }
+func (a *OnTransitionTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *OnTransitionTime) Value() zcl.Val     { return a }
+
 func (a OnTransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *OnTransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5700,9 +5884,10 @@ func (OnOffTransistionTime) Writable() bool   { return true }
 func (OnOffTransistionTime) Reportable() bool { return false }
 func (OnOffTransistionTime) SceneIndex() int  { return -1 }
 
-func (OnOffTransistionTime) Name() string                  { return "On/Off Transistion Time" }
-func (a *OnOffTransistionTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *OnOffTransistionTime) Value() zcl.Val             { return a }
+func (OnOffTransistionTime) Name() string          { return "On/Off Transistion Time" }
+func (a *OnOffTransistionTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *OnOffTransistionTime) Value() zcl.Val     { return a }
+
 func (a OnOffTransistionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *OnOffTransistionTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5726,9 +5911,10 @@ func (a OnOffTransistionTime) String() string {
 
 type OnOffControl zcl.Zbmp8
 
-func (OnOffControl) Name() string                  { return "On/off control" }
-func (a *OnOffControl) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *OnOffControl) Value() zcl.Val             { return a }
+func (OnOffControl) Name() string          { return "On/off control" }
+func (a *OnOffControl) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *OnOffControl) Value() zcl.Val     { return a }
+
 func (a OnOffControl) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *OnOffControl) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5782,9 +5968,10 @@ func (OverTempTotalDwell) Writable() bool   { return false }
 func (OverTempTotalDwell) Reportable() bool { return false }
 func (OverTempTotalDwell) SceneIndex() int  { return -1 }
 
-func (OverTempTotalDwell) Name() string                  { return "Over Temp Total Dwell" }
-func (a *OverTempTotalDwell) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *OverTempTotalDwell) Value() zcl.Val             { return a }
+func (OverTempTotalDwell) Name() string          { return "Over Temp Total Dwell" }
+func (a *OverTempTotalDwell) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *OverTempTotalDwell) Value() zcl.Val     { return a }
+
 func (a OverTempTotalDwell) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *OverTempTotalDwell) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5816,9 +6003,10 @@ func (PacketBufferAllocFailures) Writable() bool   { return false }
 func (PacketBufferAllocFailures) Reportable() bool { return false }
 func (PacketBufferAllocFailures) SceneIndex() int  { return -1 }
 
-func (PacketBufferAllocFailures) Name() string                  { return "Packet Buffer Alloc Failures" }
-func (a *PacketBufferAllocFailures) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *PacketBufferAllocFailures) Value() zcl.Val             { return a }
+func (PacketBufferAllocFailures) Name() string          { return "Packet Buffer Alloc Failures" }
+func (a *PacketBufferAllocFailures) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *PacketBufferAllocFailures) Value() zcl.Val     { return a }
+
 func (a PacketBufferAllocFailures) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *PacketBufferAllocFailures) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5850,9 +6038,10 @@ func (PacketValidateDropcount) Writable() bool   { return false }
 func (PacketValidateDropcount) Reportable() bool { return false }
 func (PacketValidateDropcount) SceneIndex() int  { return -1 }
 
-func (PacketValidateDropcount) Name() string                  { return "Packet Validate Dropcount" }
-func (a *PacketValidateDropcount) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *PacketValidateDropcount) Value() zcl.Val             { return a }
+func (PacketValidateDropcount) Name() string          { return "Packet Validate Dropcount" }
+func (a *PacketValidateDropcount) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *PacketValidateDropcount) Value() zcl.Val     { return a }
+
 func (a PacketValidateDropcount) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *PacketValidateDropcount) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5885,9 +6074,10 @@ func (PathLossExponent) Writable() bool   { return true }
 func (PathLossExponent) Reportable() bool { return false }
 func (PathLossExponent) SceneIndex() int  { return -1 }
 
-func (PathLossExponent) Name() string                  { return "Path loss Exponent" }
-func (a *PathLossExponent) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *PathLossExponent) Value() zcl.Val             { return a }
+func (PathLossExponent) Name() string          { return "Path loss Exponent" }
+func (a *PathLossExponent) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *PathLossExponent) Value() zcl.Val     { return a }
+
 func (a PathLossExponent) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *PathLossExponent) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5919,9 +6109,10 @@ func (PersistensMemoryWrites) Writable() bool   { return false }
 func (PersistensMemoryWrites) Reportable() bool { return false }
 func (PersistensMemoryWrites) SceneIndex() int  { return -1 }
 
-func (PersistensMemoryWrites) Name() string                  { return "Persistens Memory Writes" }
-func (a *PersistensMemoryWrites) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *PersistensMemoryWrites) Value() zcl.Val             { return a }
+func (PersistensMemoryWrites) Name() string          { return "Persistens Memory Writes" }
+func (a *PersistensMemoryWrites) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *PersistensMemoryWrites) Value() zcl.Val     { return a }
+
 func (a PersistensMemoryWrites) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *PersistensMemoryWrites) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5953,9 +6144,10 @@ func (PhyToMacQueueLimitReached) Writable() bool   { return false }
 func (PhyToMacQueueLimitReached) Reportable() bool { return false }
 func (PhyToMacQueueLimitReached) SceneIndex() int  { return -1 }
 
-func (PhyToMacQueueLimitReached) Name() string                  { return "Phy to MAC queue limit reached" }
-func (a *PhyToMacQueueLimitReached) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *PhyToMacQueueLimitReached) Value() zcl.Val             { return a }
+func (PhyToMacQueueLimitReached) Name() string          { return "Phy to MAC queue limit reached" }
+func (a *PhyToMacQueueLimitReached) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *PhyToMacQueueLimitReached) Value() zcl.Val     { return a }
+
 func (a PhyToMacQueueLimitReached) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *PhyToMacQueueLimitReached) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -5987,9 +6179,10 @@ func (PhysicalEnvironment) Writable() bool   { return true }
 func (PhysicalEnvironment) Reportable() bool { return false }
 func (PhysicalEnvironment) SceneIndex() int  { return -1 }
 
-func (PhysicalEnvironment) Name() string                  { return "Physical Environment" }
-func (a *PhysicalEnvironment) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *PhysicalEnvironment) Value() zcl.Val             { return a }
+func (PhysicalEnvironment) Name() string          { return "Physical Environment" }
+func (a *PhysicalEnvironment) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *PhysicalEnvironment) Value() zcl.Val     { return a }
+
 func (a PhysicalEnvironment) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *PhysicalEnvironment) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6564,9 +6757,10 @@ func (Power) Writable() bool   { return true }
 func (Power) Reportable() bool { return false }
 func (Power) SceneIndex() int  { return -1 }
 
-func (Power) Name() string                  { return "Power" }
-func (a *Power) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *Power) Value() zcl.Val             { return a }
+func (Power) Name() string          { return "Power" }
+func (a *Power) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *Power) Value() zcl.Val     { return a }
+
 func (a Power) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *Power) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6598,9 +6792,10 @@ func (PowerOnLevel) Writable() bool   { return true }
 func (PowerOnLevel) Reportable() bool { return false }
 func (PowerOnLevel) SceneIndex() int  { return -1 }
 
-func (PowerOnLevel) Name() string                  { return "Power On level" }
-func (a *PowerOnLevel) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *PowerOnLevel) Value() zcl.Val             { return a }
+func (PowerOnLevel) Name() string          { return "Power On level" }
+func (a *PowerOnLevel) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *PowerOnLevel) Value() zcl.Val     { return a }
+
 func (a PowerOnLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *PowerOnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6632,9 +6827,10 @@ func (PowerSource) Writable() bool   { return false }
 func (PowerSource) Reportable() bool { return false }
 func (PowerSource) SceneIndex() int  { return -1 }
 
-func (PowerSource) Name() string                  { return "Power Source" }
-func (a *PowerSource) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *PowerSource) Value() zcl.Val             { return a }
+func (PowerSource) Name() string          { return "Power Source" }
+func (a *PowerSource) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *PowerSource) Value() zcl.Val     { return a }
+
 func (a PowerSource) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *PowerSource) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6744,9 +6940,10 @@ func (PoweronOnOff) Writable() bool   { return true }
 func (PoweronOnOff) Reportable() bool { return false }
 func (PoweronOnOff) SceneIndex() int  { return -1 }
 
-func (PoweronOnOff) Name() string                  { return "PowerOn On/Off" }
-func (a *PoweronOnOff) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *PoweronOnOff) Value() zcl.Val             { return a }
+func (PoweronOnOff) Name() string          { return "PowerOn On/Off" }
+func (a *PoweronOnOff) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *PoweronOnOff) Value() zcl.Val     { return a }
+
 func (a PoweronOnOff) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *PoweronOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6802,9 +6999,10 @@ func (ProductUrl) Writable() bool   { return false }
 func (ProductUrl) Reportable() bool { return false }
 func (ProductUrl) SceneIndex() int  { return -1 }
 
-func (ProductUrl) Name() string                  { return "Product URL" }
-func (a *ProductUrl) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *ProductUrl) Value() zcl.Val             { return a }
+func (ProductUrl) Name() string          { return "Product URL" }
+func (a *ProductUrl) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *ProductUrl) Value() zcl.Val     { return a }
+
 func (a ProductUrl) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *ProductUrl) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6837,9 +7035,10 @@ func (ProductCode) Writable() bool   { return false }
 func (ProductCode) Reportable() bool { return false }
 func (ProductCode) SceneIndex() int  { return -1 }
 
-func (ProductCode) Name() string                  { return "Product code" }
-func (a *ProductCode) TypeID() zcl.TypeID         { return zcl.Zostring(*a).ID() }
-func (a *ProductCode) Value() zcl.Val             { return a }
+func (ProductCode) Name() string          { return "Product code" }
+func (a *ProductCode) TypeID() zcl.TypeID { return zcl.Zostring(*a).ID() }
+func (a *ProductCode) Value() zcl.Val     { return a }
+
 func (a ProductCode) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
 
 func (a *ProductCode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6871,9 +7070,10 @@ func (QualityMeasure) Writable() bool   { return false }
 func (QualityMeasure) Reportable() bool { return false }
 func (QualityMeasure) SceneIndex() int  { return -1 }
 
-func (QualityMeasure) Name() string                  { return "Quality Measure" }
-func (a *QualityMeasure) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *QualityMeasure) Value() zcl.Val             { return a }
+func (QualityMeasure) Name() string          { return "Quality Measure" }
+func (a *QualityMeasure) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *QualityMeasure) Value() zcl.Val     { return a }
+
 func (a QualityMeasure) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *QualityMeasure) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6897,9 +7097,10 @@ func (a QualityMeasure) String() string {
 
 type QualityIndex zcl.Zu16
 
-func (QualityIndex) Name() string                  { return "Quality index" }
-func (a *QualityIndex) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *QualityIndex) Value() zcl.Val             { return a }
+func (QualityIndex) Name() string          { return "Quality index" }
+func (a *QualityIndex) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *QualityIndex) Value() zcl.Val     { return a }
+
 func (a QualityIndex) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *QualityIndex) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6923,9 +7124,10 @@ func (a QualityIndex) String() string {
 
 type Rssi zcl.Zs8
 
-func (Rssi) Name() string                  { return "RSSI" }
-func (a *Rssi) TypeID() zcl.TypeID         { return zcl.Zs8(*a).ID() }
-func (a *Rssi) Value() zcl.Val             { return a }
+func (Rssi) Name() string          { return "RSSI" }
+func (a *Rssi) TypeID() zcl.TypeID { return zcl.Zs8(*a).ID() }
+func (a *Rssi) Value() zcl.Val     { return a }
+
 func (a Rssi) MarshalZcl() ([]byte, error) { return zcl.Zs8(a).MarshalZcl() }
 
 func (a *Rssi) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6949,9 +7151,10 @@ func (a Rssi) String() string {
 
 type Rate zcl.Zu8
 
-func (Rate) Name() string                  { return "Rate" }
-func (a *Rate) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *Rate) Value() zcl.Val             { return a }
+func (Rate) Name() string          { return "Rate" }
+func (a *Rate) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *Rate) Value() zcl.Val     { return a }
+
 func (a Rate) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Rate) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -6983,9 +7186,10 @@ func (RelayedUcast) Writable() bool   { return false }
 func (RelayedUcast) Reportable() bool { return false }
 func (RelayedUcast) SceneIndex() int  { return -1 }
 
-func (RelayedUcast) Name() string                  { return "Relayed Ucast" }
-func (a *RelayedUcast) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *RelayedUcast) Value() zcl.Val             { return a }
+func (RelayedUcast) Name() string          { return "Relayed Ucast" }
+func (a *RelayedUcast) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *RelayedUcast) Value() zcl.Val     { return a }
+
 func (a RelayedUcast) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *RelayedUcast) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7018,9 +7222,10 @@ func (RemainingTime) Writable() bool   { return false }
 func (RemainingTime) Reportable() bool { return false }
 func (RemainingTime) SceneIndex() int  { return -1 }
 
-func (RemainingTime) Name() string                  { return "Remaining Time" }
-func (a *RemainingTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *RemainingTime) Value() zcl.Val             { return a }
+func (RemainingTime) Name() string          { return "Remaining Time" }
+func (a *RemainingTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *RemainingTime) Value() zcl.Val     { return a }
+
 func (a RemainingTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7052,9 +7257,10 @@ func (ReportingPeriod) Writable() bool   { return true }
 func (ReportingPeriod) Reportable() bool { return false }
 func (ReportingPeriod) SceneIndex() int  { return -1 }
 
-func (ReportingPeriod) Name() string                  { return "Reporting Period" }
-func (a *ReportingPeriod) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ReportingPeriod) Value() zcl.Val             { return a }
+func (ReportingPeriod) Name() string          { return "Reporting Period" }
+func (a *ReportingPeriod) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ReportingPeriod) Value() zcl.Val     { return a }
+
 func (a ReportingPeriod) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ReportingPeriod) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7078,9 +7284,10 @@ func (a ReportingPeriod) String() string {
 
 type Resolution zcl.Zenum8
 
-func (Resolution) Name() string                  { return "Resolution" }
-func (a *Resolution) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *Resolution) Value() zcl.Val             { return a }
+func (Resolution) Name() string          { return "Resolution" }
+func (a *Resolution) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *Resolution) Value() zcl.Val     { return a }
+
 func (a Resolution) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *Resolution) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7135,9 +7342,10 @@ func (RouteDiscInitiated) Writable() bool   { return false }
 func (RouteDiscInitiated) Reportable() bool { return false }
 func (RouteDiscInitiated) SceneIndex() int  { return -1 }
 
-func (RouteDiscInitiated) Name() string                  { return "Route Disc Initiated" }
-func (a *RouteDiscInitiated) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *RouteDiscInitiated) Value() zcl.Val             { return a }
+func (RouteDiscInitiated) Name() string          { return "Route Disc Initiated" }
+func (a *RouteDiscInitiated) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *RouteDiscInitiated) Value() zcl.Val     { return a }
+
 func (a RouteDiscInitiated) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *RouteDiscInitiated) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7169,9 +7377,10 @@ func (SwBuildId) Writable() bool   { return false }
 func (SwBuildId) Reportable() bool { return false }
 func (SwBuildId) SceneIndex() int  { return -1 }
 
-func (SwBuildId) Name() string                  { return "SW Build ID" }
-func (a *SwBuildId) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *SwBuildId) Value() zcl.Val             { return a }
+func (SwBuildId) Name() string          { return "SW Build ID" }
+func (a *SwBuildId) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *SwBuildId) Value() zcl.Val     { return a }
+
 func (a SwBuildId) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *SwBuildId) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7196,9 +7405,10 @@ func (a SwBuildId) String() string {
 // SceneCapacity specifies remaining number of scenes that can be added
 type SceneCapacity zcl.Zu8
 
-func (SceneCapacity) Name() string                  { return "Scene Capacity" }
-func (a *SceneCapacity) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *SceneCapacity) Value() zcl.Val             { return a }
+func (SceneCapacity) Name() string          { return "Scene Capacity" }
+func (a *SceneCapacity) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *SceneCapacity) Value() zcl.Val     { return a }
+
 func (a SceneCapacity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *SceneCapacity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7222,9 +7432,10 @@ func (a SceneCapacity) String() string {
 
 type SceneCopyMode zcl.Zbmp8
 
-func (SceneCopyMode) Name() string                  { return "Scene Copy Mode" }
-func (a *SceneCopyMode) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *SceneCopyMode) Value() zcl.Val             { return a }
+func (SceneCopyMode) Name() string          { return "Scene Copy Mode" }
+func (a *SceneCopyMode) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *SceneCopyMode) Value() zcl.Val     { return a }
+
 func (a SceneCopyMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *SceneCopyMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7275,9 +7486,10 @@ func (SceneCount) Writable() bool   { return false }
 func (SceneCount) Reportable() bool { return false }
 func (SceneCount) SceneIndex() int  { return -1 }
 
-func (SceneCount) Name() string                  { return "Scene Count" }
-func (a *SceneCount) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *SceneCount) Value() zcl.Val             { return a }
+func (SceneCount) Name() string          { return "Scene Count" }
+func (a *SceneCount) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *SceneCount) Value() zcl.Val     { return a }
+
 func (a SceneCount) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *SceneCount) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7307,9 +7519,10 @@ func (a SceneCount) String() string {
 // I.e. the field would be a repeating struct with [ClusterID uint16] [OctetLength uint8] [AttrID ...uint16]
 type SceneExtensions zcl.SceneExtensionSet
 
-func (SceneExtensions) Name() string                  { return "Scene Extensions" }
-func (a *SceneExtensions) TypeID() zcl.TypeID         { return zcl.SceneExtensionSet(*a).ID() }
-func (a *SceneExtensions) Value() zcl.Val             { return a }
+func (SceneExtensions) Name() string          { return "Scene Extensions" }
+func (a *SceneExtensions) TypeID() zcl.TypeID { return zcl.SceneExtensionSet(*a).ID() }
+func (a *SceneExtensions) Value() zcl.Val     { return a }
+
 func (a SceneExtensions) MarshalZcl() ([]byte, error) { return zcl.SceneExtensionSet(a).MarshalZcl() }
 
 func (a *SceneExtensions) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7333,9 +7546,10 @@ func (a SceneExtensions) String() string {
 
 type SceneId zcl.Zu8
 
-func (SceneId) Name() string                  { return "Scene ID" }
-func (a *SceneId) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *SceneId) Value() zcl.Val             { return a }
+func (SceneId) Name() string          { return "Scene ID" }
+func (a *SceneId) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *SceneId) Value() zcl.Val     { return a }
+
 func (a SceneId) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *SceneId) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7367,9 +7581,10 @@ func (SceneLastConfiguredBy) Writable() bool   { return false }
 func (SceneLastConfiguredBy) Reportable() bool { return false }
 func (SceneLastConfiguredBy) SceneIndex() int  { return -1 }
 
-func (SceneLastConfiguredBy) Name() string                  { return "Scene Last Configured By" }
-func (a *SceneLastConfiguredBy) TypeID() zcl.TypeID         { return zcl.Zuid(*a).ID() }
-func (a *SceneLastConfiguredBy) Value() zcl.Val             { return a }
+func (SceneLastConfiguredBy) Name() string          { return "Scene Last Configured By" }
+func (a *SceneLastConfiguredBy) TypeID() zcl.TypeID { return zcl.Zuid(*a).ID() }
+func (a *SceneLastConfiguredBy) Value() zcl.Val     { return a }
+
 func (a SceneLastConfiguredBy) MarshalZcl() ([]byte, error) { return zcl.Zuid(a).MarshalZcl() }
 
 func (a *SceneLastConfiguredBy) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7393,9 +7608,10 @@ func (a SceneLastConfiguredBy) String() string {
 
 type SceneName zcl.Zcstring
 
-func (SceneName) Name() string                  { return "Scene Name" }
-func (a *SceneName) TypeID() zcl.TypeID         { return zcl.Zcstring(*a).ID() }
-func (a *SceneName) Value() zcl.Val             { return a }
+func (SceneName) Name() string          { return "Scene Name" }
+func (a *SceneName) TypeID() zcl.TypeID { return zcl.Zcstring(*a).ID() }
+func (a *SceneName) Value() zcl.Val     { return a }
+
 func (a SceneName) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
 
 func (a *SceneName) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7427,9 +7643,10 @@ func (SceneNameSupport) Writable() bool   { return false }
 func (SceneNameSupport) Reportable() bool { return false }
 func (SceneNameSupport) SceneIndex() int  { return -1 }
 
-func (SceneNameSupport) Name() string                  { return "Scene Name Support" }
-func (a *SceneNameSupport) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *SceneNameSupport) Value() zcl.Val             { return a }
+func (SceneNameSupport) Name() string          { return "Scene Name Support" }
+func (a *SceneNameSupport) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *SceneNameSupport) Value() zcl.Val     { return a }
+
 func (a SceneNameSupport) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *SceneNameSupport) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7482,9 +7699,10 @@ func (SceneValid) Writable() bool   { return false }
 func (SceneValid) Reportable() bool { return false }
 func (SceneValid) SceneIndex() int  { return -1 }
 
-func (SceneValid) Name() string                  { return "Scene Valid" }
-func (a *SceneValid) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *SceneValid) Value() zcl.Val             { return a }
+func (SceneValid) Name() string          { return "Scene Valid" }
+func (a *SceneValid) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *SceneValid) Value() zcl.Val     { return a }
+
 func (a SceneValid) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *SceneValid) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7511,15 +7729,41 @@ type SceneList zcl.Zset
 func (SceneList) Name() string          { return "Scene list" }
 func (a *SceneList) TypeID() zcl.TypeID { return zcl.Zset(*a).ID() }
 func (a *SceneList) Value() zcl.Val     { return a }
-func (a SceneList) MarshalZcl() ([]byte, error) {
-	return nil, zcl.Errorf("not implemented")
+
+func (SceneList) ArrayTypeID() zcl.TypeID { return new(zcl.Zu8).ID() }
+
+func (a *SceneList) ArrayValues() (o []uint8) {
+	for _, v := range a.Content {
+		if vv, ok := v.(*zcl.Zu8); ok {
+			o = append(o, uint8(*vv))
+		}
+	}
+	return o
+}
+
+func (a *SceneList) SetValues(val []uint8) error {
+	a.Type = a.ArrayTypeID()
+	a.Content = []zcl.Val{}
+	return a.AddValues(val...)
+}
+
+func (a *SceneList) AddValues(val ...uint8) error {
+	a.Type = a.ArrayTypeID()
+	for _, v := range val {
+		nv := zcl.Zu8(v)
+		a.Content = append(a.Content, &nv)
+	}
+	return nil
+}
+
+func (a *SceneList) MarshalZcl() ([]byte, error) {
+	return zcl.ArrayNoTypeMarshalZcl("sloc", a.Content)
 }
 
 func (a *SceneList) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zset)
-	br, err := nt.UnmarshalZcl(b)
-	*a = SceneList(*nt)
-	return br, err
+	var err error
+	a.Content, b, err = zcl.ArrayNoTypeUnmarshalZcl("sloc", b, a.ArrayTypeID())
+	return b, err
 }
 
 func (a *SceneList) SetValue(v zcl.Val) error {
@@ -7544,9 +7788,10 @@ func (Sensitivity) Writable() bool   { return true }
 func (Sensitivity) Reportable() bool { return false }
 func (Sensitivity) SceneIndex() int  { return -1 }
 
-func (Sensitivity) Name() string                  { return "Sensitivity" }
-func (a *Sensitivity) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *Sensitivity) Value() zcl.Val             { return a }
+func (Sensitivity) Name() string          { return "Sensitivity" }
+func (a *Sensitivity) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *Sensitivity) Value() zcl.Val     { return a }
+
 func (a Sensitivity) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *Sensitivity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7601,9 +7846,10 @@ func (ShortPollInterval) Writable() bool   { return false }
 func (ShortPollInterval) Reportable() bool { return false }
 func (ShortPollInterval) SceneIndex() int  { return -1 }
 
-func (ShortPollInterval) Name() string                  { return "Short Poll Interval" }
-func (a *ShortPollInterval) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *ShortPollInterval) Value() zcl.Val             { return a }
+func (ShortPollInterval) Name() string          { return "Short Poll Interval" }
+func (a *ShortPollInterval) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *ShortPollInterval) Value() zcl.Val     { return a }
+
 func (a ShortPollInterval) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *ShortPollInterval) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7635,9 +7881,10 @@ func (StackVersion) Writable() bool   { return false }
 func (StackVersion) Reportable() bool { return false }
 func (StackVersion) SceneIndex() int  { return -1 }
 
-func (StackVersion) Name() string                  { return "Stack Version" }
-func (a *StackVersion) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *StackVersion) Value() zcl.Val             { return a }
+func (StackVersion) Name() string          { return "Stack Version" }
+func (a *StackVersion) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *StackVersion) Value() zcl.Val     { return a }
+
 func (a StackVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *StackVersion) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7670,9 +7917,10 @@ func (StandardTime) Writable() bool   { return false }
 func (StandardTime) Reportable() bool { return false }
 func (StandardTime) SceneIndex() int  { return -1 }
 
-func (StandardTime) Name() string                  { return "Standard Time" }
-func (a *StandardTime) TypeID() zcl.TypeID         { return zcl.Zu32(*a).ID() }
-func (a *StandardTime) Value() zcl.Val             { return a }
+func (StandardTime) Name() string          { return "Standard Time" }
+func (a *StandardTime) TypeID() zcl.TypeID { return zcl.Zu32(*a).ID() }
+func (a *StandardTime) Value() zcl.Val     { return a }
+
 func (a StandardTime) MarshalZcl() ([]byte, error) { return zcl.Zu32(a).MarshalZcl() }
 
 func (a *StandardTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7696,9 +7944,10 @@ func (a StandardTime) String() string {
 
 type Status zcl.Status
 
-func (Status) Name() string                  { return "Status" }
-func (a *Status) TypeID() zcl.TypeID         { return zcl.Status(*a).ID() }
-func (a *Status) Value() zcl.Val             { return a }
+func (Status) Name() string          { return "Status" }
+func (a *Status) TypeID() zcl.TypeID { return zcl.Status(*a).ID() }
+func (a *Status) Value() zcl.Val     { return a }
+
 func (a Status) MarshalZcl() ([]byte, error) { return zcl.Status(a).MarshalZcl() }
 
 func (a *Status) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7722,9 +7971,10 @@ func (a Status) String() string {
 
 type StepSize zcl.Zu8
 
-func (StepSize) Name() string                  { return "Step size" }
-func (a *StepSize) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *StepSize) Value() zcl.Val             { return a }
+func (StepSize) Name() string          { return "Step size" }
+func (a *StepSize) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *StepSize) Value() zcl.Val     { return a }
+
 func (a StepSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *StepSize) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7757,9 +8007,10 @@ func (SwitchActions) Writable() bool   { return true }
 func (SwitchActions) Reportable() bool { return false }
 func (SwitchActions) SceneIndex() int  { return -1 }
 
-func (SwitchActions) Name() string                  { return "Switch actions" }
-func (a *SwitchActions) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *SwitchActions) Value() zcl.Val             { return a }
+func (SwitchActions) Name() string          { return "Switch actions" }
+func (a *SwitchActions) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *SwitchActions) Value() zcl.Val     { return a }
+
 func (a SwitchActions) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *SwitchActions) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7815,9 +8066,10 @@ func (SwitchType) Writable() bool   { return false }
 func (SwitchType) Reportable() bool { return false }
 func (SwitchType) SceneIndex() int  { return -1 }
 
-func (SwitchType) Name() string                  { return "Switch type" }
-func (a *SwitchType) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *SwitchType) Value() zcl.Val             { return a }
+func (SwitchType) Name() string          { return "Switch type" }
+func (a *SwitchType) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *SwitchType) Value() zcl.Val     { return a }
+
 func (a SwitchType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *SwitchType) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7872,9 +8124,10 @@ func (Time) Writable() bool   { return true }
 func (Time) Reportable() bool { return false }
 func (Time) SceneIndex() int  { return -1 }
 
-func (Time) Name() string                  { return "Time" }
-func (a *Time) TypeID() zcl.TypeID         { return zcl.Zutc(*a).ID() }
-func (a *Time) Value() zcl.Val             { return a }
+func (Time) Name() string          { return "Time" }
+func (a *Time) TypeID() zcl.TypeID { return zcl.Zutc(*a).ID() }
+func (a *Time) Value() zcl.Val     { return a }
+
 func (a Time) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
 
 func (a *Time) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7906,9 +8159,10 @@ func (TimeStatus) Writable() bool   { return true }
 func (TimeStatus) Reportable() bool { return false }
 func (TimeStatus) SceneIndex() int  { return -1 }
 
-func (TimeStatus) Name() string                  { return "Time Status" }
-func (a *TimeStatus) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *TimeStatus) Value() zcl.Val             { return a }
+func (TimeStatus) Name() string          { return "Time Status" }
+func (a *TimeStatus) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *TimeStatus) Value() zcl.Val     { return a }
+
 func (a TimeStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *TimeStatus) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -7977,9 +8231,10 @@ func (TimeZone) Writable() bool   { return true }
 func (TimeZone) Reportable() bool { return false }
 func (TimeZone) SceneIndex() int  { return -1 }
 
-func (TimeZone) Name() string                  { return "Time Zone" }
-func (a *TimeZone) TypeID() zcl.TypeID         { return zcl.Zs32(*a).ID() }
-func (a *TimeZone) Value() zcl.Val             { return a }
+func (TimeZone) Name() string          { return "Time Zone" }
+func (a *TimeZone) TypeID() zcl.TypeID { return zcl.Zs32(*a).ID() }
+func (a *TimeZone) Value() zcl.Val     { return a }
+
 func (a TimeZone) MarshalZcl() ([]byte, error) { return zcl.Zs32(a).MarshalZcl() }
 
 func (a *TimeZone) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8003,9 +8258,10 @@ func (a TimeZone) String() string {
 
 type TransitionTime zcl.Zu16
 
-func (TransitionTime) Name() string                  { return "Transition Time" }
-func (a *TransitionTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *TransitionTime) Value() zcl.Val             { return a }
+func (TransitionTime) Name() string          { return "Transition Time" }
+func (a *TransitionTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *TransitionTime) Value() zcl.Val     { return a }
+
 func (a TransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8029,9 +8285,10 @@ func (a TransitionTime) String() string {
 
 type TransitionTimeSec zcl.Zu16
 
-func (TransitionTimeSec) Name() string                  { return "Transition time (Sec)" }
-func (a *TransitionTimeSec) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *TransitionTimeSec) Value() zcl.Val             { return a }
+func (TransitionTimeSec) Name() string          { return "Transition time (Sec)" }
+func (a *TransitionTimeSec) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *TransitionTimeSec) Value() zcl.Val     { return a }
+
 func (a TransitionTimeSec) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TransitionTimeSec) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8063,9 +8320,10 @@ func (UserTest) Writable() bool   { return true }
 func (UserTest) Reportable() bool { return false }
 func (UserTest) SceneIndex() int  { return -1 }
 
-func (UserTest) Name() string                  { return "User test" }
-func (a *UserTest) TypeID() zcl.TypeID         { return zcl.Zbool(*a).ID() }
-func (a *UserTest) Value() zcl.Val             { return a }
+func (UserTest) Name() string          { return "User test" }
+func (a *UserTest) TypeID() zcl.TypeID { return zcl.Zbool(*a).ID() }
+func (a *UserTest) Value() zcl.Val     { return a }
+
 func (a UserTest) MarshalZcl() ([]byte, error) { return zcl.Zbool(a).MarshalZcl() }
 
 func (a *UserTest) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8097,9 +8355,10 @@ func (ValidUntilTime) Writable() bool   { return true }
 func (ValidUntilTime) Reportable() bool { return false }
 func (ValidUntilTime) SceneIndex() int  { return -1 }
 
-func (ValidUntilTime) Name() string                  { return "Valid Until Time" }
-func (a *ValidUntilTime) TypeID() zcl.TypeID         { return zcl.Zutc(*a).ID() }
-func (a *ValidUntilTime) Value() zcl.Val             { return a }
+func (ValidUntilTime) Name() string          { return "Valid Until Time" }
+func (a *ValidUntilTime) TypeID() zcl.TypeID { return zcl.Zutc(*a).ID() }
+func (a *ValidUntilTime) Value() zcl.Val     { return a }
+
 func (a ValidUntilTime) MarshalZcl() ([]byte, error) { return zcl.Zutc(a).MarshalZcl() }
 
 func (a *ValidUntilTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8131,9 +8390,10 @@ func (XCoordinate) Writable() bool   { return true }
 func (XCoordinate) Reportable() bool { return false }
 func (XCoordinate) SceneIndex() int  { return -1 }
 
-func (XCoordinate) Name() string                  { return "X Coordinate" }
-func (a *XCoordinate) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *XCoordinate) Value() zcl.Val             { return a }
+func (XCoordinate) Name() string          { return "X Coordinate" }
+func (a *XCoordinate) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *XCoordinate) Value() zcl.Val     { return a }
+
 func (a XCoordinate) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *XCoordinate) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8165,9 +8425,10 @@ func (YCoordinate) Writable() bool   { return true }
 func (YCoordinate) Reportable() bool { return false }
 func (YCoordinate) SceneIndex() int  { return -1 }
 
-func (YCoordinate) Name() string                  { return "Y Coordinate" }
-func (a *YCoordinate) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *YCoordinate) Value() zcl.Val             { return a }
+func (YCoordinate) Name() string          { return "Y Coordinate" }
+func (a *YCoordinate) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *YCoordinate) Value() zcl.Val     { return a }
+
 func (a YCoordinate) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *YCoordinate) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8199,9 +8460,10 @@ func (ZCoordinate) Writable() bool   { return true }
 func (ZCoordinate) Reportable() bool { return false }
 func (ZCoordinate) SceneIndex() int  { return -1 }
 
-func (ZCoordinate) Name() string                  { return "Z Coordinate" }
-func (a *ZCoordinate) TypeID() zcl.TypeID         { return zcl.Zs16(*a).ID() }
-func (a *ZCoordinate) Value() zcl.Val             { return a }
+func (ZCoordinate) Name() string          { return "Z Coordinate" }
+func (a *ZCoordinate) TypeID() zcl.TypeID { return zcl.Zs16(*a).ID() }
+func (a *ZCoordinate) Value() zcl.Val     { return a }
+
 func (a ZCoordinate) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
 
 func (a *ZCoordinate) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -8233,9 +8495,10 @@ func (ZclVersion) Writable() bool   { return false }
 func (ZclVersion) Reportable() bool { return false }
 func (ZclVersion) SceneIndex() int  { return -1 }
 
-func (ZclVersion) Name() string                  { return "ZCL Version" }
-func (a *ZclVersion) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *ZclVersion) Value() zcl.Val             { return a }
+func (ZclVersion) Name() string          { return "ZCL Version" }
+func (a *ZclVersion) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *ZclVersion) Value() zcl.Val     { return a }
+
 func (a ZclVersion) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *ZclVersion) UnmarshalZcl(b []byte) ([]byte, error) {

@@ -71,13 +71,13 @@ func (v *SetAbsoluteLocation) Values() []zcl.Val {
 }
 
 // Arguments returns all values of SetAbsoluteLocation
-func (v *SetAbsoluteLocation) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.XCoordinate,
-		&v.YCoordinate,
-		&v.ZCoordinate,
-		&v.Power,
-		&v.PathLossExponent,
+func (v *SetAbsoluteLocation) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "XCoordinate", Argument: &v.XCoordinate},
+		{Name: "YCoordinate", Argument: &v.YCoordinate},
+		{Name: "ZCoordinate", Argument: &v.ZCoordinate},
+		{Name: "Power", Argument: &v.Power},
+		{Name: "PathLossExponent", Argument: &v.PathLossExponent},
 	}
 }
 
@@ -208,13 +208,13 @@ func (v *SetDeviceConfiguration) Values() []zcl.Val {
 }
 
 // Arguments returns all values of SetDeviceConfiguration
-func (v *SetDeviceConfiguration) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Power,
-		&v.PathLossExponent,
-		&v.CalculationPeriod,
-		&v.NumberRssiMeasurements,
-		&v.ReportingPeriod,
+func (v *SetDeviceConfiguration) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Power", Argument: &v.Power},
+		{Name: "PathLossExponent", Argument: &v.PathLossExponent},
+		{Name: "CalculationPeriod", Argument: &v.CalculationPeriod},
+		{Name: "NumberRssiMeasurements", Argument: &v.NumberRssiMeasurements},
+		{Name: "ReportingPeriod", Argument: &v.ReportingPeriod},
 	}
 }
 
@@ -335,9 +335,9 @@ func (v *GetDeviceConfiguration) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetDeviceConfiguration
-func (v *GetDeviceConfiguration) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.TargetAddress,
+func (v *GetDeviceConfiguration) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "TargetAddress", Argument: &v.TargetAddress},
 	}
 }
 
@@ -414,11 +414,11 @@ func (v *GetLocationData) Values() []zcl.Val {
 }
 
 // Arguments returns all values of GetLocationData
-func (v *GetLocationData) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LocationFlags,
-		&v.NumberResponses,
-		&v.TargetAddress,
+func (v *GetLocationData) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LocationFlags", Argument: &v.LocationFlags},
+		{Name: "NumberResponses", Argument: &v.NumberResponses},
+		{Name: "TargetAddress", Argument: &v.TargetAddress},
 	}
 }
 
@@ -526,14 +526,14 @@ func (v *RssiResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RssiResponse
-func (v *RssiResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Device,
-		&v.XCoordinate,
-		&v.YCoordinate,
-		&v.ZCoordinate,
-		&v.Rssi,
-		&v.NumberRssiMeasurements,
+func (v *RssiResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Device", Argument: &v.Device},
+		{Name: "XCoordinate", Argument: &v.XCoordinate},
+		{Name: "YCoordinate", Argument: &v.YCoordinate},
+		{Name: "ZCoordinate", Argument: &v.ZCoordinate},
+		{Name: "Rssi", Argument: &v.Rssi},
+		{Name: "NumberRssiMeasurements", Argument: &v.NumberRssiMeasurements},
 	}
 }
 
@@ -671,11 +671,11 @@ func (v *SendPings) Values() []zcl.Val {
 }
 
 // Arguments returns all values of SendPings
-func (v *SendPings) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.TargetAddress,
-		&v.NumberRssiMeasurements,
-		&v.CalculationPeriod,
+func (v *SendPings) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "TargetAddress", Argument: &v.TargetAddress},
+		{Name: "NumberRssiMeasurements", Argument: &v.NumberRssiMeasurements},
+		{Name: "CalculationPeriod", Argument: &v.CalculationPeriod},
 	}
 }
 
@@ -778,12 +778,12 @@ func (v *AnchorNodeAnnounce) Values() []zcl.Val {
 }
 
 // Arguments returns all values of AnchorNodeAnnounce
-func (v *AnchorNodeAnnounce) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Device,
-		&v.XCoordinate,
-		&v.YCoordinate,
-		&v.ZCoordinate,
+func (v *AnchorNodeAnnounce) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Device", Argument: &v.Device},
+		{Name: "XCoordinate", Argument: &v.XCoordinate},
+		{Name: "YCoordinate", Argument: &v.YCoordinate},
+		{Name: "ZCoordinate", Argument: &v.ZCoordinate},
 	}
 }
 
@@ -894,10 +894,10 @@ func (v *DistanceMeasure) Values() []zcl.Val {
 }
 
 // Arguments returns all values of DistanceMeasure
-func (v *DistanceMeasure) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.TargetAddress,
-		&v.Resolution,
+func (v *DistanceMeasure) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "TargetAddress", Argument: &v.TargetAddress},
+		{Name: "Resolution", Argument: &v.Resolution},
 	}
 }
 
@@ -994,14 +994,14 @@ func (v *DeviceConfigurationResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of DeviceConfigurationResponse
-func (v *DeviceConfigurationResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.Power,
-		&v.PathLossExponent,
-		&v.CalculationPeriod,
-		&v.NumberRssiMeasurements,
-		&v.ReportingPeriod,
+func (v *DeviceConfigurationResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "Power", Argument: &v.Power},
+		{Name: "PathLossExponent", Argument: &v.PathLossExponent},
+		{Name: "CalculationPeriod", Argument: &v.CalculationPeriod},
+		{Name: "NumberRssiMeasurements", Argument: &v.NumberRssiMeasurements},
+		{Name: "ReportingPeriod", Argument: &v.ReportingPeriod},
 	}
 }
 
@@ -1173,18 +1173,18 @@ func (v *LocationDataResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of LocationDataResponse
-func (v *LocationDataResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Status,
-		&v.LocationType,
-		&v.XCoordinate,
-		&v.YCoordinate,
-		&v.ZCoordinate,
-		&v.Power,
-		&v.PathLossExponent,
-		&v.LocationMethod,
-		&v.QualityMeasure,
-		&v.LocationAge,
+func (v *LocationDataResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "LocationType", Argument: &v.LocationType},
+		{Name: "XCoordinate", Argument: &v.XCoordinate},
+		{Name: "YCoordinate", Argument: &v.YCoordinate},
+		{Name: "ZCoordinate", Argument: &v.ZCoordinate},
+		{Name: "Power", Argument: &v.Power},
+		{Name: "PathLossExponent", Argument: &v.PathLossExponent},
+		{Name: "LocationMethod", Argument: &v.LocationMethod},
+		{Name: "QualityMeasure", Argument: &v.QualityMeasure},
+		{Name: "LocationAge", Argument: &v.LocationAge},
 	}
 }
 
@@ -1418,17 +1418,17 @@ func (v *LocationDataNotification) Values() []zcl.Val {
 }
 
 // Arguments returns all values of LocationDataNotification
-func (v *LocationDataNotification) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LocationType,
-		&v.XCoordinate,
-		&v.YCoordinate,
-		&v.ZCoordinate,
-		&v.Power,
-		&v.PathLossExponent,
-		&v.LocationMethod,
-		&v.QualityMeasure,
-		&v.LocationAge,
+func (v *LocationDataNotification) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LocationType", Argument: &v.LocationType},
+		{Name: "XCoordinate", Argument: &v.XCoordinate},
+		{Name: "YCoordinate", Argument: &v.YCoordinate},
+		{Name: "ZCoordinate", Argument: &v.ZCoordinate},
+		{Name: "Power", Argument: &v.Power},
+		{Name: "PathLossExponent", Argument: &v.PathLossExponent},
+		{Name: "LocationMethod", Argument: &v.LocationMethod},
+		{Name: "QualityMeasure", Argument: &v.QualityMeasure},
+		{Name: "LocationAge", Argument: &v.LocationAge},
 	}
 }
 
@@ -1623,14 +1623,14 @@ func (v *CompactLocationDataNotification) Values() []zcl.Val {
 }
 
 // Arguments returns all values of CompactLocationDataNotification
-func (v *CompactLocationDataNotification) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LocationType,
-		&v.XCoordinate,
-		&v.YCoordinate,
-		&v.ZCoordinate,
-		&v.QualityMeasure,
-		&v.LocationAge,
+func (v *CompactLocationDataNotification) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LocationType", Argument: &v.LocationType},
+		{Name: "XCoordinate", Argument: &v.XCoordinate},
+		{Name: "YCoordinate", Argument: &v.YCoordinate},
+		{Name: "ZCoordinate", Argument: &v.ZCoordinate},
+		{Name: "QualityMeasure", Argument: &v.QualityMeasure},
+		{Name: "LocationAge", Argument: &v.LocationAge},
 	}
 }
 
@@ -1775,9 +1775,9 @@ func (v *RssiPing) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RssiPing
-func (v *RssiPing) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.LocationType,
+func (v *RssiPing) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "LocationType", Argument: &v.LocationType},
 	}
 }
 
@@ -1847,8 +1847,8 @@ func (v *RssiRequest) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RssiRequest
-func (v *RssiRequest) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *RssiRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -1903,10 +1903,10 @@ func (v *ReportRssiMeasurements) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ReportRssiMeasurements
-func (v *ReportRssiMeasurements) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Device,
-		&v.NeighborsInfo,
+func (v *ReportRssiMeasurements) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Device", Argument: &v.Device},
+		{Name: "NeighborsInfo", Argument: &v.NeighborsInfo},
 	}
 }
 
@@ -1991,9 +1991,9 @@ func (v *RequestOwnLocation) Values() []zcl.Val {
 }
 
 // Arguments returns all values of RequestOwnLocation
-func (v *RequestOwnLocation) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.BlindNodeAddress,
+func (v *RequestOwnLocation) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "BlindNodeAddress", Argument: &v.BlindNodeAddress},
 	}
 }
 
@@ -2071,11 +2071,11 @@ func (v *DistanceMeasureResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of DistanceMeasureResponse
-func (v *DistanceMeasureResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.TargetAddress,
-		&v.Distance,
-		&v.QualityIndex,
+func (v *DistanceMeasureResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "TargetAddress", Argument: &v.TargetAddress},
+		{Name: "Distance", Argument: &v.Distance},
+		{Name: "QualityIndex", Argument: &v.QualityIndex},
 	}
 }
 

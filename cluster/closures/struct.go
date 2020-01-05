@@ -14,9 +14,10 @@ func (ConfigStatus) Writable() bool   { return false }
 func (ConfigStatus) Reportable() bool { return false }
 func (ConfigStatus) SceneIndex() int  { return -1 }
 
-func (ConfigStatus) Name() string                  { return "Config / Status" }
-func (a *ConfigStatus) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *ConfigStatus) Value() zcl.Val             { return a }
+func (ConfigStatus) Name() string          { return "Config / Status" }
+func (a *ConfigStatus) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *ConfigStatus) Value() zcl.Val     { return a }
+
 func (a ConfigStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *ConfigStatus) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -107,9 +108,10 @@ func (LiftAccelerationTime) Writable() bool   { return true }
 func (LiftAccelerationTime) Reportable() bool { return false }
 func (LiftAccelerationTime) SceneIndex() int  { return -1 }
 
-func (LiftAccelerationTime) Name() string                  { return "Lift - Acceleration Time" }
-func (a *LiftAccelerationTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftAccelerationTime) Value() zcl.Val             { return a }
+func (LiftAccelerationTime) Name() string          { return "Lift - Acceleration Time" }
+func (a *LiftAccelerationTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftAccelerationTime) Value() zcl.Val     { return a }
+
 func (a LiftAccelerationTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftAccelerationTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -141,9 +143,10 @@ func (LiftCurrentPosition) Writable() bool   { return false }
 func (LiftCurrentPosition) Reportable() bool { return false }
 func (LiftCurrentPosition) SceneIndex() int  { return -1 }
 
-func (LiftCurrentPosition) Name() string                  { return "Lift - Current Position" }
-func (a *LiftCurrentPosition) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftCurrentPosition) Value() zcl.Val             { return a }
+func (LiftCurrentPosition) Name() string          { return "Lift - Current Position" }
+func (a *LiftCurrentPosition) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftCurrentPosition) Value() zcl.Val     { return a }
+
 func (a LiftCurrentPosition) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftCurrentPosition) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -175,9 +178,10 @@ func (LiftDecelerationTime) Writable() bool   { return true }
 func (LiftDecelerationTime) Reportable() bool { return false }
 func (LiftDecelerationTime) SceneIndex() int  { return -1 }
 
-func (LiftDecelerationTime) Name() string                  { return "Lift - Deceleration Time" }
-func (a *LiftDecelerationTime) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftDecelerationTime) Value() zcl.Val             { return a }
+func (LiftDecelerationTime) Name() string          { return "Lift - Deceleration Time" }
+func (a *LiftDecelerationTime) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftDecelerationTime) Value() zcl.Val     { return a }
+
 func (a LiftDecelerationTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftDecelerationTime) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -209,9 +213,10 @@ func (LiftInstalledClosedLimit) Writable() bool   { return false }
 func (LiftInstalledClosedLimit) Reportable() bool { return false }
 func (LiftInstalledClosedLimit) SceneIndex() int  { return -1 }
 
-func (LiftInstalledClosedLimit) Name() string                  { return "Lift - Installed Closed Limit" }
-func (a *LiftInstalledClosedLimit) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftInstalledClosedLimit) Value() zcl.Val             { return a }
+func (LiftInstalledClosedLimit) Name() string          { return "Lift - Installed Closed Limit" }
+func (a *LiftInstalledClosedLimit) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftInstalledClosedLimit) Value() zcl.Val     { return a }
+
 func (a LiftInstalledClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftInstalledClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -243,9 +248,10 @@ func (LiftInstalledOpenLimit) Writable() bool   { return false }
 func (LiftInstalledOpenLimit) Reportable() bool { return false }
 func (LiftInstalledOpenLimit) SceneIndex() int  { return -1 }
 
-func (LiftInstalledOpenLimit) Name() string                  { return "Lift - Installed Open Limit" }
-func (a *LiftInstalledOpenLimit) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftInstalledOpenLimit) Value() zcl.Val             { return a }
+func (LiftInstalledOpenLimit) Name() string          { return "Lift - Installed Open Limit" }
+func (a *LiftInstalledOpenLimit) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftInstalledOpenLimit) Value() zcl.Val     { return a }
+
 func (a LiftInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -277,9 +283,10 @@ func (LiftIntermediateSetpoints) Writable() bool   { return true }
 func (LiftIntermediateSetpoints) Reportable() bool { return false }
 func (LiftIntermediateSetpoints) SceneIndex() int  { return -1 }
 
-func (LiftIntermediateSetpoints) Name() string                  { return "Lift - Intermediate Setpoints" }
-func (a *LiftIntermediateSetpoints) TypeID() zcl.TypeID         { return zcl.Zostring(*a).ID() }
-func (a *LiftIntermediateSetpoints) Value() zcl.Val             { return a }
+func (LiftIntermediateSetpoints) Name() string          { return "Lift - Intermediate Setpoints" }
+func (a *LiftIntermediateSetpoints) TypeID() zcl.TypeID { return zcl.Zostring(*a).ID() }
+func (a *LiftIntermediateSetpoints) Value() zcl.Val     { return a }
+
 func (a LiftIntermediateSetpoints) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
 
 func (a *LiftIntermediateSetpoints) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -311,9 +318,10 @@ func (LiftNumberOfActuations) Writable() bool   { return false }
 func (LiftNumberOfActuations) Reportable() bool { return false }
 func (LiftNumberOfActuations) SceneIndex() int  { return -1 }
 
-func (LiftNumberOfActuations) Name() string                  { return "Lift - Number of Actuations" }
-func (a *LiftNumberOfActuations) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftNumberOfActuations) Value() zcl.Val             { return a }
+func (LiftNumberOfActuations) Name() string          { return "Lift - Number of Actuations" }
+func (a *LiftNumberOfActuations) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftNumberOfActuations) Value() zcl.Val     { return a }
+
 func (a LiftNumberOfActuations) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftNumberOfActuations) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -345,9 +353,10 @@ func (LiftPhysicalClosedLimit) Writable() bool   { return false }
 func (LiftPhysicalClosedLimit) Reportable() bool { return false }
 func (LiftPhysicalClosedLimit) SceneIndex() int  { return -1 }
 
-func (LiftPhysicalClosedLimit) Name() string                  { return "Lift - Physical Closed Limit" }
-func (a *LiftPhysicalClosedLimit) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftPhysicalClosedLimit) Value() zcl.Val             { return a }
+func (LiftPhysicalClosedLimit) Name() string          { return "Lift - Physical Closed Limit" }
+func (a *LiftPhysicalClosedLimit) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftPhysicalClosedLimit) Value() zcl.Val     { return a }
+
 func (a LiftPhysicalClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftPhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -379,9 +388,10 @@ func (LiftVelocity) Writable() bool   { return true }
 func (LiftVelocity) Reportable() bool { return false }
 func (LiftVelocity) SceneIndex() int  { return -1 }
 
-func (LiftVelocity) Name() string                  { return "Lift - Velocity" }
-func (a *LiftVelocity) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *LiftVelocity) Value() zcl.Val             { return a }
+func (LiftVelocity) Name() string          { return "Lift - Velocity" }
+func (a *LiftVelocity) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *LiftVelocity) Value() zcl.Val     { return a }
+
 func (a LiftVelocity) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *LiftVelocity) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -413,9 +423,10 @@ func (LiftCurrentPositionPercentage) Writable() bool   { return false }
 func (LiftCurrentPositionPercentage) Reportable() bool { return false }
 func (LiftCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
-func (LiftCurrentPositionPercentage) Name() string                  { return "Lift Current Position Percentage" }
-func (a *LiftCurrentPositionPercentage) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *LiftCurrentPositionPercentage) Value() zcl.Val             { return a }
+func (LiftCurrentPositionPercentage) Name() string          { return "Lift Current Position Percentage" }
+func (a *LiftCurrentPositionPercentage) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *LiftCurrentPositionPercentage) Value() zcl.Val     { return a }
+
 func (a LiftCurrentPositionPercentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *LiftCurrentPositionPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -439,9 +450,10 @@ func (a LiftCurrentPositionPercentage) String() string {
 
 type Percentage zcl.Zu8
 
-func (Percentage) Name() string                  { return "Percentage" }
-func (a *Percentage) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *Percentage) Value() zcl.Val             { return a }
+func (Percentage) Name() string          { return "Percentage" }
+func (a *Percentage) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *Percentage) Value() zcl.Val     { return a }
+
 func (a Percentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *Percentage) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -465,9 +477,10 @@ func (a Percentage) String() string {
 
 type Position zcl.Zu16
 
-func (Position) Name() string                  { return "Position" }
-func (a *Position) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *Position) Value() zcl.Val             { return a }
+func (Position) Name() string          { return "Position" }
+func (a *Position) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *Position) Value() zcl.Val     { return a }
+
 func (a Position) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *Position) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -499,9 +512,10 @@ func (TiltCurrentPosition) Writable() bool   { return false }
 func (TiltCurrentPosition) Reportable() bool { return false }
 func (TiltCurrentPosition) SceneIndex() int  { return -1 }
 
-func (TiltCurrentPosition) Name() string                  { return "Tilt - Current Position" }
-func (a *TiltCurrentPosition) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *TiltCurrentPosition) Value() zcl.Val             { return a }
+func (TiltCurrentPosition) Name() string          { return "Tilt - Current Position" }
+func (a *TiltCurrentPosition) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *TiltCurrentPosition) Value() zcl.Val     { return a }
+
 func (a TiltCurrentPosition) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TiltCurrentPosition) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -533,9 +547,10 @@ func (TiltIntermediateSetpoints) Writable() bool   { return true }
 func (TiltIntermediateSetpoints) Reportable() bool { return false }
 func (TiltIntermediateSetpoints) SceneIndex() int  { return -1 }
 
-func (TiltIntermediateSetpoints) Name() string                  { return "Tilt - Intermediate Setpoints" }
-func (a *TiltIntermediateSetpoints) TypeID() zcl.TypeID         { return zcl.Zostring(*a).ID() }
-func (a *TiltIntermediateSetpoints) Value() zcl.Val             { return a }
+func (TiltIntermediateSetpoints) Name() string          { return "Tilt - Intermediate Setpoints" }
+func (a *TiltIntermediateSetpoints) TypeID() zcl.TypeID { return zcl.Zostring(*a).ID() }
+func (a *TiltIntermediateSetpoints) Value() zcl.Val     { return a }
+
 func (a TiltIntermediateSetpoints) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
 
 func (a *TiltIntermediateSetpoints) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -567,9 +582,10 @@ func (TiltNumberOfActuations) Writable() bool   { return false }
 func (TiltNumberOfActuations) Reportable() bool { return false }
 func (TiltNumberOfActuations) SceneIndex() int  { return -1 }
 
-func (TiltNumberOfActuations) Name() string                  { return "Tilt - Number of Actuations" }
-func (a *TiltNumberOfActuations) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *TiltNumberOfActuations) Value() zcl.Val             { return a }
+func (TiltNumberOfActuations) Name() string          { return "Tilt - Number of Actuations" }
+func (a *TiltNumberOfActuations) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *TiltNumberOfActuations) Value() zcl.Val     { return a }
+
 func (a TiltNumberOfActuations) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TiltNumberOfActuations) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -601,9 +617,10 @@ func (TiltPhysicalClosedLimit) Writable() bool   { return false }
 func (TiltPhysicalClosedLimit) Reportable() bool { return false }
 func (TiltPhysicalClosedLimit) SceneIndex() int  { return -1 }
 
-func (TiltPhysicalClosedLimit) Name() string                  { return "Tilt - Physical Closed Limit" }
-func (a *TiltPhysicalClosedLimit) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *TiltPhysicalClosedLimit) Value() zcl.Val             { return a }
+func (TiltPhysicalClosedLimit) Name() string          { return "Tilt - Physical Closed Limit" }
+func (a *TiltPhysicalClosedLimit) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *TiltPhysicalClosedLimit) Value() zcl.Val     { return a }
+
 func (a TiltPhysicalClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TiltPhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -635,9 +652,10 @@ func (TiltAInstalledOpenLimit) Writable() bool   { return false }
 func (TiltAInstalledOpenLimit) Reportable() bool { return false }
 func (TiltAInstalledOpenLimit) SceneIndex() int  { return -1 }
 
-func (TiltAInstalledOpenLimit) Name() string                  { return "Tilt A - Installed Open Limit" }
-func (a *TiltAInstalledOpenLimit) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *TiltAInstalledOpenLimit) Value() zcl.Val             { return a }
+func (TiltAInstalledOpenLimit) Name() string          { return "Tilt A - Installed Open Limit" }
+func (a *TiltAInstalledOpenLimit) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *TiltAInstalledOpenLimit) Value() zcl.Val     { return a }
+
 func (a TiltAInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TiltAInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -669,9 +687,10 @@ func (TiltBInstalledOpenLimit) Writable() bool   { return false }
 func (TiltBInstalledOpenLimit) Reportable() bool { return false }
 func (TiltBInstalledOpenLimit) SceneIndex() int  { return -1 }
 
-func (TiltBInstalledOpenLimit) Name() string                  { return "Tilt B - Installed Open Limit" }
-func (a *TiltBInstalledOpenLimit) TypeID() zcl.TypeID         { return zcl.Zu16(*a).ID() }
-func (a *TiltBInstalledOpenLimit) Value() zcl.Val             { return a }
+func (TiltBInstalledOpenLimit) Name() string          { return "Tilt B - Installed Open Limit" }
+func (a *TiltBInstalledOpenLimit) TypeID() zcl.TypeID { return zcl.Zu16(*a).ID() }
+func (a *TiltBInstalledOpenLimit) Value() zcl.Val     { return a }
+
 func (a TiltBInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
 
 func (a *TiltBInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -703,9 +722,10 @@ func (TiltCurrentPositionPercentage) Writable() bool   { return false }
 func (TiltCurrentPositionPercentage) Reportable() bool { return false }
 func (TiltCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
-func (TiltCurrentPositionPercentage) Name() string                  { return "Tilt Current Position Percentage" }
-func (a *TiltCurrentPositionPercentage) TypeID() zcl.TypeID         { return zcl.Zu8(*a).ID() }
-func (a *TiltCurrentPositionPercentage) Value() zcl.Val             { return a }
+func (TiltCurrentPositionPercentage) Name() string          { return "Tilt Current Position Percentage" }
+func (a *TiltCurrentPositionPercentage) TypeID() zcl.TypeID { return zcl.Zu8(*a).ID() }
+func (a *TiltCurrentPositionPercentage) Value() zcl.Val     { return a }
+
 func (a TiltCurrentPositionPercentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
 
 func (a *TiltCurrentPositionPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -737,9 +757,10 @@ func (WindowCoveringMode) Writable() bool   { return true }
 func (WindowCoveringMode) Reportable() bool { return false }
 func (WindowCoveringMode) SceneIndex() int  { return -1 }
 
-func (WindowCoveringMode) Name() string                  { return "Window Covering Mode" }
-func (a *WindowCoveringMode) TypeID() zcl.TypeID         { return zcl.Zbmp8(*a).ID() }
-func (a *WindowCoveringMode) Value() zcl.Val             { return a }
+func (WindowCoveringMode) Name() string          { return "Window Covering Mode" }
+func (a *WindowCoveringMode) TypeID() zcl.TypeID { return zcl.Zbmp8(*a).ID() }
+func (a *WindowCoveringMode) Value() zcl.Val     { return a }
+
 func (a WindowCoveringMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
 
 func (a *WindowCoveringMode) UnmarshalZcl(b []byte) ([]byte, error) {
@@ -811,9 +832,10 @@ func (WindowCoveringType) Writable() bool   { return false }
 func (WindowCoveringType) Reportable() bool { return false }
 func (WindowCoveringType) SceneIndex() int  { return -1 }
 
-func (WindowCoveringType) Name() string                  { return "Window Covering Type" }
-func (a *WindowCoveringType) TypeID() zcl.TypeID         { return zcl.Zenum8(*a).ID() }
-func (a *WindowCoveringType) Value() zcl.Val             { return a }
+func (WindowCoveringType) Name() string          { return "Window Covering Type" }
+func (a *WindowCoveringType) TypeID() zcl.TypeID { return zcl.Zenum8(*a).ID() }
+func (a *WindowCoveringType) Value() zcl.Val     { return a }
+
 func (a WindowCoveringType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
 
 func (a *WindowCoveringType) UnmarshalZcl(b []byte) ([]byte, error) {

@@ -36,8 +36,8 @@ func (v *CheckIn) Values() []zcl.Val {
 }
 
 // Arguments returns all values of CheckIn
-func (v *CheckIn) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *CheckIn) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command

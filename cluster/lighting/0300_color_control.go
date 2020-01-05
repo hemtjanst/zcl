@@ -115,11 +115,11 @@ func (v *MoveToHue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveToHue
-func (v *MoveToHue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Hue,
-		&v.Direction,
-		&v.TransitionTime,
+func (v *MoveToHue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Hue", Argument: &v.Hue},
+		{Name: "Direction", Argument: &v.Direction},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -219,10 +219,10 @@ func (v *MoveHue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveHue
-func (v *MoveHue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.MoveMode,
-		&v.Rate,
+func (v *MoveHue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "MoveMode", Argument: &v.MoveMode},
+		{Name: "Rate", Argument: &v.Rate},
 	}
 }
 
@@ -312,11 +312,11 @@ func (v *StepHue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StepHue
-func (v *StepHue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.StepMode,
-		&v.StepSize,
-		&v.TransitionTime,
+func (v *StepHue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "StepMode", Argument: &v.StepMode},
+		{Name: "StepSize", Argument: &v.StepSize},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -416,10 +416,10 @@ func (v *MoveToSaturation) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveToSaturation
-func (v *MoveToSaturation) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Saturation,
-		&v.TransitionTime,
+func (v *MoveToSaturation) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Saturation", Argument: &v.Saturation},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -507,10 +507,10 @@ func (v *MoveSaturation) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveSaturation
-func (v *MoveSaturation) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.MoveMode,
-		&v.Rate,
+func (v *MoveSaturation) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "MoveMode", Argument: &v.MoveMode},
+		{Name: "Rate", Argument: &v.Rate},
 	}
 }
 
@@ -600,11 +600,11 @@ func (v *StepSaturation) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StepSaturation
-func (v *StepSaturation) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.StepMode,
-		&v.StepSize,
-		&v.TransitionTime,
+func (v *StepSaturation) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "StepMode", Argument: &v.StepMode},
+		{Name: "StepSize", Argument: &v.StepSize},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -706,11 +706,11 @@ func (v *MoveToHueAndSaturation) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveToHueAndSaturation
-func (v *MoveToHueAndSaturation) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.Hue,
-		&v.Saturation,
-		&v.TransitionTime,
+func (v *MoveToHueAndSaturation) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Hue", Argument: &v.Hue},
+		{Name: "Saturation", Argument: &v.Saturation},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -818,11 +818,11 @@ func (v *MoveToColor) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveToColor
-func (v *MoveToColor) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.ColorX,
-		&v.ColorY,
-		&v.TransitionTime,
+func (v *MoveToColor) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "ColorX", Argument: &v.ColorX},
+		{Name: "ColorY", Argument: &v.ColorY},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -923,10 +923,10 @@ func (v *MoveColor) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveColor
-func (v *MoveColor) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.RateX,
-		&v.RateY,
+func (v *MoveColor) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "RateX", Argument: &v.RateX},
+		{Name: "RateY", Argument: &v.RateY},
 	}
 }
 
@@ -1016,11 +1016,11 @@ func (v *StepColor) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StepColor
-func (v *StepColor) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.StepX,
-		&v.StepY,
-		&v.TransitionTime,
+func (v *StepColor) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "StepX", Argument: &v.StepX},
+		{Name: "StepY", Argument: &v.StepY},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -1120,10 +1120,10 @@ func (v *MoveToColorTemperature) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveToColorTemperature
-func (v *MoveToColorTemperature) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.ColorTemperature,
-		&v.TransitionTime,
+func (v *MoveToColorTemperature) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "ColorTemperature", Argument: &v.ColorTemperature},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -1213,11 +1213,11 @@ func (v *EnhancedMoveToHue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedMoveToHue
-func (v *EnhancedMoveToHue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.EnhancedHue,
-		&v.Direction,
-		&v.TransitionTime,
+func (v *EnhancedMoveToHue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "EnhancedHue", Argument: &v.EnhancedHue},
+		{Name: "Direction", Argument: &v.Direction},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -1317,10 +1317,10 @@ func (v *EnhancedMoveHue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedMoveHue
-func (v *EnhancedMoveHue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.MoveMode,
-		&v.Rate,
+func (v *EnhancedMoveHue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "MoveMode", Argument: &v.MoveMode},
+		{Name: "Rate", Argument: &v.Rate},
 	}
 }
 
@@ -1410,11 +1410,11 @@ func (v *EnhancedStepHue) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedStepHue
-func (v *EnhancedStepHue) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.StepMode,
-		&v.StepSize,
-		&v.TransitionTime,
+func (v *EnhancedStepHue) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "StepMode", Argument: &v.StepMode},
+		{Name: "StepSize", Argument: &v.StepSize},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -1516,11 +1516,11 @@ func (v *EnhancedMoveToHueAndSaturation) Values() []zcl.Val {
 }
 
 // Arguments returns all values of EnhancedMoveToHueAndSaturation
-func (v *EnhancedMoveToHueAndSaturation) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.EnhancedHue,
-		&v.Saturation,
-		&v.TransitionTime,
+func (v *EnhancedMoveToHueAndSaturation) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "EnhancedHue", Argument: &v.EnhancedHue},
+		{Name: "Saturation", Argument: &v.Saturation},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
 	}
 }
 
@@ -1626,13 +1626,13 @@ func (v *ColorLoopSet) Values() []zcl.Val {
 }
 
 // Arguments returns all values of ColorLoopSet
-func (v *ColorLoopSet) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.UpdateFlags,
-		&v.Action,
-		&v.HueDirection,
-		&v.Time,
-		&v.EnhancedHue,
+func (v *ColorLoopSet) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "UpdateFlags", Argument: &v.UpdateFlags},
+		{Name: "Action", Argument: &v.Action},
+		{Name: "HueDirection", Argument: &v.HueDirection},
+		{Name: "Time", Argument: &v.Time},
+		{Name: "EnhancedHue", Argument: &v.EnhancedHue},
 	}
 }
 
@@ -1752,8 +1752,8 @@ func (v *StopMoveStep) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StopMoveStep
-func (v *StopMoveStep) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *StopMoveStep) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -1813,12 +1813,12 @@ func (v *MoveColorTemperature) Values() []zcl.Val {
 }
 
 // Arguments returns all values of MoveColorTemperature
-func (v *MoveColorTemperature) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.MoveMode,
-		&v.Rate,
-		&v.ColorTemperatureMin,
-		&v.ColorTemperatureMax,
+func (v *MoveColorTemperature) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "MoveMode", Argument: &v.MoveMode},
+		{Name: "Rate", Argument: &v.Rate},
+		{Name: "ColorTemperatureMin", Argument: &v.ColorTemperatureMin},
+		{Name: "ColorTemperatureMax", Argument: &v.ColorTemperatureMax},
 	}
 }
 
@@ -1936,13 +1936,13 @@ func (v *StepColorTemperature) Values() []zcl.Val {
 }
 
 // Arguments returns all values of StepColorTemperature
-func (v *StepColorTemperature) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.StepMode,
-		&v.StepSize,
-		&v.TransitionTime,
-		&v.ColorTemperatureMinMireds,
-		&v.ColorTemperatureMaxMireds,
+func (v *StepColorTemperature) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "StepMode", Argument: &v.StepMode},
+		{Name: "StepSize", Argument: &v.StepSize},
+		{Name: "TransitionTime", Argument: &v.TransitionTime},
+		{Name: "ColorTemperatureMinMireds", Argument: &v.ColorTemperatureMinMireds},
+		{Name: "ColorTemperatureMaxMireds", Argument: &v.ColorTemperatureMaxMireds},
 	}
 }
 

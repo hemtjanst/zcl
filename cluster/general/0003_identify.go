@@ -39,9 +39,9 @@ func (v *Identify) Values() []zcl.Val {
 }
 
 // Arguments returns all values of Identify
-func (v *Identify) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.IdentifyTime,
+func (v *Identify) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "IdentifyTime", Argument: &v.IdentifyTime},
 	}
 }
 
@@ -112,8 +112,8 @@ func (v *IdentifyQuery) Values() []zcl.Val {
 }
 
 // Arguments returns all values of IdentifyQuery
-func (v *IdentifyQuery) Arguments() []zcl.Argument {
-	return []zcl.Argument{}
+func (v *IdentifyQuery) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{}
 }
 
 // Name of the command
@@ -171,10 +171,10 @@ func (v *TriggerEffect) Values() []zcl.Val {
 }
 
 // Arguments returns all values of TriggerEffect
-func (v *TriggerEffect) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.IdentifyEffect,
-		&v.IdentifyEffectVariant,
+func (v *TriggerEffect) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "IdentifyEffect", Argument: &v.IdentifyEffect},
+		{Name: "IdentifyEffectVariant", Argument: &v.IdentifyEffectVariant},
 	}
 }
 
@@ -261,9 +261,9 @@ func (v *IdentifyQueryResponse) Values() []zcl.Val {
 }
 
 // Arguments returns all values of IdentifyQueryResponse
-func (v *IdentifyQueryResponse) Arguments() []zcl.Argument {
-	return []zcl.Argument{
-		&v.IdentifyTimeout,
+func (v *IdentifyQueryResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "IdentifyTimeout", Argument: &v.IdentifyTimeout},
 	}
 }
 
