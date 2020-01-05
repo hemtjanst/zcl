@@ -2,7 +2,7 @@ package zcl
 
 import (
 	"encoding/binary"
-	"github.com/h2so5/half"
+	"hemtjan.st/zcl/utils/half"
 	"math"
 	"strconv"
 )
