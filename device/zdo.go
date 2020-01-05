@@ -4,8 +4,8 @@ import (
 	"errors"
 	"hemtjan.st/zcl"
 	"hemtjan.st/zcl/utils"
-	// "hemtjan.st/zcl/zdo"
-	"hemtjan.st/zcl/zdo_old"
+	"hemtjan.st/zcl/zdo"
+
 	"log"
 )
 
@@ -32,7 +32,7 @@ func (z *Zdo) Request(cmd zcl.ZdoCommand) (interface{}, error) {
 		utils.NWKAddress(z.dev.nwk),
 		0,
 		0,
-		cmd.Cluster(),
+		uint16(cmd.Cluster()),
 		append([]byte{seqNo}, reqBytes...),
 	)
 
@@ -68,7 +68,7 @@ func (z *Zdo) Respond(seqNo uint8, cmd zcl.ZdoCommand) error {
 		utils.NWKAddress(z.dev.nwk),
 		0,
 		0,
-		cmd.Cluster(),
+		uint16(cmd.Cluster()),
 		append([]byte{seqNo}, reqBytes...),
 	)
 
@@ -90,23 +90,23 @@ func (z *Zdo) Handle(seqNo uint8, cmd zcl.ZdoCommand) error {
 		return errors.New("response to unknown request")
 	}
 	switch cmd.(type) {
-	case *zdo_old.DeviceAnnounce:
+	case *zdo.DeviceAnnounce: //*zdo_old.DeviceAnnounce:
 		err := z.dev.Init()
 		if err != nil {
 			log.Printf("Error re-initializing device: %s", err)
 		}
 		return nil
-	case *zdo_old.NWKAddrRequest:
-	case *zdo_old.IEEEAddrRequest:
-	case *zdo_old.MatchDescRequest:
-		md := cmd.(*zdo_old.MatchDescRequest)
-		rsp := &zdo_old.MatchDescResponse{}
+	case *zdo.NwkAddressRequest: //*zdo_old.NWKAddrRequest:
+	case *zdo.IeeeAddressRequest: //*zdo_old.IEEEAddrRequest:
+	case *zdo.MatchDescRequest: //*zdo_old.MatchDescRequest:
+		md := cmd.(*zdo.MatchDescRequest)
+		rsp := &zdo.MatchDescResponse{}
 
-		if md.ProfileID == 260 {
-			rsp.MatchList = zdo_old.LVuint8{1}
+		if md.ProfileId == 260 {
+			rsp.EndpointList.AddValues(1)
 			ep := z.dev.Endpoint(1)
-			ep.profile = uint16(md.ProfileID)
-			for _, cl := range md.InClusterList {
+			ep.profile = uint16(md.ProfileId)
+			for _, cl := range md.InClusterList.ArrayValues() {
 				for _, m := range ep.outCluster {
 					if m == zcl.ClusterID(cl) {
 						continue
@@ -114,7 +114,7 @@ func (z *Zdo) Handle(seqNo uint8, cmd zcl.ZdoCommand) error {
 				}
 				ep.outCluster = append(ep.outCluster, zcl.ClusterID(cl))
 			}
-			for _, cl := range md.OutClusterList {
+			for _, cl := range md.OutClusterList.ArrayValues() {
 				for _, m := range ep.inCluster {
 					if m == zcl.ClusterID(cl) {
 						continue

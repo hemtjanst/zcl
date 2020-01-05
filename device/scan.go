@@ -7,37 +7,42 @@ import (
 	"hemtjan.st/zcl/foundation"
 	"hemtjan.st/zcl/zdo"
 	"hemtjan.st/zcl/zdo_old"
+
+	//"hemtjan.st/zcl/zdo_old"
 	"log"
 	"sort"
 )
 
 func (z *Endpoint) ScanClusters() error {
 
-	cRsp, err := z.dev.Zdo().Request(&zdo_old.ComplexDescRequest{
-		NWKI: zcl.Zu16(z.dev.nwk),
+	cRsp, err := z.dev.Zdo().Request(&zdo.ComplexDescRequest{
+		NwkAddress: zdo.NwkAddress(z.dev.nwk),
 	})
 	if err != nil {
 		return err
 	}
-	cDesc, ok := cRsp.(*zdo_old.ComplexDescResponse)
+	cDesc, ok := cRsp.(*zdo.ComplexDescResponse)
 	if !ok {
 		return fmt.Errorf("invalid response to ComplexDescRequest: %+v", cRsp)
 	}
-	log.Printf("Complex Desc: %s (%X)", string(cDesc.Desc), []byte(cDesc.Desc))
+	log.Printf("Complex Desc: %s (%X)", string(cDesc.ComplexDescriptor), []byte(cDesc.ComplexDescriptor))
 
-	rsp, err := z.dev.Zdo().Request(&zdo_old.SimpleDescRequest{
-		NWKI:     zcl.Zu16(z.dev.nwk),
-		Endpoint: zcl.Zu8(z.ep),
+	rsp, err := z.dev.Zdo().Request(&zdo.SimpleDescRequest{
+		NwkAddress: zdo.NwkAddress(z.dev.nwk),
+		Endpoint:   zdo.Endpoint(z.ep),
 	})
 	if err != nil {
 		return err
 	}
-	desc, ok := rsp.(*zdo_old.SimpleDescResponse)
+	desc, ok := rsp.(*zdo.SimpleDescResponse)
 	if !ok {
 		return fmt.Errorf("invalid response to SimpleDescRequest: %+v", rsp)
 	}
 
-	sd := desc.Desc
+	sd := new(zdo_old.SimpleDescriptor)
+	if _, err := sd.UnmarshalZcl(desc.SimpleDescriptor); err != nil {
+		return err
+	}
 
 	z.devType = zdo.DeviceType(sd.DeviceType)
 	z.devVersion = uint8(sd.DeviceVersion)

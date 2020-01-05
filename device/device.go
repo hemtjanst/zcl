@@ -7,7 +7,7 @@ import (
 	"hemtjan.st/zcl"
 	"hemtjan.st/zcl/utils"
 	"hemtjan.st/zcl/zdo"
-	"hemtjan.st/zcl/zdo_old"
+	//"hemtjan.st/zcl/zdo_old"
 	"log"
 	"net"
 	"sort"
@@ -131,12 +131,12 @@ func (d *Device) Handle(seq uint8, data interface{}) bool {
 }
 
 func (d *Device) Init() error {
-	rsp, err := d.Zdo().Request(&zdo_old.ActiveEndpointRequest{NWKI: zcl.Zu16(d.nwk)})
+	rsp, err := d.Zdo().Request(&zdo.ActiveEndpointRequest{NwkAddress: zdo.NwkAddress(d.nwk)})
 	if err != nil {
 		return err
 	}
-	if activeEndpoints, ok := rsp.(*zdo_old.ActiveEndpointResponse); ok {
-		for _, ep := range activeEndpoints.ActiveEPList {
+	if activeEndpoints, ok := rsp.(*zdo.ActiveEndpointResponse); ok {
+		for _, ep := range activeEndpoints.EndpointList.ArrayValues() {
 			go func(ep uint8) {
 				if ep == 1 {
 					err := d.Endpoint(ep).Init(260)
@@ -144,7 +144,7 @@ func (d *Device) Init() error {
 						log.Printf("Error initializing endpoint %d on %04x: %s", ep, d.nwk, err)
 					}
 				}
-			}(uint8(ep))
+			}(ep)
 		}
 		return nil
 	}
