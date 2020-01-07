@@ -27,9 +27,16 @@ func (z *Zdo) Request(cmd zcl.ZdoCommand) (interface{}, error) {
 	seqNo, release := z.dev.seq.Next(ch)
 	defer release()
 
+	target := utils.NWKAddress(z.dev.nwk)
+
+	switch cmd.ID() {
+	case zdo.SystemServerDiscoverRequestCommand, zdo.DeviceAnnounceCommand:
+		target = utils.NWKAddress(zcl.BroadcastRxOnWhenIdle)
+	}
+
 	packet := utils.Packet(
 		0,
-		utils.NWKAddress(z.dev.nwk),
+		target,
 		0,
 		0,
 		uint16(cmd.Cluster()),

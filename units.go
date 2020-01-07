@@ -51,7 +51,7 @@ func (u *EngineeringUnit) UnmarshalZcl(buf []byte) ([]byte, error) {
 	return buf, err
 }
 func (u EngineeringUnit) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(u)) }
-func (EngineeringUnit) ID() TypeID                    { return Zu16(0).ID() }
+func (EngineeringUnit) TypeID() TypeID                { return Zu16(0).TypeID() }
 func (u *EngineeringUnit) Values() []Val              { return []Val{u} }
 func (u EngineeringUnit) Unit() Unit                  { return Unit(u) }
 func (u EngineeringUnit) String() string              { return u.Unit().String() }

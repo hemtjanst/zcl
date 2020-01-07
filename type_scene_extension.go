@@ -7,8 +7,8 @@ type SceneExtension interface {
 
 type SceneExtensionSet []SceneExtension
 
-func (SceneExtensionSet) ID() TypeID {
-	return new(Zset).ID()
+func (SceneExtensionSet) TypeID() TypeID {
+	return new(Zset).TypeID()
 }
 
 func (s SceneExtensionSet) MarshalZcl() ([]byte, error) {

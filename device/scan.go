@@ -6,9 +6,6 @@ import (
 	"hemtjan.st/zcl/cluster"
 	"hemtjan.st/zcl/foundation"
 	"hemtjan.st/zcl/zdo"
-	"hemtjan.st/zcl/zdo_old"
-
-	//"hemtjan.st/zcl/zdo_old"
 	"log"
 	"sort"
 )
@@ -39,22 +36,20 @@ func (z *Endpoint) ScanClusters() error {
 		return fmt.Errorf("invalid response to SimpleDescRequest: %+v", rsp)
 	}
 
-	sd := new(zdo_old.SimpleDescriptor)
-	if _, err := sd.UnmarshalZcl(desc.SimpleDescriptor); err != nil {
-		return err
-	}
+	sd := desc.SimpleDescriptor
 
-	z.profile = uint16(sd.Profile)
+	log.Printf("Simple Descriptor: %s", sd)
+	z.profile = uint16(sd.ProfileId)
 	z.devType = zdo.DeviceType(sd.DeviceType)
 	z.devVersion = uint8(sd.DeviceVersion)
 
 	z.inCluster = []zcl.ClusterID{}
-	for _, cl := range sd.InputClusters {
-		z.inCluster = append(z.inCluster, zcl.ClusterID(cl))
+	for _, cl := range sd.InClusterList {
+		z.inCluster = append(z.inCluster, zcl.ClusterID(*cl))
 	}
 	z.outCluster = []zcl.ClusterID{}
-	for _, cl := range sd.OutputClusters {
-		z.outCluster = append(z.outCluster, zcl.ClusterID(cl))
+	for _, cl := range sd.OutClusterList {
+		z.outCluster = append(z.outCluster, zcl.ClusterID(*cl))
 	}
 
 	return nil
@@ -123,7 +118,12 @@ nextCluster:
 					}
 				}
 
-				if len(readReq.AttributeList) > 0 {
+				maxAttempt := 5
+				for len(readReq.AttributeList) > 0 {
+					maxAttempt--
+					if maxAttempt <= 0 {
+						break
+					}
 					rsp, err := z.General(uint16(cl), readReq)
 					if err != nil {
 						log.Printf("Unable to read attributes (%#v): %s", readReq, err)
@@ -134,6 +134,16 @@ nextCluster:
 								if v.Status != zcl.Success {
 									log.Printf("Error Reading Attribute 0x%04X/0x%04X: %s", cl, v.AttrID, v.Status.String())
 									continue
+								}
+
+								chop := 0
+								for i, vv := range readReq.AttributeList {
+									if vv <= v.AttributeID {
+										chop = i
+									}
+								}
+								if chop > 0 {
+									readReq.AttributeList = readReq.AttributeList[chop:]
 								}
 
 								for _, a := range discAttr {
@@ -174,28 +184,32 @@ nextCluster:
 }
 
 func (z *Endpoint) ScanCommandsGenerated() error {
+	outCommand := map[zcl.ClusterID][]func() zcl.Command{}
 	for _, cl := range z.Clusters() {
 		var err error
-		z.outCommand[cl], err = z.scanCommands(cl, func(idx int) zcl.General {
+		outCommand[cl], err = z.scanCommands(cl, func(idx int) zcl.General {
 			return &foundation.DiscoverCommandsGenerated{StartIndex: zcl.Zu8(idx), MaxEntries: 32}
 		})
 		if err != nil {
 			log.Printf("Error Discovering Generated Commands for cluster %04X: %s", cl, err)
 		}
 	}
+	z.outCommand = outCommand
 	return nil
 }
 
 func (z *Endpoint) ScanCommandsReceived() error {
+	inCommand := map[zcl.ClusterID][]func() zcl.Command{}
 	for _, cl := range z.Clusters() {
 		var err error
-		z.outCommand[cl], err = z.scanCommands(cl, func(idx int) zcl.General {
+		inCommand[cl], err = z.scanCommands(cl, func(idx int) zcl.General {
 			return &foundation.DiscoverCommandsReceived{StartIndex: zcl.Zu8(idx), MaxEntries: 32}
 		})
 		if err != nil {
 			log.Printf("Error Discovering Received Commands for cluster %04X: %s", cl, err)
 		}
 	}
+	z.inCommand = inCommand
 	return nil
 }
 
@@ -204,7 +218,6 @@ func (z *Endpoint) scanCommands(cl zcl.ClusterID, cmdFn func(idx int) zcl.Genera
 	if !ok {
 		return nil, fmt.Errorf("cluster %04X not supported", cl)
 	}
-	z.outCommand[cl] = []func() zcl.Command{}
 	idx := 0
 	for {
 		rsp, err := z.General(uint16(cl), cmdFn(idx))

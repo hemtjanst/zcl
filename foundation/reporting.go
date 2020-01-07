@@ -469,9 +469,10 @@ func (v *ReportAttributeRecord) AttrValue() zcl.Val   { return v.Value }
 
 func (v ReportAttributeRecord) String() string {
 	return zcl.Sprintf(
-		"Attr[0x%04X = %v]",
+		"Attr[0x%04X = %v(%s)]",
 		v.AttributeID,
 		v.Value,
+		v.DataType,
 	)
 }
 

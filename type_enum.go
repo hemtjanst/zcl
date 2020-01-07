@@ -12,7 +12,7 @@ func (e *Zenum8) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (e Zenum8) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(1, uint64(e)) }
 func (e *Zenum8) Values() []Val              { return []Val{e} }
-func (e Zenum8) ID() TypeID                  { return 48 }
+func (e Zenum8) TypeID() TypeID              { return 48 }
 
 func (e Zenum8) Valid() bool { return e != Zenum8(0xFF) }
 
@@ -28,6 +28,6 @@ func (e *Zenum16) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (e Zenum16) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(e)) }
 func (e *Zenum16) Values() []Val              { return []Val{e} }
-func (e Zenum16) ID() TypeID                  { return 49 }
+func (e Zenum16) TypeID() TypeID              { return 49 }
 
 func (e Zenum16) Valid() bool { return e != Zenum16(0xFFFF) }

@@ -7,7 +7,6 @@ import (
 	"hemtjan.st/zcl"
 	"hemtjan.st/zcl/utils"
 	"hemtjan.st/zcl/zdo"
-	//"hemtjan.st/zcl/zdo_old"
 	"log"
 	"net"
 	"sort"
@@ -109,6 +108,9 @@ func (d *Device) OnAnnounce(mac zcl.Zuid, cap zdo.Capability) {
 func (d *Device) Endpoint(ep uint8) *Endpoint {
 	d.Lock()
 	defer d.Unlock()
+	if d.ep == nil {
+		d.ep = map[uint8]*Endpoint{}
+	}
 	if e, ok := d.ep[ep]; ok {
 		return e
 	}

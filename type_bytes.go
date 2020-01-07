@@ -62,14 +62,14 @@ func (d *Zdat48) Values() []Val              { return []Val{d} }
 func (d *Zdat56) Values() []Val              { return []Val{d} }
 func (d *Zdat64) Values() []Val              { return []Val{d} }
 func (d *Zbytes) Values() []Val              { return []Val{d} }
-func (d Zdat8) ID() TypeID                   { return 8 }
-func (d Zdat16) ID() TypeID                  { return 9 }
-func (d Zdat24) ID() TypeID                  { return 10 }
-func (d Zdat32) ID() TypeID                  { return 11 }
-func (d Zdat40) ID() TypeID                  { return 12 }
-func (d Zdat48) ID() TypeID                  { return 13 }
-func (d Zdat56) ID() TypeID                  { return 14 }
-func (d Zdat64) ID() TypeID                  { return 15 }
+func (d Zdat8) TypeID() TypeID               { return 8 }
+func (d Zdat16) TypeID() TypeID              { return 9 }
+func (d Zdat24) TypeID() TypeID              { return 10 }
+func (d Zdat32) TypeID() TypeID              { return 11 }
+func (d Zdat40) TypeID() TypeID              { return 12 }
+func (d Zdat48) TypeID() TypeID              { return 13 }
+func (d Zdat56) TypeID() TypeID              { return 14 }
+func (d Zdat64) TypeID() TypeID              { return 15 }
 
 func (d *Zdat8) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(1, buf)

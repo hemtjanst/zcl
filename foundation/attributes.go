@@ -44,7 +44,7 @@ func (v *AttributeList) UnmarshalZcl(b []byte) ([]byte, error) {
 	return b, nil
 }
 
-func (v *AttributeList) TypeID() zcl.TypeID { return new(zcl.Zlist).ID() }
+func (v *AttributeList) TypeID() zcl.TypeID { return new(zcl.Zlist).TypeID() }
 func (v *AttributeList) Name() string       { return "Attribute list" }
 func (v *AttributeList) String() string     { return fmt.Sprintf("%v", []zcl.AttrID(*v)) }
 
@@ -68,7 +68,7 @@ func (v *ReadAttributes) UnmarshalZcl(b []byte) ([]byte, error) {
 	return v.AttributeList.UnmarshalZcl(b)
 }
 
-func (v ReadAttributes) AttributeListString() string {
+func (v *ReadAttributes) AttributeListString() string {
 	var str []string
 	for _, a := range v.AttributeList {
 		str = append(str, zcl.Sprintf("%04x", a))
@@ -76,7 +76,7 @@ func (v ReadAttributes) AttributeListString() string {
 	return zcl.StrJoin(str, ", ")
 }
 
-func (v ReadAttributes) String() string {
+func (v *ReadAttributes) String() string {
 	var str []string
 	str = append(str, "AttributeList["+v.AttributeListString()+"]")
 	return "ReadAttributes{" + zcl.StrJoin(str, " ") + "}"
@@ -98,7 +98,7 @@ func (v *ReadAttributeStatusRecord) AttrValue() zcl.Val     { return v.Value }
 
 func (v ReadAttributeStatusRecord) String() string {
 	return zcl.Sprintf(
-		"ID[0x%04X] Status[%s] Type[%s] Value[%v]",
+		"ID[0x%04X] Status[%s] Type[%s] Value[%s]",
 		v.AttributeID,
 		v.Status,
 		v.DataType,
@@ -226,6 +226,11 @@ func (v *ReadAttributeStatusRecord) UnmarshalZcl(b []byte) ([]byte, error) {
 type ReadAttributesResponse struct {
 	// AttributeList to read
 	Attributes []ReadAttributeStatusRecord
+	hasError   bool
+}
+
+func (v ReadAttributesResponse) HasError() bool {
+	return v.hasError
 }
 
 func (v *ReadAttributesResponse) Values() []zcl.Val {
@@ -256,23 +261,28 @@ func (v ReadAttributesResponse) MarshalZcl() ([]byte, error) {
 
 func (v *ReadAttributesResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
-	var list []ReadAttributeStatusRecord
+	v.Attributes = []ReadAttributeStatusRecord{}
 
 	for len(b) > 0 {
 		a := new(ReadAttributeStatusRecord)
+		nb := b
 		if b, err = a.UnmarshalZcl(b); err != nil {
+			if len(v.Attributes) > 0 {
+				v.hasError = true
+				// We read at least one record, handle as success
+				return nb, nil
+			}
 			return b, err
 		}
-		list = append(list, *a)
+		v.Attributes = append(v.Attributes, *a)
 	}
-	v.Attributes = list
 	return b, nil
 }
 
 func (v ReadAttributesResponse) AttributesString() string {
 	var str []string
 	for _, a := range v.Attributes {
-		str = append(str, zcl.Sprintf("%#v", a))
+		str = append(str, zcl.Sprintf("%s", a))
 	}
 	return zcl.StrJoin(str, ", ")
 }

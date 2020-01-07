@@ -96,6 +96,6 @@ func (e *Status) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (e Status) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(1, uint64(e)) }
 func (e *Status) Values() []Val              { return []Val{e} }
-func (e Status) ID() TypeID                  { return 48 }
+func (e Status) TypeID() TypeID              { return 48 }
 
 func (e Status) Valid() bool { return e != Status(0xFF) }

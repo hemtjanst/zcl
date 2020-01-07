@@ -1,6 +1,9 @@
 package zcl
 
-import "encoding/binary"
+import (
+	"encoding/binary"
+	"encoding/json"
+)
 
 func BitmapTest(a []byte, b uint) bool {
 	// Pad to 64 bits
@@ -39,6 +42,28 @@ func BitmapList(b []byte) []int {
 	return bits
 }
 
+func bitmapMarshalJson(b []byte) ([]byte, error) {
+	var s []int
+	for i := 0; i < len(b)*8; i++ {
+		if BitmapTest(b, uint(i)) {
+			s = append(s, i)
+		}
+	}
+	return json.Marshal(s)
+}
+
+func bitmapUnmarshalJson(ln int, b []byte) ([]byte, error) {
+	o := make([]byte, ln)
+	v := new([]uint8)
+	if err := json.Unmarshal(b, v); err != nil {
+		return o, err
+	}
+	for _, i := range *v {
+		o = BitmapSet(o, uint(i), true)
+	}
+	return o, nil
+}
+
 func BitmapStringer(b []byte) string {
 	bits := BitmapList(b)
 	return Sprintf("Bits%v", bits)
@@ -53,38 +78,87 @@ type Zbmp48 [6]byte
 type Zbmp56 [7]byte
 type Zbmp64 [8]byte
 
-func (b Zbmp8) String() string               { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp16) String() string              { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp24) String() string              { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp32) String() string              { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp40) String() string              { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp48) String() string              { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp56) String() string              { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp64) String() string              { return BitmapStringer([]byte(b[:])) }
-func (b Zbmp8) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(1, []byte(b[:])) }
-func (b Zbmp16) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(2, []byte(b[:])) }
-func (b Zbmp24) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(3, []byte(b[:])) }
-func (b Zbmp32) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(4, []byte(b[:])) }
-func (b Zbmp40) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(5, []byte(b[:])) }
-func (b Zbmp48) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(6, []byte(b[:])) }
-func (b Zbmp56) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(7, []byte(b[:])) }
-func (b Zbmp64) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(8, []byte(b[:])) }
-func (b *Zbmp8) Values() []Val               { return []Val{b} }
-func (b *Zbmp16) Values() []Val              { return []Val{b} }
-func (b *Zbmp24) Values() []Val              { return []Val{b} }
-func (b *Zbmp32) Values() []Val              { return []Val{b} }
-func (b *Zbmp40) Values() []Val              { return []Val{b} }
-func (b *Zbmp48) Values() []Val              { return []Val{b} }
-func (b *Zbmp56) Values() []Val              { return []Val{b} }
-func (b *Zbmp64) Values() []Val              { return []Val{b} }
-func (b Zbmp8) ID() TypeID                   { return 24 }
-func (b Zbmp16) ID() TypeID                  { return 25 }
-func (b Zbmp24) ID() TypeID                  { return 26 }
-func (b Zbmp32) ID() TypeID                  { return 27 }
-func (b Zbmp40) ID() TypeID                  { return 28 }
-func (b Zbmp48) ID() TypeID                  { return 29 }
-func (b Zbmp56) ID() TypeID                  { return 30 }
-func (b Zbmp64) ID() TypeID                  { return 31 }
+func (b Zbmp8) String() string                { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp16) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp24) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp32) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp40) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp48) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp56) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp64) String() string               { return BitmapStringer([]byte(b[:])) }
+func (b Zbmp8) MarshalJSON() ([]byte, error)  { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp16) MarshalJSON() ([]byte, error) { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp24) MarshalJSON() ([]byte, error) { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp32) MarshalJSON() ([]byte, error) { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp40) MarshalJSON() ([]byte, error) { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp48) MarshalJSON() ([]byte, error) { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp56) MarshalJSON() ([]byte, error) { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp64) MarshalJSON() ([]byte, error) { return bitmapMarshalJson([]byte(b[:])) }
+func (b Zbmp8) MarshalZcl() ([]byte, error)   { return bytesMarshalZcl(1, []byte(b[:])) }
+func (b Zbmp16) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(2, []byte(b[:])) }
+func (b Zbmp24) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(3, []byte(b[:])) }
+func (b Zbmp32) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(4, []byte(b[:])) }
+func (b Zbmp40) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(5, []byte(b[:])) }
+func (b Zbmp48) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(6, []byte(b[:])) }
+func (b Zbmp56) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(7, []byte(b[:])) }
+func (b Zbmp64) MarshalZcl() ([]byte, error)  { return bytesMarshalZcl(8, []byte(b[:])) }
+func (b *Zbmp8) Values() []Val                { return []Val{b} }
+func (b *Zbmp16) Values() []Val               { return []Val{b} }
+func (b *Zbmp24) Values() []Val               { return []Val{b} }
+func (b *Zbmp32) Values() []Val               { return []Val{b} }
+func (b *Zbmp40) Values() []Val               { return []Val{b} }
+func (b *Zbmp48) Values() []Val               { return []Val{b} }
+func (b *Zbmp56) Values() []Val               { return []Val{b} }
+func (b *Zbmp64) Values() []Val               { return []Val{b} }
+func (b Zbmp8) TypeID() TypeID                { return 24 }
+func (b Zbmp16) TypeID() TypeID               { return 25 }
+func (b Zbmp24) TypeID() TypeID               { return 26 }
+func (b Zbmp32) TypeID() TypeID               { return 27 }
+func (b Zbmp40) TypeID() TypeID               { return 28 }
+func (b Zbmp48) TypeID() TypeID               { return 29 }
+func (b Zbmp56) TypeID() TypeID               { return 30 }
+func (b Zbmp64) TypeID() TypeID               { return 31 }
+
+func (b *Zbmp8) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(1, buf)
+	copy((*b)[:], val)
+	return err
+}
+func (b *Zbmp16) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(2, buf)
+	copy((*b)[:], val)
+	return err
+}
+func (b *Zbmp24) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(3, buf)
+	copy((*b)[:], val)
+	return err
+}
+func (b *Zbmp32) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(4, buf)
+	copy((*b)[:], val)
+	return err
+}
+func (b *Zbmp40) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(5, buf)
+	copy((*b)[:], val)
+	return err
+}
+func (b *Zbmp48) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(6, buf)
+	copy((*b)[:], val)
+	return err
+}
+func (b *Zbmp56) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(7, buf)
+	copy((*b)[:], val)
+	return err
+}
+func (b *Zbmp64) UnmarshalJSON(buf []byte) error {
+	val, err := bitmapUnmarshalJson(8, buf)
+	copy((*b)[:], val)
+	return err
+}
 
 func (b *Zbmp8) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := bytesUnmarshalZcl(1, buf)

@@ -2,6 +2,7 @@ package zcl
 
 import (
 	"encoding/binary"
+	"encoding/json"
 	"fmt"
 	"net"
 )
@@ -17,8 +18,30 @@ func (t *Zbool) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (t *Zbool) Values() []Val              { return []Val{t} }
 func (t Zbool) MarshalZcl() ([]byte, error) { return []byte{byte(t)}, nil }
-func (t Zbool) ID() TypeID                  { return 16 }
-func (t Zbool) Valid() bool                 { return t < 2 }
+func (t Zbool) MarshalJSON() ([]byte, error) {
+	if t == 0 {
+		return []byte("false"), nil
+	} else {
+		return []byte("true"), nil
+	}
+}
+func (t *Zbool) UnmarshalJSON(b []byte) error {
+	if string(b) == "true" {
+		*t = 1
+	} else if string(b) == "false" {
+		*t = 0
+	} else {
+		nv := new(uint8)
+		if err := json.Unmarshal(b, nv); err != nil {
+			return err
+		}
+		*t = Zbool(*nv)
+	}
+	return nil
+}
+
+func (t Zbool) TypeID() TypeID { return 16 }
+func (t Zbool) Valid() bool    { return t < 2 }
 func (t Zbool) String() string {
 	if t == 1 {
 		return "true"
@@ -39,7 +62,7 @@ func (c *Zcid) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (c Zcid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(c)) }
 func (c *Zcid) Values() []Val              { return []Val{c} }
-func (c Zcid) ID() TypeID                  { return 232 }
+func (c Zcid) TypeID() TypeID              { return 232 }
 func (c Zcid) String() string              { return fmt.Sprintf("0x%04x", uint16(c)) }
 func (c Zcid) Valid() bool                 { return c != Zcid(0xFFFF) }
 
@@ -53,7 +76,7 @@ func (a *Zaid) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (a Zaid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(2, uint64(a)) }
 func (a *Zaid) Values() []Val              { return []Val{a} }
-func (a Zaid) ID() TypeID                  { return 233 }
+func (a Zaid) TypeID() TypeID              { return 233 }
 func (a Zaid) String() string              { return fmt.Sprintf("0x%04x", uint16(a)) }
 func (a Zaid) Valid() bool                 { return a != Zaid(0xFFFF) }
 
@@ -67,7 +90,7 @@ func (o *Zoid) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (o Zoid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(4, uint64(o)) }
 func (o *Zoid) Values() []Val              { return []Val{o} }
-func (o Zoid) ID() TypeID                  { return 234 }
+func (o Zoid) TypeID() TypeID              { return 234 }
 func (o Zoid) Valid() bool                 { return o != Zoid(0xFFFFFFFF) }
 func (o Zoid) String() string {
 	ot := (o & 0xFFC00000) >> 22
@@ -83,10 +106,24 @@ func (u *Zuid) UnmarshalZcl(buf []byte) ([]byte, error) {
 	*u = Zuid(val)
 	return buf, err
 }
-func (u Zuid) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(8, uint64(u)) }
-func (u *Zuid) Values() []Val              { return []Val{u} }
-func (u Zuid) ID() TypeID                  { return 240 }
-func (u Zuid) Valid() bool                 { return u != Zuid(0xFFFFFFFFFFFFFFFF) }
+func (u Zuid) MarshalZcl() ([]byte, error)  { return uintLEMarshalZcl(8, uint64(u)) }
+func (u Zuid) MarshalJSON() ([]byte, error) { return json.Marshal(u.String()) }
+func (u *Zuid) UnmarshalJSON(b []byte) error {
+	s := new(string)
+	if err := json.Unmarshal(b, s); err != nil {
+		return err
+	}
+	mac, err := net.ParseMAC(*s)
+	if err != nil {
+		return err
+	}
+
+	*u = Zuid(binary.BigEndian.Uint64(mac))
+	return nil
+}
+func (u *Zuid) Values() []Val { return []Val{u} }
+func (u Zuid) TypeID() TypeID { return 240 }
+func (u Zuid) Valid() bool    { return u != Zuid(0xFFFFFFFFFFFFFFFF) }
 func (u Zuid) String() string {
 	return u.HWAddr().String()
 }
@@ -106,7 +143,7 @@ func (s *Zseckey) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (s Zseckey) MarshalZcl() ([]byte, error) { return bytesMarshalZcl(16, []byte(s)) }
 func (s *Zseckey) Values() []Val              { return []Val{s} }
-func (s Zseckey) ID() TypeID                  { return 241 }
+func (s Zseckey) TypeID() TypeID              { return 241 }
 func (s Zseckey) String() string {
 	return net.HardwareAddr(s).String()
 }

@@ -109,15 +109,20 @@ func genHelpers(clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncM
 				mpre := ""
 				mpost := ""
 				if c.Mask != "" {
-					mpre = "("
-					mpost = fmt.Sprintf(" & %s)", c.Mask)
+					mpre = mpre + "("
+					mpost = fmt.Sprintf(" & %s)%s", c.Mask, mpost)
+				}
+				eq := "=="
+				if c.Invert {
+					eq = "!="
 				}
 				if c.Name != "" {
 					vstr = append(vstr, fmt.Sprintf(
-						"%sv.%s%s == %s",
+						"%sv.%s%s %s %s",
 						mpre,
 						c.Name.Fmt(),
 						mpost,
+						eq,
 						c.Value,
 					))
 					continue next
@@ -125,10 +130,11 @@ func genHelpers(clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncM
 				for _, a := range attrList {
 					if a.ID.Uint() == c.Attr.Uint() {
 						vstr = append(vstr, fmt.Sprintf(
-							"%sv.%s%s == %s",
+							"%sv.%s%s %s %s",
 							mpre,
 							a.Name.Fmt(),
 							mpost,
+							eq,
 							c.Value,
 						))
 
@@ -198,7 +204,6 @@ func GenerateStruct(base, defPath, tplPath, outPath string) error {
 
 	for _, v := range d.Files() {
 		p := v.SubPath()
-		log.Printf("Parsing %s", v.Path())
 		clRoot, err := v.ReadCluster()
 		if err != nil {
 			return fmt.Errorf("while reading %s: %v", v.name, err)

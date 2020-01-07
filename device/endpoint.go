@@ -1,15 +1,17 @@
 package device
 
 import (
-	"encoding/json"
-	"errors"
 	"hemtjan.st/zcl"
 	"hemtjan.st/zcl/cluster"
+	"hemtjan.st/zcl/foundation"
 	"hemtjan.st/zcl/utils"
 	"hemtjan.st/zcl/zdo"
-	"sort"
 
+	"encoding/json"
+	"errors"
 	"log"
+	"sort"
+	"sync"
 	"time"
 )
 
@@ -20,6 +22,7 @@ type AttrInfo struct {
 }
 
 type Endpoint struct {
+	attrLock   sync.RWMutex
 	init       bool
 	dev        *Device
 	ep         uint8
@@ -359,10 +362,40 @@ func (z *Endpoint) General(cluster uint16, cmd zcl.General) (interface{}, error)
 	}
 }
 
+func (z *Endpoint) HandleReport(fr *zcl.Frame, report *foundation.ReportAttributes) error {
+	z.attrLock.Lock()
+	defer z.attrLock.Unlock()
+	if _, ok := z.attr[fr.Cluster]; !ok {
+		z.attr[fr.Cluster] = []zcl.Attr{}
+	}
+nextAttr:
+	for _, r := range report.Attributes {
+		for _, a := range z.attr[fr.Cluster] {
+			if r.AttributeID == a.ID() {
+				if err := a.SetValue(r.Value); err != nil {
+					log.Printf("While trying to update %s to %s: %v", a, r, err)
+				}
+				continue nextAttr
+			}
+		}
+		av, err := FindAttr(fr.Cluster, &r)
+		if err != nil {
+			log.Printf("While trying to create attr %s: %v", r, err)
+			continue nextAttr
+		}
+		z.attr[fr.Cluster] = append(z.attr[fr.Cluster], av)
+	}
+
+	return nil
+}
+
 func (z *Endpoint) Handle(fr *zcl.Frame, cmd interface{}) error {
 	if fr.IsReply {
 		if z.dev.seq.Handle(fr.Seq, cmd) {
 			return nil
+		}
+		if report, ok := cmd.(*foundation.ReportAttributes); ok {
+			return z.HandleReport(fr, report)
 		}
 		log.Printf("Unhandled response: %#v", cmd)
 		return nil

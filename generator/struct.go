@@ -106,11 +106,12 @@ func (r Required) IsTrue() bool {
 }
 
 type Condition struct {
-	Desc  Desc `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
-	Name  Name `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
-	Attr  Hex  `toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
-	Value Hex  `toml:"value,omitempty" yaml:"value,omitempty" json:"value,omitempty"`
-	Mask  Hex  `toml:"mask,omitempty" yaml:"mask,omitempty" json:"mask,omitempty"`
+	Desc   Desc `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
+	Name   Name `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	Attr   Hex  `toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
+	Value  Hex  `toml:"value,omitempty" yaml:"value,omitempty" json:"value,omitempty"`
+	Mask   Hex  `toml:"mask,omitempty" yaml:"mask,omitempty" json:"mask,omitempty"`
+	Invert bool `toml:"invert,omitempty" yaml:"invert,omitempty" json:"invert,omitempty"`
 }
 
 func (a Attr) Equal(o Attr) bool {
@@ -165,6 +166,7 @@ type Attr struct {
 	Marshal       string          `xml:"marshal" toml:"marshal,omitempty" yaml:"marshal,omitempty" json:"marshal,omitempty"`
 	Unmarshal     string          `xml:"unmarshal" toml:"unmarshal,omitempty" yaml:"unmarshal,omitempty" json:"unmarshal,omitempty"`
 	MarshalNoType bool            `xml:"marshalnotype" toml:"marshalnotype,omitempty" yaml:"marshalnotype,omitempty" json:"marshalnotype,omitempty"`
+	StructAttr    []Attr          `xml:"structattr" toml:"structattr,omitempty" yaml:"structattr,omitempty" json:"structattr,omitempty"`
 }
 
 func (a Attr) CanRead() bool {
@@ -340,7 +342,7 @@ func (n Type) Native() string {
 	if nt, ok := nativeTypes[string(n)]; ok {
 		return nt
 	}
-	return "interface{}"
+	return n.RealType()
 }
 
 func (l Length) FixLen() bool {
@@ -562,6 +564,13 @@ func (n Name) Pfx() string {
 		out = append(out, ch)
 	}
 	return string(out)
+}
+
+func (n Type) RealType() string {
+	if len(n) > 0 && n[0] == '_' {
+		return string(n[1:])
+	}
+	return fmt.Sprintf("zcl.%s", n.Type())
 }
 
 func (n Type) Type() string {

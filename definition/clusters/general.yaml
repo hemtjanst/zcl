@@ -29,7 +29,7 @@ templates:
     argname: "Target Address"
 
   multistateValue: &multistateValue
-    type: bmp16
+    type: u16
 
 
 types:
@@ -1222,10 +1222,9 @@ types:
       "0x00": High
       "0x01": Mid
       "0x02": Low
-  NeighborsInfo: &neighborsInfo
-    name: Neighbors Info
-    type: set
-    arraytype: struct
+  NeighborInfo:
+    name: Neighbor Info
+    type: local
     structattr:
       - *device
       - *xCoordinate
@@ -1233,6 +1232,10 @@ types:
       - *zCoordinate
       - *rssi
       - *numberRssiMeasurements
+  NeighborsInfoList: &neighborsInfoList
+    name: Neighbors Info List
+    type: set
+    arraytype: _NeighborInfo
   Distance: &distance
     name: Distance
     type: u16
@@ -1341,36 +1344,51 @@ types:
     default: "0"
     report: true
     required: true
+  AnalogPriority:
+    name: Analog Priority
+    type: local
+    structattr:
+      - type: bool
+        argname: IsPriority
+      - type: float
+        argname: PriorityValue
   AnalogPriorityArray: &analogPriorityArray
     id: "0x0057"
     name: Analog Priority Array
     access: rw
     listsize: 16
     type: array
-    arraytype: struct
+    arraytype: _AnalogPriority
+  BinaryPriority:
+    name: Binary Priority
+    type: local
     structattr:
       - type: bool
-      - type: float
+        argname: IsPriority
+      - type: bool
+        argname: PriorityValue
   BinaryPriorityArray: &binaryPriorityArray
     id: "0x0057"
     name: Binary Priority Array
     access: rw
     listsize: 16
     type: array
-    arraytype: struct
+    arraytype: _BinaryPriority
+  MultistatePriority:
+    name: Multistate Priority
+    type: local
     structattr:
       - type: bool
-      - type: bool
+        argname: IsPriority
+      - <<: *multistateValue
+        argname: PriorityValue
   MultistatePriorityArray: &multistatePriorityArray
     id: "0x0057"
     name: Multistate Priority Array
     access: rw
     listsize: 16
     type: array
-    arraytype: struct
-    structattr:
-      - type: bool
-      - <<: *multistateValue
+    arraytype: _MultistatePriority
   IOReliability: &ioReliability
     id: "0x0067"
     name: I/O Reliability
@@ -2517,7 +2535,7 @@ clusters:
             required: o
             payloadattr:
               - *device
-              - *neighborsInfo
+              - *neighborsInfoList
           - id: "0x07"
             name: Request Own Location
             dir: recv

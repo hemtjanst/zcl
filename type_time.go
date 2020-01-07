@@ -30,7 +30,7 @@ func (t *Ztime) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (t Ztime) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(4, uint64(t)) }
 func (t *Ztime) Values() []Val              { return []Val{t} }
-func (t Ztime) ID() TypeID                  { return 224 }
+func (t Ztime) TypeID() TypeID              { return 224 }
 func (t Ztime) String() string {
 	h := (t & 0xFF000000) >> 24
 	m := (t & 0x00FF0000) >> 16
@@ -79,7 +79,7 @@ func (d Zdate) MarshalZcl() ([]byte, error) {
 	return uintLEMarshalZcl(4, val)
 }
 func (d *Zdate) Values() []Val { return []Val{d} }
-func (d Zdate) ID() TypeID     { return 225 }
+func (d Zdate) TypeID() TypeID { return 225 }
 func (d Zdate) String() string { return fmt.Sprintf("%04d-%02d-%02d", d.Year, d.Month, d.Day) }
 func (d Zdate) Valid() bool    { return d.Year > 0 }
 
@@ -90,7 +90,7 @@ func (u *Zutc) UnmarshalZcl(buf []byte) ([]byte, error) {
 }
 func (u Zutc) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(4, uint64(u)) }
 func (u *Zutc) Values() []Val              { return []Val{u} }
-func (u Zutc) ID() TypeID                  { return 226 }
+func (u Zutc) TypeID() TypeID              { return 226 }
 func (u Zutc) String() string              { return u.Time().String() }
 func (u Zutc) Time() time.Time {
 	// (uint32) Seconds since midnight 2000-01-01

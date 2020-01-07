@@ -11,6 +11,20 @@ templates:
     name: Status
     value: 0x00
     description: "successful"
+  condAddrShort: &__cond_addr_short
+    name: Address Mode
+    invert: true
+    value: 0x03
+    description: "short address mode"
+  condAddrLong: &__cond_addr_long
+    name: Address Mode
+    value: 0x03
+    description: "long address mode"
+  condAddrNotGroup: &__cond_addr_not_group
+    name: Address Mode
+    invert: true
+    value: 0x01
+    description: "is not group address"
 
 types:
   status: &status
@@ -32,6 +46,13 @@ types:
       0x8B: Not Permitted
       0x8C: Table Full
       0x8D: Not Authorized
+  addressMode: &addressMode
+    name: Address Mode
+    type: enum8
+    values:
+      "0x01": "Group"
+      "0x02": "NWK"
+      "0x03": "IEEE"
   ieee: &ieee
     name: IEEE Address
     description: is a 64-bit MAC address
@@ -65,6 +86,10 @@ types:
       provides the starting index for the requested elements of the associated list.
   profileId: &profileId
     name: Profile ID
+    showas: hex
+    type: u16
+  clusterId: &clusterId
+    name: Cluster ID
     showas: hex
     type: u16
   deviceType: &deviceType
@@ -211,22 +236,7 @@ types:
     values:
       <<: *manufacturer
 
-  ndLogicalType: &ndType
-    name: Type
-    type: bmp8
-    bits:
-      3: User Desc Available
-      4: Complex Desc Available
-      5: Router
-      6: End Device
-  ndFrequency: &ndFrequency
-    name: Frequency Bands
-    type: bmp8
-    bits:
-      0: "868.0-868.6 MHz"
-      2: "902.0-928 MHz"
-      3: "2400.0-2483.5 MHz"
-  ndMaxBufSize: &ndMaxBufSize
+  maxBufferSize: &maxBufferSize
     name: Max Buffer Size
     type: u8
     range: 0x00,0x7F
@@ -234,26 +244,20 @@ types:
       specifies the maximum size, in octets, of the network sub-layer data unit (NSDU) for this node.
       This is the maximum size of data or commands passed to or from the application by the application support sub-layer,
       before any fragmentation or re-assembly.
-  ndMaxRxSize: &ndMaxRxSize
-    name: Max Incoming Transfer size
+  maxRxSize: &maxRxSize
+    name: Max RX size
     type: u16
     range: 0x00,0x7FFF
     description: >
       specifies the maximum size, in octets, of the application sub-layer data unit (ASDU) that can be transferred to
       this node in one single message transfer.
-  ndMaxTxSize: &ndMaxTxSize
-    name: Max Outgoing Transfer size
+  maxTxSize: &maxTxSize
+    name: Max TX size
     type: u16
     range: 0x00,0x7FFF
     description: |
       specifies the maximum size, in octets, of the application sub-layer data unit (ASDU) that can be transferred from
       this node in one single message transfer.
-  ndDescCap: &ndDescCap
-    name: Descriptor Capability
-    type: bmp8
-    bits:
-      0: Extended Active Endpoint List Available
-      1: Extended Simple Descriptor List Available
   npMode: &npMode
     name: Power Mode
     type: bmp8
@@ -264,21 +268,20 @@ types:
       4: Check In Periodically
       5: Check In on Action
   npSource: &npSource
-    name: Current Power Source
+    name: Power Source
+    type: bmp8
+    bits:
+      0: Mains power
+      1: Rechargeable battery
+      2: Disposable battery
+  npLevel: &npLevel
+    name: Power Level
     type: enum8
     values:
-      0x00: Constant Power (Critical)
-      0x04: Constant Power (33%)
-      0x08: Constant Power (66%)
-      0x0B: Constant Power (100%)
-      0x10: Rech. battery (Critical)
-      0x14: Rech. battery (33%)
-      0x18: Rech. battery (66%)
-      0x1B: Rech. battery (100%)
-      0x20: Battery (Critical)
-      0x24: Battery (33%)
-      0x28: Battery (66%)
-      0x2B: Battery (100%)
+      0x00: Critical
+      0x04: 33%
+      0x08: 66%
+      0x0C: 100%
 
   deviceVersion: &deviceVersion
     name: Device Version
@@ -308,10 +311,13 @@ types:
     name: Unknown u8
     type: u8
 
-  simpleDescriptor: &simpleDescriptor
+  simpleDescriptor:
+    .tpl: &simpleDescriptor
+      name: Simple Descriptor
+      type: _SimpleDescriptor
     name: Simple Descriptor
-    type: ostring
-    .structattr:
+    type: local
+    structattr:
       - *endpoint
       - *profileId
       - *deviceType
@@ -319,27 +325,239 @@ types:
       - *inClusterList
       - *outClusterList
 
+  rxOnWhenIdle: &rxOnWhenIdle
+    name: Rx On When Idle
+    type: enum8
+    values:
+      "0x00": Receiver is off
+      "0x01": Receiver is on
+      "0x02": Unknown
+  neighborType: &neighborType
+    name: Neighbor Type
+    type: enum8
+    values:
+      "0x00": Coordinator
+      "0x01": Router
+      "0x03": End device
+      "0x04": Unknown
+  relationship: &relationship
+    name: Relationship
+    type: enum8
+    values:
+      "0x00": Parent
+      "0x01": Child
+      "0x02": Sibling
+      "0x03": None
+      "0x04": Previous Child
+  permitJoining: &permitJoining
+    name: Permit Joining
+    type: enum8
+    values:
+      "0x00": Not permitted
+      "0x01": Permitted
+      "0x02": Unknown
+  depth: &depth
+    name: Depth
+    type: u8
+    description: of the neighbor device. A value of 0 indicates that the device is the coordinator for the network
+  lqi: &lqi
+    name: Lqi
+    type: u8
+    description: is the estimated link quality for RF transmissions from this device
+
+  totalEntries: &totalEntries
+    name: Total Entries
+    description: is the total number of entries that can be queried for
+    type: u8
+
+  neighborTable: &neighborTable
+    name: Neighbor Table
+    description:
+    type: array
+    arraytype: _NeighborTableEntry
+
+  neighborTableEntry:
+    name: Neighbor Table Entry
+    .tpl: &neighborTableEntry
+      name: Neighbor Table Entry
+      type: _NeighborTableEntry
+    type: local
+    structattr:
+      - <<: *ieee
+        argname: Pan ID
+      - *ieee
+      - *nwk
+      - <<: *neighborType
+        unmarshal: |
+          if len(b) == 0 { return b, zcl.ErrNotEnoughData }
+          a.NeighborType = NeighborType((b[0] >> 6) & 0x03)
+        marshal: |
+          tmp = []byte{}
+          tmp2 = uint32(a.NeighborType & 0x03) << 6
+      - <<: *rxOnWhenIdle
+        unmarshal: |
+          a.RxOnWhenIdle = RxOnWhenIdle((b[0] >> 4) & 0x03)
+        marshal: |
+          tmp2 |= uint32(a.RxOnWhenIdle & 0x03) << 4
+      - <<: *relationship
+        unmarshal: |
+          a.Relationship = Relationship((b[0] >> 1) & 0x07)
+          b = b[1:]
+        marshal: |
+          tmp2 |= uint32(a.Relationship & 0x07) << 1
+          tmp = []byte{uint8(tmp2)}
+      - <<: *permitJoining
+        unmarshal: |
+          if len(b) == 0 { return b, zcl.ErrNotEnoughData }
+          a.PermitJoining = PermitJoining((b[0] >> 6) & 0x03)
+          b = b[1:]
+        marshal: |
+          tmp2 = uint32(a.PermitJoining & 0x03) << 6
+          tmp = []byte{uint8(tmp2)}
+      - *depth
+      - *lqi
+
+
   complexDescriptor: &complexDescriptor
     name: Complex Descriptor
     type: ostring
 
-.templates2:
+  powerDescriptor:
+    name: Power Descriptor
+    .tpl: &powerDescriptor
+      name: Power Descriptor
+      type: _PowerDescriptor
+    type: local
+    structattr:
+      - <<: *npMode
+        unmarshal: |
+          if len(b) == 0 { return b, zcl.ErrNotEnoughData }
+          a.PowerMode[0] = (b[0] >> 4) & 0x0F
+        marshal: |
+          tmp = []byte{}
+          tmp2 = uint32(a.PowerMode[0] & 0x0F) << 4
+      - <<: *npSource
+        argname: Active Power Source
+        unmarshal: |
+          a.ActivePowerSource[0] = b[0] & 0x0F
+          b = b[1:]
+        marshal: |
+          tmp2 |= uint32(a.ActivePowerSource[0] & 0x0F)
+          tmp = []byte{uint8(tmp2)}
+      - <<: *npSource
+        argname: Current Power Source
+        unmarshal: |
+          if len(b) == 0 { return b, zcl.ErrNotEnoughData }
+          a.CurrentPowerSource[0] = (b[0] >> 4) & 0x0F
+        marshal: |
+          tmp = []byte{}
+          tmp2 = uint32(a.CurrentPowerSource[0] & 0x0F) << 4
+      - <<: *npLevel
+        unmarshal: |
+          a.PowerLevel = PowerLevel(b[0] & 0x0F)
+          b = b[1:]
+        marshal: |
+          tmp2 |= uint32(a.PowerLevel & 0x0F)
+          tmp = []byte{uint8(tmp2)}
 
-  powerDescriptor: &powerDescriptor
-    - *npMode
-    - *npSource
+  logicalType: &logicalType
+    name: Logical Type
+    type: enum8
+    values:
+      "0x00": Coordinator
+      "0x01": Router
+      "0x10": End Device
 
-  nodeDescriptor: &nodeDescriptor
-    - *ndType
-    - *ndFrequency
-    - *deviceCap
-    - *mnfCode
-    - *ndMaxBufSize
-    - *ndMaxRxSize
-    - *serverMask
-    - *ndMaxTxSize
-    - *ndDescCap
+  complexDescriptorAvailable: &complexDescriptorAvailable
+    name: Complex Descriptor Available
+    type: bool
 
+  userDescriptorAvailable: &userDescriptorAvailable
+    name: User Descriptor Available
+    type: bool
+
+  apsFlags: &apsFlags
+    name: APS Flags
+    type: u8
+
+  frequencyBands: &frequencyBands
+    name: Frequency Bands
+    type: bmp8
+    bits:
+      0: "868 MHz"
+      2: "902-928 MHz"
+      3: "2.4 GHz"
+      #0: "868.0-868.6 MHz"
+      #2: "902.0-928 MHz"
+      #3: "2400.0-2483.5 MHz"
+
+
+
+  macCapabilityFlags: &macCapabilityFlags
+    name: MAC Capability Flags
+    type: bmp8
+    bits:
+      0: Alternate PAN Coordinator
+      1: Full function device
+      2: Mains powered
+      3: Receiver on when idle
+      6: Supports secured frames
+      7: Allocate Address
+
+  descriptorCapability: &descriptorCapability
+    name: Descriptor Capability
+    type: bmp8
+    bits:
+      0: Extended Active Endpoint List Available
+      1: Extended Simple Descriptor List Available
+
+  nodeDescriptor:
+    .tpl: &nodeDescriptor
+      name: Node Descriptor
+      type: _NodeDescriptor
+    name: Node Descriptor
+    type: local
+    structattr:
+      - <<: *logicalType
+        unmarshal: |
+          if len(b) == 0 { return b, zcl.ErrNotEnoughData }
+          a.LogicalType = LogicalType((b[0] >> 5) & 0x07)
+        marshal: |
+          tmp = []byte{}
+          tmp2 = uint32(a.LogicalType & 0x07) << 5
+      - <<: *complexDescriptorAvailable
+        unmarshal: |
+          a.ComplexDescriptorAvailable = ComplexDescriptorAvailable((b[0] >> 4) & 0x01)
+        marshal: |
+          tmp2 |= uint32(a.ComplexDescriptorAvailable & 0x01) << 4
+      - <<: *userDescriptorAvailable
+        unmarshal: |
+          a.UserDescriptorAvailable = UserDescriptorAvailable((b[0] >> 3) & 0x01)
+          b = b[1:]
+        marshal: |
+          tmp2 |= uint32(a.UserDescriptorAvailable & 0x01) << 3
+          tmp = []byte{uint8(tmp2)}
+      - <<: *apsFlags
+        unmarshal: |
+          if len(b) == 0 { return b, zcl.ErrNotEnoughData }
+          a.ApsFlags = ApsFlags((b[0] >> 5) & 0x07)
+        marshal: |
+          tmp = []byte{}
+          tmp2 = uint32(a.ApsFlags & 0x07) << 5
+      - <<: *frequencyBands
+        unmarshal: |
+          a.FrequencyBands[0] = b[0] & 0x1F
+          b = b[1:]
+        marshal: |
+          tmp2 |= uint32(a.FrequencyBands[0] & 0x1F)
+          tmp = []byte{uint8(tmp2)}
+      - <<: *macCapabilityFlags
+      - <<: *mnfCode
+      - <<: *maxBufferSize
+      - <<: *maxRxSize
+      - <<: *serverMask
+      - <<: *maxTxSize
+      - <<: *descriptorCapability
 
 commands:
   - name: NWK Address Request
@@ -363,7 +581,13 @@ commands:
       - *ieee
       - *nwk
       - type: u8
-        marshal: "tmp = []byte{uint8(2*len(v.AssociatedDevices.Content))}"
+        unmarshal: |
+          if len(b) == 0 { return b, nil }
+          nv := new(zcl.Zu8)
+          b, _ = nv.UnmarshalZcl(b)
+          tmp2 = uint32(*nv)
+        marshal: |
+          tmp = []byte{uint8(2*len(v.AssociatedDevices))}
         cond:
           - *__cond_success
       - <<: *startIndex
@@ -394,13 +618,29 @@ commands:
       - *ieee
       - *nwk
       - type: u8
-        marshal: "tmp = []byte{uint8(2*len(v.AssociatedDevices.Content))}"
+        unmarshal: |
+          if len(b) == 0 { return b, nil }
+          nv := new(zcl.Zu8)
+          b, _ = nv.UnmarshalZcl(b)
+          tmp2 = uint32(*nv)
+        marshal: |
+          tmp = []byte{uint8(2*len(v.AssociatedDevices))}
         cond:
           - *__cond_success
       - <<: *startIndex
         cond:
           - *__cond_success
       - <<: *associatedDevices
+        unmarshal: |
+          if b, err = (&v.AssociatedDevices).UnmarshalZcl(append([]byte{uint8(tmp2)}, b...)); err != nil {
+              return b, err
+          }
+        marshal: |
+          if tmp, err = v.AssociatedDevices.MarshalZcl(); err != nil {
+              return nil, err
+          }
+          // Ignore length, it was added earlier
+          tmp = tmp[1:]
         cond:
           - *__cond_success
 
@@ -417,19 +657,10 @@ commands:
   - name: Node Desc Response
     id: "0x8002"
     required: true
-    playloadattr:
+    payloadattr:
       - *status
       - *nwk
-      - <<: *unknownU8
-        argname: b1
-      - <<: *unknownU8
-        argname: b2
-      - *deviceCap
-      - *mnfCode
-      - *ndMaxBufSize
-      - *ndMaxRxSize
-      - *ndMaxTxSize
-      - *ndDescCap
+      - *nodeDescriptor
 
 
   - name: Power Desc Request
@@ -469,7 +700,19 @@ commands:
     payloadattr:
       - *status
       - *nwk
-      - *simpleDescriptor
+      - marshal: |
+          sd, _ := v.SimpleDescriptor.MarshalZcl()
+          tmp = []byte{uint8(len(sd))}
+        unmarshal: |
+          // Ignore descriptor length
+          if b, err = new(zcl.Zu8).UnmarshalZcl(b); err != nil {
+          	return b, err
+          }
+        cond:
+          - *__cond_success
+      - <<: *simpleDescriptor
+        cond:
+          - *__cond_success
 
 
   - name: Active Endpoint Request
@@ -602,15 +845,15 @@ commands:
     payloadattr:
       - *nwk
       - *ieee
-      - *ndType
-      - *ndFrequency
+      #- *ndType
+      #- *ndFrequency
       - *deviceCap
       - *mnfCode
-      - *ndMaxBufSize
-      - *ndMaxRxSize
+      - *maxBufferSize
+      - *maxRxSize
       - *serverMask
-      - *ndMaxTxSize
-      - *ndDescCap
+      - *maxTxSize
+      #- *ndDescCap
 
 
   - name: Power Desc Store Request
@@ -648,13 +891,15 @@ commands:
       - *nwk
       - *ieee
       - type: u8
-        marshal: "tmp = []byte{uint8(8 + 2*len(v.InClusterList.Content) + 2*len(v.OutClusterList.Content))}"
-      - *endpoint
-      - *profileId
-      - *deviceType
-      - *deviceVersion
-      - *inClusterList
-      - *outClusterList
+        marshal: |
+          if tmp, err = v.SimpleDescriptor.MarshalZcl(); err != nil {
+            return nil, err
+          }
+          data = append(data, uint8(len(tmp)))
+      - <<: *simpleDescriptor
+        marshal: |
+          // Marshalled above
+          tmp = []byte{}
 
 
   - name: Remove Node Cache Request
@@ -712,3 +957,58 @@ commands:
       - *profileId
       - *inClusterList
       - *outClusterList
+
+  - name: Bind Request
+    id: "0x0021"
+    payloadattr:
+      - *sourceAddress
+      - *sourceEndpoint
+      - *clusterId
+      - *addressMode
+      - <<: *nwk
+        cond:
+          - *__cond_addr_short
+      - <<: *ieee
+        cond:
+          - *__cond_addr_long
+      - <<: *endpoint
+        cond:
+          - *__cond_addr_not_group
+  - name: Bind Response
+    id: "0x8021"
+    payloadattr:
+      - *status
+
+  - name: Unbind Request
+    id: "0x0022"
+    payloadattr:
+      - *sourceAddress
+      - *sourceEndpoint
+      - *clusterId
+      - *addressMode
+      - <<: *nwk
+        cond:
+          - *__cond_addr_short
+      - <<: *ieee
+        cond:
+          - *__cond_addr_long
+      - <<: *endpoint
+        cond:
+          - *__cond_addr_not_group
+  - name: Unbind Response
+    id: "0x8022"
+    payloadattr:
+      - *status
+
+
+  - name: Mgmt Lqi Request
+    id: "0x0031"
+    payloadattr:
+      - *startIndex
+  - name: Mgmt Lqi Response
+    id: "0x8031"
+    payloadattr:
+      - *status
+      - *totalEntries
+      - *startIndex
+      - *neighborTable

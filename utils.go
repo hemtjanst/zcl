@@ -1,15 +1,18 @@
 package zcl
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
 )
 
 var (
-	StrJoin = strings.Join
-	Sprintf = fmt.Sprintf
-	Errorf  = fmt.Errorf
+	StrJoin   = strings.Join
+	Sprintf   = fmt.Sprintf
+	Errorf    = fmt.Errorf
+	ToJson    = json.Marshal
+	ParseJson = json.Unmarshal
 )
 
 func Duration(t int, m int) time.Duration {

@@ -44,6 +44,7 @@ const (
 	GroupAddress AddressMode = 0x01
 	NWKAddress   AddressMode = 0x02
 	IEEEAddress  AddressMode = 0x03
+	FullAddress  AddressMode = 0x04
 
 	BroadcastAll            uint16 = 0xFFFF
 	BroadcastRxOnWhenIdle   uint16 = 0xFFFD
@@ -59,6 +60,8 @@ func (a AddressMode) String() string {
 		return "NWK"
 	case IEEEAddress:
 		return "IEEE"
+	case FullAddress:
+		return "NWK+IEEE"
 	}
 	return fmt.Sprintf("AddrMode%d", int(a))
 }

@@ -36,12 +36,14 @@ func ({{.Name.Fmt}}) Cluster() zcl.ClusterID { return {{clusterID}} }
 func ({{.Name.Fmt}}) MnfCode() []byte { return []byte{ {{mfc.ByteStr}} } }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func ({{.Name.Fmt}}) MarshalJSON() ([]byte, error) { return []byte("{{.ID.Uint}}"), nil }
+// func ({{.Name.Fmt}}) MarshalJSON() ([]byte, error) { return []byte("{{.ID.Uint}}"), nil }
 
 // MarshalZcl returns the wire format representation of {{.Name.Fmt}}
 func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}
     var data []byte
     var tmp []byte
+    tmp2 := uint32(0)
+    _ = tmp2
     var err error
     {{range .PayloadAttr}}
         {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{else}} { {{end}}{{if .Marshal}}
@@ -58,6 +60,8 @@ func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}
 // UnmarshalZcl parses the wire format representation into the {{.Name.Fmt}} struct
 func (v *{{.Name.Fmt}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .PayloadAttr}}
     var err error
+    tmp2 := uint32(0)
+    _ = tmp2
     {{range .PayloadAttr}}
         {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $cmd.PayloadAttr .Cond}} { {{end}}{{if .Unmarshal}}
         {{.Unmarshal}}{{else}}if b, err = {{if .Name}}(&v.{{.ArgNameFmt}}){{else}}new(zcl.{{.Type.Type}}){{end}}.UnmarshalZcl(b); err != nil {
