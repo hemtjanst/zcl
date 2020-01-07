@@ -75,12 +75,14 @@ func (MoveToLevel) Cluster() zcl.ClusterID { return LevelControlID }
 func (MoveToLevel) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveToLevel) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (MoveToLevel) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToLevel
 func (v MoveToLevel) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -101,6 +103,8 @@ func (v MoveToLevel) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveToLevel struct
 func (v *MoveToLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Level).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -165,12 +169,14 @@ func (Move) Cluster() zcl.ClusterID { return LevelControlID }
 func (Move) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Move) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (Move) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of Move
 func (v Move) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -191,6 +197,8 @@ func (v Move) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the Move struct
 func (v *Move) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LevelDirection).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -258,12 +266,14 @@ func (Step) Cluster() zcl.ClusterID { return LevelControlID }
 func (Step) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Step) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (Step) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of Step
 func (v Step) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -290,6 +300,8 @@ func (v Step) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the Step struct
 func (v *Step) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LevelDirection).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -352,7 +364,7 @@ func (Stop) Cluster() zcl.ClusterID { return LevelControlID }
 func (Stop) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Stop) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (Stop) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of Stop
 func (v Stop) MarshalZcl() ([]byte, error) {
@@ -411,12 +423,14 @@ func (MoveToLevelWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 func (MoveToLevelWithOnOff) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveToLevelWithOnOff) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (MoveToLevelWithOnOff) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToLevelWithOnOff
 func (v MoveToLevelWithOnOff) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -437,6 +451,8 @@ func (v MoveToLevelWithOnOff) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveToLevelWithOnOff struct
 func (v *MoveToLevelWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Level).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -501,12 +517,14 @@ func (MoveWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 func (MoveWithOnOff) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveWithOnOff) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+// func (MoveWithOnOff) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of MoveWithOnOff
 func (v MoveWithOnOff) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -527,6 +545,8 @@ func (v MoveWithOnOff) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveWithOnOff struct
 func (v *MoveWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LevelDirection).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -594,12 +614,14 @@ func (StepWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 func (StepWithOnOff) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StepWithOnOff) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+// func (StepWithOnOff) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of StepWithOnOff
 func (v StepWithOnOff) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -626,6 +648,8 @@ func (v StepWithOnOff) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the StepWithOnOff struct
 func (v *StepWithOnOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LevelDirection).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -688,7 +712,7 @@ func (StopWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 func (StopWithOnOff) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StopWithOnOff) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+// func (StopWithOnOff) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
 
 // MarshalZcl returns the wire format representation of StopWithOnOff
 func (v StopWithOnOff) MarshalZcl() ([]byte, error) {

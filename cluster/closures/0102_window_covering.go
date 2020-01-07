@@ -75,7 +75,7 @@ func (UpOpen) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (UpOpen) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (UpOpen) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (UpOpen) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of UpOpen
 func (v UpOpen) MarshalZcl() ([]byte, error) {
@@ -126,7 +126,7 @@ func (DownClose) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (DownClose) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (DownClose) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (DownClose) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of DownClose
 func (v DownClose) MarshalZcl() ([]byte, error) {
@@ -177,7 +177,7 @@ func (Stop) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (Stop) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Stop) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (Stop) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of Stop
 func (v Stop) MarshalZcl() ([]byte, error) {
@@ -233,12 +233,14 @@ func (GoToLiftValue) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (GoToLiftValue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GoToLiftValue) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (GoToLiftValue) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of GoToLiftValue
 func (v GoToLiftValue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -253,6 +255,8 @@ func (v GoToLiftValue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GoToLiftValue struct
 func (v *GoToLiftValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Position).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -308,12 +312,14 @@ func (GoToLiftPercentage) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (GoToLiftPercentage) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GoToLiftPercentage) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+// func (GoToLiftPercentage) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of GoToLiftPercentage
 func (v GoToLiftPercentage) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -328,6 +334,8 @@ func (v GoToLiftPercentage) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GoToLiftPercentage struct
 func (v *GoToLiftPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Percentage).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -383,12 +391,14 @@ func (GoToTiltValue) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (GoToTiltValue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GoToTiltValue) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+// func (GoToTiltValue) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
 
 // MarshalZcl returns the wire format representation of GoToTiltValue
 func (v GoToTiltValue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -403,6 +413,8 @@ func (v GoToTiltValue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GoToTiltValue struct
 func (v *GoToTiltValue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Position).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -458,12 +470,14 @@ func (GoToTiltPercentage) Cluster() zcl.ClusterID { return WindowCoveringID }
 func (GoToTiltPercentage) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GoToTiltPercentage) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
+// func (GoToTiltPercentage) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
 
 // MarshalZcl returns the wire format representation of GoToTiltPercentage
 func (v GoToTiltPercentage) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -478,6 +492,8 @@ func (v GoToTiltPercentage) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GoToTiltPercentage struct
 func (v *GoToTiltPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Percentage).UnmarshalZcl(b); err != nil {
 		return b, err

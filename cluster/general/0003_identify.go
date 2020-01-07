@@ -61,12 +61,14 @@ func (Identify) Cluster() zcl.ClusterID { return IdentifyID }
 func (Identify) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Identify) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (Identify) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of Identify
 func (v Identify) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -81,6 +83,8 @@ func (v Identify) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the Identify struct
 func (v *Identify) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.IdentifyTime).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -132,7 +136,7 @@ func (IdentifyQuery) Cluster() zcl.ClusterID { return IdentifyID }
 func (IdentifyQuery) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (IdentifyQuery) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (IdentifyQuery) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of IdentifyQuery
 func (v IdentifyQuery) MarshalZcl() ([]byte, error) {
@@ -194,12 +198,14 @@ func (TriggerEffect) Cluster() zcl.ClusterID { return IdentifyID }
 func (TriggerEffect) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (TriggerEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+// func (TriggerEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of TriggerEffect
 func (v TriggerEffect) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -220,6 +226,8 @@ func (v TriggerEffect) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the TriggerEffect struct
 func (v *TriggerEffect) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.IdentifyEffect).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -283,12 +291,14 @@ func (IdentifyQueryResponse) Cluster() zcl.ClusterID { return IdentifyID }
 func (IdentifyQueryResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (IdentifyQueryResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (IdentifyQueryResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of IdentifyQueryResponse
 func (v IdentifyQueryResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -303,6 +313,8 @@ func (v IdentifyQueryResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the IdentifyQueryResponse struct
 func (v *IdentifyQueryResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.IdentifyTimeout).UnmarshalZcl(b); err != nil {
 		return b, err

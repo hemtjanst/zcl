@@ -64,12 +64,14 @@ func (ResetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 func (ResetAlarm) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ResetAlarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (ResetAlarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of ResetAlarm
 func (v ResetAlarm) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -90,6 +92,8 @@ func (v ResetAlarm) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the ResetAlarm struct
 func (v *ResetAlarm) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.AlarmCode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -147,7 +151,7 @@ func (ResetAllAlarms) Cluster() zcl.ClusterID { return AlarmsID }
 func (ResetAllAlarms) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ResetAllAlarms) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (ResetAllAlarms) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ResetAllAlarms
 func (v ResetAllAlarms) MarshalZcl() ([]byte, error) {
@@ -199,7 +203,7 @@ func (GetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 func (GetAlarm) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetAlarm) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (GetAlarm) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of GetAlarm
 func (v GetAlarm) MarshalZcl() ([]byte, error) {
@@ -251,7 +255,7 @@ func (ResetAlarmLog) Cluster() zcl.ClusterID { return AlarmsID }
 func (ResetAlarmLog) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ResetAlarmLog) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (ResetAlarmLog) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of ResetAlarmLog
 func (v ResetAlarmLog) MarshalZcl() ([]byte, error) {
@@ -310,12 +314,14 @@ func (Alarm) Cluster() zcl.ClusterID { return AlarmsID }
 func (Alarm) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Alarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (Alarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of Alarm
 func (v Alarm) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -336,6 +342,8 @@ func (v Alarm) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the Alarm struct
 func (v *Alarm) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.AlarmCode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -406,12 +414,14 @@ func (GetAlarmResponse) Cluster() zcl.ClusterID { return AlarmsID }
 func (GetAlarmResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetAlarmResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (GetAlarmResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of GetAlarmResponse
 func (v GetAlarmResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -447,6 +457,8 @@ func (v GetAlarmResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GetAlarmResponse struct
 func (v *GetAlarmResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err

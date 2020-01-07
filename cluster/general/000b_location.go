@@ -97,12 +97,14 @@ func (SetAbsoluteLocation) Cluster() zcl.ClusterID { return LocationID }
 func (SetAbsoluteLocation) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (SetAbsoluteLocation) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (SetAbsoluteLocation) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of SetAbsoluteLocation
 func (v SetAbsoluteLocation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -141,6 +143,8 @@ func (v SetAbsoluteLocation) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the SetAbsoluteLocation struct
 func (v *SetAbsoluteLocation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.XCoordinate).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -234,12 +238,14 @@ func (SetDeviceConfiguration) Cluster() zcl.ClusterID { return LocationID }
 func (SetDeviceConfiguration) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (SetDeviceConfiguration) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (SetDeviceConfiguration) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of SetDeviceConfiguration
 func (v SetDeviceConfiguration) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -278,6 +284,8 @@ func (v SetDeviceConfiguration) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the SetDeviceConfiguration struct
 func (v *SetDeviceConfiguration) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Power).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -357,12 +365,14 @@ func (GetDeviceConfiguration) Cluster() zcl.ClusterID { return LocationID }
 func (GetDeviceConfiguration) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetDeviceConfiguration) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (GetDeviceConfiguration) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of GetDeviceConfiguration
 func (v GetDeviceConfiguration) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -377,6 +387,8 @@ func (v GetDeviceConfiguration) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GetDeviceConfiguration struct
 func (v *GetDeviceConfiguration) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.TargetAddress).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -438,12 +450,14 @@ func (GetLocationData) Cluster() zcl.ClusterID { return LocationID }
 func (GetLocationData) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetLocationData) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (GetLocationData) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of GetLocationData
 func (v GetLocationData) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -470,6 +484,8 @@ func (v GetLocationData) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GetLocationData struct
 func (v *GetLocationData) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LocationFlags).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -553,12 +569,14 @@ func (RssiResponse) Cluster() zcl.ClusterID { return LocationID }
 func (RssiResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RssiResponse) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (RssiResponse) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of RssiResponse
 func (v RssiResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -603,6 +621,8 @@ func (v RssiResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RssiResponse struct
 func (v *RssiResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Device).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -695,12 +715,14 @@ func (SendPings) Cluster() zcl.ClusterID { return LocationID }
 func (SendPings) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (SendPings) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+// func (SendPings) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of SendPings
 func (v SendPings) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -727,6 +749,8 @@ func (v SendPings) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the SendPings struct
 func (v *SendPings) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.TargetAddress).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -803,12 +827,14 @@ func (AnchorNodeAnnounce) Cluster() zcl.ClusterID { return LocationID }
 func (AnchorNodeAnnounce) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (AnchorNodeAnnounce) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+// func (AnchorNodeAnnounce) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of AnchorNodeAnnounce
 func (v AnchorNodeAnnounce) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -841,6 +867,8 @@ func (v AnchorNodeAnnounce) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the AnchorNodeAnnounce struct
 func (v *AnchorNodeAnnounce) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Device).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -917,12 +945,14 @@ func (DistanceMeasure) Cluster() zcl.ClusterID { return LocationID }
 func (DistanceMeasure) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (DistanceMeasure) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+// func (DistanceMeasure) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of DistanceMeasure
 func (v DistanceMeasure) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -943,6 +973,8 @@ func (v DistanceMeasure) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the DistanceMeasure struct
 func (v *DistanceMeasure) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.TargetAddress).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1021,12 +1053,14 @@ func (DeviceConfigurationResponse) Cluster() zcl.ClusterID { return LocationID }
 func (DeviceConfigurationResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (DeviceConfigurationResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (DeviceConfigurationResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of DeviceConfigurationResponse
 func (v DeviceConfigurationResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1076,6 +1110,8 @@ func (v DeviceConfigurationResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the DeviceConfigurationResponse struct
 func (v *DeviceConfigurationResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1204,12 +1240,14 @@ func (LocationDataResponse) Cluster() zcl.ClusterID { return LocationID }
 func (LocationDataResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (LocationDataResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (LocationDataResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of LocationDataResponse
 func (v LocationDataResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1287,6 +1325,8 @@ func (v LocationDataResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the LocationDataResponse struct
 func (v *LocationDataResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1448,12 +1488,14 @@ func (LocationDataNotification) Cluster() zcl.ClusterID { return LocationID }
 func (LocationDataNotification) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (LocationDataNotification) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (LocationDataNotification) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of LocationDataNotification
 func (v LocationDataNotification) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1520,6 +1562,8 @@ func (v LocationDataNotification) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the LocationDataNotification struct
 func (v *LocationDataNotification) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LocationType).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1650,12 +1694,14 @@ func (CompactLocationDataNotification) Cluster() zcl.ClusterID { return Location
 func (CompactLocationDataNotification) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (CompactLocationDataNotification) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (CompactLocationDataNotification) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of CompactLocationDataNotification
 func (v CompactLocationDataNotification) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1703,6 +1749,8 @@ func (v CompactLocationDataNotification) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the CompactLocationDataNotification struct
 func (v *CompactLocationDataNotification) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LocationType).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1797,12 +1845,14 @@ func (RssiPing) Cluster() zcl.ClusterID { return LocationID }
 func (RssiPing) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RssiPing) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (RssiPing) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of RssiPing
 func (v RssiPing) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1817,6 +1867,8 @@ func (v RssiPing) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RssiPing struct
 func (v *RssiPing) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.LocationType).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1867,7 +1919,7 @@ func (RssiRequest) Cluster() zcl.ClusterID { return LocationID }
 func (RssiRequest) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RssiRequest) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+// func (RssiRequest) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of RssiRequest
 func (v RssiRequest) MarshalZcl() ([]byte, error) {
@@ -1887,8 +1939,8 @@ func (v RssiRequest) String() string {
 }
 
 type ReportRssiMeasurements struct {
-	Device        Device
-	NeighborsInfo NeighborsInfo
+	Device            Device
+	NeighborsInfoList NeighborsInfoList
 }
 
 // ReportRssiMeasurementsCommand is the Command ID of ReportRssiMeasurements
@@ -1898,7 +1950,7 @@ const ReportRssiMeasurementsCommand CommandID = 0x0006
 func (v *ReportRssiMeasurements) Values() []zcl.Val {
 	return []zcl.Val{
 		&v.Device,
-		&v.NeighborsInfo,
+		&v.NeighborsInfoList,
 	}
 }
 
@@ -1906,7 +1958,7 @@ func (v *ReportRssiMeasurements) Values() []zcl.Val {
 func (v *ReportRssiMeasurements) Arguments() []zcl.ArgDesc {
 	return []zcl.ArgDesc{
 		{Name: "Device", Argument: &v.Device},
-		{Name: "NeighborsInfo", Argument: &v.NeighborsInfo},
+		{Name: "NeighborsInfoList", Argument: &v.NeighborsInfoList},
 	}
 }
 
@@ -1926,12 +1978,14 @@ func (ReportRssiMeasurements) Cluster() zcl.ClusterID { return LocationID }
 func (ReportRssiMeasurements) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ReportRssiMeasurements) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+// func (ReportRssiMeasurements) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of ReportRssiMeasurements
 func (v ReportRssiMeasurements) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1941,7 +1995,7 @@ func (v ReportRssiMeasurements) MarshalZcl() ([]byte, error) {
 		data = append(data, tmp...)
 	}
 	{
-		if tmp, err = v.NeighborsInfo.MarshalZcl(); err != nil {
+		if tmp, err = v.NeighborsInfoList.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
@@ -1952,12 +2006,14 @@ func (v ReportRssiMeasurements) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the ReportRssiMeasurements struct
 func (v *ReportRssiMeasurements) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Device).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
-	if b, err = (&v.NeighborsInfo).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.NeighborsInfoList).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -1969,10 +2025,10 @@ func (v ReportRssiMeasurements) String() string {
 	return zcl.Sprintf(
 		"ReportRssiMeasurements{"+zcl.StrJoin([]string{
 			"Device(%v)",
-			"NeighborsInfo(%v)",
+			"NeighborsInfoList(%v)",
 		}, " ")+"}",
 		v.Device,
-		v.NeighborsInfo,
+		v.NeighborsInfoList,
 	)
 }
 
@@ -2013,12 +2069,14 @@ func (RequestOwnLocation) Cluster() zcl.ClusterID { return LocationID }
 func (RequestOwnLocation) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RequestOwnLocation) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+// func (RequestOwnLocation) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
 
 // MarshalZcl returns the wire format representation of RequestOwnLocation
 func (v RequestOwnLocation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -2033,6 +2091,8 @@ func (v RequestOwnLocation) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RequestOwnLocation struct
 func (v *RequestOwnLocation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.BlindNodeAddress).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -2095,12 +2155,14 @@ func (DistanceMeasureResponse) Cluster() zcl.ClusterID { return LocationID }
 func (DistanceMeasureResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (DistanceMeasureResponse) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+// func (DistanceMeasureResponse) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of DistanceMeasureResponse
 func (v DistanceMeasureResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -2127,6 +2189,8 @@ func (v DistanceMeasureResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the DistanceMeasureResponse struct
 func (v *DistanceMeasureResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.TargetAddress).UnmarshalZcl(b); err != nil {
 		return b, err

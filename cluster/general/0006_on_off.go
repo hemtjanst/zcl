@@ -62,7 +62,7 @@ func (Off) Cluster() zcl.ClusterID { return OnOffID }
 func (Off) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Off) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (Off) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of Off
 func (v Off) MarshalZcl() ([]byte, error) {
@@ -114,7 +114,7 @@ func (On) Cluster() zcl.ClusterID { return OnOffID }
 func (On) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (On) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (On) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of On
 func (v On) MarshalZcl() ([]byte, error) {
@@ -166,7 +166,7 @@ func (Toggle) Cluster() zcl.ClusterID { return OnOffID }
 func (Toggle) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (Toggle) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (Toggle) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of Toggle
 func (v Toggle) MarshalZcl() ([]byte, error) {
@@ -226,12 +226,14 @@ func (OffWithEffect) Cluster() zcl.ClusterID { return OnOffID }
 func (OffWithEffect) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (OffWithEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+// func (OffWithEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of OffWithEffect
 func (v OffWithEffect) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -252,6 +254,8 @@ func (v OffWithEffect) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the OffWithEffect struct
 func (v *OffWithEffect) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.EffectIdentifier).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -309,7 +313,7 @@ func (OnWithRecallGlobalScene) Cluster() zcl.ClusterID { return OnOffID }
 func (OnWithRecallGlobalScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (OnWithRecallGlobalScene) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
+// func (OnWithRecallGlobalScene) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of OnWithRecallGlobalScene
 func (v OnWithRecallGlobalScene) MarshalZcl() ([]byte, error) {
@@ -372,12 +376,14 @@ func (OnWithTimedOff) Cluster() zcl.ClusterID { return OnOffID }
 func (OnWithTimedOff) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (OnWithTimedOff) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
+// func (OnWithTimedOff) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of OnWithTimedOff
 func (v OnWithTimedOff) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -404,6 +410,8 @@ func (v OnWithTimedOff) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the OnWithTimedOff struct
 func (v *OnWithTimedOff) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.OnOffControl).UnmarshalZcl(b); err != nil {
 		return b, err

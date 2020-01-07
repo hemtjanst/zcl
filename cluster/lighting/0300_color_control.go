@@ -139,12 +139,14 @@ func (MoveToHue) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveToHue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveToHue) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (MoveToHue) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToHue
 func (v MoveToHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -171,6 +173,8 @@ func (v MoveToHue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveToHue struct
 func (v *MoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Hue).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -242,12 +246,14 @@ func (MoveHue) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveHue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveHue) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (MoveHue) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of MoveHue
 func (v MoveHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -268,6 +274,8 @@ func (v MoveHue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveHue struct
 func (v *MoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.MoveMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -336,12 +344,14 @@ func (StepHue) Cluster() zcl.ClusterID { return ColorControlID }
 func (StepHue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StepHue) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (StepHue) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of StepHue
 func (v StepHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -368,6 +378,8 @@ func (v StepHue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the StepHue struct
 func (v *StepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.StepMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -439,12 +451,14 @@ func (MoveToSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveToSaturation) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveToSaturation) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (MoveToSaturation) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToSaturation
 func (v MoveToSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -465,6 +479,8 @@ func (v MoveToSaturation) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveToSaturation struct
 func (v *MoveToSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Saturation).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -530,12 +546,14 @@ func (MoveSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveSaturation) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveSaturation) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (MoveSaturation) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of MoveSaturation
 func (v MoveSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -556,6 +574,8 @@ func (v MoveSaturation) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveSaturation struct
 func (v *MoveSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.MoveMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -624,12 +644,14 @@ func (StepSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 func (StepSaturation) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StepSaturation) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+// func (StepSaturation) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of StepSaturation
 func (v StepSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -656,6 +678,8 @@ func (v StepSaturation) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the StepSaturation struct
 func (v *StepSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.StepMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -730,12 +754,14 @@ func (MoveToHueAndSaturation) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveToHueAndSaturation) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveToHueAndSaturation) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+// func (MoveToHueAndSaturation) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToHueAndSaturation
 func (v MoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -762,6 +788,8 @@ func (v MoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveToHueAndSaturation struct
 func (v *MoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Hue).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -842,12 +870,14 @@ func (MoveToColor) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveToColor) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveToColor) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+// func (MoveToColor) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToColor
 func (v MoveToColor) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -874,6 +904,8 @@ func (v MoveToColor) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveToColor struct
 func (v *MoveToColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.ColorX).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -946,12 +978,14 @@ func (MoveColor) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveColor) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveColor) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
+// func (MoveColor) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
 
 // MarshalZcl returns the wire format representation of MoveColor
 func (v MoveColor) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -972,6 +1006,8 @@ func (v MoveColor) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveColor struct
 func (v *MoveColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.RateX).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1040,12 +1076,14 @@ func (StepColor) Cluster() zcl.ClusterID { return ColorControlID }
 func (StepColor) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StepColor) MarshalJSON() ([]byte, error) { return []byte("9"), nil }
+// func (StepColor) MarshalJSON() ([]byte, error) { return []byte("9"), nil }
 
 // MarshalZcl returns the wire format representation of StepColor
 func (v StepColor) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1072,6 +1110,8 @@ func (v StepColor) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the StepColor struct
 func (v *StepColor) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.StepX).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1143,12 +1183,14 @@ func (MoveToColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveToColorTemperature) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveToColorTemperature) MarshalJSON() ([]byte, error) { return []byte("10"), nil }
+// func (MoveToColorTemperature) MarshalJSON() ([]byte, error) { return []byte("10"), nil }
 
 // MarshalZcl returns the wire format representation of MoveToColorTemperature
 func (v MoveToColorTemperature) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1169,6 +1211,8 @@ func (v MoveToColorTemperature) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveToColorTemperature struct
 func (v *MoveToColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.ColorTemperature).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1237,12 +1281,14 @@ func (EnhancedMoveToHue) Cluster() zcl.ClusterID { return ColorControlID }
 func (EnhancedMoveToHue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedMoveToHue) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+// func (EnhancedMoveToHue) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedMoveToHue
 func (v EnhancedMoveToHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1269,6 +1315,8 @@ func (v EnhancedMoveToHue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedMoveToHue struct
 func (v *EnhancedMoveToHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.EnhancedHue).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1340,12 +1388,14 @@ func (EnhancedMoveHue) Cluster() zcl.ClusterID { return ColorControlID }
 func (EnhancedMoveHue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedMoveHue) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
+// func (EnhancedMoveHue) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedMoveHue
 func (v EnhancedMoveHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1366,6 +1416,8 @@ func (v EnhancedMoveHue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedMoveHue struct
 func (v *EnhancedMoveHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.MoveMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1434,12 +1486,14 @@ func (EnhancedStepHue) Cluster() zcl.ClusterID { return ColorControlID }
 func (EnhancedStepHue) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedStepHue) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
+// func (EnhancedStepHue) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedStepHue
 func (v EnhancedStepHue) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1466,6 +1520,8 @@ func (v EnhancedStepHue) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedStepHue struct
 func (v *EnhancedStepHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.StepMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1540,12 +1596,14 @@ func (EnhancedMoveToHueAndSaturation) Cluster() zcl.ClusterID { return ColorCont
 func (EnhancedMoveToHueAndSaturation) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedMoveToHueAndSaturation) MarshalJSON() ([]byte, error) { return []byte("67"), nil }
+// func (EnhancedMoveToHueAndSaturation) MarshalJSON() ([]byte, error) { return []byte("67"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedMoveToHueAndSaturation
 func (v EnhancedMoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1572,6 +1630,8 @@ func (v EnhancedMoveToHueAndSaturation) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedMoveToHueAndSaturation struct
 func (v *EnhancedMoveToHueAndSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.EnhancedHue).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1652,12 +1712,14 @@ func (ColorLoopSet) Cluster() zcl.ClusterID { return ColorControlID }
 func (ColorLoopSet) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ColorLoopSet) MarshalJSON() ([]byte, error) { return []byte("68"), nil }
+// func (ColorLoopSet) MarshalJSON() ([]byte, error) { return []byte("68"), nil }
 
 // MarshalZcl returns the wire format representation of ColorLoopSet
 func (v ColorLoopSet) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1696,6 +1758,8 @@ func (v ColorLoopSet) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the ColorLoopSet struct
 func (v *ColorLoopSet) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.UpdateFlags).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1772,7 +1836,7 @@ func (StopMoveStep) Cluster() zcl.ClusterID { return ColorControlID }
 func (StopMoveStep) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StopMoveStep) MarshalJSON() ([]byte, error) { return []byte("71"), nil }
+// func (StopMoveStep) MarshalJSON() ([]byte, error) { return []byte("71"), nil }
 
 // MarshalZcl returns the wire format representation of StopMoveStep
 func (v StopMoveStep) MarshalZcl() ([]byte, error) {
@@ -1838,12 +1902,14 @@ func (MoveColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 func (MoveColorTemperature) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (MoveColorTemperature) MarshalJSON() ([]byte, error) { return []byte("75"), nil }
+// func (MoveColorTemperature) MarshalJSON() ([]byte, error) { return []byte("75"), nil }
 
 // MarshalZcl returns the wire format representation of MoveColorTemperature
 func (v MoveColorTemperature) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1876,6 +1942,8 @@ func (v MoveColorTemperature) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the MoveColorTemperature struct
 func (v *MoveColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.MoveMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1962,12 +2030,14 @@ func (StepColorTemperature) Cluster() zcl.ClusterID { return ColorControlID }
 func (StepColorTemperature) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StepColorTemperature) MarshalJSON() ([]byte, error) { return []byte("76"), nil }
+// func (StepColorTemperature) MarshalJSON() ([]byte, error) { return []byte("76"), nil }
 
 // MarshalZcl returns the wire format representation of StepColorTemperature
 func (v StepColorTemperature) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -2006,6 +2076,8 @@ func (v StepColorTemperature) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the StepColorTemperature struct
 func (v *StepColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.StepMode).UnmarshalZcl(b); err != nil {
 		return b, err

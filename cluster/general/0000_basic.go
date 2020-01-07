@@ -72,7 +72,7 @@ func (ResetToFactoryDefaults) Cluster() zcl.ClusterID { return BasicID }
 func (ResetToFactoryDefaults) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ResetToFactoryDefaults) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (ResetToFactoryDefaults) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of ResetToFactoryDefaults
 func (v ResetToFactoryDefaults) MarshalZcl() ([]byte, error) {

@@ -56,7 +56,7 @@ func (CheckIn) Cluster() zcl.ClusterID { return PollControlID }
 func (CheckIn) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (CheckIn) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (CheckIn) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of CheckIn
 func (v CheckIn) MarshalZcl() ([]byte, error) {

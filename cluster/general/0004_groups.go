@@ -69,12 +69,14 @@ func (AddGroup) Cluster() zcl.ClusterID { return GroupsID }
 func (AddGroup) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (AddGroup) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (AddGroup) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddGroup
 func (v AddGroup) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -95,6 +97,8 @@ func (v AddGroup) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the AddGroup struct
 func (v *AddGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -157,12 +161,14 @@ func (ViewGroup) Cluster() zcl.ClusterID { return GroupsID }
 func (ViewGroup) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ViewGroup) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (ViewGroup) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewGroup
 func (v ViewGroup) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -177,6 +183,8 @@ func (v ViewGroup) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the ViewGroup struct
 func (v *ViewGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -233,12 +241,14 @@ func (GetGroupMembership) Cluster() zcl.ClusterID { return GroupsID }
 func (GetGroupMembership) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetGroupMembership) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (GetGroupMembership) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of GetGroupMembership
 func (v GetGroupMembership) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -253,6 +263,8 @@ func (v GetGroupMembership) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GetGroupMembership struct
 func (v *GetGroupMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupList).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -309,12 +321,14 @@ func (RemoveGroup) Cluster() zcl.ClusterID { return GroupsID }
 func (RemoveGroup) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RemoveGroup) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (RemoveGroup) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveGroup
 func (v RemoveGroup) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -329,6 +343,8 @@ func (v RemoveGroup) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RemoveGroup struct
 func (v *RemoveGroup) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupList).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -380,7 +396,7 @@ func (RemoveAllGroups) Cluster() zcl.ClusterID { return GroupsID }
 func (RemoveAllGroups) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RemoveAllGroups) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (RemoveAllGroups) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveAllGroups
 func (v RemoveAllGroups) MarshalZcl() ([]byte, error) {
@@ -440,12 +456,14 @@ func (AddGroupIfIdentifying) Cluster() zcl.ClusterID { return GroupsID }
 func (AddGroupIfIdentifying) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (AddGroupIfIdentifying) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+// func (AddGroupIfIdentifying) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of AddGroupIfIdentifying
 func (v AddGroupIfIdentifying) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -466,6 +484,8 @@ func (v AddGroupIfIdentifying) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the AddGroupIfIdentifying struct
 func (v *AddGroupIfIdentifying) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -531,12 +551,14 @@ func (AddGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 func (AddGroupResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (AddGroupResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (AddGroupResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddGroupResponse
 func (v AddGroupResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -557,6 +579,8 @@ func (v AddGroupResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the AddGroupResponse struct
 func (v *AddGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -625,12 +649,14 @@ func (ViewGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 func (ViewGroupResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ViewGroupResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (ViewGroupResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewGroupResponse
 func (v ViewGroupResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -657,6 +683,8 @@ func (v ViewGroupResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the ViewGroupResponse struct
 func (v *ViewGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -731,12 +759,14 @@ func (GetGroupMembershipResponse) Cluster() zcl.ClusterID { return GroupsID }
 func (GetGroupMembershipResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetGroupMembershipResponse) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (GetGroupMembershipResponse) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of GetGroupMembershipResponse
 func (v GetGroupMembershipResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -757,6 +787,8 @@ func (v GetGroupMembershipResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GetGroupMembershipResponse struct
 func (v *GetGroupMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupCapacity).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -822,12 +854,14 @@ func (RemoveGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 func (RemoveGroupResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RemoveGroupResponse) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (RemoveGroupResponse) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveGroupResponse
 func (v RemoveGroupResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -848,6 +882,8 @@ func (v RemoveGroupResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RemoveGroupResponse struct
 func (v *RemoveGroupResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err

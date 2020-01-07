@@ -1,38 +1,54 @@
 package zdo
 
 import (
-	"encoding/hex"
 	"github.com/stretchr/testify/assert"
 	"hemtjan.st/zcl"
-	"hemtjan.st/zcl/zdo_old"
+	"hemtjan.st/zcl/utils/testutils"
 	"log"
 	"testing"
 )
 
-func testUnmarshal(t *testing.T, v zcl.Val, str string) {
-	data, _ := hex.DecodeString(str)
-	out, err := v.UnmarshalZcl(data)
-	assert.Nil(t, err)
-	assert.Empty(t, out)
-}
-
 func TestMatchDescRequest_UnmarshalZcl(t *testing.T) {
 	v := &MatchDescRequest{}
-	testUnmarshal(t, v, "FDFF040101190000")
+	testutils.Unmarshal(t, v, "FDFF040101190000")
 
 	assert.Equal(t, NwkAddress(0xFFFD), v.NwkAddress)
 	assert.Equal(t, ProfileId(0x104), v.ProfileId)
 	expectVal := zcl.Zu16(0x0019)
-	assert.Equal(t, InClusterList{Type: new(zcl.Zu16).ID(), Content: []zcl.Val{&expectVal}}, v.InClusterList)
+	assert.Equal(t, InClusterList{&expectVal}, v.InClusterList)
 
 }
 
 func TestSimpleDescResponse_UnmarshalZcl(t *testing.T) {
+
 	v := &SimpleDescResponse{}
-	testUnmarshal(t, v, "00A9E41E010401010101070000030004000500060008000010040500190020000010")
-	// 00A9E40CF2E0A1610000012100012100
-	v2 := &zdo_old.SimpleDescriptor{}
-	b2, _ := hex.DecodeString("F2E0A1610000012100012100")
-	v2.UnmarshalZcl(b2)
-	log.Printf("%+v", v2)
+	// status + nwk + length + simpleDesc(endpoint + profile + deviceId + version + inClusterList + outClusterList)
+	testutils.Unmarshal(t, v, "00"+"0000"+"08"+"50"+"00DE"+"0100"+"01"+"00"+"00")
+	log.Printf("%+v", v.SimpleDescriptor)
+
+}
+
+func TestNwkAddressRequest_UnmarshalZcl(t *testing.T) {
+	v := &NwkAddressRequest{}
+	testutils.Unmarshal(t, v, "105A0B0A00")
+	log.Printf("%+v", v)
+
+}
+
+func TestBindRequest_UnmarshalZcl(t *testing.T) {
+	v := &BindRequest{}
+	testutils.Unmarshal(t, v, "75FDFE02008D1500010600036D0804FFFF2E210001")
+	log.Printf("%+v", v)
+}
+
+func TestIeeeAddressResponse_UnmarshalZcl(t *testing.T) {
+	v := &IeeeAddressResponse{}
+	testutils.Unmarshal(t, v, "006D0804FFFF2E21000000")
+	log.Printf("%+v", v)
+}
+
+func TestNodeDescResponse_UnmarshalZcl(t *testing.T) {
+	v := &NodeDescResponse{}
+	testutils.Unmarshal(t, v, "00274101408E7C11525200002C520000")
+	log.Printf("%+v %+v", v, v.NodeDescriptor)
 }

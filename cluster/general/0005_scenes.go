@@ -101,12 +101,14 @@ func (AddScene) Cluster() zcl.ClusterID { return ScenesID }
 func (AddScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (AddScene) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (AddScene) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddScene
 func (v AddScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -145,6 +147,8 @@ func (v AddScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the AddScene struct
 func (v *AddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -228,12 +232,14 @@ func (ViewScene) Cluster() zcl.ClusterID { return ScenesID }
 func (ViewScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ViewScene) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (ViewScene) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewScene
 func (v ViewScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -254,6 +260,8 @@ func (v ViewScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the ViewScene struct
 func (v *ViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -319,12 +327,14 @@ func (RemoveScene) Cluster() zcl.ClusterID { return ScenesID }
 func (RemoveScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RemoveScene) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (RemoveScene) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveScene
 func (v RemoveScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -345,6 +355,8 @@ func (v RemoveScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RemoveScene struct
 func (v *RemoveScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -407,12 +419,14 @@ func (RemoveAllScenes) Cluster() zcl.ClusterID { return ScenesID }
 func (RemoveAllScenes) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RemoveAllScenes) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (RemoveAllScenes) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveAllScenes
 func (v RemoveAllScenes) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -427,6 +441,8 @@ func (v RemoveAllScenes) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RemoveAllScenes struct
 func (v *RemoveAllScenes) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -486,12 +502,14 @@ func (StoreScene) Cluster() zcl.ClusterID { return ScenesID }
 func (StoreScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StoreScene) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (StoreScene) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of StoreScene
 func (v StoreScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -512,6 +530,8 @@ func (v StoreScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the StoreScene struct
 func (v *StoreScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -577,12 +597,14 @@ func (RecallScene) Cluster() zcl.ClusterID { return ScenesID }
 func (RecallScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RecallScene) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+// func (RecallScene) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
 
 // MarshalZcl returns the wire format representation of RecallScene
 func (v RecallScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -603,6 +625,8 @@ func (v RecallScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RecallScene struct
 func (v *RecallScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -665,12 +689,14 @@ func (GetSceneMembership) Cluster() zcl.ClusterID { return ScenesID }
 func (GetSceneMembership) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetSceneMembership) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+// func (GetSceneMembership) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of GetSceneMembership
 func (v GetSceneMembership) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -685,6 +711,8 @@ func (v GetSceneMembership) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GetSceneMembership struct
 func (v *GetSceneMembership) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -759,12 +787,14 @@ func (EnhancedAddScene) Cluster() zcl.ClusterID { return ScenesID }
 func (EnhancedAddScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedAddScene) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+// func (EnhancedAddScene) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedAddScene
 func (v EnhancedAddScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -803,6 +833,8 @@ func (v EnhancedAddScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedAddScene struct
 func (v *EnhancedAddScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -886,12 +918,14 @@ func (EnhancedViewScene) Cluster() zcl.ClusterID { return ScenesID }
 func (EnhancedViewScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedViewScene) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
+// func (EnhancedViewScene) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedViewScene
 func (v EnhancedViewScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -912,6 +946,8 @@ func (v EnhancedViewScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedViewScene struct
 func (v *EnhancedViewScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.GroupId).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -985,12 +1021,14 @@ func (CopyScene) Cluster() zcl.ClusterID { return ScenesID }
 func (CopyScene) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (CopyScene) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
+// func (CopyScene) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of CopyScene
 func (v CopyScene) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1029,6 +1067,8 @@ func (v CopyScene) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the CopyScene struct
 func (v *CopyScene) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.SceneCopyMode).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1109,12 +1149,14 @@ func (IkeaRemotePress) Cluster() zcl.ClusterID { return ScenesID }
 func (IkeaRemotePress) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (IkeaRemotePress) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+// func (IkeaRemotePress) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
 
 // MarshalZcl returns the wire format representation of IkeaRemotePress
 func (v IkeaRemotePress) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1129,6 +1171,8 @@ func (v IkeaRemotePress) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the IkeaRemotePress struct
 func (v *IkeaRemotePress) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.IkeaRemoteDirection).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1184,12 +1228,14 @@ func (IkeaRemoteLongpressStart) Cluster() zcl.ClusterID { return ScenesID }
 func (IkeaRemoteLongpressStart) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (IkeaRemoteLongpressStart) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
+// func (IkeaRemoteLongpressStart) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
 
 // MarshalZcl returns the wire format representation of IkeaRemoteLongpressStart
 func (v IkeaRemoteLongpressStart) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1204,6 +1250,8 @@ func (v IkeaRemoteLongpressStart) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the IkeaRemoteLongpressStart struct
 func (v *IkeaRemoteLongpressStart) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.IkeaRemoteDirection).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1254,7 +1302,7 @@ func (IkeaRemoteLongpressStop) Cluster() zcl.ClusterID { return ScenesID }
 func (IkeaRemoteLongpressStop) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (IkeaRemoteLongpressStop) MarshalJSON() ([]byte, error) { return []byte("9"), nil }
+// func (IkeaRemoteLongpressStop) MarshalJSON() ([]byte, error) { return []byte("9"), nil }
 
 // MarshalZcl returns the wire format representation of IkeaRemoteLongpressStop
 func (v IkeaRemoteLongpressStop) MarshalZcl() ([]byte, error) {
@@ -1317,12 +1365,14 @@ func (AddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (AddSceneResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (AddSceneResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+// func (AddSceneResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
 
 // MarshalZcl returns the wire format representation of AddSceneResponse
 func (v AddSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1349,6 +1399,8 @@ func (v AddSceneResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the AddSceneResponse struct
 func (v *AddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1438,12 +1490,14 @@ func (ViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (ViewSceneResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (ViewSceneResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+// func (ViewSceneResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
 
 // MarshalZcl returns the wire format representation of ViewSceneResponse
 func (v ViewSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1488,6 +1542,8 @@ func (v ViewSceneResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the ViewSceneResponse struct
 func (v *ViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1580,12 +1636,14 @@ func (RemoveSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (RemoveSceneResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RemoveSceneResponse) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+// func (RemoveSceneResponse) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveSceneResponse
 func (v RemoveSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1612,6 +1670,8 @@ func (v RemoveSceneResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RemoveSceneResponse struct
 func (v *RemoveSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1683,12 +1743,14 @@ func (RemoveAllScenesResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (RemoveAllScenesResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (RemoveAllScenesResponse) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+// func (RemoveAllScenesResponse) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
 
 // MarshalZcl returns the wire format representation of RemoveAllScenesResponse
 func (v RemoveAllScenesResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1709,6 +1771,8 @@ func (v RemoveAllScenesResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the RemoveAllScenesResponse struct
 func (v *RemoveAllScenesResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1777,12 +1841,14 @@ func (StoreSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (StoreSceneResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (StoreSceneResponse) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+// func (StoreSceneResponse) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
 
 // MarshalZcl returns the wire format representation of StoreSceneResponse
 func (v StoreSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1809,6 +1875,8 @@ func (v StoreSceneResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the StoreSceneResponse struct
 func (v *StoreSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -1887,12 +1955,14 @@ func (GetSceneMembershipResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (GetSceneMembershipResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (GetSceneMembershipResponse) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+// func (GetSceneMembershipResponse) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
 
 // MarshalZcl returns the wire format representation of GetSceneMembershipResponse
 func (v GetSceneMembershipResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -1925,6 +1995,8 @@ func (v GetSceneMembershipResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the GetSceneMembershipResponse struct
 func (v *GetSceneMembershipResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -2004,12 +2076,14 @@ func (EnhancedAddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (EnhancedAddSceneResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedAddSceneResponse) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+// func (EnhancedAddSceneResponse) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedAddSceneResponse
 func (v EnhancedAddSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -2036,6 +2110,8 @@ func (v EnhancedAddSceneResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedAddSceneResponse struct
 func (v *EnhancedAddSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -2125,12 +2201,14 @@ func (EnhancedViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (EnhancedViewSceneResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (EnhancedViewSceneResponse) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
+// func (EnhancedViewSceneResponse) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
 
 // MarshalZcl returns the wire format representation of EnhancedViewSceneResponse
 func (v EnhancedViewSceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -2175,6 +2253,8 @@ func (v EnhancedViewSceneResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the EnhancedViewSceneResponse struct
 func (v *EnhancedViewSceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
@@ -2266,12 +2346,14 @@ func (CopySceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 func (CopySceneResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
-func (CopySceneResponse) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
+// func (CopySceneResponse) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
 
 // MarshalZcl returns the wire format representation of CopySceneResponse
 func (v CopySceneResponse) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
 	var err error
 
 	{
@@ -2298,6 +2380,8 @@ func (v CopySceneResponse) MarshalZcl() ([]byte, error) {
 // UnmarshalZcl parses the wire format representation into the CopySceneResponse struct
 func (v *CopySceneResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
 
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return b, err
