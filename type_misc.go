@@ -101,6 +101,10 @@ func (o Zoid) String() string {
 // Zuid is IEEE address (0xffffffffffffffff = invalid). A/D = D
 type Zuid uint64
 
+func IEEE(addr net.HardwareAddr) Zuid {
+	return Zuid(binary.BigEndian.Uint64(addr))
+}
+
 func (u *Zuid) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := uintLEUnmarshalZcl(8, buf)
 	*u = Zuid(val)

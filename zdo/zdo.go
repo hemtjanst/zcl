@@ -4654,6 +4654,11 @@ func (v PowerDescRequest) String() string {
 }
 
 type PowerDescResponse struct {
+	// Status Code, command is normally empty unless status is `Success`
+	Status Status
+	// NwkAddress is a 16-bit Network address
+	NwkAddress      NwkAddress
+	PowerDescriptor PowerDescriptor
 }
 
 // PowerDescResponseCommand is the Command ID of PowerDescResponse
@@ -4661,12 +4666,20 @@ const PowerDescResponseCommand CommandID = 0x8003
 
 // Values returns all values of PowerDescResponse
 func (v *PowerDescResponse) Values() []zcl.Val {
-	return []zcl.Val{}
+	return []zcl.Val{
+		&v.Status,
+		&v.NwkAddress,
+		&v.PowerDescriptor,
+	}
 }
 
 // Arguments returns all values of PowerDescResponse
 func (v *PowerDescResponse) Arguments() []zcl.ArgDesc {
-	return []zcl.ArgDesc{}
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "NwkAddress", Argument: &v.NwkAddress},
+		{Name: "PowerDescriptor", Argument: &v.PowerDescriptor},
+	}
 }
 
 // Name of the command
@@ -4689,18 +4702,65 @@ func (PowerDescResponse) MnfCode() []byte { return []byte{} }
 
 // MarshalZcl returns the wire format representation of PowerDescResponse
 func (v PowerDescResponse) MarshalZcl() ([]byte, error) {
-	return nil, nil
+	var data []byte
+	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
+	var err error
+
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.NwkAddress.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.PowerDescriptor.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
 }
 
 // UnmarshalZcl parses the wire format representation into the PowerDescResponse struct
 func (v *PowerDescResponse) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
+
+	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.NwkAddress).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.PowerDescriptor).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
 	return b, nil
 }
 
 // String returns a log-friendly string representation of the struct
 func (v PowerDescResponse) String() string {
 	return zcl.Sprintf(
-		"PowerDescResponse{" + zcl.StrJoin([]string{}, " ") + "}",
+		"PowerDescResponse{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"NwkAddress(%v)",
+			"PowerDescriptor(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.NwkAddress,
+		v.PowerDescriptor,
 	)
 }
 

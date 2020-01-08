@@ -675,14 +675,10 @@ commands:
   - name: Power Desc Response
     id: "0x8003"
     required: true
-    playloadattr:
+    payloadattr:
       - *status
       - *nwk
-      - <<: *unknownU8
-        argname: b1
-      - <<: *unknownU8
-        argname: b2
-
+      - *powerDescriptor
 
   - name: Simple Desc Request
     id: "0x0004"

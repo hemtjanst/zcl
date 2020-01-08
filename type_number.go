@@ -2,6 +2,7 @@ package zcl
 
 import (
 	"encoding/binary"
+	"encoding/json"
 	"hemtjan.st/zcl/utils/half"
 	"math"
 	"strconv"
@@ -126,6 +127,9 @@ func (u *Zu8) UnmarshalZcl(buf []byte) ([]byte, error) {
 	val, buf, err := uintLEUnmarshalZcl(1, buf)
 	*u = Zu8(val)
 	return buf, err
+}
+func (u Zu8) MarshalJSON() ([]byte, error) {
+	return json.Marshal(int(u))
 }
 func (u Zu8) MarshalZcl() ([]byte, error) { return uintLEMarshalZcl(1, uint64(u)) }
 func (u *Zu8) Values() []Val              { return []Val{u} }
