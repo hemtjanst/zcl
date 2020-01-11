@@ -199,8 +199,8 @@ types:
       4: Primary Discovery Cache
       5: Backup Discovery Cache
       6: Network Manager
-  userDesc: &userDesc
-    name: User Desc
+  userDescriptor: &userDescriptor
+    name: User Descriptor
     type: cstring
     description: |
       is a user provided ASCII string of 16 characters set on a remote device.
@@ -492,6 +492,19 @@ types:
       #3: "2400.0-2483.5 MHz"
 
 
+  scannedChannels: &scannedChannels
+    name: Scanned Channels
+    type: bmp32
+  totalTransmissions: &totalTransmissions
+    name: Total Transmissions
+    type: u16
+  transmissionFailures: &transmissionFailures
+    name: Transmission Failures
+    type: u16
+  energyValues: &energyValues
+    name: Energy Values
+    type: array
+    arraytype: u8
 
   macCapabilityFlags: &macCapabilityFlags
     name: MAC Capability Flags
@@ -776,6 +789,16 @@ commands:
       or to a device that contains the discovery information of the remote device.
     payloadattr:
       - *nwk
+  - name: User Desc Response
+    id: "0x8011"
+    payloadattr:
+      - *status
+      - <<: *nwk
+        cond:
+          - *__cond_success
+      - <<: *userDescriptor
+        cond:
+          - *__cond_success
 
 
   - name: Discovery Cache Request
@@ -805,7 +828,7 @@ commands:
       requests the remote device to update it's user descriptor.
     payloadattr:
       - *nwk
-      - *userDesc
+      - *userDescriptor
 
 
   - name: System Server Discover Request
@@ -1008,3 +1031,11 @@ commands:
       - *totalEntries
       - *startIndex
       - *neighborTable
+  - name: Mgmt Nwk Update
+    id: "0x8038"
+    payloadattr:
+      - *status
+      - *scannedChannels
+      - *totalTransmissions
+      - *transmissionFailures
+      - *energyValues
