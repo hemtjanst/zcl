@@ -1,5 +1,0 @@
-name: General
-description: The general functional domain contains clusters and information that
-    provides generally applicable functions and attributes that are not specific to
-    other functional domains.
-usezcl: true

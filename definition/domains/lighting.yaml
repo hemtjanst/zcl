@@ -1,5 +1,0 @@
-name: Lighting
-description: The lighting functional domain contains clusters and information to build
-    devices in the lighting domain, e.g. ballast units.
-lowbound: "0x0300"
-highbound: "0x03FF"

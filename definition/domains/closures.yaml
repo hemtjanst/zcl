@@ -1,5 +1,0 @@
-name: Closures
-description: The closures functional domain contains clusters and information to build
-    devices in the closure domain, e.g. shade controllers.
-lowbound: "0x0100"
-highbound: "0x01FF"

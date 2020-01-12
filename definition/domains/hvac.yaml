@@ -1,5 +1,0 @@
-name: HVAC
-description: The HVAC functional domain contains clusters and information to build
-    devices in the HVAC domain, e.g. pumps.
-lowbound: "0x0200"
-highbound: "0x02FF"
