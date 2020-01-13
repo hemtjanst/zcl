@@ -3,8 +3,10 @@ package lighting
 import "hemtjan.st/zcl"
 
 type CommandID = zcl.CommandID
+type Frame = zcl.ReceivedZclFrame
 
-func (Action) Name() string { return "Action" }
+func (Action) Name() string        { return `Action` }
+func (Action) Description() string { return `` }
 
 type Action zcl.Zenum8
 
@@ -76,7 +78,15 @@ func (BallastFactorAdjustment) Writable() bool   { return true }
 func (BallastFactorAdjustment) Reportable() bool { return false }
 func (BallastFactorAdjustment) SceneIndex() int  { return -1 }
 
-func (BallastFactorAdjustment) Name() string { return "Ballast Factor Adjustment" }
+func (BallastFactorAdjustment) Name() string { return `Ballast Factor Adjustment` }
+func (BallastFactorAdjustment) Description() string {
+	return `specifies the multiplication factor, as a percentage, to be applied
+to the configured light output of the lamps. A typical usage of this
+mechanism is to compensate for reduction in efficiency over the lifetime
+of a lamp. The light output is given by
+Actual light output = configured light output x BallastFactorAdjustment / 100%
+The range for this attribute is manufacturer dependent`
+}
 
 // BallastFactorAdjustment specifies the multiplication factor, as a percentage, to be applied
 // to the configured light output of the lamps. A typical usage of this
@@ -131,7 +141,14 @@ func (BallastStatus) Writable() bool   { return false }
 func (BallastStatus) Reportable() bool { return false }
 func (BallastStatus) SceneIndex() int  { return -1 }
 
-func (BallastStatus) Name() string { return "Ballast Status" }
+func (BallastStatus) Name() string { return `Ballast Status` }
+func (BallastStatus) Description() string {
+	return `It specifies the activity status of the ballast functions. Where a
+function is active, the corresponding bit is 1. Where a function is
+not active, the corresponding bit is 0. This means that bit 0 with
+a value of 0 means the ballast is operational and bit 1 with a
+value of 0 that the lamp(s) is/are in their socket(s)`
+}
 
 // BallastStatus It specifies the activity status of the ballast functions. Where a
 // function is active, the corresponding bit is 1. Where a function is
@@ -211,7 +228,12 @@ func (ColorMode) Writable() bool   { return false }
 func (ColorMode) Reportable() bool { return false }
 func (ColorMode) SceneIndex() int  { return -1 }
 
-func (ColorMode) Name() string { return "Color Mode" }
+func (ColorMode) Name() string { return `Color Mode` }
+func (ColorMode) Description() string {
+	return `indicates which attributes are currently determining the color of
+the device. This attribute is optional if the device does not implement
+CurrentHue and CurrentSaturation`
+}
 
 // ColorMode indicates which attributes are currently determining the color of
 // the device. This attribute is optional if the device does not implement
@@ -286,7 +308,12 @@ func (ColorPointBlueX) Writable() bool   { return true }
 func (ColorPointBlueX) Reportable() bool { return false }
 func (ColorPointBlueX) SceneIndex() int  { return -1 }
 
-func (ColorPointBlueX) Name() string { return "Color Point Blue X" }
+func (ColorPointBlueX) Name() string { return `Color Point Blue X` }
+func (ColorPointBlueX) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorPointBlueX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -338,7 +365,12 @@ func (ColorPointBlueY) Writable() bool   { return true }
 func (ColorPointBlueY) Reportable() bool { return false }
 func (ColorPointBlueY) SceneIndex() int  { return -1 }
 
-func (ColorPointBlueY) Name() string { return "Color Point Blue Y" }
+func (ColorPointBlueY) Name() string { return `Color Point Blue Y` }
+func (ColorPointBlueY) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorPointBlueY contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -390,7 +422,14 @@ func (ColorPointBlueIntensity) Writable() bool   { return true }
 func (ColorPointBlueIntensity) Reportable() bool { return false }
 func (ColorPointBlueIntensity) SceneIndex() int  { return -1 }
 
-func (ColorPointBlueIntensity) Name() string { return "Color Point Blue intensity" }
+func (ColorPointBlueIntensity) Name() string { return `Color Point Blue intensity` }
+func (ColorPointBlueIntensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // ColorPointBlueIntensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -444,7 +483,12 @@ func (ColorPointGreenX) Writable() bool   { return true }
 func (ColorPointGreenX) Reportable() bool { return false }
 func (ColorPointGreenX) SceneIndex() int  { return -1 }
 
-func (ColorPointGreenX) Name() string { return "Color Point Green X" }
+func (ColorPointGreenX) Name() string { return `Color Point Green X` }
+func (ColorPointGreenX) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorPointGreenX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -496,7 +540,12 @@ func (ColorPointGreenY) Writable() bool   { return true }
 func (ColorPointGreenY) Reportable() bool { return false }
 func (ColorPointGreenY) SceneIndex() int  { return -1 }
 
-func (ColorPointGreenY) Name() string { return "Color Point Green Y" }
+func (ColorPointGreenY) Name() string { return `Color Point Green Y` }
+func (ColorPointGreenY) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorPointGreenY contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -548,7 +597,14 @@ func (ColorPointGreenIntensity) Writable() bool   { return true }
 func (ColorPointGreenIntensity) Reportable() bool { return false }
 func (ColorPointGreenIntensity) SceneIndex() int  { return -1 }
 
-func (ColorPointGreenIntensity) Name() string { return "Color Point Green intensity" }
+func (ColorPointGreenIntensity) Name() string { return `Color Point Green intensity` }
+func (ColorPointGreenIntensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // ColorPointGreenIntensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -602,7 +658,12 @@ func (ColorPointRedX) Writable() bool   { return true }
 func (ColorPointRedX) Reportable() bool { return false }
 func (ColorPointRedX) SceneIndex() int  { return -1 }
 
-func (ColorPointRedX) Name() string { return "Color Point Red X" }
+func (ColorPointRedX) Name() string { return `Color Point Red X` }
+func (ColorPointRedX) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorPointRedX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -654,7 +715,12 @@ func (ColorPointRedY) Writable() bool   { return true }
 func (ColorPointRedY) Reportable() bool { return false }
 func (ColorPointRedY) SceneIndex() int  { return -1 }
 
-func (ColorPointRedY) Name() string { return "Color Point Red Y" }
+func (ColorPointRedY) Name() string { return `Color Point Red Y` }
+func (ColorPointRedY) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorPointRedY contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -706,7 +772,14 @@ func (ColorPointRedIntensity) Writable() bool   { return true }
 func (ColorPointRedIntensity) Reportable() bool { return false }
 func (ColorPointRedIntensity) SceneIndex() int  { return -1 }
 
-func (ColorPointRedIntensity) Name() string { return "Color Point Red intensity" }
+func (ColorPointRedIntensity) Name() string { return `Color Point Red intensity` }
+func (ColorPointRedIntensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // ColorPointRedIntensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -752,7 +825,8 @@ func (a ColorPointRedIntensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (ColorTemperature) Name() string { return "Color Temperature" }
+func (ColorTemperature) Name() string        { return `Color Temperature` }
+func (ColorTemperature) Description() string { return `` }
 
 type ColorTemperature zcl.Zu16
 
@@ -793,7 +867,8 @@ func (a ColorTemperature) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (ColorTemperatureMax) Name() string { return "Color Temperature max" }
+func (ColorTemperatureMax) Name() string        { return `Color Temperature max` }
+func (ColorTemperatureMax) Description() string { return `` }
 
 type ColorTemperatureMax zcl.Zu16
 
@@ -834,7 +909,8 @@ func (a ColorTemperatureMax) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (ColorTemperatureMaxMireds) Name() string { return "Color Temperature max Mireds" }
+func (ColorTemperatureMaxMireds) Name() string        { return `Color Temperature max Mireds` }
+func (ColorTemperatureMaxMireds) Description() string { return `` }
 
 type ColorTemperatureMaxMireds zcl.Zu16
 
@@ -875,7 +951,8 @@ func (a ColorTemperatureMaxMireds) String() string {
 	return zcl.Mired.Format(float64(a))
 }
 
-func (ColorTemperatureMin) Name() string { return "Color Temperature min" }
+func (ColorTemperatureMin) Name() string        { return `Color Temperature min` }
+func (ColorTemperatureMin) Description() string { return `` }
 
 type ColorTemperatureMin zcl.Zu16
 
@@ -916,7 +993,8 @@ func (a ColorTemperatureMin) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (ColorTemperatureMinMireds) Name() string { return "Color Temperature min Mireds" }
+func (ColorTemperatureMinMireds) Name() string        { return `Color Temperature min Mireds` }
+func (ColorTemperatureMinMireds) Description() string { return `` }
 
 type ColorTemperatureMinMireds zcl.Zu16
 
@@ -957,7 +1035,12 @@ func (a ColorTemperatureMinMireds) String() string {
 	return zcl.Mired.Format(float64(a))
 }
 
-func (ColorX) Name() string { return "Color X" }
+func (ColorX) Name() string { return `Color X` }
+func (ColorX) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -1001,7 +1084,12 @@ func (a ColorX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (ColorY) Name() string { return "Color Y" }
+func (ColorY) Name() string { return `Color Y` }
+func (ColorY) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // ColorY contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -1053,7 +1141,11 @@ func (ColorCapabilities) Writable() bool   { return false }
 func (ColorCapabilities) Reportable() bool { return false }
 func (ColorCapabilities) SceneIndex() int  { return -1 }
 
-func (ColorCapabilities) Name() string { return "Color capabilities" }
+func (ColorCapabilities) Name() string { return `Color capabilities` }
+func (ColorCapabilities) Description() string {
+	return `specifies the color capabilities of the device supporting the color
+control cluster`
+}
 
 // ColorCapabilities specifies the color capabilities of the device supporting the color
 // control cluster
@@ -1149,7 +1241,10 @@ func (ColorControlOptions) Writable() bool   { return true }
 func (ColorControlOptions) Reportable() bool { return false }
 func (ColorControlOptions) SceneIndex() int  { return -1 }
 
-func (ColorControlOptions) Name() string { return "Color control options" }
+func (ColorControlOptions) Name() string { return `Color control options` }
+func (ColorControlOptions) Description() string {
+	return `is a bitmap that determines the default behavior of some cluster commands`
+}
 
 // ColorControlOptions is a bitmap that determines the default behavior of some cluster commands
 type ColorControlOptions zcl.Zbmp8
@@ -1220,7 +1315,11 @@ func (ColorLoopActive) Writable() bool   { return false }
 func (ColorLoopActive) Reportable() bool { return false }
 func (ColorLoopActive) SceneIndex() int  { return 5 }
 
-func (ColorLoopActive) Name() string { return "Color loop active" }
+func (ColorLoopActive) Name() string { return `Color loop active` }
+func (ColorLoopActive) Description() string {
+	return `specifies the current active status of the color loop. 0x00 means
+inactive, 0x01 means active`
+}
 
 // ColorLoopActive specifies the current active status of the color loop. 0x00 means
 // inactive, 0x01 means active
@@ -1271,7 +1370,12 @@ func (ColorLoopDirection) Writable() bool   { return false }
 func (ColorLoopDirection) Reportable() bool { return false }
 func (ColorLoopDirection) SceneIndex() int  { return 6 }
 
-func (ColorLoopDirection) Name() string { return "Color loop direction" }
+func (ColorLoopDirection) Name() string { return `Color loop direction` }
+func (ColorLoopDirection) Description() string {
+	return `specifies the current direction of the color loop. If this attribute
+has the value 0x00, the EnhancedCurrentHue is be decremented. If this
+attribute has the value 0x01, the EnhancedCurrentHue is incremented`
+}
 
 // ColorLoopDirection specifies the current direction of the color loop. If this attribute
 // has the value 0x00, the EnhancedCurrentHue is be decremented. If this
@@ -1323,7 +1427,11 @@ func (ColorLoopStartEnhancedHue) Writable() bool   { return false }
 func (ColorLoopStartEnhancedHue) Reportable() bool { return false }
 func (ColorLoopStartEnhancedHue) SceneIndex() int  { return -1 }
 
-func (ColorLoopStartEnhancedHue) Name() string { return "Color loop start enhanced hue" }
+func (ColorLoopStartEnhancedHue) Name() string { return `Color loop start enhanced hue` }
+func (ColorLoopStartEnhancedHue) Description() string {
+	return `specifies the value of the EnhancedCurrentHue attribute from which
+the color loop starts`
+}
 
 // ColorLoopStartEnhancedHue specifies the value of the EnhancedCurrentHue attribute from which
 // the color loop starts
@@ -1374,7 +1482,12 @@ func (ColorLoopStoredEnhancedHue) Writable() bool   { return false }
 func (ColorLoopStoredEnhancedHue) Reportable() bool { return false }
 func (ColorLoopStoredEnhancedHue) SceneIndex() int  { return -1 }
 
-func (ColorLoopStoredEnhancedHue) Name() string { return "Color loop stored enhanced hue" }
+func (ColorLoopStoredEnhancedHue) Name() string { return `Color loop stored enhanced hue` }
+func (ColorLoopStoredEnhancedHue) Description() string {
+	return `specifies the value of the EnhancedCurrentHue attribute before the
+color loop was started. Once the color loop is complete, It is restored
+to this value`
+}
 
 // ColorLoopStoredEnhancedHue specifies the value of the EnhancedCurrentHue attribute before the
 // color loop was started. Once the color loop is complete, It is restored
@@ -1426,7 +1539,11 @@ func (ColorLoopTime) Writable() bool   { return false }
 func (ColorLoopTime) Reportable() bool { return false }
 func (ColorLoopTime) SceneIndex() int  { return 7 }
 
-func (ColorLoopTime) Name() string { return "Color loop time" }
+func (ColorLoopTime) Name() string { return `Color loop time` }
+func (ColorLoopTime) Description() string {
+	return `specifies the number of seconds it takes to perform a full color
+loop, i.e., to cycle all values of EnhancedCurrentHue`
+}
 
 // ColorLoopTime specifies the number of seconds it takes to perform a full color
 // loop, i.e., to cycle all values of EnhancedCurrentHue
@@ -1477,7 +1594,15 @@ func (ColorTemperatureMireds) Writable() bool   { return false }
 func (ColorTemperatureMireds) Reportable() bool { return true }
 func (ColorTemperatureMireds) SceneIndex() int  { return -1 }
 
-func (ColorTemperatureMireds) Name() string { return "Color temperature Mireds" }
+func (ColorTemperatureMireds) Name() string { return `Color temperature Mireds` }
+func (ColorTemperatureMireds) Description() string {
+	return `contains a scaled inverse of the current value of the color
+temperature. The unit of ColorTemperatureMireds is the mired
+(micro reciprocal degree), a.k.a mirek (micro reciprocal
+kelvin). Color temperature in kelvins = 1,000,000 / ColorTemperatureMireds,
+where ColorTemperatureMireds is in the range 1 to 65279 mireds inclusive,
+giving a color temperature range from 1,000,000 kelvins to 15.32 kelvins`
+}
 
 // ColorTemperatureMireds contains a scaled inverse of the current value of the color
 // temperature. The unit of ColorTemperatureMireds is the mired
@@ -1532,7 +1657,13 @@ func (ColorTemperaturePhysicalMaxMireds) Writable() bool   { return false }
 func (ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
 func (ColorTemperaturePhysicalMaxMireds) SceneIndex() int  { return -1 }
 
-func (ColorTemperaturePhysicalMaxMireds) Name() string { return "Color temperature physical max Mireds" }
+func (ColorTemperaturePhysicalMaxMireds) Name() string { return `Color temperature physical max Mireds` }
+func (ColorTemperaturePhysicalMaxMireds) Description() string {
+	return `indicates the maximum mired value supported by the hardware.
+ColorTempPhysicalMaxMireds corresponds to the minimum color
+temperature in Kelvins supported by the hardware.
+ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds`
+}
 
 // ColorTemperaturePhysicalMaxMireds indicates the maximum mired value supported by the hardware.
 // ColorTempPhysicalMaxMireds corresponds to the minimum color
@@ -1587,7 +1718,13 @@ func (ColorTemperaturePhysicalMinMireds) Writable() bool   { return false }
 func (ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
 func (ColorTemperaturePhysicalMinMireds) SceneIndex() int  { return -1 }
 
-func (ColorTemperaturePhysicalMinMireds) Name() string { return "Color temperature physical min Mireds" }
+func (ColorTemperaturePhysicalMinMireds) Name() string { return `Color temperature physical min Mireds` }
+func (ColorTemperaturePhysicalMinMireds) Description() string {
+	return `indicates the minimum mired value supported by the hardware.
+ColorTempPhysicalMinMireds corresponds to the maximum color
+temperature in Kelvins supported by the hardware.
+ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds`
+}
 
 // ColorTemperaturePhysicalMinMireds indicates the minimum mired value supported by the hardware.
 // ColorTempPhysicalMinMireds corresponds to the maximum color
@@ -1642,7 +1779,11 @@ func (CompensationText) Writable() bool   { return false }
 func (CompensationText) Reportable() bool { return false }
 func (CompensationText) SceneIndex() int  { return -1 }
 
-func (CompensationText) Name() string { return "Compensation Text" }
+func (CompensationText) Name() string { return `Compensation Text` }
+func (CompensationText) Description() string {
+	return `holds a textual indication of what mechanism, if any, is in use to
+compensate for color/intensity drift over time`
+}
 
 // CompensationText holds a textual indication of what mechanism, if any, is in use to
 // compensate for color/intensity drift over time
@@ -1693,7 +1834,12 @@ func (CoupleColorTempToLevelMinMireds) Writable() bool   { return false }
 func (CoupleColorTempToLevelMinMireds) Reportable() bool { return false }
 func (CoupleColorTempToLevelMinMireds) SceneIndex() int  { return -1 }
 
-func (CoupleColorTempToLevelMinMireds) Name() string { return "Couple Color Temp to Level Min Mireds" }
+func (CoupleColorTempToLevelMinMireds) Name() string { return `Couple Color Temp to Level Min Mireds` }
+func (CoupleColorTempToLevelMinMireds) Description() string {
+	return `specifies a lower bound on the value of the ColorTemperatureMireds attribute for the purposes of coupling the
+ColorTemperatureMireds attribute to the CurrentLevel attribute when the CoupleColorTempToLevel bit of the
+Options attribute of the Level Control cluster is equal to 1`
+}
 
 // CoupleColorTempToLevelMinMireds specifies a lower bound on the value of the ColorTemperatureMireds attribute for the purposes of coupling the
 // ColorTemperatureMireds attribute to the CurrentLevel attribute when the CoupleColorTempToLevel bit of the
@@ -1745,7 +1891,12 @@ func (CurrentX) Writable() bool   { return false }
 func (CurrentX) Reportable() bool { return true }
 func (CurrentX) SceneIndex() int  { return 1 }
 
-func (CurrentX) Name() string { return "Current X" }
+func (CurrentX) Name() string { return `Current X` }
+func (CurrentX) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // CurrentX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -1797,7 +1948,12 @@ func (CurrentY) Writable() bool   { return false }
 func (CurrentY) Reportable() bool { return true }
 func (CurrentY) SceneIndex() int  { return 2 }
 
-func (CurrentY) Name() string { return "Current Y" }
+func (CurrentY) Name() string { return `Current Y` }
+func (CurrentY) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // CurrentY contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -1849,7 +2005,11 @@ func (CurrentHue) Writable() bool   { return false }
 func (CurrentHue) Reportable() bool { return true }
 func (CurrentHue) SceneIndex() int  { return -1 }
 
-func (CurrentHue) Name() string { return "Current hue" }
+func (CurrentHue) Name() string { return `Current hue` }
+func (CurrentHue) Description() string {
+	return `contains the current hue value of the light. Hue = CurrentHue x 360 / 254
+(CurrentHue in the range 0 - 254 inclusive)`
+}
 
 // CurrentHue contains the current hue value of the light. Hue = CurrentHue x 360 / 254
 // (CurrentHue in the range 0 - 254 inclusive)
@@ -1900,7 +2060,12 @@ func (CurrentSaturation) Writable() bool   { return false }
 func (CurrentSaturation) Reportable() bool { return true }
 func (CurrentSaturation) SceneIndex() int  { return 4 }
 
-func (CurrentSaturation) Name() string { return "Current saturation" }
+func (CurrentSaturation) Name() string { return `Current saturation` }
+func (CurrentSaturation) Description() string {
+	return `holds the current saturation value of the light.
+Saturation = CurrentSaturation/254 (CurrentSaturation in the range
+0 - 254 inclusive)`
+}
 
 // CurrentSaturation holds the current saturation value of the light.
 // Saturation = CurrentSaturation/254 (CurrentSaturation in the range
@@ -1944,75 +2109,6 @@ func (a CurrentSaturation) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (Direction) Name() string { return "Direction" }
-
-type Direction zcl.Zenum8
-
-func (a *Direction) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *Direction) Value() zcl.Val     { return a }
-
-func (a Direction) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
-
-func (a *Direction) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zenum8)
-	br, err := nt.UnmarshalZcl(b)
-	*a = Direction(*nt)
-	return br, err
-}
-
-func (a Direction) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
-}
-
-func (a *Direction) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
-		return err
-	}
-	*a = Direction(*v)
-	return nil
-}
-
-func (a *Direction) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = Direction(*nv)
-		return nil
-	}
-	return zcl.ErrInvalidType
-}
-
-func (a Direction) String() string {
-	switch a {
-	case 0x00:
-		return "Shortest distance"
-	case 0x01:
-		return "Longest Distance"
-	case 0x02:
-		return "Up"
-	case 0x03:
-		return "Down"
-	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
-}
-
-func (a Direction) IsShortestDistance() bool { return a == 0x00 }
-func (a Direction) IsLongestDistance() bool  { return a == 0x01 }
-func (a Direction) IsUp() bool               { return a == 0x02 }
-func (a Direction) IsDown() bool             { return a == 0x03 }
-func (a *Direction) SetShortestDistance()    { *a = 0x00 }
-func (a *Direction) SetLongestDistance()     { *a = 0x01 }
-func (a *Direction) SetUp()                  { *a = 0x02 }
-func (a *Direction) SetDown()                { *a = 0x03 }
-
-func (Direction) SingleOptions() []zcl.Option {
-	return []zcl.Option{
-		{Value: 0x00, Name: "Shortest distance"},
-		{Value: 0x01, Name: "Longest Distance"},
-		{Value: 0x02, Name: "Up"},
-		{Value: 0x03, Name: "Down"},
-	}
-}
-
 const DriftCompensationAttr zcl.AttrID = 5
 
 func (DriftCompensation) ID() zcl.AttrID   { return DriftCompensationAttr }
@@ -2021,7 +2117,11 @@ func (DriftCompensation) Writable() bool   { return false }
 func (DriftCompensation) Reportable() bool { return false }
 func (DriftCompensation) SceneIndex() int  { return -1 }
 
-func (DriftCompensation) Name() string { return "Drift Compensation" }
+func (DriftCompensation) Name() string { return `Drift Compensation` }
+func (DriftCompensation) Description() string {
+	return `indicates what mechanism, if any, is in use for compensation for
+color/intensity drift over time`
+}
 
 // DriftCompensation indicates what mechanism, if any, is in use for compensation for
 // color/intensity drift over time
@@ -2097,7 +2197,8 @@ func (DriftCompensation) SingleOptions() []zcl.Option {
 	}
 }
 
-func (EnhancedHue) Name() string { return "Enhanced Hue" }
+func (EnhancedHue) Name() string        { return `Enhanced Hue` }
+func (EnhancedHue) Description() string { return `` }
 
 type EnhancedHue zcl.Zu16
 
@@ -2146,7 +2247,11 @@ func (EnhancedColorMode) Writable() bool   { return false }
 func (EnhancedColorMode) Reportable() bool { return false }
 func (EnhancedColorMode) SceneIndex() int  { return -1 }
 
-func (EnhancedColorMode) Name() string { return "Enhanced color mode" }
+func (EnhancedColorMode) Name() string { return `Enhanced color mode` }
+func (EnhancedColorMode) Description() string {
+	return `specifies which attributes are currently determining the color of
+the device`
+}
 
 // EnhancedColorMode specifies which attributes are currently determining the color of
 // the device
@@ -2225,7 +2330,17 @@ func (EnhancedCurrentHue) Writable() bool   { return false }
 func (EnhancedCurrentHue) Reportable() bool { return false }
 func (EnhancedCurrentHue) SceneIndex() int  { return 3 }
 
-func (EnhancedCurrentHue) Name() string { return "Enhanced current hue" }
+func (EnhancedCurrentHue) Name() string { return `Enhanced current hue` }
+func (EnhancedCurrentHue) Description() string {
+	return `represents non-equidistant steps along the CIE 1931 color triangle,
+and it provides 16-bits precision. The upper 8 bits of this attribute
+are used as an index in the implementation specific XY lookup table to
+provide the non-equidistance steps. The lower 8 bits are used to
+interpolate between these steps in a linear way in order to provide color
+zoom for the user. To provide compatibility with standard ZCL, the
+CurrentHue attribute contains a hue value in the range 0 to 254,
+calculated from the EnhancedCurrentHue attribute`
+}
 
 // EnhancedCurrentHue represents non-equidistant steps along the CIE 1931 color triangle,
 // and it provides 16-bits precision. The upper 8 bits of this attribute
@@ -2274,7 +2389,8 @@ func (a EnhancedCurrentHue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (Hue) Name() string { return "Hue" }
+func (Hue) Name() string        { return `Hue` }
+func (Hue) Description() string { return `` }
 
 type Hue zcl.Zu8
 
@@ -2315,7 +2431,8 @@ func (a Hue) String() string {
 	return zcl.DegreesAngular.Format(float64(a) / 0.70556)
 }
 
-func (HueDirection) Name() string { return "Hue Direction" }
+func (HueDirection) Name() string        { return `Hue Direction` }
+func (HueDirection) Description() string { return `` }
 
 type HueDirection zcl.Zenum8
 
@@ -2382,7 +2499,11 @@ func (IntrinsicBallastFactor) Writable() bool   { return true }
 func (IntrinsicBallastFactor) Reportable() bool { return false }
 func (IntrinsicBallastFactor) SceneIndex() int  { return -1 }
 
-func (IntrinsicBallastFactor) Name() string { return "Intrinsic Ballast Factor" }
+func (IntrinsicBallastFactor) Name() string { return `Intrinsic Ballast Factor` }
+func (IntrinsicBallastFactor) Description() string {
+	return `specifies, as a percentage, the ballast factor of the ballast/lamp
+combination, prior to any adjustment.`
+}
 
 // IntrinsicBallastFactor specifies, as a percentage, the ballast factor of the ballast/lamp
 // combination, prior to any adjustment.
@@ -2433,7 +2554,11 @@ func (LampAlarmMode) Writable() bool   { return true }
 func (LampAlarmMode) Reportable() bool { return false }
 func (LampAlarmMode) SceneIndex() int  { return -1 }
 
-func (LampAlarmMode) Name() string { return "Lamp Alarm Mode" }
+func (LampAlarmMode) Name() string { return `Lamp Alarm Mode` }
+func (LampAlarmMode) Description() string {
+	return `specifies which attributes can cause an alarm notification to be
+generated`
+}
 
 // LampAlarmMode specifies which attributes can cause an alarm notification to be
 // generated
@@ -2503,7 +2628,13 @@ func (LampBurnHours) Writable() bool   { return true }
 func (LampBurnHours) Reportable() bool { return false }
 func (LampBurnHours) SceneIndex() int  { return -1 }
 
-func (LampBurnHours) Name() string { return "Lamp Burn Hours" }
+func (LampBurnHours) Name() string { return `Lamp Burn Hours` }
+func (LampBurnHours) Description() string {
+	return `specifies the length of time, in hours, the currently connected
+lamps have been operated, cumulative since the last re-lamping. Burn
+hours are not accumulated if the lamps are off and are reset to 0
+when a lamp is changed`
+}
 
 // LampBurnHours specifies the length of time, in hours, the currently connected
 // lamps have been operated, cumulative since the last re-lamping. Burn
@@ -2556,7 +2687,11 @@ func (LampBurnHoursTripPoint) Writable() bool   { return true }
 func (LampBurnHoursTripPoint) Reportable() bool { return false }
 func (LampBurnHoursTripPoint) SceneIndex() int  { return -1 }
 
-func (LampBurnHoursTripPoint) Name() string { return "Lamp Burn Hours Trip Point" }
+func (LampBurnHoursTripPoint) Name() string { return `Lamp Burn Hours Trip Point` }
+func (LampBurnHoursTripPoint) Description() string {
+	return `specifies the number of hours the LampBurnHours attribute can
+reach before an alarm is generated`
+}
 
 // LampBurnHoursTripPoint specifies the number of hours the LampBurnHours attribute can
 // reach before an alarm is generated
@@ -2607,7 +2742,11 @@ func (LampManufacturer) Writable() bool   { return true }
 func (LampManufacturer) Reportable() bool { return false }
 func (LampManufacturer) SceneIndex() int  { return -1 }
 
-func (LampManufacturer) Name() string { return "Lamp Manufacturer" }
+func (LampManufacturer) Name() string { return `Lamp Manufacturer` }
+func (LampManufacturer) Description() string {
+	return `specifies the name of the manufacturer of the currently connected
+lamps.`
+}
 
 // LampManufacturer specifies the name of the manufacturer of the currently connected
 // lamps.
@@ -2658,7 +2797,10 @@ func (LampQuantity) Writable() bool   { return false }
 func (LampQuantity) Reportable() bool { return false }
 func (LampQuantity) SceneIndex() int  { return -1 }
 
-func (LampQuantity) Name() string { return "Lamp Quantity" }
+func (LampQuantity) Name() string { return `Lamp Quantity` }
+func (LampQuantity) Description() string {
+	return `specifies the number of lamps connected to this ballast`
+}
 
 // LampQuantity specifies the number of lamps connected to this ballast
 type LampQuantity zcl.Zu8
@@ -2708,7 +2850,11 @@ func (LampRatedHours) Writable() bool   { return true }
 func (LampRatedHours) Reportable() bool { return false }
 func (LampRatedHours) SceneIndex() int  { return -1 }
 
-func (LampRatedHours) Name() string { return "Lamp Rated Hours" }
+func (LampRatedHours) Name() string { return `Lamp Rated Hours` }
+func (LampRatedHours) Description() string {
+	return `specifies the number of hours of use the lamps are rated for by
+the manufacturer`
+}
 
 // LampRatedHours specifies the number of hours of use the lamps are rated for by
 // the manufacturer
@@ -2759,7 +2905,8 @@ func (LampType) Writable() bool   { return true }
 func (LampType) Reportable() bool { return false }
 func (LampType) SceneIndex() int  { return -1 }
 
-func (LampType) Name() string { return "Lamp Type" }
+func (LampType) Name() string        { return `Lamp Type` }
+func (LampType) Description() string { return `` }
 
 type LampType zcl.Zcstring
 
@@ -2808,7 +2955,14 @@ func (MaxLevel) Writable() bool   { return true }
 func (MaxLevel) Reportable() bool { return false }
 func (MaxLevel) SceneIndex() int  { return -1 }
 
-func (MaxLevel) Name() string { return "Max Level" }
+func (MaxLevel) Name() string { return `Max Level` }
+func (MaxLevel) Description() string {
+	return `specifies the maximum light level the ballast is permitted to use.
+It is specified in the range 0x01 to 0xfe, and specifies the light
+output of the ballast according to the dimming light curve. The value
+is both less than or equal to PhysicalMaxLevel and greater than or equal
+to MinLevel`
+}
 
 // MaxLevel specifies the maximum light level the ballast is permitted to use.
 // It is specified in the range 0x01 to 0xfe, and specifies the light
@@ -2862,7 +3016,8 @@ func (MinLevel) Writable() bool   { return true }
 func (MinLevel) Reportable() bool { return false }
 func (MinLevel) SceneIndex() int  { return -1 }
 
-func (MinLevel) Name() string { return "Min Level" }
+func (MinLevel) Name() string        { return `Min Level` }
+func (MinLevel) Description() string { return `` }
 
 type MinLevel zcl.Zu8
 
@@ -2903,7 +3058,78 @@ func (a MinLevel) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (MoveMode) Name() string { return "Move mode" }
+func (MoveDirection) Name() string        { return `Move Direction` }
+func (MoveDirection) Description() string { return `` }
+
+type MoveDirection zcl.Zenum8
+
+func (a *MoveDirection) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (a *MoveDirection) Value() zcl.Val     { return a }
+
+func (a MoveDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+
+func (a *MoveDirection) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zenum8)
+	br, err := nt.UnmarshalZcl(b)
+	*a = MoveDirection(*nt)
+	return br, err
+}
+
+func (a MoveDirection) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(a))
+}
+
+func (a *MoveDirection) UnmarshalJSON(b []byte) error {
+	v := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, v); err != nil {
+		return err
+	}
+	*a = MoveDirection(*v)
+	return nil
+}
+
+func (a *MoveDirection) SetValue(v zcl.Val) error {
+	if nv, ok := v.(*zcl.Zenum8); ok {
+		*a = MoveDirection(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (a MoveDirection) String() string {
+	switch a {
+	case 0x00:
+		return "Shortest distance"
+	case 0x01:
+		return "Longest Distance"
+	case 0x02:
+		return "Up"
+	case 0x03:
+		return "Down"
+	}
+	return zcl.Sprintf("%v", zcl.Zenum8(a))
+}
+
+func (a MoveDirection) IsShortestDistance() bool { return a == 0x00 }
+func (a MoveDirection) IsLongestDistance() bool  { return a == 0x01 }
+func (a MoveDirection) IsUp() bool               { return a == 0x02 }
+func (a MoveDirection) IsDown() bool             { return a == 0x03 }
+func (a *MoveDirection) SetShortestDistance()    { *a = 0x00 }
+func (a *MoveDirection) SetLongestDistance()     { *a = 0x01 }
+func (a *MoveDirection) SetUp()                  { *a = 0x02 }
+func (a *MoveDirection) SetDown()                { *a = 0x03 }
+
+func (MoveDirection) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Shortest distance"},
+		{Value: 0x01, Name: "Longest Distance"},
+		{Value: 0x02, Name: "Up"},
+		{Value: 0x03, Name: "Down"},
+	}
+}
+
+func (MoveMode) Name() string        { return `Move mode` }
+func (MoveMode) Description() string { return `` }
 
 type MoveMode zcl.Zenum8
 
@@ -2975,7 +3201,11 @@ func (NumberOfPrimaries) Writable() bool   { return false }
 func (NumberOfPrimaries) Reportable() bool { return false }
 func (NumberOfPrimaries) SceneIndex() int  { return -1 }
 
-func (NumberOfPrimaries) Name() string { return "Number of primaries" }
+func (NumberOfPrimaries) Name() string { return `Number of primaries` }
+func (NumberOfPrimaries) Description() string {
+	return `contains the number of color primaries implemented on this device.
+A value of 0xff indicates that the number of primaries is unknown`
+}
 
 // NumberOfPrimaries contains the number of color primaries implemented on this device.
 // A value of 0xff indicates that the number of primaries is unknown
@@ -3026,7 +3256,12 @@ func (PhysicalMaxLevel) Writable() bool   { return false }
 func (PhysicalMaxLevel) Reportable() bool { return false }
 func (PhysicalMaxLevel) SceneIndex() int  { return -1 }
 
-func (PhysicalMaxLevel) Name() string { return "Physical Max Level" }
+func (PhysicalMaxLevel) Name() string { return `Physical Max Level` }
+func (PhysicalMaxLevel) Description() string {
+	return `specifies the maximum light level the ballast can achieve. It is
+specified in the range 0x01 to 0xfe, and specifies the light output
+of the ballast according to the dimming light curve`
+}
 
 // PhysicalMaxLevel specifies the maximum light level the ballast can achieve. It is
 // specified in the range 0x01 to 0xfe, and specifies the light output
@@ -3078,7 +3313,12 @@ func (PhysicalMinLevel) Writable() bool   { return false }
 func (PhysicalMinLevel) Reportable() bool { return false }
 func (PhysicalMinLevel) SceneIndex() int  { return -1 }
 
-func (PhysicalMinLevel) Name() string { return "Physical Min Level" }
+func (PhysicalMinLevel) Name() string { return `Physical Min Level` }
+func (PhysicalMinLevel) Description() string {
+	return `specifies the minimum light level the ballast can achieve. It is
+specified in the range 0x01 to 0xfe, and specifies the light output
+of the ballast according to the dimming light curve`
+}
 
 // PhysicalMinLevel specifies the minimum light level the ballast can achieve. It is
 // specified in the range 0x01 to 0xfe, and specifies the light output
@@ -3130,7 +3370,14 @@ func (PowerOnLevel) Writable() bool   { return true }
 func (PowerOnLevel) Reportable() bool { return false }
 func (PowerOnLevel) SceneIndex() int  { return -1 }
 
-func (PowerOnLevel) Name() string { return "Power On level" }
+func (PowerOnLevel) Name() string { return `Power On level` }
+func (PowerOnLevel) Description() string {
+	return `It specifies the light level to which the ballast will go when power
+is applied (e.g., when mains power is re-established after a power
+failure). It can have a value between 0x00 and 0xfe to set it to
+a specific light level, according to the dimming light curve, or
+0xff to set it to the value it was before the power failure`
+}
 
 // PowerOnLevel It specifies the light level to which the ballast will go when power
 // is applied (e.g., when mains power is re-established after a power
@@ -3184,7 +3431,8 @@ func (PowerOnTime) Writable() bool   { return true }
 func (PowerOnTime) Reportable() bool { return false }
 func (PowerOnTime) SceneIndex() int  { return -1 }
 
-func (PowerOnTime) Name() string { return "Power-On Time" }
+func (PowerOnTime) Name() string        { return `Power-On Time` }
+func (PowerOnTime) Description() string { return `The transition time in 1/10ths of a second.` }
 
 // PowerOnTime The transition time in 1/10ths of a second.
 type PowerOnTime zcl.Zu16
@@ -3234,7 +3482,8 @@ func (PowerOnColorTemperature) Writable() bool   { return true }
 func (PowerOnColorTemperature) Reportable() bool { return false }
 func (PowerOnColorTemperature) SceneIndex() int  { return -1 }
 
-func (PowerOnColorTemperature) Name() string { return "Power-on color temperature" }
+func (PowerOnColorTemperature) Name() string        { return `Power-on color temperature` }
+func (PowerOnColorTemperature) Description() string { return `` }
 
 type PowerOnColorTemperature zcl.Zu16
 
@@ -3283,7 +3532,12 @@ func (Primary1X) Writable() bool   { return false }
 func (Primary1X) Reportable() bool { return false }
 func (Primary1X) SceneIndex() int  { return -1 }
 
-func (Primary1X) Name() string { return "Primary1 X" }
+func (Primary1X) Name() string { return `Primary1 X` }
+func (Primary1X) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary1X contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -3335,7 +3589,12 @@ func (Primary1Y) Writable() bool   { return false }
 func (Primary1Y) Reportable() bool { return false }
 func (Primary1Y) SceneIndex() int  { return -1 }
 
-func (Primary1Y) Name() string { return "Primary1 Y" }
+func (Primary1Y) Name() string { return `Primary1 Y` }
+func (Primary1Y) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary1Y contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -3387,7 +3646,14 @@ func (Primary1Intensity) Writable() bool   { return false }
 func (Primary1Intensity) Reportable() bool { return false }
 func (Primary1Intensity) SceneIndex() int  { return -1 }
 
-func (Primary1Intensity) Name() string { return "Primary1 intensity" }
+func (Primary1Intensity) Name() string { return `Primary1 intensity` }
+func (Primary1Intensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // Primary1Intensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -3441,7 +3707,12 @@ func (Primary2X) Writable() bool   { return false }
 func (Primary2X) Reportable() bool { return false }
 func (Primary2X) SceneIndex() int  { return -1 }
 
-func (Primary2X) Name() string { return "Primary2 X" }
+func (Primary2X) Name() string { return `Primary2 X` }
+func (Primary2X) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary2X contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -3493,7 +3764,12 @@ func (Primary2Y) Writable() bool   { return false }
 func (Primary2Y) Reportable() bool { return false }
 func (Primary2Y) SceneIndex() int  { return -1 }
 
-func (Primary2Y) Name() string { return "Primary2 Y" }
+func (Primary2Y) Name() string { return `Primary2 Y` }
+func (Primary2Y) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary2Y contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -3545,7 +3821,14 @@ func (Primary2Intensity) Writable() bool   { return false }
 func (Primary2Intensity) Reportable() bool { return false }
 func (Primary2Intensity) SceneIndex() int  { return -1 }
 
-func (Primary2Intensity) Name() string { return "Primary2 intensity" }
+func (Primary2Intensity) Name() string { return `Primary2 intensity` }
+func (Primary2Intensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // Primary2Intensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -3599,7 +3882,12 @@ func (Primary3X) Writable() bool   { return false }
 func (Primary3X) Reportable() bool { return false }
 func (Primary3X) SceneIndex() int  { return -1 }
 
-func (Primary3X) Name() string { return "Primary3 X" }
+func (Primary3X) Name() string { return `Primary3 X` }
+func (Primary3X) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary3X contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -3651,7 +3939,12 @@ func (Primary3Y) Writable() bool   { return false }
 func (Primary3Y) Reportable() bool { return false }
 func (Primary3Y) SceneIndex() int  { return -1 }
 
-func (Primary3Y) Name() string { return "Primary3 Y" }
+func (Primary3Y) Name() string { return `Primary3 Y` }
+func (Primary3Y) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary3Y contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -3703,7 +3996,14 @@ func (Primary3Intensity) Writable() bool   { return false }
 func (Primary3Intensity) Reportable() bool { return false }
 func (Primary3Intensity) SceneIndex() int  { return -1 }
 
-func (Primary3Intensity) Name() string { return "Primary3 intensity" }
+func (Primary3Intensity) Name() string { return `Primary3 intensity` }
+func (Primary3Intensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // Primary3Intensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -3757,7 +4057,12 @@ func (Primary4X) Writable() bool   { return false }
 func (Primary4X) Reportable() bool { return false }
 func (Primary4X) SceneIndex() int  { return -1 }
 
-func (Primary4X) Name() string { return "Primary4 X" }
+func (Primary4X) Name() string { return `Primary4 X` }
+func (Primary4X) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary4X contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -3809,7 +4114,12 @@ func (Primary4Y) Writable() bool   { return false }
 func (Primary4Y) Reportable() bool { return false }
 func (Primary4Y) SceneIndex() int  { return -1 }
 
-func (Primary4Y) Name() string { return "Primary4 Y" }
+func (Primary4Y) Name() string { return `Primary4 Y` }
+func (Primary4Y) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary4Y contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -3861,7 +4171,14 @@ func (Primary4Intensity) Writable() bool   { return false }
 func (Primary4Intensity) Reportable() bool { return false }
 func (Primary4Intensity) SceneIndex() int  { return -1 }
 
-func (Primary4Intensity) Name() string { return "Primary4 intensity" }
+func (Primary4Intensity) Name() string { return `Primary4 intensity` }
+func (Primary4Intensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // Primary4Intensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -3915,7 +4232,12 @@ func (Primary5X) Writable() bool   { return false }
 func (Primary5X) Reportable() bool { return false }
 func (Primary5X) SceneIndex() int  { return -1 }
 
-func (Primary5X) Name() string { return "Primary5 X" }
+func (Primary5X) Name() string { return `Primary5 X` }
+func (Primary5X) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary5X contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -3967,7 +4289,12 @@ func (Primary5Y) Writable() bool   { return false }
 func (Primary5Y) Reportable() bool { return false }
 func (Primary5Y) SceneIndex() int  { return -1 }
 
-func (Primary5Y) Name() string { return "Primary5 Y" }
+func (Primary5Y) Name() string { return `Primary5 Y` }
+func (Primary5Y) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary5Y contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -4019,7 +4346,14 @@ func (Primary5Intensity) Writable() bool   { return false }
 func (Primary5Intensity) Reportable() bool { return false }
 func (Primary5Intensity) SceneIndex() int  { return -1 }
 
-func (Primary5Intensity) Name() string { return "Primary5 intensity" }
+func (Primary5Intensity) Name() string { return `Primary5 intensity` }
+func (Primary5Intensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // Primary5Intensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -4073,7 +4407,12 @@ func (Primary6X) Writable() bool   { return false }
 func (Primary6X) Reportable() bool { return false }
 func (Primary6X) SceneIndex() int  { return -1 }
 
-func (Primary6X) Name() string { return "Primary6 X" }
+func (Primary6X) Name() string { return `Primary6 X` }
+func (Primary6X) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary6X contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -4125,7 +4464,12 @@ func (Primary6Y) Writable() bool   { return false }
 func (Primary6Y) Reportable() bool { return false }
 func (Primary6Y) SceneIndex() int  { return -1 }
 
-func (Primary6Y) Name() string { return "Primary6 Y" }
+func (Primary6Y) Name() string { return `Primary6 Y` }
+func (Primary6Y) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // Primary6Y contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value
@@ -4177,7 +4521,14 @@ func (Primary6Intensity) Writable() bool   { return false }
 func (Primary6Intensity) Reportable() bool { return false }
 func (Primary6Intensity) SceneIndex() int  { return -1 }
 
-func (Primary6Intensity) Name() string { return "Primary6 intensity" }
+func (Primary6Intensity) Name() string { return `Primary6 intensity` }
+func (Primary6Intensity) Description() string {
+	return `contains a representation of the maximum intensity of this attribute as
+defined in the Dimming Light Curve in the Ballast Configuration cluster,
+normalized such that the attribute with the highest maximum intensity
+contains the value 0xfe. A value of 0xff indicates that this attribute is
+not available`
+}
 
 // Primary6Intensity contains a representation of the maximum intensity of this attribute as
 // defined in the Dimming Light Curve in the Ballast Configuration cluster,
@@ -4223,7 +4574,8 @@ func (a Primary6Intensity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (Rate) Name() string { return "Rate" }
+func (Rate) Name() string        { return `Rate` }
+func (Rate) Description() string { return `increment/steps per second` }
 
 // Rate increment/steps per second
 type Rate zcl.Zu8
@@ -4265,7 +4617,8 @@ func (a Rate) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (RateX) Name() string { return "Rate X" }
+func (RateX) Name() string        { return `Rate X` }
+func (RateX) Description() string { return `increment/steps per second` }
 
 // RateX increment/steps per second
 type RateX zcl.Zs16
@@ -4307,7 +4660,8 @@ func (a RateX) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
 }
 
-func (RateY) Name() string { return "Rate Y" }
+func (RateY) Name() string        { return `Rate Y` }
+func (RateY) Description() string { return `increment/steps per second` }
 
 // RateY increment/steps per second
 type RateY zcl.Zs16
@@ -4357,7 +4711,11 @@ func (RemainingTime) Writable() bool   { return false }
 func (RemainingTime) Reportable() bool { return false }
 func (RemainingTime) SceneIndex() int  { return -1 }
 
-func (RemainingTime) Name() string { return "Remaining time" }
+func (RemainingTime) Name() string { return `Remaining time` }
+func (RemainingTime) Description() string {
+	return `holds the time remaining, in 1/10ths of a second, until the currently
+active command will be complete`
+}
 
 // RemainingTime holds the time remaining, in 1/10ths of a second, until the currently
 // active command will be complete
@@ -4400,7 +4758,8 @@ func (a RemainingTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
 }
 
-func (Saturation) Name() string { return "Saturation" }
+func (Saturation) Name() string        { return `Saturation` }
+func (Saturation) Description() string { return `` }
 
 type Saturation zcl.Zu8
 
@@ -4441,7 +4800,8 @@ func (a Saturation) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (StepX) Name() string { return "Step X" }
+func (StepX) Name() string        { return `Step X` }
+func (StepX) Description() string { return `` }
 
 type StepX zcl.Zs16
 
@@ -4482,7 +4842,8 @@ func (a StepX) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
 }
 
-func (StepY) Name() string { return "Step Y" }
+func (StepY) Name() string        { return `Step Y` }
+func (StepY) Description() string { return `` }
 
 type StepY zcl.Zs16
 
@@ -4523,7 +4884,8 @@ func (a StepY) String() string {
 	return zcl.Sprintf("%v", zcl.Zs16(a))
 }
 
-func (StepMode) Name() string { return "Step mode" }
+func (StepMode) Name() string        { return `Step mode` }
+func (StepMode) Description() string { return `` }
 
 type StepMode zcl.Zenum8
 
@@ -4582,7 +4944,8 @@ func (StepMode) SingleOptions() []zcl.Option {
 	}
 }
 
-func (StepSize) Name() string { return "Step size" }
+func (StepSize) Name() string        { return `Step size` }
+func (StepSize) Description() string { return `` }
 
 type StepSize zcl.Zu8
 
@@ -4623,7 +4986,8 @@ func (a StepSize) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (Time) Name() string { return "Time" }
+func (Time) Name() string        { return `Time` }
+func (Time) Description() string { return `Time in seconds used for a whole color loop.` }
 
 // Time Time in seconds used for a whole color loop.
 type Time zcl.Zu16
@@ -4665,7 +5029,8 @@ func (a Time) String() string {
 	return zcl.Seconds.Format(float64(a))
 }
 
-func (TransitionTime) Name() string { return "Transition time" }
+func (TransitionTime) Name() string        { return `Transition time` }
+func (TransitionTime) Description() string { return `The transition time in 1/10ths of a second.` }
 
 // TransitionTime The transition time in 1/10ths of a second.
 type TransitionTime zcl.Zu16
@@ -4707,7 +5072,8 @@ func (a TransitionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
 }
 
-func (UpdateFlags) Name() string { return "Update flags" }
+func (UpdateFlags) Name() string        { return `Update flags` }
+func (UpdateFlags) Description() string { return `` }
 
 type UpdateFlags zcl.Zbmp8
 
@@ -4790,7 +5156,12 @@ func (WhitePointX) Writable() bool   { return true }
 func (WhitePointX) Reportable() bool { return false }
 func (WhitePointX) SceneIndex() int  { return -1 }
 
-func (WhitePointX) Name() string { return "White Point X" }
+func (WhitePointX) Name() string { return `White Point X` }
+func (WhitePointX) Description() string {
+	return `contains the normalized chromaticity value x for this attribute, as
+defined in the CIE xyY Color Space. x = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // WhitePointX contains the normalized chromaticity value x for this attribute, as
 // defined in the CIE xyY Color Space. x = value / 65536 (value
@@ -4842,7 +5213,12 @@ func (WhitePointY) Writable() bool   { return true }
 func (WhitePointY) Reportable() bool { return false }
 func (WhitePointY) SceneIndex() int  { return -1 }
 
-func (WhitePointY) Name() string { return "White Point Y" }
+func (WhitePointY) Name() string { return `White Point Y` }
+func (WhitePointY) Description() string {
+	return `contains the normalized chromaticity value y for this attribute, as
+defined in the CIE xyY Color Space. y = value / 65536 (value
+in the range 0 to 65279 inclusive)`
+}
 
 // WhitePointY contains the normalized chromaticity value y for this attribute, as
 // defined in the CIE xyY Color Space. y = value / 65536 (value

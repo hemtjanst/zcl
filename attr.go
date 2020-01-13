@@ -6,11 +6,6 @@ type AttrID Zu16
 
 func (i AttrID) MarshalZcl() ([]byte, error) { return Zu16(i).MarshalZcl() }
 
-type AttrDef interface {
-	ID() AttrID
-	Value() Val
-}
-
 type UnknownAttr struct {
 	Type      TypeID
 	AttrID    AttrID
@@ -45,9 +40,13 @@ func JsonAttr(a Attr) ([]byte, error) {
 	})
 }
 
-type Argument interface {
+type TypeVal interface {
 	Val
 	TypeID() TypeID
+}
+
+type Argument interface {
+	TypeVal
 	Name() string
 	String() string
 	Value() Val
@@ -61,6 +60,16 @@ type Attr interface {
 	Writable() bool
 	Reportable() bool
 	SceneIndex() int
+}
+
+type AttrDef interface {
+	AttrID() AttrID
+	AttrType() TypeID
+}
+
+type AttrValue interface {
+	AttrDef
+	AttrValue() Val
 }
 
 type ClusterAttrImpl struct {

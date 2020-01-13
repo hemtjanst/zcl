@@ -34,12 +34,44 @@ func writeFile(f string, b []byte) error {
 	return err2
 }
 
-func genHelpers(clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncMap {
+func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncMap {
 	// clusterID()
 	return template.FuncMap{
 		"base": path.Base,
 		"path": func(pkg ...string) string { return path.Join(append([]string{base}, pkg...)...) },
 		"fmt":  fmt.Sprintf,
+		"zdo": func() bool {
+			return zdo != nil
+		},
+		"strEsc": func(str interface{}) string {
+			var s string
+			if v, ok := str.(string); ok {
+				s = v
+			} else if v, ok := str.(fmt.Stringer); ok {
+				s = v.String()
+			} else {
+				s = fmt.Sprintf("%v", str)
+			}
+
+			s = strings.TrimSpace(strings.ReplaceAll(s, "\r", ""))
+			rows := strings.Split(s, "\n")
+			var out []string
+			if strings.Contains(s, "`") {
+				for _, ss := range rows {
+					ss = strings.ReplaceAll(
+						strings.ReplaceAll(ss, `\`, `\\`),
+						`"`, `\"`)
+					out = append(out, `"`+ss+`"`) // Use quotes if string contains `
+				}
+			} else {
+				for _, ss := range rows {
+					out = append(out, "`"+ss+"`")
+				}
+				return fmt.Sprintf("`%s`", s)
+			}
+
+			return strings.Join(out, " + \"\\n\" + \n")
+		},
 		"package": func() string {
 			return filepath.Base(pkg)
 		},
@@ -49,8 +81,49 @@ func genHelpers(clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncM
 		"mfc": func() MfCode {
 			return mfc
 		},
+		"direction": func(c Command) string {
+			if cluster != nil {
+				for _, cmd := range cluster.Server.Command {
+					if cmd.ID == c.ID {
+						return "ClientToServer"
+					}
+				}
+				for _, cmd := range cluster.Client.Command {
+					if cmd.ID == c.ID {
+						return "ServerToClient"
+					}
+				}
+			}
+			return ""
+		},
+		"findResponse": func(c Command) *Command {
+			if c.Response == nil {
+				return nil
+			}
+			rsp := *c.Response
+			if cluster != nil && server {
+				for _, cmd := range cluster.Client.Command {
+					if cmd.ID.AsDecimal() == rsp.AsDecimal() {
+						return &cmd
+					}
+				}
+			} else if cluster != nil {
+				for _, cmd := range cluster.Server.Command {
+					if cmd.ID.AsDecimal() == rsp.AsDecimal() {
+						return &cmd
+					}
+				}
+			} else if zdo != nil {
+				for _, cmd := range zdo.Commands {
+					if cmd.ID.AsDecimal() == rsp.AsDecimal() {
+						return &cmd
+					}
+				}
+			}
+			return nil
+		},
 		"renderType": func(attr Attr) string {
-			attrTpl, err := loadTpl(tplPath, "attr", genHelpers(clusterID, pkg, tplPath, base, mfc))
+			attrTpl, err := loadTpl(tplPath, "attr", genHelpers(cluster, zdo, server, clusterID, pkg, tplPath, base, mfc))
 			if err != nil {
 				log.Fatalf("Cannot load attribute template: %+v", err)
 			}
@@ -62,7 +135,7 @@ func genHelpers(clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncM
 			return string(*wr)
 		},
 		"renderCluster": func(cl Cluster) string {
-			attrTpl, err := loadTpl(tplPath, "cluster", genHelpers(cl.ID.Hex4(), pkg, tplPath, base, cl.MfCode))
+			attrTpl, err := loadTpl(tplPath, "cluster", genHelpers(cluster, zdo, server, cl.ID.Hex4(), pkg, tplPath, base, cl.MfCode))
 			if err != nil {
 				log.Fatalf("Cannot load attribute template: %+v", err)
 			}
@@ -73,12 +146,12 @@ func genHelpers(clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncM
 			}
 			return string(*wr)
 		},
-		"renderCommand": func(cmd Command, newClusterID ...string) string {
+		"renderCommand": func(cmd Command, server bool, newClusterID ...string) string {
 			clid := clusterID
 			if len(newClusterID) > 0 {
 				clid = newClusterID[0]
 			}
-			cmdTpl, err := loadTpl(tplPath, "command", genHelpers(clid, pkg, tplPath, base, mfc))
+			cmdTpl, err := loadTpl(tplPath, "command", genHelpers(cluster, zdo, server, clid, pkg, tplPath, base, mfc))
 			if err != nil {
 				log.Fatalf("Cannot load command template: %+v", err)
 			}
@@ -164,7 +237,7 @@ func GenerateZdo(base, defPath, tplPath, outPath string) error {
 	zdoTpl, err := loadTpl(
 		tplPath,
 		"zdo",
-		genHelpers("", "cluster", tplPath, base, MfCode("")),
+		genHelpers(nil, ret, false, "", "cluster", tplPath, base, MfCode("")),
 	)
 
 	if err != nil {
@@ -217,7 +290,7 @@ func GenerateStruct(base, defPath, tplPath, outPath string) error {
 		dp = strings.TrimSuffix(dp, ".yaml")
 		_ = os.MkdirAll(dp, 0755)
 
-		structTpl, err := loadTpl(tplPath, "struct", genHelpers("", dp, tplPath, base, ""))
+		structTpl, err := loadTpl(tplPath, "struct", genHelpers(nil, nil, false, "", dp, tplPath, base, ""))
 		if err != nil {
 			return fmt.Errorf("parsing struct template: %v", err)
 		}
@@ -232,7 +305,7 @@ func GenerateStruct(base, defPath, tplPath, outPath string) error {
 		}
 
 		for _, cl := range clRoot.Clusters {
-			clusterTpl, err := loadTpl(tplPath, "cluster", genHelpers(cl.Name.Fmt()+"ID", dp, tplPath, base, cl.MfCode))
+			clusterTpl, err := loadTpl(tplPath, "cluster", genHelpers(&cl, nil, false, cl.Name.Fmt()+"ID", dp, tplPath, base, cl.MfCode))
 			if err != nil {
 				return fmt.Errorf("parsing cluster template: %v", err)
 			}

@@ -43,6 +43,10 @@ var BasicCluster = zcl.Cluster{
 type ResetToFactoryDefaults struct {
 }
 
+type ResetToFactoryDefaultsHandler interface {
+	HandleResetToFactoryDefaults(frame Frame, cmd *ResetToFactoryDefaults) error
+}
+
 // ResetToFactoryDefaultsCommand is the Command ID of ResetToFactoryDefaults
 const ResetToFactoryDefaultsCommand CommandID = 0x0000
 
@@ -57,7 +61,10 @@ func (v *ResetToFactoryDefaults) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (ResetToFactoryDefaults) Name() string { return "Reset to Factory Defaults" }
+func (ResetToFactoryDefaults) Name() string { return `Reset to Factory Defaults` }
+
+// Description of the command
+func (ResetToFactoryDefaults) Description() string { return `` }
 
 // ID of the command
 func (ResetToFactoryDefaults) ID() CommandID { return ResetToFactoryDefaultsCommand }
@@ -68,11 +75,22 @@ func (ResetToFactoryDefaults) Required() bool { return false }
 // Cluster ID of the command
 func (ResetToFactoryDefaults) Cluster() zcl.ClusterID { return BasicID }
 
+// Direction of the command
+func (ResetToFactoryDefaults) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (ResetToFactoryDefaults) MnfCode() []byte { return []byte{} }
+func (ResetToFactoryDefaults) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (ResetToFactoryDefaults) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *ResetToFactoryDefaults) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h ResetToFactoryDefaultsHandler
+	if h, found = handler.(ResetToFactoryDefaultsHandler); found {
+		err = h.HandleResetToFactoryDefaults(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of ResetToFactoryDefaults
 func (v ResetToFactoryDefaults) MarshalZcl() ([]byte, error) {

@@ -28,6 +28,10 @@ type Identify struct {
 	IdentifyTime IdentifyTime
 }
 
+type IdentifyHandler interface {
+	HandleIdentify(frame Frame, cmd *Identify) error
+}
+
 // IdentifyCommand is the Command ID of Identify
 const IdentifyCommand CommandID = 0x0000
 
@@ -46,7 +50,10 @@ func (v *Identify) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Identify) Name() string { return "Identify" }
+func (Identify) Name() string { return `Identify` }
+
+// Description of the command
+func (Identify) Description() string { return `Start or stop the device identifying itself.` }
 
 // ID of the command
 func (Identify) ID() CommandID { return IdentifyCommand }
@@ -57,11 +64,22 @@ func (Identify) Required() bool { return true }
 // Cluster ID of the command
 func (Identify) Cluster() zcl.ClusterID { return IdentifyID }
 
+// Direction of the command
+func (Identify) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Identify) MnfCode() []byte { return []byte{} }
+func (Identify) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Identify) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *Identify) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h IdentifyHandler
+	if h, found = handler.(IdentifyHandler); found {
+		err = h.HandleIdentify(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Identify
 func (v Identify) MarshalZcl() ([]byte, error) {
@@ -107,6 +125,10 @@ func (v Identify) String() string {
 type IdentifyQuery struct {
 }
 
+type IdentifyQueryHandler interface {
+	HandleIdentifyQuery(frame Frame, cmd *IdentifyQuery) (*IdentifyQueryResponse, error)
+}
+
 // IdentifyQueryCommand is the Command ID of IdentifyQuery
 const IdentifyQueryCommand CommandID = 0x0001
 
@@ -121,7 +143,12 @@ func (v *IdentifyQuery) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (IdentifyQuery) Name() string { return "Identify Query" }
+func (IdentifyQuery) Name() string { return `Identify Query` }
+
+// Description of the command
+func (IdentifyQuery) Description() string {
+	return `Allows the sending device to request the target or targets to respond if they are currently identifying themselves.`
+}
 
 // ID of the command
 func (IdentifyQuery) ID() CommandID { return IdentifyQueryCommand }
@@ -132,11 +159,22 @@ func (IdentifyQuery) Required() bool { return true }
 // Cluster ID of the command
 func (IdentifyQuery) Cluster() zcl.ClusterID { return IdentifyID }
 
+// Direction of the command
+func (IdentifyQuery) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (IdentifyQuery) MnfCode() []byte { return []byte{} }
+func (IdentifyQuery) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (IdentifyQuery) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *IdentifyQuery) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h IdentifyQueryHandler
+	if h, found = handler.(IdentifyQueryHandler); found {
+		rsp, err = h.HandleIdentifyQuery(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of IdentifyQuery
 func (v IdentifyQuery) MarshalZcl() ([]byte, error) {
@@ -163,6 +201,10 @@ type TriggerEffect struct {
 	IdentifyEffectVariant IdentifyEffectVariant
 }
 
+type TriggerEffectHandler interface {
+	HandleTriggerEffect(frame Frame, cmd *TriggerEffect) error
+}
+
 // TriggerEffectCommand is the Command ID of TriggerEffect
 const TriggerEffectCommand CommandID = 0x0040
 
@@ -183,7 +225,12 @@ func (v *TriggerEffect) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (TriggerEffect) Name() string { return "Trigger Effect" }
+func (TriggerEffect) Name() string { return `Trigger Effect` }
+
+// Description of the command
+func (TriggerEffect) Description() string {
+	return `The trigger effect command allows the support of feedback to the user, such as a certain light effect.`
+}
 
 // ID of the command
 func (TriggerEffect) ID() CommandID { return TriggerEffectCommand }
@@ -194,11 +241,22 @@ func (TriggerEffect) Required() bool { return true }
 // Cluster ID of the command
 func (TriggerEffect) Cluster() zcl.ClusterID { return IdentifyID }
 
+// Direction of the command
+func (TriggerEffect) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (TriggerEffect) MnfCode() []byte { return []byte{} }
+func (TriggerEffect) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (TriggerEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+
+func (v *TriggerEffect) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h TriggerEffectHandler
+	if h, found = handler.(TriggerEffectHandler); found {
+		err = h.HandleTriggerEffect(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of TriggerEffect
 func (v TriggerEffect) MarshalZcl() ([]byte, error) {
@@ -258,6 +316,10 @@ type IdentifyQueryResponse struct {
 	IdentifyTimeout IdentifyTimeout
 }
 
+type IdentifyQueryResponseHandler interface {
+	HandleIdentifyQueryResponse(frame Frame, cmd *IdentifyQueryResponse) error
+}
+
 // IdentifyQueryResponseCommand is the Command ID of IdentifyQueryResponse
 const IdentifyQueryResponseCommand CommandID = 0x0000
 
@@ -276,7 +338,10 @@ func (v *IdentifyQueryResponse) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (IdentifyQueryResponse) Name() string { return "Identify Query Response" }
+func (IdentifyQueryResponse) Name() string { return `Identify Query Response` }
+
+// Description of the command
+func (IdentifyQueryResponse) Description() string { return `Response of a identify query command.` }
 
 // ID of the command
 func (IdentifyQueryResponse) ID() CommandID { return IdentifyQueryResponseCommand }
@@ -287,11 +352,22 @@ func (IdentifyQueryResponse) Required() bool { return true }
 // Cluster ID of the command
 func (IdentifyQueryResponse) Cluster() zcl.ClusterID { return IdentifyID }
 
+// Direction of the command
+func (IdentifyQueryResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (IdentifyQueryResponse) MnfCode() []byte { return []byte{} }
+func (IdentifyQueryResponse) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (IdentifyQueryResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *IdentifyQueryResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h IdentifyQueryResponseHandler
+	if h, found = handler.(IdentifyQueryResponseHandler); found {
+		err = h.HandleIdentifyQueryResponse(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of IdentifyQueryResponse
 func (v IdentifyQueryResponse) MarshalZcl() ([]byte, error) {

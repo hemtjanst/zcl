@@ -232,7 +232,7 @@ func (z *Endpoint) scanCommands(cl zcl.ClusterID, cmdFn func(idx int) zcl.Genera
 		} else if cmdRsp, ok := rsp.(*foundation.DiscoverCommandsReceivedResponse); ok {
 			foundCommands = cmdRsp.Commands
 			discoveryComplete = cmdRsp.DiscoveryComplete == 1
-		} else if cmdRsp, ok := rsp.(*foundation.DefaultResponse); ok {
+		} else if cmdRsp, ok := rsp.(*zcl.DefaultResponse); ok {
 			return out, fmt.Errorf("%s", cmdRsp.Status.String())
 		} else {
 			return out, fmt.Errorf("invalid response: %#v", rsp)

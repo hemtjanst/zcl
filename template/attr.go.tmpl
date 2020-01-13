@@ -6,7 +6,8 @@ func ({{$an}}) Writable() bool { return {{if .CanWrite}}true{{else}}false{{end}}
 func ({{$an}}) Reportable() bool { return {{if .Report}}true{{else}}false{{end}} }
 func ({{$an}}) SceneIndex() int { return {{if .Scene}}{{.Scene}}{{else}}-1{{end}} }
 {{end}}
-func ({{$an}}) Name() string { return "{{.Name}}" }
+func ({{$an}}) Name() string { return {{strEsc .Name}} }
+func ({{$an}}) Description() string { return {{strEsc .Desc}} }
 
 {{.Desc.Comment .Name.Fmt}}{{ if eq .Type "local" }}
 type {{.Name.Fmt}} struct { {{range .StructAttr}}

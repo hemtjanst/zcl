@@ -28,6 +28,10 @@ var {{$sn}}Cluster = zcl.Cluster{
     },
 }
 
-{{range .Command}}
-{{renderCommand .}}
+{{range .Server.Command}}
+{{renderCommand . true}}
+{{end}}
+
+{{range .Client.Command}}
+{{renderCommand . false}}
 {{end}}

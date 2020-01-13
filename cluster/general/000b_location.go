@@ -56,6 +56,10 @@ type SetAbsoluteLocation struct {
 	PathLossExponent PathLossExponent
 }
 
+type SetAbsoluteLocationHandler interface {
+	HandleSetAbsoluteLocation(frame Frame, cmd *SetAbsoluteLocation) error
+}
+
 // SetAbsoluteLocationCommand is the Command ID of SetAbsoluteLocation
 const SetAbsoluteLocationCommand CommandID = 0x0000
 
@@ -82,7 +86,10 @@ func (v *SetAbsoluteLocation) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (SetAbsoluteLocation) Name() string { return "Set Absolute Location" }
+func (SetAbsoluteLocation) Name() string { return `Set Absolute Location` }
+
+// Description of the command
+func (SetAbsoluteLocation) Description() string { return `` }
 
 // ID of the command
 func (SetAbsoluteLocation) ID() CommandID { return SetAbsoluteLocationCommand }
@@ -93,11 +100,22 @@ func (SetAbsoluteLocation) Required() bool { return true }
 // Cluster ID of the command
 func (SetAbsoluteLocation) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (SetAbsoluteLocation) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (SetAbsoluteLocation) MnfCode() []byte { return []byte{} }
+func (SetAbsoluteLocation) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (SetAbsoluteLocation) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *SetAbsoluteLocation) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h SetAbsoluteLocationHandler
+	if h, found = handler.(SetAbsoluteLocationHandler); found {
+		err = h.HandleSetAbsoluteLocation(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of SetAbsoluteLocation
 func (v SetAbsoluteLocation) MarshalZcl() ([]byte, error) {
@@ -197,6 +215,10 @@ type SetDeviceConfiguration struct {
 	ReportingPeriod        ReportingPeriod
 }
 
+type SetDeviceConfigurationHandler interface {
+	HandleSetDeviceConfiguration(frame Frame, cmd *SetDeviceConfiguration) error
+}
+
 // SetDeviceConfigurationCommand is the Command ID of SetDeviceConfiguration
 const SetDeviceConfigurationCommand CommandID = 0x0001
 
@@ -223,7 +245,10 @@ func (v *SetDeviceConfiguration) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (SetDeviceConfiguration) Name() string { return "Set Device Configuration" }
+func (SetDeviceConfiguration) Name() string { return `Set Device Configuration` }
+
+// Description of the command
+func (SetDeviceConfiguration) Description() string { return `` }
 
 // ID of the command
 func (SetDeviceConfiguration) ID() CommandID { return SetDeviceConfigurationCommand }
@@ -234,11 +259,22 @@ func (SetDeviceConfiguration) Required() bool { return true }
 // Cluster ID of the command
 func (SetDeviceConfiguration) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (SetDeviceConfiguration) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (SetDeviceConfiguration) MnfCode() []byte { return []byte{} }
+func (SetDeviceConfiguration) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (SetDeviceConfiguration) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *SetDeviceConfiguration) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h SetDeviceConfigurationHandler
+	if h, found = handler.(SetDeviceConfigurationHandler); found {
+		err = h.HandleSetDeviceConfiguration(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of SetDeviceConfiguration
 func (v SetDeviceConfiguration) MarshalZcl() ([]byte, error) {
@@ -332,6 +368,10 @@ type GetDeviceConfiguration struct {
 	TargetAddress Device
 }
 
+type GetDeviceConfigurationHandler interface {
+	HandleGetDeviceConfiguration(frame Frame, cmd *GetDeviceConfiguration) (*DeviceConfigurationResponse, error)
+}
+
 // GetDeviceConfigurationCommand is the Command ID of GetDeviceConfiguration
 const GetDeviceConfigurationCommand CommandID = 0x0002
 
@@ -350,7 +390,10 @@ func (v *GetDeviceConfiguration) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GetDeviceConfiguration) Name() string { return "Get Device Configuration" }
+func (GetDeviceConfiguration) Name() string { return `Get Device Configuration` }
+
+// Description of the command
+func (GetDeviceConfiguration) Description() string { return `` }
 
 // ID of the command
 func (GetDeviceConfiguration) ID() CommandID { return GetDeviceConfigurationCommand }
@@ -361,11 +404,22 @@ func (GetDeviceConfiguration) Required() bool { return true }
 // Cluster ID of the command
 func (GetDeviceConfiguration) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (GetDeviceConfiguration) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GetDeviceConfiguration) MnfCode() []byte { return []byte{} }
+func (GetDeviceConfiguration) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GetDeviceConfiguration) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+
+func (v *GetDeviceConfiguration) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GetDeviceConfigurationHandler
+	if h, found = handler.(GetDeviceConfigurationHandler); found {
+		rsp, err = h.HandleGetDeviceConfiguration(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GetDeviceConfiguration
 func (v GetDeviceConfiguration) MarshalZcl() ([]byte, error) {
@@ -413,6 +467,10 @@ type GetLocationData struct {
 	TargetAddress   Device
 }
 
+type GetLocationDataHandler interface {
+	HandleGetLocationData(frame Frame, cmd *GetLocationData) (*LocationDataResponse, error)
+}
+
 // GetLocationDataCommand is the Command ID of GetLocationData
 const GetLocationDataCommand CommandID = 0x0003
 
@@ -435,7 +493,10 @@ func (v *GetLocationData) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GetLocationData) Name() string { return "Get Location Data" }
+func (GetLocationData) Name() string { return `Get Location Data` }
+
+// Description of the command
+func (GetLocationData) Description() string { return `` }
 
 // ID of the command
 func (GetLocationData) ID() CommandID { return GetLocationDataCommand }
@@ -446,11 +507,22 @@ func (GetLocationData) Required() bool { return true }
 // Cluster ID of the command
 func (GetLocationData) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (GetLocationData) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GetLocationData) MnfCode() []byte { return []byte{} }
+func (GetLocationData) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GetLocationData) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+
+func (v *GetLocationData) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GetLocationDataHandler
+	if h, found = handler.(GetLocationDataHandler); found {
+		rsp, err = h.HandleGetLocationData(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GetLocationData
 func (v GetLocationData) MarshalZcl() ([]byte, error) {
@@ -526,6 +598,10 @@ type RssiResponse struct {
 	NumberRssiMeasurements NumberRssiMeasurements
 }
 
+type RssiResponseHandler interface {
+	HandleRssiResponse(frame Frame, cmd *RssiResponse) error
+}
+
 // RssiResponseCommand is the Command ID of RssiResponse
 const RssiResponseCommand CommandID = 0x0004
 
@@ -554,7 +630,10 @@ func (v *RssiResponse) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (RssiResponse) Name() string { return "RSSI Response" }
+func (RssiResponse) Name() string { return `RSSI Response` }
+
+// Description of the command
+func (RssiResponse) Description() string { return `` }
 
 // ID of the command
 func (RssiResponse) ID() CommandID { return RssiResponseCommand }
@@ -565,11 +644,22 @@ func (RssiResponse) Required() bool { return true }
 // Cluster ID of the command
 func (RssiResponse) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (RssiResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (RssiResponse) MnfCode() []byte { return []byte{} }
+func (RssiResponse) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (RssiResponse) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+
+func (v *RssiResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h RssiResponseHandler
+	if h, found = handler.(RssiResponseHandler); found {
+		err = h.HandleRssiResponse(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of RssiResponse
 func (v RssiResponse) MarshalZcl() ([]byte, error) {
@@ -678,6 +768,10 @@ type SendPings struct {
 	CalculationPeriod      CalculationPeriod
 }
 
+type SendPingsHandler interface {
+	HandleSendPings(frame Frame, cmd *SendPings) (*ReportRssiMeasurements, error)
+}
+
 // SendPingsCommand is the Command ID of SendPings
 const SendPingsCommand CommandID = 0x0005
 
@@ -700,7 +794,10 @@ func (v *SendPings) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (SendPings) Name() string { return "Send Pings" }
+func (SendPings) Name() string { return `Send Pings` }
+
+// Description of the command
+func (SendPings) Description() string { return `` }
 
 // ID of the command
 func (SendPings) ID() CommandID { return SendPingsCommand }
@@ -711,11 +808,22 @@ func (SendPings) Required() bool { return false }
 // Cluster ID of the command
 func (SendPings) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (SendPings) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (SendPings) MnfCode() []byte { return []byte{} }
+func (SendPings) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (SendPings) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+
+func (v *SendPings) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h SendPingsHandler
+	if h, found = handler.(SendPingsHandler); found {
+		rsp, err = h.HandleSendPings(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of SendPings
 func (v SendPings) MarshalZcl() ([]byte, error) {
@@ -788,6 +896,10 @@ type AnchorNodeAnnounce struct {
 	ZCoordinate ZCoordinate
 }
 
+type AnchorNodeAnnounceHandler interface {
+	HandleAnchorNodeAnnounce(frame Frame, cmd *AnchorNodeAnnounce) error
+}
+
 // AnchorNodeAnnounceCommand is the Command ID of AnchorNodeAnnounce
 const AnchorNodeAnnounceCommand CommandID = 0x0006
 
@@ -812,7 +924,10 @@ func (v *AnchorNodeAnnounce) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (AnchorNodeAnnounce) Name() string { return "Anchor Node Announce" }
+func (AnchorNodeAnnounce) Name() string { return `Anchor Node Announce` }
+
+// Description of the command
+func (AnchorNodeAnnounce) Description() string { return `` }
 
 // ID of the command
 func (AnchorNodeAnnounce) ID() CommandID { return AnchorNodeAnnounceCommand }
@@ -823,11 +938,22 @@ func (AnchorNodeAnnounce) Required() bool { return false }
 // Cluster ID of the command
 func (AnchorNodeAnnounce) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (AnchorNodeAnnounce) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (AnchorNodeAnnounce) MnfCode() []byte { return []byte{} }
+func (AnchorNodeAnnounce) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (AnchorNodeAnnounce) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+
+func (v *AnchorNodeAnnounce) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h AnchorNodeAnnounceHandler
+	if h, found = handler.(AnchorNodeAnnounceHandler); found {
+		err = h.HandleAnchorNodeAnnounce(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of AnchorNodeAnnounce
 func (v AnchorNodeAnnounce) MarshalZcl() ([]byte, error) {
@@ -910,6 +1036,10 @@ type DistanceMeasure struct {
 	Resolution    Resolution
 }
 
+type DistanceMeasureHandler interface {
+	HandleDistanceMeasure(frame Frame, cmd *DistanceMeasure) (*DistanceMeasureResponse, error)
+}
+
 // DistanceMeasureCommand is the Command ID of DistanceMeasure
 const DistanceMeasureCommand CommandID = 0x0040
 
@@ -930,7 +1060,10 @@ func (v *DistanceMeasure) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (DistanceMeasure) Name() string { return "Distance measure" }
+func (DistanceMeasure) Name() string { return `Distance measure` }
+
+// Description of the command
+func (DistanceMeasure) Description() string { return `` }
 
 // ID of the command
 func (DistanceMeasure) ID() CommandID { return DistanceMeasureCommand }
@@ -941,11 +1074,22 @@ func (DistanceMeasure) Required() bool { return true }
 // Cluster ID of the command
 func (DistanceMeasure) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (DistanceMeasure) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (DistanceMeasure) MnfCode() []byte { return []byte{} }
+func (DistanceMeasure) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (DistanceMeasure) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+
+func (v *DistanceMeasure) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h DistanceMeasureHandler
+	if h, found = handler.(DistanceMeasureHandler); found {
+		rsp, err = h.HandleDistanceMeasure(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of DistanceMeasure
 func (v DistanceMeasure) MarshalZcl() ([]byte, error) {
@@ -1010,6 +1154,10 @@ type DeviceConfigurationResponse struct {
 	ReportingPeriod        ReportingPeriod
 }
 
+type DeviceConfigurationResponseHandler interface {
+	HandleDeviceConfigurationResponse(frame Frame, cmd *DeviceConfigurationResponse) error
+}
+
 // DeviceConfigurationResponseCommand is the Command ID of DeviceConfigurationResponse
 const DeviceConfigurationResponseCommand CommandID = 0x0000
 
@@ -1038,7 +1186,10 @@ func (v *DeviceConfigurationResponse) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (DeviceConfigurationResponse) Name() string { return "Device Configuration Response" }
+func (DeviceConfigurationResponse) Name() string { return `Device Configuration Response` }
+
+// Description of the command
+func (DeviceConfigurationResponse) Description() string { return `` }
 
 // ID of the command
 func (DeviceConfigurationResponse) ID() CommandID { return DeviceConfigurationResponseCommand }
@@ -1049,11 +1200,22 @@ func (DeviceConfigurationResponse) Required() bool { return true }
 // Cluster ID of the command
 func (DeviceConfigurationResponse) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (DeviceConfigurationResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (DeviceConfigurationResponse) MnfCode() []byte { return []byte{} }
+func (DeviceConfigurationResponse) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (DeviceConfigurationResponse) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *DeviceConfigurationResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h DeviceConfigurationResponseHandler
+	if h, found = handler.(DeviceConfigurationResponseHandler); found {
+		err = h.HandleDeviceConfigurationResponse(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of DeviceConfigurationResponse
 func (v DeviceConfigurationResponse) MarshalZcl() ([]byte, error) {
@@ -1189,6 +1351,10 @@ type LocationDataResponse struct {
 	LocationAge      LocationAge
 }
 
+type LocationDataResponseHandler interface {
+	HandleLocationDataResponse(frame Frame, cmd *LocationDataResponse) error
+}
+
 // LocationDataResponseCommand is the Command ID of LocationDataResponse
 const LocationDataResponseCommand CommandID = 0x0001
 
@@ -1225,7 +1391,10 @@ func (v *LocationDataResponse) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (LocationDataResponse) Name() string { return "Location Data Response" }
+func (LocationDataResponse) Name() string { return `Location Data Response` }
+
+// Description of the command
+func (LocationDataResponse) Description() string { return `` }
 
 // ID of the command
 func (LocationDataResponse) ID() CommandID { return LocationDataResponseCommand }
@@ -1236,11 +1405,22 @@ func (LocationDataResponse) Required() bool { return true }
 // Cluster ID of the command
 func (LocationDataResponse) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (LocationDataResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (LocationDataResponse) MnfCode() []byte { return []byte{} }
+func (LocationDataResponse) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (LocationDataResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *LocationDataResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h LocationDataResponseHandler
+	if h, found = handler.(LocationDataResponseHandler); found {
+		err = h.HandleLocationDataResponse(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of LocationDataResponse
 func (v LocationDataResponse) MarshalZcl() ([]byte, error) {
@@ -1439,6 +1619,10 @@ type LocationDataNotification struct {
 	LocationAge      LocationAge
 }
 
+type LocationDataNotificationHandler interface {
+	HandleLocationDataNotification(frame Frame, cmd *LocationDataNotification) error
+}
+
 // LocationDataNotificationCommand is the Command ID of LocationDataNotification
 const LocationDataNotificationCommand CommandID = 0x0002
 
@@ -1473,7 +1657,10 @@ func (v *LocationDataNotification) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (LocationDataNotification) Name() string { return "Location Data Notification" }
+func (LocationDataNotification) Name() string { return `Location Data Notification` }
+
+// Description of the command
+func (LocationDataNotification) Description() string { return `` }
 
 // ID of the command
 func (LocationDataNotification) ID() CommandID { return LocationDataNotificationCommand }
@@ -1484,11 +1671,22 @@ func (LocationDataNotification) Required() bool { return true }
 // Cluster ID of the command
 func (LocationDataNotification) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (LocationDataNotification) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (LocationDataNotification) MnfCode() []byte { return []byte{} }
+func (LocationDataNotification) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (LocationDataNotification) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+
+func (v *LocationDataNotification) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h LocationDataNotificationHandler
+	if h, found = handler.(LocationDataNotificationHandler); found {
+		err = h.HandleLocationDataNotification(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of LocationDataNotification
 func (v LocationDataNotification) MarshalZcl() ([]byte, error) {
@@ -1651,6 +1849,10 @@ type CompactLocationDataNotification struct {
 	LocationAge    LocationAge
 }
 
+type CompactLocationDataNotificationHandler interface {
+	HandleCompactLocationDataNotification(frame Frame, cmd *CompactLocationDataNotification) error
+}
+
 // CompactLocationDataNotificationCommand is the Command ID of CompactLocationDataNotification
 const CompactLocationDataNotificationCommand CommandID = 0x0003
 
@@ -1679,7 +1881,10 @@ func (v *CompactLocationDataNotification) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (CompactLocationDataNotification) Name() string { return "Compact Location Data Notification" }
+func (CompactLocationDataNotification) Name() string { return `Compact Location Data Notification` }
+
+// Description of the command
+func (CompactLocationDataNotification) Description() string { return `` }
 
 // ID of the command
 func (CompactLocationDataNotification) ID() CommandID { return CompactLocationDataNotificationCommand }
@@ -1690,11 +1895,22 @@ func (CompactLocationDataNotification) Required() bool { return true }
 // Cluster ID of the command
 func (CompactLocationDataNotification) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (CompactLocationDataNotification) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (CompactLocationDataNotification) MnfCode() []byte { return []byte{} }
+func (CompactLocationDataNotification) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (CompactLocationDataNotification) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+
+func (v *CompactLocationDataNotification) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h CompactLocationDataNotificationHandler
+	if h, found = handler.(CompactLocationDataNotificationHandler); found {
+		err = h.HandleCompactLocationDataNotification(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of CompactLocationDataNotification
 func (v CompactLocationDataNotification) MarshalZcl() ([]byte, error) {
@@ -1812,6 +2028,10 @@ type RssiPing struct {
 	LocationType LocationType
 }
 
+type RssiPingHandler interface {
+	HandleRssiPing(frame Frame, cmd *RssiPing) error
+}
+
 // RssiPingCommand is the Command ID of RssiPing
 const RssiPingCommand CommandID = 0x0004
 
@@ -1830,7 +2050,10 @@ func (v *RssiPing) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (RssiPing) Name() string { return "RSSI Ping" }
+func (RssiPing) Name() string { return `RSSI Ping` }
+
+// Description of the command
+func (RssiPing) Description() string { return `` }
 
 // ID of the command
 func (RssiPing) ID() CommandID { return RssiPingCommand }
@@ -1841,11 +2064,22 @@ func (RssiPing) Required() bool { return true }
 // Cluster ID of the command
 func (RssiPing) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (RssiPing) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (RssiPing) MnfCode() []byte { return []byte{} }
+func (RssiPing) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (RssiPing) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+
+func (v *RssiPing) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h RssiPingHandler
+	if h, found = handler.(RssiPingHandler); found {
+		err = h.HandleRssiPing(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of RssiPing
 func (v RssiPing) MarshalZcl() ([]byte, error) {
@@ -1890,6 +2124,10 @@ func (v RssiPing) String() string {
 type RssiRequest struct {
 }
 
+type RssiRequestHandler interface {
+	HandleRssiRequest(frame Frame, cmd *RssiRequest) (*RssiResponse, error)
+}
+
 // RssiRequestCommand is the Command ID of RssiRequest
 const RssiRequestCommand CommandID = 0x0005
 
@@ -1904,7 +2142,10 @@ func (v *RssiRequest) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (RssiRequest) Name() string { return "RSSI Request" }
+func (RssiRequest) Name() string { return `RSSI Request` }
+
+// Description of the command
+func (RssiRequest) Description() string { return `` }
 
 // ID of the command
 func (RssiRequest) ID() CommandID { return RssiRequestCommand }
@@ -1915,11 +2156,22 @@ func (RssiRequest) Required() bool { return false }
 // Cluster ID of the command
 func (RssiRequest) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (RssiRequest) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (RssiRequest) MnfCode() []byte { return []byte{} }
+func (RssiRequest) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (RssiRequest) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+
+func (v *RssiRequest) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h RssiRequestHandler
+	if h, found = handler.(RssiRequestHandler); found {
+		rsp, err = h.HandleRssiRequest(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of RssiRequest
 func (v RssiRequest) MarshalZcl() ([]byte, error) {
@@ -1943,6 +2195,10 @@ type ReportRssiMeasurements struct {
 	NeighborsInfoList NeighborsInfoList
 }
 
+type ReportRssiMeasurementsHandler interface {
+	HandleReportRssiMeasurements(frame Frame, cmd *ReportRssiMeasurements) error
+}
+
 // ReportRssiMeasurementsCommand is the Command ID of ReportRssiMeasurements
 const ReportRssiMeasurementsCommand CommandID = 0x0006
 
@@ -1963,7 +2219,10 @@ func (v *ReportRssiMeasurements) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (ReportRssiMeasurements) Name() string { return "Report RSSI Measurements" }
+func (ReportRssiMeasurements) Name() string { return `Report RSSI Measurements` }
+
+// Description of the command
+func (ReportRssiMeasurements) Description() string { return `` }
 
 // ID of the command
 func (ReportRssiMeasurements) ID() CommandID { return ReportRssiMeasurementsCommand }
@@ -1974,11 +2233,22 @@ func (ReportRssiMeasurements) Required() bool { return false }
 // Cluster ID of the command
 func (ReportRssiMeasurements) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (ReportRssiMeasurements) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (ReportRssiMeasurements) MnfCode() []byte { return []byte{} }
+func (ReportRssiMeasurements) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (ReportRssiMeasurements) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+
+func (v *ReportRssiMeasurements) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h ReportRssiMeasurementsHandler
+	if h, found = handler.(ReportRssiMeasurementsHandler); found {
+		err = h.HandleReportRssiMeasurements(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of ReportRssiMeasurements
 func (v ReportRssiMeasurements) MarshalZcl() ([]byte, error) {
@@ -2036,6 +2306,10 @@ type RequestOwnLocation struct {
 	BlindNodeAddress Device
 }
 
+type RequestOwnLocationHandler interface {
+	HandleRequestOwnLocation(frame Frame, cmd *RequestOwnLocation) (*SetAbsoluteLocation, error)
+}
+
 // RequestOwnLocationCommand is the Command ID of RequestOwnLocation
 const RequestOwnLocationCommand CommandID = 0x0007
 
@@ -2054,7 +2328,10 @@ func (v *RequestOwnLocation) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (RequestOwnLocation) Name() string { return "Request Own Location" }
+func (RequestOwnLocation) Name() string { return `Request Own Location` }
+
+// Description of the command
+func (RequestOwnLocation) Description() string { return `` }
 
 // ID of the command
 func (RequestOwnLocation) ID() CommandID { return RequestOwnLocationCommand }
@@ -2065,11 +2342,22 @@ func (RequestOwnLocation) Required() bool { return false }
 // Cluster ID of the command
 func (RequestOwnLocation) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (RequestOwnLocation) Direction() zcl.Direction { return zcl.ServerToClient }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (RequestOwnLocation) MnfCode() []byte { return []byte{} }
+func (RequestOwnLocation) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (RequestOwnLocation) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+
+func (v *RequestOwnLocation) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h RequestOwnLocationHandler
+	if h, found = handler.(RequestOwnLocationHandler); found {
+		rsp, err = h.HandleRequestOwnLocation(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of RequestOwnLocation
 func (v RequestOwnLocation) MarshalZcl() ([]byte, error) {
@@ -2118,6 +2406,10 @@ type DistanceMeasureResponse struct {
 	QualityIndex  QualityIndex
 }
 
+type DistanceMeasureResponseHandler interface {
+	HandleDistanceMeasureResponse(frame Frame, cmd *DistanceMeasureResponse) error
+}
+
 // DistanceMeasureResponseCommand is the Command ID of DistanceMeasureResponse
 const DistanceMeasureResponseCommand CommandID = 0x0040
 
@@ -2140,7 +2432,12 @@ func (v *DistanceMeasureResponse) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (DistanceMeasureResponse) Name() string { return "Distance measure response" }
+func (DistanceMeasureResponse) Name() string { return `Distance measure response` }
+
+// Description of the command
+func (DistanceMeasureResponse) Description() string {
+	return `Returns the result of a distance measure.`
+}
 
 // ID of the command
 func (DistanceMeasureResponse) ID() CommandID { return DistanceMeasureResponseCommand }
@@ -2151,11 +2448,22 @@ func (DistanceMeasureResponse) Required() bool { return true }
 // Cluster ID of the command
 func (DistanceMeasureResponse) Cluster() zcl.ClusterID { return LocationID }
 
+// Direction of the command
+func (DistanceMeasureResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (DistanceMeasureResponse) MnfCode() []byte { return []byte{} }
+func (DistanceMeasureResponse) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (DistanceMeasureResponse) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+
+func (v *DistanceMeasureResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h DistanceMeasureResponseHandler
+	if h, found = handler.(DistanceMeasureResponseHandler); found {
+		err = h.HandleDistanceMeasureResponse(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of DistanceMeasureResponse
 func (v DistanceMeasureResponse) MarshalZcl() ([]byte, error) {

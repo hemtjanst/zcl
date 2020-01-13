@@ -101,9 +101,8 @@ func DescribeCommand(cmd Command) (desc CommandDescription) {
 	desc.ClusterID = &c
 
 	m := cmd.MnfCode()
-	if len(m) == 2 {
-		mnf := uint16(m[0]<<8 | m[1])
-		desc.MnfCode = &mnf
+	if m > 0 {
+		desc.MnfCode = &m
 	}
 	desc.Required = cmd.Required()
 	return

@@ -2,6 +2,7 @@
 
 import "{{path}}"
 type CommandID = zcl.CommandID
+type Frame = zcl.ReceivedZclFrame
 
 {{range .Types}}{{if .Name}}
 {{renderType .}}

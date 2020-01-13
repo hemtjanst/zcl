@@ -2,6 +2,7 @@ package zdo
 
 import "{{path}}"
 type CommandID = zcl.ZdoCmdID
+type Frame = zcl.ReceivedZdpFrame
 
 var Commands = map[zcl.ZdoCmdID]func() zcl.ZdoCommand{ {{range .Commands}}
     {{.Name.Fmt}}Command: func() zcl.ZdoCommand { return new({{.Name.Fmt}}) },{{end}}
@@ -12,5 +13,5 @@ var Commands = map[zcl.ZdoCmdID]func() zcl.ZdoCommand{ {{range .Commands}}
 {{end}}{{end}}
 
 {{range .Commands}}
-{{renderCommand . .ID.Hex4}}
+{{renderCommand . false .ID.Hex4}}
 {{end}}

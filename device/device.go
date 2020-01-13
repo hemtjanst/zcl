@@ -96,16 +96,10 @@ func (d *Device) Resume(nwk uint16, tr zcl.Transport, seq utils.Seq) {
 	}
 }
 
-func (d *Device) OnAnnounce(mac zcl.Zuid, cap zdo.Capability) {
-	d.Lock()
-	defer d.Unlock()
-	d.mac = mac
-	d.cap = cap
-
-	// TODO: Check for new endpoints/attributes/commands
-}
-
 func (d *Device) Endpoint(ep uint8) *Endpoint {
+	if ep == 0 {
+		return nil
+	}
 	d.Lock()
 	defer d.Unlock()
 	if d.ep == nil {

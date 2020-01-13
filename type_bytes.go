@@ -18,11 +18,7 @@ func bytesUnmarshalZcl(ln int, o []byte) ([]byte, []byte, error) {
 }
 
 func BytesStringer(b []byte) string {
-	var str []string
-	for _, v := range b {
-		str = append(str, Sprintf("0x%02X", v))
-	}
-	return StrJoin(str, " ")
+	return Sprintf("0x%X", b)
 }
 
 type Zdat8 [1]byte

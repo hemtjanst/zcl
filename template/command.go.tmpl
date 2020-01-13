@@ -1,5 +1,9 @@
-{{$cmd := .}}{{.Desc.Comment .Name.Fmt}}type {{.Name.Fmt}} struct { {{range .PayloadAttr}}{{if .Name}}
+{{$cmd := .}}{{$rsp := findResponse .}}{{.Desc.Comment .Name.Fmt}}type {{.Name.Fmt}} struct { {{range .PayloadAttr}}{{if .Name}}
     {{.Desc.Comment .ArgNameFmt}}{{.ArgNameFmt}} {{.Name.Fmt}}{{end}}{{end}}
+}
+
+type {{.Name.Fmt}}Handler interface {
+    Handle{{.Name.Fmt}}(frame Frame, cmd *{{.Name.Fmt}}) {{if $rsp}}(*{{$rsp.Name.Fmt}}, error){{else}}error{{end}}
 }
 
 // {{.Name.Fmt}}Command is the Command ID of {{.Name.Fmt}}
@@ -21,7 +25,10 @@ func (v *{{.Name.Fmt}}) Arguments() []zcl.ArgDesc {
 
 
 // Name of the command
-func ({{.Name.Fmt}}) Name() string { return "{{.Name}}" }
+func ({{.Name.Fmt}}) Name() string { return {{strEsc .Name}} }
+
+// Description of the command
+func ({{.Name.Fmt}}) Description() string { return {{strEsc .Desc}} }
 
 // ID of the command
 func ({{.Name.Fmt}}) ID() CommandID { return {{.Name.Fmt}}Command }
@@ -32,11 +39,28 @@ func ({{.Name.Fmt}}) Required() bool { return {{if .Required.IsTrue}}true{{else}
 // Cluster ID of the command
 func ({{.Name.Fmt}}) Cluster() zcl.ClusterID { return {{clusterID}} }
 
+{{ if direction . }}
+// Direction of the command
+func ({{.Name.Fmt}}) Direction() zcl.Direction { return zcl.{{direction .}} }
+{{ end }}
+
 // MnfCode returns the manufacturer code (if any) of the command
-func ({{.Name.Fmt}}) MnfCode() []byte { return []byte{ {{mfc.ByteStr}} } }
+func ({{.Name.Fmt}}) MnfCode() uint16 { return {{mfc.Uint}} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func ({{.Name.Fmt}}) MarshalJSON() ([]byte, error) { return []byte("{{.ID.Uint}}"), nil }
+
+func (v *{{.Name.Fmt}}) Handle(frame Frame, handler interface{}) (rsp {{if zdo}}zcl.ZdoCommand{{else}}zcl.General{{end}}, found bool, err error) {
+    var h {{.Name.Fmt}}Handler
+    if h, found = handler.({{.Name.Fmt}}Handler); found {
+        {{if $rsp}}rsp, {{end}}err = h.Handle{{.Name.Fmt}}(frame, v)
+    } {{if $rsp}}{{if zdo}}
+    if rsp == nil {
+        rsp = &{{$rsp.Name.Fmt}}{Status: 0x84}
+    }
+    {{end}}{{end}}
+    return
+}
 
 // MarshalZcl returns the wire format representation of {{.Name.Fmt}}
 func (v {{.Name.Fmt}}) MarshalZcl() ([]byte, error) { {{if .PayloadAttr}}

@@ -83,7 +83,7 @@ type Command struct {
 	Desc        Desc     `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
 	Dir         string   `xml:"dir,attr" toml:"dir,omitempty" yaml:"dir,omitempty" json:"dir,omitempty"`
 	Required    Required `xml:"required,attr" toml:"required,omitempty" yaml:"required,omitempty" json:"required,omitempty"`
-	Response    Hex      `xml:"response,attr" toml:"response,omitempty" yaml:"response,omitempty" json:"response,omitempty"`
+	Response    *Hex     `xml:"response,attr" toml:"response,omitempty" yaml:"response,omitempty" json:"response,omitempty"`
 	ShowAs      string   `xml:"showas,attr" toml:"showas,omitempty" yaml:"showas,omitempty" json:"showas,omitempty"`
 	Vendor      string   `xml:"vendor,attr" toml:"vendor,omitempty" yaml:"vendor,omitempty" json:"vendor,omitempty"`
 	PayloadAttr []Attr   `xml:"payload>attribute" toml:"payloadattr,omitempty" yaml:"payloadattr,omitempty" json:"payloadattr,omitempty"`

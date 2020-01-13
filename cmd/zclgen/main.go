@@ -1,14 +1,18 @@
 package main
 
 import (
+	"flag"
 	"hemtjan.st/zcl/generator"
 	"log"
 	"os"
 )
 
 const (
+	TplPath = "./template"
+	DefPath = "./definition"
 	GenPath = "./cluster"
 	ZdoPath = "./zdo"
+	PkgName = "hemtjan.st/zcl"
 )
 
 func check(stage string, err error) {
@@ -18,22 +22,28 @@ func check(stage string, err error) {
 }
 
 func main() {
+	defPath := flag.String("definition-path", DefPath, "Path to yaml definitions")
+	tplPath := flag.String("template-path", TplPath, "Path to templates")
+	genPath := flag.String("cluster-path", GenPath, "Path for outputting generated clusters")
+	zdpPath := flag.String("zdp-path", ZdoPath, "Path for outputting generated ZDP commands")
+	pkgName := flag.String("package", PkgName, "Generated package name")
+	flag.Parse()
 
-	os.MkdirAll(GenPath, 0755)
-	os.MkdirAll(ZdoPath, 0755)
+	os.MkdirAll(*genPath, 0755)
+	os.MkdirAll(*zdpPath, 0755)
 
 	check("zdo", generator.GenerateZdo(
-		"hemtjan.st/zcl",
-		"./definition",
-		"./template",
-		ZdoPath,
+		*pkgName,
+		*defPath,
+		*tplPath,
+		*zdpPath,
 	))
 
 	check("cluster", generator.GenerateStruct(
-		"hemtjan.st/zcl",
-		"./definition",
-		"./template",
-		GenPath,
+		*pkgName,
+		*defPath,
+		*tplPath,
+		*genPath,
 	))
 
 }

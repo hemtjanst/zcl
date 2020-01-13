@@ -46,6 +46,10 @@ var WindowCoveringCluster = zcl.Cluster{
 type UpOpen struct {
 }
 
+type UpOpenHandler interface {
+	HandleUpOpen(frame Frame, cmd *UpOpen) error
+}
+
 // UpOpenCommand is the Command ID of UpOpen
 const UpOpenCommand CommandID = 0x0000
 
@@ -60,7 +64,10 @@ func (v *UpOpen) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (UpOpen) Name() string { return "Up / Open" }
+func (UpOpen) Name() string { return `Up / Open` }
+
+// Description of the command
+func (UpOpen) Description() string { return `` }
 
 // ID of the command
 func (UpOpen) ID() CommandID { return UpOpenCommand }
@@ -71,11 +78,22 @@ func (UpOpen) Required() bool { return true }
 // Cluster ID of the command
 func (UpOpen) Cluster() zcl.ClusterID { return WindowCoveringID }
 
+// Direction of the command
+func (UpOpen) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (UpOpen) MnfCode() []byte { return []byte{} }
+func (UpOpen) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (UpOpen) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *UpOpen) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h UpOpenHandler
+	if h, found = handler.(UpOpenHandler); found {
+		err = h.HandleUpOpen(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of UpOpen
 func (v UpOpen) MarshalZcl() ([]byte, error) {
@@ -97,6 +115,10 @@ func (v UpOpen) String() string {
 type DownClose struct {
 }
 
+type DownCloseHandler interface {
+	HandleDownClose(frame Frame, cmd *DownClose) error
+}
+
 // DownCloseCommand is the Command ID of DownClose
 const DownCloseCommand CommandID = 0x0001
 
@@ -111,7 +133,10 @@ func (v *DownClose) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (DownClose) Name() string { return "Down / Close" }
+func (DownClose) Name() string { return `Down / Close` }
+
+// Description of the command
+func (DownClose) Description() string { return `` }
 
 // ID of the command
 func (DownClose) ID() CommandID { return DownCloseCommand }
@@ -122,11 +147,22 @@ func (DownClose) Required() bool { return true }
 // Cluster ID of the command
 func (DownClose) Cluster() zcl.ClusterID { return WindowCoveringID }
 
+// Direction of the command
+func (DownClose) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (DownClose) MnfCode() []byte { return []byte{} }
+func (DownClose) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (DownClose) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *DownClose) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h DownCloseHandler
+	if h, found = handler.(DownCloseHandler); found {
+		err = h.HandleDownClose(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of DownClose
 func (v DownClose) MarshalZcl() ([]byte, error) {
@@ -148,6 +184,10 @@ func (v DownClose) String() string {
 type Stop struct {
 }
 
+type StopHandler interface {
+	HandleStop(frame Frame, cmd *Stop) error
+}
+
 // StopCommand is the Command ID of Stop
 const StopCommand CommandID = 0x0002
 
@@ -162,7 +202,10 @@ func (v *Stop) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Stop) Name() string { return "Stop" }
+func (Stop) Name() string { return `Stop` }
+
+// Description of the command
+func (Stop) Description() string { return `` }
 
 // ID of the command
 func (Stop) ID() CommandID { return StopCommand }
@@ -173,11 +216,22 @@ func (Stop) Required() bool { return true }
 // Cluster ID of the command
 func (Stop) Cluster() zcl.ClusterID { return WindowCoveringID }
 
+// Direction of the command
+func (Stop) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Stop) MnfCode() []byte { return []byte{} }
+func (Stop) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Stop) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+
+func (v *Stop) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h StopHandler
+	if h, found = handler.(StopHandler); found {
+		err = h.HandleStop(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Stop
 func (v Stop) MarshalZcl() ([]byte, error) {
@@ -200,6 +254,10 @@ type GoToLiftValue struct {
 	Position Position
 }
 
+type GoToLiftValueHandler interface {
+	HandleGoToLiftValue(frame Frame, cmd *GoToLiftValue) error
+}
+
 // GoToLiftValueCommand is the Command ID of GoToLiftValue
 const GoToLiftValueCommand CommandID = 0x0004
 
@@ -218,7 +276,10 @@ func (v *GoToLiftValue) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GoToLiftValue) Name() string { return "Go To Lift Value" }
+func (GoToLiftValue) Name() string { return `Go To Lift Value` }
+
+// Description of the command
+func (GoToLiftValue) Description() string { return `` }
 
 // ID of the command
 func (GoToLiftValue) ID() CommandID { return GoToLiftValueCommand }
@@ -229,11 +290,22 @@ func (GoToLiftValue) Required() bool { return false }
 // Cluster ID of the command
 func (GoToLiftValue) Cluster() zcl.ClusterID { return WindowCoveringID }
 
+// Direction of the command
+func (GoToLiftValue) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GoToLiftValue) MnfCode() []byte { return []byte{} }
+func (GoToLiftValue) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GoToLiftValue) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+
+func (v *GoToLiftValue) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GoToLiftValueHandler
+	if h, found = handler.(GoToLiftValueHandler); found {
+		err = h.HandleGoToLiftValue(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GoToLiftValue
 func (v GoToLiftValue) MarshalZcl() ([]byte, error) {
@@ -279,6 +351,10 @@ type GoToLiftPercentage struct {
 	Percentage Percentage
 }
 
+type GoToLiftPercentageHandler interface {
+	HandleGoToLiftPercentage(frame Frame, cmd *GoToLiftPercentage) error
+}
+
 // GoToLiftPercentageCommand is the Command ID of GoToLiftPercentage
 const GoToLiftPercentageCommand CommandID = 0x0005
 
@@ -297,7 +373,10 @@ func (v *GoToLiftPercentage) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GoToLiftPercentage) Name() string { return "Go to Lift Percentage" }
+func (GoToLiftPercentage) Name() string { return `Go to Lift Percentage` }
+
+// Description of the command
+func (GoToLiftPercentage) Description() string { return `` }
 
 // ID of the command
 func (GoToLiftPercentage) ID() CommandID { return GoToLiftPercentageCommand }
@@ -308,11 +387,22 @@ func (GoToLiftPercentage) Required() bool { return false }
 // Cluster ID of the command
 func (GoToLiftPercentage) Cluster() zcl.ClusterID { return WindowCoveringID }
 
+// Direction of the command
+func (GoToLiftPercentage) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GoToLiftPercentage) MnfCode() []byte { return []byte{} }
+func (GoToLiftPercentage) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GoToLiftPercentage) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+
+func (v *GoToLiftPercentage) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GoToLiftPercentageHandler
+	if h, found = handler.(GoToLiftPercentageHandler); found {
+		err = h.HandleGoToLiftPercentage(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GoToLiftPercentage
 func (v GoToLiftPercentage) MarshalZcl() ([]byte, error) {
@@ -358,6 +448,10 @@ type GoToTiltValue struct {
 	Position Position
 }
 
+type GoToTiltValueHandler interface {
+	HandleGoToTiltValue(frame Frame, cmd *GoToTiltValue) error
+}
+
 // GoToTiltValueCommand is the Command ID of GoToTiltValue
 const GoToTiltValueCommand CommandID = 0x0007
 
@@ -376,7 +470,10 @@ func (v *GoToTiltValue) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GoToTiltValue) Name() string { return "Go to Tilt Value" }
+func (GoToTiltValue) Name() string { return `Go to Tilt Value` }
+
+// Description of the command
+func (GoToTiltValue) Description() string { return `` }
 
 // ID of the command
 func (GoToTiltValue) ID() CommandID { return GoToTiltValueCommand }
@@ -387,11 +484,22 @@ func (GoToTiltValue) Required() bool { return false }
 // Cluster ID of the command
 func (GoToTiltValue) Cluster() zcl.ClusterID { return WindowCoveringID }
 
+// Direction of the command
+func (GoToTiltValue) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GoToTiltValue) MnfCode() []byte { return []byte{} }
+func (GoToTiltValue) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GoToTiltValue) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+
+func (v *GoToTiltValue) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GoToTiltValueHandler
+	if h, found = handler.(GoToTiltValueHandler); found {
+		err = h.HandleGoToTiltValue(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GoToTiltValue
 func (v GoToTiltValue) MarshalZcl() ([]byte, error) {
@@ -437,6 +545,10 @@ type GoToTiltPercentage struct {
 	Percentage Percentage
 }
 
+type GoToTiltPercentageHandler interface {
+	HandleGoToTiltPercentage(frame Frame, cmd *GoToTiltPercentage) error
+}
+
 // GoToTiltPercentageCommand is the Command ID of GoToTiltPercentage
 const GoToTiltPercentageCommand CommandID = 0x0008
 
@@ -455,7 +567,10 @@ func (v *GoToTiltPercentage) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GoToTiltPercentage) Name() string { return "Go to Tilt Percentage" }
+func (GoToTiltPercentage) Name() string { return `Go to Tilt Percentage` }
+
+// Description of the command
+func (GoToTiltPercentage) Description() string { return `` }
 
 // ID of the command
 func (GoToTiltPercentage) ID() CommandID { return GoToTiltPercentageCommand }
@@ -466,11 +581,22 @@ func (GoToTiltPercentage) Required() bool { return false }
 // Cluster ID of the command
 func (GoToTiltPercentage) Cluster() zcl.ClusterID { return WindowCoveringID }
 
+// Direction of the command
+func (GoToTiltPercentage) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GoToTiltPercentage) MnfCode() []byte { return []byte{} }
+func (GoToTiltPercentage) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GoToTiltPercentage) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
+
+func (v *GoToTiltPercentage) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GoToTiltPercentageHandler
+	if h, found = handler.(GoToTiltPercentageHandler); found {
+		err = h.HandleGoToTiltPercentage(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GoToTiltPercentage
 func (v GoToTiltPercentage) MarshalZcl() ([]byte, error) {

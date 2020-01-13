@@ -33,6 +33,10 @@ var OnOffCluster = zcl.Cluster{
 type Off struct {
 }
 
+type OffHandler interface {
+	HandleOff(frame Frame, cmd *Off) error
+}
+
 // OffCommand is the Command ID of Off
 const OffCommand CommandID = 0x0000
 
@@ -47,7 +51,12 @@ func (v *Off) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Off) Name() string { return "Off" }
+func (Off) Name() string { return `Off` }
+
+// Description of the command
+func (Off) Description() string {
+	return `On receipt of this command, a device shall enter its 'Off' state. This state is device dependent, but it is recommended that it is used for power off or similar functions.`
+}
 
 // ID of the command
 func (Off) ID() CommandID { return OffCommand }
@@ -58,11 +67,22 @@ func (Off) Required() bool { return true }
 // Cluster ID of the command
 func (Off) Cluster() zcl.ClusterID { return OnOffID }
 
+// Direction of the command
+func (Off) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Off) MnfCode() []byte { return []byte{} }
+func (Off) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Off) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *Off) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h OffHandler
+	if h, found = handler.(OffHandler); found {
+		err = h.HandleOff(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Off
 func (v Off) MarshalZcl() ([]byte, error) {
@@ -85,6 +105,10 @@ func (v Off) String() string {
 type On struct {
 }
 
+type OnHandler interface {
+	HandleOn(frame Frame, cmd *On) error
+}
+
 // OnCommand is the Command ID of On
 const OnCommand CommandID = 0x0001
 
@@ -99,7 +123,12 @@ func (v *On) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (On) Name() string { return "On" }
+func (On) Name() string { return `On` }
+
+// Description of the command
+func (On) Description() string {
+	return `On receipt of this command, a device shall enter its 'On' state. This state is device dependent, but it is recommended that it is used for power on or similar functions.`
+}
 
 // ID of the command
 func (On) ID() CommandID { return OnCommand }
@@ -110,11 +139,22 @@ func (On) Required() bool { return true }
 // Cluster ID of the command
 func (On) Cluster() zcl.ClusterID { return OnOffID }
 
+// Direction of the command
+func (On) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (On) MnfCode() []byte { return []byte{} }
+func (On) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (On) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *On) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h OnHandler
+	if h, found = handler.(OnHandler); found {
+		err = h.HandleOn(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of On
 func (v On) MarshalZcl() ([]byte, error) {
@@ -137,6 +177,10 @@ func (v On) String() string {
 type Toggle struct {
 }
 
+type ToggleHandler interface {
+	HandleToggle(frame Frame, cmd *Toggle) error
+}
+
 // ToggleCommand is the Command ID of Toggle
 const ToggleCommand CommandID = 0x0002
 
@@ -151,7 +195,12 @@ func (v *Toggle) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Toggle) Name() string { return "Toggle" }
+func (Toggle) Name() string { return `Toggle` }
+
+// Description of the command
+func (Toggle) Description() string {
+	return `On receipt of this command, if a device is in its ‘Off’ state it shall enter its 'On' state. Otherwise, if it is in its ‘On’ state it shall enter its 'Off' state.`
+}
 
 // ID of the command
 func (Toggle) ID() CommandID { return ToggleCommand }
@@ -162,11 +211,22 @@ func (Toggle) Required() bool { return true }
 // Cluster ID of the command
 func (Toggle) Cluster() zcl.ClusterID { return OnOffID }
 
+// Direction of the command
+func (Toggle) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Toggle) MnfCode() []byte { return []byte{} }
+func (Toggle) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Toggle) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+
+func (v *Toggle) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h ToggleHandler
+	if h, found = handler.(ToggleHandler); found {
+		err = h.HandleToggle(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Toggle
 func (v Toggle) MarshalZcl() ([]byte, error) {
@@ -191,6 +251,10 @@ type OffWithEffect struct {
 	EffectVariant    EffectVariant
 }
 
+type OffWithEffectHandler interface {
+	HandleOffWithEffect(frame Frame, cmd *OffWithEffect) error
+}
+
 // OffWithEffectCommand is the Command ID of OffWithEffect
 const OffWithEffectCommand CommandID = 0x0040
 
@@ -211,7 +275,10 @@ func (v *OffWithEffect) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (OffWithEffect) Name() string { return "Off with effect" }
+func (OffWithEffect) Name() string { return `Off with effect` }
+
+// Description of the command
+func (OffWithEffect) Description() string { return `` }
 
 // ID of the command
 func (OffWithEffect) ID() CommandID { return OffWithEffectCommand }
@@ -222,11 +289,22 @@ func (OffWithEffect) Required() bool { return true }
 // Cluster ID of the command
 func (OffWithEffect) Cluster() zcl.ClusterID { return OnOffID }
 
+// Direction of the command
+func (OffWithEffect) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (OffWithEffect) MnfCode() []byte { return []byte{} }
+func (OffWithEffect) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (OffWithEffect) MarshalJSON() ([]byte, error) { return []byte("64"), nil }
+
+func (v *OffWithEffect) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h OffWithEffectHandler
+	if h, found = handler.(OffWithEffectHandler); found {
+		err = h.HandleOffWithEffect(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of OffWithEffect
 func (v OffWithEffect) MarshalZcl() ([]byte, error) {
@@ -284,6 +362,10 @@ func (v OffWithEffect) String() string {
 type OnWithRecallGlobalScene struct {
 }
 
+type OnWithRecallGlobalSceneHandler interface {
+	HandleOnWithRecallGlobalScene(frame Frame, cmd *OnWithRecallGlobalScene) error
+}
+
 // OnWithRecallGlobalSceneCommand is the Command ID of OnWithRecallGlobalScene
 const OnWithRecallGlobalSceneCommand CommandID = 0x0041
 
@@ -298,7 +380,12 @@ func (v *OnWithRecallGlobalScene) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (OnWithRecallGlobalScene) Name() string { return "On with recall global scene" }
+func (OnWithRecallGlobalScene) Name() string { return `On with recall global scene` }
+
+// Description of the command
+func (OnWithRecallGlobalScene) Description() string {
+	return `The on with recall global scene command allows the recall of the light settings when the light was turned off.`
+}
 
 // ID of the command
 func (OnWithRecallGlobalScene) ID() CommandID { return OnWithRecallGlobalSceneCommand }
@@ -309,11 +396,22 @@ func (OnWithRecallGlobalScene) Required() bool { return true }
 // Cluster ID of the command
 func (OnWithRecallGlobalScene) Cluster() zcl.ClusterID { return OnOffID }
 
+// Direction of the command
+func (OnWithRecallGlobalScene) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (OnWithRecallGlobalScene) MnfCode() []byte { return []byte{} }
+func (OnWithRecallGlobalScene) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (OnWithRecallGlobalScene) MarshalJSON() ([]byte, error) { return []byte("65"), nil }
+
+func (v *OnWithRecallGlobalScene) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h OnWithRecallGlobalSceneHandler
+	if h, found = handler.(OnWithRecallGlobalSceneHandler); found {
+		err = h.HandleOnWithRecallGlobalScene(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of OnWithRecallGlobalScene
 func (v OnWithRecallGlobalScene) MarshalZcl() ([]byte, error) {
@@ -339,6 +437,10 @@ type OnWithTimedOff struct {
 	OffWaitTime  OffWaitTime
 }
 
+type OnWithTimedOffHandler interface {
+	HandleOnWithTimedOff(frame Frame, cmd *OnWithTimedOff) error
+}
+
 // OnWithTimedOffCommand is the Command ID of OnWithTimedOff
 const OnWithTimedOffCommand CommandID = 0x0042
 
@@ -361,7 +463,12 @@ func (v *OnWithTimedOff) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (OnWithTimedOff) Name() string { return "On with timed off" }
+func (OnWithTimedOff) Name() string { return `On with timed off` }
+
+// Description of the command
+func (OnWithTimedOff) Description() string {
+	return `Allows lamps to be turned on for a specific duration with a guarded off duration so that should the lamp be subsequently switched off, further on with timed off commands, received during this time, are prevented from turning the lamps back on.`
+}
 
 // ID of the command
 func (OnWithTimedOff) ID() CommandID { return OnWithTimedOffCommand }
@@ -372,11 +479,22 @@ func (OnWithTimedOff) Required() bool { return true }
 // Cluster ID of the command
 func (OnWithTimedOff) Cluster() zcl.ClusterID { return OnOffID }
 
+// Direction of the command
+func (OnWithTimedOff) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (OnWithTimedOff) MnfCode() []byte { return []byte{} }
+func (OnWithTimedOff) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (OnWithTimedOff) MarshalJSON() ([]byte, error) { return []byte("66"), nil }
+
+func (v *OnWithTimedOff) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h OnWithTimedOffHandler
+	if h, found = handler.(OnWithTimedOffHandler); found {
+		err = h.HandleOnWithTimedOff(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of OnWithTimedOff
 func (v OnWithTimedOff) MarshalZcl() ([]byte, error) {

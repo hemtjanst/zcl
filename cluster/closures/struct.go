@@ -3,6 +3,7 @@ package closures
 import "hemtjan.st/zcl"
 
 type CommandID = zcl.CommandID
+type Frame = zcl.ReceivedZclFrame
 
 const ConfigStatusAttr zcl.AttrID = 7
 
@@ -12,7 +13,8 @@ func (ConfigStatus) Writable() bool   { return false }
 func (ConfigStatus) Reportable() bool { return false }
 func (ConfigStatus) SceneIndex() int  { return -1 }
 
-func (ConfigStatus) Name() string { return "Config / Status" }
+func (ConfigStatus) Name() string        { return `Config / Status` }
+func (ConfigStatus) Description() string { return `` }
 
 type ConfigStatus zcl.Zbmp8
 
@@ -120,7 +122,8 @@ func (LiftAccelerationTime) Writable() bool   { return true }
 func (LiftAccelerationTime) Reportable() bool { return false }
 func (LiftAccelerationTime) SceneIndex() int  { return -1 }
 
-func (LiftAccelerationTime) Name() string { return "Lift - Acceleration Time" }
+func (LiftAccelerationTime) Name() string        { return `Lift - Acceleration Time` }
+func (LiftAccelerationTime) Description() string { return `` }
 
 type LiftAccelerationTime zcl.Zu16
 
@@ -169,7 +172,8 @@ func (LiftCurrentPosition) Writable() bool   { return false }
 func (LiftCurrentPosition) Reportable() bool { return false }
 func (LiftCurrentPosition) SceneIndex() int  { return -1 }
 
-func (LiftCurrentPosition) Name() string { return "Lift - Current Position" }
+func (LiftCurrentPosition) Name() string        { return `Lift - Current Position` }
+func (LiftCurrentPosition) Description() string { return `` }
 
 type LiftCurrentPosition zcl.Zu16
 
@@ -218,7 +222,8 @@ func (LiftDecelerationTime) Writable() bool   { return true }
 func (LiftDecelerationTime) Reportable() bool { return false }
 func (LiftDecelerationTime) SceneIndex() int  { return -1 }
 
-func (LiftDecelerationTime) Name() string { return "Lift - Deceleration Time" }
+func (LiftDecelerationTime) Name() string        { return `Lift - Deceleration Time` }
+func (LiftDecelerationTime) Description() string { return `` }
 
 type LiftDecelerationTime zcl.Zu16
 
@@ -267,7 +272,8 @@ func (LiftInstalledClosedLimit) Writable() bool   { return false }
 func (LiftInstalledClosedLimit) Reportable() bool { return false }
 func (LiftInstalledClosedLimit) SceneIndex() int  { return -1 }
 
-func (LiftInstalledClosedLimit) Name() string { return "Lift - Installed Closed Limit" }
+func (LiftInstalledClosedLimit) Name() string        { return `Lift - Installed Closed Limit` }
+func (LiftInstalledClosedLimit) Description() string { return `` }
 
 type LiftInstalledClosedLimit zcl.Zu16
 
@@ -316,7 +322,8 @@ func (LiftInstalledOpenLimit) Writable() bool   { return false }
 func (LiftInstalledOpenLimit) Reportable() bool { return false }
 func (LiftInstalledOpenLimit) SceneIndex() int  { return -1 }
 
-func (LiftInstalledOpenLimit) Name() string { return "Lift - Installed Open Limit" }
+func (LiftInstalledOpenLimit) Name() string        { return `Lift - Installed Open Limit` }
+func (LiftInstalledOpenLimit) Description() string { return `` }
 
 type LiftInstalledOpenLimit zcl.Zu16
 
@@ -365,7 +372,8 @@ func (LiftIntermediateSetpoints) Writable() bool   { return true }
 func (LiftIntermediateSetpoints) Reportable() bool { return false }
 func (LiftIntermediateSetpoints) SceneIndex() int  { return -1 }
 
-func (LiftIntermediateSetpoints) Name() string { return "Lift - Intermediate Setpoints" }
+func (LiftIntermediateSetpoints) Name() string        { return `Lift - Intermediate Setpoints` }
+func (LiftIntermediateSetpoints) Description() string { return `` }
 
 type LiftIntermediateSetpoints zcl.Zostring
 
@@ -414,7 +422,8 @@ func (LiftNumberOfActuations) Writable() bool   { return false }
 func (LiftNumberOfActuations) Reportable() bool { return false }
 func (LiftNumberOfActuations) SceneIndex() int  { return -1 }
 
-func (LiftNumberOfActuations) Name() string { return "Lift - Number of Actuations" }
+func (LiftNumberOfActuations) Name() string        { return `Lift - Number of Actuations` }
+func (LiftNumberOfActuations) Description() string { return `` }
 
 type LiftNumberOfActuations zcl.Zu16
 
@@ -463,7 +472,8 @@ func (LiftPhysicalClosedLimit) Writable() bool   { return false }
 func (LiftPhysicalClosedLimit) Reportable() bool { return false }
 func (LiftPhysicalClosedLimit) SceneIndex() int  { return -1 }
 
-func (LiftPhysicalClosedLimit) Name() string { return "Lift - Physical Closed Limit" }
+func (LiftPhysicalClosedLimit) Name() string        { return `Lift - Physical Closed Limit` }
+func (LiftPhysicalClosedLimit) Description() string { return `` }
 
 type LiftPhysicalClosedLimit zcl.Zu16
 
@@ -512,7 +522,8 @@ func (LiftVelocity) Writable() bool   { return true }
 func (LiftVelocity) Reportable() bool { return false }
 func (LiftVelocity) SceneIndex() int  { return -1 }
 
-func (LiftVelocity) Name() string { return "Lift - Velocity" }
+func (LiftVelocity) Name() string        { return `Lift - Velocity` }
+func (LiftVelocity) Description() string { return `` }
 
 type LiftVelocity zcl.Zu16
 
@@ -561,7 +572,8 @@ func (LiftCurrentPositionPercentage) Writable() bool   { return false }
 func (LiftCurrentPositionPercentage) Reportable() bool { return false }
 func (LiftCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
-func (LiftCurrentPositionPercentage) Name() string { return "Lift Current Position Percentage" }
+func (LiftCurrentPositionPercentage) Name() string        { return `Lift Current Position Percentage` }
+func (LiftCurrentPositionPercentage) Description() string { return `` }
 
 type LiftCurrentPositionPercentage zcl.Zu8
 
@@ -602,7 +614,8 @@ func (a LiftCurrentPositionPercentage) String() string {
 	return zcl.Percent.Format(float64(a))
 }
 
-func (Percentage) Name() string { return "Percentage" }
+func (Percentage) Name() string        { return `Percentage` }
+func (Percentage) Description() string { return `` }
 
 type Percentage zcl.Zu8
 
@@ -643,7 +656,8 @@ func (a Percentage) String() string {
 	return zcl.Percent.Format(float64(a))
 }
 
-func (Position) Name() string { return "Position" }
+func (Position) Name() string        { return `Position` }
+func (Position) Description() string { return `` }
 
 type Position zcl.Zu16
 
@@ -692,7 +706,8 @@ func (TiltCurrentPosition) Writable() bool   { return false }
 func (TiltCurrentPosition) Reportable() bool { return false }
 func (TiltCurrentPosition) SceneIndex() int  { return -1 }
 
-func (TiltCurrentPosition) Name() string { return "Tilt - Current Position" }
+func (TiltCurrentPosition) Name() string        { return `Tilt - Current Position` }
+func (TiltCurrentPosition) Description() string { return `` }
 
 type TiltCurrentPosition zcl.Zu16
 
@@ -741,7 +756,8 @@ func (TiltIntermediateSetpoints) Writable() bool   { return true }
 func (TiltIntermediateSetpoints) Reportable() bool { return false }
 func (TiltIntermediateSetpoints) SceneIndex() int  { return -1 }
 
-func (TiltIntermediateSetpoints) Name() string { return "Tilt - Intermediate Setpoints" }
+func (TiltIntermediateSetpoints) Name() string        { return `Tilt - Intermediate Setpoints` }
+func (TiltIntermediateSetpoints) Description() string { return `` }
 
 type TiltIntermediateSetpoints zcl.Zostring
 
@@ -790,7 +806,8 @@ func (TiltNumberOfActuations) Writable() bool   { return false }
 func (TiltNumberOfActuations) Reportable() bool { return false }
 func (TiltNumberOfActuations) SceneIndex() int  { return -1 }
 
-func (TiltNumberOfActuations) Name() string { return "Tilt - Number of Actuations" }
+func (TiltNumberOfActuations) Name() string        { return `Tilt - Number of Actuations` }
+func (TiltNumberOfActuations) Description() string { return `` }
 
 type TiltNumberOfActuations zcl.Zu16
 
@@ -839,7 +856,8 @@ func (TiltPhysicalClosedLimit) Writable() bool   { return false }
 func (TiltPhysicalClosedLimit) Reportable() bool { return false }
 func (TiltPhysicalClosedLimit) SceneIndex() int  { return -1 }
 
-func (TiltPhysicalClosedLimit) Name() string { return "Tilt - Physical Closed Limit" }
+func (TiltPhysicalClosedLimit) Name() string        { return `Tilt - Physical Closed Limit` }
+func (TiltPhysicalClosedLimit) Description() string { return `` }
 
 type TiltPhysicalClosedLimit zcl.Zu16
 
@@ -888,7 +906,8 @@ func (TiltAInstalledOpenLimit) Writable() bool   { return false }
 func (TiltAInstalledOpenLimit) Reportable() bool { return false }
 func (TiltAInstalledOpenLimit) SceneIndex() int  { return -1 }
 
-func (TiltAInstalledOpenLimit) Name() string { return "Tilt A - Installed Open Limit" }
+func (TiltAInstalledOpenLimit) Name() string        { return `Tilt A - Installed Open Limit` }
+func (TiltAInstalledOpenLimit) Description() string { return `` }
 
 type TiltAInstalledOpenLimit zcl.Zu16
 
@@ -937,7 +956,8 @@ func (TiltBInstalledOpenLimit) Writable() bool   { return false }
 func (TiltBInstalledOpenLimit) Reportable() bool { return false }
 func (TiltBInstalledOpenLimit) SceneIndex() int  { return -1 }
 
-func (TiltBInstalledOpenLimit) Name() string { return "Tilt B - Installed Open Limit" }
+func (TiltBInstalledOpenLimit) Name() string        { return `Tilt B - Installed Open Limit` }
+func (TiltBInstalledOpenLimit) Description() string { return `` }
 
 type TiltBInstalledOpenLimit zcl.Zu16
 
@@ -986,7 +1006,8 @@ func (TiltCurrentPositionPercentage) Writable() bool   { return false }
 func (TiltCurrentPositionPercentage) Reportable() bool { return false }
 func (TiltCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
-func (TiltCurrentPositionPercentage) Name() string { return "Tilt Current Position Percentage" }
+func (TiltCurrentPositionPercentage) Name() string        { return `Tilt Current Position Percentage` }
+func (TiltCurrentPositionPercentage) Description() string { return `` }
 
 type TiltCurrentPositionPercentage zcl.Zu8
 
@@ -1035,7 +1056,8 @@ func (WindowCoveringMode) Writable() bool   { return true }
 func (WindowCoveringMode) Reportable() bool { return false }
 func (WindowCoveringMode) SceneIndex() int  { return -1 }
 
-func (WindowCoveringMode) Name() string { return "Window Covering Mode" }
+func (WindowCoveringMode) Name() string        { return `Window Covering Mode` }
+func (WindowCoveringMode) Description() string { return `` }
 
 type WindowCoveringMode zcl.Zbmp8
 
@@ -1124,7 +1146,8 @@ func (WindowCoveringType) Writable() bool   { return false }
 func (WindowCoveringType) Reportable() bool { return false }
 func (WindowCoveringType) SceneIndex() int  { return -1 }
 
-func (WindowCoveringType) Name() string { return "Window Covering Type" }
+func (WindowCoveringType) Name() string        { return `Window Covering Type` }
+func (WindowCoveringType) Description() string { return `` }
 
 type WindowCoveringType zcl.Zenum8
 

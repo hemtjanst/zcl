@@ -22,3 +22,10 @@ func (a GroupAddress) Mode() zcl.AddressMode  { return zcl.GroupAddress }
 func (a GroupAddress) NWK() uint16            { return uint16(a) }
 func (a GroupAddress) IEEE() net.HardwareAddr { return make([]byte, 8) }
 func (a GroupAddress) String() string         { return fmt.Sprintf("Group(%04X)", uint16(a)) }
+
+const (
+	BroadcastAll            = NWKAddress(zcl.BroadcastAll)
+	BroadcastRxOnWhenIdle   = NWKAddress(zcl.BroadcastRxOnWhenIdle)
+	BroadcastRoutersCoords  = NWKAddress(zcl.BroadcastRoutersCoords)
+	BroadcastLowPowerRouter = NWKAddress(zcl.BroadcastLowPowerRouter)
+)

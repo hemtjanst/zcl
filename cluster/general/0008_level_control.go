@@ -40,6 +40,10 @@ type MoveToLevel struct {
 	TransitionTime TransitionTime
 }
 
+type MoveToLevelHandler interface {
+	HandleMoveToLevel(frame Frame, cmd *MoveToLevel) error
+}
+
 // MoveToLevelCommand is the Command ID of MoveToLevel
 const MoveToLevelCommand CommandID = 0x0000
 
@@ -60,7 +64,10 @@ func (v *MoveToLevel) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (MoveToLevel) Name() string { return "Move to Level" }
+func (MoveToLevel) Name() string { return `Move to Level` }
+
+// Description of the command
+func (MoveToLevel) Description() string { return `` }
 
 // ID of the command
 func (MoveToLevel) ID() CommandID { return MoveToLevelCommand }
@@ -71,11 +78,22 @@ func (MoveToLevel) Required() bool { return true }
 // Cluster ID of the command
 func (MoveToLevel) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (MoveToLevel) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (MoveToLevel) MnfCode() []byte { return []byte{} }
+func (MoveToLevel) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (MoveToLevel) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *MoveToLevel) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h MoveToLevelHandler
+	if h, found = handler.(MoveToLevelHandler); found {
+		err = h.HandleMoveToLevel(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of MoveToLevel
 func (v MoveToLevel) MarshalZcl() ([]byte, error) {
@@ -134,6 +152,10 @@ type Move struct {
 	Rate           Rate
 }
 
+type MoveHandler interface {
+	HandleMove(frame Frame, cmd *Move) error
+}
+
 // MoveCommand is the Command ID of Move
 const MoveCommand CommandID = 0x0001
 
@@ -154,7 +176,10 @@ func (v *Move) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Move) Name() string { return "Move" }
+func (Move) Name() string { return `Move` }
+
+// Description of the command
+func (Move) Description() string { return `` }
 
 // ID of the command
 func (Move) ID() CommandID { return MoveCommand }
@@ -165,11 +190,22 @@ func (Move) Required() bool { return true }
 // Cluster ID of the command
 func (Move) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (Move) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Move) MnfCode() []byte { return []byte{} }
+func (Move) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Move) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *Move) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h MoveHandler
+	if h, found = handler.(MoveHandler); found {
+		err = h.HandleMove(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Move
 func (v Move) MarshalZcl() ([]byte, error) {
@@ -229,6 +265,10 @@ type Step struct {
 	TransitionTime TransitionTime
 }
 
+type StepHandler interface {
+	HandleStep(frame Frame, cmd *Step) error
+}
+
 // StepCommand is the Command ID of Step
 const StepCommand CommandID = 0x0002
 
@@ -251,7 +291,10 @@ func (v *Step) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Step) Name() string { return "Step" }
+func (Step) Name() string { return `Step` }
+
+// Description of the command
+func (Step) Description() string { return `` }
 
 // ID of the command
 func (Step) ID() CommandID { return StepCommand }
@@ -262,11 +305,22 @@ func (Step) Required() bool { return true }
 // Cluster ID of the command
 func (Step) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (Step) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Step) MnfCode() []byte { return []byte{} }
+func (Step) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Step) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+
+func (v *Step) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h StepHandler
+	if h, found = handler.(StepHandler); found {
+		err = h.HandleStep(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Step
 func (v Step) MarshalZcl() ([]byte, error) {
@@ -335,6 +389,10 @@ func (v Step) String() string {
 type Stop struct {
 }
 
+type StopHandler interface {
+	HandleStop(frame Frame, cmd *Stop) error
+}
+
 // StopCommand is the Command ID of Stop
 const StopCommand CommandID = 0x0003
 
@@ -349,7 +407,10 @@ func (v *Stop) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Stop) Name() string { return "Stop" }
+func (Stop) Name() string { return `Stop` }
+
+// Description of the command
+func (Stop) Description() string { return `` }
 
 // ID of the command
 func (Stop) ID() CommandID { return StopCommand }
@@ -360,11 +421,22 @@ func (Stop) Required() bool { return true }
 // Cluster ID of the command
 func (Stop) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (Stop) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Stop) MnfCode() []byte { return []byte{} }
+func (Stop) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Stop) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+
+func (v *Stop) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h StopHandler
+	if h, found = handler.(StopHandler); found {
+		err = h.HandleStop(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Stop
 func (v Stop) MarshalZcl() ([]byte, error) {
@@ -388,6 +460,10 @@ type MoveToLevelWithOnOff struct {
 	TransitionTime TransitionTime
 }
 
+type MoveToLevelWithOnOffHandler interface {
+	HandleMoveToLevelWithOnOff(frame Frame, cmd *MoveToLevelWithOnOff) error
+}
+
 // MoveToLevelWithOnOffCommand is the Command ID of MoveToLevelWithOnOff
 const MoveToLevelWithOnOffCommand CommandID = 0x0004
 
@@ -408,7 +484,10 @@ func (v *MoveToLevelWithOnOff) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (MoveToLevelWithOnOff) Name() string { return "Move to Level (with On/Off)" }
+func (MoveToLevelWithOnOff) Name() string { return `Move to Level (with On/Off)` }
+
+// Description of the command
+func (MoveToLevelWithOnOff) Description() string { return `` }
 
 // ID of the command
 func (MoveToLevelWithOnOff) ID() CommandID { return MoveToLevelWithOnOffCommand }
@@ -419,11 +498,22 @@ func (MoveToLevelWithOnOff) Required() bool { return true }
 // Cluster ID of the command
 func (MoveToLevelWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (MoveToLevelWithOnOff) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (MoveToLevelWithOnOff) MnfCode() []byte { return []byte{} }
+func (MoveToLevelWithOnOff) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (MoveToLevelWithOnOff) MarshalJSON() ([]byte, error) { return []byte("4"), nil }
+
+func (v *MoveToLevelWithOnOff) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h MoveToLevelWithOnOffHandler
+	if h, found = handler.(MoveToLevelWithOnOffHandler); found {
+		err = h.HandleMoveToLevelWithOnOff(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of MoveToLevelWithOnOff
 func (v MoveToLevelWithOnOff) MarshalZcl() ([]byte, error) {
@@ -482,6 +572,10 @@ type MoveWithOnOff struct {
 	Rate           Rate
 }
 
+type MoveWithOnOffHandler interface {
+	HandleMoveWithOnOff(frame Frame, cmd *MoveWithOnOff) error
+}
+
 // MoveWithOnOffCommand is the Command ID of MoveWithOnOff
 const MoveWithOnOffCommand CommandID = 0x0005
 
@@ -502,7 +596,10 @@ func (v *MoveWithOnOff) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (MoveWithOnOff) Name() string { return "Move (with On/Off)" }
+func (MoveWithOnOff) Name() string { return `Move (with On/Off)` }
+
+// Description of the command
+func (MoveWithOnOff) Description() string { return `` }
 
 // ID of the command
 func (MoveWithOnOff) ID() CommandID { return MoveWithOnOffCommand }
@@ -513,11 +610,22 @@ func (MoveWithOnOff) Required() bool { return true }
 // Cluster ID of the command
 func (MoveWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (MoveWithOnOff) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (MoveWithOnOff) MnfCode() []byte { return []byte{} }
+func (MoveWithOnOff) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (MoveWithOnOff) MarshalJSON() ([]byte, error) { return []byte("5"), nil }
+
+func (v *MoveWithOnOff) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h MoveWithOnOffHandler
+	if h, found = handler.(MoveWithOnOffHandler); found {
+		err = h.HandleMoveWithOnOff(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of MoveWithOnOff
 func (v MoveWithOnOff) MarshalZcl() ([]byte, error) {
@@ -577,6 +685,10 @@ type StepWithOnOff struct {
 	TransitionTime TransitionTime
 }
 
+type StepWithOnOffHandler interface {
+	HandleStepWithOnOff(frame Frame, cmd *StepWithOnOff) error
+}
+
 // StepWithOnOffCommand is the Command ID of StepWithOnOff
 const StepWithOnOffCommand CommandID = 0x0006
 
@@ -599,7 +711,10 @@ func (v *StepWithOnOff) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (StepWithOnOff) Name() string { return "Step (with On/Off)" }
+func (StepWithOnOff) Name() string { return `Step (with On/Off)` }
+
+// Description of the command
+func (StepWithOnOff) Description() string { return `` }
 
 // ID of the command
 func (StepWithOnOff) ID() CommandID { return StepWithOnOffCommand }
@@ -610,11 +725,22 @@ func (StepWithOnOff) Required() bool { return true }
 // Cluster ID of the command
 func (StepWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (StepWithOnOff) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (StepWithOnOff) MnfCode() []byte { return []byte{} }
+func (StepWithOnOff) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (StepWithOnOff) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+
+func (v *StepWithOnOff) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h StepWithOnOffHandler
+	if h, found = handler.(StepWithOnOffHandler); found {
+		err = h.HandleStepWithOnOff(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of StepWithOnOff
 func (v StepWithOnOff) MarshalZcl() ([]byte, error) {
@@ -683,6 +809,10 @@ func (v StepWithOnOff) String() string {
 type StopWithOnOff struct {
 }
 
+type StopWithOnOffHandler interface {
+	HandleStopWithOnOff(frame Frame, cmd *StopWithOnOff) error
+}
+
 // StopWithOnOffCommand is the Command ID of StopWithOnOff
 const StopWithOnOffCommand CommandID = 0x0007
 
@@ -697,7 +827,10 @@ func (v *StopWithOnOff) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (StopWithOnOff) Name() string { return "Stop (with On/Off)" }
+func (StopWithOnOff) Name() string { return `Stop (with On/Off)` }
+
+// Description of the command
+func (StopWithOnOff) Description() string { return `` }
 
 // ID of the command
 func (StopWithOnOff) ID() CommandID { return StopWithOnOffCommand }
@@ -708,11 +841,22 @@ func (StopWithOnOff) Required() bool { return true }
 // Cluster ID of the command
 func (StopWithOnOff) Cluster() zcl.ClusterID { return LevelControlID }
 
+// Direction of the command
+func (StopWithOnOff) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (StopWithOnOff) MnfCode() []byte { return []byte{} }
+func (StopWithOnOff) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (StopWithOnOff) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+
+func (v *StopWithOnOff) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h StopWithOnOffHandler
+	if h, found = handler.(StopWithOnOffHandler); found {
+		err = h.HandleStopWithOnOff(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of StopWithOnOff
 func (v StopWithOnOff) MarshalZcl() ([]byte, error) {

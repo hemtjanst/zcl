@@ -57,40 +57,40 @@ func Unmarshal(cluster uint16, data []byte) (uint8, Command, error) {
 }
 
 func init() {
-	addCommand(func() Command { return &NWKAddrRequest{} })
-	addCommand(func() Command { return &IEEEAddrRequest{} })
-	addCommand(func() Command { return &NodeDescRequest{} })
-	addCommand(func() Command { return &PowerDescRequest{} })
-	addCommand(func() Command { return &SimpleDescRequest{} })
-	addCommand(func() Command { return &ActiveEndpointRequest{} })
-	addCommand(func() Command { return &MatchDescRequest{} })
-	addCommand(func() Command { return &UserDescRequest{} })
-	addCommand(func() Command { return &DiscoveryCacheRequest{} })
-	addCommand(func() Command { return &DeviceAnnounce{} })
-	addCommand(func() Command { return &SetUserDescRequest{} })
-	addCommand(func() Command { return &SystemServerDiscoveryRequest{} })
-	addCommand(func() Command { return &DiscoveryStoreRequest{} })
-	addCommand(func() Command { return &NodeDescStoreRequest{} })
-	addCommand(func() Command { return &ActiveEndpointStoreRequest{} })
-	addCommand(func() Command { return &SimpleDescStoreRequest{} })
-	addCommand(func() Command { return &RemoveNodeCacheRequest{} })
-	addCommand(func() Command { return &FindNodeCacheRequest{} })
-	addCommand(func() Command { return &ExtendedSimpleDescRequest{} })
-	addCommand(func() Command { return &ExtendedActiveEndpointRequest{} })
-	addCommand(func() Command { return &EndDeviceBindRequest{} })
+	addCommand(func() Command { return &NWKAddrRequest{} })                //done
+	addCommand(func() Command { return &IEEEAddrRequest{} })               //done
+	addCommand(func() Command { return &NodeDescRequest{} })               //done
+	addCommand(func() Command { return &PowerDescRequest{} })              //done
+	addCommand(func() Command { return &SimpleDescRequest{} })             //done
+	addCommand(func() Command { return &ActiveEndpointRequest{} })         //done
+	addCommand(func() Command { return &MatchDescRequest{} })              //done
+	addCommand(func() Command { return &UserDescRequest{} })               //done
+	addCommand(func() Command { return &DiscoveryCacheRequest{} })         //done
+	addCommand(func() Command { return &DeviceAnnounce{} })                //done
+	addCommand(func() Command { return &SetUserDescRequest{} })            //done
+	addCommand(func() Command { return &SystemServerDiscoveryRequest{} })  //done
+	addCommand(func() Command { return &DiscoveryStoreRequest{} })         //done
+	addCommand(func() Command { return &NodeDescStoreRequest{} })          //done
+	addCommand(func() Command { return &ActiveEndpointStoreRequest{} })    //done
+	addCommand(func() Command { return &SimpleDescStoreRequest{} })        //done
+	addCommand(func() Command { return &RemoveNodeCacheRequest{} })        //done
+	addCommand(func() Command { return &FindNodeCacheRequest{} })          //done
+	addCommand(func() Command { return &ExtendedSimpleDescRequest{} })     //done
+	addCommand(func() Command { return &ExtendedActiveEndpointRequest{} }) //done
+	addCommand(func() Command { return &EndDeviceBindRequest{} })          //done
 	addCommand(func() Command { return &BindRequest{} })
 	addCommand(func() Command { return &UnbindRequest{} })
 	addCommand(func() Command { return &MgmtLqiRequest{} })
 	addCommand(func() Command { return &MgmtRtgRequest{} })
 	addCommand(func() Command { return &MgmtLeaveRequest{} })
 	addCommand(func() Command { return &MgmtPermitJoiningRequest{} })
-	addCommand(func() Command { return &NWKAddrResponse{} })
-	addCommand(func() Command { return &IEEEAddrResponse{} })
-	addCommand(func() Command { return &NodeDescResponse{} })
-	addCommand(func() Command { return &PowerDescResponse{} })
-	addCommand(func() Command { return &SimpleDescResponse{} })
-	addCommand(func() Command { return &ActiveEndpointResponse{} })
-	addCommand(func() Command { return &MatchDescResponse{} })
+	addCommand(func() Command { return &NWKAddrResponse{} })        //done
+	addCommand(func() Command { return &IEEEAddrResponse{} })       //done
+	addCommand(func() Command { return &NodeDescResponse{} })       //done
+	addCommand(func() Command { return &PowerDescResponse{} })      //done
+	addCommand(func() Command { return &SimpleDescResponse{} })     //done
+	addCommand(func() Command { return &ActiveEndpointResponse{} }) //done
+	addCommand(func() Command { return &MatchDescResponse{} })      //done
 	addCommand(func() Command { return &UserDescResponse{} })
 	addCommand(func() Command { return &DiscoveryCacheResponse{} })
 	addCommand(func() Command { return &SetUserDescResponse{} })

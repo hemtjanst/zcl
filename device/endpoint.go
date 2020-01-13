@@ -260,49 +260,34 @@ func (z *Endpoint) Init() error {
 }
 
 func (z *Endpoint) Request(cmd zcl.Command) (interface{}, error) {
-	fr := &zcl.Frame{}
-	fr.Type = 1
-	fr.CommandID = cmd.ID()
-	fr.Cluster = cmd.Cluster()
-	fr.MnfCode = cmd.MnfCode()
-	fr.ExpectReply = true
-	fr.Profile = zcl.ProfileID(z.profile)
-	fr.Payload = cmd
-
 	ch := make(chan interface{})
 	seqNo, release := z.dev.seq.Next(ch)
 	defer release()
-	fr.Seq = seqNo
 
-	data, err := fr.MarshalZcl()
+	fr, err := zcl.NewClusterFrame(seqNo, z.ep, z.dev.NWK(), z.ep, zcl.ProfileID(z.profile), cmd)
 	if err != nil {
 		return nil, err
 	}
-
-	packet := utils.Packet(
-		z.ep,
-		utils.NWKAddress(z.dev.nwk),
-		z.ep,
-		z.profile,
-		uint16(cmd.Cluster()),
-		data,
-	)
-
 	log.Printf("TX: [EP(%d) -> %s/%d] Profile[%d] Cluster[%d] Seq[%d] %#v (%X)",
-		packet.SrcEP(),
-		packet.DstAddr(),
-		packet.DstEP(),
-		packet.Profile(),
-		packet.Cluster(),
+		fr.SrcEP(),
+		fr.DstAddr(),
+		fr.DstEP(),
+		fr.Profile(),
+		fr.Cluster(),
 		seqNo,
 		cmd,
-		data,
+		fr.Payload(),
 	)
 
-	err = z.dev.tr.Send(packet)
+	err = z.dev.tr.Send(fr)
 	if err != nil {
 		return nil, err
 	}
+
+	if fr.DisableDefaultResponse() {
+		return nil, nil
+	}
+
 	select {
 	case ret := <-ch:
 		return ret, nil
@@ -312,48 +297,34 @@ func (z *Endpoint) Request(cmd zcl.Command) (interface{}, error) {
 }
 
 func (z *Endpoint) General(cluster uint16, cmd zcl.General) (interface{}, error) {
-	fr := &zcl.Frame{}
-	fr.Type = 0
-	fr.CommandID = cmd.ID()
-	fr.ExpectReply = true
-	fr.Cluster = zcl.ClusterID(cluster)
-	fr.Profile = zcl.ProfileID(z.profile)
-	fr.Payload = cmd
-
 	ch := make(chan interface{})
 	seqNo, release := z.dev.seq.Next(ch)
 	defer release()
-	fr.Seq = seqNo
 
-	data, err := fr.MarshalZcl()
+	fr, err := zcl.NewProfileFrame(seqNo, z.ep, z.dev.NWK(), z.ep, zcl.ProfileID(z.profile), zcl.ClusterID(cluster), cmd)
 	if err != nil {
 		return nil, err
 	}
-
-	packet := utils.Packet(
-		z.ep,
-		utils.NWKAddress(z.dev.nwk),
-		z.ep,
-		z.profile,
-		cluster,
-		data,
-	)
-
 	log.Printf("TX: [EP(%d) -> %s/%d] Profile[%d] Cluster[%d] Seq[%d] %#v (%X)",
-		packet.SrcEP(),
-		packet.DstAddr(),
-		packet.DstEP(),
-		packet.Profile(),
-		packet.Cluster(),
+		fr.SrcEP(),
+		fr.DstAddr(),
+		fr.DstEP(),
+		fr.Profile(),
+		fr.Cluster(),
 		seqNo,
 		cmd,
-		data,
+		fr.Payload(),
 	)
 
-	err = z.dev.tr.Send(packet)
+	err = z.dev.tr.Send(fr)
 	if err != nil {
 		return nil, err
 	}
+
+	if fr.DisableDefaultResponse() {
+		return nil, nil
+	}
+
 	select {
 	case ret := <-ch:
 		return ret, nil
@@ -362,15 +333,15 @@ func (z *Endpoint) General(cluster uint16, cmd zcl.General) (interface{}, error)
 	}
 }
 
-func (z *Endpoint) HandleReport(fr *zcl.Frame, report *foundation.ReportAttributes) error {
+func (z *Endpoint) HandleReportAttributes(fr zcl.ZclFrame, report *foundation.ReportAttributes) error {
 	z.attrLock.Lock()
 	defer z.attrLock.Unlock()
-	if _, ok := z.attr[fr.Cluster]; !ok {
-		z.attr[fr.Cluster] = []zcl.Attr{}
+	if _, ok := z.attr[fr.Cluster()]; !ok {
+		z.attr[fr.Cluster()] = []zcl.Attr{}
 	}
 nextAttr:
 	for _, r := range report.Attributes {
-		for _, a := range z.attr[fr.Cluster] {
+		for _, a := range z.attr[fr.Cluster()] {
 			if r.AttributeID == a.ID() {
 				if err := a.SetValue(r.Value); err != nil {
 					log.Printf("While trying to update %s to %s: %v", a, r, err)
@@ -378,28 +349,51 @@ nextAttr:
 				continue nextAttr
 			}
 		}
-		av, err := FindAttr(fr.Cluster, &r)
+		av, err := FindAttr(fr.Cluster(), &r)
 		if err != nil {
 			log.Printf("While trying to create attr %s: %v", r, err)
 			continue nextAttr
 		}
-		z.attr[fr.Cluster] = append(z.attr[fr.Cluster], av)
+		z.attr[fr.Cluster()] = append(z.attr[fr.Cluster()], av)
 	}
-
 	return nil
 }
 
-func (z *Endpoint) Handle(fr *zcl.Frame, cmd interface{}) error {
-	if fr.IsReply {
-		if z.dev.seq.Handle(fr.Seq, cmd) {
-			return nil
+func (z *Endpoint) HandleZcl(fr zcl.ReceivedZclFrame) (zcl.ZclFrame, error) {
+	switch fr.CommandType() {
+	case zcl.ClusterSpecific:
+		cmd, err := utils.ParseZclClusterFrame(fr)
+		if err != nil {
+			return nil, err
 		}
-		if report, ok := cmd.(*foundation.ReportAttributes); ok {
-			return z.HandleReport(fr, report)
+		if cmd.Direction() == zcl.ServerToClient {
+			if z.dev.seq.Handle(fr.SeqNo(), cmd) {
+				return nil, nil
+			}
 		}
-		log.Printf("Unhandled response: %#v", cmd)
-		return nil
+		ret, _, err := cmd.Handle(fr, z)
+		if !foundation.IsRequest(cmd.ID()) {
+			z.dev.seq.Handle(fr.SeqNo(), cmd)
+			return nil, nil
+		}
+		if ret != nil {
+			return fr.Response(z.ep, ret)
+		}
+		return nil, err
+	case zcl.ProfileWide:
+		cmd, err := utils.ParseZclProfileFrame(fr)
+		if err != nil {
+			return nil, err
+		}
+		ret, _, err := cmd.Handle(fr, z)
+		if !foundation.IsRequest(cmd.ID()) {
+			z.dev.seq.Handle(fr.SeqNo(), cmd)
+			return nil, nil
+		}
+		if ret != nil {
+			return fr.Response(z.ep, ret)
+		}
+		return nil, err
 	}
-	log.Printf("Unhandled ZCL request: %#v", cmd)
-	return nil
+	return nil, zcl.ErrInvalidPacket
 }

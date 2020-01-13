@@ -2,7 +2,6 @@ package zcl
 
 import (
 	"encoding/hex"
-	"errors"
 	"fmt"
 	"log"
 	"strconv"
@@ -21,89 +20,31 @@ func (i TypeID) MarshalZcl() ([]byte, error)    { return Zu8(i).MarshalZcl() }
 func (i TypeID) New() Val                       { return NewValue(uint8(i)) }
 
 const (
-	ErrNotEnoughData      errType = "not enough data"
-	ErrTooMuchData        errType = "too much data"
-	ErrNotImpl            errType = "not implemented"
-	ErrInvalidArrayLength errType = "invalid length for array"
-	ErrInvalidType        errType = "invalid type"
-	ErrTimeout            errType = "timeout"
+	ErrNotEnoughData           errType = "not enough data"
+	ErrTooMuchData             errType = "too much data"
+	ErrNotImpl                 errType = "not implemented"
+	ErrInvalidArrayLength      errType = "invalid length for array"
+	ErrInvalidType             errType = "invalid type"
+	ErrTimeout                 errType = "timeout"
+	ErrInvalidHandler          errType = "invalid handler"
+	ErrInvalidPacket           errType = "invalid packet"
+	ErrCommandClusterSpecific  errType = "command is cluster-specific, cannot use as profile-wide"
+	ErrCommandProfileWide      errType = "command is profile-wide, cannot use as cluster-specific"
+	ErrResponseClusterSpecific errType = "request is profile-wide, cannot respond with cluster-specific command"
+	ErrResponseProfileWide     errType = "request is cluster-specific, cannot respond with profile-wide command"
+	ErrResponseWrongCluster    errType = "response cluster does not match request"
+	ErrResponseWrongMnfCode    errType = "response mnfCode does not match request"
+	ErrUnknownCommand          errType = "unknown command"
 )
 
-type Frame struct {
-	ExpectReply bool
-	IsReply     bool
-	Profile     ProfileID
-	Cluster     ClusterID
-	MnfCode     []byte
-	Type        uint8
-	Seq         uint8
-	CommandID   CommandID
-	Payload     Val
-}
-
-type RequestFn func(fr *Frame) (*Frame, error)
-
-func (f *Frame) Check() error {
-	return nil
-}
-
-func (f *Frame) MarshalZcl() ([]byte, error) {
-	data := []byte{f.Type & 0x03}
-	if f.IsReply {
-		data[0] = data[0] | 0x08
-	}
-	if len(f.MnfCode) == 2 {
-		data[0] = data[0] | 0x04
-		data = append(data, f.MnfCode[1], f.MnfCode[0])
-	}
-	data = append(data, uint8(f.Seq), uint8(f.CommandID))
-
-	if f.Payload != nil {
-		payload, err := f.Payload.MarshalZcl()
-		if err != nil {
-			return nil, err
-		}
-		data = append(data, payload...)
-	}
-	return data, nil
-}
-
-func (f *Frame) UnmarshalZcl(b []byte) ([]byte, error) {
-	if len(b) < 3 {
-		return nil, errors.New("too few bytes(frame:0)")
-	}
-	st := b[0]
-	b = b[1:]
-	f.Type = st & 0x03
-	f.IsReply = st&0x08 == 0x08
-	if st&0x04 == 0x04 {
-		if len(b) < 4 {
-			return nil, errors.New("too few bytes(frame:1)")
-		}
-		f.MnfCode = []byte{b[1], b[0]}
-		b = b[2:]
-	}
-	f.Seq = b[0]
-	f.CommandID = CommandID(b[1])
-	return b[2:], nil
-}
-
-type Val interface {
-	MarshalZcl() ([]byte, error)
-	UnmarshalZcl([]byte) ([]byte, error)
-}
+type Direction bool
+type CommandType uint8
+type AddressMode uint8
+type errType string
 
 type Option struct {
 	Name  string
 	Value int
-}
-
-type EnumArg interface {
-	SingleOptions() []Option
-}
-
-type BitmapArg interface {
-	MultiOptions() []Option
 }
 
 type ArgDesc struct {
@@ -111,41 +52,41 @@ type ArgDesc struct {
 	Name     string
 }
 
-type Command interface {
-	General
-	Arguments() []ArgDesc
-	Cluster() ClusterID
-	Required() bool
-	MnfCode() []byte
+const (
+	ServerToClient          Direction   = true
+	ClientToServer          Direction   = false
+	ProfileWide             CommandType = 0
+	ClusterSpecific         CommandType = 1
+	GroupAddress            AddressMode = 0x01
+	NWKAddress              AddressMode = 0x02
+	IEEEAddress             AddressMode = 0x03
+	FullAddress             AddressMode = 0x04
+	BroadcastAll            uint16      = 0xFFFF
+	BroadcastRxOnWhenIdle   uint16      = 0xFFFD
+	BroadcastRoutersCoords  uint16      = 0xFFFC
+	BroadcastLowPowerRouter uint16      = 0xFFFB
+)
+
+func (d Direction) String() string {
+	if d == ServerToClient {
+		return "Server-to-Client"
+	}
+	return "Client-to-Server"
 }
 
-type General interface {
-	Val
-	Values() []Val
-	ID() CommandID
-	Name() string
-	String() string
+func (a AddressMode) String() string {
+	switch a {
+	case GroupAddress:
+		return "Group"
+	case NWKAddress:
+		return "NWK"
+	case IEEEAddress:
+		return "IEEE"
+	case FullAddress:
+		return "NWK+IEEE"
+	}
+	return fmt.Sprintf("AddrMode%d", int(a))
 }
-
-type ZdoCommand interface {
-	Val
-	Arguments() []ArgDesc
-	Cluster() ClusterID
-	Values() []Val
-	ID() ZdoCmdID
-	Name() string
-	String() string
-}
-
-/*type ZdoCommand interface {
-	Val
-	Values() []Val
-	ID() ZdoCmdID
-	Name() string
-	String() string
-}*/
-
-type errType string
 
 func (i *AttrID) UnmarshalZcl(b []byte) ([]byte, error) {
 	v := new(Zu16)

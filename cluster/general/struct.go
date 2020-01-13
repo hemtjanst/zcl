@@ -4,6 +4,7 @@ package general
 import "hemtjan.st/zcl"
 
 type CommandID = zcl.CommandID
+type Frame = zcl.ReceivedZclFrame
 
 const ApsDecryptFailuresAttr zcl.AttrID = 278
 
@@ -13,7 +14,8 @@ func (ApsDecryptFailures) Writable() bool   { return false }
 func (ApsDecryptFailures) Reportable() bool { return false }
 func (ApsDecryptFailures) SceneIndex() int  { return -1 }
 
-func (ApsDecryptFailures) Name() string { return "APS Decrypt Failures" }
+func (ApsDecryptFailures) Name() string        { return `APS Decrypt Failures` }
+func (ApsDecryptFailures) Description() string { return `` }
 
 type ApsDecryptFailures zcl.Zu16
 
@@ -62,7 +64,8 @@ func (ApsFcFailure) Writable() bool   { return false }
 func (ApsFcFailure) Reportable() bool { return false }
 func (ApsFcFailure) SceneIndex() int  { return -1 }
 
-func (ApsFcFailure) Name() string { return "APS FC Failure" }
+func (ApsFcFailure) Name() string        { return `APS FC Failure` }
+func (ApsFcFailure) Description() string { return `` }
 
 type ApsFcFailure zcl.Zu16
 
@@ -111,7 +114,8 @@ func (ApsRxBcast) Writable() bool   { return false }
 func (ApsRxBcast) Reportable() bool { return false }
 func (ApsRxBcast) SceneIndex() int  { return -1 }
 
-func (ApsRxBcast) Name() string { return "APS Rx Bcast" }
+func (ApsRxBcast) Name() string        { return `APS Rx Bcast` }
+func (ApsRxBcast) Description() string { return `` }
 
 type ApsRxBcast zcl.Zu16
 
@@ -160,7 +164,8 @@ func (ApsRxUcast) Writable() bool   { return false }
 func (ApsRxUcast) Reportable() bool { return false }
 func (ApsRxUcast) SceneIndex() int  { return -1 }
 
-func (ApsRxUcast) Name() string { return "APS Rx Ucast" }
+func (ApsRxUcast) Name() string        { return `APS Rx Ucast` }
+func (ApsRxUcast) Description() string { return `` }
 
 type ApsRxUcast zcl.Zu16
 
@@ -209,7 +214,8 @@ func (ApsTxBcast) Writable() bool   { return false }
 func (ApsTxBcast) Reportable() bool { return false }
 func (ApsTxBcast) SceneIndex() int  { return -1 }
 
-func (ApsTxBcast) Name() string { return "APS Tx Bcast" }
+func (ApsTxBcast) Name() string        { return `APS Tx Bcast` }
+func (ApsTxBcast) Description() string { return `` }
 
 type ApsTxBcast zcl.Zu16
 
@@ -258,7 +264,8 @@ func (ApsTxUcastFail) Writable() bool   { return false }
 func (ApsTxUcastFail) Reportable() bool { return false }
 func (ApsTxUcastFail) SceneIndex() int  { return -1 }
 
-func (ApsTxUcastFail) Name() string { return "APS Tx Ucast Fail" }
+func (ApsTxUcastFail) Name() string        { return `APS Tx Ucast Fail` }
+func (ApsTxUcastFail) Description() string { return `` }
 
 type ApsTxUcastFail zcl.Zu16
 
@@ -307,7 +314,8 @@ func (ApsTxUcastRetry) Writable() bool   { return false }
 func (ApsTxUcastRetry) Reportable() bool { return false }
 func (ApsTxUcastRetry) SceneIndex() int  { return -1 }
 
-func (ApsTxUcastRetry) Name() string { return "APS Tx Ucast Retry" }
+func (ApsTxUcastRetry) Name() string        { return `APS Tx Ucast Retry` }
+func (ApsTxUcastRetry) Description() string { return `` }
 
 type ApsTxUcastRetry zcl.Zu16
 
@@ -356,7 +364,8 @@ func (ApsTxUcastSuccess) Writable() bool   { return false }
 func (ApsTxUcastSuccess) Reportable() bool { return false }
 func (ApsTxUcastSuccess) SceneIndex() int  { return -1 }
 
-func (ApsTxUcastSuccess) Name() string { return "APS Tx Ucast Success" }
+func (ApsTxUcastSuccess) Name() string        { return `APS Tx Ucast Success` }
+func (ApsTxUcastSuccess) Description() string { return `` }
 
 type ApsTxUcastSuccess zcl.Zu16
 
@@ -405,7 +414,8 @@ func (ApsUnauthorizedKey) Writable() bool   { return false }
 func (ApsUnauthorizedKey) Reportable() bool { return false }
 func (ApsUnauthorizedKey) SceneIndex() int  { return -1 }
 
-func (ApsUnauthorizedKey) Name() string { return "APS Unauthorized Key" }
+func (ApsUnauthorizedKey) Name() string        { return `APS Unauthorized Key` }
+func (ApsUnauthorizedKey) Description() string { return `` }
 
 type ApsUnauthorizedKey zcl.Zu16
 
@@ -454,7 +464,8 @@ func (AlarmCount) Writable() bool   { return true }
 func (AlarmCount) Reportable() bool { return false }
 func (AlarmCount) SceneIndex() int  { return -1 }
 
-func (AlarmCount) Name() string { return "Alarm Count" }
+func (AlarmCount) Name() string        { return `Alarm Count` }
+func (AlarmCount) Description() string { return `Number of alarms currently defined` }
 
 // AlarmCount Number of alarms currently defined
 type AlarmCount zcl.Zu16
@@ -504,7 +515,8 @@ func (AlarmMask) Writable() bool   { return true }
 func (AlarmMask) Reportable() bool { return false }
 func (AlarmMask) SceneIndex() int  { return -1 }
 
-func (AlarmMask) Name() string { return "Alarm Mask" }
+func (AlarmMask) Name() string        { return `Alarm Mask` }
+func (AlarmMask) Description() string { return `` }
 
 type AlarmMask zcl.Zbmp8
 
@@ -573,7 +585,8 @@ func (AlarmMask) MultiOptions() []zcl.Option {
 	}
 }
 
-func (AlarmCode) Name() string { return "Alarm code" }
+func (AlarmCode) Name() string        { return `Alarm code` }
+func (AlarmCode) Description() string { return `` }
 
 type AlarmCode zcl.Zenum8
 
@@ -622,7 +635,8 @@ func (AnalogMaxPresentValue) Writable() bool   { return true }
 func (AnalogMaxPresentValue) Reportable() bool { return false }
 func (AnalogMaxPresentValue) SceneIndex() int  { return -1 }
 
-func (AnalogMaxPresentValue) Name() string { return "Analog Max Present Value" }
+func (AnalogMaxPresentValue) Name() string        { return `Analog Max Present Value` }
+func (AnalogMaxPresentValue) Description() string { return `` }
 
 type AnalogMaxPresentValue zcl.Zfloat
 
@@ -671,7 +685,8 @@ func (AnalogMinPresentValue) Writable() bool   { return true }
 func (AnalogMinPresentValue) Reportable() bool { return false }
 func (AnalogMinPresentValue) SceneIndex() int  { return -1 }
 
-func (AnalogMinPresentValue) Name() string { return "Analog Min Present Value" }
+func (AnalogMinPresentValue) Name() string        { return `Analog Min Present Value` }
+func (AnalogMinPresentValue) Description() string { return `` }
 
 type AnalogMinPresentValue zcl.Zfloat
 
@@ -720,7 +735,8 @@ func (AnalogPresentValue) Writable() bool   { return true }
 func (AnalogPresentValue) Reportable() bool { return true }
 func (AnalogPresentValue) SceneIndex() int  { return -1 }
 
-func (AnalogPresentValue) Name() string { return "Analog Present value" }
+func (AnalogPresentValue) Name() string        { return `Analog Present value` }
+func (AnalogPresentValue) Description() string { return `` }
 
 type AnalogPresentValue zcl.Zfloat
 
@@ -761,7 +777,8 @@ func (a AnalogPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zfloat(a))
 }
 
-func (AnalogPriority) Name() string { return "Analog Priority" }
+func (AnalogPriority) Name() string        { return `Analog Priority` }
+func (AnalogPriority) Description() string { return `` }
 
 type AnalogPriority struct {
 	Ispriority    zcl.Zbool
@@ -832,7 +849,8 @@ func (AnalogPriorityArray) Writable() bool   { return true }
 func (AnalogPriorityArray) Reportable() bool { return false }
 func (AnalogPriorityArray) SceneIndex() int  { return -1 }
 
-func (AnalogPriorityArray) Name() string { return "Analog Priority Array" }
+func (AnalogPriorityArray) Name() string        { return `Analog Priority Array` }
+func (AnalogPriorityArray) Description() string { return `` }
 
 type AnalogPriorityArray []*AnalogPriority
 
@@ -902,7 +920,8 @@ func (AnalogRelinquishDefault) Writable() bool   { return true }
 func (AnalogRelinquishDefault) Reportable() bool { return false }
 func (AnalogRelinquishDefault) SceneIndex() int  { return -1 }
 
-func (AnalogRelinquishDefault) Name() string { return "Analog Relinquish Default" }
+func (AnalogRelinquishDefault) Name() string        { return `Analog Relinquish Default` }
+func (AnalogRelinquishDefault) Description() string { return `` }
 
 type AnalogRelinquishDefault zcl.Zfloat
 
@@ -951,7 +970,8 @@ func (AnalogResolution) Writable() bool   { return true }
 func (AnalogResolution) Reportable() bool { return false }
 func (AnalogResolution) SceneIndex() int  { return -1 }
 
-func (AnalogResolution) Name() string { return "Analog Resolution" }
+func (AnalogResolution) Name() string        { return `Analog Resolution` }
+func (AnalogResolution) Description() string { return `` }
 
 type AnalogResolution zcl.Zfloat
 
@@ -1000,7 +1020,8 @@ func (ApplicationVersion) Writable() bool   { return false }
 func (ApplicationVersion) Reportable() bool { return false }
 func (ApplicationVersion) SceneIndex() int  { return -1 }
 
-func (ApplicationVersion) Name() string { return "Application Version" }
+func (ApplicationVersion) Name() string        { return `Application Version` }
+func (ApplicationVersion) Description() string { return `` }
 
 type ApplicationVersion zcl.Zu8
 
@@ -1049,7 +1070,8 @@ func (AvgMacRetryPerApsMsgSent) Writable() bool   { return false }
 func (AvgMacRetryPerApsMsgSent) Reportable() bool { return false }
 func (AvgMacRetryPerApsMsgSent) SceneIndex() int  { return -1 }
 
-func (AvgMacRetryPerApsMsgSent) Name() string { return "Avg MAC Retry per APS Msg Sent" }
+func (AvgMacRetryPerApsMsgSent) Name() string        { return `Avg MAC Retry per APS Msg Sent` }
+func (AvgMacRetryPerApsMsgSent) Description() string { return `` }
 
 type AvgMacRetryPerApsMsgSent zcl.Zu16
 
@@ -1098,7 +1120,8 @@ func (BatteryAlarmMask) Writable() bool   { return true }
 func (BatteryAlarmMask) Reportable() bool { return false }
 func (BatteryAlarmMask) SceneIndex() int  { return -1 }
 
-func (BatteryAlarmMask) Name() string { return "Battery Alarm Mask" }
+func (BatteryAlarmMask) Name() string        { return `Battery Alarm Mask` }
+func (BatteryAlarmMask) Description() string { return `` }
 
 type BatteryAlarmMask zcl.Zbmp8
 
@@ -1189,7 +1212,8 @@ func (BatteryAlarmState) Writable() bool   { return true }
 func (BatteryAlarmState) Reportable() bool { return false }
 func (BatteryAlarmState) SceneIndex() int  { return -1 }
 
-func (BatteryAlarmState) Name() string { return "Battery Alarm State" }
+func (BatteryAlarmState) Name() string        { return `Battery Alarm State` }
+func (BatteryAlarmState) Description() string { return `` }
 
 type BatteryAlarmState zcl.Zbmp32
 
@@ -1367,7 +1391,8 @@ func (BatteryManufacturer) Writable() bool   { return true }
 func (BatteryManufacturer) Reportable() bool { return false }
 func (BatteryManufacturer) SceneIndex() int  { return -1 }
 
-func (BatteryManufacturer) Name() string { return "Battery Manufacturer" }
+func (BatteryManufacturer) Name() string        { return `Battery Manufacturer` }
+func (BatteryManufacturer) Description() string { return `` }
 
 type BatteryManufacturer zcl.Zcstring
 
@@ -1416,7 +1441,8 @@ func (BatteryPercentageMinThreshold) Writable() bool   { return true }
 func (BatteryPercentageMinThreshold) Reportable() bool { return false }
 func (BatteryPercentageMinThreshold) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageMinThreshold) Name() string { return "Battery Percentage Min Threshold" }
+func (BatteryPercentageMinThreshold) Name() string        { return `Battery Percentage Min Threshold` }
+func (BatteryPercentageMinThreshold) Description() string { return `` }
 
 type BatteryPercentageMinThreshold zcl.Zu8
 
@@ -1465,7 +1491,8 @@ func (BatteryPercentageThreshold1) Writable() bool   { return true }
 func (BatteryPercentageThreshold1) Reportable() bool { return false }
 func (BatteryPercentageThreshold1) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageThreshold1) Name() string { return "Battery Percentage Threshold 1" }
+func (BatteryPercentageThreshold1) Name() string        { return `Battery Percentage Threshold 1` }
+func (BatteryPercentageThreshold1) Description() string { return `` }
 
 type BatteryPercentageThreshold1 zcl.Zu8
 
@@ -1514,7 +1541,8 @@ func (BatteryPercentageThreshold2) Writable() bool   { return true }
 func (BatteryPercentageThreshold2) Reportable() bool { return false }
 func (BatteryPercentageThreshold2) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageThreshold2) Name() string { return "Battery Percentage Threshold 2" }
+func (BatteryPercentageThreshold2) Name() string        { return `Battery Percentage Threshold 2` }
+func (BatteryPercentageThreshold2) Description() string { return `` }
 
 type BatteryPercentageThreshold2 zcl.Zu8
 
@@ -1563,7 +1591,8 @@ func (BatteryPercentageThreshold3) Writable() bool   { return true }
 func (BatteryPercentageThreshold3) Reportable() bool { return false }
 func (BatteryPercentageThreshold3) SceneIndex() int  { return -1 }
 
-func (BatteryPercentageThreshold3) Name() string { return "Battery Percentage Threshold 3" }
+func (BatteryPercentageThreshold3) Name() string        { return `Battery Percentage Threshold 3` }
+func (BatteryPercentageThreshold3) Description() string { return `` }
 
 type BatteryPercentageThreshold3 zcl.Zu8
 
@@ -1612,7 +1641,8 @@ func (BatteryQuantity) Writable() bool   { return true }
 func (BatteryQuantity) Reportable() bool { return false }
 func (BatteryQuantity) SceneIndex() int  { return -1 }
 
-func (BatteryQuantity) Name() string { return "Battery Quantity" }
+func (BatteryQuantity) Name() string        { return `Battery Quantity` }
+func (BatteryQuantity) Description() string { return `` }
 
 type BatteryQuantity zcl.Zu8
 
@@ -1661,7 +1691,8 @@ func (BatteryRatedVoltage) Writable() bool   { return true }
 func (BatteryRatedVoltage) Reportable() bool { return false }
 func (BatteryRatedVoltage) SceneIndex() int  { return -1 }
 
-func (BatteryRatedVoltage) Name() string { return "Battery Rated Voltage" }
+func (BatteryRatedVoltage) Name() string        { return `Battery Rated Voltage` }
+func (BatteryRatedVoltage) Description() string { return `` }
 
 type BatteryRatedVoltage zcl.Zu8
 
@@ -1710,7 +1741,8 @@ func (BatteryRemaining) Writable() bool   { return false }
 func (BatteryRemaining) Reportable() bool { return true }
 func (BatteryRemaining) SceneIndex() int  { return -1 }
 
-func (BatteryRemaining) Name() string { return "Battery Remaining" }
+func (BatteryRemaining) Name() string        { return `Battery Remaining` }
+func (BatteryRemaining) Description() string { return `` }
 
 type BatteryRemaining zcl.Zu8
 
@@ -1759,7 +1791,8 @@ func (BatterySize) Writable() bool   { return true }
 func (BatterySize) Reportable() bool { return false }
 func (BatterySize) SceneIndex() int  { return -1 }
 
-func (BatterySize) Name() string { return "Battery Size" }
+func (BatterySize) Name() string        { return `Battery Size` }
+func (BatterySize) Description() string { return `` }
 
 type BatterySize zcl.Zenum8
 
@@ -1866,7 +1899,8 @@ func (BatteryVoltage) Writable() bool   { return false }
 func (BatteryVoltage) Reportable() bool { return false }
 func (BatteryVoltage) SceneIndex() int  { return -1 }
 
-func (BatteryVoltage) Name() string { return "Battery Voltage" }
+func (BatteryVoltage) Name() string        { return `Battery Voltage` }
+func (BatteryVoltage) Description() string { return `` }
 
 type BatteryVoltage zcl.Zu8
 
@@ -1915,7 +1949,8 @@ func (BatteryVoltageMinThreshold) Writable() bool   { return true }
 func (BatteryVoltageMinThreshold) Reportable() bool { return false }
 func (BatteryVoltageMinThreshold) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageMinThreshold) Name() string { return "Battery Voltage Min Threshold" }
+func (BatteryVoltageMinThreshold) Name() string        { return `Battery Voltage Min Threshold` }
+func (BatteryVoltageMinThreshold) Description() string { return `` }
 
 type BatteryVoltageMinThreshold zcl.Zu8
 
@@ -1964,7 +1999,8 @@ func (BatteryVoltageThreshold1) Writable() bool   { return true }
 func (BatteryVoltageThreshold1) Reportable() bool { return false }
 func (BatteryVoltageThreshold1) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageThreshold1) Name() string { return "Battery Voltage Threshold 1" }
+func (BatteryVoltageThreshold1) Name() string        { return `Battery Voltage Threshold 1` }
+func (BatteryVoltageThreshold1) Description() string { return `` }
 
 type BatteryVoltageThreshold1 zcl.Zu8
 
@@ -2013,7 +2049,8 @@ func (BatteryVoltageThreshold2) Writable() bool   { return true }
 func (BatteryVoltageThreshold2) Reportable() bool { return false }
 func (BatteryVoltageThreshold2) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageThreshold2) Name() string { return "Battery Voltage Threshold 2" }
+func (BatteryVoltageThreshold2) Name() string        { return `Battery Voltage Threshold 2` }
+func (BatteryVoltageThreshold2) Description() string { return `` }
 
 type BatteryVoltageThreshold2 zcl.Zu8
 
@@ -2062,7 +2099,8 @@ func (BatteryVoltageThreshold3) Writable() bool   { return true }
 func (BatteryVoltageThreshold3) Reportable() bool { return false }
 func (BatteryVoltageThreshold3) SceneIndex() int  { return -1 }
 
-func (BatteryVoltageThreshold3) Name() string { return "Battery Voltage Threshold 3" }
+func (BatteryVoltageThreshold3) Name() string        { return `Battery Voltage Threshold 3` }
+func (BatteryVoltageThreshold3) Description() string { return `` }
 
 type BatteryVoltageThreshold3 zcl.Zu8
 
@@ -2111,7 +2149,8 @@ func (BatteryCapacity) Writable() bool   { return true }
 func (BatteryCapacity) Reportable() bool { return false }
 func (BatteryCapacity) SceneIndex() int  { return -1 }
 
-func (BatteryCapacity) Name() string { return "Battery capacity" }
+func (BatteryCapacity) Name() string        { return `Battery capacity` }
+func (BatteryCapacity) Description() string { return `` }
 
 type BatteryCapacity zcl.Zu16
 
@@ -2160,7 +2199,8 @@ func (BinaryActiveText) Writable() bool   { return true }
 func (BinaryActiveText) Reportable() bool { return false }
 func (BinaryActiveText) SceneIndex() int  { return -1 }
 
-func (BinaryActiveText) Name() string { return "Binary Active Text" }
+func (BinaryActiveText) Name() string        { return `Binary Active Text` }
+func (BinaryActiveText) Description() string { return `` }
 
 type BinaryActiveText zcl.Zcstring
 
@@ -2209,7 +2249,8 @@ func (BinaryInactiveText) Writable() bool   { return true }
 func (BinaryInactiveText) Reportable() bool { return false }
 func (BinaryInactiveText) SceneIndex() int  { return -1 }
 
-func (BinaryInactiveText) Name() string { return "Binary Inactive Text" }
+func (BinaryInactiveText) Name() string        { return `Binary Inactive Text` }
+func (BinaryInactiveText) Description() string { return `` }
 
 type BinaryInactiveText zcl.Zcstring
 
@@ -2258,7 +2299,8 @@ func (BinaryMaxOffTime) Writable() bool   { return true }
 func (BinaryMaxOffTime) Reportable() bool { return false }
 func (BinaryMaxOffTime) SceneIndex() int  { return -1 }
 
-func (BinaryMaxOffTime) Name() string { return "Binary Max Off-time" }
+func (BinaryMaxOffTime) Name() string        { return `Binary Max Off-time` }
+func (BinaryMaxOffTime) Description() string { return `` }
 
 type BinaryMaxOffTime zcl.Zu32
 
@@ -2307,7 +2349,8 @@ func (BinaryMinOffTime) Writable() bool   { return true }
 func (BinaryMinOffTime) Reportable() bool { return false }
 func (BinaryMinOffTime) SceneIndex() int  { return -1 }
 
-func (BinaryMinOffTime) Name() string { return "Binary Min Off-time" }
+func (BinaryMinOffTime) Name() string        { return `Binary Min Off-time` }
+func (BinaryMinOffTime) Description() string { return `` }
 
 type BinaryMinOffTime zcl.Zu32
 
@@ -2356,7 +2399,8 @@ func (BinaryPolarity) Writable() bool   { return false }
 func (BinaryPolarity) Reportable() bool { return false }
 func (BinaryPolarity) SceneIndex() int  { return -1 }
 
-func (BinaryPolarity) Name() string { return "Binary Polarity" }
+func (BinaryPolarity) Name() string        { return `Binary Polarity` }
+func (BinaryPolarity) Description() string { return `` }
 
 type BinaryPolarity zcl.Zenum8
 
@@ -2423,7 +2467,8 @@ func (BinaryPresentValue) Writable() bool   { return true }
 func (BinaryPresentValue) Reportable() bool { return true }
 func (BinaryPresentValue) SceneIndex() int  { return -1 }
 
-func (BinaryPresentValue) Name() string { return "Binary Present Value" }
+func (BinaryPresentValue) Name() string        { return `Binary Present Value` }
+func (BinaryPresentValue) Description() string { return `` }
 
 type BinaryPresentValue zcl.Zbool
 
@@ -2464,7 +2509,8 @@ func (a BinaryPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
 }
 
-func (BinaryPriority) Name() string { return "Binary Priority" }
+func (BinaryPriority) Name() string        { return `Binary Priority` }
+func (BinaryPriority) Description() string { return `` }
 
 type BinaryPriority struct {
 	Ispriority    zcl.Zbool
@@ -2535,7 +2581,8 @@ func (BinaryPriorityArray) Writable() bool   { return true }
 func (BinaryPriorityArray) Reportable() bool { return false }
 func (BinaryPriorityArray) SceneIndex() int  { return -1 }
 
-func (BinaryPriorityArray) Name() string { return "Binary Priority Array" }
+func (BinaryPriorityArray) Name() string        { return `Binary Priority Array` }
+func (BinaryPriorityArray) Description() string { return `` }
 
 type BinaryPriorityArray []*BinaryPriority
 
@@ -2605,7 +2652,8 @@ func (BinaryRelinquishDefault) Writable() bool   { return true }
 func (BinaryRelinquishDefault) Reportable() bool { return false }
 func (BinaryRelinquishDefault) SceneIndex() int  { return -1 }
 
-func (BinaryRelinquishDefault) Name() string { return "Binary Relinquish Default" }
+func (BinaryRelinquishDefault) Name() string        { return `Binary Relinquish Default` }
+func (BinaryRelinquishDefault) Description() string { return `` }
 
 type BinaryRelinquishDefault zcl.Zbool
 
@@ -2654,7 +2702,8 @@ func (CalculationPeriod) Writable() bool   { return true }
 func (CalculationPeriod) Reportable() bool { return false }
 func (CalculationPeriod) SceneIndex() int  { return -1 }
 
-func (CalculationPeriod) Name() string { return "Calculation Period" }
+func (CalculationPeriod) Name() string        { return `Calculation Period` }
+func (CalculationPeriod) Description() string { return `` }
 
 type CalculationPeriod zcl.Zu16
 
@@ -2703,7 +2752,8 @@ func (CheckInInterval) Writable() bool   { return true }
 func (CheckInInterval) Reportable() bool { return false }
 func (CheckInInterval) SceneIndex() int  { return -1 }
 
-func (CheckInInterval) Name() string { return "Check-in Interval" }
+func (CheckInInterval) Name() string        { return `Check-in Interval` }
+func (CheckInInterval) Description() string { return `` }
 
 type CheckInInterval zcl.Zu32
 
@@ -2752,7 +2802,8 @@ func (CheckInIntervalMin) Writable() bool   { return false }
 func (CheckInIntervalMin) Reportable() bool { return false }
 func (CheckInIntervalMin) SceneIndex() int  { return -1 }
 
-func (CheckInIntervalMin) Name() string { return "Check-in Interval Min" }
+func (CheckInIntervalMin) Name() string        { return `Check-in Interval Min` }
+func (CheckInIntervalMin) Description() string { return `` }
 
 type CheckInIntervalMin zcl.Zu32
 
@@ -2801,7 +2852,8 @@ func (ChildMoved) Writable() bool   { return false }
 func (ChildMoved) Reportable() bool { return false }
 func (ChildMoved) SceneIndex() int  { return -1 }
 
-func (ChildMoved) Name() string { return "Child Moved" }
+func (ChildMoved) Name() string        { return `Child Moved` }
+func (ChildMoved) Description() string { return `` }
 
 type ChildMoved zcl.Zu16
 
@@ -2842,7 +2894,8 @@ func (a ChildMoved) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (ClusterId) Name() string { return "Cluster Id" }
+func (ClusterId) Name() string        { return `Cluster Id` }
+func (ClusterId) Description() string { return `` }
 
 type ClusterId zcl.Zu16
 
@@ -2891,7 +2944,8 @@ func (ClusterRevision) Writable() bool   { return true }
 func (ClusterRevision) Reportable() bool { return false }
 func (ClusterRevision) SceneIndex() int  { return -1 }
 
-func (ClusterRevision) Name() string { return "Cluster Revision" }
+func (ClusterRevision) Name() string        { return `Cluster Revision` }
+func (ClusterRevision) Description() string { return `` }
 
 type ClusterRevision zcl.Zu16
 
@@ -2940,7 +2994,8 @@ func (Configuration) Writable() bool   { return true }
 func (Configuration) Reportable() bool { return false }
 func (Configuration) SceneIndex() int  { return -1 }
 
-func (Configuration) Name() string { return "Configuration" }
+func (Configuration) Name() string        { return `Configuration` }
+func (Configuration) Description() string { return `` }
 
 type Configuration zcl.Zbmp16
 
@@ -3024,7 +3079,8 @@ func (CurrentGroup) Writable() bool   { return false }
 func (CurrentGroup) Reportable() bool { return false }
 func (CurrentGroup) SceneIndex() int  { return -1 }
 
-func (CurrentGroup) Name() string { return "Current Group" }
+func (CurrentGroup) Name() string        { return `Current Group` }
+func (CurrentGroup) Description() string { return `` }
 
 type CurrentGroup zcl.Zu16
 
@@ -3073,9 +3129,12 @@ func (CurrentLevel) Writable() bool   { return false }
 func (CurrentLevel) Reportable() bool { return true }
 func (CurrentLevel) SceneIndex() int  { return 1 }
 
-func (CurrentLevel) Name() string { return "Current Level" }
+func (CurrentLevel) Name() string { return `Current Level` }
+func (CurrentLevel) Description() string {
+	return `represents the current level of this device. Meaning of 'level' is device dependent.`
+}
 
-// CurrentLevel The CurrentLevel attribute represents the current level of this device. meaning of 'level' is device dependent.
+// CurrentLevel represents the current level of this device. Meaning of 'level' is device dependent.
 type CurrentLevel zcl.Zu8
 
 func (a *CurrentLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
@@ -3123,7 +3182,8 @@ func (CurrentScene) Writable() bool   { return false }
 func (CurrentScene) Reportable() bool { return false }
 func (CurrentScene) SceneIndex() int  { return -1 }
 
-func (CurrentScene) Name() string { return "Current Scene" }
+func (CurrentScene) Name() string        { return `Current Scene` }
+func (CurrentScene) Description() string { return `` }
 
 type CurrentScene zcl.Zu8
 
@@ -3172,7 +3232,8 @@ func (CurrentTemperature) Writable() bool   { return false }
 func (CurrentTemperature) Reportable() bool { return false }
 func (CurrentTemperature) SceneIndex() int  { return -1 }
 
-func (CurrentTemperature) Name() string { return "Current Temperature" }
+func (CurrentTemperature) Name() string        { return `Current Temperature` }
+func (CurrentTemperature) Description() string { return `` }
 
 type CurrentTemperature zcl.Zs16
 
@@ -3221,7 +3282,8 @@ func (DateCode) Writable() bool   { return false }
 func (DateCode) Reportable() bool { return false }
 func (DateCode) SceneIndex() int  { return -1 }
 
-func (DateCode) Name() string { return "Date Code" }
+func (DateCode) Name() string        { return `Date Code` }
+func (DateCode) Description() string { return `` }
 
 type DateCode zcl.Zcstring
 
@@ -3270,7 +3332,8 @@ func (DefaultMoveRate) Writable() bool   { return true }
 func (DefaultMoveRate) Reportable() bool { return false }
 func (DefaultMoveRate) SceneIndex() int  { return -1 }
 
-func (DefaultMoveRate) Name() string { return "Default Move Rate" }
+func (DefaultMoveRate) Name() string        { return `Default Move Rate` }
+func (DefaultMoveRate) Description() string { return `` }
 
 type DefaultMoveRate zcl.Zu8
 
@@ -3311,7 +3374,8 @@ func (a DefaultMoveRate) String() string {
 	return zcl.PercentPerSecond.Format(float64(a) / 2.54)
 }
 
-func (Device) Name() string { return "Device" }
+func (Device) Name() string        { return `Device` }
+func (Device) Description() string { return `` }
 
 type Device zcl.Zuid
 
@@ -3360,7 +3424,8 @@ func (DeviceEnabled) Writable() bool   { return true }
 func (DeviceEnabled) Reportable() bool { return false }
 func (DeviceEnabled) SceneIndex() int  { return -1 }
 
-func (DeviceEnabled) Name() string { return "Device Enabled" }
+func (DeviceEnabled) Name() string        { return `Device Enabled` }
+func (DeviceEnabled) Description() string { return `` }
 
 type DeviceEnabled zcl.Zbool
 
@@ -3409,7 +3474,8 @@ func (DeviceTempAlarmMask) Writable() bool   { return true }
 func (DeviceTempAlarmMask) Reportable() bool { return false }
 func (DeviceTempAlarmMask) SceneIndex() int  { return -1 }
 
-func (DeviceTempAlarmMask) Name() string { return "Device Temp Alarm Mask" }
+func (DeviceTempAlarmMask) Name() string        { return `Device Temp Alarm Mask` }
+func (DeviceTempAlarmMask) Description() string { return `` }
 
 type DeviceTempAlarmMask zcl.Zbmp8
 
@@ -3486,7 +3552,8 @@ func (DisableLocalConfig) Writable() bool   { return true }
 func (DisableLocalConfig) Reportable() bool { return false }
 func (DisableLocalConfig) SceneIndex() int  { return -1 }
 
-func (DisableLocalConfig) Name() string { return "Disable Local Config" }
+func (DisableLocalConfig) Name() string        { return `Disable Local Config` }
+func (DisableLocalConfig) Description() string { return `` }
 
 type DisableLocalConfig zcl.Zbmp8
 
@@ -3557,7 +3624,8 @@ func (DisableLocalConfig) MultiOptions() []zcl.Option {
 	}
 }
 
-func (Distance) Name() string { return "Distance" }
+func (Distance) Name() string        { return `Distance` }
+func (Distance) Description() string { return `` }
 
 type Distance zcl.Zu16
 
@@ -3606,7 +3674,8 @@ func (DstEnd) Writable() bool   { return true }
 func (DstEnd) Reportable() bool { return false }
 func (DstEnd) SceneIndex() int  { return -1 }
 
-func (DstEnd) Name() string { return "Dst End" }
+func (DstEnd) Name() string        { return `Dst End` }
+func (DstEnd) Description() string { return `` }
 
 type DstEnd zcl.Zutc
 
@@ -3655,7 +3724,8 @@ func (DstShift) Writable() bool   { return true }
 func (DstShift) Reportable() bool { return false }
 func (DstShift) SceneIndex() int  { return -1 }
 
-func (DstShift) Name() string { return "Dst Shift" }
+func (DstShift) Name() string        { return `Dst Shift` }
+func (DstShift) Description() string { return `` }
 
 type DstShift zcl.Zs32
 
@@ -3704,7 +3774,8 @@ func (DstStart) Writable() bool   { return true }
 func (DstStart) Reportable() bool { return false }
 func (DstStart) SceneIndex() int  { return -1 }
 
-func (DstStart) Name() string { return "Dst Start" }
+func (DstStart) Name() string        { return `Dst Start` }
+func (DstStart) Description() string { return `` }
 
 type DstStart zcl.Zutc
 
@@ -3745,7 +3816,8 @@ func (a DstStart) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
 }
 
-func (EffectIdentifier) Name() string { return "Effect Identifier" }
+func (EffectIdentifier) Name() string        { return `Effect Identifier` }
+func (EffectIdentifier) Description() string { return `when turning lights off` }
 
 // EffectIdentifier when turning lights off
 type EffectIdentifier zcl.Zenum8
@@ -3805,7 +3877,8 @@ func (EffectIdentifier) SingleOptions() []zcl.Option {
 	}
 }
 
-func (EffectVariant) Name() string { return "Effect Variant" }
+func (EffectVariant) Name() string        { return `Effect Variant` }
+func (EffectVariant) Description() string { return `` }
 
 type EffectVariant zcl.Zenum8
 
@@ -3879,7 +3952,8 @@ func (FastPollTimeout) Writable() bool   { return true }
 func (FastPollTimeout) Reportable() bool { return false }
 func (FastPollTimeout) SceneIndex() int  { return -1 }
 
-func (FastPollTimeout) Name() string { return "Fast Poll Timeout" }
+func (FastPollTimeout) Name() string        { return `Fast Poll Timeout` }
+func (FastPollTimeout) Description() string { return `` }
 
 type FastPollTimeout zcl.Zu16
 
@@ -3928,7 +4002,8 @@ func (FastPollTimeoutMax) Writable() bool   { return false }
 func (FastPollTimeoutMax) Reportable() bool { return false }
 func (FastPollTimeoutMax) SceneIndex() int  { return -1 }
 
-func (FastPollTimeoutMax) Name() string { return "Fast Poll Timeout Max" }
+func (FastPollTimeoutMax) Name() string        { return `Fast Poll Timeout Max` }
+func (FastPollTimeoutMax) Description() string { return `` }
 
 type FastPollTimeoutMax zcl.Zu16
 
@@ -3977,7 +4052,10 @@ func (GenericDeviceClass) Writable() bool   { return false }
 func (GenericDeviceClass) Reportable() bool { return false }
 func (GenericDeviceClass) SceneIndex() int  { return -1 }
 
-func (GenericDeviceClass) Name() string { return "Generic Device Class" }
+func (GenericDeviceClass) Name() string { return `Generic Device Class` }
+func (GenericDeviceClass) Description() string {
+	return `defines the field of application of the GenericDeviceType attribute`
+}
 
 // GenericDeviceClass defines the field of application of the GenericDeviceType attribute
 type GenericDeviceClass zcl.Zenum8
@@ -4027,7 +4105,10 @@ func (GenericDeviceType) Writable() bool   { return false }
 func (GenericDeviceType) Reportable() bool { return false }
 func (GenericDeviceType) SceneIndex() int  { return -1 }
 
-func (GenericDeviceType) Name() string { return "Generic Device Type" }
+func (GenericDeviceType) Name() string { return `Generic Device Type` }
+func (GenericDeviceType) Description() string {
+	return `allows an application to show an icon on a rich user interface (e.g. smartphone app)`
+}
 
 // GenericDeviceType allows an application to show an icon on a rich user interface (e.g. smartphone app)
 type GenericDeviceType zcl.Zenum8
@@ -4077,7 +4158,8 @@ func (GlobalSceneControl) Writable() bool   { return false }
 func (GlobalSceneControl) Reportable() bool { return false }
 func (GlobalSceneControl) SceneIndex() int  { return -1 }
 
-func (GlobalSceneControl) Name() string { return "Global Scene Control" }
+func (GlobalSceneControl) Name() string        { return `Global Scene Control` }
+func (GlobalSceneControl) Description() string { return `` }
 
 type GlobalSceneControl zcl.Zbool
 
@@ -4118,7 +4200,8 @@ func (a GlobalSceneControl) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
 }
 
-func (GroupId) Name() string { return "Group ID" }
+func (GroupId) Name() string        { return `Group ID` }
+func (GroupId) Description() string { return `` }
 
 type GroupId zcl.Zu16
 
@@ -4167,7 +4250,8 @@ func (GroupNameSupport) Writable() bool   { return false }
 func (GroupNameSupport) Reportable() bool { return false }
 func (GroupNameSupport) SceneIndex() int  { return -1 }
 
-func (GroupNameSupport) Name() string { return "Group Name Support" }
+func (GroupNameSupport) Name() string        { return `Group Name Support` }
+func (GroupNameSupport) Description() string { return `` }
 
 type GroupNameSupport zcl.Zbmp8
 
@@ -4229,7 +4313,12 @@ func (GroupNameSupport) MultiOptions() []zcl.Option {
 	}
 }
 
-func (GroupCapacity) Name() string { return "Group capacity" }
+func (GroupCapacity) Name() string { return `Group capacity` }
+func (GroupCapacity) Description() string {
+	return `specifies remaining number of groups that can be added.
+If set to 0xFE, at least one more group can be added (exact number unknown)
+If set to 0xFF, it's unknown if any more groups can be added`
+}
 
 // GroupCapacity specifies remaining number of groups that can be added.
 // If set to 0xFE, at least one more group can be added (exact number unknown)
@@ -4273,7 +4362,8 @@ func (a GroupCapacity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (GroupList) Name() string { return "Group list" }
+func (GroupList) Name() string        { return `Group list` }
+func (GroupList) Description() string { return `` }
 
 type GroupList []*zcl.Zu16
 
@@ -4335,7 +4425,8 @@ func (a GroupList) String() string {
 	return "[" + zcl.StrJoin(s, ",") + "]"
 }
 
-func (GroupName) Name() string { return "Group name" }
+func (GroupName) Name() string        { return `Group name` }
+func (GroupName) Description() string { return `` }
 
 type GroupName zcl.Zcstring
 
@@ -4384,7 +4475,8 @@ func (HwVersion) Writable() bool   { return false }
 func (HwVersion) Reportable() bool { return false }
 func (HwVersion) SceneIndex() int  { return -1 }
 
-func (HwVersion) Name() string { return "HW Version" }
+func (HwVersion) Name() string        { return `HW Version` }
+func (HwVersion) Description() string { return `` }
 
 type HwVersion zcl.Zu8
 
@@ -4433,7 +4525,8 @@ func (HighTempDwellTripPoint) Writable() bool   { return false }
 func (HighTempDwellTripPoint) Reportable() bool { return false }
 func (HighTempDwellTripPoint) SceneIndex() int  { return -1 }
 
-func (HighTempDwellTripPoint) Name() string { return "High Temp Dwell Trip Point" }
+func (HighTempDwellTripPoint) Name() string        { return `High Temp Dwell Trip Point` }
+func (HighTempDwellTripPoint) Description() string { return `` }
 
 type HighTempDwellTripPoint zcl.Zu24
 
@@ -4482,7 +4575,11 @@ func (HighTempThreshold) Writable() bool   { return true }
 func (HighTempThreshold) Reportable() bool { return false }
 func (HighTempThreshold) SceneIndex() int  { return -1 }
 
-func (HighTempThreshold) Name() string { return "High Temp Threshold" }
+func (HighTempThreshold) Name() string { return `High Temp Threshold` }
+func (HighTempThreshold) Description() string {
+	return `If the current temperature goes above the threshold for longer
+than the time specified by high temp dwell, an alarm will be triggered`
+}
 
 // HighTempThreshold If the current temperature goes above the threshold for longer
 // than the time specified by high temp dwell, an alarm will be triggered
@@ -4533,7 +4630,8 @@ func (IOApplicationType) Writable() bool   { return false }
 func (IOApplicationType) Reportable() bool { return false }
 func (IOApplicationType) SceneIndex() int  { return -1 }
 
-func (IOApplicationType) Name() string { return "I/O Application Type" }
+func (IOApplicationType) Name() string        { return `I/O Application Type` }
+func (IOApplicationType) Description() string { return `` }
 
 type IOApplicationType zcl.Zu32
 
@@ -4582,7 +4680,8 @@ func (IODescription) Writable() bool   { return true }
 func (IODescription) Reportable() bool { return false }
 func (IODescription) SceneIndex() int  { return -1 }
 
-func (IODescription) Name() string { return "I/O Description" }
+func (IODescription) Name() string        { return `I/O Description` }
+func (IODescription) Description() string { return `` }
 
 type IODescription zcl.Zcstring
 
@@ -4631,7 +4730,8 @@ func (IOOutOfService) Writable() bool   { return true }
 func (IOOutOfService) Reportable() bool { return false }
 func (IOOutOfService) SceneIndex() int  { return -1 }
 
-func (IOOutOfService) Name() string { return "I/O Out of service" }
+func (IOOutOfService) Name() string        { return `I/O Out of service` }
+func (IOOutOfService) Description() string { return `` }
 
 type IOOutOfService zcl.Zbool
 
@@ -4680,7 +4780,8 @@ func (IOReliability) Writable() bool   { return true }
 func (IOReliability) Reportable() bool { return false }
 func (IOReliability) SceneIndex() int  { return -1 }
 
-func (IOReliability) Name() string { return "I/O Reliability" }
+func (IOReliability) Name() string        { return `I/O Reliability` }
+func (IOReliability) Description() string { return `` }
 
 type IOReliability zcl.Zenum8
 
@@ -4792,7 +4893,8 @@ func (IOStatusFlags) Writable() bool   { return false }
 func (IOStatusFlags) Reportable() bool { return true }
 func (IOStatusFlags) SceneIndex() int  { return -1 }
 
-func (IOStatusFlags) Name() string { return "I/O Status flags" }
+func (IOStatusFlags) Name() string        { return `I/O Status flags` }
+func (IOStatusFlags) Description() string { return `` }
 
 type IOStatusFlags zcl.Zbmp8
 
@@ -4875,7 +4977,8 @@ func (IOUnitType) Writable() bool   { return true }
 func (IOUnitType) Reportable() bool { return false }
 func (IOUnitType) SceneIndex() int  { return -1 }
 
-func (IOUnitType) Name() string { return "I/O Unit Type" }
+func (IOUnitType) Name() string        { return `I/O Unit Type` }
+func (IOUnitType) Description() string { return `` }
 
 type IOUnitType zcl.EngineeringUnit
 
@@ -4916,7 +5019,10 @@ func (a IOUnitType) String() string {
 	return zcl.Sprintf("%v", zcl.EngineeringUnit(a))
 }
 
-func (IdentifyEffect) Name() string { return "Identify Effect" }
+func (IdentifyEffect) Name() string { return `Identify Effect` }
+func (IdentifyEffect) Description() string {
+	return `The effect identifier field specifies the identify effect to use.`
+}
 
 // IdentifyEffect The effect identifier field specifies the identify effect to use.
 type IdentifyEffect zcl.Zenum8
@@ -4996,7 +5102,10 @@ func (IdentifyEffect) SingleOptions() []zcl.Option {
 	}
 }
 
-func (IdentifyEffectVariant) Name() string { return "Identify Effect variant" }
+func (IdentifyEffectVariant) Name() string { return `Identify Effect variant` }
+func (IdentifyEffectVariant) Description() string {
+	return `The effect identifier field specifies the identify effect to use.`
+}
 
 // IdentifyEffectVariant The effect identifier field specifies the identify effect to use.
 type IdentifyEffectVariant zcl.Zenum8
@@ -5059,7 +5168,10 @@ func (IdentifyTime) Writable() bool   { return true }
 func (IdentifyTime) Reportable() bool { return false }
 func (IdentifyTime) SceneIndex() int  { return -1 }
 
-func (IdentifyTime) Name() string { return "Identify Time" }
+func (IdentifyTime) Name() string { return `Identify Time` }
+func (IdentifyTime) Description() string {
+	return `The time in seconds for which a device will stay in identify mode.`
+}
 
 // IdentifyTime The time in seconds for which a device will stay in identify mode.
 type IdentifyTime zcl.Zu16
@@ -5101,7 +5213,10 @@ func (a IdentifyTime) String() string {
 	return zcl.Seconds.Format(float64(a))
 }
 
-func (IdentifyTimeout) Name() string { return "Identify Timeout" }
+func (IdentifyTimeout) Name() string { return `Identify Timeout` }
+func (IdentifyTimeout) Description() string {
+	return `The time in seconds for which a device will stay in identify mode.`
+}
 
 // IdentifyTimeout The time in seconds for which a device will stay in identify mode.
 type IdentifyTimeout zcl.Zu16
@@ -5143,7 +5258,8 @@ func (a IdentifyTimeout) String() string {
 	return zcl.Seconds.Format(float64(a))
 }
 
-func (IkeaRemoteDirection) Name() string { return "Ikea Remote Direction" }
+func (IkeaRemoteDirection) Name() string        { return `Ikea Remote Direction` }
+func (IkeaRemoteDirection) Description() string { return `` }
 
 type IkeaRemoteDirection zcl.Zenum8
 
@@ -5210,7 +5326,8 @@ func (JoinIndication) Writable() bool   { return false }
 func (JoinIndication) Reportable() bool { return false }
 func (JoinIndication) SceneIndex() int  { return -1 }
 
-func (JoinIndication) Name() string { return "Join Indication" }
+func (JoinIndication) Name() string        { return `Join Indication` }
+func (JoinIndication) Description() string { return `` }
 
 type JoinIndication zcl.Zu16
 
@@ -5259,7 +5376,8 @@ func (LedIndication) Writable() bool   { return true }
 func (LedIndication) Reportable() bool { return false }
 func (LedIndication) SceneIndex() int  { return -1 }
 
-func (LedIndication) Name() string { return "LED Indication" }
+func (LedIndication) Name() string        { return `LED Indication` }
+func (LedIndication) Description() string { return `` }
 
 type LedIndication zcl.Zbool
 
@@ -5308,7 +5426,8 @@ func (LastMessageLqi) Writable() bool   { return false }
 func (LastMessageLqi) Reportable() bool { return false }
 func (LastMessageLqi) SceneIndex() int  { return -1 }
 
-func (LastMessageLqi) Name() string { return "Last Message LQI" }
+func (LastMessageLqi) Name() string        { return `Last Message LQI` }
+func (LastMessageLqi) Description() string { return `` }
 
 type LastMessageLqi zcl.Zu8
 
@@ -5357,7 +5476,8 @@ func (LastMessageRssi) Writable() bool   { return false }
 func (LastMessageRssi) Reportable() bool { return false }
 func (LastMessageRssi) SceneIndex() int  { return -1 }
 
-func (LastMessageRssi) Name() string { return "Last Message RSSI" }
+func (LastMessageRssi) Name() string        { return `Last Message RSSI` }
+func (LastMessageRssi) Description() string { return `` }
 
 type LastMessageRssi zcl.Zs8
 
@@ -5406,7 +5526,8 @@ func (LastSetTime) Writable() bool   { return false }
 func (LastSetTime) Reportable() bool { return false }
 func (LastSetTime) SceneIndex() int  { return -1 }
 
-func (LastSetTime) Name() string { return "Last Set Time" }
+func (LastSetTime) Name() string        { return `Last Set Time` }
+func (LastSetTime) Description() string { return `` }
 
 type LastSetTime zcl.Zutc
 
@@ -5447,7 +5568,8 @@ func (a LastSetTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zutc(a))
 }
 
-func (Level) Name() string { return "Level" }
+func (Level) Name() string        { return `Level` }
+func (Level) Description() string { return `` }
 
 type Level zcl.Zu8
 
@@ -5496,7 +5618,10 @@ func (LevelControlOptions) Writable() bool   { return true }
 func (LevelControlOptions) Reportable() bool { return false }
 func (LevelControlOptions) SceneIndex() int  { return -1 }
 
-func (LevelControlOptions) Name() string { return "Level Control Options" }
+func (LevelControlOptions) Name() string { return `Level Control Options` }
+func (LevelControlOptions) Description() string {
+	return `is a bitmap that determines the default behavior of some cluster commands`
+}
 
 // LevelControlOptions is a bitmap that determines the default behavior of some cluster commands
 type LevelControlOptions zcl.Zbmp8
@@ -5559,7 +5684,8 @@ func (LevelControlOptions) MultiOptions() []zcl.Option {
 	}
 }
 
-func (LevelDirection) Name() string { return "Level direction" }
+func (LevelDirection) Name() string        { return `Level direction` }
+func (LevelDirection) Description() string { return `` }
 
 type LevelDirection zcl.Zenum8
 
@@ -5626,7 +5752,8 @@ func (LocalTime) Writable() bool   { return false }
 func (LocalTime) Reportable() bool { return false }
 func (LocalTime) SceneIndex() int  { return -1 }
 
-func (LocalTime) Name() string { return "Local Time" }
+func (LocalTime) Name() string        { return `Local Time` }
+func (LocalTime) Description() string { return `Local time` }
 
 // LocalTime Local time
 type LocalTime zcl.Zu32
@@ -5676,7 +5803,8 @@ func (LocationAge) Writable() bool   { return false }
 func (LocationAge) Reportable() bool { return false }
 func (LocationAge) SceneIndex() int  { return -1 }
 
-func (LocationAge) Name() string { return "Location Age" }
+func (LocationAge) Name() string        { return `Location Age` }
+func (LocationAge) Description() string { return `` }
 
 type LocationAge zcl.Zu16
 
@@ -5725,7 +5853,8 @@ func (LocationDescription) Writable() bool   { return true }
 func (LocationDescription) Reportable() bool { return false }
 func (LocationDescription) SceneIndex() int  { return -1 }
 
-func (LocationDescription) Name() string { return "Location Description" }
+func (LocationDescription) Name() string        { return `Location Description` }
+func (LocationDescription) Description() string { return `` }
 
 type LocationDescription zcl.Zcstring
 
@@ -5774,7 +5903,8 @@ func (LocationMethod) Writable() bool   { return true }
 func (LocationMethod) Reportable() bool { return false }
 func (LocationMethod) SceneIndex() int  { return -1 }
 
-func (LocationMethod) Name() string { return "Location Method" }
+func (LocationMethod) Name() string        { return `Location Method` }
+func (LocationMethod) Description() string { return `` }
 
 type LocationMethod zcl.Zenum8
 
@@ -5856,7 +5986,8 @@ func (LocationType) Writable() bool   { return true }
 func (LocationType) Reportable() bool { return false }
 func (LocationType) SceneIndex() int  { return -1 }
 
-func (LocationType) Name() string { return "Location Type" }
+func (LocationType) Name() string        { return `Location Type` }
+func (LocationType) Description() string { return `` }
 
 type LocationType zcl.Zenum8
 
@@ -5925,7 +6056,8 @@ func (LocationType) SingleOptions() []zcl.Option {
 	}
 }
 
-func (LocationFlags) Name() string { return "Location flags" }
+func (LocationFlags) Name() string        { return `Location flags` }
+func (LocationFlags) Description() string { return `` }
 
 type LocationFlags zcl.Zbmp8
 
@@ -6019,7 +6151,8 @@ func (LongPollInterval) Writable() bool   { return false }
 func (LongPollInterval) Reportable() bool { return false }
 func (LongPollInterval) SceneIndex() int  { return -1 }
 
-func (LongPollInterval) Name() string { return "Long Poll Interval" }
+func (LongPollInterval) Name() string        { return `Long Poll Interval` }
+func (LongPollInterval) Description() string { return `` }
 
 type LongPollInterval zcl.Zu32
 
@@ -6068,7 +6201,8 @@ func (LongPollIntervalMin) Writable() bool   { return false }
 func (LongPollIntervalMin) Reportable() bool { return false }
 func (LongPollIntervalMin) SceneIndex() int  { return -1 }
 
-func (LongPollIntervalMin) Name() string { return "Long Poll Interval Min" }
+func (LongPollIntervalMin) Name() string        { return `Long Poll Interval Min` }
+func (LongPollIntervalMin) Description() string { return `` }
 
 type LongPollIntervalMin zcl.Zu32
 
@@ -6117,7 +6251,8 @@ func (LowTempDwellTripPoint) Writable() bool   { return false }
 func (LowTempDwellTripPoint) Reportable() bool { return false }
 func (LowTempDwellTripPoint) SceneIndex() int  { return -1 }
 
-func (LowTempDwellTripPoint) Name() string { return "Low Temp Dwell Trip Point" }
+func (LowTempDwellTripPoint) Name() string        { return `Low Temp Dwell Trip Point` }
+func (LowTempDwellTripPoint) Description() string { return `` }
 
 type LowTempDwellTripPoint zcl.Zu24
 
@@ -6166,7 +6301,11 @@ func (LowTempThreshold) Writable() bool   { return true }
 func (LowTempThreshold) Reportable() bool { return false }
 func (LowTempThreshold) SceneIndex() int  { return -1 }
 
-func (LowTempThreshold) Name() string { return "Low Temp Threshold" }
+func (LowTempThreshold) Name() string { return `Low Temp Threshold` }
+func (LowTempThreshold) Description() string {
+	return `If the current temperature drops below the threshold for longer
+than the time specified by low temp dwell, an alarm will be triggered`
+}
 
 // LowTempThreshold If the current temperature drops below the threshold for longer
 // than the time specified by low temp dwell, an alarm will be triggered
@@ -6217,7 +6356,8 @@ func (MacRxBcast) Writable() bool   { return false }
 func (MacRxBcast) Reportable() bool { return false }
 func (MacRxBcast) SceneIndex() int  { return -1 }
 
-func (MacRxBcast) Name() string { return "Mac Rx Bcast" }
+func (MacRxBcast) Name() string        { return `Mac Rx Bcast` }
+func (MacRxBcast) Description() string { return `` }
 
 type MacRxBcast zcl.Zu32
 
@@ -6266,7 +6406,8 @@ func (MacRxUcast) Writable() bool   { return false }
 func (MacRxUcast) Reportable() bool { return false }
 func (MacRxUcast) SceneIndex() int  { return -1 }
 
-func (MacRxUcast) Name() string { return "Mac Rx Ucast" }
+func (MacRxUcast) Name() string        { return `Mac Rx Ucast` }
+func (MacRxUcast) Description() string { return `` }
 
 type MacRxUcast zcl.Zu32
 
@@ -6315,7 +6456,8 @@ func (MacTxBcast) Writable() bool   { return false }
 func (MacTxBcast) Reportable() bool { return false }
 func (MacTxBcast) SceneIndex() int  { return -1 }
 
-func (MacTxBcast) Name() string { return "Mac Tx Bcast" }
+func (MacTxBcast) Name() string        { return `Mac Tx Bcast` }
+func (MacTxBcast) Description() string { return `` }
 
 type MacTxBcast zcl.Zu32
 
@@ -6364,7 +6506,8 @@ func (MacTxUcast) Writable() bool   { return false }
 func (MacTxUcast) Reportable() bool { return false }
 func (MacTxUcast) SceneIndex() int  { return -1 }
 
-func (MacTxUcast) Name() string { return "Mac Tx Ucast" }
+func (MacTxUcast) Name() string        { return `Mac Tx Ucast` }
+func (MacTxUcast) Description() string { return `` }
 
 type MacTxUcast zcl.Zu32
 
@@ -6413,7 +6556,8 @@ func (MacTxUcastFail) Writable() bool   { return false }
 func (MacTxUcastFail) Reportable() bool { return false }
 func (MacTxUcastFail) SceneIndex() int  { return -1 }
 
-func (MacTxUcastFail) Name() string { return "Mac Tx Ucast Fail" }
+func (MacTxUcastFail) Name() string        { return `Mac Tx Ucast Fail` }
+func (MacTxUcastFail) Description() string { return `` }
 
 type MacTxUcastFail zcl.Zu16
 
@@ -6462,7 +6606,8 @@ func (MacTxUcastRetry) Writable() bool   { return false }
 func (MacTxUcastRetry) Reportable() bool { return false }
 func (MacTxUcastRetry) SceneIndex() int  { return -1 }
 
-func (MacTxUcastRetry) Name() string { return "Mac Tx Ucast Retry" }
+func (MacTxUcastRetry) Name() string        { return `Mac Tx Ucast Retry` }
+func (MacTxUcastRetry) Description() string { return `` }
 
 type MacTxUcastRetry zcl.Zu16
 
@@ -6511,7 +6656,8 @@ func (MainsAlarmMask) Writable() bool   { return true }
 func (MainsAlarmMask) Reportable() bool { return false }
 func (MainsAlarmMask) SceneIndex() int  { return -1 }
 
-func (MainsAlarmMask) Name() string { return "Mains Alarm Mask" }
+func (MainsAlarmMask) Name() string        { return `Mains Alarm Mask` }
+func (MainsAlarmMask) Description() string { return `` }
 
 type MainsAlarmMask zcl.Zbmp8
 
@@ -6597,7 +6743,14 @@ func (MainsFrequency) Writable() bool   { return false }
 func (MainsFrequency) Reportable() bool { return false }
 func (MainsFrequency) SceneIndex() int  { return -1 }
 
-func (MainsFrequency) Name() string { return "Mains Frequency" }
+func (MainsFrequency) Name() string { return `Mains Frequency` }
+func (MainsFrequency) Description() string {
+	return `Resolution of 2Hz
+Special values:
+* 0x00 frequency too low to measure
+* 0xfe frequency too high to measure
+* 0xff unable to measure`
+}
 
 // MainsFrequency Resolution of 2Hz
 // Special values:
@@ -6651,7 +6804,8 @@ func (MainsVoltage) Writable() bool   { return false }
 func (MainsVoltage) Reportable() bool { return false }
 func (MainsVoltage) SceneIndex() int  { return -1 }
 
-func (MainsVoltage) Name() string { return "Mains Voltage" }
+func (MainsVoltage) Name() string        { return `Mains Voltage` }
+func (MainsVoltage) Description() string { return `` }
 
 type MainsVoltage zcl.Zu16
 
@@ -6700,7 +6854,11 @@ func (MainsVoltageDwellTripPoint) Writable() bool   { return true }
 func (MainsVoltageDwellTripPoint) Reportable() bool { return false }
 func (MainsVoltageDwellTripPoint) SceneIndex() int  { return -1 }
 
-func (MainsVoltageDwellTripPoint) Name() string { return "Mains Voltage Dwell Trip Point" }
+func (MainsVoltageDwellTripPoint) Name() string { return `Mains Voltage Dwell Trip Point` }
+func (MainsVoltageDwellTripPoint) Description() string {
+	return `Length of time that the value of MainsVoltage MAY exist beyond either
+of its thresholds before an alarm is generated`
+}
 
 // MainsVoltageDwellTripPoint Length of time that the value of MainsVoltage MAY exist beyond either
 // of its thresholds before an alarm is generated
@@ -6751,7 +6909,8 @@ func (MainsVoltageMaxThreshold) Writable() bool   { return true }
 func (MainsVoltageMaxThreshold) Reportable() bool { return false }
 func (MainsVoltageMaxThreshold) SceneIndex() int  { return -1 }
 
-func (MainsVoltageMaxThreshold) Name() string { return "Mains Voltage Max Threshold" }
+func (MainsVoltageMaxThreshold) Name() string        { return `Mains Voltage Max Threshold` }
+func (MainsVoltageMaxThreshold) Description() string { return `` }
 
 type MainsVoltageMaxThreshold zcl.Zu16
 
@@ -6800,7 +6959,8 @@ func (MainsVoltageMinThreshold) Writable() bool   { return true }
 func (MainsVoltageMinThreshold) Reportable() bool { return false }
 func (MainsVoltageMinThreshold) SceneIndex() int  { return -1 }
 
-func (MainsVoltageMinThreshold) Name() string { return "Mains Voltage Min Threshold" }
+func (MainsVoltageMinThreshold) Name() string        { return `Mains Voltage Min Threshold` }
+func (MainsVoltageMinThreshold) Description() string { return `` }
 
 type MainsVoltageMinThreshold zcl.Zu16
 
@@ -6849,7 +7009,8 @@ func (ManufacturerName) Writable() bool   { return false }
 func (ManufacturerName) Reportable() bool { return false }
 func (ManufacturerName) SceneIndex() int  { return -1 }
 
-func (ManufacturerName) Name() string { return "Manufacturer Name" }
+func (ManufacturerName) Name() string        { return `Manufacturer Name` }
+func (ManufacturerName) Description() string { return `` }
 
 type ManufacturerName zcl.Zcstring
 
@@ -6898,7 +7059,8 @@ func (MaxTempExperienced) Writable() bool   { return false }
 func (MaxTempExperienced) Reportable() bool { return false }
 func (MaxTempExperienced) SceneIndex() int  { return -1 }
 
-func (MaxTempExperienced) Name() string { return "Max Temp Experienced" }
+func (MaxTempExperienced) Name() string        { return `Max Temp Experienced` }
+func (MaxTempExperienced) Description() string { return `` }
 
 type MaxTempExperienced zcl.Zs16
 
@@ -6947,7 +7109,8 @@ func (MinTempExperienced) Writable() bool   { return false }
 func (MinTempExperienced) Reportable() bool { return false }
 func (MinTempExperienced) SceneIndex() int  { return -1 }
 
-func (MinTempExperienced) Name() string { return "Min Temp Experienced" }
+func (MinTempExperienced) Name() string        { return `Min Temp Experienced` }
+func (MinTempExperienced) Description() string { return `` }
 
 type MinTempExperienced zcl.Zs16
 
@@ -6996,7 +7159,8 @@ func (ModelIdentifier) Writable() bool   { return false }
 func (ModelIdentifier) Reportable() bool { return false }
 func (ModelIdentifier) SceneIndex() int  { return -1 }
 
-func (ModelIdentifier) Name() string { return "Model Identifier" }
+func (ModelIdentifier) Name() string        { return `Model Identifier` }
+func (ModelIdentifier) Description() string { return `` }
 
 type ModelIdentifier zcl.Zcstring
 
@@ -7045,7 +7209,8 @@ func (MultistateNumberOfStates) Writable() bool   { return true }
 func (MultistateNumberOfStates) Reportable() bool { return false }
 func (MultistateNumberOfStates) SceneIndex() int  { return -1 }
 
-func (MultistateNumberOfStates) Name() string { return "Multistate Number of States" }
+func (MultistateNumberOfStates) Name() string        { return `Multistate Number of States` }
+func (MultistateNumberOfStates) Description() string { return `` }
 
 type MultistateNumberOfStates zcl.Zu16
 
@@ -7094,7 +7259,8 @@ func (MultistatePresentValue) Writable() bool   { return true }
 func (MultistatePresentValue) Reportable() bool { return true }
 func (MultistatePresentValue) SceneIndex() int  { return -1 }
 
-func (MultistatePresentValue) Name() string { return "Multistate Present value" }
+func (MultistatePresentValue) Name() string        { return `Multistate Present value` }
+func (MultistatePresentValue) Description() string { return `` }
 
 type MultistatePresentValue zcl.Zu16
 
@@ -7135,7 +7301,8 @@ func (a MultistatePresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (MultistatePriority) Name() string { return "Multistate Priority" }
+func (MultistatePriority) Name() string        { return `Multistate Priority` }
+func (MultistatePriority) Description() string { return `` }
 
 type MultistatePriority struct {
 	Ispriority    zcl.Zbool
@@ -7206,7 +7373,8 @@ func (MultistatePriorityArray) Writable() bool   { return true }
 func (MultistatePriorityArray) Reportable() bool { return false }
 func (MultistatePriorityArray) SceneIndex() int  { return -1 }
 
-func (MultistatePriorityArray) Name() string { return "Multistate Priority Array" }
+func (MultistatePriorityArray) Name() string        { return `Multistate Priority Array` }
+func (MultistatePriorityArray) Description() string { return `` }
 
 type MultistatePriorityArray []*MultistatePriority
 
@@ -7276,7 +7444,8 @@ func (MultistateRelinquishDefault) Writable() bool   { return true }
 func (MultistateRelinquishDefault) Reportable() bool { return false }
 func (MultistateRelinquishDefault) SceneIndex() int  { return -1 }
 
-func (MultistateRelinquishDefault) Name() string { return "Multistate Relinquish Default" }
+func (MultistateRelinquishDefault) Name() string        { return `Multistate Relinquish Default` }
+func (MultistateRelinquishDefault) Description() string { return `` }
 
 type MultistateRelinquishDefault zcl.Zu16
 
@@ -7325,7 +7494,8 @@ func (MultistateText) Writable() bool   { return true }
 func (MultistateText) Reportable() bool { return false }
 func (MultistateText) SceneIndex() int  { return -1 }
 
-func (MultistateText) Name() string { return "Multistate Text" }
+func (MultistateText) Name() string        { return `Multistate Text` }
+func (MultistateText) Description() string { return `` }
 
 type MultistateText zcl.Zcstring
 
@@ -7374,7 +7544,8 @@ func (NwkDecryptFailures) Writable() bool   { return false }
 func (NwkDecryptFailures) Reportable() bool { return false }
 func (NwkDecryptFailures) SceneIndex() int  { return -1 }
 
-func (NwkDecryptFailures) Name() string { return "NWK Decrypt Failures" }
+func (NwkDecryptFailures) Name() string        { return `NWK Decrypt Failures` }
+func (NwkDecryptFailures) Description() string { return `` }
 
 type NwkDecryptFailures zcl.Zu16
 
@@ -7423,7 +7594,8 @@ func (NwkFcFailure) Writable() bool   { return false }
 func (NwkFcFailure) Reportable() bool { return false }
 func (NwkFcFailure) SceneIndex() int  { return -1 }
 
-func (NwkFcFailure) Name() string { return "NWK FC Failure" }
+func (NwkFcFailure) Name() string        { return `NWK FC Failure` }
+func (NwkFcFailure) Description() string { return `` }
 
 type NwkFcFailure zcl.Zu16
 
@@ -7472,7 +7644,8 @@ func (NeighborAdded) Writable() bool   { return false }
 func (NeighborAdded) Reportable() bool { return false }
 func (NeighborAdded) SceneIndex() int  { return -1 }
 
-func (NeighborAdded) Name() string { return "Neighbor Added" }
+func (NeighborAdded) Name() string        { return `Neighbor Added` }
+func (NeighborAdded) Description() string { return `` }
 
 type NeighborAdded zcl.Zu16
 
@@ -7513,7 +7686,8 @@ func (a NeighborAdded) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (NeighborInfo) Name() string { return "Neighbor Info" }
+func (NeighborInfo) Name() string        { return `Neighbor Info` }
+func (NeighborInfo) Description() string { return `` }
 
 type NeighborInfo struct {
 	Device      Device
@@ -7642,7 +7816,8 @@ func (NeighborRemoved) Writable() bool   { return false }
 func (NeighborRemoved) Reportable() bool { return false }
 func (NeighborRemoved) SceneIndex() int  { return -1 }
 
-func (NeighborRemoved) Name() string { return "Neighbor Removed" }
+func (NeighborRemoved) Name() string        { return `Neighbor Removed` }
+func (NeighborRemoved) Description() string { return `` }
 
 type NeighborRemoved zcl.Zu16
 
@@ -7691,7 +7866,8 @@ func (NeighborStale) Writable() bool   { return false }
 func (NeighborStale) Reportable() bool { return false }
 func (NeighborStale) SceneIndex() int  { return -1 }
 
-func (NeighborStale) Name() string { return "Neighbor Stale" }
+func (NeighborStale) Name() string        { return `Neighbor Stale` }
+func (NeighborStale) Description() string { return `` }
 
 type NeighborStale zcl.Zu16
 
@@ -7732,7 +7908,8 @@ func (a NeighborStale) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (NeighborsInfoList) Name() string { return "Neighbors Info List" }
+func (NeighborsInfoList) Name() string        { return `Neighbors Info List` }
+func (NeighborsInfoList) Description() string { return `` }
 
 type NeighborsInfoList []*NeighborInfo
 
@@ -7802,7 +7979,10 @@ func (NumberRssiMeasurements) Writable() bool   { return true }
 func (NumberRssiMeasurements) Reportable() bool { return false }
 func (NumberRssiMeasurements) SceneIndex() int  { return -1 }
 
-func (NumberRssiMeasurements) Name() string { return "Number RSSI Measurements" }
+func (NumberRssiMeasurements) Name() string { return `Number RSSI Measurements` }
+func (NumberRssiMeasurements) Description() string {
+	return `is the number of measurements to use to generate one location estimate`
+}
 
 // NumberRssiMeasurements is the number of measurements to use to generate one location estimate
 type NumberRssiMeasurements zcl.Zu8
@@ -7844,7 +8024,8 @@ func (a NumberRssiMeasurements) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (NumberResponses) Name() string { return "Number Responses" }
+func (NumberResponses) Name() string        { return `Number Responses` }
+func (NumberResponses) Description() string { return `` }
 
 type NumberResponses zcl.Zu8
 
@@ -7893,7 +8074,8 @@ func (NumberOfDevices) Writable() bool   { return false }
 func (NumberOfDevices) Reportable() bool { return false }
 func (NumberOfDevices) SceneIndex() int  { return -1 }
 
-func (NumberOfDevices) Name() string { return "Number of Devices" }
+func (NumberOfDevices) Name() string        { return `Number of Devices` }
+func (NumberOfDevices) Description() string { return `` }
 
 type NumberOfDevices zcl.Zu8
 
@@ -7942,7 +8124,8 @@ func (NumberOfResets) Writable() bool   { return false }
 func (NumberOfResets) Reportable() bool { return false }
 func (NumberOfResets) SceneIndex() int  { return -1 }
 
-func (NumberOfResets) Name() string { return "Number of Resets" }
+func (NumberOfResets) Name() string        { return `Number of Resets` }
+func (NumberOfResets) Description() string { return `` }
 
 type NumberOfResets zcl.Zu16
 
@@ -7991,7 +8174,8 @@ func (OffTransitionTime) Writable() bool   { return true }
 func (OffTransitionTime) Reportable() bool { return false }
 func (OffTransitionTime) SceneIndex() int  { return -1 }
 
-func (OffTransitionTime) Name() string { return "Off Transition Time" }
+func (OffTransitionTime) Name() string        { return `Off Transition Time` }
+func (OffTransitionTime) Description() string { return `` }
 
 type OffTransitionTime zcl.Zu16
 
@@ -8040,7 +8224,8 @@ func (OffWaitTime) Writable() bool   { return false }
 func (OffWaitTime) Reportable() bool { return false }
 func (OffWaitTime) SceneIndex() int  { return -1 }
 
-func (OffWaitTime) Name() string { return "Off Wait Time" }
+func (OffWaitTime) Name() string        { return `Off Wait Time` }
+func (OffWaitTime) Description() string { return `` }
 
 type OffWaitTime zcl.Zu16
 
@@ -8089,10 +8274,16 @@ func (OnLevel) Writable() bool   { return true }
 func (OnLevel) Reportable() bool { return false }
 func (OnLevel) SceneIndex() int  { return -1 }
 
-func (OnLevel) Name() string { return "On Level" }
+func (OnLevel) Name() string { return `On Level` }
+func (OnLevel) Description() string {
+	return `determines the value that the CurrentLevel attribute is set to when the OnOff attribute of an On/Off cluster
+on the same endpoint is set to On. If the OnLevel attribute is not implemented, or is set to 0xff, it has no
+effect.`
+}
 
-// OnLevel determines the value that the CurrentLevel attribute is set to when the OnOff attribute of an On/Off cluster on the
-// same endpoint is set to On. If the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.
+// OnLevel determines the value that the CurrentLevel attribute is set to when the OnOff attribute of an On/Off cluster
+// on the same endpoint is set to On. If the OnLevel attribute is not implemented, or is set to 0xff, it has no
+// effect.
 type OnLevel zcl.Zu8
 
 func (a *OnLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
@@ -8140,7 +8331,8 @@ func (OnOff) Writable() bool   { return false }
 func (OnOff) Reportable() bool { return true }
 func (OnOff) SceneIndex() int  { return 1 }
 
-func (OnOff) Name() string { return "On Off" }
+func (OnOff) Name() string        { return `On Off` }
+func (OnOff) Description() string { return `` }
 
 type OnOff zcl.Zbool
 
@@ -8207,7 +8399,8 @@ func (OnTime) Writable() bool   { return false }
 func (OnTime) Reportable() bool { return false }
 func (OnTime) SceneIndex() int  { return -1 }
 
-func (OnTime) Name() string { return "On Time" }
+func (OnTime) Name() string        { return `On Time` }
+func (OnTime) Description() string { return `` }
 
 type OnTime zcl.Zu16
 
@@ -8256,7 +8449,8 @@ func (OnTransitionTime) Writable() bool   { return true }
 func (OnTransitionTime) Reportable() bool { return false }
 func (OnTransitionTime) SceneIndex() int  { return -1 }
 
-func (OnTransitionTime) Name() string { return "On Transition Time" }
+func (OnTransitionTime) Name() string        { return `On Transition Time` }
+func (OnTransitionTime) Description() string { return `` }
 
 type OnTransitionTime zcl.Zu16
 
@@ -8305,7 +8499,12 @@ func (OnOffTransistionTime) Writable() bool   { return true }
 func (OnOffTransistionTime) Reportable() bool { return false }
 func (OnOffTransistionTime) SceneIndex() int  { return -1 }
 
-func (OnOffTransistionTime) Name() string { return "On/Off Transistion Time" }
+func (OnOffTransistionTime) Name() string { return `On/Off Transistion Time` }
+func (OnOffTransistionTime) Description() string {
+	return `represents the time taken to move to or from the target level when On of Off commands are received
+by an On/Off cluster on the same endpoint.
+The actual time taken should be as close to OnOffTransitionTime as the device is able.`
+}
 
 // OnOffTransistionTime represents the time taken to move to or from the target level when On of Off commands are received
 // by an On/Off cluster on the same endpoint.
@@ -8349,7 +8548,8 @@ func (a OnOffTransistionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
 }
 
-func (OnOffControl) Name() string { return "On/off control" }
+func (OnOffControl) Name() string        { return `On/off control` }
+func (OnOffControl) Description() string { return `` }
 
 type OnOffControl zcl.Zbmp8
 
@@ -8419,7 +8619,10 @@ func (OverTempTotalDwell) Writable() bool   { return false }
 func (OverTempTotalDwell) Reportable() bool { return false }
 func (OverTempTotalDwell) SceneIndex() int  { return -1 }
 
-func (OverTempTotalDwell) Name() string { return "Over Temp Total Dwell" }
+func (OverTempTotalDwell) Name() string { return `Over Temp Total Dwell` }
+func (OverTempTotalDwell) Description() string {
+	return `Total time the device has spent above the tmperature specified by High Temp Threshold`
+}
 
 // OverTempTotalDwell Total time the device has spent above the tmperature specified by High Temp Threshold
 type OverTempTotalDwell zcl.Zu16
@@ -8469,7 +8672,8 @@ func (PacketBufferAllocFailures) Writable() bool   { return false }
 func (PacketBufferAllocFailures) Reportable() bool { return false }
 func (PacketBufferAllocFailures) SceneIndex() int  { return -1 }
 
-func (PacketBufferAllocFailures) Name() string { return "Packet Buffer Alloc Failures" }
+func (PacketBufferAllocFailures) Name() string        { return `Packet Buffer Alloc Failures` }
+func (PacketBufferAllocFailures) Description() string { return `` }
 
 type PacketBufferAllocFailures zcl.Zu16
 
@@ -8518,7 +8722,8 @@ func (PacketValidateDropcount) Writable() bool   { return false }
 func (PacketValidateDropcount) Reportable() bool { return false }
 func (PacketValidateDropcount) SceneIndex() int  { return -1 }
 
-func (PacketValidateDropcount) Name() string { return "Packet Validate Dropcount" }
+func (PacketValidateDropcount) Name() string        { return `Packet Validate Dropcount` }
+func (PacketValidateDropcount) Description() string { return `` }
 
 type PacketValidateDropcount zcl.Zu16
 
@@ -8567,7 +8772,10 @@ func (PathLossExponent) Writable() bool   { return true }
 func (PathLossExponent) Reportable() bool { return false }
 func (PathLossExponent) SceneIndex() int  { return -1 }
 
-func (PathLossExponent) Name() string { return "Path loss Exponent" }
+func (PathLossExponent) Name() string { return `Path loss Exponent` }
+func (PathLossExponent) Description() string {
+	return `is the rate at which the signal power decays with increasing distance`
+}
 
 // PathLossExponent is the rate at which the signal power decays with increasing distance
 type PathLossExponent zcl.Zu16
@@ -8617,7 +8825,8 @@ func (PersistensMemoryWrites) Writable() bool   { return false }
 func (PersistensMemoryWrites) Reportable() bool { return false }
 func (PersistensMemoryWrites) SceneIndex() int  { return -1 }
 
-func (PersistensMemoryWrites) Name() string { return "Persistens Memory Writes" }
+func (PersistensMemoryWrites) Name() string        { return `Persistens Memory Writes` }
+func (PersistensMemoryWrites) Description() string { return `` }
 
 type PersistensMemoryWrites zcl.Zu16
 
@@ -8666,7 +8875,8 @@ func (PhyToMacQueueLimitReached) Writable() bool   { return false }
 func (PhyToMacQueueLimitReached) Reportable() bool { return false }
 func (PhyToMacQueueLimitReached) SceneIndex() int  { return -1 }
 
-func (PhyToMacQueueLimitReached) Name() string { return "Phy to MAC queue limit reached" }
+func (PhyToMacQueueLimitReached) Name() string        { return `Phy to MAC queue limit reached` }
+func (PhyToMacQueueLimitReached) Description() string { return `` }
 
 type PhyToMacQueueLimitReached zcl.Zu16
 
@@ -8715,7 +8925,8 @@ func (PhysicalEnvironment) Writable() bool   { return true }
 func (PhysicalEnvironment) Reportable() bool { return false }
 func (PhysicalEnvironment) SceneIndex() int  { return -1 }
 
-func (PhysicalEnvironment) Name() string { return "Physical Environment" }
+func (PhysicalEnvironment) Name() string        { return `Physical Environment` }
+func (PhysicalEnvironment) Description() string { return `` }
 
 type PhysicalEnvironment zcl.Zenum8
 
@@ -9307,7 +9518,8 @@ func (Power) Writable() bool   { return true }
 func (Power) Reportable() bool { return false }
 func (Power) SceneIndex() int  { return -1 }
 
-func (Power) Name() string { return "Power" }
+func (Power) Name() string        { return `Power` }
+func (Power) Description() string { return `` }
 
 type Power zcl.Zs16
 
@@ -9356,7 +9568,8 @@ func (PowerOnLevel) Writable() bool   { return true }
 func (PowerOnLevel) Reportable() bool { return false }
 func (PowerOnLevel) SceneIndex() int  { return -1 }
 
-func (PowerOnLevel) Name() string { return "Power On level" }
+func (PowerOnLevel) Name() string        { return `Power On level` }
+func (PowerOnLevel) Description() string { return `` }
 
 type PowerOnLevel zcl.Zu8
 
@@ -9405,7 +9618,8 @@ func (PowerSource) Writable() bool   { return false }
 func (PowerSource) Reportable() bool { return false }
 func (PowerSource) SceneIndex() int  { return -1 }
 
-func (PowerSource) Name() string { return "Power Source" }
+func (PowerSource) Name() string        { return `Power Source` }
+func (PowerSource) Description() string { return `` }
 
 type PowerSource zcl.Zenum8
 
@@ -9532,7 +9746,8 @@ func (PoweronOnOff) Writable() bool   { return true }
 func (PoweronOnOff) Reportable() bool { return false }
 func (PoweronOnOff) SceneIndex() int  { return -1 }
 
-func (PoweronOnOff) Name() string { return "PowerOn On/Off" }
+func (PoweronOnOff) Name() string        { return `PowerOn On/Off` }
+func (PoweronOnOff) Description() string { return `` }
 
 type PoweronOnOff zcl.Zenum8
 
@@ -9604,7 +9819,10 @@ func (ProductUrl) Writable() bool   { return false }
 func (ProductUrl) Reportable() bool { return false }
 func (ProductUrl) SceneIndex() int  { return -1 }
 
-func (ProductUrl) Name() string { return "Product URL" }
+func (ProductUrl) Name() string { return `Product URL` }
+func (ProductUrl) Description() string {
+	return `specifies a link to a web page containing specific product information.`
+}
 
 // ProductUrl specifies a link to a web page containing specific product information.
 type ProductUrl zcl.Zcstring
@@ -9654,7 +9872,8 @@ func (ProductCode) Writable() bool   { return false }
 func (ProductCode) Reportable() bool { return false }
 func (ProductCode) SceneIndex() int  { return -1 }
 
-func (ProductCode) Name() string { return "Product code" }
+func (ProductCode) Name() string        { return `Product code` }
+func (ProductCode) Description() string { return `As printed on the product.` }
 
 // ProductCode As printed on the product.
 type ProductCode zcl.Zostring
@@ -9704,7 +9923,8 @@ func (QualityMeasure) Writable() bool   { return false }
 func (QualityMeasure) Reportable() bool { return false }
 func (QualityMeasure) SceneIndex() int  { return -1 }
 
-func (QualityMeasure) Name() string { return "Quality Measure" }
+func (QualityMeasure) Name() string        { return `Quality Measure` }
+func (QualityMeasure) Description() string { return `` }
 
 type QualityMeasure zcl.Zu8
 
@@ -9745,7 +9965,8 @@ func (a QualityMeasure) String() string {
 	return zcl.Percent.Format(float64(a))
 }
 
-func (QualityIndex) Name() string { return "Quality index" }
+func (QualityIndex) Name() string        { return `Quality index` }
+func (QualityIndex) Description() string { return `` }
 
 type QualityIndex zcl.Zu16
 
@@ -9786,7 +10007,8 @@ func (a QualityIndex) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(a))
 }
 
-func (Rssi) Name() string { return "RSSI" }
+func (Rssi) Name() string        { return `RSSI` }
+func (Rssi) Description() string { return `` }
 
 type Rssi zcl.Zs8
 
@@ -9827,7 +10049,8 @@ func (a Rssi) String() string {
 	return zcl.DecibelMilliWatts.Format(float64(a))
 }
 
-func (Rate) Name() string { return "Rate" }
+func (Rate) Name() string        { return `Rate` }
+func (Rate) Description() string { return `` }
 
 type Rate zcl.Zu8
 
@@ -9876,7 +10099,8 @@ func (RelayedUcast) Writable() bool   { return false }
 func (RelayedUcast) Reportable() bool { return false }
 func (RelayedUcast) SceneIndex() int  { return -1 }
 
-func (RelayedUcast) Name() string { return "Relayed Ucast" }
+func (RelayedUcast) Name() string        { return `Relayed Ucast` }
+func (RelayedUcast) Description() string { return `` }
 
 type RelayedUcast zcl.Zu16
 
@@ -9925,9 +10149,12 @@ func (RemainingTime) Writable() bool   { return false }
 func (RemainingTime) Reportable() bool { return false }
 func (RemainingTime) SceneIndex() int  { return -1 }
 
-func (RemainingTime) Name() string { return "Remaining Time" }
+func (RemainingTime) Name() string { return `Remaining Time` }
+func (RemainingTime) Description() string {
+	return `represents the time remaining until the current command is complete. It is specified in 1/10ths of a second.`
+}
 
-// RemainingTime represents the time remaining until the current command is complete - it is specified in 1/10ths of a second.
+// RemainingTime represents the time remaining until the current command is complete. It is specified in 1/10ths of a second.
 type RemainingTime zcl.Zu16
 
 func (a *RemainingTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
@@ -9975,7 +10202,8 @@ func (ReportingPeriod) Writable() bool   { return true }
 func (ReportingPeriod) Reportable() bool { return false }
 func (ReportingPeriod) SceneIndex() int  { return -1 }
 
-func (ReportingPeriod) Name() string { return "Reporting Period" }
+func (ReportingPeriod) Name() string        { return `Reporting Period` }
+func (ReportingPeriod) Description() string { return `` }
 
 type ReportingPeriod zcl.Zu16
 
@@ -10016,7 +10244,8 @@ func (a ReportingPeriod) String() string {
 	return zcl.Seconds.Format(float64(a))
 }
 
-func (Resolution) Name() string { return "Resolution" }
+func (Resolution) Name() string        { return `Resolution` }
+func (Resolution) Description() string { return `` }
 
 type Resolution zcl.Zenum8
 
@@ -10088,7 +10317,8 @@ func (RouteDiscInitiated) Writable() bool   { return false }
 func (RouteDiscInitiated) Reportable() bool { return false }
 func (RouteDiscInitiated) SceneIndex() int  { return -1 }
 
-func (RouteDiscInitiated) Name() string { return "Route Disc Initiated" }
+func (RouteDiscInitiated) Name() string        { return `Route Disc Initiated` }
+func (RouteDiscInitiated) Description() string { return `` }
 
 type RouteDiscInitiated zcl.Zu16
 
@@ -10137,7 +10367,8 @@ func (SwBuildId) Writable() bool   { return false }
 func (SwBuildId) Reportable() bool { return false }
 func (SwBuildId) SceneIndex() int  { return -1 }
 
-func (SwBuildId) Name() string { return "SW Build ID" }
+func (SwBuildId) Name() string        { return `SW Build ID` }
+func (SwBuildId) Description() string { return `` }
 
 type SwBuildId zcl.Zcstring
 
@@ -10178,7 +10409,10 @@ func (a SwBuildId) String() string {
 	return zcl.Sprintf("%v", zcl.Zcstring(a))
 }
 
-func (SceneCapacity) Name() string { return "Scene Capacity" }
+func (SceneCapacity) Name() string { return `Scene Capacity` }
+func (SceneCapacity) Description() string {
+	return `specifies remaining number of scenes that can be added`
+}
 
 // SceneCapacity specifies remaining number of scenes that can be added
 type SceneCapacity zcl.Zu8
@@ -10220,7 +10454,8 @@ func (a SceneCapacity) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (SceneCopyMode) Name() string { return "Scene Copy Mode" }
+func (SceneCopyMode) Name() string        { return `Scene Copy Mode` }
+func (SceneCopyMode) Description() string { return `` }
 
 type SceneCopyMode zcl.Zbmp8
 
@@ -10288,7 +10523,8 @@ func (SceneCount) Writable() bool   { return false }
 func (SceneCount) Reportable() bool { return false }
 func (SceneCount) SceneIndex() int  { return -1 }
 
-func (SceneCount) Name() string { return "Scene Count" }
+func (SceneCount) Name() string        { return `Scene Count` }
+func (SceneCount) Description() string { return `` }
 
 type SceneCount zcl.Zu8
 
@@ -10329,7 +10565,15 @@ func (a SceneCount) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(a))
 }
 
-func (SceneExtensions) Name() string { return "Scene Extensions" }
+func (SceneExtensions) Name() string { return `Scene Extensions` }
+func (SceneExtensions) Description() string {
+	return `The format of each extension field set is a 16 bit field carrying the cluster ID,
+followed by an 8 bit length field and the set of scene extension fields specified
+in  the  relevant  cluster. The length field holds the length in octets of that
+extension field set. Extension field set format:
+{{clusterId1, length 1, {extension field set 1}}, {clusterId2, length 2, {extension field set 2}} ...}
+I.e. the field would be a repeating struct with [ClusterID uint16] [OctetLength uint8] [AttrID ...uint16]`
+}
 
 // SceneExtensions The format of each extension field set is a 16 bit field carrying the cluster ID,
 // followed by an 8 bit length field and the set of scene extension fields specified
@@ -10376,7 +10620,8 @@ func (a SceneExtensions) String() string {
 	return zcl.Sprintf("%v", zcl.SceneExtensionSet(a))
 }
 
-func (SceneId) Name() string { return "Scene ID" }
+func (SceneId) Name() string        { return `Scene ID` }
+func (SceneId) Description() string { return `` }
 
 type SceneId zcl.Zu8
 
@@ -10425,7 +10670,8 @@ func (SceneLastConfiguredBy) Writable() bool   { return false }
 func (SceneLastConfiguredBy) Reportable() bool { return false }
 func (SceneLastConfiguredBy) SceneIndex() int  { return -1 }
 
-func (SceneLastConfiguredBy) Name() string { return "Scene Last Configured By" }
+func (SceneLastConfiguredBy) Name() string        { return `Scene Last Configured By` }
+func (SceneLastConfiguredBy) Description() string { return `` }
 
 type SceneLastConfiguredBy zcl.Zuid
 
@@ -10466,7 +10712,8 @@ func (a SceneLastConfiguredBy) String() string {
 	return zcl.Sprintf("%v", zcl.Zuid(a))
 }
 
-func (SceneName) Name() string { return "Scene Name" }
+func (SceneName) Name() string        { return `Scene Name` }
+func (SceneName) Description() string { return `` }
 
 type SceneName zcl.Zcstring
 
@@ -10515,7 +10762,8 @@ func (SceneNameSupport) Writable() bool   { return false }
 func (SceneNameSupport) Reportable() bool { return false }
 func (SceneNameSupport) SceneIndex() int  { return -1 }
 
-func (SceneNameSupport) Name() string { return "Scene Name Support" }
+func (SceneNameSupport) Name() string        { return `Scene Name Support` }
+func (SceneNameSupport) Description() string { return `` }
 
 type SceneNameSupport zcl.Zbmp8
 
@@ -10585,7 +10833,8 @@ func (SceneValid) Writable() bool   { return false }
 func (SceneValid) Reportable() bool { return false }
 func (SceneValid) SceneIndex() int  { return -1 }
 
-func (SceneValid) Name() string { return "Scene Valid" }
+func (SceneValid) Name() string        { return `Scene Valid` }
+func (SceneValid) Description() string { return `` }
 
 type SceneValid zcl.Zbool
 
@@ -10626,7 +10875,8 @@ func (a SceneValid) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(a))
 }
 
-func (SceneList) Name() string { return "Scene list" }
+func (SceneList) Name() string        { return `Scene list` }
+func (SceneList) Description() string { return `` }
 
 type SceneList []*zcl.Zu8
 
@@ -10696,7 +10946,8 @@ func (Sensitivity) Writable() bool   { return true }
 func (Sensitivity) Reportable() bool { return false }
 func (Sensitivity) SceneIndex() int  { return -1 }
 
-func (Sensitivity) Name() string { return "Sensitivity" }
+func (Sensitivity) Name() string        { return `Sensitivity` }
+func (Sensitivity) Description() string { return `` }
 
 type Sensitivity zcl.Zenum8
 
@@ -10768,7 +11019,8 @@ func (ShortPollInterval) Writable() bool   { return false }
 func (ShortPollInterval) Reportable() bool { return false }
 func (ShortPollInterval) SceneIndex() int  { return -1 }
 
-func (ShortPollInterval) Name() string { return "Short Poll Interval" }
+func (ShortPollInterval) Name() string        { return `Short Poll Interval` }
+func (ShortPollInterval) Description() string { return `` }
 
 type ShortPollInterval zcl.Zu16
 
@@ -10817,7 +11069,8 @@ func (StackVersion) Writable() bool   { return false }
 func (StackVersion) Reportable() bool { return false }
 func (StackVersion) SceneIndex() int  { return -1 }
 
-func (StackVersion) Name() string { return "Stack Version" }
+func (StackVersion) Name() string        { return `Stack Version` }
+func (StackVersion) Description() string { return `` }
 
 type StackVersion zcl.Zu8
 
@@ -10866,7 +11119,8 @@ func (StandardTime) Writable() bool   { return false }
 func (StandardTime) Reportable() bool { return false }
 func (StandardTime) SceneIndex() int  { return -1 }
 
-func (StandardTime) Name() string { return "Standard Time" }
+func (StandardTime) Name() string        { return `Standard Time` }
+func (StandardTime) Description() string { return `Local time (without DST offset)` }
 
 // StandardTime Local time (without DST offset)
 type StandardTime zcl.Zu32
@@ -10908,7 +11162,8 @@ func (a StandardTime) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(a))
 }
 
-func (Status) Name() string { return "Status" }
+func (Status) Name() string        { return `Status` }
+func (Status) Description() string { return `` }
 
 type Status zcl.Status
 
@@ -10949,7 +11204,8 @@ func (a Status) String() string {
 	return zcl.Sprintf("%v", zcl.Status(a))
 }
 
-func (StepSize) Name() string { return "Step size" }
+func (StepSize) Name() string        { return `Step size` }
+func (StepSize) Description() string { return `` }
 
 type StepSize zcl.Zu8
 
@@ -10998,7 +11254,10 @@ func (SwitchActions) Writable() bool   { return true }
 func (SwitchActions) Reportable() bool { return false }
 func (SwitchActions) SceneIndex() int  { return -1 }
 
-func (SwitchActions) Name() string { return "Switch actions" }
+func (SwitchActions) Name() string { return `Switch actions` }
+func (SwitchActions) Description() string {
+	return `specifies the commands of the On/Off cluster to be generated when the switch moves between its two states.`
+}
 
 // SwitchActions specifies the commands of the On/Off cluster to be generated when the switch moves between its two states.
 type SwitchActions zcl.Zenum8
@@ -11071,7 +11330,10 @@ func (SwitchType) Writable() bool   { return false }
 func (SwitchType) Reportable() bool { return false }
 func (SwitchType) SceneIndex() int  { return -1 }
 
-func (SwitchType) Name() string { return "Switch type" }
+func (SwitchType) Name() string { return `Switch type` }
+func (SwitchType) Description() string {
+	return `specifies the basic functionality of the On/Off switching device.`
+}
 
 // SwitchType specifies the basic functionality of the On/Off switching device.
 type SwitchType zcl.Zenum8
@@ -11144,7 +11406,8 @@ func (Time) Writable() bool   { return true }
 func (Time) Reportable() bool { return false }
 func (Time) SceneIndex() int  { return -1 }
 
-func (Time) Name() string { return "Time" }
+func (Time) Name() string        { return `Time` }
+func (Time) Description() string { return `` }
 
 type Time zcl.Zutc
 
@@ -11193,7 +11456,8 @@ func (TimeStatus) Writable() bool   { return true }
 func (TimeStatus) Reportable() bool { return false }
 func (TimeStatus) SceneIndex() int  { return -1 }
 
-func (TimeStatus) Name() string { return "Time Status" }
+func (TimeStatus) Name() string        { return `Time Status` }
+func (TimeStatus) Description() string { return `` }
 
 type TimeStatus zcl.Zbmp8
 
@@ -11278,7 +11542,8 @@ func (TimeZone) Writable() bool   { return true }
 func (TimeZone) Reportable() bool { return false }
 func (TimeZone) SceneIndex() int  { return -1 }
 
-func (TimeZone) Name() string { return "Time Zone" }
+func (TimeZone) Name() string        { return `Time Zone` }
+func (TimeZone) Description() string { return `Offset during normal time from UTC in seconds` }
 
 // TimeZone Offset during normal time from UTC in seconds
 type TimeZone zcl.Zs32
@@ -11320,7 +11585,8 @@ func (a TimeZone) String() string {
 	return zcl.Seconds.Format(float64(a))
 }
 
-func (TransitionTime) Name() string { return "Transition Time" }
+func (TransitionTime) Name() string        { return `Transition Time` }
+func (TransitionTime) Description() string { return `` }
 
 type TransitionTime zcl.Zu16
 
@@ -11361,7 +11627,8 @@ func (a TransitionTime) String() string {
 	return zcl.Seconds.Format(float64(a) / 10)
 }
 
-func (TransitionTimeSec) Name() string { return "Transition time (Sec)" }
+func (TransitionTimeSec) Name() string        { return `Transition time (Sec)` }
+func (TransitionTimeSec) Description() string { return `` }
 
 type TransitionTimeSec zcl.Zu16
 
@@ -11410,7 +11677,8 @@ func (UserTest) Writable() bool   { return true }
 func (UserTest) Reportable() bool { return false }
 func (UserTest) SceneIndex() int  { return -1 }
 
-func (UserTest) Name() string { return "User test" }
+func (UserTest) Name() string        { return `User test` }
+func (UserTest) Description() string { return `` }
 
 type UserTest zcl.Zbool
 
@@ -11459,7 +11727,8 @@ func (ValidUntilTime) Writable() bool   { return true }
 func (ValidUntilTime) Reportable() bool { return false }
 func (ValidUntilTime) SceneIndex() int  { return -1 }
 
-func (ValidUntilTime) Name() string { return "Valid Until Time" }
+func (ValidUntilTime) Name() string        { return `Valid Until Time` }
+func (ValidUntilTime) Description() string { return `` }
 
 type ValidUntilTime zcl.Zutc
 
@@ -11508,7 +11777,8 @@ func (XCoordinate) Writable() bool   { return true }
 func (XCoordinate) Reportable() bool { return false }
 func (XCoordinate) SceneIndex() int  { return -1 }
 
-func (XCoordinate) Name() string { return "X Coordinate" }
+func (XCoordinate) Name() string        { return `X Coordinate` }
+func (XCoordinate) Description() string { return `` }
 
 type XCoordinate zcl.Zs16
 
@@ -11557,7 +11827,8 @@ func (YCoordinate) Writable() bool   { return true }
 func (YCoordinate) Reportable() bool { return false }
 func (YCoordinate) SceneIndex() int  { return -1 }
 
-func (YCoordinate) Name() string { return "Y Coordinate" }
+func (YCoordinate) Name() string        { return `Y Coordinate` }
+func (YCoordinate) Description() string { return `` }
 
 type YCoordinate zcl.Zs16
 
@@ -11606,7 +11877,8 @@ func (ZCoordinate) Writable() bool   { return true }
 func (ZCoordinate) Reportable() bool { return false }
 func (ZCoordinate) SceneIndex() int  { return -1 }
 
-func (ZCoordinate) Name() string { return "Z Coordinate" }
+func (ZCoordinate) Name() string        { return `Z Coordinate` }
+func (ZCoordinate) Description() string { return `` }
 
 type ZCoordinate zcl.Zs16
 
@@ -11655,7 +11927,8 @@ func (ZclVersion) Writable() bool   { return false }
 func (ZclVersion) Reportable() bool { return false }
 func (ZclVersion) SceneIndex() int  { return -1 }
 
-func (ZclVersion) Name() string { return "ZCL Version" }
+func (ZclVersion) Name() string        { return `ZCL Version` }
+func (ZclVersion) Description() string { return `` }
 
 type ZclVersion zcl.Zu8
 

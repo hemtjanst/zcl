@@ -20,6 +20,8 @@ type Seq interface {
 type seqNo struct {
 	lock    sync.RWMutex
 	seq     uint8
+	min     uint8
+	max     uint8
 	waits   map[uint8]chan<- interface{}
 	queueCh chan struct{}
 }
@@ -29,6 +31,19 @@ func NewSeq() Seq {
 	return &seqNo{
 		waits:   map[uint8]chan<- interface{}{},
 		queueCh: make(chan struct{}, 1),
+		min:     0,
+		max:     255,
+	}
+}
+
+// NewSeq returns a new Seq
+func NewSeqRange(min, max uint8) Seq {
+	return &seqNo{
+		waits:   map[uint8]chan<- interface{}{},
+		queueCh: make(chan struct{}, 1),
+		min:     min,
+		max:     max,
+		seq:     min,
 	}
 }
 
@@ -65,9 +80,9 @@ func (s *seqNo) find(ch chan<- interface{}) (uint8, bool) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	seq := s.seq
-	for i := 0; i < 255; i++ {
-		if seq == 255 {
-			seq = 0
+	for i := s.min; i < s.max; i++ {
+		if seq == s.max {
+			seq = s.min
 		} else {
 			seq = seq + 1
 		}
@@ -86,9 +101,12 @@ func (s *seqNo) find(ch chan<- interface{}) (uint8, bool) {
 func (s *seqNo) release(seq uint8) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
-	delete(s.waits, seq)
-	if s.queueCh != nil {
-		close(s.queueCh)
-		s.queueCh = nil
+	if ch, ok := s.waits[seq]; ok {
+		close(ch)
+		delete(s.waits, seq)
+		if s.queueCh != nil {
+			close(s.queueCh)
+			s.queueCh = nil
+		}
 	}
 }

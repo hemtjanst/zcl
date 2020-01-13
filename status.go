@@ -32,6 +32,18 @@ const (
 	CalibrationError         Status = 0xc2
 )
 
+type StatusError interface {
+	Status() Status
+}
+
+func (e Status) Error() string {
+	return fmt.Sprintf("zcl status %d: %s", uint8(e), e.String())
+}
+
+func (e Status) Status() Status {
+	return e
+}
+
 func (e Status) String() string {
 	switch e {
 	case Success:

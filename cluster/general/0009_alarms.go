@@ -29,6 +29,10 @@ type ResetAlarm struct {
 	ClusterId ClusterId
 }
 
+type ResetAlarmHandler interface {
+	HandleResetAlarm(frame Frame, cmd *ResetAlarm) error
+}
+
 // ResetAlarmCommand is the Command ID of ResetAlarm
 const ResetAlarmCommand CommandID = 0x0000
 
@@ -49,7 +53,10 @@ func (v *ResetAlarm) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (ResetAlarm) Name() string { return "Reset alarm" }
+func (ResetAlarm) Name() string { return `Reset alarm` }
+
+// Description of the command
+func (ResetAlarm) Description() string { return `` }
 
 // ID of the command
 func (ResetAlarm) ID() CommandID { return ResetAlarmCommand }
@@ -60,11 +67,22 @@ func (ResetAlarm) Required() bool { return true }
 // Cluster ID of the command
 func (ResetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 
+// Direction of the command
+func (ResetAlarm) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (ResetAlarm) MnfCode() []byte { return []byte{} }
+func (ResetAlarm) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (ResetAlarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *ResetAlarm) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h ResetAlarmHandler
+	if h, found = handler.(ResetAlarmHandler); found {
+		err = h.HandleResetAlarm(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of ResetAlarm
 func (v ResetAlarm) MarshalZcl() ([]byte, error) {
@@ -122,6 +140,10 @@ func (v ResetAlarm) String() string {
 type ResetAllAlarms struct {
 }
 
+type ResetAllAlarmsHandler interface {
+	HandleResetAllAlarms(frame Frame, cmd *ResetAllAlarms) error
+}
+
 // ResetAllAlarmsCommand is the Command ID of ResetAllAlarms
 const ResetAllAlarmsCommand CommandID = 0x0001
 
@@ -136,7 +158,12 @@ func (v *ResetAllAlarms) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (ResetAllAlarms) Name() string { return "Reset all alarms" }
+func (ResetAllAlarms) Name() string { return `Reset all alarms` }
+
+// Description of the command
+func (ResetAllAlarms) Description() string {
+	return `Resets all alarms, causing triggered alarms to generate new notification`
+}
 
 // ID of the command
 func (ResetAllAlarms) ID() CommandID { return ResetAllAlarmsCommand }
@@ -147,11 +174,22 @@ func (ResetAllAlarms) Required() bool { return true }
 // Cluster ID of the command
 func (ResetAllAlarms) Cluster() zcl.ClusterID { return AlarmsID }
 
+// Direction of the command
+func (ResetAllAlarms) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (ResetAllAlarms) MnfCode() []byte { return []byte{} }
+func (ResetAllAlarms) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (ResetAllAlarms) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *ResetAllAlarms) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h ResetAllAlarmsHandler
+	if h, found = handler.(ResetAllAlarmsHandler); found {
+		err = h.HandleResetAllAlarms(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of ResetAllAlarms
 func (v ResetAllAlarms) MarshalZcl() ([]byte, error) {
@@ -174,6 +212,10 @@ func (v ResetAllAlarms) String() string {
 type GetAlarm struct {
 }
 
+type GetAlarmHandler interface {
+	HandleGetAlarm(frame Frame, cmd *GetAlarm) (*GetAlarmResponse, error)
+}
+
 // GetAlarmCommand is the Command ID of GetAlarm
 const GetAlarmCommand CommandID = 0x0002
 
@@ -188,7 +230,12 @@ func (v *GetAlarm) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GetAlarm) Name() string { return "Get Alarm" }
+func (GetAlarm) Name() string { return `Get Alarm` }
+
+// Description of the command
+func (GetAlarm) Description() string {
+	return `Retrieves the earliest alarm and removes it from the table`
+}
 
 // ID of the command
 func (GetAlarm) ID() CommandID { return GetAlarmCommand }
@@ -199,11 +246,22 @@ func (GetAlarm) Required() bool { return false }
 // Cluster ID of the command
 func (GetAlarm) Cluster() zcl.ClusterID { return AlarmsID }
 
+// Direction of the command
+func (GetAlarm) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GetAlarm) MnfCode() []byte { return []byte{} }
+func (GetAlarm) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GetAlarm) MarshalJSON() ([]byte, error) { return []byte("2"), nil }
+
+func (v *GetAlarm) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GetAlarmHandler
+	if h, found = handler.(GetAlarmHandler); found {
+		rsp, err = h.HandleGetAlarm(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GetAlarm
 func (v GetAlarm) MarshalZcl() ([]byte, error) {
@@ -226,6 +284,10 @@ func (v GetAlarm) String() string {
 type ResetAlarmLog struct {
 }
 
+type ResetAlarmLogHandler interface {
+	HandleResetAlarmLog(frame Frame, cmd *ResetAlarmLog) error
+}
+
 // ResetAlarmLogCommand is the Command ID of ResetAlarmLog
 const ResetAlarmLogCommand CommandID = 0x0003
 
@@ -240,7 +302,10 @@ func (v *ResetAlarmLog) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (ResetAlarmLog) Name() string { return "Reset alarm log" }
+func (ResetAlarmLog) Name() string { return `Reset alarm log` }
+
+// Description of the command
+func (ResetAlarmLog) Description() string { return `Clears the alarm log` }
 
 // ID of the command
 func (ResetAlarmLog) ID() CommandID { return ResetAlarmLogCommand }
@@ -251,11 +316,22 @@ func (ResetAlarmLog) Required() bool { return false }
 // Cluster ID of the command
 func (ResetAlarmLog) Cluster() zcl.ClusterID { return AlarmsID }
 
+// Direction of the command
+func (ResetAlarmLog) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (ResetAlarmLog) MnfCode() []byte { return []byte{} }
+func (ResetAlarmLog) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (ResetAlarmLog) MarshalJSON() ([]byte, error) { return []byte("3"), nil }
+
+func (v *ResetAlarmLog) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h ResetAlarmLogHandler
+	if h, found = handler.(ResetAlarmLogHandler); found {
+		err = h.HandleResetAlarmLog(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of ResetAlarmLog
 func (v ResetAlarmLog) MarshalZcl() ([]byte, error) {
@@ -279,6 +355,10 @@ type Alarm struct {
 	ClusterId ClusterId
 }
 
+type AlarmHandler interface {
+	HandleAlarm(frame Frame, cmd *Alarm) error
+}
+
 // AlarmCommand is the Command ID of Alarm
 const AlarmCommand CommandID = 0x0000
 
@@ -299,7 +379,10 @@ func (v *Alarm) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (Alarm) Name() string { return "Alarm" }
+func (Alarm) Name() string { return `Alarm` }
+
+// Description of the command
+func (Alarm) Description() string { return `` }
 
 // ID of the command
 func (Alarm) ID() CommandID { return AlarmCommand }
@@ -310,11 +393,22 @@ func (Alarm) Required() bool { return true }
 // Cluster ID of the command
 func (Alarm) Cluster() zcl.ClusterID { return AlarmsID }
 
+// Direction of the command
+func (Alarm) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (Alarm) MnfCode() []byte { return []byte{} }
+func (Alarm) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (Alarm) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *Alarm) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h AlarmHandler
+	if h, found = handler.(AlarmHandler); found {
+		err = h.HandleAlarm(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of Alarm
 func (v Alarm) MarshalZcl() ([]byte, error) {
@@ -375,6 +469,10 @@ type GetAlarmResponse struct {
 	Time      Time
 }
 
+type GetAlarmResponseHandler interface {
+	HandleGetAlarmResponse(frame Frame, cmd *GetAlarmResponse) error
+}
+
 // GetAlarmResponseCommand is the Command ID of GetAlarmResponse
 const GetAlarmResponseCommand CommandID = 0x0001
 
@@ -399,7 +497,10 @@ func (v *GetAlarmResponse) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (GetAlarmResponse) Name() string { return "Get alarm response" }
+func (GetAlarmResponse) Name() string { return `Get alarm response` }
+
+// Description of the command
+func (GetAlarmResponse) Description() string { return `` }
 
 // ID of the command
 func (GetAlarmResponse) ID() CommandID { return GetAlarmResponseCommand }
@@ -410,11 +511,22 @@ func (GetAlarmResponse) Required() bool { return false }
 // Cluster ID of the command
 func (GetAlarmResponse) Cluster() zcl.ClusterID { return AlarmsID }
 
+// Direction of the command
+func (GetAlarmResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (GetAlarmResponse) MnfCode() []byte { return []byte{} }
+func (GetAlarmResponse) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (GetAlarmResponse) MarshalJSON() ([]byte, error) { return []byte("1"), nil }
+
+func (v *GetAlarmResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h GetAlarmResponseHandler
+	if h, found = handler.(GetAlarmResponseHandler); found {
+		err = h.HandleGetAlarmResponse(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of GetAlarmResponse
 func (v GetAlarmResponse) MarshalZcl() ([]byte, error) {

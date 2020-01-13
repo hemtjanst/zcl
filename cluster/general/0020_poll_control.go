@@ -27,6 +27,10 @@ var PollControlCluster = zcl.Cluster{
 type CheckIn struct {
 }
 
+type CheckInHandler interface {
+	HandleCheckIn(frame Frame, cmd *CheckIn) error
+}
+
 // CheckInCommand is the Command ID of CheckIn
 const CheckInCommand CommandID = 0x0000
 
@@ -41,7 +45,10 @@ func (v *CheckIn) Arguments() []zcl.ArgDesc {
 }
 
 // Name of the command
-func (CheckIn) Name() string { return "Check-in" }
+func (CheckIn) Name() string { return `Check-in` }
+
+// Description of the command
+func (CheckIn) Description() string { return `` }
 
 // ID of the command
 func (CheckIn) ID() CommandID { return CheckInCommand }
@@ -52,11 +59,22 @@ func (CheckIn) Required() bool { return true }
 // Cluster ID of the command
 func (CheckIn) Cluster() zcl.ClusterID { return PollControlID }
 
+// Direction of the command
+func (CheckIn) Direction() zcl.Direction { return zcl.ClientToServer }
+
 // MnfCode returns the manufacturer code (if any) of the command
-func (CheckIn) MnfCode() []byte { return []byte{} }
+func (CheckIn) MnfCode() uint16 { return 0 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (CheckIn) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *CheckIn) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h CheckInHandler
+	if h, found = handler.(CheckInHandler); found {
+		err = h.HandleCheckIn(frame, v)
+	}
+	return
+}
 
 // MarshalZcl returns the wire format representation of CheckIn
 func (v CheckIn) MarshalZcl() ([]byte, error) {

@@ -39,7 +39,7 @@ func (z *Zdo) Request(cmd zcl.ZdoCommand) (interface{}, error) {
 		target,
 		0,
 		0,
-		uint16(cmd.Cluster()),
+		cmd.Cluster(),
 		append([]byte{seqNo}, reqBytes...),
 	)
 
@@ -75,7 +75,7 @@ func (z *Zdo) Respond(seqNo uint8, cmd zcl.ZdoCommand) error {
 		utils.NWKAddress(z.dev.nwk),
 		0,
 		0,
-		uint16(cmd.Cluster()),
+		cmd.Cluster(),
 		append([]byte{seqNo}, reqBytes...),
 	)
 
