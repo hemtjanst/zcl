@@ -54,6 +54,9 @@ func DescribeArgs(cmd interface{}) (v []ValueDescription) {
 		f := rf.Field(i)
 		fv := rv.Field(i)
 		//ft := f.Type
+		if !fv.CanInterface() {
+			continue
+		}
 
 		fd := ValueDescription{}
 		if attr, ok := fv.Interface().(Argument); ok {

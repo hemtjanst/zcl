@@ -10,41 +10,41 @@ func (Action) Description() string { return `` }
 
 type Action zcl.Zenum8
 
-func (a *Action) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *Action) Value() zcl.Val     { return a }
+func (v *Action) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *Action) Value() zcl.Val     { return v }
 
-func (a Action) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v Action) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *Action) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Action) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Action(*nt)
+	*v = Action(*nt)
 	return br, err
 }
 
-func (a Action) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v Action) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *Action) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Action) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Action(*v)
+	*v = Action(*a)
 	return nil
 }
 
-func (a *Action) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = Action(*nv)
+func (v *Action) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = Action(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Action) String() string {
-	switch a {
+func (v Action) String() string {
+	switch v {
 	case 0x00:
 		return "De-activate color loop"
 	case 0x01:
@@ -52,15 +52,15 @@ func (a Action) String() string {
 	case 0x02:
 		return "Activate from EnhancedCurrentHue"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a Action) IsDeActivateColorLoop() bool                   { return a == 0x00 }
-func (a Action) IsActivateFromColorloopstartenhancedhue() bool { return a == 0x01 }
-func (a Action) IsActivateFromEnhancedcurrenthue() bool        { return a == 0x02 }
-func (a *Action) SetDeActivateColorLoop()                      { *a = 0x00 }
-func (a *Action) SetActivateFromColorloopstartenhancedhue()    { *a = 0x01 }
-func (a *Action) SetActivateFromEnhancedcurrenthue()           { *a = 0x02 }
+func (v Action) IsDeActivateColorLoop() bool                   { return v == 0x00 }
+func (v Action) IsActivateFromColorloopstartenhancedhue() bool { return v == 0x01 }
+func (v Action) IsActivateFromEnhancedcurrenthue() bool        { return v == 0x02 }
+func (v *Action) SetDeActivateColorLoop()                      { *v = 0x00 }
+func (v *Action) SetActivateFromColorloopstartenhancedhue()    { *v = 0x01 }
+func (v *Action) SetActivateFromEnhancedcurrenthue()           { *v = 0x02 }
 
 func (Action) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -77,6 +77,11 @@ func (BallastFactorAdjustment) Readable() bool   { return true }
 func (BallastFactorAdjustment) Writable() bool   { return true }
 func (BallastFactorAdjustment) Reportable() bool { return false }
 func (BallastFactorAdjustment) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v BallastFactorAdjustment) AttrID() zcl.AttrID   { return v.ID() }
+func (v BallastFactorAdjustment) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *BallastFactorAdjustment) AttrValue() zcl.Val  { return v.Value() }
 
 func (BallastFactorAdjustment) Name() string { return `Ballast Factor Adjustment` }
 func (BallastFactorAdjustment) Description() string {
@@ -96,41 +101,41 @@ The range for this attribute is manufacturer dependent`
 // The range for this attribute is manufacturer dependent
 type BallastFactorAdjustment zcl.Zu8
 
-func (a *BallastFactorAdjustment) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *BallastFactorAdjustment) Value() zcl.Val     { return a }
+func (v *BallastFactorAdjustment) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *BallastFactorAdjustment) Value() zcl.Val     { return v }
 
-func (a BallastFactorAdjustment) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v BallastFactorAdjustment) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *BallastFactorAdjustment) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *BallastFactorAdjustment) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = BallastFactorAdjustment(*nt)
+	*v = BallastFactorAdjustment(*nt)
 	return br, err
 }
 
-func (a BallastFactorAdjustment) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v BallastFactorAdjustment) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *BallastFactorAdjustment) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *BallastFactorAdjustment) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = BallastFactorAdjustment(*v)
+	*v = BallastFactorAdjustment(*a)
 	return nil
 }
 
-func (a *BallastFactorAdjustment) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = BallastFactorAdjustment(*nv)
+func (v *BallastFactorAdjustment) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = BallastFactorAdjustment(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a BallastFactorAdjustment) String() string {
-	return zcl.Percent.Format(float64(a))
+func (v BallastFactorAdjustment) String() string {
+	return zcl.Percent.Format(float64(v))
 }
 
 const BallastStatusAttr zcl.AttrID = 2
@@ -140,6 +145,11 @@ func (BallastStatus) Readable() bool   { return true }
 func (BallastStatus) Writable() bool   { return false }
 func (BallastStatus) Reportable() bool { return false }
 func (BallastStatus) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v BallastStatus) AttrID() zcl.AttrID   { return v.ID() }
+func (v BallastStatus) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *BallastStatus) AttrValue() zcl.Val  { return v.Value() }
 
 func (BallastStatus) Name() string { return `Ballast Status` }
 func (BallastStatus) Description() string {
@@ -157,42 +167,42 @@ value of 0 that the lamp(s) is/are in their socket(s)`
 // value of 0 that the lamp(s) is/are in their socket(s)
 type BallastStatus zcl.Zbmp8
 
-func (a *BallastStatus) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
-func (a *BallastStatus) Value() zcl.Val     { return a }
+func (v *BallastStatus) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
+func (v *BallastStatus) Value() zcl.Val     { return v }
 
-func (a BallastStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+func (v BallastStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(v).MarshalZcl() }
 
-func (a *BallastStatus) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *BallastStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = BallastStatus(*nt)
+	*v = BallastStatus(*nt)
 	return br, err
 }
 
-func (a BallastStatus) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zbmp8(a))
+func (v BallastStatus) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zbmp8(v))
 }
 
-func (a *BallastStatus) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zbmp8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *BallastStatus) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zbmp8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = BallastStatus(*v)
+	*v = BallastStatus(*a)
 	return nil
 }
 
-func (a *BallastStatus) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zbmp8); ok {
-		*a = BallastStatus(*nv)
+func (v *BallastStatus) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zbmp8); ok {
+		*v = BallastStatus(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a BallastStatus) String() string {
+func (v BallastStatus) String() string {
 	var bstr []string
-	bits := zcl.BitmapList(a[:])
+	bits := zcl.BitmapList(v[:])
 	for _, bit := range bits {
 		switch bit {
 		case 0:
@@ -206,11 +216,11 @@ func (a BallastStatus) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (a BallastStatus) IsNonOperational() bool    { return zcl.BitmapTest([]byte(a[:]), 0) }
-func (a BallastStatus) IsLampNotInSocket() bool   { return zcl.BitmapTest([]byte(a[:]), 1) }
-func (a *BallastStatus) SetNonOperational(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b)) }
-func (a *BallastStatus) SetLampNotInSocket(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 1, b))
+func (v BallastStatus) IsNonOperational() bool    { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v BallastStatus) IsLampNotInSocket() bool   { return zcl.BitmapTest([]byte(v[:]), 1) }
+func (v *BallastStatus) SetNonOperational(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
+func (v *BallastStatus) SetLampNotInSocket(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b))
 }
 
 func (BallastStatus) MultiOptions() []zcl.Option {
@@ -228,6 +238,11 @@ func (ColorMode) Writable() bool   { return false }
 func (ColorMode) Reportable() bool { return false }
 func (ColorMode) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v ColorMode) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorMode) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorMode) AttrValue() zcl.Val  { return v.Value() }
+
 func (ColorMode) Name() string { return `Color Mode` }
 func (ColorMode) Description() string {
 	return `indicates which attributes are currently determining the color of
@@ -240,41 +255,41 @@ CurrentHue and CurrentSaturation`
 // CurrentHue and CurrentSaturation
 type ColorMode zcl.Zenum8
 
-func (a *ColorMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *ColorMode) Value() zcl.Val     { return a }
+func (v *ColorMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *ColorMode) Value() zcl.Val     { return v }
 
-func (a ColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v ColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *ColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorMode(*nt)
+	*v = ColorMode(*nt)
 	return br, err
 }
 
-func (a ColorMode) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v ColorMode) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *ColorMode) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorMode) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorMode(*v)
+	*v = ColorMode(*a)
 	return nil
 }
 
-func (a *ColorMode) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = ColorMode(*nv)
+func (v *ColorMode) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = ColorMode(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorMode) String() string {
-	switch a {
+func (v ColorMode) String() string {
+	switch v {
 	case 0x00:
 		return "Current hue and current saturation"
 	case 0x01:
@@ -282,15 +297,15 @@ func (a ColorMode) String() string {
 	case 0x02:
 		return "Color temperature"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a ColorMode) IsCurrentHueAndCurrentSaturation() bool { return a == 0x00 }
-func (a ColorMode) IsCurrentXAndCurrentY() bool            { return a == 0x01 }
-func (a ColorMode) IsColorTemperature() bool               { return a == 0x02 }
-func (a *ColorMode) SetCurrentHueAndCurrentSaturation()    { *a = 0x00 }
-func (a *ColorMode) SetCurrentXAndCurrentY()               { *a = 0x01 }
-func (a *ColorMode) SetColorTemperature()                  { *a = 0x02 }
+func (v ColorMode) IsCurrentHueAndCurrentSaturation() bool { return v == 0x00 }
+func (v ColorMode) IsCurrentXAndCurrentY() bool            { return v == 0x01 }
+func (v ColorMode) IsColorTemperature() bool               { return v == 0x02 }
+func (v *ColorMode) SetCurrentHueAndCurrentSaturation()    { *v = 0x00 }
+func (v *ColorMode) SetCurrentXAndCurrentY()               { *v = 0x01 }
+func (v *ColorMode) SetColorTemperature()                  { *v = 0x02 }
 
 func (ColorMode) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -308,6 +323,11 @@ func (ColorPointBlueX) Writable() bool   { return true }
 func (ColorPointBlueX) Reportable() bool { return false }
 func (ColorPointBlueX) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointBlueX) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointBlueX) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointBlueX) AttrValue() zcl.Val  { return v.Value() }
+
 func (ColorPointBlueX) Name() string { return `Color Point Blue X` }
 func (ColorPointBlueX) Description() string {
 	return `contains the normalized chromaticity value x for this attribute, as
@@ -320,41 +340,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorPointBlueX zcl.Zu16
 
-func (a *ColorPointBlueX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorPointBlueX) Value() zcl.Val     { return a }
+func (v *ColorPointBlueX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorPointBlueX) Value() zcl.Val     { return v }
 
-func (a ColorPointBlueX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorPointBlueX) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorPointBlueX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointBlueX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueX(*nt)
+	*v = ColorPointBlueX(*nt)
 	return br, err
 }
 
-func (a ColorPointBlueX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorPointBlueX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorPointBlueX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointBlueX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointBlueX(*v)
+	*v = ColorPointBlueX(*a)
 	return nil
 }
 
-func (a *ColorPointBlueX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorPointBlueX(*nv)
+func (v *ColorPointBlueX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorPointBlueX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointBlueX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorPointBlueX) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorPointBlueYAttr zcl.AttrID = 59
@@ -364,6 +384,11 @@ func (ColorPointBlueY) Readable() bool   { return true }
 func (ColorPointBlueY) Writable() bool   { return true }
 func (ColorPointBlueY) Reportable() bool { return false }
 func (ColorPointBlueY) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointBlueY) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointBlueY) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointBlueY) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointBlueY) Name() string { return `Color Point Blue Y` }
 func (ColorPointBlueY) Description() string {
@@ -377,41 +402,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorPointBlueY zcl.Zu16
 
-func (a *ColorPointBlueY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorPointBlueY) Value() zcl.Val     { return a }
+func (v *ColorPointBlueY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorPointBlueY) Value() zcl.Val     { return v }
 
-func (a ColorPointBlueY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorPointBlueY) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorPointBlueY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointBlueY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueY(*nt)
+	*v = ColorPointBlueY(*nt)
 	return br, err
 }
 
-func (a ColorPointBlueY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorPointBlueY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorPointBlueY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointBlueY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointBlueY(*v)
+	*v = ColorPointBlueY(*a)
 	return nil
 }
 
-func (a *ColorPointBlueY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorPointBlueY(*nv)
+func (v *ColorPointBlueY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorPointBlueY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointBlueY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorPointBlueY) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorPointBlueIntensityAttr zcl.AttrID = 60
@@ -421,6 +446,11 @@ func (ColorPointBlueIntensity) Readable() bool   { return true }
 func (ColorPointBlueIntensity) Writable() bool   { return true }
 func (ColorPointBlueIntensity) Reportable() bool { return false }
 func (ColorPointBlueIntensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointBlueIntensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointBlueIntensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointBlueIntensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointBlueIntensity) Name() string { return `Color Point Blue intensity` }
 func (ColorPointBlueIntensity) Description() string {
@@ -438,41 +468,41 @@ not available`
 // not available
 type ColorPointBlueIntensity zcl.Zu8
 
-func (a *ColorPointBlueIntensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *ColorPointBlueIntensity) Value() zcl.Val     { return a }
+func (v *ColorPointBlueIntensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *ColorPointBlueIntensity) Value() zcl.Val     { return v }
 
-func (a ColorPointBlueIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v ColorPointBlueIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *ColorPointBlueIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointBlueIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointBlueIntensity(*nt)
+	*v = ColorPointBlueIntensity(*nt)
 	return br, err
 }
 
-func (a ColorPointBlueIntensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v ColorPointBlueIntensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *ColorPointBlueIntensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointBlueIntensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointBlueIntensity(*v)
+	*v = ColorPointBlueIntensity(*a)
 	return nil
 }
 
-func (a *ColorPointBlueIntensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = ColorPointBlueIntensity(*nv)
+func (v *ColorPointBlueIntensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = ColorPointBlueIntensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointBlueIntensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v ColorPointBlueIntensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const ColorPointGreenXAttr zcl.AttrID = 54
@@ -482,6 +512,11 @@ func (ColorPointGreenX) Readable() bool   { return true }
 func (ColorPointGreenX) Writable() bool   { return true }
 func (ColorPointGreenX) Reportable() bool { return false }
 func (ColorPointGreenX) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointGreenX) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointGreenX) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointGreenX) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointGreenX) Name() string { return `Color Point Green X` }
 func (ColorPointGreenX) Description() string {
@@ -495,41 +530,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorPointGreenX zcl.Zu16
 
-func (a *ColorPointGreenX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorPointGreenX) Value() zcl.Val     { return a }
+func (v *ColorPointGreenX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorPointGreenX) Value() zcl.Val     { return v }
 
-func (a ColorPointGreenX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorPointGreenX) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorPointGreenX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointGreenX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenX(*nt)
+	*v = ColorPointGreenX(*nt)
 	return br, err
 }
 
-func (a ColorPointGreenX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorPointGreenX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorPointGreenX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointGreenX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointGreenX(*v)
+	*v = ColorPointGreenX(*a)
 	return nil
 }
 
-func (a *ColorPointGreenX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorPointGreenX(*nv)
+func (v *ColorPointGreenX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorPointGreenX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointGreenX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorPointGreenX) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorPointGreenYAttr zcl.AttrID = 55
@@ -539,6 +574,11 @@ func (ColorPointGreenY) Readable() bool   { return true }
 func (ColorPointGreenY) Writable() bool   { return true }
 func (ColorPointGreenY) Reportable() bool { return false }
 func (ColorPointGreenY) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointGreenY) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointGreenY) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointGreenY) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointGreenY) Name() string { return `Color Point Green Y` }
 func (ColorPointGreenY) Description() string {
@@ -552,41 +592,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorPointGreenY zcl.Zu16
 
-func (a *ColorPointGreenY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorPointGreenY) Value() zcl.Val     { return a }
+func (v *ColorPointGreenY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorPointGreenY) Value() zcl.Val     { return v }
 
-func (a ColorPointGreenY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorPointGreenY) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorPointGreenY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointGreenY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenY(*nt)
+	*v = ColorPointGreenY(*nt)
 	return br, err
 }
 
-func (a ColorPointGreenY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorPointGreenY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorPointGreenY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointGreenY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointGreenY(*v)
+	*v = ColorPointGreenY(*a)
 	return nil
 }
 
-func (a *ColorPointGreenY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorPointGreenY(*nv)
+func (v *ColorPointGreenY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorPointGreenY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointGreenY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorPointGreenY) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorPointGreenIntensityAttr zcl.AttrID = 56
@@ -596,6 +636,11 @@ func (ColorPointGreenIntensity) Readable() bool   { return true }
 func (ColorPointGreenIntensity) Writable() bool   { return true }
 func (ColorPointGreenIntensity) Reportable() bool { return false }
 func (ColorPointGreenIntensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointGreenIntensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointGreenIntensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointGreenIntensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointGreenIntensity) Name() string { return `Color Point Green intensity` }
 func (ColorPointGreenIntensity) Description() string {
@@ -613,41 +658,41 @@ not available`
 // not available
 type ColorPointGreenIntensity zcl.Zu8
 
-func (a *ColorPointGreenIntensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *ColorPointGreenIntensity) Value() zcl.Val     { return a }
+func (v *ColorPointGreenIntensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *ColorPointGreenIntensity) Value() zcl.Val     { return v }
 
-func (a ColorPointGreenIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v ColorPointGreenIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *ColorPointGreenIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointGreenIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointGreenIntensity(*nt)
+	*v = ColorPointGreenIntensity(*nt)
 	return br, err
 }
 
-func (a ColorPointGreenIntensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v ColorPointGreenIntensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *ColorPointGreenIntensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointGreenIntensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointGreenIntensity(*v)
+	*v = ColorPointGreenIntensity(*a)
 	return nil
 }
 
-func (a *ColorPointGreenIntensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = ColorPointGreenIntensity(*nv)
+func (v *ColorPointGreenIntensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = ColorPointGreenIntensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointGreenIntensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v ColorPointGreenIntensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const ColorPointRedXAttr zcl.AttrID = 50
@@ -657,6 +702,11 @@ func (ColorPointRedX) Readable() bool   { return true }
 func (ColorPointRedX) Writable() bool   { return true }
 func (ColorPointRedX) Reportable() bool { return false }
 func (ColorPointRedX) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointRedX) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointRedX) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointRedX) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointRedX) Name() string { return `Color Point Red X` }
 func (ColorPointRedX) Description() string {
@@ -670,41 +720,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorPointRedX zcl.Zu16
 
-func (a *ColorPointRedX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorPointRedX) Value() zcl.Val     { return a }
+func (v *ColorPointRedX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorPointRedX) Value() zcl.Val     { return v }
 
-func (a ColorPointRedX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorPointRedX) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorPointRedX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointRedX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedX(*nt)
+	*v = ColorPointRedX(*nt)
 	return br, err
 }
 
-func (a ColorPointRedX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorPointRedX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorPointRedX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointRedX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointRedX(*v)
+	*v = ColorPointRedX(*a)
 	return nil
 }
 
-func (a *ColorPointRedX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorPointRedX(*nv)
+func (v *ColorPointRedX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorPointRedX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointRedX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorPointRedX) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorPointRedYAttr zcl.AttrID = 51
@@ -714,6 +764,11 @@ func (ColorPointRedY) Readable() bool   { return true }
 func (ColorPointRedY) Writable() bool   { return true }
 func (ColorPointRedY) Reportable() bool { return false }
 func (ColorPointRedY) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointRedY) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointRedY) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointRedY) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointRedY) Name() string { return `Color Point Red Y` }
 func (ColorPointRedY) Description() string {
@@ -727,41 +782,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorPointRedY zcl.Zu16
 
-func (a *ColorPointRedY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorPointRedY) Value() zcl.Val     { return a }
+func (v *ColorPointRedY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorPointRedY) Value() zcl.Val     { return v }
 
-func (a ColorPointRedY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorPointRedY) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorPointRedY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointRedY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedY(*nt)
+	*v = ColorPointRedY(*nt)
 	return br, err
 }
 
-func (a ColorPointRedY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorPointRedY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorPointRedY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointRedY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointRedY(*v)
+	*v = ColorPointRedY(*a)
 	return nil
 }
 
-func (a *ColorPointRedY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorPointRedY(*nv)
+func (v *ColorPointRedY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorPointRedY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointRedY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorPointRedY) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorPointRedIntensityAttr zcl.AttrID = 52
@@ -771,6 +826,11 @@ func (ColorPointRedIntensity) Readable() bool   { return true }
 func (ColorPointRedIntensity) Writable() bool   { return true }
 func (ColorPointRedIntensity) Reportable() bool { return false }
 func (ColorPointRedIntensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorPointRedIntensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorPointRedIntensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorPointRedIntensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorPointRedIntensity) Name() string { return `Color Point Red intensity` }
 func (ColorPointRedIntensity) Description() string {
@@ -788,41 +848,41 @@ not available`
 // not available
 type ColorPointRedIntensity zcl.Zu8
 
-func (a *ColorPointRedIntensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *ColorPointRedIntensity) Value() zcl.Val     { return a }
+func (v *ColorPointRedIntensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *ColorPointRedIntensity) Value() zcl.Val     { return v }
 
-func (a ColorPointRedIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v ColorPointRedIntensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *ColorPointRedIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorPointRedIntensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorPointRedIntensity(*nt)
+	*v = ColorPointRedIntensity(*nt)
 	return br, err
 }
 
-func (a ColorPointRedIntensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v ColorPointRedIntensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *ColorPointRedIntensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorPointRedIntensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorPointRedIntensity(*v)
+	*v = ColorPointRedIntensity(*a)
 	return nil
 }
 
-func (a *ColorPointRedIntensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = ColorPointRedIntensity(*nv)
+func (v *ColorPointRedIntensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = ColorPointRedIntensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorPointRedIntensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v ColorPointRedIntensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 func (ColorTemperature) Name() string        { return `Color Temperature` }
@@ -830,41 +890,41 @@ func (ColorTemperature) Description() string { return `` }
 
 type ColorTemperature zcl.Zu16
 
-func (a *ColorTemperature) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperature) Value() zcl.Val     { return a }
+func (v *ColorTemperature) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperature) Value() zcl.Val     { return v }
 
-func (a ColorTemperature) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorTemperature) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperature(*nt)
+	*v = ColorTemperature(*nt)
 	return br, err
 }
 
-func (a ColorTemperature) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperature) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperature) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperature) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperature(*v)
+	*v = ColorTemperature(*a)
 	return nil
 }
 
-func (a *ColorTemperature) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperature(*nv)
+func (v *ColorTemperature) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperature(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperature) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorTemperature) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 func (ColorTemperatureMax) Name() string        { return `Color Temperature max` }
@@ -872,41 +932,41 @@ func (ColorTemperatureMax) Description() string { return `` }
 
 type ColorTemperatureMax zcl.Zu16
 
-func (a *ColorTemperatureMax) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperatureMax) Value() zcl.Val     { return a }
+func (v *ColorTemperatureMax) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperatureMax) Value() zcl.Val     { return v }
 
-func (a ColorTemperatureMax) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorTemperatureMax) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorTemperatureMax) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperatureMax) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperatureMax(*nt)
+	*v = ColorTemperatureMax(*nt)
 	return br, err
 }
 
-func (a ColorTemperatureMax) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperatureMax) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperatureMax) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperatureMax) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperatureMax(*v)
+	*v = ColorTemperatureMax(*a)
 	return nil
 }
 
-func (a *ColorTemperatureMax) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperatureMax(*nv)
+func (v *ColorTemperatureMax) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperatureMax(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperatureMax) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorTemperatureMax) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 func (ColorTemperatureMaxMireds) Name() string        { return `Color Temperature max Mireds` }
@@ -914,41 +974,41 @@ func (ColorTemperatureMaxMireds) Description() string { return `` }
 
 type ColorTemperatureMaxMireds zcl.Zu16
 
-func (a *ColorTemperatureMaxMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperatureMaxMireds) Value() zcl.Val     { return a }
+func (v *ColorTemperatureMaxMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperatureMaxMireds) Value() zcl.Val     { return v }
 
-func (a ColorTemperatureMaxMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorTemperatureMaxMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorTemperatureMaxMireds) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperatureMaxMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperatureMaxMireds(*nt)
+	*v = ColorTemperatureMaxMireds(*nt)
 	return br, err
 }
 
-func (a ColorTemperatureMaxMireds) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperatureMaxMireds) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperatureMaxMireds) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperatureMaxMireds) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperatureMaxMireds(*v)
+	*v = ColorTemperatureMaxMireds(*a)
 	return nil
 }
 
-func (a *ColorTemperatureMaxMireds) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperatureMaxMireds(*nv)
+func (v *ColorTemperatureMaxMireds) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperatureMaxMireds(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperatureMaxMireds) String() string {
-	return zcl.Mired.Format(float64(a))
+func (v ColorTemperatureMaxMireds) String() string {
+	return zcl.Mired.Format(float64(v))
 }
 
 func (ColorTemperatureMin) Name() string        { return `Color Temperature min` }
@@ -956,41 +1016,41 @@ func (ColorTemperatureMin) Description() string { return `` }
 
 type ColorTemperatureMin zcl.Zu16
 
-func (a *ColorTemperatureMin) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperatureMin) Value() zcl.Val     { return a }
+func (v *ColorTemperatureMin) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperatureMin) Value() zcl.Val     { return v }
 
-func (a ColorTemperatureMin) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorTemperatureMin) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorTemperatureMin) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperatureMin) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperatureMin(*nt)
+	*v = ColorTemperatureMin(*nt)
 	return br, err
 }
 
-func (a ColorTemperatureMin) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperatureMin) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperatureMin) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperatureMin) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperatureMin(*v)
+	*v = ColorTemperatureMin(*a)
 	return nil
 }
 
-func (a *ColorTemperatureMin) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperatureMin(*nv)
+func (v *ColorTemperatureMin) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperatureMin(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperatureMin) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorTemperatureMin) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 func (ColorTemperatureMinMireds) Name() string        { return `Color Temperature min Mireds` }
@@ -998,41 +1058,41 @@ func (ColorTemperatureMinMireds) Description() string { return `` }
 
 type ColorTemperatureMinMireds zcl.Zu16
 
-func (a *ColorTemperatureMinMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperatureMinMireds) Value() zcl.Val     { return a }
+func (v *ColorTemperatureMinMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperatureMinMireds) Value() zcl.Val     { return v }
 
-func (a ColorTemperatureMinMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorTemperatureMinMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorTemperatureMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperatureMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperatureMinMireds(*nt)
+	*v = ColorTemperatureMinMireds(*nt)
 	return br, err
 }
 
-func (a ColorTemperatureMinMireds) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperatureMinMireds) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperatureMinMireds) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperatureMinMireds) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperatureMinMireds(*v)
+	*v = ColorTemperatureMinMireds(*a)
 	return nil
 }
 
-func (a *ColorTemperatureMinMireds) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperatureMinMireds(*nv)
+func (v *ColorTemperatureMinMireds) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperatureMinMireds(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperatureMinMireds) String() string {
-	return zcl.Mired.Format(float64(a))
+func (v ColorTemperatureMinMireds) String() string {
+	return zcl.Mired.Format(float64(v))
 }
 
 func (ColorX) Name() string { return `Color X` }
@@ -1047,41 +1107,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorX zcl.Zu16
 
-func (a *ColorX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorX) Value() zcl.Val     { return a }
+func (v *ColorX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorX) Value() zcl.Val     { return v }
 
-func (a ColorX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorX) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorX(*nt)
+	*v = ColorX(*nt)
 	return br, err
 }
 
-func (a ColorX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorX(*v)
+	*v = ColorX(*a)
 	return nil
 }
 
-func (a *ColorX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorX(*nv)
+func (v *ColorX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorX) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 func (ColorY) Name() string { return `Color Y` }
@@ -1096,41 +1156,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type ColorY zcl.Zu16
 
-func (a *ColorY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorY) Value() zcl.Val     { return a }
+func (v *ColorY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorY) Value() zcl.Val     { return v }
 
-func (a ColorY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorY) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorY(*nt)
+	*v = ColorY(*nt)
 	return br, err
 }
 
-func (a ColorY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorY(*v)
+	*v = ColorY(*a)
 	return nil
 }
 
-func (a *ColorY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorY(*nv)
+func (v *ColorY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorY) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorCapabilitiesAttr zcl.AttrID = 16394
@@ -1140,6 +1200,11 @@ func (ColorCapabilities) Readable() bool   { return true }
 func (ColorCapabilities) Writable() bool   { return false }
 func (ColorCapabilities) Reportable() bool { return false }
 func (ColorCapabilities) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorCapabilities) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorCapabilities) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorCapabilities) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorCapabilities) Name() string { return `Color capabilities` }
 func (ColorCapabilities) Description() string {
@@ -1151,42 +1216,42 @@ control cluster`
 // control cluster
 type ColorCapabilities zcl.Zbmp16
 
-func (a *ColorCapabilities) TypeID() zcl.TypeID { return new(zcl.Zbmp16).TypeID() }
-func (a *ColorCapabilities) Value() zcl.Val     { return a }
+func (v *ColorCapabilities) TypeID() zcl.TypeID { return new(zcl.Zbmp16).TypeID() }
+func (v *ColorCapabilities) Value() zcl.Val     { return v }
 
-func (a ColorCapabilities) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(a).MarshalZcl() }
+func (v ColorCapabilities) MarshalZcl() ([]byte, error) { return zcl.Zbmp16(v).MarshalZcl() }
 
-func (a *ColorCapabilities) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorCapabilities) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorCapabilities(*nt)
+	*v = ColorCapabilities(*nt)
 	return br, err
 }
 
-func (a ColorCapabilities) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zbmp16(a))
+func (v ColorCapabilities) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zbmp16(v))
 }
 
-func (a *ColorCapabilities) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zbmp16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorCapabilities) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zbmp16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorCapabilities(*v)
+	*v = ColorCapabilities(*a)
 	return nil
 }
 
-func (a *ColorCapabilities) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zbmp16); ok {
-		*a = ColorCapabilities(*nv)
+func (v *ColorCapabilities) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zbmp16); ok {
+		*v = ColorCapabilities(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorCapabilities) String() string {
+func (v ColorCapabilities) String() string {
 	var bstr []string
-	bits := zcl.BitmapList(a[:])
+	bits := zcl.BitmapList(v[:])
 	for _, bit := range bits {
 		switch bit {
 		case 0:
@@ -1206,21 +1271,21 @@ func (a ColorCapabilities) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (a ColorCapabilities) IsHueSaturation() bool         { return zcl.BitmapTest([]byte(a[:]), 0) }
-func (a ColorCapabilities) IsEnhancedHueSaturation() bool { return zcl.BitmapTest([]byte(a[:]), 1) }
-func (a ColorCapabilities) IsColorLoop() bool             { return zcl.BitmapTest([]byte(a[:]), 2) }
-func (a ColorCapabilities) IsCie1931Xy() bool             { return zcl.BitmapTest([]byte(a[:]), 3) }
-func (a ColorCapabilities) IsColorTemperature() bool      { return zcl.BitmapTest([]byte(a[:]), 4) }
-func (a *ColorCapabilities) SetHueSaturation(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b))
+func (v ColorCapabilities) IsHueSaturation() bool         { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v ColorCapabilities) IsEnhancedHueSaturation() bool { return zcl.BitmapTest([]byte(v[:]), 1) }
+func (v ColorCapabilities) IsColorLoop() bool             { return zcl.BitmapTest([]byte(v[:]), 2) }
+func (v ColorCapabilities) IsCie1931Xy() bool             { return zcl.BitmapTest([]byte(v[:]), 3) }
+func (v ColorCapabilities) IsColorTemperature() bool      { return zcl.BitmapTest([]byte(v[:]), 4) }
+func (v *ColorCapabilities) SetHueSaturation(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b))
 }
-func (a *ColorCapabilities) SetEnhancedHueSaturation(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 1, b))
+func (v *ColorCapabilities) SetEnhancedHueSaturation(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b))
 }
-func (a *ColorCapabilities) SetColorLoop(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 2, b)) }
-func (a *ColorCapabilities) SetCie1931Xy(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 3, b)) }
-func (a *ColorCapabilities) SetColorTemperature(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 4, b))
+func (v *ColorCapabilities) SetColorLoop(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 2, b)) }
+func (v *ColorCapabilities) SetCie1931Xy(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 3, b)) }
+func (v *ColorCapabilities) SetColorTemperature(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 4, b))
 }
 
 func (ColorCapabilities) MultiOptions() []zcl.Option {
@@ -1241,6 +1306,11 @@ func (ColorControlOptions) Writable() bool   { return true }
 func (ColorControlOptions) Reportable() bool { return false }
 func (ColorControlOptions) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v ColorControlOptions) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorControlOptions) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorControlOptions) AttrValue() zcl.Val  { return v.Value() }
+
 func (ColorControlOptions) Name() string { return `Color control options` }
 func (ColorControlOptions) Description() string {
 	return `is a bitmap that determines the default behavior of some cluster commands`
@@ -1249,42 +1319,42 @@ func (ColorControlOptions) Description() string {
 // ColorControlOptions is a bitmap that determines the default behavior of some cluster commands
 type ColorControlOptions zcl.Zbmp8
 
-func (a *ColorControlOptions) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
-func (a *ColorControlOptions) Value() zcl.Val     { return a }
+func (v *ColorControlOptions) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
+func (v *ColorControlOptions) Value() zcl.Val     { return v }
 
-func (a ColorControlOptions) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+func (v ColorControlOptions) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(v).MarshalZcl() }
 
-func (a *ColorControlOptions) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorControlOptions) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorControlOptions(*nt)
+	*v = ColorControlOptions(*nt)
 	return br, err
 }
 
-func (a ColorControlOptions) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zbmp8(a))
+func (v ColorControlOptions) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zbmp8(v))
 }
 
-func (a *ColorControlOptions) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zbmp8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorControlOptions) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zbmp8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorControlOptions(*v)
+	*v = ColorControlOptions(*a)
 	return nil
 }
 
-func (a *ColorControlOptions) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zbmp8); ok {
-		*a = ColorControlOptions(*nv)
+func (v *ColorControlOptions) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zbmp8); ok {
+		*v = ColorControlOptions(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorControlOptions) String() string {
+func (v ColorControlOptions) String() string {
 	var bstr []string
-	bits := zcl.BitmapList(a[:])
+	bits := zcl.BitmapList(v[:])
 	for _, bit := range bits {
 		switch bit {
 		case 0x00:
@@ -1296,9 +1366,9 @@ func (a ColorControlOptions) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (a ColorControlOptions) IsExecuteIfOff() bool { return zcl.BitmapTest([]byte(a[:]), 0x00) }
-func (a *ColorControlOptions) SetExecuteIfOff(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0x00, b))
+func (v ColorControlOptions) IsExecuteIfOff() bool { return zcl.BitmapTest([]byte(v[:]), 0x00) }
+func (v *ColorControlOptions) SetExecuteIfOff(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0x00, b))
 }
 
 func (ColorControlOptions) MultiOptions() []zcl.Option {
@@ -1315,6 +1385,11 @@ func (ColorLoopActive) Writable() bool   { return false }
 func (ColorLoopActive) Reportable() bool { return false }
 func (ColorLoopActive) SceneIndex() int  { return 5 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v ColorLoopActive) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorLoopActive) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorLoopActive) AttrValue() zcl.Val  { return v.Value() }
+
 func (ColorLoopActive) Name() string { return `Color loop active` }
 func (ColorLoopActive) Description() string {
 	return `specifies the current active status of the color loop. 0x00 means
@@ -1325,41 +1400,41 @@ inactive, 0x01 means active`
 // inactive, 0x01 means active
 type ColorLoopActive zcl.Zu8
 
-func (a *ColorLoopActive) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *ColorLoopActive) Value() zcl.Val     { return a }
+func (v *ColorLoopActive) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *ColorLoopActive) Value() zcl.Val     { return v }
 
-func (a ColorLoopActive) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v ColorLoopActive) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *ColorLoopActive) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorLoopActive) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopActive(*nt)
+	*v = ColorLoopActive(*nt)
 	return br, err
 }
 
-func (a ColorLoopActive) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v ColorLoopActive) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *ColorLoopActive) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorLoopActive) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorLoopActive(*v)
+	*v = ColorLoopActive(*a)
 	return nil
 }
 
-func (a *ColorLoopActive) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = ColorLoopActive(*nv)
+func (v *ColorLoopActive) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = ColorLoopActive(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorLoopActive) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v ColorLoopActive) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const ColorLoopDirectionAttr zcl.AttrID = 16387
@@ -1369,6 +1444,11 @@ func (ColorLoopDirection) Readable() bool   { return true }
 func (ColorLoopDirection) Writable() bool   { return false }
 func (ColorLoopDirection) Reportable() bool { return false }
 func (ColorLoopDirection) SceneIndex() int  { return 6 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorLoopDirection) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorLoopDirection) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorLoopDirection) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorLoopDirection) Name() string { return `Color loop direction` }
 func (ColorLoopDirection) Description() string {
@@ -1382,41 +1462,41 @@ attribute has the value 0x01, the EnhancedCurrentHue is incremented`
 // attribute has the value 0x01, the EnhancedCurrentHue is incremented
 type ColorLoopDirection zcl.Zu8
 
-func (a *ColorLoopDirection) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *ColorLoopDirection) Value() zcl.Val     { return a }
+func (v *ColorLoopDirection) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *ColorLoopDirection) Value() zcl.Val     { return v }
 
-func (a ColorLoopDirection) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v ColorLoopDirection) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *ColorLoopDirection) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorLoopDirection) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopDirection(*nt)
+	*v = ColorLoopDirection(*nt)
 	return br, err
 }
 
-func (a ColorLoopDirection) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v ColorLoopDirection) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *ColorLoopDirection) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorLoopDirection) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorLoopDirection(*v)
+	*v = ColorLoopDirection(*a)
 	return nil
 }
 
-func (a *ColorLoopDirection) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = ColorLoopDirection(*nv)
+func (v *ColorLoopDirection) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = ColorLoopDirection(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorLoopDirection) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v ColorLoopDirection) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const ColorLoopStartEnhancedHueAttr zcl.AttrID = 16389
@@ -1426,6 +1506,11 @@ func (ColorLoopStartEnhancedHue) Readable() bool   { return true }
 func (ColorLoopStartEnhancedHue) Writable() bool   { return false }
 func (ColorLoopStartEnhancedHue) Reportable() bool { return false }
 func (ColorLoopStartEnhancedHue) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorLoopStartEnhancedHue) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorLoopStartEnhancedHue) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorLoopStartEnhancedHue) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorLoopStartEnhancedHue) Name() string { return `Color loop start enhanced hue` }
 func (ColorLoopStartEnhancedHue) Description() string {
@@ -1437,41 +1522,41 @@ the color loop starts`
 // the color loop starts
 type ColorLoopStartEnhancedHue zcl.Zu16
 
-func (a *ColorLoopStartEnhancedHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorLoopStartEnhancedHue) Value() zcl.Val     { return a }
+func (v *ColorLoopStartEnhancedHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorLoopStartEnhancedHue) Value() zcl.Val     { return v }
 
-func (a ColorLoopStartEnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorLoopStartEnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorLoopStartEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorLoopStartEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopStartEnhancedHue(*nt)
+	*v = ColorLoopStartEnhancedHue(*nt)
 	return br, err
 }
 
-func (a ColorLoopStartEnhancedHue) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorLoopStartEnhancedHue) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorLoopStartEnhancedHue) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorLoopStartEnhancedHue) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorLoopStartEnhancedHue(*v)
+	*v = ColorLoopStartEnhancedHue(*a)
 	return nil
 }
 
-func (a *ColorLoopStartEnhancedHue) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorLoopStartEnhancedHue(*nv)
+func (v *ColorLoopStartEnhancedHue) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorLoopStartEnhancedHue(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorLoopStartEnhancedHue) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorLoopStartEnhancedHue) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorLoopStoredEnhancedHueAttr zcl.AttrID = 16390
@@ -1481,6 +1566,11 @@ func (ColorLoopStoredEnhancedHue) Readable() bool   { return true }
 func (ColorLoopStoredEnhancedHue) Writable() bool   { return false }
 func (ColorLoopStoredEnhancedHue) Reportable() bool { return false }
 func (ColorLoopStoredEnhancedHue) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorLoopStoredEnhancedHue) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorLoopStoredEnhancedHue) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorLoopStoredEnhancedHue) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorLoopStoredEnhancedHue) Name() string { return `Color loop stored enhanced hue` }
 func (ColorLoopStoredEnhancedHue) Description() string {
@@ -1494,41 +1584,41 @@ to this value`
 // to this value
 type ColorLoopStoredEnhancedHue zcl.Zu16
 
-func (a *ColorLoopStoredEnhancedHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorLoopStoredEnhancedHue) Value() zcl.Val     { return a }
+func (v *ColorLoopStoredEnhancedHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorLoopStoredEnhancedHue) Value() zcl.Val     { return v }
 
-func (a ColorLoopStoredEnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorLoopStoredEnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorLoopStoredEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorLoopStoredEnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopStoredEnhancedHue(*nt)
+	*v = ColorLoopStoredEnhancedHue(*nt)
 	return br, err
 }
 
-func (a ColorLoopStoredEnhancedHue) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorLoopStoredEnhancedHue) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorLoopStoredEnhancedHue) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorLoopStoredEnhancedHue) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorLoopStoredEnhancedHue(*v)
+	*v = ColorLoopStoredEnhancedHue(*a)
 	return nil
 }
 
-func (a *ColorLoopStoredEnhancedHue) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorLoopStoredEnhancedHue(*nv)
+func (v *ColorLoopStoredEnhancedHue) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorLoopStoredEnhancedHue(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorLoopStoredEnhancedHue) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorLoopStoredEnhancedHue) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorLoopTimeAttr zcl.AttrID = 16388
@@ -1538,6 +1628,11 @@ func (ColorLoopTime) Readable() bool   { return true }
 func (ColorLoopTime) Writable() bool   { return false }
 func (ColorLoopTime) Reportable() bool { return false }
 func (ColorLoopTime) SceneIndex() int  { return 7 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorLoopTime) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorLoopTime) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorLoopTime) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorLoopTime) Name() string { return `Color loop time` }
 func (ColorLoopTime) Description() string {
@@ -1549,41 +1644,41 @@ loop, i.e., to cycle all values of EnhancedCurrentHue`
 // loop, i.e., to cycle all values of EnhancedCurrentHue
 type ColorLoopTime zcl.Zu16
 
-func (a *ColorLoopTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorLoopTime) Value() zcl.Val     { return a }
+func (v *ColorLoopTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorLoopTime) Value() zcl.Val     { return v }
 
-func (a ColorLoopTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorLoopTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorLoopTime) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorLoopTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorLoopTime(*nt)
+	*v = ColorLoopTime(*nt)
 	return br, err
 }
 
-func (a ColorLoopTime) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorLoopTime) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorLoopTime) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorLoopTime) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorLoopTime(*v)
+	*v = ColorLoopTime(*a)
 	return nil
 }
 
-func (a *ColorLoopTime) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorLoopTime(*nv)
+func (v *ColorLoopTime) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorLoopTime(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorLoopTime) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v ColorLoopTime) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const ColorTemperatureMiredsAttr zcl.AttrID = 7
@@ -1593,6 +1688,11 @@ func (ColorTemperatureMireds) Readable() bool   { return true }
 func (ColorTemperatureMireds) Writable() bool   { return false }
 func (ColorTemperatureMireds) Reportable() bool { return true }
 func (ColorTemperatureMireds) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorTemperatureMireds) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorTemperatureMireds) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorTemperatureMireds) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorTemperatureMireds) Name() string { return `Color temperature Mireds` }
 func (ColorTemperatureMireds) Description() string {
@@ -1612,41 +1712,41 @@ giving a color temperature range from 1,000,000 kelvins to 15.32 kelvins`
 // giving a color temperature range from 1,000,000 kelvins to 15.32 kelvins
 type ColorTemperatureMireds zcl.Zu16
 
-func (a *ColorTemperatureMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperatureMireds) Value() zcl.Val     { return a }
+func (v *ColorTemperatureMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperatureMireds) Value() zcl.Val     { return v }
 
-func (a ColorTemperatureMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v ColorTemperatureMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *ColorTemperatureMireds) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperatureMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperatureMireds(*nt)
+	*v = ColorTemperatureMireds(*nt)
 	return br, err
 }
 
-func (a ColorTemperatureMireds) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperatureMireds) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperatureMireds) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperatureMireds) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperatureMireds(*v)
+	*v = ColorTemperatureMireds(*a)
 	return nil
 }
 
-func (a *ColorTemperatureMireds) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperatureMireds(*nv)
+func (v *ColorTemperatureMireds) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperatureMireds(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperatureMireds) String() string {
-	return zcl.Mired.Format(float64(a))
+func (v ColorTemperatureMireds) String() string {
+	return zcl.Mired.Format(float64(v))
 }
 
 const ColorTemperaturePhysicalMaxMiredsAttr zcl.AttrID = 16396
@@ -1656,6 +1756,11 @@ func (ColorTemperaturePhysicalMaxMireds) Readable() bool   { return true }
 func (ColorTemperaturePhysicalMaxMireds) Writable() bool   { return false }
 func (ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
 func (ColorTemperaturePhysicalMaxMireds) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorTemperaturePhysicalMaxMireds) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorTemperaturePhysicalMaxMireds) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorTemperaturePhysicalMaxMireds) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorTemperaturePhysicalMaxMireds) Name() string { return `Color temperature physical max Mireds` }
 func (ColorTemperaturePhysicalMaxMireds) Description() string {
@@ -1671,43 +1776,43 @@ ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds`
 // ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds
 type ColorTemperaturePhysicalMaxMireds zcl.Zu16
 
-func (a *ColorTemperaturePhysicalMaxMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperaturePhysicalMaxMireds) Value() zcl.Val     { return a }
+func (v *ColorTemperaturePhysicalMaxMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperaturePhysicalMaxMireds) Value() zcl.Val     { return v }
 
-func (a ColorTemperaturePhysicalMaxMireds) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
+func (v ColorTemperaturePhysicalMaxMireds) MarshalZcl() ([]byte, error) {
+	return zcl.Zu16(v).MarshalZcl()
 }
 
-func (a *ColorTemperaturePhysicalMaxMireds) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperaturePhysicalMaxMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperaturePhysicalMaxMireds(*nt)
+	*v = ColorTemperaturePhysicalMaxMireds(*nt)
 	return br, err
 }
 
-func (a ColorTemperaturePhysicalMaxMireds) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperaturePhysicalMaxMireds) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperaturePhysicalMaxMireds) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperaturePhysicalMaxMireds) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperaturePhysicalMaxMireds(*v)
+	*v = ColorTemperaturePhysicalMaxMireds(*a)
 	return nil
 }
 
-func (a *ColorTemperaturePhysicalMaxMireds) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperaturePhysicalMaxMireds(*nv)
+func (v *ColorTemperaturePhysicalMaxMireds) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperaturePhysicalMaxMireds(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperaturePhysicalMaxMireds) String() string {
-	return zcl.Mired.Format(float64(a))
+func (v ColorTemperaturePhysicalMaxMireds) String() string {
+	return zcl.Mired.Format(float64(v))
 }
 
 const ColorTemperaturePhysicalMinMiredsAttr zcl.AttrID = 16395
@@ -1717,6 +1822,11 @@ func (ColorTemperaturePhysicalMinMireds) Readable() bool   { return true }
 func (ColorTemperaturePhysicalMinMireds) Writable() bool   { return false }
 func (ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
 func (ColorTemperaturePhysicalMinMireds) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ColorTemperaturePhysicalMinMireds) AttrID() zcl.AttrID   { return v.ID() }
+func (v ColorTemperaturePhysicalMinMireds) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ColorTemperaturePhysicalMinMireds) AttrValue() zcl.Val  { return v.Value() }
 
 func (ColorTemperaturePhysicalMinMireds) Name() string { return `Color temperature physical min Mireds` }
 func (ColorTemperaturePhysicalMinMireds) Description() string {
@@ -1732,43 +1842,43 @@ ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds`
 // ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds
 type ColorTemperaturePhysicalMinMireds zcl.Zu16
 
-func (a *ColorTemperaturePhysicalMinMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *ColorTemperaturePhysicalMinMireds) Value() zcl.Val     { return a }
+func (v *ColorTemperaturePhysicalMinMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *ColorTemperaturePhysicalMinMireds) Value() zcl.Val     { return v }
 
-func (a ColorTemperaturePhysicalMinMireds) MarshalZcl() ([]byte, error) {
-	return zcl.Zu16(a).MarshalZcl()
+func (v ColorTemperaturePhysicalMinMireds) MarshalZcl() ([]byte, error) {
+	return zcl.Zu16(v).MarshalZcl()
 }
 
-func (a *ColorTemperaturePhysicalMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ColorTemperaturePhysicalMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ColorTemperaturePhysicalMinMireds(*nt)
+	*v = ColorTemperaturePhysicalMinMireds(*nt)
 	return br, err
 }
 
-func (a ColorTemperaturePhysicalMinMireds) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v ColorTemperaturePhysicalMinMireds) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *ColorTemperaturePhysicalMinMireds) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ColorTemperaturePhysicalMinMireds) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ColorTemperaturePhysicalMinMireds(*v)
+	*v = ColorTemperaturePhysicalMinMireds(*a)
 	return nil
 }
 
-func (a *ColorTemperaturePhysicalMinMireds) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = ColorTemperaturePhysicalMinMireds(*nv)
+func (v *ColorTemperaturePhysicalMinMireds) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = ColorTemperaturePhysicalMinMireds(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ColorTemperaturePhysicalMinMireds) String() string {
-	return zcl.Mired.Format(float64(a))
+func (v ColorTemperaturePhysicalMinMireds) String() string {
+	return zcl.Mired.Format(float64(v))
 }
 
 const CompensationTextAttr zcl.AttrID = 6
@@ -1778,6 +1888,11 @@ func (CompensationText) Readable() bool   { return true }
 func (CompensationText) Writable() bool   { return false }
 func (CompensationText) Reportable() bool { return false }
 func (CompensationText) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v CompensationText) AttrID() zcl.AttrID   { return v.ID() }
+func (v CompensationText) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *CompensationText) AttrValue() zcl.Val  { return v.Value() }
 
 func (CompensationText) Name() string { return `Compensation Text` }
 func (CompensationText) Description() string {
@@ -1789,41 +1904,41 @@ compensate for color/intensity drift over time`
 // compensate for color/intensity drift over time
 type CompensationText zcl.Zcstring
 
-func (a *CompensationText) TypeID() zcl.TypeID { return new(zcl.Zcstring).TypeID() }
-func (a *CompensationText) Value() zcl.Val     { return a }
+func (v *CompensationText) TypeID() zcl.TypeID { return new(zcl.Zcstring).TypeID() }
+func (v *CompensationText) Value() zcl.Val     { return v }
 
-func (a CompensationText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+func (v CompensationText) MarshalZcl() ([]byte, error) { return zcl.Zcstring(v).MarshalZcl() }
 
-func (a *CompensationText) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *CompensationText) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CompensationText(*nt)
+	*v = CompensationText(*nt)
 	return br, err
 }
 
-func (a CompensationText) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zcstring(a))
+func (v CompensationText) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zcstring(v))
 }
 
-func (a *CompensationText) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zcstring)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *CompensationText) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zcstring)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = CompensationText(*v)
+	*v = CompensationText(*a)
 	return nil
 }
 
-func (a *CompensationText) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zcstring); ok {
-		*a = CompensationText(*nv)
+func (v *CompensationText) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zcstring); ok {
+		*v = CompensationText(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a CompensationText) String() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(a))
+func (v CompensationText) String() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(v))
 }
 
 const CoupleColorTempToLevelMinMiredsAttr zcl.AttrID = 16397
@@ -1833,6 +1948,11 @@ func (CoupleColorTempToLevelMinMireds) Readable() bool   { return true }
 func (CoupleColorTempToLevelMinMireds) Writable() bool   { return false }
 func (CoupleColorTempToLevelMinMireds) Reportable() bool { return false }
 func (CoupleColorTempToLevelMinMireds) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v CoupleColorTempToLevelMinMireds) AttrID() zcl.AttrID   { return v.ID() }
+func (v CoupleColorTempToLevelMinMireds) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *CoupleColorTempToLevelMinMireds) AttrValue() zcl.Val  { return v.Value() }
 
 func (CoupleColorTempToLevelMinMireds) Name() string { return `Couple Color Temp to Level Min Mireds` }
 func (CoupleColorTempToLevelMinMireds) Description() string {
@@ -1846,41 +1966,41 @@ Options attribute of the Level Control cluster is equal to 1`
 // Options attribute of the Level Control cluster is equal to 1
 type CoupleColorTempToLevelMinMireds zcl.Zu16
 
-func (a *CoupleColorTempToLevelMinMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *CoupleColorTempToLevelMinMireds) Value() zcl.Val     { return a }
+func (v *CoupleColorTempToLevelMinMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *CoupleColorTempToLevelMinMireds) Value() zcl.Val     { return v }
 
-func (a CoupleColorTempToLevelMinMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v CoupleColorTempToLevelMinMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *CoupleColorTempToLevelMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *CoupleColorTempToLevelMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CoupleColorTempToLevelMinMireds(*nt)
+	*v = CoupleColorTempToLevelMinMireds(*nt)
 	return br, err
 }
 
-func (a CoupleColorTempToLevelMinMireds) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v CoupleColorTempToLevelMinMireds) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *CoupleColorTempToLevelMinMireds) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *CoupleColorTempToLevelMinMireds) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = CoupleColorTempToLevelMinMireds(*v)
+	*v = CoupleColorTempToLevelMinMireds(*a)
 	return nil
 }
 
-func (a *CoupleColorTempToLevelMinMireds) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = CoupleColorTempToLevelMinMireds(*nv)
+func (v *CoupleColorTempToLevelMinMireds) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = CoupleColorTempToLevelMinMireds(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a CoupleColorTempToLevelMinMireds) String() string {
-	return zcl.Mired.Format(float64(a))
+func (v CoupleColorTempToLevelMinMireds) String() string {
+	return zcl.Mired.Format(float64(v))
 }
 
 const CurrentXAttr zcl.AttrID = 3
@@ -1890,6 +2010,11 @@ func (CurrentX) Readable() bool   { return true }
 func (CurrentX) Writable() bool   { return false }
 func (CurrentX) Reportable() bool { return true }
 func (CurrentX) SceneIndex() int  { return 1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v CurrentX) AttrID() zcl.AttrID   { return v.ID() }
+func (v CurrentX) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *CurrentX) AttrValue() zcl.Val  { return v.Value() }
 
 func (CurrentX) Name() string { return `Current X` }
 func (CurrentX) Description() string {
@@ -1903,41 +2028,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type CurrentX zcl.Zu16
 
-func (a *CurrentX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *CurrentX) Value() zcl.Val     { return a }
+func (v *CurrentX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *CurrentX) Value() zcl.Val     { return v }
 
-func (a CurrentX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v CurrentX) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *CurrentX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *CurrentX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentX(*nt)
+	*v = CurrentX(*nt)
 	return br, err
 }
 
-func (a CurrentX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v CurrentX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *CurrentX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *CurrentX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = CurrentX(*v)
+	*v = CurrentX(*a)
 	return nil
 }
 
-func (a *CurrentX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = CurrentX(*nv)
+func (v *CurrentX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = CurrentX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a CurrentX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v CurrentX) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const CurrentYAttr zcl.AttrID = 4
@@ -1947,6 +2072,11 @@ func (CurrentY) Readable() bool   { return true }
 func (CurrentY) Writable() bool   { return false }
 func (CurrentY) Reportable() bool { return true }
 func (CurrentY) SceneIndex() int  { return 2 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v CurrentY) AttrID() zcl.AttrID   { return v.ID() }
+func (v CurrentY) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *CurrentY) AttrValue() zcl.Val  { return v.Value() }
 
 func (CurrentY) Name() string { return `Current Y` }
 func (CurrentY) Description() string {
@@ -1960,41 +2090,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type CurrentY zcl.Zu16
 
-func (a *CurrentY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *CurrentY) Value() zcl.Val     { return a }
+func (v *CurrentY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *CurrentY) Value() zcl.Val     { return v }
 
-func (a CurrentY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v CurrentY) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *CurrentY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *CurrentY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentY(*nt)
+	*v = CurrentY(*nt)
 	return br, err
 }
 
-func (a CurrentY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v CurrentY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *CurrentY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *CurrentY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = CurrentY(*v)
+	*v = CurrentY(*a)
 	return nil
 }
 
-func (a *CurrentY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = CurrentY(*nv)
+func (v *CurrentY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = CurrentY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a CurrentY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v CurrentY) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const CurrentHueAttr zcl.AttrID = 0
@@ -2004,6 +2134,11 @@ func (CurrentHue) Readable() bool   { return true }
 func (CurrentHue) Writable() bool   { return false }
 func (CurrentHue) Reportable() bool { return true }
 func (CurrentHue) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v CurrentHue) AttrID() zcl.AttrID   { return v.ID() }
+func (v CurrentHue) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *CurrentHue) AttrValue() zcl.Val  { return v.Value() }
 
 func (CurrentHue) Name() string { return `Current hue` }
 func (CurrentHue) Description() string {
@@ -2015,41 +2150,41 @@ func (CurrentHue) Description() string {
 // (CurrentHue in the range 0 - 254 inclusive)
 type CurrentHue zcl.Zu8
 
-func (a *CurrentHue) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *CurrentHue) Value() zcl.Val     { return a }
+func (v *CurrentHue) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *CurrentHue) Value() zcl.Val     { return v }
 
-func (a CurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v CurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *CurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *CurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentHue(*nt)
+	*v = CurrentHue(*nt)
 	return br, err
 }
 
-func (a CurrentHue) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v CurrentHue) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *CurrentHue) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *CurrentHue) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = CurrentHue(*v)
+	*v = CurrentHue(*a)
 	return nil
 }
 
-func (a *CurrentHue) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = CurrentHue(*nv)
+func (v *CurrentHue) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = CurrentHue(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a CurrentHue) String() string {
-	return zcl.DegreesAngular.Format(float64(a) / 0.70556)
+func (v CurrentHue) String() string {
+	return zcl.DegreesAngular.Format(float64(v) / 0.70556)
 }
 
 const CurrentSaturationAttr zcl.AttrID = 1
@@ -2059,6 +2194,11 @@ func (CurrentSaturation) Readable() bool   { return true }
 func (CurrentSaturation) Writable() bool   { return false }
 func (CurrentSaturation) Reportable() bool { return true }
 func (CurrentSaturation) SceneIndex() int  { return 4 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v CurrentSaturation) AttrID() zcl.AttrID   { return v.ID() }
+func (v CurrentSaturation) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *CurrentSaturation) AttrValue() zcl.Val  { return v.Value() }
 
 func (CurrentSaturation) Name() string { return `Current saturation` }
 func (CurrentSaturation) Description() string {
@@ -2072,41 +2212,41 @@ Saturation = CurrentSaturation/254 (CurrentSaturation in the range
 // 0 - 254 inclusive)
 type CurrentSaturation zcl.Zu8
 
-func (a *CurrentSaturation) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *CurrentSaturation) Value() zcl.Val     { return a }
+func (v *CurrentSaturation) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *CurrentSaturation) Value() zcl.Val     { return v }
 
-func (a CurrentSaturation) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v CurrentSaturation) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *CurrentSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *CurrentSaturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = CurrentSaturation(*nt)
+	*v = CurrentSaturation(*nt)
 	return br, err
 }
 
-func (a CurrentSaturation) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v CurrentSaturation) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *CurrentSaturation) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *CurrentSaturation) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = CurrentSaturation(*v)
+	*v = CurrentSaturation(*a)
 	return nil
 }
 
-func (a *CurrentSaturation) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = CurrentSaturation(*nv)
+func (v *CurrentSaturation) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = CurrentSaturation(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a CurrentSaturation) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v CurrentSaturation) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const DriftCompensationAttr zcl.AttrID = 5
@@ -2116,6 +2256,11 @@ func (DriftCompensation) Readable() bool   { return true }
 func (DriftCompensation) Writable() bool   { return false }
 func (DriftCompensation) Reportable() bool { return false }
 func (DriftCompensation) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v DriftCompensation) AttrID() zcl.AttrID   { return v.ID() }
+func (v DriftCompensation) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *DriftCompensation) AttrValue() zcl.Val  { return v.Value() }
 
 func (DriftCompensation) Name() string { return `Drift Compensation` }
 func (DriftCompensation) Description() string {
@@ -2127,41 +2272,41 @@ color/intensity drift over time`
 // color/intensity drift over time
 type DriftCompensation zcl.Zenum8
 
-func (a *DriftCompensation) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *DriftCompensation) Value() zcl.Val     { return a }
+func (v *DriftCompensation) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *DriftCompensation) Value() zcl.Val     { return v }
 
-func (a DriftCompensation) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v DriftCompensation) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *DriftCompensation) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *DriftCompensation) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = DriftCompensation(*nt)
+	*v = DriftCompensation(*nt)
 	return br, err
 }
 
-func (a DriftCompensation) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v DriftCompensation) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *DriftCompensation) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *DriftCompensation) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = DriftCompensation(*v)
+	*v = DriftCompensation(*a)
 	return nil
 }
 
-func (a *DriftCompensation) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = DriftCompensation(*nv)
+func (v *DriftCompensation) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = DriftCompensation(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a DriftCompensation) String() string {
-	switch a {
+func (v DriftCompensation) String() string {
+	switch v {
 	case 0x00:
 		return "None"
 	case 0x01:
@@ -2173,19 +2318,19 @@ func (a DriftCompensation) String() string {
 	case 0x04:
 		return "Optical color monitoring and feedback"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a DriftCompensation) IsNone() bool                                  { return a == 0x00 }
-func (a DriftCompensation) IsOtherUnknown() bool                          { return a == 0x01 }
-func (a DriftCompensation) IsTemperatureMonitoring() bool                 { return a == 0x02 }
-func (a DriftCompensation) IsOpticalLuminanceMonitoringAndFeedback() bool { return a == 0x03 }
-func (a DriftCompensation) IsOpticalColorMonitoringAndFeedback() bool     { return a == 0x04 }
-func (a *DriftCompensation) SetNone()                                     { *a = 0x00 }
-func (a *DriftCompensation) SetOtherUnknown()                             { *a = 0x01 }
-func (a *DriftCompensation) SetTemperatureMonitoring()                    { *a = 0x02 }
-func (a *DriftCompensation) SetOpticalLuminanceMonitoringAndFeedback()    { *a = 0x03 }
-func (a *DriftCompensation) SetOpticalColorMonitoringAndFeedback()        { *a = 0x04 }
+func (v DriftCompensation) IsNone() bool                                  { return v == 0x00 }
+func (v DriftCompensation) IsOtherUnknown() bool                          { return v == 0x01 }
+func (v DriftCompensation) IsTemperatureMonitoring() bool                 { return v == 0x02 }
+func (v DriftCompensation) IsOpticalLuminanceMonitoringAndFeedback() bool { return v == 0x03 }
+func (v DriftCompensation) IsOpticalColorMonitoringAndFeedback() bool     { return v == 0x04 }
+func (v *DriftCompensation) SetNone()                                     { *v = 0x00 }
+func (v *DriftCompensation) SetOtherUnknown()                             { *v = 0x01 }
+func (v *DriftCompensation) SetTemperatureMonitoring()                    { *v = 0x02 }
+func (v *DriftCompensation) SetOpticalLuminanceMonitoringAndFeedback()    { *v = 0x03 }
+func (v *DriftCompensation) SetOpticalColorMonitoringAndFeedback()        { *v = 0x04 }
 
 func (DriftCompensation) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -2202,41 +2347,41 @@ func (EnhancedHue) Description() string { return `` }
 
 type EnhancedHue zcl.Zu16
 
-func (a *EnhancedHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *EnhancedHue) Value() zcl.Val     { return a }
+func (v *EnhancedHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *EnhancedHue) Value() zcl.Val     { return v }
 
-func (a EnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v EnhancedHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *EnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *EnhancedHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = EnhancedHue(*nt)
+	*v = EnhancedHue(*nt)
 	return br, err
 }
 
-func (a EnhancedHue) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v EnhancedHue) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *EnhancedHue) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *EnhancedHue) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = EnhancedHue(*v)
+	*v = EnhancedHue(*a)
 	return nil
 }
 
-func (a *EnhancedHue) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = EnhancedHue(*nv)
+func (v *EnhancedHue) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = EnhancedHue(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a EnhancedHue) String() string {
-	return zcl.DegreesAngular.Format(float64(a) / 0.002756094)
+func (v EnhancedHue) String() string {
+	return zcl.DegreesAngular.Format(float64(v) / 0.002756094)
 }
 
 const EnhancedColorModeAttr zcl.AttrID = 16385
@@ -2246,6 +2391,11 @@ func (EnhancedColorMode) Readable() bool   { return true }
 func (EnhancedColorMode) Writable() bool   { return false }
 func (EnhancedColorMode) Reportable() bool { return false }
 func (EnhancedColorMode) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v EnhancedColorMode) AttrID() zcl.AttrID   { return v.ID() }
+func (v EnhancedColorMode) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *EnhancedColorMode) AttrValue() zcl.Val  { return v.Value() }
 
 func (EnhancedColorMode) Name() string { return `Enhanced color mode` }
 func (EnhancedColorMode) Description() string {
@@ -2257,41 +2407,41 @@ the device`
 // the device
 type EnhancedColorMode zcl.Zenum8
 
-func (a *EnhancedColorMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *EnhancedColorMode) Value() zcl.Val     { return a }
+func (v *EnhancedColorMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *EnhancedColorMode) Value() zcl.Val     { return v }
 
-func (a EnhancedColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v EnhancedColorMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *EnhancedColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *EnhancedColorMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = EnhancedColorMode(*nt)
+	*v = EnhancedColorMode(*nt)
 	return br, err
 }
 
-func (a EnhancedColorMode) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v EnhancedColorMode) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *EnhancedColorMode) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *EnhancedColorMode) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = EnhancedColorMode(*v)
+	*v = EnhancedColorMode(*a)
 	return nil
 }
 
-func (a *EnhancedColorMode) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = EnhancedColorMode(*nv)
+func (v *EnhancedColorMode) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = EnhancedColorMode(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a EnhancedColorMode) String() string {
-	switch a {
+func (v EnhancedColorMode) String() string {
+	switch v {
 	case 0x00:
 		return "Current hue and current saturation"
 	case 0x01:
@@ -2301,17 +2451,17 @@ func (a EnhancedColorMode) String() string {
 	case 0x03:
 		return "Enhanced current hue and current saturation"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a EnhancedColorMode) IsCurrentHueAndCurrentSaturation() bool         { return a == 0x00 }
-func (a EnhancedColorMode) IsCurrentXAndCurrentY() bool                    { return a == 0x01 }
-func (a EnhancedColorMode) IsColorTemperature() bool                       { return a == 0x02 }
-func (a EnhancedColorMode) IsEnhancedCurrentHueAndCurrentSaturation() bool { return a == 0x03 }
-func (a *EnhancedColorMode) SetCurrentHueAndCurrentSaturation()            { *a = 0x00 }
-func (a *EnhancedColorMode) SetCurrentXAndCurrentY()                       { *a = 0x01 }
-func (a *EnhancedColorMode) SetColorTemperature()                          { *a = 0x02 }
-func (a *EnhancedColorMode) SetEnhancedCurrentHueAndCurrentSaturation()    { *a = 0x03 }
+func (v EnhancedColorMode) IsCurrentHueAndCurrentSaturation() bool         { return v == 0x00 }
+func (v EnhancedColorMode) IsCurrentXAndCurrentY() bool                    { return v == 0x01 }
+func (v EnhancedColorMode) IsColorTemperature() bool                       { return v == 0x02 }
+func (v EnhancedColorMode) IsEnhancedCurrentHueAndCurrentSaturation() bool { return v == 0x03 }
+func (v *EnhancedColorMode) SetCurrentHueAndCurrentSaturation()            { *v = 0x00 }
+func (v *EnhancedColorMode) SetCurrentXAndCurrentY()                       { *v = 0x01 }
+func (v *EnhancedColorMode) SetColorTemperature()                          { *v = 0x02 }
+func (v *EnhancedColorMode) SetEnhancedCurrentHueAndCurrentSaturation()    { *v = 0x03 }
 
 func (EnhancedColorMode) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -2329,6 +2479,11 @@ func (EnhancedCurrentHue) Readable() bool   { return true }
 func (EnhancedCurrentHue) Writable() bool   { return false }
 func (EnhancedCurrentHue) Reportable() bool { return false }
 func (EnhancedCurrentHue) SceneIndex() int  { return 3 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v EnhancedCurrentHue) AttrID() zcl.AttrID   { return v.ID() }
+func (v EnhancedCurrentHue) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *EnhancedCurrentHue) AttrValue() zcl.Val  { return v.Value() }
 
 func (EnhancedCurrentHue) Name() string { return `Enhanced current hue` }
 func (EnhancedCurrentHue) Description() string {
@@ -2352,41 +2507,41 @@ calculated from the EnhancedCurrentHue attribute`
 // calculated from the EnhancedCurrentHue attribute
 type EnhancedCurrentHue zcl.Zu16
 
-func (a *EnhancedCurrentHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *EnhancedCurrentHue) Value() zcl.Val     { return a }
+func (v *EnhancedCurrentHue) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *EnhancedCurrentHue) Value() zcl.Val     { return v }
 
-func (a EnhancedCurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v EnhancedCurrentHue) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *EnhancedCurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *EnhancedCurrentHue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = EnhancedCurrentHue(*nt)
+	*v = EnhancedCurrentHue(*nt)
 	return br, err
 }
 
-func (a EnhancedCurrentHue) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v EnhancedCurrentHue) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *EnhancedCurrentHue) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *EnhancedCurrentHue) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = EnhancedCurrentHue(*v)
+	*v = EnhancedCurrentHue(*a)
 	return nil
 }
 
-func (a *EnhancedCurrentHue) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = EnhancedCurrentHue(*nv)
+func (v *EnhancedCurrentHue) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = EnhancedCurrentHue(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a EnhancedCurrentHue) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v EnhancedCurrentHue) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 func (Hue) Name() string        { return `Hue` }
@@ -2394,41 +2549,41 @@ func (Hue) Description() string { return `` }
 
 type Hue zcl.Zu8
 
-func (a *Hue) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Hue) Value() zcl.Val     { return a }
+func (v *Hue) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Hue) Value() zcl.Val     { return v }
 
-func (a Hue) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Hue) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Hue) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Hue) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Hue(*nt)
+	*v = Hue(*nt)
 	return br, err
 }
 
-func (a Hue) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Hue) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Hue) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Hue) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Hue(*v)
+	*v = Hue(*a)
 	return nil
 }
 
-func (a *Hue) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Hue(*nv)
+func (v *Hue) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Hue(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Hue) String() string {
-	return zcl.DegreesAngular.Format(float64(a) / 0.70556)
+func (v Hue) String() string {
+	return zcl.DegreesAngular.Format(float64(v) / 0.70556)
 }
 
 func (HueDirection) Name() string        { return `Hue Direction` }
@@ -2436,53 +2591,53 @@ func (HueDirection) Description() string { return `` }
 
 type HueDirection zcl.Zenum8
 
-func (a *HueDirection) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *HueDirection) Value() zcl.Val     { return a }
+func (v *HueDirection) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *HueDirection) Value() zcl.Val     { return v }
 
-func (a HueDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v HueDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *HueDirection) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *HueDirection) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = HueDirection(*nt)
+	*v = HueDirection(*nt)
 	return br, err
 }
 
-func (a HueDirection) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v HueDirection) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *HueDirection) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *HueDirection) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = HueDirection(*v)
+	*v = HueDirection(*a)
 	return nil
 }
 
-func (a *HueDirection) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = HueDirection(*nv)
+func (v *HueDirection) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = HueDirection(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a HueDirection) String() string {
-	switch a {
+func (v HueDirection) String() string {
+	switch v {
 	case 0x00:
 		return "Decrement hue"
 	case 0x01:
 		return "Increment hue"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a HueDirection) IsDecrementHue() bool { return a == 0x00 }
-func (a HueDirection) IsIncrementHue() bool { return a == 0x01 }
-func (a *HueDirection) SetDecrementHue()    { *a = 0x00 }
-func (a *HueDirection) SetIncrementHue()    { *a = 0x01 }
+func (v HueDirection) IsDecrementHue() bool { return v == 0x00 }
+func (v HueDirection) IsIncrementHue() bool { return v == 0x01 }
+func (v *HueDirection) SetDecrementHue()    { *v = 0x00 }
+func (v *HueDirection) SetIncrementHue()    { *v = 0x01 }
 
 func (HueDirection) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -2499,6 +2654,11 @@ func (IntrinsicBallastFactor) Writable() bool   { return true }
 func (IntrinsicBallastFactor) Reportable() bool { return false }
 func (IntrinsicBallastFactor) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v IntrinsicBallastFactor) AttrID() zcl.AttrID   { return v.ID() }
+func (v IntrinsicBallastFactor) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *IntrinsicBallastFactor) AttrValue() zcl.Val  { return v.Value() }
+
 func (IntrinsicBallastFactor) Name() string { return `Intrinsic Ballast Factor` }
 func (IntrinsicBallastFactor) Description() string {
 	return `specifies, as a percentage, the ballast factor of the ballast/lamp
@@ -2509,41 +2669,41 @@ combination, prior to any adjustment.`
 // combination, prior to any adjustment.
 type IntrinsicBallastFactor zcl.Zu8
 
-func (a *IntrinsicBallastFactor) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *IntrinsicBallastFactor) Value() zcl.Val     { return a }
+func (v *IntrinsicBallastFactor) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *IntrinsicBallastFactor) Value() zcl.Val     { return v }
 
-func (a IntrinsicBallastFactor) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v IntrinsicBallastFactor) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *IntrinsicBallastFactor) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *IntrinsicBallastFactor) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = IntrinsicBallastFactor(*nt)
+	*v = IntrinsicBallastFactor(*nt)
 	return br, err
 }
 
-func (a IntrinsicBallastFactor) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v IntrinsicBallastFactor) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *IntrinsicBallastFactor) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *IntrinsicBallastFactor) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = IntrinsicBallastFactor(*v)
+	*v = IntrinsicBallastFactor(*a)
 	return nil
 }
 
-func (a *IntrinsicBallastFactor) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = IntrinsicBallastFactor(*nv)
+func (v *IntrinsicBallastFactor) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = IntrinsicBallastFactor(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a IntrinsicBallastFactor) String() string {
-	return zcl.Percent.Format(float64(a))
+func (v IntrinsicBallastFactor) String() string {
+	return zcl.Percent.Format(float64(v))
 }
 
 const LampAlarmModeAttr zcl.AttrID = 52
@@ -2553,6 +2713,11 @@ func (LampAlarmMode) Readable() bool   { return true }
 func (LampAlarmMode) Writable() bool   { return true }
 func (LampAlarmMode) Reportable() bool { return false }
 func (LampAlarmMode) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v LampAlarmMode) AttrID() zcl.AttrID   { return v.ID() }
+func (v LampAlarmMode) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LampAlarmMode) AttrValue() zcl.Val  { return v.Value() }
 
 func (LampAlarmMode) Name() string { return `Lamp Alarm Mode` }
 func (LampAlarmMode) Description() string {
@@ -2564,42 +2729,42 @@ generated`
 // generated
 type LampAlarmMode zcl.Zbmp8
 
-func (a *LampAlarmMode) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
-func (a *LampAlarmMode) Value() zcl.Val     { return a }
+func (v *LampAlarmMode) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
+func (v *LampAlarmMode) Value() zcl.Val     { return v }
 
-func (a LampAlarmMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+func (v LampAlarmMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(v).MarshalZcl() }
 
-func (a *LampAlarmMode) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LampAlarmMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LampAlarmMode(*nt)
+	*v = LampAlarmMode(*nt)
 	return br, err
 }
 
-func (a LampAlarmMode) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zbmp8(a))
+func (v LampAlarmMode) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zbmp8(v))
 }
 
-func (a *LampAlarmMode) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zbmp8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LampAlarmMode) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zbmp8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LampAlarmMode(*v)
+	*v = LampAlarmMode(*a)
 	return nil
 }
 
-func (a *LampAlarmMode) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zbmp8); ok {
-		*a = LampAlarmMode(*nv)
+func (v *LampAlarmMode) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zbmp8); ok {
+		*v = LampAlarmMode(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LampAlarmMode) String() string {
+func (v LampAlarmMode) String() string {
 	var bstr []string
-	bits := zcl.BitmapList(a[:])
+	bits := zcl.BitmapList(v[:])
 	for _, bit := range bits {
 		switch bit {
 		case 0:
@@ -2611,8 +2776,8 @@ func (a LampAlarmMode) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (a LampAlarmMode) IsLampBurnHours() bool    { return zcl.BitmapTest([]byte(a[:]), 0) }
-func (a *LampAlarmMode) SetLampBurnHours(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b)) }
+func (v LampAlarmMode) IsLampBurnHours() bool    { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v *LampAlarmMode) SetLampBurnHours(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
 
 func (LampAlarmMode) MultiOptions() []zcl.Option {
 	return []zcl.Option{
@@ -2628,6 +2793,11 @@ func (LampBurnHours) Writable() bool   { return true }
 func (LampBurnHours) Reportable() bool { return false }
 func (LampBurnHours) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LampBurnHours) AttrID() zcl.AttrID   { return v.ID() }
+func (v LampBurnHours) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LampBurnHours) AttrValue() zcl.Val  { return v.Value() }
+
 func (LampBurnHours) Name() string { return `Lamp Burn Hours` }
 func (LampBurnHours) Description() string {
 	return `specifies the length of time, in hours, the currently connected
@@ -2642,41 +2812,41 @@ when a lamp is changed`
 // when a lamp is changed
 type LampBurnHours zcl.Zu24
 
-func (a *LampBurnHours) TypeID() zcl.TypeID { return new(zcl.Zu24).TypeID() }
-func (a *LampBurnHours) Value() zcl.Val     { return a }
+func (v *LampBurnHours) TypeID() zcl.TypeID { return new(zcl.Zu24).TypeID() }
+func (v *LampBurnHours) Value() zcl.Val     { return v }
 
-func (a LampBurnHours) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
+func (v LampBurnHours) MarshalZcl() ([]byte, error) { return zcl.Zu24(v).MarshalZcl() }
 
-func (a *LampBurnHours) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LampBurnHours) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LampBurnHours(*nt)
+	*v = LampBurnHours(*nt)
 	return br, err
 }
 
-func (a LampBurnHours) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu24(a))
+func (v LampBurnHours) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu24(v))
 }
 
-func (a *LampBurnHours) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu24)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LampBurnHours) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu24)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LampBurnHours(*v)
+	*v = LampBurnHours(*a)
 	return nil
 }
 
-func (a *LampBurnHours) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu24); ok {
-		*a = LampBurnHours(*nv)
+func (v *LampBurnHours) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu24); ok {
+		*v = LampBurnHours(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LampBurnHours) String() string {
-	return zcl.Hours.Format(float64(a))
+func (v LampBurnHours) String() string {
+	return zcl.Hours.Format(float64(v))
 }
 
 const LampBurnHoursTripPointAttr zcl.AttrID = 53
@@ -2686,6 +2856,11 @@ func (LampBurnHoursTripPoint) Readable() bool   { return true }
 func (LampBurnHoursTripPoint) Writable() bool   { return true }
 func (LampBurnHoursTripPoint) Reportable() bool { return false }
 func (LampBurnHoursTripPoint) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v LampBurnHoursTripPoint) AttrID() zcl.AttrID   { return v.ID() }
+func (v LampBurnHoursTripPoint) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LampBurnHoursTripPoint) AttrValue() zcl.Val  { return v.Value() }
 
 func (LampBurnHoursTripPoint) Name() string { return `Lamp Burn Hours Trip Point` }
 func (LampBurnHoursTripPoint) Description() string {
@@ -2697,41 +2872,41 @@ reach before an alarm is generated`
 // reach before an alarm is generated
 type LampBurnHoursTripPoint zcl.Zu24
 
-func (a *LampBurnHoursTripPoint) TypeID() zcl.TypeID { return new(zcl.Zu24).TypeID() }
-func (a *LampBurnHoursTripPoint) Value() zcl.Val     { return a }
+func (v *LampBurnHoursTripPoint) TypeID() zcl.TypeID { return new(zcl.Zu24).TypeID() }
+func (v *LampBurnHoursTripPoint) Value() zcl.Val     { return v }
 
-func (a LampBurnHoursTripPoint) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
+func (v LampBurnHoursTripPoint) MarshalZcl() ([]byte, error) { return zcl.Zu24(v).MarshalZcl() }
 
-func (a *LampBurnHoursTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LampBurnHoursTripPoint) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LampBurnHoursTripPoint(*nt)
+	*v = LampBurnHoursTripPoint(*nt)
 	return br, err
 }
 
-func (a LampBurnHoursTripPoint) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu24(a))
+func (v LampBurnHoursTripPoint) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu24(v))
 }
 
-func (a *LampBurnHoursTripPoint) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu24)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LampBurnHoursTripPoint) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu24)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LampBurnHoursTripPoint(*v)
+	*v = LampBurnHoursTripPoint(*a)
 	return nil
 }
 
-func (a *LampBurnHoursTripPoint) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu24); ok {
-		*a = LampBurnHoursTripPoint(*nv)
+func (v *LampBurnHoursTripPoint) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu24); ok {
+		*v = LampBurnHoursTripPoint(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LampBurnHoursTripPoint) String() string {
-	return zcl.Hours.Format(float64(a))
+func (v LampBurnHoursTripPoint) String() string {
+	return zcl.Hours.Format(float64(v))
 }
 
 const LampManufacturerAttr zcl.AttrID = 49
@@ -2741,6 +2916,11 @@ func (LampManufacturer) Readable() bool   { return true }
 func (LampManufacturer) Writable() bool   { return true }
 func (LampManufacturer) Reportable() bool { return false }
 func (LampManufacturer) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v LampManufacturer) AttrID() zcl.AttrID   { return v.ID() }
+func (v LampManufacturer) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LampManufacturer) AttrValue() zcl.Val  { return v.Value() }
 
 func (LampManufacturer) Name() string { return `Lamp Manufacturer` }
 func (LampManufacturer) Description() string {
@@ -2752,41 +2932,41 @@ lamps.`
 // lamps.
 type LampManufacturer zcl.Zcstring
 
-func (a *LampManufacturer) TypeID() zcl.TypeID { return new(zcl.Zcstring).TypeID() }
-func (a *LampManufacturer) Value() zcl.Val     { return a }
+func (v *LampManufacturer) TypeID() zcl.TypeID { return new(zcl.Zcstring).TypeID() }
+func (v *LampManufacturer) Value() zcl.Val     { return v }
 
-func (a LampManufacturer) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+func (v LampManufacturer) MarshalZcl() ([]byte, error) { return zcl.Zcstring(v).MarshalZcl() }
 
-func (a *LampManufacturer) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LampManufacturer) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LampManufacturer(*nt)
+	*v = LampManufacturer(*nt)
 	return br, err
 }
 
-func (a LampManufacturer) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zcstring(a))
+func (v LampManufacturer) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zcstring(v))
 }
 
-func (a *LampManufacturer) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zcstring)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LampManufacturer) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zcstring)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LampManufacturer(*v)
+	*v = LampManufacturer(*a)
 	return nil
 }
 
-func (a *LampManufacturer) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zcstring); ok {
-		*a = LampManufacturer(*nv)
+func (v *LampManufacturer) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zcstring); ok {
+		*v = LampManufacturer(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LampManufacturer) String() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(a))
+func (v LampManufacturer) String() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(v))
 }
 
 const LampQuantityAttr zcl.AttrID = 32
@@ -2797,6 +2977,11 @@ func (LampQuantity) Writable() bool   { return false }
 func (LampQuantity) Reportable() bool { return false }
 func (LampQuantity) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LampQuantity) AttrID() zcl.AttrID   { return v.ID() }
+func (v LampQuantity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LampQuantity) AttrValue() zcl.Val  { return v.Value() }
+
 func (LampQuantity) Name() string { return `Lamp Quantity` }
 func (LampQuantity) Description() string {
 	return `specifies the number of lamps connected to this ballast`
@@ -2805,41 +2990,41 @@ func (LampQuantity) Description() string {
 // LampQuantity specifies the number of lamps connected to this ballast
 type LampQuantity zcl.Zu8
 
-func (a *LampQuantity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *LampQuantity) Value() zcl.Val     { return a }
+func (v *LampQuantity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *LampQuantity) Value() zcl.Val     { return v }
 
-func (a LampQuantity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v LampQuantity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *LampQuantity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LampQuantity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LampQuantity(*nt)
+	*v = LampQuantity(*nt)
 	return br, err
 }
 
-func (a LampQuantity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v LampQuantity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *LampQuantity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LampQuantity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LampQuantity(*v)
+	*v = LampQuantity(*a)
 	return nil
 }
 
-func (a *LampQuantity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = LampQuantity(*nv)
+func (v *LampQuantity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = LampQuantity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LampQuantity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v LampQuantity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const LampRatedHoursAttr zcl.AttrID = 50
@@ -2849,6 +3034,11 @@ func (LampRatedHours) Readable() bool   { return true }
 func (LampRatedHours) Writable() bool   { return true }
 func (LampRatedHours) Reportable() bool { return false }
 func (LampRatedHours) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v LampRatedHours) AttrID() zcl.AttrID   { return v.ID() }
+func (v LampRatedHours) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LampRatedHours) AttrValue() zcl.Val  { return v.Value() }
 
 func (LampRatedHours) Name() string { return `Lamp Rated Hours` }
 func (LampRatedHours) Description() string {
@@ -2860,41 +3050,41 @@ the manufacturer`
 // the manufacturer
 type LampRatedHours zcl.Zu24
 
-func (a *LampRatedHours) TypeID() zcl.TypeID { return new(zcl.Zu24).TypeID() }
-func (a *LampRatedHours) Value() zcl.Val     { return a }
+func (v *LampRatedHours) TypeID() zcl.TypeID { return new(zcl.Zu24).TypeID() }
+func (v *LampRatedHours) Value() zcl.Val     { return v }
 
-func (a LampRatedHours) MarshalZcl() ([]byte, error) { return zcl.Zu24(a).MarshalZcl() }
+func (v LampRatedHours) MarshalZcl() ([]byte, error) { return zcl.Zu24(v).MarshalZcl() }
 
-func (a *LampRatedHours) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LampRatedHours) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu24)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LampRatedHours(*nt)
+	*v = LampRatedHours(*nt)
 	return br, err
 }
 
-func (a LampRatedHours) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu24(a))
+func (v LampRatedHours) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu24(v))
 }
 
-func (a *LampRatedHours) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu24)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LampRatedHours) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu24)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LampRatedHours(*v)
+	*v = LampRatedHours(*a)
 	return nil
 }
 
-func (a *LampRatedHours) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu24); ok {
-		*a = LampRatedHours(*nv)
+func (v *LampRatedHours) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu24); ok {
+		*v = LampRatedHours(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LampRatedHours) String() string {
-	return zcl.Hours.Format(float64(a))
+func (v LampRatedHours) String() string {
+	return zcl.Hours.Format(float64(v))
 }
 
 const LampTypeAttr zcl.AttrID = 48
@@ -2905,46 +3095,51 @@ func (LampType) Writable() bool   { return true }
 func (LampType) Reportable() bool { return false }
 func (LampType) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LampType) AttrID() zcl.AttrID   { return v.ID() }
+func (v LampType) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LampType) AttrValue() zcl.Val  { return v.Value() }
+
 func (LampType) Name() string        { return `Lamp Type` }
 func (LampType) Description() string { return `` }
 
 type LampType zcl.Zcstring
 
-func (a *LampType) TypeID() zcl.TypeID { return new(zcl.Zcstring).TypeID() }
-func (a *LampType) Value() zcl.Val     { return a }
+func (v *LampType) TypeID() zcl.TypeID { return new(zcl.Zcstring).TypeID() }
+func (v *LampType) Value() zcl.Val     { return v }
 
-func (a LampType) MarshalZcl() ([]byte, error) { return zcl.Zcstring(a).MarshalZcl() }
+func (v LampType) MarshalZcl() ([]byte, error) { return zcl.Zcstring(v).MarshalZcl() }
 
-func (a *LampType) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LampType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zcstring)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LampType(*nt)
+	*v = LampType(*nt)
 	return br, err
 }
 
-func (a LampType) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zcstring(a))
+func (v LampType) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zcstring(v))
 }
 
-func (a *LampType) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zcstring)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LampType) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zcstring)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LampType(*v)
+	*v = LampType(*a)
 	return nil
 }
 
-func (a *LampType) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zcstring); ok {
-		*a = LampType(*nv)
+func (v *LampType) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zcstring); ok {
+		*v = LampType(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LampType) String() string {
-	return zcl.Sprintf("%v", zcl.Zcstring(a))
+func (v LampType) String() string {
+	return zcl.Sprintf("%v", zcl.Zcstring(v))
 }
 
 const MaxLevelAttr zcl.AttrID = 17
@@ -2954,6 +3149,11 @@ func (MaxLevel) Readable() bool   { return true }
 func (MaxLevel) Writable() bool   { return true }
 func (MaxLevel) Reportable() bool { return false }
 func (MaxLevel) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v MaxLevel) AttrID() zcl.AttrID   { return v.ID() }
+func (v MaxLevel) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MaxLevel) AttrValue() zcl.Val  { return v.Value() }
 
 func (MaxLevel) Name() string { return `Max Level` }
 func (MaxLevel) Description() string {
@@ -2971,41 +3171,41 @@ to MinLevel`
 // to MinLevel
 type MaxLevel zcl.Zu8
 
-func (a *MaxLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *MaxLevel) Value() zcl.Val     { return a }
+func (v *MaxLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *MaxLevel) Value() zcl.Val     { return v }
 
-func (a MaxLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v MaxLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *MaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *MaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = MaxLevel(*nt)
+	*v = MaxLevel(*nt)
 	return br, err
 }
 
-func (a MaxLevel) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v MaxLevel) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *MaxLevel) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *MaxLevel) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = MaxLevel(*v)
+	*v = MaxLevel(*a)
 	return nil
 }
 
-func (a *MaxLevel) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = MaxLevel(*nv)
+func (v *MaxLevel) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = MaxLevel(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a MaxLevel) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v MaxLevel) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const MinLevelAttr zcl.AttrID = 16
@@ -3016,46 +3216,51 @@ func (MinLevel) Writable() bool   { return true }
 func (MinLevel) Reportable() bool { return false }
 func (MinLevel) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v MinLevel) AttrID() zcl.AttrID   { return v.ID() }
+func (v MinLevel) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MinLevel) AttrValue() zcl.Val  { return v.Value() }
+
 func (MinLevel) Name() string        { return `Min Level` }
 func (MinLevel) Description() string { return `` }
 
 type MinLevel zcl.Zu8
 
-func (a *MinLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *MinLevel) Value() zcl.Val     { return a }
+func (v *MinLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *MinLevel) Value() zcl.Val     { return v }
 
-func (a MinLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v MinLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *MinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *MinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = MinLevel(*nt)
+	*v = MinLevel(*nt)
 	return br, err
 }
 
-func (a MinLevel) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v MinLevel) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *MinLevel) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *MinLevel) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = MinLevel(*v)
+	*v = MinLevel(*a)
 	return nil
 }
 
-func (a *MinLevel) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = MinLevel(*nv)
+func (v *MinLevel) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = MinLevel(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a MinLevel) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v MinLevel) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 func (MoveDirection) Name() string        { return `Move Direction` }
@@ -3063,41 +3268,41 @@ func (MoveDirection) Description() string { return `` }
 
 type MoveDirection zcl.Zenum8
 
-func (a *MoveDirection) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *MoveDirection) Value() zcl.Val     { return a }
+func (v *MoveDirection) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *MoveDirection) Value() zcl.Val     { return v }
 
-func (a MoveDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v MoveDirection) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *MoveDirection) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *MoveDirection) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = MoveDirection(*nt)
+	*v = MoveDirection(*nt)
 	return br, err
 }
 
-func (a MoveDirection) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v MoveDirection) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *MoveDirection) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *MoveDirection) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = MoveDirection(*v)
+	*v = MoveDirection(*a)
 	return nil
 }
 
-func (a *MoveDirection) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = MoveDirection(*nv)
+func (v *MoveDirection) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = MoveDirection(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a MoveDirection) String() string {
-	switch a {
+func (v MoveDirection) String() string {
+	switch v {
 	case 0x00:
 		return "Shortest distance"
 	case 0x01:
@@ -3107,17 +3312,17 @@ func (a MoveDirection) String() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a MoveDirection) IsShortestDistance() bool { return a == 0x00 }
-func (a MoveDirection) IsLongestDistance() bool  { return a == 0x01 }
-func (a MoveDirection) IsUp() bool               { return a == 0x02 }
-func (a MoveDirection) IsDown() bool             { return a == 0x03 }
-func (a *MoveDirection) SetShortestDistance()    { *a = 0x00 }
-func (a *MoveDirection) SetLongestDistance()     { *a = 0x01 }
-func (a *MoveDirection) SetUp()                  { *a = 0x02 }
-func (a *MoveDirection) SetDown()                { *a = 0x03 }
+func (v MoveDirection) IsShortestDistance() bool { return v == 0x00 }
+func (v MoveDirection) IsLongestDistance() bool  { return v == 0x01 }
+func (v MoveDirection) IsUp() bool               { return v == 0x02 }
+func (v MoveDirection) IsDown() bool             { return v == 0x03 }
+func (v *MoveDirection) SetShortestDistance()    { *v = 0x00 }
+func (v *MoveDirection) SetLongestDistance()     { *v = 0x01 }
+func (v *MoveDirection) SetUp()                  { *v = 0x02 }
+func (v *MoveDirection) SetDown()                { *v = 0x03 }
 
 func (MoveDirection) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -3133,41 +3338,41 @@ func (MoveMode) Description() string { return `` }
 
 type MoveMode zcl.Zenum8
 
-func (a *MoveMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *MoveMode) Value() zcl.Val     { return a }
+func (v *MoveMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *MoveMode) Value() zcl.Val     { return v }
 
-func (a MoveMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v MoveMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *MoveMode) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *MoveMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = MoveMode(*nt)
+	*v = MoveMode(*nt)
 	return br, err
 }
 
-func (a MoveMode) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v MoveMode) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *MoveMode) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *MoveMode) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = MoveMode(*v)
+	*v = MoveMode(*a)
 	return nil
 }
 
-func (a *MoveMode) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = MoveMode(*nv)
+func (v *MoveMode) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = MoveMode(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a MoveMode) String() string {
-	switch a {
+func (v MoveMode) String() string {
+	switch v {
 	case 0x00:
 		return "Stop"
 	case 0x01:
@@ -3175,15 +3380,15 @@ func (a MoveMode) String() string {
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a MoveMode) IsStop() bool { return a == 0x00 }
-func (a MoveMode) IsUp() bool   { return a == 0x01 }
-func (a MoveMode) IsDown() bool { return a == 0x03 }
-func (a *MoveMode) SetStop()    { *a = 0x00 }
-func (a *MoveMode) SetUp()      { *a = 0x01 }
-func (a *MoveMode) SetDown()    { *a = 0x03 }
+func (v MoveMode) IsStop() bool { return v == 0x00 }
+func (v MoveMode) IsUp() bool   { return v == 0x01 }
+func (v MoveMode) IsDown() bool { return v == 0x03 }
+func (v *MoveMode) SetStop()    { *v = 0x00 }
+func (v *MoveMode) SetUp()      { *v = 0x01 }
+func (v *MoveMode) SetDown()    { *v = 0x03 }
 
 func (MoveMode) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -3201,6 +3406,11 @@ func (NumberOfPrimaries) Writable() bool   { return false }
 func (NumberOfPrimaries) Reportable() bool { return false }
 func (NumberOfPrimaries) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v NumberOfPrimaries) AttrID() zcl.AttrID   { return v.ID() }
+func (v NumberOfPrimaries) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *NumberOfPrimaries) AttrValue() zcl.Val  { return v.Value() }
+
 func (NumberOfPrimaries) Name() string { return `Number of primaries` }
 func (NumberOfPrimaries) Description() string {
 	return `contains the number of color primaries implemented on this device.
@@ -3211,41 +3421,41 @@ A value of 0xff indicates that the number of primaries is unknown`
 // A value of 0xff indicates that the number of primaries is unknown
 type NumberOfPrimaries zcl.Zu8
 
-func (a *NumberOfPrimaries) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *NumberOfPrimaries) Value() zcl.Val     { return a }
+func (v *NumberOfPrimaries) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *NumberOfPrimaries) Value() zcl.Val     { return v }
 
-func (a NumberOfPrimaries) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v NumberOfPrimaries) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *NumberOfPrimaries) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *NumberOfPrimaries) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = NumberOfPrimaries(*nt)
+	*v = NumberOfPrimaries(*nt)
 	return br, err
 }
 
-func (a NumberOfPrimaries) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v NumberOfPrimaries) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *NumberOfPrimaries) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *NumberOfPrimaries) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = NumberOfPrimaries(*v)
+	*v = NumberOfPrimaries(*a)
 	return nil
 }
 
-func (a *NumberOfPrimaries) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = NumberOfPrimaries(*nv)
+func (v *NumberOfPrimaries) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = NumberOfPrimaries(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a NumberOfPrimaries) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v NumberOfPrimaries) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const PhysicalMaxLevelAttr zcl.AttrID = 1
@@ -3255,6 +3465,11 @@ func (PhysicalMaxLevel) Readable() bool   { return true }
 func (PhysicalMaxLevel) Writable() bool   { return false }
 func (PhysicalMaxLevel) Reportable() bool { return false }
 func (PhysicalMaxLevel) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v PhysicalMaxLevel) AttrID() zcl.AttrID   { return v.ID() }
+func (v PhysicalMaxLevel) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *PhysicalMaxLevel) AttrValue() zcl.Val  { return v.Value() }
 
 func (PhysicalMaxLevel) Name() string { return `Physical Max Level` }
 func (PhysicalMaxLevel) Description() string {
@@ -3268,41 +3483,41 @@ of the ballast according to the dimming light curve`
 // of the ballast according to the dimming light curve
 type PhysicalMaxLevel zcl.Zu8
 
-func (a *PhysicalMaxLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *PhysicalMaxLevel) Value() zcl.Val     { return a }
+func (v *PhysicalMaxLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *PhysicalMaxLevel) Value() zcl.Val     { return v }
 
-func (a PhysicalMaxLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v PhysicalMaxLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *PhysicalMaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *PhysicalMaxLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = PhysicalMaxLevel(*nt)
+	*v = PhysicalMaxLevel(*nt)
 	return br, err
 }
 
-func (a PhysicalMaxLevel) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v PhysicalMaxLevel) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *PhysicalMaxLevel) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *PhysicalMaxLevel) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = PhysicalMaxLevel(*v)
+	*v = PhysicalMaxLevel(*a)
 	return nil
 }
 
-func (a *PhysicalMaxLevel) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = PhysicalMaxLevel(*nv)
+func (v *PhysicalMaxLevel) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = PhysicalMaxLevel(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a PhysicalMaxLevel) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v PhysicalMaxLevel) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const PhysicalMinLevelAttr zcl.AttrID = 0
@@ -3312,6 +3527,11 @@ func (PhysicalMinLevel) Readable() bool   { return true }
 func (PhysicalMinLevel) Writable() bool   { return false }
 func (PhysicalMinLevel) Reportable() bool { return false }
 func (PhysicalMinLevel) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v PhysicalMinLevel) AttrID() zcl.AttrID   { return v.ID() }
+func (v PhysicalMinLevel) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *PhysicalMinLevel) AttrValue() zcl.Val  { return v.Value() }
 
 func (PhysicalMinLevel) Name() string { return `Physical Min Level` }
 func (PhysicalMinLevel) Description() string {
@@ -3325,41 +3545,41 @@ of the ballast according to the dimming light curve`
 // of the ballast according to the dimming light curve
 type PhysicalMinLevel zcl.Zu8
 
-func (a *PhysicalMinLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *PhysicalMinLevel) Value() zcl.Val     { return a }
+func (v *PhysicalMinLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *PhysicalMinLevel) Value() zcl.Val     { return v }
 
-func (a PhysicalMinLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v PhysicalMinLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *PhysicalMinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *PhysicalMinLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = PhysicalMinLevel(*nt)
+	*v = PhysicalMinLevel(*nt)
 	return br, err
 }
 
-func (a PhysicalMinLevel) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v PhysicalMinLevel) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *PhysicalMinLevel) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *PhysicalMinLevel) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = PhysicalMinLevel(*v)
+	*v = PhysicalMinLevel(*a)
 	return nil
 }
 
-func (a *PhysicalMinLevel) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = PhysicalMinLevel(*nv)
+func (v *PhysicalMinLevel) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = PhysicalMinLevel(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a PhysicalMinLevel) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v PhysicalMinLevel) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const PowerOnLevelAttr zcl.AttrID = 18
@@ -3369,6 +3589,11 @@ func (PowerOnLevel) Readable() bool   { return true }
 func (PowerOnLevel) Writable() bool   { return true }
 func (PowerOnLevel) Reportable() bool { return false }
 func (PowerOnLevel) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v PowerOnLevel) AttrID() zcl.AttrID   { return v.ID() }
+func (v PowerOnLevel) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *PowerOnLevel) AttrValue() zcl.Val  { return v.Value() }
 
 func (PowerOnLevel) Name() string { return `Power On level` }
 func (PowerOnLevel) Description() string {
@@ -3386,41 +3611,41 @@ a specific light level, according to the dimming light curve, or
 // 0xff to set it to the value it was before the power failure
 type PowerOnLevel zcl.Zu8
 
-func (a *PowerOnLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *PowerOnLevel) Value() zcl.Val     { return a }
+func (v *PowerOnLevel) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *PowerOnLevel) Value() zcl.Val     { return v }
 
-func (a PowerOnLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v PowerOnLevel) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *PowerOnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *PowerOnLevel) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = PowerOnLevel(*nt)
+	*v = PowerOnLevel(*nt)
 	return br, err
 }
 
-func (a PowerOnLevel) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v PowerOnLevel) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *PowerOnLevel) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *PowerOnLevel) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = PowerOnLevel(*v)
+	*v = PowerOnLevel(*a)
 	return nil
 }
 
-func (a *PowerOnLevel) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = PowerOnLevel(*nv)
+func (v *PowerOnLevel) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = PowerOnLevel(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a PowerOnLevel) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v PowerOnLevel) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const PowerOnTimeAttr zcl.AttrID = 19
@@ -3431,47 +3656,52 @@ func (PowerOnTime) Writable() bool   { return true }
 func (PowerOnTime) Reportable() bool { return false }
 func (PowerOnTime) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v PowerOnTime) AttrID() zcl.AttrID   { return v.ID() }
+func (v PowerOnTime) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *PowerOnTime) AttrValue() zcl.Val  { return v.Value() }
+
 func (PowerOnTime) Name() string        { return `Power-On Time` }
 func (PowerOnTime) Description() string { return `The transition time in 1/10ths of a second.` }
 
 // PowerOnTime The transition time in 1/10ths of a second.
 type PowerOnTime zcl.Zu16
 
-func (a *PowerOnTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *PowerOnTime) Value() zcl.Val     { return a }
+func (v *PowerOnTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *PowerOnTime) Value() zcl.Val     { return v }
 
-func (a PowerOnTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v PowerOnTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *PowerOnTime) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *PowerOnTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = PowerOnTime(*nt)
+	*v = PowerOnTime(*nt)
 	return br, err
 }
 
-func (a PowerOnTime) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v PowerOnTime) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *PowerOnTime) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *PowerOnTime) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = PowerOnTime(*v)
+	*v = PowerOnTime(*a)
 	return nil
 }
 
-func (a *PowerOnTime) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = PowerOnTime(*nv)
+func (v *PowerOnTime) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = PowerOnTime(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a PowerOnTime) String() string {
-	return zcl.Seconds.Format(float64(a) / 10)
+func (v PowerOnTime) String() string {
+	return zcl.Seconds.Format(float64(v) / 10)
 }
 
 const PowerOnColorTemperatureAttr zcl.AttrID = 16400
@@ -3482,46 +3712,51 @@ func (PowerOnColorTemperature) Writable() bool   { return true }
 func (PowerOnColorTemperature) Reportable() bool { return false }
 func (PowerOnColorTemperature) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v PowerOnColorTemperature) AttrID() zcl.AttrID   { return v.ID() }
+func (v PowerOnColorTemperature) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *PowerOnColorTemperature) AttrValue() zcl.Val  { return v.Value() }
+
 func (PowerOnColorTemperature) Name() string        { return `Power-on color temperature` }
 func (PowerOnColorTemperature) Description() string { return `` }
 
 type PowerOnColorTemperature zcl.Zu16
 
-func (a *PowerOnColorTemperature) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *PowerOnColorTemperature) Value() zcl.Val     { return a }
+func (v *PowerOnColorTemperature) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *PowerOnColorTemperature) Value() zcl.Val     { return v }
 
-func (a PowerOnColorTemperature) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v PowerOnColorTemperature) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *PowerOnColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *PowerOnColorTemperature) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = PowerOnColorTemperature(*nt)
+	*v = PowerOnColorTemperature(*nt)
 	return br, err
 }
 
-func (a PowerOnColorTemperature) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v PowerOnColorTemperature) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *PowerOnColorTemperature) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *PowerOnColorTemperature) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = PowerOnColorTemperature(*v)
+	*v = PowerOnColorTemperature(*a)
 	return nil
 }
 
-func (a *PowerOnColorTemperature) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = PowerOnColorTemperature(*nv)
+func (v *PowerOnColorTemperature) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = PowerOnColorTemperature(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a PowerOnColorTemperature) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v PowerOnColorTemperature) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary1XAttr zcl.AttrID = 17
@@ -3531,6 +3766,11 @@ func (Primary1X) Readable() bool   { return true }
 func (Primary1X) Writable() bool   { return false }
 func (Primary1X) Reportable() bool { return false }
 func (Primary1X) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary1X) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary1X) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary1X) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary1X) Name() string { return `Primary1 X` }
 func (Primary1X) Description() string {
@@ -3544,41 +3784,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary1X zcl.Zu16
 
-func (a *Primary1X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary1X) Value() zcl.Val     { return a }
+func (v *Primary1X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary1X) Value() zcl.Val     { return v }
 
-func (a Primary1X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary1X) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary1X) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary1X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1X(*nt)
+	*v = Primary1X(*nt)
 	return br, err
 }
 
-func (a Primary1X) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary1X) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary1X) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary1X) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary1X(*v)
+	*v = Primary1X(*a)
 	return nil
 }
 
-func (a *Primary1X) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary1X(*nv)
+func (v *Primary1X) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary1X(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary1X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary1X) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary1YAttr zcl.AttrID = 18
@@ -3588,6 +3828,11 @@ func (Primary1Y) Readable() bool   { return true }
 func (Primary1Y) Writable() bool   { return false }
 func (Primary1Y) Reportable() bool { return false }
 func (Primary1Y) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary1Y) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary1Y) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary1Y) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary1Y) Name() string { return `Primary1 Y` }
 func (Primary1Y) Description() string {
@@ -3601,41 +3846,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary1Y zcl.Zu16
 
-func (a *Primary1Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary1Y) Value() zcl.Val     { return a }
+func (v *Primary1Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary1Y) Value() zcl.Val     { return v }
 
-func (a Primary1Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary1Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary1Y) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary1Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1Y(*nt)
+	*v = Primary1Y(*nt)
 	return br, err
 }
 
-func (a Primary1Y) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary1Y) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary1Y) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary1Y) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary1Y(*v)
+	*v = Primary1Y(*a)
 	return nil
 }
 
-func (a *Primary1Y) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary1Y(*nv)
+func (v *Primary1Y) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary1Y(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary1Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary1Y) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary1IntensityAttr zcl.AttrID = 19
@@ -3645,6 +3890,11 @@ func (Primary1Intensity) Readable() bool   { return true }
 func (Primary1Intensity) Writable() bool   { return false }
 func (Primary1Intensity) Reportable() bool { return false }
 func (Primary1Intensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary1Intensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary1Intensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary1Intensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary1Intensity) Name() string { return `Primary1 intensity` }
 func (Primary1Intensity) Description() string {
@@ -3662,41 +3912,41 @@ not available`
 // not available
 type Primary1Intensity zcl.Zu8
 
-func (a *Primary1Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Primary1Intensity) Value() zcl.Val     { return a }
+func (v *Primary1Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Primary1Intensity) Value() zcl.Val     { return v }
 
-func (a Primary1Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Primary1Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Primary1Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary1Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary1Intensity(*nt)
+	*v = Primary1Intensity(*nt)
 	return br, err
 }
 
-func (a Primary1Intensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Primary1Intensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Primary1Intensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary1Intensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary1Intensity(*v)
+	*v = Primary1Intensity(*a)
 	return nil
 }
 
-func (a *Primary1Intensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Primary1Intensity(*nv)
+func (v *Primary1Intensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Primary1Intensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary1Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Primary1Intensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const Primary2XAttr zcl.AttrID = 21
@@ -3706,6 +3956,11 @@ func (Primary2X) Readable() bool   { return true }
 func (Primary2X) Writable() bool   { return false }
 func (Primary2X) Reportable() bool { return false }
 func (Primary2X) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary2X) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary2X) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary2X) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary2X) Name() string { return `Primary2 X` }
 func (Primary2X) Description() string {
@@ -3719,41 +3974,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary2X zcl.Zu16
 
-func (a *Primary2X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary2X) Value() zcl.Val     { return a }
+func (v *Primary2X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary2X) Value() zcl.Val     { return v }
 
-func (a Primary2X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary2X) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary2X) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary2X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2X(*nt)
+	*v = Primary2X(*nt)
 	return br, err
 }
 
-func (a Primary2X) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary2X) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary2X) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary2X) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary2X(*v)
+	*v = Primary2X(*a)
 	return nil
 }
 
-func (a *Primary2X) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary2X(*nv)
+func (v *Primary2X) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary2X(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary2X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary2X) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary2YAttr zcl.AttrID = 22
@@ -3763,6 +4018,11 @@ func (Primary2Y) Readable() bool   { return true }
 func (Primary2Y) Writable() bool   { return false }
 func (Primary2Y) Reportable() bool { return false }
 func (Primary2Y) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary2Y) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary2Y) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary2Y) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary2Y) Name() string { return `Primary2 Y` }
 func (Primary2Y) Description() string {
@@ -3776,41 +4036,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary2Y zcl.Zu16
 
-func (a *Primary2Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary2Y) Value() zcl.Val     { return a }
+func (v *Primary2Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary2Y) Value() zcl.Val     { return v }
 
-func (a Primary2Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary2Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary2Y) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary2Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2Y(*nt)
+	*v = Primary2Y(*nt)
 	return br, err
 }
 
-func (a Primary2Y) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary2Y) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary2Y) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary2Y) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary2Y(*v)
+	*v = Primary2Y(*a)
 	return nil
 }
 
-func (a *Primary2Y) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary2Y(*nv)
+func (v *Primary2Y) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary2Y(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary2Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary2Y) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary2IntensityAttr zcl.AttrID = 23
@@ -3820,6 +4080,11 @@ func (Primary2Intensity) Readable() bool   { return true }
 func (Primary2Intensity) Writable() bool   { return false }
 func (Primary2Intensity) Reportable() bool { return false }
 func (Primary2Intensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary2Intensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary2Intensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary2Intensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary2Intensity) Name() string { return `Primary2 intensity` }
 func (Primary2Intensity) Description() string {
@@ -3837,41 +4102,41 @@ not available`
 // not available
 type Primary2Intensity zcl.Zu8
 
-func (a *Primary2Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Primary2Intensity) Value() zcl.Val     { return a }
+func (v *Primary2Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Primary2Intensity) Value() zcl.Val     { return v }
 
-func (a Primary2Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Primary2Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Primary2Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary2Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary2Intensity(*nt)
+	*v = Primary2Intensity(*nt)
 	return br, err
 }
 
-func (a Primary2Intensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Primary2Intensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Primary2Intensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary2Intensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary2Intensity(*v)
+	*v = Primary2Intensity(*a)
 	return nil
 }
 
-func (a *Primary2Intensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Primary2Intensity(*nv)
+func (v *Primary2Intensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Primary2Intensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary2Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Primary2Intensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const Primary3XAttr zcl.AttrID = 25
@@ -3881,6 +4146,11 @@ func (Primary3X) Readable() bool   { return true }
 func (Primary3X) Writable() bool   { return false }
 func (Primary3X) Reportable() bool { return false }
 func (Primary3X) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary3X) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary3X) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary3X) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary3X) Name() string { return `Primary3 X` }
 func (Primary3X) Description() string {
@@ -3894,41 +4164,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary3X zcl.Zu16
 
-func (a *Primary3X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary3X) Value() zcl.Val     { return a }
+func (v *Primary3X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary3X) Value() zcl.Val     { return v }
 
-func (a Primary3X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary3X) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary3X) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary3X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3X(*nt)
+	*v = Primary3X(*nt)
 	return br, err
 }
 
-func (a Primary3X) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary3X) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary3X) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary3X) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary3X(*v)
+	*v = Primary3X(*a)
 	return nil
 }
 
-func (a *Primary3X) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary3X(*nv)
+func (v *Primary3X) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary3X(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary3X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary3X) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary3YAttr zcl.AttrID = 26
@@ -3938,6 +4208,11 @@ func (Primary3Y) Readable() bool   { return true }
 func (Primary3Y) Writable() bool   { return false }
 func (Primary3Y) Reportable() bool { return false }
 func (Primary3Y) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary3Y) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary3Y) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary3Y) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary3Y) Name() string { return `Primary3 Y` }
 func (Primary3Y) Description() string {
@@ -3951,41 +4226,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary3Y zcl.Zu16
 
-func (a *Primary3Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary3Y) Value() zcl.Val     { return a }
+func (v *Primary3Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary3Y) Value() zcl.Val     { return v }
 
-func (a Primary3Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary3Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary3Y) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary3Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3Y(*nt)
+	*v = Primary3Y(*nt)
 	return br, err
 }
 
-func (a Primary3Y) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary3Y) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary3Y) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary3Y) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary3Y(*v)
+	*v = Primary3Y(*a)
 	return nil
 }
 
-func (a *Primary3Y) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary3Y(*nv)
+func (v *Primary3Y) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary3Y(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary3Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary3Y) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary3IntensityAttr zcl.AttrID = 27
@@ -3995,6 +4270,11 @@ func (Primary3Intensity) Readable() bool   { return true }
 func (Primary3Intensity) Writable() bool   { return false }
 func (Primary3Intensity) Reportable() bool { return false }
 func (Primary3Intensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary3Intensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary3Intensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary3Intensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary3Intensity) Name() string { return `Primary3 intensity` }
 func (Primary3Intensity) Description() string {
@@ -4012,41 +4292,41 @@ not available`
 // not available
 type Primary3Intensity zcl.Zu8
 
-func (a *Primary3Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Primary3Intensity) Value() zcl.Val     { return a }
+func (v *Primary3Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Primary3Intensity) Value() zcl.Val     { return v }
 
-func (a Primary3Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Primary3Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Primary3Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary3Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary3Intensity(*nt)
+	*v = Primary3Intensity(*nt)
 	return br, err
 }
 
-func (a Primary3Intensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Primary3Intensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Primary3Intensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary3Intensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary3Intensity(*v)
+	*v = Primary3Intensity(*a)
 	return nil
 }
 
-func (a *Primary3Intensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Primary3Intensity(*nv)
+func (v *Primary3Intensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Primary3Intensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary3Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Primary3Intensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const Primary4XAttr zcl.AttrID = 32
@@ -4056,6 +4336,11 @@ func (Primary4X) Readable() bool   { return true }
 func (Primary4X) Writable() bool   { return false }
 func (Primary4X) Reportable() bool { return false }
 func (Primary4X) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary4X) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary4X) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary4X) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary4X) Name() string { return `Primary4 X` }
 func (Primary4X) Description() string {
@@ -4069,41 +4354,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary4X zcl.Zu16
 
-func (a *Primary4X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary4X) Value() zcl.Val     { return a }
+func (v *Primary4X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary4X) Value() zcl.Val     { return v }
 
-func (a Primary4X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary4X) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary4X) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary4X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4X(*nt)
+	*v = Primary4X(*nt)
 	return br, err
 }
 
-func (a Primary4X) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary4X) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary4X) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary4X) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary4X(*v)
+	*v = Primary4X(*a)
 	return nil
 }
 
-func (a *Primary4X) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary4X(*nv)
+func (v *Primary4X) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary4X(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary4X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary4X) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary4YAttr zcl.AttrID = 33
@@ -4113,6 +4398,11 @@ func (Primary4Y) Readable() bool   { return true }
 func (Primary4Y) Writable() bool   { return false }
 func (Primary4Y) Reportable() bool { return false }
 func (Primary4Y) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary4Y) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary4Y) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary4Y) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary4Y) Name() string { return `Primary4 Y` }
 func (Primary4Y) Description() string {
@@ -4126,41 +4416,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary4Y zcl.Zu16
 
-func (a *Primary4Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary4Y) Value() zcl.Val     { return a }
+func (v *Primary4Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary4Y) Value() zcl.Val     { return v }
 
-func (a Primary4Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary4Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary4Y) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary4Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4Y(*nt)
+	*v = Primary4Y(*nt)
 	return br, err
 }
 
-func (a Primary4Y) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary4Y) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary4Y) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary4Y) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary4Y(*v)
+	*v = Primary4Y(*a)
 	return nil
 }
 
-func (a *Primary4Y) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary4Y(*nv)
+func (v *Primary4Y) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary4Y(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary4Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary4Y) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary4IntensityAttr zcl.AttrID = 34
@@ -4170,6 +4460,11 @@ func (Primary4Intensity) Readable() bool   { return true }
 func (Primary4Intensity) Writable() bool   { return false }
 func (Primary4Intensity) Reportable() bool { return false }
 func (Primary4Intensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary4Intensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary4Intensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary4Intensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary4Intensity) Name() string { return `Primary4 intensity` }
 func (Primary4Intensity) Description() string {
@@ -4187,41 +4482,41 @@ not available`
 // not available
 type Primary4Intensity zcl.Zu8
 
-func (a *Primary4Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Primary4Intensity) Value() zcl.Val     { return a }
+func (v *Primary4Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Primary4Intensity) Value() zcl.Val     { return v }
 
-func (a Primary4Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Primary4Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Primary4Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary4Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary4Intensity(*nt)
+	*v = Primary4Intensity(*nt)
 	return br, err
 }
 
-func (a Primary4Intensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Primary4Intensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Primary4Intensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary4Intensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary4Intensity(*v)
+	*v = Primary4Intensity(*a)
 	return nil
 }
 
-func (a *Primary4Intensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Primary4Intensity(*nv)
+func (v *Primary4Intensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Primary4Intensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary4Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Primary4Intensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const Primary5XAttr zcl.AttrID = 36
@@ -4231,6 +4526,11 @@ func (Primary5X) Readable() bool   { return true }
 func (Primary5X) Writable() bool   { return false }
 func (Primary5X) Reportable() bool { return false }
 func (Primary5X) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary5X) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary5X) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary5X) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary5X) Name() string { return `Primary5 X` }
 func (Primary5X) Description() string {
@@ -4244,41 +4544,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary5X zcl.Zu16
 
-func (a *Primary5X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary5X) Value() zcl.Val     { return a }
+func (v *Primary5X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary5X) Value() zcl.Val     { return v }
 
-func (a Primary5X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary5X) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary5X) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary5X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5X(*nt)
+	*v = Primary5X(*nt)
 	return br, err
 }
 
-func (a Primary5X) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary5X) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary5X) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary5X) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary5X(*v)
+	*v = Primary5X(*a)
 	return nil
 }
 
-func (a *Primary5X) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary5X(*nv)
+func (v *Primary5X) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary5X(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary5X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary5X) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary5YAttr zcl.AttrID = 37
@@ -4288,6 +4588,11 @@ func (Primary5Y) Readable() bool   { return true }
 func (Primary5Y) Writable() bool   { return false }
 func (Primary5Y) Reportable() bool { return false }
 func (Primary5Y) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary5Y) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary5Y) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary5Y) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary5Y) Name() string { return `Primary5 Y` }
 func (Primary5Y) Description() string {
@@ -4301,41 +4606,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary5Y zcl.Zu16
 
-func (a *Primary5Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary5Y) Value() zcl.Val     { return a }
+func (v *Primary5Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary5Y) Value() zcl.Val     { return v }
 
-func (a Primary5Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary5Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary5Y) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary5Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5Y(*nt)
+	*v = Primary5Y(*nt)
 	return br, err
 }
 
-func (a Primary5Y) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary5Y) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary5Y) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary5Y) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary5Y(*v)
+	*v = Primary5Y(*a)
 	return nil
 }
 
-func (a *Primary5Y) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary5Y(*nv)
+func (v *Primary5Y) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary5Y(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary5Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary5Y) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary5IntensityAttr zcl.AttrID = 38
@@ -4345,6 +4650,11 @@ func (Primary5Intensity) Readable() bool   { return true }
 func (Primary5Intensity) Writable() bool   { return false }
 func (Primary5Intensity) Reportable() bool { return false }
 func (Primary5Intensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary5Intensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary5Intensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary5Intensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary5Intensity) Name() string { return `Primary5 intensity` }
 func (Primary5Intensity) Description() string {
@@ -4362,41 +4672,41 @@ not available`
 // not available
 type Primary5Intensity zcl.Zu8
 
-func (a *Primary5Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Primary5Intensity) Value() zcl.Val     { return a }
+func (v *Primary5Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Primary5Intensity) Value() zcl.Val     { return v }
 
-func (a Primary5Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Primary5Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Primary5Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary5Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary5Intensity(*nt)
+	*v = Primary5Intensity(*nt)
 	return br, err
 }
 
-func (a Primary5Intensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Primary5Intensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Primary5Intensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary5Intensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary5Intensity(*v)
+	*v = Primary5Intensity(*a)
 	return nil
 }
 
-func (a *Primary5Intensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Primary5Intensity(*nv)
+func (v *Primary5Intensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Primary5Intensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary5Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Primary5Intensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 const Primary6XAttr zcl.AttrID = 40
@@ -4406,6 +4716,11 @@ func (Primary6X) Readable() bool   { return true }
 func (Primary6X) Writable() bool   { return false }
 func (Primary6X) Reportable() bool { return false }
 func (Primary6X) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary6X) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary6X) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary6X) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary6X) Name() string { return `Primary6 X` }
 func (Primary6X) Description() string {
@@ -4419,41 +4734,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary6X zcl.Zu16
 
-func (a *Primary6X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary6X) Value() zcl.Val     { return a }
+func (v *Primary6X) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary6X) Value() zcl.Val     { return v }
 
-func (a Primary6X) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary6X) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary6X) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary6X) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6X(*nt)
+	*v = Primary6X(*nt)
 	return br, err
 }
 
-func (a Primary6X) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary6X) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary6X) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary6X) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary6X(*v)
+	*v = Primary6X(*a)
 	return nil
 }
 
-func (a *Primary6X) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary6X(*nv)
+func (v *Primary6X) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary6X(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary6X) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary6X) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary6YAttr zcl.AttrID = 41
@@ -4463,6 +4778,11 @@ func (Primary6Y) Readable() bool   { return true }
 func (Primary6Y) Writable() bool   { return false }
 func (Primary6Y) Reportable() bool { return false }
 func (Primary6Y) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary6Y) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary6Y) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary6Y) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary6Y) Name() string { return `Primary6 Y` }
 func (Primary6Y) Description() string {
@@ -4476,41 +4796,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type Primary6Y zcl.Zu16
 
-func (a *Primary6Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Primary6Y) Value() zcl.Val     { return a }
+func (v *Primary6Y) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Primary6Y) Value() zcl.Val     { return v }
 
-func (a Primary6Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Primary6Y) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Primary6Y) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary6Y) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6Y(*nt)
+	*v = Primary6Y(*nt)
 	return br, err
 }
 
-func (a Primary6Y) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Primary6Y) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Primary6Y) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary6Y) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary6Y(*v)
+	*v = Primary6Y(*a)
 	return nil
 }
 
-func (a *Primary6Y) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Primary6Y(*nv)
+func (v *Primary6Y) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Primary6Y(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary6Y) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Primary6Y) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const Primary6IntensityAttr zcl.AttrID = 42
@@ -4520,6 +4840,11 @@ func (Primary6Intensity) Readable() bool   { return true }
 func (Primary6Intensity) Writable() bool   { return false }
 func (Primary6Intensity) Reportable() bool { return false }
 func (Primary6Intensity) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Primary6Intensity) AttrID() zcl.AttrID   { return v.ID() }
+func (v Primary6Intensity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Primary6Intensity) AttrValue() zcl.Val  { return v.Value() }
 
 func (Primary6Intensity) Name() string { return `Primary6 intensity` }
 func (Primary6Intensity) Description() string {
@@ -4537,41 +4862,41 @@ not available`
 // not available
 type Primary6Intensity zcl.Zu8
 
-func (a *Primary6Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Primary6Intensity) Value() zcl.Val     { return a }
+func (v *Primary6Intensity) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Primary6Intensity) Value() zcl.Val     { return v }
 
-func (a Primary6Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Primary6Intensity) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Primary6Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Primary6Intensity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Primary6Intensity(*nt)
+	*v = Primary6Intensity(*nt)
 	return br, err
 }
 
-func (a Primary6Intensity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Primary6Intensity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Primary6Intensity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Primary6Intensity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Primary6Intensity(*v)
+	*v = Primary6Intensity(*a)
 	return nil
 }
 
-func (a *Primary6Intensity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Primary6Intensity(*nv)
+func (v *Primary6Intensity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Primary6Intensity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Primary6Intensity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Primary6Intensity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 func (Rate) Name() string        { return `Rate` }
@@ -4580,41 +4905,41 @@ func (Rate) Description() string { return `increment/steps per second` }
 // Rate increment/steps per second
 type Rate zcl.Zu8
 
-func (a *Rate) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Rate) Value() zcl.Val     { return a }
+func (v *Rate) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Rate) Value() zcl.Val     { return v }
 
-func (a Rate) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Rate) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Rate) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Rate) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Rate(*nt)
+	*v = Rate(*nt)
 	return br, err
 }
 
-func (a Rate) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Rate) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Rate) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Rate) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Rate(*v)
+	*v = Rate(*a)
 	return nil
 }
 
-func (a *Rate) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Rate(*nv)
+func (v *Rate) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Rate(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Rate) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Rate) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 func (RateX) Name() string        { return `Rate X` }
@@ -4623,41 +4948,41 @@ func (RateX) Description() string { return `increment/steps per second` }
 // RateX increment/steps per second
 type RateX zcl.Zs16
 
-func (a *RateX) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
-func (a *RateX) Value() zcl.Val     { return a }
+func (v *RateX) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
+func (v *RateX) Value() zcl.Val     { return v }
 
-func (a RateX) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+func (v RateX) MarshalZcl() ([]byte, error) { return zcl.Zs16(v).MarshalZcl() }
 
-func (a *RateX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *RateX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = RateX(*nt)
+	*v = RateX(*nt)
 	return br, err
 }
 
-func (a RateX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zs16(a))
+func (v RateX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zs16(v))
 }
 
-func (a *RateX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zs16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *RateX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zs16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = RateX(*v)
+	*v = RateX(*a)
 	return nil
 }
 
-func (a *RateX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zs16); ok {
-		*a = RateX(*nv)
+func (v *RateX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zs16); ok {
+		*v = RateX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a RateX) String() string {
-	return zcl.Sprintf("%v", zcl.Zs16(a))
+func (v RateX) String() string {
+	return zcl.Sprintf("%v", zcl.Zs16(v))
 }
 
 func (RateY) Name() string        { return `Rate Y` }
@@ -4666,41 +4991,41 @@ func (RateY) Description() string { return `increment/steps per second` }
 // RateY increment/steps per second
 type RateY zcl.Zs16
 
-func (a *RateY) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
-func (a *RateY) Value() zcl.Val     { return a }
+func (v *RateY) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
+func (v *RateY) Value() zcl.Val     { return v }
 
-func (a RateY) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+func (v RateY) MarshalZcl() ([]byte, error) { return zcl.Zs16(v).MarshalZcl() }
 
-func (a *RateY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *RateY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = RateY(*nt)
+	*v = RateY(*nt)
 	return br, err
 }
 
-func (a RateY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zs16(a))
+func (v RateY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zs16(v))
 }
 
-func (a *RateY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zs16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *RateY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zs16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = RateY(*v)
+	*v = RateY(*a)
 	return nil
 }
 
-func (a *RateY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zs16); ok {
-		*a = RateY(*nv)
+func (v *RateY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zs16); ok {
+		*v = RateY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a RateY) String() string {
-	return zcl.Sprintf("%v", zcl.Zs16(a))
+func (v RateY) String() string {
+	return zcl.Sprintf("%v", zcl.Zs16(v))
 }
 
 const RemainingTimeAttr zcl.AttrID = 2
@@ -4710,6 +5035,11 @@ func (RemainingTime) Readable() bool   { return true }
 func (RemainingTime) Writable() bool   { return false }
 func (RemainingTime) Reportable() bool { return false }
 func (RemainingTime) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v RemainingTime) AttrID() zcl.AttrID   { return v.ID() }
+func (v RemainingTime) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *RemainingTime) AttrValue() zcl.Val  { return v.Value() }
 
 func (RemainingTime) Name() string { return `Remaining time` }
 func (RemainingTime) Description() string {
@@ -4721,41 +5051,41 @@ active command will be complete`
 // active command will be complete
 type RemainingTime zcl.Zu16
 
-func (a *RemainingTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *RemainingTime) Value() zcl.Val     { return a }
+func (v *RemainingTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *RemainingTime) Value() zcl.Val     { return v }
 
-func (a RemainingTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v RemainingTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *RemainingTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = RemainingTime(*nt)
+	*v = RemainingTime(*nt)
 	return br, err
 }
 
-func (a RemainingTime) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v RemainingTime) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *RemainingTime) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *RemainingTime) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = RemainingTime(*v)
+	*v = RemainingTime(*a)
 	return nil
 }
 
-func (a *RemainingTime) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = RemainingTime(*nv)
+func (v *RemainingTime) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = RemainingTime(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a RemainingTime) String() string {
-	return zcl.Seconds.Format(float64(a) / 10)
+func (v RemainingTime) String() string {
+	return zcl.Seconds.Format(float64(v) / 10)
 }
 
 func (Saturation) Name() string        { return `Saturation` }
@@ -4763,41 +5093,41 @@ func (Saturation) Description() string { return `` }
 
 type Saturation zcl.Zu8
 
-func (a *Saturation) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Saturation) Value() zcl.Val     { return a }
+func (v *Saturation) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Saturation) Value() zcl.Val     { return v }
 
-func (a Saturation) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Saturation) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Saturation) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Saturation) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Saturation(*nt)
+	*v = Saturation(*nt)
 	return br, err
 }
 
-func (a Saturation) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Saturation) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Saturation) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Saturation) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Saturation(*v)
+	*v = Saturation(*a)
 	return nil
 }
 
-func (a *Saturation) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Saturation(*nv)
+func (v *Saturation) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Saturation(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Saturation) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v Saturation) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 func (StepX) Name() string        { return `Step X` }
@@ -4805,41 +5135,41 @@ func (StepX) Description() string { return `` }
 
 type StepX zcl.Zs16
 
-func (a *StepX) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
-func (a *StepX) Value() zcl.Val     { return a }
+func (v *StepX) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
+func (v *StepX) Value() zcl.Val     { return v }
 
-func (a StepX) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+func (v StepX) MarshalZcl() ([]byte, error) { return zcl.Zs16(v).MarshalZcl() }
 
-func (a *StepX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *StepX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = StepX(*nt)
+	*v = StepX(*nt)
 	return br, err
 }
 
-func (a StepX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zs16(a))
+func (v StepX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zs16(v))
 }
 
-func (a *StepX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zs16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *StepX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zs16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = StepX(*v)
+	*v = StepX(*a)
 	return nil
 }
 
-func (a *StepX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zs16); ok {
-		*a = StepX(*nv)
+func (v *StepX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zs16); ok {
+		*v = StepX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a StepX) String() string {
-	return zcl.Sprintf("%v", zcl.Zs16(a))
+func (v StepX) String() string {
+	return zcl.Sprintf("%v", zcl.Zs16(v))
 }
 
 func (StepY) Name() string        { return `Step Y` }
@@ -4847,41 +5177,41 @@ func (StepY) Description() string { return `` }
 
 type StepY zcl.Zs16
 
-func (a *StepY) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
-func (a *StepY) Value() zcl.Val     { return a }
+func (v *StepY) TypeID() zcl.TypeID { return new(zcl.Zs16).TypeID() }
+func (v *StepY) Value() zcl.Val     { return v }
 
-func (a StepY) MarshalZcl() ([]byte, error) { return zcl.Zs16(a).MarshalZcl() }
+func (v StepY) MarshalZcl() ([]byte, error) { return zcl.Zs16(v).MarshalZcl() }
 
-func (a *StepY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *StepY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zs16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = StepY(*nt)
+	*v = StepY(*nt)
 	return br, err
 }
 
-func (a StepY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zs16(a))
+func (v StepY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zs16(v))
 }
 
-func (a *StepY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zs16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *StepY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zs16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = StepY(*v)
+	*v = StepY(*a)
 	return nil
 }
 
-func (a *StepY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zs16); ok {
-		*a = StepY(*nv)
+func (v *StepY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zs16); ok {
+		*v = StepY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a StepY) String() string {
-	return zcl.Sprintf("%v", zcl.Zs16(a))
+func (v StepY) String() string {
+	return zcl.Sprintf("%v", zcl.Zs16(v))
 }
 
 func (StepMode) Name() string        { return `Step mode` }
@@ -4889,53 +5219,53 @@ func (StepMode) Description() string { return `` }
 
 type StepMode zcl.Zenum8
 
-func (a *StepMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *StepMode) Value() zcl.Val     { return a }
+func (v *StepMode) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *StepMode) Value() zcl.Val     { return v }
 
-func (a StepMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v StepMode) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *StepMode) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *StepMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = StepMode(*nt)
+	*v = StepMode(*nt)
 	return br, err
 }
 
-func (a StepMode) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v StepMode) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *StepMode) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *StepMode) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = StepMode(*v)
+	*v = StepMode(*a)
 	return nil
 }
 
-func (a *StepMode) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = StepMode(*nv)
+func (v *StepMode) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = StepMode(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a StepMode) String() string {
-	switch a {
+func (v StepMode) String() string {
+	switch v {
 	case 0x01:
 		return "Up"
 	case 0x03:
 		return "Down"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a StepMode) IsUp() bool   { return a == 0x01 }
-func (a StepMode) IsDown() bool { return a == 0x03 }
-func (a *StepMode) SetUp()      { *a = 0x01 }
-func (a *StepMode) SetDown()    { *a = 0x03 }
+func (v StepMode) IsUp() bool   { return v == 0x01 }
+func (v StepMode) IsDown() bool { return v == 0x03 }
+func (v *StepMode) SetUp()      { *v = 0x01 }
+func (v *StepMode) SetDown()    { *v = 0x03 }
 
 func (StepMode) SingleOptions() []zcl.Option {
 	return []zcl.Option{
@@ -4949,41 +5279,41 @@ func (StepSize) Description() string { return `` }
 
 type StepSize zcl.Zu8
 
-func (a *StepSize) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *StepSize) Value() zcl.Val     { return a }
+func (v *StepSize) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *StepSize) Value() zcl.Val     { return v }
 
-func (a StepSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v StepSize) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *StepSize) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *StepSize) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = StepSize(*nt)
+	*v = StepSize(*nt)
 	return br, err
 }
 
-func (a StepSize) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v StepSize) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *StepSize) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *StepSize) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = StepSize(*v)
+	*v = StepSize(*a)
 	return nil
 }
 
-func (a *StepSize) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = StepSize(*nv)
+func (v *StepSize) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = StepSize(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a StepSize) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(a))
+func (v StepSize) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 func (Time) Name() string        { return `Time` }
@@ -4992,41 +5322,41 @@ func (Time) Description() string { return `Time in seconds used for a whole colo
 // Time Time in seconds used for a whole color loop.
 type Time zcl.Zu16
 
-func (a *Time) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Time) Value() zcl.Val     { return a }
+func (v *Time) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Time) Value() zcl.Val     { return v }
 
-func (a Time) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Time) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Time) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Time) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Time(*nt)
+	*v = Time(*nt)
 	return br, err
 }
 
-func (a Time) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Time) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Time) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Time) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Time(*v)
+	*v = Time(*a)
 	return nil
 }
 
-func (a *Time) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Time(*nv)
+func (v *Time) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Time(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Time) String() string {
-	return zcl.Seconds.Format(float64(a))
+func (v Time) String() string {
+	return zcl.Seconds.Format(float64(v))
 }
 
 func (TransitionTime) Name() string        { return `Transition time` }
@@ -5035,41 +5365,41 @@ func (TransitionTime) Description() string { return `The transition time in 1/10
 // TransitionTime The transition time in 1/10ths of a second.
 type TransitionTime zcl.Zu16
 
-func (a *TransitionTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *TransitionTime) Value() zcl.Val     { return a }
+func (v *TransitionTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *TransitionTime) Value() zcl.Val     { return v }
 
-func (a TransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v TransitionTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *TransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TransitionTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TransitionTime(*nt)
+	*v = TransitionTime(*nt)
 	return br, err
 }
 
-func (a TransitionTime) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v TransitionTime) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *TransitionTime) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TransitionTime) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TransitionTime(*v)
+	*v = TransitionTime(*a)
 	return nil
 }
 
-func (a *TransitionTime) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = TransitionTime(*nv)
+func (v *TransitionTime) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = TransitionTime(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TransitionTime) String() string {
-	return zcl.Seconds.Format(float64(a) / 10)
+func (v TransitionTime) String() string {
+	return zcl.Seconds.Format(float64(v) / 10)
 }
 
 func (UpdateFlags) Name() string        { return `Update flags` }
@@ -5077,42 +5407,42 @@ func (UpdateFlags) Description() string { return `` }
 
 type UpdateFlags zcl.Zbmp8
 
-func (a *UpdateFlags) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
-func (a *UpdateFlags) Value() zcl.Val     { return a }
+func (v *UpdateFlags) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
+func (v *UpdateFlags) Value() zcl.Val     { return v }
 
-func (a UpdateFlags) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+func (v UpdateFlags) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(v).MarshalZcl() }
 
-func (a *UpdateFlags) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *UpdateFlags) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = UpdateFlags(*nt)
+	*v = UpdateFlags(*nt)
 	return br, err
 }
 
-func (a UpdateFlags) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zbmp8(a))
+func (v UpdateFlags) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zbmp8(v))
 }
 
-func (a *UpdateFlags) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zbmp8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *UpdateFlags) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zbmp8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = UpdateFlags(*v)
+	*v = UpdateFlags(*a)
 	return nil
 }
 
-func (a *UpdateFlags) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zbmp8); ok {
-		*a = UpdateFlags(*nv)
+func (v *UpdateFlags) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zbmp8); ok {
+		*v = UpdateFlags(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a UpdateFlags) String() string {
+func (v UpdateFlags) String() string {
 	var bstr []string
-	bits := zcl.BitmapList(a[:])
+	bits := zcl.BitmapList(v[:])
 	for _, bit := range bits {
 		switch bit {
 		case 0:
@@ -5130,14 +5460,14 @@ func (a UpdateFlags) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (a UpdateFlags) IsUpdateAction() bool       { return zcl.BitmapTest([]byte(a[:]), 0) }
-func (a UpdateFlags) IsUpdateDirection() bool    { return zcl.BitmapTest([]byte(a[:]), 1) }
-func (a UpdateFlags) IsUpdateTime() bool         { return zcl.BitmapTest([]byte(a[:]), 2) }
-func (a UpdateFlags) IsUpdateStartHue() bool     { return zcl.BitmapTest([]byte(a[:]), 3) }
-func (a *UpdateFlags) SetUpdateAction(b bool)    { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b)) }
-func (a *UpdateFlags) SetUpdateDirection(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 1, b)) }
-func (a *UpdateFlags) SetUpdateTime(b bool)      { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 2, b)) }
-func (a *UpdateFlags) SetUpdateStartHue(b bool)  { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 3, b)) }
+func (v UpdateFlags) IsUpdateAction() bool       { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v UpdateFlags) IsUpdateDirection() bool    { return zcl.BitmapTest([]byte(v[:]), 1) }
+func (v UpdateFlags) IsUpdateTime() bool         { return zcl.BitmapTest([]byte(v[:]), 2) }
+func (v UpdateFlags) IsUpdateStartHue() bool     { return zcl.BitmapTest([]byte(v[:]), 3) }
+func (v *UpdateFlags) SetUpdateAction(b bool)    { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
+func (v *UpdateFlags) SetUpdateDirection(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b)) }
+func (v *UpdateFlags) SetUpdateTime(b bool)      { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 2, b)) }
+func (v *UpdateFlags) SetUpdateStartHue(b bool)  { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 3, b)) }
 
 func (UpdateFlags) MultiOptions() []zcl.Option {
 	return []zcl.Option{
@@ -5156,6 +5486,11 @@ func (WhitePointX) Writable() bool   { return true }
 func (WhitePointX) Reportable() bool { return false }
 func (WhitePointX) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v WhitePointX) AttrID() zcl.AttrID   { return v.ID() }
+func (v WhitePointX) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *WhitePointX) AttrValue() zcl.Val  { return v.Value() }
+
 func (WhitePointX) Name() string { return `White Point X` }
 func (WhitePointX) Description() string {
 	return `contains the normalized chromaticity value x for this attribute, as
@@ -5168,41 +5503,41 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type WhitePointX zcl.Zu16
 
-func (a *WhitePointX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *WhitePointX) Value() zcl.Val     { return a }
+func (v *WhitePointX) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *WhitePointX) Value() zcl.Val     { return v }
 
-func (a WhitePointX) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v WhitePointX) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *WhitePointX) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *WhitePointX) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = WhitePointX(*nt)
+	*v = WhitePointX(*nt)
 	return br, err
 }
 
-func (a WhitePointX) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v WhitePointX) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *WhitePointX) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *WhitePointX) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = WhitePointX(*v)
+	*v = WhitePointX(*a)
 	return nil
 }
 
-func (a *WhitePointX) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = WhitePointX(*nv)
+func (v *WhitePointX) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = WhitePointX(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a WhitePointX) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v WhitePointX) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const WhitePointYAttr zcl.AttrID = 49
@@ -5212,6 +5547,11 @@ func (WhitePointY) Readable() bool   { return true }
 func (WhitePointY) Writable() bool   { return true }
 func (WhitePointY) Reportable() bool { return false }
 func (WhitePointY) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v WhitePointY) AttrID() zcl.AttrID   { return v.ID() }
+func (v WhitePointY) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *WhitePointY) AttrValue() zcl.Val  { return v.Value() }
 
 func (WhitePointY) Name() string { return `White Point Y` }
 func (WhitePointY) Description() string {
@@ -5225,39 +5565,39 @@ in the range 0 to 65279 inclusive)`
 // in the range 0 to 65279 inclusive)
 type WhitePointY zcl.Zu16
 
-func (a *WhitePointY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *WhitePointY) Value() zcl.Val     { return a }
+func (v *WhitePointY) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *WhitePointY) Value() zcl.Val     { return v }
 
-func (a WhitePointY) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v WhitePointY) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *WhitePointY) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *WhitePointY) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = WhitePointY(*nt)
+	*v = WhitePointY(*nt)
 	return br, err
 }
 
-func (a WhitePointY) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v WhitePointY) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *WhitePointY) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *WhitePointY) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = WhitePointY(*v)
+	*v = WhitePointY(*a)
 	return nil
 }
 
-func (a *WhitePointY) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = WhitePointY(*nv)
+func (v *WhitePointY) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = WhitePointY(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a WhitePointY) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v WhitePointY) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }

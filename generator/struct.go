@@ -86,6 +86,7 @@ type Command struct {
 	Response    *Hex     `xml:"response,attr" toml:"response,omitempty" yaml:"response,omitempty" json:"response,omitempty"`
 	ShowAs      string   `xml:"showas,attr" toml:"showas,omitempty" yaml:"showas,omitempty" json:"showas,omitempty"`
 	Vendor      string   `xml:"vendor,attr" toml:"vendor,omitempty" yaml:"vendor,omitempty" json:"vendor,omitempty"`
+	MfCode      MfCode   `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
 	PayloadAttr []Attr   `xml:"payload>attribute" toml:"payloadattr,omitempty" yaml:"payloadattr,omitempty" json:"payloadattr,omitempty"`
 }
 
@@ -564,6 +565,13 @@ func (n Name) Pfx() string {
 		out = append(out, ch)
 	}
 	return string(out)
+}
+
+func (n Type) TsType(path string) string {
+	if len(n) > 0 && n[0] == '_' {
+		return path + "." + string(n[1:])
+	}
+	return fmt.Sprintf("base.%s", n)
 }
 
 func (n Type) RealType() string {

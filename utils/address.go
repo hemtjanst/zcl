@@ -29,3 +29,17 @@ const (
 	BroadcastRoutersCoords  = NWKAddress(zcl.BroadcastRoutersCoords)
 	BroadcastLowPowerRouter = NWKAddress(zcl.BroadcastLowPowerRouter)
 )
+
+type full struct {
+	IEEEAddress
+	NWKAddress
+}
+
+func (a full) Mode() zcl.AddressMode  { return zcl.FullAddress }
+func (a full) NWK() uint16            { return a.NWKAddress.NWK() }
+func (a full) IEEE() net.HardwareAddr { return a.IEEEAddress.IEEE() }
+func (a full) String() string         { return a.IEEE().String() }
+
+func FullAddress(ieee net.HardwareAddr, nwk uint16) zcl.Address {
+	return full{IEEEAddress(ieee), NWKAddress(nwk)}
+}

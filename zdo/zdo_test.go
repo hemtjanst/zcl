@@ -52,3 +52,10 @@ func TestNodeDescResponse_UnmarshalZcl(t *testing.T) {
 	testutils.Unmarshal(t, v, "00274101408E7C11525200002C520000")
 	log.Printf("%+v %+v", v, v.NodeDescriptor)
 }
+
+func TestSimpleDescResponse_UnmarshalZcl1(t *testing.T) {
+	v := &SimpleDescResponse{}
+	// 3E002202000000020B9F000000048027000C
+	testutils.Unmarshal(t, v, "000B9F22015EC0000202090000030004000500060008000003050B001004050019002000001000AFFF0E8D1700D6")
+	log.Printf("%+v %+v", v, v.SimpleDescriptor)
+}

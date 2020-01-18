@@ -417,6 +417,8 @@ func (v *GetDeviceConfiguration) Handle(frame Frame, handler interface{}) (rsp z
 	var h GetDeviceConfigurationHandler
 	if h, found = handler.(GetDeviceConfigurationHandler); found {
 		rsp, err = h.HandleGetDeviceConfiguration(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -520,6 +522,8 @@ func (v *GetLocationData) Handle(frame Frame, handler interface{}) (rsp zcl.Gene
 	var h GetLocationDataHandler
 	if h, found = handler.(GetLocationDataHandler); found {
 		rsp, err = h.HandleGetLocationData(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -821,6 +825,8 @@ func (v *SendPings) Handle(frame Frame, handler interface{}) (rsp zcl.General, f
 	var h SendPingsHandler
 	if h, found = handler.(SendPingsHandler); found {
 		rsp, err = h.HandleSendPings(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -1087,6 +1093,8 @@ func (v *DistanceMeasure) Handle(frame Frame, handler interface{}) (rsp zcl.Gene
 	var h DistanceMeasureHandler
 	if h, found = handler.(DistanceMeasureHandler); found {
 		rsp, err = h.HandleDistanceMeasure(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -2169,6 +2177,8 @@ func (v *RssiRequest) Handle(frame Frame, handler interface{}) (rsp zcl.General,
 	var h RssiRequestHandler
 	if h, found = handler.(RssiRequestHandler); found {
 		rsp, err = h.HandleRssiRequest(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -2355,6 +2365,8 @@ func (v *RequestOwnLocation) Handle(frame Frame, handler interface{}) (rsp zcl.G
 	var h RequestOwnLocationHandler
 	if h, found = handler.(RequestOwnLocationHandler); found {
 		rsp, err = h.HandleRequestOwnLocation(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }

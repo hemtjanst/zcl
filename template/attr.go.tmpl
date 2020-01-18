@@ -5,6 +5,11 @@ func ({{$an}}) Readable() bool { return {{if .CanRead}}true{{else}}false{{end}} 
 func ({{$an}}) Writable() bool { return {{if .CanWrite}}true{{else}}false{{end}} }
 func ({{$an}}) Reportable() bool { return {{if .Report}}true{{else}}false{{end}} }
 func ({{$an}}) SceneIndex() int { return {{if .Scene}}{{.Scene}}{{else}}-1{{end}} }
+
+// Implements AttrDef/AttrValue interfaces
+func (v {{$an}}) AttrID() zcl.AttrID { return v.ID() }
+func (v {{$an}}) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *{{$an}}) AttrValue() zcl.Val { return v.Value() }
 {{end}}
 func ({{$an}}) Name() string { return {{strEsc .Name}} }
 func ({{$an}}) Description() string { return {{strEsc .Desc}} }
@@ -13,9 +18,9 @@ func ({{$an}}) Description() string { return {{strEsc .Desc}} }
 type {{.Name.Fmt}} struct { {{range .StructAttr}}
     {{.Desc.Comment .ArgNameFmt}}{{.ArgNameFmt}} {{if .Name}}{{.Name.Fmt}}{{else}}{{.Type.RealType}}{{end}}{{end}}
 }
-func (a *{{$an}}) TypeID() zcl.TypeID { return zcl.TypeID(76) } // struct
-func (a *{{$an}}) Value() zcl.Val { return a }
-func (a {{$an}}) MarshalZcl() ([]byte, error) { {{if .StructAttr}}
+func (v *{{$an}}) TypeID() zcl.TypeID { return zcl.TypeID(76) } // struct
+func (v *{{$an}}) Value() zcl.Val { return v }
+func (v {{$an}}) MarshalZcl() ([]byte, error) { {{if .StructAttr}}
     var data []byte
     var tmp []byte
     tmp2 := uint32(0)
@@ -25,7 +30,7 @@ func (a {{$an}}) MarshalZcl() ([]byte, error) { {{if .StructAttr}}
     {{range .StructAttr}}
         {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $attr.StructAttr .Cond}} { {{else}} { {{end}}{{if .Marshal}}
         {{.Marshal}}{{else}}
-        if tmp, err = a.{{.ArgNameFmt}}.MarshalZcl(); err != nil {
+        if tmp, err = v.{{.ArgNameFmt}}.MarshalZcl(); err != nil {
         return nil, err
         }{{end}}
         data = append(data, tmp...)
@@ -34,14 +39,14 @@ func (a {{$an}}) MarshalZcl() ([]byte, error) { {{if .StructAttr}}
     return nil, nil {{ end }}
 }
 
-func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .StructAttr}}
+func (v *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .StructAttr}}
     var err error
     tmp2 := uint32(0)
     _ = tmp2
     _ = err
     {{range .StructAttr}}
         {{if .Cond}}{{condDesc .ArgNameFmt .Cond}}if {{joinCond $attr.StructAttr .Cond}} { {{end}}{{if .Unmarshal}}
-        {{.Unmarshal}}{{else}}if b, err = {{if .Name}}(&a.{{.ArgNameFmt}}){{else}}new(zcl.{{.Type.Type}}){{end}}.UnmarshalZcl(b); err != nil {
+        {{.Unmarshal}}{{else}}if b, err = {{if .Name}}(&v.{{.ArgNameFmt}}){{else}}new(zcl.{{.Type.Type}}){{end}}.UnmarshalZcl(b); err != nil {
         return b, err
         }{{end}}
         {{if .Cond}} } {{end}}
@@ -49,121 +54,121 @@ func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) { {{if .StructAttr}}
 {{ end }}return b, nil
 }
 
-func (a *{{$an}}) SetValue(v zcl.Val) error {
-    if nv, ok := v.(*{{$an}}); ok {
-        *a = *nv
+func (v *{{$an}}) SetValue(a zcl.Val) error {
+    if nv, ok := a.(*{{$an}}); ok {
+        *v = *nv
         return nil
     }
     return zcl.ErrNotImpl
 }
 
-func (a *{{$an}}) String() string {
+func (v *{{$an}}) String() string {
     return zcl.Sprintf(
         "{{.Name.Fmt}}{" + zcl.StrJoin([]string{ {{range .StructAttr}}{{if .Name}}
             "{{.ArgNameFmt}}(%v)",{{end}}{{end}}
         }, " ")+"}", {{range .StructAttr}}{{if .Name}}
-        a.{{.ArgNameFmt}},{{end}}{{end}}
+        v.{{.ArgNameFmt}},{{end}}{{end}}
     )
 }
 
 {{else}}type {{.Name.Fmt}} {{ if .ArrayType}}[]*{{.ArrayType.RealType}}{{else}}{{.Type.RealType}}{{end}}
 
-func (a *{{$an}}) TypeID() zcl.TypeID { return new({{.Type.RealType}}).TypeID() }
-func (a *{{$an}}) Value() zcl.Val { return a }
+func (v *{{$an}}) TypeID() zcl.TypeID { return new({{.Type.RealType}}).TypeID() }
+func (v *{{$an}}) Value() zcl.Val { return v }
 
 {{ if .ArrayType}}
 func ({{$an}}) ArrayTypeID() zcl.TypeID { return new({{.ArrayType.RealType}}).TypeID() }
 
-func (a *{{$an}}) ArrayValues() (o []{{.ArrayType.Native}}) {
-    for _, v := range *a {
-        o = append(o, {{if eq .ArrayType.RealType .ArrayType.Native}}*v{{else}}{{.ArrayType.Native}}(*v){{end}})
+func (v *{{$an}}) ArrayValues() (o []{{.ArrayType.Native}}) {
+    for _, a := range *v {
+        o = append(o, {{if eq .ArrayType.RealType .ArrayType.Native}}*a{{else}}{{.ArrayType.Native}}(*a){{end}})
     }
     return o
 }
 
-func (a *{{$an}}) SetValues(val []{{.ArrayType.Native}}) error {
-    *a = []*{{.ArrayType.RealType}}{}
-    return a.AddValues(val...)
+func (v *{{$an}}) SetValues(val []{{.ArrayType.Native}}) error {
+    *v = []*{{.ArrayType.RealType}}{}
+    return v.AddValues(val...)
 }
 
-func (a *{{$an}}) AddValues(val ...{{.ArrayType.Native}}) error {
-    for _, v := range val {
-        nv := {{if eq .ArrayType.RealType .ArrayType.Native}}v{{else}}{{.ArrayType.RealType}}(v){{end}}
-        *a = append(*a, &nv)
+func (v *{{$an}}) AddValues(val ...{{.ArrayType.Native}}) error {
+    for _, a := range val {
+        nv := {{if eq .ArrayType.RealType .ArrayType.Native}}a{{else}}{{.ArrayType.RealType}}(a){{end}}
+        *v = append(*v, &nv)
     }
     return nil
 }
 
-func (a {{$an}}) MarshalZcl() ([]byte, error) {
+func (v {{$an}}) MarshalZcl() ([]byte, error) {
     var vars []zcl.Val
-    for _, v := range a {
-        vars = append(vars, v)
+    for _, a := range v {
+        vars = append(vars, a)
     }
     return zcl.ArrayNoTypeMarshalZcl("sloc", vars)
 }
 
-func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
-    *a = []*{{.ArrayType.RealType}}{}
+func (v *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
+    *v = []*{{.ArrayType.RealType}}{}
     return zcl.UnmarshalList("sloc", b, func() zcl.Val {
         nv := new({{.ArrayType.RealType}})
-        *a = append(*a, nv)
+        *v = append(*v, nv)
         return nv
     })
 }
 
-func (a *{{$an}}) SetValue(v zcl.Val) error {
-    if nv, ok := v.(*{{$an}}); ok {
-        *a = *nv
+func (v *{{$an}}) SetValue(a zcl.Val) error {
+    if nv, ok := a.(*{{$an}}); ok {
+        *v = *nv
         return nil
     }
     return zcl.ErrInvalidType
 }
 
 
-func (a {{$an}}) String() string {
+func (v {{$an}}) String() string {
     var s []string
-    for _, v := range a {
-        s = append(s, zcl.Sprintf("%v", v))
+    for _, a := range v {
+        s = append(s, zcl.Sprintf("%v", a))
     }
     return "["+zcl.StrJoin(s, ",")+"]"
 }
 
 {{ else }}
-func (a {{$an}}) MarshalZcl() ([]byte, error) { return {{.Type.RealType}}(a).MarshalZcl() }
+func (v {{$an}}) MarshalZcl() ([]byte, error) { return {{.Type.RealType}}(v).MarshalZcl() }
 
-func (a *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *{{$an}}) UnmarshalZcl(b []byte) ([]byte, error) {
     nt := new({{.Type.RealType}})
     br, err := nt.UnmarshalZcl(b)
-    *a = {{.Name.Fmt}}(*nt)
+    *v = {{.Name.Fmt}}(*nt)
     return br, err
 }
 
-func (a {{$an}}) MarshalJSON() ([]byte, error) {
-    return zcl.ToJson({{.Type.RealType}}(a))
+func (v {{$an}}) MarshalJSON() ([]byte, error) {
+    return zcl.ToJson({{.Type.RealType}}(v))
 }
 
-func (a *{{$an}}) UnmarshalJSON(b []byte) error {
-    v := new({{.Type.RealType}})
-    if err := zcl.ParseJson(b, v); err != nil {
+func (v *{{$an}}) UnmarshalJSON(b []byte) error {
+    a := new({{.Type.RealType}})
+    if err := zcl.ParseJson(b, a); err != nil {
         return err
     }
-    *a = {{$an}}(*v)
+    *v = {{$an}}(*a)
     return nil
 }
 
-func (a *{{$an}}) SetValue(v zcl.Val) error {
-    if nv, ok := v.(*{{.Type.RealType}}); ok {
-        *a = {{$an}}(*nv)
+func (v *{{$an}}) SetValue(a zcl.Val) error {
+    if nv, ok := a.(*{{.Type.RealType}}); ok {
+        *v = {{$an}}(*nv)
         return nil
     }
     return zcl.ErrInvalidType
 }
 
-func (a {{$an}}) String() string { {{if .Values}}switch a { {{range $vk,$vv := .Values}}
+func (v {{$an}}) String() string { {{if .Values}}switch v { {{range $vk,$vv := .Values}}
         case {{$vk}}: return "{{$vv}}"{{end}}
     }{{end}}{{if .Bits}}
     var bstr []string
-    bits := zcl.BitmapList(a[:])
+    bits := zcl.BitmapList(v[:])
     for _, bit := range bits {
         switch bit { {{range $vk,$vv := .Bits}}
             case {{$vk}}: bstr = append(bstr, "{{$vv}}") {{end}}
@@ -171,14 +176,14 @@ func (a {{$an}}) String() string { {{if .Values}}switch a { {{range $vk,$vv := .
         }
     }
     return zcl.StrJoin(bstr, ", "){{else if eq .Unit "s"}}
-    return zcl.Seconds.Format(float64(a){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else if .Unit}}
-    return zcl.{{.Unit}}.Format(float64(a){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else}}
-    return zcl.Sprintf("%v", {{.Type.RealType}}(a)){{end}}
+    return zcl.Seconds.Format(float64(v){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else if .Unit}}
+    return zcl.{{.Unit}}.Format(float64(v){{if .Multiplier}}/{{.Multiplier}}{{end}}){{else}}
+    return zcl.Sprintf("%v", {{.Type.RealType}}(v)){{end}}
 }
 
 {{range $vk,$vv := .Bits}}
-func (a {{$an}}) Is{{$vv.Fmt}}() bool { return zcl.BitmapTest([]byte(a[:]), {{$vk}}) }{{end}}{{range $vk,$vv := .Bits}}
-func (a *{{$an}}) Set{{$vv.Fmt}}(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), {{$vk}}, b)) } {{end}}
+func (v {{$an}}) Is{{$vv.Fmt}}() bool { return zcl.BitmapTest([]byte(v[:]), {{$vk}}) }{{end}}{{range $vk,$vv := .Bits}}
+func (v *{{$an}}) Set{{$vv.Fmt}}(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), {{$vk}}, b)) } {{end}}
 
 {{if .Bits}}func({{$an}}) MultiOptions() []zcl.Option {
     return []zcl.Option{ {{range $vk,$vv := .Bits}}
@@ -187,8 +192,8 @@ func (a *{{$an}}) Set{{$vv.Fmt}}(b bool) { copy((*a)[:], zcl.BitmapSet([]byte((*
 }{{end}}
 
 {{range $vk,$vv := .Values}}
-func (a {{$an}}) Is{{$vv.Fmt}}() bool { return a == {{$vk}} }{{end}}{{range $vk,$vv := .Values}}
-func (a *{{$an}}) Set{{$vv.Fmt}}() { *a = {{$vk}} }{{end}}
+func (v {{$an}}) Is{{$vv.Fmt}}() bool { return v == {{$vk}} }{{end}}{{range $vk,$vv := .Values}}
+func (v *{{$an}}) Set{{$vv.Fmt}}() { *v = {{$vk}} }{{end}}
 
 {{if .Values}}func({{$an}}) SingleOptions() []zcl.Option {
     return []zcl.Option{ {{range $vk,$vv := .Values}}

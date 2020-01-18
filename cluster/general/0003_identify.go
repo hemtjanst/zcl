@@ -172,6 +172,8 @@ func (v *IdentifyQuery) Handle(frame Frame, handler interface{}) (rsp zcl.Genera
 	var h IdentifyQueryHandler
 	if h, found = handler.(IdentifyQueryHandler); found {
 		rsp, err = h.HandleIdentifyQuery(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }

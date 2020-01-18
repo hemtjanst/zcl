@@ -1,0 +1,835 @@
+{{- /*gotype: map[string]interface{}*/ -}}
+{{define "main"}}{{$ns := "ZigBee"}}
+namespace {{$ns}} {
+    interface IType {
+        type: string;
+        size: number;
+        format?: (t: IType, val: ValueType) => string;
+        bits?: {[bit: number]: string};
+        values?: {[val: number]: string};
+    }
+
+    interface IVal extends IType {
+        value?: ValueType
+        scale?: number
+        unit?: IUnit
+    }
+    type IValInit<T> = (value?: ValueType) => T;
+
+    interface IArgument extends IType {
+        name: string
+        arrayType?: () => IType
+        [n: string]: any
+    }
+    interface IAttribute extends IArgument {
+        id: number,
+
+    }
+    interface ICommand extends IType {
+
+    }
+
+    const command: IType = {
+        type: "command",
+        size: -1
+    };
+
+    interface IUnit {
+        unit: string
+        format(v: ValueType): string
+    }
+    type ValueType = string|object|number|Uint8Array;
+
+    const lp = (n: number|string, z: number) => {
+        if (typeof n === 'number') n = n.toString();
+        while (n.length < z) n = `0${n}`;
+        return n;
+    };
+
+    export function makeType<T extends IType>(...parts:any[]): IValInit<T> {
+        return (value) => {
+            let proto: any = {};
+            for (let obj of parts) {
+                proto = {
+                    ...proto,
+                    ...(typeof obj === 'function' ? obj() : obj)
+                };
+            }
+
+            class Value {
+                value: ValueType;
+
+                constructor(value?: ValueType) {
+                    for (let k in proto) {
+                        if (!proto.hasOwnProperty(k)) continue;
+                        this[k] = proto[k];
+                    }
+                    if (typeof this['parse'] === 'function') {
+                        let nv = this['parse'](this, value);
+                        // Ignore NaN
+                        if (typeof nv !== 'number' || !isNaN(nv)) {
+                            value = nv;
+                        }
+                    }
+
+                    this.value = value;
+                }
+
+                toString() {
+                    let val = o.value;
+                    let nv;
+                    switch (typeof val) {
+                        case 'undefined': return null;
+                        case 'string': nv = parseFloat(val); break;
+                        case 'number': nv = val; break;
+                        case 'object':
+                            if (Array.isArray(val) && val.length === 1 && typeof val[0] === 'number') {
+                                nv = val[0];
+                            }
+                            break;
+                    }
+                    if (nv && typeof o.values === 'object' && typeof o.values[nv] !== 'undefined') {
+                        return o.values[nv];
+                    }
+                    if (nv && typeof o.scale !== 'undefined') {
+                        val = nv = (Math.round(100 * nv / o.scale) / 100);
+                    }
+                    if (typeof o.format === 'function') {
+                        return o.format(o, val);
+                    }
+                    if (nv &&typeof o.unit !== 'undefined') {
+                        val = o.unit.format(nv);
+                    }
+                    return "" + val;
+                }
+            }
+
+            let o: IVal = <IVal>(new Value(value));
+            return <T>o;
+        }
+    }
+
+    const unitFmt = (a: IVal) => {
+
+    };
+
+    export const native = {
+        bool: { native: "bool" },
+        array: { native: "array" },
+        struct: { native: "struct" },
+        int: { native: "int" },
+        uint: { native: "uint" },
+        bitmap: {
+            native: "bitmap",
+            format: (a: IType, v) => (Array.isArray(v) ? v.map(v => {
+                    if (typeof a.bits !== 'undefined' && typeof a.bits[v] !== 'undefined') {
+                        return a.bits[v]
+                    }
+                    return `${v}`
+                }).join(", ") : ''),
+        },
+        byte: { native: "byte",
+            parse: (a: IType, v: ValueType) => {
+                if (typeof v !== 'string') { return v; }
+                try {
+                    return atob(v);
+                } catch(e) {}
+                return v;
+            }
+        },
+        float: { native: "float" },
+        string: { native: "string" },
+        enum: { native: "enum" },
+    };
+
+    export const base = {
+        local: makeType<IType>(native.struct, {size: -1, type: "local"}),
+        array: makeType<IType>(native.array, {size: -1, type: "array"}),
+        struct: makeType<IType>(native.struct, {size: -1, type: "struct"}),
+        set: makeType<IType>(native.array, {size: -1, type: "set"}),
+        bag: makeType<IType>(native.array, {size: -1, type: "bag"}),
+        list: makeType<IType>(native.array, {size: -1, type: "list"}),
+        bmp8: makeType<IType>(native.bitmap, {size: 1, type: "bmp8"}),
+        bmp16: makeType<IType>(native.bitmap, {size: 2, type: "bmp16"}),
+        bmp24: makeType<IType>(native.bitmap, {size: 3, type: "bmp24"}),
+        bmp32: makeType<IType>(native.bitmap, {size: 4, type: "bmp32"}),
+        bmp40: makeType<IType>(native.bitmap, {size: 5, type: "bmp40"}),
+        bmp48: makeType<IType>(native.bitmap, {size: 6, type: "bmp48"}),
+        bmp56: makeType<IType>(native.bitmap, {size: 7, type: "bmp56"}),
+        bmp64: makeType<IType>(native.bitmap, {size: 8, type: "bmp64"}),
+        dat8: makeType<IType>(native.byte, {size: 1, type: "dat8"}),
+        dat16: makeType<IType>(native.byte, {size: 2, type: "dat16"}),
+        dat24: makeType<IType>(native.byte, {size: 3, type: "dat24"}),
+        dat32: makeType<IType>(native.byte, {size: 4, type: "dat32"}),
+        dat40: makeType<IType>(native.byte, {size: 5, type: "dat40"}),
+        dat48: makeType<IType>(native.byte, {size: 6, type: "dat48"}),
+        dat56: makeType<IType>(native.byte, {size: 7, type: "dat56"}),
+        dat64: makeType<IType>(native.byte, {size: 8, type: "dat64"}),
+        bytes: makeType<IType>(native.byte, {size: -1, type: "bytes"}),
+        enum8: makeType<IType>(native.enum, {size: 1, type: "enum8"}),
+        enum16: makeType<IType>(native.enum, {size: 2, type: "enum16"}),
+        bool: makeType<IType>(native.bool, {size: 1, type: "bool"}),
+        cid: makeType<IType>(native.uint, {size: 2, type: "cid"}),
+        aid: makeType<IType>(native.uint, {size: 2, type: "aid"}),
+        oid: makeType<IType>(native.uint, {size: 4, type: "oid"}),
+        uid: makeType<IType>(native.string, {size: 8, type: "uid"}),
+        seckey: makeType<IType>(native.byte, {size: 16, type: "seckey"}),
+        u8: makeType<IType>(native.uint, {size: 1, type: "u8"}),
+        u16: makeType<IType>(native.uint, {size: 2, type: "u16"}),
+        u24: makeType<IType>(native.uint, {size: 4, type: "u24"}),
+        u32: makeType<IType>(native.uint, {size: 4, type: "u32"}),
+        u40: makeType<IType>(native.uint, {size: 8, type: "u40"}),
+        u48: makeType<IType>(native.uint, {size: 8, type: "u48"}),
+        u56: makeType<IType>(native.uint, {size: 8, type: "u56"}),
+        u64: makeType<IType>(native.uint, {size: 8, type: "u64"}),
+        s8: makeType<IType>(native.int, {size: 1, type: "s8"}),
+        s16: makeType<IType>(native.int, {size: 2, type: "s16"}),
+        s24: makeType<IType>(native.int, {size: 4, type: "s24"}),
+        s32: makeType<IType>(native.int, {size: 4, type: "s32"}),
+        s40: makeType<IType>(native.int, {size: 8, type: "s40"}),
+        s48: makeType<IType>(native.int, {size: 8, type: "s48"}),
+        s56: makeType<IType>(native.int, {size: 8, type: "s56"}),
+        s64: makeType<IType>(native.int, {size: 8, type: "s64"}),
+        semi: makeType<IType>(native.float, {size: 4, type: "semi"}),
+        float: makeType<IType>(native.float, {size: 4, type: "float"}),
+        double: makeType<IType>(native.float, {size: 8, type: "double"}),
+        ostring: makeType<IType>(native.byte, {size: -1, type: "ostring"}),
+        cstring: makeType<IType>(native.string, {size: -1, type: "cstring"}),
+        lostring: makeType<IType>(native.byte, {size: -2, type: "lostring"}),
+        lcstring: makeType<IType>(native.string, {size: -2, type: "lcstring"}),
+        date: makeType<IType>(native.string, {size: 4, type: "date",
+            format: (v) => {
+                if (typeof v !== 'number') v=parseInt(v);
+                // Can we stop using tiny numbers for dates? Y2K, Y2038 and now 2157...
+                let yr = ((v & 0xFF000000) >> 24) + 1900,
+                    mo = ((v & 0x00FF0000) >> 16) - 1,
+                    day = (v & 0x0000FF00) >> 8,
+                    wd = (v & 0x000000FF);
+                return (new Date(yr, mo, day, 0, 0, 0)).toLocaleDateString();
+            }
+        }),
+        time: makeType<IType>(native.uint, {size: 4, type: "time",
+            format: (v) => {
+                if (typeof v !== 'number') v=parseInt(v);
+                let h = (v & 0xFF000000) >> 24,
+                    m = (v & 0x00FF0000) >> 16,
+                    s = (v & 0x0000FF00) >> 8,
+                    c = (v & 0x000000FF);
+                return `${lp(h,2)}:${lp(m,2)}:${lp(s,2)}.${lp(c,2)}`
+            }
+        }),
+        utc: makeType<IType>(native.uint, {size: 4, type: "utc",
+            format: (v) => {
+                if (typeof v !== 'number') v=parseInt(v);
+                // Unixtime-like, but starts on 2000-01-01, should last until ~2137
+                return (new Date(1000 * (v + 946684800))).toLocaleString();
+            }
+        }),
+        Status: makeType<IType>(native.enum, { size: 1, type: "status", 
+            values: {
+                0x00: "Success",
+                0x01: "Failure",
+                0x7e: "Not Authorized",
+                0x7f: "Reserved Field Not Zero",
+                0x80: "Malformed Command",
+                0x81: "Unsupported Cluster Command",
+                0x82: "Unsupported General Command",
+                0x83: "Unsupported Manuf. Cluster Command",
+                0x84: "Unsupported Manuf. General Command",
+                0x85: "Invalid Field",
+                0x86: "Unsupported Attribute",
+                0x87: "Invalid Value",
+                0x88: "Read Only",
+                0x89: "Insufficient Space",
+                0x8a: "Duplicate Exists",
+                0x8b: "Not Found",
+                0x8c: "Unreportable Attribute",
+                0x8d: "Invalid Data Type",
+                0x8e: "Invalid Sector",
+                0x8f: "Write Only",
+                0x90: "Inconsistent Startup State",
+                0x91: "Defined Out Of Band",
+                0xc0: "Hardware Failure",
+                0xc1: "Software Failure",
+                0xc2: "Calibration Error",
+            } 
+        }),
+        SceneExtensionSet: makeType<IType>(native.struct, { type: "sceneExtensionSet" }),
+        EngineeringUnit: makeType<IType>(native.uint, {size: 2, type: "engineeringUnit",
+            parse: (v) => {
+
+                return v;
+            }
+        }),
+    };
+
+    export namespace Type {
+        class Array {
+            constructor(private name: string, private size) {
+            }
+        }
+        class Struct {
+            constructor(private name: string, private size) {
+            }
+        }
+        class Bitmap {
+            constructor(public name: string, public size) {
+            }
+        }
+        class Byte {}
+        class Uint {}
+        class Int {}
+        class Float {}
+        class String {}
+    }
+
+    export const ZDP = { {{$path := fmt "%s.ZDP.Types" $ns}}
+        Types: {
+            {{range $name,$attr := .zdp.TypeMap}}{{if $attr.Name}}{{template "attr" withPath $path $attr}}{{end}}{{end}}
+        },
+        Commands: { {{range .zdp.Commands}}{{if .Name}}{{template "cmd" withPath $path .}}{{end}}{{end}} }
+    };
+
+    export namespace Profile {
+
+    }
+
+    {{range .cluster}}{{$dom := .Name.Fmt}}{{$path := fmt "%s.%s.Types" $ns $dom}}
+    export const {{$dom}} = {
+        Types: { {{range $name,$attr := .TypeMap}}{{if $attr.Name}}{{template "attr" withPath $path $attr}}{{end}}{{end}} }{{range .Clusters}}{{$cl := .Name.Fmt}},
+        {{.Name.Fmt}}: {
+            ID: {{.ID.Hex4}},
+            Name: {{strEsc .Name}},
+            Desc: {{strEsc .Desc}},
+            {{range .Server.Command}}{{if .Name}}{{template "cmd" withPath $path .}}{{end}}{{end}}
+            {{range .Client.Command}}{{if .Name}}{{template "cmd" withPath $path .}}{{end}}{{end}}
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        }{{end}}
+    };
+    {{range .Clusters}}{{$cl := .Name.Fmt}}
+    {{$ns}}.{{$dom}}.{{$cl}}.Server.Attribute = { {{range .Server.Attr}}{{if .ID}}
+        {{.ID.Hex4}}: {{$ns}}.{{$dom}}.Types.{{.Name.Fmt}},{{end}}{{end}}
+    };
+    {{$ns}}.{{$dom}}.{{$cl}}.Client.Attribute = { {{range .Client.Attr}}{{if .ID}}
+        {{.ID.Hex4}}: {{$ns}}.{{$dom}}.Types.{{.Name.Fmt}},{{end}}{{end}}
+    };
+    {{$ns}}.{{$dom}}.{{$cl}}.Server.Command = { {{range .Server.Command}}{{if .Name}}
+        {{.ID.Hex2}}: {{$ns}}.{{$dom}}.{{$cl}}.{{.Name.Fmt}},{{end}}{{end}}
+    };
+    {{$ns}}.{{$dom}}.{{$cl}}.Client.Command = { {{range .Client.Command}}{{if .Name}}
+        {{.ID.Hex2}}: {{$ns}}.{{$dom}}.{{$cl}}.{{.Name.Fmt}},{{end}}{{end}}
+    };{{end}}{{end}}
+
+    export const cluster = { {{range .cluster}}{{$dom := .Name.Fmt}}{{range .Clusters}}{{$cl := .Name.Fmt}}
+        {{.ID}}: ZigBee.{{$dom}}.{{$cl}},{{end}}{{end}}
+    };
+
+
+    export const units = {
+        SquareMeters: { unit: "m²", format: (v) => `${v}m²` },
+        SquareFeet: { unit: "ft²", format: (v) => `${v}ft²` },
+        Milliamperes: { unit: "mA", format: (v) => `${v}mA` },
+        Amperes: { unit: "A", format: (v) => `${v}A` },
+        Ohms: { unit: "Ω", format: (v) => `${v} Ω` },
+        Volts: { unit: "V", format: (v) => `${v}V` },
+        KiloVolts: { unit: "kV", format: (v) => `${v}kV` },
+        MegaVolts: { unit: "MV", format: (v) => `${v}MV` },
+        VoltAmperes: { unit: "VA", format: (v) => `${v}VA` },
+        KiloVoltAmperes: { unit: "kVA", format: (v) => `${v}kVA` },
+        MegaVoltAmperes: { unit: "MVA", format: (v) => `${v}MVA` },
+        VoltAmperesReactive: { unit: "var", format: (v) => `${v} var` },
+        KiloVoltAmperesReactive: { unit: "kvar", format: (v) => `${v} kvar` },
+        MegaVoltAmperesReactive: { unit: "Mvar", format: (v) => `${v} Mvar` },
+        DegreesPhase: { unit: "°", format: (v) => `${v}°` },
+        PowerFactor: { unit: "PFC", format: (v) => `${v} PFC` },
+        Joules: { unit: "J", format: (v) => `${v}J` },
+        Kilojoules: { unit: "kJ", format: (v) => `${v}kJ` },
+        WattHours: { unit: "Wh", format: (v) => `${v}Wh` },
+        KilowattHours: { unit: "kWh", format: (v) => `${v}kWh` },
+        BTUs: { unit: "BTU", format: (v) => `${v} BTU` },
+        Therms: { unit: "thm", format: (v) => `${v} thm` }, // == 100000 BTU
+        TonHours: { unit: "Th", format: (v) => `${v} Th` },
+        JoulesPerKilogramDryAir: { unit: "J/kg dry air", format: (v) => `${v} J/kg dry air` },
+        BTUsPerPoundDryAir: { unit: "BTU/lbs dry air", format: (v) => `${v} BTU/lbs dry air` },
+        CyclesPerHour: { unit: "cycles/hr", format: (v) => `${v} cycles/hr` },
+        CyclesPerMinute: { unit: "cycles/min", format: (v) => `${v} cycles/min` },
+        Hertz: { unit: "Hz", format: (v) => `${v} Hz` },
+        GramsOfWaterPerKilogramDryAir: { unit: "g water/kg dry air", format: (v) => `${v}g water/kg dry air` },
+        PercentRelativeHumidity: { unit: "% RH", format: (v) => `${v}% RH` },
+        Millimeters: { unit: "mm", format: (v) => `${v}mm` },
+        Meters: { unit: "m", format: (v) => `${v}m` },
+        Inches: { unit: "in", format: (v) => `${v}in` },
+        Feet: { unit: "ft", format: (v) => `${v}ft` },
+        WattsPerSquareFoot: { unit: "W/ft²", format: (v) => `${v}W/ft²` },
+        WattsPerSquareMeter: { unit: "W/m²", format: (v) => `${v}W/m²` },
+        Lumens: { unit: "lm", format: (v) => `${v}lm` },
+        Luxes: { unit: "lux", format: (v) => `${v}lux` },
+        FootCandles: { unit: "lm/ft²", format: (v) => `${v}lm/ft²` },
+        Kilograms: { unit: "kg", format: (v) => `${v}kg` },
+        PoundsMass: { unit: "lbm", format: (v) => `${v}lbm` },
+        Tons: { unit: "ton", format: (v) => `${v} ton` },
+        KilogramsPerSecond: { unit: "kg/s", format: (v) => `${v}kg/s` },
+        KilogramsPerMinute: { unit: "kg/min", format: (v) => `${v}kg/min` },
+        KilogramsPerHour: { unit: "kg/h", format: (v) => `${v}kg/h` },
+        PoundsMassPerMinute: { unit: "lbm/min", format: (v) => `${v}lbm/min` },
+        PoundsMassPerHour: { unit: "lbm/h", format: (v) => `${v}lbm/h` },
+        Watts: { unit: "W", format: (v) => `${v}W` },
+        Kilowatts: { unit: "kW", format: (v) => `${v}kW` },
+        Megawatts: { unit: "MW", format: (v) => `${v}MW` },
+        BTUsPerHour: { unit: "BTU/h", format: (v) => `${v} BTU/h` },
+        Horsepower: { unit: "hp", format: (v) => `${v}hp` },
+        TonsRefrigeration: { unit: "TR", format: (v) => `${v} TR` },
+        Pascals: { unit: "Pa", format: (v) => `${v}Pa` },
+        Kilopascals: { unit: "kPa", format: (v) => `${v}kPa` },
+        Bars: { unit: "bar", format: (v) => `${v} bar` },
+        PoundsForcePerSquareInch: { unit: "lbf/in²", format: (v) => `${v}lbf/in²` },
+        CentimetersOfWater: { unit: "cm h2o", format: (v) => `${v}cm h2o` },
+        InchesOfWater: { unit: "in h2o", format: (v) => `${v}in h2o` },
+        MillimetersOfMercury: { unit: "mmHg", format: (v) => `${v}mmHg` },
+        CentimetersOfMercury: { unit: "cmHg", format: (v) => `${v}cmHg` },
+        InchesOfMercury: { unit: "inHg", format: (v) => `${v}inHg` },
+        DegreesCelsius: { unit: "°C", format: (v) => `${v}°C` },
+        DegreesKelvin: { unit: "K", format: (v) => `${v}K` },
+        DegreesFahrenheit: { unit: "°F", format: (v) => `${v}°F` },
+        DegreeDaysCelsius: { unit: "°C DD", format: (v) => `${v}°C DD` },
+        DegreeDaysFahrenheit: { unit: "°F DD", format: (v) => `${v}°F DD` },
+        Years: { unit: "years", format: (v) => `${v} year${v!=1?'s':''}` },
+        Months: { unit: "months", format: (v) => `${v} month${v!=1?'s':''}` },
+        Weeks: { unit: "weeks", format: (v) => `${v} week${v!=1?'s':''}` },
+        Days: { unit: "days", format: (v) => `${v} day${v!=1?'s':''}` },
+        Hours: { unit: "hours", format: (v) => `${v} hour${v!=1?'s':''}` },
+        Minutes: { unit: "minutes", format: (v) => `${v} minute${v!=1?'s':''}` },
+        Seconds: { unit: "seconds", format: (v) => `${v} second${v!=1?'s':''}` },
+        MetersPerSecond: { unit: "m/s", format: (v) => `${v}m/s` },
+        KilometersPerHour: { unit: "km/h", format: (v) => `${v}km/h` },
+        FeetPerSecond: { unit: "ft/s", format: (v) => `${v}ft/s` },
+        FeetPerMinute: { unit: "ft/min", format: (v) => `${v}ft/min` },
+        MilesPerHour: { unit: "mph", format: (v) => `${v}mph` },
+        CubicFeet: { unit: "ft³", format: (v) => `${v}ft³` },
+        CubicMeters: { unit: "m³", format: (v) => `${v}m³` },
+        ImperialGallons: { unit: "gal (Imp.)", format: (v) => `${v}gal (Imp.)` },
+        Liters: { unit: "L", format: (v) => `${v}L` },
+        UsGallons: { unit: "gal (US)", format: (v) => `${v}gal (US)` },
+        CubicFeetPerMinute: { unit: "ft³/min", format: (v) => `${v}ft³/min` },
+        CubicMetersPerSecond: { unit: "m³/s", format: (v) => `${v}m³/s` },
+        ImperialGallonsPerMinute: { unit: "gal/min (Imp.)", format: (v) => `${v}gal/min (Imp.)` },
+        LitersPerSecond: { unit: "L/s", format: (v) => `${v}L/s` },
+        LitersPerMinute: { unit: "L/min", format: (v) => `${v}L/min` },
+        UsGallonsPerMinute: { unit: "gal/min (US)", format: (v) => `${v}gal/min (US)` },
+        DegreesAngular: { unit: "°", format: (v) => `${v}°` },
+        DegreesCelsiusPerHour: { unit: "°C/h", format: (v) => `${v}°C/h` },
+        DegreesCelsiusPerMinute: { unit: "°C/min", format: (v) => `${v}°C/min` },
+        DegreesFahrenheitPerHour: { unit: "°F/h", format: (v) => `${v}°F/h` },
+        DegreesFahrenheitPerMinute: { unit: "°F/min", format: (v) => `${v}°F/min` },
+        NoUnits: { unit: "", format: (v) => `${v}` },
+        PartsPerMillion: { unit: "ppm", format: (v) => `${v}ppm` },
+        PartsPerBillion: { unit: "ppb", format: (v) => `${v}ppb` },
+        Percent: { unit: "%", format: (v) => `${Math.floor(v)}%` },
+        PercentPerSecond: { unit: "%/s", format: (v) => `${Math.floor(v)}%/s` },
+        PerMinute: { unit: "/min", format: (v) => `${v}/min` },
+        PerSecond: { unit: "/s", format: (v) => `${v}/s` },
+        PsiPerDegreeFahrenheit: { unit: "psi/°F", format: (v) => `${v}psi/°F` },
+        Radians: { unit: "rad", format: (v) => `${v}rad` },
+        RevolutionsPerMinute: { unit: "RPM", format: (v) => `${v} RPM` },
+        Currency1: { unit: "Currency1", format: (v) => `${v}` },
+        Currency2: { unit: "Currency2", format: (v) => `${v}` },
+        Currency3: { unit: "Currency3", format: (v) => `${v}` },
+        Currency4: { unit: "Currency4", format: (v) => `${v}` },
+        Currency5: { unit: "Currency5", format: (v) => `${v}` },
+        Currency6: { unit: "Currency6", format: (v) => `${v}` },
+        Currency7: { unit: "Currency7", format: (v) => `${v}` },
+        Currency8: { unit: "Currency8", format: (v) => `${v}` },
+        Currency9: { unit: "Currency9", format: (v) => `${v}` },
+        Currency10: { unit: "Currency10", format: (v) => `${v}` },
+        SquareInches: { unit: "in²", format: (v) => `${v}in²` },
+        SquareCentimeters: { unit: "cm²", format: (v) => `${v}cm²` },
+        BTUsPerPound: { unit: "BTU/lbs", format: (v) => `${v} BTU/lbs` },
+        Centimeters: { unit: "cm", format: (v) => `${v}cm` },
+        PoundsMassPerSecond: { unit: "lbm/s", format: (v) => `${v}lbm/s` },
+        DeltaDegreesFahrenheit: { unit: "delta °F", format: (v) => `${v} delta °F` },
+        DeltaDegreesKelvin: { unit: "delta-K", format: (v) => `${v} delta-K` },
+        Kilohms: { unit: "kΩ", format: (v) => `${v}kΩ` },
+        Megohms: { unit: "MΩ", format: (v) => `${v}MΩ` },
+        Millivolts: { unit: "mV", format: (v) => `${v}mV` },
+        KilojoulesPerKilogram: { unit: "kJ/kg", format: (v) => `${v}kJ/kg` },
+        Megajoules: { unit: "MJ", format: (v) => `${v}MJ` },
+        JoulesPerDegreeKelvin: { unit: "J/°K", format: (v) => `${v}J/°K` },
+        JoulesPerKilogramDegreeKelvin: { unit: "J/kg-K", format: (v) => `${v}J/kg-K` },
+        Kilohertz: { unit: "kHz", format: (v) => `${v}kHz` },
+        Megahertz: { unit: "MHz", format: (v) => `${v}MHz` },
+        PerHour: { unit: "/h", format: (v) => `${v}/h` },
+        Milliwatts: { unit: "mW", format: (v) => `${v}mW` },
+        Hectopascals: { unit: "hpa", format: (v) => `${v}hpa` },
+        Millibars: { unit: "mbar", format: (v) => `${v}mbar` },
+        CubicMetersPerHour: { unit: "m³/h", format: (v) => `${v}m³/h` },
+        LitersPerHour: { unit: "L/h", format: (v) => `${v}L/h` },
+        KilowattHoursPerSquareMeter: { unit: "kWh/m²", format: (v) => `${v}kWh/m²` },
+        KilowattHoursPerSquareFoot: { unit: "kWh/ft²", format: (v) => `${v}kWh/ft²` },
+        MegajoulesPerSquareMeter: { unit: "MJ/m²", format: (v) => `${v}MJ/m²` },
+        MegajoulesPerSquareFoot: { unit: "MJ/ft²", format: (v) => `${v}MJ/ft²` },
+        WattsPerSquareMeterDegreeKelvin: { unit: "W/m²-K", format: (v) => `${v}W/m²-K` },
+        CubicFeetPerSecond: { unit: "ft³/s", format: (v) => `${v}ft³/s` },
+        PercentObscurationPerFoot: { unit: "% obscuration/ft", format: (v) => `${v}% obscuration/ft` },
+        PercentObscurationPerMeter: { unit: "% obscuration/m", format: (v) => `${v}% obscuration/m` },
+        Milliohms: { unit: "mΩ", format: (v) => `${v}mΩ` },
+        MegawattHours: { unit: "MWh", format: (v) => `${v}MWh` },
+        KiloBTUs: { unit: "kBTU", format: (v) => `${v} kBTU` },
+        MegaBTUs: { unit: "MBTU", format: (v) => `${v} MBTU` },
+        KilojoulesPerKilogramDryAir: { unit: "KJ/kg dry air", format: (v) => `${v} KJ/kg dry air` },
+        MegajoulesPerKilogramDryAir: { unit: "MJ/kg dry air", format: (v) => `${v} MJ/kg dry air` },
+        KilojoulesPerDegreeKelvin: { unit: "KJ/deg-K", format: (v) => `${v} KJ/deg-K` },
+        MegajoulesPerDegreeKelvin: { unit: "MJ/deg-K", format: (v) => `${v} MJ/deg-K` },
+        Newton: { unit: "N", format: (v) => `${v}N` },
+        GramsPerSecond: { unit: "g/s", format: (v) => `${v}g/s` },
+        GramsPerMinute: { unit: "g/min", format: (v) => `${v}g/min` },
+        TonsPerHour: { unit: "tons/h", format: (v) => `${v} tons/h` },
+        KiloBTUsPerHour: { unit: "kBTU/h", format: (v) => `${v} kBTU/h` },
+        HundredthsSeconds: { unit: "Centiseconds", format: (v) => `${v} centisecond` },
+        Milliseconds: { unit: "ms", format: (v) => `${v}ms` },
+        NewtonMeters: { unit: "Nm", format: (v) => `${v}Nm` },
+        MillimetersPerSecond: { unit: "mm/s", format: (v) => `${v}mm/s` },
+        MillimetersPerMinute: { unit: "mm/min", format: (v) => `${v}mm/min` },
+        MetersPerMinute: { unit: "m/min", format: (v) => `${v}m/min` },
+        MetersPerHour: { unit: "m/h", format: (v) => `${v}m/h` },
+        CubicMetersPerMinute: { unit: "m³/min", format: (v) => `${v}m³/min` },
+        MetersPerSecondPerSecond: { unit: "m/s²", format: (v) => `${v}m/s²` },
+        AmperesPerMeter: { unit: "A/m", format: (v) => `${v}A/m` },
+        AmperesPerSquareMeter: { unit: "A/m²", format: (v) => `${v}A/m²` },
+        AmpereSquareMeters: { unit: "Am²", format: (v) => `${v}Am²` },
+        Farads: { unit: "Farads", format: (v) => `${v} Farads` },
+        Henrys: { unit: "Henrys", format: (v) => `${v} Henrys` },
+        OhmMeters: { unit: "Ωm", format: (v) => `${v}Ωm` },
+        Siemens: { unit: "Siemens", format: (v) => `${v} Siemens` },
+        SiemensPerMeter: { unit: "Siemens/m", format: (v) => `${v} Siemens/m` },
+        Teslas: { unit: "Teslas", format: (v) => `${v} Teslas` },
+        VoltsPerDegreeKelvin: { unit: "V/deg-K", format: (v) => `${v}V/deg-K` },
+        VoltsPerMeter: { unit: "V/m", format: (v) => `${v}V/m` },
+        Webers: { unit: "Webers", format: (v) => `${v} Webers` },
+        Candelas: { unit: "Candelas", format: (v) => `${v} Candelas` },
+        CandelasPerSquareMeter: { unit: "Candelas/m²", format: (v) => `${v} Candelas/m²` },
+        KelvinsPerHour: { unit: "K/h", format: (v) => `${v}K/h` },
+        KelvinsPerMinute: { unit: "K/min", format: (v) => `${v}K/min` },
+        JouleSeconds: { unit: "Js", format: (v) => `${v}Js` },
+        SquareMetersPerNewton: { unit: "m²/N", format: (v) => `${v}m²/N` },
+        KilogramPerCubicMeter: { unit: "kg/m³", format: (v) => `${v}kg/m³` },
+        NewtonSeconds: { unit: "Ns", format: (v) => `${v}Ns` },
+        NewtonsPerMeter: { unit: "N/m", format: (v) => `${v}N/m` },
+        WattsPerMeterPerDegreeKelvin: { unit: "W/m/deg-K", format: (v) => `${v}W/m/deg-K` },
+        Other: { unit: "other", format: (v) => `${v}` },
+        DecibelMilliWatts: { unit: "dBm", format: (v) => `${v}` },
+        MilliAmpereHours: { unit: "mAh", format: (v) => `${v}mAh` },
+        Mired: { unit: "mired", format: (v) => `${v} mired` },
+        Bytes: { unit: "bytes",
+            format: (v) => {
+                let si = ['Ki', 'Mi', 'Gi', 'Ti', 'Pi'];
+                let suf = '';
+                while (v >= 2048 && si.length > 0) {
+                    suf = si.shift();
+                    v /= 1024;
+                }
+                return `${v}${suf}B`
+            }},
+    };
+    export const typeID = {
+        8: base.dat8,
+        9: base.dat16,
+        10: base.dat24,
+        11: base.dat32,
+        12: base.dat40,
+        13: base.dat48,
+        14: base.dat56,
+        15: base.dat64,
+        16: base.bool,
+        24: base.bmp8,
+        25: base.bmp16,
+        26: base.bmp24,
+        27: base.bmp32,
+        28: base.bmp40,
+        29: base.bmp48,
+        30: base.bmp56,
+        31: base.bmp64,
+        32: base.u8,
+        33: base.u16,
+        34: base.u24,
+        35: base.u32,
+        36: base.u40,
+        37: base.u48,
+        38: base.u56,
+        39: base.u64,
+        40: base.s8,
+        41: base.s16,
+        42: base.s24,
+        43: base.s32,
+        44: base.s40,
+        45: base.s48,
+        46: base.s56,
+        47: base.s64,
+        48: base.enum8,
+        49: base.enum16,
+        56: base.semi,
+        57: base.float,
+        58: base.double,
+        65: base.ostring,
+        66: base.cstring,
+        67: base.lostring,
+        68: base.lcstring,
+        72: base.array,
+        76: base.struct,
+        80: base.set,
+        81: base.bag,
+        224: base.time,
+        225: base.date,
+        226: base.utc,
+        232: base.cid,
+        233: base.aid,
+        234: base.oid,
+        240: base.uid,
+        241: base.seckey,
+    };
+    export const unitID = {
+        0x00: units.SquareMeters,  //  Area
+        0x01: units.SquareFeet,  //  Area
+        0x02: units.Milliamperes,  //  Electrical
+        0x03: units.Amperes,  //  Electrical
+        0x04: units.Ohms,  //  Electrical
+        0x05: units.Volts,  //  Electrical
+        0x06: units.KiloVolts,  //  Electrical
+        0x07: units.MegaVolts,  //  Electrical
+        0x08: units.VoltAmperes,  //  Electrical
+        0x09: units.KiloVoltAmperes,  //  Electrical
+        0x0A: units.MegaVoltAmperes,  //  Electrical
+        0x0B: units.VoltAmperesReactive,  //  Electrical
+        0x0C: units.KiloVoltAmperesReactive,  //  Electrical
+        0x0D: units.MegaVoltAmperesReactive,  //  Electrical
+        0x0E: units.DegreesPhase,  //  Electrical
+        0x0F: units.PowerFactor,  //  Electrical
+        0x10: units.Joules,  //  Energy
+        0x11: units.Kilojoules,  //  Energy
+        0x12: units.WattHours,  //  Energy
+        0x13: units.KilowattHours,  //  Energy
+        0x14: units.BTUs,  //  Energy
+        0x15: units.Therms,  //  Energy
+        0x16: units.TonHours,  //  Energy
+        0x17: units.JoulesPerKilogramDryAir,  //  Enthalpy
+        0x18: units.BTUsPerPoundDryAir,  //  Enthalpy
+        0x19: units.CyclesPerHour,  //  Frequency
+        0x1A: units.CyclesPerMinute,  //  Frequency
+        0x1B: units.Hertz,  //  Frequency
+        0x1C: units.GramsOfWaterPerKilogramDryAir,  //  Humidity
+        0x1D: units.PercentRelativeHumidity,  //  Humidity
+        0x1E: units.Millimeters,  //  Length
+        0x1F: units.Meters,  //  Length
+        0x20: units.Inches,  //  Length
+        0x21: units.Feet,  //  Length
+        0x22: units.WattsPerSquareFoot,  //  Light
+        0x23: units.WattsPerSquareMeter,  //  Light
+        0x24: units.Lumens,  //  Light
+        0x25: units.Luxes,  //  Light
+        0x26: units.FootCandles,  //  Light
+        0x27: units.Kilograms,  //  Mass
+        0x28: units.PoundsMass,  //  Mass
+        0x29: units.Tons,  //  Mass
+        0x2A: units.KilogramsPerSecond,  //  Mass Flow
+        0x2B: units.KilogramsPerMinute,  //  Mass Flow
+        0x2C: units.KilogramsPerHour,  //  Mass Flow
+        0x2D: units.PoundsMassPerMinute,  //  Mass Flow
+        0x2E: units.PoundsMassPerHour,  //  Mass Flow
+        0x2F: units.Watts,  //  Power
+        0x30: units.Kilowatts,  //  Power
+        0x31: units.Megawatts,  //  Power
+        0x32: units.BTUsPerHour,  //  Power
+        0x33: units.Horsepower,  //  Power
+        0x34: units.TonsRefrigeration,  //  Power
+        0x35: units.Pascals,  //  Pressure
+        0x36: units.Kilopascals,  //  Pressure
+        0x37: units.Bars,  //  Pressure
+        0x38: units.PoundsForcePerSquareInch,  //  Pressure
+        0x39: units.CentimetersOfWater,  //  Pressure
+        0x3A: units.InchesOfWater,  //  Pressure
+        0x3B: units.MillimetersOfMercury,  //  Pressure
+        0x3C: units.CentimetersOfMercury,  //  Pressure
+        0x3D: units.InchesOfMercury,  //  Pressure
+        0x3E: units.DegreesCelsius,  //  Temperature
+        0x3F: units.DegreesKelvin,  //  Temperature
+        0x40: units.DegreesFahrenheit,  //  Temperature
+        0x41: units.DegreeDaysCelsius,  //  Temperature
+        0x42: units.DegreeDaysFahrenheit,  //  Temperature
+        0x43: units.Years,  //  Time
+        0x44: units.Months,  //  Time
+        0x45: units.Weeks,  //  Time
+        0x46: units.Days,  //  Time
+        0x47: units.Hours,  //  Time
+        0x48: units.Minutes,  //  Time
+        0x49: units.Seconds,  //  Time
+        0x4A: units.MetersPerSecond,  //  Velocity
+        0x4B: units.KilometersPerHour,  //  Velocity
+        0x4C: units.FeetPerSecond,  //  Velocity
+        0x4D: units.FeetPerMinute,  //  Velocity
+        0x4E: units.MilesPerHour,  //  Velocity
+        0x4F: units.CubicFeet,  //  Volume
+        0x50: units.CubicMeters,  //  Volume
+        0x51: units.ImperialGallons,  //  Volume
+        0x52: units.Liters,  //  Volume
+        0x53: units.UsGallons,  //  Volume
+        0x54: units.CubicFeetPerMinute,  //  Volumetric Flow
+        0x55: units.CubicMetersPerSecond,  //  Volumetric Flow
+        0x56: units.ImperialGallonsPerMinute,  //  Volumetric Flow
+        0x57: units.LitersPerSecond,  //  Volumetric Flow
+        0x58: units.LitersPerMinute,  //  Volumetric Flow
+        0x59: units.UsGallonsPerMinute,  //  Volumetric Flow
+        0x5A: units.DegreesAngular,  //  Other
+        0x5B: units.DegreesCelsiusPerHour,  //  Other
+        0x5C: units.DegreesCelsiusPerMinute,  //  Other
+        0x5D: units.DegreesFahrenheitPerHour,  //  Other
+        0x5E: units.DegreesFahrenheitPerMinute,  //  Other
+        0x5F: units.NoUnits,  //  Other
+        0x60: units.PartsPerMillion,  //  Other
+        0x61: units.PartsPerBillion,  //  Other
+        0x62: units.Percent,  //  Other
+        0x63: units.PercentPerSecond,  //  Other
+        0x64: units.PerMinute,  //  Other
+        0x65: units.PerSecond,  //  Other
+        0x66: units.PsiPerDegreeFahrenheit,  //  Other
+        0x67: units.Radians,  //  Other
+        0x68: units.RevolutionsPerMinute,  //  Other
+        0x69: units.Currency1,  //  Currency
+        0x6A: units.Currency2,  //  Currency
+        0x6B: units.Currency3,  //  Currency
+        0x6C: units.Currency4,  //  Currency
+        0x6D: units.Currency5,  //  Currency
+        0x6E: units.Currency6,  //  Currency
+        0x6F: units.Currency7,  //  Currency
+        0x70: units.Currency8,  //  Currency
+        0x71: units.Currency9,  //  Currency
+        0x72: units.Currency10,  //  Currency
+        0x73: units.SquareInches,  //  Area
+        0x74: units.SquareCentimeters,  //  Area
+        0x75: units.BTUsPerPound,  //  Enthalpy
+        0x76: units.Centimeters,  //  Length
+        0x77: units.PoundsMassPerSecond,  //  Mass Flow
+        0x78: units.DeltaDegreesFahrenheit,  //  Temperature
+        0x79: units.DeltaDegreesKelvin,  //  Temperature
+        0x7A: units.Kilohms,  //  Electrical
+        0x7B: units.Megohms,  //  Electrical
+        0x7C: units.Millivolts,  //  Electrical
+        0x7D: units.KilojoulesPerKilogram,  //  Energy
+        0x7E: units.Megajoules,  //  Energy
+        0x7F: units.JoulesPerDegreeKelvin,  //  Entrophy
+        0x80: units.JoulesPerKilogramDegreeKelvin,  //  Entrophy
+        0x81: units.Kilohertz,  //  Frequency
+        0x82: units.Megahertz,  //  Frequency
+        0x83: units.PerHour,  //  Frequency
+        0x84: units.Milliwatts,  //  Power
+        0x85: units.Hectopascals,  //  Pressure
+        0x86: units.Millibars,  //  Pressure
+        0x87: units.CubicMetersPerHour,  //  Volumetric Flow
+        0x88: units.LitersPerHour,  //  Volumetric Flow
+        0x89: units.KilowattHoursPerSquareMeter,  //  Other
+        0x8A: units.KilowattHoursPerSquareFoot,  //  Other
+        0x8B: units.MegajoulesPerSquareMeter,  //  Other
+        0x8C: units.MegajoulesPerSquareFoot,  //  Other
+        0x8D: units.WattsPerSquareMeterDegreeKelvin,  //  Other
+        0x8E: units.CubicFeetPerSecond,  //  Volumetric Flow
+        0x8F: units.PercentObscurationPerFoot,  //  Other
+        0x90: units.PercentObscurationPerMeter,  //  Other
+        0x91: units.Milliohms,  //  Electrical
+        0x92: units.MegawattHours,  //  Energy
+        0x93: units.KiloBTUs,  //  Energy
+        0x94: units.MegaBTUs,  //  Energy
+        0x95: units.KilojoulesPerKilogramDryAir,  //  Enthalpy
+        0x96: units.MegajoulesPerKilogramDryAir,  //  Enthalpy
+        0x97: units.KilojoulesPerDegreeKelvin,  //  Entrophy
+        0x98: units.MegajoulesPerDegreeKelvin,  //  Entrophy
+        0x99: units.Newton,  //  Force
+        0x9A: units.GramsPerSecond,  //  Mass Flow
+        0x9B: units.GramsPerMinute,  //  Mass Flow
+        0x9C: units.TonsPerHour,  //  Mass Flow
+        0x9D: units.KiloBTUsPerHour,  //  Power
+        0x9E: units.HundredthsSeconds,  //  Time
+        0x9F: units.Milliseconds,  //  Time
+        0xA0: units.NewtonMeters,  //  Torque
+        0xA1: units.MillimetersPerSecond,  //  Velocity
+        0xA2: units.MillimetersPerMinute,  //  Velocity
+        0xA3: units.MetersPerMinute,  //  Velocity
+        0xA4: units.MetersPerHour,  //  Velocity
+        0xA5: units.CubicMetersPerMinute,  //  Volumetric Flow
+        0xA6: units.MetersPerSecondPerSecond,  //  Acceleration
+        0xA7: units.AmperesPerMeter,  //  Electrical
+        0xA8: units.AmperesPerSquareMeter,  //  Electrical
+        0xA9: units.AmpereSquareMeters,  //  Electrical
+        0xAA: units.Farads,  //  Electrical
+        0xAB: units.Henrys,  //  Electrical
+        0xAC: units.OhmMeters,  //  Electrical
+        0xAD: units.Siemens,  //  Electrical
+        0xAE: units.SiemensPerMeter,  //  Electrical
+        0xAF: units.Teslas,  //  Electrical
+        0xB0: units.VoltsPerDegreeKelvin,  //  Electrical
+        0xB1: units.VoltsPerMeter,  //  Electrical
+        0xB2: units.Webers,  //  Electrical
+        0xB3: units.Candelas,  //  Light
+        0xB4: units.CandelasPerSquareMeter,  //  Light
+        0xB5: units.KelvinsPerHour,  //  Temperature
+        0xB6: units.KelvinsPerMinute,  //  Temperature
+        0xB7: units.JouleSeconds,  //  Other
+        0xB8: units.SquareMetersPerNewton,  //  Other
+        0xB9: units.KilogramPerCubicMeter,  //  Other
+        0xBA: units.NewtonSeconds,  //  Other
+        0xBB: units.NewtonsPerMeter,  //  Other
+        0xBC: units.WattsPerMeterPerDegreeKelvin,  //  Other
+        0xFF: units.Other,
+    };
+
+}
+
+{{end}}
+
+{{define "cmd"}}
+        {{.Val.Name.Fmt}}: makeType<ICommand>(command, () => ({
+            name: {{strEsc .Val.Name}},
+            description: {{strEsc .Val.Desc}},
+            id: {{.Val.ID.Hex4}},
+            {{if .Val.MfCode}}mnf: {{fmt "0x%04x" .Val.MfCode.Uint}},
+            {{end}}payload: {{if .Val.PayloadAttr}}{ {{template "attrList" withPath .Path .Val.PayloadAttr}}}{{else}}{}{{end}}
+        })),
+{{end}}
+
+{{define "attr"}}
+        {{.Val.Name.Fmt}}: makeType<{{if .Val.ID}}IAttribute{{else}}IArgument{{end}}>({{.Val.Type.TsType .Path}}, ()=>({
+            name: {{strEsc .Val.Name}},
+            description: {{strEsc .Val.Desc}},
+            {{if .Val.ID}}id: {{.Val.ID.Hex4}},
+            report: {{.Val.Report}},
+            read: {{.Val.CanRead}},
+            write: {{.Val.CanWrite}},
+            require: {{if eq "m" .Val.Required}}true{{else}}false{{end}},
+            {{end}}{{if .Val.MfCode}}mnf: {{fmt "0x%04x" .Val.MfCode.Uint}},
+            {{end}}{{if .Val.ArrayType}}arrayType: {{.Val.ArrayType.TsType .Path}},
+            {{end}}{{if .Val.StructAttr}}payload: { {{template "attrList" withPath .Path .Val.StructAttr}} },
+            {{end}}{{if .Val.Unit}}unit: units.{{.Val.Unit}},
+            {{end}}{{if .Val.Multiplier}}scale: {{.Val.Multiplier}},
+            {{end}}{{if .Val.Bits}}bits: { {{template "optsList" .Val.Bits}} },
+            {{end}}{{if .Val.Values}}values: { {{template "optsList" .Val.Values}} },
+            {{end}}{{if .Val.Cond}}cond: [ {{template "condList" .Val.Cond}} ],{{end}}
+        })),{{end}}
+
+{{define "optsList"}}{{ range $k,$v := . }}
+                {{$k}}: {{strEsc $v}}, {{end}}{{end}}
+
+{{define "attrList"}}
+{{$path:=.Path}}{{range .Val}}{{if .Name}}                {{if .ArgName}}{{.ArgName.Fmt}}{{else}}{{.Name.Fmt}}{{end}}: {{$path}}.{{.Name.Fmt}},
+{{end}}{{end}}            {{end}}
+
+{{define "condList"}}{{range .}}{{if .Name}}{
+            description: {{strEsc .Desc}},
+            field: "{{.Name.Fmt}}",
+            value: {{.Value.Hex4}},
+            mask: {{.Mask.Hex4}},
+            invert: {{.Invert}}
+        },{{end}}{{end}}{{end}}

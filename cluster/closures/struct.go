@@ -13,47 +13,52 @@ func (ConfigStatus) Writable() bool   { return false }
 func (ConfigStatus) Reportable() bool { return false }
 func (ConfigStatus) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v ConfigStatus) AttrID() zcl.AttrID   { return v.ID() }
+func (v ConfigStatus) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ConfigStatus) AttrValue() zcl.Val  { return v.Value() }
+
 func (ConfigStatus) Name() string        { return `Config / Status` }
 func (ConfigStatus) Description() string { return `` }
 
 type ConfigStatus zcl.Zbmp8
 
-func (a *ConfigStatus) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
-func (a *ConfigStatus) Value() zcl.Val     { return a }
+func (v *ConfigStatus) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
+func (v *ConfigStatus) Value() zcl.Val     { return v }
 
-func (a ConfigStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+func (v ConfigStatus) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(v).MarshalZcl() }
 
-func (a *ConfigStatus) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *ConfigStatus) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = ConfigStatus(*nt)
+	*v = ConfigStatus(*nt)
 	return br, err
 }
 
-func (a ConfigStatus) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zbmp8(a))
+func (v ConfigStatus) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zbmp8(v))
 }
 
-func (a *ConfigStatus) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zbmp8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *ConfigStatus) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zbmp8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = ConfigStatus(*v)
+	*v = ConfigStatus(*a)
 	return nil
 }
 
-func (a *ConfigStatus) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zbmp8); ok {
-		*a = ConfigStatus(*nv)
+func (v *ConfigStatus) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zbmp8); ok {
+		*v = ConfigStatus(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a ConfigStatus) String() string {
+func (v ConfigStatus) String() string {
 	var bstr []string
-	bits := zcl.BitmapList(a[:])
+	bits := zcl.BitmapList(v[:])
 	for _, bit := range bits {
 		switch bit {
 		case 0:
@@ -77,29 +82,29 @@ func (a ConfigStatus) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (a ConfigStatus) IsOperational() bool             { return zcl.BitmapTest([]byte(a[:]), 0) }
-func (a ConfigStatus) IsOnline() bool                  { return zcl.BitmapTest([]byte(a[:]), 1) }
-func (a ConfigStatus) IsCommandsReversed() bool        { return zcl.BitmapTest([]byte(a[:]), 2) }
-func (a ConfigStatus) IsLiftControlIsClosedLoop() bool { return zcl.BitmapTest([]byte(a[:]), 3) }
-func (a ConfigStatus) IsTiltControlIsClosedLoop() bool { return zcl.BitmapTest([]byte(a[:]), 4) }
-func (a ConfigStatus) IsLiftEncoderControlled() bool   { return zcl.BitmapTest([]byte(a[:]), 5) }
-func (a ConfigStatus) IsTiltEncoderControlled() bool   { return zcl.BitmapTest([]byte(a[:]), 6) }
-func (a *ConfigStatus) SetOperational(b bool)          { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b)) }
-func (a *ConfigStatus) SetOnline(b bool)               { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 1, b)) }
-func (a *ConfigStatus) SetCommandsReversed(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 2, b))
+func (v ConfigStatus) IsOperational() bool             { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v ConfigStatus) IsOnline() bool                  { return zcl.BitmapTest([]byte(v[:]), 1) }
+func (v ConfigStatus) IsCommandsReversed() bool        { return zcl.BitmapTest([]byte(v[:]), 2) }
+func (v ConfigStatus) IsLiftControlIsClosedLoop() bool { return zcl.BitmapTest([]byte(v[:]), 3) }
+func (v ConfigStatus) IsTiltControlIsClosedLoop() bool { return zcl.BitmapTest([]byte(v[:]), 4) }
+func (v ConfigStatus) IsLiftEncoderControlled() bool   { return zcl.BitmapTest([]byte(v[:]), 5) }
+func (v ConfigStatus) IsTiltEncoderControlled() bool   { return zcl.BitmapTest([]byte(v[:]), 6) }
+func (v *ConfigStatus) SetOperational(b bool)          { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
+func (v *ConfigStatus) SetOnline(b bool)               { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b)) }
+func (v *ConfigStatus) SetCommandsReversed(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 2, b))
 }
-func (a *ConfigStatus) SetLiftControlIsClosedLoop(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 3, b))
+func (v *ConfigStatus) SetLiftControlIsClosedLoop(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 3, b))
 }
-func (a *ConfigStatus) SetTiltControlIsClosedLoop(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 4, b))
+func (v *ConfigStatus) SetTiltControlIsClosedLoop(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 4, b))
 }
-func (a *ConfigStatus) SetLiftEncoderControlled(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 5, b))
+func (v *ConfigStatus) SetLiftEncoderControlled(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 5, b))
 }
-func (a *ConfigStatus) SetTiltEncoderControlled(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 6, b))
+func (v *ConfigStatus) SetTiltEncoderControlled(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 6, b))
 }
 
 func (ConfigStatus) MultiOptions() []zcl.Option {
@@ -122,46 +127,51 @@ func (LiftAccelerationTime) Writable() bool   { return true }
 func (LiftAccelerationTime) Reportable() bool { return false }
 func (LiftAccelerationTime) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftAccelerationTime) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftAccelerationTime) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftAccelerationTime) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftAccelerationTime) Name() string        { return `Lift - Acceleration Time` }
 func (LiftAccelerationTime) Description() string { return `` }
 
 type LiftAccelerationTime zcl.Zu16
 
-func (a *LiftAccelerationTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftAccelerationTime) Value() zcl.Val     { return a }
+func (v *LiftAccelerationTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftAccelerationTime) Value() zcl.Val     { return v }
 
-func (a LiftAccelerationTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftAccelerationTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftAccelerationTime) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftAccelerationTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftAccelerationTime(*nt)
+	*v = LiftAccelerationTime(*nt)
 	return br, err
 }
 
-func (a LiftAccelerationTime) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftAccelerationTime) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftAccelerationTime) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftAccelerationTime) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftAccelerationTime(*v)
+	*v = LiftAccelerationTime(*a)
 	return nil
 }
 
-func (a *LiftAccelerationTime) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftAccelerationTime(*nv)
+func (v *LiftAccelerationTime) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftAccelerationTime(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftAccelerationTime) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftAccelerationTime) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftCurrentPositionAttr zcl.AttrID = 3
@@ -172,46 +182,51 @@ func (LiftCurrentPosition) Writable() bool   { return false }
 func (LiftCurrentPosition) Reportable() bool { return false }
 func (LiftCurrentPosition) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftCurrentPosition) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftCurrentPosition) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftCurrentPosition) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftCurrentPosition) Name() string        { return `Lift - Current Position` }
 func (LiftCurrentPosition) Description() string { return `` }
 
 type LiftCurrentPosition zcl.Zu16
 
-func (a *LiftCurrentPosition) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftCurrentPosition) Value() zcl.Val     { return a }
+func (v *LiftCurrentPosition) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftCurrentPosition) Value() zcl.Val     { return v }
 
-func (a LiftCurrentPosition) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftCurrentPosition) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftCurrentPosition) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftCurrentPosition) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftCurrentPosition(*nt)
+	*v = LiftCurrentPosition(*nt)
 	return br, err
 }
 
-func (a LiftCurrentPosition) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftCurrentPosition) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftCurrentPosition) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftCurrentPosition) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftCurrentPosition(*v)
+	*v = LiftCurrentPosition(*a)
 	return nil
 }
 
-func (a *LiftCurrentPosition) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftCurrentPosition(*nv)
+func (v *LiftCurrentPosition) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftCurrentPosition(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftCurrentPosition) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftCurrentPosition) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftDecelerationTimeAttr zcl.AttrID = 22
@@ -222,46 +237,51 @@ func (LiftDecelerationTime) Writable() bool   { return true }
 func (LiftDecelerationTime) Reportable() bool { return false }
 func (LiftDecelerationTime) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftDecelerationTime) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftDecelerationTime) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftDecelerationTime) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftDecelerationTime) Name() string        { return `Lift - Deceleration Time` }
 func (LiftDecelerationTime) Description() string { return `` }
 
 type LiftDecelerationTime zcl.Zu16
 
-func (a *LiftDecelerationTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftDecelerationTime) Value() zcl.Val     { return a }
+func (v *LiftDecelerationTime) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftDecelerationTime) Value() zcl.Val     { return v }
 
-func (a LiftDecelerationTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftDecelerationTime) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftDecelerationTime) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftDecelerationTime) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftDecelerationTime(*nt)
+	*v = LiftDecelerationTime(*nt)
 	return br, err
 }
 
-func (a LiftDecelerationTime) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftDecelerationTime) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftDecelerationTime) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftDecelerationTime) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftDecelerationTime(*v)
+	*v = LiftDecelerationTime(*a)
 	return nil
 }
 
-func (a *LiftDecelerationTime) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftDecelerationTime(*nv)
+func (v *LiftDecelerationTime) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftDecelerationTime(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftDecelerationTime) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftDecelerationTime) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftInstalledClosedLimitAttr zcl.AttrID = 17
@@ -272,46 +292,51 @@ func (LiftInstalledClosedLimit) Writable() bool   { return false }
 func (LiftInstalledClosedLimit) Reportable() bool { return false }
 func (LiftInstalledClosedLimit) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftInstalledClosedLimit) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftInstalledClosedLimit) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftInstalledClosedLimit) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftInstalledClosedLimit) Name() string        { return `Lift - Installed Closed Limit` }
 func (LiftInstalledClosedLimit) Description() string { return `` }
 
 type LiftInstalledClosedLimit zcl.Zu16
 
-func (a *LiftInstalledClosedLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftInstalledClosedLimit) Value() zcl.Val     { return a }
+func (v *LiftInstalledClosedLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftInstalledClosedLimit) Value() zcl.Val     { return v }
 
-func (a LiftInstalledClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftInstalledClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftInstalledClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftInstalledClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftInstalledClosedLimit(*nt)
+	*v = LiftInstalledClosedLimit(*nt)
 	return br, err
 }
 
-func (a LiftInstalledClosedLimit) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftInstalledClosedLimit) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftInstalledClosedLimit) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftInstalledClosedLimit) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftInstalledClosedLimit(*v)
+	*v = LiftInstalledClosedLimit(*a)
 	return nil
 }
 
-func (a *LiftInstalledClosedLimit) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftInstalledClosedLimit(*nv)
+func (v *LiftInstalledClosedLimit) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftInstalledClosedLimit(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftInstalledClosedLimit) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftInstalledClosedLimit) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftInstalledOpenLimitAttr zcl.AttrID = 16
@@ -322,46 +347,51 @@ func (LiftInstalledOpenLimit) Writable() bool   { return false }
 func (LiftInstalledOpenLimit) Reportable() bool { return false }
 func (LiftInstalledOpenLimit) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftInstalledOpenLimit) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftInstalledOpenLimit) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftInstalledOpenLimit) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftInstalledOpenLimit) Name() string        { return `Lift - Installed Open Limit` }
 func (LiftInstalledOpenLimit) Description() string { return `` }
 
 type LiftInstalledOpenLimit zcl.Zu16
 
-func (a *LiftInstalledOpenLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftInstalledOpenLimit) Value() zcl.Val     { return a }
+func (v *LiftInstalledOpenLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftInstalledOpenLimit) Value() zcl.Val     { return v }
 
-func (a LiftInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftInstalledOpenLimit(*nt)
+	*v = LiftInstalledOpenLimit(*nt)
 	return br, err
 }
 
-func (a LiftInstalledOpenLimit) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftInstalledOpenLimit) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftInstalledOpenLimit) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftInstalledOpenLimit) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftInstalledOpenLimit(*v)
+	*v = LiftInstalledOpenLimit(*a)
 	return nil
 }
 
-func (a *LiftInstalledOpenLimit) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftInstalledOpenLimit(*nv)
+func (v *LiftInstalledOpenLimit) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftInstalledOpenLimit(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftInstalledOpenLimit) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftInstalledOpenLimit) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftIntermediateSetpointsAttr zcl.AttrID = 24
@@ -372,46 +402,51 @@ func (LiftIntermediateSetpoints) Writable() bool   { return true }
 func (LiftIntermediateSetpoints) Reportable() bool { return false }
 func (LiftIntermediateSetpoints) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftIntermediateSetpoints) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftIntermediateSetpoints) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftIntermediateSetpoints) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftIntermediateSetpoints) Name() string        { return `Lift - Intermediate Setpoints` }
 func (LiftIntermediateSetpoints) Description() string { return `` }
 
 type LiftIntermediateSetpoints zcl.Zostring
 
-func (a *LiftIntermediateSetpoints) TypeID() zcl.TypeID { return new(zcl.Zostring).TypeID() }
-func (a *LiftIntermediateSetpoints) Value() zcl.Val     { return a }
+func (v *LiftIntermediateSetpoints) TypeID() zcl.TypeID { return new(zcl.Zostring).TypeID() }
+func (v *LiftIntermediateSetpoints) Value() zcl.Val     { return v }
 
-func (a LiftIntermediateSetpoints) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+func (v LiftIntermediateSetpoints) MarshalZcl() ([]byte, error) { return zcl.Zostring(v).MarshalZcl() }
 
-func (a *LiftIntermediateSetpoints) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftIntermediateSetpoints) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftIntermediateSetpoints(*nt)
+	*v = LiftIntermediateSetpoints(*nt)
 	return br, err
 }
 
-func (a LiftIntermediateSetpoints) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zostring(a))
+func (v LiftIntermediateSetpoints) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zostring(v))
 }
 
-func (a *LiftIntermediateSetpoints) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zostring)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftIntermediateSetpoints) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zostring)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftIntermediateSetpoints(*v)
+	*v = LiftIntermediateSetpoints(*a)
 	return nil
 }
 
-func (a *LiftIntermediateSetpoints) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zostring); ok {
-		*a = LiftIntermediateSetpoints(*nv)
+func (v *LiftIntermediateSetpoints) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zostring); ok {
+		*v = LiftIntermediateSetpoints(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftIntermediateSetpoints) String() string {
-	return zcl.Sprintf("%v", zcl.Zostring(a))
+func (v LiftIntermediateSetpoints) String() string {
+	return zcl.Sprintf("%v", zcl.Zostring(v))
 }
 
 const LiftNumberOfActuationsAttr zcl.AttrID = 5
@@ -422,46 +457,51 @@ func (LiftNumberOfActuations) Writable() bool   { return false }
 func (LiftNumberOfActuations) Reportable() bool { return false }
 func (LiftNumberOfActuations) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftNumberOfActuations) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftNumberOfActuations) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftNumberOfActuations) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftNumberOfActuations) Name() string        { return `Lift - Number of Actuations` }
 func (LiftNumberOfActuations) Description() string { return `` }
 
 type LiftNumberOfActuations zcl.Zu16
 
-func (a *LiftNumberOfActuations) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftNumberOfActuations) Value() zcl.Val     { return a }
+func (v *LiftNumberOfActuations) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftNumberOfActuations) Value() zcl.Val     { return v }
 
-func (a LiftNumberOfActuations) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftNumberOfActuations) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftNumberOfActuations) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftNumberOfActuations) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftNumberOfActuations(*nt)
+	*v = LiftNumberOfActuations(*nt)
 	return br, err
 }
 
-func (a LiftNumberOfActuations) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftNumberOfActuations) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftNumberOfActuations) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftNumberOfActuations) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftNumberOfActuations(*v)
+	*v = LiftNumberOfActuations(*a)
 	return nil
 }
 
-func (a *LiftNumberOfActuations) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftNumberOfActuations(*nv)
+func (v *LiftNumberOfActuations) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftNumberOfActuations(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftNumberOfActuations) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftNumberOfActuations) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftPhysicalClosedLimitAttr zcl.AttrID = 1
@@ -472,46 +512,51 @@ func (LiftPhysicalClosedLimit) Writable() bool   { return false }
 func (LiftPhysicalClosedLimit) Reportable() bool { return false }
 func (LiftPhysicalClosedLimit) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftPhysicalClosedLimit) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftPhysicalClosedLimit) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftPhysicalClosedLimit) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftPhysicalClosedLimit) Name() string        { return `Lift - Physical Closed Limit` }
 func (LiftPhysicalClosedLimit) Description() string { return `` }
 
 type LiftPhysicalClosedLimit zcl.Zu16
 
-func (a *LiftPhysicalClosedLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftPhysicalClosedLimit) Value() zcl.Val     { return a }
+func (v *LiftPhysicalClosedLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftPhysicalClosedLimit) Value() zcl.Val     { return v }
 
-func (a LiftPhysicalClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftPhysicalClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftPhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftPhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftPhysicalClosedLimit(*nt)
+	*v = LiftPhysicalClosedLimit(*nt)
 	return br, err
 }
 
-func (a LiftPhysicalClosedLimit) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftPhysicalClosedLimit) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftPhysicalClosedLimit) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftPhysicalClosedLimit) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftPhysicalClosedLimit(*v)
+	*v = LiftPhysicalClosedLimit(*a)
 	return nil
 }
 
-func (a *LiftPhysicalClosedLimit) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftPhysicalClosedLimit(*nv)
+func (v *LiftPhysicalClosedLimit) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftPhysicalClosedLimit(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftPhysicalClosedLimit) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftPhysicalClosedLimit) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftVelocityAttr zcl.AttrID = 20
@@ -522,46 +567,51 @@ func (LiftVelocity) Writable() bool   { return true }
 func (LiftVelocity) Reportable() bool { return false }
 func (LiftVelocity) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftVelocity) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftVelocity) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftVelocity) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftVelocity) Name() string        { return `Lift - Velocity` }
 func (LiftVelocity) Description() string { return `` }
 
 type LiftVelocity zcl.Zu16
 
-func (a *LiftVelocity) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *LiftVelocity) Value() zcl.Val     { return a }
+func (v *LiftVelocity) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *LiftVelocity) Value() zcl.Val     { return v }
 
-func (a LiftVelocity) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v LiftVelocity) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *LiftVelocity) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftVelocity) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftVelocity(*nt)
+	*v = LiftVelocity(*nt)
 	return br, err
 }
 
-func (a LiftVelocity) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v LiftVelocity) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *LiftVelocity) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftVelocity) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftVelocity(*v)
+	*v = LiftVelocity(*a)
 	return nil
 }
 
-func (a *LiftVelocity) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = LiftVelocity(*nv)
+func (v *LiftVelocity) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = LiftVelocity(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftVelocity) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v LiftVelocity) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const LiftCurrentPositionPercentageAttr zcl.AttrID = 8
@@ -572,46 +622,51 @@ func (LiftCurrentPositionPercentage) Writable() bool   { return false }
 func (LiftCurrentPositionPercentage) Reportable() bool { return false }
 func (LiftCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v LiftCurrentPositionPercentage) AttrID() zcl.AttrID   { return v.ID() }
+func (v LiftCurrentPositionPercentage) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *LiftCurrentPositionPercentage) AttrValue() zcl.Val  { return v.Value() }
+
 func (LiftCurrentPositionPercentage) Name() string        { return `Lift Current Position Percentage` }
 func (LiftCurrentPositionPercentage) Description() string { return `` }
 
 type LiftCurrentPositionPercentage zcl.Zu8
 
-func (a *LiftCurrentPositionPercentage) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *LiftCurrentPositionPercentage) Value() zcl.Val     { return a }
+func (v *LiftCurrentPositionPercentage) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *LiftCurrentPositionPercentage) Value() zcl.Val     { return v }
 
-func (a LiftCurrentPositionPercentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v LiftCurrentPositionPercentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *LiftCurrentPositionPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *LiftCurrentPositionPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = LiftCurrentPositionPercentage(*nt)
+	*v = LiftCurrentPositionPercentage(*nt)
 	return br, err
 }
 
-func (a LiftCurrentPositionPercentage) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v LiftCurrentPositionPercentage) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *LiftCurrentPositionPercentage) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *LiftCurrentPositionPercentage) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = LiftCurrentPositionPercentage(*v)
+	*v = LiftCurrentPositionPercentage(*a)
 	return nil
 }
 
-func (a *LiftCurrentPositionPercentage) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = LiftCurrentPositionPercentage(*nv)
+func (v *LiftCurrentPositionPercentage) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = LiftCurrentPositionPercentage(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a LiftCurrentPositionPercentage) String() string {
-	return zcl.Percent.Format(float64(a))
+func (v LiftCurrentPositionPercentage) String() string {
+	return zcl.Percent.Format(float64(v))
 }
 
 func (Percentage) Name() string        { return `Percentage` }
@@ -619,41 +674,41 @@ func (Percentage) Description() string { return `` }
 
 type Percentage zcl.Zu8
 
-func (a *Percentage) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *Percentage) Value() zcl.Val     { return a }
+func (v *Percentage) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *Percentage) Value() zcl.Val     { return v }
 
-func (a Percentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v Percentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *Percentage) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Percentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Percentage(*nt)
+	*v = Percentage(*nt)
 	return br, err
 }
 
-func (a Percentage) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v Percentage) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *Percentage) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Percentage) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Percentage(*v)
+	*v = Percentage(*a)
 	return nil
 }
 
-func (a *Percentage) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = Percentage(*nv)
+func (v *Percentage) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = Percentage(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Percentage) String() string {
-	return zcl.Percent.Format(float64(a))
+func (v Percentage) String() string {
+	return zcl.Percent.Format(float64(v))
 }
 
 func (Position) Name() string        { return `Position` }
@@ -661,41 +716,41 @@ func (Position) Description() string { return `` }
 
 type Position zcl.Zu16
 
-func (a *Position) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *Position) Value() zcl.Val     { return a }
+func (v *Position) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *Position) Value() zcl.Val     { return v }
 
-func (a Position) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v Position) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *Position) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *Position) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = Position(*nt)
+	*v = Position(*nt)
 	return br, err
 }
 
-func (a Position) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v Position) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *Position) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *Position) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = Position(*v)
+	*v = Position(*a)
 	return nil
 }
 
-func (a *Position) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = Position(*nv)
+func (v *Position) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = Position(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a Position) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v Position) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const TiltCurrentPositionAttr zcl.AttrID = 4
@@ -706,46 +761,51 @@ func (TiltCurrentPosition) Writable() bool   { return false }
 func (TiltCurrentPosition) Reportable() bool { return false }
 func (TiltCurrentPosition) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v TiltCurrentPosition) AttrID() zcl.AttrID   { return v.ID() }
+func (v TiltCurrentPosition) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *TiltCurrentPosition) AttrValue() zcl.Val  { return v.Value() }
+
 func (TiltCurrentPosition) Name() string        { return `Tilt - Current Position` }
 func (TiltCurrentPosition) Description() string { return `` }
 
 type TiltCurrentPosition zcl.Zu16
 
-func (a *TiltCurrentPosition) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *TiltCurrentPosition) Value() zcl.Val     { return a }
+func (v *TiltCurrentPosition) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *TiltCurrentPosition) Value() zcl.Val     { return v }
 
-func (a TiltCurrentPosition) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v TiltCurrentPosition) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *TiltCurrentPosition) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TiltCurrentPosition) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TiltCurrentPosition(*nt)
+	*v = TiltCurrentPosition(*nt)
 	return br, err
 }
 
-func (a TiltCurrentPosition) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v TiltCurrentPosition) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *TiltCurrentPosition) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TiltCurrentPosition) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TiltCurrentPosition(*v)
+	*v = TiltCurrentPosition(*a)
 	return nil
 }
 
-func (a *TiltCurrentPosition) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = TiltCurrentPosition(*nv)
+func (v *TiltCurrentPosition) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = TiltCurrentPosition(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TiltCurrentPosition) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v TiltCurrentPosition) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const TiltIntermediateSetpointsAttr zcl.AttrID = 25
@@ -756,46 +816,51 @@ func (TiltIntermediateSetpoints) Writable() bool   { return true }
 func (TiltIntermediateSetpoints) Reportable() bool { return false }
 func (TiltIntermediateSetpoints) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v TiltIntermediateSetpoints) AttrID() zcl.AttrID   { return v.ID() }
+func (v TiltIntermediateSetpoints) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *TiltIntermediateSetpoints) AttrValue() zcl.Val  { return v.Value() }
+
 func (TiltIntermediateSetpoints) Name() string        { return `Tilt - Intermediate Setpoints` }
 func (TiltIntermediateSetpoints) Description() string { return `` }
 
 type TiltIntermediateSetpoints zcl.Zostring
 
-func (a *TiltIntermediateSetpoints) TypeID() zcl.TypeID { return new(zcl.Zostring).TypeID() }
-func (a *TiltIntermediateSetpoints) Value() zcl.Val     { return a }
+func (v *TiltIntermediateSetpoints) TypeID() zcl.TypeID { return new(zcl.Zostring).TypeID() }
+func (v *TiltIntermediateSetpoints) Value() zcl.Val     { return v }
 
-func (a TiltIntermediateSetpoints) MarshalZcl() ([]byte, error) { return zcl.Zostring(a).MarshalZcl() }
+func (v TiltIntermediateSetpoints) MarshalZcl() ([]byte, error) { return zcl.Zostring(v).MarshalZcl() }
 
-func (a *TiltIntermediateSetpoints) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TiltIntermediateSetpoints) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zostring)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TiltIntermediateSetpoints(*nt)
+	*v = TiltIntermediateSetpoints(*nt)
 	return br, err
 }
 
-func (a TiltIntermediateSetpoints) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zostring(a))
+func (v TiltIntermediateSetpoints) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zostring(v))
 }
 
-func (a *TiltIntermediateSetpoints) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zostring)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TiltIntermediateSetpoints) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zostring)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TiltIntermediateSetpoints(*v)
+	*v = TiltIntermediateSetpoints(*a)
 	return nil
 }
 
-func (a *TiltIntermediateSetpoints) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zostring); ok {
-		*a = TiltIntermediateSetpoints(*nv)
+func (v *TiltIntermediateSetpoints) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zostring); ok {
+		*v = TiltIntermediateSetpoints(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TiltIntermediateSetpoints) String() string {
-	return zcl.Sprintf("%v", zcl.Zostring(a))
+func (v TiltIntermediateSetpoints) String() string {
+	return zcl.Sprintf("%v", zcl.Zostring(v))
 }
 
 const TiltNumberOfActuationsAttr zcl.AttrID = 6
@@ -806,46 +871,51 @@ func (TiltNumberOfActuations) Writable() bool   { return false }
 func (TiltNumberOfActuations) Reportable() bool { return false }
 func (TiltNumberOfActuations) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v TiltNumberOfActuations) AttrID() zcl.AttrID   { return v.ID() }
+func (v TiltNumberOfActuations) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *TiltNumberOfActuations) AttrValue() zcl.Val  { return v.Value() }
+
 func (TiltNumberOfActuations) Name() string        { return `Tilt - Number of Actuations` }
 func (TiltNumberOfActuations) Description() string { return `` }
 
 type TiltNumberOfActuations zcl.Zu16
 
-func (a *TiltNumberOfActuations) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *TiltNumberOfActuations) Value() zcl.Val     { return a }
+func (v *TiltNumberOfActuations) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *TiltNumberOfActuations) Value() zcl.Val     { return v }
 
-func (a TiltNumberOfActuations) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v TiltNumberOfActuations) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *TiltNumberOfActuations) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TiltNumberOfActuations) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TiltNumberOfActuations(*nt)
+	*v = TiltNumberOfActuations(*nt)
 	return br, err
 }
 
-func (a TiltNumberOfActuations) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v TiltNumberOfActuations) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *TiltNumberOfActuations) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TiltNumberOfActuations) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TiltNumberOfActuations(*v)
+	*v = TiltNumberOfActuations(*a)
 	return nil
 }
 
-func (a *TiltNumberOfActuations) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = TiltNumberOfActuations(*nv)
+func (v *TiltNumberOfActuations) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = TiltNumberOfActuations(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TiltNumberOfActuations) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v TiltNumberOfActuations) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const TiltPhysicalClosedLimitAttr zcl.AttrID = 2
@@ -856,46 +926,51 @@ func (TiltPhysicalClosedLimit) Writable() bool   { return false }
 func (TiltPhysicalClosedLimit) Reportable() bool { return false }
 func (TiltPhysicalClosedLimit) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v TiltPhysicalClosedLimit) AttrID() zcl.AttrID   { return v.ID() }
+func (v TiltPhysicalClosedLimit) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *TiltPhysicalClosedLimit) AttrValue() zcl.Val  { return v.Value() }
+
 func (TiltPhysicalClosedLimit) Name() string        { return `Tilt - Physical Closed Limit` }
 func (TiltPhysicalClosedLimit) Description() string { return `` }
 
 type TiltPhysicalClosedLimit zcl.Zu16
 
-func (a *TiltPhysicalClosedLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *TiltPhysicalClosedLimit) Value() zcl.Val     { return a }
+func (v *TiltPhysicalClosedLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *TiltPhysicalClosedLimit) Value() zcl.Val     { return v }
 
-func (a TiltPhysicalClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v TiltPhysicalClosedLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *TiltPhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TiltPhysicalClosedLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TiltPhysicalClosedLimit(*nt)
+	*v = TiltPhysicalClosedLimit(*nt)
 	return br, err
 }
 
-func (a TiltPhysicalClosedLimit) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v TiltPhysicalClosedLimit) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *TiltPhysicalClosedLimit) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TiltPhysicalClosedLimit) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TiltPhysicalClosedLimit(*v)
+	*v = TiltPhysicalClosedLimit(*a)
 	return nil
 }
 
-func (a *TiltPhysicalClosedLimit) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = TiltPhysicalClosedLimit(*nv)
+func (v *TiltPhysicalClosedLimit) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = TiltPhysicalClosedLimit(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TiltPhysicalClosedLimit) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v TiltPhysicalClosedLimit) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const TiltAInstalledOpenLimitAttr zcl.AttrID = 18
@@ -906,46 +981,51 @@ func (TiltAInstalledOpenLimit) Writable() bool   { return false }
 func (TiltAInstalledOpenLimit) Reportable() bool { return false }
 func (TiltAInstalledOpenLimit) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v TiltAInstalledOpenLimit) AttrID() zcl.AttrID   { return v.ID() }
+func (v TiltAInstalledOpenLimit) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *TiltAInstalledOpenLimit) AttrValue() zcl.Val  { return v.Value() }
+
 func (TiltAInstalledOpenLimit) Name() string        { return `Tilt A - Installed Open Limit` }
 func (TiltAInstalledOpenLimit) Description() string { return `` }
 
 type TiltAInstalledOpenLimit zcl.Zu16
 
-func (a *TiltAInstalledOpenLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *TiltAInstalledOpenLimit) Value() zcl.Val     { return a }
+func (v *TiltAInstalledOpenLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *TiltAInstalledOpenLimit) Value() zcl.Val     { return v }
 
-func (a TiltAInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v TiltAInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *TiltAInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TiltAInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TiltAInstalledOpenLimit(*nt)
+	*v = TiltAInstalledOpenLimit(*nt)
 	return br, err
 }
 
-func (a TiltAInstalledOpenLimit) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v TiltAInstalledOpenLimit) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *TiltAInstalledOpenLimit) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TiltAInstalledOpenLimit) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TiltAInstalledOpenLimit(*v)
+	*v = TiltAInstalledOpenLimit(*a)
 	return nil
 }
 
-func (a *TiltAInstalledOpenLimit) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = TiltAInstalledOpenLimit(*nv)
+func (v *TiltAInstalledOpenLimit) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = TiltAInstalledOpenLimit(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TiltAInstalledOpenLimit) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v TiltAInstalledOpenLimit) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const TiltBInstalledOpenLimitAttr zcl.AttrID = 19
@@ -956,46 +1036,51 @@ func (TiltBInstalledOpenLimit) Writable() bool   { return false }
 func (TiltBInstalledOpenLimit) Reportable() bool { return false }
 func (TiltBInstalledOpenLimit) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v TiltBInstalledOpenLimit) AttrID() zcl.AttrID   { return v.ID() }
+func (v TiltBInstalledOpenLimit) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *TiltBInstalledOpenLimit) AttrValue() zcl.Val  { return v.Value() }
+
 func (TiltBInstalledOpenLimit) Name() string        { return `Tilt B - Installed Open Limit` }
 func (TiltBInstalledOpenLimit) Description() string { return `` }
 
 type TiltBInstalledOpenLimit zcl.Zu16
 
-func (a *TiltBInstalledOpenLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
-func (a *TiltBInstalledOpenLimit) Value() zcl.Val     { return a }
+func (v *TiltBInstalledOpenLimit) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
+func (v *TiltBInstalledOpenLimit) Value() zcl.Val     { return v }
 
-func (a TiltBInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(a).MarshalZcl() }
+func (v TiltBInstalledOpenLimit) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
-func (a *TiltBInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TiltBInstalledOpenLimit) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TiltBInstalledOpenLimit(*nt)
+	*v = TiltBInstalledOpenLimit(*nt)
 	return br, err
 }
 
-func (a TiltBInstalledOpenLimit) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu16(a))
+func (v TiltBInstalledOpenLimit) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
-func (a *TiltBInstalledOpenLimit) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu16)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TiltBInstalledOpenLimit) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu16)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TiltBInstalledOpenLimit(*v)
+	*v = TiltBInstalledOpenLimit(*a)
 	return nil
 }
 
-func (a *TiltBInstalledOpenLimit) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu16); ok {
-		*a = TiltBInstalledOpenLimit(*nv)
+func (v *TiltBInstalledOpenLimit) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu16); ok {
+		*v = TiltBInstalledOpenLimit(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TiltBInstalledOpenLimit) String() string {
-	return zcl.Sprintf("%v", zcl.Zu16(a))
+func (v TiltBInstalledOpenLimit) String() string {
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 const TiltCurrentPositionPercentageAttr zcl.AttrID = 9
@@ -1006,46 +1091,51 @@ func (TiltCurrentPositionPercentage) Writable() bool   { return false }
 func (TiltCurrentPositionPercentage) Reportable() bool { return false }
 func (TiltCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v TiltCurrentPositionPercentage) AttrID() zcl.AttrID   { return v.ID() }
+func (v TiltCurrentPositionPercentage) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *TiltCurrentPositionPercentage) AttrValue() zcl.Val  { return v.Value() }
+
 func (TiltCurrentPositionPercentage) Name() string        { return `Tilt Current Position Percentage` }
 func (TiltCurrentPositionPercentage) Description() string { return `` }
 
 type TiltCurrentPositionPercentage zcl.Zu8
 
-func (a *TiltCurrentPositionPercentage) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (a *TiltCurrentPositionPercentage) Value() zcl.Val     { return a }
+func (v *TiltCurrentPositionPercentage) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *TiltCurrentPositionPercentage) Value() zcl.Val     { return v }
 
-func (a TiltCurrentPositionPercentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(a).MarshalZcl() }
+func (v TiltCurrentPositionPercentage) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
 
-func (a *TiltCurrentPositionPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *TiltCurrentPositionPercentage) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = TiltCurrentPositionPercentage(*nt)
+	*v = TiltCurrentPositionPercentage(*nt)
 	return br, err
 }
 
-func (a TiltCurrentPositionPercentage) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(a))
+func (v TiltCurrentPositionPercentage) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
 }
 
-func (a *TiltCurrentPositionPercentage) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *TiltCurrentPositionPercentage) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = TiltCurrentPositionPercentage(*v)
+	*v = TiltCurrentPositionPercentage(*a)
 	return nil
 }
 
-func (a *TiltCurrentPositionPercentage) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zu8); ok {
-		*a = TiltCurrentPositionPercentage(*nv)
+func (v *TiltCurrentPositionPercentage) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = TiltCurrentPositionPercentage(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a TiltCurrentPositionPercentage) String() string {
-	return zcl.Percent.Format(float64(a))
+func (v TiltCurrentPositionPercentage) String() string {
+	return zcl.Percent.Format(float64(v))
 }
 
 const WindowCoveringModeAttr zcl.AttrID = 23
@@ -1056,47 +1146,52 @@ func (WindowCoveringMode) Writable() bool   { return true }
 func (WindowCoveringMode) Reportable() bool { return false }
 func (WindowCoveringMode) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v WindowCoveringMode) AttrID() zcl.AttrID   { return v.ID() }
+func (v WindowCoveringMode) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *WindowCoveringMode) AttrValue() zcl.Val  { return v.Value() }
+
 func (WindowCoveringMode) Name() string        { return `Window Covering Mode` }
 func (WindowCoveringMode) Description() string { return `` }
 
 type WindowCoveringMode zcl.Zbmp8
 
-func (a *WindowCoveringMode) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
-func (a *WindowCoveringMode) Value() zcl.Val     { return a }
+func (v *WindowCoveringMode) TypeID() zcl.TypeID { return new(zcl.Zbmp8).TypeID() }
+func (v *WindowCoveringMode) Value() zcl.Val     { return v }
 
-func (a WindowCoveringMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(a).MarshalZcl() }
+func (v WindowCoveringMode) MarshalZcl() ([]byte, error) { return zcl.Zbmp8(v).MarshalZcl() }
 
-func (a *WindowCoveringMode) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *WindowCoveringMode) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zbmp8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = WindowCoveringMode(*nt)
+	*v = WindowCoveringMode(*nt)
 	return br, err
 }
 
-func (a WindowCoveringMode) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zbmp8(a))
+func (v WindowCoveringMode) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zbmp8(v))
 }
 
-func (a *WindowCoveringMode) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zbmp8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *WindowCoveringMode) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zbmp8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = WindowCoveringMode(*v)
+	*v = WindowCoveringMode(*a)
 	return nil
 }
 
-func (a *WindowCoveringMode) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zbmp8); ok {
-		*a = WindowCoveringMode(*nv)
+func (v *WindowCoveringMode) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zbmp8); ok {
+		*v = WindowCoveringMode(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a WindowCoveringMode) String() string {
+func (v WindowCoveringMode) String() string {
 	var bstr []string
-	bits := zcl.BitmapList(a[:])
+	bits := zcl.BitmapList(v[:])
 	for _, bit := range bits {
 		switch bit {
 		case 0:
@@ -1114,19 +1209,19 @@ func (a WindowCoveringMode) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (a WindowCoveringMode) IsReversed() bool        { return zcl.BitmapTest([]byte(a[:]), 0) }
-func (a WindowCoveringMode) IsCalibrationMode() bool { return zcl.BitmapTest([]byte(a[:]), 1) }
-func (a WindowCoveringMode) IsMaintenanceMode() bool { return zcl.BitmapTest([]byte(a[:]), 2) }
-func (a WindowCoveringMode) IsLedFeedback() bool     { return zcl.BitmapTest([]byte(a[:]), 3) }
-func (a *WindowCoveringMode) SetReversed(b bool)     { copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 0, b)) }
-func (a *WindowCoveringMode) SetCalibrationMode(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 1, b))
+func (v WindowCoveringMode) IsReversed() bool        { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v WindowCoveringMode) IsCalibrationMode() bool { return zcl.BitmapTest([]byte(v[:]), 1) }
+func (v WindowCoveringMode) IsMaintenanceMode() bool { return zcl.BitmapTest([]byte(v[:]), 2) }
+func (v WindowCoveringMode) IsLedFeedback() bool     { return zcl.BitmapTest([]byte(v[:]), 3) }
+func (v *WindowCoveringMode) SetReversed(b bool)     { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
+func (v *WindowCoveringMode) SetCalibrationMode(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b))
 }
-func (a *WindowCoveringMode) SetMaintenanceMode(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 2, b))
+func (v *WindowCoveringMode) SetMaintenanceMode(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 2, b))
 }
-func (a *WindowCoveringMode) SetLedFeedback(b bool) {
-	copy((*a)[:], zcl.BitmapSet([]byte((*a)[:]), 3, b))
+func (v *WindowCoveringMode) SetLedFeedback(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 3, b))
 }
 
 func (WindowCoveringMode) MultiOptions() []zcl.Option {
@@ -1146,46 +1241,51 @@ func (WindowCoveringType) Writable() bool   { return false }
 func (WindowCoveringType) Reportable() bool { return false }
 func (WindowCoveringType) SceneIndex() int  { return -1 }
 
+// Implements AttrDef/AttrValue interfaces
+func (v WindowCoveringType) AttrID() zcl.AttrID   { return v.ID() }
+func (v WindowCoveringType) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *WindowCoveringType) AttrValue() zcl.Val  { return v.Value() }
+
 func (WindowCoveringType) Name() string        { return `Window Covering Type` }
 func (WindowCoveringType) Description() string { return `` }
 
 type WindowCoveringType zcl.Zenum8
 
-func (a *WindowCoveringType) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
-func (a *WindowCoveringType) Value() zcl.Val     { return a }
+func (v *WindowCoveringType) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *WindowCoveringType) Value() zcl.Val     { return v }
 
-func (a WindowCoveringType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(a).MarshalZcl() }
+func (v WindowCoveringType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
 
-func (a *WindowCoveringType) UnmarshalZcl(b []byte) ([]byte, error) {
+func (v *WindowCoveringType) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zenum8)
 	br, err := nt.UnmarshalZcl(b)
-	*a = WindowCoveringType(*nt)
+	*v = WindowCoveringType(*nt)
 	return br, err
 }
 
-func (a WindowCoveringType) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum8(a))
+func (v WindowCoveringType) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
 }
 
-func (a *WindowCoveringType) UnmarshalJSON(b []byte) error {
-	v := new(zcl.Zenum8)
-	if err := zcl.ParseJson(b, v); err != nil {
+func (v *WindowCoveringType) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
-	*a = WindowCoveringType(*v)
+	*v = WindowCoveringType(*a)
 	return nil
 }
 
-func (a *WindowCoveringType) SetValue(v zcl.Val) error {
-	if nv, ok := v.(*zcl.Zenum8); ok {
-		*a = WindowCoveringType(*nv)
+func (v *WindowCoveringType) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = WindowCoveringType(*nv)
 		return nil
 	}
 	return zcl.ErrInvalidType
 }
 
-func (a WindowCoveringType) String() string {
-	switch a {
+func (v WindowCoveringType) String() string {
+	switch v {
 	case 0x00:
 		return "Rollershade"
 	case 0x01:
@@ -1207,29 +1307,29 @@ func (a WindowCoveringType) String() string {
 	case 0x09:
 		return "Projector Screen"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum8(a))
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (a WindowCoveringType) IsRollershade() bool               { return a == 0x00 }
-func (a WindowCoveringType) IsRollershade2Motor() bool         { return a == 0x01 }
-func (a WindowCoveringType) IsRollershadeExterior() bool       { return a == 0x02 }
-func (a WindowCoveringType) IsRollershadeExterior2Motor() bool { return a == 0x03 }
-func (a WindowCoveringType) IsDrapery() bool                   { return a == 0x04 }
-func (a WindowCoveringType) IsAwning() bool                    { return a == 0x05 }
-func (a WindowCoveringType) IsShutter() bool                   { return a == 0x06 }
-func (a WindowCoveringType) IsTiltBlindTiltOnly() bool         { return a == 0x07 }
-func (a WindowCoveringType) IsTiltBlindLiftAndTilt() bool      { return a == 0x08 }
-func (a WindowCoveringType) IsProjectorScreen() bool           { return a == 0x09 }
-func (a *WindowCoveringType) SetRollershade()                  { *a = 0x00 }
-func (a *WindowCoveringType) SetRollershade2Motor()            { *a = 0x01 }
-func (a *WindowCoveringType) SetRollershadeExterior()          { *a = 0x02 }
-func (a *WindowCoveringType) SetRollershadeExterior2Motor()    { *a = 0x03 }
-func (a *WindowCoveringType) SetDrapery()                      { *a = 0x04 }
-func (a *WindowCoveringType) SetAwning()                       { *a = 0x05 }
-func (a *WindowCoveringType) SetShutter()                      { *a = 0x06 }
-func (a *WindowCoveringType) SetTiltBlindTiltOnly()            { *a = 0x07 }
-func (a *WindowCoveringType) SetTiltBlindLiftAndTilt()         { *a = 0x08 }
-func (a *WindowCoveringType) SetProjectorScreen()              { *a = 0x09 }
+func (v WindowCoveringType) IsRollershade() bool               { return v == 0x00 }
+func (v WindowCoveringType) IsRollershade2Motor() bool         { return v == 0x01 }
+func (v WindowCoveringType) IsRollershadeExterior() bool       { return v == 0x02 }
+func (v WindowCoveringType) IsRollershadeExterior2Motor() bool { return v == 0x03 }
+func (v WindowCoveringType) IsDrapery() bool                   { return v == 0x04 }
+func (v WindowCoveringType) IsAwning() bool                    { return v == 0x05 }
+func (v WindowCoveringType) IsShutter() bool                   { return v == 0x06 }
+func (v WindowCoveringType) IsTiltBlindTiltOnly() bool         { return v == 0x07 }
+func (v WindowCoveringType) IsTiltBlindLiftAndTilt() bool      { return v == 0x08 }
+func (v WindowCoveringType) IsProjectorScreen() bool           { return v == 0x09 }
+func (v *WindowCoveringType) SetRollershade()                  { *v = 0x00 }
+func (v *WindowCoveringType) SetRollershade2Motor()            { *v = 0x01 }
+func (v *WindowCoveringType) SetRollershadeExterior()          { *v = 0x02 }
+func (v *WindowCoveringType) SetRollershadeExterior2Motor()    { *v = 0x03 }
+func (v *WindowCoveringType) SetDrapery()                      { *v = 0x04 }
+func (v *WindowCoveringType) SetAwning()                       { *v = 0x05 }
+func (v *WindowCoveringType) SetShutter()                      { *v = 0x06 }
+func (v *WindowCoveringType) SetTiltBlindTiltOnly()            { *v = 0x07 }
+func (v *WindowCoveringType) SetTiltBlindLiftAndTilt()         { *v = 0x08 }
+func (v *WindowCoveringType) SetProjectorScreen()              { *v = 0x09 }
 
 func (WindowCoveringType) SingleOptions() []zcl.Option {
 	return []zcl.Option{

@@ -12,6 +12,7 @@ const (
 	DefPath = "./definition"
 	GenPath = "./cluster"
 	ZdoPath = "./zdo"
+	TsPath  = "./cluster/all.ts"
 	PkgName = "hemtjan.st/zcl"
 )
 
@@ -25,6 +26,7 @@ func main() {
 	defPath := flag.String("definition-path", DefPath, "Path to yaml definitions")
 	tplPath := flag.String("template-path", TplPath, "Path to templates")
 	genPath := flag.String("cluster-path", GenPath, "Path for outputting generated clusters")
+	tsPath := flag.String("typescript-path", TsPath, "Path for outputting generated typescript file")
 	zdpPath := flag.String("zdp-path", ZdoPath, "Path for outputting generated ZDP commands")
 	pkgName := flag.String("package", PkgName, "Generated package name")
 	flag.Parse()
@@ -44,6 +46,13 @@ func main() {
 		*defPath,
 		*tplPath,
 		*genPath,
+	))
+
+	check("typescript", generator.GenerateTypescript(
+		"ZigBee",
+		*defPath,
+		*tplPath,
+		*tsPath,
 	))
 
 }

@@ -259,6 +259,8 @@ func (v *GetAlarm) Handle(frame Frame, handler interface{}) (rsp zcl.General, fo
 	var h GetAlarmHandler
 	if h, found = handler.(GetAlarmHandler); found {
 		rsp, err = h.HandleGetAlarm(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }

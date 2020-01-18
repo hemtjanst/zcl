@@ -3,6 +3,7 @@ package zcl
 import (
 	"encoding/binary"
 	"encoding/json"
+	"strconv"
 )
 
 func BitmapTest(a []byte, b uint) bool {
@@ -56,7 +57,20 @@ func bitmapUnmarshalJson(ln int, b []byte) ([]byte, error) {
 	o := make([]byte, ln)
 	v := new([]uint8)
 	if err := json.Unmarshal(b, v); err != nil {
-		return o, err
+		v = new([]uint8)
+		// Try with strings instead
+		vv := new([]string)
+		if err := json.Unmarshal(b, vv); err != nil {
+			return o, err
+		}
+		for _, s := range *vv {
+			if n, err := strconv.ParseUint(s, 10, 8); err != nil {
+				return o, err
+			} else {
+				*v = append(*v, uint8(n))
+			}
+		}
+
 	}
 	for _, i := range *v {
 		o = BitmapSet(o, uint(i), true)

@@ -85,6 +85,8 @@ func (v *AddGroup) Handle(frame Frame, handler interface{}) (rsp zcl.General, fo
 	var h AddGroupHandler
 	if h, found = handler.(AddGroupHandler); found {
 		rsp, err = h.HandleAddGroup(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -195,6 +197,8 @@ func (v *ViewGroup) Handle(frame Frame, handler interface{}) (rsp zcl.General, f
 	var h ViewGroupHandler
 	if h, found = handler.(ViewGroupHandler); found {
 		rsp, err = h.HandleViewGroup(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -295,6 +299,8 @@ func (v *GetGroupMembership) Handle(frame Frame, handler interface{}) (rsp zcl.G
 	var h GetGroupMembershipHandler
 	if h, found = handler.(GetGroupMembershipHandler); found {
 		rsp, err = h.HandleGetGroupMembership(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -393,6 +399,8 @@ func (v *RemoveGroup) Handle(frame Frame, handler interface{}) (rsp zcl.General,
 	var h RemoveGroupHandler
 	if h, found = handler.(RemoveGroupHandler); found {
 		rsp, err = h.HandleRemoveGroup(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -486,6 +494,8 @@ func (v *RemoveAllGroups) Handle(frame Frame, handler interface{}) (rsp zcl.Gene
 	var h RemoveAllGroupsHandler
 	if h, found = handler.(RemoveAllGroupsHandler); found {
 		rsp, err = h.HandleRemoveAllGroups(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -566,6 +576,8 @@ func (v *AddGroupIfIdentifying) Handle(frame Frame, handler interface{}) (rsp zc
 	var h AddGroupIfIdentifyingHandler
 	if h, found = handler.(AddGroupIfIdentifyingHandler); found {
 		rsp, err = h.HandleAddGroupIfIdentifying(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }

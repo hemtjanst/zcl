@@ -1,9 +1,21 @@
 package zcl
 
+import (
+	"fmt"
+)
+
 type zdpFrame struct {
 	Packet
 	seq  uint8
 	data []byte
+}
+
+func (f *zdpFrame) String() string {
+	return fmt.Sprintf(
+		"%v [ZDP] Seq[%d]",
+		f.Packet,
+		f.seq,
+	)
 }
 
 type recvZdpFrame struct {
@@ -36,7 +48,7 @@ func (f *recvZdpFrame) Response(cmd ZdoCommand) (frame ZdpFrame, err error) {
 	if nf.data, err = cmd.MarshalZcl(); err != nil {
 		return nil, err
 	}
-	nf.Packet, err = NewPacket(f.DstEP(), f.SrcAddr(), 0, 0, cmd.Cluster(), nf)
+	nf.Packet, err = NewPacket(0, f.SrcAddr(), 0, 0, cmd.Cluster(), nf)
 	return
 }
 

@@ -37,7 +37,7 @@ type StatusError interface {
 }
 
 func (e Status) Error() string {
-	return fmt.Sprintf("zcl status %d: %s", uint8(e), e.String())
+	return e.String()
 }
 
 func (e Status) Status() Status {

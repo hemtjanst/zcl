@@ -14,6 +14,7 @@ const (
 	DecibelMilliWatts CustomUnit = iota
 	MilliAmpereHours
 	Mired
+	Bytes
 )
 
 func (u CustomUnit) Format(n float64) string {
@@ -30,6 +31,8 @@ func (u CustomUnit) Format(n float64) string {
 		return fmt.Sprintf("%smAh", v)
 	case Mired:
 		return fmt.Sprintf("%s mired", v)
+	case Bytes:
+		return fmt.Sprintf("%s bytes", v)
 	}
 	return fmt.Sprintf("%s", v)
 }
@@ -41,6 +44,8 @@ func (u CustomUnit) String() string {
 		return "mAh"
 	case Mired:
 		return "mired"
+	case Bytes:
+		return "bytes"
 	}
 	return fmt.Sprintf("CustomUnit(0x%02x)", uint8(u))
 }

@@ -1,6 +1,9 @@
 package zcl
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type zclFrame struct {
 	Packet
@@ -17,12 +20,30 @@ type recvZclFrame struct {
 	zclFrame
 }
 
+func (f *zclFrame) String() string {
+	mnf := ""
+	if f.mnfCode > 0 {
+		mnf = fmt.Sprintf("MNF[%04X] ", uint16(f.mnfCode))
+	}
+
+	return fmt.Sprintf(
+		"%v [ZCL] %s %s%s Cmd[0x%02X] Seq[%d]",
+		f.Packet,
+		f.direction,
+		mnf,
+		f.cmdType,
+		uint8(f.commandID),
+		f.seq,
+	)
+
+}
+
 func (f *zclFrame) MarshalZcl() ([]byte, error) {
 	data := []byte{uint8(f.cmdType) & 0x03}
 	if f.direction {
 		data[0] = data[0] | 0x08
 	}
-	if !f.disableDefaultResponse {
+	if f.disableDefaultResponse {
 		data[0] = data[0] | 0x10
 	}
 
@@ -51,7 +72,6 @@ func (f *zclFrame) UnmarshalZcl(b []byte) ([]byte, error) {
 			return b, err
 		}
 	}
-	f.disableDefaultResponse = st&0x10 == 1
 	f.seq = b[0]
 	f.commandID = CommandID(b[1])
 	f.data = b[2:]

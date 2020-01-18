@@ -34,10 +34,10 @@ const (
 var Commands = map[zcl.CommandID]func() zcl.General{
 	ReadAttributesCommand:         func() zcl.General { return new(ReadAttributes) },
 	ReadAttributesResponseCommand: func() zcl.General { return new(ReadAttributesResponse) },
-	/*WriteAttributesCommand:                    func() zcl.General { return new(WriteAttributes) },
-	WriteAttributesUndividedCommand:           func() zcl.General { return new(WriteAttributesUndivided) },
-	WriteAttributesResponseCommand:            func() zcl.General { return new(WriteAttributesResponse) },
-	WriteAttributesNoResponseCommand:          func() zcl.General { return new(WriteAttributesNoResponse) },*/
+	WriteAttributesCommand:        func() zcl.General { return new(WriteAttributes) },
+	/*WriteAttributesUndividedCommand:           func() zcl.General { return new(WriteAttributesUndivided) },*/
+	WriteAttributesResponseCommand: func() zcl.General { return new(WriteAttributesResponse) },
+	/*WriteAttributesNoResponseCommand:          func() zcl.General { return new(WriteAttributesNoResponse) },*/
 	ConfigureReportingCommand:                 func() zcl.General { return new(ConfigureReporting) },
 	ConfigureReportingResponseCommand:         func() zcl.General { return new(ConfigureReportingResponse) },
 	ReadReportingConfigurationCommand:         func() zcl.General { return new(ReadReportingConfiguration) },
@@ -80,8 +80,8 @@ func (ReportAttributes) Direction() zcl.Direction           { return zcl.ClientT
 func (DiscoverAttributes) Direction() zcl.Direction         { return zcl.ClientToServer }
 func (DiscoverCommandsReceived) Direction() zcl.Direction   { return zcl.ClientToServer }
 func (DiscoverCommandsGenerated) Direction() zcl.Direction  { return zcl.ClientToServer }
+func (WriteAttributes) Direction() zcl.Direction            { return zcl.ClientToServer }
 
-//func (WriteAttributes) Direction() zcl.Direction { return zcl.ClientToServer }
 //func (WriteAttributesUndivided) Direction() zcl.Direction { return zcl.ClientToServer }
 //func (ReadAttributesStructured) Direction() zcl.Direction { return zcl.ClientToServer }
 //func (WriteAttributesStructured) Direction() zcl.Direction { return zcl.ClientToServer }
@@ -93,8 +93,8 @@ func (ReadReportingConfigurationResponse) Direction() zcl.Direction { return zcl
 func (DiscoverAttributesResponse) Direction() zcl.Direction         { return zcl.ServerToClient }
 func (DiscoverCommandsReceivedResponse) Direction() zcl.Direction   { return zcl.ServerToClient }
 func (DiscoverCommandsGeneratedResponse) Direction() zcl.Direction  { return zcl.ServerToClient }
+func (WriteAttributesResponse) Direction() zcl.Direction            { return zcl.ServerToClient }
 
-//func (WriteAttributesResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 //func (WriteAttributesNoResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 //func (WriteAttributesStructuredResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 //func (DiscoverAttributesExtendedResponse) Direction() zcl.Direction { return zcl.ServerToClient }

@@ -1,6 +1,9 @@
 package foundation
 
-import "hemtjan.st/zcl"
+import (
+	"encoding/json"
+	"hemtjan.st/zcl"
+)
 
 type AttributeReportingConfig struct {
 	Direction        zcl.Zenum8
@@ -10,6 +13,33 @@ type AttributeReportingConfig struct {
 	MaxInterval      zcl.Zu16
 	ReportableChange zcl.Val
 	TimeoutPeriod    zcl.Zu16
+}
+
+func (v *AttributeReportingConfig) UnmarshalJSON(b []byte) error {
+	a := &struct {
+		Direction        zcl.Zenum8
+		AttrID           zcl.AttrID
+		Type             zcl.TypeID
+		MinInterval      zcl.Zu16
+		MaxInterval      zcl.Zu16
+		TimeoutPeriod    zcl.Zu16
+		ReportableChange *string
+	}{}
+	if err := json.Unmarshal(b, a); err != nil {
+		return err
+	}
+
+	v.Direction = a.Direction
+	v.AttrID = a.AttrID
+	v.Type = a.Type
+	v.MinInterval = a.MinInterval
+	v.MaxInterval = a.MaxInterval
+	v.TimeoutPeriod = a.TimeoutPeriod
+
+	if a.ReportableChange != nil {
+		v.ReportableChange = zcl.FromString(uint8(v.Type), *a.ReportableChange)
+	}
+	return nil
 }
 
 func (v AttributeReportingConfig) String() string {
@@ -139,6 +169,18 @@ func (v *ConfigureReporting) Values() (r []zcl.Val) {
 func (ConfigureReporting) ID() zcl.CommandID { return ConfigureReportingCommand }
 func (ConfigureReporting) Name() string      { return "ConfigureReporting" }
 
+func (v ConfigureReporting) MarshalJSON() ([]byte, error) {
+	return json.Marshal(struct{ ReportingConfig []AttributeReportingConfig }{v})
+}
+func (v *ConfigureReporting) UnmarshalJSON(b []byte) error {
+	rc := &struct{ ReportingConfig []AttributeReportingConfig }{}
+	if err := json.Unmarshal(b, rc); err != nil {
+		return err
+	}
+	*v = rc.ReportingConfig
+	return nil
+}
+
 func (v ConfigureReporting) MarshalZcl() ([]byte, error) {
 	var data []byte
 	var tmp []byte
@@ -213,6 +255,9 @@ func (v *AttributeReportingConfigStatus) UnmarshalZcl(b []byte) ([]byte, error) 
 	var err error
 	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
 		return nil, err
+	}
+	if len(b) == 0 {
+		return nil, nil
 	}
 	if b, err = (&v.Direction).UnmarshalZcl(b); err != nil {
 		return nil, err

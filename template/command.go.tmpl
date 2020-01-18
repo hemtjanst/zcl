@@ -45,7 +45,7 @@ func ({{.Name.Fmt}}) Direction() zcl.Direction { return zcl.{{direction .}} }
 {{ end }}
 
 // MnfCode returns the manufacturer code (if any) of the command
-func ({{.Name.Fmt}}) MnfCode() uint16 { return {{mfc.Uint}} }
+func ({{.Name.Fmt}}) MnfCode() uint16 { return {{ .MfCode.Uint}} }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func ({{.Name.Fmt}}) MarshalJSON() ([]byte, error) { return []byte("{{.ID.Uint}}"), nil }
@@ -54,11 +54,12 @@ func (v *{{.Name.Fmt}}) Handle(frame Frame, handler interface{}) (rsp {{if zdo}}
     var h {{.Name.Fmt}}Handler
     if h, found = handler.({{.Name.Fmt}}Handler); found {
         {{if $rsp}}rsp, {{end}}err = h.Handle{{.Name.Fmt}}(frame, v)
-    } {{if $rsp}}{{if zdo}}
-    if rsp == nil {
-        rsp = &{{$rsp.Name.Fmt}}{Status: 0x84}
-    }
-    {{end}}{{end}}
+    } {{if $rsp}}{{if zdo}}else {
+        rsp = &{{$rsp.Name.Fmt}}{}
+        rsp.(*{{$rsp.Name.Fmt}}).Status.SetNotSupported()
+    } {{else}}else {
+        rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
+    }{{end}}{{end}}
     return
 }
 

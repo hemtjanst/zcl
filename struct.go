@@ -18,6 +18,41 @@ func (i CommandID) MarshalZcl() ([]byte, error) { return Zu8(i).MarshalZcl() }
 func (i ZdoCmdID) MarshalZcl() ([]byte, error)  { return Zu16(i).MarshalZcl() }
 func (i TypeID) MarshalZcl() ([]byte, error)    { return Zu8(i).MarshalZcl() }
 func (i TypeID) New() Val                       { return NewValue(uint8(i)) }
+func (i TypeID) Size() int {
+	v := i.New()
+	if v == nil {
+		return -1
+	}
+	if _, ok := v.(*Zostring); ok {
+		return 255
+	}
+	if _, ok := v.(*Zcstring); ok {
+		return 255
+	}
+	if _, ok := v.(*Zlostring); ok {
+		return 255
+	}
+	if _, ok := v.(*Zlcstring); ok {
+		return 255
+	}
+	if _, ok := v.(*Zarray); ok {
+		return 255
+	}
+	if _, ok := v.(*Zstruct); ok {
+		return 255
+	}
+	if _, ok := v.(*Zset); ok {
+		return 255
+	}
+	if _, ok := v.(*Zbag); ok {
+		return 255
+	}
+	bytes, err := v.MarshalZcl()
+	if err != nil {
+		return 255
+	}
+	return len(bytes)
+}
 
 const (
 	ErrNotEnoughData           errType = "not enough data"
@@ -66,6 +101,17 @@ const (
 	BroadcastRoutersCoords  uint16      = 0xFFFC
 	BroadcastLowPowerRouter uint16      = 0xFFFB
 )
+
+func (t CommandType) String() string {
+	switch t {
+	case ProfileWide:
+		return "ProfileWide"
+	case ClusterSpecific:
+		return "ClusterSpecific"
+	default:
+		return fmt.Sprintf("CommandType(0x%02X)", uint8(t))
+	}
+}
 
 func (d Direction) String() string {
 	if d == ServerToClient {

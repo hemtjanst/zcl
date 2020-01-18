@@ -117,6 +117,8 @@ func (v *AddScene) Handle(frame Frame, handler interface{}) (rsp zcl.General, fo
 	var h AddSceneHandler
 	if h, found = handler.(AddSceneHandler); found {
 		rsp, err = h.HandleAddScene(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -266,6 +268,8 @@ func (v *ViewScene) Handle(frame Frame, handler interface{}) (rsp zcl.General, f
 	var h ViewSceneHandler
 	if h, found = handler.(ViewSceneHandler); found {
 		rsp, err = h.HandleViewScene(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -379,6 +383,8 @@ func (v *RemoveScene) Handle(frame Frame, handler interface{}) (rsp zcl.General,
 	var h RemoveSceneHandler
 	if h, found = handler.(RemoveSceneHandler); found {
 		rsp, err = h.HandleRemoveScene(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -489,6 +495,8 @@ func (v *RemoveAllScenes) Handle(frame Frame, handler interface{}) (rsp zcl.Gene
 	var h RemoveAllScenesHandler
 	if h, found = handler.(RemoveAllScenesHandler); found {
 		rsp, err = h.HandleRemoveAllScenes(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -590,6 +598,8 @@ func (v *StoreScene) Handle(frame Frame, handler interface{}) (rsp zcl.General, 
 	var h StoreSceneHandler
 	if h, found = handler.(StoreSceneHandler); found {
 		rsp, err = h.HandleStoreScene(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -813,6 +823,8 @@ func (v *GetSceneMembership) Handle(frame Frame, handler interface{}) (rsp zcl.G
 	var h GetSceneMembershipHandler
 	if h, found = handler.(GetSceneMembershipHandler); found {
 		rsp, err = h.HandleGetSceneMembership(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -931,6 +943,8 @@ func (v *EnhancedAddScene) Handle(frame Frame, handler interface{}) (rsp zcl.Gen
 	var h EnhancedAddSceneHandler
 	if h, found = handler.(EnhancedAddSceneHandler); found {
 		rsp, err = h.HandleEnhancedAddScene(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -1082,6 +1096,8 @@ func (v *EnhancedViewScene) Handle(frame Frame, handler interface{}) (rsp zcl.Ge
 	var h EnhancedViewSceneHandler
 	if h, found = handler.(EnhancedViewSceneHandler); found {
 		rsp, err = h.HandleEnhancedViewScene(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -1203,6 +1219,8 @@ func (v *CopyScene) Handle(frame Frame, handler interface{}) (rsp zcl.General, f
 	var h CopySceneHandler
 	if h, found = handler.(CopySceneHandler); found {
 		rsp, err = h.HandleCopyScene(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
 	}
 	return
 }
@@ -1340,7 +1358,7 @@ func (IkeaRemotePress) Cluster() zcl.ClusterID { return ScenesID }
 func (IkeaRemotePress) Direction() zcl.Direction { return zcl.ClientToServer }
 
 // MnfCode returns the manufacturer code (if any) of the command
-func (IkeaRemotePress) MnfCode() uint16 { return 0 }
+func (IkeaRemotePress) MnfCode() uint16 { return 4476 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (IkeaRemotePress) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
@@ -1437,7 +1455,7 @@ func (IkeaRemoteLongpressStart) Cluster() zcl.ClusterID { return ScenesID }
 func (IkeaRemoteLongpressStart) Direction() zcl.Direction { return zcl.ClientToServer }
 
 // MnfCode returns the manufacturer code (if any) of the command
-func (IkeaRemoteLongpressStart) MnfCode() uint16 { return 0 }
+func (IkeaRemoteLongpressStart) MnfCode() uint16 { return 4476 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (IkeaRemoteLongpressStart) MarshalJSON() ([]byte, error) { return []byte("8"), nil }
@@ -1529,7 +1547,7 @@ func (IkeaRemoteLongpressStop) Cluster() zcl.ClusterID { return ScenesID }
 func (IkeaRemoteLongpressStop) Direction() zcl.Direction { return zcl.ClientToServer }
 
 // MnfCode returns the manufacturer code (if any) of the command
-func (IkeaRemoteLongpressStop) MnfCode() uint16 { return 0 }
+func (IkeaRemoteLongpressStop) MnfCode() uint16 { return 4476 }
 
 // MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
 // func (IkeaRemoteLongpressStop) MarshalJSON() ([]byte, error) { return []byte("9"), nil }

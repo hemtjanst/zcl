@@ -22,16 +22,15 @@ func (b *BufWriter) Write(bytes []byte) (int, error) {
 }
 
 func writeFile(f string, b []byte) error {
-	b2, err2 := format.Source(b)
-	if err2 == nil {
-		b = b2
+	if strings.HasSuffix(f, ".go") {
+		b2, err2 := format.Source(b)
+		if err2 == nil {
+			b = b2
+		}
 	}
 
 	err := ioutil.WriteFile(f, b, 0644)
-	if err != nil {
-		return err
-	}
-	return err2
+	return err
 }
 
 func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath, base string, mfc MfCode) template.FuncMap {
@@ -42,6 +41,12 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 		"fmt":  fmt.Sprintf,
 		"zdo": func() bool {
 			return zdo != nil
+		},
+		"withPath": func(path string, val interface{}) map[string]interface{} {
+			return map[string]interface{}{
+				"Path": path,
+				"Val":  val,
+			}
 		},
 		"strEsc": func(str interface{}) string {
 			var s string
@@ -123,7 +128,7 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 			return nil
 		},
 		"renderType": func(attr Attr) string {
-			attrTpl, err := loadTpl(tplPath, "attr", genHelpers(cluster, zdo, server, clusterID, pkg, tplPath, base, mfc))
+			attrTpl, err := loadTpl(tplPath, "attr.go", genHelpers(cluster, zdo, server, clusterID, pkg, tplPath, base, mfc))
 			if err != nil {
 				log.Fatalf("Cannot load attribute template: %+v", err)
 			}
@@ -135,7 +140,7 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 			return string(*wr)
 		},
 		"renderCluster": func(cl Cluster) string {
-			attrTpl, err := loadTpl(tplPath, "cluster", genHelpers(cluster, zdo, server, cl.ID.Hex4(), pkg, tplPath, base, cl.MfCode))
+			attrTpl, err := loadTpl(tplPath, "cluster.go", genHelpers(cluster, zdo, server, cl.ID.Hex4(), pkg, tplPath, base, cl.MfCode))
 			if err != nil {
 				log.Fatalf("Cannot load attribute template: %+v", err)
 			}
@@ -151,7 +156,7 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 			if len(newClusterID) > 0 {
 				clid = newClusterID[0]
 			}
-			cmdTpl, err := loadTpl(tplPath, "command", genHelpers(cluster, zdo, server, clid, pkg, tplPath, base, mfc))
+			cmdTpl, err := loadTpl(tplPath, "command.go", genHelpers(cluster, zdo, server, clid, pkg, tplPath, base, mfc))
 			if err != nil {
 				log.Fatalf("Cannot load command template: %+v", err)
 			}
@@ -236,7 +241,7 @@ func GenerateZdo(base, defPath, tplPath, outPath string) error {
 	}
 	zdoTpl, err := loadTpl(
 		tplPath,
-		"zdo",
+		"zdo.go",
 		genHelpers(nil, ret, false, "", "cluster", tplPath, base, MfCode("")),
 	)
 
@@ -257,8 +262,63 @@ func GenerateZdo(base, defPath, tplPath, outPath string) error {
 	return nil
 }
 
+func GenerateTypescript(base, defPath, tplPath, outPath string) error {
+
+	data := map[string]interface{}{}
+
+	file := filepath.Join(defPath, "zdo.yaml")
+	b, err := ioutil.ReadFile(file)
+	if err != nil {
+		return err
+	}
+	zdp := &Zdo{}
+	err = yaml.Unmarshal(b, zdp)
+	if err != nil {
+		return err
+	}
+	data["zdp"] = zdp
+
+	d := &Dir{name: filepath.Join(defPath, "clusters")}
+	d.traverse()
+
+	var cluster []Cluster
+	for _, v := range d.Files() {
+		clRoot, err := v.ReadCluster()
+		if err != nil {
+			return fmt.Errorf("while reading %s: %v", v.name, err)
+		}
+
+		if len(clRoot.Clusters) == 0 {
+			continue
+		}
+		cluster = append(cluster, *clRoot)
+	}
+
+	data["cluster"] = cluster
+
+	tpl, err := loadTpl(
+		tplPath,
+		"zyaml.ts",
+		genHelpers(nil, zdp, false, "", "ZigBee", tplPath, base, MfCode("")),
+	)
+
+	if err != nil {
+		return fmt.Errorf("while parsing template for ZDO: %v", err)
+	}
+	wr := &BufWriter{}
+	err = tpl.ExecuteTemplate(wr, "main", data)
+	if err != nil {
+		return fmt.Errorf("while executing template for ZDO: %v", err)
+	}
+	if err = writeFile(outPath, []byte(*wr)); err != nil {
+		return fmt.Errorf("trying to write %s: %v", outPath, err)
+	}
+
+	return nil
+}
+
 func loadTpl(tplPath, tpl string, funcs template.FuncMap) (*template.Template, error) {
-	b, err := ioutil.ReadFile(filepath.Join(tplPath, tpl+".go.tmpl"))
+	b, err := ioutil.ReadFile(filepath.Join(tplPath, tpl+".tmpl"))
 	if err != nil {
 		return nil, fmt.Errorf("loading template %s: %v", tpl, err)
 	}
@@ -290,7 +350,7 @@ func GenerateStruct(base, defPath, tplPath, outPath string) error {
 		dp = strings.TrimSuffix(dp, ".yaml")
 		_ = os.MkdirAll(dp, 0755)
 
-		structTpl, err := loadTpl(tplPath, "struct", genHelpers(nil, nil, false, "", dp, tplPath, base, ""))
+		structTpl, err := loadTpl(tplPath, "struct.go", genHelpers(nil, nil, false, "", dp, tplPath, base, ""))
 		if err != nil {
 			return fmt.Errorf("parsing struct template: %v", err)
 		}
@@ -305,7 +365,7 @@ func GenerateStruct(base, defPath, tplPath, outPath string) error {
 		}
 
 		for _, cl := range clRoot.Clusters {
-			clusterTpl, err := loadTpl(tplPath, "cluster", genHelpers(&cl, nil, false, cl.Name.Fmt()+"ID", dp, tplPath, base, cl.MfCode))
+			clusterTpl, err := loadTpl(tplPath, "cluster.go", genHelpers(&cl, nil, false, cl.Name.Fmt()+"ID", dp, tplPath, base, cl.MfCode))
 			if err != nil {
 				return fmt.Errorf("parsing cluster template: %v", err)
 			}

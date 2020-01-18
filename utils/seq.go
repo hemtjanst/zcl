@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"context"
 	"sync"
 )
 
@@ -10,15 +11,24 @@ type Seq interface {
 	// The ch argument will receive data once Handle() is called with the corresponding seq number
 	// It's important to call the release() func when the callback is no longer needed
 	// in order to prevent sequence exhaustion. Preferably via defer
-	Next(ch chan<- interface{}) (seq uint8, release func())
+	Next(ch chan<- interface{}) (seq uint8, release func(), err error)
 
 	// Handle sends data to the corresponding waiting channel
 	// Returns false if no waiting channel is found
 	Handle(seq uint8, data interface{}) (found bool)
 }
 
+type Err string
+
+func (e Err) Error() string { return string(e) }
+
+const (
+	ErrContextDone = Err("context is expired")
+)
+
 type seqNo struct {
 	lock    sync.RWMutex
+	ctx     context.Context
 	seq     uint8
 	min     uint8
 	max     uint8
@@ -27,31 +37,57 @@ type seqNo struct {
 }
 
 // NewSeq returns a new Seq
-func NewSeq() Seq {
-	return &seqNo{
+func NewSeq(ctx context.Context) Seq {
+	s := &seqNo{
 		waits:   map[uint8]chan<- interface{}{},
 		queueCh: make(chan struct{}, 1),
 		min:     0,
 		max:     255,
+		ctx:     ctx,
 	}
+	if ctx != nil {
+		go func() {
+			<-ctx.Done()
+			s.lock.Lock()
+			defer s.lock.Unlock()
+			for _, ch := range s.waits {
+				close(ch)
+			}
+			s.waits = map[uint8]chan<- interface{}{}
+		}()
+	}
+	return s
 }
 
 // NewSeq returns a new Seq
-func NewSeqRange(min, max uint8) Seq {
-	return &seqNo{
-		waits:   map[uint8]chan<- interface{}{},
-		queueCh: make(chan struct{}, 1),
-		min:     min,
-		max:     max,
-		seq:     min,
-	}
+func NewSeqRange(ctx context.Context, min, max uint8) Seq {
+	s := NewSeq(ctx).(*seqNo)
+	s.min = min
+	s.max = max
+	s.seq = min
+	return s
 }
 
-func (s *seqNo) Next(ch chan<- interface{}) (uint8, func()) {
+func (s *seqNo) isDone() bool {
+	if s.ctx != nil {
+		select {
+		case <-s.ctx.Done():
+			return true
+		default:
+			return false
+		}
+	}
+	return false
+}
+
+func (s *seqNo) Next(ch chan<- interface{}) (uint8, func(), error) {
 	for {
+		if s.isDone() {
+			return 0, nil, ErrContextDone
+		}
 		seq, ok := s.find(ch)
 		if ok {
-			return seq, func() { s.release(seq) }
+			return seq, func() { s.release(seq) }, nil
 		}
 		<-s.waitCh()
 	}

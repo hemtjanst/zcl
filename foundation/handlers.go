@@ -43,6 +43,13 @@ type DiscoverCommandsReceivedResponseHandler interface {
 type DiscoverCommandsGeneratedResponseHandler interface {
 	HandleDiscoverCommandsGeneratedResponse(Frame, *DiscoverCommandsGeneratedResponse) error
 }
+type WriteAttributesHandler interface {
+	HandleWriteAttributes(Frame, *WriteAttributes) (*WriteAttributesResponse, error)
+}
+
+type WriteAttributesResponseHandler interface {
+	HandleWriteAttributesResponse(Frame, *WriteAttributesResponse) error
+}
 
 func (v *ReadAttributes) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
 	var h ReadAttributesHandler
@@ -132,6 +139,20 @@ func (v *DiscoverCommandsGeneratedResponse) Handle(frame Frame, handler interfac
 	var h DiscoverCommandsGeneratedResponseHandler
 	if h, found = handler.(DiscoverCommandsGeneratedResponseHandler); found {
 		err = h.HandleDiscoverCommandsGeneratedResponse(frame, v)
+	}
+	return
+}
+func (v *WriteAttributes) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h WriteAttributesHandler
+	if h, found = handler.(WriteAttributesHandler); found {
+		rsp, err = h.HandleWriteAttributes(frame, v)
+	}
+	return
+}
+func (v *WriteAttributesResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h WriteAttributesResponseHandler
+	if h, found = handler.(WriteAttributesResponseHandler); found {
+		err = h.HandleWriteAttributesResponse(frame, v)
 	}
 	return
 }
