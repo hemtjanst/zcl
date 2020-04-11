@@ -1,7 +1,7 @@
 {{- /*gotype: map[string]interface{}*/ -}}
 {{define "main"}}{{$ns := "ZigBee"}}
 namespace {{$ns}} {
-    interface IType {
+    export interface IType {
         type: string;
         size: number;
         format?: (t: IType, val: ValueType) => string;
@@ -9,36 +9,77 @@ namespace {{$ns}} {
         values?: {[val: number]: string};
     }
 
-    interface IVal extends IType {
+    export interface IVal extends IType {
         value?: ValueType
         scale?: number
         unit?: IUnit
     }
-    type IValInit<T> = (value?: ValueType) => T;
+    export type IValInit<T,V> = (value?: V) => T;
 
-    interface IArgument extends IType {
+    export interface IArgument extends IType {
+        value?: any
         name: string
+        description?: string
+        mnf?: number
         arrayType?: () => IType
+        payload?: {[name: string]: IValInit<IArgument,ValueType>}
+        unit?: IUnit
+        scale?: number
+        bits?: {[bit: number]: string}
+        values?: {[value: number]: string}
+        cond?: ICondition[]
         [n: string]: any
     }
-    interface IAttribute extends IArgument {
-        id: number,
+    export interface IAttribute extends IArgument {
+        id: number
+        report?: boolean
+        read?: boolean
+        write?: boolean
+        require?: boolean
 
     }
-    interface ICommand extends IType {
-
+    export interface ICommand extends IType {
+        value: {[name:string]: any}
+        id: number
+        name: string
+        description?: string
+        payload: {[name: string]: IValInit<IArgument,any>}
     }
+
+    export interface ICondition {
+        field: string
+        description?: string
+        value: number
+        mask?: number
+        invert?: boolean
+    }
+
+    export interface ICluster {
+        ID: number
+        Name: string
+        Desc: string
+        Server: {
+            Attribute: { [id: number]: IValInit<IAttribute,any> }
+            Command: { [id: number]: IValInit<ICommand,any> }
+        }
+        Client: {
+            Attribute: { [id: number]: IValInit<IAttribute,any> }
+            Command: { [id: number]: IValInit<ICommand,any> }
+        }
+        [cmdName: string]: any
+    }
+
 
     const command: IType = {
         type: "command",
         size: -1
     };
 
-    interface IUnit {
+    export interface IUnit {
         unit: string
         format(v: ValueType): string
     }
-    type ValueType = string|object|number|Uint8Array;
+    export type ValueType = string|object|number|Uint8Array;
 
     const lp = (n: number|string, z: number) => {
         if (typeof n === 'number') n = n.toString();
@@ -46,7 +87,7 @@ namespace {{$ns}} {
         return n;
     };
 
-    export function makeType<T extends IType>(...parts:any[]): IValInit<T> {
+    export function makeType<T extends IType,V>(...parts:any[]): IValInit<T,V> {
         return (value) => {
             let proto: any = {};
             for (let obj of parts) {
@@ -57,9 +98,9 @@ namespace {{$ns}} {
             }
 
             class Value {
-                value: ValueType;
+                value: V;
 
-                constructor(value?: ValueType) {
+                constructor(value?: V) {
                     for (let k in proto) {
                         if (!proto.hasOwnProperty(k)) continue;
                         this[k] = proto[k];
@@ -104,7 +145,7 @@ namespace {{$ns}} {
                 }
             }
 
-            let o: IVal = <IVal>(new Value(value));
+            let o: IVal = <IVal><unknown>(new Value(value));
             return <T>o;
         }
     }
@@ -143,61 +184,61 @@ namespace {{$ns}} {
     };
 
     export const base = {
-        local: makeType<IType>(native.struct, {size: -1, type: "local"}),
-        array: makeType<IType>(native.array, {size: -1, type: "array"}),
-        struct: makeType<IType>(native.struct, {size: -1, type: "struct"}),
-        set: makeType<IType>(native.array, {size: -1, type: "set"}),
-        bag: makeType<IType>(native.array, {size: -1, type: "bag"}),
-        list: makeType<IType>(native.array, {size: -1, type: "list"}),
-        bmp8: makeType<IType>(native.bitmap, {size: 1, type: "bmp8"}),
-        bmp16: makeType<IType>(native.bitmap, {size: 2, type: "bmp16"}),
-        bmp24: makeType<IType>(native.bitmap, {size: 3, type: "bmp24"}),
-        bmp32: makeType<IType>(native.bitmap, {size: 4, type: "bmp32"}),
-        bmp40: makeType<IType>(native.bitmap, {size: 5, type: "bmp40"}),
-        bmp48: makeType<IType>(native.bitmap, {size: 6, type: "bmp48"}),
-        bmp56: makeType<IType>(native.bitmap, {size: 7, type: "bmp56"}),
-        bmp64: makeType<IType>(native.bitmap, {size: 8, type: "bmp64"}),
-        dat8: makeType<IType>(native.byte, {size: 1, type: "dat8"}),
-        dat16: makeType<IType>(native.byte, {size: 2, type: "dat16"}),
-        dat24: makeType<IType>(native.byte, {size: 3, type: "dat24"}),
-        dat32: makeType<IType>(native.byte, {size: 4, type: "dat32"}),
-        dat40: makeType<IType>(native.byte, {size: 5, type: "dat40"}),
-        dat48: makeType<IType>(native.byte, {size: 6, type: "dat48"}),
-        dat56: makeType<IType>(native.byte, {size: 7, type: "dat56"}),
-        dat64: makeType<IType>(native.byte, {size: 8, type: "dat64"}),
-        bytes: makeType<IType>(native.byte, {size: -1, type: "bytes"}),
-        enum8: makeType<IType>(native.enum, {size: 1, type: "enum8"}),
-        enum16: makeType<IType>(native.enum, {size: 2, type: "enum16"}),
-        bool: makeType<IType>(native.bool, {size: 1, type: "bool"}),
-        cid: makeType<IType>(native.uint, {size: 2, type: "cid"}),
-        aid: makeType<IType>(native.uint, {size: 2, type: "aid"}),
-        oid: makeType<IType>(native.uint, {size: 4, type: "oid"}),
-        uid: makeType<IType>(native.string, {size: 8, type: "uid"}),
-        seckey: makeType<IType>(native.byte, {size: 16, type: "seckey"}),
-        u8: makeType<IType>(native.uint, {size: 1, type: "u8"}),
-        u16: makeType<IType>(native.uint, {size: 2, type: "u16"}),
-        u24: makeType<IType>(native.uint, {size: 4, type: "u24"}),
-        u32: makeType<IType>(native.uint, {size: 4, type: "u32"}),
-        u40: makeType<IType>(native.uint, {size: 8, type: "u40"}),
-        u48: makeType<IType>(native.uint, {size: 8, type: "u48"}),
-        u56: makeType<IType>(native.uint, {size: 8, type: "u56"}),
-        u64: makeType<IType>(native.uint, {size: 8, type: "u64"}),
-        s8: makeType<IType>(native.int, {size: 1, type: "s8"}),
-        s16: makeType<IType>(native.int, {size: 2, type: "s16"}),
-        s24: makeType<IType>(native.int, {size: 4, type: "s24"}),
-        s32: makeType<IType>(native.int, {size: 4, type: "s32"}),
-        s40: makeType<IType>(native.int, {size: 8, type: "s40"}),
-        s48: makeType<IType>(native.int, {size: 8, type: "s48"}),
-        s56: makeType<IType>(native.int, {size: 8, type: "s56"}),
-        s64: makeType<IType>(native.int, {size: 8, type: "s64"}),
-        semi: makeType<IType>(native.float, {size: 4, type: "semi"}),
-        float: makeType<IType>(native.float, {size: 4, type: "float"}),
-        double: makeType<IType>(native.float, {size: 8, type: "double"}),
-        ostring: makeType<IType>(native.byte, {size: -1, type: "ostring"}),
-        cstring: makeType<IType>(native.string, {size: -1, type: "cstring"}),
-        lostring: makeType<IType>(native.byte, {size: -2, type: "lostring"}),
-        lcstring: makeType<IType>(native.string, {size: -2, type: "lcstring"}),
-        date: makeType<IType>(native.string, {size: 4, type: "date",
+        local: makeType<IType,Object>(native.struct, {size: -1, type: "local"}),
+        array: makeType<IType,any[]>(native.array, {size: -1, type: "array"}),
+        struct: makeType<IType,Object>(native.struct, {size: -1, type: "struct"}),
+        set: makeType<IType,any[]>(native.array, {size: -1, type: "set"}),
+        bag: makeType<IType,any[]>(native.array, {size: -1, type: "bag"}),
+        list: makeType<IType,any[]>(native.array, {size: -1, type: "list"}),
+        bmp8: makeType<IType,number[]>(native.bitmap, {size: 1, type: "bmp8"}),
+        bmp16: makeType<IType,number[]>(native.bitmap, {size: 2, type: "bmp16"}),
+        bmp24: makeType<IType,number[]>(native.bitmap, {size: 3, type: "bmp24"}),
+        bmp32: makeType<IType,number[]>(native.bitmap, {size: 4, type: "bmp32"}),
+        bmp40: makeType<IType,number[]>(native.bitmap, {size: 5, type: "bmp40"}),
+        bmp48: makeType<IType,number[]>(native.bitmap, {size: 6, type: "bmp48"}),
+        bmp56: makeType<IType,number[]>(native.bitmap, {size: 7, type: "bmp56"}),
+        bmp64: makeType<IType,number[]>(native.bitmap, {size: 8, type: "bmp64"}),
+        dat8: makeType<IType,string>(native.byte, {size: 1, type: "dat8"}),
+        dat16: makeType<IType,string>(native.byte, {size: 2, type: "dat16"}),
+        dat24: makeType<IType,string>(native.byte, {size: 3, type: "dat24"}),
+        dat32: makeType<IType,string>(native.byte, {size: 4, type: "dat32"}),
+        dat40: makeType<IType,string>(native.byte, {size: 5, type: "dat40"}),
+        dat48: makeType<IType,string>(native.byte, {size: 6, type: "dat48"}),
+        dat56: makeType<IType,string>(native.byte, {size: 7, type: "dat56"}),
+        dat64: makeType<IType,string>(native.byte, {size: 8, type: "dat64"}),
+        bytes: makeType<IType,string>(native.byte, {size: -1, type: "bytes"}),
+        enum8: makeType<IType,number>(native.enum, {size: 1, type: "enum8"}),
+        enum16: makeType<IType,number>(native.enum, {size: 2, type: "enum16"}),
+        bool: makeType<IType,number>(native.bool, {size: 1, type: "bool"}),
+        cid: makeType<IType,number>(native.uint, {size: 2, type: "cid"}),
+        aid: makeType<IType,number>(native.uint, {size: 2, type: "aid"}),
+        oid: makeType<IType,number>(native.uint, {size: 4, type: "oid"}),
+        uid: makeType<IType,number>(native.string, {size: 8, type: "uid"}),
+        seckey: makeType<IType,string>(native.byte, {size: 16, type: "seckey"}),
+        u8: makeType<IType,number>(native.uint, {size: 1, type: "u8"}),
+        u16: makeType<IType,number>(native.uint, {size: 2, type: "u16"}),
+        u24: makeType<IType,number>(native.uint, {size: 4, type: "u24"}),
+        u32: makeType<IType,number>(native.uint, {size: 4, type: "u32"}),
+        u40: makeType<IType,number>(native.uint, {size: 8, type: "u40"}),
+        u48: makeType<IType,number>(native.uint, {size: 8, type: "u48"}),
+        u56: makeType<IType,number>(native.uint, {size: 8, type: "u56"}),
+        u64: makeType<IType,number>(native.uint, {size: 8, type: "u64"}),
+        s8: makeType<IType,number>(native.int, {size: 1, type: "s8"}),
+        s16: makeType<IType,number>(native.int, {size: 2, type: "s16"}),
+        s24: makeType<IType,number>(native.int, {size: 4, type: "s24"}),
+        s32: makeType<IType,number>(native.int, {size: 4, type: "s32"}),
+        s40: makeType<IType,number>(native.int, {size: 8, type: "s40"}),
+        s48: makeType<IType,number>(native.int, {size: 8, type: "s48"}),
+        s56: makeType<IType,number>(native.int, {size: 8, type: "s56"}),
+        s64: makeType<IType,number>(native.int, {size: 8, type: "s64"}),
+        semi: makeType<IType,number>(native.float, {size: 4, type: "semi"}),
+        float: makeType<IType,number>(native.float, {size: 4, type: "float"}),
+        double: makeType<IType,number>(native.float, {size: 8, type: "double"}),
+        ostring: makeType<IType,string>(native.byte, {size: -1, type: "ostring"}),
+        cstring: makeType<IType,string>(native.string, {size: -1, type: "cstring"}),
+        lostring: makeType<IType,string>(native.byte, {size: -2, type: "lostring"}),
+        lcstring: makeType<IType,string>(native.string, {size: -2, type: "lcstring"}),
+        date: makeType<IType,number>(native.string, {size: 4, type: "date",
             format: (v) => {
                 if (typeof v !== 'number') v=parseInt(v);
                 // Can we stop using tiny numbers for dates? Y2K, Y2038 and now 2157...
@@ -208,7 +249,7 @@ namespace {{$ns}} {
                 return (new Date(yr, mo, day, 0, 0, 0)).toLocaleDateString();
             }
         }),
-        time: makeType<IType>(native.uint, {size: 4, type: "time",
+        time: makeType<IType,number>(native.uint, {size: 4, type: "time",
             format: (v) => {
                 if (typeof v !== 'number') v=parseInt(v);
                 let h = (v & 0xFF000000) >> 24,
@@ -218,14 +259,14 @@ namespace {{$ns}} {
                 return `${lp(h,2)}:${lp(m,2)}:${lp(s,2)}.${lp(c,2)}`
             }
         }),
-        utc: makeType<IType>(native.uint, {size: 4, type: "utc",
+        utc: makeType<IType,number>(native.uint, {size: 4, type: "utc",
             format: (v) => {
                 if (typeof v !== 'number') v=parseInt(v);
                 // Unixtime-like, but starts on 2000-01-01, should last until ~2137
                 return (new Date(1000 * (v + 946684800))).toLocaleString();
             }
         }),
-        Status: makeType<IType>(native.enum, { size: 1, type: "status", 
+        Status: makeType<IType,number>(native.enum, { size: 1, type: "status",
             values: {
                 0x00: "Success",
                 0x01: "Failure",
@@ -254,8 +295,8 @@ namespace {{$ns}} {
                 0xc2: "Calibration Error",
             } 
         }),
-        SceneExtensionSet: makeType<IType>(native.struct, { type: "sceneExtensionSet" }),
-        EngineeringUnit: makeType<IType>(native.uint, {size: 2, type: "engineeringUnit",
+        SceneExtensionSet: makeType<IType,Object>(native.struct, { type: "sceneExtensionSet" }),
+        EngineeringUnit: makeType<IType,number>(native.uint, {size: 2, type: "engineeringUnit",
             parse: (v) => {
 
                 return v;
@@ -283,26 +324,26 @@ namespace {{$ns}} {
         class String {}
     }
 
-    export const ZDP = { {{$path := fmt "%s.ZDP.Types" $ns}}
+    export const ZDP = { {{$path := fmt "%s.ZDP" $ns}}{{$ipath := fmt "%s.IZDP" $ns}}
         Types: {
-            {{range $name,$attr := .zdp.TypeMap}}{{if $attr.Name}}{{template "attr" withPath $path $attr}}{{end}}{{end}}
+            {{range $name,$attr := .zdp.TypeMap}}{{if $attr.Name}}{{template "attr" withPath $path $ipath $ipath $attr}}{{end}}{{end}}
         },
-        Commands: { {{range .zdp.Commands}}{{if .Name}}{{template "cmd" withPath $path .}}{{end}}{{end}} }
+        Commands: { {{range .zdp.Commands}}{{if .Name}}{{template "cmd" withPath $path $ipath $ipath .}}{{end}}{{end}} }
     };
 
     export namespace Profile {
 
     }
 
-    {{range .cluster}}{{$dom := .Name.Fmt}}{{$path := fmt "%s.%s.Types" $ns $dom}}
+    {{range .cluster}}{{$dom := .Name.Fmt}}{{$path := fmt "%s.%s" $ns $dom}}{{$ipath := fmt "%s.I%s" $ns $dom}}
     export const {{$dom}} = {
-        Types: { {{range $name,$attr := .TypeMap}}{{if $attr.Name}}{{template "attr" withPath $path $attr}}{{end}}{{end}} }{{range .Clusters}}{{$cl := .Name.Fmt}},
+        Types: { {{range $name,$attr := .TypeMap}}{{if $attr.Name}}{{template "attr" withPath $path $ipath "" $attr}}{{end}}{{end}} }{{range .Clusters}}{{$cl := .Name.Fmt}}{{$iCmdPath := fmt "%s.I%s.%s" $ns $dom $cl}},
         {{.Name.Fmt}}: {
             ID: {{.ID.Hex4}},
             Name: {{strEsc .Name}},
             Desc: {{strEsc .Desc}},
-            {{range .Server.Command}}{{if .Name}}{{template "cmd" withPath $path .}}{{end}}{{end}}
-            {{range .Client.Command}}{{if .Name}}{{template "cmd" withPath $path .}}{{end}}{{end}}
+            {{range .Server.Command}}{{if .Name}}{{template "cmd" withPath $path $ipath $iCmdPath .}}{{end}}{{end}}
+            {{range .Client.Command}}{{if .Name}}{{template "cmd" withPath $path $ipath $iCmdPath .}}{{end}}{{end}}
             Server: {
                 Attribute: {},
                 Command: {},
@@ -327,9 +368,31 @@ namespace {{$ns}} {
         {{.ID.Hex2}}: {{$ns}}.{{$dom}}.{{$cl}}.{{.Name.Fmt}},{{end}}{{end}}
     };{{end}}{{end}}
 
-    export const cluster = { {{range .cluster}}{{$dom := .Name.Fmt}}{{range .Clusters}}{{$cl := .Name.Fmt}}
+    export const cluster: {[id: number]: ICluster} = { {{range .cluster}}{{$dom := .Name.Fmt}}{{range .Clusters}}{{$cl := .Name.Fmt}}
         {{.ID}}: ZigBee.{{$dom}}.{{$cl}},{{end}}{{end}}
     };
+
+    export namespace IZDP {
+        import ICommand = ZigBee.ICommand;
+        import IArgument = ZigBee.IArgument;
+        import ValueType = ZigBee.ValueType;
+
+        {{range .zdp.Commands}}{{if .Name}}{{template "cmdInterface" .}}{{end}}{{end}}{{range .zdp.Types}}{{if .Name}}{{template "argInterface" .}}{{end}}{{end}}
+    }
+    {{range .cluster}}
+    export namespace I{{.Name.Fmt}} {
+        import IArgument = ZigBee.IArgument;
+        import IAttribute = ZigBee.IAttribute;
+        import ValueType = ZigBee.ValueType;
+        {{range .Clusters}}
+        export namespace {{.Name.Fmt}} {
+            import ICommand = ZigBee.ICommand;
+            import ValueType = ZigBee.ValueType;
+
+        {{range .Server.Command}}{{if .Name}}{{template "cmdInterface" .}}{{end}}{{end}}{{range .Client.Command}}{{if .Name}}{{template "cmdInterface" .}}{{end}}{{end}}
+        }
+{{end}}{{range .Types}}{{if .Name}}{{template "argInterface" .}}{{end}}{{end}}    }
+{{end}}
 
 
     export const units = {
@@ -791,40 +854,48 @@ namespace {{$ns}} {
 {{end}}
 
 {{define "cmd"}}
-        {{.Val.Name.Fmt}}: makeType<ICommand>(command, () => ({
-            name: {{strEsc .Val.Name}},
-            description: {{strEsc .Val.Desc}},
-            id: {{.Val.ID.Hex4}},
-            {{if .Val.MfCode}}mnf: {{fmt "0x%04x" .Val.MfCode.Uint}},
-            {{end}}payload: {{if .Val.PayloadAttr}}{ {{template "attrList" withPath .Path .Val.PayloadAttr}}}{{else}}{}{{end}}
-        })),
+            {{.Val.Name.Fmt}}: makeType<{{.CmdPath}}.ICmd{{.Val.Name.Fmt}}, {{.CmdPath}}.ICmd{{.Val.Name.Fmt}}Payload>(command, () => ({
+                name: {{strEsc .Val.Name}},
+                description: {{strEsc .Val.Desc}},
+                id: {{.Val.ID.Hex4}},
+                {{if .Val.MfCode}}mnf: {{fmt "0x%04x" .Val.MfCode.Uint}},
+                {{end}}payload: {{if .Val.PayloadAttr}}{ {{template "attrList" withPath .Path .IPath .CmdPath .Val.PayloadAttr}}}{{else}}{}{{end}}
+            })),
 {{end}}
 
+{{define "cmdInterface"}}
+            export type ICmd{{.Name.Fmt}}Payload = { {{range .PayloadAttr}}{{if .Name}}{{if .ArgName}}{{.ArgName.Fmt}}{{else}}{{.Name.Fmt}}{{end}}?: IArg{{.Name.Fmt}}Payload, {{end}}{{end}}}
+            export interface ICmd{{.Name.Fmt}} extends ICommand { value: ICmd{{.Name.Fmt}}Payload }{{end}}
+
+{{define "argInterface"}}
+            export type IArg{{.Name.Fmt}}Payload = {{if .StructAttr}}{ {{range .StructAttr}}{{if .Name}}{{if .ArgName}}{{.ArgName.Fmt}}{{else}}{{.Name.Fmt}}{{end}}?: IArg{{.Name.Fmt}}Payload, {{end}}{{end}}}{{else}}ValueType{{end}};
+            export interface IArg{{.Name.Fmt}} extends {{if .ID}}IAttribute{{else}}IArgument{{end}} { value: IArg{{.Name.Fmt}}Payload }{{end}}
+
 {{define "attr"}}
-        {{.Val.Name.Fmt}}: makeType<{{if .Val.ID}}IAttribute{{else}}IArgument{{end}}>({{.Val.Type.TsType .Path}}, ()=>({
-            name: {{strEsc .Val.Name}},
-            description: {{strEsc .Val.Desc}},
-            {{if .Val.ID}}id: {{.Val.ID.Hex4}},
-            report: {{.Val.Report}},
-            read: {{.Val.CanRead}},
-            write: {{.Val.CanWrite}},
-            require: {{if eq "m" .Val.Required}}true{{else}}false{{end}},
-            {{end}}{{if .Val.MfCode}}mnf: {{fmt "0x%04x" .Val.MfCode.Uint}},
-            {{end}}{{if .Val.ArrayType}}arrayType: {{.Val.ArrayType.TsType .Path}},
-            {{end}}{{if .Val.StructAttr}}payload: { {{template "attrList" withPath .Path .Val.StructAttr}} },
-            {{end}}{{if .Val.Unit}}unit: units.{{.Val.Unit}},
-            {{end}}{{if .Val.Multiplier}}scale: {{.Val.Multiplier}},
-            {{end}}{{if .Val.Bits}}bits: { {{template "optsList" .Val.Bits}} },
-            {{end}}{{if .Val.Values}}values: { {{template "optsList" .Val.Values}} },
-            {{end}}{{if .Val.Cond}}cond: [ {{template "condList" .Val.Cond}} ],{{end}}
-        })),{{end}}
+            {{.Val.Name.Fmt}}: makeType<{{.IPath}}.IArg{{.Val.Name.Fmt}}, {{.IPath}}.IArg{{.Val.Name.Fmt}}Payload>({{.Val.Type.TsType .Path}}, ()=>({
+                name: {{strEsc .Val.Name}},
+                description: {{strEsc .Val.Desc}},
+                {{if .Val.ID}}id: {{.Val.ID.Hex4}},
+                report: {{.Val.Report}},
+                read: {{.Val.CanRead}},
+                write: {{.Val.CanWrite}},
+                require: {{if eq "m" .Val.Required}}true{{else}}false{{end}},
+                {{end}}{{if .Val.MfCode}}mnf: {{fmt "0x%04x" .Val.MfCode.Uint}},
+                {{end}}{{if .Val.ArrayType}}arrayType: {{.Val.ArrayType.TsType .Path}},
+                {{end}}{{if .Val.StructAttr}}payload: { {{template "attrList" withPath .Path .IPath .CmdPath .Val.StructAttr}} },
+                {{end}}{{if .Val.Unit}}unit: units.{{.Val.Unit}},
+                {{end}}{{if .Val.Multiplier}}scale: {{.Val.Multiplier}},
+                {{end}}{{if .Val.Bits}}bits: { {{template "optsList" .Val.Bits}} },
+                {{end}}{{if .Val.Values}}values: { {{template "optsList" .Val.Values}} },
+                {{end}}{{if .Val.Cond}}cond: [ {{template "condList" .Val.Cond}} ],{{end}}
+            })),{{end}}
 
 {{define "optsList"}}{{ range $k,$v := . }}
                 {{$k}}: {{strEsc $v}}, {{end}}{{end}}
 
 {{define "attrList"}}
-{{$path:=.Path}}{{range .Val}}{{if .Name}}                {{if .ArgName}}{{.ArgName.Fmt}}{{else}}{{.Name.Fmt}}{{end}}: {{$path}}.{{.Name.Fmt}},
-{{end}}{{end}}            {{end}}
+{{$path:=.Path}}{{$ipath:=.IPath}}{{range .Val}}{{if .Name}}                    {{if .ArgName}}{{.ArgName.Fmt}}{{else}}{{.Name.Fmt}}{{end}}: {{$path}}.Types.{{.Name.Fmt}},
+{{end}}{{end}}                {{end}}
 
 {{define "condList"}}{{range .}}{{if .Name}}{
             description: {{strEsc .Desc}},

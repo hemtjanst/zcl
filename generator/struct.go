@@ -569,7 +569,7 @@ func (n Name) Pfx() string {
 
 func (n Type) TsType(path string) string {
 	if len(n) > 0 && n[0] == '_' {
-		return path + "." + string(n[1:])
+		return path + ".Types." + string(n[1:])
 	}
 	return fmt.Sprintf("base.%s", n)
 }

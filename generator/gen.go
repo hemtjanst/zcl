@@ -42,10 +42,12 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 		"zdo": func() bool {
 			return zdo != nil
 		},
-		"withPath": func(path string, val interface{}) map[string]interface{} {
+		"withPath": func(path string, iPath string, cmdPath string, val interface{}) map[string]interface{} {
 			return map[string]interface{}{
-				"Path": path,
-				"Val":  val,
+				"Path":    path,
+				"CmdPath": cmdPath,
+				"IPath":   iPath,
+				"Val":     val,
 			}
 		},
 		"strEsc": func(str interface{}) string {
