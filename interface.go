@@ -23,6 +23,10 @@ type Val interface {
 	OutArg
 }
 
+type ScaledArg interface {
+	Scaled() float64
+}
+
 type EnumArg interface {
 	SingleOptions() []Option
 }

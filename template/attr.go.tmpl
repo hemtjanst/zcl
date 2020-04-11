@@ -181,6 +181,12 @@ func (v {{$an}}) String() string { {{if .Values}}switch v { {{range $vk,$vv := .
     return zcl.Sprintf("%v", {{.Type.RealType}}(v)){{end}}
 }
 
+{{if .Multiplier}}func (v {{$an}}) Scaled() float64 {
+    return float64(v)/{{.Multiplier}}
+}{{else if eq .Type "bool"}}func (v {{$an}}) Scaled() float64 {
+    return float64(v)
+}{{end}}
+
 {{range $vk,$vv := .Bits}}
 func (v {{$an}}) Is{{$vv.Fmt}}() bool { return zcl.BitmapTest([]byte(v[:]), {{$vk}}) }{{end}}{{range $vk,$vv := .Bits}}
 func (v *{{$an}}) Set{{$vv.Fmt}}(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), {{$vk}}, b)) } {{end}}
