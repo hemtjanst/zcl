@@ -4,16 +4,12 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-      - 'cluster/**'
-      - 'zdo/**'
     branches:
       - master
   push:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-      - 'cluster/**'
-      - 'zdo/**'
     branches:
       - master
 
@@ -36,6 +32,14 @@ jobs:
       working-directory: ./zcl
       run: |
         go run hemtjan.st/zcl/cmd/zclgen -definition-path ../zyaml
+        if test -n "$(git status -s)"; then
+          echo "Repository is in dirty state!"
+          echo "  Update your copy of zyaml to latest master"
+          echo "  Regenerate using cmd/zclgen"
+          echo "Changed files:"
+          git status -s
+          exit 1
+        fi
     - name: Build updated ZCL
       working-directory: ./zcl
       run: |
@@ -44,41 +48,3 @@ jobs:
       working-directory: ./zcl
       run: |
         go test -v hemtjan.st/zcl/...
-  update:
-    name: Push updated ZCL
-    if: github.ref == 'refs/heads/master'
-    needs: generate_and_test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        path: zcl
-        ssh-key: ${{ secrets.BOT_SSH_KEY }}
-    - uses: actions/checkout@v2
-      with:
-        repository: hemtjanst/zyaml
-        path: zyaml
-    - uses: actions/setup-go@v2-beta
-      with:
-        go-version: '1.14'
-    - name: Generate ZCL
-      working-directory: ./zcl
-      run: |
-        go run hemtjan.st/zcl/cmd/zclgen -definition-path ../zyaml
-        go build hemtjan.st/zcl/...
-        go mod tidy
-    - name: Commit
-      working-directory: ./zcl
-      run: |
-        if test -n "$(git status -s)"; then
-          git config user.name "Hemtjanst Bot"
-          git config user.email "63548820+hemtjanst-bot@users.noreply.github.com"
-          git add .
-          git commit -m "Regenerated library at ${GITHUB_SHA}"
-        else
-          echo "No changes to generated code"
-        fi
-    - name: Push
-      working-directory: ./zcl
-      run: |
-        git push
