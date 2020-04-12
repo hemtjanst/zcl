@@ -1947,7 +1947,11 @@ func (v *BatteryRemaining) SetValue(a zcl.Val) error {
 }
 
 func (v BatteryRemaining) String() string {
-	return zcl.Percent.Format(float64(v))
+	return zcl.Percent.Format(float64(v) / 2)
+}
+
+func (v BatteryRemaining) Scaled() float64 {
+	return float64(v) / 2
 }
 
 const BatterySizeAttr zcl.AttrID = 49
