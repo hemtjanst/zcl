@@ -2295,7 +2295,9 @@ func (v *GetSceneMembershipResponse) Arguments() []zcl.ArgDesc {
 func (GetSceneMembershipResponse) Name() string { return `Get scene membership response` }
 
 // Description of the command
-func (GetSceneMembershipResponse) Description() string { return `Shows details about scene membership.` }
+func (GetSceneMembershipResponse) Description() string {
+	return `Shows details about scene membership.`
+}
 
 // ID of the command
 func (GetSceneMembershipResponse) ID() CommandID { return GetSceneMembershipResponseCommand }

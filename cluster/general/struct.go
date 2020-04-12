@@ -1429,7 +1429,9 @@ func (v BatteryAlarmState) IsThreshold3ForVoltageOrPercentageReachedForBatterySo
 func (v BatteryAlarmState) IsThreshold3ForVoltageOrPercentageReachedForBatterySource1() bool {
 	return zcl.BitmapTest([]byte(v[:]), 3)
 }
-func (v BatteryAlarmState) IsMainsPowerLostUnavailable() bool { return zcl.BitmapTest([]byte(v[:]), 30) }
+func (v BatteryAlarmState) IsMainsPowerLostUnavailable() bool {
+	return zcl.BitmapTest([]byte(v[:]), 30)
+}
 func (v *BatteryAlarmState) SetMinimumThreshold1ForVoltageOrPercentageReachedForBatterySource1(b bool) {
 	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b))
 }
@@ -1598,6 +1600,10 @@ func (v BatteryPercentageMinThreshold) String() string {
 	return zcl.Percent.Format(float64(v) / 2)
 }
 
+func (v BatteryPercentageMinThreshold) Scaled() float64 {
+	return float64(v) / 2
+}
+
 const BatteryPercentageThreshold1Attr zcl.AttrID = 59
 
 func (BatteryPercentageThreshold1) ID() zcl.AttrID   { return BatteryPercentageThreshold1Attr }
@@ -1651,6 +1657,10 @@ func (v *BatteryPercentageThreshold1) SetValue(a zcl.Val) error {
 
 func (v BatteryPercentageThreshold1) String() string {
 	return zcl.Percent.Format(float64(v) / 2)
+}
+
+func (v BatteryPercentageThreshold1) Scaled() float64 {
+	return float64(v) / 2
 }
 
 const BatteryPercentageThreshold2Attr zcl.AttrID = 60
@@ -1708,6 +1718,10 @@ func (v BatteryPercentageThreshold2) String() string {
 	return zcl.Percent.Format(float64(v) / 2)
 }
 
+func (v BatteryPercentageThreshold2) Scaled() float64 {
+	return float64(v) / 2
+}
+
 const BatteryPercentageThreshold3Attr zcl.AttrID = 61
 
 func (BatteryPercentageThreshold3) ID() zcl.AttrID   { return BatteryPercentageThreshold3Attr }
@@ -1761,6 +1775,10 @@ func (v *BatteryPercentageThreshold3) SetValue(a zcl.Val) error {
 
 func (v BatteryPercentageThreshold3) String() string {
 	return zcl.Percent.Format(float64(v) / 2)
+}
+
+func (v BatteryPercentageThreshold3) Scaled() float64 {
+	return float64(v) / 2
 }
 
 const BatteryQuantityAttr zcl.AttrID = 51
@@ -1873,6 +1891,10 @@ func (v BatteryRatedVoltage) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
 }
 
+func (v BatteryRatedVoltage) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const BatteryRemainingAttr zcl.AttrID = 33
 
 func (BatteryRemaining) ID() zcl.AttrID   { return BatteryRemainingAttr }
@@ -1925,7 +1947,7 @@ func (v *BatteryRemaining) SetValue(a zcl.Val) error {
 }
 
 func (v BatteryRemaining) String() string {
-	return zcl.Percent.Format(float64(v) / 2)
+	return zcl.Percent.Format(float64(v))
 }
 
 const BatterySizeAttr zcl.AttrID = 49
@@ -2096,6 +2118,10 @@ func (v BatteryVoltage) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
 }
 
+func (v BatteryVoltage) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const BatteryVoltageMinThresholdAttr zcl.AttrID = 54
 
 func (BatteryVoltageMinThreshold) ID() zcl.AttrID   { return BatteryVoltageMinThresholdAttr }
@@ -2149,6 +2175,10 @@ func (v *BatteryVoltageMinThreshold) SetValue(a zcl.Val) error {
 
 func (v BatteryVoltageMinThreshold) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
+}
+
+func (v BatteryVoltageMinThreshold) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const BatteryVoltageThreshold1Attr zcl.AttrID = 55
@@ -2206,6 +2236,10 @@ func (v BatteryVoltageThreshold1) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
 }
 
+func (v BatteryVoltageThreshold1) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const BatteryVoltageThreshold2Attr zcl.AttrID = 56
 
 func (BatteryVoltageThreshold2) ID() zcl.AttrID   { return BatteryVoltageThreshold2Attr }
@@ -2259,6 +2293,10 @@ func (v *BatteryVoltageThreshold2) SetValue(a zcl.Val) error {
 
 func (v BatteryVoltageThreshold2) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
+}
+
+func (v BatteryVoltageThreshold2) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const BatteryVoltageThreshold3Attr zcl.AttrID = 57
@@ -2316,6 +2354,10 @@ func (v BatteryVoltageThreshold3) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
 }
 
+func (v BatteryVoltageThreshold3) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const BatteryCapacityAttr zcl.AttrID = 50
 
 func (BatteryCapacity) ID() zcl.AttrID   { return BatteryCapacityAttr }
@@ -2369,6 +2411,10 @@ func (v *BatteryCapacity) SetValue(a zcl.Val) error {
 
 func (v BatteryCapacity) String() string {
 	return zcl.MilliAmpereHours.Format(float64(v) / 0.1)
+}
+
+func (v BatteryCapacity) Scaled() float64 {
+	return float64(v) / 0.1
 }
 
 const BinaryActiveTextAttr zcl.AttrID = 4
@@ -2719,6 +2765,10 @@ func (v BinaryPresentValue) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
 }
 
+func (v BinaryPresentValue) Scaled() float64 {
+	return float64(v)
+}
+
 func (BinaryPriority) Name() string        { return `Binary Priority` }
 func (BinaryPriority) Description() string { return `` }
 
@@ -2912,6 +2962,10 @@ func (v *BinaryRelinquishDefault) SetValue(a zcl.Val) error {
 
 func (v BinaryRelinquishDefault) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
+}
+
+func (v BinaryRelinquishDefault) Scaled() float64 {
+	return float64(v)
 }
 
 const CalculationPeriodAttr zcl.AttrID = 22
@@ -3434,6 +3488,10 @@ func (v CurrentLevel) String() string {
 	return zcl.Percent.Format(float64(v) / 2.54)
 }
 
+func (v CurrentLevel) Scaled() float64 {
+	return float64(v) / 2.54
+}
+
 const CurrentSceneAttr zcl.AttrID = 1
 
 func (CurrentScene) ID() zcl.AttrID   { return CurrentSceneAttr }
@@ -3654,6 +3712,10 @@ func (v DefaultMoveRate) String() string {
 	return zcl.PercentPerSecond.Format(float64(v) / 2.54)
 }
 
+func (v DefaultMoveRate) Scaled() float64 {
+	return float64(v) / 2.54
+}
+
 func (Device) Name() string        { return `Device` }
 func (Device) Description() string { return `` }
 
@@ -3749,6 +3811,10 @@ func (v *DeviceEnabled) SetValue(a zcl.Val) error {
 
 func (v DeviceEnabled) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
+}
+
+func (v DeviceEnabled) Scaled() float64 {
+	return float64(v)
 }
 
 const DeviceTempAlarmMaskAttr zcl.AttrID = 16
@@ -3959,6 +4025,10 @@ func (v *Distance) SetValue(a zcl.Val) error {
 
 func (v Distance) String() string {
 	return zcl.Meters.Format(float64(v) / 10)
+}
+
+func (v Distance) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const DstEndAttr zcl.AttrID = 4
@@ -4533,6 +4603,10 @@ func (v *GlobalSceneControl) SetValue(a zcl.Val) error {
 
 func (v GlobalSceneControl) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
+}
+
+func (v GlobalSceneControl) Scaled() float64 {
+	return float64(v)
 }
 
 func (GroupId) Name() string        { return `Group ID` }
@@ -5140,6 +5214,10 @@ func (v *IOOutOfService) SetValue(a zcl.Val) error {
 
 func (v IOOutOfService) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
+}
+
+func (v IOOutOfService) Scaled() float64 {
+	return float64(v)
 }
 
 const IOReliabilityAttr zcl.AttrID = 103
@@ -5818,6 +5896,10 @@ func (v LedIndication) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
 }
 
+func (v LedIndication) Scaled() float64 {
+	return float64(v)
+}
+
 const LastMessageLqiAttr zcl.AttrID = 284
 
 func (LastMessageLqi) ID() zcl.AttrID   { return LastMessageLqiAttr }
@@ -6023,6 +6105,10 @@ func (v *Level) SetValue(a zcl.Val) error {
 
 func (v Level) String() string {
 	return zcl.Percent.Format(float64(v) / 2.54)
+}
+
+func (v Level) Scaled() float64 {
+	return float64(v) / 2.54
 }
 
 const LevelControlOptionsAttr zcl.AttrID = 15
@@ -7301,6 +7387,10 @@ func (v MainsFrequency) String() string {
 	return zcl.Hertz.Format(float64(v) / 2)
 }
 
+func (v MainsFrequency) Scaled() float64 {
+	return float64(v) / 2
+}
+
 const MainsVoltageAttr zcl.AttrID = 0
 
 func (MainsVoltage) ID() zcl.AttrID   { return MainsVoltageAttr }
@@ -7354,6 +7444,10 @@ func (v *MainsVoltage) SetValue(a zcl.Val) error {
 
 func (v MainsVoltage) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
+}
+
+func (v MainsVoltage) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const MainsVoltageDwellTripPointAttr zcl.AttrID = 19
@@ -7471,6 +7565,10 @@ func (v MainsVoltageMaxThreshold) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
 }
 
+func (v MainsVoltageMaxThreshold) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const MainsVoltageMinThresholdAttr zcl.AttrID = 17
 
 func (MainsVoltageMinThreshold) ID() zcl.AttrID   { return MainsVoltageMinThresholdAttr }
@@ -7524,6 +7622,10 @@ func (v *MainsVoltageMinThreshold) SetValue(a zcl.Val) error {
 
 func (v MainsVoltageMinThreshold) String() string {
 	return zcl.Volts.Format(float64(v) / 10)
+}
+
+func (v MainsVoltageMinThreshold) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const ManufacturerNameAttr zcl.AttrID = 4
@@ -8831,6 +8933,10 @@ func (v OffTransitionTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
 }
 
+func (v OffTransitionTime) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const OffWaitTimeAttr zcl.AttrID = 16386
 
 func (OffWaitTime) ID() zcl.AttrID   { return OffWaitTimeAttr }
@@ -8884,6 +8990,10 @@ func (v *OffWaitTime) SetValue(a zcl.Val) error {
 
 func (v OffWaitTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
+}
+
+func (v OffWaitTime) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const OnLevelAttr zcl.AttrID = 17
@@ -8950,6 +9060,10 @@ func (v OnLevel) String() string {
 		return "Previous"
 	}
 	return zcl.Percent.Format(float64(v) / 2.54)
+}
+
+func (v OnLevel) Scaled() float64 {
+	return float64(v) / 2.54
 }
 
 func (v OnLevel) IsPrevious() bool { return v == 0xFF }
@@ -9022,6 +9136,10 @@ func (v OnOff) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
 }
 
+func (v OnOff) Scaled() float64 {
+	return float64(v)
+}
+
 func (v OnOff) IsOff() bool { return v == 0x00 }
 func (v OnOff) IsOn() bool  { return v == 0x01 }
 func (v *OnOff) SetOff()    { *v = 0x00 }
@@ -9089,6 +9207,10 @@ func (v OnTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
 }
 
+func (v OnTime) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const OnTransitionTimeAttr zcl.AttrID = 18
 
 func (OnTransitionTime) ID() zcl.AttrID   { return OnTransitionTimeAttr }
@@ -9142,6 +9264,10 @@ func (v *OnTransitionTime) SetValue(a zcl.Val) error {
 
 func (v OnTransitionTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
+}
+
+func (v OnTransitionTime) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const OnOffTransistionTimeAttr zcl.AttrID = 16
@@ -9204,6 +9330,10 @@ func (v *OnOffTransistionTime) SetValue(a zcl.Val) error {
 
 func (v OnOffTransistionTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
+}
+
+func (v OnOffTransistionTime) Scaled() float64 {
+	return float64(v) / 10
 }
 
 func (OnOffControl) Name() string        { return `On/off control` }
@@ -9493,6 +9623,10 @@ func (v *PathLossExponent) SetValue(a zcl.Val) error {
 
 func (v PathLossExponent) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v PathLossExponent) Scaled() float64 {
+	return float64(v) / 0.01
 }
 
 const PersistensMemoryWritesAttr zcl.AttrID = 1
@@ -10258,6 +10392,10 @@ func (v Power) String() string {
 	return zcl.DecibelMilliWatts.Format(float64(v) / 100)
 }
 
+func (v Power) Scaled() float64 {
+	return float64(v) / 100
+}
+
 const PowerOnLevelAttr zcl.AttrID = 16384
 
 func (PowerOnLevel) ID() zcl.AttrID   { return PowerOnLevelAttr }
@@ -10315,6 +10453,10 @@ func (v PowerOnLevel) String() string {
 		return "Previous"
 	}
 	return zcl.Percent.Format(float64(v) / 2.54)
+}
+
+func (v PowerOnLevel) Scaled() float64 {
+	return float64(v) / 2.54
 }
 
 func (v PowerOnLevel) IsPrevious() bool { return v == 0xFF }
@@ -10832,6 +10974,10 @@ func (v Rate) String() string {
 	return zcl.PercentPerSecond.Format(float64(v) / 2.54)
 }
 
+func (v Rate) Scaled() float64 {
+	return float64(v) / 2.54
+}
+
 const RelayedUcastAttr zcl.AttrID = 280
 
 func (RelayedUcast) ID() zcl.AttrID   { return RelayedUcastAttr }
@@ -10943,6 +11089,10 @@ func (v *RemainingTime) SetValue(a zcl.Val) error {
 
 func (v RemainingTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
+}
+
+func (v RemainingTime) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const ReportingPeriodAttr zcl.AttrID = 21
@@ -11661,6 +11811,10 @@ func (v SceneValid) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
 }
 
+func (v SceneValid) Scaled() float64 {
+	return float64(v)
+}
+
 func (SceneList) Name() string        { return `Scene list` }
 func (SceneList) Description() string { return `` }
 
@@ -12050,6 +12204,10 @@ func (v *StepSize) SetValue(a zcl.Val) error {
 
 func (v StepSize) String() string {
 	return zcl.Percent.Format(float64(v) / 2.54)
+}
+
+func (v StepSize) Scaled() float64 {
+	return float64(v) / 2.54
 }
 
 const SwitchActionsAttr zcl.AttrID = 16
@@ -12458,6 +12616,10 @@ func (v TransitionTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
 }
 
+func (v TransitionTime) Scaled() float64 {
+	return float64(v) / 10
+}
+
 func (TransitionTimeSec) Name() string        { return `Transition time (Sec)` }
 func (TransitionTimeSec) Description() string { return `` }
 
@@ -12498,6 +12660,10 @@ func (v *TransitionTimeSec) SetValue(a zcl.Val) error {
 
 func (v TransitionTimeSec) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
+}
+
+func (v TransitionTimeSec) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const UserTestAttr zcl.AttrID = 50
@@ -12553,6 +12719,10 @@ func (v *UserTest) SetValue(a zcl.Val) error {
 
 func (v UserTest) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
+}
+
+func (v UserTest) Scaled() float64 {
+	return float64(v)
 }
 
 const ValidUntilTimeAttr zcl.AttrID = 9
@@ -12665,6 +12835,10 @@ func (v XCoordinate) String() string {
 	return zcl.Meters.Format(float64(v) / 10)
 }
 
+func (v XCoordinate) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const YCoordinateAttr zcl.AttrID = 17
 
 func (YCoordinate) ID() zcl.AttrID   { return YCoordinateAttr }
@@ -12720,6 +12894,10 @@ func (v YCoordinate) String() string {
 	return zcl.Meters.Format(float64(v) / 10)
 }
 
+func (v YCoordinate) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const ZCoordinateAttr zcl.AttrID = 18
 
 func (ZCoordinate) ID() zcl.AttrID   { return ZCoordinateAttr }
@@ -12773,6 +12951,10 @@ func (v *ZCoordinate) SetValue(a zcl.Val) error {
 
 func (v ZCoordinate) String() string {
 	return zcl.Meters.Format(float64(v) / 10)
+}
+
+func (v ZCoordinate) Scaled() float64 {
+	return float64(v) / 10
 }
 
 const ZclVersionAttr zcl.AttrID = 0

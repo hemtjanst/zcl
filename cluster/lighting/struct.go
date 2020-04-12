@@ -216,9 +216,11 @@ func (v BallastStatus) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (v BallastStatus) IsNonOperational() bool    { return zcl.BitmapTest([]byte(v[:]), 0) }
-func (v BallastStatus) IsLampNotInSocket() bool   { return zcl.BitmapTest([]byte(v[:]), 1) }
-func (v *BallastStatus) SetNonOperational(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
+func (v BallastStatus) IsNonOperational() bool  { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v BallastStatus) IsLampNotInSocket() bool { return zcl.BitmapTest([]byte(v[:]), 1) }
+func (v *BallastStatus) SetNonOperational(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b))
+}
 func (v *BallastStatus) SetLampNotInSocket(b bool) {
 	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b))
 }
@@ -377,6 +379,10 @@ func (v ColorPointBlueX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v ColorPointBlueX) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const ColorPointBlueYAttr zcl.AttrID = 59
 
 func (ColorPointBlueY) ID() zcl.AttrID   { return ColorPointBlueYAttr }
@@ -437,6 +443,10 @@ func (v *ColorPointBlueY) SetValue(a zcl.Val) error {
 
 func (v ColorPointBlueY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v ColorPointBlueY) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const ColorPointBlueIntensityAttr zcl.AttrID = 60
@@ -567,6 +577,10 @@ func (v ColorPointGreenX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v ColorPointGreenX) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const ColorPointGreenYAttr zcl.AttrID = 55
 
 func (ColorPointGreenY) ID() zcl.AttrID   { return ColorPointGreenYAttr }
@@ -627,6 +641,10 @@ func (v *ColorPointGreenY) SetValue(a zcl.Val) error {
 
 func (v ColorPointGreenY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v ColorPointGreenY) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const ColorPointGreenIntensityAttr zcl.AttrID = 56
@@ -757,6 +775,10 @@ func (v ColorPointRedX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v ColorPointRedX) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const ColorPointRedYAttr zcl.AttrID = 51
 
 func (ColorPointRedY) ID() zcl.AttrID   { return ColorPointRedYAttr }
@@ -817,6 +839,10 @@ func (v *ColorPointRedY) SetValue(a zcl.Val) error {
 
 func (v ColorPointRedY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v ColorPointRedY) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const ColorPointRedIntensityAttr zcl.AttrID = 52
@@ -1144,6 +1170,10 @@ func (v ColorX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v ColorX) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 func (ColorY) Name() string { return `Color Y` }
 func (ColorY) Description() string {
 	return `contains the normalized chromaticity value y for this attribute, as
@@ -1191,6 +1221,10 @@ func (v *ColorY) SetValue(a zcl.Val) error {
 
 func (v ColorY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v ColorY) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const ColorCapabilitiesAttr zcl.AttrID = 16394
@@ -1751,7 +1785,9 @@ func (v ColorTemperatureMireds) String() string {
 
 const ColorTemperaturePhysicalMaxMiredsAttr zcl.AttrID = 16396
 
-func (ColorTemperaturePhysicalMaxMireds) ID() zcl.AttrID   { return ColorTemperaturePhysicalMaxMiredsAttr }
+func (ColorTemperaturePhysicalMaxMireds) ID() zcl.AttrID {
+	return ColorTemperaturePhysicalMaxMiredsAttr
+}
 func (ColorTemperaturePhysicalMaxMireds) Readable() bool   { return true }
 func (ColorTemperaturePhysicalMaxMireds) Writable() bool   { return false }
 func (ColorTemperaturePhysicalMaxMireds) Reportable() bool { return false }
@@ -1762,7 +1798,9 @@ func (v ColorTemperaturePhysicalMaxMireds) AttrID() zcl.AttrID   { return v.ID()
 func (v ColorTemperaturePhysicalMaxMireds) AttrType() zcl.TypeID { return v.TypeID() }
 func (v *ColorTemperaturePhysicalMaxMireds) AttrValue() zcl.Val  { return v.Value() }
 
-func (ColorTemperaturePhysicalMaxMireds) Name() string { return `Color temperature physical max Mireds` }
+func (ColorTemperaturePhysicalMaxMireds) Name() string {
+	return `Color temperature physical max Mireds`
+}
 func (ColorTemperaturePhysicalMaxMireds) Description() string {
 	return `indicates the maximum mired value supported by the hardware.
 ColorTempPhysicalMaxMireds corresponds to the minimum color
@@ -1817,7 +1855,9 @@ func (v ColorTemperaturePhysicalMaxMireds) String() string {
 
 const ColorTemperaturePhysicalMinMiredsAttr zcl.AttrID = 16395
 
-func (ColorTemperaturePhysicalMinMireds) ID() zcl.AttrID   { return ColorTemperaturePhysicalMinMiredsAttr }
+func (ColorTemperaturePhysicalMinMireds) ID() zcl.AttrID {
+	return ColorTemperaturePhysicalMinMiredsAttr
+}
 func (ColorTemperaturePhysicalMinMireds) Readable() bool   { return true }
 func (ColorTemperaturePhysicalMinMireds) Writable() bool   { return false }
 func (ColorTemperaturePhysicalMinMireds) Reportable() bool { return false }
@@ -1828,7 +1868,9 @@ func (v ColorTemperaturePhysicalMinMireds) AttrID() zcl.AttrID   { return v.ID()
 func (v ColorTemperaturePhysicalMinMireds) AttrType() zcl.TypeID { return v.TypeID() }
 func (v *ColorTemperaturePhysicalMinMireds) AttrValue() zcl.Val  { return v.Value() }
 
-func (ColorTemperaturePhysicalMinMireds) Name() string { return `Color temperature physical min Mireds` }
+func (ColorTemperaturePhysicalMinMireds) Name() string {
+	return `Color temperature physical min Mireds`
+}
 func (ColorTemperaturePhysicalMinMireds) Description() string {
 	return `indicates the minimum mired value supported by the hardware.
 ColorTempPhysicalMinMireds corresponds to the maximum color
@@ -1969,7 +2011,9 @@ type CoupleColorTempToLevelMinMireds zcl.Zu16
 func (v *CoupleColorTempToLevelMinMireds) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
 func (v *CoupleColorTempToLevelMinMireds) Value() zcl.Val     { return v }
 
-func (v CoupleColorTempToLevelMinMireds) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
+func (v CoupleColorTempToLevelMinMireds) MarshalZcl() ([]byte, error) {
+	return zcl.Zu16(v).MarshalZcl()
+}
 
 func (v *CoupleColorTempToLevelMinMireds) UnmarshalZcl(b []byte) ([]byte, error) {
 	nt := new(zcl.Zu16)
@@ -2065,6 +2109,10 @@ func (v CurrentX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v CurrentX) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const CurrentYAttr zcl.AttrID = 4
 
 func (CurrentY) ID() zcl.AttrID   { return CurrentYAttr }
@@ -2127,6 +2175,10 @@ func (v CurrentY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v CurrentY) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const CurrentHueAttr zcl.AttrID = 0
 
 func (CurrentHue) ID() zcl.AttrID   { return CurrentHueAttr }
@@ -2185,6 +2237,10 @@ func (v *CurrentHue) SetValue(a zcl.Val) error {
 
 func (v CurrentHue) String() string {
 	return zcl.DegreesAngular.Format(float64(v) / 0.70556)
+}
+
+func (v CurrentHue) Scaled() float64 {
+	return float64(v) / 0.70556
 }
 
 const CurrentSaturationAttr zcl.AttrID = 1
@@ -2247,6 +2303,10 @@ func (v *CurrentSaturation) SetValue(a zcl.Val) error {
 
 func (v CurrentSaturation) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v))
+}
+
+func (v CurrentSaturation) Scaled() float64 {
+	return float64(v) / 254
 }
 
 const DriftCompensationAttr zcl.AttrID = 5
@@ -2382,6 +2442,10 @@ func (v *EnhancedHue) SetValue(a zcl.Val) error {
 
 func (v EnhancedHue) String() string {
 	return zcl.DegreesAngular.Format(float64(v) / 0.002756094)
+}
+
+func (v EnhancedHue) Scaled() float64 {
+	return float64(v) / 0.002756094
 }
 
 const EnhancedColorModeAttr zcl.AttrID = 16385
@@ -2584,6 +2648,10 @@ func (v *Hue) SetValue(a zcl.Val) error {
 
 func (v Hue) String() string {
 	return zcl.DegreesAngular.Format(float64(v) / 0.70556)
+}
+
+func (v Hue) Scaled() float64 {
+	return float64(v) / 0.70556
 }
 
 func (HueDirection) Name() string        { return `Hue Direction` }
@@ -3704,6 +3772,10 @@ func (v PowerOnTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
 }
 
+func (v PowerOnTime) Scaled() float64 {
+	return float64(v) / 10
+}
+
 const PowerOnColorTemperatureAttr zcl.AttrID = 16400
 
 func (PowerOnColorTemperature) ID() zcl.AttrID   { return PowerOnColorTemperatureAttr }
@@ -3821,6 +3893,10 @@ func (v Primary1X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v Primary1X) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const Primary1YAttr zcl.AttrID = 18
 
 func (Primary1Y) ID() zcl.AttrID   { return Primary1YAttr }
@@ -3881,6 +3957,10 @@ func (v *Primary1Y) SetValue(a zcl.Val) error {
 
 func (v Primary1Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v Primary1Y) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const Primary1IntensityAttr zcl.AttrID = 19
@@ -4011,6 +4091,10 @@ func (v Primary2X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v Primary2X) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const Primary2YAttr zcl.AttrID = 22
 
 func (Primary2Y) ID() zcl.AttrID   { return Primary2YAttr }
@@ -4071,6 +4155,10 @@ func (v *Primary2Y) SetValue(a zcl.Val) error {
 
 func (v Primary2Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v Primary2Y) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const Primary2IntensityAttr zcl.AttrID = 23
@@ -4201,6 +4289,10 @@ func (v Primary3X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v Primary3X) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const Primary3YAttr zcl.AttrID = 26
 
 func (Primary3Y) ID() zcl.AttrID   { return Primary3YAttr }
@@ -4261,6 +4353,10 @@ func (v *Primary3Y) SetValue(a zcl.Val) error {
 
 func (v Primary3Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v Primary3Y) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const Primary3IntensityAttr zcl.AttrID = 27
@@ -4391,6 +4487,10 @@ func (v Primary4X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v Primary4X) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const Primary4YAttr zcl.AttrID = 33
 
 func (Primary4Y) ID() zcl.AttrID   { return Primary4YAttr }
@@ -4451,6 +4551,10 @@ func (v *Primary4Y) SetValue(a zcl.Val) error {
 
 func (v Primary4Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v Primary4Y) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const Primary4IntensityAttr zcl.AttrID = 34
@@ -4581,6 +4685,10 @@ func (v Primary5X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v Primary5X) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const Primary5YAttr zcl.AttrID = 37
 
 func (Primary5Y) ID() zcl.AttrID   { return Primary5YAttr }
@@ -4641,6 +4749,10 @@ func (v *Primary5Y) SetValue(a zcl.Val) error {
 
 func (v Primary5Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v Primary5Y) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const Primary5IntensityAttr zcl.AttrID = 38
@@ -4771,6 +4883,10 @@ func (v Primary6X) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v Primary6X) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const Primary6YAttr zcl.AttrID = 41
 
 func (Primary6Y) ID() zcl.AttrID   { return Primary6YAttr }
@@ -4831,6 +4947,10 @@ func (v *Primary6Y) SetValue(a zcl.Val) error {
 
 func (v Primary6Y) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v Primary6Y) Scaled() float64 {
+	return float64(v) / 65536
 }
 
 const Primary6IntensityAttr zcl.AttrID = 42
@@ -5086,6 +5206,10 @@ func (v *RemainingTime) SetValue(a zcl.Val) error {
 
 func (v RemainingTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
+}
+
+func (v RemainingTime) Scaled() float64 {
+	return float64(v) / 10
 }
 
 func (Saturation) Name() string        { return `Saturation` }
@@ -5402,6 +5526,10 @@ func (v TransitionTime) String() string {
 	return zcl.Seconds.Format(float64(v) / 10)
 }
 
+func (v TransitionTime) Scaled() float64 {
+	return float64(v) / 10
+}
+
 func (UpdateFlags) Name() string        { return `Update flags` }
 func (UpdateFlags) Description() string { return `` }
 
@@ -5540,6 +5668,10 @@ func (v WhitePointX) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (v WhitePointX) Scaled() float64 {
+	return float64(v) / 65536
+}
+
 const WhitePointYAttr zcl.AttrID = 49
 
 func (WhitePointY) ID() zcl.AttrID   { return WhitePointYAttr }
@@ -5600,4 +5732,8 @@ func (v *WhitePointY) SetValue(a zcl.Val) error {
 
 func (v WhitePointY) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
+}
+
+func (v WhitePointY) Scaled() float64 {
+	return float64(v) / 65536
 }

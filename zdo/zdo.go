@@ -795,6 +795,10 @@ func (v ComplexDescriptorAvailable) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
 }
 
+func (v ComplexDescriptorAvailable) Scaled() float64 {
+	return float64(v)
+}
+
 func (Depth) Name() string { return `Depth` }
 func (Depth) Description() string {
 	return `of the neighbor device. A value of 0 indicates that the device is the coordinator for the network`
@@ -1801,6 +1805,10 @@ func (v *Lqi) SetValue(a zcl.Val) error {
 
 func (v Lqi) String() string {
 	return zcl.Percent.Format(float64(v) / 2.55)
+}
+
+func (v Lqi) Scaled() float64 {
+	return float64(v) / 2.55
 }
 
 func (MacCapabilityFlags) Name() string        { return `MAC Capability Flags` }
@@ -3592,7 +3600,9 @@ func (v ServerMask) IsNetworkManager() bool           { return zcl.BitmapTest([]
 func (v *ServerMask) SetPrimaryTrustCenter(b bool) {
 	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b))
 }
-func (v *ServerMask) SetBackupTrustCenter(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b)) }
+func (v *ServerMask) SetBackupTrustCenter(b bool) {
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b))
+}
 func (v *ServerMask) SetPrimaryBindingTableCache(b bool) {
 	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 2, b))
 }
@@ -4323,6 +4333,10 @@ func (v *UserDescriptorAvailable) SetValue(a zcl.Val) error {
 
 func (v UserDescriptorAvailable) String() string {
 	return zcl.Sprintf("%v", zcl.Zbool(v))
+}
+
+func (v UserDescriptorAvailable) Scaled() float64 {
+	return float64(v)
 }
 
 // NwkAddressRequest queries the 16-bit address of the Remote Device based on its known IEEE address.
