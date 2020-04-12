@@ -70,10 +70,14 @@ jobs:
     - name: Commit
       working-directory: ./zcl
       run: |
-        git config user.name "Hemtjanst Bot"
-        git config user.email "63548820+hemtjanst-bot@users.noreply.github.com"
-        git add .
-        git commit -m "Regenerated library at ${GITHUB_SHA}"
+        if test -n "$(git status -s)"; then
+          git config user.name "Hemtjanst Bot"
+          git config user.email "63548820+hemtjanst-bot@users.noreply.github.com"
+          git add .
+          git commit -m "Regenerated library at ${GITHUB_SHA}"
+        else
+          echo "No changes to generated code"
+        fi
     - name: Push
       working-directory: ./zcl
       run: |
