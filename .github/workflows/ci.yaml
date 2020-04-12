@@ -1,0 +1,80 @@
+name: CI
+on:
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - 'cluster/**'
+      - 'zdo/**'
+    branches:
+      - master
+  push:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - 'cluster/**'
+      - 'zdo/**'
+    branches:
+      - master
+
+jobs:
+  generate_and_test:
+    name: Generate and test ZCL
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: zcl
+    - uses: actions/checkout@v2
+      with:
+        repository: hemtjanst/zyaml
+        path: zyaml
+    - uses: actions/setup-go@v2-beta
+      with:
+        go-version: '1.14'
+    - name: Generate ZCL
+      working-directory: ./zcl
+      run: |
+        go run hemtjan.st/zcl/cmd/zclgen -definition-path ../zyaml
+    - name: Build updated ZCL
+      working-directory: ./zcl
+      run: |
+        go build hemtjan.st/zcl/...
+    - name: Run ZCL tests
+      working-directory: ./zcl
+      run: |
+        go test -v hemtjan.st/zcl/...
+  update:
+    name: Push updated ZCL
+    if: github.ref == 'refs/heads/master'
+    needs: generate_and_test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: zcl
+        ssh-key: ${{ secrets.BOT_SSH_KEY }}
+    - uses: actions/checkout@v2
+      with:
+        repository: hemtjanst/zyaml
+        path: zyaml
+    - uses: actions/setup-go@v2-beta
+      with:
+        go-version: '1.14'
+    - name: Generate ZCL
+      working-directory: ./zcl
+      run: |
+        go run hemtjan.st/zcl/cmd/zclgen -definition-path ../zyaml
+        go build hemtjan.st/zcl/...
+        go mod tidy
+    - name: Commit
+      working-directory: ./zcl
+      run: |
+        git config user.name "Hemtjanst Bot"
+        git config user.email "63548820+hemtjanst-bot@users.noreply.github.com"
+        git add .
+        git commit -m "Regenerated library at ${GITHUB_SHA}"
+    - name: Push
+      working-directory: ./zcl
+      run: |
+        git push
