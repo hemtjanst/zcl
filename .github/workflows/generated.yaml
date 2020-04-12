@@ -1,0 +1,16 @@
+name: Prevent generated code in PRs
+on:
+  pull_request:
+    paths:
+      - 'cluster/**'
+      - 'zdo/**'
+
+jobs:
+  error:
+    name: Includes generated code
+    runs-on: ubuntu-latest
+    steps:
+    - name: Exit
+      run: |
+        echo "Do not include generated code in your PRs"
+        exit 1
