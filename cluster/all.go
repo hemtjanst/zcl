@@ -9,6 +9,8 @@ import (
 	"hemtjan.st/zcl/cluster/otau"
 )
 
+haha test ci
+
 var Clusters = map[zcl.ClusterID]zcl.Cluster{
 	closures.WindowCoveringID:                 closures.WindowCoveringCluster,
 	general.AlarmsID:                          general.AlarmsCluster,
