@@ -21,7 +21,7 @@ func TestReadAttributesResponse_UnmarshalZcl(t *testing.T) {
 			"0300002001" + // 0x0003 = uint8(1)
 			"040000420E494B4541206F662053776564656E" + // 0x0004 = cstring(IKEA of Sweden)
 			"05000042165452414446524920636F6E74726F6C206F75746C6574" + // 0x0005 = cstring(TRADFRI control outlet)
-			"060000420700003001",
+			"", // "060000420700003001",
 	)
 
 	data, err := v.UnmarshalZcl(data)
