@@ -107,12 +107,13 @@ func (r Required) IsTrue() bool {
 }
 
 type Condition struct {
-	Desc   Desc `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
-	Name   Name `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
-	Attr   Hex  `toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
-	Value  Hex  `toml:"value,omitempty" yaml:"value,omitempty" json:"value,omitempty"`
-	Mask   Hex  `toml:"mask,omitempty" yaml:"mask,omitempty" json:"mask,omitempty"`
-	Invert bool `toml:"invert,omitempty" yaml:"invert,omitempty" json:"invert,omitempty"`
+	Desc     Desc   `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
+	Name     Name   `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	Attr     Hex    `toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
+	Value    Hex    `toml:"value,omitempty" yaml:"value,omitempty" json:"value,omitempty"`
+	Mask     Hex    `toml:"mask,omitempty" yaml:"mask,omitempty" json:"mask,omitempty"`
+	Invert   bool   `toml:"invert,omitempty" yaml:"invert,omitempty" json:"invert,omitempty"`
+	Operator string `toml:"operator,omitempty" yaml:"operator,omitempty" json:"operator,omitempty"`
 }
 
 func (a Attr) Equal(o Attr) bool {

@@ -196,6 +196,9 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 				if c.Invert {
 					eq = "!="
 				}
+				if c.Operator != "" {
+					eq = c.Operator
+				}
 				if c.Name != "" {
 					vstr = append(vstr, fmt.Sprintf(
 						"%sv.%s%s %s %s",
