@@ -7702,6 +7702,16 @@ reporting occupancy status`,
                 description: ``,
                 
             })),
+            ImageNotifyPayloadType: makeType<ZigBee.IOtau.IArgImageNotifyPayloadType, ZigBee.IOtau.IArgImageNotifyPayloadTypePayload>(base.enum8, ()=>({
+                name: `Image Notify Payload Type`,
+                description: ``,
+                values: { 
+                0x00: `Query jitter`, 
+                0x01: `Query jitter and manufacturer code`, 
+                0x02: `Query jitter, manufacturer code, and image type`, 
+                0x03: `Query jitter, manufacturer code, image type, and new file version`,  },
+                
+            })),
             ImageSize: makeType<ZigBee.IOtau.IArgImageSize, ZigBee.IOtau.IArgImageSizePayload>(base.u32, ()=>({
                 name: `Image Size`,
                 description: ``,
@@ -7751,6 +7761,11 @@ reporting occupancy status`,
                 require: false,
                 
             })),
+            NewFileVersion: makeType<ZigBee.IOtau.IArgNewFileVersion, ZigBee.IOtau.IArgNewFileVersionPayload>(base.u32, ()=>({
+                name: `New File Version`,
+                description: ``,
+                
+            })),
             NextImageStatus: makeType<ZigBee.IOtau.IArgNextImageStatus, ZigBee.IOtau.IArgNextImageStatusPayload>(base.enum8, ()=>({
                 name: `Next Image Status`,
                 description: ``,
@@ -7761,6 +7776,11 @@ reporting occupancy status`,
             })),
             Payload: makeType<ZigBee.IOtau.IArgPayload, ZigBee.IOtau.IArgPayloadPayload>(base.ostring, ()=>({
                 name: `Payload`,
+                description: ``,
+                
+            })),
+            QueryJitter: makeType<ZigBee.IOtau.IArgQueryJitter, ZigBee.IOtau.IArgQueryJitterPayload>(base.u8, ()=>({
+                name: `Query jitter`,
                 description: ``,
                 
             })),
@@ -7836,6 +7856,19 @@ reporting occupancy status`,
             })),
 
             
+            ImageNotify: makeType<ZigBee.IOtau.Otau.ICmdImageNotify, ZigBee.IOtau.Otau.ICmdImageNotifyPayload>(command, () => ({
+                name: `Image notify`,
+                description: ``,
+                id: 0x0000,
+                payload: { 
+                    ImageNotifyPayloadType: ZigBee.Otau.Types.ImageNotifyPayloadType,
+                    QueryJitter: ZigBee.Otau.Types.QueryJitter,
+                    ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
+                    ImageType: ZigBee.Otau.Types.ImageType,
+                    NewFileVersion: ZigBee.Otau.Types.NewFileVersion,
+                }
+            })),
+
             QueryNextImageResponse: makeType<ZigBee.IOtau.Otau.ICmdQueryNextImageResponse, ZigBee.IOtau.Otau.ICmdQueryNextImageResponsePayload>(command, () => ({
                 name: `Query next image response`,
                 description: ``,
@@ -7897,6 +7930,7 @@ reporting occupancy status`,
         0x03: ZigBee.Otau.Otau.ImageBlockRequest,
     };
     ZigBee.Otau.Otau.Client.Command = { 
+        0x00: ZigBee.Otau.Otau.ImageNotify,
         0x02: ZigBee.Otau.Otau.QueryNextImageResponse,
         0x05: ZigBee.Otau.Otau.ImageBlockResponse,
     };
@@ -9331,6 +9365,8 @@ reporting occupancy status`,
             export interface ICmdQueryNextImage extends ICommand { value: ICmdQueryNextImagePayload }
             export type ICmdImageBlockRequestPayload = { BlockRequestOptions?: IArgBlockRequestOptionsPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, ApplicationRelease?: IArgApplicationReleasePayload, ApplicationBuild?: IArgApplicationBuildPayload, StackRelease?: IArgStackReleasePayload, StackBuild?: IArgStackBuildPayload, FileOffset?: IArgFileOffsetPayload, MaxDataSize?: IArgDataSizePayload, }
             export interface ICmdImageBlockRequest extends ICommand { value: ICmdImageBlockRequestPayload }
+            export type ICmdImageNotifyPayload = { ImageNotifyPayloadType?: IArgImageNotifyPayloadTypePayload, QueryJitter?: IArgQueryJitterPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, NewFileVersion?: IArgNewFileVersionPayload, }
+            export interface ICmdImageNotify extends ICommand { value: ICmdImageNotifyPayload }
             export type ICmdQueryNextImageResponsePayload = { Status?: IArgNextImageStatusPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, ApplicationRelease?: IArgApplicationReleasePayload, ApplicationBuild?: IArgApplicationBuildPayload, StackRelease?: IArgStackReleasePayload, StackBuild?: IArgStackBuildPayload, ImageSize?: IArgImageSizePayload, }
             export interface ICmdQueryNextImageResponse extends ICommand { value: ICmdQueryNextImageResponsePayload }
             export type ICmdImageBlockResponsePayload = { Status?: IArgStatusPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, ApplicationRelease?: IArgApplicationReleasePayload, ApplicationBuild?: IArgApplicationBuildPayload, StackRelease?: IArgStackReleasePayload, StackBuild?: IArgStackBuildPayload, FileOffset?: IArgFileOffsetPayload, Payload?: IArgPayloadPayload, }
@@ -9361,6 +9397,8 @@ reporting occupancy status`,
             export interface IArgHardwareVersion extends IArgument { value: IArgHardwareVersionPayload }
             export type IArgHardwareVersionPresentPayload = ValueType;
             export interface IArgHardwareVersionPresent extends IArgument { value: IArgHardwareVersionPresentPayload }
+            export type IArgImageNotifyPayloadTypePayload = ValueType;
+            export interface IArgImageNotifyPayloadType extends IArgument { value: IArgImageNotifyPayloadTypePayload }
             export type IArgImageSizePayload = ValueType;
             export interface IArgImageSize extends IArgument { value: IArgImageSizePayload }
             export type IArgImageTypePayload = ValueType;
@@ -9371,10 +9409,14 @@ reporting occupancy status`,
             export interface IArgManufacturerCode extends IArgument { value: IArgManufacturerCodePayload }
             export type IArgMinBlockRequestDelayPayload = ValueType;
             export interface IArgMinBlockRequestDelay extends IAttribute { value: IArgMinBlockRequestDelayPayload }
+            export type IArgNewFileVersionPayload = ValueType;
+            export interface IArgNewFileVersion extends IArgument { value: IArgNewFileVersionPayload }
             export type IArgNextImageStatusPayload = ValueType;
             export interface IArgNextImageStatus extends IArgument { value: IArgNextImageStatusPayload }
             export type IArgPayloadPayload = ValueType;
             export interface IArgPayload extends IArgument { value: IArgPayloadPayload }
+            export type IArgQueryJitterPayload = ValueType;
+            export interface IArgQueryJitter extends IArgument { value: IArgQueryJitterPayload }
             export type IArgRequestTimePayload = ValueType;
             export interface IArgRequestTime extends IArgument { value: IArgRequestTimePayload }
             export type IArgStackBuildPayload = ValueType;

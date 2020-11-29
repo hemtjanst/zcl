@@ -12,6 +12,7 @@ var OtauCluster = zcl.Cluster{
 		ImageBlockRequestCommand: func() zcl.Command { return new(ImageBlockRequest) },
 	},
 	ClientCmd: map[zcl.CommandID]func() zcl.Command{
+		ImageNotifyCommand:            func() zcl.Command { return new(ImageNotify) },
 		QueryNextImageResponseCommand: func() zcl.Command { return new(QueryNextImageResponse) },
 		ImageBlockResponseCommand:     func() zcl.Command { return new(ImageBlockResponse) },
 	},
@@ -451,6 +452,163 @@ func (v ImageBlockRequest) String() string {
 		v.StackBuild,
 		v.FileOffset,
 		v.MaxDataSize,
+	)
+}
+
+type ImageNotify struct {
+	ImageNotifyPayloadType ImageNotifyPayloadType
+	QueryJitter            QueryJitter
+	ManufacturerCode       ManufacturerCode
+	ImageType              ImageType
+	NewFileVersion         NewFileVersion
+}
+
+type ImageNotifyHandler interface {
+	HandleImageNotify(frame Frame, cmd *ImageNotify) error
+}
+
+// ImageNotifyCommand is the Command ID of ImageNotify
+const ImageNotifyCommand CommandID = 0x0000
+
+// Values returns all values of ImageNotify
+func (v *ImageNotify) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.ImageNotifyPayloadType,
+		&v.QueryJitter,
+		&v.ManufacturerCode,
+		&v.ImageType,
+		&v.NewFileVersion,
+	}
+}
+
+// Arguments returns all values of ImageNotify
+func (v *ImageNotify) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "ImageNotifyPayloadType", Argument: &v.ImageNotifyPayloadType},
+		{Name: "QueryJitter", Argument: &v.QueryJitter},
+		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
+		{Name: "ImageType", Argument: &v.ImageType},
+		{Name: "NewFileVersion", Argument: &v.NewFileVersion},
+	}
+}
+
+// Name of the command
+func (ImageNotify) Name() string { return `Image notify` }
+
+// Description of the command
+func (ImageNotify) Description() string { return `` }
+
+// ID of the command
+func (ImageNotify) ID() CommandID { return ImageNotifyCommand }
+
+// Required
+func (ImageNotify) Required() bool { return false }
+
+// Cluster ID of the command
+func (ImageNotify) Cluster() zcl.ClusterID { return OtauID }
+
+// Direction of the command
+func (ImageNotify) Direction() zcl.Direction { return zcl.ServerToClient }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (ImageNotify) MnfCode() uint16 { return 0 }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+// func (ImageNotify) MarshalJSON() ([]byte, error) { return []byte("0"), nil }
+
+func (v *ImageNotify) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h ImageNotifyHandler
+	if h, found = handler.(ImageNotifyHandler); found {
+		err = h.HandleImageNotify(frame, v)
+	}
+	return
+}
+
+// MarshalZcl returns the wire format representation of ImageNotify
+func (v ImageNotify) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
+	var err error
+
+	{
+		if tmp, err = v.ImageNotifyPayloadType.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.QueryJitter.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.ManufacturerCode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.ImageType.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.NewFileVersion.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the ImageNotify struct
+func (v *ImageNotify) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
+
+	if b, err = (&v.ImageNotifyPayloadType).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.QueryJitter).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.ManufacturerCode).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.ImageType).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.NewFileVersion).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v ImageNotify) String() string {
+	return zcl.Sprintf(
+		"ImageNotify{"+zcl.StrJoin([]string{
+			"ImageNotifyPayloadType(%v)",
+			"QueryJitter(%v)",
+			"ManufacturerCode(%v)",
+			"ImageType(%v)",
+			"NewFileVersion(%v)",
+		}, " ")+"}",
+		v.ImageNotifyPayloadType,
+		v.QueryJitter,
+		v.ManufacturerCode,
+		v.ImageType,
+		v.NewFileVersion,
 	)
 }
 
