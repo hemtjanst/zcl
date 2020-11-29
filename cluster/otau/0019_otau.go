@@ -544,19 +544,19 @@ func (v ImageNotify) MarshalZcl() ([]byte, error) {
 		}
 		data = append(data, tmp...)
 	}
-	{
+	if v.ImageNotifyPayloadType >= 0x01 {
 		if tmp, err = v.ManufacturerCode.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-	{
+	if v.ImageNotifyPayloadType >= 0x02 {
 		if tmp, err = v.ImageType.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-	{
+	if v.ImageNotifyPayloadType >= 0x03 {
 		if tmp, err = v.NewFileVersion.MarshalZcl(); err != nil {
 			return nil, err
 		}
@@ -579,16 +579,22 @@ func (v *ImageNotify) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ManufacturerCode).UnmarshalZcl(b); err != nil {
-		return b, err
+	if v.ImageNotifyPayloadType >= 0x01 {
+		if b, err = (&v.ManufacturerCode).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.ImageType).UnmarshalZcl(b); err != nil {
-		return b, err
+	if v.ImageNotifyPayloadType >= 0x02 {
+		if b, err = (&v.ImageType).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.NewFileVersion).UnmarshalZcl(b); err != nil {
-		return b, err
+	if v.ImageNotifyPayloadType >= 0x03 {
+		if b, err = (&v.NewFileVersion).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
 	return b, nil
