@@ -606,6 +606,80 @@ func (v HardwareVersionPresent) Scaled() float64 {
 	return float64(v)
 }
 
+func (ImageNotifyPayloadType) Name() string        { return `Image Notify Payload Type` }
+func (ImageNotifyPayloadType) Description() string { return `` }
+
+type ImageNotifyPayloadType zcl.Zenum8
+
+func (v *ImageNotifyPayloadType) TypeID() zcl.TypeID { return new(zcl.Zenum8).TypeID() }
+func (v *ImageNotifyPayloadType) Value() zcl.Val     { return v }
+
+func (v ImageNotifyPayloadType) MarshalZcl() ([]byte, error) { return zcl.Zenum8(v).MarshalZcl() }
+
+func (v *ImageNotifyPayloadType) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zenum8)
+	br, err := nt.UnmarshalZcl(b)
+	*v = ImageNotifyPayloadType(*nt)
+	return br, err
+}
+
+func (v ImageNotifyPayloadType) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zenum8(v))
+}
+
+func (v *ImageNotifyPayloadType) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zenum8)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = ImageNotifyPayloadType(*a)
+	return nil
+}
+
+func (v *ImageNotifyPayloadType) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zenum8); ok {
+		*v = ImageNotifyPayloadType(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v ImageNotifyPayloadType) String() string {
+	switch v {
+	case 0x00:
+		return "Query jitter"
+	case 0x01:
+		return "Query jitter and manufacturer code"
+	case 0x02:
+		return "Query jitter, manufacturer code, and image type"
+	case 0x03:
+		return "Query jitter, manufacturer code, image type, and new file version"
+	}
+	return zcl.Sprintf("%v", zcl.Zenum8(v))
+}
+
+func (v ImageNotifyPayloadType) IsQueryJitter() bool                             { return v == 0x00 }
+func (v ImageNotifyPayloadType) IsQueryJitterAndManufacturerCode() bool          { return v == 0x01 }
+func (v ImageNotifyPayloadType) IsQueryJitterManufacturerCodeAndImageType() bool { return v == 0x02 }
+func (v ImageNotifyPayloadType) IsQueryJitterManufacturerCodeImageTypeAndNewFileVersion() bool {
+	return v == 0x03
+}
+func (v *ImageNotifyPayloadType) SetQueryJitter()                             { *v = 0x00 }
+func (v *ImageNotifyPayloadType) SetQueryJitterAndManufacturerCode()          { *v = 0x01 }
+func (v *ImageNotifyPayloadType) SetQueryJitterManufacturerCodeAndImageType() { *v = 0x02 }
+func (v *ImageNotifyPayloadType) SetQueryJitterManufacturerCodeImageTypeAndNewFileVersion() {
+	*v = 0x03
+}
+
+func (ImageNotifyPayloadType) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x00, Name: "Query jitter"},
+		{Value: 0x01, Name: "Query jitter and manufacturer code"},
+		{Value: 0x02, Name: "Query jitter, manufacturer code, and image type"},
+		{Value: 0x03, Name: "Query jitter, manufacturer code, image type, and new file version"},
+	}
+}
+
 func (ImageSize) Name() string        { return `Image Size` }
 func (ImageSize) Description() string { return `` }
 
@@ -913,6 +987,48 @@ func (v MinBlockRequestDelay) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
+func (NewFileVersion) Name() string        { return `New File Version` }
+func (NewFileVersion) Description() string { return `` }
+
+type NewFileVersion zcl.Zu32
+
+func (v *NewFileVersion) TypeID() zcl.TypeID { return new(zcl.Zu32).TypeID() }
+func (v *NewFileVersion) Value() zcl.Val     { return v }
+
+func (v NewFileVersion) MarshalZcl() ([]byte, error) { return zcl.Zu32(v).MarshalZcl() }
+
+func (v *NewFileVersion) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*v = NewFileVersion(*nt)
+	return br, err
+}
+
+func (v NewFileVersion) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu32(v))
+}
+
+func (v *NewFileVersion) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu32)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = NewFileVersion(*a)
+	return nil
+}
+
+func (v *NewFileVersion) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu32); ok {
+		*v = NewFileVersion(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v NewFileVersion) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(v))
+}
+
 func (NextImageStatus) Name() string        { return `Next Image Status` }
 func (NextImageStatus) Description() string { return `` }
 
@@ -1013,6 +1129,48 @@ func (v *Payload) SetValue(a zcl.Val) error {
 
 func (v Payload) String() string {
 	return zcl.Sprintf("%v", zcl.Zostring(v))
+}
+
+func (QueryJitter) Name() string        { return `Query jitter` }
+func (QueryJitter) Description() string { return `` }
+
+type QueryJitter zcl.Zu8
+
+func (v *QueryJitter) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
+func (v *QueryJitter) Value() zcl.Val     { return v }
+
+func (v QueryJitter) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
+
+func (v *QueryJitter) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu8)
+	br, err := nt.UnmarshalZcl(b)
+	*v = QueryJitter(*nt)
+	return br, err
+}
+
+func (v QueryJitter) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu8(v))
+}
+
+func (v *QueryJitter) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu8)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = QueryJitter(*a)
+	return nil
+}
+
+func (v *QueryJitter) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu8); ok {
+		*v = QueryJitter(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v QueryJitter) String() string {
+	return zcl.Sprintf("%v", zcl.Zu8(v))
 }
 
 func (RequestTime) Name() string        { return `Request Time` }
