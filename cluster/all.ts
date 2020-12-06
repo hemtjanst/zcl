@@ -7614,16 +7614,6 @@ reporting occupancy status`,
     };
     export const Otau = {
         Types: { 
-            ApplicationBuild: makeType<ZigBee.IOtau.IArgApplicationBuild, ZigBee.IOtau.IArgApplicationBuildPayload>(base.u8, ()=>({
-                name: `Application Build`,
-                description: ``,
-                
-            })),
-            ApplicationRelease: makeType<ZigBee.IOtau.IArgApplicationRelease, ZigBee.IOtau.IArgApplicationReleasePayload>(base.u8, ()=>({
-                name: `Application Release`,
-                description: ``,
-                
-            })),
             BlockRequestOptions: makeType<ZigBee.IOtau.IArgBlockRequestOptions, ZigBee.IOtau.IArgBlockRequestOptionsPayload>(base.bmp8, ()=>({
                 name: `Block Request Options`,
                 description: ``,
@@ -7692,6 +7682,11 @@ reporting occupancy status`,
                 require: false,
                 
             })),
+            FileVersion: makeType<ZigBee.IOtau.IArgFileVersion, ZigBee.IOtau.IArgFileVersionPayload>(base.u32, ()=>({
+                name: `File Version`,
+                description: ``,
+                
+            })),
             HardwareVersion: makeType<ZigBee.IOtau.IArgHardwareVersion, ZigBee.IOtau.IArgHardwareVersionPayload>(base.u16, ()=>({
                 name: `Hardware Version`,
                 description: ``,
@@ -7718,7 +7713,7 @@ reporting occupancy status`,
                 unit: units.Bytes,
                 
             })),
-            ImageType: makeType<ZigBee.IOtau.IArgImageType, ZigBee.IOtau.IArgImageTypePayload>(base.enum16, ()=>({
+            ImageType: makeType<ZigBee.IOtau.IArgImageType, ZigBee.IOtau.IArgImageTypePayload>(base.u16, ()=>({
                 name: `Image type`,
                 description: ``,
                 values: { 
@@ -7749,6 +7744,8 @@ reporting occupancy status`,
             ManufacturerCode: makeType<ZigBee.IOtau.IArgManufacturerCode, ZigBee.IOtau.IArgManufacturerCodePayload>(base.enum16, ()=>({
                 name: `Manufacturer Code`,
                 description: ``,
+                values: { 
+                0x117C: `Ikea`,  },
                 
             })),
             MinBlockRequestDelay: makeType<ZigBee.IOtau.IArgMinBlockRequestDelay, ZigBee.IOtau.IArgMinBlockRequestDelayPayload>(base.u16, ()=>({
@@ -7759,11 +7756,6 @@ reporting occupancy status`,
                 read: true,
                 write: false,
                 require: false,
-                
-            })),
-            NewFileVersion: makeType<ZigBee.IOtau.IArgNewFileVersion, ZigBee.IOtau.IArgNewFileVersionPayload>(base.u32, ()=>({
-                name: `New File Version`,
-                description: ``,
                 
             })),
             NextImageStatus: makeType<ZigBee.IOtau.IArgNextImageStatus, ZigBee.IOtau.IArgNextImageStatusPayload>(base.enum8, ()=>({
@@ -7789,22 +7781,19 @@ reporting occupancy status`,
                 description: ``,
                 
             })),
-            StackBuild: makeType<ZigBee.IOtau.IArgStackBuild, ZigBee.IOtau.IArgStackBuildPayload>(base.u8, ()=>({
-                name: `Stack Build`,
-                description: ``,
-                
-            })),
-            StackRelease: makeType<ZigBee.IOtau.IArgStackRelease, ZigBee.IOtau.IArgStackReleasePayload>(base.u8, ()=>({
-                name: `Stack Release`,
-                description: ``,
-                
-            })),
             Status: makeType<ZigBee.IOtau.IArgStatus, ZigBee.IOtau.IArgStatusPayload>(base.enum8, ()=>({
                 name: `Status`,
                 description: ``,
                 values: { 
                 0x00: `Success`, 
-                0x97: `Wait for data`,  },
+                0x7E: `Not Authorized`, 
+                0x80: `Malformed Command`, 
+                0x81: `Unsupported Command`, 
+                0x95: `Abort`, 
+                0x96: `Invalid Image`, 
+                0x97: `Wait for data`, 
+                0x98: `No Image Available`, 
+                0x99: `Require More Image`,  },
                 
             })),
             UpgradeServer: makeType<ZigBee.IOtau.IArgUpgradeServer, ZigBee.IOtau.IArgUpgradeServerPayload>(base.uid, ()=>({
@@ -7830,10 +7819,7 @@ reporting occupancy status`,
                     HardwareVersionPresent: ZigBee.Otau.Types.HardwareVersionPresent,
                     ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
                     ImageType: ZigBee.Otau.Types.ImageType,
-                    ApplicationRelease: ZigBee.Otau.Types.ApplicationRelease,
-                    ApplicationBuild: ZigBee.Otau.Types.ApplicationBuild,
-                    StackRelease: ZigBee.Otau.Types.StackRelease,
-                    StackBuild: ZigBee.Otau.Types.StackBuild,
+                    FileVersion: ZigBee.Otau.Types.FileVersion,
                     HardwareVersion: ZigBee.Otau.Types.HardwareVersion,
                 }
             })),
@@ -7846,12 +7832,21 @@ reporting occupancy status`,
                     BlockRequestOptions: ZigBee.Otau.Types.BlockRequestOptions,
                     ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
                     ImageType: ZigBee.Otau.Types.ImageType,
-                    ApplicationRelease: ZigBee.Otau.Types.ApplicationRelease,
-                    ApplicationBuild: ZigBee.Otau.Types.ApplicationBuild,
-                    StackRelease: ZigBee.Otau.Types.StackRelease,
-                    StackBuild: ZigBee.Otau.Types.StackBuild,
+                    FileVersion: ZigBee.Otau.Types.FileVersion,
                     FileOffset: ZigBee.Otau.Types.FileOffset,
                     MaxDataSize: ZigBee.Otau.Types.DataSize,
+                }
+            })),
+
+            UpgradeEndRequest: makeType<ZigBee.IOtau.Otau.ICmdUpgradeEndRequest, ZigBee.IOtau.Otau.ICmdUpgradeEndRequestPayload>(command, () => ({
+                name: `Upgrade End Request`,
+                description: ``,
+                id: 0x0006,
+                payload: { 
+                    Status: ZigBee.Otau.Types.Status,
+                    ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
+                    ImageType: ZigBee.Otau.Types.ImageType,
+                    FileVersion: ZigBee.Otau.Types.FileVersion,
                 }
             })),
 
@@ -7865,7 +7860,7 @@ reporting occupancy status`,
                     QueryJitter: ZigBee.Otau.Types.QueryJitter,
                     ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
                     ImageType: ZigBee.Otau.Types.ImageType,
-                    NewFileVersion: ZigBee.Otau.Types.NewFileVersion,
+                    FileVersion: ZigBee.Otau.Types.FileVersion,
                 }
             })),
 
@@ -7874,13 +7869,10 @@ reporting occupancy status`,
                 description: ``,
                 id: 0x0002,
                 payload: { 
-                    Status: ZigBee.Otau.Types.NextImageStatus,
+                    Status: ZigBee.Otau.Types.Status,
                     ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
                     ImageType: ZigBee.Otau.Types.ImageType,
-                    ApplicationRelease: ZigBee.Otau.Types.ApplicationRelease,
-                    ApplicationBuild: ZigBee.Otau.Types.ApplicationBuild,
-                    StackRelease: ZigBee.Otau.Types.StackRelease,
-                    StackBuild: ZigBee.Otau.Types.StackBuild,
+                    FileVersion: ZigBee.Otau.Types.FileVersion,
                     ImageSize: ZigBee.Otau.Types.ImageSize,
                 }
             })),
@@ -7893,12 +7885,24 @@ reporting occupancy status`,
                     Status: ZigBee.Otau.Types.Status,
                     ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
                     ImageType: ZigBee.Otau.Types.ImageType,
-                    ApplicationRelease: ZigBee.Otau.Types.ApplicationRelease,
-                    ApplicationBuild: ZigBee.Otau.Types.ApplicationBuild,
-                    StackRelease: ZigBee.Otau.Types.StackRelease,
-                    StackBuild: ZigBee.Otau.Types.StackBuild,
+                    FileVersion: ZigBee.Otau.Types.FileVersion,
                     FileOffset: ZigBee.Otau.Types.FileOffset,
                     Payload: ZigBee.Otau.Types.Payload,
+                    CurrentTime: ZigBee.Otau.Types.CurrentTime,
+                    RequestTime: ZigBee.Otau.Types.RequestTime,
+                }
+            })),
+
+            UpgradeEndResponse: makeType<ZigBee.IOtau.Otau.ICmdUpgradeEndResponse, ZigBee.IOtau.Otau.ICmdUpgradeEndResponsePayload>(command, () => ({
+                name: `Upgrade End Response`,
+                description: ``,
+                id: 0x0007,
+                payload: { 
+                    ManufacturerCode: ZigBee.Otau.Types.ManufacturerCode,
+                    ImageType: ZigBee.Otau.Types.ImageType,
+                    FileVersion: ZigBee.Otau.Types.FileVersion,
+                    CurrentTime: ZigBee.Otau.Types.CurrentTime,
+                    RequestTime: ZigBee.Otau.Types.RequestTime,
                 }
             })),
 
@@ -7928,11 +7932,13 @@ reporting occupancy status`,
     ZigBee.Otau.Otau.Server.Command = { 
         0x01: ZigBee.Otau.Otau.QueryNextImage,
         0x03: ZigBee.Otau.Otau.ImageBlockRequest,
+        0x06: ZigBee.Otau.Otau.UpgradeEndRequest,
     };
     ZigBee.Otau.Otau.Client.Command = { 
         0x00: ZigBee.Otau.Otau.ImageNotify,
         0x02: ZigBee.Otau.Otau.QueryNextImageResponse,
         0x05: ZigBee.Otau.Otau.ImageBlockResponse,
+        0x07: ZigBee.Otau.Otau.UpgradeEndResponse,
     };
 
     export const cluster: {[id: number]: ICluster} = { 
@@ -9361,22 +9367,22 @@ reporting occupancy status`,
             import ValueType = ZigBee.ValueType;
 
         
-            export type ICmdQueryNextImagePayload = { HardwareVersionPresent?: IArgHardwareVersionPresentPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, ApplicationRelease?: IArgApplicationReleasePayload, ApplicationBuild?: IArgApplicationBuildPayload, StackRelease?: IArgStackReleasePayload, StackBuild?: IArgStackBuildPayload, HardwareVersion?: IArgHardwareVersionPayload, }
+            export type ICmdQueryNextImagePayload = { HardwareVersionPresent?: IArgHardwareVersionPresentPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, FileVersion?: IArgFileVersionPayload, HardwareVersion?: IArgHardwareVersionPayload, }
             export interface ICmdQueryNextImage extends ICommand { value: ICmdQueryNextImagePayload }
-            export type ICmdImageBlockRequestPayload = { BlockRequestOptions?: IArgBlockRequestOptionsPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, ApplicationRelease?: IArgApplicationReleasePayload, ApplicationBuild?: IArgApplicationBuildPayload, StackRelease?: IArgStackReleasePayload, StackBuild?: IArgStackBuildPayload, FileOffset?: IArgFileOffsetPayload, MaxDataSize?: IArgDataSizePayload, }
+            export type ICmdImageBlockRequestPayload = { BlockRequestOptions?: IArgBlockRequestOptionsPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, FileVersion?: IArgFileVersionPayload, FileOffset?: IArgFileOffsetPayload, MaxDataSize?: IArgDataSizePayload, }
             export interface ICmdImageBlockRequest extends ICommand { value: ICmdImageBlockRequestPayload }
-            export type ICmdImageNotifyPayload = { ImageNotifyPayloadType?: IArgImageNotifyPayloadTypePayload, QueryJitter?: IArgQueryJitterPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, NewFileVersion?: IArgNewFileVersionPayload, }
+            export type ICmdUpgradeEndRequestPayload = { Status?: IArgStatusPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, FileVersion?: IArgFileVersionPayload, }
+            export interface ICmdUpgradeEndRequest extends ICommand { value: ICmdUpgradeEndRequestPayload }
+            export type ICmdImageNotifyPayload = { ImageNotifyPayloadType?: IArgImageNotifyPayloadTypePayload, QueryJitter?: IArgQueryJitterPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, FileVersion?: IArgFileVersionPayload, }
             export interface ICmdImageNotify extends ICommand { value: ICmdImageNotifyPayload }
-            export type ICmdQueryNextImageResponsePayload = { Status?: IArgNextImageStatusPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, ApplicationRelease?: IArgApplicationReleasePayload, ApplicationBuild?: IArgApplicationBuildPayload, StackRelease?: IArgStackReleasePayload, StackBuild?: IArgStackBuildPayload, ImageSize?: IArgImageSizePayload, }
+            export type ICmdQueryNextImageResponsePayload = { Status?: IArgStatusPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, FileVersion?: IArgFileVersionPayload, ImageSize?: IArgImageSizePayload, }
             export interface ICmdQueryNextImageResponse extends ICommand { value: ICmdQueryNextImageResponsePayload }
-            export type ICmdImageBlockResponsePayload = { Status?: IArgStatusPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, ApplicationRelease?: IArgApplicationReleasePayload, ApplicationBuild?: IArgApplicationBuildPayload, StackRelease?: IArgStackReleasePayload, StackBuild?: IArgStackBuildPayload, FileOffset?: IArgFileOffsetPayload, Payload?: IArgPayloadPayload, }
+            export type ICmdImageBlockResponsePayload = { Status?: IArgStatusPayload, ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, FileVersion?: IArgFileVersionPayload, FileOffset?: IArgFileOffsetPayload, Payload?: IArgPayloadPayload, CurrentTime?: IArgCurrentTimePayload, RequestTime?: IArgRequestTimePayload, }
             export interface ICmdImageBlockResponse extends ICommand { value: ICmdImageBlockResponsePayload }
+            export type ICmdUpgradeEndResponsePayload = { ManufacturerCode?: IArgManufacturerCodePayload, ImageType?: IArgImageTypePayload, FileVersion?: IArgFileVersionPayload, CurrentTime?: IArgCurrentTimePayload, RequestTime?: IArgRequestTimePayload, }
+            export interface ICmdUpgradeEndResponse extends ICommand { value: ICmdUpgradeEndResponsePayload }
         }
 
-            export type IArgApplicationBuildPayload = ValueType;
-            export interface IArgApplicationBuild extends IArgument { value: IArgApplicationBuildPayload }
-            export type IArgApplicationReleasePayload = ValueType;
-            export interface IArgApplicationRelease extends IArgument { value: IArgApplicationReleasePayload }
             export type IArgBlockRequestOptionsPayload = ValueType;
             export interface IArgBlockRequestOptions extends IArgument { value: IArgBlockRequestOptionsPayload }
             export type IArgCurrentFileVersionPayload = ValueType;
@@ -9393,6 +9399,8 @@ reporting occupancy status`,
             export interface IArgDownloadedStackVersion extends IAttribute { value: IArgDownloadedStackVersionPayload }
             export type IArgFileOffsetPayload = ValueType;
             export interface IArgFileOffset extends IAttribute { value: IArgFileOffsetPayload }
+            export type IArgFileVersionPayload = ValueType;
+            export interface IArgFileVersion extends IArgument { value: IArgFileVersionPayload }
             export type IArgHardwareVersionPayload = ValueType;
             export interface IArgHardwareVersion extends IArgument { value: IArgHardwareVersionPayload }
             export type IArgHardwareVersionPresentPayload = ValueType;
@@ -9409,8 +9417,6 @@ reporting occupancy status`,
             export interface IArgManufacturerCode extends IArgument { value: IArgManufacturerCodePayload }
             export type IArgMinBlockRequestDelayPayload = ValueType;
             export interface IArgMinBlockRequestDelay extends IAttribute { value: IArgMinBlockRequestDelayPayload }
-            export type IArgNewFileVersionPayload = ValueType;
-            export interface IArgNewFileVersion extends IArgument { value: IArgNewFileVersionPayload }
             export type IArgNextImageStatusPayload = ValueType;
             export interface IArgNextImageStatus extends IArgument { value: IArgNextImageStatusPayload }
             export type IArgPayloadPayload = ValueType;
@@ -9419,10 +9425,6 @@ reporting occupancy status`,
             export interface IArgQueryJitter extends IArgument { value: IArgQueryJitterPayload }
             export type IArgRequestTimePayload = ValueType;
             export interface IArgRequestTime extends IArgument { value: IArgRequestTimePayload }
-            export type IArgStackBuildPayload = ValueType;
-            export interface IArgStackBuild extends IArgument { value: IArgStackBuildPayload }
-            export type IArgStackReleasePayload = ValueType;
-            export interface IArgStackRelease extends IArgument { value: IArgStackReleasePayload }
             export type IArgStatusPayload = ValueType;
             export interface IArgStatus extends IArgument { value: IArgStatusPayload }
             export type IArgUpgradeServerPayload = ValueType;

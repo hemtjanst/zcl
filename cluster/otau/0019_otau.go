@@ -10,11 +10,13 @@ var OtauCluster = zcl.Cluster{
 	ServerCmd: map[zcl.CommandID]func() zcl.Command{
 		QueryNextImageCommand:    func() zcl.Command { return new(QueryNextImage) },
 		ImageBlockRequestCommand: func() zcl.Command { return new(ImageBlockRequest) },
+		UpgradeEndRequestCommand: func() zcl.Command { return new(UpgradeEndRequest) },
 	},
 	ClientCmd: map[zcl.CommandID]func() zcl.Command{
 		ImageNotifyCommand:            func() zcl.Command { return new(ImageNotify) },
 		QueryNextImageResponseCommand: func() zcl.Command { return new(QueryNextImageResponse) },
 		ImageBlockResponseCommand:     func() zcl.Command { return new(ImageBlockResponse) },
+		UpgradeEndResponseCommand:     func() zcl.Command { return new(UpgradeEndResponse) },
 	},
 	ServerAttr: map[zcl.AttrID]func() zcl.Attr{},
 	ClientAttr: map[zcl.AttrID]func() zcl.Attr{
@@ -34,10 +36,7 @@ type QueryNextImage struct {
 	HardwareVersionPresent HardwareVersionPresent
 	ManufacturerCode       ManufacturerCode
 	ImageType              ImageType
-	ApplicationRelease     ApplicationRelease
-	ApplicationBuild       ApplicationBuild
-	StackRelease           StackRelease
-	StackBuild             StackBuild
+	FileVersion            FileVersion
 	HardwareVersion        HardwareVersion
 }
 
@@ -54,10 +53,7 @@ func (v *QueryNextImage) Values() []zcl.Val {
 		&v.HardwareVersionPresent,
 		&v.ManufacturerCode,
 		&v.ImageType,
-		&v.ApplicationRelease,
-		&v.ApplicationBuild,
-		&v.StackRelease,
-		&v.StackBuild,
+		&v.FileVersion,
 		&v.HardwareVersion,
 	}
 }
@@ -68,10 +64,7 @@ func (v *QueryNextImage) Arguments() []zcl.ArgDesc {
 		{Name: "HardwareVersionPresent", Argument: &v.HardwareVersionPresent},
 		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
 		{Name: "ImageType", Argument: &v.ImageType},
-		{Name: "ApplicationRelease", Argument: &v.ApplicationRelease},
-		{Name: "ApplicationBuild", Argument: &v.ApplicationBuild},
-		{Name: "StackRelease", Argument: &v.StackRelease},
-		{Name: "StackBuild", Argument: &v.StackBuild},
+		{Name: "FileVersion", Argument: &v.FileVersion},
 		{Name: "HardwareVersion", Argument: &v.HardwareVersion},
 	}
 }
@@ -137,25 +130,7 @@ func (v QueryNextImage) MarshalZcl() ([]byte, error) {
 		data = append(data, tmp...)
 	}
 	{
-		if tmp, err = v.ApplicationRelease.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.ApplicationBuild.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.StackRelease.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.StackBuild.MarshalZcl(); err != nil {
+		if tmp, err = v.FileVersion.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
@@ -187,19 +162,7 @@ func (v *QueryNextImage) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ApplicationRelease).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.ApplicationBuild).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.StackRelease).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.StackBuild).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.FileVersion).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -219,19 +182,13 @@ func (v QueryNextImage) String() string {
 			"HardwareVersionPresent(%v)",
 			"ManufacturerCode(%v)",
 			"ImageType(%v)",
-			"ApplicationRelease(%v)",
-			"ApplicationBuild(%v)",
-			"StackRelease(%v)",
-			"StackBuild(%v)",
+			"FileVersion(%v)",
 			"HardwareVersion(%v)",
 		}, " ")+"}",
 		v.HardwareVersionPresent,
 		v.ManufacturerCode,
 		v.ImageType,
-		v.ApplicationRelease,
-		v.ApplicationBuild,
-		v.StackRelease,
-		v.StackBuild,
+		v.FileVersion,
 		v.HardwareVersion,
 	)
 }
@@ -240,10 +197,7 @@ type ImageBlockRequest struct {
 	BlockRequestOptions BlockRequestOptions
 	ManufacturerCode    ManufacturerCode
 	ImageType           ImageType
-	ApplicationRelease  ApplicationRelease
-	ApplicationBuild    ApplicationBuild
-	StackRelease        StackRelease
-	StackBuild          StackBuild
+	FileVersion         FileVersion
 	FileOffset          FileOffset
 	MaxDataSize         DataSize
 }
@@ -261,10 +215,7 @@ func (v *ImageBlockRequest) Values() []zcl.Val {
 		&v.BlockRequestOptions,
 		&v.ManufacturerCode,
 		&v.ImageType,
-		&v.ApplicationRelease,
-		&v.ApplicationBuild,
-		&v.StackRelease,
-		&v.StackBuild,
+		&v.FileVersion,
 		&v.FileOffset,
 		&v.MaxDataSize,
 	}
@@ -276,10 +227,7 @@ func (v *ImageBlockRequest) Arguments() []zcl.ArgDesc {
 		{Name: "BlockRequestOptions", Argument: &v.BlockRequestOptions},
 		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
 		{Name: "ImageType", Argument: &v.ImageType},
-		{Name: "ApplicationRelease", Argument: &v.ApplicationRelease},
-		{Name: "ApplicationBuild", Argument: &v.ApplicationBuild},
-		{Name: "StackRelease", Argument: &v.StackRelease},
-		{Name: "StackBuild", Argument: &v.StackBuild},
+		{Name: "FileVersion", Argument: &v.FileVersion},
 		{Name: "FileOffset", Argument: &v.FileOffset},
 		{Name: "MaxDataSize", Argument: &v.MaxDataSize},
 	}
@@ -346,25 +294,7 @@ func (v ImageBlockRequest) MarshalZcl() ([]byte, error) {
 		data = append(data, tmp...)
 	}
 	{
-		if tmp, err = v.ApplicationRelease.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.ApplicationBuild.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.StackRelease.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.StackBuild.MarshalZcl(); err != nil {
+		if tmp, err = v.FileVersion.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
@@ -402,19 +332,7 @@ func (v *ImageBlockRequest) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ApplicationRelease).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.ApplicationBuild).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.StackRelease).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.StackBuild).UnmarshalZcl(b); err != nil {
+	if b, err = (&v.FileVersion).UnmarshalZcl(b); err != nil {
 		return b, err
 	}
 
@@ -436,22 +354,160 @@ func (v ImageBlockRequest) String() string {
 			"BlockRequestOptions(%v)",
 			"ManufacturerCode(%v)",
 			"ImageType(%v)",
-			"ApplicationRelease(%v)",
-			"ApplicationBuild(%v)",
-			"StackRelease(%v)",
-			"StackBuild(%v)",
+			"FileVersion(%v)",
 			"FileOffset(%v)",
 			"MaxDataSize(%v)",
 		}, " ")+"}",
 		v.BlockRequestOptions,
 		v.ManufacturerCode,
 		v.ImageType,
-		v.ApplicationRelease,
-		v.ApplicationBuild,
-		v.StackRelease,
-		v.StackBuild,
+		v.FileVersion,
 		v.FileOffset,
 		v.MaxDataSize,
+	)
+}
+
+type UpgradeEndRequest struct {
+	Status           Status
+	ManufacturerCode ManufacturerCode
+	ImageType        ImageType
+	FileVersion      FileVersion
+}
+
+type UpgradeEndRequestHandler interface {
+	HandleUpgradeEndRequest(frame Frame, cmd *UpgradeEndRequest) (*UpgradeEndResponse, error)
+}
+
+// UpgradeEndRequestCommand is the Command ID of UpgradeEndRequest
+const UpgradeEndRequestCommand CommandID = 0x0006
+
+// Values returns all values of UpgradeEndRequest
+func (v *UpgradeEndRequest) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.Status,
+		&v.ManufacturerCode,
+		&v.ImageType,
+		&v.FileVersion,
+	}
+}
+
+// Arguments returns all values of UpgradeEndRequest
+func (v *UpgradeEndRequest) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "Status", Argument: &v.Status},
+		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
+		{Name: "ImageType", Argument: &v.ImageType},
+		{Name: "FileVersion", Argument: &v.FileVersion},
+	}
+}
+
+// Name of the command
+func (UpgradeEndRequest) Name() string { return `Upgrade End Request` }
+
+// Description of the command
+func (UpgradeEndRequest) Description() string { return `` }
+
+// ID of the command
+func (UpgradeEndRequest) ID() CommandID { return UpgradeEndRequestCommand }
+
+// Required
+func (UpgradeEndRequest) Required() bool { return true }
+
+// Cluster ID of the command
+func (UpgradeEndRequest) Cluster() zcl.ClusterID { return OtauID }
+
+// Direction of the command
+func (UpgradeEndRequest) Direction() zcl.Direction { return zcl.ClientToServer }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (UpgradeEndRequest) MnfCode() uint16 { return 0 }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+// func (UpgradeEndRequest) MarshalJSON() ([]byte, error) { return []byte("6"), nil }
+
+func (v *UpgradeEndRequest) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h UpgradeEndRequestHandler
+	if h, found = handler.(UpgradeEndRequestHandler); found {
+		rsp, err = h.HandleUpgradeEndRequest(frame, v)
+	} else {
+		rsp = &zcl.DefaultResponse{Command: v.ID(), Status: zcl.UnsupClusterCommand}
+	}
+	return
+}
+
+// MarshalZcl returns the wire format representation of UpgradeEndRequest
+func (v UpgradeEndRequest) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
+	var err error
+
+	{
+		if tmp, err = v.Status.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.ManufacturerCode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.ImageType.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.FileVersion.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the UpgradeEndRequest struct
+func (v *UpgradeEndRequest) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
+
+	if b, err = (&v.Status).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.ManufacturerCode).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.ImageType).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.FileVersion).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v UpgradeEndRequest) String() string {
+	return zcl.Sprintf(
+		"UpgradeEndRequest{"+zcl.StrJoin([]string{
+			"Status(%v)",
+			"ManufacturerCode(%v)",
+			"ImageType(%v)",
+			"FileVersion(%v)",
+		}, " ")+"}",
+		v.Status,
+		v.ManufacturerCode,
+		v.ImageType,
+		v.FileVersion,
 	)
 }
 
@@ -460,7 +516,7 @@ type ImageNotify struct {
 	QueryJitter            QueryJitter
 	ManufacturerCode       ManufacturerCode
 	ImageType              ImageType
-	NewFileVersion         NewFileVersion
+	FileVersion            FileVersion
 }
 
 type ImageNotifyHandler interface {
@@ -477,7 +533,7 @@ func (v *ImageNotify) Values() []zcl.Val {
 		&v.QueryJitter,
 		&v.ManufacturerCode,
 		&v.ImageType,
-		&v.NewFileVersion,
+		&v.FileVersion,
 	}
 }
 
@@ -488,7 +544,7 @@ func (v *ImageNotify) Arguments() []zcl.ArgDesc {
 		{Name: "QueryJitter", Argument: &v.QueryJitter},
 		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
 		{Name: "ImageType", Argument: &v.ImageType},
-		{Name: "NewFileVersion", Argument: &v.NewFileVersion},
+		{Name: "FileVersion", Argument: &v.FileVersion},
 	}
 }
 
@@ -557,7 +613,7 @@ func (v ImageNotify) MarshalZcl() ([]byte, error) {
 		data = append(data, tmp...)
 	}
 	if v.ImageNotifyPayloadType >= 0x03 {
-		if tmp, err = v.NewFileVersion.MarshalZcl(); err != nil {
+		if tmp, err = v.FileVersion.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
@@ -592,7 +648,7 @@ func (v *ImageNotify) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	if v.ImageNotifyPayloadType >= 0x03 {
-		if b, err = (&v.NewFileVersion).UnmarshalZcl(b); err != nil {
+		if b, err = (&v.FileVersion).UnmarshalZcl(b); err != nil {
 			return b, err
 		}
 	}
@@ -608,25 +664,22 @@ func (v ImageNotify) String() string {
 			"QueryJitter(%v)",
 			"ManufacturerCode(%v)",
 			"ImageType(%v)",
-			"NewFileVersion(%v)",
+			"FileVersion(%v)",
 		}, " ")+"}",
 		v.ImageNotifyPayloadType,
 		v.QueryJitter,
 		v.ManufacturerCode,
 		v.ImageType,
-		v.NewFileVersion,
+		v.FileVersion,
 	)
 }
 
 type QueryNextImageResponse struct {
-	Status             NextImageStatus
-	ManufacturerCode   ManufacturerCode
-	ImageType          ImageType
-	ApplicationRelease ApplicationRelease
-	ApplicationBuild   ApplicationBuild
-	StackRelease       StackRelease
-	StackBuild         StackBuild
-	ImageSize          ImageSize
+	Status           Status
+	ManufacturerCode ManufacturerCode
+	ImageType        ImageType
+	FileVersion      FileVersion
+	ImageSize        ImageSize
 }
 
 type QueryNextImageResponseHandler interface {
@@ -642,10 +695,7 @@ func (v *QueryNextImageResponse) Values() []zcl.Val {
 		&v.Status,
 		&v.ManufacturerCode,
 		&v.ImageType,
-		&v.ApplicationRelease,
-		&v.ApplicationBuild,
-		&v.StackRelease,
-		&v.StackBuild,
+		&v.FileVersion,
 		&v.ImageSize,
 	}
 }
@@ -656,10 +706,7 @@ func (v *QueryNextImageResponse) Arguments() []zcl.ArgDesc {
 		{Name: "Status", Argument: &v.Status},
 		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
 		{Name: "ImageType", Argument: &v.ImageType},
-		{Name: "ApplicationRelease", Argument: &v.ApplicationRelease},
-		{Name: "ApplicationBuild", Argument: &v.ApplicationBuild},
-		{Name: "StackRelease", Argument: &v.StackRelease},
-		{Name: "StackBuild", Argument: &v.StackBuild},
+		{Name: "FileVersion", Argument: &v.FileVersion},
 		{Name: "ImageSize", Argument: &v.ImageSize},
 	}
 }
@@ -724,30 +771,9 @@ func (v QueryNextImageResponse) MarshalZcl() ([]byte, error) {
 		}
 		data = append(data, tmp...)
 	}
-	// ApplicationRelease is only included if successful
+	// FileVersion is only included if successful
 	if v.Status == 0x00 {
-		if tmp, err = v.ApplicationRelease.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	// ApplicationBuild is only included if successful
-	if v.Status == 0x00 {
-		if tmp, err = v.ApplicationBuild.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	// StackRelease is only included if successful
-	if v.Status == 0x00 {
-		if tmp, err = v.StackRelease.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	// StackBuild is only included if successful
-	if v.Status == 0x00 {
-		if tmp, err = v.StackBuild.MarshalZcl(); err != nil {
+		if tmp, err = v.FileVersion.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
@@ -786,30 +812,9 @@ func (v *QueryNextImageResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		}
 	}
 
-	// ApplicationRelease is only included if successful
+	// FileVersion is only included if successful
 	if v.Status == 0x00 {
-		if b, err = (&v.ApplicationRelease).UnmarshalZcl(b); err != nil {
-			return b, err
-		}
-	}
-
-	// ApplicationBuild is only included if successful
-	if v.Status == 0x00 {
-		if b, err = (&v.ApplicationBuild).UnmarshalZcl(b); err != nil {
-			return b, err
-		}
-	}
-
-	// StackRelease is only included if successful
-	if v.Status == 0x00 {
-		if b, err = (&v.StackRelease).UnmarshalZcl(b); err != nil {
-			return b, err
-		}
-	}
-
-	// StackBuild is only included if successful
-	if v.Status == 0x00 {
-		if b, err = (&v.StackBuild).UnmarshalZcl(b); err != nil {
+		if b, err = (&v.FileVersion).UnmarshalZcl(b); err != nil {
 			return b, err
 		}
 	}
@@ -831,33 +836,26 @@ func (v QueryNextImageResponse) String() string {
 			"Status(%v)",
 			"ManufacturerCode(%v)",
 			"ImageType(%v)",
-			"ApplicationRelease(%v)",
-			"ApplicationBuild(%v)",
-			"StackRelease(%v)",
-			"StackBuild(%v)",
+			"FileVersion(%v)",
 			"ImageSize(%v)",
 		}, " ")+"}",
 		v.Status,
 		v.ManufacturerCode,
 		v.ImageType,
-		v.ApplicationRelease,
-		v.ApplicationBuild,
-		v.StackRelease,
-		v.StackBuild,
+		v.FileVersion,
 		v.ImageSize,
 	)
 }
 
 type ImageBlockResponse struct {
-	Status             Status
-	ManufacturerCode   ManufacturerCode
-	ImageType          ImageType
-	ApplicationRelease ApplicationRelease
-	ApplicationBuild   ApplicationBuild
-	StackRelease       StackRelease
-	StackBuild         StackBuild
-	FileOffset         FileOffset
-	Payload            Payload
+	Status           Status
+	ManufacturerCode ManufacturerCode
+	ImageType        ImageType
+	FileVersion      FileVersion
+	FileOffset       FileOffset
+	Payload          Payload
+	CurrentTime      CurrentTime
+	RequestTime      RequestTime
 }
 
 type ImageBlockResponseHandler interface {
@@ -873,12 +871,11 @@ func (v *ImageBlockResponse) Values() []zcl.Val {
 		&v.Status,
 		&v.ManufacturerCode,
 		&v.ImageType,
-		&v.ApplicationRelease,
-		&v.ApplicationBuild,
-		&v.StackRelease,
-		&v.StackBuild,
+		&v.FileVersion,
 		&v.FileOffset,
 		&v.Payload,
+		&v.CurrentTime,
+		&v.RequestTime,
 	}
 }
 
@@ -888,12 +885,11 @@ func (v *ImageBlockResponse) Arguments() []zcl.ArgDesc {
 		{Name: "Status", Argument: &v.Status},
 		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
 		{Name: "ImageType", Argument: &v.ImageType},
-		{Name: "ApplicationRelease", Argument: &v.ApplicationRelease},
-		{Name: "ApplicationBuild", Argument: &v.ApplicationBuild},
-		{Name: "StackRelease", Argument: &v.StackRelease},
-		{Name: "StackBuild", Argument: &v.StackBuild},
+		{Name: "FileVersion", Argument: &v.FileVersion},
 		{Name: "FileOffset", Argument: &v.FileOffset},
 		{Name: "Payload", Argument: &v.Payload},
+		{Name: "CurrentTime", Argument: &v.CurrentTime},
+		{Name: "RequestTime", Argument: &v.RequestTime},
 	}
 }
 
@@ -943,50 +939,51 @@ func (v ImageBlockResponse) MarshalZcl() ([]byte, error) {
 		}
 		data = append(data, tmp...)
 	}
-	{
+	// ManufacturerCode is only included if successful
+	if v.Status == 0x00 {
 		if tmp, err = v.ManufacturerCode.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-	{
+	// ImageType is only included if successful
+	if v.Status == 0x00 {
 		if tmp, err = v.ImageType.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-	{
-		if tmp, err = v.ApplicationRelease.MarshalZcl(); err != nil {
+	// FileVersion is only included if successful
+	if v.Status == 0x00 {
+		if tmp, err = v.FileVersion.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-	{
-		if tmp, err = v.ApplicationBuild.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.StackRelease.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
-		if tmp, err = v.StackBuild.MarshalZcl(); err != nil {
-			return nil, err
-		}
-		data = append(data, tmp...)
-	}
-	{
+	// FileOffset is only included if successful
+	if v.Status == 0x00 {
 		if tmp, err = v.FileOffset.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
 	}
-	{
+	// Payload is only included if successful
+	if v.Status == 0x00 {
 		if tmp, err = v.Payload.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	// CurrentTime is only included if wait for data status
+	if v.Status == 0x97 {
+		if tmp, err = v.CurrentTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	// RequestTime is only included if wait for data status
+	if v.Status == 0x97 {
+		if tmp, err = v.RequestTime.MarshalZcl(); err != nil {
 			return nil, err
 		}
 		data = append(data, tmp...)
@@ -1004,36 +1001,53 @@ func (v *ImageBlockResponse) UnmarshalZcl(b []byte) ([]byte, error) {
 		return b, err
 	}
 
-	if b, err = (&v.ManufacturerCode).UnmarshalZcl(b); err != nil {
-		return b, err
+	// ManufacturerCode is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.ManufacturerCode).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.ImageType).UnmarshalZcl(b); err != nil {
-		return b, err
+	// ImageType is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.ImageType).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.ApplicationRelease).UnmarshalZcl(b); err != nil {
-		return b, err
+	// FileVersion is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.FileVersion).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.ApplicationBuild).UnmarshalZcl(b); err != nil {
-		return b, err
+	// FileOffset is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.FileOffset).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.StackRelease).UnmarshalZcl(b); err != nil {
-		return b, err
+	// Payload is only included if successful
+	if v.Status == 0x00 {
+		if b, err = (&v.Payload).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.StackBuild).UnmarshalZcl(b); err != nil {
-		return b, err
+	// CurrentTime is only included if wait for data status
+	if v.Status == 0x97 {
+		if b, err = (&v.CurrentTime).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
-	if b, err = (&v.FileOffset).UnmarshalZcl(b); err != nil {
-		return b, err
-	}
-
-	if b, err = (&v.Payload).UnmarshalZcl(b); err != nil {
-		return b, err
+	// RequestTime is only included if wait for data status
+	if v.Status == 0x97 {
+		if b, err = (&v.RequestTime).UnmarshalZcl(b); err != nil {
+			return b, err
+		}
 	}
 
 	return b, nil
@@ -1046,21 +1060,176 @@ func (v ImageBlockResponse) String() string {
 			"Status(%v)",
 			"ManufacturerCode(%v)",
 			"ImageType(%v)",
-			"ApplicationRelease(%v)",
-			"ApplicationBuild(%v)",
-			"StackRelease(%v)",
-			"StackBuild(%v)",
+			"FileVersion(%v)",
 			"FileOffset(%v)",
 			"Payload(%v)",
+			"CurrentTime(%v)",
+			"RequestTime(%v)",
 		}, " ")+"}",
 		v.Status,
 		v.ManufacturerCode,
 		v.ImageType,
-		v.ApplicationRelease,
-		v.ApplicationBuild,
-		v.StackRelease,
-		v.StackBuild,
+		v.FileVersion,
 		v.FileOffset,
 		v.Payload,
+		v.CurrentTime,
+		v.RequestTime,
+	)
+}
+
+type UpgradeEndResponse struct {
+	ManufacturerCode ManufacturerCode
+	ImageType        ImageType
+	FileVersion      FileVersion
+	CurrentTime      CurrentTime
+	RequestTime      RequestTime
+}
+
+type UpgradeEndResponseHandler interface {
+	HandleUpgradeEndResponse(frame Frame, cmd *UpgradeEndResponse) error
+}
+
+// UpgradeEndResponseCommand is the Command ID of UpgradeEndResponse
+const UpgradeEndResponseCommand CommandID = 0x0007
+
+// Values returns all values of UpgradeEndResponse
+func (v *UpgradeEndResponse) Values() []zcl.Val {
+	return []zcl.Val{
+		&v.ManufacturerCode,
+		&v.ImageType,
+		&v.FileVersion,
+		&v.CurrentTime,
+		&v.RequestTime,
+	}
+}
+
+// Arguments returns all values of UpgradeEndResponse
+func (v *UpgradeEndResponse) Arguments() []zcl.ArgDesc {
+	return []zcl.ArgDesc{
+		{Name: "ManufacturerCode", Argument: &v.ManufacturerCode},
+		{Name: "ImageType", Argument: &v.ImageType},
+		{Name: "FileVersion", Argument: &v.FileVersion},
+		{Name: "CurrentTime", Argument: &v.CurrentTime},
+		{Name: "RequestTime", Argument: &v.RequestTime},
+	}
+}
+
+// Name of the command
+func (UpgradeEndResponse) Name() string { return `Upgrade End Response` }
+
+// Description of the command
+func (UpgradeEndResponse) Description() string { return `` }
+
+// ID of the command
+func (UpgradeEndResponse) ID() CommandID { return UpgradeEndResponseCommand }
+
+// Required
+func (UpgradeEndResponse) Required() bool { return true }
+
+// Cluster ID of the command
+func (UpgradeEndResponse) Cluster() zcl.ClusterID { return OtauID }
+
+// Direction of the command
+func (UpgradeEndResponse) Direction() zcl.Direction { return zcl.ServerToClient }
+
+// MnfCode returns the manufacturer code (if any) of the command
+func (UpgradeEndResponse) MnfCode() uint16 { return 0 }
+
+// MarshalJSON is a helper that returns the command as an uint wrapped in a byte-array
+// func (UpgradeEndResponse) MarshalJSON() ([]byte, error) { return []byte("7"), nil }
+
+func (v *UpgradeEndResponse) Handle(frame Frame, handler interface{}) (rsp zcl.General, found bool, err error) {
+	var h UpgradeEndResponseHandler
+	if h, found = handler.(UpgradeEndResponseHandler); found {
+		err = h.HandleUpgradeEndResponse(frame, v)
+	}
+	return
+}
+
+// MarshalZcl returns the wire format representation of UpgradeEndResponse
+func (v UpgradeEndResponse) MarshalZcl() ([]byte, error) {
+	var data []byte
+	var tmp []byte
+	tmp2 := uint32(0)
+	_ = tmp2
+	var err error
+
+	{
+		if tmp, err = v.ManufacturerCode.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.ImageType.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.FileVersion.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.CurrentTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	{
+		if tmp, err = v.RequestTime.MarshalZcl(); err != nil {
+			return nil, err
+		}
+		data = append(data, tmp...)
+	}
+	return data, nil
+}
+
+// UnmarshalZcl parses the wire format representation into the UpgradeEndResponse struct
+func (v *UpgradeEndResponse) UnmarshalZcl(b []byte) ([]byte, error) {
+	var err error
+	tmp2 := uint32(0)
+	_ = tmp2
+
+	if b, err = (&v.ManufacturerCode).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.ImageType).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.FileVersion).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.CurrentTime).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	if b, err = (&v.RequestTime).UnmarshalZcl(b); err != nil {
+		return b, err
+	}
+
+	return b, nil
+}
+
+// String returns a log-friendly string representation of the struct
+func (v UpgradeEndResponse) String() string {
+	return zcl.Sprintf(
+		"UpgradeEndResponse{"+zcl.StrJoin([]string{
+			"ManufacturerCode(%v)",
+			"ImageType(%v)",
+			"FileVersion(%v)",
+			"CurrentTime(%v)",
+			"RequestTime(%v)",
+		}, " ")+"}",
+		v.ManufacturerCode,
+		v.ImageType,
+		v.FileVersion,
+		v.CurrentTime,
+		v.RequestTime,
 	)
 }
