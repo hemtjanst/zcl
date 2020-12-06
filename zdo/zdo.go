@@ -3263,6 +3263,8 @@ func (v ProfileId) String() string {
 	switch v {
 	case 0x0104:
 		return "Home Automation"
+	case 0xA1E0:
+		return "Green Power"
 	case 0xC05E:
 		return "Light Link"
 	}
@@ -3270,13 +3272,16 @@ func (v ProfileId) String() string {
 }
 
 func (v ProfileId) IsHomeAutomation() bool { return v == 0x0104 }
+func (v ProfileId) IsGreenPower() bool     { return v == 0xA1E0 }
 func (v ProfileId) IsLightLink() bool      { return v == 0xC05E }
 func (v *ProfileId) SetHomeAutomation()    { *v = 0x0104 }
+func (v *ProfileId) SetGreenPower()        { *v = 0xA1E0 }
 func (v *ProfileId) SetLightLink()         { *v = 0xC05E }
 
 func (ProfileId) SingleOptions() []zcl.Option {
 	return []zcl.Option{
 		{Value: 0x0104, Name: "Home Automation"},
+		{Value: 0xA1E0, Name: "Green Power"},
 		{Value: 0xC05E, Name: "Light Link"},
 	}
 }

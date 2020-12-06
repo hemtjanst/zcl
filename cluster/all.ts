@@ -737,6 +737,7 @@ this node in one single message transfer.`,
                 description: ``,
                 values: { 
                 0x0104: `Home Automation`, 
+                0xA1E0: `Green Power`, 
                 0xC05E: `Light Link`,  },
                 
             })),
