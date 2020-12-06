@@ -5,90 +5,6 @@ import "hemtjan.st/zcl"
 type CommandID = zcl.CommandID
 type Frame = zcl.ReceivedZclFrame
 
-func (ApplicationBuild) Name() string        { return `Application Build` }
-func (ApplicationBuild) Description() string { return `` }
-
-type ApplicationBuild zcl.Zu8
-
-func (v *ApplicationBuild) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (v *ApplicationBuild) Value() zcl.Val     { return v }
-
-func (v ApplicationBuild) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
-
-func (v *ApplicationBuild) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*v = ApplicationBuild(*nt)
-	return br, err
-}
-
-func (v ApplicationBuild) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(v))
-}
-
-func (v *ApplicationBuild) UnmarshalJSON(b []byte) error {
-	a := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, a); err != nil {
-		return err
-	}
-	*v = ApplicationBuild(*a)
-	return nil
-}
-
-func (v *ApplicationBuild) SetValue(a zcl.Val) error {
-	if nv, ok := a.(*zcl.Zu8); ok {
-		*v = ApplicationBuild(*nv)
-		return nil
-	}
-	return zcl.ErrInvalidType
-}
-
-func (v ApplicationBuild) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v))
-}
-
-func (ApplicationRelease) Name() string        { return `Application Release` }
-func (ApplicationRelease) Description() string { return `` }
-
-type ApplicationRelease zcl.Zu8
-
-func (v *ApplicationRelease) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (v *ApplicationRelease) Value() zcl.Val     { return v }
-
-func (v ApplicationRelease) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
-
-func (v *ApplicationRelease) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*v = ApplicationRelease(*nt)
-	return br, err
-}
-
-func (v ApplicationRelease) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(v))
-}
-
-func (v *ApplicationRelease) UnmarshalJSON(b []byte) error {
-	a := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, a); err != nil {
-		return err
-	}
-	*v = ApplicationRelease(*a)
-	return nil
-}
-
-func (v *ApplicationRelease) SetValue(a zcl.Val) error {
-	if nv, ok := a.(*zcl.Zu8); ok {
-		*v = ApplicationRelease(*nv)
-		return nil
-	}
-	return zcl.ErrInvalidType
-}
-
-func (v ApplicationRelease) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v))
-}
-
 func (BlockRequestOptions) Name() string        { return `Block Request Options` }
 func (BlockRequestOptions) Description() string { return `` }
 
@@ -518,6 +434,48 @@ func (v FileOffset) String() string {
 	return zcl.Sprintf("%v", zcl.Zu32(v))
 }
 
+func (FileVersion) Name() string        { return `File Version` }
+func (FileVersion) Description() string { return `` }
+
+type FileVersion zcl.Zu32
+
+func (v *FileVersion) TypeID() zcl.TypeID { return new(zcl.Zu32).TypeID() }
+func (v *FileVersion) Value() zcl.Val     { return v }
+
+func (v FileVersion) MarshalZcl() ([]byte, error) { return zcl.Zu32(v).MarshalZcl() }
+
+func (v *FileVersion) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zu32)
+	br, err := nt.UnmarshalZcl(b)
+	*v = FileVersion(*nt)
+	return br, err
+}
+
+func (v FileVersion) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zu32(v))
+}
+
+func (v *FileVersion) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zu32)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = FileVersion(*a)
+	return nil
+}
+
+func (v *FileVersion) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zu32); ok {
+		*v = FileVersion(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v FileVersion) String() string {
+	return zcl.Sprintf("%v", zcl.Zu32(v))
+}
+
 func (HardwareVersion) Name() string        { return `Hardware Version` }
 func (HardwareVersion) Description() string { return `` }
 
@@ -725,26 +683,26 @@ func (v ImageSize) String() string {
 func (ImageType) Name() string        { return `Image type` }
 func (ImageType) Description() string { return `` }
 
-type ImageType zcl.Zenum16
+type ImageType zcl.Zu16
 
-func (v *ImageType) TypeID() zcl.TypeID { return new(zcl.Zenum16).TypeID() }
+func (v *ImageType) TypeID() zcl.TypeID { return new(zcl.Zu16).TypeID() }
 func (v *ImageType) Value() zcl.Val     { return v }
 
-func (v ImageType) MarshalZcl() ([]byte, error) { return zcl.Zenum16(v).MarshalZcl() }
+func (v ImageType) MarshalZcl() ([]byte, error) { return zcl.Zu16(v).MarshalZcl() }
 
 func (v *ImageType) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zenum16)
+	nt := new(zcl.Zu16)
 	br, err := nt.UnmarshalZcl(b)
 	*v = ImageType(*nt)
 	return br, err
 }
 
 func (v ImageType) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zenum16(v))
+	return zcl.ToJson(zcl.Zu16(v))
 }
 
 func (v *ImageType) UnmarshalJSON(b []byte) error {
-	a := new(zcl.Zenum16)
+	a := new(zcl.Zu16)
 	if err := zcl.ParseJson(b, a); err != nil {
 		return err
 	}
@@ -753,7 +711,7 @@ func (v *ImageType) UnmarshalJSON(b []byte) error {
 }
 
 func (v *ImageType) SetValue(a zcl.Val) error {
-	if nv, ok := a.(*zcl.Zenum16); ok {
+	if nv, ok := a.(*zcl.Zu16); ok {
 		*v = ImageType(*nv)
 		return nil
 	}
@@ -773,7 +731,7 @@ func (v ImageType) String() string {
 	case 0xFFFF:
 		return "Wild card"
 	}
-	return zcl.Sprintf("%v", zcl.Zenum16(v))
+	return zcl.Sprintf("%v", zcl.Zu16(v))
 }
 
 func (v ImageType) IsSpecificImage() bool      { return v == 0x0000 }
@@ -929,7 +887,20 @@ func (v *ManufacturerCode) SetValue(a zcl.Val) error {
 }
 
 func (v ManufacturerCode) String() string {
+	switch v {
+	case 0x117C:
+		return "Ikea"
+	}
 	return zcl.Sprintf("%v", zcl.Zenum16(v))
+}
+
+func (v ManufacturerCode) IsIkea() bool { return v == 0x117C }
+func (v *ManufacturerCode) SetIkea()    { *v = 0x117C }
+
+func (ManufacturerCode) SingleOptions() []zcl.Option {
+	return []zcl.Option{
+		{Value: 0x117C, Name: "Ikea"},
+	}
 }
 
 const MinBlockRequestDelayAttr zcl.AttrID = 9
@@ -985,48 +956,6 @@ func (v *MinBlockRequestDelay) SetValue(a zcl.Val) error {
 
 func (v MinBlockRequestDelay) String() string {
 	return zcl.Sprintf("%v", zcl.Zu16(v))
-}
-
-func (NewFileVersion) Name() string        { return `New File Version` }
-func (NewFileVersion) Description() string { return `` }
-
-type NewFileVersion zcl.Zu32
-
-func (v *NewFileVersion) TypeID() zcl.TypeID { return new(zcl.Zu32).TypeID() }
-func (v *NewFileVersion) Value() zcl.Val     { return v }
-
-func (v NewFileVersion) MarshalZcl() ([]byte, error) { return zcl.Zu32(v).MarshalZcl() }
-
-func (v *NewFileVersion) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu32)
-	br, err := nt.UnmarshalZcl(b)
-	*v = NewFileVersion(*nt)
-	return br, err
-}
-
-func (v NewFileVersion) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu32(v))
-}
-
-func (v *NewFileVersion) UnmarshalJSON(b []byte) error {
-	a := new(zcl.Zu32)
-	if err := zcl.ParseJson(b, a); err != nil {
-		return err
-	}
-	*v = NewFileVersion(*a)
-	return nil
-}
-
-func (v *NewFileVersion) SetValue(a zcl.Val) error {
-	if nv, ok := a.(*zcl.Zu32); ok {
-		*v = NewFileVersion(*nv)
-		return nil
-	}
-	return zcl.ErrInvalidType
-}
-
-func (v NewFileVersion) String() string {
-	return zcl.Sprintf("%v", zcl.Zu32(v))
 }
 
 func (NextImageStatus) Name() string        { return `Next Image Status` }
@@ -1215,90 +1144,6 @@ func (v RequestTime) String() string {
 	return zcl.Sprintf("%v", zcl.Ztime(v))
 }
 
-func (StackBuild) Name() string        { return `Stack Build` }
-func (StackBuild) Description() string { return `` }
-
-type StackBuild zcl.Zu8
-
-func (v *StackBuild) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (v *StackBuild) Value() zcl.Val     { return v }
-
-func (v StackBuild) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
-
-func (v *StackBuild) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*v = StackBuild(*nt)
-	return br, err
-}
-
-func (v StackBuild) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(v))
-}
-
-func (v *StackBuild) UnmarshalJSON(b []byte) error {
-	a := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, a); err != nil {
-		return err
-	}
-	*v = StackBuild(*a)
-	return nil
-}
-
-func (v *StackBuild) SetValue(a zcl.Val) error {
-	if nv, ok := a.(*zcl.Zu8); ok {
-		*v = StackBuild(*nv)
-		return nil
-	}
-	return zcl.ErrInvalidType
-}
-
-func (v StackBuild) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v))
-}
-
-func (StackRelease) Name() string        { return `Stack Release` }
-func (StackRelease) Description() string { return `` }
-
-type StackRelease zcl.Zu8
-
-func (v *StackRelease) TypeID() zcl.TypeID { return new(zcl.Zu8).TypeID() }
-func (v *StackRelease) Value() zcl.Val     { return v }
-
-func (v StackRelease) MarshalZcl() ([]byte, error) { return zcl.Zu8(v).MarshalZcl() }
-
-func (v *StackRelease) UnmarshalZcl(b []byte) ([]byte, error) {
-	nt := new(zcl.Zu8)
-	br, err := nt.UnmarshalZcl(b)
-	*v = StackRelease(*nt)
-	return br, err
-}
-
-func (v StackRelease) MarshalJSON() ([]byte, error) {
-	return zcl.ToJson(zcl.Zu8(v))
-}
-
-func (v *StackRelease) UnmarshalJSON(b []byte) error {
-	a := new(zcl.Zu8)
-	if err := zcl.ParseJson(b, a); err != nil {
-		return err
-	}
-	*v = StackRelease(*a)
-	return nil
-}
-
-func (v *StackRelease) SetValue(a zcl.Val) error {
-	if nv, ok := a.(*zcl.Zu8); ok {
-		*v = StackRelease(*nv)
-		return nil
-	}
-	return zcl.ErrInvalidType
-}
-
-func (v StackRelease) String() string {
-	return zcl.Sprintf("%v", zcl.Zu8(v))
-}
-
 func (Status) Name() string        { return `Status` }
 func (Status) Description() string { return `` }
 
@@ -1341,21 +1186,56 @@ func (v Status) String() string {
 	switch v {
 	case 0x00:
 		return "Success"
+	case 0x7E:
+		return "Not Authorized"
+	case 0x80:
+		return "Malformed Command"
+	case 0x81:
+		return "Unsupported Command"
+	case 0x95:
+		return "Abort"
+	case 0x96:
+		return "Invalid Image"
 	case 0x97:
 		return "Wait for data"
+	case 0x98:
+		return "No Image Available"
+	case 0x99:
+		return "Require More Image"
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v))
 }
 
-func (v Status) IsSuccess() bool     { return v == 0x00 }
-func (v Status) IsWaitForData() bool { return v == 0x97 }
-func (v *Status) SetSuccess()        { *v = 0x00 }
-func (v *Status) SetWaitForData()    { *v = 0x97 }
+func (v Status) IsSuccess() bool            { return v == 0x00 }
+func (v Status) IsNotAuthorized() bool      { return v == 0x7E }
+func (v Status) IsMalformedCommand() bool   { return v == 0x80 }
+func (v Status) IsUnsupportedCommand() bool { return v == 0x81 }
+func (v Status) IsAbort() bool              { return v == 0x95 }
+func (v Status) IsInvalidImage() bool       { return v == 0x96 }
+func (v Status) IsWaitForData() bool        { return v == 0x97 }
+func (v Status) IsNoImageAvailable() bool   { return v == 0x98 }
+func (v Status) IsRequireMoreImage() bool   { return v == 0x99 }
+func (v *Status) SetSuccess()               { *v = 0x00 }
+func (v *Status) SetNotAuthorized()         { *v = 0x7E }
+func (v *Status) SetMalformedCommand()      { *v = 0x80 }
+func (v *Status) SetUnsupportedCommand()    { *v = 0x81 }
+func (v *Status) SetAbort()                 { *v = 0x95 }
+func (v *Status) SetInvalidImage()          { *v = 0x96 }
+func (v *Status) SetWaitForData()           { *v = 0x97 }
+func (v *Status) SetNoImageAvailable()      { *v = 0x98 }
+func (v *Status) SetRequireMoreImage()      { *v = 0x99 }
 
 func (Status) SingleOptions() []zcl.Option {
 	return []zcl.Option{
 		{Value: 0x00, Name: "Success"},
+		{Value: 0x7E, Name: "Not Authorized"},
+		{Value: 0x80, Name: "Malformed Command"},
+		{Value: 0x81, Name: "Unsupported Command"},
+		{Value: 0x95, Name: "Abort"},
+		{Value: 0x96, Name: "Invalid Image"},
 		{Value: 0x97, Name: "Wait for data"},
+		{Value: 0x98, Name: "No Image Available"},
+		{Value: 0x99, Name: "Require More Image"},
 	}
 }
 
