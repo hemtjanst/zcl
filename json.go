@@ -31,6 +31,14 @@ func floatUnmarshalJSON(b []byte) (float64, error) {
 	}
 }
 
+func (t *Ztime) UnmarshalJSON(b []byte) error {
+	if v, e := intUnmarshalJSON(b); e != nil {
+		return e
+	} else {
+		*t = Ztime(v)
+	}
+	return nil
+}
 func (u *Zenum8) UnmarshalJSON(b []byte) error {
 	if v, e := intUnmarshalJSON(b); e != nil {
 		return e
