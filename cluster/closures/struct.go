@@ -179,7 +179,7 @@ const LiftCurrentPositionAttr zcl.AttrID = 3
 func (LiftCurrentPosition) ID() zcl.AttrID   { return LiftCurrentPositionAttr }
 func (LiftCurrentPosition) Readable() bool   { return true }
 func (LiftCurrentPosition) Writable() bool   { return false }
-func (LiftCurrentPosition) Reportable() bool { return false }
+func (LiftCurrentPosition) Reportable() bool { return true }
 func (LiftCurrentPosition) SceneIndex() int  { return -1 }
 
 // Implements AttrDef/AttrValue interfaces
@@ -619,7 +619,7 @@ const LiftCurrentPositionPercentageAttr zcl.AttrID = 8
 func (LiftCurrentPositionPercentage) ID() zcl.AttrID   { return LiftCurrentPositionPercentageAttr }
 func (LiftCurrentPositionPercentage) Readable() bool   { return true }
 func (LiftCurrentPositionPercentage) Writable() bool   { return false }
-func (LiftCurrentPositionPercentage) Reportable() bool { return false }
+func (LiftCurrentPositionPercentage) Reportable() bool { return true }
 func (LiftCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
 // Implements AttrDef/AttrValue interfaces
@@ -758,7 +758,7 @@ const TiltCurrentPositionAttr zcl.AttrID = 4
 func (TiltCurrentPosition) ID() zcl.AttrID   { return TiltCurrentPositionAttr }
 func (TiltCurrentPosition) Readable() bool   { return true }
 func (TiltCurrentPosition) Writable() bool   { return false }
-func (TiltCurrentPosition) Reportable() bool { return false }
+func (TiltCurrentPosition) Reportable() bool { return true }
 func (TiltCurrentPosition) SceneIndex() int  { return -1 }
 
 // Implements AttrDef/AttrValue interfaces
@@ -1088,7 +1088,7 @@ const TiltCurrentPositionPercentageAttr zcl.AttrID = 9
 func (TiltCurrentPositionPercentage) ID() zcl.AttrID   { return TiltCurrentPositionPercentageAttr }
 func (TiltCurrentPositionPercentage) Readable() bool   { return true }
 func (TiltCurrentPositionPercentage) Writable() bool   { return false }
-func (TiltCurrentPositionPercentage) Reportable() bool { return false }
+func (TiltCurrentPositionPercentage) Reportable() bool { return true }
 func (TiltCurrentPositionPercentage) SceneIndex() int  { return -1 }
 
 // Implements AttrDef/AttrValue interfaces
