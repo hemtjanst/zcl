@@ -1741,7 +1741,7 @@ func (v LogicalType) String() string {
 		return "Coordinator"
 	case 0x01:
 		return "Router"
-	case 0x10:
+	case 0x02:
 		return "End Device"
 	}
 	return zcl.Sprintf("%v", zcl.Zenum8(v))
@@ -1749,16 +1749,16 @@ func (v LogicalType) String() string {
 
 func (v LogicalType) IsCoordinator() bool { return v == 0x00 }
 func (v LogicalType) IsRouter() bool      { return v == 0x01 }
-func (v LogicalType) IsEndDevice() bool   { return v == 0x10 }
+func (v LogicalType) IsEndDevice() bool   { return v == 0x02 }
 func (v *LogicalType) SetCoordinator()    { *v = 0x00 }
 func (v *LogicalType) SetRouter()         { *v = 0x01 }
-func (v *LogicalType) SetEndDevice()      { *v = 0x10 }
+func (v *LogicalType) SetEndDevice()      { *v = 0x02 }
 
 func (LogicalType) SingleOptions() []zcl.Option {
 	return []zcl.Option{
 		{Value: 0x00, Name: "Coordinator"},
 		{Value: 0x01, Name: "Router"},
-		{Value: 0x10, Name: "End Device"},
+		{Value: 0x02, Name: "End Device"},
 	}
 }
 

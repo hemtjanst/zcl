@@ -557,7 +557,7 @@ namespace ZigBee {
                 values: { 
                 0x00: `Coordinator`, 
                 0x01: `Router`, 
-                0x10: `End Device`,  },
+                0x02: `End Device`,  },
                 
             })),
             Lqi: makeType<ZigBee.IZDP.IArgLqi, ZigBee.IZDP.IArgLqiPayload>(base.u8, ()=>({
