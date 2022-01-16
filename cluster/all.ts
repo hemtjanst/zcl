@@ -239,7 +239,9 @@ namespace ZigBee {
         lcstring: makeType<IType,string>(native.string, {size: -2, type: "lcstring"}),
         date: makeType<IType,number>(native.string, {size: 4, type: "date",
             format: (v) => {
-                if (typeof v !== 'number') v=parseInt(v);
+                if (v === null) return null;
+                if (typeof v === 'string') v = parseInt(v);
+                if (typeof v !== 'number') return v;
                 // Can we stop using tiny numbers for dates? Y2K, Y2038 and now 2157...
                 let yr = ((v & 0xFF000000) >> 24) + 1900,
                     mo = ((v & 0x00FF0000) >> 16) - 1,
@@ -250,7 +252,9 @@ namespace ZigBee {
         }),
         time: makeType<IType,number>(native.uint, {size: 4, type: "time",
             format: (v) => {
-                if (typeof v !== 'number') v=parseInt(v);
+                if (v === null) return null;
+                if (typeof v === 'string') v = parseInt(v);
+                if (typeof v !== 'number') return v;
                 let h = (v & 0xFF000000) >> 24,
                     m = (v & 0x00FF0000) >> 16,
                     s = (v & 0x0000FF00) >> 8,
@@ -260,7 +264,9 @@ namespace ZigBee {
         }),
         utc: makeType<IType,number>(native.uint, {size: 4, type: "utc",
             format: (v) => {
-                if (typeof v !== 'number') v=parseInt(v);
+                if (v === null) return null;
+                if (typeof v === 'string') v = parseInt(v);
+                if (typeof v !== 'number') return v;
                 // Unixtime-like, but starts on 2000-01-01, should last until ~2137
                 return (new Date(1000 * (v + 946684800))).toLocaleString();
             }
