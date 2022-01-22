@@ -183,3 +183,15 @@ func equalZdoCommand(a, b ZdoCommand) bool {
 		a.Cluster() == b.Cluster() &&
 		equalVal(a, b)
 }
+
+func reverse(s []byte) []byte {
+	a := make([]byte, len(s))
+	copy(a, s)
+
+	for i := len(a)/2 - 1; i >= 0; i-- {
+		opp := len(a) - 1 - i
+		a[i], a[opp] = a[opp], a[i]
+	}
+
+	return a
+}

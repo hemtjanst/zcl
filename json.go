@@ -39,19 +39,19 @@ func (t *Ztime) UnmarshalJSON(b []byte) error {
 	}
 	return nil
 }
-func (u *Zenum8) UnmarshalJSON(b []byte) error {
-	if v, e := intUnmarshalJSON(b); e != nil {
-		return e
+func (e *Zenum8) UnmarshalJSON(b []byte) error {
+	if v, err := intUnmarshalJSON(b); err != nil {
+		return err
 	} else {
-		*u = Zenum8(v)
+		*e = Zenum8(v)
 	}
 	return nil
 }
-func (u *Zenum16) UnmarshalJSON(b []byte) error {
-	if v, e := intUnmarshalJSON(b); e != nil {
-		return e
+func (e *Zenum16) UnmarshalJSON(b []byte) error {
+	if v, err := intUnmarshalJSON(b); err != nil {
+		return err
 	} else {
-		*u = Zenum16(v)
+		*e = Zenum16(v)
 	}
 	return nil
 }
