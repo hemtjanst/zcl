@@ -6262,7 +6262,7 @@ one of a number of discrete states.`,
                 name: `Zone State`,
                 description: ``,
                 id: 0x0000,
-                report: false,
+                report: true,
                 read: false,
                 write: false,
                 require: false,
@@ -6275,21 +6275,21 @@ one of a number of discrete states.`,
                 name: `Zone Status`,
                 description: ``,
                 id: 0x0002,
-                report: false,
+                report: true,
                 read: false,
                 write: false,
                 require: false,
                 bits: { 
-                0: `Alarm1`, 
-                1: `Alarm2`, 
-                2: `Tamper`, 
-                3: `Battery`, 
-                4: `Supervision notify`, 
-                5: `Restore notify`, 
-                6: `Trouble`, 
-                7: `AC (mains)`, 
-                8: `Test`, 
-                9: `Battery defect`,  },
+                0: `Test`, 
+                1: `Battery defect`, 
+                10: `Tamper`, 
+                11: `Battery`, 
+                12: `Supervision notify`, 
+                13: `Restore notify`, 
+                14: `Trouble`, 
+                15: `AC (mains)`, 
+                8: `Alarm1`, 
+                9: `Alarm2`,  },
                 
             })),
             ZoneType: makeType<ZigBee.ISecurityAndSafety.IArgZoneType, ZigBee.ISecurityAndSafety.IArgZoneTypePayload>(base.enum16, ()=>({
@@ -6325,29 +6325,6 @@ one of a number of discrete states.`,
             Desc: `provides attributes and commands for controlling IAS security
 zone devices`,
             
-            ZoneStateChangeNotification: makeType<ZigBee.ISecurityAndSafety.IasZone.ICmdZoneStateChangeNotification, ZigBee.ISecurityAndSafety.IasZone.ICmdZoneStateChangeNotificationPayload>(command, () => ({
-                name: `Zone State Change Notification`,
-                description: ``,
-                id: 0x0000,
-                payload: { 
-                    ZoneStatus: ZigBee.SecurityAndSafety.Types.ZoneStatus,
-                    ExtendedStatus: ZigBee.SecurityAndSafety.Types.ExtendedStatus,
-                    ZoneId: ZigBee.SecurityAndSafety.Types.ZoneId,
-                    Delay: ZigBee.SecurityAndSafety.Types.Delay,
-                }
-            })),
-
-            ZoneEnrollRequest: makeType<ZigBee.ISecurityAndSafety.IasZone.ICmdZoneEnrollRequest, ZigBee.ISecurityAndSafety.IasZone.ICmdZoneEnrollRequestPayload>(command, () => ({
-                name: `Zone Enroll Request`,
-                description: ``,
-                id: 0x0001,
-                payload: { 
-                    ZoneType: ZigBee.SecurityAndSafety.Types.ZoneType,
-                    ManufacturerCode: ZigBee.SecurityAndSafety.Types.ManufacturerCode,
-                }
-            })),
-
-            
             ZoneEnrollResponse: makeType<ZigBee.ISecurityAndSafety.IasZone.ICmdZoneEnrollResponse, ZigBee.ISecurityAndSafety.IasZone.ICmdZoneEnrollResponsePayload>(command, () => ({
                 name: `Zone Enroll Response`,
                 description: ``,
@@ -6375,6 +6352,29 @@ zone devices`,
                 }
             })),
 
+            
+            ZoneStateChangeNotification: makeType<ZigBee.ISecurityAndSafety.IasZone.ICmdZoneStateChangeNotification, ZigBee.ISecurityAndSafety.IasZone.ICmdZoneStateChangeNotificationPayload>(command, () => ({
+                name: `Zone State Change Notification`,
+                description: ``,
+                id: 0x0000,
+                payload: { 
+                    ZoneStatus: ZigBee.SecurityAndSafety.Types.ZoneStatus,
+                    ExtendedStatus: ZigBee.SecurityAndSafety.Types.ExtendedStatus,
+                    ZoneId: ZigBee.SecurityAndSafety.Types.ZoneId,
+                    Delay: ZigBee.SecurityAndSafety.Types.Delay,
+                }
+            })),
+
+            ZoneEnrollRequest: makeType<ZigBee.ISecurityAndSafety.IasZone.ICmdZoneEnrollRequest, ZigBee.ISecurityAndSafety.IasZone.ICmdZoneEnrollRequestPayload>(command, () => ({
+                name: `Zone Enroll Request`,
+                description: ``,
+                id: 0x0001,
+                payload: { 
+                    ZoneType: ZigBee.SecurityAndSafety.Types.ZoneType,
+                    ManufacturerCode: ZigBee.SecurityAndSafety.Types.ManufacturerCode,
+                }
+            })),
+
             Server: {
                 Attribute: {},
                 Command: {},
@@ -6398,13 +6398,13 @@ zone devices`,
     ZigBee.SecurityAndSafety.IasZone.Client.Attribute = { 
     };
     ZigBee.SecurityAndSafety.IasZone.Server.Command = { 
-        0x00: ZigBee.SecurityAndSafety.IasZone.ZoneStateChangeNotification,
-        0x01: ZigBee.SecurityAndSafety.IasZone.ZoneEnrollRequest,
-    };
-    ZigBee.SecurityAndSafety.IasZone.Client.Command = { 
         0x00: ZigBee.SecurityAndSafety.IasZone.ZoneEnrollResponse,
         0x01: ZigBee.SecurityAndSafety.IasZone.InitiateNormalOperationMode,
         0x02: ZigBee.SecurityAndSafety.IasZone.InitiateTestMode,
+    };
+    ZigBee.SecurityAndSafety.IasZone.Client.Command = { 
+        0x00: ZigBee.SecurityAndSafety.IasZone.ZoneStateChangeNotification,
+        0x01: ZigBee.SecurityAndSafety.IasZone.ZoneEnrollRequest,
     };
     export const Lighting = {
         Types: { 
@@ -9815,16 +9815,16 @@ reporting occupancy status`,
             import ValueType = ZigBee.ValueType;
 
         
-            export type ICmdZoneStateChangeNotificationPayload = { ZoneStatus?: IArgZoneStatusPayload, ExtendedStatus?: IArgExtendedStatusPayload, ZoneId?: IArgZoneIdPayload, Delay?: IArgDelayPayload, }
-            export interface ICmdZoneStateChangeNotification extends ICommand { value: ICmdZoneStateChangeNotificationPayload }
-            export type ICmdZoneEnrollRequestPayload = { ZoneType?: IArgZoneTypePayload, ManufacturerCode?: IArgManufacturerCodePayload, }
-            export interface ICmdZoneEnrollRequest extends ICommand { value: ICmdZoneEnrollRequestPayload }
             export type ICmdZoneEnrollResponsePayload = { EnrollResponseCode?: IArgEnrollResponseCodePayload, ZoneId?: IArgZoneIdPayload, }
             export interface ICmdZoneEnrollResponse extends ICommand { value: ICmdZoneEnrollResponsePayload }
             export type ICmdInitiateNormalOperationModePayload = { }
             export interface ICmdInitiateNormalOperationMode extends ICommand { value: ICmdInitiateNormalOperationModePayload }
             export type ICmdInitiateTestModePayload = { TestModeDuration?: IArgTestModeDurationPayload, CurrentZoneSensitivityLevel?: IArgCurrentZoneSensitivityLevelPayload, }
             export interface ICmdInitiateTestMode extends ICommand { value: ICmdInitiateTestModePayload }
+            export type ICmdZoneStateChangeNotificationPayload = { ZoneStatus?: IArgZoneStatusPayload, ExtendedStatus?: IArgExtendedStatusPayload, ZoneId?: IArgZoneIdPayload, Delay?: IArgDelayPayload, }
+            export interface ICmdZoneStateChangeNotification extends ICommand { value: ICmdZoneStateChangeNotificationPayload }
+            export type ICmdZoneEnrollRequestPayload = { ZoneType?: IArgZoneTypePayload, ManufacturerCode?: IArgManufacturerCodePayload, }
+            export interface ICmdZoneEnrollRequest extends ICommand { value: ICmdZoneEnrollRequestPayload }
         }
 
             export type IArgCurrentZoneSensitivityLevelPayload = ValueType;
