@@ -1955,6 +1955,8 @@ func (v ManufacturerCode) String() string {
 		return "Legrand"
 	case 0x1037:
 		return "NXP"
+	case 0x105E:
+		return "Schneider Electric"
 	case 0x10F2:
 		return "Ubisys"
 	case 0x115F:
@@ -1963,34 +1965,47 @@ func (v ManufacturerCode) String() string {
 		return "innr"
 	case 0x117C:
 		return "Ikea"
+	case 0x1189:
+		return "Ledvance"
+	case 0x1241:
+		return "Samjin"
 	}
 	return zcl.Sprintf("%v", zcl.Zenum16(v))
 }
 
-func (v ManufacturerCode) IsPhilips() bool { return v == 0x100B }
-func (v ManufacturerCode) IsLegrand() bool { return v == 0x1021 }
-func (v ManufacturerCode) IsNxp() bool     { return v == 0x1037 }
-func (v ManufacturerCode) IsUbisys() bool  { return v == 0x10F2 }
-func (v ManufacturerCode) IsXiaomi() bool  { return v == 0x115F }
-func (v ManufacturerCode) IsInnr() bool    { return v == 0x1166 }
-func (v ManufacturerCode) IsIkea() bool    { return v == 0x117C }
-func (v *ManufacturerCode) SetPhilips()    { *v = 0x100B }
-func (v *ManufacturerCode) SetLegrand()    { *v = 0x1021 }
-func (v *ManufacturerCode) SetNxp()        { *v = 0x1037 }
-func (v *ManufacturerCode) SetUbisys()     { *v = 0x10F2 }
-func (v *ManufacturerCode) SetXiaomi()     { *v = 0x115F }
-func (v *ManufacturerCode) SetInnr()       { *v = 0x1166 }
-func (v *ManufacturerCode) SetIkea()       { *v = 0x117C }
+func (v ManufacturerCode) IsPhilips() bool           { return v == 0x100B }
+func (v ManufacturerCode) IsLegrand() bool           { return v == 0x1021 }
+func (v ManufacturerCode) IsNxp() bool               { return v == 0x1037 }
+func (v ManufacturerCode) IsSchneiderElectric() bool { return v == 0x105E }
+func (v ManufacturerCode) IsUbisys() bool            { return v == 0x10F2 }
+func (v ManufacturerCode) IsXiaomi() bool            { return v == 0x115F }
+func (v ManufacturerCode) IsInnr() bool              { return v == 0x1166 }
+func (v ManufacturerCode) IsIkea() bool              { return v == 0x117C }
+func (v ManufacturerCode) IsLedvance() bool          { return v == 0x1189 }
+func (v ManufacturerCode) IsSamjin() bool            { return v == 0x1241 }
+func (v *ManufacturerCode) SetPhilips()              { *v = 0x100B }
+func (v *ManufacturerCode) SetLegrand()              { *v = 0x1021 }
+func (v *ManufacturerCode) SetNxp()                  { *v = 0x1037 }
+func (v *ManufacturerCode) SetSchneiderElectric()    { *v = 0x105E }
+func (v *ManufacturerCode) SetUbisys()               { *v = 0x10F2 }
+func (v *ManufacturerCode) SetXiaomi()               { *v = 0x115F }
+func (v *ManufacturerCode) SetInnr()                 { *v = 0x1166 }
+func (v *ManufacturerCode) SetIkea()                 { *v = 0x117C }
+func (v *ManufacturerCode) SetLedvance()             { *v = 0x1189 }
+func (v *ManufacturerCode) SetSamjin()               { *v = 0x1241 }
 
 func (ManufacturerCode) SingleOptions() []zcl.Option {
 	return []zcl.Option{
 		{Value: 0x100B, Name: "Philips"},
 		{Value: 0x1021, Name: "Legrand"},
 		{Value: 0x1037, Name: "NXP"},
+		{Value: 0x105E, Name: "Schneider Electric"},
 		{Value: 0x10F2, Name: "Ubisys"},
 		{Value: 0x115F, Name: "Xiaomi"},
 		{Value: 0x1166, Name: "innr"},
 		{Value: 0x117C, Name: "Ikea"},
+		{Value: 0x1189, Name: "Ledvance"},
+		{Value: 0x1241, Name: "Samjin"},
 	}
 }
 
