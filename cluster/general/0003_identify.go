@@ -355,7 +355,7 @@ func (IdentifyQueryResponse) Required() bool { return true }
 func (IdentifyQueryResponse) Cluster() zcl.ClusterID { return IdentifyID }
 
 // Direction of the command
-func (IdentifyQueryResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (IdentifyQueryResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (IdentifyQueryResponse) MnfCode() uint16 { return 0 }

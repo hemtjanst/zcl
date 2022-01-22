@@ -372,7 +372,7 @@ func (ZoneStateChangeNotification) Required() bool { return false }
 func (ZoneStateChangeNotification) Cluster() zcl.ClusterID { return IasZoneID }
 
 // Direction of the command
-func (ZoneStateChangeNotification) Direction() zcl.Direction { return zcl.ClientToServer }
+func (ZoneStateChangeNotification) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ZoneStateChangeNotification) MnfCode() uint16 { return 0 }
@@ -508,7 +508,7 @@ func (ZoneEnrollRequest) Required() bool { return false }
 func (ZoneEnrollRequest) Cluster() zcl.ClusterID { return IasZoneID }
 
 // Direction of the command
-func (ZoneEnrollRequest) Direction() zcl.Direction { return zcl.ClientToServer }
+func (ZoneEnrollRequest) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ZoneEnrollRequest) MnfCode() uint16 { return 0 }

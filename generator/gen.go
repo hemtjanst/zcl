@@ -91,12 +91,12 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 		"direction": func(c Command) string {
 			if cluster != nil {
 				for _, cmd := range cluster.Server.Command {
-					if cmd.ID == c.ID {
+					if cmd.ID == c.ID && cmd.Name == c.Name {
 						return "ClientToServer"
 					}
 				}
 				for _, cmd := range cluster.Client.Command {
-					if cmd.ID == c.ID {
+					if cmd.ID == c.ID && cmd.Name == c.Name {
 						return "ServerToClient"
 					}
 				}

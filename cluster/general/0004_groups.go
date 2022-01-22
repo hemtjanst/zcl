@@ -679,7 +679,7 @@ func (AddGroupResponse) Required() bool { return true }
 func (AddGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // Direction of the command
-func (AddGroupResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (AddGroupResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (AddGroupResponse) MnfCode() uint16 { return 0 }
@@ -795,7 +795,7 @@ func (ViewGroupResponse) Required() bool { return true }
 func (ViewGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // Direction of the command
-func (ViewGroupResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (ViewGroupResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ViewGroupResponse) MnfCode() uint16 { return 0 }
@@ -925,7 +925,7 @@ func (GetGroupMembershipResponse) Required() bool { return true }
 func (GetGroupMembershipResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // Direction of the command
-func (GetGroupMembershipResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (GetGroupMembershipResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetGroupMembershipResponse) MnfCode() uint16 { return 0 }
@@ -1038,7 +1038,7 @@ func (RemoveGroupResponse) Required() bool { return true }
 func (RemoveGroupResponse) Cluster() zcl.ClusterID { return GroupsID }
 
 // Direction of the command
-func (RemoveGroupResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (RemoveGroupResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveGroupResponse) MnfCode() uint16 { return 0 }

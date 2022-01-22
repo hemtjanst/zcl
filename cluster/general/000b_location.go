@@ -1209,7 +1209,7 @@ func (DeviceConfigurationResponse) Required() bool { return true }
 func (DeviceConfigurationResponse) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (DeviceConfigurationResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (DeviceConfigurationResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (DeviceConfigurationResponse) MnfCode() uint16 { return 0 }
@@ -1414,7 +1414,7 @@ func (LocationDataResponse) Required() bool { return true }
 func (LocationDataResponse) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (LocationDataResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (LocationDataResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (LocationDataResponse) MnfCode() uint16 { return 0 }
@@ -1680,7 +1680,7 @@ func (LocationDataNotification) Required() bool { return true }
 func (LocationDataNotification) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (LocationDataNotification) Direction() zcl.Direction { return zcl.ClientToServer }
+func (LocationDataNotification) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (LocationDataNotification) MnfCode() uint16 { return 0 }
@@ -1904,7 +1904,7 @@ func (CompactLocationDataNotification) Required() bool { return true }
 func (CompactLocationDataNotification) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (CompactLocationDataNotification) Direction() zcl.Direction { return zcl.ClientToServer }
+func (CompactLocationDataNotification) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (CompactLocationDataNotification) MnfCode() uint16 { return 0 }
@@ -2073,7 +2073,7 @@ func (RssiPing) Required() bool { return true }
 func (RssiPing) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (RssiPing) Direction() zcl.Direction { return zcl.ClientToServer }
+func (RssiPing) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RssiPing) MnfCode() uint16 { return 0 }
@@ -2165,7 +2165,7 @@ func (RssiRequest) Required() bool { return false }
 func (RssiRequest) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (RssiRequest) Direction() zcl.Direction { return zcl.ClientToServer }
+func (RssiRequest) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RssiRequest) MnfCode() uint16 { return 0 }
@@ -2244,7 +2244,7 @@ func (ReportRssiMeasurements) Required() bool { return false }
 func (ReportRssiMeasurements) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (ReportRssiMeasurements) Direction() zcl.Direction { return zcl.ClientToServer }
+func (ReportRssiMeasurements) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ReportRssiMeasurements) MnfCode() uint16 { return 0 }
@@ -2461,7 +2461,7 @@ func (DistanceMeasureResponse) Required() bool { return true }
 func (DistanceMeasureResponse) Cluster() zcl.ClusterID { return LocationID }
 
 // Direction of the command
-func (DistanceMeasureResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (DistanceMeasureResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (DistanceMeasureResponse) MnfCode() uint16 { return 0 }
