@@ -1949,63 +1949,2950 @@ func (v *ManufacturerCode) SetValue(a zcl.Val) error {
 
 func (v ManufacturerCode) String() string {
 	switch v {
-	case 0x100B:
+	case 0x1000:
+		return "Cirronet"
+	case 0x1001:
+		return "Chipcon"
+	case 0x1002:
+		return "Ember"
+	case 0x1003:
+		return "National Tech"
+	case 0x1004:
+		return "Freescale"
+	case 0x1005:
+		return "IPCom"
+	case 0x1006:
+		return "San Juan Software"
+	case 0x1007:
+		return "TUV"
+	case 0x1008:
+		return "CompXs"
+	case 0x1009:
+		return "BM SpA"
+	case 0x100a:
+		return "AwarePoint"
+	case 0x100b:
 		return "Philips"
+	case 0x100c:
+		return "Luxoft"
+	case 0x100d:
+		return "Korvin"
+	case 0x100e:
+		return "One RF"
+	case 0x100f:
+		return "Software Technology Group"
+	case 0x1010:
+		return "Telegesis"
+	case 0x1011:
+		return "Visionic"
+	case 0x1012:
+		return "Insta"
+	case 0x1013:
+		return "Atalum"
+	case 0x1014:
+		return "Atmel"
+	case 0x1015:
+		return "Develco"
+	case 0x1016:
+		return "Honeywell"
+	case 0x1017:
+		return "RadioPulse"
+	case 0x1018:
+		return "Renesas"
+	case 0x1019:
+		return "Xanadu Wireless"
+	case 0x101a:
+		return "NEC Engineering"
+	case 0x101b:
+		return "Yamatake"
+	case 0x101c:
+		return "Tendril"
+	case 0x101d:
+		return "Assa Abloy"
+	case 0x101e:
+		return "Maxstream"
+	case 0x101f:
+		return "Neurocom"
+	case 0x1020:
+		return "Institute for Information Industry"
 	case 0x1021:
-		return "Legrand"
+		return "Vantage Controls"
+	case 0x1022:
+		return "iControl"
+	case 0x1023:
+		return "Raymarine"
+	case 0x1024:
+		return "LS Research"
+	case 0x1025:
+		return "Onity"
+	case 0x1026:
+		return "Mono Products"
+	case 0x1027:
+		return "RF Tech"
+	case 0x1028:
+		return "Itron"
+	case 0x1029:
+		return "Tritech"
+	case 0x102a:
+		return "Embedit"
+	case 0x102b:
+		return "S3C"
+	case 0x102c:
+		return "Siemens"
+	case 0x102d:
+		return "Mindtech"
+	case 0x102e:
+		return "LG Electronics"
+	case 0x102f:
+		return "Mitsubishi"
+	case 0x1030:
+		return "Johnson Controls"
+	case 0x1031:
+		return "PRI"
+	case 0x1032:
+		return "Knick"
+	case 0x1033:
+		return "Viconics"
+	case 0x1034:
+		return "Flexipanel"
+	case 0x1035:
+		return "Piasim Corporation"
+	case 0x1036:
+		return "Trane"
 	case 0x1037:
-		return "NXP"
-	case 0x105E:
+		return "Jennic"
+	case 0x1038:
+		return "Living Independently"
+	case 0x1039:
+		return "AlertMe"
+	case 0x103a:
+		return "Daintree"
+	case 0x103b:
+		return "Aiji"
+	case 0x103c:
+		return "Telecom Italia"
+	case 0x103d:
+		return "Mikrokrets"
+	case 0x103e:
+		return "Oki Semi"
+	case 0x103f:
+		return "Newport Electronics"
+	case 0x1040:
+		return "Control4"
+	case 0x1041:
+		return "STMicro"
+	case 0x1042:
+		return "Ad-Sol Nissin"
+	case 0x1043:
+		return "DCSI"
+	case 0x1044:
+		return "France Telecom"
+	case 0x1045:
+		return "muNet"
+	case 0x1046:
+		return "Autani"
+	case 0x1047:
+		return "Colorado vNet"
+	case 0x1048:
+		return "Aerocomm"
+	case 0x1049:
+		return "Silicon Labs"
+	case 0x104F:
+		return "Crane"
+	case 0x104a:
+		return "Inncom"
+	case 0x104b:
+		return "Cannon"
+	case 0x104c:
+		return "Synapse"
+	case 0x104d:
+		return "Fisher Pierce/Sunrise"
+	case 0x104e:
+		return "CentraLite"
+	case 0x1050:
+		return "Mobilarm"
+	case 0x1051:
+		return "iMonitor"
+	case 0x1052:
+		return "Bartech"
+	case 0x1053:
+		return "Meshnetics"
+	case 0x1054:
+		return "LS Industrial"
+	case 0x1055:
+		return "Cason"
+	case 0x1056:
+		return "Wireless Glue"
+	case 0x1057:
+		return "Elster"
+	case 0x1058:
+		return "SMS Tec"
+	case 0x1059:
+		return "Onset Computer"
+	case 0x105a:
+		return "Riga Development"
+	case 0x105b:
+		return "Energate"
+	case 0x105c:
+		return "ConMed Linvatec"
+	case 0x105d:
+		return "PowerMand"
+	case 0x105e:
 		return "Schneider Electric"
-	case 0x10F2:
-		return "Ubisys"
+	case 0x105f:
+		return "Eaton"
+	case 0x1060:
+		return "Telular"
+	case 0x1061:
+		return "Delphi Medical"
+	case 0x1062:
+		return "EpiSensor"
+	case 0x1063:
+		return "Landis+Gyr"
+	case 0x1064:
+		return "Kaba Group"
+	case 0x1065:
+		return "Shure"
+	case 0x1066:
+		return "Comverge"
+	case 0x1067:
+		return "DBS Lodging"
+	case 0x1068:
+		return "Energy Aware"
+	case 0x1069:
+		return "Hidalgo"
+	case 0x106a:
+		return "Air2App"
+	case 0x106b:
+		return "AMX"
+	case 0x106c:
+		return "EDMI Pty"
+	case 0x106d:
+		return "Cyan Ltd"
+	case 0x106e:
+		return "System SPA"
+	case 0x106f:
+		return "Telit"
+	case 0x1070:
+		return "Kaga Electronics"
+	case 0x1071:
+		return "4-noks s.r.l."
+	case 0x1072:
+		return "Certicom"
+	case 0x1073:
+		return "Gridpoint"
+	case 0x1074:
+		return "Profile Systems"
+	case 0x1075:
+		return "Compacta International"
+	case 0x1076:
+		return "Freestyle Technology"
+	case 0x1077:
+		return "Alektrona"
+	case 0x1078:
+		return "Computime"
+	case 0x1079:
+		return "Remote Technologies"
+	case 0x107a:
+		return "Wavecom"
+	case 0x107b:
+		return "Energy Optimizers"
+	case 0x107c:
+		return "GE"
+	case 0x107d:
+		return "Jetlun"
+	case 0x107e:
+		return "Cipher Systems"
+	case 0x107f:
+		return "Corporate Systems Eng"
+	case 0x1080:
+		return "ecobee"
+	case 0x1081:
+		return "SMK"
+	case 0x1082:
+		return "Meshworks Wireless"
+	case 0x1083:
+		return "Ellips B.V."
+	case 0x1084:
+		return "Secure electrans"
+	case 0x1085:
+		return "CEDO"
+	case 0x1086:
+		return "Toshiba"
+	case 0x1087:
+		return "Digi International"
+	case 0x1088:
+		return "Ubilogix"
+	case 0x1089:
+		return "Echelon"
+	case 0x1090:
+		return "Green Energy Options"
+	case 0x1091:
+		return "Silver Spring Networks"
+	case 0x1092:
+		return "Black & Decker"
+	case 0x1093:
+		return "Aztech AssociatesInc."
+	case 0x1094:
+		return "A&D Co"
+	case 0x1095:
+		return "Rainforest Automation"
+	case 0x1096:
+		return "Carrier Electronics"
+	case 0x1097:
+		return "SyChip/Murata"
+	case 0x1098:
+		return "OpenPeak"
+	case 0x1099:
+		return "Passive Systems"
+	case 0x109a:
+		return "MMBResearch"
+	case 0x109b:
+		return "Leviton"
+	case 0x109c:
+		return "Korea Electric Power Data Network"
+	case 0x109d:
+		return "Comcast"
+	case 0x109e:
+		return "NEC Electronics"
+	case 0x109f:
+		return "Netvox"
+	case 0x10a0:
+		return "U-Control"
+	case 0x10a1:
+		return "Embedia Technologies"
+	case 0x10a2:
+		return "Sensus"
+	case 0x10a3:
+		return "SunriseTechnologies"
+	case 0x10a4:
+		return "MemtechCorp"
+	case 0x10a5:
+		return "Freebox"
+	case 0x10a6:
+		return "M2 Labs"
+	case 0x10a7:
+		return "BritishGas"
+	case 0x10a8:
+		return "Sentec"
+	case 0x10a9:
+		return "Navetas"
+	case 0x10aa:
+		return "Lightspeed Technologies"
+	case 0x10ab:
+		return "Oki Electric"
+	case 0x10ac:
+		return "Sistemas Inteligentes"
+	case 0x10ad:
+		return "Dometic"
+	case 0x10ae:
+		return "Alps"
+	case 0x10af:
+		return "EnergyHub"
+	case 0x10b0:
+		return "Kamstrup"
+	case 0x10b1:
+		return "EchoStar"
+	case 0x10b2:
+		return "EnerNOC"
+	case 0x10b3:
+		return "Eltav"
+	case 0x10b4:
+		return "Belkin"
+	case 0x10b5:
+		return "XStreamHD Wireless"
+	case 0x10b6:
+		return "Saturn South"
+	case 0x10b7:
+		return "GreenTrapOnline"
+	case 0x10b8:
+		return "SmartSynch"
+	case 0x10b9:
+		return "Nyce Control"
+	case 0x10ba:
+		return "ICM Controls"
+	case 0x10bb:
+		return "Millennium Electronics"
+	case 0x10bc:
+		return "Motorola"
+	case 0x10bd:
+		return "EmersonWhite-Rodgers"
+	case 0x10be:
+		return "Radio Thermostat"
+	case 0x10bf:
+		return "OMRONCorporation"
+	case 0x10c0:
+		return "GiiNii GlobalLimited"
+	case 0x10c1:
+		return "Fujitsu GeneralLimited"
+	case 0x10c2:
+		return "Peel Technologies"
+	case 0x10c3:
+		return "Accent"
+	case 0x10c4:
+		return "ByteSnap Design"
+	case 0x10c5:
+		return "NEC TOKIN Corporation"
+	case 0x10c6:
+		return "G4S JusticeServices"
+	case 0x10c7:
+		return "Trilliant Networks"
+	case 0x10c8:
+		return "Electrolux Italia"
+	case 0x10c9:
+		return "OnzoLtd"
+	case 0x10ca:
+		return "EnTekSystems"
+	case 0x10cb:
+		return "Philips 2"
+	case 0x10cc:
+		return "MainstreamEngineering"
+	case 0x10cd:
+		return "IndesitCompany"
+	case 0x10ce:
+		return "THINKECO"
+	case 0x10cf:
+		return "2D2C"
+	case 0x10d0:
+		return "GreenPeak"
+	case 0x10d1:
+		return "InterCEL"
+	case 0x10d2:
+		return "LG Electronics 2"
+	case 0x10d3:
+		return "Mitsumi Electric"
+	case 0x10d4:
+		return "Mitsumi Electric 2"
+	case 0x10d5:
+		return "Zentrum Mikroelektronik Dresden"
+	case 0x10d6:
+		return "Nest Labs"
+	case 0x10d7:
+		return "Exegin Technologies"
+	case 0x10d8:
+		return "Honeywell 2"
+	case 0x10d9:
+		return "Takahata Precision"
+	case 0x10da:
+		return "Sumitomo Electric Networks"
+	case 0x10db:
+		return "GE Energy"
+	case 0x10dc:
+		return "GE Appliances"
+	case 0x10dd:
+		return "Radiocrafts AS"
+	case 0x10de:
+		return "Ceiva"
+	case 0x10df:
+		return "TEC CO Co., Ltd"
+	case 0x10e0:
+		return "Chameleon Technology (UK) Ltd"
+	case 0x10e1:
+		return "Samsung"
+	case 0x10e2:
+		return "ruwido austria gmbh"
+	case 0x10e3:
+		return "Huawei Technologies Co., Ltd."
+	case 0x10e4:
+		return "Huawei Technologies Co., Ltd. 2"
+	case 0x10e5:
+		return "Greenwave Reality"
+	case 0x10e6:
+		return "BGlobal Metering Ltd"
+	case 0x10e7:
+		return "Mindteck"
+	case 0x10e8:
+		return "Ingersoll-Rand"
+	case 0x10e9:
+		return "Dius Computing Pty Ltd"
+	case 0x10ea:
+		return "Embedded Automation, Inc."
+	case 0x10eb:
+		return "ABB"
+	case 0x10ec:
+		return "Sony"
+	case 0x10ed:
+		return "Genus Power Infrastructures Limited"
+	case 0x10ee:
+		return "Universal Devices"
+	case 0x10ef:
+		return "Universal Devices 2"
+	case 0x10f0:
+		return "Metrum Technologies, LLC"
+	case 0x10f1:
+		return "Cisco"
+	case 0x10f2:
+		return "Ubisys technologies GmbH"
+	case 0x10f3:
+		return "Consert"
+	case 0x10f4:
+		return "Crestron Electronics"
+	case 0x10f5:
+		return "Enphase Energy"
+	case 0x10f6:
+		return "Invensys Controls"
+	case 0x10f7:
+		return "Mueller Systems, LLC"
+	case 0x10f8:
+		return "AAC Technologies Holding"
+	case 0x10f9:
+		return "U-NEXT Co., Ltd"
+	case 0x10fa:
+		return "Steelcase Inc."
+	case 0x10fb:
+		return "Telematics Wireless"
+	case 0x10fc:
+		return "Samil Power Co., Ltd"
+	case 0x10fd:
+		return "Pace Plc"
+	case 0x10fe:
+		return "Osborne Coinage Co."
+	case 0x10ff:
+		return "Powerwatch"
+	case 0x1100:
+		return "CANDELED GmbH"
+	case 0x1101:
+		return "FlexGrid S.R.L"
+	case 0x1102:
+		return "Humax"
+	case 0x1103:
+		return "Universal Electronics, Inc."
+	case 0x1104:
+		return "Advanced Energy"
+	case 0x1105:
+		return "BEGA Gantenbrink-Leuchten"
+	case 0x1106:
+		return "Brunel University"
+	case 0x1107:
+		return "Panasonic R&D Center Singapore"
+	case 0x1108:
+		return "eSystems Research"
+	case 0x1109:
+		return "Panamax"
+	case 0x110a:
+		return "Physical Graph Corporation"
+	case 0x110b:
+		return "EM-Lite Ltd."
+	case 0x110c:
+		return "Osram Sylvania"
+	case 0x110d:
+		return "2 Save Energy Ltd."
+	case 0x110e:
+		return "Planet Innovation Products Pty Ltd"
+	case 0x110f:
+		return "Ambient Devices, Inc."
+	case 0x1110:
+		return "Profalux"
+	case 0x1111:
+		return "Billion Electric Company (BEC)"
+	case 0x1112:
+		return "Embertec Pty Ltd"
+	case 0x1113:
+		return "IT Watchdogs"
+	case 0x1114:
+		return "Reloc"
+	case 0x1115:
+		return "Intel Corporation"
+	case 0x1116:
+		return "Trend Electronics Limited"
+	case 0x1117:
+		return "Moxa"
+	case 0x1118:
+		return "QEES"
+	case 0x1119:
+		return "SAYME Wireless Sensor Networks"
+	case 0x111a:
+		return "Pentair Aquatic Systems"
+	case 0x111b:
+		return "Orbit Irrigation"
+	case 0x111c:
+		return "California Eastern Laboratories"
+	case 0x111d:
+		return "Comcast 2"
+	case 0x111e:
+		return "IDT Technology Limited"
+	case 0x111f:
+		return "Pixela"
+	case 0x1120:
+		return "TiVo"
+	case 0x1121:
+		return "Fidure"
+	case 0x1122:
+		return "Marvell Semiconductor"
+	case 0x1123:
+		return "Wasion Group"
+	case 0x1124:
+		return "Jasco Products"
+	case 0x1125:
+		return "Shenzhen Kaifa Technology"
+	case 0x1126:
+		return "Netcomm Wireless"
+	case 0x1127:
+		return "Define Instruments"
+	case 0x1128:
+		return "In Home Displays"
+	case 0x1129:
+		return "Miele & Cie. KG"
+	case 0x112a:
+		return "Televes S.A."
+	case 0x112b:
+		return "Labelec"
+	case 0x112c:
+		return "China Electronics Standardization Institute"
+	case 0x112d:
+		return "Vectorform"
+	case 0x112e:
+		return "Busch-Jaeger Elektro"
+	case 0x112f:
+		return "Redpine Signals"
+	case 0x1130:
+		return "Bridges Electronic Technology"
+	case 0x1131:
+		return "Sercomm"
+	case 0x1132:
+		return "WSH GmbH wirsindheller"
+	case 0x1133:
+		return "Bosch Security Systems"
+	case 0x1134:
+		return "eZEX Corporation"
+	case 0x1135:
+		return "Dresden Elektronik Ingenieurtechnik GmbH"
+	case 0x1136:
+		return "MEAZON S.A."
+	case 0x1137:
+		return "Crow Electronic Engineering"
+	case 0x1138:
+		return "Harvard Engineering"
+	case 0x1139:
+		return "Andson(Beijing) Technology"
+	case 0x113a:
+		return "Adhoco AG"
+	case 0x113b:
+		return "Waxman Consumer Products Group"
+	case 0x113c:
+		return "Owon Technology"
+	case 0x113d:
+		return "Hitron Technologies"
+	case 0x113e:
+		return "Scemtec Steuerungstechnik GmbH"
+	case 0x113f:
+		return "Webee"
+	case 0x1140:
+		return "Grid2Home"
+	case 0x1141:
+		return "Telink Micro"
+	case 0x1142:
+		return "Jasmine Systems"
+	case 0x1143:
+		return "Bidgely"
+	case 0x1144:
+		return "Lutron"
+	case 0x1145:
+		return "IJENKO"
+	case 0x1146:
+		return "Starfield Electronic"
+	case 0x1147:
+		return "TCP"
+	case 0x1148:
+		return "Rogers Communications Partnership"
+	case 0x1149:
+		return "Cree"
+	case 0x114a:
+		return "Robert Bosch LLC"
+	case 0x114b:
+		return "Ibis Networks"
+	case 0x114c:
+		return "Quirky"
+	case 0x114d:
+		return "Efergy Technologies"
+	case 0x114e:
+		return "Smartlabs"
+	case 0x114f:
+		return "Everspring Industry"
+	case 0x1150:
+		return "Swann Communications"
+	case 0x1151:
+		return "Soneter"
+	case 0x1152:
+		return "Samsung SDS"
+	case 0x1153:
+		return "Uniband Electronic Corporation"
+	case 0x1154:
+		return "Accton Technology Corporation"
+	case 0x1155:
+		return "Bosch Thermotechnik GmbH"
+	case 0x1156:
+		return "Wincor Nixdorf Inc."
+	case 0x1157:
+		return "Ohsung Electronics"
+	case 0x1158:
+		return "Zen Within, Inc."
+	case 0x1159:
+		return "Tech4home, Lda."
+	case 0x115A:
+		return "Nanoleaf"
+	case 0x115B:
+		return "Keen Home, Inc."
+	case 0x115C:
+		return "Poly-Control APS"
+	case 0x115D:
+		return "Eastfield Lighting Co., Ltd Shenzhen"
+	case 0x115E:
+		return "IP Datatel, Inc."
 	case 0x115F:
-		return "Xiaomi"
+		return "Lumi United Techology, Ltd Shenzhen"
+	case 0x1160:
+		return "Sengled Optoelectronics Corp"
+	case 0x1161:
+		return "Remote Solution Co., Ltd."
+	case 0x1162:
+		return "ABB Genway Xiamen Electrical Equipment Co., Ltd."
+	case 0x1163:
+		return "Zhejiang Rexense Tech"
+	case 0x1164:
+		return "ForEE Technology"
+	case 0x1165:
+		return "Open Access Technology Intl."
 	case 0x1166:
-		return "innr"
+		return "INNR Lighting BV"
+	case 0x1167:
+		return "Techworld Industries"
+	case 0x1168:
+		return "Leedarson Lighting Co., Ltd."
+	case 0x1169:
+		return "Arzel Zoning"
+	case 0x116A:
+		return "Holley Technology"
+	case 0x116B:
+		return "Beldon Technologies"
+	case 0x116C:
+		return "Flextronics"
+	case 0x116D:
+		return "Shenzhen Meian"
+	case 0x116E:
+		return "Lowes"
+	case 0x116F:
+		return "Sigma Connectivity"
+	case 0x1171:
+		return "Wulian"
+	case 0x1172:
+		return "Plugwise B.V."
+	case 0x1173:
+		return "Titan Products"
+	case 0x1174:
+		return "Ecospectral"
+	case 0x1175:
+		return "D-Link"
+	case 0x1176:
+		return "Technicolor Home USA"
+	case 0x1177:
+		return "Opple Lighting"
+	case 0x1178:
+		return "Wistron NeWeb Corp."
+	case 0x1179:
+		return "QMotion Shades"
+	case 0x117A:
+		return "Insta Elektro GmbH"
+	case 0x117B:
+		return "Shanghai Vancount"
 	case 0x117C:
-		return "Ikea"
+		return "Ikea of Sweden"
+	case 0x117D:
+		return "RT-RK"
+	case 0x117E:
+		return "Shenzhen Feibit"
+	case 0x117F:
+		return "EuControls"
+	case 0x1180:
+		return "Telkonet"
+	case 0x1181:
+		return "Thermal Solution Resources"
+	case 0x1182:
+		return "PomCube"
+	case 0x1183:
+		return "Ei Electronics"
+	case 0x1184:
+		return "Optoga"
+	case 0x1185:
+		return "Stelpro"
+	case 0x1186:
+		return "Lynxus Technologies Corp."
+	case 0x1187:
+		return "Semiconductor Components"
+	case 0x1188:
+		return "TP-Link"
 	case 0x1189:
-		return "Ledvance"
+		return "LEDVANCE LLC."
+	case 0x118A:
+		return "Nortek"
+	case 0x118B:
+		return "iRevo/Assa Abbloy Korea"
+	case 0x118C:
+		return "Midea"
+	case 0x118D:
+		return "ZF Friedrichshafen"
+	case 0x118E:
+		return "Checkit"
+	case 0x118F:
+		return "Aclara"
+	case 0x1190:
+		return "Nokia"
+	case 0x1191:
+		return "Goldcard High-tech Co., Ltd."
+	case 0x1192:
+		return "George Wilson Industries Ltd."
+	case 0x1193:
+		return "EASY SAVER CO.,INC"
+	case 0x1194:
+		return "ZTE Corporation"
+	case 0x1195:
+		return "ARRIS"
+	case 0x1196:
+		return "Reliance BIG TV"
+	case 0x1197:
+		return "Insight Energy Ventures/Powerley"
+	case 0x1198:
+		return "Thomas Research Products (Hubbell Lighting Inc.)"
+	case 0x1199:
+		return "Li Seng Technology"
+	case 0x119A:
+		return "System Level Solutions Inc."
+	case 0x119B:
+		return "Matrix Labs"
+	case 0x119C:
+		return "Sinope Technologies"
+	case 0x119D:
+		return "Jiuzhou Greeble"
+	case 0x119E:
+		return "Guangzhou Lanvee Tech. Co. Ltd."
+	case 0x119F:
+		return "Venstar"
+	case 0x1200:
+		return "SLV"
+	case 0x1201:
+		return "Halo Smart Labs"
+	case 0x1202:
+		return "Scout Security Inc."
+	case 0x1203:
+		return "Alibaba China Inc."
+	case 0x1204:
+		return "Resolution Products, Inc."
+	case 0x1205:
+		return "Smartlok Inc."
+	case 0x1206:
+		return "Lux Products Corp."
+	case 0x1207:
+		return "Vimar SpA"
+	case 0x1208:
+		return "Universal Lighting Technologies"
+	case 0x1209:
+		return "Robert Bosch, GmbH"
+	case 0x120A:
+		return "Accenture"
+	case 0x120B:
+		return "Heiman Technology Co., Ltd."
+	case 0x120C:
+		return "Shenzhen HOMA Technology Co., Ltd."
+	case 0x120D:
+		return "Vision-Electronics Technology"
+	case 0x120E:
+		return "Lenovo"
+	case 0x120F:
+		return "Presciense R&D"
+	case 0x1210:
+		return "Shenzhen Seastar Intelligence Co., Ltd."
+	case 0x1211:
+		return "Sensative AB"
+	case 0x1212:
+		return "SolarEdge"
+	case 0x1213:
+		return "Zipato"
+	case 0x1214:
+		return "China Fire & Security Sensing Manufacturing (iHorn)"
+	case 0x1215:
+		return "Quby BV"
+	case 0x1216:
+		return "Hangzhou Roombanker Technology Co., Ltd."
+	case 0x1217:
+		return "Amazon Lab126"
+	case 0x1218:
+		return "Paulmann Licht GmbH"
+	case 0x1219:
+		return "Shenzhen Orvibo Electronics Co. Ltd."
+	case 0x121A:
+		return "TCI Telecommunications"
+	case 0x121B:
+		return "Mueller-Licht International Inc."
+	case 0x121C:
+		return "Aurora Limited"
+	case 0x121D:
+		return "SmartDCC"
+	case 0x121E:
+		return "Shanghai UMEinfo Co. Ltd."
+	case 0x121F:
+		return "carbonTRACK"
+	case 0x1220:
+		return "Somfy"
+	case 0x1221:
+		return "Viessmann Elektronik GmbH"
+	case 0x1222:
+		return "Hildebrand Technology Ltd"
+	case 0x1223:
+		return "Onkyo Technology Corporation"
+	case 0x1224:
+		return "Shenzhen Sunricher Technology Ltd."
+	case 0x1225:
+		return "Xiu Xiu Technology Co., Ltd"
+	case 0x1226:
+		return "Zumtobel Group"
+	case 0x1227:
+		return "Shenzhen Kaadas Intelligent Technology Co. Ltd"
+	case 0x1228:
+		return "Shanghai Xiaoyan Technology Co. Ltd"
+	case 0x1229:
+		return "Cypress Semiconductor"
+	case 0x122A:
+		return "XAL GmbH"
+	case 0x122B:
+		return "Inergy Systems LLC"
+	case 0x122C:
+		return "Alfred Karcher GmbH & Co KG"
+	case 0x122D:
+		return "Adurolight Manufacturing"
+	case 0x122E:
+		return "Groupe Muller"
+	case 0x122F:
+		return "V-Mark Enterprises Inc."
+	case 0x1230:
+		return "Lead Energy AG"
+	case 0x1231:
+		return "UIOT Group"
+	case 0x1232:
+		return "Axxess Industries Inc."
+	case 0x1233:
+		return "Third Reality Inc."
+	case 0x1234:
+		return "DSR Corporation"
+	case 0x1235:
+		return "Guangzhou Vensi Intelligent Technology Co. Ltd."
+	case 0x1236:
+		return "Schlage Lock (Allegion)"
+	case 0x1237:
+		return "Net2Grid"
+	case 0x1238:
+		return "Airam Electric Oy Ab"
+	case 0x1239:
+		return "IMMAX WPB CZ"
+	case 0x123A:
+		return "ZIV Automation"
+	case 0x123B:
+		return "HangZhou iMagicTechnology Co., Ltd"
+	case 0x123C:
+		return "Xiamen Leelen Technology Co. Ltd."
+	case 0x123D:
+		return "Overkiz SAS"
+	case 0x123E:
+		return "Flonidan A/S"
+	case 0x123F:
+		return "HDL Automation Co., Ltd."
+	case 0x1240:
+		return "Ardomus Networks Corporation"
 	case 0x1241:
-		return "Samjin"
+		return "Samjin Co., Ltd."
+	case 0x1242:
+		return "Sprue Aegis PLC"
+	case 0x1243:
+		return "Indra Sistemas, S.A."
+	case 0x1244:
+		return "Shenzhen JBT Smart Lighting Co., Ltd."
+	case 0x1245:
+		return "GE Lighting & Current"
+	case 0x1246:
+		return "Danfoss A/S"
+	case 0x1247:
+		return "NIVISS PHP Sp. z o.o. Sp.k."
+	case 0x1248:
+		return "Shenzhen Fengliyuan Energy Conservating Technology Co. Ltd"
+	case 0x1249:
+		return "NEXELEC"
+	case 0x124A:
+		return "Sichuan Behome Prominent Technology Co., Ltd"
+	case 0x124B:
+		return "Fujian Star-net Communication Co., Ltd."
+	case 0x124C:
+		return "Toshiba Visual Solutions Corporation"
+	case 0x124D:
+		return "Latchable, Inc."
+	case 0x124E:
+		return "L&S Deutschland GmbH"
+	case 0x124F:
+		return "Gledopto Co., Ltd."
+	case 0x1250:
+		return "The Home Depot"
+	case 0x1251:
+		return "Neonlite International Ltd."
+	case 0x1252:
+		return "Arlo Technologies, Inc."
+	case 0x1253:
+		return "Xingluo Technology Co., Ltd."
+	case 0x1254:
+		return "Simon Electric (China) Co., Ltd."
+	case 0x1255:
+		return "Hangzhou Greatstar Industrial Co., Ltd."
+	case 0x1256:
+		return "Sequentric Energy Systems, LLC"
+	case 0x1257:
+		return "Solum Co., Ltd."
+	case 0x1258:
+		return "Eaglerise Electric & Electronic (China) Co., Ltd."
+	case 0x1259:
+		return "Fantem Technologies (Shenzhen) Co., Ltd."
+	case 0x125A:
+		return "Yunding Network Technology (Beijing) Co., Ltd."
+	case 0x125B:
+		return "Atlantic Group"
+	case 0x125C:
+		return "Xiamen Intretech, Inc."
+	case 0x125D:
+		return "Tuya Global Inc."
+	case 0x125E:
+		return "Xiamen Dnake Intelligent Technology Co., Ltd"
+	case 0x125F:
+		return "Niko nv"
+	case 0x1260:
+		return "Emporia Energy"
+	case 0x1261:
+		return "Sikom AS"
+	case 0x1262:
+		return "AXIS Labs, Inc."
+	case 0x1263:
+		return "Current Products Corporation"
+	case 0x1264:
+		return "MeteRSit SRL"
+	case 0x1265:
+		return "HORNBACH Baumarkt AG"
+	case 0x1266:
+		return "DiCEworld s.r.l. a socio unico"
+	case 0x1267:
+		return "ARC Technology Co., Ltd"
+	case 0x1268:
+		return "Hangzhou Konke Information Technology Co., Ltd."
+	case 0x1269:
+		return "SALTO Systems S.L."
+	case 0x126A:
+		return "Shenzhen Shyugj Technology Co., Ltd"
+	case 0x126B:
+		return "Brayden Automation Corporation"
+	case 0x126C:
+		return "Environexus Pty. Ltd."
+	case 0x126D:
+		return "Eltra nv/sa"
+	case 0x126E:
+		return "Xiaomi Communications Co., Ltd."
+	case 0x126F:
+		return "Shanghai Shuncom Electronic Technology Co., Ltd."
+	case 0x1270:
+		return "Voltalis S.A"
+	case 0x1271:
+		return "FEELUX Co., Ltd."
+	case 0x1272:
+		return "SmartPlus Inc."
+	case 0x1273:
+		return "Halemeier GmbH"
+	case 0x1274:
+		return "Trust International BBV"
+	case 0x1275:
+		return "Duke Energy Business Services LLC"
+	case 0x1276:
+		return "Calix, Inc."
+	case 0x1277:
+		return "ADEO"
+	case 0x1278:
+		return "Connected Response Limited"
+	case 0x1279:
+		return "StroyEnergoKom"
+	case 0x127A:
+		return "Lumitech Lighting Solution GmbH"
+	case 0x127B:
+		return "Verdant Environmental Technologies"
+	case 0x127C:
+		return "Alfred International"
+	case 0x127D:
+		return "Sansi LED Lighting"
+	case 0x127E:
+		return "Mindtree"
+	case 0x127F:
+		return "Nordic Semiconductor ASA"
+	case 0x1280:
+		return "Siterwell Electronics"
+	case 0x1281:
+		return "Briloner Leuchten GmbH"
+	case 0x1282:
+		return "Shenzhen SEI Technology"
+	case 0x1283:
+		return "Copper Labs"
+	case 0x1284:
+		return "Delta Dore"
+	case 0x1285:
+		return "Hager Group"
+	case 0x1286:
+		return "Shenzhen CoolKit Technology"
+	case 0x1287:
+		return "Hangzhou Sky-Lighting"
+	case 0x1288:
+		return "E.ON SE"
+	case 0x1289:
+		return "Lidl Stiftung"
+	case 0x128A:
+		return "Sichuan Changhong Network Technologies"
+	case 0x128B:
+		return "NodOn"
+	case 0x128C:
+		return "Jiangxi Innotech Technology"
+	case 0x128D:
+		return "Mercator Pty"
+	case 0x128E:
+		return "Beijing Ruying Tech"
+	case 0x128F:
+		return "EGLO Leuchten GmbH"
+	case 0x1290:
+		return "Pietro Fiorentini S.p.A"
+	case 0x1291:
+		return "Zehnder Group Vaux-Andigny"
+	case 0x1292:
+		return "BRK Brands"
+	case 0x1293:
+		return "Askey Computer"
+	case 0x1294:
+		return "PassiveBolt"
+	case 0x1295:
+		return "AVM Audiovisuelles"
+	case 0x1296:
+		return "Ningbo Suntech Lighting Tech"
+	case 0x1297:
+		return "Societe en Commandite Stello"
+	case 0x1298:
+		return "Vivint Smart Home"
+	case 0x1299:
+		return "Namron"
+	case 0x129A:
+		return "RADEMACHER Geraete Elektronik GmbH"
+	case 0x129B:
+		return "OMO Systems"
+	case 0x129C:
+		return "Siglis"
+	case 0x129D:
+		return "IMHOTEP CREATION"
+	case 0x129E:
+		return "icasa"
+	case 0x129F:
+		return "Level Home"
+	case 0x1300:
+		return "TIS Control"
+	case 0x1301:
+		return "Radisys India"
+	case 0x1302:
+		return "Veea"
+	case 0x1303:
+		return "FELL Technology"
+	case 0x1304:
+		return "Sowilo Design Services"
+	case 0x1305:
+		return "Lexi Devices"
+	case 0x1306:
+		return "Lifi Labs"
+	case 0x1307:
+		return "GRUNDFOS Holding"
+	case 0x1308:
+		return "SOURCING & CREATION"
+	case 0x1309:
+		return "Kraken Technologies"
+	case 0x130A:
+		return "EVE SYSTEMS"
+	case 0x130B:
+		return "LITE-ON TECHNOLOGY CORPORATION"
+	case 0x130C:
+		return "Focalcrest"
+	case 0x130D:
+		return "Bouffalo Lab (Nanjing)"
+	case 0x130E:
+		return "Wyze Labs"
+	case 0x1337:
+		return "Datek Wireless AS"
+	case 0x1994:
+		return "Gewiss S.p.A."
+	case 0x2794:
+		return "Climax Technology Cp., Ltd."
 	}
 	return zcl.Sprintf("%v", zcl.Zenum16(v))
 }
 
-func (v ManufacturerCode) IsPhilips() bool           { return v == 0x100B }
-func (v ManufacturerCode) IsLegrand() bool           { return v == 0x1021 }
-func (v ManufacturerCode) IsNxp() bool               { return v == 0x1037 }
-func (v ManufacturerCode) IsSchneiderElectric() bool { return v == 0x105E }
-func (v ManufacturerCode) IsUbisys() bool            { return v == 0x10F2 }
-func (v ManufacturerCode) IsXiaomi() bool            { return v == 0x115F }
-func (v ManufacturerCode) IsInnr() bool              { return v == 0x1166 }
-func (v ManufacturerCode) IsIkea() bool              { return v == 0x117C }
-func (v ManufacturerCode) IsLedvance() bool          { return v == 0x1189 }
-func (v ManufacturerCode) IsSamjin() bool            { return v == 0x1241 }
-func (v *ManufacturerCode) SetPhilips()              { *v = 0x100B }
-func (v *ManufacturerCode) SetLegrand()              { *v = 0x1021 }
-func (v *ManufacturerCode) SetNxp()                  { *v = 0x1037 }
-func (v *ManufacturerCode) SetSchneiderElectric()    { *v = 0x105E }
-func (v *ManufacturerCode) SetUbisys()               { *v = 0x10F2 }
-func (v *ManufacturerCode) SetXiaomi()               { *v = 0x115F }
-func (v *ManufacturerCode) SetInnr()                 { *v = 0x1166 }
-func (v *ManufacturerCode) SetIkea()                 { *v = 0x117C }
-func (v *ManufacturerCode) SetLedvance()             { *v = 0x1189 }
-func (v *ManufacturerCode) SetSamjin()               { *v = 0x1241 }
+func (v ManufacturerCode) IsCirronet() bool                                   { return v == 0x1000 }
+func (v ManufacturerCode) IsChipcon() bool                                    { return v == 0x1001 }
+func (v ManufacturerCode) IsEmber() bool                                      { return v == 0x1002 }
+func (v ManufacturerCode) IsNationalTech() bool                               { return v == 0x1003 }
+func (v ManufacturerCode) IsFreescale() bool                                  { return v == 0x1004 }
+func (v ManufacturerCode) IsIpcom() bool                                      { return v == 0x1005 }
+func (v ManufacturerCode) IsSanJuanSoftware() bool                            { return v == 0x1006 }
+func (v ManufacturerCode) IsTuv() bool                                        { return v == 0x1007 }
+func (v ManufacturerCode) IsCompxs() bool                                     { return v == 0x1008 }
+func (v ManufacturerCode) IsBmSpa() bool                                      { return v == 0x1009 }
+func (v ManufacturerCode) IsAwarepoint() bool                                 { return v == 0x100a }
+func (v ManufacturerCode) IsPhilips() bool                                    { return v == 0x100b }
+func (v ManufacturerCode) IsLuxoft() bool                                     { return v == 0x100c }
+func (v ManufacturerCode) IsKorvin() bool                                     { return v == 0x100d }
+func (v ManufacturerCode) IsOneRf() bool                                      { return v == 0x100e }
+func (v ManufacturerCode) IsSoftwareTechnologyGroup() bool                    { return v == 0x100f }
+func (v ManufacturerCode) IsTelegesis() bool                                  { return v == 0x1010 }
+func (v ManufacturerCode) IsVisionic() bool                                   { return v == 0x1011 }
+func (v ManufacturerCode) IsInsta() bool                                      { return v == 0x1012 }
+func (v ManufacturerCode) IsAtalum() bool                                     { return v == 0x1013 }
+func (v ManufacturerCode) IsAtmel() bool                                      { return v == 0x1014 }
+func (v ManufacturerCode) IsDevelco() bool                                    { return v == 0x1015 }
+func (v ManufacturerCode) IsHoneywell() bool                                  { return v == 0x1016 }
+func (v ManufacturerCode) IsRadiopulse() bool                                 { return v == 0x1017 }
+func (v ManufacturerCode) IsRenesas() bool                                    { return v == 0x1018 }
+func (v ManufacturerCode) IsXanaduWireless() bool                             { return v == 0x1019 }
+func (v ManufacturerCode) IsNecEngineering() bool                             { return v == 0x101a }
+func (v ManufacturerCode) IsYamatake() bool                                   { return v == 0x101b }
+func (v ManufacturerCode) IsTendril() bool                                    { return v == 0x101c }
+func (v ManufacturerCode) IsAssaAbloy() bool                                  { return v == 0x101d }
+func (v ManufacturerCode) IsMaxstream() bool                                  { return v == 0x101e }
+func (v ManufacturerCode) IsNeurocom() bool                                   { return v == 0x101f }
+func (v ManufacturerCode) IsInstituteForInformationIndustry() bool            { return v == 0x1020 }
+func (v ManufacturerCode) IsVantageControls() bool                            { return v == 0x1021 }
+func (v ManufacturerCode) IsIcontrol() bool                                   { return v == 0x1022 }
+func (v ManufacturerCode) IsRaymarine() bool                                  { return v == 0x1023 }
+func (v ManufacturerCode) IsLsResearch() bool                                 { return v == 0x1024 }
+func (v ManufacturerCode) IsOnity() bool                                      { return v == 0x1025 }
+func (v ManufacturerCode) IsMonoProducts() bool                               { return v == 0x1026 }
+func (v ManufacturerCode) IsRfTech() bool                                     { return v == 0x1027 }
+func (v ManufacturerCode) IsItron() bool                                      { return v == 0x1028 }
+func (v ManufacturerCode) IsTritech() bool                                    { return v == 0x1029 }
+func (v ManufacturerCode) IsEmbedit() bool                                    { return v == 0x102a }
+func (v ManufacturerCode) IsS3c() bool                                        { return v == 0x102b }
+func (v ManufacturerCode) IsSiemens() bool                                    { return v == 0x102c }
+func (v ManufacturerCode) IsMindtech() bool                                   { return v == 0x102d }
+func (v ManufacturerCode) IsLgElectronics() bool                              { return v == 0x102e }
+func (v ManufacturerCode) IsMitsubishi() bool                                 { return v == 0x102f }
+func (v ManufacturerCode) IsJohnsonControls() bool                            { return v == 0x1030 }
+func (v ManufacturerCode) IsPri() bool                                        { return v == 0x1031 }
+func (v ManufacturerCode) IsKnick() bool                                      { return v == 0x1032 }
+func (v ManufacturerCode) IsViconics() bool                                   { return v == 0x1033 }
+func (v ManufacturerCode) IsFlexipanel() bool                                 { return v == 0x1034 }
+func (v ManufacturerCode) IsPiasimCorporation() bool                          { return v == 0x1035 }
+func (v ManufacturerCode) IsTrane() bool                                      { return v == 0x1036 }
+func (v ManufacturerCode) IsJennic() bool                                     { return v == 0x1037 }
+func (v ManufacturerCode) IsLivingIndependently() bool                        { return v == 0x1038 }
+func (v ManufacturerCode) IsAlertme() bool                                    { return v == 0x1039 }
+func (v ManufacturerCode) IsDaintree() bool                                   { return v == 0x103a }
+func (v ManufacturerCode) IsAiji() bool                                       { return v == 0x103b }
+func (v ManufacturerCode) IsTelecomItalia() bool                              { return v == 0x103c }
+func (v ManufacturerCode) IsMikrokrets() bool                                 { return v == 0x103d }
+func (v ManufacturerCode) IsOkiSemi() bool                                    { return v == 0x103e }
+func (v ManufacturerCode) IsNewportElectronics() bool                         { return v == 0x103f }
+func (v ManufacturerCode) IsControl4() bool                                   { return v == 0x1040 }
+func (v ManufacturerCode) IsStmicro() bool                                    { return v == 0x1041 }
+func (v ManufacturerCode) IsAdSolNissin() bool                                { return v == 0x1042 }
+func (v ManufacturerCode) IsDcsi() bool                                       { return v == 0x1043 }
+func (v ManufacturerCode) IsFranceTelecom() bool                              { return v == 0x1044 }
+func (v ManufacturerCode) IsMunet() bool                                      { return v == 0x1045 }
+func (v ManufacturerCode) IsAutani() bool                                     { return v == 0x1046 }
+func (v ManufacturerCode) IsColoradoVnet() bool                               { return v == 0x1047 }
+func (v ManufacturerCode) IsAerocomm() bool                                   { return v == 0x1048 }
+func (v ManufacturerCode) IsSiliconLabs() bool                                { return v == 0x1049 }
+func (v ManufacturerCode) IsCrane() bool                                      { return v == 0x104F }
+func (v ManufacturerCode) IsInncom() bool                                     { return v == 0x104a }
+func (v ManufacturerCode) IsCannon() bool                                     { return v == 0x104b }
+func (v ManufacturerCode) IsSynapse() bool                                    { return v == 0x104c }
+func (v ManufacturerCode) IsFisherPierceSunrise() bool                        { return v == 0x104d }
+func (v ManufacturerCode) IsCentralite() bool                                 { return v == 0x104e }
+func (v ManufacturerCode) IsMobilarm() bool                                   { return v == 0x1050 }
+func (v ManufacturerCode) IsImonitor() bool                                   { return v == 0x1051 }
+func (v ManufacturerCode) IsBartech() bool                                    { return v == 0x1052 }
+func (v ManufacturerCode) IsMeshnetics() bool                                 { return v == 0x1053 }
+func (v ManufacturerCode) IsLsIndustrial() bool                               { return v == 0x1054 }
+func (v ManufacturerCode) IsCason() bool                                      { return v == 0x1055 }
+func (v ManufacturerCode) IsWirelessGlue() bool                               { return v == 0x1056 }
+func (v ManufacturerCode) IsElster() bool                                     { return v == 0x1057 }
+func (v ManufacturerCode) IsSmsTec() bool                                     { return v == 0x1058 }
+func (v ManufacturerCode) IsOnsetComputer() bool                              { return v == 0x1059 }
+func (v ManufacturerCode) IsRigaDevelopment() bool                            { return v == 0x105a }
+func (v ManufacturerCode) IsEnergate() bool                                   { return v == 0x105b }
+func (v ManufacturerCode) IsConmedLinvatec() bool                             { return v == 0x105c }
+func (v ManufacturerCode) IsPowermand() bool                                  { return v == 0x105d }
+func (v ManufacturerCode) IsSchneiderElectric() bool                          { return v == 0x105e }
+func (v ManufacturerCode) IsEaton() bool                                      { return v == 0x105f }
+func (v ManufacturerCode) IsTelular() bool                                    { return v == 0x1060 }
+func (v ManufacturerCode) IsDelphiMedical() bool                              { return v == 0x1061 }
+func (v ManufacturerCode) IsEpisensor() bool                                  { return v == 0x1062 }
+func (v ManufacturerCode) IsLandisGyr() bool                                  { return v == 0x1063 }
+func (v ManufacturerCode) IsKabaGroup() bool                                  { return v == 0x1064 }
+func (v ManufacturerCode) IsShure() bool                                      { return v == 0x1065 }
+func (v ManufacturerCode) IsComverge() bool                                   { return v == 0x1066 }
+func (v ManufacturerCode) IsDbsLodging() bool                                 { return v == 0x1067 }
+func (v ManufacturerCode) IsEnergyAware() bool                                { return v == 0x1068 }
+func (v ManufacturerCode) IsHidalgo() bool                                    { return v == 0x1069 }
+func (v ManufacturerCode) IsAir2app() bool                                    { return v == 0x106a }
+func (v ManufacturerCode) IsAmx() bool                                        { return v == 0x106b }
+func (v ManufacturerCode) IsEdmiPty() bool                                    { return v == 0x106c }
+func (v ManufacturerCode) IsCyanLtd() bool                                    { return v == 0x106d }
+func (v ManufacturerCode) IsSystemSpa() bool                                  { return v == 0x106e }
+func (v ManufacturerCode) IsTelit() bool                                      { return v == 0x106f }
+func (v ManufacturerCode) IsKagaElectronics() bool                            { return v == 0x1070 }
+func (v ManufacturerCode) Is4NoksSRL() bool                                   { return v == 0x1071 }
+func (v ManufacturerCode) IsCerticom() bool                                   { return v == 0x1072 }
+func (v ManufacturerCode) IsGridpoint() bool                                  { return v == 0x1073 }
+func (v ManufacturerCode) IsProfileSystems() bool                             { return v == 0x1074 }
+func (v ManufacturerCode) IsCompactaInternational() bool                      { return v == 0x1075 }
+func (v ManufacturerCode) IsFreestyleTechnology() bool                        { return v == 0x1076 }
+func (v ManufacturerCode) IsAlektrona() bool                                  { return v == 0x1077 }
+func (v ManufacturerCode) IsComputime() bool                                  { return v == 0x1078 }
+func (v ManufacturerCode) IsRemoteTechnologies() bool                         { return v == 0x1079 }
+func (v ManufacturerCode) IsWavecom() bool                                    { return v == 0x107a }
+func (v ManufacturerCode) IsEnergyOptimizers() bool                           { return v == 0x107b }
+func (v ManufacturerCode) IsGe() bool                                         { return v == 0x107c }
+func (v ManufacturerCode) IsJetlun() bool                                     { return v == 0x107d }
+func (v ManufacturerCode) IsCipherSystems() bool                              { return v == 0x107e }
+func (v ManufacturerCode) IsCorporateSystemsEng() bool                        { return v == 0x107f }
+func (v ManufacturerCode) IsEcobee() bool                                     { return v == 0x1080 }
+func (v ManufacturerCode) IsSmk() bool                                        { return v == 0x1081 }
+func (v ManufacturerCode) IsMeshworksWireless() bool                          { return v == 0x1082 }
+func (v ManufacturerCode) IsEllipsBV() bool                                   { return v == 0x1083 }
+func (v ManufacturerCode) IsSecureElectrans() bool                            { return v == 0x1084 }
+func (v ManufacturerCode) IsCedo() bool                                       { return v == 0x1085 }
+func (v ManufacturerCode) IsToshiba() bool                                    { return v == 0x1086 }
+func (v ManufacturerCode) IsDigiInternational() bool                          { return v == 0x1087 }
+func (v ManufacturerCode) IsUbilogix() bool                                   { return v == 0x1088 }
+func (v ManufacturerCode) IsEchelon() bool                                    { return v == 0x1089 }
+func (v ManufacturerCode) IsGreenEnergyOptions() bool                         { return v == 0x1090 }
+func (v ManufacturerCode) IsSilverSpringNetworks() bool                       { return v == 0x1091 }
+func (v ManufacturerCode) IsBlackDecker() bool                                { return v == 0x1092 }
+func (v ManufacturerCode) IsAztechAssociatesinc() bool                        { return v == 0x1093 }
+func (v ManufacturerCode) IsADCo() bool                                       { return v == 0x1094 }
+func (v ManufacturerCode) IsRainforestAutomation() bool                       { return v == 0x1095 }
+func (v ManufacturerCode) IsCarrierElectronics() bool                         { return v == 0x1096 }
+func (v ManufacturerCode) IsSychipMurata() bool                               { return v == 0x1097 }
+func (v ManufacturerCode) IsOpenpeak() bool                                   { return v == 0x1098 }
+func (v ManufacturerCode) IsPassiveSystems() bool                             { return v == 0x1099 }
+func (v ManufacturerCode) IsMmbresearch() bool                                { return v == 0x109a }
+func (v ManufacturerCode) IsLeviton() bool                                    { return v == 0x109b }
+func (v ManufacturerCode) IsKoreaElectricPowerDataNetwork() bool              { return v == 0x109c }
+func (v ManufacturerCode) IsComcast() bool                                    { return v == 0x109d }
+func (v ManufacturerCode) IsNecElectronics() bool                             { return v == 0x109e }
+func (v ManufacturerCode) IsNetvox() bool                                     { return v == 0x109f }
+func (v ManufacturerCode) IsUControl() bool                                   { return v == 0x10a0 }
+func (v ManufacturerCode) IsEmbediaTechnologies() bool                        { return v == 0x10a1 }
+func (v ManufacturerCode) IsSensus() bool                                     { return v == 0x10a2 }
+func (v ManufacturerCode) IsSunrisetechnologies() bool                        { return v == 0x10a3 }
+func (v ManufacturerCode) IsMemtechcorp() bool                                { return v == 0x10a4 }
+func (v ManufacturerCode) IsFreebox() bool                                    { return v == 0x10a5 }
+func (v ManufacturerCode) IsM2Labs() bool                                     { return v == 0x10a6 }
+func (v ManufacturerCode) IsBritishgas() bool                                 { return v == 0x10a7 }
+func (v ManufacturerCode) IsSentec() bool                                     { return v == 0x10a8 }
+func (v ManufacturerCode) IsNavetas() bool                                    { return v == 0x10a9 }
+func (v ManufacturerCode) IsLightspeedTechnologies() bool                     { return v == 0x10aa }
+func (v ManufacturerCode) IsOkiElectric() bool                                { return v == 0x10ab }
+func (v ManufacturerCode) IsSistemasInteligentes() bool                       { return v == 0x10ac }
+func (v ManufacturerCode) IsDometic() bool                                    { return v == 0x10ad }
+func (v ManufacturerCode) IsAlps() bool                                       { return v == 0x10ae }
+func (v ManufacturerCode) IsEnergyhub() bool                                  { return v == 0x10af }
+func (v ManufacturerCode) IsKamstrup() bool                                   { return v == 0x10b0 }
+func (v ManufacturerCode) IsEchostar() bool                                   { return v == 0x10b1 }
+func (v ManufacturerCode) IsEnernoc() bool                                    { return v == 0x10b2 }
+func (v ManufacturerCode) IsEltav() bool                                      { return v == 0x10b3 }
+func (v ManufacturerCode) IsBelkin() bool                                     { return v == 0x10b4 }
+func (v ManufacturerCode) IsXstreamhdWireless() bool                          { return v == 0x10b5 }
+func (v ManufacturerCode) IsSaturnSouth() bool                                { return v == 0x10b6 }
+func (v ManufacturerCode) IsGreentraponline() bool                            { return v == 0x10b7 }
+func (v ManufacturerCode) IsSmartsynch() bool                                 { return v == 0x10b8 }
+func (v ManufacturerCode) IsNyceControl() bool                                { return v == 0x10b9 }
+func (v ManufacturerCode) IsIcmControls() bool                                { return v == 0x10ba }
+func (v ManufacturerCode) IsMillenniumElectronics() bool                      { return v == 0x10bb }
+func (v ManufacturerCode) IsMotorola() bool                                   { return v == 0x10bc }
+func (v ManufacturerCode) IsEmersonwhiteRodgers() bool                        { return v == 0x10bd }
+func (v ManufacturerCode) IsRadioThermostat() bool                            { return v == 0x10be }
+func (v ManufacturerCode) IsOmroncorporation() bool                           { return v == 0x10bf }
+func (v ManufacturerCode) IsGiiniiGloballimited() bool                        { return v == 0x10c0 }
+func (v ManufacturerCode) IsFujitsuGenerallimited() bool                      { return v == 0x10c1 }
+func (v ManufacturerCode) IsPeelTechnologies() bool                           { return v == 0x10c2 }
+func (v ManufacturerCode) IsAccent() bool                                     { return v == 0x10c3 }
+func (v ManufacturerCode) IsBytesnapDesign() bool                             { return v == 0x10c4 }
+func (v ManufacturerCode) IsNecTokinCorporation() bool                        { return v == 0x10c5 }
+func (v ManufacturerCode) IsG4sJusticeservices() bool                         { return v == 0x10c6 }
+func (v ManufacturerCode) IsTrilliantNetworks() bool                          { return v == 0x10c7 }
+func (v ManufacturerCode) IsElectroluxItalia() bool                           { return v == 0x10c8 }
+func (v ManufacturerCode) IsOnzoltd() bool                                    { return v == 0x10c9 }
+func (v ManufacturerCode) IsEnteksystems() bool                               { return v == 0x10ca }
+func (v ManufacturerCode) IsPhilips2() bool                                   { return v == 0x10cb }
+func (v ManufacturerCode) IsMainstreamengineering() bool                      { return v == 0x10cc }
+func (v ManufacturerCode) IsIndesitcompany() bool                             { return v == 0x10cd }
+func (v ManufacturerCode) IsThinkeco() bool                                   { return v == 0x10ce }
+func (v ManufacturerCode) Is2D2c() bool                                       { return v == 0x10cf }
+func (v ManufacturerCode) IsGreenpeak() bool                                  { return v == 0x10d0 }
+func (v ManufacturerCode) IsIntercel() bool                                   { return v == 0x10d1 }
+func (v ManufacturerCode) IsLgElectronics2() bool                             { return v == 0x10d2 }
+func (v ManufacturerCode) IsMitsumiElectric() bool                            { return v == 0x10d3 }
+func (v ManufacturerCode) IsMitsumiElectric2() bool                           { return v == 0x10d4 }
+func (v ManufacturerCode) IsZentrumMikroelektronikDresden() bool              { return v == 0x10d5 }
+func (v ManufacturerCode) IsNestLabs() bool                                   { return v == 0x10d6 }
+func (v ManufacturerCode) IsExeginTechnologies() bool                         { return v == 0x10d7 }
+func (v ManufacturerCode) IsHoneywell2() bool                                 { return v == 0x10d8 }
+func (v ManufacturerCode) IsTakahataPrecision() bool                          { return v == 0x10d9 }
+func (v ManufacturerCode) IsSumitomoElectricNetworks() bool                   { return v == 0x10da }
+func (v ManufacturerCode) IsGeEnergy() bool                                   { return v == 0x10db }
+func (v ManufacturerCode) IsGeAppliances() bool                               { return v == 0x10dc }
+func (v ManufacturerCode) IsRadiocraftsAs() bool                              { return v == 0x10dd }
+func (v ManufacturerCode) IsCeiva() bool                                      { return v == 0x10de }
+func (v ManufacturerCode) IsTecCoCoLtd() bool                                 { return v == 0x10df }
+func (v ManufacturerCode) IsChameleonTechnologyUkLtd() bool                   { return v == 0x10e0 }
+func (v ManufacturerCode) IsSamsung() bool                                    { return v == 0x10e1 }
+func (v ManufacturerCode) IsRuwidoAustriaGmbh() bool                          { return v == 0x10e2 }
+func (v ManufacturerCode) IsHuaweiTechnologiesCoLtd() bool                    { return v == 0x10e3 }
+func (v ManufacturerCode) IsHuaweiTechnologiesCoLtd2() bool                   { return v == 0x10e4 }
+func (v ManufacturerCode) IsGreenwaveReality() bool                           { return v == 0x10e5 }
+func (v ManufacturerCode) IsBglobalMeteringLtd() bool                         { return v == 0x10e6 }
+func (v ManufacturerCode) IsMindteck() bool                                   { return v == 0x10e7 }
+func (v ManufacturerCode) IsIngersollRand() bool                              { return v == 0x10e8 }
+func (v ManufacturerCode) IsDiusComputingPtyLtd() bool                        { return v == 0x10e9 }
+func (v ManufacturerCode) IsEmbeddedAutomationInc() bool                      { return v == 0x10ea }
+func (v ManufacturerCode) IsAbb() bool                                        { return v == 0x10eb }
+func (v ManufacturerCode) IsSony() bool                                       { return v == 0x10ec }
+func (v ManufacturerCode) IsGenusPowerInfrastructuresLimited() bool           { return v == 0x10ed }
+func (v ManufacturerCode) IsUniversalDevices() bool                           { return v == 0x10ee }
+func (v ManufacturerCode) IsUniversalDevices2() bool                          { return v == 0x10ef }
+func (v ManufacturerCode) IsMetrumTechnologiesLlc() bool                      { return v == 0x10f0 }
+func (v ManufacturerCode) IsCisco() bool                                      { return v == 0x10f1 }
+func (v ManufacturerCode) IsUbisysTechnologiesGmbh() bool                     { return v == 0x10f2 }
+func (v ManufacturerCode) IsConsert() bool                                    { return v == 0x10f3 }
+func (v ManufacturerCode) IsCrestronElectronics() bool                        { return v == 0x10f4 }
+func (v ManufacturerCode) IsEnphaseEnergy() bool                              { return v == 0x10f5 }
+func (v ManufacturerCode) IsInvensysControls() bool                           { return v == 0x10f6 }
+func (v ManufacturerCode) IsMuellerSystemsLlc() bool                          { return v == 0x10f7 }
+func (v ManufacturerCode) IsAacTechnologiesHolding() bool                     { return v == 0x10f8 }
+func (v ManufacturerCode) IsUNextCoLtd() bool                                 { return v == 0x10f9 }
+func (v ManufacturerCode) IsSteelcaseInc() bool                               { return v == 0x10fa }
+func (v ManufacturerCode) IsTelematicsWireless() bool                         { return v == 0x10fb }
+func (v ManufacturerCode) IsSamilPowerCoLtd() bool                            { return v == 0x10fc }
+func (v ManufacturerCode) IsPacePlc() bool                                    { return v == 0x10fd }
+func (v ManufacturerCode) IsOsborneCoinageCo() bool                           { return v == 0x10fe }
+func (v ManufacturerCode) IsPowerwatch() bool                                 { return v == 0x10ff }
+func (v ManufacturerCode) IsCandeledGmbh() bool                               { return v == 0x1100 }
+func (v ManufacturerCode) IsFlexgridSRL() bool                                { return v == 0x1101 }
+func (v ManufacturerCode) IsHumax() bool                                      { return v == 0x1102 }
+func (v ManufacturerCode) IsUniversalElectronicsInc() bool                    { return v == 0x1103 }
+func (v ManufacturerCode) IsAdvancedEnergy() bool                             { return v == 0x1104 }
+func (v ManufacturerCode) IsBegaGantenbrinkLeuchten() bool                    { return v == 0x1105 }
+func (v ManufacturerCode) IsBrunelUniversity() bool                           { return v == 0x1106 }
+func (v ManufacturerCode) IsPanasonicRDCenterSingapore() bool                 { return v == 0x1107 }
+func (v ManufacturerCode) IsEsystemsResearch() bool                           { return v == 0x1108 }
+func (v ManufacturerCode) IsPanamax() bool                                    { return v == 0x1109 }
+func (v ManufacturerCode) IsPhysicalGraphCorporation() bool                   { return v == 0x110a }
+func (v ManufacturerCode) IsEmLiteLtd() bool                                  { return v == 0x110b }
+func (v ManufacturerCode) IsOsramSylvania() bool                              { return v == 0x110c }
+func (v ManufacturerCode) Is2SaveEnergyLtd() bool                             { return v == 0x110d }
+func (v ManufacturerCode) IsPlanetInnovationProductsPtyLtd() bool             { return v == 0x110e }
+func (v ManufacturerCode) IsAmbientDevicesInc() bool                          { return v == 0x110f }
+func (v ManufacturerCode) IsProfalux() bool                                   { return v == 0x1110 }
+func (v ManufacturerCode) IsBillionElectricCompanyBec() bool                  { return v == 0x1111 }
+func (v ManufacturerCode) IsEmbertecPtyLtd() bool                             { return v == 0x1112 }
+func (v ManufacturerCode) IsItWatchdogs() bool                                { return v == 0x1113 }
+func (v ManufacturerCode) IsReloc() bool                                      { return v == 0x1114 }
+func (v ManufacturerCode) IsIntelCorporation() bool                           { return v == 0x1115 }
+func (v ManufacturerCode) IsTrendElectronicsLimited() bool                    { return v == 0x1116 }
+func (v ManufacturerCode) IsMoxa() bool                                       { return v == 0x1117 }
+func (v ManufacturerCode) IsQees() bool                                       { return v == 0x1118 }
+func (v ManufacturerCode) IsSaymeWirelessSensorNetworks() bool                { return v == 0x1119 }
+func (v ManufacturerCode) IsPentairAquaticSystems() bool                      { return v == 0x111a }
+func (v ManufacturerCode) IsOrbitIrrigation() bool                            { return v == 0x111b }
+func (v ManufacturerCode) IsCaliforniaEasternLaboratories() bool              { return v == 0x111c }
+func (v ManufacturerCode) IsComcast2() bool                                   { return v == 0x111d }
+func (v ManufacturerCode) IsIdtTechnologyLimited() bool                       { return v == 0x111e }
+func (v ManufacturerCode) IsPixela() bool                                     { return v == 0x111f }
+func (v ManufacturerCode) IsTivo() bool                                       { return v == 0x1120 }
+func (v ManufacturerCode) IsFidure() bool                                     { return v == 0x1121 }
+func (v ManufacturerCode) IsMarvellSemiconductor() bool                       { return v == 0x1122 }
+func (v ManufacturerCode) IsWasionGroup() bool                                { return v == 0x1123 }
+func (v ManufacturerCode) IsJascoProducts() bool                              { return v == 0x1124 }
+func (v ManufacturerCode) IsShenzhenKaifaTechnology() bool                    { return v == 0x1125 }
+func (v ManufacturerCode) IsNetcommWireless() bool                            { return v == 0x1126 }
+func (v ManufacturerCode) IsDefineInstruments() bool                          { return v == 0x1127 }
+func (v ManufacturerCode) IsInHomeDisplays() bool                             { return v == 0x1128 }
+func (v ManufacturerCode) IsMieleCieKg() bool                                 { return v == 0x1129 }
+func (v ManufacturerCode) IsTelevesSA() bool                                  { return v == 0x112a }
+func (v ManufacturerCode) IsLabelec() bool                                    { return v == 0x112b }
+func (v ManufacturerCode) IsChinaElectronicsStandardizationInstitute() bool   { return v == 0x112c }
+func (v ManufacturerCode) IsVectorform() bool                                 { return v == 0x112d }
+func (v ManufacturerCode) IsBuschJaegerElektro() bool                         { return v == 0x112e }
+func (v ManufacturerCode) IsRedpineSignals() bool                             { return v == 0x112f }
+func (v ManufacturerCode) IsBridgesElectronicTechnology() bool                { return v == 0x1130 }
+func (v ManufacturerCode) IsSercomm() bool                                    { return v == 0x1131 }
+func (v ManufacturerCode) IsWshGmbhWirsindheller() bool                       { return v == 0x1132 }
+func (v ManufacturerCode) IsBoschSecuritySystems() bool                       { return v == 0x1133 }
+func (v ManufacturerCode) IsEzexCorporation() bool                            { return v == 0x1134 }
+func (v ManufacturerCode) IsDresdenElektronikIngenieurtechnikGmbh() bool      { return v == 0x1135 }
+func (v ManufacturerCode) IsMeazonSA() bool                                   { return v == 0x1136 }
+func (v ManufacturerCode) IsCrowElectronicEngineering() bool                  { return v == 0x1137 }
+func (v ManufacturerCode) IsHarvardEngineering() bool                         { return v == 0x1138 }
+func (v ManufacturerCode) IsAndsonBeijingTechnology() bool                    { return v == 0x1139 }
+func (v ManufacturerCode) IsAdhocoAg() bool                                   { return v == 0x113a }
+func (v ManufacturerCode) IsWaxmanConsumerProductsGroup() bool                { return v == 0x113b }
+func (v ManufacturerCode) IsOwonTechnology() bool                             { return v == 0x113c }
+func (v ManufacturerCode) IsHitronTechnologies() bool                         { return v == 0x113d }
+func (v ManufacturerCode) IsScemtecSteuerungstechnikGmbh() bool               { return v == 0x113e }
+func (v ManufacturerCode) IsWebee() bool                                      { return v == 0x113f }
+func (v ManufacturerCode) IsGrid2home() bool                                  { return v == 0x1140 }
+func (v ManufacturerCode) IsTelinkMicro() bool                                { return v == 0x1141 }
+func (v ManufacturerCode) IsJasmineSystems() bool                             { return v == 0x1142 }
+func (v ManufacturerCode) IsBidgely() bool                                    { return v == 0x1143 }
+func (v ManufacturerCode) IsLutron() bool                                     { return v == 0x1144 }
+func (v ManufacturerCode) IsIjenko() bool                                     { return v == 0x1145 }
+func (v ManufacturerCode) IsStarfieldElectronic() bool                        { return v == 0x1146 }
+func (v ManufacturerCode) IsTcp() bool                                        { return v == 0x1147 }
+func (v ManufacturerCode) IsRogersCommunicationsPartnership() bool            { return v == 0x1148 }
+func (v ManufacturerCode) IsCree() bool                                       { return v == 0x1149 }
+func (v ManufacturerCode) IsRobertBoschLlc() bool                             { return v == 0x114a }
+func (v ManufacturerCode) IsIbisNetworks() bool                               { return v == 0x114b }
+func (v ManufacturerCode) IsQuirky() bool                                     { return v == 0x114c }
+func (v ManufacturerCode) IsEfergyTechnologies() bool                         { return v == 0x114d }
+func (v ManufacturerCode) IsSmartlabs() bool                                  { return v == 0x114e }
+func (v ManufacturerCode) IsEverspringIndustry() bool                         { return v == 0x114f }
+func (v ManufacturerCode) IsSwannCommunications() bool                        { return v == 0x1150 }
+func (v ManufacturerCode) IsSoneter() bool                                    { return v == 0x1151 }
+func (v ManufacturerCode) IsSamsungSds() bool                                 { return v == 0x1152 }
+func (v ManufacturerCode) IsUnibandElectronicCorporation() bool               { return v == 0x1153 }
+func (v ManufacturerCode) IsAcctonTechnologyCorporation() bool                { return v == 0x1154 }
+func (v ManufacturerCode) IsBoschThermotechnikGmbh() bool                     { return v == 0x1155 }
+func (v ManufacturerCode) IsWincorNixdorfInc() bool                           { return v == 0x1156 }
+func (v ManufacturerCode) IsOhsungElectronics() bool                          { return v == 0x1157 }
+func (v ManufacturerCode) IsZenWithinInc() bool                               { return v == 0x1158 }
+func (v ManufacturerCode) IsTech4homeLda() bool                               { return v == 0x1159 }
+func (v ManufacturerCode) IsNanoleaf() bool                                   { return v == 0x115A }
+func (v ManufacturerCode) IsKeenHomeInc() bool                                { return v == 0x115B }
+func (v ManufacturerCode) IsPolyControlAps() bool                             { return v == 0x115C }
+func (v ManufacturerCode) IsEastfieldLightingCoLtdShenzhen() bool             { return v == 0x115D }
+func (v ManufacturerCode) IsIpDatatelInc() bool                               { return v == 0x115E }
+func (v ManufacturerCode) IsLumiUnitedTechologyLtdShenzhen() bool             { return v == 0x115F }
+func (v ManufacturerCode) IsSengledOptoelectronicsCorp() bool                 { return v == 0x1160 }
+func (v ManufacturerCode) IsRemoteSolutionCoLtd() bool                        { return v == 0x1161 }
+func (v ManufacturerCode) IsAbbGenwayXiamenElectricalEquipmentCoLtd() bool    { return v == 0x1162 }
+func (v ManufacturerCode) IsZhejiangRexenseTech() bool                        { return v == 0x1163 }
+func (v ManufacturerCode) IsForeeTechnology() bool                            { return v == 0x1164 }
+func (v ManufacturerCode) IsOpenAccessTechnologyIntl() bool                   { return v == 0x1165 }
+func (v ManufacturerCode) IsInnrLightingBv() bool                             { return v == 0x1166 }
+func (v ManufacturerCode) IsTechworldIndustries() bool                        { return v == 0x1167 }
+func (v ManufacturerCode) IsLeedarsonLightingCoLtd() bool                     { return v == 0x1168 }
+func (v ManufacturerCode) IsArzelZoning() bool                                { return v == 0x1169 }
+func (v ManufacturerCode) IsHolleyTechnology() bool                           { return v == 0x116A }
+func (v ManufacturerCode) IsBeldonTechnologies() bool                         { return v == 0x116B }
+func (v ManufacturerCode) IsFlextronics() bool                                { return v == 0x116C }
+func (v ManufacturerCode) IsShenzhenMeian() bool                              { return v == 0x116D }
+func (v ManufacturerCode) IsLowes() bool                                      { return v == 0x116E }
+func (v ManufacturerCode) IsSigmaConnectivity() bool                          { return v == 0x116F }
+func (v ManufacturerCode) IsWulian() bool                                     { return v == 0x1171 }
+func (v ManufacturerCode) IsPlugwiseBV() bool                                 { return v == 0x1172 }
+func (v ManufacturerCode) IsTitanProducts() bool                              { return v == 0x1173 }
+func (v ManufacturerCode) IsEcospectral() bool                                { return v == 0x1174 }
+func (v ManufacturerCode) IsDLink() bool                                      { return v == 0x1175 }
+func (v ManufacturerCode) IsTechnicolorHomeUsa() bool                         { return v == 0x1176 }
+func (v ManufacturerCode) IsOppleLighting() bool                              { return v == 0x1177 }
+func (v ManufacturerCode) IsWistronNewebCorp() bool                           { return v == 0x1178 }
+func (v ManufacturerCode) IsQmotionShades() bool                              { return v == 0x1179 }
+func (v ManufacturerCode) IsInstaElektroGmbh() bool                           { return v == 0x117A }
+func (v ManufacturerCode) IsShanghaiVancount() bool                           { return v == 0x117B }
+func (v ManufacturerCode) IsIkeaOfSweden() bool                               { return v == 0x117C }
+func (v ManufacturerCode) IsRtRk() bool                                       { return v == 0x117D }
+func (v ManufacturerCode) IsShenzhenFeibit() bool                             { return v == 0x117E }
+func (v ManufacturerCode) IsEucontrols() bool                                 { return v == 0x117F }
+func (v ManufacturerCode) IsTelkonet() bool                                   { return v == 0x1180 }
+func (v ManufacturerCode) IsThermalSolutionResources() bool                   { return v == 0x1181 }
+func (v ManufacturerCode) IsPomcube() bool                                    { return v == 0x1182 }
+func (v ManufacturerCode) IsEiElectronics() bool                              { return v == 0x1183 }
+func (v ManufacturerCode) IsOptoga() bool                                     { return v == 0x1184 }
+func (v ManufacturerCode) IsStelpro() bool                                    { return v == 0x1185 }
+func (v ManufacturerCode) IsLynxusTechnologiesCorp() bool                     { return v == 0x1186 }
+func (v ManufacturerCode) IsSemiconductorComponents() bool                    { return v == 0x1187 }
+func (v ManufacturerCode) IsTpLink() bool                                     { return v == 0x1188 }
+func (v ManufacturerCode) IsLedvanceLlc() bool                                { return v == 0x1189 }
+func (v ManufacturerCode) IsNortek() bool                                     { return v == 0x118A }
+func (v ManufacturerCode) IsIrevoAssaAbbloyKorea() bool                       { return v == 0x118B }
+func (v ManufacturerCode) IsMidea() bool                                      { return v == 0x118C }
+func (v ManufacturerCode) IsZfFriedrichshafen() bool                          { return v == 0x118D }
+func (v ManufacturerCode) IsCheckit() bool                                    { return v == 0x118E }
+func (v ManufacturerCode) IsAclara() bool                                     { return v == 0x118F }
+func (v ManufacturerCode) IsNokia() bool                                      { return v == 0x1190 }
+func (v ManufacturerCode) IsGoldcardHighTechCoLtd() bool                      { return v == 0x1191 }
+func (v ManufacturerCode) IsGeorgeWilsonIndustriesLtd() bool                  { return v == 0x1192 }
+func (v ManufacturerCode) IsEasySaverCoInc() bool                             { return v == 0x1193 }
+func (v ManufacturerCode) IsZteCorporation() bool                             { return v == 0x1194 }
+func (v ManufacturerCode) IsArris() bool                                      { return v == 0x1195 }
+func (v ManufacturerCode) IsRelianceBigTv() bool                              { return v == 0x1196 }
+func (v ManufacturerCode) IsInsightEnergyVenturesPowerley() bool              { return v == 0x1197 }
+func (v ManufacturerCode) IsThomasResearchProductsHubbellLightingInc() bool   { return v == 0x1198 }
+func (v ManufacturerCode) IsLiSengTechnology() bool                           { return v == 0x1199 }
+func (v ManufacturerCode) IsSystemLevelSolutionsInc() bool                    { return v == 0x119A }
+func (v ManufacturerCode) IsMatrixLabs() bool                                 { return v == 0x119B }
+func (v ManufacturerCode) IsSinopeTechnologies() bool                         { return v == 0x119C }
+func (v ManufacturerCode) IsJiuzhouGreeble() bool                             { return v == 0x119D }
+func (v ManufacturerCode) IsGuangzhouLanveeTechCoLtd() bool                   { return v == 0x119E }
+func (v ManufacturerCode) IsVenstar() bool                                    { return v == 0x119F }
+func (v ManufacturerCode) IsSlv() bool                                        { return v == 0x1200 }
+func (v ManufacturerCode) IsHaloSmartLabs() bool                              { return v == 0x1201 }
+func (v ManufacturerCode) IsScoutSecurityInc() bool                           { return v == 0x1202 }
+func (v ManufacturerCode) IsAlibabaChinaInc() bool                            { return v == 0x1203 }
+func (v ManufacturerCode) IsResolutionProductsInc() bool                      { return v == 0x1204 }
+func (v ManufacturerCode) IsSmartlokInc() bool                                { return v == 0x1205 }
+func (v ManufacturerCode) IsLuxProductsCorp() bool                            { return v == 0x1206 }
+func (v ManufacturerCode) IsVimarSpa() bool                                   { return v == 0x1207 }
+func (v ManufacturerCode) IsUniversalLightingTechnologies() bool              { return v == 0x1208 }
+func (v ManufacturerCode) IsRobertBoschGmbh() bool                            { return v == 0x1209 }
+func (v ManufacturerCode) IsAccenture() bool                                  { return v == 0x120A }
+func (v ManufacturerCode) IsHeimanTechnologyCoLtd() bool                      { return v == 0x120B }
+func (v ManufacturerCode) IsShenzhenHomaTechnologyCoLtd() bool                { return v == 0x120C }
+func (v ManufacturerCode) IsVisionElectronicsTechnology() bool                { return v == 0x120D }
+func (v ManufacturerCode) IsLenovo() bool                                     { return v == 0x120E }
+func (v ManufacturerCode) IsPrescienseRD() bool                               { return v == 0x120F }
+func (v ManufacturerCode) IsShenzhenSeastarIntelligenceCoLtd() bool           { return v == 0x1210 }
+func (v ManufacturerCode) IsSensativeAb() bool                                { return v == 0x1211 }
+func (v ManufacturerCode) IsSolaredge() bool                                  { return v == 0x1212 }
+func (v ManufacturerCode) IsZipato() bool                                     { return v == 0x1213 }
+func (v ManufacturerCode) IsChinaFireSecuritySensingManufacturingIhorn() bool { return v == 0x1214 }
+func (v ManufacturerCode) IsQubyBv() bool                                     { return v == 0x1215 }
+func (v ManufacturerCode) IsHangzhouRoombankerTechnologyCoLtd() bool          { return v == 0x1216 }
+func (v ManufacturerCode) IsAmazonLab126() bool                               { return v == 0x1217 }
+func (v ManufacturerCode) IsPaulmannLichtGmbh() bool                          { return v == 0x1218 }
+func (v ManufacturerCode) IsShenzhenOrviboElectronicsCoLtd() bool             { return v == 0x1219 }
+func (v ManufacturerCode) IsTciTelecommunications() bool                      { return v == 0x121A }
+func (v ManufacturerCode) IsMuellerLichtInternationalInc() bool               { return v == 0x121B }
+func (v ManufacturerCode) IsAuroraLimited() bool                              { return v == 0x121C }
+func (v ManufacturerCode) IsSmartdcc() bool                                   { return v == 0x121D }
+func (v ManufacturerCode) IsShanghaiUmeinfoCoLtd() bool                       { return v == 0x121E }
+func (v ManufacturerCode) IsCarbontrack() bool                                { return v == 0x121F }
+func (v ManufacturerCode) IsSomfy() bool                                      { return v == 0x1220 }
+func (v ManufacturerCode) IsViessmannElektronikGmbh() bool                    { return v == 0x1221 }
+func (v ManufacturerCode) IsHildebrandTechnologyLtd() bool                    { return v == 0x1222 }
+func (v ManufacturerCode) IsOnkyoTechnologyCorporation() bool                 { return v == 0x1223 }
+func (v ManufacturerCode) IsShenzhenSunricherTechnologyLtd() bool             { return v == 0x1224 }
+func (v ManufacturerCode) IsXiuXiuTechnologyCoLtd() bool                      { return v == 0x1225 }
+func (v ManufacturerCode) IsZumtobelGroup() bool                              { return v == 0x1226 }
+func (v ManufacturerCode) IsShenzhenKaadasIntelligentTechnologyCoLtd() bool   { return v == 0x1227 }
+func (v ManufacturerCode) IsShanghaiXiaoyanTechnologyCoLtd() bool             { return v == 0x1228 }
+func (v ManufacturerCode) IsCypressSemiconductor() bool                       { return v == 0x1229 }
+func (v ManufacturerCode) IsXalGmbh() bool                                    { return v == 0x122A }
+func (v ManufacturerCode) IsInergySystemsLlc() bool                           { return v == 0x122B }
+func (v ManufacturerCode) IsAlfredKarcherGmbhCoKg() bool                      { return v == 0x122C }
+func (v ManufacturerCode) IsAdurolightManufacturing() bool                    { return v == 0x122D }
+func (v ManufacturerCode) IsGroupeMuller() bool                               { return v == 0x122E }
+func (v ManufacturerCode) IsVMarkEnterprisesInc() bool                        { return v == 0x122F }
+func (v ManufacturerCode) IsLeadEnergyAg() bool                               { return v == 0x1230 }
+func (v ManufacturerCode) IsUiotGroup() bool                                  { return v == 0x1231 }
+func (v ManufacturerCode) IsAxxessIndustriesInc() bool                        { return v == 0x1232 }
+func (v ManufacturerCode) IsThirdRealityInc() bool                            { return v == 0x1233 }
+func (v ManufacturerCode) IsDsrCorporation() bool                             { return v == 0x1234 }
+func (v ManufacturerCode) IsGuangzhouVensiIntelligentTechnologyCoLtd() bool   { return v == 0x1235 }
+func (v ManufacturerCode) IsSchlageLockAllegion() bool                        { return v == 0x1236 }
+func (v ManufacturerCode) IsNet2grid() bool                                   { return v == 0x1237 }
+func (v ManufacturerCode) IsAiramElectricOyAb() bool                          { return v == 0x1238 }
+func (v ManufacturerCode) IsImmaxWpbCz() bool                                 { return v == 0x1239 }
+func (v ManufacturerCode) IsZivAutomation() bool                              { return v == 0x123A }
+func (v ManufacturerCode) IsHangzhouImagictechnologyCoLtd() bool              { return v == 0x123B }
+func (v ManufacturerCode) IsXiamenLeelenTechnologyCoLtd() bool                { return v == 0x123C }
+func (v ManufacturerCode) IsOverkizSas() bool                                 { return v == 0x123D }
+func (v ManufacturerCode) IsFlonidanAS() bool                                 { return v == 0x123E }
+func (v ManufacturerCode) IsHdlAutomationCoLtd() bool                         { return v == 0x123F }
+func (v ManufacturerCode) IsArdomusNetworksCorporation() bool                 { return v == 0x1240 }
+func (v ManufacturerCode) IsSamjinCoLtd() bool                                { return v == 0x1241 }
+func (v ManufacturerCode) IsSprueAegisPlc() bool                              { return v == 0x1242 }
+func (v ManufacturerCode) IsIndraSistemasSA() bool                            { return v == 0x1243 }
+func (v ManufacturerCode) IsShenzhenJbtSmartLightingCoLtd() bool              { return v == 0x1244 }
+func (v ManufacturerCode) IsGeLightingCurrent() bool                          { return v == 0x1245 }
+func (v ManufacturerCode) IsDanfossAS() bool                                  { return v == 0x1246 }
+func (v ManufacturerCode) IsNivissPhpSpZOOSpK() bool                          { return v == 0x1247 }
+func (v ManufacturerCode) IsShenzhenFengliyuanEnergyConservatingTechnologyCoLtd() bool {
+	return v == 0x1248
+}
+func (v ManufacturerCode) IsNexelec() bool                                          { return v == 0x1249 }
+func (v ManufacturerCode) IsSichuanBehomeProminentTechnologyCoLtd() bool            { return v == 0x124A }
+func (v ManufacturerCode) IsFujianStarNetCommunicationCoLtd() bool                  { return v == 0x124B }
+func (v ManufacturerCode) IsToshibaVisualSolutionsCorporation() bool                { return v == 0x124C }
+func (v ManufacturerCode) IsLatchableInc() bool                                     { return v == 0x124D }
+func (v ManufacturerCode) IsLSDeutschlandGmbh() bool                                { return v == 0x124E }
+func (v ManufacturerCode) IsGledoptoCoLtd() bool                                    { return v == 0x124F }
+func (v ManufacturerCode) IsTheHomeDepot() bool                                     { return v == 0x1250 }
+func (v ManufacturerCode) IsNeonliteInternationalLtd() bool                         { return v == 0x1251 }
+func (v ManufacturerCode) IsArloTechnologiesInc() bool                              { return v == 0x1252 }
+func (v ManufacturerCode) IsXingluoTechnologyCoLtd() bool                           { return v == 0x1253 }
+func (v ManufacturerCode) IsSimonElectricChinaCoLtd() bool                          { return v == 0x1254 }
+func (v ManufacturerCode) IsHangzhouGreatstarIndustrialCoLtd() bool                 { return v == 0x1255 }
+func (v ManufacturerCode) IsSequentricEnergySystemsLlc() bool                       { return v == 0x1256 }
+func (v ManufacturerCode) IsSolumCoLtd() bool                                       { return v == 0x1257 }
+func (v ManufacturerCode) IsEagleriseElectricElectronicChinaCoLtd() bool            { return v == 0x1258 }
+func (v ManufacturerCode) IsFantemTechnologiesShenzhenCoLtd() bool                  { return v == 0x1259 }
+func (v ManufacturerCode) IsYundingNetworkTechnologyBeijingCoLtd() bool             { return v == 0x125A }
+func (v ManufacturerCode) IsAtlanticGroup() bool                                    { return v == 0x125B }
+func (v ManufacturerCode) IsXiamenIntretechInc() bool                               { return v == 0x125C }
+func (v ManufacturerCode) IsTuyaGlobalInc() bool                                    { return v == 0x125D }
+func (v ManufacturerCode) IsXiamenDnakeIntelligentTechnologyCoLtd() bool            { return v == 0x125E }
+func (v ManufacturerCode) IsNikoNv() bool                                           { return v == 0x125F }
+func (v ManufacturerCode) IsEmporiaEnergy() bool                                    { return v == 0x1260 }
+func (v ManufacturerCode) IsSikomAs() bool                                          { return v == 0x1261 }
+func (v ManufacturerCode) IsAxisLabsInc() bool                                      { return v == 0x1262 }
+func (v ManufacturerCode) IsCurrentProductsCorporation() bool                       { return v == 0x1263 }
+func (v ManufacturerCode) IsMetersitSrl() bool                                      { return v == 0x1264 }
+func (v ManufacturerCode) IsHornbachBaumarktAg() bool                               { return v == 0x1265 }
+func (v ManufacturerCode) IsDiceworldSRLASocioUnico() bool                          { return v == 0x1266 }
+func (v ManufacturerCode) IsArcTechnologyCoLtd() bool                               { return v == 0x1267 }
+func (v ManufacturerCode) IsHangzhouKonkeInformationTechnologyCoLtd() bool          { return v == 0x1268 }
+func (v ManufacturerCode) IsSaltoSystemsSL() bool                                   { return v == 0x1269 }
+func (v ManufacturerCode) IsShenzhenShyugjTechnologyCoLtd() bool                    { return v == 0x126A }
+func (v ManufacturerCode) IsBraydenAutomationCorporation() bool                     { return v == 0x126B }
+func (v ManufacturerCode) IsEnvironexusPtyLtd() bool                                { return v == 0x126C }
+func (v ManufacturerCode) IsEltraNvSa() bool                                        { return v == 0x126D }
+func (v ManufacturerCode) IsXiaomiCommunicationsCoLtd() bool                        { return v == 0x126E }
+func (v ManufacturerCode) IsShanghaiShuncomElectronicTechnologyCoLtd() bool         { return v == 0x126F }
+func (v ManufacturerCode) IsVoltalisSA() bool                                       { return v == 0x1270 }
+func (v ManufacturerCode) IsFeeluxCoLtd() bool                                      { return v == 0x1271 }
+func (v ManufacturerCode) IsSmartplusInc() bool                                     { return v == 0x1272 }
+func (v ManufacturerCode) IsHalemeierGmbh() bool                                    { return v == 0x1273 }
+func (v ManufacturerCode) IsTrustInternationalBbv() bool                            { return v == 0x1274 }
+func (v ManufacturerCode) IsDukeEnergyBusinessServicesLlc() bool                    { return v == 0x1275 }
+func (v ManufacturerCode) IsCalixInc() bool                                         { return v == 0x1276 }
+func (v ManufacturerCode) IsAdeo() bool                                             { return v == 0x1277 }
+func (v ManufacturerCode) IsConnectedResponseLimited() bool                         { return v == 0x1278 }
+func (v ManufacturerCode) IsStroyenergokom() bool                                   { return v == 0x1279 }
+func (v ManufacturerCode) IsLumitechLightingSolutionGmbh() bool                     { return v == 0x127A }
+func (v ManufacturerCode) IsVerdantEnvironmentalTechnologies() bool                 { return v == 0x127B }
+func (v ManufacturerCode) IsAlfredInternational() bool                              { return v == 0x127C }
+func (v ManufacturerCode) IsSansiLedLighting() bool                                 { return v == 0x127D }
+func (v ManufacturerCode) IsMindtree() bool                                         { return v == 0x127E }
+func (v ManufacturerCode) IsNordicSemiconductorAsa() bool                           { return v == 0x127F }
+func (v ManufacturerCode) IsSiterwellElectronics() bool                             { return v == 0x1280 }
+func (v ManufacturerCode) IsBrilonerLeuchtenGmbh() bool                             { return v == 0x1281 }
+func (v ManufacturerCode) IsShenzhenSeiTechnology() bool                            { return v == 0x1282 }
+func (v ManufacturerCode) IsCopperLabs() bool                                       { return v == 0x1283 }
+func (v ManufacturerCode) IsDeltaDore() bool                                        { return v == 0x1284 }
+func (v ManufacturerCode) IsHagerGroup() bool                                       { return v == 0x1285 }
+func (v ManufacturerCode) IsShenzhenCoolkitTechnology() bool                        { return v == 0x1286 }
+func (v ManufacturerCode) IsHangzhouSkyLighting() bool                              { return v == 0x1287 }
+func (v ManufacturerCode) IsEOnSe() bool                                            { return v == 0x1288 }
+func (v ManufacturerCode) IsLidlStiftung() bool                                     { return v == 0x1289 }
+func (v ManufacturerCode) IsSichuanChanghongNetworkTechnologies() bool              { return v == 0x128A }
+func (v ManufacturerCode) IsNodon() bool                                            { return v == 0x128B }
+func (v ManufacturerCode) IsJiangxiInnotechTechnology() bool                        { return v == 0x128C }
+func (v ManufacturerCode) IsMercatorPty() bool                                      { return v == 0x128D }
+func (v ManufacturerCode) IsBeijingRuyingTech() bool                                { return v == 0x128E }
+func (v ManufacturerCode) IsEgloLeuchtenGmbh() bool                                 { return v == 0x128F }
+func (v ManufacturerCode) IsPietroFiorentiniSPA() bool                              { return v == 0x1290 }
+func (v ManufacturerCode) IsZehnderGroupVauxAndigny() bool                          { return v == 0x1291 }
+func (v ManufacturerCode) IsBrkBrands() bool                                        { return v == 0x1292 }
+func (v ManufacturerCode) IsAskeyComputer() bool                                    { return v == 0x1293 }
+func (v ManufacturerCode) IsPassivebolt() bool                                      { return v == 0x1294 }
+func (v ManufacturerCode) IsAvmAudiovisuelles() bool                                { return v == 0x1295 }
+func (v ManufacturerCode) IsNingboSuntechLightingTech() bool                        { return v == 0x1296 }
+func (v ManufacturerCode) IsSocieteEnCommanditeStello() bool                        { return v == 0x1297 }
+func (v ManufacturerCode) IsVivintSmartHome() bool                                  { return v == 0x1298 }
+func (v ManufacturerCode) IsNamron() bool                                           { return v == 0x1299 }
+func (v ManufacturerCode) IsRademacherGeraeteElektronikGmbh() bool                  { return v == 0x129A }
+func (v ManufacturerCode) IsOmoSystems() bool                                       { return v == 0x129B }
+func (v ManufacturerCode) IsSiglis() bool                                           { return v == 0x129C }
+func (v ManufacturerCode) IsImhotepCreation() bool                                  { return v == 0x129D }
+func (v ManufacturerCode) IsIcasa() bool                                            { return v == 0x129E }
+func (v ManufacturerCode) IsLevelHome() bool                                        { return v == 0x129F }
+func (v ManufacturerCode) IsTisControl() bool                                       { return v == 0x1300 }
+func (v ManufacturerCode) IsRadisysIndia() bool                                     { return v == 0x1301 }
+func (v ManufacturerCode) IsVeea() bool                                             { return v == 0x1302 }
+func (v ManufacturerCode) IsFellTechnology() bool                                   { return v == 0x1303 }
+func (v ManufacturerCode) IsSowiloDesignServices() bool                             { return v == 0x1304 }
+func (v ManufacturerCode) IsLexiDevices() bool                                      { return v == 0x1305 }
+func (v ManufacturerCode) IsLifiLabs() bool                                         { return v == 0x1306 }
+func (v ManufacturerCode) IsGrundfosHolding() bool                                  { return v == 0x1307 }
+func (v ManufacturerCode) IsSourcingCreation() bool                                 { return v == 0x1308 }
+func (v ManufacturerCode) IsKrakenTechnologies() bool                               { return v == 0x1309 }
+func (v ManufacturerCode) IsEveSystems() bool                                       { return v == 0x130A }
+func (v ManufacturerCode) IsLiteOnTechnologyCorporation() bool                      { return v == 0x130B }
+func (v ManufacturerCode) IsFocalcrest() bool                                       { return v == 0x130C }
+func (v ManufacturerCode) IsBouffaloLabNanjing() bool                               { return v == 0x130D }
+func (v ManufacturerCode) IsWyzeLabs() bool                                         { return v == 0x130E }
+func (v ManufacturerCode) IsDatekWirelessAs() bool                                  { return v == 0x1337 }
+func (v ManufacturerCode) IsGewissSPA() bool                                        { return v == 0x1994 }
+func (v ManufacturerCode) IsClimaxTechnologyCpLtd() bool                            { return v == 0x2794 }
+func (v *ManufacturerCode) SetCirronet()                                            { *v = 0x1000 }
+func (v *ManufacturerCode) SetChipcon()                                             { *v = 0x1001 }
+func (v *ManufacturerCode) SetEmber()                                               { *v = 0x1002 }
+func (v *ManufacturerCode) SetNationalTech()                                        { *v = 0x1003 }
+func (v *ManufacturerCode) SetFreescale()                                           { *v = 0x1004 }
+func (v *ManufacturerCode) SetIpcom()                                               { *v = 0x1005 }
+func (v *ManufacturerCode) SetSanJuanSoftware()                                     { *v = 0x1006 }
+func (v *ManufacturerCode) SetTuv()                                                 { *v = 0x1007 }
+func (v *ManufacturerCode) SetCompxs()                                              { *v = 0x1008 }
+func (v *ManufacturerCode) SetBmSpa()                                               { *v = 0x1009 }
+func (v *ManufacturerCode) SetAwarepoint()                                          { *v = 0x100a }
+func (v *ManufacturerCode) SetPhilips()                                             { *v = 0x100b }
+func (v *ManufacturerCode) SetLuxoft()                                              { *v = 0x100c }
+func (v *ManufacturerCode) SetKorvin()                                              { *v = 0x100d }
+func (v *ManufacturerCode) SetOneRf()                                               { *v = 0x100e }
+func (v *ManufacturerCode) SetSoftwareTechnologyGroup()                             { *v = 0x100f }
+func (v *ManufacturerCode) SetTelegesis()                                           { *v = 0x1010 }
+func (v *ManufacturerCode) SetVisionic()                                            { *v = 0x1011 }
+func (v *ManufacturerCode) SetInsta()                                               { *v = 0x1012 }
+func (v *ManufacturerCode) SetAtalum()                                              { *v = 0x1013 }
+func (v *ManufacturerCode) SetAtmel()                                               { *v = 0x1014 }
+func (v *ManufacturerCode) SetDevelco()                                             { *v = 0x1015 }
+func (v *ManufacturerCode) SetHoneywell()                                           { *v = 0x1016 }
+func (v *ManufacturerCode) SetRadiopulse()                                          { *v = 0x1017 }
+func (v *ManufacturerCode) SetRenesas()                                             { *v = 0x1018 }
+func (v *ManufacturerCode) SetXanaduWireless()                                      { *v = 0x1019 }
+func (v *ManufacturerCode) SetNecEngineering()                                      { *v = 0x101a }
+func (v *ManufacturerCode) SetYamatake()                                            { *v = 0x101b }
+func (v *ManufacturerCode) SetTendril()                                             { *v = 0x101c }
+func (v *ManufacturerCode) SetAssaAbloy()                                           { *v = 0x101d }
+func (v *ManufacturerCode) SetMaxstream()                                           { *v = 0x101e }
+func (v *ManufacturerCode) SetNeurocom()                                            { *v = 0x101f }
+func (v *ManufacturerCode) SetInstituteForInformationIndustry()                     { *v = 0x1020 }
+func (v *ManufacturerCode) SetVantageControls()                                     { *v = 0x1021 }
+func (v *ManufacturerCode) SetIcontrol()                                            { *v = 0x1022 }
+func (v *ManufacturerCode) SetRaymarine()                                           { *v = 0x1023 }
+func (v *ManufacturerCode) SetLsResearch()                                          { *v = 0x1024 }
+func (v *ManufacturerCode) SetOnity()                                               { *v = 0x1025 }
+func (v *ManufacturerCode) SetMonoProducts()                                        { *v = 0x1026 }
+func (v *ManufacturerCode) SetRfTech()                                              { *v = 0x1027 }
+func (v *ManufacturerCode) SetItron()                                               { *v = 0x1028 }
+func (v *ManufacturerCode) SetTritech()                                             { *v = 0x1029 }
+func (v *ManufacturerCode) SetEmbedit()                                             { *v = 0x102a }
+func (v *ManufacturerCode) SetS3c()                                                 { *v = 0x102b }
+func (v *ManufacturerCode) SetSiemens()                                             { *v = 0x102c }
+func (v *ManufacturerCode) SetMindtech()                                            { *v = 0x102d }
+func (v *ManufacturerCode) SetLgElectronics()                                       { *v = 0x102e }
+func (v *ManufacturerCode) SetMitsubishi()                                          { *v = 0x102f }
+func (v *ManufacturerCode) SetJohnsonControls()                                     { *v = 0x1030 }
+func (v *ManufacturerCode) SetPri()                                                 { *v = 0x1031 }
+func (v *ManufacturerCode) SetKnick()                                               { *v = 0x1032 }
+func (v *ManufacturerCode) SetViconics()                                            { *v = 0x1033 }
+func (v *ManufacturerCode) SetFlexipanel()                                          { *v = 0x1034 }
+func (v *ManufacturerCode) SetPiasimCorporation()                                   { *v = 0x1035 }
+func (v *ManufacturerCode) SetTrane()                                               { *v = 0x1036 }
+func (v *ManufacturerCode) SetJennic()                                              { *v = 0x1037 }
+func (v *ManufacturerCode) SetLivingIndependently()                                 { *v = 0x1038 }
+func (v *ManufacturerCode) SetAlertme()                                             { *v = 0x1039 }
+func (v *ManufacturerCode) SetDaintree()                                            { *v = 0x103a }
+func (v *ManufacturerCode) SetAiji()                                                { *v = 0x103b }
+func (v *ManufacturerCode) SetTelecomItalia()                                       { *v = 0x103c }
+func (v *ManufacturerCode) SetMikrokrets()                                          { *v = 0x103d }
+func (v *ManufacturerCode) SetOkiSemi()                                             { *v = 0x103e }
+func (v *ManufacturerCode) SetNewportElectronics()                                  { *v = 0x103f }
+func (v *ManufacturerCode) SetControl4()                                            { *v = 0x1040 }
+func (v *ManufacturerCode) SetStmicro()                                             { *v = 0x1041 }
+func (v *ManufacturerCode) SetAdSolNissin()                                         { *v = 0x1042 }
+func (v *ManufacturerCode) SetDcsi()                                                { *v = 0x1043 }
+func (v *ManufacturerCode) SetFranceTelecom()                                       { *v = 0x1044 }
+func (v *ManufacturerCode) SetMunet()                                               { *v = 0x1045 }
+func (v *ManufacturerCode) SetAutani()                                              { *v = 0x1046 }
+func (v *ManufacturerCode) SetColoradoVnet()                                        { *v = 0x1047 }
+func (v *ManufacturerCode) SetAerocomm()                                            { *v = 0x1048 }
+func (v *ManufacturerCode) SetSiliconLabs()                                         { *v = 0x1049 }
+func (v *ManufacturerCode) SetCrane()                                               { *v = 0x104F }
+func (v *ManufacturerCode) SetInncom()                                              { *v = 0x104a }
+func (v *ManufacturerCode) SetCannon()                                              { *v = 0x104b }
+func (v *ManufacturerCode) SetSynapse()                                             { *v = 0x104c }
+func (v *ManufacturerCode) SetFisherPierceSunrise()                                 { *v = 0x104d }
+func (v *ManufacturerCode) SetCentralite()                                          { *v = 0x104e }
+func (v *ManufacturerCode) SetMobilarm()                                            { *v = 0x1050 }
+func (v *ManufacturerCode) SetImonitor()                                            { *v = 0x1051 }
+func (v *ManufacturerCode) SetBartech()                                             { *v = 0x1052 }
+func (v *ManufacturerCode) SetMeshnetics()                                          { *v = 0x1053 }
+func (v *ManufacturerCode) SetLsIndustrial()                                        { *v = 0x1054 }
+func (v *ManufacturerCode) SetCason()                                               { *v = 0x1055 }
+func (v *ManufacturerCode) SetWirelessGlue()                                        { *v = 0x1056 }
+func (v *ManufacturerCode) SetElster()                                              { *v = 0x1057 }
+func (v *ManufacturerCode) SetSmsTec()                                              { *v = 0x1058 }
+func (v *ManufacturerCode) SetOnsetComputer()                                       { *v = 0x1059 }
+func (v *ManufacturerCode) SetRigaDevelopment()                                     { *v = 0x105a }
+func (v *ManufacturerCode) SetEnergate()                                            { *v = 0x105b }
+func (v *ManufacturerCode) SetConmedLinvatec()                                      { *v = 0x105c }
+func (v *ManufacturerCode) SetPowermand()                                           { *v = 0x105d }
+func (v *ManufacturerCode) SetSchneiderElectric()                                   { *v = 0x105e }
+func (v *ManufacturerCode) SetEaton()                                               { *v = 0x105f }
+func (v *ManufacturerCode) SetTelular()                                             { *v = 0x1060 }
+func (v *ManufacturerCode) SetDelphiMedical()                                       { *v = 0x1061 }
+func (v *ManufacturerCode) SetEpisensor()                                           { *v = 0x1062 }
+func (v *ManufacturerCode) SetLandisGyr()                                           { *v = 0x1063 }
+func (v *ManufacturerCode) SetKabaGroup()                                           { *v = 0x1064 }
+func (v *ManufacturerCode) SetShure()                                               { *v = 0x1065 }
+func (v *ManufacturerCode) SetComverge()                                            { *v = 0x1066 }
+func (v *ManufacturerCode) SetDbsLodging()                                          { *v = 0x1067 }
+func (v *ManufacturerCode) SetEnergyAware()                                         { *v = 0x1068 }
+func (v *ManufacturerCode) SetHidalgo()                                             { *v = 0x1069 }
+func (v *ManufacturerCode) SetAir2app()                                             { *v = 0x106a }
+func (v *ManufacturerCode) SetAmx()                                                 { *v = 0x106b }
+func (v *ManufacturerCode) SetEdmiPty()                                             { *v = 0x106c }
+func (v *ManufacturerCode) SetCyanLtd()                                             { *v = 0x106d }
+func (v *ManufacturerCode) SetSystemSpa()                                           { *v = 0x106e }
+func (v *ManufacturerCode) SetTelit()                                               { *v = 0x106f }
+func (v *ManufacturerCode) SetKagaElectronics()                                     { *v = 0x1070 }
+func (v *ManufacturerCode) Set4NoksSRL()                                            { *v = 0x1071 }
+func (v *ManufacturerCode) SetCerticom()                                            { *v = 0x1072 }
+func (v *ManufacturerCode) SetGridpoint()                                           { *v = 0x1073 }
+func (v *ManufacturerCode) SetProfileSystems()                                      { *v = 0x1074 }
+func (v *ManufacturerCode) SetCompactaInternational()                               { *v = 0x1075 }
+func (v *ManufacturerCode) SetFreestyleTechnology()                                 { *v = 0x1076 }
+func (v *ManufacturerCode) SetAlektrona()                                           { *v = 0x1077 }
+func (v *ManufacturerCode) SetComputime()                                           { *v = 0x1078 }
+func (v *ManufacturerCode) SetRemoteTechnologies()                                  { *v = 0x1079 }
+func (v *ManufacturerCode) SetWavecom()                                             { *v = 0x107a }
+func (v *ManufacturerCode) SetEnergyOptimizers()                                    { *v = 0x107b }
+func (v *ManufacturerCode) SetGe()                                                  { *v = 0x107c }
+func (v *ManufacturerCode) SetJetlun()                                              { *v = 0x107d }
+func (v *ManufacturerCode) SetCipherSystems()                                       { *v = 0x107e }
+func (v *ManufacturerCode) SetCorporateSystemsEng()                                 { *v = 0x107f }
+func (v *ManufacturerCode) SetEcobee()                                              { *v = 0x1080 }
+func (v *ManufacturerCode) SetSmk()                                                 { *v = 0x1081 }
+func (v *ManufacturerCode) SetMeshworksWireless()                                   { *v = 0x1082 }
+func (v *ManufacturerCode) SetEllipsBV()                                            { *v = 0x1083 }
+func (v *ManufacturerCode) SetSecureElectrans()                                     { *v = 0x1084 }
+func (v *ManufacturerCode) SetCedo()                                                { *v = 0x1085 }
+func (v *ManufacturerCode) SetToshiba()                                             { *v = 0x1086 }
+func (v *ManufacturerCode) SetDigiInternational()                                   { *v = 0x1087 }
+func (v *ManufacturerCode) SetUbilogix()                                            { *v = 0x1088 }
+func (v *ManufacturerCode) SetEchelon()                                             { *v = 0x1089 }
+func (v *ManufacturerCode) SetGreenEnergyOptions()                                  { *v = 0x1090 }
+func (v *ManufacturerCode) SetSilverSpringNetworks()                                { *v = 0x1091 }
+func (v *ManufacturerCode) SetBlackDecker()                                         { *v = 0x1092 }
+func (v *ManufacturerCode) SetAztechAssociatesinc()                                 { *v = 0x1093 }
+func (v *ManufacturerCode) SetADCo()                                                { *v = 0x1094 }
+func (v *ManufacturerCode) SetRainforestAutomation()                                { *v = 0x1095 }
+func (v *ManufacturerCode) SetCarrierElectronics()                                  { *v = 0x1096 }
+func (v *ManufacturerCode) SetSychipMurata()                                        { *v = 0x1097 }
+func (v *ManufacturerCode) SetOpenpeak()                                            { *v = 0x1098 }
+func (v *ManufacturerCode) SetPassiveSystems()                                      { *v = 0x1099 }
+func (v *ManufacturerCode) SetMmbresearch()                                         { *v = 0x109a }
+func (v *ManufacturerCode) SetLeviton()                                             { *v = 0x109b }
+func (v *ManufacturerCode) SetKoreaElectricPowerDataNetwork()                       { *v = 0x109c }
+func (v *ManufacturerCode) SetComcast()                                             { *v = 0x109d }
+func (v *ManufacturerCode) SetNecElectronics()                                      { *v = 0x109e }
+func (v *ManufacturerCode) SetNetvox()                                              { *v = 0x109f }
+func (v *ManufacturerCode) SetUControl()                                            { *v = 0x10a0 }
+func (v *ManufacturerCode) SetEmbediaTechnologies()                                 { *v = 0x10a1 }
+func (v *ManufacturerCode) SetSensus()                                              { *v = 0x10a2 }
+func (v *ManufacturerCode) SetSunrisetechnologies()                                 { *v = 0x10a3 }
+func (v *ManufacturerCode) SetMemtechcorp()                                         { *v = 0x10a4 }
+func (v *ManufacturerCode) SetFreebox()                                             { *v = 0x10a5 }
+func (v *ManufacturerCode) SetM2Labs()                                              { *v = 0x10a6 }
+func (v *ManufacturerCode) SetBritishgas()                                          { *v = 0x10a7 }
+func (v *ManufacturerCode) SetSentec()                                              { *v = 0x10a8 }
+func (v *ManufacturerCode) SetNavetas()                                             { *v = 0x10a9 }
+func (v *ManufacturerCode) SetLightspeedTechnologies()                              { *v = 0x10aa }
+func (v *ManufacturerCode) SetOkiElectric()                                         { *v = 0x10ab }
+func (v *ManufacturerCode) SetSistemasInteligentes()                                { *v = 0x10ac }
+func (v *ManufacturerCode) SetDometic()                                             { *v = 0x10ad }
+func (v *ManufacturerCode) SetAlps()                                                { *v = 0x10ae }
+func (v *ManufacturerCode) SetEnergyhub()                                           { *v = 0x10af }
+func (v *ManufacturerCode) SetKamstrup()                                            { *v = 0x10b0 }
+func (v *ManufacturerCode) SetEchostar()                                            { *v = 0x10b1 }
+func (v *ManufacturerCode) SetEnernoc()                                             { *v = 0x10b2 }
+func (v *ManufacturerCode) SetEltav()                                               { *v = 0x10b3 }
+func (v *ManufacturerCode) SetBelkin()                                              { *v = 0x10b4 }
+func (v *ManufacturerCode) SetXstreamhdWireless()                                   { *v = 0x10b5 }
+func (v *ManufacturerCode) SetSaturnSouth()                                         { *v = 0x10b6 }
+func (v *ManufacturerCode) SetGreentraponline()                                     { *v = 0x10b7 }
+func (v *ManufacturerCode) SetSmartsynch()                                          { *v = 0x10b8 }
+func (v *ManufacturerCode) SetNyceControl()                                         { *v = 0x10b9 }
+func (v *ManufacturerCode) SetIcmControls()                                         { *v = 0x10ba }
+func (v *ManufacturerCode) SetMillenniumElectronics()                               { *v = 0x10bb }
+func (v *ManufacturerCode) SetMotorola()                                            { *v = 0x10bc }
+func (v *ManufacturerCode) SetEmersonwhiteRodgers()                                 { *v = 0x10bd }
+func (v *ManufacturerCode) SetRadioThermostat()                                     { *v = 0x10be }
+func (v *ManufacturerCode) SetOmroncorporation()                                    { *v = 0x10bf }
+func (v *ManufacturerCode) SetGiiniiGloballimited()                                 { *v = 0x10c0 }
+func (v *ManufacturerCode) SetFujitsuGenerallimited()                               { *v = 0x10c1 }
+func (v *ManufacturerCode) SetPeelTechnologies()                                    { *v = 0x10c2 }
+func (v *ManufacturerCode) SetAccent()                                              { *v = 0x10c3 }
+func (v *ManufacturerCode) SetBytesnapDesign()                                      { *v = 0x10c4 }
+func (v *ManufacturerCode) SetNecTokinCorporation()                                 { *v = 0x10c5 }
+func (v *ManufacturerCode) SetG4sJusticeservices()                                  { *v = 0x10c6 }
+func (v *ManufacturerCode) SetTrilliantNetworks()                                   { *v = 0x10c7 }
+func (v *ManufacturerCode) SetElectroluxItalia()                                    { *v = 0x10c8 }
+func (v *ManufacturerCode) SetOnzoltd()                                             { *v = 0x10c9 }
+func (v *ManufacturerCode) SetEnteksystems()                                        { *v = 0x10ca }
+func (v *ManufacturerCode) SetPhilips2()                                            { *v = 0x10cb }
+func (v *ManufacturerCode) SetMainstreamengineering()                               { *v = 0x10cc }
+func (v *ManufacturerCode) SetIndesitcompany()                                      { *v = 0x10cd }
+func (v *ManufacturerCode) SetThinkeco()                                            { *v = 0x10ce }
+func (v *ManufacturerCode) Set2D2c()                                                { *v = 0x10cf }
+func (v *ManufacturerCode) SetGreenpeak()                                           { *v = 0x10d0 }
+func (v *ManufacturerCode) SetIntercel()                                            { *v = 0x10d1 }
+func (v *ManufacturerCode) SetLgElectronics2()                                      { *v = 0x10d2 }
+func (v *ManufacturerCode) SetMitsumiElectric()                                     { *v = 0x10d3 }
+func (v *ManufacturerCode) SetMitsumiElectric2()                                    { *v = 0x10d4 }
+func (v *ManufacturerCode) SetZentrumMikroelektronikDresden()                       { *v = 0x10d5 }
+func (v *ManufacturerCode) SetNestLabs()                                            { *v = 0x10d6 }
+func (v *ManufacturerCode) SetExeginTechnologies()                                  { *v = 0x10d7 }
+func (v *ManufacturerCode) SetHoneywell2()                                          { *v = 0x10d8 }
+func (v *ManufacturerCode) SetTakahataPrecision()                                   { *v = 0x10d9 }
+func (v *ManufacturerCode) SetSumitomoElectricNetworks()                            { *v = 0x10da }
+func (v *ManufacturerCode) SetGeEnergy()                                            { *v = 0x10db }
+func (v *ManufacturerCode) SetGeAppliances()                                        { *v = 0x10dc }
+func (v *ManufacturerCode) SetRadiocraftsAs()                                       { *v = 0x10dd }
+func (v *ManufacturerCode) SetCeiva()                                               { *v = 0x10de }
+func (v *ManufacturerCode) SetTecCoCoLtd()                                          { *v = 0x10df }
+func (v *ManufacturerCode) SetChameleonTechnologyUkLtd()                            { *v = 0x10e0 }
+func (v *ManufacturerCode) SetSamsung()                                             { *v = 0x10e1 }
+func (v *ManufacturerCode) SetRuwidoAustriaGmbh()                                   { *v = 0x10e2 }
+func (v *ManufacturerCode) SetHuaweiTechnologiesCoLtd()                             { *v = 0x10e3 }
+func (v *ManufacturerCode) SetHuaweiTechnologiesCoLtd2()                            { *v = 0x10e4 }
+func (v *ManufacturerCode) SetGreenwaveReality()                                    { *v = 0x10e5 }
+func (v *ManufacturerCode) SetBglobalMeteringLtd()                                  { *v = 0x10e6 }
+func (v *ManufacturerCode) SetMindteck()                                            { *v = 0x10e7 }
+func (v *ManufacturerCode) SetIngersollRand()                                       { *v = 0x10e8 }
+func (v *ManufacturerCode) SetDiusComputingPtyLtd()                                 { *v = 0x10e9 }
+func (v *ManufacturerCode) SetEmbeddedAutomationInc()                               { *v = 0x10ea }
+func (v *ManufacturerCode) SetAbb()                                                 { *v = 0x10eb }
+func (v *ManufacturerCode) SetSony()                                                { *v = 0x10ec }
+func (v *ManufacturerCode) SetGenusPowerInfrastructuresLimited()                    { *v = 0x10ed }
+func (v *ManufacturerCode) SetUniversalDevices()                                    { *v = 0x10ee }
+func (v *ManufacturerCode) SetUniversalDevices2()                                   { *v = 0x10ef }
+func (v *ManufacturerCode) SetMetrumTechnologiesLlc()                               { *v = 0x10f0 }
+func (v *ManufacturerCode) SetCisco()                                               { *v = 0x10f1 }
+func (v *ManufacturerCode) SetUbisysTechnologiesGmbh()                              { *v = 0x10f2 }
+func (v *ManufacturerCode) SetConsert()                                             { *v = 0x10f3 }
+func (v *ManufacturerCode) SetCrestronElectronics()                                 { *v = 0x10f4 }
+func (v *ManufacturerCode) SetEnphaseEnergy()                                       { *v = 0x10f5 }
+func (v *ManufacturerCode) SetInvensysControls()                                    { *v = 0x10f6 }
+func (v *ManufacturerCode) SetMuellerSystemsLlc()                                   { *v = 0x10f7 }
+func (v *ManufacturerCode) SetAacTechnologiesHolding()                              { *v = 0x10f8 }
+func (v *ManufacturerCode) SetUNextCoLtd()                                          { *v = 0x10f9 }
+func (v *ManufacturerCode) SetSteelcaseInc()                                        { *v = 0x10fa }
+func (v *ManufacturerCode) SetTelematicsWireless()                                  { *v = 0x10fb }
+func (v *ManufacturerCode) SetSamilPowerCoLtd()                                     { *v = 0x10fc }
+func (v *ManufacturerCode) SetPacePlc()                                             { *v = 0x10fd }
+func (v *ManufacturerCode) SetOsborneCoinageCo()                                    { *v = 0x10fe }
+func (v *ManufacturerCode) SetPowerwatch()                                          { *v = 0x10ff }
+func (v *ManufacturerCode) SetCandeledGmbh()                                        { *v = 0x1100 }
+func (v *ManufacturerCode) SetFlexgridSRL()                                         { *v = 0x1101 }
+func (v *ManufacturerCode) SetHumax()                                               { *v = 0x1102 }
+func (v *ManufacturerCode) SetUniversalElectronicsInc()                             { *v = 0x1103 }
+func (v *ManufacturerCode) SetAdvancedEnergy()                                      { *v = 0x1104 }
+func (v *ManufacturerCode) SetBegaGantenbrinkLeuchten()                             { *v = 0x1105 }
+func (v *ManufacturerCode) SetBrunelUniversity()                                    { *v = 0x1106 }
+func (v *ManufacturerCode) SetPanasonicRDCenterSingapore()                          { *v = 0x1107 }
+func (v *ManufacturerCode) SetEsystemsResearch()                                    { *v = 0x1108 }
+func (v *ManufacturerCode) SetPanamax()                                             { *v = 0x1109 }
+func (v *ManufacturerCode) SetPhysicalGraphCorporation()                            { *v = 0x110a }
+func (v *ManufacturerCode) SetEmLiteLtd()                                           { *v = 0x110b }
+func (v *ManufacturerCode) SetOsramSylvania()                                       { *v = 0x110c }
+func (v *ManufacturerCode) Set2SaveEnergyLtd()                                      { *v = 0x110d }
+func (v *ManufacturerCode) SetPlanetInnovationProductsPtyLtd()                      { *v = 0x110e }
+func (v *ManufacturerCode) SetAmbientDevicesInc()                                   { *v = 0x110f }
+func (v *ManufacturerCode) SetProfalux()                                            { *v = 0x1110 }
+func (v *ManufacturerCode) SetBillionElectricCompanyBec()                           { *v = 0x1111 }
+func (v *ManufacturerCode) SetEmbertecPtyLtd()                                      { *v = 0x1112 }
+func (v *ManufacturerCode) SetItWatchdogs()                                         { *v = 0x1113 }
+func (v *ManufacturerCode) SetReloc()                                               { *v = 0x1114 }
+func (v *ManufacturerCode) SetIntelCorporation()                                    { *v = 0x1115 }
+func (v *ManufacturerCode) SetTrendElectronicsLimited()                             { *v = 0x1116 }
+func (v *ManufacturerCode) SetMoxa()                                                { *v = 0x1117 }
+func (v *ManufacturerCode) SetQees()                                                { *v = 0x1118 }
+func (v *ManufacturerCode) SetSaymeWirelessSensorNetworks()                         { *v = 0x1119 }
+func (v *ManufacturerCode) SetPentairAquaticSystems()                               { *v = 0x111a }
+func (v *ManufacturerCode) SetOrbitIrrigation()                                     { *v = 0x111b }
+func (v *ManufacturerCode) SetCaliforniaEasternLaboratories()                       { *v = 0x111c }
+func (v *ManufacturerCode) SetComcast2()                                            { *v = 0x111d }
+func (v *ManufacturerCode) SetIdtTechnologyLimited()                                { *v = 0x111e }
+func (v *ManufacturerCode) SetPixela()                                              { *v = 0x111f }
+func (v *ManufacturerCode) SetTivo()                                                { *v = 0x1120 }
+func (v *ManufacturerCode) SetFidure()                                              { *v = 0x1121 }
+func (v *ManufacturerCode) SetMarvellSemiconductor()                                { *v = 0x1122 }
+func (v *ManufacturerCode) SetWasionGroup()                                         { *v = 0x1123 }
+func (v *ManufacturerCode) SetJascoProducts()                                       { *v = 0x1124 }
+func (v *ManufacturerCode) SetShenzhenKaifaTechnology()                             { *v = 0x1125 }
+func (v *ManufacturerCode) SetNetcommWireless()                                     { *v = 0x1126 }
+func (v *ManufacturerCode) SetDefineInstruments()                                   { *v = 0x1127 }
+func (v *ManufacturerCode) SetInHomeDisplays()                                      { *v = 0x1128 }
+func (v *ManufacturerCode) SetMieleCieKg()                                          { *v = 0x1129 }
+func (v *ManufacturerCode) SetTelevesSA()                                           { *v = 0x112a }
+func (v *ManufacturerCode) SetLabelec()                                             { *v = 0x112b }
+func (v *ManufacturerCode) SetChinaElectronicsStandardizationInstitute()            { *v = 0x112c }
+func (v *ManufacturerCode) SetVectorform()                                          { *v = 0x112d }
+func (v *ManufacturerCode) SetBuschJaegerElektro()                                  { *v = 0x112e }
+func (v *ManufacturerCode) SetRedpineSignals()                                      { *v = 0x112f }
+func (v *ManufacturerCode) SetBridgesElectronicTechnology()                         { *v = 0x1130 }
+func (v *ManufacturerCode) SetSercomm()                                             { *v = 0x1131 }
+func (v *ManufacturerCode) SetWshGmbhWirsindheller()                                { *v = 0x1132 }
+func (v *ManufacturerCode) SetBoschSecuritySystems()                                { *v = 0x1133 }
+func (v *ManufacturerCode) SetEzexCorporation()                                     { *v = 0x1134 }
+func (v *ManufacturerCode) SetDresdenElektronikIngenieurtechnikGmbh()               { *v = 0x1135 }
+func (v *ManufacturerCode) SetMeazonSA()                                            { *v = 0x1136 }
+func (v *ManufacturerCode) SetCrowElectronicEngineering()                           { *v = 0x1137 }
+func (v *ManufacturerCode) SetHarvardEngineering()                                  { *v = 0x1138 }
+func (v *ManufacturerCode) SetAndsonBeijingTechnology()                             { *v = 0x1139 }
+func (v *ManufacturerCode) SetAdhocoAg()                                            { *v = 0x113a }
+func (v *ManufacturerCode) SetWaxmanConsumerProductsGroup()                         { *v = 0x113b }
+func (v *ManufacturerCode) SetOwonTechnology()                                      { *v = 0x113c }
+func (v *ManufacturerCode) SetHitronTechnologies()                                  { *v = 0x113d }
+func (v *ManufacturerCode) SetScemtecSteuerungstechnikGmbh()                        { *v = 0x113e }
+func (v *ManufacturerCode) SetWebee()                                               { *v = 0x113f }
+func (v *ManufacturerCode) SetGrid2home()                                           { *v = 0x1140 }
+func (v *ManufacturerCode) SetTelinkMicro()                                         { *v = 0x1141 }
+func (v *ManufacturerCode) SetJasmineSystems()                                      { *v = 0x1142 }
+func (v *ManufacturerCode) SetBidgely()                                             { *v = 0x1143 }
+func (v *ManufacturerCode) SetLutron()                                              { *v = 0x1144 }
+func (v *ManufacturerCode) SetIjenko()                                              { *v = 0x1145 }
+func (v *ManufacturerCode) SetStarfieldElectronic()                                 { *v = 0x1146 }
+func (v *ManufacturerCode) SetTcp()                                                 { *v = 0x1147 }
+func (v *ManufacturerCode) SetRogersCommunicationsPartnership()                     { *v = 0x1148 }
+func (v *ManufacturerCode) SetCree()                                                { *v = 0x1149 }
+func (v *ManufacturerCode) SetRobertBoschLlc()                                      { *v = 0x114a }
+func (v *ManufacturerCode) SetIbisNetworks()                                        { *v = 0x114b }
+func (v *ManufacturerCode) SetQuirky()                                              { *v = 0x114c }
+func (v *ManufacturerCode) SetEfergyTechnologies()                                  { *v = 0x114d }
+func (v *ManufacturerCode) SetSmartlabs()                                           { *v = 0x114e }
+func (v *ManufacturerCode) SetEverspringIndustry()                                  { *v = 0x114f }
+func (v *ManufacturerCode) SetSwannCommunications()                                 { *v = 0x1150 }
+func (v *ManufacturerCode) SetSoneter()                                             { *v = 0x1151 }
+func (v *ManufacturerCode) SetSamsungSds()                                          { *v = 0x1152 }
+func (v *ManufacturerCode) SetUnibandElectronicCorporation()                        { *v = 0x1153 }
+func (v *ManufacturerCode) SetAcctonTechnologyCorporation()                         { *v = 0x1154 }
+func (v *ManufacturerCode) SetBoschThermotechnikGmbh()                              { *v = 0x1155 }
+func (v *ManufacturerCode) SetWincorNixdorfInc()                                    { *v = 0x1156 }
+func (v *ManufacturerCode) SetOhsungElectronics()                                   { *v = 0x1157 }
+func (v *ManufacturerCode) SetZenWithinInc()                                        { *v = 0x1158 }
+func (v *ManufacturerCode) SetTech4homeLda()                                        { *v = 0x1159 }
+func (v *ManufacturerCode) SetNanoleaf()                                            { *v = 0x115A }
+func (v *ManufacturerCode) SetKeenHomeInc()                                         { *v = 0x115B }
+func (v *ManufacturerCode) SetPolyControlAps()                                      { *v = 0x115C }
+func (v *ManufacturerCode) SetEastfieldLightingCoLtdShenzhen()                      { *v = 0x115D }
+func (v *ManufacturerCode) SetIpDatatelInc()                                        { *v = 0x115E }
+func (v *ManufacturerCode) SetLumiUnitedTechologyLtdShenzhen()                      { *v = 0x115F }
+func (v *ManufacturerCode) SetSengledOptoelectronicsCorp()                          { *v = 0x1160 }
+func (v *ManufacturerCode) SetRemoteSolutionCoLtd()                                 { *v = 0x1161 }
+func (v *ManufacturerCode) SetAbbGenwayXiamenElectricalEquipmentCoLtd()             { *v = 0x1162 }
+func (v *ManufacturerCode) SetZhejiangRexenseTech()                                 { *v = 0x1163 }
+func (v *ManufacturerCode) SetForeeTechnology()                                     { *v = 0x1164 }
+func (v *ManufacturerCode) SetOpenAccessTechnologyIntl()                            { *v = 0x1165 }
+func (v *ManufacturerCode) SetInnrLightingBv()                                      { *v = 0x1166 }
+func (v *ManufacturerCode) SetTechworldIndustries()                                 { *v = 0x1167 }
+func (v *ManufacturerCode) SetLeedarsonLightingCoLtd()                              { *v = 0x1168 }
+func (v *ManufacturerCode) SetArzelZoning()                                         { *v = 0x1169 }
+func (v *ManufacturerCode) SetHolleyTechnology()                                    { *v = 0x116A }
+func (v *ManufacturerCode) SetBeldonTechnologies()                                  { *v = 0x116B }
+func (v *ManufacturerCode) SetFlextronics()                                         { *v = 0x116C }
+func (v *ManufacturerCode) SetShenzhenMeian()                                       { *v = 0x116D }
+func (v *ManufacturerCode) SetLowes()                                               { *v = 0x116E }
+func (v *ManufacturerCode) SetSigmaConnectivity()                                   { *v = 0x116F }
+func (v *ManufacturerCode) SetWulian()                                              { *v = 0x1171 }
+func (v *ManufacturerCode) SetPlugwiseBV()                                          { *v = 0x1172 }
+func (v *ManufacturerCode) SetTitanProducts()                                       { *v = 0x1173 }
+func (v *ManufacturerCode) SetEcospectral()                                         { *v = 0x1174 }
+func (v *ManufacturerCode) SetDLink()                                               { *v = 0x1175 }
+func (v *ManufacturerCode) SetTechnicolorHomeUsa()                                  { *v = 0x1176 }
+func (v *ManufacturerCode) SetOppleLighting()                                       { *v = 0x1177 }
+func (v *ManufacturerCode) SetWistronNewebCorp()                                    { *v = 0x1178 }
+func (v *ManufacturerCode) SetQmotionShades()                                       { *v = 0x1179 }
+func (v *ManufacturerCode) SetInstaElektroGmbh()                                    { *v = 0x117A }
+func (v *ManufacturerCode) SetShanghaiVancount()                                    { *v = 0x117B }
+func (v *ManufacturerCode) SetIkeaOfSweden()                                        { *v = 0x117C }
+func (v *ManufacturerCode) SetRtRk()                                                { *v = 0x117D }
+func (v *ManufacturerCode) SetShenzhenFeibit()                                      { *v = 0x117E }
+func (v *ManufacturerCode) SetEucontrols()                                          { *v = 0x117F }
+func (v *ManufacturerCode) SetTelkonet()                                            { *v = 0x1180 }
+func (v *ManufacturerCode) SetThermalSolutionResources()                            { *v = 0x1181 }
+func (v *ManufacturerCode) SetPomcube()                                             { *v = 0x1182 }
+func (v *ManufacturerCode) SetEiElectronics()                                       { *v = 0x1183 }
+func (v *ManufacturerCode) SetOptoga()                                              { *v = 0x1184 }
+func (v *ManufacturerCode) SetStelpro()                                             { *v = 0x1185 }
+func (v *ManufacturerCode) SetLynxusTechnologiesCorp()                              { *v = 0x1186 }
+func (v *ManufacturerCode) SetSemiconductorComponents()                             { *v = 0x1187 }
+func (v *ManufacturerCode) SetTpLink()                                              { *v = 0x1188 }
+func (v *ManufacturerCode) SetLedvanceLlc()                                         { *v = 0x1189 }
+func (v *ManufacturerCode) SetNortek()                                              { *v = 0x118A }
+func (v *ManufacturerCode) SetIrevoAssaAbbloyKorea()                                { *v = 0x118B }
+func (v *ManufacturerCode) SetMidea()                                               { *v = 0x118C }
+func (v *ManufacturerCode) SetZfFriedrichshafen()                                   { *v = 0x118D }
+func (v *ManufacturerCode) SetCheckit()                                             { *v = 0x118E }
+func (v *ManufacturerCode) SetAclara()                                              { *v = 0x118F }
+func (v *ManufacturerCode) SetNokia()                                               { *v = 0x1190 }
+func (v *ManufacturerCode) SetGoldcardHighTechCoLtd()                               { *v = 0x1191 }
+func (v *ManufacturerCode) SetGeorgeWilsonIndustriesLtd()                           { *v = 0x1192 }
+func (v *ManufacturerCode) SetEasySaverCoInc()                                      { *v = 0x1193 }
+func (v *ManufacturerCode) SetZteCorporation()                                      { *v = 0x1194 }
+func (v *ManufacturerCode) SetArris()                                               { *v = 0x1195 }
+func (v *ManufacturerCode) SetRelianceBigTv()                                       { *v = 0x1196 }
+func (v *ManufacturerCode) SetInsightEnergyVenturesPowerley()                       { *v = 0x1197 }
+func (v *ManufacturerCode) SetThomasResearchProductsHubbellLightingInc()            { *v = 0x1198 }
+func (v *ManufacturerCode) SetLiSengTechnology()                                    { *v = 0x1199 }
+func (v *ManufacturerCode) SetSystemLevelSolutionsInc()                             { *v = 0x119A }
+func (v *ManufacturerCode) SetMatrixLabs()                                          { *v = 0x119B }
+func (v *ManufacturerCode) SetSinopeTechnologies()                                  { *v = 0x119C }
+func (v *ManufacturerCode) SetJiuzhouGreeble()                                      { *v = 0x119D }
+func (v *ManufacturerCode) SetGuangzhouLanveeTechCoLtd()                            { *v = 0x119E }
+func (v *ManufacturerCode) SetVenstar()                                             { *v = 0x119F }
+func (v *ManufacturerCode) SetSlv()                                                 { *v = 0x1200 }
+func (v *ManufacturerCode) SetHaloSmartLabs()                                       { *v = 0x1201 }
+func (v *ManufacturerCode) SetScoutSecurityInc()                                    { *v = 0x1202 }
+func (v *ManufacturerCode) SetAlibabaChinaInc()                                     { *v = 0x1203 }
+func (v *ManufacturerCode) SetResolutionProductsInc()                               { *v = 0x1204 }
+func (v *ManufacturerCode) SetSmartlokInc()                                         { *v = 0x1205 }
+func (v *ManufacturerCode) SetLuxProductsCorp()                                     { *v = 0x1206 }
+func (v *ManufacturerCode) SetVimarSpa()                                            { *v = 0x1207 }
+func (v *ManufacturerCode) SetUniversalLightingTechnologies()                       { *v = 0x1208 }
+func (v *ManufacturerCode) SetRobertBoschGmbh()                                     { *v = 0x1209 }
+func (v *ManufacturerCode) SetAccenture()                                           { *v = 0x120A }
+func (v *ManufacturerCode) SetHeimanTechnologyCoLtd()                               { *v = 0x120B }
+func (v *ManufacturerCode) SetShenzhenHomaTechnologyCoLtd()                         { *v = 0x120C }
+func (v *ManufacturerCode) SetVisionElectronicsTechnology()                         { *v = 0x120D }
+func (v *ManufacturerCode) SetLenovo()                                              { *v = 0x120E }
+func (v *ManufacturerCode) SetPrescienseRD()                                        { *v = 0x120F }
+func (v *ManufacturerCode) SetShenzhenSeastarIntelligenceCoLtd()                    { *v = 0x1210 }
+func (v *ManufacturerCode) SetSensativeAb()                                         { *v = 0x1211 }
+func (v *ManufacturerCode) SetSolaredge()                                           { *v = 0x1212 }
+func (v *ManufacturerCode) SetZipato()                                              { *v = 0x1213 }
+func (v *ManufacturerCode) SetChinaFireSecuritySensingManufacturingIhorn()          { *v = 0x1214 }
+func (v *ManufacturerCode) SetQubyBv()                                              { *v = 0x1215 }
+func (v *ManufacturerCode) SetHangzhouRoombankerTechnologyCoLtd()                   { *v = 0x1216 }
+func (v *ManufacturerCode) SetAmazonLab126()                                        { *v = 0x1217 }
+func (v *ManufacturerCode) SetPaulmannLichtGmbh()                                   { *v = 0x1218 }
+func (v *ManufacturerCode) SetShenzhenOrviboElectronicsCoLtd()                      { *v = 0x1219 }
+func (v *ManufacturerCode) SetTciTelecommunications()                               { *v = 0x121A }
+func (v *ManufacturerCode) SetMuellerLichtInternationalInc()                        { *v = 0x121B }
+func (v *ManufacturerCode) SetAuroraLimited()                                       { *v = 0x121C }
+func (v *ManufacturerCode) SetSmartdcc()                                            { *v = 0x121D }
+func (v *ManufacturerCode) SetShanghaiUmeinfoCoLtd()                                { *v = 0x121E }
+func (v *ManufacturerCode) SetCarbontrack()                                         { *v = 0x121F }
+func (v *ManufacturerCode) SetSomfy()                                               { *v = 0x1220 }
+func (v *ManufacturerCode) SetViessmannElektronikGmbh()                             { *v = 0x1221 }
+func (v *ManufacturerCode) SetHildebrandTechnologyLtd()                             { *v = 0x1222 }
+func (v *ManufacturerCode) SetOnkyoTechnologyCorporation()                          { *v = 0x1223 }
+func (v *ManufacturerCode) SetShenzhenSunricherTechnologyLtd()                      { *v = 0x1224 }
+func (v *ManufacturerCode) SetXiuXiuTechnologyCoLtd()                               { *v = 0x1225 }
+func (v *ManufacturerCode) SetZumtobelGroup()                                       { *v = 0x1226 }
+func (v *ManufacturerCode) SetShenzhenKaadasIntelligentTechnologyCoLtd()            { *v = 0x1227 }
+func (v *ManufacturerCode) SetShanghaiXiaoyanTechnologyCoLtd()                      { *v = 0x1228 }
+func (v *ManufacturerCode) SetCypressSemiconductor()                                { *v = 0x1229 }
+func (v *ManufacturerCode) SetXalGmbh()                                             { *v = 0x122A }
+func (v *ManufacturerCode) SetInergySystemsLlc()                                    { *v = 0x122B }
+func (v *ManufacturerCode) SetAlfredKarcherGmbhCoKg()                               { *v = 0x122C }
+func (v *ManufacturerCode) SetAdurolightManufacturing()                             { *v = 0x122D }
+func (v *ManufacturerCode) SetGroupeMuller()                                        { *v = 0x122E }
+func (v *ManufacturerCode) SetVMarkEnterprisesInc()                                 { *v = 0x122F }
+func (v *ManufacturerCode) SetLeadEnergyAg()                                        { *v = 0x1230 }
+func (v *ManufacturerCode) SetUiotGroup()                                           { *v = 0x1231 }
+func (v *ManufacturerCode) SetAxxessIndustriesInc()                                 { *v = 0x1232 }
+func (v *ManufacturerCode) SetThirdRealityInc()                                     { *v = 0x1233 }
+func (v *ManufacturerCode) SetDsrCorporation()                                      { *v = 0x1234 }
+func (v *ManufacturerCode) SetGuangzhouVensiIntelligentTechnologyCoLtd()            { *v = 0x1235 }
+func (v *ManufacturerCode) SetSchlageLockAllegion()                                 { *v = 0x1236 }
+func (v *ManufacturerCode) SetNet2grid()                                            { *v = 0x1237 }
+func (v *ManufacturerCode) SetAiramElectricOyAb()                                   { *v = 0x1238 }
+func (v *ManufacturerCode) SetImmaxWpbCz()                                          { *v = 0x1239 }
+func (v *ManufacturerCode) SetZivAutomation()                                       { *v = 0x123A }
+func (v *ManufacturerCode) SetHangzhouImagictechnologyCoLtd()                       { *v = 0x123B }
+func (v *ManufacturerCode) SetXiamenLeelenTechnologyCoLtd()                         { *v = 0x123C }
+func (v *ManufacturerCode) SetOverkizSas()                                          { *v = 0x123D }
+func (v *ManufacturerCode) SetFlonidanAS()                                          { *v = 0x123E }
+func (v *ManufacturerCode) SetHdlAutomationCoLtd()                                  { *v = 0x123F }
+func (v *ManufacturerCode) SetArdomusNetworksCorporation()                          { *v = 0x1240 }
+func (v *ManufacturerCode) SetSamjinCoLtd()                                         { *v = 0x1241 }
+func (v *ManufacturerCode) SetSprueAegisPlc()                                       { *v = 0x1242 }
+func (v *ManufacturerCode) SetIndraSistemasSA()                                     { *v = 0x1243 }
+func (v *ManufacturerCode) SetShenzhenJbtSmartLightingCoLtd()                       { *v = 0x1244 }
+func (v *ManufacturerCode) SetGeLightingCurrent()                                   { *v = 0x1245 }
+func (v *ManufacturerCode) SetDanfossAS()                                           { *v = 0x1246 }
+func (v *ManufacturerCode) SetNivissPhpSpZOOSpK()                                   { *v = 0x1247 }
+func (v *ManufacturerCode) SetShenzhenFengliyuanEnergyConservatingTechnologyCoLtd() { *v = 0x1248 }
+func (v *ManufacturerCode) SetNexelec()                                             { *v = 0x1249 }
+func (v *ManufacturerCode) SetSichuanBehomeProminentTechnologyCoLtd()               { *v = 0x124A }
+func (v *ManufacturerCode) SetFujianStarNetCommunicationCoLtd()                     { *v = 0x124B }
+func (v *ManufacturerCode) SetToshibaVisualSolutionsCorporation()                   { *v = 0x124C }
+func (v *ManufacturerCode) SetLatchableInc()                                        { *v = 0x124D }
+func (v *ManufacturerCode) SetLSDeutschlandGmbh()                                   { *v = 0x124E }
+func (v *ManufacturerCode) SetGledoptoCoLtd()                                       { *v = 0x124F }
+func (v *ManufacturerCode) SetTheHomeDepot()                                        { *v = 0x1250 }
+func (v *ManufacturerCode) SetNeonliteInternationalLtd()                            { *v = 0x1251 }
+func (v *ManufacturerCode) SetArloTechnologiesInc()                                 { *v = 0x1252 }
+func (v *ManufacturerCode) SetXingluoTechnologyCoLtd()                              { *v = 0x1253 }
+func (v *ManufacturerCode) SetSimonElectricChinaCoLtd()                             { *v = 0x1254 }
+func (v *ManufacturerCode) SetHangzhouGreatstarIndustrialCoLtd()                    { *v = 0x1255 }
+func (v *ManufacturerCode) SetSequentricEnergySystemsLlc()                          { *v = 0x1256 }
+func (v *ManufacturerCode) SetSolumCoLtd()                                          { *v = 0x1257 }
+func (v *ManufacturerCode) SetEagleriseElectricElectronicChinaCoLtd()               { *v = 0x1258 }
+func (v *ManufacturerCode) SetFantemTechnologiesShenzhenCoLtd()                     { *v = 0x1259 }
+func (v *ManufacturerCode) SetYundingNetworkTechnologyBeijingCoLtd()                { *v = 0x125A }
+func (v *ManufacturerCode) SetAtlanticGroup()                                       { *v = 0x125B }
+func (v *ManufacturerCode) SetXiamenIntretechInc()                                  { *v = 0x125C }
+func (v *ManufacturerCode) SetTuyaGlobalInc()                                       { *v = 0x125D }
+func (v *ManufacturerCode) SetXiamenDnakeIntelligentTechnologyCoLtd()               { *v = 0x125E }
+func (v *ManufacturerCode) SetNikoNv()                                              { *v = 0x125F }
+func (v *ManufacturerCode) SetEmporiaEnergy()                                       { *v = 0x1260 }
+func (v *ManufacturerCode) SetSikomAs()                                             { *v = 0x1261 }
+func (v *ManufacturerCode) SetAxisLabsInc()                                         { *v = 0x1262 }
+func (v *ManufacturerCode) SetCurrentProductsCorporation()                          { *v = 0x1263 }
+func (v *ManufacturerCode) SetMetersitSrl()                                         { *v = 0x1264 }
+func (v *ManufacturerCode) SetHornbachBaumarktAg()                                  { *v = 0x1265 }
+func (v *ManufacturerCode) SetDiceworldSRLASocioUnico()                             { *v = 0x1266 }
+func (v *ManufacturerCode) SetArcTechnologyCoLtd()                                  { *v = 0x1267 }
+func (v *ManufacturerCode) SetHangzhouKonkeInformationTechnologyCoLtd()             { *v = 0x1268 }
+func (v *ManufacturerCode) SetSaltoSystemsSL()                                      { *v = 0x1269 }
+func (v *ManufacturerCode) SetShenzhenShyugjTechnologyCoLtd()                       { *v = 0x126A }
+func (v *ManufacturerCode) SetBraydenAutomationCorporation()                        { *v = 0x126B }
+func (v *ManufacturerCode) SetEnvironexusPtyLtd()                                   { *v = 0x126C }
+func (v *ManufacturerCode) SetEltraNvSa()                                           { *v = 0x126D }
+func (v *ManufacturerCode) SetXiaomiCommunicationsCoLtd()                           { *v = 0x126E }
+func (v *ManufacturerCode) SetShanghaiShuncomElectronicTechnologyCoLtd()            { *v = 0x126F }
+func (v *ManufacturerCode) SetVoltalisSA()                                          { *v = 0x1270 }
+func (v *ManufacturerCode) SetFeeluxCoLtd()                                         { *v = 0x1271 }
+func (v *ManufacturerCode) SetSmartplusInc()                                        { *v = 0x1272 }
+func (v *ManufacturerCode) SetHalemeierGmbh()                                       { *v = 0x1273 }
+func (v *ManufacturerCode) SetTrustInternationalBbv()                               { *v = 0x1274 }
+func (v *ManufacturerCode) SetDukeEnergyBusinessServicesLlc()                       { *v = 0x1275 }
+func (v *ManufacturerCode) SetCalixInc()                                            { *v = 0x1276 }
+func (v *ManufacturerCode) SetAdeo()                                                { *v = 0x1277 }
+func (v *ManufacturerCode) SetConnectedResponseLimited()                            { *v = 0x1278 }
+func (v *ManufacturerCode) SetStroyenergokom()                                      { *v = 0x1279 }
+func (v *ManufacturerCode) SetLumitechLightingSolutionGmbh()                        { *v = 0x127A }
+func (v *ManufacturerCode) SetVerdantEnvironmentalTechnologies()                    { *v = 0x127B }
+func (v *ManufacturerCode) SetAlfredInternational()                                 { *v = 0x127C }
+func (v *ManufacturerCode) SetSansiLedLighting()                                    { *v = 0x127D }
+func (v *ManufacturerCode) SetMindtree()                                            { *v = 0x127E }
+func (v *ManufacturerCode) SetNordicSemiconductorAsa()                              { *v = 0x127F }
+func (v *ManufacturerCode) SetSiterwellElectronics()                                { *v = 0x1280 }
+func (v *ManufacturerCode) SetBrilonerLeuchtenGmbh()                                { *v = 0x1281 }
+func (v *ManufacturerCode) SetShenzhenSeiTechnology()                               { *v = 0x1282 }
+func (v *ManufacturerCode) SetCopperLabs()                                          { *v = 0x1283 }
+func (v *ManufacturerCode) SetDeltaDore()                                           { *v = 0x1284 }
+func (v *ManufacturerCode) SetHagerGroup()                                          { *v = 0x1285 }
+func (v *ManufacturerCode) SetShenzhenCoolkitTechnology()                           { *v = 0x1286 }
+func (v *ManufacturerCode) SetHangzhouSkyLighting()                                 { *v = 0x1287 }
+func (v *ManufacturerCode) SetEOnSe()                                               { *v = 0x1288 }
+func (v *ManufacturerCode) SetLidlStiftung()                                        { *v = 0x1289 }
+func (v *ManufacturerCode) SetSichuanChanghongNetworkTechnologies()                 { *v = 0x128A }
+func (v *ManufacturerCode) SetNodon()                                               { *v = 0x128B }
+func (v *ManufacturerCode) SetJiangxiInnotechTechnology()                           { *v = 0x128C }
+func (v *ManufacturerCode) SetMercatorPty()                                         { *v = 0x128D }
+func (v *ManufacturerCode) SetBeijingRuyingTech()                                   { *v = 0x128E }
+func (v *ManufacturerCode) SetEgloLeuchtenGmbh()                                    { *v = 0x128F }
+func (v *ManufacturerCode) SetPietroFiorentiniSPA()                                 { *v = 0x1290 }
+func (v *ManufacturerCode) SetZehnderGroupVauxAndigny()                             { *v = 0x1291 }
+func (v *ManufacturerCode) SetBrkBrands()                                           { *v = 0x1292 }
+func (v *ManufacturerCode) SetAskeyComputer()                                       { *v = 0x1293 }
+func (v *ManufacturerCode) SetPassivebolt()                                         { *v = 0x1294 }
+func (v *ManufacturerCode) SetAvmAudiovisuelles()                                   { *v = 0x1295 }
+func (v *ManufacturerCode) SetNingboSuntechLightingTech()                           { *v = 0x1296 }
+func (v *ManufacturerCode) SetSocieteEnCommanditeStello()                           { *v = 0x1297 }
+func (v *ManufacturerCode) SetVivintSmartHome()                                     { *v = 0x1298 }
+func (v *ManufacturerCode) SetNamron()                                              { *v = 0x1299 }
+func (v *ManufacturerCode) SetRademacherGeraeteElektronikGmbh()                     { *v = 0x129A }
+func (v *ManufacturerCode) SetOmoSystems()                                          { *v = 0x129B }
+func (v *ManufacturerCode) SetSiglis()                                              { *v = 0x129C }
+func (v *ManufacturerCode) SetImhotepCreation()                                     { *v = 0x129D }
+func (v *ManufacturerCode) SetIcasa()                                               { *v = 0x129E }
+func (v *ManufacturerCode) SetLevelHome()                                           { *v = 0x129F }
+func (v *ManufacturerCode) SetTisControl()                                          { *v = 0x1300 }
+func (v *ManufacturerCode) SetRadisysIndia()                                        { *v = 0x1301 }
+func (v *ManufacturerCode) SetVeea()                                                { *v = 0x1302 }
+func (v *ManufacturerCode) SetFellTechnology()                                      { *v = 0x1303 }
+func (v *ManufacturerCode) SetSowiloDesignServices()                                { *v = 0x1304 }
+func (v *ManufacturerCode) SetLexiDevices()                                         { *v = 0x1305 }
+func (v *ManufacturerCode) SetLifiLabs()                                            { *v = 0x1306 }
+func (v *ManufacturerCode) SetGrundfosHolding()                                     { *v = 0x1307 }
+func (v *ManufacturerCode) SetSourcingCreation()                                    { *v = 0x1308 }
+func (v *ManufacturerCode) SetKrakenTechnologies()                                  { *v = 0x1309 }
+func (v *ManufacturerCode) SetEveSystems()                                          { *v = 0x130A }
+func (v *ManufacturerCode) SetLiteOnTechnologyCorporation()                         { *v = 0x130B }
+func (v *ManufacturerCode) SetFocalcrest()                                          { *v = 0x130C }
+func (v *ManufacturerCode) SetBouffaloLabNanjing()                                  { *v = 0x130D }
+func (v *ManufacturerCode) SetWyzeLabs()                                            { *v = 0x130E }
+func (v *ManufacturerCode) SetDatekWirelessAs()                                     { *v = 0x1337 }
+func (v *ManufacturerCode) SetGewissSPA()                                           { *v = 0x1994 }
+func (v *ManufacturerCode) SetClimaxTechnologyCpLtd()                               { *v = 0x2794 }
 
 func (ManufacturerCode) SingleOptions() []zcl.Option {
 	return []zcl.Option{
-		{Value: 0x100B, Name: "Philips"},
-		{Value: 0x1021, Name: "Legrand"},
-		{Value: 0x1037, Name: "NXP"},
-		{Value: 0x105E, Name: "Schneider Electric"},
-		{Value: 0x10F2, Name: "Ubisys"},
-		{Value: 0x115F, Name: "Xiaomi"},
-		{Value: 0x1166, Name: "innr"},
-		{Value: 0x117C, Name: "Ikea"},
-		{Value: 0x1189, Name: "Ledvance"},
-		{Value: 0x1241, Name: "Samjin"},
+		{Value: 0x1000, Name: "Cirronet"},
+		{Value: 0x1001, Name: "Chipcon"},
+		{Value: 0x1002, Name: "Ember"},
+		{Value: 0x1003, Name: "National Tech"},
+		{Value: 0x1004, Name: "Freescale"},
+		{Value: 0x1005, Name: "IPCom"},
+		{Value: 0x1006, Name: "San Juan Software"},
+		{Value: 0x1007, Name: "TUV"},
+		{Value: 0x1008, Name: "CompXs"},
+		{Value: 0x1009, Name: "BM SpA"},
+		{Value: 0x100a, Name: "AwarePoint"},
+		{Value: 0x100b, Name: "Philips"},
+		{Value: 0x100c, Name: "Luxoft"},
+		{Value: 0x100d, Name: "Korvin"},
+		{Value: 0x100e, Name: "One RF"},
+		{Value: 0x100f, Name: "Software Technology Group"},
+		{Value: 0x1010, Name: "Telegesis"},
+		{Value: 0x1011, Name: "Visionic"},
+		{Value: 0x1012, Name: "Insta"},
+		{Value: 0x1013, Name: "Atalum"},
+		{Value: 0x1014, Name: "Atmel"},
+		{Value: 0x1015, Name: "Develco"},
+		{Value: 0x1016, Name: "Honeywell"},
+		{Value: 0x1017, Name: "RadioPulse"},
+		{Value: 0x1018, Name: "Renesas"},
+		{Value: 0x1019, Name: "Xanadu Wireless"},
+		{Value: 0x101a, Name: "NEC Engineering"},
+		{Value: 0x101b, Name: "Yamatake"},
+		{Value: 0x101c, Name: "Tendril"},
+		{Value: 0x101d, Name: "Assa Abloy"},
+		{Value: 0x101e, Name: "Maxstream"},
+		{Value: 0x101f, Name: "Neurocom"},
+		{Value: 0x1020, Name: "Institute for Information Industry"},
+		{Value: 0x1021, Name: "Vantage Controls"},
+		{Value: 0x1022, Name: "iControl"},
+		{Value: 0x1023, Name: "Raymarine"},
+		{Value: 0x1024, Name: "LS Research"},
+		{Value: 0x1025, Name: "Onity"},
+		{Value: 0x1026, Name: "Mono Products"},
+		{Value: 0x1027, Name: "RF Tech"},
+		{Value: 0x1028, Name: "Itron"},
+		{Value: 0x1029, Name: "Tritech"},
+		{Value: 0x102a, Name: "Embedit"},
+		{Value: 0x102b, Name: "S3C"},
+		{Value: 0x102c, Name: "Siemens"},
+		{Value: 0x102d, Name: "Mindtech"},
+		{Value: 0x102e, Name: "LG Electronics"},
+		{Value: 0x102f, Name: "Mitsubishi"},
+		{Value: 0x1030, Name: "Johnson Controls"},
+		{Value: 0x1031, Name: "PRI"},
+		{Value: 0x1032, Name: "Knick"},
+		{Value: 0x1033, Name: "Viconics"},
+		{Value: 0x1034, Name: "Flexipanel"},
+		{Value: 0x1035, Name: "Piasim Corporation"},
+		{Value: 0x1036, Name: "Trane"},
+		{Value: 0x1037, Name: "Jennic"},
+		{Value: 0x1038, Name: "Living Independently"},
+		{Value: 0x1039, Name: "AlertMe"},
+		{Value: 0x103a, Name: "Daintree"},
+		{Value: 0x103b, Name: "Aiji"},
+		{Value: 0x103c, Name: "Telecom Italia"},
+		{Value: 0x103d, Name: "Mikrokrets"},
+		{Value: 0x103e, Name: "Oki Semi"},
+		{Value: 0x103f, Name: "Newport Electronics"},
+		{Value: 0x1040, Name: "Control4"},
+		{Value: 0x1041, Name: "STMicro"},
+		{Value: 0x1042, Name: "Ad-Sol Nissin"},
+		{Value: 0x1043, Name: "DCSI"},
+		{Value: 0x1044, Name: "France Telecom"},
+		{Value: 0x1045, Name: "muNet"},
+		{Value: 0x1046, Name: "Autani"},
+		{Value: 0x1047, Name: "Colorado vNet"},
+		{Value: 0x1048, Name: "Aerocomm"},
+		{Value: 0x1049, Name: "Silicon Labs"},
+		{Value: 0x104F, Name: "Crane"},
+		{Value: 0x104a, Name: "Inncom"},
+		{Value: 0x104b, Name: "Cannon"},
+		{Value: 0x104c, Name: "Synapse"},
+		{Value: 0x104d, Name: "Fisher Pierce/Sunrise"},
+		{Value: 0x104e, Name: "CentraLite"},
+		{Value: 0x1050, Name: "Mobilarm"},
+		{Value: 0x1051, Name: "iMonitor"},
+		{Value: 0x1052, Name: "Bartech"},
+		{Value: 0x1053, Name: "Meshnetics"},
+		{Value: 0x1054, Name: "LS Industrial"},
+		{Value: 0x1055, Name: "Cason"},
+		{Value: 0x1056, Name: "Wireless Glue"},
+		{Value: 0x1057, Name: "Elster"},
+		{Value: 0x1058, Name: "SMS Tec"},
+		{Value: 0x1059, Name: "Onset Computer"},
+		{Value: 0x105a, Name: "Riga Development"},
+		{Value: 0x105b, Name: "Energate"},
+		{Value: 0x105c, Name: "ConMed Linvatec"},
+		{Value: 0x105d, Name: "PowerMand"},
+		{Value: 0x105e, Name: "Schneider Electric"},
+		{Value: 0x105f, Name: "Eaton"},
+		{Value: 0x1060, Name: "Telular"},
+		{Value: 0x1061, Name: "Delphi Medical"},
+		{Value: 0x1062, Name: "EpiSensor"},
+		{Value: 0x1063, Name: "Landis+Gyr"},
+		{Value: 0x1064, Name: "Kaba Group"},
+		{Value: 0x1065, Name: "Shure"},
+		{Value: 0x1066, Name: "Comverge"},
+		{Value: 0x1067, Name: "DBS Lodging"},
+		{Value: 0x1068, Name: "Energy Aware"},
+		{Value: 0x1069, Name: "Hidalgo"},
+		{Value: 0x106a, Name: "Air2App"},
+		{Value: 0x106b, Name: "AMX"},
+		{Value: 0x106c, Name: "EDMI Pty"},
+		{Value: 0x106d, Name: "Cyan Ltd"},
+		{Value: 0x106e, Name: "System SPA"},
+		{Value: 0x106f, Name: "Telit"},
+		{Value: 0x1070, Name: "Kaga Electronics"},
+		{Value: 0x1071, Name: "4-noks s.r.l."},
+		{Value: 0x1072, Name: "Certicom"},
+		{Value: 0x1073, Name: "Gridpoint"},
+		{Value: 0x1074, Name: "Profile Systems"},
+		{Value: 0x1075, Name: "Compacta International"},
+		{Value: 0x1076, Name: "Freestyle Technology"},
+		{Value: 0x1077, Name: "Alektrona"},
+		{Value: 0x1078, Name: "Computime"},
+		{Value: 0x1079, Name: "Remote Technologies"},
+		{Value: 0x107a, Name: "Wavecom"},
+		{Value: 0x107b, Name: "Energy Optimizers"},
+		{Value: 0x107c, Name: "GE"},
+		{Value: 0x107d, Name: "Jetlun"},
+		{Value: 0x107e, Name: "Cipher Systems"},
+		{Value: 0x107f, Name: "Corporate Systems Eng"},
+		{Value: 0x1080, Name: "ecobee"},
+		{Value: 0x1081, Name: "SMK"},
+		{Value: 0x1082, Name: "Meshworks Wireless"},
+		{Value: 0x1083, Name: "Ellips B.V."},
+		{Value: 0x1084, Name: "Secure electrans"},
+		{Value: 0x1085, Name: "CEDO"},
+		{Value: 0x1086, Name: "Toshiba"},
+		{Value: 0x1087, Name: "Digi International"},
+		{Value: 0x1088, Name: "Ubilogix"},
+		{Value: 0x1089, Name: "Echelon"},
+		{Value: 0x1090, Name: "Green Energy Options"},
+		{Value: 0x1091, Name: "Silver Spring Networks"},
+		{Value: 0x1092, Name: "Black & Decker"},
+		{Value: 0x1093, Name: "Aztech AssociatesInc."},
+		{Value: 0x1094, Name: "A&D Co"},
+		{Value: 0x1095, Name: "Rainforest Automation"},
+		{Value: 0x1096, Name: "Carrier Electronics"},
+		{Value: 0x1097, Name: "SyChip/Murata"},
+		{Value: 0x1098, Name: "OpenPeak"},
+		{Value: 0x1099, Name: "Passive Systems"},
+		{Value: 0x109a, Name: "MMBResearch"},
+		{Value: 0x109b, Name: "Leviton"},
+		{Value: 0x109c, Name: "Korea Electric Power Data Network"},
+		{Value: 0x109d, Name: "Comcast"},
+		{Value: 0x109e, Name: "NEC Electronics"},
+		{Value: 0x109f, Name: "Netvox"},
+		{Value: 0x10a0, Name: "U-Control"},
+		{Value: 0x10a1, Name: "Embedia Technologies"},
+		{Value: 0x10a2, Name: "Sensus"},
+		{Value: 0x10a3, Name: "SunriseTechnologies"},
+		{Value: 0x10a4, Name: "MemtechCorp"},
+		{Value: 0x10a5, Name: "Freebox"},
+		{Value: 0x10a6, Name: "M2 Labs"},
+		{Value: 0x10a7, Name: "BritishGas"},
+		{Value: 0x10a8, Name: "Sentec"},
+		{Value: 0x10a9, Name: "Navetas"},
+		{Value: 0x10aa, Name: "Lightspeed Technologies"},
+		{Value: 0x10ab, Name: "Oki Electric"},
+		{Value: 0x10ac, Name: "Sistemas Inteligentes"},
+		{Value: 0x10ad, Name: "Dometic"},
+		{Value: 0x10ae, Name: "Alps"},
+		{Value: 0x10af, Name: "EnergyHub"},
+		{Value: 0x10b0, Name: "Kamstrup"},
+		{Value: 0x10b1, Name: "EchoStar"},
+		{Value: 0x10b2, Name: "EnerNOC"},
+		{Value: 0x10b3, Name: "Eltav"},
+		{Value: 0x10b4, Name: "Belkin"},
+		{Value: 0x10b5, Name: "XStreamHD Wireless"},
+		{Value: 0x10b6, Name: "Saturn South"},
+		{Value: 0x10b7, Name: "GreenTrapOnline"},
+		{Value: 0x10b8, Name: "SmartSynch"},
+		{Value: 0x10b9, Name: "Nyce Control"},
+		{Value: 0x10ba, Name: "ICM Controls"},
+		{Value: 0x10bb, Name: "Millennium Electronics"},
+		{Value: 0x10bc, Name: "Motorola"},
+		{Value: 0x10bd, Name: "EmersonWhite-Rodgers"},
+		{Value: 0x10be, Name: "Radio Thermostat"},
+		{Value: 0x10bf, Name: "OMRONCorporation"},
+		{Value: 0x10c0, Name: "GiiNii GlobalLimited"},
+		{Value: 0x10c1, Name: "Fujitsu GeneralLimited"},
+		{Value: 0x10c2, Name: "Peel Technologies"},
+		{Value: 0x10c3, Name: "Accent"},
+		{Value: 0x10c4, Name: "ByteSnap Design"},
+		{Value: 0x10c5, Name: "NEC TOKIN Corporation"},
+		{Value: 0x10c6, Name: "G4S JusticeServices"},
+		{Value: 0x10c7, Name: "Trilliant Networks"},
+		{Value: 0x10c8, Name: "Electrolux Italia"},
+		{Value: 0x10c9, Name: "OnzoLtd"},
+		{Value: 0x10ca, Name: "EnTekSystems"},
+		{Value: 0x10cb, Name: "Philips 2"},
+		{Value: 0x10cc, Name: "MainstreamEngineering"},
+		{Value: 0x10cd, Name: "IndesitCompany"},
+		{Value: 0x10ce, Name: "THINKECO"},
+		{Value: 0x10cf, Name: "2D2C"},
+		{Value: 0x10d0, Name: "GreenPeak"},
+		{Value: 0x10d1, Name: "InterCEL"},
+		{Value: 0x10d2, Name: "LG Electronics 2"},
+		{Value: 0x10d3, Name: "Mitsumi Electric"},
+		{Value: 0x10d4, Name: "Mitsumi Electric 2"},
+		{Value: 0x10d5, Name: "Zentrum Mikroelektronik Dresden"},
+		{Value: 0x10d6, Name: "Nest Labs"},
+		{Value: 0x10d7, Name: "Exegin Technologies"},
+		{Value: 0x10d8, Name: "Honeywell 2"},
+		{Value: 0x10d9, Name: "Takahata Precision"},
+		{Value: 0x10da, Name: "Sumitomo Electric Networks"},
+		{Value: 0x10db, Name: "GE Energy"},
+		{Value: 0x10dc, Name: "GE Appliances"},
+		{Value: 0x10dd, Name: "Radiocrafts AS"},
+		{Value: 0x10de, Name: "Ceiva"},
+		{Value: 0x10df, Name: "TEC CO Co., Ltd"},
+		{Value: 0x10e0, Name: "Chameleon Technology (UK) Ltd"},
+		{Value: 0x10e1, Name: "Samsung"},
+		{Value: 0x10e2, Name: "ruwido austria gmbh"},
+		{Value: 0x10e3, Name: "Huawei Technologies Co., Ltd."},
+		{Value: 0x10e4, Name: "Huawei Technologies Co., Ltd. 2"},
+		{Value: 0x10e5, Name: "Greenwave Reality"},
+		{Value: 0x10e6, Name: "BGlobal Metering Ltd"},
+		{Value: 0x10e7, Name: "Mindteck"},
+		{Value: 0x10e8, Name: "Ingersoll-Rand"},
+		{Value: 0x10e9, Name: "Dius Computing Pty Ltd"},
+		{Value: 0x10ea, Name: "Embedded Automation, Inc."},
+		{Value: 0x10eb, Name: "ABB"},
+		{Value: 0x10ec, Name: "Sony"},
+		{Value: 0x10ed, Name: "Genus Power Infrastructures Limited"},
+		{Value: 0x10ee, Name: "Universal Devices"},
+		{Value: 0x10ef, Name: "Universal Devices 2"},
+		{Value: 0x10f0, Name: "Metrum Technologies, LLC"},
+		{Value: 0x10f1, Name: "Cisco"},
+		{Value: 0x10f2, Name: "Ubisys technologies GmbH"},
+		{Value: 0x10f3, Name: "Consert"},
+		{Value: 0x10f4, Name: "Crestron Electronics"},
+		{Value: 0x10f5, Name: "Enphase Energy"},
+		{Value: 0x10f6, Name: "Invensys Controls"},
+		{Value: 0x10f7, Name: "Mueller Systems, LLC"},
+		{Value: 0x10f8, Name: "AAC Technologies Holding"},
+		{Value: 0x10f9, Name: "U-NEXT Co., Ltd"},
+		{Value: 0x10fa, Name: "Steelcase Inc."},
+		{Value: 0x10fb, Name: "Telematics Wireless"},
+		{Value: 0x10fc, Name: "Samil Power Co., Ltd"},
+		{Value: 0x10fd, Name: "Pace Plc"},
+		{Value: 0x10fe, Name: "Osborne Coinage Co."},
+		{Value: 0x10ff, Name: "Powerwatch"},
+		{Value: 0x1100, Name: "CANDELED GmbH"},
+		{Value: 0x1101, Name: "FlexGrid S.R.L"},
+		{Value: 0x1102, Name: "Humax"},
+		{Value: 0x1103, Name: "Universal Electronics, Inc."},
+		{Value: 0x1104, Name: "Advanced Energy"},
+		{Value: 0x1105, Name: "BEGA Gantenbrink-Leuchten"},
+		{Value: 0x1106, Name: "Brunel University"},
+		{Value: 0x1107, Name: "Panasonic R&D Center Singapore"},
+		{Value: 0x1108, Name: "eSystems Research"},
+		{Value: 0x1109, Name: "Panamax"},
+		{Value: 0x110a, Name: "Physical Graph Corporation"},
+		{Value: 0x110b, Name: "EM-Lite Ltd."},
+		{Value: 0x110c, Name: "Osram Sylvania"},
+		{Value: 0x110d, Name: "2 Save Energy Ltd."},
+		{Value: 0x110e, Name: "Planet Innovation Products Pty Ltd"},
+		{Value: 0x110f, Name: "Ambient Devices, Inc."},
+		{Value: 0x1110, Name: "Profalux"},
+		{Value: 0x1111, Name: "Billion Electric Company (BEC)"},
+		{Value: 0x1112, Name: "Embertec Pty Ltd"},
+		{Value: 0x1113, Name: "IT Watchdogs"},
+		{Value: 0x1114, Name: "Reloc"},
+		{Value: 0x1115, Name: "Intel Corporation"},
+		{Value: 0x1116, Name: "Trend Electronics Limited"},
+		{Value: 0x1117, Name: "Moxa"},
+		{Value: 0x1118, Name: "QEES"},
+		{Value: 0x1119, Name: "SAYME Wireless Sensor Networks"},
+		{Value: 0x111a, Name: "Pentair Aquatic Systems"},
+		{Value: 0x111b, Name: "Orbit Irrigation"},
+		{Value: 0x111c, Name: "California Eastern Laboratories"},
+		{Value: 0x111d, Name: "Comcast 2"},
+		{Value: 0x111e, Name: "IDT Technology Limited"},
+		{Value: 0x111f, Name: "Pixela"},
+		{Value: 0x1120, Name: "TiVo"},
+		{Value: 0x1121, Name: "Fidure"},
+		{Value: 0x1122, Name: "Marvell Semiconductor"},
+		{Value: 0x1123, Name: "Wasion Group"},
+		{Value: 0x1124, Name: "Jasco Products"},
+		{Value: 0x1125, Name: "Shenzhen Kaifa Technology"},
+		{Value: 0x1126, Name: "Netcomm Wireless"},
+		{Value: 0x1127, Name: "Define Instruments"},
+		{Value: 0x1128, Name: "In Home Displays"},
+		{Value: 0x1129, Name: "Miele & Cie. KG"},
+		{Value: 0x112a, Name: "Televes S.A."},
+		{Value: 0x112b, Name: "Labelec"},
+		{Value: 0x112c, Name: "China Electronics Standardization Institute"},
+		{Value: 0x112d, Name: "Vectorform"},
+		{Value: 0x112e, Name: "Busch-Jaeger Elektro"},
+		{Value: 0x112f, Name: "Redpine Signals"},
+		{Value: 0x1130, Name: "Bridges Electronic Technology"},
+		{Value: 0x1131, Name: "Sercomm"},
+		{Value: 0x1132, Name: "WSH GmbH wirsindheller"},
+		{Value: 0x1133, Name: "Bosch Security Systems"},
+		{Value: 0x1134, Name: "eZEX Corporation"},
+		{Value: 0x1135, Name: "Dresden Elektronik Ingenieurtechnik GmbH"},
+		{Value: 0x1136, Name: "MEAZON S.A."},
+		{Value: 0x1137, Name: "Crow Electronic Engineering"},
+		{Value: 0x1138, Name: "Harvard Engineering"},
+		{Value: 0x1139, Name: "Andson(Beijing) Technology"},
+		{Value: 0x113a, Name: "Adhoco AG"},
+		{Value: 0x113b, Name: "Waxman Consumer Products Group"},
+		{Value: 0x113c, Name: "Owon Technology"},
+		{Value: 0x113d, Name: "Hitron Technologies"},
+		{Value: 0x113e, Name: "Scemtec Steuerungstechnik GmbH"},
+		{Value: 0x113f, Name: "Webee"},
+		{Value: 0x1140, Name: "Grid2Home"},
+		{Value: 0x1141, Name: "Telink Micro"},
+		{Value: 0x1142, Name: "Jasmine Systems"},
+		{Value: 0x1143, Name: "Bidgely"},
+		{Value: 0x1144, Name: "Lutron"},
+		{Value: 0x1145, Name: "IJENKO"},
+		{Value: 0x1146, Name: "Starfield Electronic"},
+		{Value: 0x1147, Name: "TCP"},
+		{Value: 0x1148, Name: "Rogers Communications Partnership"},
+		{Value: 0x1149, Name: "Cree"},
+		{Value: 0x114a, Name: "Robert Bosch LLC"},
+		{Value: 0x114b, Name: "Ibis Networks"},
+		{Value: 0x114c, Name: "Quirky"},
+		{Value: 0x114d, Name: "Efergy Technologies"},
+		{Value: 0x114e, Name: "Smartlabs"},
+		{Value: 0x114f, Name: "Everspring Industry"},
+		{Value: 0x1150, Name: "Swann Communications"},
+		{Value: 0x1151, Name: "Soneter"},
+		{Value: 0x1152, Name: "Samsung SDS"},
+		{Value: 0x1153, Name: "Uniband Electronic Corporation"},
+		{Value: 0x1154, Name: "Accton Technology Corporation"},
+		{Value: 0x1155, Name: "Bosch Thermotechnik GmbH"},
+		{Value: 0x1156, Name: "Wincor Nixdorf Inc."},
+		{Value: 0x1157, Name: "Ohsung Electronics"},
+		{Value: 0x1158, Name: "Zen Within, Inc."},
+		{Value: 0x1159, Name: "Tech4home, Lda."},
+		{Value: 0x115A, Name: "Nanoleaf"},
+		{Value: 0x115B, Name: "Keen Home, Inc."},
+		{Value: 0x115C, Name: "Poly-Control APS"},
+		{Value: 0x115D, Name: "Eastfield Lighting Co., Ltd Shenzhen"},
+		{Value: 0x115E, Name: "IP Datatel, Inc."},
+		{Value: 0x115F, Name: "Lumi United Techology, Ltd Shenzhen"},
+		{Value: 0x1160, Name: "Sengled Optoelectronics Corp"},
+		{Value: 0x1161, Name: "Remote Solution Co., Ltd."},
+		{Value: 0x1162, Name: "ABB Genway Xiamen Electrical Equipment Co., Ltd."},
+		{Value: 0x1163, Name: "Zhejiang Rexense Tech"},
+		{Value: 0x1164, Name: "ForEE Technology"},
+		{Value: 0x1165, Name: "Open Access Technology Intl."},
+		{Value: 0x1166, Name: "INNR Lighting BV"},
+		{Value: 0x1167, Name: "Techworld Industries"},
+		{Value: 0x1168, Name: "Leedarson Lighting Co., Ltd."},
+		{Value: 0x1169, Name: "Arzel Zoning"},
+		{Value: 0x116A, Name: "Holley Technology"},
+		{Value: 0x116B, Name: "Beldon Technologies"},
+		{Value: 0x116C, Name: "Flextronics"},
+		{Value: 0x116D, Name: "Shenzhen Meian"},
+		{Value: 0x116E, Name: "Lowes"},
+		{Value: 0x116F, Name: "Sigma Connectivity"},
+		{Value: 0x1171, Name: "Wulian"},
+		{Value: 0x1172, Name: "Plugwise B.V."},
+		{Value: 0x1173, Name: "Titan Products"},
+		{Value: 0x1174, Name: "Ecospectral"},
+		{Value: 0x1175, Name: "D-Link"},
+		{Value: 0x1176, Name: "Technicolor Home USA"},
+		{Value: 0x1177, Name: "Opple Lighting"},
+		{Value: 0x1178, Name: "Wistron NeWeb Corp."},
+		{Value: 0x1179, Name: "QMotion Shades"},
+		{Value: 0x117A, Name: "Insta Elektro GmbH"},
+		{Value: 0x117B, Name: "Shanghai Vancount"},
+		{Value: 0x117C, Name: "Ikea of Sweden"},
+		{Value: 0x117D, Name: "RT-RK"},
+		{Value: 0x117E, Name: "Shenzhen Feibit"},
+		{Value: 0x117F, Name: "EuControls"},
+		{Value: 0x1180, Name: "Telkonet"},
+		{Value: 0x1181, Name: "Thermal Solution Resources"},
+		{Value: 0x1182, Name: "PomCube"},
+		{Value: 0x1183, Name: "Ei Electronics"},
+		{Value: 0x1184, Name: "Optoga"},
+		{Value: 0x1185, Name: "Stelpro"},
+		{Value: 0x1186, Name: "Lynxus Technologies Corp."},
+		{Value: 0x1187, Name: "Semiconductor Components"},
+		{Value: 0x1188, Name: "TP-Link"},
+		{Value: 0x1189, Name: "LEDVANCE LLC."},
+		{Value: 0x118A, Name: "Nortek"},
+		{Value: 0x118B, Name: "iRevo/Assa Abbloy Korea"},
+		{Value: 0x118C, Name: "Midea"},
+		{Value: 0x118D, Name: "ZF Friedrichshafen"},
+		{Value: 0x118E, Name: "Checkit"},
+		{Value: 0x118F, Name: "Aclara"},
+		{Value: 0x1190, Name: "Nokia"},
+		{Value: 0x1191, Name: "Goldcard High-tech Co., Ltd."},
+		{Value: 0x1192, Name: "George Wilson Industries Ltd."},
+		{Value: 0x1193, Name: "EASY SAVER CO.,INC"},
+		{Value: 0x1194, Name: "ZTE Corporation"},
+		{Value: 0x1195, Name: "ARRIS"},
+		{Value: 0x1196, Name: "Reliance BIG TV"},
+		{Value: 0x1197, Name: "Insight Energy Ventures/Powerley"},
+		{Value: 0x1198, Name: "Thomas Research Products (Hubbell Lighting Inc.)"},
+		{Value: 0x1199, Name: "Li Seng Technology"},
+		{Value: 0x119A, Name: "System Level Solutions Inc."},
+		{Value: 0x119B, Name: "Matrix Labs"},
+		{Value: 0x119C, Name: "Sinope Technologies"},
+		{Value: 0x119D, Name: "Jiuzhou Greeble"},
+		{Value: 0x119E, Name: "Guangzhou Lanvee Tech. Co. Ltd."},
+		{Value: 0x119F, Name: "Venstar"},
+		{Value: 0x1200, Name: "SLV"},
+		{Value: 0x1201, Name: "Halo Smart Labs"},
+		{Value: 0x1202, Name: "Scout Security Inc."},
+		{Value: 0x1203, Name: "Alibaba China Inc."},
+		{Value: 0x1204, Name: "Resolution Products, Inc."},
+		{Value: 0x1205, Name: "Smartlok Inc."},
+		{Value: 0x1206, Name: "Lux Products Corp."},
+		{Value: 0x1207, Name: "Vimar SpA"},
+		{Value: 0x1208, Name: "Universal Lighting Technologies"},
+		{Value: 0x1209, Name: "Robert Bosch, GmbH"},
+		{Value: 0x120A, Name: "Accenture"},
+		{Value: 0x120B, Name: "Heiman Technology Co., Ltd."},
+		{Value: 0x120C, Name: "Shenzhen HOMA Technology Co., Ltd."},
+		{Value: 0x120D, Name: "Vision-Electronics Technology"},
+		{Value: 0x120E, Name: "Lenovo"},
+		{Value: 0x120F, Name: "Presciense R&D"},
+		{Value: 0x1210, Name: "Shenzhen Seastar Intelligence Co., Ltd."},
+		{Value: 0x1211, Name: "Sensative AB"},
+		{Value: 0x1212, Name: "SolarEdge"},
+		{Value: 0x1213, Name: "Zipato"},
+		{Value: 0x1214, Name: "China Fire & Security Sensing Manufacturing (iHorn)"},
+		{Value: 0x1215, Name: "Quby BV"},
+		{Value: 0x1216, Name: "Hangzhou Roombanker Technology Co., Ltd."},
+		{Value: 0x1217, Name: "Amazon Lab126"},
+		{Value: 0x1218, Name: "Paulmann Licht GmbH"},
+		{Value: 0x1219, Name: "Shenzhen Orvibo Electronics Co. Ltd."},
+		{Value: 0x121A, Name: "TCI Telecommunications"},
+		{Value: 0x121B, Name: "Mueller-Licht International Inc."},
+		{Value: 0x121C, Name: "Aurora Limited"},
+		{Value: 0x121D, Name: "SmartDCC"},
+		{Value: 0x121E, Name: "Shanghai UMEinfo Co. Ltd."},
+		{Value: 0x121F, Name: "carbonTRACK"},
+		{Value: 0x1220, Name: "Somfy"},
+		{Value: 0x1221, Name: "Viessmann Elektronik GmbH"},
+		{Value: 0x1222, Name: "Hildebrand Technology Ltd"},
+		{Value: 0x1223, Name: "Onkyo Technology Corporation"},
+		{Value: 0x1224, Name: "Shenzhen Sunricher Technology Ltd."},
+		{Value: 0x1225, Name: "Xiu Xiu Technology Co., Ltd"},
+		{Value: 0x1226, Name: "Zumtobel Group"},
+		{Value: 0x1227, Name: "Shenzhen Kaadas Intelligent Technology Co. Ltd"},
+		{Value: 0x1228, Name: "Shanghai Xiaoyan Technology Co. Ltd"},
+		{Value: 0x1229, Name: "Cypress Semiconductor"},
+		{Value: 0x122A, Name: "XAL GmbH"},
+		{Value: 0x122B, Name: "Inergy Systems LLC"},
+		{Value: 0x122C, Name: "Alfred Karcher GmbH & Co KG"},
+		{Value: 0x122D, Name: "Adurolight Manufacturing"},
+		{Value: 0x122E, Name: "Groupe Muller"},
+		{Value: 0x122F, Name: "V-Mark Enterprises Inc."},
+		{Value: 0x1230, Name: "Lead Energy AG"},
+		{Value: 0x1231, Name: "UIOT Group"},
+		{Value: 0x1232, Name: "Axxess Industries Inc."},
+		{Value: 0x1233, Name: "Third Reality Inc."},
+		{Value: 0x1234, Name: "DSR Corporation"},
+		{Value: 0x1235, Name: "Guangzhou Vensi Intelligent Technology Co. Ltd."},
+		{Value: 0x1236, Name: "Schlage Lock (Allegion)"},
+		{Value: 0x1237, Name: "Net2Grid"},
+		{Value: 0x1238, Name: "Airam Electric Oy Ab"},
+		{Value: 0x1239, Name: "IMMAX WPB CZ"},
+		{Value: 0x123A, Name: "ZIV Automation"},
+		{Value: 0x123B, Name: "HangZhou iMagicTechnology Co., Ltd"},
+		{Value: 0x123C, Name: "Xiamen Leelen Technology Co. Ltd."},
+		{Value: 0x123D, Name: "Overkiz SAS"},
+		{Value: 0x123E, Name: "Flonidan A/S"},
+		{Value: 0x123F, Name: "HDL Automation Co., Ltd."},
+		{Value: 0x1240, Name: "Ardomus Networks Corporation"},
+		{Value: 0x1241, Name: "Samjin Co., Ltd."},
+		{Value: 0x1242, Name: "Sprue Aegis PLC"},
+		{Value: 0x1243, Name: "Indra Sistemas, S.A."},
+		{Value: 0x1244, Name: "Shenzhen JBT Smart Lighting Co., Ltd."},
+		{Value: 0x1245, Name: "GE Lighting & Current"},
+		{Value: 0x1246, Name: "Danfoss A/S"},
+		{Value: 0x1247, Name: "NIVISS PHP Sp. z o.o. Sp.k."},
+		{Value: 0x1248, Name: "Shenzhen Fengliyuan Energy Conservating Technology Co. Ltd"},
+		{Value: 0x1249, Name: "NEXELEC"},
+		{Value: 0x124A, Name: "Sichuan Behome Prominent Technology Co., Ltd"},
+		{Value: 0x124B, Name: "Fujian Star-net Communication Co., Ltd."},
+		{Value: 0x124C, Name: "Toshiba Visual Solutions Corporation"},
+		{Value: 0x124D, Name: "Latchable, Inc."},
+		{Value: 0x124E, Name: "L&S Deutschland GmbH"},
+		{Value: 0x124F, Name: "Gledopto Co., Ltd."},
+		{Value: 0x1250, Name: "The Home Depot"},
+		{Value: 0x1251, Name: "Neonlite International Ltd."},
+		{Value: 0x1252, Name: "Arlo Technologies, Inc."},
+		{Value: 0x1253, Name: "Xingluo Technology Co., Ltd."},
+		{Value: 0x1254, Name: "Simon Electric (China) Co., Ltd."},
+		{Value: 0x1255, Name: "Hangzhou Greatstar Industrial Co., Ltd."},
+		{Value: 0x1256, Name: "Sequentric Energy Systems, LLC"},
+		{Value: 0x1257, Name: "Solum Co., Ltd."},
+		{Value: 0x1258, Name: "Eaglerise Electric & Electronic (China) Co., Ltd."},
+		{Value: 0x1259, Name: "Fantem Technologies (Shenzhen) Co., Ltd."},
+		{Value: 0x125A, Name: "Yunding Network Technology (Beijing) Co., Ltd."},
+		{Value: 0x125B, Name: "Atlantic Group"},
+		{Value: 0x125C, Name: "Xiamen Intretech, Inc."},
+		{Value: 0x125D, Name: "Tuya Global Inc."},
+		{Value: 0x125E, Name: "Xiamen Dnake Intelligent Technology Co., Ltd"},
+		{Value: 0x125F, Name: "Niko nv"},
+		{Value: 0x1260, Name: "Emporia Energy"},
+		{Value: 0x1261, Name: "Sikom AS"},
+		{Value: 0x1262, Name: "AXIS Labs, Inc."},
+		{Value: 0x1263, Name: "Current Products Corporation"},
+		{Value: 0x1264, Name: "MeteRSit SRL"},
+		{Value: 0x1265, Name: "HORNBACH Baumarkt AG"},
+		{Value: 0x1266, Name: "DiCEworld s.r.l. a socio unico"},
+		{Value: 0x1267, Name: "ARC Technology Co., Ltd"},
+		{Value: 0x1268, Name: "Hangzhou Konke Information Technology Co., Ltd."},
+		{Value: 0x1269, Name: "SALTO Systems S.L."},
+		{Value: 0x126A, Name: "Shenzhen Shyugj Technology Co., Ltd"},
+		{Value: 0x126B, Name: "Brayden Automation Corporation"},
+		{Value: 0x126C, Name: "Environexus Pty. Ltd."},
+		{Value: 0x126D, Name: "Eltra nv/sa"},
+		{Value: 0x126E, Name: "Xiaomi Communications Co., Ltd."},
+		{Value: 0x126F, Name: "Shanghai Shuncom Electronic Technology Co., Ltd."},
+		{Value: 0x1270, Name: "Voltalis S.A"},
+		{Value: 0x1271, Name: "FEELUX Co., Ltd."},
+		{Value: 0x1272, Name: "SmartPlus Inc."},
+		{Value: 0x1273, Name: "Halemeier GmbH"},
+		{Value: 0x1274, Name: "Trust International BBV"},
+		{Value: 0x1275, Name: "Duke Energy Business Services LLC"},
+		{Value: 0x1276, Name: "Calix, Inc."},
+		{Value: 0x1277, Name: "ADEO"},
+		{Value: 0x1278, Name: "Connected Response Limited"},
+		{Value: 0x1279, Name: "StroyEnergoKom"},
+		{Value: 0x127A, Name: "Lumitech Lighting Solution GmbH"},
+		{Value: 0x127B, Name: "Verdant Environmental Technologies"},
+		{Value: 0x127C, Name: "Alfred International"},
+		{Value: 0x127D, Name: "Sansi LED Lighting"},
+		{Value: 0x127E, Name: "Mindtree"},
+		{Value: 0x127F, Name: "Nordic Semiconductor ASA"},
+		{Value: 0x1280, Name: "Siterwell Electronics"},
+		{Value: 0x1281, Name: "Briloner Leuchten GmbH"},
+		{Value: 0x1282, Name: "Shenzhen SEI Technology"},
+		{Value: 0x1283, Name: "Copper Labs"},
+		{Value: 0x1284, Name: "Delta Dore"},
+		{Value: 0x1285, Name: "Hager Group"},
+		{Value: 0x1286, Name: "Shenzhen CoolKit Technology"},
+		{Value: 0x1287, Name: "Hangzhou Sky-Lighting"},
+		{Value: 0x1288, Name: "E.ON SE"},
+		{Value: 0x1289, Name: "Lidl Stiftung"},
+		{Value: 0x128A, Name: "Sichuan Changhong Network Technologies"},
+		{Value: 0x128B, Name: "NodOn"},
+		{Value: 0x128C, Name: "Jiangxi Innotech Technology"},
+		{Value: 0x128D, Name: "Mercator Pty"},
+		{Value: 0x128E, Name: "Beijing Ruying Tech"},
+		{Value: 0x128F, Name: "EGLO Leuchten GmbH"},
+		{Value: 0x1290, Name: "Pietro Fiorentini S.p.A"},
+		{Value: 0x1291, Name: "Zehnder Group Vaux-Andigny"},
+		{Value: 0x1292, Name: "BRK Brands"},
+		{Value: 0x1293, Name: "Askey Computer"},
+		{Value: 0x1294, Name: "PassiveBolt"},
+		{Value: 0x1295, Name: "AVM Audiovisuelles"},
+		{Value: 0x1296, Name: "Ningbo Suntech Lighting Tech"},
+		{Value: 0x1297, Name: "Societe en Commandite Stello"},
+		{Value: 0x1298, Name: "Vivint Smart Home"},
+		{Value: 0x1299, Name: "Namron"},
+		{Value: 0x129A, Name: "RADEMACHER Geraete Elektronik GmbH"},
+		{Value: 0x129B, Name: "OMO Systems"},
+		{Value: 0x129C, Name: "Siglis"},
+		{Value: 0x129D, Name: "IMHOTEP CREATION"},
+		{Value: 0x129E, Name: "icasa"},
+		{Value: 0x129F, Name: "Level Home"},
+		{Value: 0x1300, Name: "TIS Control"},
+		{Value: 0x1301, Name: "Radisys India"},
+		{Value: 0x1302, Name: "Veea"},
+		{Value: 0x1303, Name: "FELL Technology"},
+		{Value: 0x1304, Name: "Sowilo Design Services"},
+		{Value: 0x1305, Name: "Lexi Devices"},
+		{Value: 0x1306, Name: "Lifi Labs"},
+		{Value: 0x1307, Name: "GRUNDFOS Holding"},
+		{Value: 0x1308, Name: "SOURCING & CREATION"},
+		{Value: 0x1309, Name: "Kraken Technologies"},
+		{Value: 0x130A, Name: "EVE SYSTEMS"},
+		{Value: 0x130B, Name: "LITE-ON TECHNOLOGY CORPORATION"},
+		{Value: 0x130C, Name: "Focalcrest"},
+		{Value: 0x130D, Name: "Bouffalo Lab (Nanjing)"},
+		{Value: 0x130E, Name: "Wyze Labs"},
+		{Value: 0x1337, Name: "Datek Wireless AS"},
+		{Value: 0x1994, Name: "Gewiss S.p.A."},
+		{Value: 0x2794, Name: "Climax Technology Cp., Ltd."},
 	}
 }
 
