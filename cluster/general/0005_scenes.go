@@ -1625,7 +1625,7 @@ func (AddSceneResponse) Required() bool { return true }
 func (AddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (AddSceneResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (AddSceneResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (AddSceneResponse) MnfCode() uint16 { return 0 }
@@ -1768,7 +1768,7 @@ func (ViewSceneResponse) Required() bool { return true }
 func (ViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (ViewSceneResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (ViewSceneResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (ViewSceneResponse) MnfCode() uint16 { return 0 }
@@ -1932,7 +1932,7 @@ func (RemoveSceneResponse) Required() bool { return true }
 func (RemoveSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (RemoveSceneResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (RemoveSceneResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveSceneResponse) MnfCode() uint16 { return 0 }
@@ -2059,7 +2059,7 @@ func (RemoveAllScenesResponse) Required() bool { return true }
 func (RemoveAllScenesResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (RemoveAllScenesResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (RemoveAllScenesResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (RemoveAllScenesResponse) MnfCode() uint16 { return 0 }
@@ -2175,7 +2175,7 @@ func (StoreSceneResponse) Required() bool { return true }
 func (StoreSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (StoreSceneResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (StoreSceneResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (StoreSceneResponse) MnfCode() uint16 { return 0 }
@@ -2309,7 +2309,7 @@ func (GetSceneMembershipResponse) Required() bool { return true }
 func (GetSceneMembershipResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (GetSceneMembershipResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (GetSceneMembershipResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetSceneMembershipResponse) MnfCode() uint16 { return 0 }
@@ -2448,7 +2448,7 @@ func (EnhancedAddSceneResponse) Required() bool { return false }
 func (EnhancedAddSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (EnhancedAddSceneResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (EnhancedAddSceneResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedAddSceneResponse) MnfCode() uint16 { return 0 }
@@ -2591,7 +2591,7 @@ func (EnhancedViewSceneResponse) Required() bool { return false }
 func (EnhancedViewSceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (EnhancedViewSceneResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (EnhancedViewSceneResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (EnhancedViewSceneResponse) MnfCode() uint16 { return 0 }
@@ -2754,7 +2754,7 @@ func (CopySceneResponse) Required() bool { return false }
 func (CopySceneResponse) Cluster() zcl.ClusterID { return ScenesID }
 
 // Direction of the command
-func (CopySceneResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (CopySceneResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (CopySceneResponse) MnfCode() uint16 { return 0 }

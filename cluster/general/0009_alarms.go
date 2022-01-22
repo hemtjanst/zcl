@@ -396,7 +396,7 @@ func (Alarm) Required() bool { return true }
 func (Alarm) Cluster() zcl.ClusterID { return AlarmsID }
 
 // Direction of the command
-func (Alarm) Direction() zcl.Direction { return zcl.ClientToServer }
+func (Alarm) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (Alarm) MnfCode() uint16 { return 0 }
@@ -514,7 +514,7 @@ func (GetAlarmResponse) Required() bool { return false }
 func (GetAlarmResponse) Cluster() zcl.ClusterID { return AlarmsID }
 
 // Direction of the command
-func (GetAlarmResponse) Direction() zcl.Direction { return zcl.ClientToServer }
+func (GetAlarmResponse) Direction() zcl.Direction { return zcl.ServerToClient }
 
 // MnfCode returns the manufacturer code (if any) of the command
 func (GetAlarmResponse) MnfCode() uint16 { return 0 }
