@@ -13,6 +13,8 @@ namespace {{$ns}} {
         value?: ValueType
         scale?: number
         unit?: IUnit
+        numberValue?: () => number|undefined
+        valueName?: () => string|undefined
     }
     export type IValInit<T,V> = (value?: V) => T;
 
@@ -116,21 +118,36 @@ namespace {{$ns}} {
                     this.value = value;
                 }
 
-                toString() {
+                valueName() {
+                    if (typeof o.value === 'number' && typeof o.values === 'object' && typeof o.values[o.value] !== 'undefined') {
+                        return `${o.values[o.value]}`;
+                    }
+                    return undefined;
+                }
+
+                numberValue() {
                     let val = o.value;
-                    let nv;
                     switch (typeof val) {
-                        case 'undefined': return null;
-                        case 'string': nv = parseFloat(val); break;
-                        case 'number': nv = val; break;
+                        case 'string': return parseFloat(val);
+                        case 'number': return val;
                         case 'object':
                             if (Array.isArray(val) && val.length === 1 && typeof val[0] === 'number') {
-                                nv = val[0];
+                                return val[0];
+                            }
+                            if (Array.isArray(val) && val.length === 1 && typeof val[0] === 'string') {
+                                return parseFloat(val[0]);
                             }
                             break;
                     }
-                    if (nv && typeof o.values === 'object' && typeof o.values[nv] !== 'undefined') {
-                        return o.values[nv];
+                }
+
+                toString() {
+                    let val = o.value;
+                    let nv = o.numberValue();
+                    let vn = o.valueName();
+
+                    if (vn) {
+                        return vn;
                     }
                     if (nv && typeof o.scale !== 'undefined') {
                         val = nv = (Math.round(100 * nv / o.scale) / 100);
@@ -149,10 +166,6 @@ namespace {{$ns}} {
             return <T>o;
         }
     }
-
-    const unitFmt = (a: IVal) => {
-
-    };
 
     export const native = {
         bool: { native: "bool" },
@@ -244,10 +257,10 @@ namespace {{$ns}} {
                 if (typeof v === 'string') v = parseInt(v);
                 if (typeof v !== 'number') return v;
                 // Can we stop using tiny numbers for dates? Y2K, Y2038 and now 2157...
-                let yr = ((v & 0xFF000000) >> 24) + 1900,
-                    mo = ((v & 0x00FF0000) >> 16) - 1,
-                    day = (v & 0x0000FF00) >> 8,
-                    wd = (v & 0x000000FF);
+                let yr = ((v & 0xFF000000) >> 24) + 1900
+                    ,mo = ((v & 0x00FF0000) >> 16) - 1
+                    ,day = (v & 0x0000FF00) >> 8
+                    //,wd = (v & 0x000000FF);
                 return (new Date(yr, mo, day, 0, 0, 0)).toLocaleDateString();
             }
         }),
@@ -310,26 +323,6 @@ namespace {{$ns}} {
         }),
     };
 
-    export namespace Type {
-        class Array {
-            constructor(private name: string, private size) {
-            }
-        }
-        class Struct {
-            constructor(private name: string, private size) {
-            }
-        }
-        class Bitmap {
-            constructor(public name: string, public size) {
-            }
-        }
-        class Byte {}
-        class Uint {}
-        class Int {}
-        class Float {}
-        class String {}
-    }
-
     export const ZDP = { {{$path := fmt "%s.ZDP" $ns}}{{$ipath := fmt "%s.IZDP" $ns}}
         Types: {
             {{range $name,$attr := .zdp.TypeMap}}{{if $attr.Name}}{{template "attr" withPath $path $ipath $ipath $attr}}{{end}}{{end}}
@@ -379,20 +372,28 @@ namespace {{$ns}} {
     };
 
     export namespace IZDP {
+        // noinspection ES6UnusedImports
         import ICommand = ZigBee.ICommand;
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
 
         {{range .zdp.Commands}}{{if .Name}}{{template "cmdInterface" .}}{{end}}{{end}}{{range .zdp.Types}}{{if .Name}}{{template "argInterface" .}}{{end}}{{end}}
     }
     {{range .cluster}}
     export namespace I{{.Name.Fmt}} {
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         {{range .Clusters}}
         export namespace {{.Name.Fmt}} {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         {{range .Server.Command}}{{if .Name}}{{template "cmdInterface" .}}{{end}}{{end}}{{range .Client.Command}}{{if .Name}}{{template "cmdInterface" .}}{{end}}{{end}}

@@ -12,6 +12,8 @@ namespace ZigBee {
         value?: ValueType
         scale?: number
         unit?: IUnit
+        numberValue?: () => number|undefined
+        valueName?: () => string|undefined
     }
     export type IValInit<T,V> = (value?: V) => T;
 
@@ -115,21 +117,36 @@ namespace ZigBee {
                     this.value = value;
                 }
 
-                toString() {
+                valueName() {
+                    if (typeof o.value === 'number' && typeof o.values === 'object' && typeof o.values[o.value] !== 'undefined') {
+                        return `${o.values[o.value]}`;
+                    }
+                    return undefined;
+                }
+
+                numberValue() {
                     let val = o.value;
-                    let nv;
                     switch (typeof val) {
-                        case 'undefined': return null;
-                        case 'string': nv = parseFloat(val); break;
-                        case 'number': nv = val; break;
+                        case 'string': return parseFloat(val);
+                        case 'number': return val;
                         case 'object':
                             if (Array.isArray(val) && val.length === 1 && typeof val[0] === 'number') {
-                                nv = val[0];
+                                return val[0];
+                            }
+                            if (Array.isArray(val) && val.length === 1 && typeof val[0] === 'string') {
+                                return parseFloat(val[0]);
                             }
                             break;
                     }
-                    if (nv && typeof o.values === 'object' && typeof o.values[nv] !== 'undefined') {
-                        return o.values[nv];
+                }
+
+                toString() {
+                    let val = o.value;
+                    let nv = o.numberValue();
+                    let vn = o.valueName();
+
+                    if (vn) {
+                        return vn;
                     }
                     if (nv && typeof o.scale !== 'undefined') {
                         val = nv = (Math.round(100 * nv / o.scale) / 100);
@@ -148,10 +165,6 @@ namespace ZigBee {
             return <T>o;
         }
     }
-
-    const unitFmt = (a: IVal) => {
-
-    };
 
     export const native = {
         bool: { native: "bool" },
@@ -243,10 +256,10 @@ namespace ZigBee {
                 if (typeof v === 'string') v = parseInt(v);
                 if (typeof v !== 'number') return v;
                 // Can we stop using tiny numbers for dates? Y2K, Y2038 and now 2157...
-                let yr = ((v & 0xFF000000) >> 24) + 1900,
-                    mo = ((v & 0x00FF0000) >> 16) - 1,
-                    day = (v & 0x0000FF00) >> 8,
-                    wd = (v & 0x000000FF);
+                let yr = ((v & 0xFF000000) >> 24) + 1900
+                    ,mo = ((v & 0x00FF0000) >> 16) - 1
+                    ,day = (v & 0x0000FF00) >> 8
+                    //,wd = (v & 0x000000FF);
                 return (new Date(yr, mo, day, 0, 0, 0)).toLocaleDateString();
             }
         }),
@@ -308,26 +321,6 @@ namespace ZigBee {
             }
         }),
     };
-
-    export namespace Type {
-        class Array {
-            constructor(private name: string, private size) {
-            }
-        }
-        class Struct {
-            constructor(private name: string, private size) {
-            }
-        }
-        class Bitmap {
-            constructor(public name: string, public size) {
-            }
-        }
-        class Byte {}
-        class Uint {}
-        class Int {}
-        class Float {}
-        class String {}
-    }
 
     export const ZDP = { 
         Types: {
@@ -8791,8 +8784,11 @@ reporting occupancy status`,
     };
 
     export namespace IZDP {
+        // noinspection ES6UnusedImports
         import ICommand = ZigBee.ICommand;
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
 
         
@@ -9001,12 +8997,17 @@ reporting occupancy status`,
     }
     
     export namespace IClosures {
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         
         export namespace WindowCovering {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9072,12 +9073,17 @@ reporting occupancy status`,
             export interface IArgWindowCoveringType extends IAttribute { value: IArgWindowCoveringTypePayload }    }
 
     export namespace IGeneral {
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         
         export namespace Basic {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9086,21 +9092,27 @@ reporting occupancy status`,
         }
 
         export namespace PowerConfiguration {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace DeviceTemperatureConfiguration {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace Identify {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9115,7 +9127,9 @@ reporting occupancy status`,
         }
 
         export namespace Groups {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9142,7 +9156,9 @@ reporting occupancy status`,
         }
 
         export namespace Scenes {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9193,7 +9209,9 @@ reporting occupancy status`,
         }
 
         export namespace OnOff {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9212,14 +9230,18 @@ reporting occupancy status`,
         }
 
         export namespace OnOffSwitchConfiguration {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace LevelControl {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9242,7 +9264,9 @@ reporting occupancy status`,
         }
 
         export namespace Alarms {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9261,14 +9285,18 @@ reporting occupancy status`,
         }
 
         export namespace Time {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace Location {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9309,70 +9337,90 @@ reporting occupancy status`,
         }
 
         export namespace AnalogInput {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace AnalogOutput {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace AnalogValue {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace BinaryInput {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace BinaryOutput {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace BinaryValue {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace MultistateInput {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace MultistateOutput {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace MultistateValue {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace PollControl {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9381,14 +9429,18 @@ reporting occupancy status`,
         }
 
         export namespace MeterIdentification {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace Diagnostics {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9806,12 +9858,17 @@ reporting occupancy status`,
             export interface IArgZclVersion extends IAttribute { value: IArgZclVersionPayload }    }
 
     export namespace ISecurityAndSafety {
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         
         export namespace IasZone {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9853,12 +9910,17 @@ reporting occupancy status`,
             export interface IArgZoneType extends IAttribute { value: IArgZoneTypePayload }    }
 
     export namespace ILighting {
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         
         export namespace ColorControl {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -9903,7 +9965,9 @@ reporting occupancy status`,
         }
 
         export namespace BallastConfiguration {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -10095,54 +10159,71 @@ reporting occupancy status`,
             export interface IArgWhitePointY extends IAttribute { value: IArgWhitePointYPayload }    }
 
     export namespace IMeasurementAndSensing {
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         
         export namespace IlluminanceMeasurement {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace IlluminanceLevelSensing {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace TemperatureMeasurement {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace PressureMeasurement {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace FlowMeasurement {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace RelativeHumidityMeasurement {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
         }
 
         export namespace OccupancySensing {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
@@ -10216,12 +10297,17 @@ reporting occupancy status`,
             export interface IArgUltrasonicUnoccupiedToOccupiedThreshold extends IAttribute { value: IArgUltrasonicUnoccupiedToOccupiedThresholdPayload }    }
 
     export namespace IOtau {
+        // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
         import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         
         export namespace Otau {
+            // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
             import ValueType = ZigBee.ValueType;
 
         
