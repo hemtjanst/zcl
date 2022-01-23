@@ -603,25 +603,25 @@ func (v ZoneStatus) String() string {
 	for _, bit := range bits {
 		switch bit {
 		case 0:
-			bstr = append(bstr, "Test")
+			bstr = append(bstr, "Alarm1")
 		case 1:
-			bstr = append(bstr, "Battery defect")
-		case 10:
+			bstr = append(bstr, "Alarm2")
+		case 2:
 			bstr = append(bstr, "Tamper")
-		case 11:
+		case 3:
 			bstr = append(bstr, "Battery")
-		case 12:
+		case 4:
 			bstr = append(bstr, "Supervision notify")
-		case 13:
+		case 5:
 			bstr = append(bstr, "Restore notify")
-		case 14:
+		case 6:
 			bstr = append(bstr, "Trouble")
-		case 15:
+		case 7:
 			bstr = append(bstr, "AC (mains)")
 		case 8:
-			bstr = append(bstr, "Alarm1")
+			bstr = append(bstr, "Test")
 		case 9:
-			bstr = append(bstr, "Alarm2")
+			bstr = append(bstr, "Battery defect")
 		default:
 			bstr = append(bstr, zcl.Sprintf("Unknown(%d)", bit))
 		}
@@ -629,41 +629,41 @@ func (v ZoneStatus) String() string {
 	return zcl.StrJoin(bstr, ", ")
 }
 
-func (v ZoneStatus) IsTest() bool              { return zcl.BitmapTest([]byte(v[:]), 0) }
-func (v ZoneStatus) IsBatteryDefect() bool     { return zcl.BitmapTest([]byte(v[:]), 1) }
-func (v ZoneStatus) IsTamper() bool            { return zcl.BitmapTest([]byte(v[:]), 10) }
-func (v ZoneStatus) IsBattery() bool           { return zcl.BitmapTest([]byte(v[:]), 11) }
-func (v ZoneStatus) IsSupervisionNotify() bool { return zcl.BitmapTest([]byte(v[:]), 12) }
-func (v ZoneStatus) IsRestoreNotify() bool     { return zcl.BitmapTest([]byte(v[:]), 13) }
-func (v ZoneStatus) IsTrouble() bool           { return zcl.BitmapTest([]byte(v[:]), 14) }
-func (v ZoneStatus) IsAcMains() bool           { return zcl.BitmapTest([]byte(v[:]), 15) }
-func (v ZoneStatus) IsAlarm1() bool            { return zcl.BitmapTest([]byte(v[:]), 8) }
-func (v ZoneStatus) IsAlarm2() bool            { return zcl.BitmapTest([]byte(v[:]), 9) }
-func (v *ZoneStatus) SetTest(b bool)           { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
-func (v *ZoneStatus) SetBatteryDefect(b bool)  { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b)) }
-func (v *ZoneStatus) SetTamper(b bool)         { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 10, b)) }
-func (v *ZoneStatus) SetBattery(b bool)        { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 11, b)) }
+func (v ZoneStatus) IsAlarm1() bool            { return zcl.BitmapTest([]byte(v[:]), 0) }
+func (v ZoneStatus) IsAlarm2() bool            { return zcl.BitmapTest([]byte(v[:]), 1) }
+func (v ZoneStatus) IsTamper() bool            { return zcl.BitmapTest([]byte(v[:]), 2) }
+func (v ZoneStatus) IsBattery() bool           { return zcl.BitmapTest([]byte(v[:]), 3) }
+func (v ZoneStatus) IsSupervisionNotify() bool { return zcl.BitmapTest([]byte(v[:]), 4) }
+func (v ZoneStatus) IsRestoreNotify() bool     { return zcl.BitmapTest([]byte(v[:]), 5) }
+func (v ZoneStatus) IsTrouble() bool           { return zcl.BitmapTest([]byte(v[:]), 6) }
+func (v ZoneStatus) IsAcMains() bool           { return zcl.BitmapTest([]byte(v[:]), 7) }
+func (v ZoneStatus) IsTest() bool              { return zcl.BitmapTest([]byte(v[:]), 8) }
+func (v ZoneStatus) IsBatteryDefect() bool     { return zcl.BitmapTest([]byte(v[:]), 9) }
+func (v *ZoneStatus) SetAlarm1(b bool)         { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 0, b)) }
+func (v *ZoneStatus) SetAlarm2(b bool)         { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 1, b)) }
+func (v *ZoneStatus) SetTamper(b bool)         { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 2, b)) }
+func (v *ZoneStatus) SetBattery(b bool)        { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 3, b)) }
 func (v *ZoneStatus) SetSupervisionNotify(b bool) {
-	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 12, b))
+	copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 4, b))
 }
-func (v *ZoneStatus) SetRestoreNotify(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 13, b)) }
-func (v *ZoneStatus) SetTrouble(b bool)       { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 14, b)) }
-func (v *ZoneStatus) SetAcMains(b bool)       { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 15, b)) }
-func (v *ZoneStatus) SetAlarm1(b bool)        { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 8, b)) }
-func (v *ZoneStatus) SetAlarm2(b bool)        { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 9, b)) }
+func (v *ZoneStatus) SetRestoreNotify(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 5, b)) }
+func (v *ZoneStatus) SetTrouble(b bool)       { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 6, b)) }
+func (v *ZoneStatus) SetAcMains(b bool)       { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 7, b)) }
+func (v *ZoneStatus) SetTest(b bool)          { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 8, b)) }
+func (v *ZoneStatus) SetBatteryDefect(b bool) { copy((*v)[:], zcl.BitmapSet([]byte((*v)[:]), 9, b)) }
 
 func (ZoneStatus) MultiOptions() []zcl.Option {
 	return []zcl.Option{
-		{Value: 0, Name: "Test"},
-		{Value: 1, Name: "Battery defect"},
-		{Value: 10, Name: "Tamper"},
-		{Value: 11, Name: "Battery"},
-		{Value: 12, Name: "Supervision notify"},
-		{Value: 13, Name: "Restore notify"},
-		{Value: 14, Name: "Trouble"},
-		{Value: 15, Name: "AC (mains)"},
-		{Value: 8, Name: "Alarm1"},
-		{Value: 9, Name: "Alarm2"},
+		{Value: 0, Name: "Alarm1"},
+		{Value: 1, Name: "Alarm2"},
+		{Value: 2, Name: "Tamper"},
+		{Value: 3, Name: "Battery"},
+		{Value: 4, Name: "Supervision notify"},
+		{Value: 5, Name: "Restore notify"},
+		{Value: 6, Name: "Trouble"},
+		{Value: 7, Name: "AC (mains)"},
+		{Value: 8, Name: "Test"},
+		{Value: 9, Name: "Battery defect"},
 	}
 }
 
