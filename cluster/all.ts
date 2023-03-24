@@ -2167,6 +2167,21 @@ nodes that implements a larger number of endpoints than can be described by a Ac
                 0x09: `Projector Screen`,  },
                 
             })), },
+        DoorLock: {
+            ID: 0x0101,
+            Name: `Door Lock`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
         WindowCovering: {
             ID: 0x0102,
             Name: `Window Covering`,
@@ -2241,6 +2256,14 @@ nodes that implements a larger number of endpoints than can be described by a Ac
         }
     };
     
+    ZigBee.Closures.DoorLock.Server.Attribute = { 
+    };
+    ZigBee.Closures.DoorLock.Client.Attribute = { 
+    };
+    ZigBee.Closures.DoorLock.Server.Command = { 
+    };
+    ZigBee.Closures.DoorLock.Client.Command = { 
+    };
     ZigBee.Closures.WindowCovering.Server.Attribute = { 
         0x0000: ZigBee.Closures.Types.WindowCoveringType,
         0x0001: ZigBee.Closures.Types.LiftPhysicalClosedLimit,
@@ -7795,6 +7818,738 @@ color loop.`,
     };
     export const MeasurementAndSensing = {
         Types: { 
+            AcActivePowerOverload: makeType<ZigBee.IMeasurementAndSensing.IArgAcActivePowerOverload, ZigBee.IMeasurementAndSensing.IArgAcActivePowerOverloadPayload>(base.s16, ()=>({
+                name: `AC Active Power Overload`,
+                description: `specifies the alarm threshold, set by the manufacturer, for the maximum output active power supported by
+device. The value is multiplied and divided by the ACPowerMultiplier and ACPowerDivisor, respectively.`,
+                id: 0x0803,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            AcAlarmsMask: makeType<ZigBee.IMeasurementAndSensing.IArgAcAlarmsMask, ZigBee.IMeasurementAndSensing.IArgAcAlarmsMaskPayload>(base.bmp16, ()=>({
+                name: `AC Alarms Mask`,
+                description: `specifies which configurable alarms may be generated`,
+                id: 0x0800,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                bits: { 
+                0: `Voltage Overload`, 
+                1: `Current Overload`, 
+                2: `Active Power Overload`, 
+                3: `Reactive Power Overload`, 
+                4: `Average RMS Over Voltage`, 
+                5: `Average RMS Under Voltage`, 
+                6: `RMS Extreme Over Voltage`, 
+                7: `RMS Extreme Under Voltage`, 
+                8: `RMS Voltage Sag`, 
+                9: `RMS Voltage Swell`,  },
+                
+            })),
+            AcCurrentDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgAcCurrentDivisor, ZigBee.IMeasurementAndSensing.IArgAcCurrentDivisorPayload>(base.u16, ()=>({
+                name: `AC Current Divisor`,
+                description: `Provides a value to be divided against the ACCurrent, InstantaneousCurrent and RMSCurrent attributes.
+This attribute must be used in conjunction with the ACCurrentMultiplier attribute. 0x0000 is an invalid value
+for this attribute`,
+                id: 0x0603,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcCurrentMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgAcCurrentMultiplier, ZigBee.IMeasurementAndSensing.IArgAcCurrentMultiplierPayload>(base.u16, ()=>({
+                name: `AC Current Multiplier`,
+                description: `Provides a value to be multiplied against the InstantaneousCurrent and RMSCurrent attributes. This attribute
+must be used in conjunction with the ACCurrentDivisor attribute. 0x0000 is an invalid value for this attribute.`,
+                id: 0x0602,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcCurrentOverload: makeType<ZigBee.IMeasurementAndSensing.IArgAcCurrentOverload, ZigBee.IMeasurementAndSensing.IArgAcCurrentOverloadPayload>(base.s16, ()=>({
+                name: `AC Current Overload`,
+                description: `specifies the alarm threshold, set by the manufacturer, for the maximum output current supported by device.
+The value is multiplied and divided by the ACCurrentMultiplier and ACCurrentDivider, respectively. The
+value is current RMS.`,
+                id: 0x0802,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            AcFrequency: makeType<ZigBee.IMeasurementAndSensing.IArgAcFrequency, ZigBee.IMeasurementAndSensing.IArgAcFrequencyPayload>(base.u16, ()=>({
+                name: `AC Frequency`,
+                description: `represents the most recent AC Frequency reading in Hertz (Hz). If the frequency
+cannot be measured, a value of 0xFFFF is returned.`,
+                id: 0x0300,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Hertz,
+                
+            })),
+            AcFrequencyDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgAcFrequencyDivisor, ZigBee.IMeasurementAndSensing.IArgAcFrequencyDivisorPayload>(base.u16, ()=>({
+                name: `AC Frequency Divisor`,
+                description: `Provides a value to be divided against the ACFrequency attribute. This attribute must be used in conjunction
+with the ACFrequencyMultiplier attribute. 0x0000 is an invalid value for this attribute.`,
+                id: 0x0401,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcFrequencyMax: makeType<ZigBee.IMeasurementAndSensing.IArgAcFrequencyMax, ZigBee.IMeasurementAndSensing.IArgAcFrequencyMaxPayload>(base.u16, ()=>({
+                name: `AC Frequency Max`,
+                description: `attribute represents the highest AC Frequency value measured in Hertz (Hz). After
+resetting, this attribute will return a value of 0xFFFF until a measurement is made.`,
+                id: 0x0302,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Hertz,
+                
+            })),
+            AcFrequencyMin: makeType<ZigBee.IMeasurementAndSensing.IArgAcFrequencyMin, ZigBee.IMeasurementAndSensing.IArgAcFrequencyMinPayload>(base.u16, ()=>({
+                name: `AC Frequency Min`,
+                description: `attribute represents the lowest AC Frequency value measured in Hertz (Hz). After
+resetting, this attribute will return a value of 0xFFFF until a measurement is made.`,
+                id: 0x0301,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Hertz,
+                
+            })),
+            AcFrequencyMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgAcFrequencyMultiplier, ZigBee.IMeasurementAndSensing.IArgAcFrequencyMultiplierPayload>(base.u16, ()=>({
+                name: `AC Frequency Multiplier`,
+                description: `Provides a value to be multiplied against the ACFrequency attribute.
+This attribute must be used in conjunction with the ACFrequencyDivisor attribute.
+0x0000 is an invalid value for this attribute.`,
+                id: 0x0400,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcPowerDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgAcPowerDivisor, ZigBee.IMeasurementAndSensing.IArgAcPowerDivisorPayload>(base.u16, ()=>({
+                name: `AC Power Divisor`,
+                description: `Provides a value to be divided against the InstantaneousPower and ActivePower attributes. This attribute
+must be used in conjunction with the ACPowerMultiplier attribute. 0x0000 is an invalid value for this attribute.`,
+                id: 0x0605,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcPowerMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgAcPowerMultiplier, ZigBee.IMeasurementAndSensing.IArgAcPowerMultiplierPayload>(base.u16, ()=>({
+                name: `AC Power Multiplier`,
+                description: `Provides a value to be multiplied against the InstantaneousPower and ActivePower attributes. This attribute
+must be used in conjunction with the ACPowerDivisor attribute. 0x0000 is an invalid value for this attribute.`,
+                id: 0x0604,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcReactivePowerOverload: makeType<ZigBee.IMeasurementAndSensing.IArgAcReactivePowerOverload, ZigBee.IMeasurementAndSensing.IArgAcReactivePowerOverloadPayload>(base.s16, ()=>({
+                name: `AC Reactive Power Overload`,
+                description: `specifies the alarm threshold, set by the manufacturer, for the maximum output reactive power supported by
+device. The value is multiplied and divided by the ACPowerMultiplier and ACPowerDivisor, respectively.`,
+                id: 0x0804,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcVoltageDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgAcVoltageDivisor, ZigBee.IMeasurementAndSensing.IArgAcVoltageDivisorPayload>(base.u16, ()=>({
+                name: `AC Voltage Divisor`,
+                description: `Provides a value to be divided against the InstantaneousVoltage and RMSVoltage attributes. This attribute
+must be used in conjunction with the ACVoltageMultiplier attribute. 0x0000 is an invalid value for this
+attribute.`,
+                id: 0x0601,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcVoltageMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgAcVoltageMultiplier, ZigBee.IMeasurementAndSensing.IArgAcVoltageMultiplierPayload>(base.u16, ()=>({
+                name: `AC Voltage Multiplier`,
+                description: `Provides a value to be multiplied against the InstantaneousVoltage and RMSVoltage attributes. This attribute
+must be used in conjunction with the ACVoltageDivisor attribute. 0x0000 is an invalid value for this attribute.`,
+                id: 0x0600,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AcVoltageOverload: makeType<ZigBee.IMeasurementAndSensing.IArgAcVoltageOverload, ZigBee.IMeasurementAndSensing.IArgAcVoltageOverloadPayload>(base.s16, ()=>({
+                name: `AC Voltage Overload`,
+                description: `specifies the alarm threshold, set by the manufacturer, for the maximum output voltage supported by device.
+The value is multiplied and divided by the ACVoltageMultiplier the ACVoltageDivisor, respectively. The
+value is voltage RMS.`,
+                id: 0x0801,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            ActiveCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgActiveCurrent, ZigBee.IMeasurementAndSensing.IArgActiveCurrentPayload>(base.s16, ()=>({
+                name: `Active Current`,
+                description: `Represents the single phase or Phase A, AC active/resistive current value at the moment in time the attribute
+is read, in Amps (A). Positive values indicate power delivered to the premises where negative values indicate
+power received from the premises.`,
+                id: 0x0502,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            ActiveCurrentPhB: makeType<ZigBee.IMeasurementAndSensing.IArgActiveCurrentPhB, ZigBee.IMeasurementAndSensing.IArgActiveCurrentPhBPayload>(base.s16, ()=>({
+                name: `Active Current Ph B`,
+                description: `represents the Phase B, AC active/resistive current value at the moment in time the attribute is read.
+Positive values indicate power delivered to the premises where negative values indicate power received
+from the premises.`,
+                id: 0x0902,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            ActiveCurrentPhC: makeType<ZigBee.IMeasurementAndSensing.IArgActiveCurrentPhC, ZigBee.IMeasurementAndSensing.IArgActiveCurrentPhCPayload>(base.s16, ()=>({
+                name: `Active Current Ph C`,
+                description: ``,
+                id: 0x0A02,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ActivePower: makeType<ZigBee.IMeasurementAndSensing.IArgActivePower, ZigBee.IMeasurementAndSensing.IArgActivePowerPayload>(base.s16, ()=>({
+                name: `Active Power`,
+                description: `Represents the single phase or Phase A, current demand of active power delivered or received at the premises.
+Positive values indicate power delivered to the premises where negative values indicate power received from the
+premises.`,
+                id: 0x050B,
+                report: true,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            ActivePowerMax: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerMax, ZigBee.IMeasurementAndSensing.IArgActivePowerMaxPayload>(base.s16, ()=>({
+                name: `Active Power Max`,
+                description: `Represents the highest AC power value`,
+                id: 0x050D,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            ActivePowerMaxPhB: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerMaxPhB, ZigBee.IMeasurementAndSensing.IArgActivePowerMaxPhBPayload>(base.s16, ()=>({
+                name: `Active Power Max Ph B`,
+                description: ``,
+                id: 0x090D,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ActivePowerMaxPhC: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerMaxPhC, ZigBee.IMeasurementAndSensing.IArgActivePowerMaxPhCPayload>(base.s16, ()=>({
+                name: `Active Power Max Ph C`,
+                description: ``,
+                id: 0x0A0D,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ActivePowerMin: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerMin, ZigBee.IMeasurementAndSensing.IArgActivePowerMinPayload>(base.s16, ()=>({
+                name: `Active Power Min`,
+                description: `Represents the lowest AC power value`,
+                id: 0x050C,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            ActivePowerMinPhB: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerMinPhB, ZigBee.IMeasurementAndSensing.IArgActivePowerMinPhBPayload>(base.s16, ()=>({
+                name: `Active Power Min Ph B`,
+                description: ``,
+                id: 0x090C,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ActivePowerMinPhC: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerMinPhC, ZigBee.IMeasurementAndSensing.IArgActivePowerMinPhCPayload>(base.s16, ()=>({
+                name: `Active Power Min Ph C`,
+                description: ``,
+                id: 0x0A0C,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ActivePowerPhB: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerPhB, ZigBee.IMeasurementAndSensing.IArgActivePowerPhBPayload>(base.s16, ()=>({
+                name: `Active Power Ph B`,
+                description: ``,
+                id: 0x090B,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ActivePowerPhC: makeType<ZigBee.IMeasurementAndSensing.IArgActivePowerPhC, ZigBee.IMeasurementAndSensing.IArgActivePowerPhCPayload>(base.s16, ()=>({
+                name: `Active Power Ph C`,
+                description: ``,
+                id: 0x0A0B,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ApparentPower: makeType<ZigBee.IMeasurementAndSensing.IArgApparentPower, ZigBee.IMeasurementAndSensing.IArgApparentPowerPayload>(base.u16, ()=>({
+                name: `Apparent Power`,
+                description: `Represents the single phase or Phase A, current demand of apparent (Square root of active and reactive
+power) power, in VA.`,
+                id: 0x050F,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.VoltAmperes,
+                
+            })),
+            ApparentPowerPhB: makeType<ZigBee.IMeasurementAndSensing.IArgApparentPowerPhB, ZigBee.IMeasurementAndSensing.IArgApparentPowerPhBPayload>(base.u16, ()=>({
+                name: `Apparent Power Ph B`,
+                description: ``,
+                id: 0x090F,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ApparentPowerPhC: makeType<ZigBee.IMeasurementAndSensing.IArgApparentPowerPhC, ZigBee.IMeasurementAndSensing.IArgApparentPowerPhCPayload>(base.u16, ()=>({
+                name: `Apparent Power Ph C`,
+                description: ``,
+                id: 0x0A0F,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            AttributeId: makeType<ZigBee.IMeasurementAndSensing.IArgAttributeId, ZigBee.IMeasurementAndSensing.IArgAttributeIdPayload>(base.u16, ()=>({
+                name: `Attribute ID`,
+                description: ``,
+                
+            })),
+            AverageRmsOverVoltage: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltage, ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltagePayload>(base.s16, ()=>({
+                name: `Average RMS over-voltage`,
+                description: `is the average RMS voltage above which an over voltage condition is reported.
+The threshold shall be configurable within the specified operating range of the electricity meter.
+The value is multiplied and divided by the ACVoltageMultiplier and ACVoltageDivisor, respectively.`,
+                id: 0x0805,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            AverageRmsOverVoltageCounter: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltageCounter, ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltageCounterPayload>(base.u16, ()=>({
+                name: `Average RMS Over Voltage Counter`,
+                description: `is the number of times the average RMS voltage, has been above the AverageRMS OverVoltage threshold
+since last reset. This counter may be reset by writing zero to the attribute.`,
+                id: 0x0512,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            AverageRmsOverVoltageCounterPhB: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltageCounterPhB, ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltageCounterPhBPayload>(base.u16, ()=>({
+                name: `Average RMS Over Voltage Counter Ph B`,
+                description: ``,
+                id: 0x0912,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            AverageRmsOverVoltageCounterPhC: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltageCounterPhC, ZigBee.IMeasurementAndSensing.IArgAverageRmsOverVoltageCounterPhCPayload>(base.u16, ()=>({
+                name: `Average RMS Over Voltage Counter Ph C`,
+                description: ``,
+                id: 0x0A12,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            AverageRmsUnderVoltage: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltage, ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltagePayload>(base.s16, ()=>({
+                name: `Average RMS under-voltage`,
+                description: `is the average RMS voltage below which an under voltage condition is reported.
+The threshold shall be configurable within the specified operating range of the electricity meter.
+The value is multiplied and divided by the ACVoltageMultiplier and ACVoltageDivisor, respectively.`,
+                id: 0x0806,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            AverageRmsUnderVoltageCounter: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltageCounter, ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltageCounterPayload>(base.u16, ()=>({
+                name: `Average RMS Under Voltage Counter`,
+                description: `is the number of times the average RMS voltage, has been below the AverageRMS underVoltage threshold
+since last reset. This counter may be reset by writing zero to the attribute.`,
+                id: 0x0513,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            AverageRmsUnderVoltageCounterPhB: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltageCounterPhB, ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltageCounterPhBPayload>(base.u16, ()=>({
+                name: `Average RMS Under Voltage Counter Ph B`,
+                description: ``,
+                id: 0x0913,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            AverageRmsUnderVoltageCounterPhC: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltageCounterPhC, ZigBee.IMeasurementAndSensing.IArgAverageRmsUnderVoltageCounterPhCPayload>(base.u16, ()=>({
+                name: `Average RMS Under Voltage Counter Ph C`,
+                description: ``,
+                id: 0x0A13,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            AverageRmsVoltageMeasurementPeriod: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsVoltageMeasurementPeriod, ZigBee.IMeasurementAndSensing.IArgAverageRmsVoltageMeasurementPeriodPayload>(base.u16, ()=>({
+                name: `Average RMS Voltage Measurement Period`,
+                description: `is the period that the RMS voltage is averaged over.`,
+                id: 0x0511,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Seconds,
+                
+            })),
+            AverageRmsVoltageMeasurementPeriodPhB: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsVoltageMeasurementPeriodPhB, ZigBee.IMeasurementAndSensing.IArgAverageRmsVoltageMeasurementPeriodPhBPayload>(base.u16, ()=>({
+                name: `Average RMS Voltage Measurement Period Ph B`,
+                description: ``,
+                id: 0x0911,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            AverageRmsVoltageMeasurementPeriodPhC: makeType<ZigBee.IMeasurementAndSensing.IArgAverageRmsVoltageMeasurementPeriodPhC, ZigBee.IMeasurementAndSensing.IArgAverageRmsVoltageMeasurementPeriodPhCPayload>(base.u16, ()=>({
+                name: `Average RMS Voltage Measurement Period Ph C`,
+                description: ``,
+                id: 0x0A11,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            DcCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrent, ZigBee.IMeasurementAndSensing.IArgDcCurrentPayload>(base.s16, ()=>({
+                name: `DC Current`,
+                description: `represents the most recent DC current reading in Amps (A). If the current cannot be
+measured, a value of 0x8000 is returned.`,
+                id: 0x0103,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            DcCurrentDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrentDivisor, ZigBee.IMeasurementAndSensing.IArgDcCurrentDivisorPayload>(base.u16, ()=>({
+                name: `DC Current Divisor`,
+                description: `provides a value to be divided against the DCCurrent, DCCurrentMin, and DCCurrentMax attributes.
+This attribute must be used in conjunction with the DCCurrentMultiplier attribute.
+0x0000 is an invalid value for this attribute.`,
+                id: 0x0203,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DcCurrentMax: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrentMax, ZigBee.IMeasurementAndSensing.IArgDcCurrentMaxPayload>(base.s16, ()=>({
+                name: `DC Current Max`,
+                description: `represents the highest DC current value measured in Amps (A). After resetting,
+this attribute will return a value of 0x8000 until a measurement is made.`,
+                id: 0x0105,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            DcCurrentMin: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrentMin, ZigBee.IMeasurementAndSensing.IArgDcCurrentMinPayload>(base.s16, ()=>({
+                name: `DC Current Min`,
+                description: `represents the lowest DC current value measured in Amps (A). After resetting,
+this attribute will return a value of 0x8000 until a measurement is made.`,
+                id: 0x0104,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            DcCurrentMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrentMultiplier, ZigBee.IMeasurementAndSensing.IArgDcCurrentMultiplierPayload>(base.u16, ()=>({
+                name: `DC Current Multiplier`,
+                description: `provides a value to be multiplied against the DCCurrent, DCCurrentMin, and DCCurrentMax attributes.
+This attribute must be used in conjunction with the DCCurrentDivisor attribute.
+0x0000 is an invalid value for this attribute.`,
+                id: 0x0202,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DcCurrentOverload: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrentOverload, ZigBee.IMeasurementAndSensing.IArgDcCurrentOverloadPayload>(base.s16, ()=>({
+                name: `DC Current Overload`,
+                description: `Specifies the alarm threshold, set by the manufacturer, for the maximum output current supported by device.
+The value is multiplied and divided by the DCCurrentMultiplier and DCCurrentDivider respectively.`,
+                id: 0x0702,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            DcOverloadAlarmsMask: makeType<ZigBee.IMeasurementAndSensing.IArgDcOverloadAlarmsMask, ZigBee.IMeasurementAndSensing.IArgDcOverloadAlarmsMaskPayload>(base.bmp8, ()=>({
+                name: `DC Overload Alarms Mask`,
+                description: `Specifies which configurable alarms may be generated`,
+                id: 0x0700,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                bits: { 
+                0: `Voltage Overload`, 
+                1: `Current Overload`,  },
+                
+            })),
+            DcPower: makeType<ZigBee.IMeasurementAndSensing.IArgDcPower, ZigBee.IMeasurementAndSensing.IArgDcPowerPayload>(base.s16, ()=>({
+                name: `DC Power`,
+                description: `represents the most recent DC power reading in Watts (W). If the power cannot be
+measured, a value of 0x8000 is returned.`,
+                id: 0x0106,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            DcPowerDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgDcPowerDivisor, ZigBee.IMeasurementAndSensing.IArgDcPowerDivisorPayload>(base.u16, ()=>({
+                name: `DC Power Divisor`,
+                description: `provides a value to be divided against the DCPower, DCPowerMin, and DCPowerMax attributes.
+This attribute must be used in conjunction with the DCPowerMultiplier attribute.
+0x0000 is an invalid value for this attribute`,
+                id: 0x0205,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DcPowerMax: makeType<ZigBee.IMeasurementAndSensing.IArgDcPowerMax, ZigBee.IMeasurementAndSensing.IArgDcPowerMaxPayload>(base.s16, ()=>({
+                name: `DC Power Max`,
+                description: `represents the highest DC power value measured in Watts (W). After resetting,
+this attribute will return a value of 0x8000 until a measurement is made.`,
+                id: 0x0108,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            DcPowerMin: makeType<ZigBee.IMeasurementAndSensing.IArgDcPowerMin, ZigBee.IMeasurementAndSensing.IArgDcPowerMinPayload>(base.s16, ()=>({
+                name: `DC Power Min`,
+                description: `represents the lowest DC power value measured in Watts (W). After resetting,
+this attribute will return a value of 0x8000 until a measurement is made.`,
+                id: 0x0107,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            DcPowerMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgDcPowerMultiplier, ZigBee.IMeasurementAndSensing.IArgDcPowerMultiplierPayload>(base.u16, ()=>({
+                name: `DC Power Multiplier`,
+                description: `provides a value to be multiplied against the DCPower, DCPowerMin, and DCPowerMax attributes.
+This attribute must be used in conjunction with the DCPowerDivisor attribute.
+0x0000 is an invalid value for this attribute.`,
+                id: 0x0204,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DcVoltage: makeType<ZigBee.IMeasurementAndSensing.IArgDcVoltage, ZigBee.IMeasurementAndSensing.IArgDcVoltagePayload>(base.s16, ()=>({
+                name: `DC Voltage`,
+                description: `represents the most recent DC voltage reading in Volts (V). If the voltage cannot be
+measured, a value of 0x8000 is returned.`,
+                id: 0x0100,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            DcVoltageDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgDcVoltageDivisor, ZigBee.IMeasurementAndSensing.IArgDcVoltageDivisorPayload>(base.u16, ()=>({
+                name: `DC Voltage Divisor`,
+                description: `provides a value to be divided against the DCVoltage, DCVoltageMin, and DCVoltageMax attributes.
+This attribute must be used in conjunction with the DCVoltageMultiplier attribute.
+0x0000 is an invalid value for this attribute.`,
+                id: 0x0201,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DcVoltageMax: makeType<ZigBee.IMeasurementAndSensing.IArgDcVoltageMax, ZigBee.IMeasurementAndSensing.IArgDcVoltageMaxPayload>(base.s16, ()=>({
+                name: `DC Voltage Max`,
+                description: `represents the highest DC voltage value measured in Volts (V). After resetting,
+this attribute will return a value of 0x8000 until a measurement is made.`,
+                id: 0x0102,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            DcVoltageMin: makeType<ZigBee.IMeasurementAndSensing.IArgDcVoltageMin, ZigBee.IMeasurementAndSensing.IArgDcVoltageMinPayload>(base.s16, ()=>({
+                name: `DC Voltage Min`,
+                description: `represents the lowest DC voltage value measured in Volts (V). After resetting,
+this attribute will return a value of 0x8000 until a measurement is made.`,
+                id: 0x0101,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            DcVoltageMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgDcVoltageMultiplier, ZigBee.IMeasurementAndSensing.IArgDcVoltageMultiplierPayload>(base.u16, ()=>({
+                name: `DC Voltage Multiplier`,
+                description: `provides a value to be multiplied against the DCVoltage, DCVoltageMin, and DCVoltageMax attributes.
+This attribute must be used in conjunction with the DCVoltageDivisor attribute.
+0x0000 is an invalid value for this attribute`,
+                id: 0x0200,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DcVoltageOverload: makeType<ZigBee.IMeasurementAndSensing.IArgDcVoltageOverload, ZigBee.IMeasurementAndSensing.IArgDcVoltageOverloadPayload>(base.s16, ()=>({
+                name: `DC Voltage Overload`,
+                description: `Specifies the alarm threshold, set by the manufacturer, for the maximum output voltage supported by device.
+The value is multiplied and divided by the DCVoltageMultiplier the DCVoltageDivisor respectively.`,
+                id: 0x0701,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            ElectricalMeasurementType: makeType<ZigBee.IMeasurementAndSensing.IArgElectricalMeasurementType, ZigBee.IMeasurementAndSensing.IArgElectricalMeasurementTypePayload>(base.bmp32, ()=>({
+                name: `Electrical Measurement Type`,
+                description: ``,
+                id: 0x0000,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                bits: { 
+                0: `Active measurement (AC)`, 
+                1: `Reactive measurement (AC)`, 
+                2: `Apparent measurement (AC)`, 
+                3: `Phase A measurement`, 
+                4: `Phase B measurement`, 
+                5: `Phase C measurement`, 
+                6: `DC measurement`, 
+                7: `Harmonics measurement`, 
+                8: `Power quality measurement`,  },
+                
+            })),
+            HarmonicCurrentMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgHarmonicCurrentMultiplier, ZigBee.IMeasurementAndSensing.IArgHarmonicCurrentMultiplierPayload>(base.s8, ()=>({
+                name: `Harmonic Current Multiplier`,
+                description: `Represents the unit value for the MeasuredNthHarmonicCurrent attribute in the format
+MeasuredNthHarmonicCurrent * 10 ^ HarmonicCurrentMultiplier amperes.`,
+                id: 0x0404,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
             IlluminanceLightSensorType: makeType<ZigBee.IMeasurementAndSensing.IArgIlluminanceLightSensorType, ZigBee.IMeasurementAndSensing.IArgIlluminanceLightSensorTypePayload>(base.enum8, ()=>({
                 name: `Illuminance Light Sensor Type`,
                 description: `specifies the electronic type of the light sensor. The range 0x40-0xfe is reserved for
@@ -7825,6 +8580,16 @@ follows: IlluminanceTargetLevel = 10,000 x log 10 Illuminance`,
                 unit: units.Luxes,
                 
             })),
+            Intervals: makeType<ZigBee.IMeasurementAndSensing.IArgIntervals, ZigBee.IMeasurementAndSensing.IArgIntervalsPayload>(base.array, ()=>({
+                name: `Intervals`,
+                description: `is a series of interval data captured using the period specified by the ProfileIntervalPeriod field. The
+content of the interval data depend of the type of information requested using the AttributeID field in the Get
+Measurement Profile Command. Data is organized in a reverse chronological order, the oldest intervals are
+transmitted first and the newest interval is transmitted last. Invalid intervals should be marked as 0xFFFF.
+For scaling and data type use the respective attribute set as defined above in attribute sets.`,
+                arrayType: base.u16,
+                
+            })),
             LevelStatus: makeType<ZigBee.IMeasurementAndSensing.IArgLevelStatus, ZigBee.IMeasurementAndSensing.IArgLevelStatusPayload>(base.enum8, ()=>({
                 name: `Level Status`,
                 description: `indicates whether the measured Flow is above, below, or within a band
@@ -7853,6 +8618,47 @@ manufacturer specific light sensor types`,
                 0x00: `Photodiode`, 
                 0x01: `CMOS`, 
                 0xff: `Unknown`,  },
+                
+            })),
+            LineCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgLineCurrent, ZigBee.IMeasurementAndSensing.IArgLineCurrentPayload>(base.u16, ()=>({
+                name: `Line Current`,
+                description: `Represents the single phase or Phase A, AC line current (Square root of active and reactive current) value at
+the moment in time the attribute is read. If it cannot be measured, a value of 0x8000 is returned.`,
+                id: 0x0501,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            LineCurrentPhB: makeType<ZigBee.IMeasurementAndSensing.IArgLineCurrentPhB, ZigBee.IMeasurementAndSensing.IArgLineCurrentPhBPayload>(base.u16, ()=>({
+                name: `Line Current Ph B`,
+                description: `represents the Phase B, AC line current (Square root sum of active and reactive currents) value at the moment
+in time the attribute is read.
+If the instantaneous current cannot be measured, a value of 0x8000 is returned.`,
+                id: 0x0901,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            LineCurrentPhC: makeType<ZigBee.IMeasurementAndSensing.IArgLineCurrentPhC, ZigBee.IMeasurementAndSensing.IArgLineCurrentPhCPayload>(base.u16, ()=>({
+                name: `Line Current Ph C`,
+                description: ``,
+                id: 0x0A01,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ListOfAttributes: makeType<ZigBee.IMeasurementAndSensing.IArgListOfAttributes, ZigBee.IMeasurementAndSensing.IArgListOfAttributesPayload>(base.set, ()=>({
+                name: `List Of Attributes`,
+                description: `is the list of attributes being profiled`,
+                arrayType: base.u16,
                 
             })),
             MaxMeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMaxMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMaxMeasuredFlowPayload>(base.u16, ()=>({
@@ -7919,6 +8725,84 @@ value of 0x8000 indicates that this attribute is not defined`,
                 scale: 100,
                 
             })),
+            MaxNumberOfIntervals: makeType<ZigBee.IMeasurementAndSensing.IArgMaxNumberOfIntervals, ZigBee.IMeasurementAndSensing.IArgMaxNumberOfIntervalsPayload>(base.u8, ()=>({
+                name: `Max Number Of Intervals`,
+                description: `represents the maximum number of intervals the device is capable of returning in one command.
+It is required MaxNumberofIntervals fit within the default Fragmentation ASDU size of 128 bytes,
+or an optionally agreed upon larger Fragmentation ASDU size supported by both devices.`,
+                
+            })),
+            Measured11ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasured11ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasured11ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured 11th Harmonic Current`,
+                description: `represent the most recent 11th harmonic current reading in an AC frequency.`,
+                id: 0x030C,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            Measured1StHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasured1StHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasured1StHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured 1st Harmonic Current`,
+                description: `represent the most recent 1st harmonic current reading in an AC frequency.
+The unit for this measurement is 10 ^ 1stHarmonicCurrentMultiplier amperes.
+If 1stHarmonicCurrentMultiplier is not implemented the unit is in amperes.
+If the 1st harmonic current cannot be measured a value of 0x8000 is returned.
+A positive value indicates the measured 1st harmonic current is positive, and a
+negative value indicates that the measured 1st harmonic current is negative.`,
+                id: 0x0307,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            Measured3RdHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasured3RdHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasured3RdHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured 3rd Harmonic Current`,
+                description: `represent the most recent 3rd harmonic current reading in an AC frequency.`,
+                id: 0x0308,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            Measured5ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasured5ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasured5ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured 5th Harmonic Current`,
+                description: `represent the most recent 5th harmonic current reading in an AC frequency.`,
+                id: 0x0309,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            Measured7ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasured7ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasured7ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured 7th Harmonic Current`,
+                description: `represent the most recent 7th harmonic current reading in an AC frequency.`,
+                id: 0x030A,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            Measured9ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasured9ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasured9ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured 9th Harmonic Current`,
+                description: `represent the most recent 9th harmonic current reading in an AC frequency.`,
+                id: 0x030B,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
             MeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMeasuredFlowPayload>(base.u16, ()=>({
                 name: `Measured Flow`,
                 description: `represents the flow in m^3/h`,
@@ -7943,6 +8827,77 @@ in the range 1 to 0xfffe`,
                 write: false,
                 require: false,
                 unit: units.Luxes,
+                
+            })),
+            MeasuredPhase11ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPhase11ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasuredPhase11ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured Phase 11th Harmonic Current`,
+                description: `represent the most recent phase of the 11th harmonic current reading in an AC frequency.`,
+                id: 0x0312,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.DegreesPhase,
+                
+            })),
+            MeasuredPhase1StHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPhase1StHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasuredPhase1StHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured Phase 1st Harmonic Current`,
+                description: `represent the most recent phase of the 1st harmonic current reading in an AC frequency.
+The unit for this measurement is 10 ^ Phase1StHarmonicCurrentMultiplier degree.
+If Phase1StHarmonicCurrentMultiplier is not implemented the unit is in degree.
+If the phase of cannot be measured a value of 0x8000 is returned.
+A positive value indicates the measured phase is prehurry,
+and a negative value indicates that the measured phase is lagging.`,
+                id: 0x030D,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.DegreesPhase,
+                
+            })),
+            MeasuredPhase3RdHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPhase3RdHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasuredPhase3RdHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured Phase 3rd Harmonic Current`,
+                description: `represent the most recent phase of the 3rd harmonic current reading in an AC frequency.`,
+                id: 0x030E,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.DegreesPhase,
+                
+            })),
+            MeasuredPhase5ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPhase5ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasuredPhase5ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured Phase 5th Harmonic Current`,
+                description: `represent the most recent phase of the 5th harmonic current reading in an AC frequency.`,
+                id: 0x030F,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.DegreesPhase,
+                
+            })),
+            MeasuredPhase7ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPhase7ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasuredPhase7ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured Phase 7th Harmonic Current`,
+                description: `represent the most recent phase of the 7th harmonic current reading in an AC frequency.`,
+                id: 0x0310,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.DegreesPhase,
+                
+            })),
+            MeasuredPhase9ThHarmonicCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPhase9ThHarmonicCurrent, ZigBee.IMeasurementAndSensing.IArgMeasuredPhase9ThHarmonicCurrentPayload>(base.s16, ()=>({
+                name: `Measured Phase 9th Harmonic Current`,
+                description: `represent the most recent phase of the 9th harmonic current reading in an AC frequency.`,
+                id: 0x0311,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.DegreesPhase,
                 
             })),
             MeasuredPressure: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPressure, ZigBee.IMeasurementAndSensing.IArgMeasuredPressurePayload>(base.s16, ()=>({
@@ -7979,6 +8934,17 @@ in the range 1 to 0xfffe`,
                 require: false,
                 unit: units.DegreesCelsius,
                 scale: 100,
+                
+            })),
+            MeasurementResponseStatus: makeType<ZigBee.IMeasurementAndSensing.IArgMeasurementResponseStatus, ZigBee.IMeasurementAndSensing.IArgMeasurementResponseStatusPayload>(base.enum8, ()=>({
+                name: `Measurement Response Status`,
+                description: ``,
+                values: { 
+                0x00: `Success`, 
+                0x01: `Attribute Profile not supported`, 
+                0x02: `Invalid Start Time`, 
+                0x03: `More intervals requested than can be returned`, 
+                0x04: `No intervals available for the requested time`,  },
                 
             })),
             MinMeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMinMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMinMeasuredFlowPayload>(base.u16, ()=>({
@@ -8045,6 +9011,23 @@ value of 0x8000 indicates that this attribute is not defined`,
                 scale: 100,
                 
             })),
+            NeutralCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgNeutralCurrent, ZigBee.IMeasurementAndSensing.IArgNeutralCurrentPayload>(base.u16, ()=>({
+                name: `Neutral Current`,
+                description: `represents the AC neutral (Line-Out) current value at the moment in time the
+attribute is read. If the instantaneous current cannot be measured, a value of 0xFFFF is returned`,
+                id: 0x0303,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            NumberOfIntervals: makeType<ZigBee.IMeasurementAndSensing.IArgNumberOfIntervals, ZigBee.IMeasurementAndSensing.IArgNumberOfIntervalsPayload>(base.u8, ()=>({
+                name: `Number Of Intervals`,
+                description: `is the number of intervals requested or returned`,
+                
+            })),
             Occupancy: makeType<ZigBee.IMeasurementAndSensing.IArgOccupancy, ZigBee.IMeasurementAndSensing.IArgOccupancyPayload>(base.bmp8, ()=>({
                 name: `Occupancy`,
                 description: ``,
@@ -8069,6 +9052,17 @@ value of 0x8000 indicates that this attribute is not defined`,
                 0x00: `PIR`, 
                 0x01: `Ultrasonic`, 
                 0x03: `PIR and ultrasonic`,  },
+                
+            })),
+            PhaseHarmonicCurrentMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgPhaseHarmonicCurrentMultiplier, ZigBee.IMeasurementAndSensing.IArgPhaseHarmonicCurrentMultiplierPayload>(base.s8, ()=>({
+                name: `Phase Harmonic Current Multiplier`,
+                description: `Represents the unit value for the MeasuredPhaseNthHarmonicCurrent attribute in the format
+MeasuredPhaseNthHarmonicCurrent * 10 ^ PhaseHarmonicCurrentMultiplier degrees.`,
+                id: 0x0405,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
                 
             })),
             PirOccupiedToUnoccupiedDelay: makeType<ZigBee.IMeasurementAndSensing.IArgPirOccupiedToUnoccupiedDelay, ZigBee.IMeasurementAndSensing.IArgPirOccupiedToUnoccupiedDelayPayload>(base.u16, ()=>({
@@ -8098,6 +9092,521 @@ mandatory if the PIRUnoccupiedToOccupiedThreshold attribute is implemented`,
                 name: `PIR Unoccupied To Occupied Threshold`,
                 description: `is 8 bits in length and specifies the number of movement detection events that must occur in the period PIRUnoccupiedToOccupiedDelay, before the PIR sensor changes to its occupied state. This attribute is mandatory if the PIRUnoccupiedToOccupiedDelay attribute is implemented`,
                 id: 0x0012,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            PowerDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgPowerDivisor, ZigBee.IMeasurementAndSensing.IArgPowerDivisorPayload>(base.u32, ()=>({
+                name: `Power Divisor`,
+                description: `Provides a value to divide against the results of applying the Multiplier attribute against a raw or
+uncompensated sensor count of power being measured by the metering device. If present, this attribute must
+be applied against all demand/power values to derive the delivered and received values expressed in the
+specified units. This attribute must be used in conjunction with the PowerMultiplier attribute.`,
+                id: 0x0403,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            PowerFactor: makeType<ZigBee.IMeasurementAndSensing.IArgPowerFactor, ZigBee.IMeasurementAndSensing.IArgPowerFactorPayload>(base.s8, ()=>({
+                name: `Power Factor`,
+                description: `contains the single phase or PhaseA, Power Factor ratio in 1/100ths`,
+                id: 0x0510,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            PowerFactorPhB: makeType<ZigBee.IMeasurementAndSensing.IArgPowerFactorPhB, ZigBee.IMeasurementAndSensing.IArgPowerFactorPhBPayload>(base.s8, ()=>({
+                name: `Power Factor Ph B`,
+                description: ``,
+                id: 0x0910,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            PowerFactorPhC: makeType<ZigBee.IMeasurementAndSensing.IArgPowerFactorPhC, ZigBee.IMeasurementAndSensing.IArgPowerFactorPhCPayload>(base.s8, ()=>({
+                name: `Power Factor Ph C`,
+                description: ``,
+                id: 0x0A10,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            PowerMultiplier: makeType<ZigBee.IMeasurementAndSensing.IArgPowerMultiplier, ZigBee.IMeasurementAndSensing.IArgPowerMultiplierPayload>(base.u32, ()=>({
+                name: `Power Multiplier`,
+                description: `Provides a value to be multiplied against a raw or uncompensated sensor count of power being measured by
+the metering device. If present, this attribute must be applied against all power/demand values to derive the
+delivered and received values expressed in the specified units. This attribute must be used in conjunction with
+the PowerDivisor attribute.`,
+                id: 0x0402,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ProfileCount: makeType<ZigBee.IMeasurementAndSensing.IArgProfileCount, ZigBee.IMeasurementAndSensing.IArgProfileCountPayload>(base.u8, ()=>({
+                name: `Profile Count`,
+                description: `is the total number of supported profiles`,
+                
+            })),
+            ProfileIntervalPeriod: makeType<ZigBee.IMeasurementAndSensing.IArgProfileIntervalPeriod, ZigBee.IMeasurementAndSensing.IArgProfileIntervalPeriodPayload>(base.enum8, ()=>({
+                name: `Profile Interval Period`,
+                description: `represents the interval or time frame used to capture parameter for profiling purposes`,
+                values: { 
+                0x00: `Daily`, 
+                0x01: `60 minutes`, 
+                0x02: `30 minutes`, 
+                0x03: `15 minutes`, 
+                0x04: `10 minutes`, 
+                0x05: `7.5 minutes`, 
+                0x06: `5 minutes`, 
+                0x07: `2.5 minutes`,  },
+                
+            })),
+            ReactiveCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgReactiveCurrent, ZigBee.IMeasurementAndSensing.IArgReactiveCurrentPayload>(base.s16, ()=>({
+                name: `Reactive Current`,
+                description: `Represents the single phase or Phase A, AC reactive current value at the moment in time the attribute is read,
+in Amps (A). Positive values indicate power delivered to the premises where negative values indicate power
+received from the premises.`,
+                id: 0x0503,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            ReactiveCurrentPhB: makeType<ZigBee.IMeasurementAndSensing.IArgReactiveCurrentPhB, ZigBee.IMeasurementAndSensing.IArgReactiveCurrentPhBPayload>(base.s16, ()=>({
+                name: `Reactive Current Ph B`,
+                description: `represents the Phase B, AC reactive current value at the moment in time the attribute is read.
+Positive values indicate power delivered to the premises where negative values indicate power received from
+the premises.`,
+                id: 0x0903,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            ReactiveCurrentPhC: makeType<ZigBee.IMeasurementAndSensing.IArgReactiveCurrentPhC, ZigBee.IMeasurementAndSensing.IArgReactiveCurrentPhCPayload>(base.s16, ()=>({
+                name: `Reactive Current Ph C`,
+                description: ``,
+                id: 0x0A03,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ReactivePower: makeType<ZigBee.IMeasurementAndSensing.IArgReactivePower, ZigBee.IMeasurementAndSensing.IArgReactivePowerPayload>(base.s16, ()=>({
+                name: `Reactive Power`,
+                description: `Represents the single phase or Phase A, current demand of reactive power delivered or received at the
+premises, in VAr. Positive values indicate power delivered to the premises where negative values indicate
+power received from the premises.`,
+                id: 0x050E,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.VoltAmperesReactive,
+                
+            })),
+            ReactivePowerPhB: makeType<ZigBee.IMeasurementAndSensing.IArgReactivePowerPhB, ZigBee.IMeasurementAndSensing.IArgReactivePowerPhBPayload>(base.s16, ()=>({
+                name: `Reactive Power Ph B`,
+                description: ``,
+                id: 0x090E,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ReactivePowerPhC: makeType<ZigBee.IMeasurementAndSensing.IArgReactivePowerPhC, ZigBee.IMeasurementAndSensing.IArgReactivePowerPhCPayload>(base.s16, ()=>({
+                name: `Reactive Power Ph C`,
+                description: ``,
+                id: 0x0A0E,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrent, ZigBee.IMeasurementAndSensing.IArgRmsCurrentPayload>(base.u16, ()=>({
+                name: `RMS Current`,
+                description: `Represents the most recent RMS current reading.`,
+                id: 0x0508,
+                report: true,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            RmsCurrentMax: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentMax, ZigBee.IMeasurementAndSensing.IArgRmsCurrentMaxPayload>(base.u16, ()=>({
+                name: `RMS Current Max`,
+                description: `Represents the highest RMS current value.`,
+                id: 0x050A,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            RmsCurrentMaxPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentMaxPhB, ZigBee.IMeasurementAndSensing.IArgRmsCurrentMaxPhBPayload>(base.u16, ()=>({
+                name: `RMS Current Max Ph B`,
+                description: ``,
+                id: 0x090A,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsCurrentMaxPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentMaxPhC, ZigBee.IMeasurementAndSensing.IArgRmsCurrentMaxPhCPayload>(base.u16, ()=>({
+                name: `RMS Current Max Ph C`,
+                description: ``,
+                id: 0x0A0A,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsCurrentMin: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentMin, ZigBee.IMeasurementAndSensing.IArgRmsCurrentMinPayload>(base.u16, ()=>({
+                name: `RMS Current Min`,
+                description: `Represents the lowest RMS current value.`,
+                id: 0x0509,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Amperes,
+                
+            })),
+            RmsCurrentMinPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentMinPhB, ZigBee.IMeasurementAndSensing.IArgRmsCurrentMinPhBPayload>(base.u16, ()=>({
+                name: `RMS Current Min Ph B`,
+                description: ``,
+                id: 0x0909,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsCurrentMinPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentMinPhC, ZigBee.IMeasurementAndSensing.IArgRmsCurrentMinPhCPayload>(base.u16, ()=>({
+                name: `RMS Current Min Ph C`,
+                description: ``,
+                id: 0x0A09,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsCurrentPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentPhB, ZigBee.IMeasurementAndSensing.IArgRmsCurrentPhBPayload>(base.u16, ()=>({
+                name: `RMS Current Ph B`,
+                description: ``,
+                id: 0x0908,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsCurrentPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsCurrentPhC, ZigBee.IMeasurementAndSensing.IArgRmsCurrentPhCPayload>(base.u16, ()=>({
+                name: `RMS Current Ph C`,
+                description: ``,
+                id: 0x0A08,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsExtremeOverVoltage: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltage, ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltagePayload>(base.s16, ()=>({
+                name: `RMS extreme over-voltage`,
+                description: `is the RMS voltage above which an extreme under voltage condition is reported.
+The threshold shall be configurable within the specified operating range of the electricity meter.
+The value is multiplied and divided by the ACVoltageMultiplier and ACVoltageDivisor, respectively.`,
+                id: 0x0807,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsExtremeOverVoltagePeriod: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltagePeriod, ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltagePeriodPayload>(base.u16, ()=>({
+                name: `RMS Extreme Over Voltage Period`,
+                description: `is the durations used to measure an extreme over voltage condition.`,
+                id: 0x0514,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Seconds,
+                
+            })),
+            RmsExtremeOverVoltagePeriodPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltagePeriodPhB, ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltagePeriodPhBPayload>(base.u16, ()=>({
+                name: `RMS Extreme Over Voltage Period Ph B`,
+                description: ``,
+                id: 0x0914,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            RmsExtremeOverVoltagePeriodPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltagePeriodPhC, ZigBee.IMeasurementAndSensing.IArgRmsExtremeOverVoltagePeriodPhCPayload>(base.u16, ()=>({
+                name: `RMS Extreme Over-voltage Period Ph C`,
+                description: ``,
+                id: 0x0A14,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            RmsExtremeUnderVoltage: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltage, ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltagePayload>(base.s16, ()=>({
+                name: `RMS extreme under-voltage`,
+                description: `is the RMS voltage below which an extreme under voltage condition is reported. The threshold shall be
+configurable within the specified operating range of the electricity meter. The value is multiplied and divided
+by the ACVoltageMultiplier and ACVoltageDivisor, respectively.`,
+                id: 0x0808,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsExtremeUnderVoltagePeriod: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltagePeriod, ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltagePeriodPayload>(base.u16, ()=>({
+                name: `RMS Extreme Under Voltage Period`,
+                description: `is the duration used to measure an extreme under voltage condition.`,
+                id: 0x0515,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Seconds,
+                
+            })),
+            RmsExtremeUnderVoltagePeriodPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltagePeriodPhB, ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltagePeriodPhBPayload>(base.u16, ()=>({
+                name: `RMS Extreme Under Voltage Period Ph B`,
+                description: ``,
+                id: 0x0915,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            RmsExtremeUnderVoltagePeriodPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltagePeriodPhC, ZigBee.IMeasurementAndSensing.IArgRmsExtremeUnderVoltagePeriodPhCPayload>(base.u16, ()=>({
+                name: `RMS Extreme Under-voltage Period Ph C`,
+                description: ``,
+                id: 0x0A15,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            RmsVoltage: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltage, ZigBee.IMeasurementAndSensing.IArgRmsVoltagePayload>(base.u16, ()=>({
+                name: `RMS Voltage`,
+                description: `represents the most recent RMS voltage reading.
+If the RMS voltage cannot be measured, a value of 0xFFFF is returned`,
+                id: 0x0505,
+                report: true,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltageMax: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageMax, ZigBee.IMeasurementAndSensing.IArgRmsVoltageMaxPayload>(base.u16, ()=>({
+                name: `RMS Voltage Max`,
+                description: `Represents the highest RMS voltage value.
+After resetting, this attribute will return a value of 0xFFFF until a measurement is made.`,
+                id: 0x0507,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltageMaxPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageMaxPhB, ZigBee.IMeasurementAndSensing.IArgRmsVoltageMaxPhBPayload>(base.u16, ()=>({
+                name: `RMS Voltage Max Ph B`,
+                description: `represents the highest RMS voltage value measured. After resetting, this attribute will return a
+value of 0xFFFF until a measurement is made.`,
+                id: 0x0907,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltageMaxPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageMaxPhC, ZigBee.IMeasurementAndSensing.IArgRmsVoltageMaxPhCPayload>(base.u16, ()=>({
+                name: `RMS Voltage Max Ph C`,
+                description: ``,
+                id: 0x0A07,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsVoltageMin: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageMin, ZigBee.IMeasurementAndSensing.IArgRmsVoltageMinPayload>(base.u16, ()=>({
+                name: `RMS Voltage Min`,
+                description: `Represents the lowest RMS voltage value.
+After resetting, this attribute will return a value of 0xFFFF until a measurement is made.`,
+                id: 0x0506,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltageMinPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageMinPhB, ZigBee.IMeasurementAndSensing.IArgRmsVoltageMinPhBPayload>(base.u16, ()=>({
+                name: `RMS Voltage Min Ph B`,
+                description: `represents the lowest RMS voltage value measured. After resetting, this attribute will return a
+value of 0xFFFF until a measurement is made.`,
+                id: 0x0906,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltageMinPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageMinPhC, ZigBee.IMeasurementAndSensing.IArgRmsVoltageMinPhCPayload>(base.u16, ()=>({
+                name: `RMS Voltage Min Ph C`,
+                description: ``,
+                id: 0x0A06,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsVoltagePhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltagePhB, ZigBee.IMeasurementAndSensing.IArgRmsVoltagePhBPayload>(base.u16, ()=>({
+                name: `RMS Voltage Ph B`,
+                description: `represents the most recent RMS voltage reading. If the RMS voltage cannot be measured, a value of 0xFFFF
+is returned.`,
+                id: 0x0905,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltagePhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltagePhC, ZigBee.IMeasurementAndSensing.IArgRmsVoltagePhCPayload>(base.u16, ()=>({
+                name: `RMS Voltage Ph C`,
+                description: ``,
+                id: 0x0A05,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            RmsVoltageSag: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSag, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSagPayload>(base.s16, ()=>({
+                name: `RMS Voltage Sag`,
+                description: `is the RMS voltage below which a sag condition is reported.
+The threshold shall be configurable within the specified operating range of the electricity meter.
+The value is multiplied and divided by the ACVoltageMultiplier and ACVoltageDivisor, respectively`,
+                id: 0x0809,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltageSagPeriod: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSagPeriod, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSagPeriodPayload>(base.u16, ()=>({
+                name: `RMS Voltage Sag Period`,
+                description: `is the duration used to measure a voltage sag condition.`,
+                id: 0x0516,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Seconds,
+                
+            })),
+            RmsVoltageSagPeriodPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSagPeriodPhB, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSagPeriodPhBPayload>(base.u16, ()=>({
+                name: `RMS Voltage Sag Period Ph B`,
+                description: ``,
+                id: 0x0916,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            RmsVoltageSagPeriodPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSagPeriodPhC, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSagPeriodPhCPayload>(base.u16, ()=>({
+                name: `RMS Voltage Sag Period Ph C`,
+                description: ``,
+                id: 0x0A16,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            RmsVoltageSwell: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwell, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwellPayload>(base.s16, ()=>({
+                name: `RMS Voltage Swell`,
+                description: `is the RMS voltage above which a swell condition is reported.
+The threshold shall be configurable within the specified operating range of the electricity meter.
+The value is multiplied and divided by the ACVoltageMultiplier and ACVoltageDivisor, respectively`,
+                id: 0x080A,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Volts,
+                
+            })),
+            RmsVoltageSwellPeriod: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwellPeriod, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwellPeriodPayload>(base.u16, ()=>({
+                name: `RMS Voltage Swell Period`,
+                description: `is the duration used to measure a voltage swell condition.`,
+                id: 0x0517,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Seconds,
+                
+            })),
+            RmsVoltageSwellPeriodPhB: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwellPeriodPhB, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwellPeriodPhBPayload>(base.u16, ()=>({
+                name: `RMS Voltage Swell Period Ph B`,
+                description: ``,
+                id: 0x0917,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            RmsVoltageSwellPeriodPhC: makeType<ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwellPeriodPhC, ZigBee.IMeasurementAndSensing.IArgRmsVoltageSwellPeriodPhCPayload>(base.u16, ()=>({
+                name: `RMS Voltage Swell Period Ph C`,
+                description: ``,
+                id: 0x0A17,
                 report: false,
                 read: true,
                 write: true,
@@ -8162,6 +9671,12 @@ The true value is located in the range (ScaledPressure – ScaledTolerance) to
                 require: false,
                 
             })),
+            StartTime: makeType<ZigBee.IMeasurementAndSensing.IArgStartTime, ZigBee.IMeasurementAndSensing.IArgStartTimePayload>(base.utc, ()=>({
+                name: `Start Time`,
+                description: `is the end time of the most chronologically recent interval being requested.
+Example: Data collected from 2:00 PM to 3:00 PM would be specified as a 3:00 PM interval (end time).`,
+                
+            })),
             Tolerance: makeType<ZigBee.IMeasurementAndSensing.IArgTolerance, ZigBee.IMeasurementAndSensing.IArgTolerancePayload>(base.u16, ()=>({
                 name: `Tolerance`,
                 description: `indicates the magnitude of the possible error that is associated with MeasuredValue.
@@ -8172,6 +9687,45 @@ The true value is located in the range (MeasuredValue – Tolerance) to
                 read: true,
                 write: false,
                 require: false,
+                
+            })),
+            TotalActivePower: makeType<ZigBee.IMeasurementAndSensing.IArgTotalActivePower, ZigBee.IMeasurementAndSensing.IArgTotalActivePowerPayload>(base.s32, ()=>({
+                name: `Total Active Power`,
+                description: `represents the current demand of active power delivered or received at the premises, in kW.
+Positive values indicate power delivered to the premises where negative values indicate power received from
+the premises. In case if device is capable of measuring multi elements or phases then this will be net active
+power value.`,
+                id: 0x0304,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.Kilowatts,
+                
+            })),
+            TotalApparentPower: makeType<ZigBee.IMeasurementAndSensing.IArgTotalApparentPower, ZigBee.IMeasurementAndSensing.IArgTotalApparentPowerPayload>(base.u32, ()=>({
+                name: `Total Apparent Power`,
+                description: `represents the current demand of apparent power.`,
+                id: 0x0306,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.KiloVoltAmperes,
+                
+            })),
+            TotalReactivePower: makeType<ZigBee.IMeasurementAndSensing.IArgTotalReactivePower, ZigBee.IMeasurementAndSensing.IArgTotalReactivePowerPayload>(base.s32, ()=>({
+                name: `Total Reactive Power`,
+                description: `represents the current demand of reactive power delivered or received at the premises, in kVAr. Positive values
+indicate power delivered to the premises where negative values indicate power received from the premises.
+In case if device is capable of measuring multi elements or phases then this will be net reactive
+power value.`,
+                id: 0x0305,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                unit: units.KiloVoltAmperesReactive,
                 
             })),
             UltrasonicOccupiedToUnoccupiedDelay: makeType<ZigBee.IMeasurementAndSensing.IArgUltrasonicOccupiedToUnoccupiedDelay, ZigBee.IMeasurementAndSensing.IArgUltrasonicOccupiedToUnoccupiedDelayPayload>(base.u16, ()=>({
@@ -8319,6 +9873,71 @@ reporting occupancy status`,
                 Attribute: {},
                 Command: {}
             },
+        },
+        ElectricalMeasurement: {
+            ID: 0x0B04,
+            Name: `Electrical Measurement`,
+            Desc: `provides a mechanism for querying data about the electrical properties as measured by the device.
+This cluster may be implemented on any device type and be implemented on a per-endpoint basis.
+For example, a power strip device could represent each outlet on a different endpoint and report
+electrical information for each individual outlet. The only caveat is that if you implement an
+attribute that has an associated multiplier and divisor, then you must implement the associated
+multiplier and divisor attributes. For example if you implement DCVoltage, you must also implement
+DCVoltageMultiplier and DCVoltageDivisor`,
+            
+            GetProfileInfo: makeType<ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetProfileInfo, ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetProfileInfoPayload>(command, () => ({
+                name: `Get Profile Info`,
+                description: ``,
+                id: 0x0000,
+                payload: {}
+            })),
+
+            GetMeasurementProfile: makeType<ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetMeasurementProfile, ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetMeasurementProfilePayload>(command, () => ({
+                name: `Get Measurement Profile`,
+                description: ``,
+                id: 0x0001,
+                payload: { 
+                    AttributeId: ZigBee.MeasurementAndSensing.Types.AttributeId,
+                    StartTime: ZigBee.MeasurementAndSensing.Types.StartTime,
+                    NumberOfIntervals: ZigBee.MeasurementAndSensing.Types.NumberOfIntervals,
+                }
+            })),
+
+            
+            GetProfileInfoResponse: makeType<ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetProfileInfoResponse, ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetProfileInfoResponsePayload>(command, () => ({
+                name: `Get Profile Info Response`,
+                description: ``,
+                id: 0x0000,
+                payload: { 
+                    ProfileCount: ZigBee.MeasurementAndSensing.Types.ProfileCount,
+                    ProfileIntervalPeriod: ZigBee.MeasurementAndSensing.Types.ProfileIntervalPeriod,
+                    MaxNumberOfIntervals: ZigBee.MeasurementAndSensing.Types.MaxNumberOfIntervals,
+                    ListOfAttributes: ZigBee.MeasurementAndSensing.Types.ListOfAttributes,
+                }
+            })),
+
+            GetMeasurementProfileResponse: makeType<ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetMeasurementProfileResponse, ZigBee.IMeasurementAndSensing.ElectricalMeasurement.ICmdGetMeasurementProfileResponsePayload>(command, () => ({
+                name: `Get Measurement Profile Response`,
+                description: ``,
+                id: 0x0001,
+                payload: { 
+                    StartTime: ZigBee.MeasurementAndSensing.Types.StartTime,
+                    MeasurementResponseStatus: ZigBee.MeasurementAndSensing.Types.MeasurementResponseStatus,
+                    ProfileIntervalPeriod: ZigBee.MeasurementAndSensing.Types.ProfileIntervalPeriod,
+                    NumberOfIntervals: ZigBee.MeasurementAndSensing.Types.NumberOfIntervals,
+                    AttributeId: ZigBee.MeasurementAndSensing.Types.AttributeId,
+                    Intervals: ZigBee.MeasurementAndSensing.Types.Intervals,
+                }
+            })),
+
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
         }
     };
     
@@ -8414,6 +10033,145 @@ reporting occupancy status`,
     ZigBee.MeasurementAndSensing.OccupancySensing.Server.Command = { 
     };
     ZigBee.MeasurementAndSensing.OccupancySensing.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ElectricalMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.ElectricalMeasurementType,
+        0x0100: ZigBee.MeasurementAndSensing.Types.DcVoltage,
+        0x0101: ZigBee.MeasurementAndSensing.Types.DcVoltageMin,
+        0x0102: ZigBee.MeasurementAndSensing.Types.DcVoltageMax,
+        0x0103: ZigBee.MeasurementAndSensing.Types.DcCurrent,
+        0x0104: ZigBee.MeasurementAndSensing.Types.DcCurrentMin,
+        0x0105: ZigBee.MeasurementAndSensing.Types.DcCurrentMax,
+        0x0106: ZigBee.MeasurementAndSensing.Types.DcPower,
+        0x0107: ZigBee.MeasurementAndSensing.Types.DcPowerMin,
+        0x0108: ZigBee.MeasurementAndSensing.Types.DcPowerMax,
+        0x0200: ZigBee.MeasurementAndSensing.Types.DcVoltageMultiplier,
+        0x0201: ZigBee.MeasurementAndSensing.Types.DcVoltageDivisor,
+        0x0202: ZigBee.MeasurementAndSensing.Types.DcCurrentMultiplier,
+        0x0203: ZigBee.MeasurementAndSensing.Types.DcCurrentDivisor,
+        0x0204: ZigBee.MeasurementAndSensing.Types.DcPowerMultiplier,
+        0x0205: ZigBee.MeasurementAndSensing.Types.DcPowerDivisor,
+        0x0300: ZigBee.MeasurementAndSensing.Types.AcFrequency,
+        0x0301: ZigBee.MeasurementAndSensing.Types.AcFrequencyMin,
+        0x0302: ZigBee.MeasurementAndSensing.Types.AcFrequencyMax,
+        0x0303: ZigBee.MeasurementAndSensing.Types.NeutralCurrent,
+        0x0304: ZigBee.MeasurementAndSensing.Types.TotalActivePower,
+        0x0305: ZigBee.MeasurementAndSensing.Types.TotalReactivePower,
+        0x0306: ZigBee.MeasurementAndSensing.Types.TotalApparentPower,
+        0x0307: ZigBee.MeasurementAndSensing.Types.Measured1StHarmonicCurrent,
+        0x0308: ZigBee.MeasurementAndSensing.Types.Measured3RdHarmonicCurrent,
+        0x0309: ZigBee.MeasurementAndSensing.Types.Measured5ThHarmonicCurrent,
+        0x030A: ZigBee.MeasurementAndSensing.Types.Measured7ThHarmonicCurrent,
+        0x030B: ZigBee.MeasurementAndSensing.Types.Measured9ThHarmonicCurrent,
+        0x030C: ZigBee.MeasurementAndSensing.Types.Measured11ThHarmonicCurrent,
+        0x030D: ZigBee.MeasurementAndSensing.Types.MeasuredPhase1StHarmonicCurrent,
+        0x030E: ZigBee.MeasurementAndSensing.Types.MeasuredPhase3RdHarmonicCurrent,
+        0x030F: ZigBee.MeasurementAndSensing.Types.MeasuredPhase5ThHarmonicCurrent,
+        0x0310: ZigBee.MeasurementAndSensing.Types.MeasuredPhase7ThHarmonicCurrent,
+        0x0311: ZigBee.MeasurementAndSensing.Types.MeasuredPhase9ThHarmonicCurrent,
+        0x0312: ZigBee.MeasurementAndSensing.Types.MeasuredPhase11ThHarmonicCurrent,
+        0x0400: ZigBee.MeasurementAndSensing.Types.AcFrequencyMultiplier,
+        0x0401: ZigBee.MeasurementAndSensing.Types.AcFrequencyDivisor,
+        0x0402: ZigBee.MeasurementAndSensing.Types.PowerMultiplier,
+        0x0403: ZigBee.MeasurementAndSensing.Types.PowerDivisor,
+        0x0404: ZigBee.MeasurementAndSensing.Types.HarmonicCurrentMultiplier,
+        0x0405: ZigBee.MeasurementAndSensing.Types.PhaseHarmonicCurrentMultiplier,
+        0x0501: ZigBee.MeasurementAndSensing.Types.LineCurrent,
+        0x0502: ZigBee.MeasurementAndSensing.Types.ActiveCurrent,
+        0x0503: ZigBee.MeasurementAndSensing.Types.ReactiveCurrent,
+        0x0505: ZigBee.MeasurementAndSensing.Types.RmsVoltage,
+        0x0506: ZigBee.MeasurementAndSensing.Types.RmsVoltageMin,
+        0x0507: ZigBee.MeasurementAndSensing.Types.RmsVoltageMax,
+        0x0508: ZigBee.MeasurementAndSensing.Types.RmsCurrent,
+        0x0509: ZigBee.MeasurementAndSensing.Types.RmsCurrentMin,
+        0x050A: ZigBee.MeasurementAndSensing.Types.RmsCurrentMax,
+        0x050B: ZigBee.MeasurementAndSensing.Types.ActivePower,
+        0x050C: ZigBee.MeasurementAndSensing.Types.ActivePowerMin,
+        0x050D: ZigBee.MeasurementAndSensing.Types.ActivePowerMax,
+        0x050E: ZigBee.MeasurementAndSensing.Types.ReactivePower,
+        0x050F: ZigBee.MeasurementAndSensing.Types.ApparentPower,
+        0x0510: ZigBee.MeasurementAndSensing.Types.PowerFactor,
+        0x0511: ZigBee.MeasurementAndSensing.Types.AverageRmsVoltageMeasurementPeriod,
+        0x0512: ZigBee.MeasurementAndSensing.Types.AverageRmsOverVoltageCounter,
+        0x0513: ZigBee.MeasurementAndSensing.Types.AverageRmsUnderVoltageCounter,
+        0x0514: ZigBee.MeasurementAndSensing.Types.RmsExtremeOverVoltagePeriod,
+        0x0515: ZigBee.MeasurementAndSensing.Types.RmsExtremeUnderVoltagePeriod,
+        0x0516: ZigBee.MeasurementAndSensing.Types.RmsVoltageSagPeriod,
+        0x0517: ZigBee.MeasurementAndSensing.Types.RmsVoltageSwellPeriod,
+        0x0600: ZigBee.MeasurementAndSensing.Types.AcVoltageMultiplier,
+        0x0601: ZigBee.MeasurementAndSensing.Types.AcVoltageDivisor,
+        0x0602: ZigBee.MeasurementAndSensing.Types.AcCurrentMultiplier,
+        0x0603: ZigBee.MeasurementAndSensing.Types.AcCurrentDivisor,
+        0x0604: ZigBee.MeasurementAndSensing.Types.AcPowerMultiplier,
+        0x0605: ZigBee.MeasurementAndSensing.Types.AcPowerDivisor,
+        0x0700: ZigBee.MeasurementAndSensing.Types.DcOverloadAlarmsMask,
+        0x0701: ZigBee.MeasurementAndSensing.Types.DcVoltageOverload,
+        0x0702: ZigBee.MeasurementAndSensing.Types.DcCurrentOverload,
+        0x0800: ZigBee.MeasurementAndSensing.Types.AcAlarmsMask,
+        0x0801: ZigBee.MeasurementAndSensing.Types.AcVoltageOverload,
+        0x0802: ZigBee.MeasurementAndSensing.Types.AcCurrentOverload,
+        0x0803: ZigBee.MeasurementAndSensing.Types.AcActivePowerOverload,
+        0x0804: ZigBee.MeasurementAndSensing.Types.AcReactivePowerOverload,
+        0x0805: ZigBee.MeasurementAndSensing.Types.AverageRmsOverVoltage,
+        0x0806: ZigBee.MeasurementAndSensing.Types.AverageRmsUnderVoltage,
+        0x0807: ZigBee.MeasurementAndSensing.Types.RmsExtremeOverVoltage,
+        0x0808: ZigBee.MeasurementAndSensing.Types.RmsExtremeUnderVoltage,
+        0x0809: ZigBee.MeasurementAndSensing.Types.RmsVoltageSag,
+        0x080A: ZigBee.MeasurementAndSensing.Types.RmsVoltageSwell,
+        0x0901: ZigBee.MeasurementAndSensing.Types.LineCurrentPhB,
+        0x0902: ZigBee.MeasurementAndSensing.Types.ActiveCurrentPhB,
+        0x0903: ZigBee.MeasurementAndSensing.Types.ReactiveCurrentPhB,
+        0x0905: ZigBee.MeasurementAndSensing.Types.RmsVoltagePhB,
+        0x0906: ZigBee.MeasurementAndSensing.Types.RmsVoltageMinPhB,
+        0x0907: ZigBee.MeasurementAndSensing.Types.RmsVoltageMaxPhB,
+        0x0908: ZigBee.MeasurementAndSensing.Types.RmsCurrentPhB,
+        0x0909: ZigBee.MeasurementAndSensing.Types.RmsCurrentMinPhB,
+        0x090A: ZigBee.MeasurementAndSensing.Types.RmsCurrentMaxPhB,
+        0x090B: ZigBee.MeasurementAndSensing.Types.ActivePowerPhB,
+        0x090C: ZigBee.MeasurementAndSensing.Types.ActivePowerMinPhB,
+        0x090D: ZigBee.MeasurementAndSensing.Types.ActivePowerMaxPhB,
+        0x090E: ZigBee.MeasurementAndSensing.Types.ReactivePowerPhB,
+        0x090F: ZigBee.MeasurementAndSensing.Types.ApparentPowerPhB,
+        0x0910: ZigBee.MeasurementAndSensing.Types.PowerFactorPhB,
+        0x0911: ZigBee.MeasurementAndSensing.Types.AverageRmsVoltageMeasurementPeriodPhB,
+        0x0912: ZigBee.MeasurementAndSensing.Types.AverageRmsOverVoltageCounterPhB,
+        0x0913: ZigBee.MeasurementAndSensing.Types.AverageRmsUnderVoltageCounterPhB,
+        0x0914: ZigBee.MeasurementAndSensing.Types.RmsExtremeOverVoltagePeriodPhB,
+        0x0915: ZigBee.MeasurementAndSensing.Types.RmsExtremeUnderVoltagePeriodPhB,
+        0x0916: ZigBee.MeasurementAndSensing.Types.RmsVoltageSagPeriodPhB,
+        0x0917: ZigBee.MeasurementAndSensing.Types.RmsVoltageSwellPeriodPhB,
+        0x0A01: ZigBee.MeasurementAndSensing.Types.LineCurrentPhC,
+        0x0A02: ZigBee.MeasurementAndSensing.Types.ActiveCurrentPhC,
+        0x0A03: ZigBee.MeasurementAndSensing.Types.ReactiveCurrentPhC,
+        0x0A05: ZigBee.MeasurementAndSensing.Types.RmsVoltagePhC,
+        0x0A06: ZigBee.MeasurementAndSensing.Types.RmsVoltageMinPhC,
+        0x0A07: ZigBee.MeasurementAndSensing.Types.RmsVoltageMaxPhC,
+        0x0A08: ZigBee.MeasurementAndSensing.Types.RmsCurrentPhC,
+        0x0A09: ZigBee.MeasurementAndSensing.Types.RmsCurrentMinPhC,
+        0x0A0A: ZigBee.MeasurementAndSensing.Types.RmsCurrentMaxPhC,
+        0x0A0B: ZigBee.MeasurementAndSensing.Types.ActivePowerPhC,
+        0x0A0C: ZigBee.MeasurementAndSensing.Types.ActivePowerMinPhC,
+        0x0A0D: ZigBee.MeasurementAndSensing.Types.ActivePowerMaxPhC,
+        0x0A0E: ZigBee.MeasurementAndSensing.Types.ReactivePowerPhC,
+        0x0A0F: ZigBee.MeasurementAndSensing.Types.ApparentPowerPhC,
+        0x0A10: ZigBee.MeasurementAndSensing.Types.PowerFactorPhC,
+        0x0A11: ZigBee.MeasurementAndSensing.Types.AverageRmsVoltageMeasurementPeriodPhC,
+        0x0A12: ZigBee.MeasurementAndSensing.Types.AverageRmsOverVoltageCounterPhC,
+        0x0A13: ZigBee.MeasurementAndSensing.Types.AverageRmsUnderVoltageCounterPhC,
+        0x0A14: ZigBee.MeasurementAndSensing.Types.RmsExtremeOverVoltagePeriodPhC,
+        0x0A15: ZigBee.MeasurementAndSensing.Types.RmsExtremeUnderVoltagePeriodPhC,
+        0x0A16: ZigBee.MeasurementAndSensing.Types.RmsVoltageSagPeriodPhC,
+        0x0A17: ZigBee.MeasurementAndSensing.Types.RmsVoltageSwellPeriodPhC,
+    };
+    ZigBee.MeasurementAndSensing.ElectricalMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.ElectricalMeasurement.Server.Command = { 
+        0x00: ZigBee.MeasurementAndSensing.ElectricalMeasurement.GetProfileInfo,
+        0x01: ZigBee.MeasurementAndSensing.ElectricalMeasurement.GetMeasurementProfile,
+    };
+    ZigBee.MeasurementAndSensing.ElectricalMeasurement.Client.Command = { 
+        0x00: ZigBee.MeasurementAndSensing.ElectricalMeasurement.GetProfileInfoResponse,
+        0x01: ZigBee.MeasurementAndSensing.ElectricalMeasurement.GetMeasurementProfileResponse,
     };
     export const Otau = {
         Types: { 
@@ -8743,8 +10501,403 @@ reporting occupancy status`,
         0x05: ZigBee.Otau.Otau.ImageBlockResponse,
         0x07: ZigBee.Otau.Otau.UpgradeEndResponse,
     };
+    export const SmartEnergy = {
+        Types: { 
+            ControlTemperature: makeType<ZigBee.ISmartEnergy.IArgControlTemperature, ZigBee.ISmartEnergy.IArgControlTemperaturePayload>(base.s24, ()=>({
+                name: `Control Temperature`,
+                description: ``,
+                id: 0x0019,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentBlock: makeType<ZigBee.ISmartEnergy.IArgCurrentBlock, ZigBee.ISmartEnergy.IArgCurrentBlockPayload>(base.enum8, ()=>({
+                name: `Current Block`,
+                description: `is an 8-bit Enumeration which indicates the currently active block. If blocks are active then the current
+active block is based on the CurrentBlockPeriodConsumptionDelivered and the block thresholds.
+Block 1 is active when the value of CurrentBlockPeriodConsumptionDelivered is less than Block1Threshold value;
+Block 2 is active when CurrentBlockPeriodConsumptionDelivered is greater than Block1Threshold value and less than
+Block2Threshold value, and so on. Block 16 is active when the value of CurrentBlockPeriodConsumptionDelivered is
+greater than Block15Threshold value.`,
+                id: 0x000E,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                values: { 
+                0x00: `No blocks in use`, 
+                0x01: `Block1`, 
+                0x02: `Block2`, 
+                0x03: `Block3`, 
+                0x04: `Block4`, 
+                0x05: `Block5`, 
+                0x06: `Block6`, 
+                0x07: `Block7`, 
+                0x08: `Block8`, 
+                0x09: `Block9`, 
+                0x0A: `Block10`, 
+                0x0B: `Block11`, 
+                0x0C: `Block12`, 
+                0x0D: `Block13`, 
+                0x0E: `Block14`, 
+                0x0F: `Block15`, 
+                0x10: `Block16`,  },
+                
+            })),
+            CurrentBlockPeriodConsumptionDelivered: makeType<ZigBee.ISmartEnergy.IArgCurrentBlockPeriodConsumptionDelivered, ZigBee.ISmartEnergy.IArgCurrentBlockPeriodConsumptionDeliveredPayload>(base.u48, ()=>({
+                name: `Current Block Period Consumption Delivered`,
+                description: `represents the most recent summed value of Energy, Gas or Water delivered and consumed in the premises during the
+Block Tariff Period. The CurrentBlockPeriodConsumptionDelivered is reset at the start of each Block Tariff Period.`,
+                id: 0x000C,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentInletEnergyCarrierDemand: makeType<ZigBee.ISmartEnergy.IArgCurrentInletEnergyCarrierDemand, ZigBee.ISmartEnergy.IArgCurrentInletEnergyCarrierDemandPayload>(base.s24, ()=>({
+                name: `Current Inlet Energy Carrier Demand`,
+                description: ``,
+                id: 0x001A,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentInletEnergyCarrierSummation: makeType<ZigBee.ISmartEnergy.IArgCurrentInletEnergyCarrierSummation, ZigBee.ISmartEnergy.IArgCurrentInletEnergyCarrierSummationPayload>(base.u48, ()=>({
+                name: `Current Inlet Energy Carrier Summation`,
+                description: ``,
+                id: 0x0015,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentMaxDemandDelivered: makeType<ZigBee.ISmartEnergy.IArgCurrentMaxDemandDelivered, ZigBee.ISmartEnergy.IArgCurrentMaxDemandDeliveredPayload>(base.u48, ()=>({
+                name: `Current Max Demand Delivered`,
+                description: `represents the maximum demand or rate of delivered value of Energy, Gas, or Water being utilized at the premises`,
+                id: 0x0002,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentMaxDemandDeliveredTime: makeType<ZigBee.ISmartEnergy.IArgCurrentMaxDemandDeliveredTime, ZigBee.ISmartEnergy.IArgCurrentMaxDemandDeliveredTimePayload>(base.utc, ()=>({
+                name: `Current Max Demand Delivered Time`,
+                description: `represents the time when CurrentMaxDemandDelivered reading was captured`,
+                id: 0x0008,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentMaxDemandReceived: makeType<ZigBee.ISmartEnergy.IArgCurrentMaxDemandReceived, ZigBee.ISmartEnergy.IArgCurrentMaxDemandReceivedPayload>(base.u48, ()=>({
+                name: `Current Max Demand Received`,
+                description: `represents the maximum demand or rate of received value of Energy, Gas, or Water being utilized by the utility`,
+                id: 0x0003,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentMaxDemandReceivedTime: makeType<ZigBee.ISmartEnergy.IArgCurrentMaxDemandReceivedTime, ZigBee.ISmartEnergy.IArgCurrentMaxDemandReceivedTimePayload>(base.utc, ()=>({
+                name: `Current Max Demand Received Time`,
+                description: `represents the time when CurrentMaxDemandReceived reading was captured`,
+                id: 0x0009,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentOutletEnergyCarrierDemand: makeType<ZigBee.ISmartEnergy.IArgCurrentOutletEnergyCarrierDemand, ZigBee.ISmartEnergy.IArgCurrentOutletEnergyCarrierDemandPayload>(base.s24, ()=>({
+                name: `Current Outlet Energy Carrier Demand`,
+                description: ``,
+                id: 0x001B,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentOutletEnergyCarrierSummation: makeType<ZigBee.ISmartEnergy.IArgCurrentOutletEnergyCarrierSummation, ZigBee.ISmartEnergy.IArgCurrentOutletEnergyCarrierSummationPayload>(base.u48, ()=>({
+                name: `Current Outlet Energy Carrier Summation`,
+                description: ``,
+                id: 0x0016,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentSummationDelivered: makeType<ZigBee.ISmartEnergy.IArgCurrentSummationDelivered, ZigBee.ISmartEnergy.IArgCurrentSummationDeliveredPayload>(base.u48, ()=>({
+                name: `Current Summation Delivered`,
+                description: `represents the most recent summed value of Energy, Gas, or Water delivered and consumed in the premises.`,
+                id: 0x0000,
+                report: true,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            CurrentSummationReceived: makeType<ZigBee.ISmartEnergy.IArgCurrentSummationReceived, ZigBee.ISmartEnergy.IArgCurrentSummationReceivedPayload>(base.u48, ()=>({
+                name: `Current Summation Received`,
+                description: `represents the most recent summed value of Energy, Gas, or Water generated and delivered from the premises.`,
+                id: 0x0001,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DailyConsumptionTarget: makeType<ZigBee.ISmartEnergy.IArgDailyConsumptionTarget, ZigBee.ISmartEnergy.IArgDailyConsumptionTargetPayload>(base.u24, ()=>({
+                name: `Daily Consumption Target`,
+                description: `is a daily target consumption amount that can be displayed to the consumer on a HAN device, with the intent that
+it can be used to compare to actual daily consumption (e.g. compare to the CurrentDayConsumptionDelivered).
+This may be sent from the utility to the ESI, or it may be derived. Although intended to be based on Block
+Thresholds, it can be used for other targets not related to blocks. The formatting will be based on the
+HistoricalConsumptionFormatting attribute.
+Example: If based on a Block Threshold, the DailyConsumptionTarget could be calculated based on the
+number of days specified in the Block Tariff Period and a given Block Threshold as follows:
+DailyConsumptionTarget = BlockNThreshold / ((BlockPeriodDuration /60) / 24). Example: If the target is
+based on a Block1Threshold of 675kWh and where 43200 BlockThresholdPeriod is the number of minutes in
+the billing period (30 days), the ConsumptionDailyTarget would be 675 / ((43200 / 60) / 24) = 22.5 kWh per day`,
+                id: 0x000D,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DailyFreezeTime: makeType<ZigBee.ISmartEnergy.IArgDailyFreezeTime, ZigBee.ISmartEnergy.IArgDailyFreezeTimePayload>(base.u16, ()=>({
+                name: `Daily Freeze Time`,
+                description: `represents the time of day when DFTSummation.
+Bits 0 to 7: Range of 0 to 0x3C representing the number of minutes past the top of the hour.
+Bits 8 to 15: Range of 0 to 0x17 representing the hour of the day (in 24-hour format).`,
+                id: 0x0005,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DefaultUpdatePeriod: makeType<ZigBee.ISmartEnergy.IArgDefaultUpdatePeriod, ZigBee.ISmartEnergy.IArgDefaultUpdatePeriodPayload>(base.u8, ()=>({
+                name: `Default Update Period`,
+                description: `represents the interval (seconds) at which the InstantaneousDemand
+attribute is updated when not in fast poll mode. InstantaneousDemand may be continuously updated as new
+measurements are acquired, but at a minimum InstantaneousDemand must be updated at the
+DefaultUpdatePeriod. The DefaultUpdatePeriod may apply to other attributes as defined by the device
+manufacturer.`,
+                id: 0x000A,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            DftSummation: makeType<ZigBee.ISmartEnergy.IArgDftSummation, ZigBee.ISmartEnergy.IArgDftSummationPayload>(base.u48, ()=>({
+                name: `DFT Summation`,
+                description: `represents a snapshot of attribute CurrentSummationDelivered captured at the time indicated by attribute
+DailyFreezeTime`,
+                id: 0x0004,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            FastPollUpdatePeriod: makeType<ZigBee.ISmartEnergy.IArgFastPollUpdatePeriod, ZigBee.ISmartEnergy.IArgFastPollUpdatePeriodPayload>(base.u8, ()=>({
+                name: `Fast Poll Update Period`,
+                description: `represents the interval (seconds) at which the InstantaneousDemand
+attribute is updated when in fast poll mode. InstantaneousDemand may be continuously updated as new
+measurements are acquired, but at a minimum, InstantaneousDemand must be updated at the
+FastPollUpdatePeriod. The FastPollUpdatePeriod may apply to other attributes as defined by the device
+manufacturer.`,
+                id: 0x000B,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            FlowRestriction: makeType<ZigBee.ISmartEnergy.IArgFlowRestriction, ZigBee.ISmartEnergy.IArgFlowRestrictionPayload>(base.u8, ()=>({
+                name: `Flow Restriction`,
+                description: ``,
+                id: 0x0013,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            InletTemperature: makeType<ZigBee.ISmartEnergy.IArgInletTemperature, ZigBee.ISmartEnergy.IArgInletTemperaturePayload>(base.s24, ()=>({
+                name: `Inlet Temperature`,
+                description: ``,
+                id: 0x0017,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            IntervalReadReportingPeriod: makeType<ZigBee.ISmartEnergy.IArgIntervalReadReportingPeriod, ZigBee.ISmartEnergy.IArgIntervalReadReportingPeriodPayload>(base.u16, ()=>({
+                name: `Interval Read Reporting Period`,
+                description: ``,
+                id: 0x0010,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            OutletTemperature: makeType<ZigBee.ISmartEnergy.IArgOutletTemperature, ZigBee.ISmartEnergy.IArgOutletTemperaturePayload>(base.s24, ()=>({
+                name: `Outlet Temperature`,
+                description: ``,
+                id: 0x0018,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            PowerFactor: makeType<ZigBee.ISmartEnergy.IArgPowerFactor, ZigBee.ISmartEnergy.IArgPowerFactorPayload>(base.s8, ()=>({
+                name: `Power Factor`,
+                description: `contains the Average Power Factor ratio in 1/100ths. Valid values are 0 to 99`,
+                id: 0x0006,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            PresetReadingTime: makeType<ZigBee.ISmartEnergy.IArgPresetReadingTime, ZigBee.ISmartEnergy.IArgPresetReadingTimePayload>(base.u16, ()=>({
+                name: `Preset Reading Time`,
+                description: ``,
+                id: 0x0011,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            PreviousBlockPeriodConsumptionDelivered: makeType<ZigBee.ISmartEnergy.IArgPreviousBlockPeriodConsumptionDelivered, ZigBee.ISmartEnergy.IArgPreviousBlockPeriodConsumptionDeliveredPayload>(base.u48, ()=>({
+                name: `Previous Block Period Consumption Delivered`,
+                description: ``,
+                id: 0x001C,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ProfileIntervalPeriod: makeType<ZigBee.ISmartEnergy.IArgProfileIntervalPeriod, ZigBee.ISmartEnergy.IArgProfileIntervalPeriodPayload>(base.enum8, ()=>({
+                name: `Profile Interval Period`,
+                description: `is currently included in the Get Profile Response command payload, but does not appear in an attribute set.
+This represents the duration of each interval. ProfileIntervalPeriod represents the interval or time frame used
+to capture metered Energy, Gas, and Water consumption for profiling purposes.`,
+                id: 0x000F,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            ReadingSnapShotTime: makeType<ZigBee.ISmartEnergy.IArgReadingSnapShotTime, ZigBee.ISmartEnergy.IArgReadingSnapShotTimePayload>(base.utc, ()=>({
+                name: `Reading Snap Shot Time`,
+                description: `represents the last time all of the CurrentSummationDelivered, CurrentSummationReceived,
+CurrentMaxDemandDelivered, and CurrentMaxDemandReceived attributes that are supported by the device were updated`,
+                id: 0x0007,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            SupplyStatus: makeType<ZigBee.ISmartEnergy.IArgSupplyStatus, ZigBee.ISmartEnergy.IArgSupplyStatusPayload>(base.enum8, ()=>({
+                name: `Supply Status`,
+                description: ``,
+                id: 0x0014,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })),
+            VolumePerReport: makeType<ZigBee.ISmartEnergy.IArgVolumePerReport, ZigBee.ISmartEnergy.IArgVolumePerReportPayload>(base.u16, ()=>({
+                name: `Volume Per Report`,
+                description: ``,
+                id: 0x0012,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                
+            })), },
+        Metering: {
+            ID: 0x0702,
+            Name: `Metering`,
+            Desc: `provides a mechanism to retrieve usage information from Electric, Gas, Water, and
+potentially Thermal metering devices.`,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        }
+    };
+    
+    ZigBee.SmartEnergy.Metering.Server.Attribute = { 
+        0x0000: ZigBee.SmartEnergy.Types.CurrentSummationDelivered,
+        0x0001: ZigBee.SmartEnergy.Types.CurrentSummationReceived,
+        0x0002: ZigBee.SmartEnergy.Types.CurrentMaxDemandDelivered,
+        0x0003: ZigBee.SmartEnergy.Types.CurrentMaxDemandReceived,
+        0x0004: ZigBee.SmartEnergy.Types.DftSummation,
+        0x0005: ZigBee.SmartEnergy.Types.DailyFreezeTime,
+        0x0006: ZigBee.SmartEnergy.Types.PowerFactor,
+        0x0007: ZigBee.SmartEnergy.Types.ReadingSnapShotTime,
+        0x0008: ZigBee.SmartEnergy.Types.CurrentMaxDemandDeliveredTime,
+        0x0009: ZigBee.SmartEnergy.Types.CurrentMaxDemandReceivedTime,
+        0x000A: ZigBee.SmartEnergy.Types.DefaultUpdatePeriod,
+        0x000B: ZigBee.SmartEnergy.Types.FastPollUpdatePeriod,
+        0x000C: ZigBee.SmartEnergy.Types.CurrentBlockPeriodConsumptionDelivered,
+        0x000D: ZigBee.SmartEnergy.Types.DailyConsumptionTarget,
+        0x000E: ZigBee.SmartEnergy.Types.CurrentBlock,
+        0x000F: ZigBee.SmartEnergy.Types.ProfileIntervalPeriod,
+        0x0010: ZigBee.SmartEnergy.Types.IntervalReadReportingPeriod,
+        0x0011: ZigBee.SmartEnergy.Types.PresetReadingTime,
+        0x0012: ZigBee.SmartEnergy.Types.VolumePerReport,
+        0x0013: ZigBee.SmartEnergy.Types.FlowRestriction,
+        0x0014: ZigBee.SmartEnergy.Types.SupplyStatus,
+        0x0015: ZigBee.SmartEnergy.Types.CurrentInletEnergyCarrierSummation,
+        0x0016: ZigBee.SmartEnergy.Types.CurrentOutletEnergyCarrierSummation,
+        0x0017: ZigBee.SmartEnergy.Types.InletTemperature,
+        0x0018: ZigBee.SmartEnergy.Types.OutletTemperature,
+        0x0019: ZigBee.SmartEnergy.Types.ControlTemperature,
+        0x001A: ZigBee.SmartEnergy.Types.CurrentInletEnergyCarrierDemand,
+        0x001B: ZigBee.SmartEnergy.Types.CurrentOutletEnergyCarrierDemand,
+        0x001C: ZigBee.SmartEnergy.Types.PreviousBlockPeriodConsumptionDelivered,
+    };
+    ZigBee.SmartEnergy.Metering.Client.Attribute = { 
+    };
+    ZigBee.SmartEnergy.Metering.Server.Command = { 
+    };
+    ZigBee.SmartEnergy.Metering.Client.Command = { 
+    };
 
     export const cluster: {[id: number]: ICluster} = { 
+        0x0101: ZigBee.Closures.DoorLock,
         0x0102: ZigBee.Closures.WindowCovering,
         0x0000: ZigBee.General.Basic,
         0x0001: ZigBee.General.PowerConfiguration,
@@ -8780,7 +10933,9 @@ reporting occupancy status`,
         0x0404: ZigBee.MeasurementAndSensing.FlowMeasurement,
         0x0405: ZigBee.MeasurementAndSensing.RelativeHumidityMeasurement,
         0x0406: ZigBee.MeasurementAndSensing.OccupancySensing,
+        0x0B04: ZigBee.MeasurementAndSensing.ElectricalMeasurement,
         0x0019: ZigBee.Otau.Otau,
+        0x0702: ZigBee.SmartEnergy.Metering,
     };
 
     export namespace IZDP {
@@ -9004,6 +11159,15 @@ reporting occupancy status`,
         // noinspection ES6UnusedImports
         import ValueType = ZigBee.ValueType;
         
+        export namespace DoorLock {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
         export namespace WindowCovering {
             // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
@@ -10229,14 +12393,167 @@ reporting occupancy status`,
         
         }
 
+        export namespace ElectricalMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+            export type ICmdGetProfileInfoPayload = { }
+            export interface ICmdGetProfileInfo extends ICommand { value: ICmdGetProfileInfoPayload }
+            export type ICmdGetMeasurementProfilePayload = { AttributeId?: IArgAttributeIdPayload, StartTime?: IArgStartTimePayload, NumberOfIntervals?: IArgNumberOfIntervalsPayload, }
+            export interface ICmdGetMeasurementProfile extends ICommand { value: ICmdGetMeasurementProfilePayload }
+            export type ICmdGetProfileInfoResponsePayload = { ProfileCount?: IArgProfileCountPayload, ProfileIntervalPeriod?: IArgProfileIntervalPeriodPayload, MaxNumberOfIntervals?: IArgMaxNumberOfIntervalsPayload, ListOfAttributes?: IArgListOfAttributesPayload, }
+            export interface ICmdGetProfileInfoResponse extends ICommand { value: ICmdGetProfileInfoResponsePayload }
+            export type ICmdGetMeasurementProfileResponsePayload = { StartTime?: IArgStartTimePayload, MeasurementResponseStatus?: IArgMeasurementResponseStatusPayload, ProfileIntervalPeriod?: IArgProfileIntervalPeriodPayload, NumberOfIntervals?: IArgNumberOfIntervalsPayload, AttributeId?: IArgAttributeIdPayload, Intervals?: IArgIntervalsPayload, }
+            export interface ICmdGetMeasurementProfileResponse extends ICommand { value: ICmdGetMeasurementProfileResponsePayload }
+        }
+
+            export type IArgAcActivePowerOverloadPayload = ValueType;
+            export interface IArgAcActivePowerOverload extends IAttribute { value: IArgAcActivePowerOverloadPayload }
+            export type IArgAcAlarmsMaskPayload = ValueType;
+            export interface IArgAcAlarmsMask extends IAttribute { value: IArgAcAlarmsMaskPayload }
+            export type IArgAcCurrentDivisorPayload = ValueType;
+            export interface IArgAcCurrentDivisor extends IAttribute { value: IArgAcCurrentDivisorPayload }
+            export type IArgAcCurrentMultiplierPayload = ValueType;
+            export interface IArgAcCurrentMultiplier extends IAttribute { value: IArgAcCurrentMultiplierPayload }
+            export type IArgAcCurrentOverloadPayload = ValueType;
+            export interface IArgAcCurrentOverload extends IAttribute { value: IArgAcCurrentOverloadPayload }
+            export type IArgAcFrequencyPayload = ValueType;
+            export interface IArgAcFrequency extends IAttribute { value: IArgAcFrequencyPayload }
+            export type IArgAcFrequencyDivisorPayload = ValueType;
+            export interface IArgAcFrequencyDivisor extends IAttribute { value: IArgAcFrequencyDivisorPayload }
+            export type IArgAcFrequencyMaxPayload = ValueType;
+            export interface IArgAcFrequencyMax extends IAttribute { value: IArgAcFrequencyMaxPayload }
+            export type IArgAcFrequencyMinPayload = ValueType;
+            export interface IArgAcFrequencyMin extends IAttribute { value: IArgAcFrequencyMinPayload }
+            export type IArgAcFrequencyMultiplierPayload = ValueType;
+            export interface IArgAcFrequencyMultiplier extends IAttribute { value: IArgAcFrequencyMultiplierPayload }
+            export type IArgAcPowerDivisorPayload = ValueType;
+            export interface IArgAcPowerDivisor extends IAttribute { value: IArgAcPowerDivisorPayload }
+            export type IArgAcPowerMultiplierPayload = ValueType;
+            export interface IArgAcPowerMultiplier extends IAttribute { value: IArgAcPowerMultiplierPayload }
+            export type IArgAcReactivePowerOverloadPayload = ValueType;
+            export interface IArgAcReactivePowerOverload extends IAttribute { value: IArgAcReactivePowerOverloadPayload }
+            export type IArgAcVoltageDivisorPayload = ValueType;
+            export interface IArgAcVoltageDivisor extends IAttribute { value: IArgAcVoltageDivisorPayload }
+            export type IArgAcVoltageMultiplierPayload = ValueType;
+            export interface IArgAcVoltageMultiplier extends IAttribute { value: IArgAcVoltageMultiplierPayload }
+            export type IArgAcVoltageOverloadPayload = ValueType;
+            export interface IArgAcVoltageOverload extends IAttribute { value: IArgAcVoltageOverloadPayload }
+            export type IArgActiveCurrentPayload = ValueType;
+            export interface IArgActiveCurrent extends IAttribute { value: IArgActiveCurrentPayload }
+            export type IArgActiveCurrentPhBPayload = ValueType;
+            export interface IArgActiveCurrentPhB extends IAttribute { value: IArgActiveCurrentPhBPayload }
+            export type IArgActiveCurrentPhCPayload = ValueType;
+            export interface IArgActiveCurrentPhC extends IAttribute { value: IArgActiveCurrentPhCPayload }
+            export type IArgActivePowerPayload = ValueType;
+            export interface IArgActivePower extends IAttribute { value: IArgActivePowerPayload }
+            export type IArgActivePowerMaxPayload = ValueType;
+            export interface IArgActivePowerMax extends IAttribute { value: IArgActivePowerMaxPayload }
+            export type IArgActivePowerMaxPhBPayload = ValueType;
+            export interface IArgActivePowerMaxPhB extends IAttribute { value: IArgActivePowerMaxPhBPayload }
+            export type IArgActivePowerMaxPhCPayload = ValueType;
+            export interface IArgActivePowerMaxPhC extends IAttribute { value: IArgActivePowerMaxPhCPayload }
+            export type IArgActivePowerMinPayload = ValueType;
+            export interface IArgActivePowerMin extends IAttribute { value: IArgActivePowerMinPayload }
+            export type IArgActivePowerMinPhBPayload = ValueType;
+            export interface IArgActivePowerMinPhB extends IAttribute { value: IArgActivePowerMinPhBPayload }
+            export type IArgActivePowerMinPhCPayload = ValueType;
+            export interface IArgActivePowerMinPhC extends IAttribute { value: IArgActivePowerMinPhCPayload }
+            export type IArgActivePowerPhBPayload = ValueType;
+            export interface IArgActivePowerPhB extends IAttribute { value: IArgActivePowerPhBPayload }
+            export type IArgActivePowerPhCPayload = ValueType;
+            export interface IArgActivePowerPhC extends IAttribute { value: IArgActivePowerPhCPayload }
+            export type IArgApparentPowerPayload = ValueType;
+            export interface IArgApparentPower extends IAttribute { value: IArgApparentPowerPayload }
+            export type IArgApparentPowerPhBPayload = ValueType;
+            export interface IArgApparentPowerPhB extends IAttribute { value: IArgApparentPowerPhBPayload }
+            export type IArgApparentPowerPhCPayload = ValueType;
+            export interface IArgApparentPowerPhC extends IAttribute { value: IArgApparentPowerPhCPayload }
+            export type IArgAttributeIdPayload = ValueType;
+            export interface IArgAttributeId extends IArgument { value: IArgAttributeIdPayload }
+            export type IArgAverageRmsOverVoltageCounterPayload = ValueType;
+            export interface IArgAverageRmsOverVoltageCounter extends IAttribute { value: IArgAverageRmsOverVoltageCounterPayload }
+            export type IArgAverageRmsOverVoltageCounterPhBPayload = ValueType;
+            export interface IArgAverageRmsOverVoltageCounterPhB extends IAttribute { value: IArgAverageRmsOverVoltageCounterPhBPayload }
+            export type IArgAverageRmsOverVoltageCounterPhCPayload = ValueType;
+            export interface IArgAverageRmsOverVoltageCounterPhC extends IAttribute { value: IArgAverageRmsOverVoltageCounterPhCPayload }
+            export type IArgAverageRmsUnderVoltageCounterPayload = ValueType;
+            export interface IArgAverageRmsUnderVoltageCounter extends IAttribute { value: IArgAverageRmsUnderVoltageCounterPayload }
+            export type IArgAverageRmsUnderVoltageCounterPhBPayload = ValueType;
+            export interface IArgAverageRmsUnderVoltageCounterPhB extends IAttribute { value: IArgAverageRmsUnderVoltageCounterPhBPayload }
+            export type IArgAverageRmsUnderVoltageCounterPhCPayload = ValueType;
+            export interface IArgAverageRmsUnderVoltageCounterPhC extends IAttribute { value: IArgAverageRmsUnderVoltageCounterPhCPayload }
+            export type IArgAverageRmsVoltageMeasurementPeriodPayload = ValueType;
+            export interface IArgAverageRmsVoltageMeasurementPeriod extends IAttribute { value: IArgAverageRmsVoltageMeasurementPeriodPayload }
+            export type IArgAverageRmsVoltageMeasurementPeriodPhBPayload = ValueType;
+            export interface IArgAverageRmsVoltageMeasurementPeriodPhB extends IAttribute { value: IArgAverageRmsVoltageMeasurementPeriodPhBPayload }
+            export type IArgAverageRmsVoltageMeasurementPeriodPhCPayload = ValueType;
+            export interface IArgAverageRmsVoltageMeasurementPeriodPhC extends IAttribute { value: IArgAverageRmsVoltageMeasurementPeriodPhCPayload }
+            export type IArgAverageRmsOverVoltagePayload = ValueType;
+            export interface IArgAverageRmsOverVoltage extends IAttribute { value: IArgAverageRmsOverVoltagePayload }
+            export type IArgAverageRmsUnderVoltagePayload = ValueType;
+            export interface IArgAverageRmsUnderVoltage extends IAttribute { value: IArgAverageRmsUnderVoltagePayload }
+            export type IArgDcCurrentPayload = ValueType;
+            export interface IArgDcCurrent extends IAttribute { value: IArgDcCurrentPayload }
+            export type IArgDcCurrentDivisorPayload = ValueType;
+            export interface IArgDcCurrentDivisor extends IAttribute { value: IArgDcCurrentDivisorPayload }
+            export type IArgDcCurrentMaxPayload = ValueType;
+            export interface IArgDcCurrentMax extends IAttribute { value: IArgDcCurrentMaxPayload }
+            export type IArgDcCurrentMinPayload = ValueType;
+            export interface IArgDcCurrentMin extends IAttribute { value: IArgDcCurrentMinPayload }
+            export type IArgDcCurrentMultiplierPayload = ValueType;
+            export interface IArgDcCurrentMultiplier extends IAttribute { value: IArgDcCurrentMultiplierPayload }
+            export type IArgDcCurrentOverloadPayload = ValueType;
+            export interface IArgDcCurrentOverload extends IAttribute { value: IArgDcCurrentOverloadPayload }
+            export type IArgDcOverloadAlarmsMaskPayload = ValueType;
+            export interface IArgDcOverloadAlarmsMask extends IAttribute { value: IArgDcOverloadAlarmsMaskPayload }
+            export type IArgDcPowerPayload = ValueType;
+            export interface IArgDcPower extends IAttribute { value: IArgDcPowerPayload }
+            export type IArgDcPowerDivisorPayload = ValueType;
+            export interface IArgDcPowerDivisor extends IAttribute { value: IArgDcPowerDivisorPayload }
+            export type IArgDcPowerMaxPayload = ValueType;
+            export interface IArgDcPowerMax extends IAttribute { value: IArgDcPowerMaxPayload }
+            export type IArgDcPowerMinPayload = ValueType;
+            export interface IArgDcPowerMin extends IAttribute { value: IArgDcPowerMinPayload }
+            export type IArgDcPowerMultiplierPayload = ValueType;
+            export interface IArgDcPowerMultiplier extends IAttribute { value: IArgDcPowerMultiplierPayload }
+            export type IArgDcVoltagePayload = ValueType;
+            export interface IArgDcVoltage extends IAttribute { value: IArgDcVoltagePayload }
+            export type IArgDcVoltageDivisorPayload = ValueType;
+            export interface IArgDcVoltageDivisor extends IAttribute { value: IArgDcVoltageDivisorPayload }
+            export type IArgDcVoltageMaxPayload = ValueType;
+            export interface IArgDcVoltageMax extends IAttribute { value: IArgDcVoltageMaxPayload }
+            export type IArgDcVoltageMinPayload = ValueType;
+            export interface IArgDcVoltageMin extends IAttribute { value: IArgDcVoltageMinPayload }
+            export type IArgDcVoltageMultiplierPayload = ValueType;
+            export interface IArgDcVoltageMultiplier extends IAttribute { value: IArgDcVoltageMultiplierPayload }
+            export type IArgDcVoltageOverloadPayload = ValueType;
+            export interface IArgDcVoltageOverload extends IAttribute { value: IArgDcVoltageOverloadPayload }
+            export type IArgElectricalMeasurementTypePayload = ValueType;
+            export interface IArgElectricalMeasurementType extends IAttribute { value: IArgElectricalMeasurementTypePayload }
+            export type IArgHarmonicCurrentMultiplierPayload = ValueType;
+            export interface IArgHarmonicCurrentMultiplier extends IAttribute { value: IArgHarmonicCurrentMultiplierPayload }
             export type IArgIlluminanceLightSensorTypePayload = ValueType;
             export interface IArgIlluminanceLightSensorType extends IAttribute { value: IArgIlluminanceLightSensorTypePayload }
             export type IArgIlluminanceTargetLevelPayload = ValueType;
             export interface IArgIlluminanceTargetLevel extends IAttribute { value: IArgIlluminanceTargetLevelPayload }
+            export type IArgIntervalsPayload = ValueType;
+            export interface IArgIntervals extends IArgument { value: IArgIntervalsPayload }
             export type IArgLevelStatusPayload = ValueType;
             export interface IArgLevelStatus extends IAttribute { value: IArgLevelStatusPayload }
             export type IArgLightSensorTypePayload = ValueType;
             export interface IArgLightSensorType extends IAttribute { value: IArgLightSensorTypePayload }
+            export type IArgLineCurrentPayload = ValueType;
+            export interface IArgLineCurrent extends IAttribute { value: IArgLineCurrentPayload }
+            export type IArgLineCurrentPhBPayload = ValueType;
+            export interface IArgLineCurrentPhB extends IAttribute { value: IArgLineCurrentPhBPayload }
+            export type IArgLineCurrentPhCPayload = ValueType;
+            export interface IArgLineCurrentPhC extends IAttribute { value: IArgLineCurrentPhCPayload }
+            export type IArgListOfAttributesPayload = ValueType;
+            export interface IArgListOfAttributes extends IArgument { value: IArgListOfAttributesPayload }
             export type IArgMaxMeasuredFlowPayload = ValueType;
             export interface IArgMaxMeasuredFlow extends IAttribute { value: IArgMaxMeasuredFlowPayload }
             export type IArgMaxMeasuredIlluminancePayload = ValueType;
@@ -10247,16 +12564,44 @@ reporting occupancy status`,
             export interface IArgMaxMeasuredRelativeHumidity extends IAttribute { value: IArgMaxMeasuredRelativeHumidityPayload }
             export type IArgMaxMeasuredTemperaturePayload = ValueType;
             export interface IArgMaxMeasuredTemperature extends IAttribute { value: IArgMaxMeasuredTemperaturePayload }
+            export type IArgMaxNumberOfIntervalsPayload = ValueType;
+            export interface IArgMaxNumberOfIntervals extends IArgument { value: IArgMaxNumberOfIntervalsPayload }
+            export type IArgMeasured11ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasured11ThHarmonicCurrent extends IAttribute { value: IArgMeasured11ThHarmonicCurrentPayload }
+            export type IArgMeasured1StHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasured1StHarmonicCurrent extends IAttribute { value: IArgMeasured1StHarmonicCurrentPayload }
+            export type IArgMeasured3RdHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasured3RdHarmonicCurrent extends IAttribute { value: IArgMeasured3RdHarmonicCurrentPayload }
+            export type IArgMeasured5ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasured5ThHarmonicCurrent extends IAttribute { value: IArgMeasured5ThHarmonicCurrentPayload }
+            export type IArgMeasured7ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasured7ThHarmonicCurrent extends IAttribute { value: IArgMeasured7ThHarmonicCurrentPayload }
+            export type IArgMeasured9ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasured9ThHarmonicCurrent extends IAttribute { value: IArgMeasured9ThHarmonicCurrentPayload }
             export type IArgMeasuredFlowPayload = ValueType;
             export interface IArgMeasuredFlow extends IAttribute { value: IArgMeasuredFlowPayload }
             export type IArgMeasuredIlluminancePayload = ValueType;
             export interface IArgMeasuredIlluminance extends IAttribute { value: IArgMeasuredIlluminancePayload }
+            export type IArgMeasuredPhase11ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasuredPhase11ThHarmonicCurrent extends IAttribute { value: IArgMeasuredPhase11ThHarmonicCurrentPayload }
+            export type IArgMeasuredPhase1StHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasuredPhase1StHarmonicCurrent extends IAttribute { value: IArgMeasuredPhase1StHarmonicCurrentPayload }
+            export type IArgMeasuredPhase3RdHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasuredPhase3RdHarmonicCurrent extends IAttribute { value: IArgMeasuredPhase3RdHarmonicCurrentPayload }
+            export type IArgMeasuredPhase5ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasuredPhase5ThHarmonicCurrent extends IAttribute { value: IArgMeasuredPhase5ThHarmonicCurrentPayload }
+            export type IArgMeasuredPhase7ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasuredPhase7ThHarmonicCurrent extends IAttribute { value: IArgMeasuredPhase7ThHarmonicCurrentPayload }
+            export type IArgMeasuredPhase9ThHarmonicCurrentPayload = ValueType;
+            export interface IArgMeasuredPhase9ThHarmonicCurrent extends IAttribute { value: IArgMeasuredPhase9ThHarmonicCurrentPayload }
             export type IArgMeasuredPressurePayload = ValueType;
             export interface IArgMeasuredPressure extends IAttribute { value: IArgMeasuredPressurePayload }
             export type IArgMeasuredRelativeHumidityPayload = ValueType;
             export interface IArgMeasuredRelativeHumidity extends IAttribute { value: IArgMeasuredRelativeHumidityPayload }
             export type IArgMeasuredTemperaturePayload = ValueType;
             export interface IArgMeasuredTemperature extends IAttribute { value: IArgMeasuredTemperaturePayload }
+            export type IArgMeasurementResponseStatusPayload = ValueType;
+            export interface IArgMeasurementResponseStatus extends IArgument { value: IArgMeasurementResponseStatusPayload }
             export type IArgMinMeasuredFlowPayload = ValueType;
             export interface IArgMinMeasuredFlow extends IAttribute { value: IArgMinMeasuredFlowPayload }
             export type IArgMinMeasuredIlluminancePayload = ValueType;
@@ -10267,6 +12612,10 @@ reporting occupancy status`,
             export interface IArgMinMeasuredRelativeHumidity extends IAttribute { value: IArgMinMeasuredRelativeHumidityPayload }
             export type IArgMinMeasuredTemperaturePayload = ValueType;
             export interface IArgMinMeasuredTemperature extends IAttribute { value: IArgMinMeasuredTemperaturePayload }
+            export type IArgNeutralCurrentPayload = ValueType;
+            export interface IArgNeutralCurrent extends IAttribute { value: IArgNeutralCurrentPayload }
+            export type IArgNumberOfIntervalsPayload = ValueType;
+            export interface IArgNumberOfIntervals extends IArgument { value: IArgNumberOfIntervalsPayload }
             export type IArgOccupancyPayload = ValueType;
             export interface IArgOccupancy extends IAttribute { value: IArgOccupancyPayload }
             export type IArgOccupancyTypePayload = ValueType;
@@ -10277,6 +12626,102 @@ reporting occupancy status`,
             export interface IArgPirUnoccupiedToOccupiedDelay extends IAttribute { value: IArgPirUnoccupiedToOccupiedDelayPayload }
             export type IArgPirUnoccupiedToOccupiedThresholdPayload = ValueType;
             export interface IArgPirUnoccupiedToOccupiedThreshold extends IAttribute { value: IArgPirUnoccupiedToOccupiedThresholdPayload }
+            export type IArgPhaseHarmonicCurrentMultiplierPayload = ValueType;
+            export interface IArgPhaseHarmonicCurrentMultiplier extends IAttribute { value: IArgPhaseHarmonicCurrentMultiplierPayload }
+            export type IArgPowerDivisorPayload = ValueType;
+            export interface IArgPowerDivisor extends IAttribute { value: IArgPowerDivisorPayload }
+            export type IArgPowerFactorPayload = ValueType;
+            export interface IArgPowerFactor extends IAttribute { value: IArgPowerFactorPayload }
+            export type IArgPowerFactorPhBPayload = ValueType;
+            export interface IArgPowerFactorPhB extends IAttribute { value: IArgPowerFactorPhBPayload }
+            export type IArgPowerFactorPhCPayload = ValueType;
+            export interface IArgPowerFactorPhC extends IAttribute { value: IArgPowerFactorPhCPayload }
+            export type IArgPowerMultiplierPayload = ValueType;
+            export interface IArgPowerMultiplier extends IAttribute { value: IArgPowerMultiplierPayload }
+            export type IArgProfileCountPayload = ValueType;
+            export interface IArgProfileCount extends IArgument { value: IArgProfileCountPayload }
+            export type IArgProfileIntervalPeriodPayload = ValueType;
+            export interface IArgProfileIntervalPeriod extends IArgument { value: IArgProfileIntervalPeriodPayload }
+            export type IArgRmsCurrentPayload = ValueType;
+            export interface IArgRmsCurrent extends IAttribute { value: IArgRmsCurrentPayload }
+            export type IArgRmsCurrentMaxPayload = ValueType;
+            export interface IArgRmsCurrentMax extends IAttribute { value: IArgRmsCurrentMaxPayload }
+            export type IArgRmsCurrentMaxPhBPayload = ValueType;
+            export interface IArgRmsCurrentMaxPhB extends IAttribute { value: IArgRmsCurrentMaxPhBPayload }
+            export type IArgRmsCurrentMaxPhCPayload = ValueType;
+            export interface IArgRmsCurrentMaxPhC extends IAttribute { value: IArgRmsCurrentMaxPhCPayload }
+            export type IArgRmsCurrentMinPayload = ValueType;
+            export interface IArgRmsCurrentMin extends IAttribute { value: IArgRmsCurrentMinPayload }
+            export type IArgRmsCurrentMinPhBPayload = ValueType;
+            export interface IArgRmsCurrentMinPhB extends IAttribute { value: IArgRmsCurrentMinPhBPayload }
+            export type IArgRmsCurrentMinPhCPayload = ValueType;
+            export interface IArgRmsCurrentMinPhC extends IAttribute { value: IArgRmsCurrentMinPhCPayload }
+            export type IArgRmsCurrentPhBPayload = ValueType;
+            export interface IArgRmsCurrentPhB extends IAttribute { value: IArgRmsCurrentPhBPayload }
+            export type IArgRmsCurrentPhCPayload = ValueType;
+            export interface IArgRmsCurrentPhC extends IAttribute { value: IArgRmsCurrentPhCPayload }
+            export type IArgRmsExtremeOverVoltagePeriodPayload = ValueType;
+            export interface IArgRmsExtremeOverVoltagePeriod extends IAttribute { value: IArgRmsExtremeOverVoltagePeriodPayload }
+            export type IArgRmsExtremeOverVoltagePeriodPhBPayload = ValueType;
+            export interface IArgRmsExtremeOverVoltagePeriodPhB extends IAttribute { value: IArgRmsExtremeOverVoltagePeriodPhBPayload }
+            export type IArgRmsExtremeOverVoltagePeriodPhCPayload = ValueType;
+            export interface IArgRmsExtremeOverVoltagePeriodPhC extends IAttribute { value: IArgRmsExtremeOverVoltagePeriodPhCPayload }
+            export type IArgRmsExtremeUnderVoltagePeriodPayload = ValueType;
+            export interface IArgRmsExtremeUnderVoltagePeriod extends IAttribute { value: IArgRmsExtremeUnderVoltagePeriodPayload }
+            export type IArgRmsExtremeUnderVoltagePeriodPhBPayload = ValueType;
+            export interface IArgRmsExtremeUnderVoltagePeriodPhB extends IAttribute { value: IArgRmsExtremeUnderVoltagePeriodPhBPayload }
+            export type IArgRmsExtremeUnderVoltagePeriodPhCPayload = ValueType;
+            export interface IArgRmsExtremeUnderVoltagePeriodPhC extends IAttribute { value: IArgRmsExtremeUnderVoltagePeriodPhCPayload }
+            export type IArgRmsVoltagePayload = ValueType;
+            export interface IArgRmsVoltage extends IAttribute { value: IArgRmsVoltagePayload }
+            export type IArgRmsVoltageMaxPayload = ValueType;
+            export interface IArgRmsVoltageMax extends IAttribute { value: IArgRmsVoltageMaxPayload }
+            export type IArgRmsVoltageMaxPhBPayload = ValueType;
+            export interface IArgRmsVoltageMaxPhB extends IAttribute { value: IArgRmsVoltageMaxPhBPayload }
+            export type IArgRmsVoltageMaxPhCPayload = ValueType;
+            export interface IArgRmsVoltageMaxPhC extends IAttribute { value: IArgRmsVoltageMaxPhCPayload }
+            export type IArgRmsVoltageMinPayload = ValueType;
+            export interface IArgRmsVoltageMin extends IAttribute { value: IArgRmsVoltageMinPayload }
+            export type IArgRmsVoltageMinPhBPayload = ValueType;
+            export interface IArgRmsVoltageMinPhB extends IAttribute { value: IArgRmsVoltageMinPhBPayload }
+            export type IArgRmsVoltageMinPhCPayload = ValueType;
+            export interface IArgRmsVoltageMinPhC extends IAttribute { value: IArgRmsVoltageMinPhCPayload }
+            export type IArgRmsVoltagePhBPayload = ValueType;
+            export interface IArgRmsVoltagePhB extends IAttribute { value: IArgRmsVoltagePhBPayload }
+            export type IArgRmsVoltagePhCPayload = ValueType;
+            export interface IArgRmsVoltagePhC extends IAttribute { value: IArgRmsVoltagePhCPayload }
+            export type IArgRmsVoltageSagPayload = ValueType;
+            export interface IArgRmsVoltageSag extends IAttribute { value: IArgRmsVoltageSagPayload }
+            export type IArgRmsVoltageSagPeriodPayload = ValueType;
+            export interface IArgRmsVoltageSagPeriod extends IAttribute { value: IArgRmsVoltageSagPeriodPayload }
+            export type IArgRmsVoltageSagPeriodPhBPayload = ValueType;
+            export interface IArgRmsVoltageSagPeriodPhB extends IAttribute { value: IArgRmsVoltageSagPeriodPhBPayload }
+            export type IArgRmsVoltageSagPeriodPhCPayload = ValueType;
+            export interface IArgRmsVoltageSagPeriodPhC extends IAttribute { value: IArgRmsVoltageSagPeriodPhCPayload }
+            export type IArgRmsVoltageSwellPayload = ValueType;
+            export interface IArgRmsVoltageSwell extends IAttribute { value: IArgRmsVoltageSwellPayload }
+            export type IArgRmsVoltageSwellPeriodPayload = ValueType;
+            export interface IArgRmsVoltageSwellPeriod extends IAttribute { value: IArgRmsVoltageSwellPeriodPayload }
+            export type IArgRmsVoltageSwellPeriodPhBPayload = ValueType;
+            export interface IArgRmsVoltageSwellPeriodPhB extends IAttribute { value: IArgRmsVoltageSwellPeriodPhBPayload }
+            export type IArgRmsVoltageSwellPeriodPhCPayload = ValueType;
+            export interface IArgRmsVoltageSwellPeriodPhC extends IAttribute { value: IArgRmsVoltageSwellPeriodPhCPayload }
+            export type IArgRmsExtremeOverVoltagePayload = ValueType;
+            export interface IArgRmsExtremeOverVoltage extends IAttribute { value: IArgRmsExtremeOverVoltagePayload }
+            export type IArgRmsExtremeUnderVoltagePayload = ValueType;
+            export interface IArgRmsExtremeUnderVoltage extends IAttribute { value: IArgRmsExtremeUnderVoltagePayload }
+            export type IArgReactiveCurrentPayload = ValueType;
+            export interface IArgReactiveCurrent extends IAttribute { value: IArgReactiveCurrentPayload }
+            export type IArgReactiveCurrentPhBPayload = ValueType;
+            export interface IArgReactiveCurrentPhB extends IAttribute { value: IArgReactiveCurrentPhBPayload }
+            export type IArgReactiveCurrentPhCPayload = ValueType;
+            export interface IArgReactiveCurrentPhC extends IAttribute { value: IArgReactiveCurrentPhCPayload }
+            export type IArgReactivePowerPayload = ValueType;
+            export interface IArgReactivePower extends IAttribute { value: IArgReactivePowerPayload }
+            export type IArgReactivePowerPhBPayload = ValueType;
+            export interface IArgReactivePowerPhB extends IAttribute { value: IArgReactivePowerPhBPayload }
+            export type IArgReactivePowerPhCPayload = ValueType;
+            export interface IArgReactivePowerPhC extends IAttribute { value: IArgReactivePowerPhCPayload }
             export type IArgScalePayload = ValueType;
             export interface IArgScale extends IAttribute { value: IArgScalePayload }
             export type IArgScaledMaxPressurePayload = ValueType;
@@ -10287,8 +12732,16 @@ reporting occupancy status`,
             export interface IArgScaledPressure extends IAttribute { value: IArgScaledPressurePayload }
             export type IArgScaledTolerancePayload = ValueType;
             export interface IArgScaledTolerance extends IAttribute { value: IArgScaledTolerancePayload }
+            export type IArgStartTimePayload = ValueType;
+            export interface IArgStartTime extends IArgument { value: IArgStartTimePayload }
             export type IArgTolerancePayload = ValueType;
             export interface IArgTolerance extends IAttribute { value: IArgTolerancePayload }
+            export type IArgTotalActivePowerPayload = ValueType;
+            export interface IArgTotalActivePower extends IAttribute { value: IArgTotalActivePowerPayload }
+            export type IArgTotalApparentPowerPayload = ValueType;
+            export interface IArgTotalApparentPower extends IAttribute { value: IArgTotalApparentPowerPayload }
+            export type IArgTotalReactivePowerPayload = ValueType;
+            export interface IArgTotalReactivePower extends IAttribute { value: IArgTotalReactivePowerPayload }
             export type IArgUltrasonicOccupiedToUnoccupiedDelayPayload = ValueType;
             export interface IArgUltrasonicOccupiedToUnoccupiedDelay extends IAttribute { value: IArgUltrasonicOccupiedToUnoccupiedDelayPayload }
             export type IArgUltrasonicUnoccupiedToOccupiedDelayPayload = ValueType;
@@ -10373,6 +12826,82 @@ reporting occupancy status`,
             export interface IArgStatus extends IArgument { value: IArgStatusPayload }
             export type IArgUpgradeServerPayload = ValueType;
             export interface IArgUpgradeServer extends IAttribute { value: IArgUpgradeServerPayload }    }
+
+    export namespace ISmartEnergy {
+        // noinspection ES6UnusedImports
+        import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
+        import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
+        import ValueType = ZigBee.ValueType;
+        
+        export namespace Metering {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+            export type IArgControlTemperaturePayload = ValueType;
+            export interface IArgControlTemperature extends IAttribute { value: IArgControlTemperaturePayload }
+            export type IArgCurrentBlockPayload = ValueType;
+            export interface IArgCurrentBlock extends IAttribute { value: IArgCurrentBlockPayload }
+            export type IArgCurrentBlockPeriodConsumptionDeliveredPayload = ValueType;
+            export interface IArgCurrentBlockPeriodConsumptionDelivered extends IAttribute { value: IArgCurrentBlockPeriodConsumptionDeliveredPayload }
+            export type IArgCurrentInletEnergyCarrierDemandPayload = ValueType;
+            export interface IArgCurrentInletEnergyCarrierDemand extends IAttribute { value: IArgCurrentInletEnergyCarrierDemandPayload }
+            export type IArgCurrentInletEnergyCarrierSummationPayload = ValueType;
+            export interface IArgCurrentInletEnergyCarrierSummation extends IAttribute { value: IArgCurrentInletEnergyCarrierSummationPayload }
+            export type IArgCurrentMaxDemandDeliveredPayload = ValueType;
+            export interface IArgCurrentMaxDemandDelivered extends IAttribute { value: IArgCurrentMaxDemandDeliveredPayload }
+            export type IArgCurrentMaxDemandDeliveredTimePayload = ValueType;
+            export interface IArgCurrentMaxDemandDeliveredTime extends IAttribute { value: IArgCurrentMaxDemandDeliveredTimePayload }
+            export type IArgCurrentMaxDemandReceivedPayload = ValueType;
+            export interface IArgCurrentMaxDemandReceived extends IAttribute { value: IArgCurrentMaxDemandReceivedPayload }
+            export type IArgCurrentMaxDemandReceivedTimePayload = ValueType;
+            export interface IArgCurrentMaxDemandReceivedTime extends IAttribute { value: IArgCurrentMaxDemandReceivedTimePayload }
+            export type IArgCurrentOutletEnergyCarrierDemandPayload = ValueType;
+            export interface IArgCurrentOutletEnergyCarrierDemand extends IAttribute { value: IArgCurrentOutletEnergyCarrierDemandPayload }
+            export type IArgCurrentOutletEnergyCarrierSummationPayload = ValueType;
+            export interface IArgCurrentOutletEnergyCarrierSummation extends IAttribute { value: IArgCurrentOutletEnergyCarrierSummationPayload }
+            export type IArgCurrentSummationDeliveredPayload = ValueType;
+            export interface IArgCurrentSummationDelivered extends IAttribute { value: IArgCurrentSummationDeliveredPayload }
+            export type IArgCurrentSummationReceivedPayload = ValueType;
+            export interface IArgCurrentSummationReceived extends IAttribute { value: IArgCurrentSummationReceivedPayload }
+            export type IArgDftSummationPayload = ValueType;
+            export interface IArgDftSummation extends IAttribute { value: IArgDftSummationPayload }
+            export type IArgDailyConsumptionTargetPayload = ValueType;
+            export interface IArgDailyConsumptionTarget extends IAttribute { value: IArgDailyConsumptionTargetPayload }
+            export type IArgDailyFreezeTimePayload = ValueType;
+            export interface IArgDailyFreezeTime extends IAttribute { value: IArgDailyFreezeTimePayload }
+            export type IArgDefaultUpdatePeriodPayload = ValueType;
+            export interface IArgDefaultUpdatePeriod extends IAttribute { value: IArgDefaultUpdatePeriodPayload }
+            export type IArgFastPollUpdatePeriodPayload = ValueType;
+            export interface IArgFastPollUpdatePeriod extends IAttribute { value: IArgFastPollUpdatePeriodPayload }
+            export type IArgFlowRestrictionPayload = ValueType;
+            export interface IArgFlowRestriction extends IAttribute { value: IArgFlowRestrictionPayload }
+            export type IArgInletTemperaturePayload = ValueType;
+            export interface IArgInletTemperature extends IAttribute { value: IArgInletTemperaturePayload }
+            export type IArgIntervalReadReportingPeriodPayload = ValueType;
+            export interface IArgIntervalReadReportingPeriod extends IAttribute { value: IArgIntervalReadReportingPeriodPayload }
+            export type IArgOutletTemperaturePayload = ValueType;
+            export interface IArgOutletTemperature extends IAttribute { value: IArgOutletTemperaturePayload }
+            export type IArgPowerFactorPayload = ValueType;
+            export interface IArgPowerFactor extends IAttribute { value: IArgPowerFactorPayload }
+            export type IArgPresetReadingTimePayload = ValueType;
+            export interface IArgPresetReadingTime extends IAttribute { value: IArgPresetReadingTimePayload }
+            export type IArgPreviousBlockPeriodConsumptionDeliveredPayload = ValueType;
+            export interface IArgPreviousBlockPeriodConsumptionDelivered extends IAttribute { value: IArgPreviousBlockPeriodConsumptionDeliveredPayload }
+            export type IArgProfileIntervalPeriodPayload = ValueType;
+            export interface IArgProfileIntervalPeriod extends IAttribute { value: IArgProfileIntervalPeriodPayload }
+            export type IArgReadingSnapShotTimePayload = ValueType;
+            export interface IArgReadingSnapShotTime extends IAttribute { value: IArgReadingSnapShotTimePayload }
+            export type IArgSupplyStatusPayload = ValueType;
+            export interface IArgSupplyStatus extends IAttribute { value: IArgSupplyStatusPayload }
+            export type IArgVolumePerReportPayload = ValueType;
+            export interface IArgVolumePerReport extends IAttribute { value: IArgVolumePerReportPayload }    }
 
 
 
