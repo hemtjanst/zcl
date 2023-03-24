@@ -8,9 +8,11 @@ import (
 	"hemtjan.st/zcl/cluster/lighting"
 	"hemtjan.st/zcl/cluster/measurement"
 	"hemtjan.st/zcl/cluster/otau"
+	"hemtjan.st/zcl/cluster/smartenergy"
 )
 
 var Clusters = map[zcl.ClusterID]zcl.Cluster{
+	closures.DoorLockID:                       closures.DoorLockCluster,
 	closures.WindowCoveringID:                 closures.WindowCoveringCluster,
 	general.AlarmsID:                          general.AlarmsCluster,
 	general.AnalogInputID:                     general.AnalogInputCluster,
@@ -39,6 +41,7 @@ var Clusters = map[zcl.ClusterID]zcl.Cluster{
 	ias.IasZoneID:                             ias.IasZoneCluster,
 	lighting.BallastConfigurationID:           lighting.BallastConfigurationCluster,
 	lighting.ColorControlID:                   lighting.ColorControlCluster,
+	measurement.ElectricalMeasurementID:       measurement.ElectricalMeasurementCluster,
 	measurement.FlowMeasurementID:             measurement.FlowMeasurementCluster,
 	measurement.IlluminanceLevelSensingID:     measurement.IlluminanceLevelSensingCluster,
 	measurement.IlluminanceMeasurementID:      measurement.IlluminanceMeasurementCluster,
@@ -47,4 +50,5 @@ var Clusters = map[zcl.ClusterID]zcl.Cluster{
 	measurement.RelativeHumidityMeasurementID: measurement.RelativeHumidityMeasurementCluster,
 	measurement.TemperatureMeasurementID:      measurement.TemperatureMeasurementCluster,
 	otau.OtauID:                               otau.OtauCluster,
+	smartenergy.MeteringID:                    smartenergy.MeteringCluster,
 }
