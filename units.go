@@ -15,6 +15,7 @@ const (
 	MilliAmpereHours
 	Mired
 	Bytes
+	Concentration
 )
 
 func (u CustomUnit) Format(n float64) string {
@@ -33,6 +34,14 @@ func (u CustomUnit) Format(n float64) string {
 		return fmt.Sprintf("%s mired", v)
 	case Bytes:
 		return fmt.Sprintf("%s bytes", v)
+	case Concentration:
+		if n >= 0.001 {
+			return fmt.Sprintf("%.1f%", n*100)
+		}
+		if n >= 0.000001 {
+			return fmt.Sprintf("%.1f ppm", n*1000000)
+		}
+		return fmt.Sprintf("%.1f ppb", n*1000000000)
 	}
 	return fmt.Sprintf("%s", v)
 }

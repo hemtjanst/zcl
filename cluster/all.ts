@@ -14348,6 +14348,12 @@ potentially Thermal metering devices.`,
                 }
                 return `${v}${suf}B`
             }},
+        Concentration: { unit: "concentration",
+            format: (v) => {
+                if (v >= 0.001) return `${v*100}%`;
+                if (v >= 0.000001) return `${v*1000000} ppm`;
+                return `${v*1000000000} ppb`;
+            }},
     };
     export const typeID = {
         8: base.dat8,
