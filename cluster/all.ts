@@ -8302,6 +8302,18 @@ since last reset. This counter may be reset by writing zero to the attribute.`,
                 require: false,
                 
             })),
+            ConcentrationTolerance: makeType<ZigBee.IMeasurementAndSensing.IArgConcentrationTolerance, ZigBee.IMeasurementAndSensing.IArgConcentrationTolerancePayload>(base.float, ()=>({
+                name: `Concentration Tolerance`,
+                description: `indicates the magnitude of the possible error that is associated with MeasuredValue.
+The true value is located in the range (MeasuredValue – Tolerance) to
+(MeasuredValue + Tolerance)`,
+                id: 0x0003,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
             DcCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrent, ZigBee.IMeasurementAndSensing.IArgDcCurrentPayload>(base.s16, ()=>({
                 name: `DC Current`,
                 description: `represents the most recent DC current reading in Amps (A). If the current cannot be
@@ -8661,6 +8673,17 @@ If the instantaneous current cannot be measured, a value of 0x8000 is returned.`
                 arrayType: base.u16,
                 
             })),
+            MaxMeasuredConcentration: makeType<ZigBee.IMeasurementAndSensing.IArgMaxMeasuredConcentration, ZigBee.IMeasurementAndSensing.IArgMaxMeasuredConcentrationPayload>(base.float, ()=>({
+                name: `Max Measured Concentration`,
+                description: `indicates the maximum of MeasuredConcentration that is capable of being measured.
+A value of NaN indicates that the maximum value is not defined`,
+                id: 0x0002,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
             MaxMeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMaxMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMaxMeasuredFlowPayload>(base.u16, ()=>({
                 name: `Max Measured Flow`,
                 description: `indicates the maximum value of MeasuredFlow that can be measured. A
@@ -8801,6 +8824,19 @@ negative value indicates that the measured 1st harmonic current is negative.`,
                 write: false,
                 require: false,
                 unit: units.Amperes,
+                
+            })),
+            MeasuredConcentration: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredConcentration, ZigBee.IMeasurementAndSensing.IArgMeasuredConcentrationPayload>(base.float, ()=>({
+                name: `Measured Concentration`,
+                description: `represents the concentration as a fraction of 1 (one).
+A value of NaN indicates that the concentration measurement is unknown or outside the valid range.
+MinMeasuredConcentration and MaxMeasuredConcentration define the valid range for MeasuredConcentration.
+MeasuredConcentration is updated continuously as new measurements are made`,
+                id: 0x0000,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
                 
             })),
             MeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMeasuredFlowPayload>(base.u16, ()=>({
@@ -8945,6 +8981,17 @@ and a negative value indicates that the measured phase is lagging.`,
                 0x02: `Invalid Start Time`, 
                 0x03: `More intervals requested than can be returned`, 
                 0x04: `No intervals available for the requested time`,  },
+                
+            })),
+            MinMeasuredConcentration: makeType<ZigBee.IMeasurementAndSensing.IArgMinMeasuredConcentration, ZigBee.IMeasurementAndSensing.IArgMinMeasuredConcentrationPayload>(base.float, ()=>({
+                name: `Min Measured Concentration`,
+                description: `indicates the minimum value of MeasuredConcentration that is capable of being measured.
+A value of NaN indicates that the minimum value is not defined`,
+                id: 0x0001,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
                 
             })),
             MinMeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMinMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMinMeasuredFlowPayload>(base.u16, ()=>({
@@ -9938,6 +9985,486 @@ DCVoltageMultiplier and DCVoltageDivisor`,
                 Attribute: {},
                 Command: {}
             },
+        },
+        CarbonMonoxideMeasurement: {
+            ID: 0x040C,
+            Name: `Carbon Monoxide Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        CarbonDioxideMeasurement: {
+            ID: 0x040D,
+            Name: `Carbon Dioxide Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        EthyleneMeasurement: {
+            ID: 0x040E,
+            Name: `Ethylene Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        EthyleneOxideMeasurement: {
+            ID: 0x040F,
+            Name: `Ethylene Oxide Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        HydrogenMeasurement: {
+            ID: 0x0410,
+            Name: `Hydrogen Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        HydrogenSulfideMeasurement: {
+            ID: 0x0411,
+            Name: `Hydrogen Sulfide Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        NitricOxideMeasurement: {
+            ID: 0x0412,
+            Name: `Nitric Oxide Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        NitrogenDioxideMeasurement: {
+            ID: 0x0413,
+            Name: `Nitrogen Dioxide Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        OxygenMeasurement: {
+            ID: 0x0414,
+            Name: `Oxygen Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        OzoneMeasurement: {
+            ID: 0x0415,
+            Name: `Ozone Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        SulfurDioxideMeasurement: {
+            ID: 0x0416,
+            Name: `Sulfur Dioxide Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        DissolvedOxygenMeasurement: {
+            ID: 0x0417,
+            Name: `Dissolved Oxygen Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        BromateMeasurement: {
+            ID: 0x0418,
+            Name: `Bromate Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        ChloraminesMeasurement: {
+            ID: 0x0419,
+            Name: `Chloramines Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        ChlorineMeasurement: {
+            ID: 0x041A,
+            Name: `Chlorine Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        FecalColiformEColiMeasurement: {
+            ID: 0x041B,
+            Name: `Fecal coliform & E. Coli Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        FluorideMeasurement: {
+            ID: 0x041C,
+            Name: `Fluoride Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        HaloaceticAcidsMeasurement: {
+            ID: 0x041D,
+            Name: `Haloacetic Acids Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        TotalTrihalomethanesMeasurement: {
+            ID: 0x041E,
+            Name: `Total Trihalomethanes Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        TotalColiformBacteriaMeasurement: {
+            ID: 0x041F,
+            Name: `Total Coliform Bacteria Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        TurbidityMeasurement: {
+            ID: 0x0420,
+            Name: `Turbidity Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        CopperMeasurement: {
+            ID: 0x0421,
+            Name: `Copper Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        LeadMeasurement: {
+            ID: 0x0422,
+            Name: `Lead Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        ManganeseMeasurement: {
+            ID: 0x0423,
+            Name: `Manganese Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        SulfateMeasurement: {
+            ID: 0x0424,
+            Name: `Sulfate Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        BromodichloromethaneMeasurement: {
+            ID: 0x0425,
+            Name: `Bromodichloromethane Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        BromoformMeasurement: {
+            ID: 0x0426,
+            Name: `Bromoform Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        ChlorodibromomethaneMeasurement: {
+            ID: 0x0427,
+            Name: `Chlorodibromomethane Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        ChloroformMeasurement: {
+            ID: 0x0428,
+            Name: `Chloroform Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        SodiumMeasurement: {
+            ID: 0x0429,
+            Name: `Sodium Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        Pm25Measurement: {
+            ID: 0x042A,
+            Name: `PM2.5 Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        FormaldehydeMeasurement: {
+            ID: 0x042B,
+            Name: `Formaldehyde Measurement`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
         }
     };
     
@@ -10172,6 +10699,390 @@ DCVoltageMultiplier and DCVoltageDivisor`,
     ZigBee.MeasurementAndSensing.ElectricalMeasurement.Client.Command = { 
         0x00: ZigBee.MeasurementAndSensing.ElectricalMeasurement.GetProfileInfoResponse,
         0x01: ZigBee.MeasurementAndSensing.ElectricalMeasurement.GetMeasurementProfileResponse,
+    };
+    ZigBee.MeasurementAndSensing.CarbonMonoxideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.CarbonMonoxideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.CarbonMonoxideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.CarbonMonoxideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.CarbonDioxideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.CarbonDioxideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.CarbonDioxideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.CarbonDioxideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.EthyleneMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.EthyleneMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.EthyleneMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.EthyleneMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.EthyleneOxideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.EthyleneOxideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.EthyleneOxideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.EthyleneOxideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.HydrogenMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.HydrogenMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.HydrogenMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.HydrogenMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.HydrogenSulfideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.HydrogenSulfideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.HydrogenSulfideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.HydrogenSulfideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.NitricOxideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.NitricOxideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.NitricOxideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.NitricOxideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.NitrogenDioxideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.NitrogenDioxideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.NitrogenDioxideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.NitrogenDioxideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.OxygenMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.OxygenMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.OxygenMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.OxygenMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.OzoneMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.OzoneMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.OzoneMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.OzoneMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.SulfurDioxideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.SulfurDioxideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.SulfurDioxideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.SulfurDioxideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.DissolvedOxygenMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.DissolvedOxygenMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.DissolvedOxygenMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.DissolvedOxygenMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.BromateMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.BromateMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.BromateMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.BromateMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChloraminesMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.ChloraminesMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.ChloraminesMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChloraminesMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChlorineMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.ChlorineMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.ChlorineMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChlorineMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.FecalColiformEColiMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.FecalColiformEColiMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.FecalColiformEColiMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.FecalColiformEColiMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.FluorideMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.FluorideMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.FluorideMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.FluorideMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.HaloaceticAcidsMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.HaloaceticAcidsMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.HaloaceticAcidsMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.HaloaceticAcidsMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.TotalTrihalomethanesMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.TotalTrihalomethanesMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.TotalTrihalomethanesMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.TotalTrihalomethanesMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.TotalColiformBacteriaMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.TotalColiformBacteriaMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.TotalColiformBacteriaMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.TotalColiformBacteriaMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.TurbidityMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.TurbidityMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.TurbidityMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.TurbidityMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.CopperMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.CopperMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.CopperMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.CopperMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.LeadMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.LeadMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.LeadMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.LeadMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ManganeseMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.ManganeseMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.ManganeseMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ManganeseMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.SulfateMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.SulfateMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.SulfateMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.SulfateMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.BromodichloromethaneMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.BromodichloromethaneMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.BromodichloromethaneMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.BromodichloromethaneMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.BromoformMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.BromoformMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.BromoformMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.BromoformMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChlorodibromomethaneMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.ChlorodibromomethaneMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.ChlorodibromomethaneMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChlorodibromomethaneMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChloroformMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.ChloroformMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.ChloroformMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.ChloroformMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.SodiumMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.SodiumMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.SodiumMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.SodiumMeasurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.FormaldehydeMeasurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
+        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
+    };
+    ZigBee.MeasurementAndSensing.FormaldehydeMeasurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.FormaldehydeMeasurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.FormaldehydeMeasurement.Client.Command = { 
     };
     export const Otau = {
         Types: { 
@@ -10934,6 +11845,38 @@ potentially Thermal metering devices.`,
         0x0405: ZigBee.MeasurementAndSensing.RelativeHumidityMeasurement,
         0x0406: ZigBee.MeasurementAndSensing.OccupancySensing,
         0x0B04: ZigBee.MeasurementAndSensing.ElectricalMeasurement,
+        0x040c: ZigBee.MeasurementAndSensing.CarbonMonoxideMeasurement,
+        0x040d: ZigBee.MeasurementAndSensing.CarbonDioxideMeasurement,
+        0x040e: ZigBee.MeasurementAndSensing.EthyleneMeasurement,
+        0x040f: ZigBee.MeasurementAndSensing.EthyleneOxideMeasurement,
+        0x0410: ZigBee.MeasurementAndSensing.HydrogenMeasurement,
+        0x0411: ZigBee.MeasurementAndSensing.HydrogenSulfideMeasurement,
+        0x0412: ZigBee.MeasurementAndSensing.NitricOxideMeasurement,
+        0x0413: ZigBee.MeasurementAndSensing.NitrogenDioxideMeasurement,
+        0x0414: ZigBee.MeasurementAndSensing.OxygenMeasurement,
+        0x0415: ZigBee.MeasurementAndSensing.OzoneMeasurement,
+        0x0416: ZigBee.MeasurementAndSensing.SulfurDioxideMeasurement,
+        0x0417: ZigBee.MeasurementAndSensing.DissolvedOxygenMeasurement,
+        0x0418: ZigBee.MeasurementAndSensing.BromateMeasurement,
+        0x0419: ZigBee.MeasurementAndSensing.ChloraminesMeasurement,
+        0x041a: ZigBee.MeasurementAndSensing.ChlorineMeasurement,
+        0x041b: ZigBee.MeasurementAndSensing.FecalColiformEColiMeasurement,
+        0x041c: ZigBee.MeasurementAndSensing.FluorideMeasurement,
+        0x041d: ZigBee.MeasurementAndSensing.HaloaceticAcidsMeasurement,
+        0x041e: ZigBee.MeasurementAndSensing.TotalTrihalomethanesMeasurement,
+        0x041f: ZigBee.MeasurementAndSensing.TotalColiformBacteriaMeasurement,
+        0x0420: ZigBee.MeasurementAndSensing.TurbidityMeasurement,
+        0x0421: ZigBee.MeasurementAndSensing.CopperMeasurement,
+        0x0422: ZigBee.MeasurementAndSensing.LeadMeasurement,
+        0x0423: ZigBee.MeasurementAndSensing.ManganeseMeasurement,
+        0x0424: ZigBee.MeasurementAndSensing.SulfateMeasurement,
+        0x0425: ZigBee.MeasurementAndSensing.BromodichloromethaneMeasurement,
+        0x0426: ZigBee.MeasurementAndSensing.BromoformMeasurement,
+        0x0427: ZigBee.MeasurementAndSensing.ChlorodibromomethaneMeasurement,
+        0x0428: ZigBee.MeasurementAndSensing.ChloroformMeasurement,
+        0x0429: ZigBee.MeasurementAndSensing.SodiumMeasurement,
+        0x042a: ZigBee.MeasurementAndSensing.Pm25Measurement,
+        0x042b: ZigBee.MeasurementAndSensing.FormaldehydeMeasurement,
         0x0019: ZigBee.Otau.Otau,
         0x0702: ZigBee.SmartEnergy.Metering,
     };
@@ -12410,6 +13353,294 @@ potentially Thermal metering devices.`,
             export interface ICmdGetMeasurementProfileResponse extends ICommand { value: ICmdGetMeasurementProfileResponsePayload }
         }
 
+        export namespace CarbonMonoxideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace CarbonDioxideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace EthyleneMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace EthyleneOxideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace HydrogenMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace HydrogenSulfideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace NitricOxideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace NitrogenDioxideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace OxygenMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace OzoneMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace SulfurDioxideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace DissolvedOxygenMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace BromateMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace ChloraminesMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace ChlorineMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace FecalColiformEColiMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace FluorideMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace HaloaceticAcidsMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace TotalTrihalomethanesMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace TotalColiformBacteriaMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace TurbidityMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace CopperMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace LeadMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace ManganeseMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace SulfateMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace BromodichloromethaneMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace BromoformMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace ChlorodibromomethaneMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace ChloroformMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace SodiumMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace Pm25Measurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace FormaldehydeMeasurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
             export type IArgAcActivePowerOverloadPayload = ValueType;
             export interface IArgAcActivePowerOverload extends IAttribute { value: IArgAcActivePowerOverloadPayload }
             export type IArgAcAlarmsMaskPayload = ValueType;
@@ -12496,6 +13727,8 @@ potentially Thermal metering devices.`,
             export interface IArgAverageRmsOverVoltage extends IAttribute { value: IArgAverageRmsOverVoltagePayload }
             export type IArgAverageRmsUnderVoltagePayload = ValueType;
             export interface IArgAverageRmsUnderVoltage extends IAttribute { value: IArgAverageRmsUnderVoltagePayload }
+            export type IArgConcentrationTolerancePayload = ValueType;
+            export interface IArgConcentrationTolerance extends IAttribute { value: IArgConcentrationTolerancePayload }
             export type IArgDcCurrentPayload = ValueType;
             export interface IArgDcCurrent extends IAttribute { value: IArgDcCurrentPayload }
             export type IArgDcCurrentDivisorPayload = ValueType;
@@ -12554,6 +13787,8 @@ potentially Thermal metering devices.`,
             export interface IArgLineCurrentPhC extends IAttribute { value: IArgLineCurrentPhCPayload }
             export type IArgListOfAttributesPayload = ValueType;
             export interface IArgListOfAttributes extends IArgument { value: IArgListOfAttributesPayload }
+            export type IArgMaxMeasuredConcentrationPayload = ValueType;
+            export interface IArgMaxMeasuredConcentration extends IAttribute { value: IArgMaxMeasuredConcentrationPayload }
             export type IArgMaxMeasuredFlowPayload = ValueType;
             export interface IArgMaxMeasuredFlow extends IAttribute { value: IArgMaxMeasuredFlowPayload }
             export type IArgMaxMeasuredIlluminancePayload = ValueType;
@@ -12578,6 +13813,8 @@ potentially Thermal metering devices.`,
             export interface IArgMeasured7ThHarmonicCurrent extends IAttribute { value: IArgMeasured7ThHarmonicCurrentPayload }
             export type IArgMeasured9ThHarmonicCurrentPayload = ValueType;
             export interface IArgMeasured9ThHarmonicCurrent extends IAttribute { value: IArgMeasured9ThHarmonicCurrentPayload }
+            export type IArgMeasuredConcentrationPayload = ValueType;
+            export interface IArgMeasuredConcentration extends IAttribute { value: IArgMeasuredConcentrationPayload }
             export type IArgMeasuredFlowPayload = ValueType;
             export interface IArgMeasuredFlow extends IAttribute { value: IArgMeasuredFlowPayload }
             export type IArgMeasuredIlluminancePayload = ValueType;
@@ -12602,6 +13839,8 @@ potentially Thermal metering devices.`,
             export interface IArgMeasuredTemperature extends IAttribute { value: IArgMeasuredTemperaturePayload }
             export type IArgMeasurementResponseStatusPayload = ValueType;
             export interface IArgMeasurementResponseStatus extends IArgument { value: IArgMeasurementResponseStatusPayload }
+            export type IArgMinMeasuredConcentrationPayload = ValueType;
+            export interface IArgMinMeasuredConcentration extends IAttribute { value: IArgMinMeasuredConcentrationPayload }
             export type IArgMinMeasuredFlowPayload = ValueType;
             export interface IArgMinMeasuredFlow extends IAttribute { value: IArgMinMeasuredFlowPayload }
             export type IArgMinMeasuredIlluminancePayload = ValueType;

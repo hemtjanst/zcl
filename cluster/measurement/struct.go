@@ -2613,6 +2613,68 @@ func (v AverageRmsUnderVoltage) String() string {
 	return zcl.Volts.Format(float64(v))
 }
 
+const ConcentrationToleranceAttr zcl.AttrID = 3
+
+func (ConcentrationTolerance) ID() zcl.AttrID   { return ConcentrationToleranceAttr }
+func (ConcentrationTolerance) Readable() bool   { return true }
+func (ConcentrationTolerance) Writable() bool   { return false }
+func (ConcentrationTolerance) Reportable() bool { return false }
+func (ConcentrationTolerance) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v ConcentrationTolerance) AttrID() zcl.AttrID   { return v.ID() }
+func (v ConcentrationTolerance) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *ConcentrationTolerance) AttrValue() zcl.Val  { return v.Value() }
+
+func (ConcentrationTolerance) Name() string { return `Concentration Tolerance` }
+func (ConcentrationTolerance) Description() string {
+	return `indicates the magnitude of the possible error that is associated with MeasuredValue.
+The true value is located in the range (MeasuredValue – Tolerance) to
+(MeasuredValue + Tolerance)`
+}
+
+// ConcentrationTolerance indicates the magnitude of the possible error that is associated with MeasuredValue.
+// The true value is located in the range (MeasuredValue – Tolerance) to
+// (MeasuredValue + Tolerance)
+type ConcentrationTolerance zcl.Zfloat
+
+func (v *ConcentrationTolerance) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *ConcentrationTolerance) Value() zcl.Val     { return v }
+
+func (v ConcentrationTolerance) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *ConcentrationTolerance) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = ConcentrationTolerance(*nt)
+	return br, err
+}
+
+func (v ConcentrationTolerance) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *ConcentrationTolerance) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = ConcentrationTolerance(*a)
+	return nil
+}
+
+func (v *ConcentrationTolerance) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = ConcentrationTolerance(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v ConcentrationTolerance) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(v))
+}
+
 const DcCurrentAttr zcl.AttrID = 259
 
 func (DcCurrent) ID() zcl.AttrID   { return DcCurrentAttr }
@@ -4563,6 +4625,66 @@ func (v ListOfAttributes) String() string {
 	return "[" + zcl.StrJoin(s, ",") + "]"
 }
 
+const MaxMeasuredConcentrationAttr zcl.AttrID = 2
+
+func (MaxMeasuredConcentration) ID() zcl.AttrID   { return MaxMeasuredConcentrationAttr }
+func (MaxMeasuredConcentration) Readable() bool   { return true }
+func (MaxMeasuredConcentration) Writable() bool   { return false }
+func (MaxMeasuredConcentration) Reportable() bool { return true }
+func (MaxMeasuredConcentration) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v MaxMeasuredConcentration) AttrID() zcl.AttrID   { return v.ID() }
+func (v MaxMeasuredConcentration) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MaxMeasuredConcentration) AttrValue() zcl.Val  { return v.Value() }
+
+func (MaxMeasuredConcentration) Name() string { return `Max Measured Concentration` }
+func (MaxMeasuredConcentration) Description() string {
+	return `indicates the maximum of MeasuredConcentration that is capable of being measured.
+A value of NaN indicates that the maximum value is not defined`
+}
+
+// MaxMeasuredConcentration indicates the maximum of MeasuredConcentration that is capable of being measured.
+// A value of NaN indicates that the maximum value is not defined
+type MaxMeasuredConcentration zcl.Zfloat
+
+func (v *MaxMeasuredConcentration) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *MaxMeasuredConcentration) Value() zcl.Val     { return v }
+
+func (v MaxMeasuredConcentration) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *MaxMeasuredConcentration) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = MaxMeasuredConcentration(*nt)
+	return br, err
+}
+
+func (v MaxMeasuredConcentration) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *MaxMeasuredConcentration) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = MaxMeasuredConcentration(*a)
+	return nil
+}
+
+func (v *MaxMeasuredConcentration) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = MaxMeasuredConcentration(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v MaxMeasuredConcentration) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(v))
+}
+
 const MaxMeasuredFlowAttr zcl.AttrID = 2
 
 func (MaxMeasuredFlow) ID() zcl.AttrID   { return MaxMeasuredFlowAttr }
@@ -5284,6 +5406,70 @@ func (v *Measured9ThHarmonicCurrent) SetValue(a zcl.Val) error {
 
 func (v Measured9ThHarmonicCurrent) String() string {
 	return zcl.Amperes.Format(float64(v))
+}
+
+const MeasuredConcentrationAttr zcl.AttrID = 0
+
+func (MeasuredConcentration) ID() zcl.AttrID   { return MeasuredConcentrationAttr }
+func (MeasuredConcentration) Readable() bool   { return true }
+func (MeasuredConcentration) Writable() bool   { return false }
+func (MeasuredConcentration) Reportable() bool { return true }
+func (MeasuredConcentration) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v MeasuredConcentration) AttrID() zcl.AttrID   { return v.ID() }
+func (v MeasuredConcentration) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MeasuredConcentration) AttrValue() zcl.Val  { return v.Value() }
+
+func (MeasuredConcentration) Name() string { return `Measured Concentration` }
+func (MeasuredConcentration) Description() string {
+	return `represents the concentration as a fraction of 1 (one).
+A value of NaN indicates that the concentration measurement is unknown or outside the valid range.
+MinMeasuredConcentration and MaxMeasuredConcentration define the valid range for MeasuredConcentration.
+MeasuredConcentration is updated continuously as new measurements are made`
+}
+
+// MeasuredConcentration represents the concentration as a fraction of 1 (one).
+// A value of NaN indicates that the concentration measurement is unknown or outside the valid range.
+// MinMeasuredConcentration and MaxMeasuredConcentration define the valid range for MeasuredConcentration.
+// MeasuredConcentration is updated continuously as new measurements are made
+type MeasuredConcentration zcl.Zfloat
+
+func (v *MeasuredConcentration) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *MeasuredConcentration) Value() zcl.Val     { return v }
+
+func (v MeasuredConcentration) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *MeasuredConcentration) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = MeasuredConcentration(*nt)
+	return br, err
+}
+
+func (v MeasuredConcentration) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *MeasuredConcentration) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = MeasuredConcentration(*a)
+	return nil
+}
+
+func (v *MeasuredConcentration) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = MeasuredConcentration(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v MeasuredConcentration) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(v))
 }
 
 const MeasuredFlowAttr zcl.AttrID = 0
@@ -6039,6 +6225,66 @@ func (MeasurementResponseStatus) SingleOptions() []zcl.Option {
 		{Value: 0x03, Name: "More intervals requested than can be returned"},
 		{Value: 0x04, Name: "No intervals available for the requested time"},
 	}
+}
+
+const MinMeasuredConcentrationAttr zcl.AttrID = 1
+
+func (MinMeasuredConcentration) ID() zcl.AttrID   { return MinMeasuredConcentrationAttr }
+func (MinMeasuredConcentration) Readable() bool   { return true }
+func (MinMeasuredConcentration) Writable() bool   { return false }
+func (MinMeasuredConcentration) Reportable() bool { return true }
+func (MinMeasuredConcentration) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v MinMeasuredConcentration) AttrID() zcl.AttrID   { return v.ID() }
+func (v MinMeasuredConcentration) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MinMeasuredConcentration) AttrValue() zcl.Val  { return v.Value() }
+
+func (MinMeasuredConcentration) Name() string { return `Min Measured Concentration` }
+func (MinMeasuredConcentration) Description() string {
+	return `indicates the minimum value of MeasuredConcentration that is capable of being measured.
+A value of NaN indicates that the minimum value is not defined`
+}
+
+// MinMeasuredConcentration indicates the minimum value of MeasuredConcentration that is capable of being measured.
+// A value of NaN indicates that the minimum value is not defined
+type MinMeasuredConcentration zcl.Zfloat
+
+func (v *MinMeasuredConcentration) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *MinMeasuredConcentration) Value() zcl.Val     { return v }
+
+func (v MinMeasuredConcentration) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *MinMeasuredConcentration) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = MinMeasuredConcentration(*nt)
+	return br, err
+}
+
+func (v MinMeasuredConcentration) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *MinMeasuredConcentration) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = MinMeasuredConcentration(*a)
+	return nil
+}
+
+func (v *MinMeasuredConcentration) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = MinMeasuredConcentration(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v MinMeasuredConcentration) String() string {
+	return zcl.Sprintf("%v", zcl.Zfloat(v))
 }
 
 const MinMeasuredFlowAttr zcl.AttrID = 1
