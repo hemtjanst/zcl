@@ -36,7 +36,7 @@ func (u CustomUnit) Format(n float64) string {
 		return fmt.Sprintf("%s bytes", v)
 	case Concentration:
 		if n >= 0.001 {
-			return fmt.Sprintf("%.1f%", n*100)
+			return fmt.Sprintf("%.1f%%", n*100)
 		}
 		if n >= 0.000001 {
 			return fmt.Sprintf("%.1f ppm", n*1000000)
@@ -55,6 +55,8 @@ func (u CustomUnit) String() string {
 		return "mired"
 	case Bytes:
 		return "bytes"
+	case Concentration:
+		return "concentration"
 	}
 	return fmt.Sprintf("CustomUnit(0x%02x)", uint8(u))
 }
