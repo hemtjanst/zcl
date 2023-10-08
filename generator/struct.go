@@ -250,14 +250,15 @@ func (c Zdo) Types() []Attr {
 }
 
 type Cluster struct {
-	TypeMap  map[string]Attr `xml:"types" toml:"types,omitempty" yaml:"types,omitempty" json:"types,omitempty"`
-	ID       Hex             `xml:"id,attr" toml:"id,omitempty" yaml:"id,omitempty" json:"id,omitempty"`
-	Name     Name            `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
-	MfCode   MfCode          `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
-	Desc     Desc            `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
-	Server   CmdAttr         `xml:"server" toml:"server,omitempty" yaml:"server,omitempty" json:"server,omitempty"`
-	Client   CmdAttr         `xml:"client" toml:"client,omitempty" yaml:"client,omitempty" json:"client,omitempty"`
-	Clusters []Cluster       `xml:"clusters" toml:"clusters,omitempty" yaml:"clusters,omitempty" json:"clusters,omitempty"`
+	TypeMap   map[string]Attr `xml:"types" toml:"types,omitempty" yaml:"types,omitempty" json:"types,omitempty"`
+	ID        Hex             `xml:"id,attr" toml:"id,omitempty" yaml:"id,omitempty" json:"id,omitempty"`
+	Name      Name            `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	MfCode    MfCode          `xml:"mfcode,attr" toml:"mnfcode,omitempty" yaml:"mnfcode,omitempty" json:"mnfcode,omitempty"`
+	Desc      Desc            `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
+	Server    CmdAttr         `xml:"server" toml:"server,omitempty" yaml:"server,omitempty" json:"server,omitempty"`
+	Client    CmdAttr         `xml:"client" toml:"client,omitempty" yaml:"client,omitempty" json:"client,omitempty"`
+	Clusters  []Cluster       `xml:"clusters" toml:"clusters,omitempty" yaml:"clusters,omitempty" json:"clusters,omitempty"`
+	Templates []TemplateDef   `xml:"cluster_templates" toml:"cluster_templates,omitempty" yaml:"cluster_templates,omitempty" json:"cluster_templates,omitempty"`
 }
 
 func (c Cluster) Types() []Attr {
