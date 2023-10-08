@@ -2672,7 +2672,7 @@ func (v *ConcentrationTolerance) SetValue(a zcl.Val) error {
 }
 
 func (v ConcentrationTolerance) String() string {
-	return zcl.Sprintf("%v", zcl.Zfloat(v))
+	return zcl.Concentration.Format(float64(v))
 }
 
 const DcCurrentAttr zcl.AttrID = 259
@@ -4682,7 +4682,7 @@ func (v *MaxMeasuredConcentration) SetValue(a zcl.Val) error {
 }
 
 func (v MaxMeasuredConcentration) String() string {
-	return zcl.Sprintf("%v", zcl.Zfloat(v))
+	return zcl.Concentration.Format(float64(v))
 }
 
 const MaxMeasuredFlowAttr zcl.AttrID = 2
@@ -5469,7 +5469,7 @@ func (v *MeasuredConcentration) SetValue(a zcl.Val) error {
 }
 
 func (v MeasuredConcentration) String() string {
-	return zcl.Sprintf("%v", zcl.Zfloat(v))
+	return zcl.Concentration.Format(float64(v))
 }
 
 const MeasuredFlowAttr zcl.AttrID = 0
@@ -6284,7 +6284,7 @@ func (v *MinMeasuredConcentration) SetValue(a zcl.Val) error {
 }
 
 func (v MinMeasuredConcentration) String() string {
-	return zcl.Sprintf("%v", zcl.Zfloat(v))
+	return zcl.Concentration.Format(float64(v))
 }
 
 const MinMeasuredFlowAttr zcl.AttrID = 1

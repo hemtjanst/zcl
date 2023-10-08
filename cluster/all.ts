@@ -8312,6 +8312,7 @@ The true value is located in the range (MeasuredValue – Tolerance) to
                 read: true,
                 write: false,
                 require: false,
+                unit: units.Concentration,
                 
             })),
             DcCurrent: makeType<ZigBee.IMeasurementAndSensing.IArgDcCurrent, ZigBee.IMeasurementAndSensing.IArgDcCurrentPayload>(base.s16, ()=>({
@@ -8682,6 +8683,7 @@ A value of NaN indicates that the maximum value is not defined`,
                 read: true,
                 write: false,
                 require: false,
+                unit: units.Concentration,
                 
             })),
             MaxMeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMaxMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMaxMeasuredFlowPayload>(base.u16, ()=>({
@@ -8837,6 +8839,7 @@ MeasuredConcentration is updated continuously as new measurements are made`,
                 read: true,
                 write: false,
                 require: false,
+                unit: units.Concentration,
                 
             })),
             MeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMeasuredFlowPayload>(base.u16, ()=>({
@@ -8992,6 +8995,7 @@ A value of NaN indicates that the minimum value is not defined`,
                 read: true,
                 write: false,
                 require: false,
+                unit: units.Concentration,
                 
             })),
             MinMeasuredFlow: makeType<ZigBee.IMeasurementAndSensing.IArgMinMeasuredFlow, ZigBee.IMeasurementAndSensing.IArgMinMeasuredFlowPayload>(base.u16, ()=>({
@@ -9989,7 +9993,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         CarbonMonoxideMeasurement: {
             ID: 0x040C,
             Name: `Carbon Monoxide Measurement`,
-            Desc: ``,
+            Desc: `(CO) as concentration in Air`,
             
             
             Server: {
@@ -10004,7 +10008,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         CarbonDioxideMeasurement: {
             ID: 0x040D,
             Name: `Carbon Dioxide Measurement`,
-            Desc: ``,
+            Desc: `(CO2) as concentration in Air`,
             
             
             Server: {
@@ -10019,7 +10023,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         EthyleneMeasurement: {
             ID: 0x040E,
             Name: `Ethylene Measurement`,
-            Desc: ``,
+            Desc: `(CH2) as concentration in Air`,
             
             
             Server: {
@@ -10034,7 +10038,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         EthyleneOxideMeasurement: {
             ID: 0x040F,
             Name: `Ethylene Oxide Measurement`,
-            Desc: ``,
+            Desc: `(C2H40) as concentration in Air`,
             
             
             Server: {
@@ -10049,7 +10053,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         HydrogenMeasurement: {
             ID: 0x0410,
             Name: `Hydrogen Measurement`,
-            Desc: ``,
+            Desc: `(H) as concentration in Air`,
             
             
             Server: {
@@ -10064,7 +10068,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         HydrogenSulfideMeasurement: {
             ID: 0x0411,
             Name: `Hydrogen Sulfide Measurement`,
-            Desc: ``,
+            Desc: `(H2S) as concentration in Air`,
             
             
             Server: {
@@ -10079,7 +10083,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         NitricOxideMeasurement: {
             ID: 0x0412,
             Name: `Nitric Oxide Measurement`,
-            Desc: ``,
+            Desc: `(NO) as concentration in Air`,
             
             
             Server: {
@@ -10094,7 +10098,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         NitrogenDioxideMeasurement: {
             ID: 0x0413,
             Name: `Nitrogen Dioxide Measurement`,
-            Desc: ``,
+            Desc: `(NO2) as concentration in Air`,
             
             
             Server: {
@@ -10109,7 +10113,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         OxygenMeasurement: {
             ID: 0x0414,
             Name: `Oxygen Measurement`,
-            Desc: ``,
+            Desc: `(O2) as concentration in Air`,
             
             
             Server: {
@@ -10124,7 +10128,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         OzoneMeasurement: {
             ID: 0x0415,
             Name: `Ozone Measurement`,
-            Desc: ``,
+            Desc: `(O3) as concentration in Air`,
             
             
             Server: {
@@ -10139,7 +10143,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         SulfurDioxideMeasurement: {
             ID: 0x0416,
             Name: `Sulfur Dioxide Measurement`,
-            Desc: ``,
+            Desc: `(SO2) as concentration in Air`,
             
             
             Server: {
@@ -10154,7 +10158,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         DissolvedOxygenMeasurement: {
             ID: 0x0417,
             Name: `Dissolved Oxygen Measurement`,
-            Desc: ``,
+            Desc: `(DO) as concentration in Water`,
             
             
             Server: {
@@ -10169,7 +10173,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         BromateMeasurement: {
             ID: 0x0418,
             Name: `Bromate Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10184,7 +10188,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         ChloraminesMeasurement: {
             ID: 0x0419,
             Name: `Chloramines Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10199,7 +10203,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         ChlorineMeasurement: {
             ID: 0x041A,
             Name: `Chlorine Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10214,7 +10218,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         FecalColiformEColiMeasurement: {
             ID: 0x041B,
             Name: `Fecal coliform & E. Coli Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10229,7 +10233,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         FluorideMeasurement: {
             ID: 0x041C,
             Name: `Fluoride Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10244,7 +10248,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         HaloaceticAcidsMeasurement: {
             ID: 0x041D,
             Name: `Haloacetic Acids Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10259,7 +10263,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         TotalTrihalomethanesMeasurement: {
             ID: 0x041E,
             Name: `Total Trihalomethanes Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10274,7 +10278,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         TotalColiformBacteriaMeasurement: {
             ID: 0x041F,
             Name: `Total Coliform Bacteria Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10289,7 +10293,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         TurbidityMeasurement: {
             ID: 0x0420,
             Name: `Turbidity Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10304,7 +10308,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         CopperMeasurement: {
             ID: 0x0421,
             Name: `Copper Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10319,7 +10323,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         LeadMeasurement: {
             ID: 0x0422,
             Name: `Lead Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10334,7 +10338,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         ManganeseMeasurement: {
             ID: 0x0423,
             Name: `Manganese Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10349,7 +10353,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         SulfateMeasurement: {
             ID: 0x0424,
             Name: `Sulfate Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10364,7 +10368,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         BromodichloromethaneMeasurement: {
             ID: 0x0425,
             Name: `Bromodichloromethane Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10379,7 +10383,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         BromoformMeasurement: {
             ID: 0x0426,
             Name: `Bromoform Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10394,7 +10398,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         ChlorodibromomethaneMeasurement: {
             ID: 0x0427,
             Name: `Chlorodibromomethane Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10409,7 +10413,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         ChloroformMeasurement: {
             ID: 0x0428,
             Name: `Chloroform Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10424,7 +10428,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         SodiumMeasurement: {
             ID: 0x0429,
             Name: `Sodium Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Drinking Water`,
             
             
             Server: {
@@ -10439,7 +10443,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         Pm25Measurement: {
             ID: 0x042A,
             Name: `PM2.5 Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Air`,
             
             
             Server: {
@@ -10454,7 +10458,7 @@ DCVoltageMultiplier and DCVoltageDivisor`,
         FormaldehydeMeasurement: {
             ID: 0x042B,
             Name: `Formaldehyde Measurement`,
-            Desc: ``,
+            Desc: `as concentration in Air`,
             
             
             Server: {
