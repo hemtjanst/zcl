@@ -22,6 +22,10 @@ func (f *File) ReadCluster() (*Cluster, error) {
 	}
 	ret := &Cluster{}
 	err = yaml.Unmarshal(b, ret)
+	if err != nil {
+		return nil, err
+	}
+	err = ret.ExpandTemplates()
 	return ret, err
 
 }
