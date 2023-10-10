@@ -6422,6 +6422,50 @@ zone devices`,
         0x00: ZigBee.SecurityAndSafety.IasZone.ZoneStateChangeNotification,
         0x01: ZigBee.SecurityAndSafety.IasZone.ZoneEnrollRequest,
     };
+    export const Ikea = {
+        Types: { 
+            VocIndex: makeType<ZigBee.IIkea.IArgVocIndex, ZigBee.IIkea.IArgVocIndexPayload>(base.float, ()=>({
+                name: `VOC Index`,
+                description: `represents the Sensirion AG measurement of VOC status relative to the sensors recent history.
+The VOC Index uses a moving average over the past 24 hours (called the "learning time") as offset.
+The VOC Index mimics the human nose’s perception of odors with a relative intensity compared to recent history.
+A VOC Index above 100 means that there are more VOCs compared to the average (e.g., induced by a VOC event from
+cooking, cleaning, breathing, etc.) while a VOC Index below 100 means that there are fewer VOCs compared to the
+average (e.g., induced by fresh air from an open window, using an air purifier, etc.).
+The VOC Index ranges from 1 to 500.`,
+                id: 0x0000,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                
+            })), },
+        IkeaAirQuality: {
+            ID: 0xFC7E,
+            Name: `IKEA Air Quality`,
+            Desc: ``,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        }
+    };
+    
+    ZigBee.Ikea.IkeaAirQuality.Server.Attribute = { 
+        0x0000: ZigBee.Ikea.Types.VocIndex,
+    };
+    ZigBee.Ikea.IkeaAirQuality.Client.Attribute = { 
+    };
+    ZigBee.Ikea.IkeaAirQuality.Server.Command = { 
+    };
+    ZigBee.Ikea.IkeaAirQuality.Client.Command = { 
+    };
     export const Lighting = {
         Types: { 
             Action: makeType<ZigBee.ILighting.IArgAction, ZigBee.ILighting.IArgActionPayload>(base.enum8, ()=>({
@@ -8711,6 +8755,17 @@ value of 0xffff indicates that this attribute is not defined`,
                 unit: units.Luxes,
                 
             })),
+            MaxMeasuredPm25: makeType<ZigBee.IMeasurementAndSensing.IArgMaxMeasuredPm25, ZigBee.IMeasurementAndSensing.IArgMaxMeasuredPm25Payload>(base.float, ()=>({
+                name: `Max Measured PM2.5`,
+                description: ``,
+                id: 0x0002,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.MicrogramPerCubicMeter,
+                
+            })),
             MaxMeasuredPressure: makeType<ZigBee.IMeasurementAndSensing.IArgMaxMeasuredPressure, ZigBee.IMeasurementAndSensing.IArgMaxMeasuredPressurePayload>(base.s16, ()=>({
                 name: `Max Measured Pressure`,
                 description: `indicates the maximum value of MeasuredPressure that can be measured. A
@@ -8939,6 +8994,17 @@ and a negative value indicates that the measured phase is lagging.`,
                 unit: units.DegreesPhase,
                 
             })),
+            MeasuredPm25: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPm25, ZigBee.IMeasurementAndSensing.IArgMeasuredPm25Payload>(base.float, ()=>({
+                name: `Measured PM2.5`,
+                description: ``,
+                id: 0x0000,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.MicrogramPerCubicMeter,
+                
+            })),
             MeasuredPressure: makeType<ZigBee.IMeasurementAndSensing.IArgMeasuredPressure, ZigBee.IMeasurementAndSensing.IArgMeasuredPressurePayload>(base.s16, ()=>({
                 name: `Measured Pressure`,
                 description: `represents the temperature in degrees DegreesCelsius`,
@@ -9021,6 +9087,17 @@ value of 0xffff indicates that this attribute is not defined`,
                 write: false,
                 require: false,
                 unit: units.Luxes,
+                
+            })),
+            MinMeasuredPm25: makeType<ZigBee.IMeasurementAndSensing.IArgMinMeasuredPm25, ZigBee.IMeasurementAndSensing.IArgMinMeasuredPm25Payload>(base.float, ()=>({
+                name: `Min Measured PM2.5`,
+                description: ``,
+                id: 0x0001,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.MicrogramPerCubicMeter,
                 
             })),
             MinMeasuredPressure: makeType<ZigBee.IMeasurementAndSensing.IArgMinMeasuredPressure, ZigBee.IMeasurementAndSensing.IArgMinMeasuredPressurePayload>(base.s16, ()=>({
@@ -9147,6 +9224,17 @@ mandatory if the PIRUnoccupiedToOccupiedThreshold attribute is implemented`,
                 read: true,
                 write: true,
                 require: false,
+                
+            })),
+            Pm25Tolerance: makeType<ZigBee.IMeasurementAndSensing.IArgPm25Tolerance, ZigBee.IMeasurementAndSensing.IArgPm25TolerancePayload>(base.float, ()=>({
+                name: `PM2.5 Tolerance`,
+                description: ``,
+                id: 0x0003,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.MicrogramPerCubicMeter,
                 
             })),
             PowerDivisor: makeType<ZigBee.IMeasurementAndSensing.IArgPowerDivisor, ZigBee.IMeasurementAndSensing.IArgPowerDivisorPayload>(base.u32, ()=>({
@@ -9925,6 +10013,21 @@ reporting occupancy status`,
                 Command: {}
             },
         },
+        Pm25Measurement: {
+            ID: 0x042A,
+            Name: `PM2.5 Measurement`,
+            Desc: `(Particulate Matter 2.5 microns or less) in µg/m³`,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
         ElectricalMeasurement: {
             ID: 0x0B04,
             Name: `Electrical Measurement`,
@@ -10440,21 +10543,6 @@ DCVoltageMultiplier and DCVoltageDivisor`,
                 Command: {}
             },
         },
-        Pm25Measurement: {
-            ID: 0x042A,
-            Name: `PM2.5 Measurement`,
-            Desc: `as concentration in Air`,
-            
-            
-            Server: {
-                Attribute: {},
-                Command: {},
-            },
-            Client: {
-                Attribute: {},
-                Command: {}
-            },
-        },
         FormaldehydeMeasurement: {
             ID: 0x042B,
             Name: `Formaldehyde Measurement`,
@@ -10564,6 +10652,18 @@ DCVoltageMultiplier and DCVoltageDivisor`,
     ZigBee.MeasurementAndSensing.OccupancySensing.Server.Command = { 
     };
     ZigBee.MeasurementAndSensing.OccupancySensing.Client.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Server.Attribute = { 
+        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredPm25,
+        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredPm25,
+        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredPm25,
+        0x0003: ZigBee.MeasurementAndSensing.Types.Pm25Tolerance,
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Client.Attribute = { 
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Server.Command = { 
+    };
+    ZigBee.MeasurementAndSensing.Pm25Measurement.Client.Command = { 
     };
     ZigBee.MeasurementAndSensing.ElectricalMeasurement.Server.Attribute = { 
         0x0000: ZigBee.MeasurementAndSensing.Types.ElectricalMeasurementType,
@@ -11063,18 +11163,6 @@ DCVoltageMultiplier and DCVoltageDivisor`,
     ZigBee.MeasurementAndSensing.SodiumMeasurement.Server.Command = { 
     };
     ZigBee.MeasurementAndSensing.SodiumMeasurement.Client.Command = { 
-    };
-    ZigBee.MeasurementAndSensing.Pm25Measurement.Server.Attribute = { 
-        0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
-        0x0001: ZigBee.MeasurementAndSensing.Types.MinMeasuredConcentration,
-        0x0002: ZigBee.MeasurementAndSensing.Types.MaxMeasuredConcentration,
-        0x0003: ZigBee.MeasurementAndSensing.Types.ConcentrationTolerance,
-    };
-    ZigBee.MeasurementAndSensing.Pm25Measurement.Client.Attribute = { 
-    };
-    ZigBee.MeasurementAndSensing.Pm25Measurement.Server.Command = { 
-    };
-    ZigBee.MeasurementAndSensing.Pm25Measurement.Client.Command = { 
     };
     ZigBee.MeasurementAndSensing.FormaldehydeMeasurement.Server.Attribute = { 
         0x0000: ZigBee.MeasurementAndSensing.Types.MeasuredConcentration,
@@ -11839,6 +11927,7 @@ potentially Thermal metering devices.`,
         0x0B01: ZigBee.General.MeterIdentification,
         0x0B05: ZigBee.General.Diagnostics,
         0x0500: ZigBee.SecurityAndSafety.IasZone,
+        0xFC7E: ZigBee.Ikea.IkeaAirQuality,
         0x0300: ZigBee.Lighting.ColorControl,
         0x0301: ZigBee.Lighting.BallastConfiguration,
         0x0400: ZigBee.MeasurementAndSensing.IlluminanceMeasurement,
@@ -11848,6 +11937,7 @@ potentially Thermal metering devices.`,
         0x0404: ZigBee.MeasurementAndSensing.FlowMeasurement,
         0x0405: ZigBee.MeasurementAndSensing.RelativeHumidityMeasurement,
         0x0406: ZigBee.MeasurementAndSensing.OccupancySensing,
+        0x042a: ZigBee.MeasurementAndSensing.Pm25Measurement,
         0x0B04: ZigBee.MeasurementAndSensing.ElectricalMeasurement,
         0x040c: ZigBee.MeasurementAndSensing.CarbonMonoxideMeasurement,
         0x040d: ZigBee.MeasurementAndSensing.CarbonDioxideMeasurement,
@@ -11879,7 +11969,6 @@ potentially Thermal metering devices.`,
         0x0427: ZigBee.MeasurementAndSensing.ChlorodibromomethaneMeasurement,
         0x0428: ZigBee.MeasurementAndSensing.ChloroformMeasurement,
         0x0429: ZigBee.MeasurementAndSensing.SodiumMeasurement,
-        0x042a: ZigBee.MeasurementAndSensing.Pm25Measurement,
         0x042b: ZigBee.MeasurementAndSensing.FormaldehydeMeasurement,
         0x0019: ZigBee.Otau.Otau,
         0x0702: ZigBee.SmartEnergy.Metering,
@@ -13020,6 +13109,26 @@ potentially Thermal metering devices.`,
             export type IArgZoneTypePayload = ValueType;
             export interface IArgZoneType extends IAttribute { value: IArgZoneTypePayload }    }
 
+    export namespace IIkea {
+        // noinspection ES6UnusedImports
+        import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
+        import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
+        import ValueType = ZigBee.ValueType;
+        
+        export namespace IkeaAirQuality {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+            export type IArgVocIndexPayload = ValueType;
+            export interface IArgVocIndex extends IAttribute { value: IArgVocIndexPayload }    }
+
     export namespace ILighting {
         // noinspection ES6UnusedImports
         import IArgument = ZigBee.IArgument;
@@ -13340,6 +13449,15 @@ potentially Thermal metering devices.`,
         
         }
 
+        export namespace Pm25Measurement {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
         export namespace ElectricalMeasurement {
             // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
@@ -13627,15 +13745,6 @@ potentially Thermal metering devices.`,
         
         }
 
-        export namespace Pm25Measurement {
-            // noinspection ES6UnusedImports
-            import ICommand = ZigBee.ICommand;
-            // noinspection ES6UnusedImports
-            import ValueType = ZigBee.ValueType;
-
-        
-        }
-
         export namespace FormaldehydeMeasurement {
             // noinspection ES6UnusedImports
             import ICommand = ZigBee.ICommand;
@@ -13797,6 +13906,8 @@ potentially Thermal metering devices.`,
             export interface IArgMaxMeasuredFlow extends IAttribute { value: IArgMaxMeasuredFlowPayload }
             export type IArgMaxMeasuredIlluminancePayload = ValueType;
             export interface IArgMaxMeasuredIlluminance extends IAttribute { value: IArgMaxMeasuredIlluminancePayload }
+            export type IArgMaxMeasuredPm25Payload = ValueType;
+            export interface IArgMaxMeasuredPm25 extends IAttribute { value: IArgMaxMeasuredPm25Payload }
             export type IArgMaxMeasuredPressurePayload = ValueType;
             export interface IArgMaxMeasuredPressure extends IAttribute { value: IArgMaxMeasuredPressurePayload }
             export type IArgMaxMeasuredRelativeHumidityPayload = ValueType;
@@ -13823,6 +13934,8 @@ potentially Thermal metering devices.`,
             export interface IArgMeasuredFlow extends IAttribute { value: IArgMeasuredFlowPayload }
             export type IArgMeasuredIlluminancePayload = ValueType;
             export interface IArgMeasuredIlluminance extends IAttribute { value: IArgMeasuredIlluminancePayload }
+            export type IArgMeasuredPm25Payload = ValueType;
+            export interface IArgMeasuredPm25 extends IAttribute { value: IArgMeasuredPm25Payload }
             export type IArgMeasuredPhase11ThHarmonicCurrentPayload = ValueType;
             export interface IArgMeasuredPhase11ThHarmonicCurrent extends IAttribute { value: IArgMeasuredPhase11ThHarmonicCurrentPayload }
             export type IArgMeasuredPhase1StHarmonicCurrentPayload = ValueType;
@@ -13849,6 +13962,8 @@ potentially Thermal metering devices.`,
             export interface IArgMinMeasuredFlow extends IAttribute { value: IArgMinMeasuredFlowPayload }
             export type IArgMinMeasuredIlluminancePayload = ValueType;
             export interface IArgMinMeasuredIlluminance extends IAttribute { value: IArgMinMeasuredIlluminancePayload }
+            export type IArgMinMeasuredPm25Payload = ValueType;
+            export interface IArgMinMeasuredPm25 extends IAttribute { value: IArgMinMeasuredPm25Payload }
             export type IArgMinMeasuredPressurePayload = ValueType;
             export interface IArgMinMeasuredPressure extends IAttribute { value: IArgMinMeasuredPressurePayload }
             export type IArgMinMeasuredRelativeHumidityPayload = ValueType;
@@ -13869,6 +13984,8 @@ potentially Thermal metering devices.`,
             export interface IArgPirUnoccupiedToOccupiedDelay extends IAttribute { value: IArgPirUnoccupiedToOccupiedDelayPayload }
             export type IArgPirUnoccupiedToOccupiedThresholdPayload = ValueType;
             export interface IArgPirUnoccupiedToOccupiedThreshold extends IAttribute { value: IArgPirUnoccupiedToOccupiedThresholdPayload }
+            export type IArgPm25TolerancePayload = ValueType;
+            export interface IArgPm25Tolerance extends IAttribute { value: IArgPm25TolerancePayload }
             export type IArgPhaseHarmonicCurrentMultiplierPayload = ValueType;
             export interface IArgPhaseHarmonicCurrentMultiplier extends IAttribute { value: IArgPhaseHarmonicCurrentMultiplierPayload }
             export type IArgPowerDivisorPayload = ValueType;

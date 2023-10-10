@@ -4809,6 +4809,61 @@ func (v MaxMeasuredIlluminance) String() string {
 	return zcl.Luxes.Format(float64(v))
 }
 
+const MaxMeasuredPm25Attr zcl.AttrID = 2
+
+func (MaxMeasuredPm25) ID() zcl.AttrID   { return MaxMeasuredPm25Attr }
+func (MaxMeasuredPm25) Readable() bool   { return true }
+func (MaxMeasuredPm25) Writable() bool   { return false }
+func (MaxMeasuredPm25) Reportable() bool { return true }
+func (MaxMeasuredPm25) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v MaxMeasuredPm25) AttrID() zcl.AttrID   { return v.ID() }
+func (v MaxMeasuredPm25) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MaxMeasuredPm25) AttrValue() zcl.Val  { return v.Value() }
+
+func (MaxMeasuredPm25) Name() string        { return `Max Measured PM2.5` }
+func (MaxMeasuredPm25) Description() string { return `` }
+
+type MaxMeasuredPm25 zcl.Zfloat
+
+func (v *MaxMeasuredPm25) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *MaxMeasuredPm25) Value() zcl.Val     { return v }
+
+func (v MaxMeasuredPm25) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *MaxMeasuredPm25) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = MaxMeasuredPm25(*nt)
+	return br, err
+}
+
+func (v MaxMeasuredPm25) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *MaxMeasuredPm25) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = MaxMeasuredPm25(*a)
+	return nil
+}
+
+func (v *MaxMeasuredPm25) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = MaxMeasuredPm25(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v MaxMeasuredPm25) String() string {
+	return zcl.MicrogramPerCubicMeter.Format(float64(v))
+}
+
 const MaxMeasuredPressureAttr zcl.AttrID = 2
 
 func (MaxMeasuredPressure) ID() zcl.AttrID   { return MaxMeasuredPressureAttr }
@@ -5594,6 +5649,61 @@ func (v *MeasuredIlluminance) SetValue(a zcl.Val) error {
 
 func (v MeasuredIlluminance) String() string {
 	return zcl.Luxes.Format(float64(v))
+}
+
+const MeasuredPm25Attr zcl.AttrID = 0
+
+func (MeasuredPm25) ID() zcl.AttrID   { return MeasuredPm25Attr }
+func (MeasuredPm25) Readable() bool   { return true }
+func (MeasuredPm25) Writable() bool   { return false }
+func (MeasuredPm25) Reportable() bool { return true }
+func (MeasuredPm25) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v MeasuredPm25) AttrID() zcl.AttrID   { return v.ID() }
+func (v MeasuredPm25) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MeasuredPm25) AttrValue() zcl.Val  { return v.Value() }
+
+func (MeasuredPm25) Name() string        { return `Measured PM2.5` }
+func (MeasuredPm25) Description() string { return `` }
+
+type MeasuredPm25 zcl.Zfloat
+
+func (v *MeasuredPm25) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *MeasuredPm25) Value() zcl.Val     { return v }
+
+func (v MeasuredPm25) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *MeasuredPm25) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = MeasuredPm25(*nt)
+	return br, err
+}
+
+func (v MeasuredPm25) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *MeasuredPm25) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = MeasuredPm25(*a)
+	return nil
+}
+
+func (v *MeasuredPm25) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = MeasuredPm25(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v MeasuredPm25) String() string {
+	return zcl.MicrogramPerCubicMeter.Format(float64(v))
 }
 
 const MeasuredPhase11ThHarmonicCurrentAttr zcl.AttrID = 786
@@ -6411,6 +6521,61 @@ func (v MinMeasuredIlluminance) String() string {
 	return zcl.Luxes.Format(float64(v))
 }
 
+const MinMeasuredPm25Attr zcl.AttrID = 1
+
+func (MinMeasuredPm25) ID() zcl.AttrID   { return MinMeasuredPm25Attr }
+func (MinMeasuredPm25) Readable() bool   { return true }
+func (MinMeasuredPm25) Writable() bool   { return false }
+func (MinMeasuredPm25) Reportable() bool { return true }
+func (MinMeasuredPm25) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v MinMeasuredPm25) AttrID() zcl.AttrID   { return v.ID() }
+func (v MinMeasuredPm25) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *MinMeasuredPm25) AttrValue() zcl.Val  { return v.Value() }
+
+func (MinMeasuredPm25) Name() string        { return `Min Measured PM2.5` }
+func (MinMeasuredPm25) Description() string { return `` }
+
+type MinMeasuredPm25 zcl.Zfloat
+
+func (v *MinMeasuredPm25) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *MinMeasuredPm25) Value() zcl.Val     { return v }
+
+func (v MinMeasuredPm25) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *MinMeasuredPm25) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = MinMeasuredPm25(*nt)
+	return br, err
+}
+
+func (v MinMeasuredPm25) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *MinMeasuredPm25) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = MinMeasuredPm25(*a)
+	return nil
+}
+
+func (v *MinMeasuredPm25) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = MinMeasuredPm25(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v MinMeasuredPm25) String() string {
+	return zcl.MicrogramPerCubicMeter.Format(float64(v))
+}
+
 const MinMeasuredPressureAttr zcl.AttrID = 1
 
 func (MinMeasuredPressure) ID() zcl.AttrID   { return MinMeasuredPressureAttr }
@@ -7040,6 +7205,61 @@ func (v *PirUnoccupiedToOccupiedThreshold) SetValue(a zcl.Val) error {
 
 func (v PirUnoccupiedToOccupiedThreshold) String() string {
 	return zcl.Sprintf("%v", zcl.Zu8(v))
+}
+
+const Pm25ToleranceAttr zcl.AttrID = 3
+
+func (Pm25Tolerance) ID() zcl.AttrID   { return Pm25ToleranceAttr }
+func (Pm25Tolerance) Readable() bool   { return true }
+func (Pm25Tolerance) Writable() bool   { return false }
+func (Pm25Tolerance) Reportable() bool { return false }
+func (Pm25Tolerance) SceneIndex() int  { return -1 }
+
+// Implements AttrDef/AttrValue interfaces
+func (v Pm25Tolerance) AttrID() zcl.AttrID   { return v.ID() }
+func (v Pm25Tolerance) AttrType() zcl.TypeID { return v.TypeID() }
+func (v *Pm25Tolerance) AttrValue() zcl.Val  { return v.Value() }
+
+func (Pm25Tolerance) Name() string        { return `PM2.5 Tolerance` }
+func (Pm25Tolerance) Description() string { return `` }
+
+type Pm25Tolerance zcl.Zfloat
+
+func (v *Pm25Tolerance) TypeID() zcl.TypeID { return new(zcl.Zfloat).TypeID() }
+func (v *Pm25Tolerance) Value() zcl.Val     { return v }
+
+func (v Pm25Tolerance) MarshalZcl() ([]byte, error) { return zcl.Zfloat(v).MarshalZcl() }
+
+func (v *Pm25Tolerance) UnmarshalZcl(b []byte) ([]byte, error) {
+	nt := new(zcl.Zfloat)
+	br, err := nt.UnmarshalZcl(b)
+	*v = Pm25Tolerance(*nt)
+	return br, err
+}
+
+func (v Pm25Tolerance) MarshalJSON() ([]byte, error) {
+	return zcl.ToJson(zcl.Zfloat(v))
+}
+
+func (v *Pm25Tolerance) UnmarshalJSON(b []byte) error {
+	a := new(zcl.Zfloat)
+	if err := zcl.ParseJson(b, a); err != nil {
+		return err
+	}
+	*v = Pm25Tolerance(*a)
+	return nil
+}
+
+func (v *Pm25Tolerance) SetValue(a zcl.Val) error {
+	if nv, ok := a.(*zcl.Zfloat); ok {
+		*v = Pm25Tolerance(*nv)
+		return nil
+	}
+	return zcl.ErrInvalidType
+}
+
+func (v Pm25Tolerance) String() string {
+	return zcl.MicrogramPerCubicMeter.Format(float64(v))
 }
 
 const PhaseHarmonicCurrentMultiplierAttr zcl.AttrID = 1029
