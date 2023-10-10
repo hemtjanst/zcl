@@ -5,6 +5,7 @@ import (
 	"hemtjan.st/zcl/cluster/closures"
 	"hemtjan.st/zcl/cluster/general"
 	"hemtjan.st/zcl/cluster/ias"
+	"hemtjan.st/zcl/cluster/ikea"
 	"hemtjan.st/zcl/cluster/lighting"
 	"hemtjan.st/zcl/cluster/measurement"
 	"hemtjan.st/zcl/cluster/otau"
@@ -39,6 +40,7 @@ var Clusters = map[zcl.ClusterID]zcl.Cluster{
 	general.ScenesID:                               general.ScenesCluster,
 	general.TimeID:                                 general.TimeCluster,
 	ias.IasZoneID:                                  ias.IasZoneCluster,
+	ikea.IkeaAirQualityID:                          ikea.IkeaAirQualityCluster,
 	lighting.BallastConfigurationID:                lighting.BallastConfigurationCluster,
 	lighting.ColorControlID:                        lighting.ColorControlCluster,
 	measurement.BromateMeasurementID:               measurement.BromateMeasurementCluster,
