@@ -14342,6 +14342,7 @@ potentially Thermal metering devices.`,
         DecibelMilliWatts: { unit: "dBm", format: (v) => `${v}` },
         MilliAmpereHours: { unit: "mAh", format: (v) => `${v}mAh` },
         Mired: { unit: "mired", format: (v) => `${v} mired` },
+        MicrogramPerCubicMeter: { unit: "µg/m³", format: (v) => `${v}µg/m³` },
         Bytes: { unit: "bytes",
             format: (v) => {
                 let si = ['Ki', 'Mi', 'Gi', 'Ti', 'Pi'];
