@@ -36,7 +36,7 @@ func (u CustomUnit) Format(n float64) string {
 	case Bytes:
 		return fmt.Sprintf("%s bytes", v)
 	case MicrogramPerCubicMeter:
-		return fmt.Sprintf("%.1f µg/m³")
+		return fmt.Sprintf("%s µg/m³", v)
 	case Concentration:
 		if n >= 0.001 {
 			return fmt.Sprintf("%.1f%%", n*100)
