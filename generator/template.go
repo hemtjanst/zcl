@@ -98,6 +98,7 @@ func (a Attr) FromTemplate(v any) (o Attr, err error) {
 		o.Cond = append(o.Cond, Condition{
 			Desc:     mustStrTemplate(c.Desc, v),
 			Name:     mustStrTemplate(c.Name, v),
+			Index:    c.Index,
 			Attr:     mustStrTemplate(c.Attr, v),
 			Value:    mustStrTemplate(c.Value, v),
 			Mask:     mustStrTemplate(c.Mask, v),

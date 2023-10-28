@@ -109,6 +109,7 @@ func (r Required) IsTrue() bool {
 type Condition struct {
 	Desc     Desc   `xml:"description" toml:"description,omitempty" yaml:"description,omitempty" json:"description,omitempty"`
 	Name     Name   `xml:"name,attr" toml:"name,omitempty" yaml:"name,omitempty" json:"name,omitempty"`
+	Index    *int   `xml:"index,attr" toml:"index,omitempty" yaml:"index,omitempty" json:"index,omitempty"`
 	Attr     Hex    `toml:"attr,omitempty" yaml:"attr,omitempty" json:"attr,omitempty"`
 	Value    Hex    `toml:"value,omitempty" yaml:"value,omitempty" json:"value,omitempty"`
 	Mask     Hex    `toml:"mask,omitempty" yaml:"mask,omitempty" json:"mask,omitempty"`
