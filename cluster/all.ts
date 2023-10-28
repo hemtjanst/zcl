@@ -6199,6 +6199,1733 @@ one of a number of discrete states.`,
     };
     ZigBee.General.Diagnostics.Client.Command = { 
     };
+    export const Hvac = {
+        Types: { 
+            AbsMaxCoolSetpointLimit: makeType<ZigBee.IHvac.IArgAbsMaxCoolSetpointLimit, ZigBee.IHvac.IArgAbsMaxCoolSetpointLimitPayload>(base.s16, ()=>({
+                name: `Abs Max Cool Setpoint Limit`,
+                description: `absolute maximum level that the cooling setpoint may be set to. This is
+a limitation imposed by the manufacturer. The value is calculated as
+described in the LocalTemperature attribute`,
+                id: 0x0006,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            AbsMaxHeatSetpointLimit: makeType<ZigBee.IHvac.IArgAbsMaxHeatSetpointLimit, ZigBee.IHvac.IArgAbsMaxHeatSetpointLimitPayload>(base.s16, ()=>({
+                name: `Abs Max Heat Setpoint Limit`,
+                description: `absolute maximum level that the heating setpoint may be set to. This is[[s]]
+a limitation imposed by the manufacturer. The value is calculated as
+described in the LocalTemperature attribute`,
+                id: 0x0004,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            AbsMinCoolSetpointLimit: makeType<ZigBee.IHvac.IArgAbsMinCoolSetpointLimit, ZigBee.IHvac.IArgAbsMinCoolSetpointLimitPayload>(base.s16, ()=>({
+                name: `Abs Min Cool Setpoint Limit`,
+                description: `absolute minimum level that the cooling setpoint may be set to. This is
+a limitation imposed by the manufacturer. The value is calculated as
+described in the LocalTemperature attribute`,
+                id: 0x0005,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            AbsMinHeatSetpointLimit: makeType<ZigBee.IHvac.IArgAbsMinHeatSetpointLimit, ZigBee.IHvac.IArgAbsMinHeatSetpointLimitPayload>(base.s16, ()=>({
+                name: `Abs Min Heat Setpoint Limit`,
+                description: `absolute minimum level that the heating setpoint may be set to. This is
+a limitation imposed by the manufacturer. The value is calculated as
+described in the LocalTemperature attribute`,
+                id: 0x0003,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            AcCapacity: makeType<ZigBee.IHvac.IArgAcCapacity, ZigBee.IHvac.IArgAcCapacityPayload>(base.u16, ()=>({
+                name: `AC Capacity`,
+                description: `capacity in terms of the format defined by the ACCapacityFormat`,
+                id: 0x0041,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.BTUsPerHour,
+                
+            })),
+            AcCapacityFormat: makeType<ZigBee.IHvac.IArgAcCapacityFormat, ZigBee.IHvac.IArgAcCapacityFormatPayload>(base.enum8, ()=>({
+                name: `AC Capacity Format`,
+                description: ``,
+                id: 0x0047,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `BTUh`,  },
+                
+            })),
+            AcCoilTemperature: makeType<ZigBee.IHvac.IArgAcCoilTemperature, ZigBee.IHvac.IArgAcCoilTemperaturePayload>(base.s16, ()=>({
+                name: `AC Coil Temperature`,
+                description: ``,
+                id: 0x0046,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            AcCompressorType: makeType<ZigBee.IHvac.IArgAcCompressorType, ZigBee.IHvac.IArgAcCompressorTypePayload>(base.enum8, ()=>({
+                name: `AC Compressor Type`,
+                description: ``,
+                id: 0x0043,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Unknown`, 
+                0x01: `T1, Max working ambient 43ºC`, 
+                0x02: `T2, Max working ambient 35ºC`, 
+                0x03: `T3, Max working ambient 52ºC`,  },
+                
+            })),
+            AcErrorCode: makeType<ZigBee.IHvac.IArgAcErrorCode, ZigBee.IHvac.IArgAcErrorCodePayload>(base.bmp32, ()=>({
+                name: `AC Error Code`,
+                description: ``,
+                id: 0x0044,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                bits: { 
+                0: `Compressor failure or refrigerant leakage`, 
+                1: `Room temperature sensor failure`, 
+                2: `Outdoor temperature sensor failure`, 
+                3: `Indoor coil temperature sensor failure`, 
+                4: `Fan failure`,  },
+                
+            })),
+            AcLouverPosition: makeType<ZigBee.IHvac.IArgAcLouverPosition, ZigBee.IHvac.IArgAcLouverPositionPayload>(base.enum8, ()=>({
+                name: `AC Louver Position`,
+                description: ``,
+                id: 0x0045,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x01: `Fully closed`, 
+                0x02: `Fully open`, 
+                0x03: `Quarter open`, 
+                0x04: `Half open`, 
+                0x05: `Three quarters open`,  },
+                
+            })),
+            AcRefrigerantType: makeType<ZigBee.IHvac.IArgAcRefrigerantType, ZigBee.IHvac.IArgAcRefrigerantTypePayload>(base.enum8, ()=>({
+                name: `AC Refrigerant Type`,
+                description: `refrigerant used`,
+                id: 0x0042,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Unknown`, 
+                0x01: `R22`, 
+                0x02: `R410a`, 
+                0x03: `R407c`,  },
+                
+            })),
+            AcType: makeType<ZigBee.IHvac.IArgAcType, ZigBee.IHvac.IArgAcTypePayload>(base.enum8, ()=>({
+                name: `AC Type`,
+                description: `type of Mini Split depending on how Cooling and Heating condition is
+achieved`,
+                id: 0x0040,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Unknown`, 
+                0x01: `Cooling and fixed speed`, 
+                0x02: `Heat pump and fixed speed`, 
+                0x03: `Cooling and inverter`, 
+                0x04: `Heat pump and inverter`,  },
+                
+            })),
+            Capacity: makeType<ZigBee.IHvac.IArgCapacity, ZigBee.IHvac.IArgCapacityPayload>(base.s16, ()=>({
+                name: `Capacity`,
+                description: `actual capacity of the pump as a percentage of the effective maximum
+setpoint value. It is updated dynamically as the speed of the pump
+changes`,
+                id: 0x0013,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.Percent,
+                scale: 200,
+                
+            })),
+            ControlMode: makeType<ZigBee.IHvac.IArgControlMode, ZigBee.IHvac.IArgControlModePayload>(base.enum8, ()=>({
+                name: `Control Mode`,
+                description: `control mode of the pump`,
+                id: 0x0021,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Constant speed`, 
+                0x01: `Constant pressure`, 
+                0x02: `Proportional pressure`, 
+                0x03: `Constant flow`, 
+                0x05: `Constant temperature`, 
+                0x07: `Automatic`,  },
+                
+            })),
+            ControlSequenceOfOperation: makeType<ZigBee.IHvac.IArgControlSequenceOfOperation, ZigBee.IHvac.IArgControlSequenceOfOperationPayload>(base.enum8, ()=>({
+                name: `Control Sequence Of Operation`,
+                description: `overall operating environment of the thermostat, and thus the possible
+system modes that the thermostat can operate in`,
+                id: 0x001B,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Cooling only`, 
+                0x01: `Cooling with reheat`, 
+                0x02: `Heating only`, 
+                0x03: `Heating with reheat`, 
+                0x04: `Cooling and heating 4-pipes`, 
+                0x05: `Cooling and heating 4-pipes with reheat`,  },
+                
+            })),
+            DehumidificationCooling: makeType<ZigBee.IHvac.IArgDehumidificationCooling, ZigBee.IHvac.IArgDehumidificationCoolingPayload>(base.u8, ()=>({
+                name: `Dehumidification Cooling`,
+                description: `current dehumidification cooling output`,
+                id: 0x0001,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
+            DehumidificationHysteresis: makeType<ZigBee.IHvac.IArgDehumidificationHysteresis, ZigBee.IHvac.IArgDehumidificationHysteresisPayload>(base.u8, ()=>({
+                name: `Dehumidification Hysteresis`,
+                description: `hysteresis associated with RH`,
+                id: 0x0013,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Percent,
+                
+            })),
+            DehumidificationLockout: makeType<ZigBee.IHvac.IArgDehumidificationLockout, ZigBee.IHvac.IArgDehumidificationLockoutPayload>(base.enum8, ()=>({
+                name: `Dehumidification Lockout`,
+                description: `whether dehumidification is allowed or not`,
+                id: 0x0012,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Denied`, 
+                0x01: `Allowed`,  },
+                
+            })),
+            DehumidificationMaxCool: makeType<ZigBee.IHvac.IArgDehumidificationMaxCool, ZigBee.IHvac.IArgDehumidificationMaxCoolPayload>(base.u8, ()=>({
+                name: `Dehumidification Max Cool`,
+                description: `maximum dehumidification cooling output`,
+                id: 0x0014,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Percent,
+                
+            })),
+            EffectiveControlMode: makeType<ZigBee.IHvac.IArgEffectiveControlMode, ZigBee.IHvac.IArgEffectiveControlModePayload>(base.enum8, ()=>({
+                name: `Effective Control Mode`,
+                description: `control mode that currently applies to the pump. It will have the value
+of the ControlMode attribute, unless a remote sensor is used as the
+sensor for regulation of the pump. In this case, EffectiveControlMode
+will display Constant pressure, Constant flow or Constant temperature
+if the remote sensor is a pressure sensor, a flow sensor or a
+temperature sensor respectively, regardless of the value of the
+ControlMode attribute`,
+                id: 0x0012,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                values: { 
+                0x00: `Constant speed`, 
+                0x01: `Constant pressure`, 
+                0x02: `Proportional pressure`, 
+                0x03: `Constant flow`, 
+                0x05: `Constant temperature`, 
+                0x07: `Automatic`,  },
+                
+            })),
+            EffectiveOperationMode: makeType<ZigBee.IHvac.IArgEffectiveOperationMode, ZigBee.IHvac.IArgEffectiveOperationModePayload>(base.enum8, ()=>({
+                name: `Effective Operation Mode`,
+                description: `current effective operation mode of the pump. The value of the
+EffectiveOperationMode attribute is the same as the OperationMode
+attribute of the Pump settings attribute set, except when it is
+overridden locally`,
+                id: 0x0011,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                values: { 
+                0x00: `Normal`, 
+                0x01: `Minimum`, 
+                0x02: `Maximum`, 
+                0x03: `Local`,  },
+                
+            })),
+            EmergencyHeatDelta: makeType<ZigBee.IHvac.IArgEmergencyHeatDelta, ZigBee.IHvac.IArgEmergencyHeatDeltaPayload>(base.u8, ()=>({
+                name: `Emergency Heat Delta`,
+                description: `degrees between LocalTemperature and the OccupiedHeatingSetpoint or
+UnoccupiedHeatingSetpoint attributes at which the Thermostat server
+will operate in emergency heat mode`,
+                id: 0x003A,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            FanMode: makeType<ZigBee.IHvac.IArgFanMode, ZigBee.IHvac.IArgFanModePayload>(base.enum8, ()=>({
+                name: `Fan Mode`,
+                description: `current speed of the fan`,
+                id: 0x0000,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Off`, 
+                0x01: `Low`, 
+                0x02: `Medium`, 
+                0x03: `High`, 
+                0x04: `On`, 
+                0x05: `Auto`, 
+                0x06: `Smart (based on occupancy)`,  },
+                
+            })),
+            FanModeSequence: makeType<ZigBee.IHvac.IArgFanModeSequence, ZigBee.IHvac.IArgFanModeSequencePayload>(base.enum8, ()=>({
+                name: `Fan Mode Sequence`,
+                description: `possible fan speeds that the thermostat can set`,
+                id: 0x0001,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Low/med/high`, 
+                0x01: `Low/high`, 
+                0x02: `Low/med/high/auto`, 
+                0x03: `Low/high/auto`, 
+                0x04: `On/auto`,  },
+                
+            })),
+            GetWeeklyDaysToReturn: makeType<ZigBee.IHvac.IArgGetWeeklyDaysToReturn, ZigBee.IHvac.IArgGetWeeklyDaysToReturnPayload>(base.bmp8, ()=>({
+                name: `Get Weekly Days To Return`,
+                description: ``,
+                bits: { 
+                0: `Sunday`, 
+                1: `Monday`, 
+                2: `Tuesday`, 
+                3: `Wednesday`, 
+                4: `Thursday`, 
+                5: `Friday`, 
+                6: `Saturday`, 
+                7: `Away or vacation`,  },
+                
+            })),
+            GetWeeklyModeToReturn: makeType<ZigBee.IHvac.IArgGetWeeklyModeToReturn, ZigBee.IHvac.IArgGetWeeklyModeToReturnPayload>(base.bmp8, ()=>({
+                name: `Get Weekly Mode To Return`,
+                description: ``,
+                bits: { 
+                0: `Heat setpoint`, 
+                1: `Cool setpoint`,  },
+                
+            })),
+            HvacSystemTypeConfiguration: makeType<ZigBee.IHvac.IArgHvacSystemTypeConfiguration, ZigBee.IHvac.IArgHvacSystemTypeConfigurationPayload>(base.bmp8, ()=>({
+                name: `HVAC System Type Configuration`,
+                description: `HVAC system type controlled by the thermostat.
+Bit | Description
+0-1 | Cooling systemn stage
+    | 00 Stage 1
+    | 01 Stage 2
+    | 10 Stage 3
+2-3 | Heating system stage
+    | 00 Stage 1
+    | 01 Stage 2
+    | 10 Stage 3
+4   | Heating system type
+    | 0 Conventional
+    | 1 Heat pump
+5   | Heating fuel source
+    | 0 Electric
+    | 1 Gas`,
+                id: 0x0009,
+                report: false,
+                read: false,
+                write: false,
+                require: false,
+                bits: { 
+                1: `Cool stage 2`, 
+                2: `Cool stage 3`, 
+                3: `Heat stage 2`, 
+                4: `Heat stage 3`, 
+                5: `Heat pump`, 
+                6: `Gas fuel source`,  },
+                
+            })),
+            KeypadLockout: makeType<ZigBee.IHvac.IArgKeypadLockout, ZigBee.IHvac.IArgKeypadLockoutPayload>(base.enum8, ()=>({
+                name: `Keypad Lockout`,
+                description: `level of functionality that is available to the user via the keypad`,
+                id: 0x0001,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `No lockout`, 
+                0x01: `Level 1 lockout`, 
+                0x02: `Level 2 lockout`, 
+                0x03: `Level 3 lockout`, 
+                0x04: `Level 4 lockout`, 
+                0x05: `Level 5 lockout`,  },
+                
+            })),
+            LifetimeEnergyConsumed: makeType<ZigBee.IHvac.IArgLifetimeEnergyConsumed, ZigBee.IHvac.IArgLifetimeEnergyConsumedPayload>(base.u32, ()=>({
+                name: `Lifetime Energy Consumed`,
+                description: `accumulated energy consumption of the pump through the entire lifetime
+of the pump in kWh. The value of the LifetimeEnergyConsumed attribute
+is updated dynamically as the energy consumption of the pump increases.
+If LifetimeEnergyConsumed rises above maximum value it rolls over and
+starts at 0 (zero)`,
+                id: 0x0017,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.KilowattHours,
+                
+            })),
+            LifetimeRunningHours: makeType<ZigBee.IHvac.IArgLifetimeRunningHours, ZigBee.IHvac.IArgLifetimeRunningHoursPayload>(base.u24, ()=>({
+                name: `Lifetime Running Hours`,
+                description: `ccumulated number of hours that the pump has been powered and the motor
+has been running. It is updated dynamically as it increases. It is
+preserved over powercycles of the pump. if LifeTimeRunningHours rises
+above maximum value it <rolls over= and starts at 0 (zero)`,
+                id: 0x0015,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Hours,
+                
+            })),
+            LocalTemperature: makeType<ZigBee.IHvac.IArgLocalTemperature, ZigBee.IHvac.IArgLocalTemperaturePayload>(base.s16, ()=>({
+                name: `Local Temperature`,
+                description: `temperature in degrees Celsius, as measured locally or remotely (over
+the network), including any adjustments applied by
+LocalTemperatureCalibration attribute (if any) as follows:
+LocalTemperature = 100 x (temperature in degrees Celsius +
+LocalTemperatureCalibration)`,
+                id: 0x0000,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            LocalTemperatureCalibration: makeType<ZigBee.IHvac.IArgLocalTemperatureCalibration, ZigBee.IHvac.IArgLocalTemperatureCalibrationPayload>(base.s8, ()=>({
+                name: `Local Temperature Calibration`,
+                description: `offset the thermostat server shall make to the measured temperature
+(locally or remotely) before calculating, displaying, or communicating
+the LocalTemperature attribute`,
+                id: 0x0010,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            MaxCompPressure: makeType<ZigBee.IHvac.IArgMaxCompPressure, ZigBee.IHvac.IArgMaxCompPressurePayload>(base.s16, ()=>({
+                name: `Max Comp Pressure`,
+                description: `the maximum compensated pressure the pump can achieve when it is
+running and working in control mode Proportional pressure (ControlMode
+attribute of the Pump settings attribute set is set to Proportional
+pressure)`,
+                id: 0x0006,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.Kilopascals,
+                scale: 10,
+                
+            })),
+            MaxConstFlow: makeType<ZigBee.IHvac.IArgMaxConstFlow, ZigBee.IHvac.IArgMaxConstFlowPayload>(base.u16, ()=>({
+                name: `Max Const Flow`,
+                description: `the maximum flow the pump can achieve when it is running and working in
+control mode Constant flow (ControlMode attribute of the Pump settings
+attribute set is set to Constant flow)`,
+                id: 0x000A,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.CubicMetersPerHour,
+                scale: 10,
+                
+            })),
+            MaxConstPressure: makeType<ZigBee.IHvac.IArgMaxConstPressure, ZigBee.IHvac.IArgMaxConstPressurePayload>(base.s16, ()=>({
+                name: `Max Const Pressure`,
+                description: `the maximum pressure the pump can achieve when it is running and
+working in control mode constant pressure (ControlMode attribute of the
+Pump settings attribute set is set to Constant pressure)`,
+                id: 0x0004,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.Kilopascals,
+                scale: 10,
+                
+            })),
+            MaxConstSpeed: makeType<ZigBee.IHvac.IArgMaxConstSpeed, ZigBee.IHvac.IArgMaxConstSpeedPayload>(base.u16, ()=>({
+                name: `Max Const Speed`,
+                description: `the maximum speed the pump can achieve when it is running and working
+in control mode Constant speed (ControlMode attribute of the Pump
+settings attribute set is set to Constant speed)`,
+                id: 0x0008,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.RevolutionsPerMinute,
+                
+            })),
+            MaxConstTemp: makeType<ZigBee.IHvac.IArgMaxConstTemp, ZigBee.IHvac.IArgMaxConstTempPayload>(base.s16, ()=>({
+                name: `Max Const Temp`,
+                description: `the maximum temperature the pump can maintain in the system when it is
+running and working in control mode Constant temperature (ControlMode
+attribute of the Pump settings attribute set is set to Constant
+temperature)`,
+                id: 0x000C,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            MaxCoolSetpointLimit: makeType<ZigBee.IHvac.IArgMaxCoolSetpointLimit, ZigBee.IHvac.IArgMaxCoolSetpointLimitPayload>(base.s16, ()=>({
+                name: `Max Cool Setpoint Limit`,
+                description: `maximum level that the cooling setpoint may be set to. It must be less
+than or equal to AbsMaxCoolSetpointLimit. If this attribute is not
+present, it shall be taken as equal to AbsMaxCoolSetpointLimit`,
+                id: 0x0018,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            MaxFlow: makeType<ZigBee.IHvac.IArgMaxFlow, ZigBee.IHvac.IArgMaxFlowPayload>(base.u16, ()=>({
+                name: `Max Flow`,
+                description: `the maximum flow the pump can achieve. It is a physical limit, and does
+not apply to any specific control mode or operation mode`,
+                id: 0x0002,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.CubicMetersPerHour,
+                scale: 10,
+                
+            })),
+            MaxHeatSetpointLimit: makeType<ZigBee.IHvac.IArgMaxHeatSetpointLimit, ZigBee.IHvac.IArgMaxHeatSetpointLimitPayload>(base.s16, ()=>({
+                name: `Max Heat Setpoint Limit`,
+                description: `maximum level that the heating setpoint MAY be set to. It must be less
+than or equal to AbsMaxHeatSetpointLimit. If this attribute is not
+present, it shall be taken as equal to AbsMaxHeatSetpointLimit`,
+                id: 0x0016,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            MaxPressure: makeType<ZigBee.IHvac.IArgMaxPressure, ZigBee.IHvac.IArgMaxPressurePayload>(base.s16, ()=>({
+                name: `Max Pressure`,
+                description: `the maximum pressure the pump can achieve. It is a physical limit,
+and does not apply to any specific control mode or operation mode`,
+                id: 0x0000,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.Kilopascals,
+                scale: 10,
+                
+            })),
+            MaxSpeed: makeType<ZigBee.IHvac.IArgMaxSpeed, ZigBee.IHvac.IArgMaxSpeedPayload>(base.u16, ()=>({
+                name: `Max Speed`,
+                description: `the maximum speed the pump can achieve. It is a physical limit, and
+does not apply to any specific control mode or operation mode`,
+                id: 0x0001,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.RevolutionsPerMinute,
+                
+            })),
+            MinCompPressure: makeType<ZigBee.IHvac.IArgMinCompPressure, ZigBee.IHvac.IArgMinCompPressurePayload>(base.s16, ()=>({
+                name: `Min Comp Pressure`,
+                description: `the minimum compensated pressure the pump can achieve when it is
+running and working in control mode Proportional pressure (ControlMode
+attribute of the Pump settings attribute set is set to Proportional
+pressure)`,
+                id: 0x0005,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.Kilopascals,
+                scale: 10,
+                
+            })),
+            MinConstFlow: makeType<ZigBee.IHvac.IArgMinConstFlow, ZigBee.IHvac.IArgMinConstFlowPayload>(base.u16, ()=>({
+                name: `Min Const Flow`,
+                description: `the minimum flow the pump can achieve when it is running and working in
+control mode Constant flow (ControlMode attribute of the Pump settings
+attribute set is set to Constant flow)`,
+                id: 0x0009,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.CubicMetersPerHour,
+                scale: 10,
+                
+            })),
+            MinConstPressure: makeType<ZigBee.IHvac.IArgMinConstPressure, ZigBee.IHvac.IArgMinConstPressurePayload>(base.s16, ()=>({
+                name: `Min Const Pressure`,
+                description: `the minimum pressure the pump can achieve when it is running and
+working in control mode constant pressure (ControlMode attribute of the
+Pump settings attribute set is set to Constant pressure)`,
+                id: 0x0003,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.Kilopascals,
+                scale: 10,
+                
+            })),
+            MinConstSpeed: makeType<ZigBee.IHvac.IArgMinConstSpeed, ZigBee.IHvac.IArgMinConstSpeedPayload>(base.u16, ()=>({
+                name: `Min Const Speed`,
+                description: `the minimum speed the pump can achieve when it is running and working
+in control mode Constant speed (ControlMode attribute of the Pump
+settings attribute set is set to Constant speed)`,
+                id: 0x0007,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.RevolutionsPerMinute,
+                
+            })),
+            MinConstTemp: makeType<ZigBee.IHvac.IArgMinConstTemp, ZigBee.IHvac.IArgMinConstTempPayload>(base.s16, ()=>({
+                name: `Min Const Temp`,
+                description: `the minimum temperature the pump can maintain in the system when it is
+running and working in control mode Constant temperature (ControlMode
+attribute of the Pump settings attribute set is set to Constant
+temperature)`,
+                id: 0x000B,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            MinCoolSetpointLimit: makeType<ZigBee.IHvac.IArgMinCoolSetpointLimit, ZigBee.IHvac.IArgMinCoolSetpointLimitPayload>(base.s16, ()=>({
+                name: `Min Cool Setpoint Limit`,
+                description: `minimum level that the cooling setpoint may be set to. It must be
+greater than or equal to AbsMinCoolSetpointLimit. If this attribute is
+not present, it shall be taken as equal to AbsMinCoolSetpointLimit`,
+                id: 0x0017,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            MinHeatSetpointLimit: makeType<ZigBee.IHvac.IArgMinHeatSetpointLimit, ZigBee.IHvac.IArgMinHeatSetpointLimitPayload>(base.s16, ()=>({
+                name: `Min Heat Setpoint Limit`,
+                description: `minimum level that the heating setpoint may be set to. If this
+attribute is not present, it shall be taken as equal to
+AbsMinHeatSetpointLimit`,
+                id: 0x0015,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            MinSetpointDeadBand: makeType<ZigBee.IHvac.IArgMinSetpointDeadBand, ZigBee.IHvac.IArgMinSetpointDeadBandPayload>(base.s8, ()=>({
+                name: `Min Setpoint Dead Band`,
+                description: `minimum difference between the Heat Setpoint and the Cool SetPoint`,
+                id: 0x0019,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                
+            })),
+            NumberOfDailyTransitions: makeType<ZigBee.IHvac.IArgNumberOfDailyTransitions, ZigBee.IHvac.IArgNumberOfDailyTransitionsPayload>(base.u8, ()=>({
+                name: `Number Of Daily Transitions`,
+                description: `how many daily schedule transitions the thermostat is capable of
+handling`,
+                id: 0x0022,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
+            NumberOfWeeklyTransitions: makeType<ZigBee.IHvac.IArgNumberOfWeeklyTransitions, ZigBee.IHvac.IArgNumberOfWeeklyTransitionsPayload>(base.u8, ()=>({
+                name: `Number Of Weekly Transitions`,
+                description: `how many weekly schedule transitions the thermostat is capable of
+handling`,
+                id: 0x0021,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
+            Occupancy: makeType<ZigBee.IHvac.IArgOccupancy, ZigBee.IHvac.IArgOccupancyPayload>(base.bmp8, ()=>({
+                name: `Occupancy`,
+                description: `whether the heated/cooled space is occupied or not, as measured locally
+or remotely (over the network)`,
+                id: 0x0002,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                bits: { 
+                1: `Occupied`,  },
+                
+            })),
+            OccupiedCoolingSetpoint: makeType<ZigBee.IHvac.IArgOccupiedCoolingSetpoint, ZigBee.IHvac.IArgOccupiedCoolingSetpointPayload>(base.s16, ()=>({
+                name: `Occupied Cooling Setpoint`,
+                description: `cooling mode setpoint when the room is occupied. The
+OccupiedHeatingSetpoint attribute shall always be below the value
+specified by at least MinSetpointDeadband`,
+                id: 0x0011,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            OccupiedHeatingSetpoint: makeType<ZigBee.IHvac.IArgOccupiedHeatingSetpoint, ZigBee.IHvac.IArgOccupiedHeatingSetpointPayload>(base.s16, ()=>({
+                name: `Occupied Heating Setpoint`,
+                description: `heating mode setpoint when the room is occupied. The
+OccupiedCoolingSetpoint attribute shall always be above the value
+specified by at least MinSetpointDeadband`,
+                id: 0x0012,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            OccupiedSetback: makeType<ZigBee.IHvac.IArgOccupiedSetback, ZigBee.IHvac.IArgOccupiedSetbackPayload>(base.u8, ()=>({
+                name: `Occupied Setback`,
+                description: `degrees the thermostat will allow the LocalTemperature attribute to
+float above the OccupiedCooling setpoint (i.e., OccupiedCooling +
+OccupiedSetback) or below the OccupiedHeating setpoint (i.e.,
+OccupiedHeating - OccupiedSetback) before initiating a state change to
+bring the temperature back to the user's desired setpoint`,
+                id: 0x0034,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            OccupiedSetbackMax: makeType<ZigBee.IHvac.IArgOccupiedSetbackMax, ZigBee.IHvac.IArgOccupiedSetbackMaxPayload>(base.u8, ()=>({
+                name: `Occupied Setback Max`,
+                description: `degrees the thermostat will allow the OccupiedSetback attribute to be
+configured by a user`,
+                id: 0x0036,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            OccupiedSetbackMin: makeType<ZigBee.IHvac.IArgOccupiedSetbackMin, ZigBee.IHvac.IArgOccupiedSetbackMinPayload>(base.u8, ()=>({
+                name: `Occupied Setback Min`,
+                description: `degrees the thermostat will allow the OccupiedSetback attribute to be
+configured by a user`,
+                id: 0x0035,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            OperationMode: makeType<ZigBee.IHvac.IArgOperationMode, ZigBee.IHvac.IArgOperationModePayload>(base.enum8, ()=>({
+                name: `Operation Mode`,
+                description: `specifies the operation mode of the pump`,
+                id: 0x0020,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Normal`, 
+                0x01: `Minimum`, 
+                0x02: `Maximum`, 
+                0x03: `Local`,  },
+                
+            })),
+            OutdoorTemperature: makeType<ZigBee.IHvac.IArgOutdoorTemperature, ZigBee.IHvac.IArgOutdoorTemperaturePayload>(base.s16, ()=>({
+                name: `Outdoor Temperature`,
+                description: `outdoor temperature in degrees Celsius, as measured locally or remotely
+(over the network). It is measured as described for LocalTemperature`,
+                id: 0x0001,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            PiCoolingDemand: makeType<ZigBee.IHvac.IArgPiCoolingDemand, ZigBee.IHvac.IArgPiCoolingDemandPayload>(base.u8, ()=>({
+                name: `PI Cooling Demand`,
+                description: `specifies the level of cooling demanded by the PI (proportional
+integral) control loop in use by the thermostat (if any), in
+percent. This value is 0 when the thermostat is in off or heating mode`,
+                id: 0x0007,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
+            PiHeatingDemand: makeType<ZigBee.IHvac.IArgPiHeatingDemand, ZigBee.IHvac.IArgPiHeatingDemandPayload>(base.u8, ()=>({
+                name: `PI Heating Demand`,
+                description: `specifies the level of heating demanded by the PI (proportional
+integral) control loop in use by the thermostat (if any), in
+percent. This value is 0 when the thermostat is in off or cooling mode`,
+                id: 0x0008,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
+            Power: makeType<ZigBee.IHvac.IArgPower, ZigBee.IHvac.IArgPowerPayload>(base.u24, ()=>({
+                name: `Power`,
+                description: `power consumption of the pump in Watts`,
+                id: 0x0016,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Watts,
+                
+            })),
+            PumpAlarmMask: makeType<ZigBee.IHvac.IArgPumpAlarmMask, ZigBee.IHvac.IArgPumpAlarmMaskPayload>(base.bmp16, ()=>({
+                name: `Pump Alarm Mask`,
+                description: `whether each of the alarms listed is enabled. When the bit number
+corresponding to the alarm code is set to 1, the alarm is enabled, else
+it is disabled`,
+                id: 0x0022,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                bits: { 
+                0: `Supply voltage too low`, 
+                1: `Supply voltage too high`, 
+                10: `Sensor failure`, 
+                11: `Electronic non-fatal failure`, 
+                12: `Electronic fatal failure`, 
+                13: `General fault`, 
+                2: `Power missing phase`, 
+                3: `System pressure too low`, 
+                4: `System pressure too high`, 
+                5: `Dry running`, 
+                6: `Motor temperature too high`, 
+                7: `Pump motor has fatal failure`, 
+                8: `Electronic temperature too high`, 
+                9: `Pump blocked`,  },
+                
+            })),
+            PumpStatus: makeType<ZigBee.IHvac.IArgPumpStatus, ZigBee.IHvac.IArgPumpStatusPayload>(base.bmp16, ()=>({
+                name: `Pump Status`,
+                description: ``,
+                id: 0x0010,
+                report: true,
+                read: true,
+                write: false,
+                require: false,
+                bits: { 
+                0: `Device fault`, 
+                1: `Supply fault`, 
+                2: `Speed low`, 
+                3: `Speed high`, 
+                4: `Local override`, 
+                5: `Running`, 
+                6: `Remote pressure`, 
+                7: `Remote flow`, 
+                8: `Remote temperature`,  },
+                
+            })),
+            RelativeHumidity: makeType<ZigBee.IHvac.IArgRelativeHumidity, ZigBee.IHvac.IArgRelativeHumidityPayload>(base.u8, ()=>({
+                name: `Relative Humidity`,
+                description: `current relative humidity measured by a local or remote sensor`,
+                id: 0x0000,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.Percent,
+                
+            })),
+            RelativeHumidityDisplay: makeType<ZigBee.IHvac.IArgRelativeHumidityDisplay, ZigBee.IHvac.IArgRelativeHumidityDisplayPayload>(base.enum8, ()=>({
+                name: `Relative Humidity Display`,
+                description: `whether the RH value is displayed to the user or not`,
+                id: 0x0015,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Not displayed`, 
+                0x01: `Displayed`,  },
+                
+            })),
+            RelativeHumidityMode: makeType<ZigBee.IHvac.IArgRelativeHumidityMode, ZigBee.IHvac.IArgRelativeHumidityModePayload>(base.enum8, ()=>({
+                name: `Relative Humidity Mode`,
+                description: `how the RelativeHumidity value is being updated`,
+                id: 0x0011,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Locally`, 
+                0x01: `Remotely`,  },
+                
+            })),
+            RelayStatus: makeType<ZigBee.IHvac.IArgRelayStatus, ZigBee.IHvac.IArgRelayStatusPayload>(base.bmp8, ()=>({
+                name: `Relay Status`,
+                description: `status for thermostat when the log is captured. Each bit represents one
+relay used by the thermostat. If the bit is on, the associated relay is
+on and active. Each thermostat manufacturer can create its own mapping
+between the bitmask and the associated relay`,
+                
+            })),
+            RelayStatusHumidity: makeType<ZigBee.IHvac.IArgRelayStatusHumidity, ZigBee.IHvac.IArgRelayStatusHumidityPayload>(base.u8, ()=>({
+                name: `Relay Status Humidity`,
+                description: `humidity when the log was captured`,
+                unit: units.Percent,
+                
+            })),
+            RelayStatusLocalTemperature: makeType<ZigBee.IHvac.IArgRelayStatusLocalTemperature, ZigBee.IHvac.IArgRelayStatusLocalTemperaturePayload>(base.s16, ()=>({
+                name: `Relay Status Local Temperature`,
+                description: `temperature when the log is captured`,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            RelayStatusLogTimeOfDay: makeType<ZigBee.IHvac.IArgRelayStatusLogTimeOfDay, ZigBee.IHvac.IArgRelayStatusLogTimeOfDayPayload>(base.u16, ()=>({
+                name: `Relay Status Log Time of Day`,
+                description: `minutes since midnight when the relay status was captured for this
+associated log entry`,
+                unit: units.Minutes,
+                
+            })),
+            RelayStatusSetpoint: makeType<ZigBee.IHvac.IArgRelayStatusSetpoint, ZigBee.IHvac.IArgRelayStatusSetpointPayload>(base.s16, ()=>({
+                name: `Relay Status Setpoint`,
+                description: `target setpoint temperature when the log is captured`,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            RelayStatusUnreadEntries: makeType<ZigBee.IHvac.IArgRelayStatusUnreadEntries, ZigBee.IHvac.IArgRelayStatusUnreadEntriesPayload>(base.u16, ()=>({
+                name: `Relay status Unread Entries`,
+                description: `umber of unread entries within the thermostat log system`,
+                
+            })),
+            RemoteSensing: makeType<ZigBee.IHvac.IArgRemoteSensing, ZigBee.IHvac.IArgRemoteSensingPayload>(base.bmp8, ()=>({
+                name: `Remote Sensing`,
+                description: `specifies whether the local temperature, outdoor temperature and
+occupancy are being sensed by internal sensors or remote networked
+sensors. When the bit is 0 it means internal, 1 means remote`,
+                id: 0x001A,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                bits: { 
+                0: `Local temperature`, 
+                1: `Outdoor temperature`, 
+                2: `Occupancy`,  },
+                
+            })),
+            RhDehumidificationSetpoint: makeType<ZigBee.IHvac.IArgRhDehumidificationSetpoint, ZigBee.IHvac.IArgRhDehumidificationSetpointPayload>(base.u8, ()=>({
+                name: `RH Dehumidification Setpoint`,
+                description: `relative humidity at which dehumidification occurs`,
+                id: 0x0010,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Percent,
+                
+            })),
+            ScheduleProgrammingVisibility: makeType<ZigBee.IHvac.IArgScheduleProgrammingVisibility, ZigBee.IHvac.IArgScheduleProgrammingVisibilityPayload>(base.enum8, ()=>({
+                name: `Schedule Programming Visibility`,
+                description: `hide the weekly schedule programming functionality or menu on a
+thermostat from a user to prevent local user programming of the weekly
+schedule`,
+                id: 0x0002,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Not hidden`, 
+                0x01: `Hidden`,  },
+                
+            })),
+            SetWeeklyCoolSetpoint1: makeType<ZigBee.IHvac.IArgSetWeeklyCoolSetpoint1, ZigBee.IHvac.IArgSetWeeklyCoolSetpoint1Payload>(base.s16, ()=>({
+                name: `Set Weekly Cool Setpoint 1`,
+                description: ``,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            SetWeeklyCoolSetpoint10: makeType<ZigBee.IHvac.IArgSetWeeklyCoolSetpoint10, ZigBee.IHvac.IArgSetWeeklyCoolSetpoint10Payload>(base.s16, ()=>({
+                name: `Set Weekly Cool Setpoint 10`,
+                description: ``,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            SetWeeklyDayOfWeek: makeType<ZigBee.IHvac.IArgSetWeeklyDayOfWeek, ZigBee.IHvac.IArgSetWeeklyDayOfWeekPayload>(base.bmp8, ()=>({
+                name: `Set Weekly Day Of Week`,
+                description: `day of the week at which all the transitions within the payload of the
+command should be associated to`,
+                bits: { 
+                0: `Sunday`, 
+                1: `Monday`, 
+                2: `Tuesday`, 
+                3: `Wednesday`, 
+                4: `Thursday`, 
+                5: `Friday`, 
+                6: `Saturday`, 
+                7: `Away or vacation`,  },
+                
+            })),
+            SetWeeklyHeatSetpoint1: makeType<ZigBee.IHvac.IArgSetWeeklyHeatSetpoint1, ZigBee.IHvac.IArgSetWeeklyHeatSetpoint1Payload>(base.s16, ()=>({
+                name: `Set Weekly Heat Setpoint 1`,
+                description: ``,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            SetWeeklyHeatSetpoint10: makeType<ZigBee.IHvac.IArgSetWeeklyHeatSetpoint10, ZigBee.IHvac.IArgSetWeeklyHeatSetpoint10Payload>(base.s16, ()=>({
+                name: `Set Weekly Heat Setpoint 10`,
+                description: ``,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            SetWeeklyMode: makeType<ZigBee.IHvac.IArgSetWeeklyMode, ZigBee.IHvac.IArgSetWeeklyModePayload>(base.bmp8, ()=>({
+                name: `Set Weekly Mode`,
+                description: `which type of setpoint transition is present in the rest of the
+command`,
+                bits: { 
+                0: `Heat setpoint`, 
+                1: `Cool setpoint`,  },
+                
+            })),
+            SetWeeklyNumberOfTransitions: makeType<ZigBee.IHvac.IArgSetWeeklyNumberOfTransitions, ZigBee.IHvac.IArgSetWeeklyNumberOfTransitionsPayload>(base.u8, ()=>({
+                name: `Set Weekly Number Of Transitions`,
+                description: `how many individual transitions to expect for this sequence of
+commands. If a device supports more than 10 transitions in its
+schedule they can send this by sending more than 1 Set Weekly Schedule
+command, each containing the separate information that the device
+needs to set`,
+                
+            })),
+            SetWeeklyTransitionTime1: makeType<ZigBee.IHvac.IArgSetWeeklyTransitionTime1, ZigBee.IHvac.IArgSetWeeklyTransitionTime1Payload>(base.u16, ()=>({
+                name: `Set Weekly Transition Time 1`,
+                description: ``,
+                unit: units.Minutes,
+                
+            })),
+            SetWeeklyTransitionTime10: makeType<ZigBee.IHvac.IArgSetWeeklyTransitionTime10, ZigBee.IHvac.IArgSetWeeklyTransitionTime10Payload>(base.u16, ()=>({
+                name: `Set Weekly Transition Time 10`,
+                description: ``,
+                unit: units.Minutes,
+                
+            })),
+            SetpointAmount: makeType<ZigBee.IHvac.IArgSetpointAmount, ZigBee.IHvac.IArgSetpointAmountPayload>(base.s8, ()=>({
+                name: `Setpoint Amount`,
+                description: ``,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            SetpointChangeAmount: makeType<ZigBee.IHvac.IArgSetpointChangeAmount, ZigBee.IHvac.IArgSetpointChangeAmountPayload>(base.s16, ()=>({
+                name: `Setpoint Change Amount`,
+                description: `delta between the current active OccupiedCoolingSetpoint or
+OccupiedHeatingSetpoint and the previous active setpoint`,
+                id: 0x0031,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 100,
+                
+            })),
+            SetpointChangeSource: makeType<ZigBee.IHvac.IArgSetpointChangeSource, ZigBee.IHvac.IArgSetpointChangeSourcePayload>(base.enum8, ()=>({
+                name: `Setpoint Change Source`,
+                description: `source of the current active OccupiedCoolingSetpoint or
+OccupiedHeatingSetpoint (i.e., who or what determined the current
+setpoint)`,
+                id: 0x0030,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                values: { 
+                0x00: `Manual/user initiated`, 
+                0x01: `Scheduling/programming initiated`, 
+                0x02: `Externally initiated by cluster command or attribute write`,  },
+                
+            })),
+            SetpointChangeSourceTimestamp: makeType<ZigBee.IHvac.IArgSetpointChangeSourceTimestamp, ZigBee.IHvac.IArgSetpointChangeSourceTimestampPayload>(base.utc, ()=>({
+                name: `Setpoint Change Source Timestamp`,
+                description: `time in UTC at which the SetpointChangeSourceAmount attribute change
+was recorded`,
+                id: 0x0032,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                
+            })),
+            SetpointMode: makeType<ZigBee.IHvac.IArgSetpointMode, ZigBee.IHvac.IArgSetpointModePayload>(base.enum8, ()=>({
+                name: `Setpoint Mode`,
+                description: ``,
+                values: { 
+                0x00: `Adjust heat setpoint`, 
+                0x01: `Adjust cool setpoint`, 
+                0x02: `Adjust heat and cool setpoint`,  },
+                
+            })),
+            Speed: makeType<ZigBee.IHvac.IArgSpeed, ZigBee.IHvac.IArgSpeedPayload>(base.u16, ()=>({
+                name: `Speed`,
+                description: `actual speed of the pump measured in RPM. It is updated dynamically as
+the speed of the pump changes`,
+                id: 0x0014,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.RevolutionsPerMinute,
+                
+            })),
+            StartOfWeek: makeType<ZigBee.IHvac.IArgStartOfWeek, ZigBee.IHvac.IArgStartOfWeekPayload>(base.enum8, ()=>({
+                name: `Start Of Week`,
+                description: `day of the week that this thermostat considers to be the start of week
+for weekly set point scheduling. This attribute may be able to be used
+as the base to determine if the device supports weekly scheduling by
+reading the attribute. Successful response means that the weekly
+scheduling is supported`,
+                id: 0x0020,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                values: { 
+                0x00: `Sunday`, 
+                0x01: `Monday`, 
+                0x02: `Tuesday`, 
+                0x03: `Wednesday`, 
+                0x04: `Thursday`, 
+                0x05: `Friday`, 
+                0x06: `Saturday`,  },
+                
+            })),
+            SystemMode: makeType<ZigBee.IHvac.IArgSystemMode, ZigBee.IHvac.IArgSystemModePayload>(base.enum8, ()=>({
+                name: `System Mode`,
+                description: `specifies the current operating mode of the thermostat`,
+                id: 0x001C,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Off`, 
+                0x01: `Auto`, 
+                0x03: `Cool`, 
+                0x04: `Heat`, 
+                0x05: `Emergency heating`, 
+                0x06: `Precooling`, 
+                0x07: `Fan only`, 
+                0x08: `Dry`, 
+                0x09: `Sleep`,  },
+                
+            })),
+            TemperatureDisplayMode: makeType<ZigBee.IHvac.IArgTemperatureDisplayMode, ZigBee.IHvac.IArgTemperatureDisplayModePayload>(base.enum8, ()=>({
+                name: `Temperature Display Mode`,
+                description: `units of the temperature displayed on the thermostat screen`,
+                id: 0x0000,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Temperature in Celsius`, 
+                0x01: `Temperature in Fahrenheit`,  },
+                
+            })),
+            TemperatureSetpointHold: makeType<ZigBee.IHvac.IArgTemperatureSetpointHold, ZigBee.IHvac.IArgTemperatureSetpointHoldPayload>(base.enum8, ()=>({
+                name: `Temperature Setpoint Hold`,
+                description: `temperature hold status on the thermostat. If hold status is on, the
+thermostat should maintain the temperature set point for the current
+mode until a system mode change. If hold status is off, the thermostat
+should follow the setpoint transitions specified by its internal
+scheduling program. If the thermostat supports setpoint hold for a
+specific duration, it should also implement the
+TemperatureSetpointHoldDuration attribute`,
+                id: 0x0023,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                values: { 
+                0x00: `Off`, 
+                0x01: `On`,  },
+                
+            })),
+            TemperatureSetpointHoldDuration: makeType<ZigBee.IHvac.IArgTemperatureSetpointHoldDuration, ZigBee.IHvac.IArgTemperatureSetpointHoldDurationPayload>(base.u16, ()=>({
+                name: `Temperature Setpoint Hold Duration`,
+                description: `period in minutes for which a setpoint hold is active`,
+                id: 0x0024,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.Minutes,
+                
+            })),
+            ThermostatAlarmMask: makeType<ZigBee.IHvac.IArgThermostatAlarmMask, ZigBee.IHvac.IArgThermostatAlarmMaskPayload>(base.bmp8, ()=>({
+                name: `Thermostat Alarm Mask`,
+                description: `specifies whether each of the alarms listed is enabled. When the bit
+number corresponding to the alarm code is set to 1, the alarm is
+enabled, else it is disabled`,
+                id: 0x001D,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                bits: { 
+                0: `Initialisation failure`, 
+                1: `Hardware failure`, 
+                2: `Self-calibration failure`,  },
+                
+            })),
+            ThermostatProgrammingOperationMode: makeType<ZigBee.IHvac.IArgThermostatProgrammingOperationMode, ZigBee.IHvac.IArgThermostatProgrammingOperationModePayload>(base.bmp8, ()=>({
+                name: `Thermostat Programming Operation Mode`,
+                description: `operational state of the thermostat's programming. The thermostat shall
+modify its programming operation when this attribute is modified by a
+client and update this attribute when its programming operation is
+modified locally by a user. When a bit is 0 it means off, 1 means on.
+For the scheduling mode bit, 0 means the thermostate is manually
+controlled, whereas 1 means it is following a programmed weekly
+schedule`,
+                id: 0x0025,
+                report: true,
+                read: true,
+                write: true,
+                require: false,
+                bits: { 
+                0: `Scheduling mode`, 
+                1: `Auto/recovery mode`, 
+                2: `Economy mode`,  },
+                
+            })),
+            ThermostatRunningMode: makeType<ZigBee.IHvac.IArgThermostatRunningMode, ZigBee.IHvac.IArgThermostatRunningModePayload>(base.enum8, ()=>({
+                name: `Thermostat Running Mode`,
+                description: `represents the running mode of the thermostat`,
+                id: 0x001E,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                values: { 
+                0x00: `Off`, 
+                0x03: `Cool`, 
+                0x04: `Heat`,  },
+                
+            })),
+            ThermostatRunningState: makeType<ZigBee.IHvac.IArgThermostatRunningState, ZigBee.IHvac.IArgThermostatRunningStatePayload>(base.bmp16, ()=>({
+                name: `Thermostat Running State`,
+                description: ``,
+                id: 0x0029,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                bits: { 
+                0: `Heat stage on`, 
+                1: `Cool stage on`, 
+                2: `Fan stage on`, 
+                3: `Heat second stage on`, 
+                4: `Cool second stage on`, 
+                5: `Fan second stage on`, 
+                6: `Fan third stage on`,  },
+                
+            })),
+            UnoccupiedCoolingSetpoint: makeType<ZigBee.IHvac.IArgUnoccupiedCoolingSetpoint, ZigBee.IHvac.IArgUnoccupiedCoolingSetpointPayload>(base.s16, ()=>({
+                name: `Unoccupied Cooling Setpoint`,
+                description: `cooling mode setpoint when the room is unoccupied. The
+UnoccupiedHeatingSetpoint attribute shall always be below the value
+specified by at least MinSetpointDeadband`,
+                id: 0x0013,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            UnoccupiedHeatingSetpoint: makeType<ZigBee.IHvac.IArgUnoccupiedHeatingSetpoint, ZigBee.IHvac.IArgUnoccupiedHeatingSetpointPayload>(base.s16, ()=>({
+                name: `Unoccupied Heating Setpoint`,
+                description: `heating mode setpoint when the room is unoccupied. The
+UnoccupiedCoolingSetpoint attribute shall always be above the value
+specified by at least MinSetpointDeadband`,
+                id: 0x0014,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            UnoccupiedSetback: makeType<ZigBee.IHvac.IArgUnoccupiedSetback, ZigBee.IHvac.IArgUnoccupiedSetbackPayload>(base.u8, ()=>({
+                name: `Unoccupied Setback`,
+                description: `degrees the thermostat will allow the LocalTemperature attribute to
+float above the UnoccupiedCooling setpoint (i.e., UnoccupiedCooling +
+UnoccupiedSetback) or below the UnoccupiedHeating setpoint (i.e.,
+UnoccupiedHeating - UnoccupiedSetback) before initiating a state change
+to bring the temperature back to the user's desired setpoint`,
+                id: 0x0037,
+                report: false,
+                read: true,
+                write: true,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            UnoccupiedSetbackMax: makeType<ZigBee.IHvac.IArgUnoccupiedSetbackMax, ZigBee.IHvac.IArgUnoccupiedSetbackMaxPayload>(base.u8, ()=>({
+                name: `Unoccupied Setback Max`,
+                description: `degrees the thermostat will allow the UnoccupiedSetback attribute to be
+configured by a user`,
+                id: 0x0039,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })),
+            UnoccupiedSetbackMin: makeType<ZigBee.IHvac.IArgUnoccupiedSetbackMin, ZigBee.IHvac.IArgUnoccupiedSetbackMinPayload>(base.u8, ()=>({
+                name: `Unoccupied Setback Min`,
+                description: `degrees the thermostat will allow the UnoccupiedSetback attribute to be
+configured by a user`,
+                id: 0x0038,
+                report: false,
+                read: true,
+                write: false,
+                require: false,
+                unit: units.DegreesCelsius,
+                scale: 10,
+                
+            })), },
+        PumpConfigurationAndControl: {
+            ID: 0x0200,
+            Name: `Pump Configuration and Control`,
+            Desc: `provides attributes and commands for configuring and
+controlling pumps`,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        Thermostat: {
+            ID: 0x0201,
+            Name: `Thermostat`,
+            Desc: `provides attributes and commands for configuring and
+controlling thermostats`,
+            
+            SetpointRaiseLower: makeType<ZigBee.IHvac.Thermostat.ICmdSetpointRaiseLower, ZigBee.IHvac.Thermostat.ICmdSetpointRaiseLowerPayload>(command, () => ({
+                name: `Setpoint raise/lower`,
+                description: ``,
+                id: 0x0000,
+                payload: { 
+                    SetpointMode: ZigBee.Hvac.Types.SetpointMode,
+                    SetpointAmount: ZigBee.Hvac.Types.SetpointAmount,
+                }
+            })),
+
+            SetWeeklySchedule: makeType<ZigBee.IHvac.Thermostat.ICmdSetWeeklySchedule, ZigBee.IHvac.Thermostat.ICmdSetWeeklySchedulePayload>(command, () => ({
+                name: `Set weekly schedule`,
+                description: ``,
+                id: 0x0001,
+                payload: { 
+                    SetWeeklyNumberOfTransitions: ZigBee.Hvac.Types.SetWeeklyNumberOfTransitions,
+                    SetWeeklyDayOfWeek: ZigBee.Hvac.Types.SetWeeklyDayOfWeek,
+                    SetWeeklyMode: ZigBee.Hvac.Types.SetWeeklyMode,
+                    SetWeeklyTransitionTime1: ZigBee.Hvac.Types.SetWeeklyTransitionTime1,
+                    SetWeeklyHeatSetpoint1: ZigBee.Hvac.Types.SetWeeklyHeatSetpoint1,
+                    SetWeeklyCoolSetpoint1: ZigBee.Hvac.Types.SetWeeklyCoolSetpoint1,
+                    SetWeeklyTransitionTime10: ZigBee.Hvac.Types.SetWeeklyTransitionTime10,
+                    SetWeeklyHeatSetpoint10: ZigBee.Hvac.Types.SetWeeklyHeatSetpoint10,
+                    SetWeeklyCoolSetpoint10: ZigBee.Hvac.Types.SetWeeklyCoolSetpoint10,
+                }
+            })),
+
+            GetWeeklySchedule: makeType<ZigBee.IHvac.Thermostat.ICmdGetWeeklySchedule, ZigBee.IHvac.Thermostat.ICmdGetWeeklySchedulePayload>(command, () => ({
+                name: `Get weekly schedule`,
+                description: ``,
+                id: 0x0002,
+                payload: { 
+                    GetWeeklyDaysToReturn: ZigBee.Hvac.Types.GetWeeklyDaysToReturn,
+                    GetWeeklyModeToReturn: ZigBee.Hvac.Types.GetWeeklyModeToReturn,
+                }
+            })),
+
+            ClearWeeklySchedule: makeType<ZigBee.IHvac.Thermostat.ICmdClearWeeklySchedule, ZigBee.IHvac.Thermostat.ICmdClearWeeklySchedulePayload>(command, () => ({
+                name: `Clear weekly schedule`,
+                description: ``,
+                id: 0x0003,
+                payload: {}
+            })),
+
+            GetRelayStatusLog: makeType<ZigBee.IHvac.Thermostat.ICmdGetRelayStatusLog, ZigBee.IHvac.Thermostat.ICmdGetRelayStatusLogPayload>(command, () => ({
+                name: `Get relay status log`,
+                description: ``,
+                id: 0x0004,
+                payload: {}
+            })),
+
+            
+            GetWeeklyScheduleResponse: makeType<ZigBee.IHvac.Thermostat.ICmdGetWeeklyScheduleResponse, ZigBee.IHvac.Thermostat.ICmdGetWeeklyScheduleResponsePayload>(command, () => ({
+                name: `Get weekly schedule response`,
+                description: ``,
+                id: 0x0000,
+                payload: { 
+                    SetWeeklyNumberOfTransitions: ZigBee.Hvac.Types.SetWeeklyNumberOfTransitions,
+                    SetWeeklyDayOfWeek: ZigBee.Hvac.Types.SetWeeklyDayOfWeek,
+                    SetWeeklyMode: ZigBee.Hvac.Types.SetWeeklyMode,
+                    SetWeeklyTransitionTime1: ZigBee.Hvac.Types.SetWeeklyTransitionTime1,
+                    SetWeeklyHeatSetpoint1: ZigBee.Hvac.Types.SetWeeklyHeatSetpoint1,
+                    SetWeeklyCoolSetpoint1: ZigBee.Hvac.Types.SetWeeklyCoolSetpoint1,
+                    SetWeeklyTransitionTime10: ZigBee.Hvac.Types.SetWeeklyTransitionTime10,
+                    SetWeeklyHeatSetpoint10: ZigBee.Hvac.Types.SetWeeklyHeatSetpoint10,
+                    SetWeeklyCoolSetpoint10: ZigBee.Hvac.Types.SetWeeklyCoolSetpoint10,
+                }
+            })),
+
+            GetRelayStatusLogResponse: makeType<ZigBee.IHvac.Thermostat.ICmdGetRelayStatusLogResponse, ZigBee.IHvac.Thermostat.ICmdGetRelayStatusLogResponsePayload>(command, () => ({
+                name: `Get relay status log response`,
+                description: ``,
+                id: 0x0001,
+                payload: { 
+                    RelayStatusLogTimeOfDay: ZigBee.Hvac.Types.RelayStatusLogTimeOfDay,
+                    RelayStatus: ZigBee.Hvac.Types.RelayStatus,
+                    RelayStatusLocalTemperature: ZigBee.Hvac.Types.RelayStatusLocalTemperature,
+                    RelayStatusHumidity: ZigBee.Hvac.Types.RelayStatusHumidity,
+                    RelayStatusSetpoint: ZigBee.Hvac.Types.RelayStatusSetpoint,
+                    RelayStatusUnreadEntries: ZigBee.Hvac.Types.RelayStatusUnreadEntries,
+                }
+            })),
+
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        FanControl: {
+            ID: 0x0202,
+            Name: `Fan Control`,
+            Desc: `provides attributes and commands for configuring fans
+in heating/cooling systems`,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        DehumidificationControl: {
+            ID: 0x0203,
+            Name: `Dehumidification Control`,
+            Desc: `provides attributes and commands for configuring
+dehumidification appliances`,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        },
+        ThermostatUiConfiguration: {
+            ID: 0x0204,
+            Name: `Thermostat UI configuration`,
+            Desc: `provides attributes and commands for configuring
+the UI of a (remote) thermostat`,
+            
+            
+            Server: {
+                Attribute: {},
+                Command: {},
+            },
+            Client: {
+                Attribute: {},
+                Command: {}
+            },
+        }
+    };
+    
+    ZigBee.Hvac.PumpConfigurationAndControl.Server.Attribute = { 
+        0x0000: ZigBee.Hvac.Types.MaxPressure,
+        0x0001: ZigBee.Hvac.Types.MaxSpeed,
+        0x0002: ZigBee.Hvac.Types.MaxFlow,
+        0x0003: ZigBee.Hvac.Types.MinConstPressure,
+        0x0004: ZigBee.Hvac.Types.MaxConstPressure,
+        0x0005: ZigBee.Hvac.Types.MinCompPressure,
+        0x0006: ZigBee.Hvac.Types.MaxCompPressure,
+        0x0007: ZigBee.Hvac.Types.MinConstSpeed,
+        0x0008: ZigBee.Hvac.Types.MaxConstSpeed,
+        0x0009: ZigBee.Hvac.Types.MinConstFlow,
+        0x000A: ZigBee.Hvac.Types.MaxConstFlow,
+        0x000B: ZigBee.Hvac.Types.MinConstTemp,
+        0x000C: ZigBee.Hvac.Types.MaxConstTemp,
+        0x0010: ZigBee.Hvac.Types.PumpStatus,
+        0x0011: ZigBee.Hvac.Types.EffectiveOperationMode,
+        0x0012: ZigBee.Hvac.Types.EffectiveControlMode,
+        0x0013: ZigBee.Hvac.Types.Capacity,
+        0x0014: ZigBee.Hvac.Types.Speed,
+        0x0015: ZigBee.Hvac.Types.LifetimeRunningHours,
+        0x0016: ZigBee.Hvac.Types.Power,
+        0x0017: ZigBee.Hvac.Types.LifetimeEnergyConsumed,
+        0x0020: ZigBee.Hvac.Types.OperationMode,
+        0x0021: ZigBee.Hvac.Types.ControlMode,
+        0x0022: ZigBee.Hvac.Types.PumpAlarmMask,
+    };
+    ZigBee.Hvac.PumpConfigurationAndControl.Client.Attribute = { 
+    };
+    ZigBee.Hvac.PumpConfigurationAndControl.Server.Command = { 
+    };
+    ZigBee.Hvac.PumpConfigurationAndControl.Client.Command = { 
+    };
+    ZigBee.Hvac.Thermostat.Server.Attribute = { 
+        0x0000: ZigBee.Hvac.Types.LocalTemperature,
+        0x0001: ZigBee.Hvac.Types.OutdoorTemperature,
+        0x0002: ZigBee.Hvac.Types.Occupancy,
+        0x0003: ZigBee.Hvac.Types.AbsMinHeatSetpointLimit,
+        0x0004: ZigBee.Hvac.Types.AbsMaxHeatSetpointLimit,
+        0x0005: ZigBee.Hvac.Types.AbsMinCoolSetpointLimit,
+        0x0006: ZigBee.Hvac.Types.AbsMaxCoolSetpointLimit,
+        0x0007: ZigBee.Hvac.Types.PiCoolingDemand,
+        0x0008: ZigBee.Hvac.Types.PiHeatingDemand,
+        0x0009: ZigBee.Hvac.Types.HvacSystemTypeConfiguration,
+        0x0010: ZigBee.Hvac.Types.LocalTemperatureCalibration,
+        0x0011: ZigBee.Hvac.Types.OccupiedCoolingSetpoint,
+        0x0012: ZigBee.Hvac.Types.OccupiedHeatingSetpoint,
+        0x0013: ZigBee.Hvac.Types.UnoccupiedCoolingSetpoint,
+        0x0014: ZigBee.Hvac.Types.UnoccupiedHeatingSetpoint,
+        0x0015: ZigBee.Hvac.Types.MinHeatSetpointLimit,
+        0x0016: ZigBee.Hvac.Types.MaxHeatSetpointLimit,
+        0x0017: ZigBee.Hvac.Types.MinCoolSetpointLimit,
+        0x0018: ZigBee.Hvac.Types.MaxCoolSetpointLimit,
+        0x0019: ZigBee.Hvac.Types.MinSetpointDeadBand,
+        0x001A: ZigBee.Hvac.Types.RemoteSensing,
+        0x001B: ZigBee.Hvac.Types.ControlSequenceOfOperation,
+        0x001C: ZigBee.Hvac.Types.SystemMode,
+        0x001D: ZigBee.Hvac.Types.ThermostatAlarmMask,
+        0x001E: ZigBee.Hvac.Types.ThermostatRunningMode,
+        0x0020: ZigBee.Hvac.Types.StartOfWeek,
+        0x0021: ZigBee.Hvac.Types.NumberOfWeeklyTransitions,
+        0x0022: ZigBee.Hvac.Types.NumberOfDailyTransitions,
+        0x0023: ZigBee.Hvac.Types.TemperatureSetpointHold,
+        0x0024: ZigBee.Hvac.Types.TemperatureSetpointHoldDuration,
+        0x0025: ZigBee.Hvac.Types.ThermostatProgrammingOperationMode,
+        0x0029: ZigBee.Hvac.Types.ThermostatRunningState,
+        0x0030: ZigBee.Hvac.Types.SetpointChangeSource,
+        0x0031: ZigBee.Hvac.Types.SetpointChangeAmount,
+        0x0032: ZigBee.Hvac.Types.SetpointChangeSourceTimestamp,
+        0x0034: ZigBee.Hvac.Types.OccupiedSetback,
+        0x0035: ZigBee.Hvac.Types.OccupiedSetbackMin,
+        0x0036: ZigBee.Hvac.Types.OccupiedSetbackMax,
+        0x0037: ZigBee.Hvac.Types.UnoccupiedSetback,
+        0x0038: ZigBee.Hvac.Types.UnoccupiedSetbackMin,
+        0x0039: ZigBee.Hvac.Types.UnoccupiedSetbackMax,
+        0x003A: ZigBee.Hvac.Types.EmergencyHeatDelta,
+        0x0040: ZigBee.Hvac.Types.AcType,
+        0x0041: ZigBee.Hvac.Types.AcCapacity,
+        0x0042: ZigBee.Hvac.Types.AcRefrigerantType,
+        0x0043: ZigBee.Hvac.Types.AcCompressorType,
+        0x0044: ZigBee.Hvac.Types.AcErrorCode,
+        0x0045: ZigBee.Hvac.Types.AcLouverPosition,
+        0x0046: ZigBee.Hvac.Types.AcCoilTemperature,
+        0x0047: ZigBee.Hvac.Types.AcCapacityFormat,
+    };
+    ZigBee.Hvac.Thermostat.Client.Attribute = { 
+    };
+    ZigBee.Hvac.Thermostat.Server.Command = { 
+        0x00: ZigBee.Hvac.Thermostat.SetpointRaiseLower,
+        0x01: ZigBee.Hvac.Thermostat.SetWeeklySchedule,
+        0x02: ZigBee.Hvac.Thermostat.GetWeeklySchedule,
+        0x03: ZigBee.Hvac.Thermostat.ClearWeeklySchedule,
+        0x04: ZigBee.Hvac.Thermostat.GetRelayStatusLog,
+    };
+    ZigBee.Hvac.Thermostat.Client.Command = { 
+        0x00: ZigBee.Hvac.Thermostat.GetWeeklyScheduleResponse,
+        0x01: ZigBee.Hvac.Thermostat.GetRelayStatusLogResponse,
+    };
+    ZigBee.Hvac.FanControl.Server.Attribute = { 
+        0x0000: ZigBee.Hvac.Types.FanMode,
+        0x0001: ZigBee.Hvac.Types.FanModeSequence,
+    };
+    ZigBee.Hvac.FanControl.Client.Attribute = { 
+    };
+    ZigBee.Hvac.FanControl.Server.Command = { 
+    };
+    ZigBee.Hvac.FanControl.Client.Command = { 
+    };
+    ZigBee.Hvac.DehumidificationControl.Server.Attribute = { 
+        0x0000: ZigBee.Hvac.Types.RelativeHumidity,
+        0x0001: ZigBee.Hvac.Types.DehumidificationCooling,
+        0x0010: ZigBee.Hvac.Types.RhDehumidificationSetpoint,
+        0x0011: ZigBee.Hvac.Types.RelativeHumidityMode,
+        0x0012: ZigBee.Hvac.Types.DehumidificationLockout,
+        0x0013: ZigBee.Hvac.Types.DehumidificationHysteresis,
+        0x0014: ZigBee.Hvac.Types.DehumidificationMaxCool,
+        0x0015: ZigBee.Hvac.Types.RelativeHumidityDisplay,
+    };
+    ZigBee.Hvac.DehumidificationControl.Client.Attribute = { 
+    };
+    ZigBee.Hvac.DehumidificationControl.Server.Command = { 
+    };
+    ZigBee.Hvac.DehumidificationControl.Client.Command = { 
+    };
+    ZigBee.Hvac.ThermostatUiConfiguration.Server.Attribute = { 
+        0x0000: ZigBee.Hvac.Types.TemperatureDisplayMode,
+        0x0001: ZigBee.Hvac.Types.KeypadLockout,
+        0x0002: ZigBee.Hvac.Types.ScheduleProgrammingVisibility,
+    };
+    ZigBee.Hvac.ThermostatUiConfiguration.Client.Attribute = { 
+    };
+    ZigBee.Hvac.ThermostatUiConfiguration.Server.Command = { 
+    };
+    ZigBee.Hvac.ThermostatUiConfiguration.Client.Command = { 
+    };
     export const SecurityAndSafety = {
         Types: { 
             CurrentZoneSensitivityLevel: makeType<ZigBee.ISecurityAndSafety.IArgCurrentZoneSensitivityLevel, ZigBee.ISecurityAndSafety.IArgCurrentZoneSensitivityLevelPayload>(base.u8, ()=>({
@@ -11926,6 +13653,11 @@ potentially Thermal metering devices.`,
         0x0020: ZigBee.General.PollControl,
         0x0B01: ZigBee.General.MeterIdentification,
         0x0B05: ZigBee.General.Diagnostics,
+        0x0200: ZigBee.Hvac.PumpConfigurationAndControl,
+        0x0201: ZigBee.Hvac.Thermostat,
+        0x0202: ZigBee.Hvac.FanControl,
+        0x0203: ZigBee.Hvac.DehumidificationControl,
+        0x0204: ZigBee.Hvac.ThermostatUiConfiguration,
         0x0500: ZigBee.SecurityAndSafety.IasZone,
         0xFC7E: ZigBee.Ikea.IkeaAirQuality,
         0x0300: ZigBee.Lighting.ColorControl,
@@ -13056,6 +14788,286 @@ potentially Thermal metering devices.`,
             export interface IArgZCoordinate extends IAttribute { value: IArgZCoordinatePayload }
             export type IArgZclVersionPayload = ValueType;
             export interface IArgZclVersion extends IAttribute { value: IArgZclVersionPayload }    }
+
+    export namespace IHvac {
+        // noinspection ES6UnusedImports
+        import IArgument = ZigBee.IArgument;
+        // noinspection ES6UnusedImports
+        import IAttribute = ZigBee.IAttribute;
+        // noinspection ES6UnusedImports
+        import ValueType = ZigBee.ValueType;
+        
+        export namespace PumpConfigurationAndControl {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace Thermostat {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+            export type ICmdSetpointRaiseLowerPayload = { SetpointMode?: IArgSetpointModePayload, SetpointAmount?: IArgSetpointAmountPayload, }
+            export interface ICmdSetpointRaiseLower extends ICommand { value: ICmdSetpointRaiseLowerPayload }
+            export type ICmdSetWeeklySchedulePayload = { SetWeeklyNumberOfTransitions?: IArgSetWeeklyNumberOfTransitionsPayload, SetWeeklyDayOfWeek?: IArgSetWeeklyDayOfWeekPayload, SetWeeklyMode?: IArgSetWeeklyModePayload, SetWeeklyTransitionTime1?: IArgSetWeeklyTransitionTime1Payload, SetWeeklyHeatSetpoint1?: IArgSetWeeklyHeatSetpoint1Payload, SetWeeklyCoolSetpoint1?: IArgSetWeeklyCoolSetpoint1Payload, SetWeeklyTransitionTime10?: IArgSetWeeklyTransitionTime10Payload, SetWeeklyHeatSetpoint10?: IArgSetWeeklyHeatSetpoint10Payload, SetWeeklyCoolSetpoint10?: IArgSetWeeklyCoolSetpoint10Payload, }
+            export interface ICmdSetWeeklySchedule extends ICommand { value: ICmdSetWeeklySchedulePayload }
+            export type ICmdGetWeeklySchedulePayload = { GetWeeklyDaysToReturn?: IArgGetWeeklyDaysToReturnPayload, GetWeeklyModeToReturn?: IArgGetWeeklyModeToReturnPayload, }
+            export interface ICmdGetWeeklySchedule extends ICommand { value: ICmdGetWeeklySchedulePayload }
+            export type ICmdClearWeeklySchedulePayload = { }
+            export interface ICmdClearWeeklySchedule extends ICommand { value: ICmdClearWeeklySchedulePayload }
+            export type ICmdGetRelayStatusLogPayload = { }
+            export interface ICmdGetRelayStatusLog extends ICommand { value: ICmdGetRelayStatusLogPayload }
+            export type ICmdGetWeeklyScheduleResponsePayload = { SetWeeklyNumberOfTransitions?: IArgSetWeeklyNumberOfTransitionsPayload, SetWeeklyDayOfWeek?: IArgSetWeeklyDayOfWeekPayload, SetWeeklyMode?: IArgSetWeeklyModePayload, SetWeeklyTransitionTime1?: IArgSetWeeklyTransitionTime1Payload, SetWeeklyHeatSetpoint1?: IArgSetWeeklyHeatSetpoint1Payload, SetWeeklyCoolSetpoint1?: IArgSetWeeklyCoolSetpoint1Payload, SetWeeklyTransitionTime10?: IArgSetWeeklyTransitionTime10Payload, SetWeeklyHeatSetpoint10?: IArgSetWeeklyHeatSetpoint10Payload, SetWeeklyCoolSetpoint10?: IArgSetWeeklyCoolSetpoint10Payload, }
+            export interface ICmdGetWeeklyScheduleResponse extends ICommand { value: ICmdGetWeeklyScheduleResponsePayload }
+            export type ICmdGetRelayStatusLogResponsePayload = { RelayStatusLogTimeOfDay?: IArgRelayStatusLogTimeOfDayPayload, RelayStatus?: IArgRelayStatusPayload, RelayStatusLocalTemperature?: IArgRelayStatusLocalTemperaturePayload, RelayStatusHumidity?: IArgRelayStatusHumidityPayload, RelayStatusSetpoint?: IArgRelayStatusSetpointPayload, RelayStatusUnreadEntries?: IArgRelayStatusUnreadEntriesPayload, }
+            export interface ICmdGetRelayStatusLogResponse extends ICommand { value: ICmdGetRelayStatusLogResponsePayload }
+        }
+
+        export namespace FanControl {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace DehumidificationControl {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+        export namespace ThermostatUiConfiguration {
+            // noinspection ES6UnusedImports
+            import ICommand = ZigBee.ICommand;
+            // noinspection ES6UnusedImports
+            import ValueType = ZigBee.ValueType;
+
+        
+        }
+
+            export type IArgAcCapacityPayload = ValueType;
+            export interface IArgAcCapacity extends IAttribute { value: IArgAcCapacityPayload }
+            export type IArgAcCapacityFormatPayload = ValueType;
+            export interface IArgAcCapacityFormat extends IAttribute { value: IArgAcCapacityFormatPayload }
+            export type IArgAcCoilTemperaturePayload = ValueType;
+            export interface IArgAcCoilTemperature extends IAttribute { value: IArgAcCoilTemperaturePayload }
+            export type IArgAcCompressorTypePayload = ValueType;
+            export interface IArgAcCompressorType extends IAttribute { value: IArgAcCompressorTypePayload }
+            export type IArgAcErrorCodePayload = ValueType;
+            export interface IArgAcErrorCode extends IAttribute { value: IArgAcErrorCodePayload }
+            export type IArgAcLouverPositionPayload = ValueType;
+            export interface IArgAcLouverPosition extends IAttribute { value: IArgAcLouverPositionPayload }
+            export type IArgAcRefrigerantTypePayload = ValueType;
+            export interface IArgAcRefrigerantType extends IAttribute { value: IArgAcRefrigerantTypePayload }
+            export type IArgAcTypePayload = ValueType;
+            export interface IArgAcType extends IAttribute { value: IArgAcTypePayload }
+            export type IArgAbsMaxCoolSetpointLimitPayload = ValueType;
+            export interface IArgAbsMaxCoolSetpointLimit extends IAttribute { value: IArgAbsMaxCoolSetpointLimitPayload }
+            export type IArgAbsMaxHeatSetpointLimitPayload = ValueType;
+            export interface IArgAbsMaxHeatSetpointLimit extends IAttribute { value: IArgAbsMaxHeatSetpointLimitPayload }
+            export type IArgAbsMinCoolSetpointLimitPayload = ValueType;
+            export interface IArgAbsMinCoolSetpointLimit extends IAttribute { value: IArgAbsMinCoolSetpointLimitPayload }
+            export type IArgAbsMinHeatSetpointLimitPayload = ValueType;
+            export interface IArgAbsMinHeatSetpointLimit extends IAttribute { value: IArgAbsMinHeatSetpointLimitPayload }
+            export type IArgCapacityPayload = ValueType;
+            export interface IArgCapacity extends IAttribute { value: IArgCapacityPayload }
+            export type IArgControlModePayload = ValueType;
+            export interface IArgControlMode extends IAttribute { value: IArgControlModePayload }
+            export type IArgControlSequenceOfOperationPayload = ValueType;
+            export interface IArgControlSequenceOfOperation extends IAttribute { value: IArgControlSequenceOfOperationPayload }
+            export type IArgDehumidificationCoolingPayload = ValueType;
+            export interface IArgDehumidificationCooling extends IAttribute { value: IArgDehumidificationCoolingPayload }
+            export type IArgDehumidificationHysteresisPayload = ValueType;
+            export interface IArgDehumidificationHysteresis extends IAttribute { value: IArgDehumidificationHysteresisPayload }
+            export type IArgDehumidificationLockoutPayload = ValueType;
+            export interface IArgDehumidificationLockout extends IAttribute { value: IArgDehumidificationLockoutPayload }
+            export type IArgDehumidificationMaxCoolPayload = ValueType;
+            export interface IArgDehumidificationMaxCool extends IAttribute { value: IArgDehumidificationMaxCoolPayload }
+            export type IArgEffectiveControlModePayload = ValueType;
+            export interface IArgEffectiveControlMode extends IAttribute { value: IArgEffectiveControlModePayload }
+            export type IArgEffectiveOperationModePayload = ValueType;
+            export interface IArgEffectiveOperationMode extends IAttribute { value: IArgEffectiveOperationModePayload }
+            export type IArgEmergencyHeatDeltaPayload = ValueType;
+            export interface IArgEmergencyHeatDelta extends IAttribute { value: IArgEmergencyHeatDeltaPayload }
+            export type IArgFanModePayload = ValueType;
+            export interface IArgFanMode extends IAttribute { value: IArgFanModePayload }
+            export type IArgFanModeSequencePayload = ValueType;
+            export interface IArgFanModeSequence extends IAttribute { value: IArgFanModeSequencePayload }
+            export type IArgGetWeeklyDaysToReturnPayload = ValueType;
+            export interface IArgGetWeeklyDaysToReturn extends IArgument { value: IArgGetWeeklyDaysToReturnPayload }
+            export type IArgGetWeeklyModeToReturnPayload = ValueType;
+            export interface IArgGetWeeklyModeToReturn extends IArgument { value: IArgGetWeeklyModeToReturnPayload }
+            export type IArgHvacSystemTypeConfigurationPayload = ValueType;
+            export interface IArgHvacSystemTypeConfiguration extends IAttribute { value: IArgHvacSystemTypeConfigurationPayload }
+            export type IArgKeypadLockoutPayload = ValueType;
+            export interface IArgKeypadLockout extends IAttribute { value: IArgKeypadLockoutPayload }
+            export type IArgLifetimeEnergyConsumedPayload = ValueType;
+            export interface IArgLifetimeEnergyConsumed extends IAttribute { value: IArgLifetimeEnergyConsumedPayload }
+            export type IArgLifetimeRunningHoursPayload = ValueType;
+            export interface IArgLifetimeRunningHours extends IAttribute { value: IArgLifetimeRunningHoursPayload }
+            export type IArgLocalTemperaturePayload = ValueType;
+            export interface IArgLocalTemperature extends IAttribute { value: IArgLocalTemperaturePayload }
+            export type IArgLocalTemperatureCalibrationPayload = ValueType;
+            export interface IArgLocalTemperatureCalibration extends IAttribute { value: IArgLocalTemperatureCalibrationPayload }
+            export type IArgMaxCompPressurePayload = ValueType;
+            export interface IArgMaxCompPressure extends IAttribute { value: IArgMaxCompPressurePayload }
+            export type IArgMaxConstFlowPayload = ValueType;
+            export interface IArgMaxConstFlow extends IAttribute { value: IArgMaxConstFlowPayload }
+            export type IArgMaxConstPressurePayload = ValueType;
+            export interface IArgMaxConstPressure extends IAttribute { value: IArgMaxConstPressurePayload }
+            export type IArgMaxConstSpeedPayload = ValueType;
+            export interface IArgMaxConstSpeed extends IAttribute { value: IArgMaxConstSpeedPayload }
+            export type IArgMaxConstTempPayload = ValueType;
+            export interface IArgMaxConstTemp extends IAttribute { value: IArgMaxConstTempPayload }
+            export type IArgMaxCoolSetpointLimitPayload = ValueType;
+            export interface IArgMaxCoolSetpointLimit extends IAttribute { value: IArgMaxCoolSetpointLimitPayload }
+            export type IArgMaxFlowPayload = ValueType;
+            export interface IArgMaxFlow extends IAttribute { value: IArgMaxFlowPayload }
+            export type IArgMaxHeatSetpointLimitPayload = ValueType;
+            export interface IArgMaxHeatSetpointLimit extends IAttribute { value: IArgMaxHeatSetpointLimitPayload }
+            export type IArgMaxPressurePayload = ValueType;
+            export interface IArgMaxPressure extends IAttribute { value: IArgMaxPressurePayload }
+            export type IArgMaxSpeedPayload = ValueType;
+            export interface IArgMaxSpeed extends IAttribute { value: IArgMaxSpeedPayload }
+            export type IArgMinCompPressurePayload = ValueType;
+            export interface IArgMinCompPressure extends IAttribute { value: IArgMinCompPressurePayload }
+            export type IArgMinConstFlowPayload = ValueType;
+            export interface IArgMinConstFlow extends IAttribute { value: IArgMinConstFlowPayload }
+            export type IArgMinConstPressurePayload = ValueType;
+            export interface IArgMinConstPressure extends IAttribute { value: IArgMinConstPressurePayload }
+            export type IArgMinConstSpeedPayload = ValueType;
+            export interface IArgMinConstSpeed extends IAttribute { value: IArgMinConstSpeedPayload }
+            export type IArgMinConstTempPayload = ValueType;
+            export interface IArgMinConstTemp extends IAttribute { value: IArgMinConstTempPayload }
+            export type IArgMinCoolSetpointLimitPayload = ValueType;
+            export interface IArgMinCoolSetpointLimit extends IAttribute { value: IArgMinCoolSetpointLimitPayload }
+            export type IArgMinHeatSetpointLimitPayload = ValueType;
+            export interface IArgMinHeatSetpointLimit extends IAttribute { value: IArgMinHeatSetpointLimitPayload }
+            export type IArgMinSetpointDeadBandPayload = ValueType;
+            export interface IArgMinSetpointDeadBand extends IAttribute { value: IArgMinSetpointDeadBandPayload }
+            export type IArgNumberOfDailyTransitionsPayload = ValueType;
+            export interface IArgNumberOfDailyTransitions extends IAttribute { value: IArgNumberOfDailyTransitionsPayload }
+            export type IArgNumberOfWeeklyTransitionsPayload = ValueType;
+            export interface IArgNumberOfWeeklyTransitions extends IAttribute { value: IArgNumberOfWeeklyTransitionsPayload }
+            export type IArgOccupancyPayload = ValueType;
+            export interface IArgOccupancy extends IAttribute { value: IArgOccupancyPayload }
+            export type IArgOccupiedCoolingSetpointPayload = ValueType;
+            export interface IArgOccupiedCoolingSetpoint extends IAttribute { value: IArgOccupiedCoolingSetpointPayload }
+            export type IArgOccupiedHeatingSetpointPayload = ValueType;
+            export interface IArgOccupiedHeatingSetpoint extends IAttribute { value: IArgOccupiedHeatingSetpointPayload }
+            export type IArgOccupiedSetbackPayload = ValueType;
+            export interface IArgOccupiedSetback extends IAttribute { value: IArgOccupiedSetbackPayload }
+            export type IArgOccupiedSetbackMaxPayload = ValueType;
+            export interface IArgOccupiedSetbackMax extends IAttribute { value: IArgOccupiedSetbackMaxPayload }
+            export type IArgOccupiedSetbackMinPayload = ValueType;
+            export interface IArgOccupiedSetbackMin extends IAttribute { value: IArgOccupiedSetbackMinPayload }
+            export type IArgOperationModePayload = ValueType;
+            export interface IArgOperationMode extends IAttribute { value: IArgOperationModePayload }
+            export type IArgOutdoorTemperaturePayload = ValueType;
+            export interface IArgOutdoorTemperature extends IAttribute { value: IArgOutdoorTemperaturePayload }
+            export type IArgPiCoolingDemandPayload = ValueType;
+            export interface IArgPiCoolingDemand extends IAttribute { value: IArgPiCoolingDemandPayload }
+            export type IArgPiHeatingDemandPayload = ValueType;
+            export interface IArgPiHeatingDemand extends IAttribute { value: IArgPiHeatingDemandPayload }
+            export type IArgPowerPayload = ValueType;
+            export interface IArgPower extends IAttribute { value: IArgPowerPayload }
+            export type IArgPumpAlarmMaskPayload = ValueType;
+            export interface IArgPumpAlarmMask extends IAttribute { value: IArgPumpAlarmMaskPayload }
+            export type IArgPumpStatusPayload = ValueType;
+            export interface IArgPumpStatus extends IAttribute { value: IArgPumpStatusPayload }
+            export type IArgRhDehumidificationSetpointPayload = ValueType;
+            export interface IArgRhDehumidificationSetpoint extends IAttribute { value: IArgRhDehumidificationSetpointPayload }
+            export type IArgRelativeHumidityPayload = ValueType;
+            export interface IArgRelativeHumidity extends IAttribute { value: IArgRelativeHumidityPayload }
+            export type IArgRelativeHumidityDisplayPayload = ValueType;
+            export interface IArgRelativeHumidityDisplay extends IAttribute { value: IArgRelativeHumidityDisplayPayload }
+            export type IArgRelativeHumidityModePayload = ValueType;
+            export interface IArgRelativeHumidityMode extends IAttribute { value: IArgRelativeHumidityModePayload }
+            export type IArgRelayStatusPayload = ValueType;
+            export interface IArgRelayStatus extends IArgument { value: IArgRelayStatusPayload }
+            export type IArgRelayStatusHumidityPayload = ValueType;
+            export interface IArgRelayStatusHumidity extends IArgument { value: IArgRelayStatusHumidityPayload }
+            export type IArgRelayStatusLocalTemperaturePayload = ValueType;
+            export interface IArgRelayStatusLocalTemperature extends IArgument { value: IArgRelayStatusLocalTemperaturePayload }
+            export type IArgRelayStatusLogTimeOfDayPayload = ValueType;
+            export interface IArgRelayStatusLogTimeOfDay extends IArgument { value: IArgRelayStatusLogTimeOfDayPayload }
+            export type IArgRelayStatusSetpointPayload = ValueType;
+            export interface IArgRelayStatusSetpoint extends IArgument { value: IArgRelayStatusSetpointPayload }
+            export type IArgRelayStatusUnreadEntriesPayload = ValueType;
+            export interface IArgRelayStatusUnreadEntries extends IArgument { value: IArgRelayStatusUnreadEntriesPayload }
+            export type IArgRemoteSensingPayload = ValueType;
+            export interface IArgRemoteSensing extends IAttribute { value: IArgRemoteSensingPayload }
+            export type IArgScheduleProgrammingVisibilityPayload = ValueType;
+            export interface IArgScheduleProgrammingVisibility extends IAttribute { value: IArgScheduleProgrammingVisibilityPayload }
+            export type IArgSetWeeklyCoolSetpoint1Payload = ValueType;
+            export interface IArgSetWeeklyCoolSetpoint1 extends IArgument { value: IArgSetWeeklyCoolSetpoint1Payload }
+            export type IArgSetWeeklyCoolSetpoint10Payload = ValueType;
+            export interface IArgSetWeeklyCoolSetpoint10 extends IArgument { value: IArgSetWeeklyCoolSetpoint10Payload }
+            export type IArgSetWeeklyDayOfWeekPayload = ValueType;
+            export interface IArgSetWeeklyDayOfWeek extends IArgument { value: IArgSetWeeklyDayOfWeekPayload }
+            export type IArgSetWeeklyHeatSetpoint1Payload = ValueType;
+            export interface IArgSetWeeklyHeatSetpoint1 extends IArgument { value: IArgSetWeeklyHeatSetpoint1Payload }
+            export type IArgSetWeeklyHeatSetpoint10Payload = ValueType;
+            export interface IArgSetWeeklyHeatSetpoint10 extends IArgument { value: IArgSetWeeklyHeatSetpoint10Payload }
+            export type IArgSetWeeklyModePayload = ValueType;
+            export interface IArgSetWeeklyMode extends IArgument { value: IArgSetWeeklyModePayload }
+            export type IArgSetWeeklyNumberOfTransitionsPayload = ValueType;
+            export interface IArgSetWeeklyNumberOfTransitions extends IArgument { value: IArgSetWeeklyNumberOfTransitionsPayload }
+            export type IArgSetWeeklyTransitionTime1Payload = ValueType;
+            export interface IArgSetWeeklyTransitionTime1 extends IArgument { value: IArgSetWeeklyTransitionTime1Payload }
+            export type IArgSetWeeklyTransitionTime10Payload = ValueType;
+            export interface IArgSetWeeklyTransitionTime10 extends IArgument { value: IArgSetWeeklyTransitionTime10Payload }
+            export type IArgSetpointAmountPayload = ValueType;
+            export interface IArgSetpointAmount extends IArgument { value: IArgSetpointAmountPayload }
+            export type IArgSetpointChangeAmountPayload = ValueType;
+            export interface IArgSetpointChangeAmount extends IAttribute { value: IArgSetpointChangeAmountPayload }
+            export type IArgSetpointChangeSourcePayload = ValueType;
+            export interface IArgSetpointChangeSource extends IAttribute { value: IArgSetpointChangeSourcePayload }
+            export type IArgSetpointChangeSourceTimestampPayload = ValueType;
+            export interface IArgSetpointChangeSourceTimestamp extends IAttribute { value: IArgSetpointChangeSourceTimestampPayload }
+            export type IArgSetpointModePayload = ValueType;
+            export interface IArgSetpointMode extends IArgument { value: IArgSetpointModePayload }
+            export type IArgSpeedPayload = ValueType;
+            export interface IArgSpeed extends IAttribute { value: IArgSpeedPayload }
+            export type IArgStartOfWeekPayload = ValueType;
+            export interface IArgStartOfWeek extends IAttribute { value: IArgStartOfWeekPayload }
+            export type IArgSystemModePayload = ValueType;
+            export interface IArgSystemMode extends IAttribute { value: IArgSystemModePayload }
+            export type IArgTemperatureDisplayModePayload = ValueType;
+            export interface IArgTemperatureDisplayMode extends IAttribute { value: IArgTemperatureDisplayModePayload }
+            export type IArgTemperatureSetpointHoldPayload = ValueType;
+            export interface IArgTemperatureSetpointHold extends IAttribute { value: IArgTemperatureSetpointHoldPayload }
+            export type IArgTemperatureSetpointHoldDurationPayload = ValueType;
+            export interface IArgTemperatureSetpointHoldDuration extends IAttribute { value: IArgTemperatureSetpointHoldDurationPayload }
+            export type IArgThermostatAlarmMaskPayload = ValueType;
+            export interface IArgThermostatAlarmMask extends IAttribute { value: IArgThermostatAlarmMaskPayload }
+            export type IArgThermostatProgrammingOperationModePayload = ValueType;
+            export interface IArgThermostatProgrammingOperationMode extends IAttribute { value: IArgThermostatProgrammingOperationModePayload }
+            export type IArgThermostatRunningModePayload = ValueType;
+            export interface IArgThermostatRunningMode extends IAttribute { value: IArgThermostatRunningModePayload }
+            export type IArgThermostatRunningStatePayload = ValueType;
+            export interface IArgThermostatRunningState extends IAttribute { value: IArgThermostatRunningStatePayload }
+            export type IArgUnoccupiedCoolingSetpointPayload = ValueType;
+            export interface IArgUnoccupiedCoolingSetpoint extends IAttribute { value: IArgUnoccupiedCoolingSetpointPayload }
+            export type IArgUnoccupiedHeatingSetpointPayload = ValueType;
+            export interface IArgUnoccupiedHeatingSetpoint extends IAttribute { value: IArgUnoccupiedHeatingSetpointPayload }
+            export type IArgUnoccupiedSetbackPayload = ValueType;
+            export interface IArgUnoccupiedSetback extends IAttribute { value: IArgUnoccupiedSetbackPayload }
+            export type IArgUnoccupiedSetbackMaxPayload = ValueType;
+            export interface IArgUnoccupiedSetbackMax extends IAttribute { value: IArgUnoccupiedSetbackMaxPayload }
+            export type IArgUnoccupiedSetbackMinPayload = ValueType;
+            export interface IArgUnoccupiedSetbackMin extends IAttribute { value: IArgUnoccupiedSetbackMinPayload }    }
 
     export namespace ISecurityAndSafety {
         // noinspection ES6UnusedImports
