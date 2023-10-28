@@ -188,9 +188,12 @@ func genHelpers(cluster *Cluster, zdo *Zdo, server bool, clusterID, pkg, tplPath
 			for _, c := range cond {
 				mpre := ""
 				mpost := ""
+				if c.Index != nil {
+					mpost = fmt.Sprintf("[%d]", *c.Index)
+				}
 				if c.Mask != "" {
 					mpre = mpre + "("
-					mpost = fmt.Sprintf(" & %s)%s", c.Mask, mpost)
+					mpost = fmt.Sprintf("%s & %s)", mpost, c.Mask)
 				}
 				eq := "=="
 				if c.Invert {
