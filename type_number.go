@@ -28,8 +28,8 @@ func intLEMarshalZcl(ln int, o int64) ([]byte, error) {
 	b := make([]byte, 8)
 	ui := uint64(o)
 	if ln < 8 {
-		sign64 := uint64(0x80000000)
-		sign := uint64((1 << uint(ln*8)) - 1)
+		sign64 := uint64(0x8000000000000000)
+		sign := uint64(1 << uint(ln*8-1))
 		if (ui & sign64) == sign64 {
 			// Move the sign to the correct place
 			ui = (ui ^ sign64) | sign
@@ -48,11 +48,11 @@ func intLEUnmarshalZcl(ln int, b []byte) (int64, []byte, error) {
 	}
 	ui := binary.LittleEndian.Uint64(buf)
 	if ln < 8 {
-		sign64 := uint64(0x80000000)
-		sign := uint64((1 << uint(ln*8)) - 1)
+		sign := uint64(1 << uint(ln*8-1))
+		mask := uint64(1<<uint(ln*8)) - 1
 		if (ui & sign) == sign {
-			// Move the sign to the correct place
-			ui = (ui ^ sign) | sign64
+			// Set remaining bits
+			ui |= uint64(0xFFFFFFFFFFFFFFFF) ^ mask
 		}
 	}
 	return int64(ui), b[ln:], nil

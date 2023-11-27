@@ -132,6 +132,9 @@ func (v ReadAttributeStatusRecord) MarshalZcl() ([]byte, error) {
 	}
 	data = append(data, tmp...)
 
+	if v.Value == nil {
+		return nil, zcl.Errorf("value is nil")
+	}
 	switch v.Value.(type) {
 	case *zcl.Zarray:
 		arr := v.Value.(*zcl.Zarray)
@@ -220,6 +223,10 @@ func (v *ReadAttributeStatusRecord) UnmarshalZcl(b []byte) ([]byte, error) {
 	}
 
 	v.Value = val
+
+	if v.Value == nil {
+		return nil, zcl.Errorf("value is nil")
+	}
 
 	return b, nil
 }
@@ -478,6 +485,9 @@ func (v WriteAttributeRecord) MarshalZcl() ([]byte, error) {
 	}
 	data = append(data, tmp...)
 
+	if v.Value == nil {
+		return nil, zcl.Errorf("value is nil")
+	}
 	switch v.Value.(type) {
 	case *zcl.Zarray:
 		arr := v.Value.(*zcl.Zarray)
