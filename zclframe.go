@@ -113,9 +113,6 @@ func (f *recvZclFrame) Response(srcEp uint8, cmd General) (frame ZclFrame, err e
 		if nf.cmdType != 0 {
 			return nil, ErrResponseProfileWide
 		}
-		if c.MnfCode() != uint16(f.mnfCode) {
-			return nil, ErrResponseWrongMnfCode
-		}
 	} else {
 		nf.cmdType = 0
 	}
